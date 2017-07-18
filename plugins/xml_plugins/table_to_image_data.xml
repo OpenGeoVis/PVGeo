@@ -1,0 +1,170 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="Table To ImageData" class="vtkPythonProgrammableFilter" label="Table To ImageData">
+      <Documentation
+        long_help="This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a nx by ny by nz structure and an origin can be set at any xyz point. Note that there is an option to choose an array from the input table; this sets which data to treat as the default scalar values. The chosen array should be irrelevant but the feature is left in case some filters down the pipeline do not like having some data not set as a scalar."
+        short_help="This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a nx by ny by nz structure and an origin can be set at any xyz point. Note that there is an option to choose an array from the input table; this sets which data to treat as the default scalar values. The chosen array should be irrelevant but the feature is left in case some filters down the pipeline do not like having some data not set as a scalar.">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM GP Filters" />
+</Hints>
+<StringVectorProperty name="SelectInputScalars"
+                            label="Array"
+                            command="SetInputArrayToProcess"
+                            number_of_elements="5"
+                            element_types="0 0 0 0 2"
+                            animateable="0">
+        <ArrayListDomain name="array_list"
+                         attribute_type="Scalars"
+                         input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property name="Input"
+                      function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain name="field_list">
+          <RequiredProperties>
+            <Property name="Input"
+                      function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkTable"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <IntVectorProperty
+        name="nx"
+        label="nx"
+        initial_string="nx"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="ny"
+        label="ny"
+        initial_string="ny"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="nz"
+        label="nz"
+        initial_string="nz"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="spacing"
+        label="spacing"
+        initial_string="spacing"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="x_origin"
+        label="x origin"
+        initial_string="x_origin"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="y_origin"
+        label="y origin"
+        initial_string="y_origin"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="z_origin"
+        label="z origin"
+        initial_string="z_origin"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <!-- Output data type: "vtkImageData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="6"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;cols = pdi.GetNumberOfColumns()&#xA;&#xA;# Setup the ImageData&#xA;image.SetDimensions(nx,ny,nz)&#xA;image.SetOrigin(x_origin,y_origin,z_origin)&#xA;image.SetSpacing(spacing,spacing,spacing)&#xA;image.AllocateScalars(vtk.VTK_DOUBLE, cols)&#xA;image.SetExtent(0,nx-1,0,ny-1,0,nz-1)&#xA;&#xA;# Add all columns of the table as arrays to the PointData&#xA;for i in range(cols):&#xA;    c = pdi.GetColumn(i)&#xA;    #image.GetCellData().AddArray(c)&#xA;    image.GetPointData().AddArray(c) # NOTE: Workaround that could be sketchy. I'm Leaving the ability to set which array is the scalars in case there is trouble down the pipeline.&#xA;&#xA;# Set scalars from the chosen array in the drop down menu from input table&#xA;name = self.GetInputArrayInformation(0).Get(vtk.vtkDataObject.FIELD_NAME())&#xA;image.GetPointData().SetScalars(pdi.GetColumnByName(name))&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1,0,ny-1,0,nz-1])&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" />
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>

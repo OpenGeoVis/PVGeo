@@ -1,0 +1,89 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="Flip ImageData" class="vtkPythonProgrammableFilter" label="Flip ImageData">
+      <Documentation
+        long_help="This filter will flip ImageData in any of the three cartesian coordinates."
+        short_help="This filter will flip ImageData in any of the three cartesian coordinates.">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM GP Filters" />
+</Hints>
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkImageData"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <IntVectorProperty
+        name="reverse_x_dir"
+        label="reverse x dir"
+        initial_string="reverse_x_dir"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="reverse_y_dir"
+        label="reverse y dir"
+        initial_string="reverse_y_dir"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="reverse_z_dir"
+        label="reverse z dir"
+        initial_string="reverse_z_dir"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <!-- Output data type: "vtkImageData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="6"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="pdi = self.GetInput() #vtkImageData&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;# Make user selection iterable&#xA;dirs = [reverse_x_dir, reverse_y_dir, reverse_z_dir]&#xA;&#xA;# Copy over input to output to be flipped around&#xA;# Deep copy keeps us from messing with the input data&#xA;image.DeepCopy(pdi)&#xA;&#xA;# Iterate over all array in the PointData&#xA;for j in range(image.GetPointData().GetNumberOfArrays()):&#xA;    # Swap Scalars with all Arrays in PointData so that all data gets filtered&#xA;    scal = image.GetPointData().GetScalars()&#xA;    arr = pdi.GetPointData().GetArray(j)&#xA;    image.GetPointData().SetScalars(arr)&#xA;    image.GetPointData().AddArray(scal)&#xA;    for i in range(3):&#xA;        # Rotate ImageData on each axis if needed&#xA;        # Go through each axis and rotate if needed&#xA;        # Note: ShallowCopy is necessary!!&#xA;        if dirs[i]:&#xA;            flipper = vtk.vtkImageFlip()&#xA;            flipper.SetInputData(image)&#xA;            flipper.SetFilteredAxis(i)&#xA;            flipper.Update()&#xA;            flipper.UpdateWholeExtent()&#xA;            image.ShallowCopy(flipper.GetOutput())&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>

@@ -1,0 +1,78 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="sources">
+    <SourceProxy name="Read GEO EAS File To Table" class="vtkPythonProgrammableFilter" label="Read GEO EAS File To Table">
+      <Documentation
+        long_help="Help"
+        short_help="Help">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM GP Readers" />
+    <ReaderFactory extensions="dat geoeas txt"
+                   file_description="GEO EAS File Format" />
+</Hints>
+
+
+            <StringVectorProperty
+            name="Delimiter_Field"
+            label="Delimiter Field"
+            initial_string="Delimiter_Field"
+            command="SetParameter"
+            animateable="1"
+            default_values=" "
+            number_of_elements="1">
+            <Documentation></Documentation>
+            </StringVectorProperty>
+
+
+          <StringVectorProperty
+            panel_visibility="advanced"
+            name="FileName"
+            label="FileName"
+            initial_string="FileName"
+            command="SetParameter"
+            animateable="1"
+            default_values="absolute path"
+            number_of_elements="1">
+            <FileListDomain name="files"/>
+            <Documentation></Documentation>
+          </StringVectorProperty>
+
+
+      <IntVectorProperty
+        name="Number_Ignore_Lines"
+        label="Number Ignore Lines"
+        initial_string="Number_Ignore_Lines"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <!-- Output data type: "vtkTable" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="19"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="import numpy as np&#xA;import csv&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;&#xA;titles = []&#xA;data = []&#xA;with open(FileName) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    # Skip defined lines&#xA;    for i in range(Number_Ignore_Lines):&#xA;        next(f)&#xA;&#xA;    # Get file header (part of format)&#xA;    header = next(f) # TODO: do something with the header&#xA;    print('File Header: ' + header)&#xA;    # Get titles&#xA;    numCols = int(next(f))&#xA;    for i in range(numCols):&#xA;        titles.append(next(f).rstrip('\r\n'))&#xA;&#xA;    # Read data&#xA;    for row in reader:&#xA;        data.append(row)&#xA;&#xA;# Put first column into table&#xA;for i in range(len(titles)):&#xA;    col = []&#xA;    for row in data:&#xA;        col.append(row[i])&#xA;    VTK_data = numpy_support.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)&#xA;    VTK_data.SetName(titles[i])&#xA;    pdo.AddColumn(VTK_data)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>

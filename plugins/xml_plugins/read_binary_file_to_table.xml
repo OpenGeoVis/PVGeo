@@ -1,0 +1,66 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="sources">
+    <SourceProxy name="Read Binary File To Table" class="vtkPythonProgrammableFilter" label="Read Binary File To Table">
+      <Documentation
+        long_help="This filter reads in float data that is packed into a binary file fomrat. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian. Use the Table to ImageData filter to reshape the vtkTable."
+        short_help="This filter reads in float data that is packed into a binary file fomrat. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian. Use the Table to ImageData filter to reshape the vtkTable.">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM GP Readers" />
+    <ReaderFactory extensions="H@ bin"
+                   file_description="Binary File Format" />
+</Hints>
+
+
+          <StringVectorProperty
+            panel_visibility="advanced"
+            name="FileName"
+            label="FileName"
+            initial_string="FileName"
+            command="SetParameter"
+            animateable="1"
+            default_values="absolute path"
+            number_of_elements="1">
+            <FileListDomain name="files"/>
+            <Documentation></Documentation>
+          </StringVectorProperty>
+
+
+            <StringVectorProperty
+            name="data_name"
+            label="data name"
+            initial_string="data_name"
+            command="SetParameter"
+            animateable="1"
+            default_values=""
+            number_of_elements="1">
+            <Documentation></Documentation>
+            </StringVectorProperty>
+
+      <!-- Output data type: "vtkTable" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="19"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="import struct&#xA;import os&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;num_bytes = 4 # float. Double is 8&#xA;&#xA;tn = os.stat(FileName).st_size / num_bytes&#xA;tn_string = str(tn)&#xA;stuff=[]&#xA;with open(FileName, 'rb') as file:&#xA;    # tell it that each is num_bytes...float&#xA;    stuff=struct.unpack('&gt;'+tn_string+'f', file.read(num_bytes*tn))&#xA;&#xA;# put stuff into vtk array&#xA;data = numpy_support.numpy_to_vtk(num_array=stuff, deep=True, array_type=vtk.VTK_FLOAT)&#xA;if data_name == '':&#xA;    data_name = os.path.basename(FileName)&#xA;data.SetName(data_name)&#xA;# NOTE: single column of data only&#xA;pdo.AddColumn(data)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
