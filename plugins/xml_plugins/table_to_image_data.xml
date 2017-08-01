@@ -71,16 +71,16 @@
       </IntVectorProperty>
 
 
-      <IntVectorProperty
+      <DoubleVectorProperty
         name="x_spacing"
         label="x spacing"
         initial_string="x_spacing"
         command="SetParameter"
         animateable="1"
-        default_values="1"
+        default_values="1.0"
         number_of_elements="1">
         <Documentation></Documentation>
-      </IntVectorProperty>
+      </DoubleVectorProperty>
 
 
       <IntVectorProperty
@@ -95,16 +95,16 @@
       </IntVectorProperty>
 
 
-      <IntVectorProperty
+      <DoubleVectorProperty
         name="y_spacing"
         label="y spacing"
         initial_string="y_spacing"
         command="SetParameter"
         animateable="1"
-        default_values="1"
+        default_values="1.0"
         number_of_elements="1">
         <Documentation></Documentation>
-      </IntVectorProperty>
+      </DoubleVectorProperty>
 
 
       <IntVectorProperty
@@ -119,16 +119,16 @@
       </IntVectorProperty>
 
 
-      <IntVectorProperty
+      <DoubleVectorProperty
         name="z_spacing"
         label="z spacing"
         initial_string="z_spacing"
         command="SetParameter"
         animateable="1"
-        default_values="1"
+        default_values="1.0"
         number_of_elements="1">
         <Documentation></Documentation>
-      </IntVectorProperty>
+      </DoubleVectorProperty>
 
       <!-- Output data type: "vtkImageData" -->
       <IntVectorProperty command="SetOutputDataSetType"
