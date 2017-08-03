@@ -13,10 +13,10 @@ ExtraXml = '''\
 
 
 Properties = dict(
-  FileName = 'absolute path',
-  Number_Ignore_Lines = 0,
-  Delimiter_Field = ' '
-  )
+    FileName='absolute path',
+    Number_Ignore_Lines=0,
+    Delimiter_Field=' '
+)
 
 
 def RequestData():

@@ -13,10 +13,10 @@ ExtraXml = '''\
 
 
 Properties = dict(
-  FileName = 'absolute path',
-  data_name = '', # TODO: can I set the default dynamically?
-  double_values = False
-  )
+    FileName='absolute path',
+    data_name='', # TODO: can I set the default dynamically?
+    double_values=False
+)
 
 
 def RequestData():
@@ -32,10 +32,10 @@ def RequestData():
 
     tn = os.stat(FileName).st_size / num_bytes
     tn_string = str(tn)
-    raw=[]
+    raw = []
     with open(FileName, 'rb') as file:
         # Unpack by num_bytes
-        raw=struct.unpack('>'+tn_string+'f', file.read(num_bytes*tn))
+        raw = struct.unpack('>'+tn_string+'f', file.read(num_bytes*tn))
 
     # Put raw data into vtk array
     data = numpy_support.numpy_to_vtk(num_array=raw, deep=True, array_type=vtk.VTK_FLOAT)

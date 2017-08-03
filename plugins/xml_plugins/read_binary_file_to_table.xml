@@ -8,7 +8,7 @@
 <Hints>
     <ShowInMenu category="CSM GP Readers" />
     <ReaderFactory extensions="H@ bin"
-                   file_description="Binary File Format" />
+                   file_description="Binary Packed Floats or Doubles" />
 </Hints>
 
 
@@ -37,6 +37,19 @@
             <Documentation></Documentation>
             </StringVectorProperty>
 
+
+      <IntVectorProperty
+        name="double_values"
+        label="double values"
+        initial_string="double_values"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <!-- Output data type: "vtkTable" -->
       <IntVectorProperty command="SetOutputDataSetType"
                          default_values="19"
@@ -51,7 +64,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import struct&#xA;import os&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;num_bytes = 4 # float. Double is 8&#xA;&#xA;tn = os.stat(FileName).st_size / num_bytes&#xA;tn_string = str(tn)&#xA;stuff=[]&#xA;with open(FileName, 'rb') as file:&#xA;    # tell it that each is num_bytes...float&#xA;    stuff=struct.unpack('&gt;'+tn_string+'f', file.read(num_bytes*tn))&#xA;&#xA;# put stuff into vtk array&#xA;data = numpy_support.numpy_to_vtk(num_array=stuff, deep=True, array_type=vtk.VTK_FLOAT)&#xA;if data_name == '':&#xA;    data_name = os.path.basename(FileName)&#xA;data.SetName(data_name)&#xA;# NOTE: single column of data only&#xA;pdo.AddColumn(data)&#xA;"
+        default_values="import struct&#xA;import os&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;&#xA;num_bytes = 4 # FLOAT&#xA;if double_values:&#xA;    num_bytes = 8 # DOUBLE&#xA;&#xA;tn = os.stat(FileName).st_size / num_bytes&#xA;tn_string = str(tn)&#xA;raw = []&#xA;with open(FileName, 'rb') as file:&#xA;    # Unpack by num_bytes&#xA;    raw = struct.unpack('&gt;'+tn_string+'f', file.read(num_bytes*tn))&#xA;&#xA;# Put raw data into vtk array&#xA;data = numpy_support.numpy_to_vtk(num_array=raw, deep=True, array_type=vtk.VTK_FLOAT)&#xA;&#xA;# If no name given for data by user, use the basename of the file&#xA;if data_name == '':&#xA;    data_name = os.path.basename(FileName)&#xA;data.SetName(data_name)&#xA;&#xA;# Table with single column of data only&#xA;pdo.AddColumn(data)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>

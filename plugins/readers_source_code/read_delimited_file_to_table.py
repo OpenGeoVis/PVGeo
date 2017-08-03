@@ -13,11 +13,11 @@ ExtraXml = '''\
 
 
 Properties = dict(
-  FileName = 'absolute_path',
-  Number_Ignore_Lines = 0,
-  Has_Titles = True,
-  Delimiter_Field = ' '
-  )
+    FileName='absolute_path',
+    Number_Ignore_Lines=0,
+    Has_Titles=True,
+    Delimiter_Field=' '
+)
 
 def RequestData():
     import numpy as np
