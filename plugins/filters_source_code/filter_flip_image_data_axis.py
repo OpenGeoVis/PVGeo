@@ -12,15 +12,15 @@ ExtraXml = '''\
 
 
 Properties = dict(
-  reverse_x_dir = False,
-  reverse_y_dir = False,
-  reverse_z_dir = False,
-  )
+    reverse_x_dir=False,
+    reverse_y_dir=False,
+    reverse_z_dir=False,
+)
 
 
 def RequestData():
-    pdi = self.GetInput() #vtkImageData
-    image = self.GetOutput() #vtkImageData
+    pdi = self.GetInput() # vtkImageData
+    image = self.GetOutput() # vtkImageData
 
     # Make user selection iterable
     dirs = [reverse_x_dir, reverse_y_dir, reverse_z_dir]
