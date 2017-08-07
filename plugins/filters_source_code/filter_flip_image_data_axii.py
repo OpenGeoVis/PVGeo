@@ -1,5 +1,5 @@
-Name = 'Flip ImageData'
-Label = 'Flip ImageData'
+Name = 'FlipImageDataAxii'
+Label = 'Flip ImageData Axii'
 Help = 'This filter will flip ImageData in any of the three cartesian coordinates.'
 
 NumberOfInputs = 1

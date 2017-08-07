@@ -1,6 +1,6 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="filters">
-    <SourceProxy name="Flip ImageData" class="vtkPythonProgrammableFilter" label="Flip ImageData">
+    <SourceProxy name="FlipImageDataAxii" class="vtkPythonProgrammableFilter" label="Flip ImageData Axii">
       <Documentation
         long_help="This filter will flip ImageData in any of the three cartesian coordinates."
         short_help="This filter will flip ImageData in any of the three cartesian coordinates.">
