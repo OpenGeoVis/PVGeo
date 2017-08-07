@@ -22,7 +22,7 @@ Properties = dict(
 def RequestData():
     import struct
     import os
-    from vtk.util import numpy_support
+    from vtk.util import numpy_support as nps
 
     pdo = self.GetOutput() # vtkTable
 
@@ -38,7 +38,7 @@ def RequestData():
         raw = struct.unpack('>'+tn_string+'f', file.read(num_bytes*tn))
 
     # Put raw data into vtk array
-    data = numpy_support.numpy_to_vtk(num_array=raw, deep=True, array_type=vtk.VTK_FLOAT)
+    data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtk.VTK_FLOAT)
 
     # If no name given for data by user, use the basename of the file
     if data_name == '':
