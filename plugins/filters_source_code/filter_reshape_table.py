@@ -1,6 +1,6 @@
 Name = 'ReshapeTable'
 Label = 'Reshape Table'
-Help = 'Help for the Test Filter'
+Help = 'This filter will take a vtkTable object and reshape it. This filter essentiall treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contigous manner.'
 
 NumberOfInputs = 1
 InputDataType = 'vtkTable'

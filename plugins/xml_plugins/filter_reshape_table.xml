@@ -2,8 +2,8 @@
   <ProxyGroup name="filters">
     <SourceProxy name="ReshapeTable" class="vtkPythonProgrammableFilter" label="Reshape Table">
       <Documentation
-        long_help="Help for the Test Filter"
-        short_help="Help for the Test Filter">
+        long_help="This filter will take a vtkTable object and reshape it. This filter essentiall treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contigous manner."
+        short_help="This filter will take a vtkTable object and reshape it. This filter essentiall treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contigous manner.">
       </Documentation>
 <Hints>
     <ShowInMenu category="CSM GP Filters" />
