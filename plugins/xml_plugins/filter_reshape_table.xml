@@ -1,0 +1,75 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="ReshapeTable" class="vtkPythonProgrammableFilter" label="Reshape Table">
+      <Documentation
+        long_help="Help for the Test Filter"
+        short_help="Help for the Test Filter">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM GP Filters" />
+</Hints>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkTable"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <IntVectorProperty
+        name="ncols"
+        label="ncols"
+        initial_string="ncols"
+        command="SetParameter"
+        animateable="1"
+        default_values="6"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="nrows"
+        label="nrows"
+        initial_string="nrows"
+        command="SetParameter"
+        animateable="1"
+        default_values="126"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <!-- Output data type: "vtkTable" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="19"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="import numpy as np&#xA;from vtk.util import numpy_support as nps&#xA;&#xA;pdi = self.GetInput() #vtkTable&#xA;pdo = self.GetOutput() #vtkTable&#xA;&#xA;# Get number of columns&#xA;cols = pdi.GetNumberOfColumns()&#xA;# Get number of rows&#xA;rows = pdi.GetColumn(0).GetNumberOfTuples() # TODO is the necessary?&#xA;&#xA;# Make a 2D numpy array and fille with data from input table&#xA;data = np.empty((cols,rows))&#xA;for i in range(cols):&#xA;    c = pdi.GetColumn(i)&#xA;    data[i] = nps.vtk_to_numpy(c)&#xA;&#xA;order = 'C'&#xA;'''&#xA;# Cannot use Fortran because nps needs contigous arrays&#xA;if Fortran_Ordering:&#xA;    order = 'F'&#xA;'''&#xA;&#xA;if ((ncols*nrows) != (cols*rows)):&#xA;    print 'Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows)&#xA;    return&#xA;&#xA;# Use numpy.reshape() to reshape data NOTE: only 2D because its a table&#xA;# NOTE: column access of this reshape is not contigous&#xA;data = np.reshape(data, (nrows,ncols), order=order)&#xA;pdo.SetNumberOfRows(nrows)&#xA;&#xA;# Add new array to output table and assign incremental names (e.g. Field0)&#xA;for i in range(ncols):&#xA;    # Make a contigous array from the column we want&#xA;    col = np.array(data[:,i])&#xA;    # allow type to be determined by input&#xA;    insert = nps.numpy_to_vtk(num_array=col, deep=True) # array_type=vtk.VTK_FLOAT&#xA;    # VTK arrays need a name. Set arbitrarily&#xA;    insert.SetName('Field%d' % i)&#xA;    #pdo.AddColumn(insert) # these are not getting added to the output table&#xA;    # ... work around:&#xA;    pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
