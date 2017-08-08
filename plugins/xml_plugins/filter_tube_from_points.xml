@@ -60,7 +60,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;pdo.Allocate()&#xA;&#xA;for i in range(0, numPoints-1):&#xA;    points = [i, i+1]&#xA;    # VTK_LINE is 3&#xA;    pdo.InsertNextCell(3, 2, points)&#xA;&#xA;# Make a tube from the PolyData line:&#xA;tube = vtk.vtkTubeFilter()&#xA;tube.SetInputData(pdo)&#xA;tube.SetRadius(Radius)&#xA;tube.SetNumberOfSides(Number_of_Sides)&#xA;tube.Update()&#xA;pdo.ShallowCopy(tube.GetOutput())&#xA;"
+        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;for i in range(0, numPoints-1):&#xA;    points = [i, i+1]&#xA;    # VTK_LINE is 3&#xA;    pdo.InsertNextCell(3, 2, points)&#xA;&#xA;# Make a tube from the PolyData line:&#xA;tube = vtk.vtkTubeFilter()&#xA;tube.SetInputData(pdo)&#xA;tube.SetRadius(Radius)&#xA;tube.SetNumberOfSides(Number_of_Sides)&#xA;tube.Update()&#xA;pdo.ShallowCopy(tube.GetOutput())&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>

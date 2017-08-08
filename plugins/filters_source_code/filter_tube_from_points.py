@@ -23,8 +23,9 @@ def RequestData():
     pdi = self.GetInput() # VTK PolyData Type
     pdo = self.GetOutput() # VTK PolyData Type
 
+    pdo.DeepCopy(pdi)
+
     numPoints = pdi.GetNumberOfPoints()
-    pdo.Allocate()
 
     for i in range(0, numPoints-1):
         points = [i, i+1]
