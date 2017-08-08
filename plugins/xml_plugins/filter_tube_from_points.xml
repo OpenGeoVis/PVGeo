@@ -1,0 +1,87 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="TubeFromPoints" class="vtkPythonProgrammableFilter" label="Tube From Points">
+      <Documentation
+        long_help="This takes points from a vtkPolyData object and constructs a line of those points then builds a tube around that line."
+        short_help="This takes points from a vtkPolyData object and constructs a line of those points then builds a tube around that line.">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM Geophysics Filters" />
+</Hints>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkPolyData"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <IntVectorProperty
+        name="Input_Arr"
+        label="Input Arr"
+        initial_string="Input_Arr"
+        command="SetParameter"
+        animateable="1"
+        default_values="3"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="Number_of_Sides"
+        label="Number of Sides"
+        initial_string="Number_of_Sides"
+        command="SetParameter"
+        animateable="1"
+        default_values="20"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <DoubleVectorProperty
+        name="Radius"
+        label="Radius"
+        initial_string="Radius"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <!-- Output data type: "vtkPolyData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="0"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;pdo.Allocate()&#xA;&#xA;for i in range(0, numPoints-1):&#xA;    points = [i, i+1]&#xA;    # VTK_LINE is 3 -&gt; TODO:&#xA;    pdo.InsertNextCell(Input_Arr, 2, points)&#xA;&#xA;# Make a tube from the PolyData line:&#xA;tube = vtk.vtkTubeFilter()&#xA;tube.SetInputData(pdo)&#xA;tube.SetRadius(10)&#xA;tube.SetNumberOfSides(20)&#xA;tube.Update()&#xA;pdo.ShallowCopy(tube.GetOutput())&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
