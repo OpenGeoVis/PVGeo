@@ -1,6 +1,6 @@
 Name = 'TubeFromPoints'
 Label = 'Tube From Points'
-Help = 'This takes points from a vtkPolyData object and constructs a line of those points then builds a tube around that line.'
+Help = 'Takes points from a vtkPolyData object and constructs a line of those points then builds a tube around that line.'
 
 NumberOfInputs = 1
 InputDataType = 'vtkPolyData'
@@ -15,7 +15,7 @@ ExtraXml = '''\
 Properties = dict(
     Number_of_Sides=20,
     Radius=1.0,
-    Input_Arr=3,
+    #Input_Arr=3,
 )
 
 
@@ -28,8 +28,8 @@ def RequestData():
 
     for i in range(0, numPoints-1):
         points = [i, i+1]
-        # VTK_LINE is 3 -> TODO:
-        pdo.InsertNextCell(Input_Arr, 2, points)
+        # VTK_LINE is 3
+        pdo.InsertNextCell(3, 2, points)
 
     # Make a tube from the PolyData line:
     tube = vtk.vtkTubeFilter()

@@ -2,8 +2,8 @@
   <ProxyGroup name="filters">
     <SourceProxy name="TubeFromPoints" class="vtkPythonProgrammableFilter" label="Tube From Points">
       <Documentation
-        long_help="This takes points from a vtkPolyData object and constructs a line of those points then builds a tube around that line."
-        short_help="This takes points from a vtkPolyData object and constructs a line of those points then builds a tube around that line.">
+        long_help="Takes points from a vtkPolyData object and constructs a line of those points then builds a tube around that line."
+        short_help="Takes points from a vtkPolyData object and constructs a line of those points then builds a tube around that line.">
       </Documentation>
 <Hints>
     <ShowInMenu category="CSM Geophysics Filters" />
@@ -22,18 +22,6 @@
             <DataType value="vtkPolyData"/>
           </DataTypeDomain>
       </InputProperty>
-
-      <IntVectorProperty
-        name="Input_Arr"
-        label="Input Arr"
-        initial_string="Input_Arr"
-        command="SetParameter"
-        animateable="1"
-        default_values="3"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </IntVectorProperty>
-
 
       <IntVectorProperty
         name="Number_of_Sides"
@@ -72,7 +60,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;pdo.Allocate()&#xA;&#xA;for i in range(0, numPoints-1):&#xA;    points = [i, i+1]&#xA;    # VTK_LINE is 3 -&gt; TODO:&#xA;    pdo.InsertNextCell(Input_Arr, 2, points)&#xA;&#xA;# Make a tube from the PolyData line:&#xA;tube = vtk.vtkTubeFilter()&#xA;tube.SetInputData(pdo)&#xA;tube.SetRadius(10)&#xA;tube.SetNumberOfSides(20)&#xA;tube.Update()&#xA;pdo.ShallowCopy(tube.GetOutput())&#xA;"
+        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;pdo.Allocate()&#xA;&#xA;for i in range(0, numPoints-1):&#xA;    points = [i, i+1]&#xA;    # VTK_LINE is 3&#xA;    pdo.InsertNextCell(3, 2, points)&#xA;&#xA;# Make a tube from the PolyData line:&#xA;tube = vtk.vtkTubeFilter()&#xA;tube.SetInputData(pdo)&#xA;tube.SetRadius(10)&#xA;tube.SetNumberOfSides(20)&#xA;tube.Update()&#xA;pdo.ShallowCopy(tube.GetOutput())&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>
