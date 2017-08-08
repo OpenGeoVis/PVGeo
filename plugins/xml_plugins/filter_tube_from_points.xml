@@ -41,7 +41,7 @@
         initial_string="Radius"
         command="SetParameter"
         animateable="1"
-        default_values="1.0"
+        default_values="10.0"
         number_of_elements="1">
         <Documentation></Documentation>
       </DoubleVectorProperty>
