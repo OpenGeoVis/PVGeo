@@ -245,19 +245,31 @@ def getOutputDataSetTypeXml(info):
 
     outputDataType = info.get('OutputDataType', '')
 
+    # these values come from vtkType.h in VTK Code Base
     typeMap = {
-
-        '' : 8, # same as input
-        'vtkPolyData' : 0,
-        'vtkStructuredGrid' : 2,
-        'vtkRectilinearGrid' : 3,
-        'vtkUnstructuredGrid' : 4,
-        'vtkImageData' : 6,
-        'vtkUniformGrid' : 10,
-        'vtkMultiblockDataSet' : 13,
-        'vtkHierarchicalBoxDataSet' : 15,
-        'vtkTable' : 19
-        }
+        '': 8, # same as input
+        'vtkPolyData': 0,
+        'vtkStructuredPoints': 1,
+        'vtkStructuredGrid': 2,
+        'vtkRectilinearGrid': 3,
+        'vtkUnstructuredGrid': 4,
+        'vtkPiecewiseFunction': 5,
+        'vtkImageData': 6,
+        'vtkDataObject': 7,
+        'vtkPointSet': 9,
+        'vtkUniformGrid': 10,
+        'vtkCompositeDataSet': 11,
+        #'vtkMultiGroupDataSet': 12, # obsolete
+        'vtkMultiBlockDataSet': 13,
+        #'vtkHierarchicalDataSet': 14, # obsolete
+        #'vtkHierarchicalBoxDataSet': 15, # obsolete
+        'vtkGenericDataSet': 16,
+        'vtkHyperOctree': 17,
+        #'vtkTemporalDataSet': 18, # obsolete
+        'vtkTable': 19,
+        'vtkGraph': 20,
+        'vtkTree': 21
+    }
 
     typeValue = typeMap[outputDataType]
 
