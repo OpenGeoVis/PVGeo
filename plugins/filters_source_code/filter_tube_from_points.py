@@ -34,7 +34,7 @@ def RequestData():
     # Make a tube from the PolyData line:
     tube = vtk.vtkTubeFilter()
     tube.SetInputData(pdo)
-    tube.SetRadius(10)
-    tube.SetNumberOfSides(20)
+    tube.SetRadius(Radius)
+    tube.SetNumberOfSides(Number_of_Sides)
     tube.Update()
     pdo.ShallowCopy(tube.GetOutput())
