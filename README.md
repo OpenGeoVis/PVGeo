@@ -6,6 +6,8 @@ Stay tuned, this project is in its early stages of development.
 
 **Before You Do Anything!!**
 
+**Before You Do Anything!!**
+
 You *MUST* change the `PVPATH` variable in `plugins/install_plugins.sh` This variable is likely different depending on you OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app/` with the name of your version of ParaView under `/Applications/`.
 
 
