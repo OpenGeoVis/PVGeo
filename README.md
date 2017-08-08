@@ -15,11 +15,11 @@ You *MUST* change the `PVPATH` variable in `plugins/install_plugins.sh` This var
 
 In the `plugins/` directory, there are two shell scripts. `build_plugins.sh` will build up the XML Server Manager Configuration filters from the `.py` scripts and install them. Only use this script if you are making your own filters or readers. If you run this script, it will build and install all filters and readers to ParaView.
 
-To simply install the distributed filters from this repo, run the `install_plugins.sh` script *but first you MUST change the `PVPATH` variable* (described above)! This script will simply copy over all the XML files from `plugins/xml_plugins` to the default directory for third paty plugins in ParaView so that they will all load when ParaView launches.
+To simply install the distributed filters from this repo, run the `install_plugins.sh` script *but first you MUST change the `PVPATH` variable* (described above)! This script will simply copy over all the XML files from `plugins/xml_plugins/` to the default directory for third paty plugins in ParaView so that they will all load when ParaView launches.
 
 
 **To Make Your Own Filters and Readers**
 
-To make a custom filter or reader, follow the outline in `plugins/example.py` and place your script in either the `filters_source_code/` or `readers_source_code/` directories with a meaningful name. *Note* that the script will only compile `.py` files that contain either `filter_` or `reader_` in the file name. This is so you can save other `.py` files in those directories without issues.
+To make a custom filter or reader, follow the outline in `plugins/example.py` and place your script in either the `plugins/filters_source_code/` or `plugins/readers_source_code/` directories with a meaningful name. *Note* that the script will only compile `.py` files that contain either `filter_` or `reader_` in the file name. This is so you can save other `.py` files in those directories without issues.
 
-All of the distributed filters in this repo will appear in the menu category `CSM Geophysics Filters`. As you develop your own, it may be useful to specify your own menu category as outlined in the hints of the ExtraXml in `example.py`
+All of the distributed filters in this repo will appear in the menu category `CSM Geophysics Filters`. As you develop your own, it may be useful to specify your own menu category as outlined in the hints of the ExtraXml in `plugins/example.py`
