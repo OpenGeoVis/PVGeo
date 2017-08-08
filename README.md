@@ -1,5 +1,5 @@
 # ParaView Geophysics Plugins
-This repository contains plugins for the open-source, multi-platform data analysis and visualization application ParaView by Kitware (https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D grids.
+This repository contains plugins for the open-source, multi-platform data analysis and visualization application ParaView by Kitware (https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D grids. All code distributed here is licensed to Bane Sullivan, undergraduate student of the Geophysics Department at the Colorado School of Mines.
 
 **More to come!**
 Stay tuned, this project is in its early stages of development.
@@ -7,7 +7,7 @@ Stay tuned, this project is in its early stages of development.
 
 **Before You Do Anything!!**
 
-You *MUST* change the `PVPATH` variable in `plugins/install_plugins.sh` This variable is likely different depending on you OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app/` with the name of your version of ParaView under `/Applications/`.
+You *MUST* change the `PVPATH` variable in `plugins/install_plugins.sh` This variable is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app/` with the name of your version of ParaView under `/Applications/`.
 
 
 **To Install XML Filters and to Build XML Filters to ParaView**
