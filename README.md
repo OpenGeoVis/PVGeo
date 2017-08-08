@@ -1,5 +1,5 @@
 # ParaView Geophysics Plugins
-This repository contains plugins for the open-source, multi-platform data analysis and visualization application ParaView by Kitware (https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D grids. All code distributed here was produced by Christopher Sullivan (chrsulli@mines.edu), undergraduate student of the Geophysics Department at the Colorado School of Mines. Feel free to contact for major questions or for custom filters/readers to visualize geoscience data.
+This repository contains plugins for the open-source, multi-platform data analysis and visualization application ParaView by Kitware (https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D grids. All code distributed here was produced by Christopher Sullivan (chrsulli@mines.edu), undergraduate student of the Geophysics Department at the Colorado School of Mines, unless otherwise specified at the top of the file. Feel free to contact for major questions or for custom filters/readers to visualize geoscience data.
 
 **More to come!**
 
