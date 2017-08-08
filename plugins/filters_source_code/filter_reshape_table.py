@@ -7,7 +7,7 @@ InputDataType = 'vtkTable'
 OutputDataType = 'vtkTable'
 ExtraXml = '''\
 <Hints>
-    <ShowInMenu category="CSM GP Filters" />
+    <ShowInMenu category="CSM Geophysics Filters" />
 </Hints>
 '''
 

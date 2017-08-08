@@ -7,7 +7,7 @@ InputDataType = 'vtkPolyData'
 OutputDataType = 'vtkPolyData'
 ExtraXml = '''\
 <Hints>
-    <ShowInMenu category="CSM GP Filters" />
+    <ShowInMenu category="CSM Geophysics Filters" />
 </Hints>
 '''
 
