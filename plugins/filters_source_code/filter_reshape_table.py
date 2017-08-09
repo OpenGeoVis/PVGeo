@@ -45,8 +45,7 @@ def RequestData():
     '''
 
     if ((ncols*nrows) != (cols*rows)):
-        print 'Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows)
-        return
+        raise Exception('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
 
     # Use numpy.reshape() to reshape data NOTE: only 2D because its a table
     # NOTE: column access of this reshape is not contigous
