@@ -1,3 +1,4 @@
 state_files/
 *.DS_Store
-prototype/
+#prototype/
+inc_*.py # Incomplete files
