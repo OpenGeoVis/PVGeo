@@ -1,4 +1,4 @@
-Name = 'Table To ImageData'
+Name = 'TableToImageData'
 Label = 'Table To ImageData'
 Help = 'This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a nx by ny by nz structure and an origin can be set at any xyz point.'
 
