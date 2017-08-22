@@ -59,16 +59,16 @@
       </IntVectorProperty>
 
 
-      <IntVectorProperty
+      <DoubleVectorProperty
         name="x_origin"
         label="x origin"
         initial_string="x_origin"
         command="SetParameter"
         animateable="1"
-        default_values="0"
+        default_values="0.0"
         number_of_elements="1">
         <Documentation></Documentation>
-      </IntVectorProperty>
+      </DoubleVectorProperty>
 
 
       <DoubleVectorProperty
@@ -83,16 +83,16 @@
       </DoubleVectorProperty>
 
 
-      <IntVectorProperty
+      <DoubleVectorProperty
         name="y_origin"
         label="y origin"
         initial_string="y_origin"
         command="SetParameter"
         animateable="1"
-        default_values="0"
+        default_values="0.0"
         number_of_elements="1">
         <Documentation></Documentation>
-      </IntVectorProperty>
+      </DoubleVectorProperty>
 
 
       <DoubleVectorProperty
@@ -107,16 +107,16 @@
       </DoubleVectorProperty>
 
 
-      <IntVectorProperty
+      <DoubleVectorProperty
         name="z_origin"
         label="z origin"
         initial_string="z_origin"
         command="SetParameter"
         animateable="1"
-        default_values="0"
+        default_values="0.0"
         number_of_elements="1">
         <Documentation></Documentation>
-      </IntVectorProperty>
+      </DoubleVectorProperty>
 
 
       <DoubleVectorProperty

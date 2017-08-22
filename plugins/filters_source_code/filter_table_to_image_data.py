@@ -18,9 +18,9 @@ Properties = dict(
     x_spacing=1.0,
     y_spacing=1.0,
     z_spacing=1.0,
-    x_origin=0,
-    y_origin=0,
-    z_origin=0,
+    x_origin=0.0,
+    y_origin=0.0,
+    z_origin=0.0,
 )
 
 def RequestData():
