@@ -1,0 +1,101 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="ProjectShotRecordToSpace" class="vtkPythonProgrammableFilter" label="Project Shot Record To Space">
+      <Documentation
+        long_help=""
+        short_help="">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM Geophysics Filters" />
+</Hints>
+
+
+      <InputProperty
+        name="Input"
+                    clean_command="RemoveAllInputs"
+            command="AddInputConnection"
+            multiple_input="1">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkTable"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <DoubleVectorProperty
+        name="ds"
+        label="ds"
+        initial_string="ds"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+
+      <DoubleVectorProperty
+        name="dt"
+        label="dt"
+        initial_string="dt"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.001"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+
+      <IntVectorProperty
+        name="ns"
+        label="ns"
+        initial_string="ns"
+        command="SetParameter"
+        animateable="1"
+        default_values="126"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="nt"
+        label="nt"
+        initial_string="nt"
+        command="SetParameter"
+        animateable="1"
+        default_values="1500"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <!-- Output data type: "vtkPolyData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="0"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;pdo = self.GetOutput()&#xA;&#xA;idata = 0&#xA;icoord = 1&#xA;&#xA;if 'coord' in inputs[0].GetColumn(0).GetName():&#xA;    idata = 1&#xA;    icoord = 0&#xA;&#xA;# connect to input ports&#xA;data_in = inputs[idata]&#xA;coords_in = inputs[icoord]&#xA;&#xA;#print('Data: ', data_in.GetColumn(0).GetName())&#xA;#print('Coords: ', coords_in.GetColumn(0).GetName())&#xA;&#xA;# Put arrays from inout to numpy arrays&#xA;data = nps.vtk_to_numpy(data_in.GetColumn(0))&#xA;coords = nps.vtk_to_numpy(coords_in.GetColumn(0))&#xA;&#xA;# Reshape arrays&#xA;#data = np.reshape(data, (ns,nt,1)) # NOT NEEDED!!!!!!&#xA;coords = np.reshape(coords, (ns,6))&#xA;# Coordinate indices in the ns x 6 matrix:&#xA;gx = 3&#xA;gy = 2&#xA;gz = 5&#xA;sx = 1&#xA;sy = 0&#xA;sz = 4&#xA;&#xA;vtk_pts = vtk.vtkPoints()&#xA;traces_as_points = np.empty((nt,4))&#xA;# For each trace (essentially columns in both structures/arrays)&#xA;for i in range(ns):&#xA;    # Grab source and receiver coords&#xA;    pts = coords[i]&#xA;    # source:&#xA;    s = [pts[sx], pts[sy], pts[sz]]&#xA;    # Receiver:&#xA;    g = [pts[gx], pts[gy], pts[gz]]&#xA;    # Direction Vector: Vector points from receiver to source&#xA;    vec = [s[0] - g[0], s[1] - g[1], s[2] - g[2]]&#xA;    # Total spatial distance:&#xA;    dist = math.sqrt(vec[0]**2 + vec[1]**2) # + vec[2]**2&#xA;    # Get unit vector for direction&#xA;    vec = [vec[0]/dist, vec[1]/dist, vec[2]] # /dist&#xA;    # Determine spacing factor from distance of 3D line and total data to fit on that 3D line&#xA;    #ds = math.floor(dist) / nt&#xA;&#xA;    # Generate an array of coords for that whole line at that spacing and associate trace data&#xA;    line_coords = np.empty((nt,3))&#xA;    for j in range(nt):&#xA;        x = g[0] + (vec[0] * (nt-j) ) #* dt&#xA;        y = g[1] + (vec[1] * (nt-j) ) #* dt&#xA;        z = g[2]#s[2] + (vec[2] * j * ds)&#xA;        #line_coords = np.append(line_coords, [x,y,z])&#xA;        #line_coords[j] = [x,y,z]&#xA;        vtk_pts.InsertNextPoint(x,y,z)&#xA;&#xA;# Add each trace one after another (x,y,z,data) to 4D array&#xA;#temp = np.append(line_coords, data[i], axis=1)&#xA;#traces_as_points = np.append(traces_as_points, temp, axis=0)&#xA;#pdo.SetPoints(vtk_pts)&#xA;#insert = nps.numpy_to_vtk(num_array=data, deep=True, array_type=vtk.VTK_FLOAT)&#xA;pdo.GetPointData().AddArray(data_in.GetColumn(0))&#xA;#pdo.AddArray(data)&#xA;&#xA;# Add the points to the vtkPolyData object&#xA;# Right now the points are not associated with a line -&#xA;# it is just a set of unconnected points. We need to&#xA;# create a 'cell' object that ties points together&#xA;# to make a curve (in this case). This is done below.&#xA;# A 'cell' is just an object that tells how points are&#xA;# connected to make a 1D, 2D, or 3D object.&#xA;pdo.SetPoints(vtk_pts)&#xA;&#xA;# Make a vtkPolyLine which holds the info necessary&#xA;# to create a curve composed of line segments. This&#xA;# really just hold constructor data that will be passed&#xA;# to vtkPolyData to add a new line.&#xA;aPolyLine = vtk.vtkPolyLine()&#xA;&#xA;#Indicate the number of points along the line&#xA;numPts = ns*nt&#xA;aPolyLine.GetPointIds().SetNumberOfIds(numPts)&#xA;for i in range(0,numPts):&#xA;    # Add the points to the line. The first value indicates&#xA;    # the order of the point on the line. The second value&#xA;    # is a reference to a point in a vtkPoints object. Depends&#xA;    # on the order that Points were added to vtkPoints object.&#xA;    # Note that this will not be associated with actual points&#xA;    # until it is added to a vtkPolyData object which holds a&#xA;    # vtkPoints object.&#xA;    aPolyLine.GetPointIds().SetId(i, i)&#xA;&#xA;# Allocate the number of 'cells' that will be added. We are just&#xA;# adding one vtkPolyLine 'cell' to the vtkPolyData object.&#xA;pdo.Allocate(1, 1)&#xA;&#xA;# Add the poly line 'cell' to the vtkPolyData object.&#xA;pdo.InsertNextCell(aPolyLine.GetCellType(), aPolyLine.GetPointIds())&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
