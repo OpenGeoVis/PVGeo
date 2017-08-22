@@ -15,7 +15,8 @@ ExtraXml = '''\
 Properties = dict(
     FileName='absolute path',
     Number_Ignore_Lines=0,
-    Delimiter_Field=' '
+    Delimiter_Field=' ',
+    Use_tab_delimiter=True
 )
 
 
@@ -25,6 +26,9 @@ def RequestData():
     from vtk.util import numpy_support
 
     pdo = self.GetOutput() # vtkTable
+
+    if (Use_tab_delimiter):
+        Delimiter_Field = '\t'
 
     titles = []
     data = []

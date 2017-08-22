@@ -49,6 +49,19 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
+
+      <IntVectorProperty
+        name="Use_tab_delimiter"
+        label="Use tab delimiter"
+        initial_string="Use_tab_delimiter"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <!-- Output data type: "vtkTable" -->
       <IntVectorProperty command="SetOutputDataSetType"
                          default_values="19"
@@ -63,7 +76,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import numpy as np&#xA;import csv&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;&#xA;titles = []&#xA;data = []&#xA;with open(FileName) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    # Skip defined lines&#xA;    for i in range(Number_Ignore_Lines):&#xA;        next(f)&#xA;&#xA;    # Get file header (part of format)&#xA;    header = next(f) # TODO: do something with the header&#xA;    print('File Header: ' + header)&#xA;    # Get titles&#xA;    numCols = int(next(f))&#xA;    for i in range(numCols):&#xA;        titles.append(next(f).rstrip('\r\n'))&#xA;&#xA;    # Read data&#xA;    for row in reader:&#xA;        data.append(row)&#xA;&#xA;# Put first column into table&#xA;for i in range(len(titles)):&#xA;    col = []&#xA;    for row in data:&#xA;        col.append(row[i])&#xA;    VTK_data = numpy_support.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)&#xA;    VTK_data.SetName(titles[i])&#xA;    pdo.AddColumn(VTK_data)&#xA;"
+        default_values="import numpy as np&#xA;import csv&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;&#xA;if (Use_tab_delimiter):&#xA;    Delimiter_Field = '\t'&#xA;&#xA;titles = []&#xA;data = []&#xA;with open(FileName) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    # Skip defined lines&#xA;    for i in range(Number_Ignore_Lines):&#xA;        next(f)&#xA;&#xA;    # Get file header (part of format)&#xA;    header = next(f) # TODO: do something with the header&#xA;    print('File Header: ' + header)&#xA;    # Get titles&#xA;    numCols = int(next(f))&#xA;    for i in range(numCols):&#xA;        titles.append(next(f).rstrip('\r\n'))&#xA;&#xA;    # Read data&#xA;    for row in reader:&#xA;        data.append(row)&#xA;&#xA;# Put first column into table&#xA;for i in range(len(titles)):&#xA;    col = []&#xA;    for row in data:&#xA;        col.append(row[i])&#xA;    VTK_data = numpy_support.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)&#xA;    VTK_data.SetName(titles[i])&#xA;    pdo.AddColumn(VTK_data)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>
