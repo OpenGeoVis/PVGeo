@@ -1,6 +1,6 @@
-Name = 'Read Binary File To Table'
-Label = 'Read Binary File To Table'
-Help = 'This filter reads in float data that is packed into a binary file fomrat. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian. Use the Table to ImageData filter to reshape the vtkTable.'
+Name = 'ReadPackedBinaryFileToTable'
+Label = 'Read Packed Binary File To Table'
+Help = 'This filter reads in float data that is packed into a binary file fomrat. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian. Use the Table to ImageData filter to reshape the data.'
 
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'

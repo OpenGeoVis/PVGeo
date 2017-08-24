@@ -1,9 +1,9 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="sources">
-    <SourceProxy name="Read Binary File To Table" class="vtkPythonProgrammableFilter" label="Read Binary File To Table">
+    <SourceProxy name="ReadPackedBinaryFileToTable" class="vtkPythonProgrammableFilter" label="Read Packed Binary File To Table">
       <Documentation
-        long_help="This filter reads in float data that is packed into a binary file fomrat. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian. Use the Table to ImageData filter to reshape the vtkTable."
-        short_help="This filter reads in float data that is packed into a binary file fomrat. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian. Use the Table to ImageData filter to reshape the vtkTable.">
+        long_help="This filter reads in float data that is packed into a binary file fomrat. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian. Use the Table to ImageData filter to reshape the data."
+        short_help="This filter reads in float data that is packed into a binary file fomrat. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian. Use the Table to ImageData filter to reshape the data.">
       </Documentation>
 <Hints>
     <ShowInMenu category="CSM GP Readers" />
