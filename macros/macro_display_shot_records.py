@@ -9,7 +9,7 @@ from os.path import isfile, join
 paraview.simple._DisableFirstRenderCameraReset()
 
 # Get all the files to be displayed
-path = '/Users/bane/school/GPVR/traces/DASV_data/'
+path = '/Users/bane/school/GPVR/closed_data/traces/DASV_data/'
 data_files = [f for f in listdir(path) if f.endswith(".H@") & ('TScale' in f)]
 coord_files = [f for f in listdir(path) if f.endswith(".H@") & ('_coord' in f)]
 #header_files = [f for f in listdir(path) if f.endswith(".H")]
@@ -28,9 +28,9 @@ for d in data_files:
             #print('Displaying trace %d' % int(num))
             attname = 'value'
             # Read data file:
-            data = ReadBinaryFileToTable(FileName=path + d, dataname=attname)
+            data = ReadPackedBinaryFileToTable(FileName=path + d, dataname=attname)
             # Read coord file:
-            coord = ReadBinaryFileToTable(FileName=path + c)
+            coord = ReadPackedBinaryFileToTable(FileName=path + c)
 
             #---- Display the source and reciever coordinates
             # Apply 'Reshape Table' filter to get 126*6 table
