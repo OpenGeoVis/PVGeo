@@ -86,7 +86,7 @@ tableToImageDataWellImage = TableToImageData(Input=wellImage)
 tableToImageDataWellImage.nx = 301
 tableToImageDataWellImage.ny = 312
 tableToImageDataWellImage.nz = 183
-tableToImageDataWellImage.xspacing = -5.0
+tableToImageDataWellImage.xspacing = 5.0
 tableToImageDataWellImage.yorigin = -73.0
 tableToImageDataWellImage.yspacing = 5.0
 tableToImageDataWellImage.zorigin = -256.0
