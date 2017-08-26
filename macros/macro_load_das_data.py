@@ -20,7 +20,7 @@ tableToImageDataReflectorModel = TableToImageData(Input=reflectorsModel)
 tableToImageDataReflectorModel.nx = 301
 tableToImageDataReflectorModel.ny = 312
 tableToImageDataReflectorModel.nz = 183
-tableToImageDataReflectorModel.xspacing = -5.0
+tableToImageDataReflectorModel.xspacing = 5.0
 tableToImageDataReflectorModel.yorigin = -73.0
 tableToImageDataReflectorModel.yspacing = 5.0
 tableToImageDataReflectorModel.zorigin = -256.0
