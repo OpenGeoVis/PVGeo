@@ -17,10 +17,22 @@ tableToImageDataFaultModel = TableToImageData(Input=faultModel)
 tableToImageDataFaultModel.nx = 312
 tableToImageDataFaultModel.ny = 183
 tableToImageDataFaultModel.nz = 301
+tableToImageDataFaultModel.xorigin = -73
+tableToImageDataFaultModel.yorigin = -256
+tableToImageDataFaultModel.zorigin = 0
+tableToImageDataFaultModel.xspacing = 5.0
+tableToImageDataFaultModel.yspacing = 5.0
+tableToImageDataFaultModel.zspacing = 5.0
+
+# create a new 'Flip ImageData Axii'
+flipImageDataAxii = FlipImageDataAxii(Input=tableToImageDataFaultModel)
+
+# Properties modified on flipImageDataAxii1
+flipImageDataAxii.reversezdir = 1
 
 
 # create a new 'Threshold'
-threshold = Threshold(Input=tableToImageDataFaultModel)
+threshold = Threshold(Input=flipImageDataAxii)
 threshold.Scalars = ['POINTS', 'faults']
 threshold.ThresholdRange = [0.5, 1.0]
 
@@ -60,13 +72,6 @@ thresholdDisplay.OpacityTransferFunction = 'PiecewiseFunction'
 # reset view to fit data
 RenderView1.ResetCamera()
 
-#### saving camera placements for all active views
-
-# current camera placement for RenderView1
-RenderView1.CameraPosition = [740.9340351215747, 280.65537120778987, 720.0047715406733]
-RenderView1.CameraFocalPoint = [155.50000000000014, 91.00000000000006, 127.99999999999986]
-RenderView1.CameraViewUp = [-0.6894584051547252, -0.10762487602453236, 0.7162848550836509]
-RenderView1.CameraParallelScale = 221.00961517544886
 
 #### uncomment the following to render all views
 # RenderAllViews()
