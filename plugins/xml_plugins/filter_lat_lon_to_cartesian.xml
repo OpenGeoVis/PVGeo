@@ -1,0 +1,87 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="LatLonToCartesian" class="vtkPythonProgrammableFilter" label="Lat Lon To Cartesian">
+      <Documentation
+        long_help="Help for the Test Filter"
+        short_help="Help for the Test Filter">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM Geophysics Filters" />
+</Hints>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkTable"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <DoubleVectorProperty
+        name="Radius"
+        label="Radius"
+        initial_string="Radius"
+        command="SetParameter"
+        animateable="1"
+        default_values="6371.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+
+      <IntVectorProperty
+        name="lat_i"
+        label="lat i"
+        initial_string="lat_i"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        name="lon_i"
+        label="lon i"
+        initial_string="lon_i"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <!-- Output data type: "vtkTable" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="19"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="import numpy as np&#xA;from vtk.util import numpy_support as nps&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;# Get number of columns&#xA;ncols = pdi.GetNumberOfColumns()&#xA;nrows = pdi.GetColumn(0).GetNumberOfTuples()&#xA;&#xA;# Make a 2D numpy array and fille with data from input table&#xA;data = np.empty((nrows,ncols))&#xA;for i in range(ncols):&#xA;    c = pdi.GetColumn(i)&#xA;    data[:,i] = nps.vtk_to_numpy(c)&#xA;&#xA;rad = 2 * np.pi / 360.0&#xA;coords = np.empty((nrows,3))&#xA;row_i = 0&#xA;for r in data:&#xA;    x = Radius * cos(r[lat_i] * rad) * cos(r[lon_i] * rad)&#xA;    y = Radius * cos(r[lat_i] * rad) * sin(r[lon_i] * rad)&#xA;    z = Radius * sin(r[lat_i] * rad)&#xA;    coords[row_i] = [x,y,z]&#xA;    row_i = row_i + 1&#xA;&#xA;# Add coords to ouptut table&#xA;for i in range(3):&#xA;    col = np.array(coords[:,i])&#xA;    print col&#xA;    insert = nps.numpy_to_vtk(num_array=col, deep=True) # array_type=vtk.VTK_FLOAT&#xA;    # VTK arrays need a name.&#xA;    if i == 0:&#xA;        insert.SetName('X')&#xA;    elif i == 1:&#xA;        insert.SetName('Y')&#xA;    elif i == 2:&#xA;        insert.SetName('Z')&#xA;    #pdo.AddColumn(insert) # these are not getting added to the output table&#xA;    # ... work around:&#xA;    pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
