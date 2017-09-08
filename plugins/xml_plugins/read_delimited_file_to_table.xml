@@ -1,6 +1,6 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="sources">
-    <SourceProxy name="Read Delimited Text File To Table" class="vtkPythonProgrammableFilter" label="Read Delimited Text File To Table">
+    <SourceProxy name="ReadDelimitedTextFileToTable" class="vtkPythonProgrammableFilter" label="Read Delimited Text File To Table">
       <Documentation
         long_help="This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in Paraview, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import."
         short_help="This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in Paraview, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.">
@@ -62,6 +62,19 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
+
+      <IntVectorProperty
+        name="Use_tab_delimiter"
+        label="Use tab delimiter"
+        initial_string="Use_tab_delimiter"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <!-- Output data type: "vtkTable" -->
       <IntVectorProperty command="SetOutputDataSetType"
                          default_values="19"
@@ -76,7 +89,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import numpy as np&#xA;import csv&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;&#xA;titles = []&#xA;data = []&#xA;with open(FileName) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    # Skip header lines&#xA;    for i in range(Number_Ignore_Lines):&#xA;        reader.next()&#xA;    # Get titles&#xA;    if (Has_Titles):&#xA;        titles = reader.next()&#xA;    else:&#xA;        # Bulild arbitrary titles for length of first row&#xA;        row = reader.next()&#xA;        data.append(row)&#xA;        for i in range(len(row)):&#xA;            titles.append('Field' + str(i))&#xA;    # Read data&#xA;    for row in reader:&#xA;        data.append(row)&#xA;&#xA;# Put columns into table&#xA;for i in range(len(titles)):&#xA;    col = []&#xA;    for row in data:&#xA;        col.append(row[i])&#xA;    VTK_data = numpy_support.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)&#xA;    VTK_data.SetName(titles[i])&#xA;    pdo.AddColumn(VTK_data)&#xA;"
+        default_values="import numpy as np&#xA;import csv&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;&#xA;if (Use_tab_delimiter):&#xA;    Delimiter_Field = '\t'&#xA;&#xA;titles = []&#xA;data = []&#xA;with open(FileName) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    # Skip header lines&#xA;    for i in range(Number_Ignore_Lines):&#xA;        reader.next()&#xA;    # Get titles&#xA;    if (Has_Titles):&#xA;        titles = reader.next()&#xA;    else:&#xA;        # Bulild arbitrary titles for length of first row&#xA;        row = reader.next()&#xA;        data.append(row)&#xA;        for i in range(len(row)):&#xA;            titles.append('Field' + str(i))&#xA;    # Read data&#xA;    for row in reader:&#xA;        data.append(row)&#xA;&#xA;# Put columns into table&#xA;for i in range(len(titles)):&#xA;    col = []&#xA;    for row in data:&#xA;        col.append(row[i])&#xA;    VTK_data = numpy_support.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)&#xA;    VTK_data.SetName(titles[i])&#xA;    pdo.AddColumn(VTK_data)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>

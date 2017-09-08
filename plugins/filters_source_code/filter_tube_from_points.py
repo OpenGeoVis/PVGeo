@@ -1,6 +1,6 @@
 Name = 'TubeFromPoints'
 Label = 'Tube From Points'
-Help = 'Takes points from a vtkPolyData object and constructs a line of those points then builds a tube around that line.'
+Help = 'Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.'
 
 NumberOfInputs = 1
 InputDataType = 'vtkPolyData'

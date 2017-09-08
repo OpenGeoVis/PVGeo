@@ -1,4 +1,4 @@
-Name = 'Read Delimited Text File To Table'
+Name = 'ReadDelimitedTextFileToTable'
 Label = 'Read Delimited Text File To Table'
 Help = 'This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in Paraview, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.'
 
@@ -16,7 +16,8 @@ Properties = dict(
     FileName='absolute_path',
     Number_Ignore_Lines=0,
     Has_Titles=True,
-    Delimiter_Field=' '
+    Delimiter_Field=' ',
+    Use_tab_delimiter=False
 )
 
 def RequestData():
@@ -25,6 +26,9 @@ def RequestData():
     from vtk.util import numpy_support
 
     pdo = self.GetOutput() # vtkTable
+
+    if (Use_tab_delimiter):
+        Delimiter_Field = '\t'
 
     titles = []
     data = []
