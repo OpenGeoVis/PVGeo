@@ -16,7 +16,7 @@ Properties = dict(
     FileName='absolute path',
     Number_Ignore_Lines=0,
     Delimiter_Field=' ',
-    Use_tab_delimiter=True
+    Use_tab_delimiter=False
 )
 
 

@@ -56,7 +56,7 @@
         initial_string="Use_tab_delimiter"
         command="SetParameter"
         animateable="1"
-        default_values="1"
+        default_values="0"
         number_of_elements="1">
         <BooleanDomain name="bool" />
         <Documentation></Documentation>
