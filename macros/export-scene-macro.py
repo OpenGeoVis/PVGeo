@@ -173,7 +173,6 @@ def dumpColorArray(datasetDir, dataDir, colorArrayInfo, root = {}, compress = Tr
     root[location]['arrays'].append({ 'data': dumpedArray })
 
   return root
-
 # -----------------------------------------------------------------------------
 
 def dumpTCoords(datasetDir, dataDir, dataset, root = {}, compress = True):
@@ -181,15 +180,6 @@ def dumpTCoords(datasetDir, dataDir, dataset, root = {}, compress = True):
   if tcoords:
     dumpedArray = dumpDataArray(datasetDir, dataDir, tcoords, {}, compress)
     root['pointData']['activeTCoords'] = len(root['pointData']['arrays'])
-    root['pointData']['arrays'].append({ 'data': dumpedArray })
-
-# -----------------------------------------------------------------------------
-
-def dumpNormals(datasetDir, dataDir, dataset, root = {}, compress = True):
-  normals = dataset.GetPointData().GetNormals()
-  if normals:
-    dumpedArray = dumpDataArray(datasetDir, dataDir, normals, {}, compress)
-    root['pointData']['activeNormals'] = len(root['pointData']['arrays'])
     root['pointData']['arrays'].append({ 'data': dumpedArray })
 
 # -----------------------------------------------------------------------------
@@ -293,7 +283,6 @@ def dumpPolyData(datasetDir, dataDir, dataset, colorArrayInfo, root = {}, compre
 
   ## PointData TCoords
   dumpTCoords(datasetDir, dataDir, dataset, container, compress)
-  # dumpNormals(datasetDir, dataDir, dataset, container, compress)
 
   return root
 
@@ -354,8 +343,6 @@ def generateSceneName():
 
   # limit to a reasonable length characters
   fileName = fileName[:12] if len(fileName) > 15 else fileName
-  if len(fileName) == 0:
-    fileName = 'SceneExport'
   sceneName = '%s' % fileName
   counter = 0
   while os.path.isfile(os.path.join(ROOT_OUTPUT_DIRECTORY, '%s%s' % (sceneName, FILENAME_EXTENSION))):
@@ -369,7 +356,6 @@ def generateSceneName():
 componentIndex = 0
 
 def getComponentName(actor):
-  global componentIndex
   srcs = simple.GetSources()
   duplicates = {}
   for key, val in srcs.items():
@@ -436,14 +422,12 @@ for rIdx in range(renderers.GetNumberOfItems()):
       dataset = None
 
       if dataObject.IsA('vtkCompositeDataSet'):
-        if dataObject.GetNumberOfBlocks() == 1:
-          dataset = dataObject.GetBlock(0)
-        else:
-          print('Apply geometry filter')
-          gf = vtkCompositeDataGeometryFilter()
-          gf.SetInputData(dataObject)
-          gf.Update()
-          dataset = gf.GetOutput()
+        dataMTime = dataObject.GetMTime()
+        gf = vtkCompositeDataGeometryFilter()
+        gf.SetInputData(dataObject)
+        gf.Update()
+        tempDS = gf.GetOutput()
+        dataset = tempDS
       else:
         dataset = mapper.GetInput()
 
