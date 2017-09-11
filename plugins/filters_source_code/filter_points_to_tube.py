@@ -29,6 +29,7 @@ def RequestData():
     for i in range(0, numPoints-1):
         points = [i, i+1]
         # VTK_LINE is 3
+        # Type map is specified in vtkCellType.h
         pdo.InsertNextCell(3, 2, points)
 
     # Make a tube from the PolyData line:

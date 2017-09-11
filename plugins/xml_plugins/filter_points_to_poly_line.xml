@@ -1,0 +1,53 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="PointsToPolyLine" class="vtkPythonProgrammableFilter" label="Points To PolyLine">
+      <Documentation
+        long_help="Takes points from a vtkPolyData object and constructs a vtkPolyLine of those points. Useful for the native Slice Along PolyLine filter."
+        short_help="Takes points from a vtkPolyData object and constructs a vtkPolyLine of those points. Useful for the native Slice Along PolyLine filter.">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM Geophysics Filters" />
+</Hints>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkPolyData"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+
+      <!-- Output data type: "vtkPolyData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="0"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;for i in range(0, numPoints-1):&#xA;    points = [i, i+1]&#xA;    # VTK_POLY_LINE is 4&#xA;    # Type map is specified in vtkCellType.h&#xA;    pdo.InsertNextCell(4, 2, points)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
