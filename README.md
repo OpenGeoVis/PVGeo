@@ -3,7 +3,7 @@ This repository contains plugins for the open-source, multi-platform data analys
 
 **More to come!**
 
-Stay tuned, this project is in its early stages of development.
+Stay tuned, this project is in its early stages of development. Also be sure to check out the wiki page for detailed documentation on the filters and general use of this repository.
 
 
 **Before You Do Anything!!**
