@@ -39,9 +39,9 @@ for d in data_files:
             # Source 'Table To Points'
             spts = TableToPoints(Input=reshapeTable)
             # trace defaults for the display properties.
-            spts.XColumn = 'Field1'
-            spts.YColumn = 'Field0'
-            spts.ZColumn = 'Field4'
+            spts.XColumn = 'Field1' # sx = 2
+            spts.YColumn = 'Field0' # sy = 1
+            spts.ZColumn = 'Field4' # sz = 5
             # show data in view
             sptsDisplay = Show(spts, renderView)
             sptsDisplay.Representation = 'Points'
@@ -50,9 +50,9 @@ for d in data_files:
             # Receiver 'Table To Points'
             gpts = TableToPoints(Input=reshapeTable)
             # trace defaults for the display properties.
-            gpts.XColumn = 'Field3'
-            gpts.YColumn = 'Field2'
-            gpts.ZColumn = 'Field5'
+            gpts.XColumn = 'Field3' # gx = 4
+            gpts.YColumn = 'Field2' # gy = 3
+            gpts.ZColumn = 'Field5' # gz = 6
             # show data in view
             gptsDisplay = Show(gpts, renderView)
             gptsDisplay.Representation = 'Points'
