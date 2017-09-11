@@ -1,5 +1,5 @@
-Name = 'TubeFromPoints'
-Label = 'Tube From Points'
+Name = 'PointsToTube'
+Label = 'Points To Tube'
 Help = 'Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.'
 
 NumberOfInputs = 1
@@ -15,7 +15,6 @@ ExtraXml = '''\
 Properties = dict(
     Number_of_Sides=20,
     Radius=10.0,
-    #Input_Arr=3,
 )
 
 
