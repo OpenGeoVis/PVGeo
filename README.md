@@ -1,5 +1,8 @@
 # ParaView Geophysics Plugins
-This repository contains plugins for the open-source, multi-platform data analysis and visualization application [ParaView by Kitware](https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D grids. Unless otherwise specified at the top of the file, all code distributed here was produced by [Bane Sullivan](banesullivan@gmail.com), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines. Feel free to contact for major questions or for custom filters/readers to visualize geoscience data.
+This repository contains plugins for the open-source, multi-platform data analysis and visualization application [ParaView by Kitware](https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D grids.
+
+## About the Author:
+Unless otherwise specified at the top of the file, all code and documentation distributed here was produced by [Bane Sullivan](banesullivan@gmail.com), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines. Feel free to contact for major questions or for custom filters/readers to visualize geoscience data.
 
 ## More to come!
 
@@ -27,3 +30,6 @@ To simply install the distributed filters from this repo, run the `install_plugi
 To make a custom filter or reader, follow the outline in `plugins/example.py` and place your script in either the `plugins/filters_source_code/` or `plugins/readers_source_code/` directories with a meaningful name. *Note* that the script will only compile `.py` files that contain either `filter_` or `reader_` in the file name. This is so you can save other `.py` files in those directories without issues.
 
 All of the distributed filters in this repo will appear in the menu category `CSM Geophysics Filters`. As you develop your own, it may be useful to specify your own menu category as outlined in the hints of the ExtraXml in `plugins/example.py`
+
+## Requesting Features and Reporting issues
+Please feel free to post features you would like to see from this repo in the Issues section as a feature request. IF you stumble across any bugs or crashes while using code distributed here, please report it in the Issues section.
