@@ -32,4 +32,4 @@ To make a custom filter or reader, follow the outline in `plugins/example.py` an
 All of the distributed filters in this repo will appear in the menu category `CSM Geophysics Filters`. As you develop your own, it may be useful to specify your own menu category as outlined in the hints of the ExtraXml in `plugins/example.py`
 
 ## Requesting Features and Reporting issues
-Please feel free to post features you would like to see from this repo in the Issues section as a feature request. IF you stumble across any bugs or crashes while using code distributed here, please report it in the Issues section.
+Please feel free to post features you would like to see from this repo in the Issues section as a feature request. If you stumble across any bugs or crashes while using code distributed here, please report it in the Issues section.
