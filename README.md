@@ -25,8 +25,9 @@ Note: If you're on Windows, [see this guide](https://devtidbits.com/2011/07/01/c
 
 ### Before You Do Anything!
 
-You *MUST* change the `PVPATH` variable in [src/install_plugins.sh](src/install_plugins.sh) This variable is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app/` with the name of your version of ParaView under `/Applications/`.
+You *MUST* change the `PVPATH` variable in [src/install_plugins.sh](src/install_plugins.sh) This variable is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app/` with the name of your version of ParaView under `/Applications/`. To double check the correct path for filter installation, open ParaView and select Tools->Manage Plugins... and copy/paste the path at the top of the window where it says "Local plugins are automatically searched for in ..."
 
+Change this variable in [src/install_plugins.sh](src/install_plugins.sh):
 ```bash
 # NOTE: Change this path if needed:
 PVPATH="/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/"
