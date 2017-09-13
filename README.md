@@ -10,7 +10,7 @@ Stay tuned, this project is in its early stages of development so only a handful
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+To clone and run this application, you'll need [Git](https://git-scm.com), [Python](https://www.python.org/downloads/), and [ParaView](https://www.paraview.org/download/) installed on your computer. From your command line:
 
 ```bash
 # Clone this repository
