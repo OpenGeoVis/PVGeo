@@ -8,7 +8,7 @@ Unless otherwise specified at the top of the file, all code and documentation di
 
 Stay tuned, this project is in its early stages of development so only a handful of the plugins are tested and published here. Also be sure to check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) for detailed documentation on the filters and general use of this repository. *Currently being developed and proofed.*
 
-## How To Use
+## How To Use Plugins in this Repository
 
 To clone and run this application, you'll need [Git](https://git-scm.com), [Python](https://www.python.org/downloads/), and [ParaView](https://www.paraview.org/download/) installed on your computer. From your command line:
 
@@ -23,7 +23,7 @@ $ cd ParaViewGeophysics
 
 Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/)
 
-## Before You Do Anything!
+### Before You Do Anything!
 
 You *MUST* change the `PVPATH` variable in [src/install_plugins.sh](src/install_plugins.sh) This variable is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app/` with the name of your version of ParaView under `/Applications/`.
 
@@ -32,8 +32,6 @@ You *MUST* change the `PVPATH` variable in [src/install_plugins.sh](src/install_
 PVPATH="/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/"
 ```
 
-
-## To Build and Install the Filters in this Repository
 
 ### Building the Plugins
 
