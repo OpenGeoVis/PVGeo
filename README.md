@@ -21,7 +21,7 @@ $ cd ParaViewGeophysics
 
 ```
 
-Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/)
+Note: If you're on Windows, [see this guide](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/)
 
 ### Before You Do Anything!
 
