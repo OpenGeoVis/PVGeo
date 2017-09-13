@@ -6,7 +6,7 @@ Unless otherwise specified at the top of the file, all code and documentation di
 
 ## More to come
 
-Stay tuned, this project is in its early stages of development. Also be sure to check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) for detailed documentation on the filters and general use of this repository. *Currently being developed and proofed*
+Stay tuned, this project is in its early stages of development so only a handful of the plugins are tested and published here. Also be sure to check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) for detailed documentation on the filters and general use of this repository. *Currently being developed and proofed.*
 
 ## How To Use
 
