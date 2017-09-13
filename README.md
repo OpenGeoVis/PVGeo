@@ -4,14 +4,33 @@ This repository contains plugins for the open-source, multi-platform data analys
 ## About the Author
 Unless otherwise specified at the top of the file, all code and documentation distributed here was produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines. Feel free to contact for major questions or for custom filters/readers to visualize geoscience data.
 
-## More to come!
+## More to come
 
 Stay tuned, this project is in its early stages of development. Also be sure to check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) for detailed documentation on the filters and general use of this repository. *Currently being developed and proofed*
 
+## How To Use
 
-## Before You Do Anything!!
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/banesullivan/ParaViewGeophysics
+
+# Go into the repository
+$ cd ParaViewGeophysics
+
+```
+
+Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/)
+
+## Before You Do Anything!
 
 You *MUST* change the `PVPATH` variable in [src/install_plugins.sh](src/install_plugins.sh) This variable is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app/` with the name of your version of ParaView under `/Applications/`.
+
+```bash
+# NOTE: Change this path if needed:
+PVPATH="/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/"
+```
 
 
 ## To Build and Install the Filters in this Repository
@@ -20,20 +39,36 @@ You *MUST* change the `PVPATH` variable in [src/install_plugins.sh](src/install_
 
 In the `src/` directory, there are two shell scripts. [src/build_plugins.sh](src/build_plugins.sh) will build up the XML Server Manager Configuration filters from the `.py` scripts and install them. Only use this script if you are making your own filters or readers. If you run this script, it will build and install all filters and readers to ParaView.
 
+```bash
+$ sh src/build_plugins.sh
+```
+
 ### Installing the Plugins to ParaView
 
 To simply install the distributed filters from this repo, run the [src/install_plugins.sh](src/install_plugins.sh) script *but first you MUST change the `PVPATH` variable* (described above)! This script will simply copy over all the XML files from `build/` to the default directory for third party plugins in ParaView so that they will all load when ParaView launches.
 
 To run these scripts on a Unix like system us the `sh` command: `sh src/install_plugins.py`
 
+```bash
+$ sh src/install_plugins.sh
+```
+
 
 ## Make Your Own Filters and Readers
 
-To make a custom filter or reader, follow the outline in [src/example.py](src/example.py) and place your script in either the `src/filters/` or `src/readers/` directories with a meaningful name. *Note* that the script will only compile `.py` files that contain either `filter_` or `reader_` in the file name. This is so you can save other `.py` files in those directories without issues.
+To make a custom filter or reader, follow the outline in [src/example.py](src/example.py) and place your script in either the `src/filters/` or `src/readers/` directories with a meaningful name. *Note* that the script will only compile `.py` files that contain either `filter_` or `reader_` in the file name. This is so you can save other `.py` files in those directories without issues. Then re-run the script [src/build_plugins.sh](src/build_plugins.sh) to wrap in XML and install to ParaView.
 
 All of the distributed filters in this repo will appear in the menu category `CSM Geophysics Filters`. As you develop your own, it may be useful to specify your own menu category as outlined in the hints of the ExtraXml in [src/example.py](src/example.py)
 
+```python
+ExtraXml = '''\
+<Hints>
+    <ShowInMenu category="Your filter category" />
+</Hints>
+'''
+```
+
 ## Requesting Features, Reporting Issues, and Contributing
-Please feel free to post features you would like to see from this repo in the Issues section as a feature request. If you stumble across any bugs or crashes while using code distributed here, please report it in the Issues section so I can promptly address it.
+Please feel free to post features you would like to see from this repo on the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) as a feature request. If you stumble across any bugs or crashes while using code distributed here, please report it in the Issues section so I can promptly address it.
 
 If you have your own plugins either developed in C++ or as python programmable filters, please share it so this can be a one stop place for geoscience plugins to ParaView!
