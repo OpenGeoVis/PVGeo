@@ -8,7 +8,7 @@ Unless otherwise specified at the top of the file, all code and documentation di
 
 Stay tuned, this project is in its early stages of development so only a handful of the plugins are tested and published here. Also be sure to check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) for detailed documentation on the filters and general use of this repository. *Currently being developed and proofed.*
 
-## How To Use Plugins in this Repository
+## How To Use the Plugins in this Repository
 
 To clone and run this application, you'll need [Git](https://git-scm.com), [Python](https://www.python.org/downloads/), and [ParaView](https://www.paraview.org/download/) installed on your computer. From your command line:
 
