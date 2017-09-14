@@ -1,6 +1,6 @@
-Name = 'PointsToTube'
-Label = 'Points To Tube'
-Help = 'Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.'
+Name = 'PolyLineToTube'
+Label = 'Poly Line To Tube'
+Help = 'Takes points from a vtkPolyData with associated poly lines in cell data and builds a polygonal tube around that line with some specified radius and number of sides.'
 
 NumberOfInputs = 1
 InputDataType = 'vtkPolyData'
@@ -23,14 +23,6 @@ def RequestData():
     pdo = self.GetOutput() # VTK PolyData Type
 
     pdo.DeepCopy(pdi)
-
-    numPoints = pdi.GetNumberOfPoints()
-
-    for i in range(0, numPoints-1):
-        points = [i, i+1]
-        # VTK_POLY_LINE is 4
-        # Type map is specified in vtkCellType.h
-        pdo.InsertNextCell(4, 2, points)
 
     # Make a tube from the PolyData line:
     tube = vtk.vtkTubeFilter()

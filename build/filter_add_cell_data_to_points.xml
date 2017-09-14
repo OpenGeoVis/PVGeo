@@ -1,13 +1,28 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="filters">
-    <SourceProxy name="PointsToTube" class="vtkPythonProgrammableFilter" label="Points To Tube">
+    <SourceProxy name="AddCellDataToPoints" class="vtkPythonProgrammableFilter" label="AddCellDataToPoints">
       <Documentation
-        long_help="Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides."
-        short_help="Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.">
+        long_help=""
+        short_help="">
       </Documentation>
 <Hints>
     <ShowInMenu category="CSM Geophysics Filters" />
 </Hints>
+
+<IntVectorProperty
+    name="Cell_Type"
+    command="SetParameter"
+    number_of_elements="1"
+    initial_string="test_drop_down_menu"
+    default_values="0">
+    <EnumerationDomain name="enum">
+          <Entry value="3" text="Line"/>
+          <Entry value="4" text="Poly Line"/>
+    </EnumerationDomain>
+    <Documentation>
+        This property indicates which two axii will be swapped.
+    </Documentation>
+</IntVectorProperty>
 
 
       <InputProperty
@@ -25,28 +40,15 @@
 
       <IntVectorProperty
         panel_visibility="default"
-        name="Number_of_Sides"
-        label="Number of Sides"
-        initial_string="Number_of_Sides"
+        name="Cell_Type"
+        label="Cell Type"
+        initial_string="Cell_Type"
         command="SetParameter"
         animateable="1"
-        default_values="20"
+        default_values="3"
         number_of_elements="1">
         <Documentation></Documentation>
       </IntVectorProperty>
-
-
-      <DoubleVectorProperty
-        panel_visibility="default"
-        name="Radius"
-        label="Radius"
-        initial_string="Radius"
-        command="SetParameter"
-        animateable="1"
-        default_values="10.0"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
@@ -62,7 +64,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;for i in range(0, numPoints-1):&#xA;    points = [i, i+1]&#xA;    # VTK_POLY_LINE is 4&#xA;    # Type map is specified in vtkCellType.h&#xA;    pdo.InsertNextCell(4, 2, points)&#xA;&#xA;# Make a tube from the PolyData line:&#xA;tube = vtk.vtkTubeFilter()&#xA;tube.SetInputData(pdo)&#xA;tube.SetRadius(Radius)&#xA;tube.SetNumberOfSides(Number_of_Sides)&#xA;tube.Update()&#xA;pdo.ShallowCopy(tube.GetOutput())&#xA;"
+        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;# Type map is specified in vtkCellType.h&#xA;for i in range(0, numPoints-1):&#xA;    if Cell_Type == 3 or Cell_Type == 4:&#xA;        points = [i, i+1]&#xA;        pdo.InsertNextCell(Cell_Type, 2, points)&#xA;    if Cell_Type == 11 or Cell_Type == 12:&#xA;        #&lt;Entry value=&quot;11&quot; text=&quot;Voxell&quot;/&gt;&#xA;        #&lt;Entry value=&quot;12&quot; text=&quot;Hexahedron&quot;/&gt;&#xA;        points = [i, i+1, i+2, i+3]&#xA;        pdo.InsertNextCell(Cell_Type, 4, points)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>
