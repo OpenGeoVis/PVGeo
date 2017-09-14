@@ -17,8 +17,9 @@ ExtraXml = '''\
     initial_string="test_drop_down_menu"
     default_values="0">
     <EnumerationDomain name="enum">
-          <Entry value="3" text="Line"/>
           <Entry value="4" text="Poly Line"/>
+          <Entry value="3" text="Line"/>
+          <Entry value="5" text="Triangle"/>
     </EnumerationDomain>
     <Documentation>
         This property indicates which two axii will be swapped.
@@ -45,8 +46,15 @@ def RequestData():
         if Cell_Type == 3 or Cell_Type == 4:
             points = [i, i+1]
             pdo.InsertNextCell(Cell_Type, 2, points)
+        if Cell_Type == 5:
+            if i == numPoints-2:
+                break
+            points = [i, i+1,i+2]
+            pdo.InsertNextCell(Cell_Type, 3, points)
+        '''
         if Cell_Type == 11 or Cell_Type == 12:
             #<Entry value="11" text="Voxell"/>
             #<Entry value="12" text="Hexahedron"/>
             points = [i, i+1, i+2, i+3]
             pdo.InsertNextCell(Cell_Type, 4, points)
+        '''

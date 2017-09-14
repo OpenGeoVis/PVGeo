@@ -16,8 +16,9 @@
     initial_string="test_drop_down_menu"
     default_values="0">
     <EnumerationDomain name="enum">
-          <Entry value="3" text="Line"/>
           <Entry value="4" text="Poly Line"/>
+          <Entry value="3" text="Line"/>
+          <Entry value="5" text="Triangle"/>
     </EnumerationDomain>
     <Documentation>
         This property indicates which two axii will be swapped.
@@ -64,7 +65,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;# Type map is specified in vtkCellType.h&#xA;for i in range(0, numPoints-1):&#xA;    if Cell_Type == 3 or Cell_Type == 4:&#xA;        points = [i, i+1]&#xA;        pdo.InsertNextCell(Cell_Type, 2, points)&#xA;    if Cell_Type == 11 or Cell_Type == 12:&#xA;        #&lt;Entry value=&quot;11&quot; text=&quot;Voxell&quot;/&gt;&#xA;        #&lt;Entry value=&quot;12&quot; text=&quot;Hexahedron&quot;/&gt;&#xA;        points = [i, i+1, i+2, i+3]&#xA;        pdo.InsertNextCell(Cell_Type, 4, points)&#xA;"
+        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;# Type map is specified in vtkCellType.h&#xA;for i in range(0, numPoints-1):&#xA;    if Cell_Type == 3 or Cell_Type == 4:&#xA;        points = [i, i+1]&#xA;        pdo.InsertNextCell(Cell_Type, 2, points)&#xA;    if Cell_Type == 5:&#xA;        if i == numPoints-2:&#xA;            break&#xA;        points = [i, i+1,i+2]&#xA;        pdo.InsertNextCell(Cell_Type, 3, points)&#xA;    '''&#xA;    if Cell_Type == 11 or Cell_Type == 12:&#xA;        #&lt;Entry value=&quot;11&quot; text=&quot;Voxell&quot;/&gt;&#xA;        #&lt;Entry value=&quot;12&quot; text=&quot;Hexahedron&quot;/&gt;&#xA;        points = [i, i+1, i+2, i+3]&#xA;        pdo.InsertNextCell(Cell_Type, 4, points)&#xA;    '''&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>
