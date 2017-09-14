@@ -28,7 +28,7 @@ ExtraXml = '''\
 
 
 Properties = dict(
-    Cell_Type=3
+    Cell_Type=4
 )
 
 

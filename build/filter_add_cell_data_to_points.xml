@@ -45,7 +45,7 @@
         initial_string="Cell_Type"
         command="SetParameter"
         animateable="1"
-        default_values="3"
+        default_values="4"
         number_of_elements="1">
         <Documentation></Documentation>
       </IntVectorProperty>
