@@ -106,7 +106,6 @@ def getFilterPropertyXml(propertyInfo, propertyName):
     if 'HIDE' in propertyName:
         vis = 'advanced'
 
-
     e = escapeForXmlAttribute
 
     propertyValue = propertyInfo[propertyName]
