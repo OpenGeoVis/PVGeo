@@ -63,6 +63,8 @@ Properties = dict(
 def RequestData():
     from vtk.util import numpy_support as nps
     import numpy as np
+    from vtk.numpy_interface import dataset_adapter as dsa
+    from vtk.numpy_interface import algorithms as algs
 
     pdi = self.GetInput()
     pdo = self.GetOutput()
@@ -72,22 +74,24 @@ def RequestData():
     name = info.Get(vtk.vtkDataObject.FIELD_NAME())
     field = info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
 
+    wpdi = dsa.WrapDataObject(pdi)
+
     # Point Data
     if field == 0:
-        c = pdi.GetPointData().GetArray(name)
+        arr = wpdi.PointData[name]
     # Cell Data:
     elif field == 1:
-        c = pdi.GetCellData().GetArray(name)
+        arr = wpdi.CellData[name]
     # Field Data:
     elif field == 2:
-        c = pdi.GetFieldData().GetArray(name)
+        arr = wpdi.FieldData[name]
     # Row Data:
     elif field == 6:
-        c = pdi.GetRowData().GetArray(name)
+        arr = wpdi.RowData[name]
 
 
     # perform normalization math
-    arr = nps.vtk_to_numpy(c)
+    #arr = nps.vtk_to_numpy(c)
 
     # Feature Scale
     if Normalization == 0:
@@ -102,7 +106,7 @@ def RequestData():
 
     # If no name given for data by user, use the basename of the file
     if new_array_name == '':
-        new_array_name = 'Feature Scaled ' + name
+        new_array_name = 'Normalized ' + name
     c.SetName(new_array_name)
 
     pdo.DeepCopy(pdi)
