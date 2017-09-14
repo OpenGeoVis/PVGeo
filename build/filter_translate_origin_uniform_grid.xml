@@ -1,0 +1,85 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="TranslateOriginOfUniformGrid" class="vtkPythonProgrammableFilter" label="Translate Origin of Uniform Grid">
+      <Documentation
+        long_help="This filter will translate the origin of vtkImageData to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior)."
+        short_help="This filter will translate the origin of vtkImageData to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior).">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM Geophysics Filters" />
+</Hints>
+
+<IntVectorProperty
+    name="Corner"
+    command="SetParameter"
+    number_of_elements="1"
+    initial_string="test_drop_down_menu"
+    default_values="0">
+    <EnumerationDomain name="enum">
+          <Entry value="1" text="South East Bottom"/>
+          <Entry value="2" text="North West Bottom"/>
+          <Entry value="3" text="North East Bottom"/>
+          <Entry value="4" text="South West Top"/>
+          <Entry value="5" text="South East Top"/>
+          <Entry value="6" text="North West Top"/>
+          <Entry value="7" text="North East Top"/>
+    </EnumerationDomain>
+    <Documentation>
+        This property indicates which two axii will be swapped.
+    </Documentation>
+</IntVectorProperty>
+
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkImageData"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Corner"
+        label="Corner"
+        initial_string="Corner"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <!-- Output data type: "vtkImageData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="6"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="pdi = self.GetInput() # vtkImageData&#xA;pdo = self.GetOutput() # vtkImageData&#xA;&#xA;[nx, ny, nz] = pdi.GetDimensions()&#xA;[ox, oy, oz] = pdi.GetOrigin()&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;xx,yy,zz = 0.0,0.0,0.0&#xA;&#xA;if Corner == 1:&#xA;    # South East Bottom&#xA;    xx = ox - nx&#xA;    yy = oy&#xA;    zz = oz&#xA;elif Corner == 2:&#xA;    # North West Bottom&#xA;    xx = ox&#xA;    yy = oy - ny&#xA;    zz = oz&#xA;elif Corner == 3:&#xA;    # North East Bottom&#xA;    xx = ox - nx&#xA;    yy = oy - ny&#xA;    zz = oz&#xA;elif Corner == 4:&#xA;    # South West Top&#xA;    xx = ox&#xA;    yy = oy&#xA;    zz = oz - nz&#xA;elif Corner == 5:&#xA;    # South East Top&#xA;    xx = ox - nx&#xA;    yy = oy&#xA;    zz = oz - nz&#xA;elif Corner == 6:&#xA;    # North West Top&#xA;    xx = ox&#xA;    yy = oy - ny&#xA;    zz = oz - nz&#xA;elif Corner == 7:&#xA;    # North East Top&#xA;    xx = ox - nx&#xA;    yy = oy - ny&#xA;    zz = oz - nz&#xA;&#xA;pdo.SetOrigin(xx, yy, zz)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
