@@ -1,0 +1,146 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="NormalizeArray" class="vtkPythonProgrammableFilter" label="Normalize Array">
+      <Documentation
+        long_help="Help for the Test Filter"
+        short_help="Help for the Test Filter">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM Geophysics Filters" />
+</Hints>
+
+<StringVectorProperty
+    name="SelectInputScalars"
+    label="Array"
+    command="SetInputArrayToProcess"
+    number_of_elements="5"
+    element_types="0 0 0 0 2"
+    animateable="0">
+    <ArrayListDomain
+        name="array_list"
+        attribute_type="Scalars"
+        input_domain_name="inputs_array">
+        <RequiredProperties>
+            <Property
+                name="Input"
+                function="Input" />
+        </RequiredProperties>
+    </ArrayListDomain>
+    <FieldDataDomain
+        name="field_list">
+        <RequiredProperties>
+            <Property
+                name="Input"
+                function="Input" />
+        </RequiredProperties>
+    </FieldDataDomain>
+</StringVectorProperty>
+
+<IntVectorProperty
+    name="Normalization"
+    command="SetParameter"
+    number_of_elements="1"
+    initial_string="test_drop_down_menu"
+    default_values="0">
+    <EnumerationDomain name="enum">
+            <Entry value="0" text="Feature Scaling"/>
+            <Entry value="1" text="Standard Score"/>
+    </EnumerationDomain>
+    <Documentation>
+        This property indicates which two axii will be swapped.
+    </Documentation>
+</IntVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkDataObject"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Normalization"
+        label="Normalization"
+        initial_string="Normalization"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="multiplyer"
+        label="multiplyer"
+        initial_string="multiplyer"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+
+            <StringVectorProperty
+            panel_visibility="default"
+            name="new_array_name"
+            label="new array name"
+            initial_string="new_array_name"
+            command="SetParameter"
+            animateable="1"
+            default_values=""
+            number_of_elements="1">
+            <Documentation></Documentation>
+            </StringVectorProperty>
+
+      <!-- Output data type: "Same as input" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="8"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;&#xA;# Get input array name&#xA;info = self.GetInputArrayInformation(0)&#xA;name = info.Get(vtk.vtkDataObject.FIELD_NAME())&#xA;field = info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())&#xA;&#xA;# Point Data&#xA;if field == 0:&#xA;    c = pdi.GetPointData().GetArray(name)&#xA;# Cell Data:&#xA;elif field == 1:&#xA;    c = pdi.GetCellData().GetArray(name)&#xA;# Field Data:&#xA;elif field == 2:&#xA;    c = pdi.GetFieldData().GetArray(name)&#xA;# Row Data:&#xA;elif field == 6:&#xA;    c = pdi.GetRowData().GetArray(name)&#xA;&#xA;&#xA;# perform normalization math&#xA;arr = nps.vtk_to_numpy(c)&#xA;&#xA;# Feature Scale&#xA;if Normalization == 0:&#xA;    arr = (arr - np.min(arr)) / (np.max(arr) - np.min(arr))&#xA;# Standard Score&#xA;elif Normalization == 1:&#xA;    arr = (arr - np.mean(arr)) / (np.std(arr))&#xA;&#xA;arr *= multiplyer&#xA;&#xA;c = nps.numpy_to_vtk(num_array=arr,deep=True)&#xA;&#xA;# If no name given for data by user, use the basename of the file&#xA;if new_array_name == '':&#xA;    new_array_name = 'Feature Scaled ' + name&#xA;c.SetName(new_array_name)&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;# Point Data&#xA;if field == 0:&#xA;    pdo.GetPointData().AddArray(c)&#xA;# Cell Data:&#xA;elif field == 1:&#xA;    pdo.GetCellData().AddArray(c)&#xA;# Field Data:&#xA;elif field == 2:&#xA;    pdo.GetFieldData().AddArray(c)&#xA;# Row Data:&#xA;elif field == 6:&#xA;    pdo.GetRowData().AddArray(c)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" />
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
