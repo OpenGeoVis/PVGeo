@@ -1,6 +1,6 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="filters">
-    <SourceProxy name="AddCellDataToPoints" class="vtkPythonProgrammableFilter" label="AddCellDataToPoints">
+    <SourceProxy name="AddCellDataToPoints" class="vtkPythonProgrammableFilter" label="Add Cell Data To Points">
       <Documentation
         long_help=""
         short_help="">

@@ -1,5 +1,5 @@
 Name = 'AddCellDataToPoints'
-Label = 'AddCellDataToPoints'
+Label = 'Add Cell Data To Points'
 Help = ''
 
 NumberOfInputs = 1
