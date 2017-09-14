@@ -34,7 +34,6 @@ def RequestData():
     rows = pdi.GetColumn(0).GetNumberOfTuples()
 
     # make sure dimensions work
-
     if (n1*n2*n3 != rows):
         raise Exception('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))
 
