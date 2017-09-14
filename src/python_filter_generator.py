@@ -110,6 +110,10 @@ def getFilterPropertyXml(propertyInfo, propertyName):
     e = escapeForXmlAttribute
 
     propertyValue = propertyInfo[propertyName]
+    propertyName = propertyName.replace('_HIDE_', '')
+    propertyName = propertyName.replace('_HIDE', '')
+    propertyName = propertyName.replace('HIDE_', '')
+    propertyName = propertyName.replace('HIDE', '')
     propertyLabel = propertyName.replace('_', ' ')
 
     if isinstance(propertyValue, list):
