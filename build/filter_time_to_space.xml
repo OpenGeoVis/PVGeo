@@ -26,6 +26,7 @@
       </InputProperty>
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="ds"
         label="ds"
         initial_string="ds"
@@ -38,6 +39,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="dt"
         label="dt"
         initial_string="dt"
@@ -50,6 +52,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="ns"
         label="ns"
         initial_string="ns"
@@ -62,6 +65,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="nt"
         label="nt"
         initial_string="nt"

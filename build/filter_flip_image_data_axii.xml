@@ -23,6 +23,7 @@
       </InputProperty>
 
       <IntVectorProperty
+        panel_visibility="default"
         name="reverse_x_dir"
         label="reverse x dir"
         initial_string="reverse_x_dir"
@@ -36,6 +37,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="reverse_y_dir"
         label="reverse y dir"
         initial_string="reverse_y_dir"
@@ -49,6 +51,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="reverse_z_dir"
         label="reverse z dir"
         initial_string="reverse_z_dir"

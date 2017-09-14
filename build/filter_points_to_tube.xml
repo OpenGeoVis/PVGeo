@@ -24,6 +24,7 @@
       </InputProperty>
 
       <IntVectorProperty
+        panel_visibility="default"
         name="Number_of_Sides"
         label="Number of Sides"
         initial_string="Number_of_Sides"
@@ -36,6 +37,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="Radius"
         label="Radius"
         initial_string="Radius"

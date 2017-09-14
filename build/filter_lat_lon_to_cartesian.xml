@@ -24,6 +24,7 @@
       </InputProperty>
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="Radius"
         label="Radius"
         initial_string="Radius"
@@ -36,6 +37,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="lat_i"
         label="lat i"
         initial_string="lat_i"
@@ -48,6 +50,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="lon_i"
         label="lon i"
         initial_string="lon_i"

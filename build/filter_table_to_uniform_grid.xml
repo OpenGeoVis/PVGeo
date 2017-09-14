@@ -24,6 +24,7 @@
       </InputProperty>
 
       <IntVectorProperty
+        panel_visibility="default"
         name="SEPlib"
         label="SEPlib"
         initial_string="SEPlib"
@@ -37,6 +38,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="n1"
         label="n1"
         initial_string="n1"
@@ -49,6 +51,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="n2"
         label="n2"
         initial_string="n2"
@@ -61,6 +64,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="n3"
         label="n3"
         initial_string="n3"
@@ -73,6 +77,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="o1_origin"
         label="o1 origin"
         initial_string="o1_origin"
@@ -85,6 +90,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="o2_origin"
         label="o2 origin"
         initial_string="o2_origin"
@@ -97,6 +103,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="o3_origin"
         label="o3 origin"
         initial_string="o3_origin"
@@ -109,6 +116,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="s1_spacing"
         label="s1 spacing"
         initial_string="s1_spacing"
@@ -121,6 +129,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="s2_spacing"
         label="s2 spacing"
         initial_string="s2_spacing"
@@ -133,6 +142,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="s3_spacing"
         label="s3 spacing"
         initial_string="s3_spacing"

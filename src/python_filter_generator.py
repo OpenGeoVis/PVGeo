@@ -102,6 +102,11 @@ def getPythonPathProperty():
 
 def getFilterPropertyXml(propertyInfo, propertyName):
 
+    vis = 'default'
+    if 'HIDE' in propertyName:
+        vis = 'advanced'
+
+
     e = escapeForXmlAttribute
 
     propertyValue = propertyInfo[propertyName]
@@ -123,6 +128,7 @@ def getFilterPropertyXml(propertyInfo, propertyName):
 
         return '''
       <IntVectorProperty
+        panel_visibility="%s"
         name="%s"
         label="%s"
         initial_string="%s"
@@ -132,12 +138,13 @@ def getFilterPropertyXml(propertyInfo, propertyName):
         number_of_elements="%s">
         <BooleanDomain name="bool" />
         <Documentation></Documentation>
-      </IntVectorProperty>''' % (propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
+      </IntVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
 
 
     if propertyType is int:
         return '''
       <IntVectorProperty
+        panel_visibility="%s"
         name="%s"
         label="%s"
         initial_string="%s"
@@ -146,11 +153,12 @@ def getFilterPropertyXml(propertyInfo, propertyName):
         default_values="%s"
         number_of_elements="%s">
         <Documentation></Documentation>
-      </IntVectorProperty>''' % (propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
+      </IntVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
 
     if propertyType is float:
         return '''
       <DoubleVectorProperty
+        panel_visibility="%s"
         name="%s"
         label="%s"
         initial_string="%s"
@@ -159,7 +167,7 @@ def getFilterPropertyXml(propertyInfo, propertyName):
         default_values="%s"
         number_of_elements="%s">
         <Documentation></Documentation>
-      </DoubleVectorProperty>''' % (propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
+      </DoubleVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
 
     if propertyType is str:
         if propertyName is 'FileName':
@@ -179,6 +187,7 @@ def getFilterPropertyXml(propertyInfo, propertyName):
         else:
             return '''
             <StringVectorProperty
+            panel_visibility="%s"
             name="%s"
             label="%s"
             initial_string="%s"
@@ -187,7 +196,7 @@ def getFilterPropertyXml(propertyInfo, propertyName):
             default_values="%s"
             number_of_elements="%s">
             <Documentation></Documentation>
-            </StringVectorProperty>''' % (propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
+            </StringVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
 
     raise Exception('Unknown property type: %r' % propertyType)
 

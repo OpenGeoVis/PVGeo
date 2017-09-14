@@ -24,6 +24,7 @@
       </InputProperty>
 
       <IntVectorProperty
+        panel_visibility="default"
         name="ncols"
         label="ncols"
         initial_string="ncols"
@@ -36,6 +37,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="nrows"
         label="nrows"
         initial_string="nrows"

@@ -27,6 +27,7 @@
 
 
             <StringVectorProperty
+            panel_visibility="default"
             name="data_name"
             label="data name"
             initial_string="data_name"
@@ -39,6 +40,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="double_values"
         label="double values"
         initial_string="double_values"

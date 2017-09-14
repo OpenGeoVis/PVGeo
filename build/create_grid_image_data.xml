@@ -12,6 +12,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="nx"
         label="nx"
         initial_string="nx"
@@ -24,6 +25,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="ny"
         label="ny"
         initial_string="ny"
@@ -36,6 +38,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="nz"
         label="nz"
         initial_string="nz"
@@ -48,6 +51,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="x_origin"
         label="x origin"
         initial_string="x_origin"
@@ -60,6 +64,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="x_spacing"
         label="x spacing"
         initial_string="x_spacing"
@@ -72,6 +77,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="y_origin"
         label="y origin"
         initial_string="y_origin"
@@ -84,6 +90,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="y_spacing"
         label="y spacing"
         initial_string="y_spacing"
@@ -96,6 +103,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="z_origin"
         label="z origin"
         initial_string="z_origin"
@@ -108,6 +116,7 @@
 
 
       <DoubleVectorProperty
+        panel_visibility="default"
         name="z_spacing"
         label="z spacing"
         initial_string="z_spacing"

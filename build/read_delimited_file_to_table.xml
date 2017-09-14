@@ -13,6 +13,7 @@
 
 
             <StringVectorProperty
+            panel_visibility="default"
             name="Delimiter_Field"
             label="Delimiter Field"
             initial_string="Delimiter_Field"
@@ -39,6 +40,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="Has_Titles"
         label="Has Titles"
         initial_string="Has_Titles"
@@ -52,6 +54,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="Number_Ignore_Lines"
         label="Number Ignore Lines"
         initial_string="Number_Ignore_Lines"
@@ -64,6 +67,7 @@
 
 
       <IntVectorProperty
+        panel_visibility="default"
         name="Use_tab_delimiter"
         label="Use tab delimiter"
         initial_string="Use_tab_delimiter"
