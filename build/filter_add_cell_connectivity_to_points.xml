@@ -1,6 +1,6 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="filters">
-    <SourceProxy name="AddCellDataToPoints" class="vtkPythonProgrammableFilter" label="Add Cell Data To Points">
+    <SourceProxy name="AddCellConnectivityToPoints" class="vtkPythonProgrammableFilter" label="Add Cell Connectivity To Points">
       <Documentation
         long_help=""
         short_help="">
@@ -18,7 +18,6 @@
     <EnumerationDomain name="enum">
           <Entry value="4" text="Poly Line"/>
           <Entry value="3" text="Line"/>
-          <Entry value="5" text="Triangle"/>
     </EnumerationDomain>
     <Documentation>
         This property indicates which two axii will be swapped.
@@ -65,7 +64,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;# Type map is specified in vtkCellType.h&#xA;for i in range(0, numPoints-1):&#xA;    if Cell_Type == 3 or Cell_Type == 4:&#xA;        points = [i, i+1]&#xA;        pdo.InsertNextCell(Cell_Type, 2, points)&#xA;    if Cell_Type == 5:&#xA;        if i == numPoints-2:&#xA;            break&#xA;        points = [i, i+1,i+2]&#xA;        pdo.InsertNextCell(Cell_Type, 3, points)&#xA;    '''&#xA;    if Cell_Type == 11 or Cell_Type == 12:&#xA;        #&lt;Entry value=&quot;11&quot; text=&quot;Voxell&quot;/&gt;&#xA;        #&lt;Entry value=&quot;12&quot; text=&quot;Hexahedron&quot;/&gt;&#xA;        points = [i, i+1, i+2, i+3]&#xA;        pdo.InsertNextCell(Cell_Type, 4, points)&#xA;    '''&#xA;"
+        default_values="from datetime import datetime&#xA;import numpy as np&#xA;from scipy.spatial import cKDTree&#xA;from vtk.util import numpy_support as nps&#xA;from vtk.numpy_interface import dataset_adapter as dsa&#xA;#from vtk.numpy_interface import algorithms as algs&#xA;startTime = datetime.now()&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;# Get the Points over the NumPy interface&#xA;wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input&#xA;points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input&#xA;&#xA;#pdo.SetPoints(pdi.GetPoints())&#xA;pdo.DeepCopy(pdi)&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;sft = 0&#xA;# Type map is specified in vtkCellType.h&#xA;#for i in range(0, numPoints - 2):&#xA;while(len(points) &gt; 1):&#xA;    tree = cKDTree(points)&#xA;    if Cell_Type == 3 or Cell_Type == 4:&#xA;        # Get indices of k nearest points&#xA;        dist, ind = tree.query(points[0], k=2)&#xA;        ptsi = [ind[0]+sft, ind[1]+sft]&#xA;        pdo.InsertNextCell(Cell_Type, 2, ptsi)&#xA;        points = np.delete(points, 0, 0) # Deletes first row&#xA;    '''&#xA;    if Cell_Type == 9:&#xA;        # Get indices of k nearest points&#xA;        dist, ind = tree.query(points[0], k=4)&#xA;        if len(points) &lt; 4:&#xA;            break&#xA;        ptsi = [ind[0]+sft, ind[1]+sft, ind[2]+sft, ind[3]+sft]&#xA;        pdo.InsertNextCell(Cell_Type, 4, ptsi)&#xA;        # TODO: which ones do I delete here?&#xA;        points = np.delete(points, 0, 0) # Deletes first row&#xA;    '''&#xA;    del(tree)&#xA;    sft += 1&#xA;print((datetime.now() - startTime))&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>
