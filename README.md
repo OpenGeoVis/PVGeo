@@ -12,7 +12,7 @@ Stay tuned, this project is in its early stages of development so only a handful
 
 ## How To Use the Plugins in this Repository
 
-To clone and run this application, you'll need [Git](https://git-scm.com), [Python](https://www.python.org/downloads/), and [ParaView](https://www.paraview.org/download/) installed on your computer. From your command line:
+To clone and use the plugins distributed in the repo for ParaView, you'll need [Git](https://git-scm.com), [Python 2](https://www.python.org/downloads/) with the SciPy and NumPy modules [installed](https://docs.python.org/2/installing/index.html), and [ParaView](https://www.paraview.org/download/) installed on your computer. From your command line:
 
 ```bash
 # Clone this repository
