@@ -23,14 +23,13 @@ def RequestData():
     pdo = self.GetOutput() # VTK PolyData Type
 
     pdo.DeepCopy(pdi)
-
     numPoints = pdi.GetNumberOfPoints()
 
-    for i in range(0, numPoints-1):
-        points = [i, i+1]
-        # VTK_POLY_LINE is 4
-        # Type map is specified in vtkCellType.h
-        pdo.InsertNextCell(4, 2, points)
+    # VTK_POLY_LINE is 4
+    # Type map is specified in vtkCellType.h
+    Cell_Type = 4
+    ptsi = [i for i in range(numPoints)]
+    pdo.InsertNextCell(Cell_Type, numPoints, ptsi)
 
     # Make a tube from the PolyData line:
     tube = vtk.vtkTubeFilter()
