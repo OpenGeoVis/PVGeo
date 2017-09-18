@@ -1,6 +1,6 @@
 Name = 'AddCellConnectivityToPoints'
 Label = 'Add Cell Connectivity To Points'
-Help = ''
+Help = 'This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation).'
 
 NumberOfInputs = 1
 InputDataType = 'vtkPolyData'
@@ -29,20 +29,18 @@ ExtraXml = '''\
 
 Properties = dict(
     Cell_Type=4,
-    #Use_nearest_nbr=True,
+    Use_nearest_nbr=True,
     #max_distance=100.0
 )
 
-# TODO: Use nearest neighbor approximations or provide option to if ShallowCopy
-# this will assign connectivity from the first point to the second point and from the second point to the third, etc. and varying for different cell types.
-# TODO: nearest neighbor approxs for hexahedral
 def RequestData():
     from datetime import datetime
     import numpy as np
     from scipy.spatial import cKDTree
     from vtk.util import numpy_support as nps
     from vtk.numpy_interface import dataset_adapter as dsa
-    #from vtk.numpy_interface import algorithms as algs
+    # NOTE: Type map is specified in vtkCellType.h
+
     startTime = datetime.now()
     pdi = self.GetInput() # VTK PolyData Type
     pdo = self.GetOutput() # VTK PolyData Type
@@ -51,32 +49,35 @@ def RequestData():
     wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
     points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
 
-    #pdo.SetPoints(pdi.GetPoints())
     pdo.DeepCopy(pdi)
     numPoints = pdi.GetNumberOfPoints()
 
-    sft = 0
-    # Type map is specified in vtkCellType.h
-    #for i in range(0, numPoints - 2):
-    while(len(points) > 1):
-        tree = cKDTree(points)
-        if Cell_Type == 3 or Cell_Type == 4:
-            # Get indices of k nearest points
-            dist, ind = tree.query(points[0], k=2)
-            ptsi = [ind[0]+sft, ind[1]+sft]
-            pdo.InsertNextCell(Cell_Type, 2, ptsi)
-            points = np.delete(points, 0, 0) # Deletes first row
-        '''
-        if Cell_Type == 9:
-            # Get indices of k nearest points
-            dist, ind = tree.query(points[0], k=4)
-            if len(points) < 4:
-                break
-            ptsi = [ind[0]+sft, ind[1]+sft, ind[2]+sft, ind[3]+sft]
-            pdo.InsertNextCell(Cell_Type, 4, ptsi)
-            # TODO: which ones do I delete here?
-            points = np.delete(points, 0, 0) # Deletes first row
-        '''
-        del(tree)
-        sft += 1
+    if Use_nearest_nbr:
+        # VTK_Line
+        if Cell_Type == 3:
+            sft = 0
+            while(len(points) > 1):
+                tree = cKDTree(points)
+                # Get indices of k nearest points
+                dist, ind = tree.query(points[0], k=2)
+                ptsi = [ind[0]+sft, ind[1]+sft]
+                pdo.InsertNextCell(Cell_Type, 2, ptsi)
+                points = np.delete(points, 0, 0) # Deletes first row
+                del(tree)
+                sft += 1
+        # VTK_PolyLine
+        elif Cell_Type == 4:
+            tree = cKDTree(points)
+            dist, ptsi = tree.query(points[0], k=numPoints)
+            pdo.InsertNextCell(Cell_Type, numPoints, ptsi)
+    else:
+        # VTK_PolyLine
+        if Cell_Type == 4:
+            ptsi = [i for i in range(numPoints)]
+            pdo.InsertNextCell(Cell_Type, numPoints, ptsi)
+        # VTK_Line
+        elif Cell_Type == 3:
+            for i in range(0, numPoints-1):
+                ptsi = [i, i+1]
+                pdo.InsertNextCell(Cell_Type, 2, ptsi)
     print((datetime.now() - startTime))

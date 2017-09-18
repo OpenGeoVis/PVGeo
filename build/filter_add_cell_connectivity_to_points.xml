@@ -2,8 +2,8 @@
   <ProxyGroup name="filters">
     <SourceProxy name="AddCellConnectivityToPoints" class="vtkPythonProgrammableFilter" label="Add Cell Connectivity To Points">
       <Documentation
-        long_help=""
-        short_help="">
+        long_help="This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation)."
+        short_help="This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation).">
       </Documentation>
 <Hints>
     <ShowInMenu category="CSM Geophysics Filters" />
@@ -50,6 +50,20 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_nearest_nbr"
+        label="Use nearest nbr"
+        initial_string="Use_nearest_nbr"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
                          default_values="0"
@@ -64,7 +78,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from datetime import datetime&#xA;import numpy as np&#xA;from scipy.spatial import cKDTree&#xA;from vtk.util import numpy_support as nps&#xA;from vtk.numpy_interface import dataset_adapter as dsa&#xA;#from vtk.numpy_interface import algorithms as algs&#xA;startTime = datetime.now()&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;# Get the Points over the NumPy interface&#xA;wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input&#xA;points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input&#xA;&#xA;#pdo.SetPoints(pdi.GetPoints())&#xA;pdo.DeepCopy(pdi)&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;sft = 0&#xA;# Type map is specified in vtkCellType.h&#xA;#for i in range(0, numPoints - 2):&#xA;while(len(points) &gt; 1):&#xA;    tree = cKDTree(points)&#xA;    if Cell_Type == 3 or Cell_Type == 4:&#xA;        # Get indices of k nearest points&#xA;        dist, ind = tree.query(points[0], k=2)&#xA;        ptsi = [ind[0]+sft, ind[1]+sft]&#xA;        pdo.InsertNextCell(Cell_Type, 2, ptsi)&#xA;        points = np.delete(points, 0, 0) # Deletes first row&#xA;    '''&#xA;    if Cell_Type == 9:&#xA;        # Get indices of k nearest points&#xA;        dist, ind = tree.query(points[0], k=4)&#xA;        if len(points) &lt; 4:&#xA;            break&#xA;        ptsi = [ind[0]+sft, ind[1]+sft, ind[2]+sft, ind[3]+sft]&#xA;        pdo.InsertNextCell(Cell_Type, 4, ptsi)&#xA;        # TODO: which ones do I delete here?&#xA;        points = np.delete(points, 0, 0) # Deletes first row&#xA;    '''&#xA;    del(tree)&#xA;    sft += 1&#xA;print((datetime.now() - startTime))&#xA;"
+        default_values="from datetime import datetime&#xA;import numpy as np&#xA;from scipy.spatial import cKDTree&#xA;from vtk.util import numpy_support as nps&#xA;from vtk.numpy_interface import dataset_adapter as dsa&#xA;# NOTE: Type map is specified in vtkCellType.h&#xA;&#xA;startTime = datetime.now()&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;# Get the Points over the NumPy interface&#xA;wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input&#xA;points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;if Use_nearest_nbr:&#xA;    # VTK_Line&#xA;    if Cell_Type == 3:&#xA;        sft = 0&#xA;        while(len(points) &gt; 1):&#xA;            tree = cKDTree(points)&#xA;            # Get indices of k nearest points&#xA;            dist, ind = tree.query(points[0], k=2)&#xA;            ptsi = [ind[0]+sft, ind[1]+sft]&#xA;            pdo.InsertNextCell(Cell_Type, 2, ptsi)&#xA;            points = np.delete(points, 0, 0) # Deletes first row&#xA;            del(tree)&#xA;            sft += 1&#xA;    # VTK_PolyLine&#xA;    elif Cell_Type == 4:&#xA;        tree = cKDTree(points)&#xA;        dist, ptsi = tree.query(points[0], k=numPoints)&#xA;        pdo.InsertNextCell(Cell_Type, numPoints, ptsi)&#xA;else:&#xA;    # VTK_PolyLine&#xA;    if Cell_Type == 4:&#xA;        ptsi = [i for i in range(numPoints)]&#xA;        pdo.InsertNextCell(Cell_Type, numPoints, ptsi)&#xA;    # VTK_Line&#xA;    elif Cell_Type == 3:&#xA;        for i in range(0, numPoints-1):&#xA;            ptsi = [i, i+1]&#xA;            pdo.InsertNextCell(Cell_Type, 2, ptsi)&#xA;print((datetime.now() - startTime))&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>
