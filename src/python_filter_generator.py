@@ -275,7 +275,7 @@ def getOutputDataSetTypeXml(info):
         'vtkMultiBlockDataSet': 13,
         #'vtkHierarchicalDataSet': 14, # obsolete
         #'vtkHierarchicalBoxDataSet': 15, # obsolete
-        'vtkGenericDataSet': 16,
+        # 'vtkGenericDataSet': 16, # obsolete
         'vtkHyperOctree': 17,
         #'vtkTemporalDataSet': 18, # obsolete
         'vtkTable': 19,
