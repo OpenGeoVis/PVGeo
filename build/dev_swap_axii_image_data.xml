@@ -1,0 +1,94 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="SwapAxiiImageData" class="vtkPythonProgrammableFilter" label="Swap Axii Image Data">
+      <Documentation
+        long_help=""
+        short_help="">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM Geophysics Filters DEV" />
+</Hints>
+
+<IntVectorProperty
+    name="Axii"
+    command="SetParameter"
+    number_of_elements="1"
+    initial_string="test_drop_down_menu"
+    default_values="0">
+    <EnumerationDomain name="enum">
+          <Entry value="0" text="Swap X and Y axii"/>
+          <Entry value="1" text="Swap X and Z axii"/>
+          <Entry value="2" text="Swap Y and Z axii"/>
+    </EnumerationDomain>
+    <Documentation>
+        This property indicates which two axii will be swapped.
+    </Documentation>
+</IntVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkImageData"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Axii"
+        label="Axii"
+        initial_string="Axii"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <!-- Output data type: "vtkImageData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="6"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="pdi = self.GetInput()&#xA;pdo = self.GetOutput() #vtkImageData&#xA;&#xA;[nx,ny,nz] = pdi.GetDimensions()&#xA;&#xA;print(Axii)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;pdi = self.GetInput()&#xA;[nx,ny,nz] = pdi.GetDimensions()&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" />
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
