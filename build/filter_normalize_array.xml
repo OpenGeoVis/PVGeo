@@ -126,20 +126,6 @@
       the programmable source runs.</Documentation>
       </StringVectorProperty>
 
-      <StringVectorProperty
-        name="InformationScript"
-        label="RequestInformation Script"
-        command="SetInformationScript"
-        number_of_elements="1"
-        default_values="from paraview import util&#xA;"
-        panel_visibility="advanced">
-        <Hints>
-          <Widget type="multi_line" />
-        </Hints>
-        <Documentation>This property is a python script that is executed during
-        the RequestInformation pipeline pass. Use this to provide information
-        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
-      </StringVectorProperty>
 
     </SourceProxy>
  </ProxyGroup>

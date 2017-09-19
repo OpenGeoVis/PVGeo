@@ -123,10 +123,3 @@ def RequestData():
     # Row Data:
     elif field == 6:
         pdo.GetRowData().AddArray(c)
-
-
-
-def RequestInformation():
-    from paraview import util
-    # ABSOLUTELY NECESSARY FOR THE IMAGEDATA FILTERS TO WORK:
-    #util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])
