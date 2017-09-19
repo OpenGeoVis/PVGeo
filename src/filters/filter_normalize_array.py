@@ -123,3 +123,5 @@ def RequestData():
     # Row Data:
     elif field == 6:
         pdo.GetRowData().AddArray(c)
+    else:
+        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
