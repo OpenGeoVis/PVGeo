@@ -1,0 +1,182 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="GenerateGridFromPoints" class="vtkPythonProgrammableFilter" label="Generate Grid From Points">
+      <Documentation
+        long_help=""
+        short_help="">
+      </Documentation>
+<Hints>
+    <ShowInMenu category="CSM Geophysics Filters DEV" />
+</Hints>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkPolyData"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="nx"
+        label="nx"
+        initial_string="nx"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="ny"
+        label="ny"
+        initial_string="ny"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="nz"
+        label="nz"
+        initial_string="nz"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="x_origin"
+        label="x origin"
+        initial_string="x_origin"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="x_spacing"
+        label="x spacing"
+        initial_string="x_spacing"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="y_origin"
+        label="y origin"
+        initial_string="y_origin"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="y_spacing"
+        label="y spacing"
+        initial_string="y_spacing"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="z_origin"
+        label="z origin"
+        initial_string="z_origin"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="z_spacing"
+        label="z spacing"
+        initial_string="z_spacing"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <!-- Output data type: "vtkImageData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="6"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;scal = pdi.GetPointData().GetArray('p')&#xA;pdi.GetPointData().SetScalars(scal)&#xA;&#xA;&#xA;shepard1 = vtk.vtkShepardMethod()&#xA;shepard1.SetInputData(pdi)&#xA;shepard1.SetModelBounds(797006.000000,805506.000000,9196651.000000,9206651.000000,-1184.000000,1900.000000)&#xA;#shepard1.SetSampleDimensions(42,58,20)&#xA;#shepard1.SetNullValue(0)&#xA;#shepard1.SetMaximumDistance(1)&#xA;#shepard1.SetPowerParameter(1)&#xA;&#xA;shepard1.Update()&#xA;pdo = shepard1.GetOutput()&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" />
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
