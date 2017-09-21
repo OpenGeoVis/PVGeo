@@ -1,14 +1,12 @@
 Name = 'ExtractArray'
 Label = 'Extract Array'
+FilterCategory = 'CSM Geophysics Filters DEV'
 Help = 'Extracts an array from any input and returns that array as vtkPolyDta.'
 
 NumberOfInputs = 1
 InputDataType = ''
 OutputDataType = 'vtkPolyData' #vtkPolyData
 ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters DEV" />
-</Hints>
 
 <StringVectorProperty
     name="SelectInputScalars"

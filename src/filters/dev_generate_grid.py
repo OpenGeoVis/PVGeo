@@ -1,15 +1,12 @@
 Name = 'GenerateGridFromPoints'
 Label = 'Generate Grid From Points'
+FilterCategory = 'CSM Geophysics Filters DEV'
 Help = ''
 
 NumberOfInputs = 1
 InputDataType = 'vtkPolyData'
 OutputDataType = 'vtkImageData'
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters DEV" />
-</Hints>
-'''
+ExtraXml = ''
 
 Properties = dict(
     nx=1,

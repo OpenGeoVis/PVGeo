@@ -1,15 +1,12 @@
 Name = 'LatLonToCartesian'
 Label = 'Lat Lon To Cartesian'
+FilterCategory = 'CSM Geophysics Filters'
 Help = 'Help for the Test Filter'
 
 NumberOfInputs = 1
 InputDataType = 'vtkTable'
 OutputDataType = 'vtkTable'
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
-'''
+ExtraXml = ''
 
 
 Properties = dict(

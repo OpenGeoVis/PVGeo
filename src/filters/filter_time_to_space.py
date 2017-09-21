@@ -1,15 +1,12 @@
 Name = 'ProjectShotRecordToSpace'
 Label = 'Project Shot Record To Space'
+FilterCategory = 'CSM Geophysics Filters'
 Help = ''
 
 NumberOfInputs = 2
 InputDataType = 'vtkTable'
 OutputDataType = 'vtkPolyData'
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
-'''
+ExtraXml = ''
 
 Properties = dict(
     ns=126,

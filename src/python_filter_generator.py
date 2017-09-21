@@ -319,6 +319,7 @@ def generatePythonFilter(info):
     outputDataSetType = getOutputDataSetTypeXml(info)
     scriptProperties = getScriptPropertiesXml(info)
     filterProperties = getFilterPropertiesXml(info)
+    filterGroup = getFilterGroup(info)
 
 
     outputXml = '''\
@@ -334,15 +335,25 @@ def generatePythonFilter(info):
 %s
 %s
 %s
+%s
     </SourceProxy>
  </ProxyGroup>
 </ServerManagerConfiguration>
-      ''' % (proxyGroup, proxyName, proxyLabel, longHelp, shortHelp, extraXml, inputPropertyXml,
-             filterProperties, outputDataSetType, scriptProperties)
+      ''' % (proxyGroup, proxyName, proxyLabel, longHelp, shortHelp,
+                filterGroup, extraXml, inputPropertyXml,
+                filterProperties, outputDataSetType, scriptProperties)
 
     return textwrap.dedent(outputXml)
 
-
+def getFilterGroup(info):
+    if not info.has_key("FilterCategory"):
+        return ''
+    else:
+        return ('''\
+        <Hints>
+            <ShowInMenu category="%s" />
+        </Hints>
+        ''' % info["FilterCategory"])
 
 
 def replaceFunctionWithSourceString(namespace, functionName, allowEmpty=False):

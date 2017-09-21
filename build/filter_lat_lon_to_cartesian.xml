@@ -5,9 +5,10 @@
         long_help="Help for the Test Filter"
         short_help="Help for the Test Filter">
       </Documentation>
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
+        <Hints>
+            <ShowInMenu category="CSM Geophysics Filters" />
+        </Hints>
+
 
 
       <InputProperty

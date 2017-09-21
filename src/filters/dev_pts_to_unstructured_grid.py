@@ -1,15 +1,12 @@
 Name = 'PointsTovtkUnstructuredGrid'
 Label = 'Points To vtkUnstructuredGrid'
+FilterCategory = 'CSM Geophysics Filters DEV'
 Help = 'Input is vtkPolyData (from Table to Points Filter)'
 
 NumberOfInputs = 1
 InputDataType = 'vtkPolyData'
 OutputDataType = 'vtkUnstructuredGrid'
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters DEV" />
-</Hints>
-'''
+ExtraXml = ''
 
 Properties = dict(
 

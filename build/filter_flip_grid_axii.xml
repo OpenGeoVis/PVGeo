@@ -5,9 +5,11 @@
         long_help="This filter will flip ImageData in any of the three cartesian coordinates."
         short_help="This filter will flip ImageData in any of the three cartesian coordinates.">
       </Documentation>
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
+        <Hints>
+            <ShowInMenu category="CSM Geophysics Filters" />
+        </Hints>
+
+
 
       <InputProperty
         name="Input"

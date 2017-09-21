@@ -5,9 +5,10 @@
         long_help="Input is vtkPolyData (from Table to Points Filter)"
         short_help="Input is vtkPolyData (from Table to Points Filter)">
       </Documentation>
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters DEV" />
-</Hints>
+        <Hints>
+            <ShowInMenu category="CSM Geophysics Filters DEV" />
+        </Hints>
+
 
 
       <InputProperty

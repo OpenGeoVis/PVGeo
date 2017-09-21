@@ -1,14 +1,11 @@
 Name = 'NormalizeArray'
 Label = 'Normalize Array'
+FilterCategory = 'CSM Geophysics Filters'
 Help = 'Help for the Test Filter'
 
 NumberOfInputs = 1
 # Works on any data type so no need to specify input/ouptut
 ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
-
 <StringVectorProperty
     name="SelectInputScalars"
     label="Array"

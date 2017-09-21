@@ -5,9 +5,9 @@
         long_help="This filter will translate the origin of vtkImageData to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior)."
         short_help="This filter will translate the origin of vtkImageData to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior).">
       </Documentation>
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
+        <Hints>
+            <ShowInMenu category="CSM Geophysics Filters" />
+        </Hints>
 
 <IntVectorProperty
     name="Corner"

@@ -1,15 +1,12 @@
 Name = 'ReshapeTable'
 Label = 'Reshape Table'
+FilterCategory = 'CSM Geophysics Filters'
 Help = 'This filter will take a vtkTable object and reshape it. This filter essentially treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contigous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.'
 
 NumberOfInputs = 1
 InputDataType = 'vtkTable'
 OutputDataType = 'vtkTable'
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
-'''
+ExtraXml = ''
 
 
 Properties = dict(

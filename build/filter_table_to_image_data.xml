@@ -5,9 +5,10 @@
         long_help="DEPRECATED (replaced by Table to Uniform Grid). This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a nx by ny by nz structure and an origin can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh)."
         short_help="DEPRECATED (replaced by Table to Uniform Grid). This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a nx by ny by nz structure and an origin can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh).">
       </Documentation>
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
+        <Hints>
+            <ShowInMenu category="CSM Geophysics Filters" />
+        </Hints>
+
 
 
       <InputProperty

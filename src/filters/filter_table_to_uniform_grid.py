@@ -1,15 +1,12 @@
 Name = 'TableToUniformGrid'
 Label = 'Table To Uniform Grid'
+FilterCategory = 'CSM Geophysics Filters'
 Help = 'This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a n1 by n2 by n3 vtkImageData structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (d1=z, d2=x, d3=y).'
 
 NumberOfInputs = 1
 InputDataType = 'vtkTable'
 OutputDataType = 'vtkImageData'
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
-'''
+ExtraXml = ''
 
 Properties = dict(
     n1=1,

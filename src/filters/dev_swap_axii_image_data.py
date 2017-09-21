@@ -1,15 +1,12 @@
 Name = 'SwapAxiiImageData'
 Label = 'Swap Axii Image Data'
+FilterCategory = 'CSM Geophysics Filters DEV'
 Help = ''
 
 NumberOfInputs = 1
 InputDataType = 'vtkImageData'
 OutputDataType = 'vtkImageData'
 ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters DEV" />
-</Hints>
-
 <IntVectorProperty
     name="Axii"
     command="SetParameter"

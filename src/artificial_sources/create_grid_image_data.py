@@ -1,14 +1,11 @@
 Name = 'CreateEmptyGrid'
 Label = 'Create Empty Grid'
+FilterCategory = 'CSM Geophysics Sources'
 Help = ''
 
 NumberOfInputs = 0
 OutputDataType = 'vtkImageData'
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Sources" />
-</Hints>
-'''
+ExtraXml = ''
 
 Properties = dict(
     nx=1,

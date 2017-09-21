@@ -5,9 +5,10 @@
         long_help=""
         short_help="">
       </Documentation>
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters DEV" />
-</Hints>
+        <Hints>
+            <ShowInMenu category="CSM Geophysics Filters DEV" />
+        </Hints>
+
 
 
       <InputProperty

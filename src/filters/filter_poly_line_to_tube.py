@@ -1,15 +1,12 @@
 Name = 'PolyLineToTube'
 Label = 'Poly Line To Tube'
+FilterCategory = 'CSM Geophysics Filters'
 Help = 'Takes points from a vtkPolyData with associated poly lines in cell data and builds a polygonal tube around that line with some specified radius and number of sides.'
 
 NumberOfInputs = 1
 InputDataType = 'vtkPolyData'
 OutputDataType = 'vtkPolyData'
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
-'''
+ExtraXml = ''
 
 
 Properties = dict(

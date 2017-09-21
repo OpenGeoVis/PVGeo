@@ -5,9 +5,10 @@
         long_help="Extracts an array from any input and returns that array as vtkPolyDta."
         short_help="Extracts an array from any input and returns that array as vtkPolyDta.">
       </Documentation>
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters DEV" />
-</Hints>
+        <Hints>
+            <ShowInMenu category="CSM Geophysics Filters DEV" />
+        </Hints>
+
 
 <StringVectorProperty
     name="SelectInputScalars"

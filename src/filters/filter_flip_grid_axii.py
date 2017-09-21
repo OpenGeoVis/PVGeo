@@ -1,14 +1,12 @@
 Name = 'FlipImageDataAxii'
 Label = 'Flip ImageData Axii'
+FilterCategory = 'CSM Geophysics Filters'
 Help = 'This filter will flip ImageData in any of the three cartesian coordinates.'
 
 NumberOfInputs = 1
 InputDataType = 'vtkImageData'
 OutputDataType = 'vtkImageData'
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>'''
+ExtraXml = ''
 
 
 Properties = dict(

@@ -1,15 +1,12 @@
 Name = 'TestFilter'
 Label = 'Test Filter'
+FilterCategory = 'Test Category'
 Help = 'Help for the Test Filter'
 
 NumberOfInputs = 1
 InputDataType = 'vtkPolyData'
 OutputDataType = 'vtkPolyData'
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="CSM Geophysics Filters" />
-</Hints>
-'''
+ExtraXml = ''
 
 
 Properties = dict(
@@ -29,6 +26,6 @@ def RequestData():
 
 
 def RequestInformation():
-    #from paraview import util
+    from paraview import util
     # ABSOLUTELY NECESSARY FOR THE IMAGEDATA FILTERS TO WORK:
     #util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])
