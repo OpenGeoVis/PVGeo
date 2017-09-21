@@ -1,4 +1,5 @@
 #!/bin/bash
+pushd "$(dirname "$0")"
 
 #------ WRAP FILTERS IN XML ------#
 for filename in ./filters/filter_*.py; do
@@ -25,3 +26,4 @@ done
 
 #------ INSTALL ------#
 sh ./install_plugins.sh
+popd
