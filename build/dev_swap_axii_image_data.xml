@@ -10,7 +10,7 @@
         </Hints>
 
 <IntVectorProperty
-    name="Axii"
+    name="Swap"
     command="SetParameter"
     number_of_elements="1"
     initial_string="test_drop_down_menu"
@@ -41,9 +41,9 @@
 
       <IntVectorProperty
         panel_visibility="default"
-        name="Axii"
-        label="Axii"
-        initial_string="Axii"
+        name="Swap"
+        label="Swap"
+        initial_string="Swap"
         command="SetParameter"
         animateable="1"
         default_values="0"
@@ -65,7 +65,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="pdi = self.GetInput()&#xA;pdo = self.GetOutput() #vtkImageData&#xA;&#xA;[nx,ny,nz] = pdi.GetDimensions()&#xA;&#xA;print(Axii)&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;from vtk.numpy_interface import dataset_adapter as dsa&#xA;pdi = self.GetInput() #vtkImageData&#xA;pdo = self.GetOutput() #vtkImageData&#xA;&#xA;#pdo.DeepCopy(pdi)&#xA;&#xA;# Input Dimensions:&#xA;[ix,iy,iz] = pdi.GetDimensions()&#xA;[iox, ioy, ioz] = pdi.GetOrigin()&#xA;[isx, isy, isz] = pdi.GetSpacing()&#xA;&#xA;# Default Sawp (X and Y):&#xA;d1, d2 = 0, 1&#xA;# Default Switch of extents:&#xA;nx, ny, nz = iy, ix, iz&#xA;# Default switch of origin:&#xA;oox, ooy, ooz = ioy, iox, ioz&#xA;# Default switch of spacing:&#xA;osx, osy, osz = isy, isx, isz&#xA;&#xA;# Determine Swap order&#xA;if Swap == 0:&#xA;    # Swap X and Y&#xA;    d1, d2 = 1, 0&#xA;    nx, ny, nz = iy, ix, iz&#xA;    oox, ooy, ooz = ioy, iox, ioz&#xA;    osx, osy, osz = isy, isx, isz&#xA;elif Swap == 1:&#xA;    # Swap X and Z&#xA;    d1, d2 = 1, 2&#xA;    nx, ny, nz = iz, iy, ix&#xA;    oox, ooy, ooz = ioz, ioy, iox&#xA;    osx, osy, osz = isz, isy, isx&#xA;elif Swap == 2:&#xA;    # Swap Y and Z&#xA;    d1, d2 = 0, 2&#xA;    nx, ny, nz = ix, iz, iy&#xA;    oox, ooy, ooz = iox, ioz, ioy&#xA;    osx, osy, osz = isx, isz, isy&#xA;else:&#xA;    raise Exception('Unknown axii swap.')&#xA;&#xA;pdo.SetDimensions(nx, ny, nz)&#xA;pdo.SetOrigin(oox, ooy, ooz)&#xA;pdo.SetSpacing(osx, osy, osz)&#xA;pdo.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)&#xA;&#xA;wpdi = dsa.WrapDataObject(pdi)&#xA;narr = pdi.GetPointData().GetNumberOfArrays()&#xA;&#xA;# TODO: the swap/reshape is not working&#xA;for i in range(narr):&#xA;    arr = wpdi.PointData[i]&#xA;    arr = np.reshape(arr, (iy,ix,iz))&#xA;    arr = np.swapaxes(arr,d1,d2)&#xA;    arr = np.reshape(arr, (ix*iy*iz))&#xA;    c = nps.numpy_to_vtk(num_array=arr,deep=True)&#xA;    c.SetName(pdi.GetPointData().GetArray(i).GetName())&#xA;    pdo.GetPointData().AddArray(c)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>
@@ -79,7 +79,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;pdi = self.GetInput()&#xA;[nx,ny,nz] = pdi.GetDimensions()&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        default_values="from paraview import util&#xA;pdi = self.GetInput() #vtkImageData&#xA;[ix,iy,iz] = pdi.GetDimensions()&#xA;# Determine Swap order&#xA;if Swap == 0:&#xA;    nx, ny, nz = iy, ix, iz&#xA;elif Swap == 1:&#xA;    nx, ny, nz = iz, iy, ix&#xA;elif Swap == 2:&#xA;    nx, ny, nz = ix, iz, iy&#xA;else:&#xA;    raise Exception('Unknown axii swap.')&#xA;# ABSOLUTELY NECESSARY FOR THE IMAGEDATA FILTERS TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" />
