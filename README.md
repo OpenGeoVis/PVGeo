@@ -61,7 +61,7 @@ To make a custom filter or reader, follow the outline in [src/example.py](src/ex
 
 All of the distributed filters in this repo will appear in the menu category `CSM Geophysics Filters`. As you develop your own, it may be useful to specify your own menu category as the variable `FilterCategory` in your python file as shown in [src/example.py](src/example.py).
 
-```python
+```py
 FilterCategory = 'CSM Geophysics Filters'
 ```
 
