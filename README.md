@@ -59,14 +59,10 @@ $ sh src/install_plugins.sh
 
 To make a custom filter or reader, follow the outline in [src/example.py](src/example.py) and place your script in either the `src/filters/` or `src/readers/` directories with a meaningful name. *Note* that the script will only compile `.py` files that contain either `filter_` or `reader_` in the file name. This is so you can save other `.py` files in those directories without issues. Then re-run the script  [src/build_plugins.sh](src/build_plugins.sh) to wrap in XML and install to ParaView.
 
-All of the distributed filters in this repo will appear in the menu category `CSM Geophysics Filters`. As you develop your own, it may be useful to specify your own menu category as outlined in the hints of the ExtraXml in [src/example.py](src/example.py)
+All of the distributed filters in this repo will appear in the menu category `CSM Geophysics Filters`. As you develop your own, it may be useful to specify your own menu category as the variable `FilterCategory` in your python file as shown in [src/example.py](src/example.py).
 
 ```python
-ExtraXml = '''\
-<Hints>
-    <ShowInMenu category="Your filter category" />
-</Hints>
-'''
+FilterCategory = 'CSM Geophysics Filters'
 ```
 
 ## Requesting Features, Reporting Issues, and Contributing
