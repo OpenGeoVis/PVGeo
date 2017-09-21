@@ -1,11 +1,9 @@
 #!/bin/bash
 
 #------ INSTALL TO PARAVIEW ------#
-# NOTE: Change this path if needed:
-PVPATH="/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/"
-if [ ! -d $PVPATH ]; then
-    mkdir $PVPATH
+if [ ! -d $PVPLUGINPATH ]; then
+    mkdir $PVPLUGINPATH
 fi
 for filename in ../build/*.xml; do
-    cp $filename $PVPATH
+    cp $filename $PVPLUGINPATH
 done
