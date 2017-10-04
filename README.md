@@ -23,7 +23,7 @@ $ cd ParaViewGeophysics
 
 ```
 
-Note: If you're on Windows, [see this guide](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/)
+Note: If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and maybe [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/)
 
 ### Before You Do Anything!
 
