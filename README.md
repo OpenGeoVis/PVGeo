@@ -12,7 +12,7 @@ Stay tuned, this project is in its early stages of development so only a handful
 
 ## How To Use the Plugins in this Repository
 
-To clone and use the plugins distributed in the repo for ParaView, you'll need [Git](https://git-scm.com), [Python 2](https://www.python.org/downloads/) with the SciPy and NumPy modules [installed](https://docs.python.org/2/installing/index.html), and [ParaView](https://www.paraview.org/download/) installed on your computer. From your command line:
+To clone and use the plugins distributed in the repo for ParaView, you'll need [Python 2](https://www.python.org/downloads/) with the SciPy and NumPy modules [installed](https://docs.python.org/2/installing/index.html), and [ParaView](https://www.paraview.org/download/) installed on your computer. From your command line:
 
 ```bash
 # Clone this repository
@@ -23,7 +23,8 @@ $ cd ParaViewGeophysics
 
 ```
 
-Note: If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) guide for using the Unix command line on windows. Download and use Cygwin for the command line operation of the scripts in this repo. When installing Cygwin, make sure to install the bash, dos2unix, git, and python2-setuptools packages. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system! **Make sure the line endings for al of the shell scripts are LF and not CRLF**
+### Windows Users:
+If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) guide for using the Unix command line on windows. Download and use Cygwin for the command line operation of the scripts in this repo. When installing Cygwin, *make sure to install the `bash`, `dos2unix`, `git`, and `python2-setuptools` packages*. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system! **Make sure the line endings for all of the shell scripts are LF and not CRLF after cloning.**
 
 ### Before You Do Anything!
 
@@ -35,9 +36,9 @@ Add this variable to your environment in your `~/.bash_profile`:
 export PVPLUGINPATH="/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/"
 ```
 
-Windows users, open Cygwin and edit your .bash_profile by executing
+Windows users, open Cygwin and edit your `~/.bash_profile` by executing
 ```bash
-echo "export PVPLUGINPATH=\"/cygdrive/c/Paraview/bin/plugins/\"" >> ~/.bash_profile
+echo "export PVPLUGINPATH=\"/cygdrive/c/ParaView/bin/plugins/\"" >> ~/.bash_profile
 ```
 
 
