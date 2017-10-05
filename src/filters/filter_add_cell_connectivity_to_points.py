@@ -33,7 +33,6 @@ Properties = dict(
 def RequestData():
     from datetime import datetime
     import numpy as np
-    from scipy.spatial import cKDTree
     from vtk.util import numpy_support as nps
     from vtk.numpy_interface import dataset_adapter as dsa
     # NOTE: Type map is specified in vtkCellType.h
@@ -50,6 +49,7 @@ def RequestData():
     numPoints = pdi.GetNumberOfPoints()
 
     if Use_nearest_nbr:
+        from scipy.spatial import cKDTree
         # VTK_Line
         if Cell_Type == 3:
             sft = 0
