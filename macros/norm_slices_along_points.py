@@ -11,7 +11,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 #paraview.simple._DisableFirstRenderCameraReset()
 
 # Where to save data. Absolute path:
-path = 'ABSOLUTE PATH HERE'
+path = 'ABSOLUTE PATH'
 #path = tkFileDialog.askdirectory()
 
 # Specify Points for the Line Source:
@@ -48,7 +48,7 @@ for i in range(0, numPoints - 1, numPoints/numSlices):
     slc.SliceType.Normal = norm
 
     # save out slice with good metadata: TODO: change name
-    filename = path + 'Slice_Advance' + str(num) + '.csv'
+    filename = path + 'Slice' + str(num) + '.csv'
     print(filename)
     #SaveData(filename, proxy=slc)
 
