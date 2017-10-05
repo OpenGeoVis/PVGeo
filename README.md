@@ -23,7 +23,7 @@ $ cd ParaViewGeophysics
 
 ```
 
-Note: If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) guide for using the Unix command line on windows. Download and use Cygwin for the command line operation of the scripts in this repo. When installing Cygwin, make sure to install the bash, less, and python2-setuptools packages. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system!
+Note: If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) guide for using the Unix command line on windows. Download and use Cygwin for the command line operation of the scripts in this repo. When installing Cygwin, make sure to install the bash, dos2unix, git, and python2-setuptools packages. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system! **Make sure the line endings for al of the shell scripts are LF and not CRLF**
 
 ### Before You Do Anything!
 
