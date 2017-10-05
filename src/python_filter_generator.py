@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # See blog for details: https://blog.kitware.com/easy-customization-of-the-paraview-python-programmable-filter-property-panel/
 #
 # This code has been modified by Chrsitopher Sullivan (chrsulli@mines.edu or banesullivan@gmail.com) for making customized filters in the geoscience data visualization. Credit does not go to Chrsitopher for this script but to the author of the above blog post.
@@ -397,7 +399,7 @@ def generatePythonFilterFromFiles(scriptFile, outputFile):
 def main():
 
     if len(sys.argv) != 3:
-        print 'Usage: %s <python input filename> <xml output filename>' % sys.argv[0]
+        print('Usage: %s <python input filename> <xml output filename>' % sys.argv[0])
         sys.exit(1)
 
     inputScript = sys.argv[1]

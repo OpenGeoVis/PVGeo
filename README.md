@@ -23,7 +23,7 @@ $ cd ParaViewGeophysics
 
 ```
 
-Note: If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and maybe [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/)
+Note: If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) guide for using the Unix command line on windows. Download and use Cygwin for the command line operation of the scripts in this repo. When installing Cygwin, make sure to install the bash, less, and python2-setuptools packages. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system!
 
 ### Before You Do Anything!
 
@@ -31,8 +31,13 @@ You *MUST* add a `PVPLUGINPATH` variable in your bash profile! This variable wil
 
 Add this variable to your environment in your `~/.bash_profile`:
 ```bash
-# ParaViewPlugins
+# ParaViewPlugins on Unix:
 export PVPLUGINPATH="/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/"
+```
+
+Windows users, open Cygwin and edit your .bash_profile by executing
+```bash
+echo "export PVPLUGINPATH=\"/cygdrive/c/Paraview/bin/plugins/\"" >> ~/.bash_profile
 ```
 
 
