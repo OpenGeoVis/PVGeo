@@ -16,6 +16,7 @@ Properties = dict(
 )
 
 # TODO: filter works but assumes a spherical earth wich is very wrong
+# NOTE: Msatches the vtkEarth SOurce however so we gonna keep it this way
 
 def RequestData():
     import numpy as np
@@ -38,13 +39,20 @@ def RequestData():
     rad = 2 * np.pi / 360.0
     coords = np.empty((nrows,3))
     row_i = 0
+    '''
     for r in data:
         x = Radius * cos(r[lat_i] * rad) * cos(r[lon_i] * rad)
         y = Radius * cos(r[lat_i] * rad) * sin(r[lon_i] * rad)
         z = Radius * sin(r[lat_i] * rad)
         coords[row_i] = [x,y,z]
         row_i = row_i + 1
-
+    '''
+    x = Radius * cos(data[:,lat_i] * rad) * cos(data[:,lon_i] * rad)
+    y = Radius * cos(data[:,lat_i] * rad) * sin(data[:,lon_i] * rad)
+    z = Radius * sin(data[:,lat_i] * rad)
+    coords[:,0] = x
+    coords[:,1] = y
+    coords[:,2] = z
     # Add coords to ouptut table
     for i in range(3):
         col = np.array(coords[:,i])
