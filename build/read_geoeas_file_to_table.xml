@@ -10,7 +10,7 @@
         </Hints>
 
 <Hints>
-    <ReaderFactory extensions="dat geoeas txt"
+    <ReaderFactory extensions="sgems dat geoeas txt SGEMS"
                    file_description="GeoEAS File Format" />
 </Hints>
 
@@ -82,7 +82,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import numpy as np&#xA;import csv&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;&#xA;if (Use_tab_delimiter):&#xA;    Delimiter_Field = '\t'&#xA;&#xA;titles = []&#xA;data = []&#xA;with open(FileName) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    # Skip defined lines&#xA;    for i in range(Number_Ignore_Lines):&#xA;        next(f)&#xA;&#xA;    # Get file header (part of format)&#xA;    header = next(f) # TODO: do something with the header&#xA;    print('File Header: ' + header)&#xA;    # Get titles&#xA;    numCols = int(next(f))&#xA;    for i in range(numCols):&#xA;        titles.append(next(f).rstrip('\r\n'))&#xA;&#xA;    # Read data&#xA;    for row in reader:&#xA;        data.append(row)&#xA;&#xA;# Put first column into table&#xA;for i in range(len(titles)):&#xA;    col = []&#xA;    for row in data:&#xA;        col.append(row[i])&#xA;    VTK_data = numpy_support.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)&#xA;    VTK_data.SetName(titles[i])&#xA;    pdo.AddColumn(VTK_data)&#xA;"
+        default_values="import numpy as np&#xA;import csv&#xA;import os&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;&#xA;if (Use_tab_delimiter):&#xA;    Delimiter_Field = '\t'&#xA;&#xA;titles = []&#xA;data = []&#xA;with open(FileName) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    # Skip defined lines&#xA;    for i in range(Number_Ignore_Lines):&#xA;        next(f)&#xA;&#xA;    # Get file header (part of format)&#xA;    header = next(f) # TODO: do something with the header&#xA;    print(os.path.basename(FileName) + ': ' + header)&#xA;    # Get titles&#xA;    numCols = int(next(f))&#xA;    for i in range(numCols):&#xA;        titles.append(next(f).rstrip('\r\n'))&#xA;&#xA;    # Read data&#xA;    for row in reader:&#xA;        data.append(row)&#xA;&#xA;# Put first column into table&#xA;for i in range(len(titles)):&#xA;    col = []&#xA;    for row in data:&#xA;        col.append(row[i])&#xA;    VTK_data = numpy_support.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)&#xA;    VTK_data.SetName(titles[i])&#xA;    pdo.AddColumn(VTK_data)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line"/>

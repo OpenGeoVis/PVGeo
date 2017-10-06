@@ -7,7 +7,7 @@ NumberOfInputs = 0
 OutputDataType = 'vtkTable'
 ExtraXml = '''\
 <Hints>
-    <ReaderFactory extensions="dat geoeas txt"
+    <ReaderFactory extensions="sgems dat geoeas txt SGEMS"
                    file_description="GeoEAS File Format" />
 </Hints>'''
 
@@ -23,6 +23,7 @@ Properties = dict(
 def RequestData():
     import numpy as np
     import csv
+    import os
     from vtk.util import numpy_support
 
     pdo = self.GetOutput() # vtkTable
@@ -40,7 +41,7 @@ def RequestData():
 
         # Get file header (part of format)
         header = next(f) # TODO: do something with the header
-        print('File Header: ' + header)
+        print(os.path.basename(FileName) + ': ' + header)
         # Get titles
         numCols = int(next(f))
         for i in range(numCols):
