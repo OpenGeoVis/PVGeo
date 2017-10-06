@@ -11,7 +11,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 #paraview.simple._DisableFirstRenderCameraReset()
 
 # Where to save data. Absolute path:
-path = 'ABSOLUTE PATH'
+path = '/Users/bane/school/GPVR/closed_data/jacob/slices/'
 #path = tkFileDialog.askdirectory()
 
 # Specify Points for the Line Source:
@@ -48,7 +48,9 @@ for i in range(0, numPoints - 1, numPoints/numSlices):
     slc.SliceType.Normal = norm
 
     # save out slice with good metadata: TODO: change name
-    filename = path + 'Slice' + str(num) + '.csv'
+    # This will use a value from the point data to add to the name
+    num = wpdi.PointData['Advance LL (S-558)'][ptsi[i]]
+    filename = path + 'Slice_Advance' + str(num) + '.csv'
     print(filename)
     #SaveData(filename, proxy=slc)
 
