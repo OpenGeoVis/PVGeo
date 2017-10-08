@@ -56,7 +56,7 @@ def RequestData():
         f.close()
 
     # Put first column into table
-    for i in range(len(titles)):
+    for i in range(numCols):
         col = []
         for row in data:
             col.append(row[i])
