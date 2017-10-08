@@ -4,7 +4,7 @@ This repository contains plugins for the open-source, multi-platform data analys
 ## *NOTICE:* This repo is under development as the project just started! Consider everything here to be an Alpha (soon to be Beta) release.
 
 ## About the Author
-Unless otherwise specified at the top of the file, all code and documentation distributed here was produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines. Feel free to contact for major questions or for custom filters/readers to visualize geoscience data.
+Unless otherwise specified at the top of the file, all code and documentation distributed here was produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for major questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
 
 ## More to come
 
