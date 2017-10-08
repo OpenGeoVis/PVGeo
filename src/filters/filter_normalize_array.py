@@ -1,7 +1,7 @@
 Name = 'NormalizeArray'
 Label = 'Normalize Array'
 FilterCategory = 'CSM Geophysics Filters'
-Help = 'This filter allow the user to select an array from the input data set to be normalized. The filter will tag on another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from two types of common normalizations: Feature Scaling and Standard Score.'
+Help = 'This filter allow the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from two types of common normalizations: Feature Scaling and Standard Score.'
 
 NumberOfInputs = 1
 # Works on any data type so no need to specify input/ouptut

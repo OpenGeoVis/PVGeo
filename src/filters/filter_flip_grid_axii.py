@@ -1,7 +1,7 @@
 Name = 'FlipImageDataAxii'
 Label = 'Flip ImageData Axii'
 FilterCategory = 'CSM Geophysics Filters'
-Help = 'This filter will flip ImageData in any of the three cartesian coordinates.'
+Help = 'This filter will flip ImageData on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data.'
 
 NumberOfInputs = 1
 InputDataType = 'vtkImageData'
