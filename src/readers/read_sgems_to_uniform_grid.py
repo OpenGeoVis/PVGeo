@@ -39,7 +39,6 @@ def RequestData():
         #header = next(f) # TODO: do something with the header
         #print(os.path.basename(FileName) + ': ' + header)
         h = reader.next()
-        print(h)
         n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
 
         pdo.SetDimensions(n1, n2, n3)
