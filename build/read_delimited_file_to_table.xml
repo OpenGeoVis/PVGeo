@@ -29,7 +29,7 @@
 
 
           <StringVectorProperty
-            panel_visibility="advanced"
+            panel_visibility="default"
             name="FileName"
             label="FileName"
             initial_string="FileName"
