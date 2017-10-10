@@ -178,7 +178,7 @@ def getFilterPropertyXml(propertyInfo, propertyName):
         if propertyName is 'FileName':
             return '''
           <StringVectorProperty
-            panel_visibility="advanced"
+            panel_visibility="%s"
             name="%s"
             label="%s"
             initial_string="%s"
@@ -188,7 +188,7 @@ def getFilterPropertyXml(propertyInfo, propertyName):
             number_of_elements="%s">
             <FileListDomain name="files"/>
             <Documentation></Documentation>
-          </StringVectorProperty>''' % (propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
+          </StringVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
         else:
             return '''
             <StringVectorProperty
