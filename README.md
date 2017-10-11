@@ -24,9 +24,9 @@ $ cd ParaViewGeophysics
 ```
 
 ### Windows Users:
-If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) guide for using the Unix command line on windows. Download and use Cygwin for the command line operation of the scripts in this repo. When installing Cygwin, *make sure to install the `bash`, `dos2unix`, `git`, and `python2-setuptools` packages*. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system! **Make sure the line endings for all of the shell scripts are LF and not CRLF after cloning.**
+If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) guide for using the Unix command line on windows.
 
-Or use [this guide](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/) if you have Windows 10 to use the Linux Bash shell to run our scripts.
+Download and use [Cygwin](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) for the command line operation of the scripts in this repo. When installing Cygwin, *make sure to install the `bash`, `dos2unix`, `git`, and `python2-setuptools` packages*. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system! **Make sure the line endings for all of the shell scripts are LF and not CRLF after cloning.**
 
 ### Before You Do Anything!
 
@@ -56,7 +56,7 @@ $ sh src/build_plugins.sh
 
 To simply install the distributed filters from this repo, run the [src/install_plugins.sh](src/install_plugins.sh) script *but first you MUST add the `PVPLUGINPATH` variable to your environment* (described above)! This script will simply copy over all the XML files from `build/` to the default directory for third party plugins in ParaView so that they will all load when ParaView launches.
 
-To run these scripts on a Unix like system us the `sh` command: `sh src/install_plugins.py`
+To run these scripts on a Unix like system us the `sh` command: `sh src/install_plugins.sh`
 
 ```bash
 $ sh src/install_plugins.sh
