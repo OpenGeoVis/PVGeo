@@ -28,6 +28,8 @@ If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub a
 
 Download and use [Cygwin](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) for the command line operation of the scripts in this repo. When installing Cygwin, *make sure to install the `bash`, `dos2unix`, `git`, and `python2-setuptools` packages*. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system! **Make sure the line endings for all of the shell scripts are LF and not CRLF after cloning.**
 
+Also, be sure to place/install ParaView and this repository to a location that has general read/write privileges for all users such as on your D drive. You will encounter all types of issues running the scripts and simply accessing the code via cygwin if you need admin privileges to access where it is all saved. *Note: the install scripts will need access to the directory where ParaView is installed*
+
 ### Before You Do Anything!
 
 You *MUST* add a `PVPLUGINPATH` variable in your bash profile! This variable will describe the plugin path within ParaView's application content. It is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app/` with the name of your version of ParaView under `/Applications/`. To double check the correct path for filter installation, open ParaView and select Tools->Manage Plugins... and copy/paste the path at the top of the window where it says "Local plugins are automatically searched for in ..."
@@ -38,9 +40,9 @@ Add this variable to your environment in your `~/.bash_profile`:
 export PVPLUGINPATH="/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/"
 ```
 
-Windows users, open Cygwin and edit your `~/.bash_profile` by executing
+Windows users, open Cygwin and edit your `~/.bash_profile` by executing this command to place a `PVPLUGINPATH` variable in your environment. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView/...` to `/cygdrive/d/ParaView-5.4.0/...`)
 ```bash
-echo "export PVPLUGINPATH=\"/cygdrive/c/ParaView/bin/plugins/\"" >> ~/.bash_profile
+echo "export PVPLUGINPATH=\"/cygdrive/d/ParaView/bin/plugins/\"" >> ~/.bash_profile
 ```
 
 
