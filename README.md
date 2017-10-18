@@ -8,11 +8,13 @@ Unless otherwise specified at the top of the file, all code and documentation di
 
 ## More to come
 
-Stay tuned, this project is in its early stages of development so only a handful of the plugins are tested and published here. Also be sure to check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) (*currently being developed and proofed*) for detailed documentation on the filters and general use of this repository.
+Stay tuned, this project is in its early stages of development so only a handful of the plugins are tested and published here. Also be sure to check out the [Wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) (*currently being developed and proofed*) for detailed documentation on the filters and general use of this repository.
 
 ## How To Use the Plugins in this Repository
 
-To clone and use the plugins distributed in the repo for ParaView, you'll need [Python 2](https://www.python.org/downloads/) with the SciPy and NumPy modules [installed](https://docs.python.org/2/installing/index.html), and [ParaView](https://www.paraview.org/download/) installed on your computer. Note that this repository will only work with builds of ParaView that have python, currently the VR build does not have python included and we will describe some workarounds for sending data to the VR version on [these wiki pages](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents#virtual-reality).
+To clone and use the plugins distributed in the repo for ParaView, you'll need [Python 2](https://www.python.org/downloads/) with the SciPy and NumPy modules [installed](https://docs.python.org/2/installing/index.html), and [ParaView](https://www.paraview.org/download/) installed on your computer. Note that this repository will only work with builds of ParaView that have Python, currently the VR build does not have Python included and we will describe some workarounds for sending data to the VR version on [these wiki pages](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents#virtual-reality).
+
+Check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) to explore the motivation for publishing this repo as well as to find all documentation and some visualization examples. Use the [Wiki Contents](Wiki-Contents) to navigate the Wiki and to find all documentation for readers, filters, macros, and more as you need.
 
 From your command line:
 
