@@ -1,5 +1,5 @@
-Name = 'ReadSGEMSFileToUniformGrid'
-Label = 'Read SGEMS File To Uniform Grid'
+Name = 'ReadSGeMSFileToUniformGrid'
+Label = 'Read SGeMS File To Uniform Grid'
 FilterCategory = 'CSM GP Readers'
 Help = ''
 
@@ -7,8 +7,8 @@ NumberOfInputs = 0
 OutputDataType = 'vtkImageData'
 ExtraXml = '''\
 <Hints>
-    <ReaderFactory extensions="sgems SGEMS"
-                   file_description="SGEMS Grid File Format" />
+    <ReaderFactory extensions="sgems SGEMS SGeMS"
+                   file_description="SGeMS Grid File Format" />
 </Hints>'''
 
 

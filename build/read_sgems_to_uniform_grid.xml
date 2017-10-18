@@ -1,6 +1,6 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="sources">
-    <SourceProxy name="ReadSGEMSFileToUniformGrid" class="vtkPythonProgrammableFilter" label="Read SGEMS File To Uniform Grid">
+    <SourceProxy name="ReadSGeMSFileToUniformGrid" class="vtkPythonProgrammableFilter" label="Read SGeMS File To Uniform Grid">
       <Documentation
         long_help=""
         short_help="">
@@ -10,8 +10,8 @@
         </Hints>
 
 <Hints>
-    <ReaderFactory extensions="sgems SGEMS"
-                   file_description="SGEMS Grid File Format" />
+    <ReaderFactory extensions="sgems SGEMS SGeMS"
+                   file_description="SGeMS Grid File Format" />
 </Hints>
 
 
