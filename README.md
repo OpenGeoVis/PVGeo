@@ -50,7 +50,7 @@ Windows users, open Cygwin and edit your `~/.bash_profile` by executing this com
 ```bash
 # ParaViewPlugins on Windows via Cygwin
 # Be sure to check that this path matches yours... Odds are it's different!
-echo "export PVPLUGINPATH=\"/cygdrive/d/ParaView/bin/plugins/\"" >> ~/.bash_profile
+echo "\n# Path for ParaView Plugins for the ParaViewGeophysics Repo: \nexport PVPLUGINPATH=\"/cygdrive/d/ParaView/bin/plugins/\"" >> ~/.bash_profile
 ```
 
 
