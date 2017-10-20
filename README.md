@@ -38,14 +38,17 @@ Also, be sure to place/install ParaView and this repository to a location that h
 
 You *MUST* add a `PVPLUGINPATH` variable in your bash profile! This variable will describe the plugin path within ParaView's application content. It is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app/` with the name of your version of ParaView under `/Applications/`. To double check the correct path for filter installation, open ParaView and select Tools->Manage Plugins... and copy/paste the path at the top of the window where it says "Local plugins are automatically searched for in ..."
 
-Add this variable to your environment in your `~/.bash_profile`:
+Add the `PVPLUGINPATH` variable to your environment through your `~/.bash_profile` by executing:
 ```bash
 # ParaViewPlugins on Unix:
-export PVPLUGINPATH="/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/"
+# Be sure to check that this path matches yours... Odds are it's different!
+echo "\n# Path for ParaView Plugins for the ParaViewGeophysics Repo: \nexport PVPLUGINPATH=\"/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/\"" >> ~/.bash_profile
 ```
 
 Windows users, open Cygwin and edit your `~/.bash_profile` by executing this command to place a `PVPLUGINPATH` variable in your environment. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView/...` to `/cygdrive/d/ParaView-5.4.0/...`)
+
 ```bash
+# Be sure to check that this path matches yours... Odds are it's different!
 echo "export PVPLUGINPATH=\"/cygdrive/d/ParaView/bin/plugins/\"" >> ~/.bash_profile
 ```
 
