@@ -48,6 +48,7 @@ echo "\n# Path for ParaView Plugins for the ParaViewGeophysics Repo: \nexport PV
 Windows users, open Cygwin and edit your `~/.bash_profile` by executing this command to place a `PVPLUGINPATH` variable in your environment. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView/...` to `/cygdrive/d/ParaView-5.4.0/...`)
 
 ```bash
+# ParaViewPlugins on Windows via Cygwin
 # Be sure to check that this path matches yours... Odds are it's different!
 echo "export PVPLUGINPATH=\"/cygdrive/d/ParaView/bin/plugins/\"" >> ~/.bash_profile
 ```
