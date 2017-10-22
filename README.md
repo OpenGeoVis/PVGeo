@@ -1,7 +1,9 @@
 # ParaView Geophysics Plugins
 This repository contains plugins for the open-source, multi-platform data analysis, and visualization application [ParaView by Kitware](https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D grids.
 
-Check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) to explore the motivation for publishing this repo as well as to find all documentation and some visualization examples. Use the [Wiki Contents](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents) to navigate the Wiki and to see all documentation for readers, filters, macros, and more as you need.
+Check out the [Wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) to explore the motivation for publishing this repo as well as to find all documentation and some visualization examples. Use the [Wiki Contents](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents) to navigate the Wiki and to see all documentation for readers, filters, macros, and more as you need.
+
+Also checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-dzBSR1laSXdiYlU/view?usp=sharing) standalone presentation about the project.
 
 ##### *NOTICE:* This repo is under development as the project just started! Consider everything here to be an Alpha (soon to be Beta) release.
 
