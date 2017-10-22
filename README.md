@@ -1,6 +1,8 @@
 # ParaView Geophysics Plugins
 This repository contains plugins for the open-source, multi-platform data analysis, and visualization application [ParaView by Kitware](https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D grids.
 
+Check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) to explore the motivation for publishing this repo as well as to find all documentation and some visualization examples. Use the [Wiki Contents](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents) to navigate the Wiki and to see all documentation for readers, filters, macros, and more as you need.
+
 ##### *NOTICE:* This repo is under development as the project just started! Consider everything here to be an Alpha (soon to be Beta) release.
 
 ## About the Author
@@ -13,8 +15,6 @@ Stay tuned; this project is in its early stages of development, so only a handfu
 ## How To Use the Plugins in this Repository
 
 To clone and use the plugins distributed in the repo for ParaView, you'll need [Python 2](https://www.python.org/downloads/) with the SciPy and NumPy modules [installed](https://docs.python.org/2/installing/index.html), and [ParaView](https://www.paraview.org/download/) installed on your computer. Note that this repository will only work with builds of ParaView that have Python. Currently, the VR build of ParaView does not have Python included, and we will describe some workarounds for sending data to the VR version on [these wiki pages](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents#virtual-reality).
-
-Check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) to explore the motivation for publishing this repo as well as to find all documentation and some visualization examples. Use the [Wiki Contents](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents) to navigate the Wiki and to see all documentation for readers, filters, macros, and more as you need.
 
 From your command line:
 
