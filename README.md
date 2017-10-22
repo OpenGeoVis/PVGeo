@@ -53,16 +53,8 @@ Windows users, open Cygwin and edit your `~/.bash_profile` by executing this com
 echo "\n# Path for ParaView Plugins for the ParaViewGeophysics Repo: \nexport PVPLUGINPATH=\"/cygdrive/d/ParaView/bin/plugins/\"" >> ~/.bash_profile
 ```
 
-
-### Building the Plugins
-
-In the `src/` directory, there are two shell scripts. [src/build_plugins.sh](src/build_plugins.sh) will build up the XML Server Manager Configuration filters from the `.py` scripts and install them. Only use this script if you are making your own filters or readers. If you run this script, it will build and install all filters and readers to ParaView.
-
-```bash
-$ sh src/build_plugins.sh
-```
-
 ### Installing the Plugins to ParaView
+In the `src/` directory, there are four shell scripts. Be careful executing these unless you know what they are doing. No serious damage can be done by running them b accident you might just get weird errors or accidentally uninstall everything.
 
 To simply install the distributed filters from this repo, run the [src/install_plugins.sh](src/install_plugins.sh) script *but first you MUST add the `PVPLUGINPATH` variable to your environment* (described above)! This script will simply copy over all the XML files from `build/` to the default directory for third party plugins in ParaView so that they will all load when ParaView launches.
 
@@ -72,6 +64,12 @@ To run these scripts on a Unix like system us the `sh` command: `sh src/install_
 $ sh src/install_plugins.sh
 ```
 
+### Building the Plugins
+To rebuild the plugins after you made changes or made your own plugins, run the [src/build_plugins.sh](src/build_plugins.sh) script which will build up the XML Server Manager Configuration filters from the `.py` scripts and install them to ParaView. Only use this script if you are making your own filters or readers (or changing what is delivered in this repo). If you run this script, it will build and install all filters and readers to ParaView. This is not necessary as the repo contains a stable build of all the plugins upon cloning.
+
+```bash
+$ sh src/build_plugins.sh
+```
 
 ## Make Your Own Filters and Readers
 
