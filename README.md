@@ -4,17 +4,17 @@ This repository contains plugins for the open-source, multi-platform data analys
 ## *NOTICE:* This repo is under development as the project just started! Consider everything here to be an Alpha (soon to be Beta) release.
 
 ## About the Author
-Unless otherwise specified at the top of the file, all code and documentation distributed here was produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for major questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
+Unless otherwise specified at the top of the file, all code and documentation distributed here were produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
 
 ## More to come
 
-Stay tuned, this project is in its early stages of development so only a handful of the plugins are tested and published here. Also be sure to check out the [Wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) (*currently being developed and proofed*) for detailed documentation on the filters and general use of this repository.
+Stay tuned; this project is in its early stages of development, so only a handful of the plugins are tested and published here. Also be sure to check out the [Wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) (*currently being developed and proofed*) for detailed documentation on the filters and general use of this repository.
 
 ## How To Use the Plugins in this Repository
 
-To clone and use the plugins distributed in the repo for ParaView, you'll need [Python 2](https://www.python.org/downloads/) with the SciPy and NumPy modules [installed](https://docs.python.org/2/installing/index.html), and [ParaView](https://www.paraview.org/download/) installed on your computer. Note that this repository will only work with builds of ParaView that have Python, currently the VR build does not have Python included and we will describe some workarounds for sending data to the VR version on [these wiki pages](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents#virtual-reality).
+To clone and use the plugins distributed in the repo for ParaView, you'll need [Python 2](https://www.python.org/downloads/) with the SciPy and NumPy modules [installed](https://docs.python.org/2/installing/index.html), and [ParaView](https://www.paraview.org/download/) installed on your computer. Note that this repository will only work with builds of ParaView that have Python. Currently, the VR build of ParaView does not have Python included, and we will describe some workarounds for sending data to the VR version on [these wiki pages](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents#virtual-reality).
 
-Check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) to explore the motivation for publishing this repo as well as to find all documentation and some visualization examples. Use the [Wiki Contents](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents) to navigate the Wiki and to find all documentation for readers, filters, macros, and more as you need.
+Check out the [wiki page](https://github.com/banesullivan/ParaViewGeophysics/wiki) to explore the motivation for publishing this repo as well as to find all documentation and some visualization examples. Use the [Wiki Contents](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents) to navigate the Wiki and to see all documentation for readers, filters, macros, and more as you need.
 
 From your command line:
 
@@ -42,7 +42,7 @@ Add the `PVPLUGINPATH` variable to your environment through your `~/.bash_profil
 ```bash
 # ParaViewPlugins on Unix:
 # Be sure to check that this path matches yours... Odds are it's different!
-echo "\n# Path for ParaView Plugins for the ParaViewGeophysics Repo: \nexport PVPLUGINPATH=\"/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/\"" >> ~/.bash_profile
+$ echo "\n# Path for ParaView Plugins for the ParaViewGeophysics Repo: \nexport PVPLUGINPATH=\"/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/\"" >> ~/.bash_profile
 ```
 
 Windows users, open Cygwin and edit your `~/.bash_profile` by executing this command to place a `PVPLUGINPATH` variable in your environment. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView/...` to `/cygdrive/d/ParaView-5.4.0/...`)
@@ -50,13 +50,13 @@ Windows users, open Cygwin and edit your `~/.bash_profile` by executing this com
 ```bash
 # ParaViewPlugins on Windows via Cygwin
 # Be sure to check that this path matches yours... Odds are it's different!
-echo "\n# Path for ParaView Plugins for the ParaViewGeophysics Repo: \nexport PVPLUGINPATH=\"/cygdrive/d/ParaView/bin/plugins/\"" >> ~/.bash_profile
+$ echo "\n# Path for ParaView Plugins for the ParaViewGeophysics Repo: \nexport PVPLUGINPATH=\"/cygdrive/d/ParaView/bin/plugins/\"" >> ~/.bash_profile
 ```
 
 ### Installing the Plugins to ParaView
-In the `src/` directory, there are four shell scripts. Be careful executing these unless you know what they are doing. No serious damage can be done by running them b accident you might just get weird errors or accidentally uninstall everything.
+In the `src/` directory, there are four shell scripts. Be careful executing these unless you know what they are doing. No severe damage can be done by running any of these scripts by accident; you might just get weird errors or accidentally uninstall everything.
 
-To simply install the distributed filters from this repo, run the [src/install_plugins.sh](src/install_plugins.sh) script *but first you MUST add the `PVPLUGINPATH` variable to your environment* (described above)! This script will simply copy over all the XML files from `build/` to the default directory for third party plugins in ParaView so that they will all load when ParaView launches.
+To simply install the distributed filters from this repo, run the [src/install_plugins.sh](src/install_plugins.sh) script *but first you MUST add the `PVPLUGINPATH` variable to your environment* (described above)! This script will simply copy over all the XML files from `build/` to the default directory for third-party plugins in ParaView so that they will all load when ParaView launches.
 
 To run these scripts on a Unix like system us the `sh` command: `sh src/install_plugins.sh`
 
@@ -84,4 +84,4 @@ FilterCategory = 'CSM Geophysics Filters'
 ## Requesting Features, Reporting Issues, and Contributing
 Please feel free to post features you would like to see from this repo on the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) as a feature request. If you stumble across any bugs or crashes while using code distributed here, please report it in the Issues section so I can promptly address it.
 
-If you have your own plugins either developed in C++ or as python programmable filters, please share it so this can be a one stop place for geoscience plugins to ParaView!
+If you have your own plugins either developed in C++ or as python programmable filters for which you would like a nice GUI, please share it so this can be a one-stop place for geoscience plugins to ParaView!
