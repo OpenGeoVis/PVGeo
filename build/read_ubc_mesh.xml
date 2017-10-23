@@ -1,0 +1,112 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="sources">
+    <SourceProxy name="ReadUBCMesh" class="vtkPythonProgrammableFilter" label="Read UBC Mesh Two-File Format">
+      <Documentation
+        long_help=""
+        short_help="">
+      </Documentation>
+        <Hints>
+            <ShowInMenu category="CSM GP Readers" />
+        </Hints>
+
+<Hints>
+    <ReaderFactory extensions="mesh msh dat"
+                   file_description="UBC Mesh Two-File Format" />
+</Hints>
+
+
+            <StringVectorProperty
+            panel_visibility="default"
+            name="Delimiter_Field"
+            label="Delimiter Field"
+            initial_string="Delimiter_Field"
+            command="SetParameter"
+            animateable="1"
+            default_values=" "
+            number_of_elements="1">
+            <Documentation></Documentation>
+            </StringVectorProperty>
+
+
+          <StringVectorProperty
+            panel_visibility="default"
+            name="FileName_Data"
+            label="FileName Data"
+            initial_string="FileName_Data"
+            command="SetParameter"
+            animateable="1"
+            default_values="absolute path"
+            number_of_elements="1">
+            <FileListDomain name="files"/>
+            <Documentation></Documentation>
+          </StringVectorProperty>
+
+
+          <StringVectorProperty
+            panel_visibility="default"
+            name="FileName_Mesh"
+            label="FileName Mesh"
+            initial_string="FileName_Mesh"
+            command="SetParameter"
+            animateable="1"
+            default_values="absolute path"
+            number_of_elements="1">
+            <FileListDomain name="files"/>
+            <Documentation></Documentation>
+          </StringVectorProperty>
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_tab_delimiter"
+        label="Use tab delimiter"
+        initial_string="Use_tab_delimiter"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <!-- Output data type: "vtkRectilinearGrid" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="3"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="import numpy as np&#xA;import csv&#xA;import os&#xA;from vtk.util import numpy_support&#xA;&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;if FileName_Data == 'absolute path':&#xA;    raise Exception('No data file selected. Aborting.')&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;&#xA;if (Use_tab_delimiter):&#xA;    Delimiter_Field = '\t'&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;import csv&#xA;&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;# Read in the mesh&#xA;with open(FileName_Mesh) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    f.close()&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" />
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
