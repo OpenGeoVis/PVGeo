@@ -175,7 +175,7 @@ def getFilterPropertyXml(propertyInfo, propertyName):
       </DoubleVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
 
     if propertyType is str:
-        if propertyName is 'FileName':
+        if 'FileName' in propertyName:
             return '''
           <StringVectorProperty
             panel_visibility="%s"
