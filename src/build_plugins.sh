@@ -1,4 +1,15 @@
 #!/bin/bash
+# This script will build up all of the XML server manager plugins from the .py
+#   files that describe the plugins. There are 4 stages to this script. It will
+#   build the filters, then the sources, then the readers, and then it will call
+#   the install_plugins script to install the built plugins.
+#   NOTE: this will only build plugins with specific prefixes to control the
+#       the development/deployment process.
+#       The prefixes are as follows:
+#           Filters     ->      './filters/filter_*.py'
+#           Sources     ->      './artificial_sources/create_*.py'
+#           Readers     ->      './readers/read_*.py'
+
 pushd "$(dirname "$0")"
 
 #------ WRAP FILTERS IN XML ------#

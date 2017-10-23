@@ -1,17 +1,17 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="sources">
-    <SourceProxy name="ReadGeoEASFileToTable" class="vtkPythonProgrammableFilter" label="Read GeoEAS File To Table">
+    <SourceProxy name="ReadGSLIBFileToTable" class="vtkPythonProgrammableFilter" label="Read GSLIB File To Table">
       <Documentation
-        long_help="The GeoEAS file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column)."
-        short_help="The GeoEAS file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column).">
+        long_help="The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column)."
+        short_help="The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column).">
       </Documentation>
         <Hints>
             <ShowInMenu category="CSM GP Readers" />
         </Hints>
 
 <Hints>
-    <ReaderFactory extensions="sgems dat geoeas txt SGEMS"
-                   file_description="GeoEAS File Format" />
+    <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
+                   file_description="GSLIB File Format" />
 </Hints>
 
 
@@ -85,7 +85,7 @@
         default_values="import numpy as np&#xA;import csv&#xA;import os&#xA;from vtk.util import numpy_support&#xA;&#xA;pdo = self.GetOutput() # vtkTable&#xA;&#xA;if (Use_tab_delimiter):&#xA;    Delimiter_Field = '\t'&#xA;&#xA;titles = []&#xA;data = []&#xA;with open(FileName) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    # Skip defined lines&#xA;    for i in range(Number_Ignore_Lines):&#xA;        next(f)&#xA;&#xA;    # Get file header (part of format)&#xA;    header = next(f) # TODO: do something with the header&#xA;    print(os.path.basename(FileName) + ': ' + header)&#xA;    # Get titles&#xA;    numCols = int(next(f))&#xA;    for i in range(numCols):&#xA;        titles.append(next(f).rstrip('\r\n'))&#xA;&#xA;    # Read data&#xA;    for row in reader:&#xA;        data.append(row)&#xA;&#xA;# Put first column into table&#xA;for i in range(numCols):&#xA;    col = []&#xA;    for row in data:&#xA;        col.append(row[i])&#xA;    VTK_data = numpy_support.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)&#xA;    VTK_data.SetName(titles[i])&#xA;    pdo.AddColumn(VTK_data)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line"/>
+         <Widget type="multi_line" syntax="python"/>
        </Hints>
       <Documentation>This property contains the text of a python program that
       the programmable source runs.</Documentation>

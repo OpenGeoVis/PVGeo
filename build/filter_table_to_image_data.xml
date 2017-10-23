@@ -1,16 +1,28 @@
 <ServerManagerConfiguration>
-  <ProxyGroup name="sources">
-    <SourceProxy name="CreateEmptyGrid" class="vtkPythonProgrammableFilter" label="Create Empty Grid">
+  <ProxyGroup name="filters">
+    <SourceProxy name="TableToImageData" class="vtkPythonProgrammableFilter" label="Table To ImageData">
       <Documentation
-        long_help=""
-        short_help="">
+        long_help="DEPRECATED (replaced by Table to Uniform Grid). This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a nx by ny by nz structure and an origin can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh)."
+        short_help="DEPRECATED (replaced by Table to Uniform Grid). This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a nx by ny by nz structure and an origin can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh).">
       </Documentation>
         <Hints>
-            <ShowInMenu category="CSM Geophysics Sources" />
+            <ShowInMenu category="CSM Geophysics Filters" />
         </Hints>
 
 
 
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkTable"/>
+          </DataTypeDomain>
+      </InputProperty>
 
       <IntVectorProperty
         panel_visibility="default"
@@ -142,7 +154,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="image = self.GetOutput() #vtkImageData&#xA;&#xA;# Setup the ImageData&#xA;image.SetDimensions(nx, ny, nz)&#xA;image.SetOrigin(x_origin, y_origin, z_origin)&#xA;image.SetSpacing(x_spacing, y_spacing, z_spacing)&#xA;image.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)&#xA;"
+        default_values="pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;cols = pdi.GetNumberOfColumns()&#xA;&#xA;# Setup the ImageData&#xA;image.SetDimensions(nx, ny, nz)&#xA;image.SetOrigin(x_origin, y_origin, z_origin)&#xA;image.SetSpacing(x_spacing, y_spacing, z_spacing)&#xA;image.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)&#xA;&#xA;# Add all columns of the table as arrays to the PointData&#xA;for i in range(cols):&#xA;    c = pdi.GetColumn(i)&#xA;    #image.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...&#xA;    image.GetPointData().AddArray(c)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>
