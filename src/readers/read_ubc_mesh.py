@@ -40,66 +40,64 @@ def RequestData():
     #--- Read in the mesh ---#
     with open(FileName_Mesh) as f:
         reader = csv.reader(f, delimiter=Delimiter_Field)
-
-        # TODO: ignore header lines if start with '!'
+        h = reader.next()
+        # Ignore header lines if start with '!'
+        while h[0][0] == '!':
+            h = reader.next()
 
         # Number of CELLS in each axial direction
-        h = reader.next()
         n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
-        # change to number of POINTS in each axial direction
-        n1,n2,n3 = n1+1,n2+1,n3+1
+        # Change to number of POINTS in each axial direction
+        #- We do ths because we have to specify the points along each axial dir
+        nn = [n1,n2,n3] = [n1+1,n2+1,n3+1]
+
+        # The origin corner (South-west-top)
+        #- Remember UBC Mesh Specifies down as the positive Z
+        h = reader.next()
+        oo = [o1,o2,o3] = [float(h[0]), float(h[1]), float(h[2])]
+
+        vv = [None, None, None]
+        for i in range(3):
+            # Get spacings for this dimension:
+            h = reader.next()
+            # Construct coordinates on this axis
+            s = np.zeros(nn[i])
+            s[0] = o1
+            for j in range(1, nn[i]):
+                if (i == 2):
+                    # Z dimension (down is positive Z!)
+                    s[j] = s[j-1] - float(h[j-1])
+                else:
+                    # X and Y dimensions
+                    s[j] = s[j-1] + float(h[j-1])
+            # Convert to VTK array for setting coordinates
+            vv[i] = nps.numpy_to_vtk(num_array=s,deep=True)
+
+        # Set the Dims and coordinates for the output
         pdo.SetDimensions(n1,n2,n3)
-        #pdo.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)
-
-        # The origin corner
-        h = reader.next()
-        o1,o2,o3 = float(h[0]), float(h[1]), float(h[2])
-
-        # Get spacings for 1st dimension:
-        h = reader.next()
-        # Set x-coordinates from spacings
-        xCoords = np.zeros(n1)
-        xCoords[0] = o1
-        for i in range(1, n1):
-            xCoords[i] = xCoords[i-1] + float(h[i-1])
-        x = nps.numpy_to_vtk(num_array=xCoords,deep=True)
-        pdo.SetXCoordinates(x)
-
-        print(np.shape(x), len(h))
-
-        # Get spacings for 2nd dimension:
-        h = reader.next()
-        # Set y-coordinates from spacings
-        yCoords = np.zeros(n2)
-        yCoords[0] = o2
-        for i in range(1, n2):
-            yCoords[i] = yCoords[i-1] + float(h[i-1])
-        y = nps.numpy_to_vtk(num_array=yCoords,deep=True)
-        pdo.SetYCoordinates(y)
-
-        # Get spacings for 3rd dimension:
-        h = reader.next()
-        # Set z-coordinates from spacings
-        # NOTE: UBC Mesh Specifies positive Z as down
-        zCoords = np.zeros(n3)
-        zCoords[0] = o3
-        for i in range(1, n3):
-            zCoords[i] = zCoords[i-1] - float(h[i-1])
-        z = nps.numpy_to_vtk(num_array=zCoords,deep=True)
-        pdo.SetZCoordinates(z)
+        pdo.SetXCoordinates(vv[0])
+        pdo.SetYCoordinates(vv[1])
+        pdo.SetZCoordinates(vv[2])
 
         f.close()
 
     #--- Read in the model ---#
     # TODO: ignore header lines if start with '!'
     print('loaded the mesh!')
-    # Add the model data to the output grid
-    data = np.zeros((n1,n2,n3),dtype=float)
+    # Add the model data to CELL data
+    # TODO: check number of lines and make sure same as number of cells
+    data = np.zeros((n1-1,n2-1,n3-1),dtype=float)
     with open(FileName_Model) as f:
-        for i in range(n1):
-            for j in range(n2):
-                for k in range(n3):
-                    data[i,j,k] = float(f.next())
+        h = f.next()
+        # Ignore header lines if start with '!'
+        while h[0][0] == '!':
+            h = reader.next()
+
+        for i in range(n1-1):
+            for j in range(n2-1):
+                for k in range(n3-1):
+                    data[i,j,k] = float(h)
+                    h = f.next()
         f.close()
 
     # Swap axes because VTK structures the coordinates a bit differently
@@ -115,7 +113,9 @@ def RequestData():
 
     c = nps.numpy_to_vtk(num_array=data,deep=True)
     c.SetName(data_name)
-    pdo.GetPointData().AddArray(c)
+    # TODO: this is supposed to be cell data!
+    pdo.GetCellData().AddArray(c)
+
 
 def RequestInformation():
     from paraview import util
@@ -127,12 +127,17 @@ def RequestInformation():
     # Read in the mesh and set up structure of output grid from mesh file input
     with open(FileName_Mesh) as f:
         reader = csv.reader(f, delimiter=Delimiter_Field)
-
+        h = reader.next()
         # TODO: ignore header lines if start with '!'
+        # Ignore header lines if start with '!'
+        while h[0][0] == '!':
+            h = reader.next()
 
-        # Number of points in each axial direction
+        # Number of CELLS in each axial direction
         h = reader.next()
         n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
+        # change to number of POINTS in each axial direction
+        n1,n2,n3 = n1+1,n2+1,n3+1
 
         # ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:
         util.SetOutputWholeExtent(self, [0,n1-1, 0,n2-1, 0,n3-1])
