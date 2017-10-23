@@ -171,7 +171,7 @@
         default_values="from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;cols = pdi.GetNumberOfColumns()&#xA;rows = pdi.GetColumn(0).GetNumberOfTuples()&#xA;&#xA;# make sure dimensions work&#xA;if (n1*n2*n3 != rows):&#xA;    raise Exception('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))&#xA;&#xA;def RearangeSEPlib(arr):&#xA;    # SWAP D1 AND D3 THEN SWAP D2 AND D1&#xA;    import numpy as np&#xA;    arr = np.reshape(arr, (n2,n3,n1))&#xA;    arr = np.swapaxes(arr,0,1)&#xA;    arr = np.swapaxes(arr,0,2)&#xA;    arr = np.reshape(arr, (n1*n2*n3))&#xA;    return arr&#xA;&#xA;&#xA;# Setup the ImageData&#xA;if SEPlib:&#xA;    # SEPlib: d1=z, d2=x, d3=y&#xA;    # TODO: rearange input array&#xA;    image.SetDimensions(n2, n3, n1)&#xA;    image.SetOrigin(o2_origin, o3_origin, o1_origin)&#xA;    image.SetSpacing(s2_spacing, s3_spacing, s1_spacing)&#xA;    image.SetExtent(0,n2-1, 0,n3-1, 0,n1-1)&#xA;else:&#xA;    # Cartesian: d1=x, d2=y, d3=z&#xA;    image.SetDimensions(n1, n2, n3)&#xA;    image.SetOrigin(o1_origin, o2_origin, o3_origin)&#xA;    image.SetSpacing(s1_spacing, s2_spacing, s3_spacing)&#xA;    image.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)&#xA;&#xA;&#xA;# Add all columns of the table as arrays to the PointData&#xA;for i in range(cols):&#xA;    c = pdi.GetColumn(i)&#xA;    if SEPlib:&#xA;        name = c.GetName()&#xA;        arr = nps.vtk_to_numpy(c)&#xA;        arr = RearangeSEPlib(arr)&#xA;        c = nps.numpy_to_vtk(num_array=arr,deep=True)&#xA;        c.SetName(name)&#xA;    #image.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...&#xA;    image.GetPointData().AddArray(c)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line"/>
+         <Widget type="multi_line" syntax="python"/>
        </Hints>
       <Documentation>This property contains the text of a python program that
       the programmable source runs.</Documentation>
@@ -185,7 +185,7 @@
         default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;if SEPlib:&#xA;    util.SetOutputWholeExtent(self, [0,n2-1, 0,n3-1, 0,n1-1])&#xA;else:&#xA;    util.SetOutputWholeExtent(self, [0,n1-1, 0,n2-1, 0,n3-1])&#xA;"
         panel_visibility="advanced">
         <Hints>
-          <Widget type="multi_line" />
+          <Widget type="multi_line" syntax="python"/>
         </Hints>
         <Documentation>This property is a python script that is executed during
         the RequestInformation pipeline pass. Use this to provide information

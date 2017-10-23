@@ -46,7 +46,7 @@ def getScriptPropertiesXml(info):
         default_values="%s"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line"/>
+         <Widget type="multi_line" syntax="python"/>
        </Hints>
       <Documentation>This property contains the text of a python program that
       the programmable source runs.</Documentation>
@@ -62,7 +62,7 @@ def getScriptPropertiesXml(info):
         default_values="%s"
         panel_visibility="advanced">
         <Hints>
-          <Widget type="multi_line" />
+          <Widget type="multi_line" syntax="python"/>
         </Hints>
         <Documentation>This property is a python script that is executed during
         the RequestInformation pipeline pass. Use this to provide information
@@ -79,7 +79,7 @@ def getScriptPropertiesXml(info):
         default_values="%s"
         panel_visibility="advanced">
         <Hints>
-          <Widget type="multi_line" />
+          <Widget type="multi_line" syntax="python"/>
         </Hints>
         <Documentation>This property is a python script that is executed during
         the RequestUpdateExtent pipeline pass. Use this to modify the update

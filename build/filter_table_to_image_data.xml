@@ -157,7 +157,7 @@
         default_values="pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;cols = pdi.GetNumberOfColumns()&#xA;&#xA;# Setup the ImageData&#xA;image.SetDimensions(nx, ny, nz)&#xA;image.SetOrigin(x_origin, y_origin, z_origin)&#xA;image.SetSpacing(x_spacing, y_spacing, z_spacing)&#xA;image.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)&#xA;&#xA;# Add all columns of the table as arrays to the PointData&#xA;for i in range(cols):&#xA;    c = pdi.GetColumn(i)&#xA;    #image.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...&#xA;    image.GetPointData().AddArray(c)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line"/>
+         <Widget type="multi_line" syntax="python"/>
        </Hints>
       <Documentation>This property contains the text of a python program that
       the programmable source runs.</Documentation>
@@ -171,7 +171,7 @@
         default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
         panel_visibility="advanced">
         <Hints>
-          <Widget type="multi_line" />
+          <Widget type="multi_line" syntax="python"/>
         </Hints>
         <Documentation>This property is a python script that is executed during
         the RequestInformation pipeline pass. Use this to provide information
