@@ -14,117 +14,39 @@
 
       <IntVectorProperty
         panel_visibility="default"
-        name="nx"
-        label="nx"
-        initial_string="nx"
+        name="extent"
+        label="extent"
+        initial_string="extent"
         command="SetParameter"
         animateable="1"
-        default_values="1"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </IntVectorProperty>
-
-
-      <IntVectorProperty
-        panel_visibility="default"
-        name="ny"
-        label="ny"
-        initial_string="ny"
-        command="SetParameter"
-        animateable="1"
-        default_values="1"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </IntVectorProperty>
-
-
-      <IntVectorProperty
-        panel_visibility="default"
-        name="nz"
-        label="nz"
-        initial_string="nz"
-        command="SetParameter"
-        animateable="1"
-        default_values="1"
-        number_of_elements="1">
+        default_values="1 1 1"
+        number_of_elements="3">
         <Documentation></Documentation>
       </IntVectorProperty>
 
 
       <DoubleVectorProperty
         panel_visibility="default"
-        name="x_origin"
-        label="x origin"
-        initial_string="x_origin"
+        name="origin"
+        label="origin"
+        initial_string="origin"
         command="SetParameter"
         animateable="1"
-        default_values="0.0"
-        number_of_elements="1">
+        default_values="0.0 0.0 0.0"
+        number_of_elements="3">
         <Documentation></Documentation>
       </DoubleVectorProperty>
 
 
       <DoubleVectorProperty
         panel_visibility="default"
-        name="x_spacing"
-        label="x spacing"
-        initial_string="x_spacing"
+        name="spacing"
+        label="spacing"
+        initial_string="spacing"
         command="SetParameter"
         animateable="1"
-        default_values="1.0"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
-
-
-      <DoubleVectorProperty
-        panel_visibility="default"
-        name="y_origin"
-        label="y origin"
-        initial_string="y_origin"
-        command="SetParameter"
-        animateable="1"
-        default_values="0.0"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
-
-
-      <DoubleVectorProperty
-        panel_visibility="default"
-        name="y_spacing"
-        label="y spacing"
-        initial_string="y_spacing"
-        command="SetParameter"
-        animateable="1"
-        default_values="1.0"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
-
-
-      <DoubleVectorProperty
-        panel_visibility="default"
-        name="z_origin"
-        label="z origin"
-        initial_string="z_origin"
-        command="SetParameter"
-        animateable="1"
-        default_values="0.0"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
-
-
-      <DoubleVectorProperty
-        panel_visibility="default"
-        name="z_spacing"
-        label="z spacing"
-        initial_string="z_spacing"
-        command="SetParameter"
-        animateable="1"
-        default_values="1.0"
-        number_of_elements="1">
+        default_values="1.0 1.0 1.0"
+        number_of_elements="3">
         <Documentation></Documentation>
       </DoubleVectorProperty>
 
@@ -142,7 +64,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="image = self.GetOutput() #vtkImageData&#xA;&#xA;# Setup the ImageData&#xA;image.SetDimensions(nx, ny, nz)&#xA;image.SetOrigin(x_origin, y_origin, z_origin)&#xA;image.SetSpacing(x_spacing, y_spacing, z_spacing)&#xA;image.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)&#xA;"
+        default_values="image = self.GetOutput() #vtkImageData&#xA;nx,ny,nz = extent[0],extent[1],extent[2]&#xA;sx,sy,sz = spacing[0],spacing[1],spacing[2]&#xA;ox,oy,oz = origin[0],origin[1],origin[2]&#xA;# Setup the ImageData&#xA;image.SetDimensions(nx, ny, nz)&#xA;image.SetOrigin(ox, oy, oz)&#xA;image.SetSpacing(sx, sy, sz)&#xA;image.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>
@@ -156,7 +78,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;nx,ny,nz = extent[0],extent[1],extent[2]&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

@@ -40,117 +40,39 @@
 
       <IntVectorProperty
         panel_visibility="default"
-        name="n1"
-        label="n1"
-        initial_string="n1"
+        name="extent"
+        label="extent"
+        initial_string="extent"
         command="SetParameter"
         animateable="1"
-        default_values="1"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </IntVectorProperty>
-
-
-      <IntVectorProperty
-        panel_visibility="default"
-        name="n2"
-        label="n2"
-        initial_string="n2"
-        command="SetParameter"
-        animateable="1"
-        default_values="1"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </IntVectorProperty>
-
-
-      <IntVectorProperty
-        panel_visibility="default"
-        name="n3"
-        label="n3"
-        initial_string="n3"
-        command="SetParameter"
-        animateable="1"
-        default_values="1"
-        number_of_elements="1">
+        default_values="1 1 1"
+        number_of_elements="3">
         <Documentation></Documentation>
       </IntVectorProperty>
 
 
       <DoubleVectorProperty
         panel_visibility="default"
-        name="o1_origin"
-        label="o1 origin"
-        initial_string="o1_origin"
+        name="origin"
+        label="origin"
+        initial_string="origin"
         command="SetParameter"
         animateable="1"
-        default_values="0.0"
-        number_of_elements="1">
+        default_values="0.0 0.0 0.0"
+        number_of_elements="3">
         <Documentation></Documentation>
       </DoubleVectorProperty>
 
 
       <DoubleVectorProperty
         panel_visibility="default"
-        name="o2_origin"
-        label="o2 origin"
-        initial_string="o2_origin"
+        name="spacing"
+        label="spacing"
+        initial_string="spacing"
         command="SetParameter"
         animateable="1"
-        default_values="0.0"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
-
-
-      <DoubleVectorProperty
-        panel_visibility="default"
-        name="o3_origin"
-        label="o3 origin"
-        initial_string="o3_origin"
-        command="SetParameter"
-        animateable="1"
-        default_values="0.0"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
-
-
-      <DoubleVectorProperty
-        panel_visibility="default"
-        name="s1_spacing"
-        label="s1 spacing"
-        initial_string="s1_spacing"
-        command="SetParameter"
-        animateable="1"
-        default_values="1.0"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
-
-
-      <DoubleVectorProperty
-        panel_visibility="default"
-        name="s2_spacing"
-        label="s2 spacing"
-        initial_string="s2_spacing"
-        command="SetParameter"
-        animateable="1"
-        default_values="1.0"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
-
-
-      <DoubleVectorProperty
-        panel_visibility="default"
-        name="s3_spacing"
-        label="s3 spacing"
-        initial_string="s3_spacing"
-        command="SetParameter"
-        animateable="1"
-        default_values="1.0"
-        number_of_elements="1">
+        default_values="1.0 1.0 1.0"
+        number_of_elements="3">
         <Documentation></Documentation>
       </DoubleVectorProperty>
 
@@ -168,7 +90,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;cols = pdi.GetNumberOfColumns()&#xA;rows = pdi.GetColumn(0).GetNumberOfTuples()&#xA;&#xA;# make sure dimensions work&#xA;if (n1*n2*n3 != rows):&#xA;    raise Exception('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))&#xA;&#xA;def RearangeSEPlib(arr):&#xA;    # SWAP D1 AND D3 THEN SWAP D2 AND D1&#xA;    import numpy as np&#xA;    arr = np.reshape(arr, (n2,n3,n1))&#xA;    arr = np.swapaxes(arr,0,1)&#xA;    arr = np.swapaxes(arr,0,2)&#xA;    arr = np.reshape(arr, (n1*n2*n3))&#xA;    return arr&#xA;&#xA;&#xA;# Setup the ImageData&#xA;if SEPlib:&#xA;    # SEPlib: d1=z, d2=x, d3=y&#xA;    # TODO: rearange input array&#xA;    image.SetDimensions(n2, n3, n1)&#xA;    image.SetOrigin(o2_origin, o3_origin, o1_origin)&#xA;    image.SetSpacing(s2_spacing, s3_spacing, s1_spacing)&#xA;    image.SetExtent(0,n2-1, 0,n3-1, 0,n1-1)&#xA;else:&#xA;    # Cartesian: d1=x, d2=y, d3=z&#xA;    image.SetDimensions(n1, n2, n3)&#xA;    image.SetOrigin(o1_origin, o2_origin, o3_origin)&#xA;    image.SetSpacing(s1_spacing, s2_spacing, s3_spacing)&#xA;    image.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)&#xA;&#xA;&#xA;# Add all columns of the table as arrays to the PointData&#xA;for i in range(cols):&#xA;    c = pdi.GetColumn(i)&#xA;    if SEPlib:&#xA;        name = c.GetName()&#xA;        arr = nps.vtk_to_numpy(c)&#xA;        arr = RearangeSEPlib(arr)&#xA;        c = nps.numpy_to_vtk(num_array=arr,deep=True)&#xA;        c.SetName(name)&#xA;    #image.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...&#xA;    image.GetPointData().AddArray(c)&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;cols = pdi.GetNumberOfColumns()&#xA;rows = pdi.GetColumn(0).GetNumberOfTuples()&#xA;&#xA;# Setup the ImageData&#xA;if SEPlib:&#xA;    # SEPlib: d1=z, d2=x, d3=y&#xA;    nz,nx,ny = extent[0],extent[1],extent[2]&#xA;    sz,sx,sy = spacing[0],spacing[1],spacing[2]&#xA;    oz,ox,oy = origin[0],origin[1],origin[2]&#xA;else:&#xA;    # Cartesian: d1=x, d2=y, d3=z&#xA;    nx,ny,nz = extent[0],extent[1],extent[2]&#xA;    sx,sy,sz = spacing[0],spacing[1],spacing[2]&#xA;    ox,oy,oz = origin[0],origin[1],origin[2]&#xA;&#xA;# make sure dimensions work&#xA;if (nx*ny*nz != rows):&#xA;    raise Exception('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))&#xA;&#xA;image.SetDimensions(nx, ny, nz)&#xA;image.SetOrigin(ox, oy, oz)&#xA;image.SetSpacing(sx, sy, sz)&#xA;image.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)&#xA;&#xA;def RearangeSEPlib(arr):&#xA;    # SWAP D1 AND D3 THEN SWAP D2 AND D1&#xA;    import numpy as np&#xA;    n1,n2,n3 = extent[0],extent[1],extent[2]&#xA;    arr = np.reshape(arr, (n2,n3,n1))&#xA;    arr = np.swapaxes(arr,0,1)&#xA;    arr = np.swapaxes(arr,0,2)&#xA;    arr = np.reshape(arr, (n1*n2*n3))&#xA;    return arr&#xA;&#xA;&#xA;# Add all columns of the table as arrays to the PointData&#xA;for i in range(cols):&#xA;    c = pdi.GetColumn(i)&#xA;    if SEPlib:&#xA;        name = c.GetName()&#xA;        arr = nps.vtk_to_numpy(c)&#xA;        arr = RearangeSEPlib(arr)&#xA;        c = nps.numpy_to_vtk(num_array=arr,deep=True)&#xA;        c.SetName(name)&#xA;    #image.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...&#xA;    image.GetPointData().AddArray(c)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>
@@ -182,7 +104,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;if SEPlib:&#xA;    util.SetOutputWholeExtent(self, [0,n2-1, 0,n3-1, 0,n1-1])&#xA;else:&#xA;    util.SetOutputWholeExtent(self, [0,n1-1, 0,n2-1, 0,n3-1])&#xA;"
+        default_values="from paraview import util&#xA;# Setup the ImageData&#xA;# Cartesian: d1=x, d2=y, d3=z&#xA;nx,ny,nz = extent[0],extent[1],extent[2]&#xA;if SEPlib:&#xA;    # SEPlib: d1=z, d2=x, d3=y&#xA;    nz,nx,ny = extent[0],extent[1],extent[2]&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

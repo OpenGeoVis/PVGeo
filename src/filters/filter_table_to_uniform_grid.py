@@ -9,15 +9,9 @@ OutputDataType = 'vtkImageData'
 ExtraXml = ''
 
 Properties = dict(
-    n1=1,
-    n2=1,
-    n3=1,
-    s1_spacing=1.0,
-    s2_spacing=1.0,
-    s3_spacing=1.0,
-    o1_origin=0.0,
-    o2_origin=0.0,
-    o3_origin=0.0,
+    extent=[1, 1, 1],
+    spacing=[1.0, 1.0, 1.0],
+    origin=[0.0, 0.0, 0.0],
     SEPlib=False
 )
 
@@ -30,34 +24,36 @@ def RequestData():
     cols = pdi.GetNumberOfColumns()
     rows = pdi.GetColumn(0).GetNumberOfTuples()
 
+    # Setup the ImageData
+    if SEPlib:
+        # SEPlib: d1=z, d2=x, d3=y
+        nz,nx,ny = extent[0],extent[1],extent[2]
+        sz,sx,sy = spacing[0],spacing[1],spacing[2]
+        oz,ox,oy = origin[0],origin[1],origin[2]
+    else:
+        # Cartesian: d1=x, d2=y, d3=z
+        nx,ny,nz = extent[0],extent[1],extent[2]
+        sx,sy,sz = spacing[0],spacing[1],spacing[2]
+        ox,oy,oz = origin[0],origin[1],origin[2]
+
     # make sure dimensions work
-    if (n1*n2*n3 != rows):
+    if (nx*ny*nz != rows):
         raise Exception('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))
+
+    image.SetDimensions(nx, ny, nz)
+    image.SetOrigin(ox, oy, oz)
+    image.SetSpacing(sx, sy, sz)
+    image.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
 
     def RearangeSEPlib(arr):
         # SWAP D1 AND D3 THEN SWAP D2 AND D1
         import numpy as np
+        n1,n2,n3 = extent[0],extent[1],extent[2]
         arr = np.reshape(arr, (n2,n3,n1))
         arr = np.swapaxes(arr,0,1)
         arr = np.swapaxes(arr,0,2)
         arr = np.reshape(arr, (n1*n2*n3))
         return arr
-
-
-    # Setup the ImageData
-    if SEPlib:
-        # SEPlib: d1=z, d2=x, d3=y
-        # TODO: rearange input array
-        image.SetDimensions(n2, n3, n1)
-        image.SetOrigin(o2_origin, o3_origin, o1_origin)
-        image.SetSpacing(s2_spacing, s3_spacing, s1_spacing)
-        image.SetExtent(0,n2-1, 0,n3-1, 0,n1-1)
-    else:
-        # Cartesian: d1=x, d2=y, d3=z
-        image.SetDimensions(n1, n2, n3)
-        image.SetOrigin(o1_origin, o2_origin, o3_origin)
-        image.SetSpacing(s1_spacing, s2_spacing, s3_spacing)
-        image.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)
 
 
     # Add all columns of the table as arrays to the PointData
@@ -75,8 +71,11 @@ def RequestData():
 
 def RequestInformation():
     from paraview import util
-    # ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:
+    # Setup the ImageData
+    # Cartesian: d1=x, d2=y, d3=z
+    nx,ny,nz = extent[0],extent[1],extent[2]
     if SEPlib:
-        util.SetOutputWholeExtent(self, [0,n2-1, 0,n3-1, 0,n1-1])
-    else:
-        util.SetOutputWholeExtent(self, [0,n1-1, 0,n2-1, 0,n3-1])
+        # SEPlib: d1=z, d2=x, d3=y
+        nz,nx,ny = extent[0],extent[1],extent[2]
+    # ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:
+    util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])
