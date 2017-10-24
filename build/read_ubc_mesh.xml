@@ -1,0 +1,125 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="sources">
+    <SourceProxy name="ReadUBCMesh" class="vtkPythonProgrammableFilter" label="Read UBC Mesh Two-File Format">
+      <Documentation
+        long_help="UBC Mesh 3D models are defined using a 2-file format. The &quot;mesh&quot; file describes how the data is descritized. The &quot;model&quot; file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. Default file delimiter is a space character."
+        short_help="UBC Mesh 3D models are defined using a 2-file format. The &quot;mesh&quot; file describes how the data is descritized. The &quot;model&quot; file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. Default file delimiter is a space character.">
+      </Documentation>
+        <Hints>
+            <ShowInMenu category="CSM GP Readers" />
+        </Hints>
+
+<Hints>
+    <ReaderFactory extensions="mesh msh dat"
+                   file_description="UBC Mesh Two-File Format" />
+</Hints>
+
+
+            <StringVectorProperty
+            panel_visibility="default"
+            name="Delimiter_Field"
+            label="Delimiter Field"
+            initial_string="Delimiter_Field"
+            command="SetParameter"
+            animateable="1"
+            default_values=" "
+            number_of_elements="1">
+            <Documentation></Documentation>
+            </StringVectorProperty>
+
+
+          <StringVectorProperty
+            panel_visibility="default"
+            name="FileName_Mesh"
+            label="FileName Mesh"
+            initial_string="FileName_Mesh"
+            command="SetParameter"
+            animateable="1"
+            default_values="absolute path"
+            number_of_elements="1">
+            <FileListDomain name="files"/>
+            <Documentation></Documentation>
+          </StringVectorProperty>
+
+
+          <StringVectorProperty
+            panel_visibility="default"
+            name="FileName_Model"
+            label="FileName Model"
+            initial_string="FileName_Model"
+            command="SetParameter"
+            animateable="1"
+            default_values="absolute path"
+            number_of_elements="1">
+            <FileListDomain name="files"/>
+            <Documentation></Documentation>
+          </StringVectorProperty>
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_tab_delimiter"
+        label="Use tab delimiter"
+        initial_string="Use_tab_delimiter"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+            <StringVectorProperty
+            panel_visibility="default"
+            name="data_name"
+            label="data name"
+            initial_string="data_name"
+            command="SetParameter"
+            animateable="1"
+            default_values=""
+            number_of_elements="1">
+            <Documentation></Documentation>
+            </StringVectorProperty>
+
+      <!-- Output data type: "vtkRectilinearGrid" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="3"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="import numpy as np&#xA;import csv&#xA;import os&#xA;from vtk.util import numpy_support as nps&#xA;&#xA;# Make sure we have input files&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;&#xA;pdo = self.GetOutput() # vtkRectilinearGrid&#xA;&#xA;# Set the tab delimiter if needed&#xA;if (Use_tab_delimiter):&#xA;    Delimiter_Field = '\t'&#xA;&#xA;#--- Read in the mesh ---#&#xA;with open(FileName_Mesh) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    h = reader.next()&#xA;    # Ignore header lines if start with '!'&#xA;    while h[0][0] == '!':&#xA;        h = reader.next()&#xA;&#xA;    # Number of CELLS in each axial direction&#xA;    n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])&#xA;    numCells = n1*n2*n3&#xA;    # Change to number of POINTS in each axial direction&#xA;    #- We do ths because we have to specify the points along each axial dir&#xA;    nn = [n1,n2,n3] = [n1+1,n2+1,n3+1]&#xA;&#xA;    # The origin corner (South-west-top)&#xA;    #- Remember UBC Mesh Specifies down as the positive Z&#xA;    h = reader.next()&#xA;    oo = [o1,o2,o3] = [float(h[0]), float(h[1]), float(h[2])]&#xA;&#xA;    vv = [None, None, None]&#xA;    for i in range(3):&#xA;        # Get spacings for this dimension:&#xA;        h = reader.next()&#xA;        # Construct coordinates on this axis&#xA;        s = np.zeros(nn[i])&#xA;        s[0] = o1&#xA;        for j in range(1, nn[i]):&#xA;            if (i == 2):&#xA;                # Z dimension (down is positive Z!)&#xA;                s[j] = s[j-1] - float(h[j-1])&#xA;            else:&#xA;                # X and Y dimensions&#xA;                s[j] = s[j-1] + float(h[j-1])&#xA;        # Convert to VTK array for setting coordinates&#xA;        vv[i] = nps.numpy_to_vtk(num_array=s,deep=True)&#xA;&#xA;    # Set the Dims and coordinates for the output&#xA;    pdo.SetDimensions(n1,n2,n3)&#xA;    pdo.SetXCoordinates(vv[0])&#xA;    pdo.SetYCoordinates(vv[1])&#xA;    pdo.SetZCoordinates(vv[2])&#xA;&#xA;    f.close()&#xA;&#xA;#--- Read in the model ---#&#xA;# Add the model data to CELL data&#xA;data = np.zeros((n1-1,n2-1,n3-1),dtype=float)&#xA;# Count number of lines in file&#xA;with open(FileName_Model) as f:&#xA;    for i, l in enumerate(f):&#xA;        pass&#xA;    numLines = i + 1&#xA;    f.close()&#xA;# Read in data from file with new iterator&#xA;with open(FileName_Model) as f:&#xA;    h = f.next()&#xA;    skipped = 0&#xA;    # Ignore header lines if start with '!'&#xA;    while h[0][0] == '!':&#xA;        h = f.next()&#xA;        skipped += 1&#xA;&#xA;    # Make sure this model file fits the dimensions of the mesh&#xA;    if (numCells &lt; (numLines - skipped)):&#xA;        raise Exception('This model file has more cell data than for which the given mesh has cells to hold that data')&#xA;    elif (numCells &gt; (numLines - skipped)):&#xA;        raise Exception('This model file does not have enough cell data to fill the given mesh\'s cells')&#xA;&#xA;    # Iterate over everyline of the file and pull data&#xA;    try:&#xA;        for i in range(n1-1):&#xA;            for j in range(n2-1):&#xA;                for k in range(n3-1):&#xA;                    data[i,j,k] = float(h)&#xA;                    if i*j*k == (n1*n2*n3)-3:&#xA;                        raise StopIteration&#xA;                    h = f.next()&#xA;    except StopIteration:&#xA;        pass&#xA;    f.close()&#xA;&#xA;&#xA;# Swap axes because VTK structures the coordinates a bit differently&#xA;#-  This is absolutely crucial!&#xA;#-  Do not play with unless you know what you are doing!&#xA;data = np.swapaxes(data,0,1)&#xA;data = np.swapaxes(data,0,2)&#xA;data = data.flatten()&#xA;&#xA;# If no name given for data by user, use the basename of the file&#xA;if data_name == '':&#xA;    data_name = os.path.basename(FileName_Model)&#xA;&#xA;# Convert data to VTK data structure and append to output&#xA;c = nps.numpy_to_vtk(num_array=data,deep=True)&#xA;c.SetName(data_name)&#xA;# THIS IS CELL DATA!&#xA;pdo.GetCellData().AddArray(c)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line" syntax="python"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;import csv&#xA;&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;&#xA;# Read in the mesh and set up structure of output grid from mesh file input&#xA;with open(FileName_Mesh) as f:&#xA;    reader = csv.reader(f, delimiter=Delimiter_Field)&#xA;    h = reader.next()&#xA;    # TODO: ignore header lines if start with '!'&#xA;    # Ignore header lines if start with '!'&#xA;    while h[0][0] == '!':&#xA;        h = reader.next()&#xA;&#xA;    # Number of CELLS in each axial direction&#xA;    n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])&#xA;    # change to number of POINTS in each axial direction&#xA;    n1,n2,n3 = n1+1,n2+1,n3+1&#xA;&#xA;    # ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;    util.SetOutputWholeExtent(self, [0,n1-1, 0,n2-1, 0,n3-1])&#xA;&#xA;    f.close()&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
