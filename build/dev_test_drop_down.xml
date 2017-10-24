@@ -1,0 +1,108 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="TestDropDown" class="vtkPythonProgrammableFilter" label="Test Drop Down">
+      <Documentation
+        long_help=""
+        short_help="">
+      </Documentation>
+        <Hints>
+            <ShowInMenu category="CSM Geophysics Filters" />
+        </Hints>
+
+<StringVectorProperty
+    name="SelectInputScalarsX"
+    label="ArrayX"
+    command="SetInputArrayToProcess"
+    number_of_elements="5"
+    element_types="0 0 0 0 2"
+    animateable="0">
+    <ArrayListDomain
+        name="array_list"
+        attribute_type="Scalars"
+        input_domain_name="inputs_array">
+        <RequiredProperties>
+            <Property
+                name="Input"
+                function="Input" />
+        </RequiredProperties>
+    </ArrayListDomain>
+    <FieldDataDomain
+        name="field_list">
+        <RequiredProperties>
+            <Property
+                name="Input"
+                function="Input" />
+        </RequiredProperties>
+    </FieldDataDomain>
+</StringVectorProperty>
+
+<StringVectorProperty
+    name="SelectInputScalarsY"
+    label="ArrayY"
+    command="SetInputArrayToProcess"
+    number_of_elements="5"
+    element_types="0 0 0 0 2"
+    animateable="0">
+    <ArrayListDomain
+        name="array_list"
+        attribute_type="Scalars"
+        input_domain_name="inputs_array">
+        <RequiredProperties>
+            <Property
+                name="Input"
+                function="Input" />
+        </RequiredProperties>
+    </ArrayListDomain>
+    <FieldDataDomain
+        name="field_list">
+        <RequiredProperties>
+            <Property
+                name="Input"
+                function="Input" />
+        </RequiredProperties>
+    </FieldDataDomain>
+</StringVectorProperty>
+
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkDataObject"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+
+      <!-- Output data type: "Same as input" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="8"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;&#xA;# Get input array name&#xA;info = self.GetInputArrayInformation(0)&#xA;name = info.Get(vtk.vtkDataObject.FIELD_NAME())&#xA;field = info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())&#xA;print(&quot;0: &quot;, name)&#xA;&#xA;info = self.GetInputArrayInformation(1)&#xA;name = info.Get(vtk.vtkDataObject.FIELD_NAME())&#xA;field = info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())&#xA;print(&quot;1: &quot;, name)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line" syntax="python"/>
+       </Hints>
+      <Documentation>This property contains the text of a python program that
+      the programmable source runs.</Documentation>
+      </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
