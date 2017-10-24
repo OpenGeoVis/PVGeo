@@ -1,7 +1,3 @@
-state_files/
 # OS Files:
 **/.DS_Store
 prototype/
-# Incomplete Files:
-**/inc_*
-**/dev_*
