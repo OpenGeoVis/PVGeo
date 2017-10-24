@@ -96,7 +96,7 @@
         default_values="pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;&#xA;# Get input array name&#xA;info = self.GetInputArrayInformation(0)&#xA;name = info.Get(vtk.vtkDataObject.FIELD_NAME())&#xA;field = info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())&#xA;print(&quot;0: &quot;, name)&#xA;&#xA;info = self.GetInputArrayInformation(1)&#xA;name = info.Get(vtk.vtkDataObject.FIELD_NAME())&#xA;field = info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())&#xA;print(&quot;1: &quot;, name)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line"/>
+         <Widget type="multi_line" syntax="python"/>
        </Hints>
       <Documentation>This property contains the text of a python program that
       the programmable source runs.</Documentation>
