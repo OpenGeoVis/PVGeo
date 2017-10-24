@@ -77,4 +77,4 @@ def RequestData():
             for i in range(0, numPoints-1):
                 ptsi = [i, i+1]
                 pdo.InsertNextCell(Cell_Type, 2, ptsi)
-    print((datetime.now() - startTime))
+    #print((datetime.now() - startTime))
