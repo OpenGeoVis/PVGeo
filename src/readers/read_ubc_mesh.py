@@ -1,7 +1,7 @@
 Name = 'ReadUBCMesh'
 Label = 'Read UBC Mesh Two-File Format'
 FilterCategory = 'CSM GP Readers'
-Help = '3D models are defined using a 2-file format. The "mesh" file describes how the earth is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. The first value is for the model\'s top-front-right, (top-south-west) corner cell. Default file delimeter is a space character'
+Help = 'UBC Mesh 3D models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. Default file delimiter is a space character.'
 
 NumberOfInputs = 0
 OutputDataType = 'vtkRectilinearGrid'
@@ -27,6 +27,7 @@ def RequestData():
     import os
     from vtk.util import numpy_support as nps
 
+    # Make sure we have input files
     if FileName_Mesh == 'absolute path':
         raise Exception('No mesh file selected. Aborting.')
     if FileName_Model == 'absolute path':
@@ -34,6 +35,7 @@ def RequestData():
 
     pdo = self.GetOutput() # vtkRectilinearGrid
 
+    # Set the tab delimiter if needed
     if (Use_tab_delimiter):
         Delimiter_Field = '\t'
 
@@ -47,6 +49,7 @@ def RequestData():
 
         # Number of CELLS in each axial direction
         n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
+        numCells = n1*n2*n3
         # Change to number of POINTS in each axial direction
         #- We do ths because we have to specify the points along each axial dir
         nn = [n1,n2,n3] = [n1+1,n2+1,n3+1]
@@ -82,23 +85,42 @@ def RequestData():
         f.close()
 
     #--- Read in the model ---#
-    # TODO: ignore header lines if start with '!'
-    print('loaded the mesh!')
     # Add the model data to CELL data
-    # TODO: check number of lines and make sure same as number of cells
     data = np.zeros((n1-1,n2-1,n3-1),dtype=float)
+    # Count number of lines in file
+    with open(FileName_Model) as f:
+        for i, l in enumerate(f):
+            pass
+        numLines = i + 1
+        f.close()
+    # Read in data from file with new iterator
     with open(FileName_Model) as f:
         h = f.next()
+        skipped = 0
         # Ignore header lines if start with '!'
         while h[0][0] == '!':
-            h = reader.next()
+            h = f.next()
+            skipped += 1
 
-        for i in range(n1-1):
-            for j in range(n2-1):
-                for k in range(n3-1):
-                    data[i,j,k] = float(h)
-                    h = f.next()
+        # Make sure this model file fits the dimensions of the mesh
+        if (numCells < (numLines - skipped)):
+            raise Exception('This model file has more cell data than for which the given mesh has cells to hold that data')
+        elif (numCells > (numLines - skipped)):
+            raise Exception('This model file does not have enough cell data to fill the given mesh\'s cells')
+
+        # Iterate over everyline of the file and pull data
+        try:
+            for i in range(n1-1):
+                for j in range(n2-1):
+                    for k in range(n3-1):
+                        data[i,j,k] = float(h)
+                        if i*j*k == (n1*n2*n3)-3:
+                            raise StopIteration
+                        h = f.next()
+        except StopIteration:
+            pass
         f.close()
+
 
     # Swap axes because VTK structures the coordinates a bit differently
     #-  This is absolutely crucial!
@@ -111,9 +133,10 @@ def RequestData():
     if data_name == '':
         data_name = os.path.basename(FileName_Model)
 
+    # Convert data to VTK data structure and append to output
     c = nps.numpy_to_vtk(num_array=data,deep=True)
     c.SetName(data_name)
-    # TODO: this is supposed to be cell data!
+    # THIS IS CELL DATA!
     pdo.GetCellData().AddArray(c)
 
 
@@ -134,7 +157,6 @@ def RequestInformation():
             h = reader.next()
 
         # Number of CELLS in each axial direction
-        h = reader.next()
         n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
         # change to number of POINTS in each axial direction
         n1,n2,n3 = n1+1,n2+1,n3+1
