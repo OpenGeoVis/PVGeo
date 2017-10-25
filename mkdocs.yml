@@ -1,8 +1,13 @@
 site_name: ParaViewGeophysics
 pages:
-    - Home: index.md
-    - What's Next: What's-Next.md
-    Getting Started:
-        - How To Use: How-to-Use-This-Wiki.md
-
+- Home: index.md
+- What's Next: What's-Next.md
+- Contents: Contents.md
+- Getting Started:
+    - How to Use This Wiki: How-to-Use-This-Wiki.md
+    - ParaView and VTK: ParaView-and-VTK.md
+    - Install These Plugins: Install-Plugins.md
+    - Using 3rd Party Py Libraries: Using-Outside-Python-Modules.md
+- Plugins:
+    - About ParaView Plugins: Plugins.md
 theme: readthedocs
