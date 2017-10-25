@@ -1,8 +1,7 @@
 site_name: ParaViewGeophysics
-site_description: Project documentation with Markdown.
-site_author: MkDocs Team
+site_author: Bane Sullivan
 
-repo_url: https://github.com/mkdocs/mkdocs/
+repo_url: https://github.com/banesullivan/ParaViewGeophysics
 
 
 
