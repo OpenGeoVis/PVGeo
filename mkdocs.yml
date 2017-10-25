@@ -32,7 +32,7 @@ pages:
         - Read UBC Mesh Two File FormatRe: Plugins/Readers/Read-UBC-Mesh-Two-File-Format.md
         - Read Binary Packed Data: Plugins/Readers/Read-Binary-Packed-Data-to-Table.md
         - Read Delimited File: Plugins/Readers/Read-Delimited-File-to-Table.md
-    -Filters:
+    - Filters:
         - Table to Uniform Grid: Plugins/Filters/Table-to-Uniform-Grid.md
         - Flip Grid Axii: Plugins/Filters/Flip-Grid-Axii.md
         - Reshape Table: Plugins/Filters/Reshape-Table.md
