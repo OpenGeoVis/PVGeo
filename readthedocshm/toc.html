@@ -1,0 +1,28 @@
+<ul class="subnav">
+    <li class="{% if nav_item.active%}current{%endif%}">
+        <a class="{% if nav_item.active%}current{%endif%}" {% if not nav_item.children%}href="{{ nav_item.url }}"{%endif%} id="{{ nav_item.title }}" style="font-size:95%;font-weight:bold;">{{ nav_item.title }}</a>
+    </li>
+    {% for nav_item in nav_item.children %}
+        <li class="{% if nav_item.active%}current{%endif%}">
+            <a style="padding-left:50px;" class="{% if nav_item.active%}current{%endif%}" {% if not nav_item.children%}href="{{ nav_item.url }}"{%endif%} id="{{ nav_item.title }}"{% if nav_item.children%} onclick="showChildren('{{ nav_item.title }}')"{%endif%}>{{ nav_item.title }} {% if nav_item.children%} <i class="fa fa-arrow-circle-down" style="padding-left:5px;font-size:13px;"></i>{%endif%}</a>
+        </li>
+        {% set id_hidden = nav_item.title %}
+        <div style="display:none" id="hidden_{{ id_hidden }}">
+        {% for nav_item in nav_item.children %}
+            <li class="{% if nav_item.active%}current{%endif%}">
+                <a style="padding-left:70px;" class="{% if nav_item.active%}current{%endif%}" {% if not nav_item.children%}href="{{ nav_item.url }}"{%endif%} id="{{ nav_item.title }}"{% if nav_item.children%} onclick="showChildren('{{ id_hidden }}{{ nav_item.title }}')"{%endif%}>{{ nav_item.title }} {% if nav_item.children%} <i class="fa fa-arrow-circle-down" style="padding-left:5px;font-size:13px;"></i>{%endif%}</a>
+            </li>
+            {% set id_hidden = id_hidden + nav_item.title %}
+            <div style="display:none" id="hidden_{{ id_hidden }}">
+            {% for nav_item in nav_item.children %}
+                <li class="{% if nav_item.active%}current{%endif%}">
+                    <a style="padding-left:90px;" class="{% if nav_item.active%}current{%endif%}" {% if not nav_item.children%}href="{{ nav_item.url }}"{%endif%} id="{{ nav_item.title }}"{% if nav_item.children%} onclick="showChildren('{{ id_hidden }}')"{%endif%}>{{ nav_item.title }} {% if nav_item.children%} <i class="fa fa-arrow-circle-down" style="padding-left:5px;font-size:13px;"></i>{%endif%}</a>
+                </li>
+            {% endfor %}
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+    <li class="paddingtop20"></li>
+</ul>
+

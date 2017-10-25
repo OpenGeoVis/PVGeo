@@ -1,0 +1,105 @@
+/*If current padding-left was off or looked strange for me*/
+.wy-menu-vertical li.on a, .wy-menu-vertical li.current > a {
+	padding-top: 0.4045em;
+	padding-right: 1.618em;
+	padding-bottom: 0.4045em;
+	padding-left: 2.3em;
+	/*background-color: #E8ECEF;*/
+}
+
+/*Make main nav bold and bigger*/
+.main-nav {
+	font-size: 95%,
+	font-weight: bold;
+}
+
+h3 {
+	color: black;
+	font-weight: bold;
+}
+
+/*
+padding from top
+*/
+.paddingtop150 {
+  padding-top: 150px;
+}
+.paddingtop100 {
+  padding-top: 100px;
+}
+.paddingtop60 {
+  padding-top: 60px;
+}
+.paddingtop50 {
+  padding-top: 50px;
+}
+.paddingtop40 {
+  padding-top: 40px;
+}
+.paddingtop25 {
+  padding-top: 25px;
+}
+.paddingtop20 {
+  padding-top: 20px;
+}
+.paddingtop15 {
+  padding-top: 15px;
+}
+.paddingtop10 {
+  padding-top: 10px;
+}
+.paddingtop8 {
+  padding-top: 8px;
+}
+.paddingtop5 {
+  padding-top: 5px;
+}
+/*
+Padding from left
+*/
+.paddingleft40 {
+  padding-left: 40px;
+}
+.paddingleft25 {
+  padding-left: 25px;
+}
+.paddingleft20 {
+  padding-left: 20px;
+}
+.paddingleft15 {
+  padding-left: 15px;
+}
+.paddingleft8 {
+  padding-left: 8px;
+}
+.paddingleft5 {
+  padding-left: 5px;
+}
+.paddingleft0 {
+  padding-left: 0px;
+}
+/*
+Padding from right
+*/
+.paddingright25 {
+  padding-right: 25px;
+}
+.paddingright20 {
+  padding-right: 20px;
+}
+.paddingright15 {
+  padding-right: 15px;
+}
+.paddingright10 {
+  padding-right: 10px;
+}
+.paddingright5 {
+  padding-right: 5px;
+}
+.paddingright0 {
+  padding-right: 0px;
+}
+
+.paddingbottom20 {
+  padding-bottom: 20px;
+}
