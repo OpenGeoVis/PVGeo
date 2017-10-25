@@ -5,7 +5,7 @@ Sometimes we might have a model, some input data, that we would like to have num
 Create a customizable macro that uses a series of points to create a path through a dataset that can then be sliced at every point (or customized to every ten points per say). The points will be converted into a sorted polyline using a nearest neighbor approximation so that we can have a coherent travel path through the model. The order in the poly line will be used to determine a normal vector for each slice.
 
 # How to Use this Macro
-*Note: You will need the SciPy module in `pvpython` for this macro to work. [See details](Using-Outside-Python-Modules).*
+*Note: You will need the SciPy module in `pvpython` for this macro to work. [See details](../../Getting-Started/Using-Outside-Python-Modules.md).*
 
 Take a look at the macro `norm_slices_along_points.py` under the `macros/` directory in the repository. This macro takes two data sources, some data containing the points for our travel path and some data that can be sliced.
 
