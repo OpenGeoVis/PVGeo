@@ -1,6 +1,6 @@
-# Welcome to the ParaView for Geophysics wiki!
+# Welcome to the ParaView for Geophysics Documentation!
 
-*NOTICE:* This wiki is under development and may currently lack content.
+*NOTICE:* This documentation is under development and may currently lack content.
 
 This repository is all about using ParaView in the geosciences for data and model visualization. Through visualization, we can bring value to data and hold the products of geoscience in a new light to interested parties.
 
