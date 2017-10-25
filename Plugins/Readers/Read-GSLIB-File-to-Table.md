@@ -9,12 +9,12 @@ Header
 numberOfColumns
 Col1_name
 Col2_name
-Col2_name
-data_c1_n1 data_c2_n1 data_c3_n1
-data_c1_n2 data_c2_n2 data_c3_n2
-data_c1_n3 data_c2_n3 data_c3_n3
-data_c1_n4 data_c2_n4 data_c3_n4
-data_c1_n5 data_c2_n5 data_c3_n5
+Col3_name
+dataCol1 dataCol2 dataCol3
+dataCol1 dataCol2 dataCol3
+dataCol1 dataCol2 dataCol3
+dataCol1 dataCol2 dataCol3
+dataCol1 dataCol2 dataCol3
 ...
 ```
 
