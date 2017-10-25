@@ -3,6 +3,13 @@ site_author: Bane Sullivan
 
 repo_url: https://github.com/banesullivan/ParaViewGeophysics
 
+theme_dir: readthedocshm
+plugins:
+    - search
+
+markdown_extensions:
+  - smarty
+  - toc
 
 
 pages:
@@ -24,9 +31,3 @@ pages:
     - Using ParaView Macros: Macros/Using-PV-Macros.md
     - Advice For Making Macros: Macros/Advice-For-Making-Macros.md
     - Scene Export Macros: Macros/Scene-Export-Macros.md
-
-
-
-theme: readthedocshm
-plugins:
-    - search
