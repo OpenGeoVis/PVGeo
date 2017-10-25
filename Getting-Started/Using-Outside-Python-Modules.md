@@ -6,6 +6,7 @@ To start using third party libraries, we are going to have copy over static vers
 
 ### Modules Currently Needed for this Repo
 These are all of the modules that filters, readers, and macros might use in this repo. We recommend opening the Python Shell from ParaView (Tools->Python Shell) and testing the import of each of these modules. Copy/Paste the modules that failed to import from wherever you have them installed into `.../ParaView/bin/site-packages/`:
+
 - [NumPy](http://www.numpy.org) (you may need update ParaView's version to the latest version for SciPy to be happy)
 - [SciPy](https://www.scipy.org/install.html)
 - [VTK](https://www.vtk.org/download/)
