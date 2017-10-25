@@ -32,14 +32,6 @@ pages:
         - Read UBC Mesh Two File FormatRe: Plugins/Readers/Read-UBC-Mesh-Two-File-Format.md
         - Read Binary Packed Data: Plugins/Readers/Read-Binary-Packed-Data-to-Table.md
         - Read Delimited File: Plugins/Readers/Read-Delimited-File-to-Table.md
-    -Filters:
-        - Table to Uniform Grid: Plugins/Filters/Table-to-Uniform-Grid.md
-        - Flip Grid Axii: Plugins/Filters/Flip-Grid-Axii.md
-        - Reshape Table: Plugins/Filters/Reshape-Table.md
-        - Add Cell Connectivity to Points: Plugins/Filters/Add-Cell-Connectivity-to-Points.md
-        - Points to Tube: Plugins/Filters/Points-to-Tube.md
-        - Translate Origin of Grid: Plugins/Filters/Translate-Origin-of-Grid.md
-        - Normalize Array: Plugins/Filters/Normalize-Array.md
 
 
 - Macros:
