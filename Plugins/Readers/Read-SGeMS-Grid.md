@@ -45,11 +45,11 @@ For example files to use with this reader, download any of the 2D or 3D files fr
 
 Here is the [Walker Lake Exhaustive DEM Categorized](http://www.trainingimages.org/uploads/3/4/0/5/3405352/a_wlreferencecat.zip) with a categorized color scale:
 
-![Walker Lake Cat](figs/walker_lake_cat.png)
+<img src="figs/walker_lake_cat.png"/>
 
 and here is the [FLUVSIM object-based model](http://www.trainingimages.org/uploads/3/4/0/5/3405352/ti_fluvsim_big_channels3d.zip) with a categorized color scale (bounding surfaces are set to be transparent):
 
-![FLUVSIM](figs/fluvsim.png)
+<img src="figs/fluvsim.png"/>
 
 We will later add in the ability to specify the spacing and origin of the produced vtkImageData as advanced properties of this reader, however you can easily do this by adding a Python Programmable Filter that copies the data and changes these properties with a script like this one:
 
