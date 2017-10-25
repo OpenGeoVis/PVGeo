@@ -1,4 +1,11 @@
 site_name: ParaViewGeophysics
+site_description: Project documentation with Markdown.
+site_author: MkDocs Team
+
+repo_url: https://github.com/mkdocs/mkdocs/
+
+
+
 pages:
 - Home: index.md
 - What's Next: What's-Next.md
@@ -10,4 +17,17 @@ pages:
     - Using 3rd Party Py Libraries: Getting-Started/Using-Outside-Python-Modules.md
 - Plugins:
     - About ParaView Plugins: Plugins/Plugins.md
+    - Build Your Own Plugins: Plugins/Build-Your-Own-Plugins.md
+    - Readers:
+        - Read SGeMS Grid: Plugins/Readers/Read-SGeMS-Grid.md
+
+- Macros:
+    - Using ParaView Macros: Macros/Using-PV-Macros.md
+    - Advice For Making Macros: Macros/Advice-For-Making-Macros.md
+    - Scene Export Macros: Macros/Scene-Export-Macros.md
+
+
+
 theme: readthedocs
+plugins:
+    - search
