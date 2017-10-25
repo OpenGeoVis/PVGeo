@@ -1,5 +1,6 @@
 # The Argument for Using Python Programmable Filters
 The development of plugins for the ParaView software platform can seem like a daunting task at first. Creating CMakeLists, writing in C++ again for the first time in years, learning XML to create interactive GUI components, and integrating the plugins into the ParaView build is a major turnoff. To get around all that, we can use something Kitware has put into ParaView for the rapid development of plugins, Python Programmable Filters and Sources! Python is an incredibly easy language to learn and most if not all geoscientists have experience working in Python. In this repo, we aim to produce all plugins in the Python Programmable Filters and Sources format for the following reasons:
+
 * Rapid development: Through the templates, shell scripts, and XML converters provided in this repo, it is easy to prototype and develop a plugin for you needs in a matter of minutes
 * Computational power: VTK has NumPy wrapping to allow for the use of Pythons complex numerical analysis libraries like SciPy and NumPy.
 * Easy customization by end user: since most scientists know and use Python, they can easily dive into the source code delivered in this repo to tailor it to their needs

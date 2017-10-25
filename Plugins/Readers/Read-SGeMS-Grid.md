@@ -3,7 +3,8 @@ The Stanford Geostatistical Modeling Software (SGeMS) ASCII format is much like 
 
 # File Format
 The general format is as follows:
-```text
+
+```txt
 n1 n2 n3
 numberOfColumns
 Col1_name
@@ -18,7 +19,8 @@ data_c1_n5 data_c2_n5 data_c3_n5
 ```
 
 An example file might look something like this, where we have a 400 by 150 by 40 (x by y by z) grid with uniform spacing along each axis with three data arrays:
-```text
+
+```txt
 400 150 40
 3
 Variable1
