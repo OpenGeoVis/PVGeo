@@ -3,7 +3,7 @@ The GSLIB file format has headers lines followed by the data as a space delimite
 
 # File Format
 Check out [this site](https://cals.arizona.edu/PLP/GIS/Case_Study_Af/GeoEAS/fileformat.html) and [this site](http://www.gslib.com/gslib_help/format.html) for more information on the specifics of the file format. The general format is as follows:
-```
+```text
 Header
 numberOfColumns
 Col1_name
@@ -18,7 +18,7 @@ data_c1_n5 data_c2_n5 data_c3_n5
 ```
 
 An example file might look something like this:
-```
+```text
 Fun data set!
 3
 Variable1
@@ -35,8 +35,8 @@ Variable3
 ```
 
 ## Common Filters to Use Down the Pipeline
-- [Table to Uniform Grid](Table-to-Uniform-Grid)
-- [Reshape Table](Reshape-Table)
+- [Table to Uniform Grid](../Filters/Table-to-Uniform-Grid.md)
+- [Reshape Table](../Filters/Reshape-Table.md)
 - [Table to Points](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Points)
 - [Table to Structured Grid](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Structured_Grid)
-- [Normalize Array](Normalize-Array)
+- [Normalize Array](../Filters/Normalize-Array.md)

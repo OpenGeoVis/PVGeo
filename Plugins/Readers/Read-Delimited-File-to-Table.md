@@ -3,8 +3,8 @@ This reader will take in any delimited text file and make a vtkTable from it. Th
 The main advantage of having this reader and using it over the default delimited text reader is that we can specify to use tab delimiters and that we deliver to the users of this repo a delimited text reader that they manipulate to work for their file format needs.
 
 ## Common Filters to Use Down the Pipeline
-- [Table to Uniform Grid](Table-to-Uniform-Grid)
-- [Reshape Table](Reshape-Table)
+- [Table to Uniform Grid](../Filters/Table-to-Uniform-Grid.md)
+- [Reshape Table](../Filters/Reshape-Table.md)
 - [Table to Points](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Points)
 - [Table to Structured Grid](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Structured_Grid)
-- [Normalize Array](Normalize-Array)
+- [Normalize Array](../Filters/Normalize-Array.md)

@@ -6,10 +6,9 @@ This repository is all about using ParaView in the geosciences for data and mode
 
 This repository was produced from the work of an undergraduate research project at the Colorado School of Mines titled: Illuminating the Value of Geophysical Imaging through Visualization and Virtual Reality. Checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-dzBSR1laSXdiYlU/view?usp=sharing) standalone presentation to learn more about the project.
 
-Use the [Wiki Contents](Wiki-Contents) to explore the Wiki and to find all documentation for readers, filters, macros, and more as you need.
+Use the Sidebar (to the left) to explore the docs page and to find all documentation for readers, filters, macros, and more as you need.
 
-
-<img src="figs/indo_clip.png" height="200"/> <img src="figs/vel2_iso.png" height="200"/>
+![Volcano](indo_clip.png)
 
 ## Purpose
 The primary goal of this project is to build plugins for the open-source, multi-platform, data analysis, and visualization application [ParaView](https://www.paraview.org) by Kitware. These plugins are tailored to the visualization of spatially referenced data in the geosciences. The overarching  goal of this project is to develop a framework to funnel geophysical data/models into virtual reality for the purpose of:
@@ -22,7 +21,7 @@ My specific goal is to develop a heavily documented library of plugins, macros, 
 Through the deployment of this software, geophysicists will gain an ability to represent their 3D spatially referenced data intuitively to interested parties and stakeholders. By integrating the visualization of various data, interested parties will gain insight into the value of the information in the models. A spatially defined 3D model yields minimal value to an outside party unless they can relate that model to other spatial features. For example, a 3D model of faults in the subsurface is unhelpful unless the location of known features to interested parties can be displayed simultaneously. To give a value of information, we must be able to show where the spatially referenced data is in relation to intuitive features like topography, well locations, survey points, or other known features. Through visual integration, we try to mimic the reality of the space in which data was acquired so that it will hold meaning to anyone that immerses into the visualization regardless of background.
 
 -------
-### Outline of Goals:
+## Outline of Goals:
 These are the goals to achieve through publishing this repository but not necessarily the goals of the research project from which this repository was developed.
 
 * Develop and document geoscientific plugins for ParaView. These plugins will take advantage of ParaView and VTK’s Python wrapping and use the Python Programmable Filter in ParaView. The advantage to using Python Programmable filters is that they are easily modified by the end user and can be wrapped in XML to create a GUI for its use in ParaView while having the option to directly edit the source code live in ParaView.

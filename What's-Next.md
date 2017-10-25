@@ -31,14 +31,14 @@ Suggestions? Post on the [Issues page](https://github.com/banesullivan/ParaViewG
 - [ ] How to start making your own macros (tips, tricks, and general advice)
 - [ ] Save screenshots in isometric views, side, top, etc. views
 - [ ] Coming to all macros: ability to use a file selection prompt instead of hardcoding file names into the scripts.
-- [x] [Many Slices Along Points:](Many-Slices-Along-Points) Export slices of data set along poly line at every point on that line (normal is the vector from that point to the next)
+- [x] [Many Slices Along Points:](Macros/ours/Many-Slices-Along-Points.md) Export slices of data set along poly line at every point on that line (normal is the vector from that point to the next)
 
 ## Examples:
 - [ ] Tutorials for each filter / reader will be in their documentation.
 - [ ] How to export a scene to a shareable 3D format
 - [ ] Importing DEM topography (with/without satellite imagery)
 - [ ] Slicing/cropping a data scene through all components/datasets
-- [x] [Slice Model Along PolyLine:](Slice-Model-Along-PolyLine) How to export a slice of a data set projected on a vtkPolyLine (capabilities are currently present in ParaView)
+- [x] [Slice Model Along PolyLine:](Examples/Slice-Model-Along-PolyLine.md) How to export a slice of a data set projected on a vtkPolyLine (capabilities are currently present in ParaView)
 
 
 # Features eventually coming (long run):

@@ -1,9 +1,9 @@
 # About this Reader
-The Stanford Geostatistical Modeling Software (SGeMS) ASCII format is much like the [GSLIB](Read-GSLIB-File-to-Table) file format. The reader we have developed for this format assumes the data to be defined on a regularly spaced grid and that the first line of the file will specify the dimensions of that grid. The output of this file reader is a vtkImageData object which is essentially a regularly spaced grid with varying dimensionality along each axis. The reader will only work if the format of the file strictly follows what is below. If your SGeMS file does not strictly follow the uniform grid format below then we recommend use the [GSLIB](Read-GSLIB-File-to-Table) file reader.
+The Stanford Geostatistical Modeling Software (SGeMS) ASCII format is much like the [GSLIB](../Readers/Read-GSLIB-File-to-Table.md) file format. The reader we have developed for this format assumes the data to be defined on a regularly spaced grid and that the first line of the file will specify the dimensions of that grid. The output of this file reader is a vtkImageData object which is essentially a regularly spaced grid with varying dimensionality along each axis. The reader will only work if the format of the file strictly follows what is below. If your SGeMS file does not strictly follow the uniform grid format below then we recommend use the [GSLIB](../Readers/Read-GSLIB-File-to-Table.md) file reader.
 
 # File Format
 The general format is as follows:
-```
+```text
 n1 n2 n3
 numberOfColumns
 Col1_name
@@ -18,7 +18,7 @@ data_c1_n5 data_c2_n5 data_c3_n5
 ```
 
 An example file might look something like this, where we have a 400 by 150 by 40 (x by y by z) grid with uniform spacing along each axis with three data arrays:
-```
+```text
 400 150 40
 3
 Variable1
@@ -34,9 +34,9 @@ Variable3
 ...
 ```
 ## Common Filters to Use Down the Pipeline
-- [Translate Origin of Grid](Translate-Origin-of-Grid)
-- [Flip Grid Axii](Flip-Grid-Axii)
-- [Normalize Array](Normalize-Array)
+- [Translate Origin of Grid](../Filters/Translate-Origin-of-Grid.md)
+- [Flip Grid Axii](../Filters/Flip-Grid-Axii.md)
+- [Normalize Array](../Filters/Normalize-Array.md)
 - [Contour](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Contour)
 - [Threshold](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Threshold)
 
