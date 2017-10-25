@@ -15,6 +15,10 @@ Properties = dict(
     SEPlib=False
 )
 
+PropertiesHelp = dict(
+    SEPlib='Use the Stanford Exploration Project\'s axial conventions (d1=z, d2=x, d3=y). Parameters would be entered [z,x,y].'
+)
+
 def RequestData():
     from vtk.util import numpy_support as nps
     import numpy as np

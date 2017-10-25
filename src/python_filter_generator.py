@@ -102,11 +102,13 @@ def getPythonPathProperty():
 
 
 
-def getFilterPropertyXml(propertyInfo, propertyName):
+def getFilterPropertyXml(propertyInfo, propertyName, propertyHelpInfo):
 
     vis = 'default'
     if 'HIDE' in propertyName:
         vis = 'advanced'
+
+    propertyHelp = propertyHelpInfo.get(propertyName, '')
 
     e = escapeForXmlAttribute
 
@@ -142,8 +144,8 @@ def getFilterPropertyXml(propertyInfo, propertyName):
         default_values="%s"
         number_of_elements="%s">
         <BooleanDomain name="bool" />
-        <Documentation></Documentation>
-      </IntVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
+        <Documentation>%s</Documentation>
+      </IntVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
 
 
     if propertyType is int:
@@ -157,8 +159,8 @@ def getFilterPropertyXml(propertyInfo, propertyName):
         animateable="1"
         default_values="%s"
         number_of_elements="%s">
-        <Documentation></Documentation>
-      </IntVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
+        <Documentation>%s</Documentation>
+      </IntVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
 
     if propertyType is float:
         return '''
@@ -171,8 +173,8 @@ def getFilterPropertyXml(propertyInfo, propertyName):
         animateable="1"
         default_values="%s"
         number_of_elements="%s">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
+        <Documentation>%s</Documentation>
+      </DoubleVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
 
     if propertyType is str:
         if 'FileName' in propertyName:
@@ -187,8 +189,8 @@ def getFilterPropertyXml(propertyInfo, propertyName):
             default_values="%s"
             number_of_elements="%s">
             <FileListDomain name="files"/>
-            <Documentation></Documentation>
-          </StringVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
+            <Documentation>%s</Documentation>
+          </StringVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
         else:
             return '''
             <StringVectorProperty
@@ -200,8 +202,8 @@ def getFilterPropertyXml(propertyInfo, propertyName):
             animateable="1"
             default_values="%s"
             number_of_elements="%s">
-            <Documentation></Documentation>
-            </StringVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements)
+            <Documentation>%s</Documentation>
+            </StringVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
 
     raise Exception('Unknown property type: %r' % propertyType)
 
@@ -209,7 +211,8 @@ def getFilterPropertyXml(propertyInfo, propertyName):
 def getFilterPropertiesXml(info):
 
     propertyInfo = info['Properties']
-    xml = [getFilterPropertyXml(propertyInfo, name) for name in sorted(propertyInfo.keys())]
+    propertyHelpInfo = info.get('PropertiesHelp', {})
+    xml = [getFilterPropertyXml(propertyInfo, name, propertyHelpInfo) for name in sorted(propertyInfo.keys())]
     return '\n\n'.join(xml)
 
 
