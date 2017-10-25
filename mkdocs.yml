@@ -39,7 +39,11 @@ pages:
     - Advice For Making Macros: Macros/Advice-For-Making-Macros.md
     - Scene Export Macros: Macros/Scene-Export-Macros.md
     - Our Macros:
+        - Many Slices Along Points: Macros/ours/Many-Slices-Along-Points.md
         - Slice Model Along PolyLine: Macros/ours/Slice-Model-Along-PolyLine.md
+
+- Examples:
+    - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
 
 - Virtual Reality:
     - Exporting Visualizations: Exporting-Visualizations.md
