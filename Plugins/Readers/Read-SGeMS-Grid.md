@@ -51,6 +51,8 @@ and here is the [FLUVSIM object-based model](http://www.trainingimages.org/uploa
 
 <img src="figs/fluvsim.png"/>
 
+![fluvsim](figs/fluvsim.png)
+
 We will later add in the ability to specify the spacing and origin of the produced vtkImageData as advanced properties of this reader, however you can easily do this by adding a Python Programmable Filter that copies the data and changes these properties with a script like this one:
 
 ```py
