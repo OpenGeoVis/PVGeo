@@ -2,6 +2,7 @@ site_name: ParaViewGeophysics
 site_author: Bane Sullivan
 
 repo_url: https://github.com/banesullivan/ParaViewGeophysics
+repo_name: 'View on GitHub'
 
 theme_dir: readthedocshm
 
