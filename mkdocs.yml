@@ -3,7 +3,7 @@ site_author: Bane Sullivan
 
 repo_url: https://github.com/banesullivan/ParaViewGeophysics
 
-theme: bootstrap
+theme_dir: mkdocs_bootstrap
 plugins:
     - search
 
