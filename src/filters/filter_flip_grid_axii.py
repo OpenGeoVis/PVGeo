@@ -15,6 +15,11 @@ Properties = dict(
     reverse_z_dir=False,
 )
 
+PropertiesHelp = dict(
+    reverse_x_dir="Reverse all data along the X-axis",
+    reverse_y_dir="Reverse all data along the Y-axis",
+    reverse_z_dir="Reverse all data along the Z-axis",
+)
 
 def RequestData():
     pdi = self.GetInput() # vtkImageData

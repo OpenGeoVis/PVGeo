@@ -44,7 +44,7 @@ ExtraXml = '''\
             <Entry value="1" text="Standard Score"/>
     </EnumerationDomain>
     <Documentation>
-        This property indicates which two axii will be swapped.
+        This is the type of normalization to apply to the input array.
     </Documentation>
 </IntVectorProperty>
 '''
@@ -54,6 +54,11 @@ Properties = dict(
     multiplyer=1.0,
     new_array_name='',
     Normalization=0,
+)
+
+PropertiesHelp = dict(
+    multiplyer="This is a static shifter/scale factor across the array after normalization.",
+    new_array_name="Give the new normalized array a meaningful name.",
 )
 
 

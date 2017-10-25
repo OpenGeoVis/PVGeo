@@ -23,7 +23,7 @@ ExtraXml = '''\
           <Entry value="7" text="North East Top"/>
     </EnumerationDomain>
     <Documentation>
-        This property indicates which two axii will be swapped.
+        This is the new origin corner you'd like the origin to reside.
     </Documentation>
 </IntVectorProperty>
 

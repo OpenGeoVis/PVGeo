@@ -18,7 +18,7 @@ ExtraXml = '''\
           <Entry value="3" text="Line"/>
     </EnumerationDomain>
     <Documentation>
-        This property indicates which two axii will be swapped.
+        Choose what type of cell connectivity to have.
     </Documentation>
 </IntVectorProperty>
 '''
@@ -27,7 +27,10 @@ ExtraXml = '''\
 Properties = dict(
     Cell_Type=4,
     Use_nearest_nbr=True,
-    #max_distance=100.0
+)
+
+PropertiesHelp = dict(
+    Use_nearest_nbr="Check this to use SciPy's cKDTree nearest neighbor algorithms to sort the points to before adding linear connectivity",
 )
 
 def RequestData():

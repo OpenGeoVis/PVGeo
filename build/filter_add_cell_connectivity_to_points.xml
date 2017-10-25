@@ -20,7 +20,7 @@
           <Entry value="3" text="Line"/>
     </EnumerationDomain>
     <Documentation>
-        This property indicates which two axii will be swapped.
+        Choose what type of cell connectivity to have.
     </Documentation>
 </IntVectorProperty>
 
@@ -61,7 +61,7 @@
         default_values="1"
         number_of_elements="1">
         <BooleanDomain name="bool" />
-        <Documentation></Documentation>
+        <Documentation>Check this to use SciPy's cKDTree nearest neighbor algorithms to sort the points to before adding linear connectivity</Documentation>
       </IntVectorProperty>
 
       <!-- Output data type: "vtkPolyData" -->
