@@ -2,7 +2,7 @@
 
 # See blog for details: https://blog.kitware.com/easy-customization-of-the-paraview-python-programmable-filter-property-panel/
 #
-# This code has been modified by Bane Sullivan (banesullivan@gmail.com) for making customized filters in the geoscience data visualization. Credit does not go to Bane for this script but to the author of the above blog post.
+# This code has been heavily modified by Bane Sullivan (banesullivan@gmail.com) for making customized filters in the geoscience data visualization. Credit does not go to Bane for this script but to the author of the above blog post.
 
 
 import os
@@ -303,14 +303,13 @@ def getOutputDataSetTypeXml(info):
 
 
 def getProxyGroup(info):
-    if not info.has_key("Group"):
+    if "Group" not in info:
         return 'sources' if getNumberOfInputs(info) == 0 else 'filters'
-    else: return info["Group"]
+    else:
+        return info["Group"]
 
 
 def generatePythonFilter(info):
-
-
     e = escapeForXmlAttribute
 
     proxyName = info['Name']
@@ -351,7 +350,7 @@ def generatePythonFilter(info):
     return textwrap.dedent(outputXml)
 
 def getFilterGroup(info):
-    if not info.has_key("FilterCategory"):
+    if "FilterCategory" not in info:
         return ''
     else:
         return ('''\
