@@ -29,13 +29,14 @@ printf "${BLUE}%s${NORMAL}\n" "Updating ParaViewGeophysics..."
 
 if git pull --rebase --stat origin master
 then
-  printf "${GREEN}%s${NORMAL}\n" "Tsjakka!! ParaViewGeophysics has been updated and/or is at the current version."
-  printf "${BLUE}${BOLD}%s${NORMAL}\n" "To keep up on the latest news and updates, check out the Wiki Page on the GitHub Repo."
   pushd ./src
   sh ./clean_out.sh
   sh ./build_plugins.sh
   popd
   popd
+  printf "${GREEN}%s${NORMAL}\n" "Tsjakka!! ParaViewGeophysics has been updated and/or is at the current version."
+  printf "${GREEN}%s${NORMAL}\n" "All plugins should be up to date and installed."
+  printf "${BLUE}${BOLD}%s${NORMAL}\n" "To keep up on the latest news and updates, check out the Wiki Page on the GitHub Repo."
 else
   printf "${RED}%s${NORMAL}\n" 'There was an error updating. Try again later?'
 fi
