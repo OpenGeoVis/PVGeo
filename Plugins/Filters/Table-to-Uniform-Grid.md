@@ -2,10 +2,10 @@
 This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a n1 by n2 by n3 vtkImageData structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (d1=z, d2=x, d3=y). When using SEPlib, specify n1 as the number of elements in the Z-direction, n2 as the number of elements in the X-direction, and n3 as the number of elements in the Y-direction (and so on for other parameters).
 
 ## Parameters
-- n1, n2, & n3: The number of elements in each of the three axial directions (n1 corresponds to x, n2 corresponds to y, n3 corresponds to z)
+- Extent: The number of elements in each of the three axial directions (element 0 (n1) corresponds to x, element 1 (n2) corresponds to y, and element 2 (n3) corresponds to z)
 - Use SEPlib: a boolean for if you want to use the SEPlib axial conventions that n1 corresponds to z, n2 corresponds to x, and n3 corresponds to y.
-- sN Spacing: the spacing along each axial direction. Usually we specify a consistent spacing across all axial directions, but you can specify to have unique spacings along each axial direction.
-- oN Origin: the d1, d2, and d3 (x,y,z) coordinates for the south-west bottom corner of the data set. This is the corner from which we build the volume out. Note that you can translate this specification using the [Translate Origin of Grid](Translate-Origin-of-Grid.md) filter.
+- Spacing: the spacing along each axial direction. Usually we specify a consistent spacing across all axial directions, but you can specify to have unique spacings along each axial direction.
+- Origin: the d1, d2, and d3 (x,y,z) coordinates for the south-west bottom corner of the data set. This is the corner from which we build the volume out. Note that you can translate this specification using the [Translate Origin of Grid](Translate-Origin-of-Grid.md) filter.
 
 ## Common Filters to Use Down the Pipeline
 - [Translate Origin of Grid](Translate-Origin-of-Grid.md)
