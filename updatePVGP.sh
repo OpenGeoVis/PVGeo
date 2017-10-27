@@ -37,7 +37,8 @@ then
   popd
   printf "${GREEN}%s${NORMAL}\n" "Tsjakka!! ParaViewGeophysics has been updated and/or is at the current version."
   printf "${GREEN}%s${NORMAL}\n" "All plugins should be up to date and installed."
-  printf "${BLUE}${BOLD}%s${ITAL}%s${NORMAL}\n" "To learn more about updates and featuresto come, check out the Read the Docs page at:"," http://paraviewgeophysics.readthedocs.io"
+  printf "${BLUE}${BOLD}%s${NORMAL}\n" "To learn more about updates and featuresto come, check out the Read the Docs page at:"
+  printf "${BLUE}${ITAL}%s${NORMAL}\n" "http://paraviewgeophysics.readthedocs.io"
 else
   printf "${RED}%s${NORMAL}\n" 'There was an error updating. Try again later?'
 fi
