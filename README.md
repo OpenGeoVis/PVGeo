@@ -40,19 +40,23 @@ Also, be sure to place/install ParaView and this repository to a location that h
 
 You *MUST* add a `PVPLUGINPATH` variable in your bash profile! This variable will describe the plugin path within ParaView's application content. It is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app/` with the name of your version of ParaView under `/Applications/`. To double check the correct path for filter installation, open ParaView and select Tools->Manage Plugins... and copy/paste the path at the top of the window where it says "Local plugins are automatically searched for in ..."
 
-Add the `PVPLUGINPATH` variable to your environment through your `~/.bash_profile` by executing:
+Add the `PVPLUGINPATH` variable to your environment through your `~/.bash_profile` by adding this expression:
 ```bash
 # ParaViewPlugins on Unix:
 # Be sure to check that this path matches yours... Odds are it's different!
-$ echo "\n# Path for ParaView Plugins for the ParaViewGeophysics Repo: \nexport PVPLUGINPATH=\"/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/\"" >> ~/.bash_profile
+
+# Path for ParaView Plugins for the ParaViewGeophysics Repo:
+export PVPLUGINPATH="/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/"
 ```
 
-Windows users, open Cygwin and edit your `~/.bash_profile` by executing this command to place a `PVPLUGINPATH` variable in your environment. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView/...` to `/cygdrive/d/ParaView-5.4.0/...`)
+Windows users, open Cygwin and edit your `~/.bash_profile` through `vim` to place a `PVPLUGINPATH` variable in your environment. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView/...` to `/cygdrive/d/ParaView-5.4.0/...`)
 
 ```bash
 # ParaViewPlugins on Windows via Cygwin
 # Be sure to check that this path matches yours... Odds are it's different!
-$ echo "\n# Path for ParaView Plugins for the ParaViewGeophysics Repo: \nexport PVPLUGINPATH=\"/cygdrive/d/ParaView/bin/plugins/\"" >> ~/.bash_profile
+
+# Path for ParaView Plugins for the ParaViewGeophysics
+export PVPLUGINPATH="/cygdrive/d/ParaView/bin/plugins/"
 ```
 
 ### Installing the Plugins to ParaView
