@@ -4,6 +4,7 @@
 #   PVPLUGINPATH directory for ParaView which you should set up according to
 #   the README
 pushd "$(dirname "$0")"
+printf "${BLUE}%s${NORMAL}\n" "Installing all the plugins..."
 #------ INSTALL TO PARAVIEW ------#
 if [ ! -d $PVPLUGINPATH ]; then
     mkdir $PVPLUGINPATH
