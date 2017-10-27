@@ -15,7 +15,7 @@ if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
   YELLOW="$(tput setaf 3)"
   BLUE="$(tput setaf 4)"
   BOLD="$(tput bold)"
-  ITAL="$(tput sitm)"
+  UND="$(tput smul)"
   NORMAL="$(tput sgr0)"
 else
   RED=""
@@ -38,7 +38,7 @@ then
   printf "${GREEN}%s${NORMAL}\n" "Tsjakka!! ParaViewGeophysics has been updated and/or is at the current version."
   printf "${GREEN}%s${NORMAL}\n" "All plugins should be up to date and installed."
   printf "${BLUE}${BOLD}%s${NORMAL}\n" "To learn more about updates and featuresto come, check out the Read the Docs page at:"
-  printf "${BLUE}${ITAL}%s${NORMAL}\n" "http://paraviewgeophysics.readthedocs.io"
+  printf "${BLUE}${BOLD}${UND}%s${NORMAL}\n" "http://paraviewgeophysics.readthedocs.io"
 else
   printf "${RED}%s${NORMAL}\n" 'There was an error updating. Try again later?'
 fi
