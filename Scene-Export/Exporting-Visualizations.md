@@ -30,8 +30,8 @@ To share these exported scenes with non-technical stakeholders, we recommend the
 ### A Bit More Robust
 Another method to share this scenes that might make the end user have a slightly easier process of viewing the file and will handle the case for mobile platforms is to host your file on a web service like GitHub or Dropbox *(we have been unsuccessful in getting Google Drive to work)*. Then get a link to the `.vtkjs` file on that web service and append it to the web viewer URL in the following manner:
 
-- Copy the url to the web browser which we host on the repo: https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html
-- Append that url with `?fileURL=`
+- Copy the url to the web browser which we host on the repo: `https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html?fileURL=`
+- Note the appended `?fileURL=`
 - Then append that with the shareable link to your visualization file from your web file service:
     - For Dropbox, we will follow this method to get direct download file links
     - Shared links for Dropbox files will have this format:
