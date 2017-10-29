@@ -14,6 +14,8 @@ Now open the standalone web viewer by opening the `StandaloneSceneLoader.html` f
 Select the exported scene as the input file for the web viewer from wherever you saved it. The macro should have printed out the location of the saved scene in the Python Shell (also if you did not modify the macro it should save out under a folder called `vtkJsExport` in your home, `~`, directory).
 
 ## How to Share
+
+### Quick and Easy
 To share these exported scenes with non-technical stakeholders, we recommend the following process:
 
 - Create your scene and export to the vtk.js format
@@ -24,6 +26,8 @@ To share these exported scenes with non-technical stakeholders, we recommend the
 > Check out the data scene/model by downloading the attached file. Then go to the link below and open that downloaded file.
 > https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
 
+
+### A Bit More Robust
 Another method to share this scenes that might make the end user have a slightly easier process of viewing the file and will handle the case for mobile platforms is to host your file on a web service like GitHub or Google Drive. Then get a link to the `.vtkjs` file on that web service and append it to the web viewer URL in the following manner:
 
 - Copy the url to the web browser: https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
@@ -32,21 +36,21 @@ Another method to share this scenes that might make the end user have a slightly
     - For Google drive, we will follow [this guide](https://www.labnol.org/internet/direct-links-for-google-drive/28356/) for direct file links
     - Shared links for Google drive files will have this format:
 
-        > https://drive.google.com/file/d/FILE_ID/edit?usp=sharing
+        > `https://drive.google.com/file/d/FILE_ID/edit?usp=sharing`
 
     - Take note of that FILE_ID and replace it in this link to have a direct download link:
 
-        > https://drive.google.com/uc?export=download&id=FILE_ID
+        > `https://drive.google.com/uc?export=download&id=FILE_ID`
 
     - For example here are the two links to one of our files:
 
-        > https://drive.google.com/a/mymail.mines.edu/file/d/0B6v2US3m042-cW80NGR1RVhsM3M/view?usp=sharing
+        > `https://drive.google.com/a/mymail.mines.edu/file/d/0B6v2US3m042-cW80NGR1RVhsM3M/view?usp=sharing`
 
-        > https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M
+        > `https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M`
 
     - Now here is the appended link for the web viewer:
 
-        > https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M
+        > `https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M`
 
 
 - This link can then be shared with anyone (on a computer, phone, or tablet)
@@ -54,8 +58,8 @@ Another method to share this scenes that might make the end user have a slightly
 
 This is an example of how to fill out your URL
 
-> https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://theDirectDownloadURLtoYourFile.vtkjs
+> `https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://theDirectDownloadURLtoYourFile.vtkjs`
 
 Here is a sample URL to one of our files for you to demo the web viewer:
 
->https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M
+>[https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M)
