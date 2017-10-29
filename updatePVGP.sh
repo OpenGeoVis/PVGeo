@@ -43,7 +43,7 @@ then
     printf "${BLUE}${BOLD}%s${NORMAL}\n" "Learn more about updates and features to come on the Read the Docs page at:"
     printf "${BLUE}${BOLD}${UND}%s${NORMAL}\n" "http://paraviewgeophysics.readthedocs.io"
 else
-  printf "${RED}%s${NORMAL}\n" 'There was an error updating. Try again later?'
+  printf "${RED}%s${NORMAL}\n" 'There was an error updating. Try again later or run a `git status` to see if you have unstaged changes.'
 fi
 
 popd
