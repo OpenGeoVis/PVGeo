@@ -51,6 +51,5 @@ pages:
     - Exporting Visualizations: Scene-Export/Exporting-Visualizations.md
     - Examples/Tutorials:
         - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
-
-- Virtual Reality:
-    - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md
+    - Virtual Reality:
+        - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md
