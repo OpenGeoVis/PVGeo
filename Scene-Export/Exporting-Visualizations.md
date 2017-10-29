@@ -7,11 +7,11 @@ In order to effectively communicate our geoscientific findings, we often need to
 The vtk.js library has an open-source [standalone scene viewer](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html) that we will recommend using. They also have a scene export macro for ParaView that compresses your data scene in ParaView to a single shareable file for viewing on the web. The macro from the vtk.js library can be found [here](https://raw.githubusercontent.com/Kitware/vtk-js/master/Utilities/ParaView/export-scene-macro.py) but we also deploy this macro in our repository under `macros/scene-export-macro.py`. The standalone scene viewer for your web browser can be found [here](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html). You can choose to either download that file to run locally or simple use the file off of the vtk.js repo by clicking that link.
 
 ## Test It Out
-Here is a sample URL to one of the vtk.js sample scenes and two of our scenes for you to demo the web viewer:
+Here are some samples to demonstrate the web viewer. We have included two of our scenes and one of the vtk.js sample scenes for you to demo:
 
+- [Our Volcano](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0)
+- [Our Ripple](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0)
 - [vtk.js Sample Scene](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download)
-- [Volcano](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0)
-- [Ripple](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0)
 
 
 # How To
