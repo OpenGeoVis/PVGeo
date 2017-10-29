@@ -37,19 +37,22 @@ Another method to share scenes that might make the end user have a slightly easi
     - For Dropbox, we will follow this method to get direct download file links
     - Shared links for Dropbox files will have this format:
 
-        > `https://www.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0`
+        > `https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0`
 
     - Change the 'www' to 'dl' in the link such that it looks like:
 
-        > `https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0`
+        > `https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0`
 
     - Now append the link for the web viewer hosted on our GitHub repo with the direct download link in the following manner:
 
-        > `https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0`
+        > `https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0`
 
 
 - This link can then be shared with anyone (on a computer, phone, or tablet)
 - Be sure to check the link yourself before sending to make sure everything worked
 
 
-Here is a sample URL to one of vtk.js' [sample scenes](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download) and one of [our scenes](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0) for you to demo the web viewer:
+Here is a sample URL to one of the vtk.js [sample scenes](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download) and two of our scenes for you to demo the web viewer:
+
+- [Volcano](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0)
+- [Ripple](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0)
