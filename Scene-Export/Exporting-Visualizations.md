@@ -8,4 +8,4 @@ The vtk.js library has an open-source [standalone scene viewer](https://kitware.
 
 # How To
 
-![Scene-Viewer](StandaloneSceneLoader.html)
+![Scene-Viewer](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html)
