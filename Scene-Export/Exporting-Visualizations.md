@@ -29,7 +29,7 @@ To share these exported scenes with non-technical stakeholders, we recommend the
 
 
 ### A Bit More Robust
-Another method to share this scenes that might make the end user have a slightly easier process of viewing the file and will handle the case for mobile platforms is to host your file on a web service like GitHub or Dropbox *(we have been unsuccessful in getting Google Drive to work)*. Then get a link to the `.vtkjs` file on that web service and append it to the web viewer URL in the following manner:
+Another method to share scenes that might make the end user have a slightly easier process of viewing the file and will handle the case for mobile platforms is to host your file on a web service like GitHub or Dropbox *(we have been unsuccessful in getting Google Drive to work)*. Then get a public link to the `.vtkjs` file on that web service and append it to the web viewer URL in the following manner:
 
 - Copy the url to the web browser which we host on the repo: `https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html?fileURL=`
 - Note the appended `?fileURL=`
@@ -43,7 +43,7 @@ Another method to share this scenes that might make the end user have a slightly
 
         > `https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0`
 
-    - Now append the link for the web viewer hosted on our GitHub repo with this link:
+    - Now append the link for the web viewer hosted on our GitHub repo with the direct download link in the following manner:
 
         > `https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0`
 
