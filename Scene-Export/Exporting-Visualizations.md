@@ -28,40 +28,30 @@ To share these exported scenes with non-technical stakeholders, we recommend the
 
 
 ### A Bit More Robust
-Another method to share this scenes that might make the end user have a slightly easier process of viewing the file and will handle the case for mobile platforms is to host your file on a web service like GitHub or Google Drive. Then get a link to the `.vtkjs` file on that web service and append it to the web viewer URL in the following manner:
+Another method to share this scenes that might make the end user have a slightly easier process of viewing the file and will handle the case for mobile platforms is to host your file on a web service like GitHub or Dropbox *(we have been unsuccessful in getting Google Drive to work)*. Then get a link to the `.vtkjs` file on that web service and append it to the web viewer URL in the following manner:
 
-- Copy the url to the web browser: https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
+- Copy the url to the web browser which we host on the repo: https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html
 - Append that url with `?fileURL=`
 - Then append that with the shareable link to your visualization file from your web file service:
-    - For Google drive, we will follow [this guide](https://www.labnol.org/internet/direct-links-for-google-drive/28356/) for direct file links
-    - Shared links for Google drive files will have this format:
+    - For Dropbox, we will follow this method to get direct download file links
+    - Shared links for Dropbox files will have this format:
 
-        > `https://drive.google.com/file/d/FILE_ID/edit?usp=sharing`
+        > `https://www.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0`
 
-    - Take note of that FILE_ID and replace it in this link to have a direct download link:
+    - Change the 'www' to 'dl' in the link such that it looks like:
 
-        > `https://drive.google.com/uc?export=download&id=FILE_ID`
+        > `https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0`
 
-    - For example here are the two links to one of our files:
+    - Now append the link for the web viewer hosted on our GitHub repo with this link:
 
-        > `https://drive.google.com/a/mymail.mines.edu/file/d/0B6v2US3m042-cW80NGR1RVhsM3M/view?usp=sharing`
-
-        > `https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M`
-
-    - Now here is the appended link for the web viewer:
-
-        > `https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M`
+        > `https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0`
 
 
 - This link can then be shared with anyone (on a computer, phone, or tablet)
-- Be sure to check the link yourself before sending to make sure the file link is correct (Google Drive can be tricky to figure out)
+- Be sure to check the link yourself before sending to make sure everything worked
 
 This is an example of how to fill out your URL
 
-> `https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://theDirectDownloadURLtoYourFile.vtkjs`
+> `https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html?fileURL=https://theDirectDownloadURLtoYourFile.vtkjs`
 
-Here is a sample URL to one of vtk.js' sample files and on of our files for you to demo the web viewer:
-
-> [https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/index.html?fileURL=https://data.kitware.com/api/v1/file/587003d08d777f05f44a5c99/download](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/index.html?fileURL=https://data.kitware.com/api/v1/file/587003d08d777f05f44a5c99/download)
-
->[https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M)
+Here is a sample URL to one of vtk.js' [sample scenes](https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003d08d777f05f44a5c99/download) and one of [our scenes](https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0) for you to demo the web viewer:
