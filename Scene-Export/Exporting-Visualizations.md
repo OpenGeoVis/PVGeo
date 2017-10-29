@@ -9,7 +9,7 @@ The vtk.js library has an open-source [standalone scene viewer](https://kitware.
 # How To
 First, make a complex scene in ParaView that you might like to share with someone. For a simple example, download [this] folder and load the state file *(be sure to use relative file paths)*. Now that you have your scene loaded, run the `export-scene-macro.py` macro delivered in this repo or download it from the link above if you do not have our repo cloned. To run this macro, select Tools->Python Shell then select Run Script. Choose the macro and it should execute without issue *(if you have trouble post on our issues page or read the vtk.js documentation [here](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html))*
 
-Now open the standalone web viewer by opening the `StandaloneSceneLoader.html` file delivered at the top level of the repo or by opening [this link](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html).
+Now open the standalone web viewer by opening [this link](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html).
 
 Select the exported scene as the input file for the web viewer from wherever you saved it. The macro should have printed out the location of the saved scene in the Python Shell (also if you did not modify the macro it should save out under a folder called `vtkJsExport` in your home, `~`, directory).
 
