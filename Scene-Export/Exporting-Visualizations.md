@@ -60,6 +60,8 @@ This is an example of how to fill out your URL
 
 > `https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://theDirectDownloadURLtoYourFile.vtkjs`
 
-Here is a sample URL to one of our files for you to demo the web viewer:
+Here is a sample URL to one of vtk.js' sample files and on of our files for you to demo the web viewer:
+
+> [https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/index.html?fileURL=https://data.kitware.com/api/v1/file/587003d08d777f05f44a5c99/download](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/index.html?fileURL=https://data.kitware.com/api/v1/file/587003d08d777f05f44a5c99/download)
 
 >[https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html?fileUrl=https://drive.google.com/uc?export=download&id=0B6v2US3m042-cW80NGR1RVhsM3M)
