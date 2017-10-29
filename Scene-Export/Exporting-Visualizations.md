@@ -52,4 +52,4 @@ Another method to share scenes that might make the end user have a slightly easi
 - Be sure to check the link yourself before sending to make sure everything worked
 
 
-Here is a sample URL to one of vtk.js' [sample scenes](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003d08d777f05f44a5c99/download) and one of [our scenes](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0) for you to demo the web viewer:
+Here is a sample URL to one of vtk.js' [sample scenes](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download) and one of [our scenes](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0) for you to demo the web viewer:
