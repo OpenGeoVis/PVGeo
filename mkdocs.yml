@@ -21,8 +21,6 @@ pages:
     - ParaView and VTK: Getting-Started/ParaView-and-VTK.md
     - Install These Plugins: Getting-Started/Install-Plugins.md
     - Using 3rd Party Py Libraries: Getting-Started/Using-Outside-Python-Modules.md
-
-
 - Plugins:
     - About ParaView Plugins: Plugins/Plugins.md
     - Build Your Own Plugins: Plugins/Build-Your-Own-Plugins.md
@@ -45,7 +43,7 @@ pages:
 - Macros:
     - Using ParaView Macros: Macros/Using-PV-Macros.md
     - Advice For Making Macros: Macros/Advice-For-Making-Macros.md
-    - Scene Export Macros: Macros/Scene-Export-Macros.md
+    - Screenshot Macros: Macros/Screenshot-Macros.md
     - Our Macros:
         - Many Slices Along Points: Macros/ours/Many-Slices-Along-Points.md
 

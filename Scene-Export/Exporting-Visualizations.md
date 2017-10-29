@@ -1,5 +1,5 @@
 # Motivation
-In order to effectively communicate our geoscientific findings, we often need to share our 3D visualizations with interested stakeholders. These interested parties are likely not going to have ParaView or other visualization software at hand. Thus we desire to have a means to export our complex visualizations in ParaView to a simple, shareable format that anyone can view. To accomplish this, we will take advantage of vtk.js and its standalone web view for vtk.js formats.
+In order to effectively communicate our geoscientific findings, we often need to share our 3D visualizations with interested stakeholders. These interested parties are likely not going to have ParaView or other visualization software at hand. Thus we desire to have a means to export our complex visualizations in ParaView to a simple, shareable format that anyone can view. To accomplish this, we will take advantage of vtk.js and its standalone web viewer for vtk.js formats.
 
 # VTK.js
 [vtk.js](https://kitware.github.io/vtk-js/) is a rendering library made for scientific visualization on the web. This code base brings high performance rendering into anyone's web browser. This library allows us to export complex scene's from ParaView and share them with anyone that has a web browser like Safari or Google Chrome.
