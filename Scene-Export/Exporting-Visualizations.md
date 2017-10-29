@@ -24,6 +24,7 @@ To share these exported scenes with non-technical stakeholders, we recommend the
 
 
 > Check out the data scene/model by downloading the attached file. Then go to the link below and open that downloaded file.
+
 > https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
 
 
@@ -50,8 +51,5 @@ Another method to share this scenes that might make the end user have a slightly
 - This link can then be shared with anyone (on a computer, phone, or tablet)
 - Be sure to check the link yourself before sending to make sure everything worked
 
-This is an example of how to fill out your URL
-
-> `https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html?fileURL=https://theDirectDownloadURLtoYourFile.vtkjs`
 
 Here is a sample URL to one of vtk.js' [sample scenes](https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003d08d777f05f44a5c99/download) and one of [our scenes](https://rawgit.com/banesullivan/ParaViewGeophysics/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/84ytq8t5mfa4ons/SampleVis.vtkjs?dl=0) for you to demo the web viewer:
