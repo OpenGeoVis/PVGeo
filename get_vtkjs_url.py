@@ -25,9 +25,6 @@ def convertGitHubURL(url):
     url = url.replace("raw/", "")
     return url
 
-# https://github.com/banesullivan/ParaViewGeophysics/raw/docs/ripple.vtkjs
-# https://rawgit.com/banesullivan/ParaViewGeophysics/docs/ripple.vtkjs
-
 def generateViewerURL(dataURL):
     viewerURL = "https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html"
     return viewerURL + '%s%s' % ("?fileURL=", dataURL)
