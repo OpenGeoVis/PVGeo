@@ -40,9 +40,10 @@ def main():
     host = sys.argv[1]
     inURL = sys.argv[2]
 
+
     if host.lower() == "dropbox":
         convertURL = convertDropboxURL(inURL)
-    if host.lower() == "github":
+    elif host.lower() == "github":
         convertURL = convertGitHubURL(inURL)
     else:
         convertURL = inURL
