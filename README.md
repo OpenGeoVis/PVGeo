@@ -122,7 +122,7 @@ To rebuild the plugins after you made changes or made your own plugins, run the 
 $ sh src/build_plugins.sh
 ```
 
-## How to Update after Installation
+## How to Update After Installation
 We have included a script that will update the repository from GitHub and re-install everything. This script is simply executed by:
 
 ```bash
