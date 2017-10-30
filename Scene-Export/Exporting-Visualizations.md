@@ -41,8 +41,8 @@ Sometimes we might want to give someone a direct link to the web visualization s
 
 Unfortunately, making the experience for the end user simple means making your experience a bit more complicated. You will need to host your file on a web service like GitHub or Dropbox *(we have been unsuccessful in getting Google Drive to work)*. Then get a public link to the `.vtkjs` file on that web service and append it to the web viewer URL in the following manner:
 
-- Copy the url to the web browser which we have cloned and host on on of our repos: `https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=`
-- Note the appended `?fileURL=`
+- Copy the url to the web browser which we have cloned and host on on of our repos: `https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html`
+- Now appended `?fileURL=`
 - Then append that with the shareable link to your visualization file from your web file service:
     - For Dropbox, we will follow this method to get direct download file links
     - Shared links for Dropbox files will have this format:
