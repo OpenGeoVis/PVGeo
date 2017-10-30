@@ -52,17 +52,6 @@ After executing the above tasks, you should be ready to go. The most common issu
 
 To clone and use the plugins distributed in the repo for ParaView, you'll need [Python 2](https://www.python.org/downloads/) with the SciPy and NumPy modules [installed](https://docs.python.org/2/installing/index.html), and [ParaView](https://www.paraview.org/download/) installed on your computer. Note that this repository will only work with builds of ParaView that have Python. Currently, the VR build of ParaView does not have Python included, and we will describe some workarounds for sending data to the VR version on [these wiki pages](https://github.com/banesullivan/ParaViewGeophysics/wiki/Wiki-Contents#virtual-reality).
 
-From your command line:
-
-```bash
-# Clone this repository
-$ git clone https://github.com/banesullivan/ParaViewGeophysics
-
-# Go into the repository
-$ cd ParaViewGeophysics
-
-```
-
 ### Windows Users:
 If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) guide for using the Unix command line on windows.
 
@@ -98,6 +87,21 @@ Remember to source your edited `~/.bash_profile`:
 
 ```bash
 $ source ~/.bash_profile
+```
+
+### Cloning the Repository
+Clone the repository from your command line by navigating to the directory you would like to save all of the code from this repo.
+
+**NOTE:** Windows users, you are going to want to clone to a folder/drive that has general read/write privileges such as your `D:\\` drive
+
+From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/banesullivan/ParaViewGeophysics
+
+# Go into the repository
+$ cd ParaViewGeophysics
 ```
 
 ### Installing the Plugins to ParaView
