@@ -73,6 +73,6 @@ Once you have that link, use the this script on your URLs in this manner:
 $ python get_vtkjs_url.py <web file host> <file link>
 
 # Dropbox example:
-python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs\?dl\=0"
+$ python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs\?dl\=0"
 
 ```
