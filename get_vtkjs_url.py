@@ -1,8 +1,32 @@
+"""
+Use this script on the command line in a manner such as:
+
+    python get_vtkjs_url.py <web file host> <file link>
+
+For Example:
+
+    python get_vtkjs_url.py github https://github.com/banesullivan/ParaViewGeophysics/raw/docs/ripple.vtkjs
+
+    python get_vtkjs_url.py dropbox https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs\?dl\=0
+
+    Current file hosts supported:
+        - Dropbox
+        - GitHub
+"""
+
 import os
 import sys
 
 def convertDropboxURL(url):
     return url.replace("https://www.dropbox.com", "https://dl.dropbox.com")
+
+def convertGitHubURL(url):
+    url = url.replace("https://github.com", "https://rawgit.com")
+    url = url.replace("raw/", "")
+    return url
+
+# https://github.com/banesullivan/ParaViewGeophysics/raw/docs/ripple.vtkjs
+# https://rawgit.com/banesullivan/ParaViewGeophysics/docs/ripple.vtkjs
 
 def generateViewerURL(dataURL):
     viewerURL = "https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html"
@@ -14,12 +38,14 @@ def main():
         sys.exit(1)
 
     host = sys.argv[1]
-    inlink = sys.argv[2]
+    inURL = sys.argv[2]
 
     if host.lower() == "dropbox":
-        convertURL = convertDropboxURL(inlink)
+        convertURL = convertDropboxURL(inURL)
+    if host.lower() == "github":
+        convertURL = convertGitHubURL(inURL)
     else:
-        convertURL = inlink
+        convertURL = inURL
     print("Your link: %s" % generateViewerURL(convertURL))
     exit(0)
 
