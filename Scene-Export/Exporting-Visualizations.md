@@ -60,3 +60,19 @@ Unfortunately, making the experience for the end user simple means making your e
 
 - This link can then be shared with anyone (on a computer, phone, or tablet)
 - Be sure to check the link yourself before sending to make sure everything worked
+
+#### URL Generator
+We have created a Python script to generate these links for you if you are sharing your data file on either Dropbox or GitHub. The script is delivered in the repository and can also be found [here](https://github.com/banesullivan/ParaViewGeophysics/blob/master/get_vtkjs_url.py).
+
+The easiest way that we have found is to share the files on Dropbox. Use the desktop client for Dropbox and right-click your exported `.vtkjs` file and select "Copy Dropbox Link."
+
+Once you have that link, use the this script on your URLs in this manner:
+
+```bash
+
+$ python get_vtkjs_url.py <web file host> <file link>
+
+# Dropbox example:
+python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs\?dl\=0"
+
+```
