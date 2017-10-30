@@ -17,7 +17,7 @@ Stay tuned; this project is in its early stages of development, so only a handfu
 # How To Use the Plugins in this Repository
 
 ## Quick and Easy
-Here I will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble, please read through the detailed explanation below.
+Here I will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble, please read through the detailed explanation after this section.
 
 First, declare a `PVPLUGINPATH` variable in your your `~/.bash_profile`. To double check the correct path for filter installation, open ParaView and select Tools->Manage Plugins... and copy/paste the path at the top of the window where it says "Local plugins are automatically searched for in ..."
 
