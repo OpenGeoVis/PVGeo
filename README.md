@@ -10,6 +10,11 @@ Also checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-dzBSR1laSX
 ## About the Author
 Unless otherwise specified at the top of the file, all code and documentation distributed here were produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
 
+## Requesting Features, Reporting Issues, and Contributing
+Please feel free to post features you would like to see from this repo on the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) as a feature request. If you stumble across any bugs or crashes while using code distributed here, please report it in the Issues section so I can promptly address it.
+
+If you have your own plugins either developed in C++ or as python programmable filters for which you would like a nice GUI, please share it so this can be a one-stop place for geoscience plugins to ParaView!
+
 ## More to come
 
 Stay tuned; this project is in its early stages of development, so only a handful of the plugins are tested and published here. Also be sure to out the [Docs pages](http://paraviewgeophysics.readthedocs.io/) (*currently being developed and proofed*) for detailed documentation on the filters and general use of this repository.
@@ -114,6 +119,7 @@ $ sh src/build_plugins.sh
 ```
 
 # Make Your Own Filters and Readers
+A detailed explanation can be found in the [Docs](http://paraviewgeophysics.readthedocs.io/en/latest/Plugins/Build-Your-Own-Plugins/) but a here is a quick run through:
 
 To make a custom filter or reader, follow the outline in [src/example.py](src/example.py) and place your script in either the `src/filters/` or `src/readers/` directories with a meaningful name. *Note* that the script will only compile `.py` files that contain either `filter_` or `reader_` in the file name. This is so you can save other `.py` files in those directories without issues. Then re-run the script  [src/build_plugins.sh](src/build_plugins.sh) to wrap in XML and install to ParaView.
 
@@ -122,8 +128,3 @@ All of the distributed filters in this repo will appear in the menu category `CS
 ```py
 FilterCategory = 'CSM Geophysics Filters'
 ```
-
-# Requesting Features, Reporting Issues, and Contributing
-Please feel free to post features you would like to see from this repo on the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) as a feature request. If you stumble across any bugs or crashes while using code distributed here, please report it in the Issues section so I can promptly address it.
-
-If you have your own plugins either developed in C++ or as python programmable filters for which you would like a nice GUI, please share it so this can be a one-stop place for geoscience plugins to ParaView!
