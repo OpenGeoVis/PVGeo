@@ -5,9 +5,9 @@ Use this script on the command line in a manner such as:
 
 For Example:
 
-    python get_vtkjs_url.py github https://github.com/banesullivan/ParaViewGeophysics/raw/docs/ripple.vtkjs
-
     python get_vtkjs_url.py dropbox https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs\?dl\=0
+
+    python get_vtkjs_url.py github https://github.com/banesullivan/ParaViewGeophysics/raw/docs/ripple.vtkjs
 
     Current file hosts supported:
         - Dropbox
