@@ -22,7 +22,7 @@ Stay tuned; this project is in its early stages of development, so only a handfu
 # How To Use the Plugins in this Repository
 Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble or you are a windows user, please read through the detailed explanation [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/Install-Plugins/)
 
-## Quick and Easy
+## Quick and Easy Unix Installation
 
 First, declare a `PVPLUGINPATH` variable in your your `~/.bash_profile`. To double check the correct path for filter installation, open ParaView and select Tools->Manage Plugins... and copy/paste the path at the top of the window where it says "Local plugins are automatically searched for in ..."
 
