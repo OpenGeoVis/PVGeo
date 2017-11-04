@@ -20,7 +20,7 @@ If you have your own plugins either developed in C++ or as python programmable f
 Stay tuned; this project is in its early stages of development, so only a handful of the plugins are tested and published here. Also be sure to out the [Docs pages](http://paraviewgeophysics.readthedocs.io/) (*currently being developed and proofed*) for detailed documentation on the filters and general use of this repository.
 
 # How To Use the Plugins in this Repository
-Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble, please read through the detailed explanation [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/Install-Plugins/)
+Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble or you are a windows user, please read through the detailed explanation [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/Install-Plugins/)
 
 ## Quick and Easy
 
