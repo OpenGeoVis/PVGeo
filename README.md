@@ -46,7 +46,7 @@ $ cd ParaViewGeophysics
 $ sh ./updatePVGP.sh
 ```
 
-After executing the above tasks, you should be ready to go. The most common issue is having the incorrect `PVPLUGINPATH` variable in your `~/.bash_profile`, so be sure to check that if errors arise. A more step-by-step process is below.
+After executing the above tasks, you should be ready to go. The most common issue is having the incorrect `PVPLUGINPATH` variable in your `~/.bash_profile`, so be sure to check that if errors arise. A more step-by-step process is [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/Install-Plugins/).
 
 # Make Your Own Filters and Readers
 A detailed explanation can be found in the [Docs](http://paraviewgeophysics.readthedocs.io/en/latest/Plugins/Build-Your-Own-Plugins/) but here is a quick run through:
