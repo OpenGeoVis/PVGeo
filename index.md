@@ -8,9 +8,8 @@ This repository was produced from the work of an undergraduate research project 
 
 Use the Sidebar (to the left) to explore the docs page and to find all documentation for readers, filters, macros, and more as you need.
 
-![Volcano](figs/indo_clip.png)
 
-<!-- Here I will test having 3D vtk.js rendering -->
+<!-- Here I will test having 3D vtk.js rendering ![Volcano](figs/indo_clip.png) -->
 <!--#include virtual="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0" -->
 
 ## Purpose
