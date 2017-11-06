@@ -9,10 +9,10 @@ This repository was produced from the work of an undergraduate research project 
 Use the Sidebar (to the left) to explore the docs page and to find all documentation for readers, filters, macros, and more as you need.
 
 
-<!-- Here I will test having 3D vtk.js rendering ![Volcano](figs/indo_clip.png) -->
-<!--#include virtual="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0" -->
+## Demo
+Check out the data scene below. This is an example of three data sets visually integrated using our framework and exported to a shareable format. Go ahead, click it and move it around!
 
-<iframe width="560" height="315" src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0" frameborder="0" ></iframe>
+<iframe src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0" frameborder="0" ></iframe>
 
 ## Purpose
 The primary goal of this project is to build plugins for the open-source, multi-platform, data analysis, and visualization application [ParaView](https://www.paraview.org) by Kitware. These plugins are tailored to the visualization of spatially referenced data in the geosciences. The overarching  goal of this project is to develop a framework to funnel geophysical data/models into virtual reality for the purpose of:
