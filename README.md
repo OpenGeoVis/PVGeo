@@ -5,7 +5,11 @@ Check out the [Docs pages](http://paraviewgeophysics.readthedocs.io/) to explore
 
 Also checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-MFIwUy1uUTlfVHM/view?usp=sharing) standalone presentation about the project.
 
-*NOTICE:* This repo is under development as the project just started! Consider everything here to be an Alpha (soon to be Beta) release.
+Here is an example of the types of visual data integration we are making possible by extending the capabilities of ParaView. The scene below is an exported data scene where we have three different data sets displayed in different manners amongst eachother. We have details on how to export your data scene in format like that below on [this Docs page](http://paraviewgeophysics.readthedocs.io/en/latest/Scene-Export/Exporting-Visualizations/)
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
 
 ## About the Author
 Unless otherwise specified at the top of the file, all code and documentation distributed here were produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
