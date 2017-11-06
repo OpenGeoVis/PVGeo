@@ -25,7 +25,7 @@ pages:
 - Plugins:
     - About ParaView Plugins: Plugins/Plugins.md
     - Build Your Own Plugins: Plugins/Build-Your-Own-Plugins.md
-    - Readers: Plugins/Plugins.md
+    - Readers:
         - Read SGeMS Grid: Plugins/Readers/Read-SGeMS-Grid.md
         - Read GSLIB File: Plugins/Readers/Read-GSLIB-File-to-Table.md
         - Read UBC Mesh Two File FormatRe: Plugins/Readers/Read-UBC-Mesh-Two-File-Format.md
