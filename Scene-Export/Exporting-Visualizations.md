@@ -17,8 +17,9 @@ The vtk.js library has an open-source [standalone scene viewer](https://kitware.
 ## Test It Out
 Here are some samples to demonstrate the web viewer. We have included two of our scenes and one of the vtk.js sample scenes for you to demo:
 
-- [Our Volcano](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0)
-- [Our Ripple](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0)
+- [Volcano](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0)
+- [Ripple](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0)
+- [Earth](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/munbt3hi00k5mpp/earth.vtkjs?dl=0)
 - [vtk.js Sample Scene](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download)
 
 
