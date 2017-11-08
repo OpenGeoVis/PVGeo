@@ -11,14 +11,14 @@ from vtk.numpy_interface import dataset_adapter as dsa
 #paraview.simple._DisableFirstRenderCameraReset()
 
 # Where to save data. Absolute path:
-path = '/Users/bane/school/GPVR/closed_data/jacob/slices/'
+#path = '/Users/cooluser/path/to/save/slices'
 #path = tkFileDialog.askdirectory()
 
 # Specify Points for the Line Source:
-line = servermanager.Fetch(FindSource('TableToPoints2'))
+line = servermanager.Fetch(FindSource('TableToPoints1'))
 
 # Specify data set to be sliced
-data = FindSource('Delaunay3D1')
+data = FindSource('Threshold1')
 
 # Get the Points over the NumPy interface
 wpdi = dsa.WrapDataObject(line) # NumPy wrapped points
@@ -49,9 +49,9 @@ for i in range(0, numPoints - 1, numPoints/numSlices):
 
     # save out slice with good metadata: TODO: change name
     # This will use a value from the point data to add to the name
-    num = wpdi.PointData['Advance LL (S-558)'][ptsi[i]]
-    filename = path + 'Slice_Advance' + str(num) + '.csv'
-    print(filename)
+    #num = wpdi.PointData['Advance LL (S-558)'][ptsi[i]]
+    #filename = path + 'Slice_Advance' + str(num) + '.csv'
+    #print(filename)
     #SaveData(filename, proxy=slc)
 
     # delete slice source
