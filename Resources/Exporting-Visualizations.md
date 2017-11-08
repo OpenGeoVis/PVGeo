@@ -14,7 +14,7 @@ Would not it be great to send your client or interested parties an interactive 3
 The vtk.js library has an open-source [standalone scene viewer](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html) which they have a nice demo for [here](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html). They also have a scene export macro for ParaView that compresses your data scene in ParaView to a single shareable file for viewing on the web. The macro from the vtk.js library can be found [here](https://raw.githubusercontent.com/Kitware/vtk-js/master/Utilities/ParaView/export-scene-macro.py) but we also deploy this macro in our repository under `macros/scene-export-macro.py`. You can choose to either download that file to run locally or simple use the file off of the vtk.js repo by clicking that link.
 
 ## Test It Out
-Here are some samples to demonstrate the web viewer. We have included two of our scenes and one of the vtk.js sample scenes for you to demo:
+Here are some samples to demonstrate the web viewer. We have included a few of our scenes and one of the vtk.js sample scenes for you to demo:
 
 
 - [Volcano](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0)
