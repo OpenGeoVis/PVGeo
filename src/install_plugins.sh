@@ -28,7 +28,7 @@ fi
 
 
 pushd "$(dirname "$0")"
-printf "${BLUE}%s${NORMAL}\n" "Installing all the plugins..."
+printf "${BLUE}%s${NORMAL}\n" "--> Installing all the plugins..."
 #------ INSTALL TO PARAVIEW ------#
 if [ ! -d $PVPLUGINPATH ]; then
     mkdir $PVPLUGINPATH

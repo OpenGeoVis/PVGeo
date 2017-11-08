@@ -27,14 +27,14 @@ else
 fi
 
 pushd "$(dirname "$0")"
-printf "${BLUE}%s${NORMAL}\n" "Jumping to the PVPLUGINPATH..."
+printf "${BLUE}%s${NORMAL}\n" "--> Jumping to the PVPLUGINPATH..."
 pushd $PVPLUGINPATH
 # Removes all of the XML files from th ParaView plugin path
-printf "${BLUE}%s${NORMAL}\n" "Cleaning out old plugins..."
+printf "${BLUE}%s${NORMAL}\n" "--> Cleaning out old plugins..."
 rm -f *.xml
 popd
 # Removes all XML files in th ../build/ directory
-printf "${BLUE}%s${NORMAL}\n" "Back to ParaViewGeophysics repo."
-printf "${BLUE}%s${NORMAL}\n" "Cleaning out old plugins..."
+printf "${BLUE}%s${NORMAL}\n" "--> Back to ParaViewGeophysics repo."
+printf "${BLUE}%s${NORMAL}\n" "--> Cleaning out old plugins..."
 rm -f ../build/*.xml
 popd

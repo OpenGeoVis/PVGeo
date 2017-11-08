@@ -36,21 +36,21 @@ fi
 pushd "$(dirname "$0")"
 
 #------ WRAP FILTERS IN XML ------#
-printf "${BLUE}%s${NORMAL}\n" "Attempting to wrap FILTERS in XML..."
+printf "${BLUE}%s${NORMAL}\n" "--> Attempting to wrap FILTERS in XML..."
 for filename in ./filters/filter_*.py; do
     filtername="${filename%.*}"
     python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
 done
 
 #------ WRAP SOURCES IN XML ------#
-printf "${BLUE}%s${NORMAL}\n" "Attempting to wrap SOURCES in XML..."
+printf "${BLUE}%s${NORMAL}\n" "--> Attempting to wrap SOURCES in XML..."
 for filename in ./artificial_sources/create_*.py; do
     filtername="${filename%.*}"
     python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
 done
 
 #------ WRAP READERS IN XML ------#
-printf "${BLUE}%s${NORMAL}\n" "Attempting to wrap READERS in XML..."
+printf "${BLUE}%s${NORMAL}\n" "--> Attempting to wrap READERS in XML..."
 for filename in ./readers/read_*.py; do
     filtername="${filename%.*}"
     python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
