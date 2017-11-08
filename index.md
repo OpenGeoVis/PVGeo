@@ -50,3 +50,6 @@ These are the goals to achieve through publishing this repository but not necess
      * Document how to use ParaView’s native filters to complete common tasks in the visualization of geoscientific data. For example, applying satellite imagery to a surface that represents topography.
 
 * Develop customizable macros for the visualization of common data formats. This will include developing macros on an individual basis to help others quickly visualize their data and models for quality assessment and individual research needs.
+
+# About the Author
+Unless otherwise specified at the top of the file, all code and documentation distributed here were produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
