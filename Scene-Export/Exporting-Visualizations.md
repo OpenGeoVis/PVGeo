@@ -4,9 +4,8 @@ In order to effectively communicate our geoscientific findings, we often need to
 Would not it be great to send your client or interested parties an interactive 3D scene of your Geophysical findings like the example below?
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-        <iframe src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/0xxviidrh66smmg/volc_clip.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        <iframe src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/ftcmvc74qsr4hbl/tunnels.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
-
 
 -----
 # VTK.js
@@ -17,8 +16,11 @@ The vtk.js library has an open-source [standalone scene viewer](https://kitware.
 ## Test It Out
 Here are some samples to demonstrate the web viewer. We have included two of our scenes and one of the vtk.js sample scenes for you to demo:
 
+
 - [Volcano](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/SampleVis.vtkjs?dl=0)
+- [Volcano Clipped](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/0xxviidrh66smmg/volc_clip.vtkjs?dl=0)
 - [Ripple](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0)
+- [Tunnels](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/ftcmvc74qsr4hbl/tunnels.vtkjs?dl=0)
 - [Earth](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/munbt3hi00k5mpp/earth.vtkjs?dl=0)
 - [vtk.js Sample Scene](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download)
 
