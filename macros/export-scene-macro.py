@@ -371,7 +371,11 @@ def getComponentName(actor):
       nameToUse = newName
     duplicates[nameToUse] = True
 
-    actorRep = simple.GetRepresentation(val).GetClientSideObject().GetActiveRepresentation().GetActor()
+    try:
+        actorRep = simple.GetRepresentation(val).GetClientSideObject().GetActiveRepresentation().GetActor()
+    except AttributeError as err:
+        print("Handling error: ", err)
+
     if actor == actorRep:
       return nameToUse
 
