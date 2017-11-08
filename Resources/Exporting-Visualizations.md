@@ -21,7 +21,6 @@ Here are some samples to demonstrate the web viewer. We have included a few of o
 - [Volcano Clipped](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/0xxviidrh66smmg/volc_clip.vtkjs?dl=0)
 - [Ripple](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0)
 - [Tunnels](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/ftcmvc74qsr4hbl/tunnels.vtkjs?dl=0)
-- [Earth](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/munbt3hi00k5mpp/earth.vtkjs?dl=0)
 - [vtk.js Sample Scene](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download)
 
 
