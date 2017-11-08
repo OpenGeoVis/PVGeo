@@ -48,7 +48,7 @@ pages:
         - Many Slices Along Points: Macros/ours/Many-Slices-Along-Points.md
 
 - Resources:
-    - Exporting Visualizations: Scene-Export/Exporting-Visualizations.md
+    - Exporting Visualizations: Resources/Exporting-Visualizations.md
     - Examples/Tutorials:
         - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
     - Virtual Reality:
