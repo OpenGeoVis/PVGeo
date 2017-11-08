@@ -358,6 +358,7 @@ componentIndex = 0
 def getComponentName(actor):
   srcs = simple.GetSources()
   duplicates = {}
+  errs = []
   for key, val in srcs.items():
     # Prevent name duplication
     nameToUse = key[0]
@@ -374,11 +375,12 @@ def getComponentName(actor):
     try:
         actorRep = simple.GetRepresentation(val).GetClientSideObject().GetActiveRepresentation().GetActor()
     except AttributeError as err:
-        print("Handling error: ", err)
+        errs.append(err)
+        #print("Handling error: ", err)
 
     if actor == actorRep:
       return nameToUse
-
+  print("Errors Handled: ", errs)
   nameToUse = '%d' % componentIndex
   componentIndex += 1
   return nameToUse
