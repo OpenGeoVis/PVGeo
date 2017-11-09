@@ -1,3 +1,4 @@
 # OS Files:
 **/.DS_Store
-prototype/
+**.pyc
+**/__pycache__/
