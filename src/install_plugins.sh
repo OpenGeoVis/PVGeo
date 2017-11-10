@@ -29,6 +29,7 @@ fi
 
 pushd "$(dirname "$0")"
 printf "${BLUE}%s${NORMAL}\n" "--> Installing all the plugins..."
+printf "${RED}" # Change printout color to red to signify errors
 #------ INSTALL TO PARAVIEW ------#
 if [ ! -d $PVPLUGINPATH ]; then
     mkdir $PVPLUGINPATH
@@ -36,4 +37,5 @@ fi
 for filename in ../build/*.xml; do
     cp $filename $PVPLUGINPATH
 done
+printf "${NORMAL}"
 popd

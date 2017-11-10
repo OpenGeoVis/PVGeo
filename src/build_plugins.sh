@@ -37,25 +37,29 @@ pushd "$(dirname "$0")"
 
 #------ WRAP FILTERS IN XML ------#
 printf "${BLUE}%s${NORMAL}\n" "--> Attempting to wrap FILTERS in XML..."
+printf "${RED}" # Change printout color to red to signify errors
 for filename in ./filters/filter_*.py; do
     filtername="${filename%.*}"
     python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
 done
+printf "${NORMAL}"
 
 #------ WRAP SOURCES IN XML ------#
 printf "${BLUE}%s${NORMAL}\n" "--> Attempting to wrap SOURCES in XML..."
+printf "${RED}" # Change printout color to red to signify errors
 for filename in ./artificial_sources/create_*.py; do
     filtername="${filename%.*}"
     python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
 done
-
+printf "${NORMAL}"
 #------ WRAP READERS IN XML ------#
 printf "${BLUE}%s${NORMAL}\n" "--> Attempting to wrap READERS in XML..."
+printf "${RED}" # Change printout color to red to signify errors
 for filename in ./readers/read_*.py; do
     filtername="${filename%.*}"
     python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
 done
-
+printf "${NORMAL}"
 #------ INSTALL ------#
 sh ./install_plugins.sh
 popd

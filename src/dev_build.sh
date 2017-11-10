@@ -27,9 +27,11 @@ fi
 
 # filters under development:
 printf "${BLUE}%s${NORMAL}\n" "--> Attempting to wrap DEV FILTERS in XML..."
+printf "${RED}" # Change printout color to red to signify errors
 for filename in ./filters/dev_*.py; do
     filtername="${filename%.*}"
     python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
 done
+printf "${NORMAL}"
 sh ./build_plugins.sh
 popd
