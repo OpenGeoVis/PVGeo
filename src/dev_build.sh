@@ -31,7 +31,7 @@ for filename in ./filters/dev_*.py; do
     filtername="${filename%.*}"
     printf "${YELLOW}%s${NORMAL}\n" "   |--> $(basename "$filtername")"
     printf "${RED}" # Change printout color to red to signify errors
-    python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
+    python2 python_filter_generator.py $filename "../plugins/$(basename "$filtername").xml"
 done
 printf "${NORMAL}"
 
@@ -41,7 +41,7 @@ for filename in ./readers/dev_*.py; do
     filtername="${filename%.*}"
     printf "${YELLOW}%s${NORMAL}\n" "   |--> $(basename "$filtername")"
     printf "${RED}" # Change printout color to red to signify errors
-    python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
+    python2 python_filter_generator.py $filename "../plugins/$(basename "$filtername").xml"
 done
 printf "${NORMAL}"
 
