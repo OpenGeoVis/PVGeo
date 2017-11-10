@@ -27,15 +27,15 @@ Here we will outline everything you need to do in one spot to quickly install th
 
 ## Quick and Easy Unix Installation
 
-First, declare a `PVPLUGINPATH` variable in your your `~/.bash_profile`. To double check the correct path for filter installation, open ParaView and select Tools->Manage Plugins... and copy/paste the path at the top of the window where it says "Local plugins are automatically searched for in ..."
+First, declare a `PVPATH` variable in your your `~/.bash_profile`. This is the path to the installation of ParaView. We need this path so that the installation script can make symbolic links between this repository and your installation of ParaView.
 
 ```bash
 # edit your ~/.bash_profile with vim or some text editor
 $ vi ~/.bash_profile
 
 # Be sure to check that this path matches yours... Odds are it's different!
-# Path for ParaView Plugins for the ParaViewGeophysics Repo:
-export PVPLUGINPATH="/Applications/ParaView-5.4.0.app/Contents/MacOS/plugins/"
+# Path to the ParaView installation:
+export PVPATH="/Applications/ParaView-5.4.0.app"
 ```
 
 Now clone the repository and get to work using our code:
@@ -45,11 +45,11 @@ Now clone the repository and get to work using our code:
 $ git clone https://github.com/banesullivan/ParaViewGeophysics
 # Go into the repository
 $ cd ParaViewGeophysics
-# Install the plugins
-$ sh ./updatePVGP.sh
+# Install the everything!
+$ sh ./install.sh
 ```
 
-After executing the above tasks, you should be ready to go. The most common issue is having the incorrect `PVPLUGINPATH` variable in your `~/.bash_profile`, so be sure to check that if errors arise. A more step-by-step process is [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/Install-Plugins/).
+After executing the above tasks, you should be ready to go. The most common issue is having the incorrect `PVPATH` variable in your `~/.bash_profile`, so be sure to check that if errors arise. A more step-by-step process is [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/Install-Plugins/).
 
 
 -----
