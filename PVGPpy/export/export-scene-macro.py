@@ -436,7 +436,8 @@ for rIdx in range(renderers.GetNumberOfItems()):
       mapper = renProp.GetMapper()
       dataObject = mapper.GetInputDataObject(0, 0);
       dataset = None
-
+      if dataObject is None:
+        continue
       if dataObject.IsA('vtkCompositeDataSet'):
         if dataObject.GetNumberOfBlocks() == 1:
           dataset = dataObject.GetBlock(0)
@@ -570,9 +571,14 @@ with open(indexFilePath, 'w') as outfile:
 # -----------------------------------------------------------------------------
 
 # Now zip up the results and get rid of the temp directory
-
-sceneName = generateSceneName()
-sceneFileName = os.path.join(ROOT_OUTPUT_DIRECTORY, '%s%s' % (sceneName, FILENAME_EXTENSION))
+if len(sys.argv) == 2:
+    # grab file name arguments
+    sceneName = sys.argv[1]
+    sceneFileName = os.path.join(ROOT_OUTPUT_DIRECTORY, '%s%s' % (sceneName, FILENAME_EXTENSION))
+else:
+    sceneName = generateSceneName()
+    print(sys.argv)
+    sceneFileName = os.path.join(ROOT_OUTPUT_DIRECTORY, '%s%s' % (sceneName, FILENAME_EXTENSION))
 
 try:
   import zlib
