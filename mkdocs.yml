@@ -40,7 +40,7 @@ pages:
         - Translate Origin of Grid: Plugins/Filters/Translate-Origin-of-Grid.md
         - Normalize Array: Plugins/Filters/Normalize-Array.md
 
-- PVPGpy and Macros:
+- PVGPpy and Macros:
     - About PVGPpy: PVGPpy/About-PVGPpy.md
     - Using ParaView Macros: Macros/Using-PV-Macros.md
     - Advice For Making Macros: Macros/Advice-For-Making-Macros.md
