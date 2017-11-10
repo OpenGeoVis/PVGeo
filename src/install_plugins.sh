@@ -28,7 +28,7 @@ fi
 
 
 pushd "$(dirname "$0")"
-printf "${BLUE}%s${NORMAL}\n" "--> Installing all the plugins..."
+printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Installing all the plugins..."
 printf "${RED}" # Change printout color to red to signify errors
 #------ INSTALL TO PARAVIEW ------#
 if [ ! -d $PVPLUGINPATH ]; then
