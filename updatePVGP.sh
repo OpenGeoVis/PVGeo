@@ -43,7 +43,7 @@ then
     printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Learn more about updates and features to come on the Read the Docs page at:"
     printf "${BLUE}${BOLD}${UND}%s${NORMAL}\n" "http://paraviewgeophysics.readthedocs.io"
 else
-  printf "${RED}${BOLD}%s${NORMAL}\n" '--> There was an error updating. Try again later or run a `git status` to see if you have unstaged changes.'
+  printf "${RED}${BOLD}%s${NORMAL}\n" '--> There was an error updating. Try again later or run a `git status` to see if you have unstaged changes. If you have made changes to files in the repo, you will need to stage them.'
 fi
 
 popd
