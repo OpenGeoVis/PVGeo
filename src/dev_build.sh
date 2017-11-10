@@ -34,5 +34,16 @@ for filename in ./filters/dev_*.py; do
     python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
 done
 printf "${NORMAL}"
+
+# readers under development:
+printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Attempting to wrap DEV READERS in XML..."
+for filename in ./readers/dev_*.py; do
+    filtername="${filename%.*}"
+    printf "${YELLOW}%s${NORMAL}\n" "    --> $(basename "$filtername")"
+    printf "${RED}" # Change printout color to red to signify errors
+    python2 python_filter_generator.py $filename "../build/$(basename "$filtername").xml"
+done
+printf "${NORMAL}"
+
 sh ./build_plugins.sh
 popd
