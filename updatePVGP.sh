@@ -26,24 +26,24 @@ else
     NORMAL=""
 fi
 
-printf "${BLUE}%s${NORMAL}\n" "--> Updating ParaViewGeophysics..."
+printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Updating ParaViewGeophysics..."
 
 #  Pull from github
 if git pull --rebase --stat origin master
 then
     # Succesful update from GitHub
-    printf "${GREEN}%s${NORMAL}\n" "--> Tsjakka!! ParaViewGeophysics has been updated and/or is at the current version."
+    printf "${GREEN}${BOLD}%s${NORMAL}\n" "--> Tsjakka!! ParaViewGeophysics has been updated and/or is at the current version."
     # Now lets clean out the old version
     pushd ./src
     sh ./clean_out.sh
     # Now lets build and install everything (running a build incase user has their own plugins added to thier fork)
     sh ./build_plugins.sh
     popd
-    printf "${GREEN}%s${NORMAL}\n" "--> All plugins should be up to date and installed."
+    printf "${GREEN}${BOLD}%s${NORMAL}\n" "--> All plugins should be up to date and installed."
     printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Learn more about updates and features to come on the Read the Docs page at:"
     printf "${BLUE}${BOLD}${UND}%s${NORMAL}\n" "http://paraviewgeophysics.readthedocs.io"
 else
-  printf "${RED}%s${NORMAL}\n" '--> There was an error updating. Try again later or run a `git status` to see if you have unstaged changes.'
+  printf "${RED}${BOLD}%s${NORMAL}\n" '--> There was an error updating. Try again later or run a `git status` to see if you have unstaged changes.'
 fi
 
 popd
