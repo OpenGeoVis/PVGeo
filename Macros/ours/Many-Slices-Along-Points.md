@@ -1,3 +1,5 @@
+*DEPRECATED. We will update soon*
+
 # Slicing Data Along a Series of Points
 Sometimes we might have a model, some input data, that we would like to have numerous slices of along a series of points, a path of points per say. These points might represent some travel path through the model where we would like to have a slice of the model at each point so that we can make spacial decisions and share this information of flat documents.
 
