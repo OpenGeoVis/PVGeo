@@ -3,6 +3,7 @@
 # ONLY RUN THIS SCRIPT ONCE (at time of installation)
 
 pushd "$(dirname "$0")"
+export CYGWIN=winsymlinks:native
 # The PVGP Path:
 PVGP="$( cd "$(dirname "$0")" ; pwd -P )"
 
