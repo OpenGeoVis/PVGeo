@@ -41,7 +41,7 @@ else
     printf "${YELLOW}" # Change printout color to yellow (success or failure)
     link_name="${PVPATH}/bin/Lib/site-packages/PVGPpy"
     target_dir="${PVGP}/PVGPpy"
-    cmd /c mklink /d "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
+    cmd /c mklink /d /j "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
     printf "${NORMAL}"
 
     #### Link the build folder to the Plugins folder in ParaView
@@ -49,7 +49,7 @@ else
     printf "${YELLOW}" # Change printout color to yellow (success or failure)
     link_name="${PVPATH}/bin/plugins"
     target_dir="${PVGP}/plugins"
-    cmd /c mklink /d "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
+    cmd /c mklink /d  /j "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
     printf "${NORMAL}"
 fi
 
