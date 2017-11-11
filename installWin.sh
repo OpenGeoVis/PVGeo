@@ -42,7 +42,7 @@ else
     printf "${RED}\n" # Change printout color to red to signify errors
 
     link_name="${PVGP}/PVGPpy"
-    target_dir="${PVPATH}/bin/Lib/site-packages/"
+    target_dir="${PVPATH}/bin/Lib/site-packages/PVGPpy"
     cmd /c mklink /d "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
     #ln -s $PVGP/PVGPpy $PVPATH/bin/Lib/site-packages
     printf "${NORMAL}"
@@ -51,7 +51,7 @@ else
     # Create symbolic link for plugins in ParaView's 3rd party plugin folder
     printf "${RED}" # Change printout color to red to signify errors
     link_name="${PVGP}/plugins"
-    target_dir="${PVPATH}/bin/"
+    target_dir="${PVPATH}/bin/plugins"
     cmd /c mklink /d "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
     # TODO: this will not work for windows or linux users
     #ln -s $PVGP/plugins $PVPATH/bin/
