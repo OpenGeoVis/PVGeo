@@ -45,7 +45,7 @@ Now clone the repository and get to work using our code:
 $ git clone https://github.com/banesullivan/ParaViewGeophysics
 # Go into the repository
 $ cd ParaViewGeophysics
-# Install the everything!
+# Install everything!
 $ sh ./install.sh
 ```
 
