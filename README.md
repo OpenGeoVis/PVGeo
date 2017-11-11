@@ -45,8 +45,13 @@ Now clone the repository and get to work using our code:
 $ git clone https://github.com/banesullivan/ParaViewGeophysics
 # Go into the repository
 $ cd ParaViewGeophysics
-# Install everything!
-$ sh ./install.sh
+
+# Install everything:
+#- Note: There are two install scripts. One for Mac/Linux and one for Windows
+#- Mac:
+$ sh ./installMac.sh
+#- Windows:
+$ sh ./installWin.sh
 ```
 
 After executing the above tasks, you should be ready to go. The most common issue is having the incorrect `PVPATH` variable in your `~/.bash_profile`, so be sure to check that if errors arise. A more step-by-step process is [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/Install-Plugins/).
