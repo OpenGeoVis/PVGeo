@@ -1,4 +1,5 @@
 #!/bin/bash
+# FOR MAC OS X OPERATING SYSTEM
 # ONLY RUN THIS SCRIPT ONCE (at time of installation)
 
 pushd "$(dirname "$0")"
@@ -43,6 +44,7 @@ else
     #### Link the build folder to the Plugins folder in ParaView
     # Create symbolic link for plugins in ParaView's 3rd party plugin folder
     printf "${RED}" # Change printout color to red to signify errors
+    # TODO: this will not work for windows or linux users
     ln -s $PVGP/plugins $PVPATH/Contents/MacOS/
     printf "${NORMAL}"
 fi
