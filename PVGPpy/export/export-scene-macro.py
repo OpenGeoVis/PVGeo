@@ -409,12 +409,30 @@ def mkdir_p(path):
     else:
       raise
 
+# Check sys arguments for file name and compression preference
+#- handle case if no arguments
+if len(sys.argv) == 1:
+    sceneName = generateSceneName()
+    doCompressArrays = False
+else:
+    args = sys.argv
+    # ignore arg 0
+    # arg 1 should be file name
+    if args[1] == '':
+        sceneName = generateSceneName()
+    else:
+        sceneName = args[1]
+    # arg 2 shoud be compression prefernece
+    doCompressArrays = args[2]
+
+
+
+
 # Generate timestamp and use it to make subdirectory within the top level output dir
 timeStamp = time.strftime("%a-%d-%b-%Y-%H-%M-%S")
 outputDir = os.path.join(ROOT_OUTPUT_DIRECTORY, timeStamp)
 mkdir_p(outputDir)
 
-doCompressArrays = False
 
 # Get the active view and render window, use it to iterate over renderers
 activeView = simple.GetActiveView()
@@ -571,14 +589,7 @@ with open(indexFilePath, 'w') as outfile:
 # -----------------------------------------------------------------------------
 
 # Now zip up the results and get rid of the temp directory
-if len(sys.argv) == 2:
-    # grab file name arguments
-    sceneName = sys.argv[1]
-    sceneFileName = os.path.join(ROOT_OUTPUT_DIRECTORY, '%s%s' % (sceneName, FILENAME_EXTENSION))
-else:
-    sceneName = generateSceneName()
-    print(sys.argv)
-    sceneFileName = os.path.join(ROOT_OUTPUT_DIRECTORY, '%s%s' % (sceneName, FILENAME_EXTENSION))
+sceneFileName = os.path.join(ROOT_OUTPUT_DIRECTORY, '%s%s' % (sceneName, FILENAME_EXTENSION))
 
 try:
   import zlib
