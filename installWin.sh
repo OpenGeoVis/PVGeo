@@ -38,7 +38,7 @@ else
     ##### Link PVGPpy to ParaView Python
     # Create symbolic link between PVGPpy and ParaView's Python library
     printf "${RED}\n" # Change printout color to red to signify errors
-    ln -s $PVGP/PVGPpy $PVPATH/lib/site-packages
+    ln -s $PVGP/PVGPpy $PVPATH/bin/Lib/site-packages
     printf "${NORMAL}"
 
     #### Link the build folder to the Plugins folder in ParaView
