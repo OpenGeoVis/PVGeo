@@ -52,6 +52,9 @@ else
     printf "${RED}" # Change printout color to red to signify errors
     link_name="${PVGP}/plugins"
     target_dir="${PVPATH}/bin/plugins"
+
+    printf "trying: %s" "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
+
     cmd /c mklink /d "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
     # TODO: this will not work for windows or linux users
     #ln -s $PVGP/plugins $PVPATH/bin/
