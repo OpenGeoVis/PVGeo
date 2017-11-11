@@ -1,6 +1,8 @@
 # How to Use the Outside Modules
 ParaView's Python environment, `pvpython`, can be a bit tricky to start using outside Python modules like SciPy or SimPEG. On Mac OS X, using Python modules installed via pip or anaconda should work simply with an `import ...` statement if you have your Python paths set up well. (Mac users: if you have trouble importing SciPy or other modules used in this repo let me know and I will develop a solution). Windows users on the other hand are going to have quite a bit of trouble as `pvpython` is its own environment nestled in the ParaView application. I have not been able to develop an elegant solution for Windows users to use 3rd party Python libraries other than a simple copy/paste of that module into the ParaView application contents.
 
+*Note: Advanced users, try a symbolic link between ParaView's python library and the libraries you have installed. This is how we are installing our module so that it stays updated.*
+
 ## Windows Users:
 To start using third party libraries, we are going to have copy over static versions of the modules into ParaView's `site-packages` directory. This folder should be under `.../ParaView/bin/site-packages/`. Effectively, we just perform a brute install of that module to `pvpython` on Windows so that when we make `import`s, the modules will be found in the `pvpython` environment.
 

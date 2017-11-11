@@ -59,11 +59,17 @@ $ cd ParaViewGeophysics
 ### Installing the Plugins to ParaView
 Now to get started using the plugins and python modules included in this repository, we need to create links between your installation of ParaView and this repository. That's why we need a `PVPATH` variable to be set in your environment (above).
 
-To create these links, run the installation script at the top of the repository called `install.sh`. If errors arise, they will be printed in red. The most common cause of error is having an incorrect `PVPATH` variable.
+To create these links, run the installation script at the top of the repository called `installMac.sh` or `installWin.sh` for your operating system. If errors arise, they will be printed in red. The most common cause of error is having an incorrect `PVPATH` variable.
+
+*Note: Windows users, when running the `installWin.sh` script there will be some yellow outputs. Make sure they are just announcing successful links and not errors/permission denied.*
 
 ```bash
-# Install our repository to ParaView
-$ sh ./install.sh
+# Install our repository to ParaView:
+#- Note: There are two install scripts. One for Mac/Linux and one for Windows
+#- Mac:
+$ sh ./installMac.sh
+#- Windows:
+$ sh ./installWin.sh
 ```
 
 <!--
