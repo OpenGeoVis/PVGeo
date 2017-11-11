@@ -37,27 +37,19 @@ if [ -z ${PVPATH+x} ]; then
 else
     # Path exists so lets get to installing!
     ##### Link PVGPpy to ParaView Python
-    # Create symbolic link between PVGPpy and ParaView's Python library
-    printf "${PVGP} \n"
-    printf "${RED}\n" # Change printout color to red to signify errors
-
-    link_name="${PVGP}/PVGPpy"
-    target_dir="${PVPATH}/bin/Lib/site-packages/PVGPpy"
+    # Create symbolic link between PVGPpy and ParaView's site-packages
+    printf "${YELLOW}" # Change printout color to yellow (success or failure)
+    link_name="${PVPATH}/bin/Lib/site-packages/PVGPpy"
+    target_dir="${PVGP}/PVGPpy"
     cmd /c mklink /d "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
-    #ln -s $PVGP/PVGPpy $PVPATH/bin/Lib/site-packages
     printf "${NORMAL}"
 
     #### Link the build folder to the Plugins folder in ParaView
     # Create symbolic link for plugins in ParaView's 3rd party plugin folder
-    printf "${RED}" # Change printout color to red to signify errors
+    printf "${YELLOW}" # Change printout color to yellow (success or failure)
     link_name="${PVPATH}/bin/plugins"
     target_dir="${PVGP}/plugins"
-
-    printf "trying: %s\n" "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
-
     cmd /c mklink /d "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
-    # TODO: this will not work for windows or linux users
-    #ln -s $PVGP/plugins $PVPATH/bin/
     printf "${NORMAL}"
 fi
 
