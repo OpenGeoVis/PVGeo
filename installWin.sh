@@ -38,15 +38,23 @@ else
     # Path exists so lets get to installing!
     ##### Link PVGPpy to ParaView Python
     # Create symbolic link between PVGPpy and ParaView's Python library
+    printf "${PVGP} \n"
     printf "${RED}\n" # Change printout color to red to signify errors
-    ln -s $PVGP/PVGPpy $PVPATH/bin/Lib/site-packages
+
+    link_name="${PVGP}/PVGPpy"
+    target_dir="${PVPATH}/bin/Lib/site-packages/"
+    cmd /c mklink /d "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
+    #ln -s $PVGP/PVGPpy $PVPATH/bin/Lib/site-packages
     printf "${NORMAL}"
 
     #### Link the build folder to the Plugins folder in ParaView
     # Create symbolic link for plugins in ParaView's 3rd party plugin folder
     printf "${RED}" # Change printout color to red to signify errors
+    link_name="${PVGP}/plugins"
+    target_dir="${PVPATH}/bin/"
+    cmd /c mklink /d "`cygpath -w \"$link_name\"`" "`cygpath -w \"$target_dir\"`"
     # TODO: this will not work for windows or linux users
-    ln -s $PVGP/plugins $PVPATH/bin/
+    #ln -s $PVGP/plugins $PVPATH/bin/
     printf "${NORMAL}"
 fi
 
