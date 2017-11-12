@@ -35,7 +35,7 @@ Variable3
 0.856096029282 0.0719339996576 0.928031027317
 ...
 ```
-# Common Filters to Use Down the Pipeline
+# Down the Pipeline
 - [Translate Origin of Grid](../Filters/Translate-Origin-of-Grid.md)
 - [Flip Grid Axii](../Filters/Flip-Grid-Axii.md)
 - [Normalize Array](../Filters/Normalize-Array.md)

@@ -36,7 +36,7 @@ Variable3
 ...
 ```
 
-# Common Filters to Use Down the Pipeline
+# Down the Pipeline
 - [Table to Uniform Grid](../Filters/Table-to-Uniform-Grid.md)
 - [Reshape Table](../Filters/Reshape-Table.md)
 - [Table to Points](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Points)

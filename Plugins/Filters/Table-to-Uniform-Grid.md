@@ -7,7 +7,7 @@ This filter takes a vtkTable object with columns that represent data to be trans
 - Spacing: the spacing along each axial direction. Usually we specify a consistent spacing across all axial directions, but you can specify to have unique spacings along each axial direction.
 - Origin: the d1, d2, and d3 (x,y,z) coordinates for the south-west bottom corner of the data set. This is the corner from which we build the volume out. Note that you can translate this specification using the [Translate Origin of Grid](Translate-Origin-of-Grid.md) filter.
 
-# Common Filters to Use Down the Pipeline
+# Down the Pipeline
 - [Translate Origin of Grid](Translate-Origin-of-Grid.md)
 - [Flip Grid Axii](Flip-Grid-Axii.md)
 - [Normalize Array](Normalize-Array.md)

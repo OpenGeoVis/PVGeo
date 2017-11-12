@@ -3,7 +3,7 @@ This filter reads in float or double data that is packed into a binary file form
 
 There is a checkbox you can use to specify double precision if needed and a text box where you can specify the data variable name. The default for the data variable name is the base name of the file, however you may want something less verbose or more specific.
 
-# Common Filters to Use Down the Pipeline
+# Down the Pipeline
 - [Table to Uniform Grid](../Filters/Table-to-Uniform-Grid.md)
 - [Reshape Table](../Filters/Reshape-Table.md)
 - [Table to Points](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Points)
