@@ -7,7 +7,10 @@ Would not it be great to send your client or interested parties an interactive 3
         <iframe src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/ftcmvc74qsr4hbl/tunnels.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
------
+
+-------
+
+
 # VTK.js
 [vtk.js](https://kitware.github.io/vtk-js/) is a rendering library made for scientific visualization on the web. This code base brings high performance rendering into anyone's web browser. This library allows us to export complex scenes from ParaView and share them with anyone that has a web browser like Safari or Google Chrome.
 
@@ -21,6 +24,9 @@ Here are some samples to demonstrate the web viewer. We have included a few of o
 - [Ripple](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0)
 - [Tunnels](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/ftcmvc74qsr4hbl/tunnels.vtkjs?dl=0)
 - [vtk.js Sample Scene](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download)
+
+
+-------
 
 
 # Make Your Own
@@ -39,6 +45,10 @@ export.exportVTKjs(FileName='test_export')
 Now open the standalone web viewer by opening [this link](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html).
 
 Select the exported scene as the input file for the web viewer from where you saved it (should be under `~/Dropbox/PVGP_vtkjs/`). The export macro should have printed out the location of the saved scene in the Python Shell.
+
+
+-------
+
 
 # How to Share
 

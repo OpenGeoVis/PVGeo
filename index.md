@@ -15,7 +15,8 @@ Check out the data scene below. This is an example of three data sets visually i
 </div>
 
 
------
+-------
+
 # About the Project
 The primary goal of this project is to build plugins for the open-source, multi-platform, data analysis, and visualization application [ParaView](https://www.paraview.org) by Kitware. These plugins are tailored to the visualization of spatially referenced data in the geosciences. The overarching  goal of this project is to develop a framework to funnel geophysical data/models into virtual reality for the purpose of:
 
@@ -49,10 +50,18 @@ These are the goals to achieve through publishing this repository but not necess
 
 * Develop customizable macros for the visualization of common data formats. This will include developing macros on an individual basis to help others quickly visualize their data and models for quality assessment and individual research needs.
 
+
+-------
+
+
 # About the Author
 Unless otherwise specified at the top of the file, all code and documentation distributed here were produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
 
-# Features on their way
+
+-------
+
+
+# Features on Their Way
 
 Here is a list of features that are shortly coming to this repo. This list will be regularly updated
 
