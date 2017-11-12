@@ -391,7 +391,6 @@ Variable3
 <p>For example files to use with this reader, download any of the 2D or 3D files from <a href="http://www.trainingimages.org/training-images-library.html">this website</a> and load them into ParaView using the &lsquo;Read SGeMS File to Uniform Grid&rsquo; file reader. A 2D or 3D block of data should automatically be built and visualized.</p>
 <p>Here is the <a href="http://www.trainingimages.org/uploads/3/4/0/5/3405352/a_wlreferencecat.zip">Walker Lake Exhaustive DEM Categorized</a> with a categorized color scale:</p>
 <p><img alt="Walker Lake Cat" src="../figs/walker_lake_cat.png" /></p>
-<p><img src="figs/walker_lake_cat.png"></p>
 <p>and here is the <a href="http://www.trainingimages.org/uploads/3/4/0/5/3405352/ti_fluvsim_big_channels3d.zip">FLUVSIM object-based model</a> with a categorized color scale (bounding surfaces are set to be transparent):</p>
 <p><img alt="FLUVSIM" src="../figs/fluvsim.png" /></p>
 <p>We will later add in the ability to specify the spacing and origin of the produced vtkImageData as advanced properties of this reader, however you can easily do this by adding a Python Programmable Filter that copies the data and changes these properties with a script like this one:</p>
