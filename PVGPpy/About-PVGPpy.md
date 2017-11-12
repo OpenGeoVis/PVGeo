@@ -4,4 +4,4 @@ PVGPpy is a python module we are developing for direct use of our macros in the 
 1. Streamline their use by allowing users to call the macros like python functions directly from the ParaView shell.
 2. Easily update/change the macros without constant merge conflictions as users will need to input certain parameters for their use. This is much easily done through function calls than overwriting the macro files.
 
-More details to come... In a nut shell, add the `import_PVGPpy.py` macro to ParaView and use this have the module imported for your use.
+More details to come...
