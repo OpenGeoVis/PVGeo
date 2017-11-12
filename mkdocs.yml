@@ -25,36 +25,33 @@ pages:
 - Plugins:
     - About ParaView Plugins: Plugins/Plugins.md
     - Build Your Own Plugins: Plugins/Build-Your-Own-Plugins.md
-    - Readers:
-        - Read SGeMS Grid: Plugins/Readers/Read-SGeMS-Grid.md
-        - Read GSLIB File: Plugins/Readers/Read-GSLIB-File-to-Table.md
-        - Read UBC Mesh Two File FormatRe: Plugins/Readers/Read-UBC-Mesh-Two-File-Format.md
-        - Read Binary Packed Data: Plugins/Readers/Read-Binary-Packed-Data-to-Table.md
-        - Read Delimited File: Plugins/Readers/Read-Delimited-File-to-Table.md
-    - Filters:
-        - Table to Uniform Grid: Plugins/Filters/Table-to-Uniform-Grid.md
-        - Flip Grid Axii: Plugins/Filters/Flip-Grid-Axii.md
-        - Reshape Table: Plugins/Filters/Reshape-Table.md
-        - Add Cell Connectivity to Points: Plugins/Filters/Add-Cell-Connectivity-to-Points.md
-        - Points to Tube: Plugins/Filters/Points-to-Tube.md
-        - Translate Origin of Grid: Plugins/Filters/Translate-Origin-of-Grid.md
-        - Normalize Array: Plugins/Filters/Normalize-Array.md
+
+    - Read SGeMS Grid: Plugins/Readers/Read-SGeMS-Grid.md
+    - Read GSLIB File: Plugins/Readers/Read-GSLIB-File-to-Table.md
+    - Read UBC Mesh Two File FormatRe: Plugins/Readers/Read-UBC-Mesh-Two-File-Format.md
+    - Read Binary Packed Data: Plugins/Readers/Read-Binary-Packed-Data-to-Table.md
+    - Read Delimited File: Plugins/Readers/Read-Delimited-File-to-Table.md
+
+    - Table to Uniform Grid: Plugins/Filters/Table-to-Uniform-Grid.md
+    - Flip Grid Axii: Plugins/Filters/Flip-Grid-Axii.md
+    - Reshape Table: Plugins/Filters/Reshape-Table.md
+    - Add Cell Connectivity to Points: Plugins/Filters/Add-Cell-Connectivity-to-Points.md
+    - Points to Tube: Plugins/Filters/Points-to-Tube.md
+    - Translate Origin of Grid: Plugins/Filters/Translate-Origin-of-Grid.md
+    - Normalize Array: Plugins/Filters/Normalize-Array.md
 
 - PVGPpy and Macros:
     - About PVGPpy: PVGPpy/About-PVGPpy.md
     - Using ParaView Macros: Macros/Using-PV-Macros.md
     - Advice For Making Macros: Macros/Advice-For-Making-Macros.md
     - Screenshot Macros: Macros/Screenshot-Macros.md
-    - PVGPpy Python Module:
-        - Export Sub-Module:
-            - Export as VTKjs: PVGPpy/export/exportVTKjs.md
-        - Macros Sub-Module:
-            - Clip Through: PVGPpy/macros/Clip-Through.md
-            - Many Slices Along Points: PVGPpy/macros/Many-Slices-Along-Points.md
+
+    - Export as VTKjs: PVGPpy/export/exportVTKjs.md
+
+    - Clip Through: PVGPpy/macros/Clip-Through.md
+    - Many Slices Along Points: PVGPpy/macros/Many-Slices-Along-Points.md
 
 - Resources:
     - Exporting Visualizations: Examples/Exporting-Visualizations.md
-    - Examples/Tutorials:
-        - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
-    - Virtual Reality:
-        - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md
+    - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
+    - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md
