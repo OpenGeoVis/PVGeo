@@ -4,10 +4,12 @@
 PVGPpy.macros.manySlicesAlongPoints(pointsNm, dataNm, numSlices=10, exportpath='', ext='.csv')
 ```
 
-## Description
+Description
+-----------
 This macro takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at intervals of that path along the vector of that path at that point. This constructs `numSlices` slices through the dataset `dataNm`.
 
-## Parameters
+Parameters
+----------
 `pointsNm` : string
 
 - The string name of the points source to construct the path.
@@ -31,6 +33,7 @@ This macro takes a series of points and a data source to be sliced. The points a
 - Default to '.csv'
 
 
-## Notes
+Notes
+-----
 - Make sure the input data source is slice-able.
 - The SciPy module is required for this macro.
