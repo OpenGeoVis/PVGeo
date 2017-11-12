@@ -41,7 +41,7 @@ then
     popd
     printf "${GREEN}${BOLD}%s${NORMAL}\n" "--> All plugins should be up to date and installed."
     printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Learn more about updates and features to come on the Read the Docs page at:"
-    printf "${BLUE}${BOLD}${UND}%s${NORMAL}\n" "http://paraviewgeophysics.readthedocs.io"
+    printf "${BLUE}${BOLD}${UND}%s${NORMAL}\n" "https://banesullivan.github.io/ParaViewGeophysics/"
 else
   printf "${RED}${BOLD}%s${NORMAL}\n" '--> There was an error updating. Try again later or run a `git status` to see if you have unstaged changes. If you have made changes to files in the repo, you will need to stage them.'
 fi
