@@ -9,7 +9,8 @@ This macro takes a series of points and a data source to be sliced. The points a
 
 ## Parameters
 `pointsNm` : string
-    - The string name of the points source to construct the path.
+
+- The string name of the points source to construct the path.
 
 `dataNm` : string
 
