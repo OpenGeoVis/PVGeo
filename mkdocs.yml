@@ -49,7 +49,7 @@ pages:
         - Many Slices Along Points: Macros/ours/Many-Slices-Along-Points.md
     - PVGPpy Python Module:
         - Export Sub-Module:
-            - exportVTKjs: PVGPpy/export/exportVTKjs.md
+            - Export as VTKjs: PVGPpy/export/exportVTKjs.md
         - Macros Sub-Module:
             - Clip Through: PVGPpy/macros/Clip-Through.md
             - Many Slices Along Points: PVGPpy/macros/Many-Slices-Along-Points.md
