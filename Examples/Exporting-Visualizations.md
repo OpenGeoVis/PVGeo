@@ -84,7 +84,7 @@ $ python get_vtkjs_url.py <web file host> <file link>
 $ python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0"
 
 ```
-
+<!-- Hidden
 ### Process to Generate Links on Your Own
 
 - Copy the url to the web browser which we have cloned and host on on of our repos: `https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html`
@@ -112,3 +112,4 @@ $ python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/rip
 
 - This link can then be shared with anyone (on a computer, phone, or tablet)
 - Be sure to check the link yourself before sending to make sure everything worked
+-->
