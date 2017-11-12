@@ -59,11 +59,11 @@ To share these exported scenes with non-technical stakeholders, we recommend the
 - Quality control your visualization by viewing in web browser yourself (follow process above)
 - Send an email with your visualization (`.vtkjs` file) and something along the lines of:
 
+```txt
+Check out the data scene/model by downloading the attached file. Then go to the link below and open that downloaded file.
 
-> Check out the data scene/model by downloading the attached file. Then go to the link below and open that downloaded file.
-
-> https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
-
+https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
+``
 
 ## A Bit More Robust
 Sometimes we might want to give someone a direct link to the web visualization so all they have to do is open the link on any device and they can see our visualization. Here is a method to share scenes that have a slightly easier process of viewing the file for the end user and will handle the case for mobile platforms.
@@ -93,15 +93,21 @@ $ python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/rip
     - For Dropbox, we will follow this method to get direct download file links
     - Shared links for Dropbox files will have this format:
 
-        > `https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0`
+    ```txt
+    https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0
+    ```
 
     - Change the 'www' to 'dl' in the link such that it looks like:
 
-        > `https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0`
+    ```txt
+    https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0
+    ```
 
     - Now append the link for the web viewer hosted on our GitHub repo with the direct download link in the following manner:
 
-        > `https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0`
+    ```txt
+    https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0
+    ```
 
 
 - This link can then be shared with anyone (on a computer, phone, or tablet)
