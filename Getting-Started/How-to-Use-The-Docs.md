@@ -3,10 +3,10 @@ All documentation for the code produced from this project will be included in th
 
 The purpose to including all this extra documentation is to provide a convenient location for geoscientists to learn how to tailor ParaView to their needs because data representation and communication are an integral part of success in science. To effectively represent our spatial data is the first step to becoming successful and effective geoscientists. This is the principle behind why we are publishing this documentation along with the code in the repository. Not only do we want to effectively communicate the effort and motivation for this project, but we want to empower others to effectively communicate their scientific endeavors through spatial visualizations.
 
-## Plugin Documentation
+# Plugin Documentation
 There is a page dedicated to every plugin in the respective readers and filters categories. On these pages, you will find implementation details, parameters, code quirks, and general usage information. As the project continues, we will also try to have an example for every reader and filter so that users can really get a feel for what is going on and how they might apply these plugins to address their needs. Since almost all geoscientific data is proprietary, these tutorials will likely come late so that we can find good open data sets and models that users can find outside of this repo for free.
 
-## Macro documentation
+# Macro documentation
 Each macro produced for this repository will have a distinct purpose, be it to export isometric screenshots of any data scene or to batch load / convert specific data sets. The macros will have broad applications and be formatted to work with generally any data scene or data of specific formats so that they can be easily expanded upon to complete specific tasks. For the macros we will try to immediately have sample data and a tutorial upon publishing with documentation of what we are doing and why. The Python scripts themselves will be heavily commented, so that every user can tailor the scripts to their individual needs.
 
 There is also a detailed page on how to easily start making your own macros/scripts. From the people that I have talked to, there tends to be quite a steep learning curve with ParaView scripting, so we want to compile our knowledge into one place for others to gain tips, tricks, and advice to start making their own macros.

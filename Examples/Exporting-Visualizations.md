@@ -23,7 +23,7 @@ Here are some samples to demonstrate the web viewer. We have included a few of o
 - [vtk.js Sample Scene](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download)
 
 
-# How To
+# Make Your Own
 First, make a complex scene in ParaView that you might like to share with someone. <!--For a simple example, download [this] folder and load the state file *(be sure to use relative file paths)*.--> Now that you have your scene loaded, open the python shell from Tools->Python Shell within ParaView. From here, import our Python module delivered in the repository called `PVGPpy`. From the `export` sub-module, there is a function called `exportVTKjs()` which takes two optional arguments (`FileName` string and `compress` boolean). Execute this function and note the output text as it will describe where the exported scene was saved.
 
 ```py
@@ -40,9 +40,9 @@ Now open the standalone web viewer by opening [this link](https://kitware.github
 
 Select the exported scene as the input file for the web viewer from where you saved it (should be under `~/Dropbox/PVGP_vtkjs/`). The export macro should have printed out the location of the saved scene in the Python Shell.
 
-## How to Share
+# How to Share
 
-### Quick and Easy
+## Quick and Easy
 To share these exported scenes with non-technical stakeholders, we recommend the following process:
 
 - Create your scene and export to the vtk.js format (follow process above)
@@ -55,7 +55,7 @@ To share these exported scenes with non-technical stakeholders, we recommend the
 > https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
 
 
-### A Bit More Robust
+## A Bit More Robust
 Sometimes we might want to give someone a direct link to the web visualization so all they have to do is open the link on any device and they can see our visualization. Here is a method to share scenes that have a slightly easier process of viewing the file for the end user and will handle the case for mobile platforms.
 
 Unfortunately, making the experience for the end user simple means making your experience a bit more complicated. You will need to host your file on a web service like GitHub or Dropbox *(we have been unsuccessful in getting Google Drive to work)*. Then get a public link to the `.vtkjs` file on that web service and append it to the web viewer URL.
@@ -75,7 +75,7 @@ $ python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/rip
 
 ```
 
-#### Process to Generate Links on Your Own
+### Process to Generate Links on Your Own
 
 - Copy the url to the web browser which we have cloned and host on on of our repos: `https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html`
 - Now appended `?fileURL=`

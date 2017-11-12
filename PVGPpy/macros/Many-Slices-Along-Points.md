@@ -68,10 +68,10 @@ If you have a series of points and a data set, go ahead and run this macro in th
 >>> macros.manySlicesAlongPoints('Points', 'Data')
 ```
 
-## Saving Out the Slices
+## Saving
 If you desire to save out the slices, you just made with this macro, then set the `exportpath` optional variable when calling the method. Be sure to give that directory a meaningful name and use that directory only for these slices as the slices will be saved out as 'slice0.csv', 'slice1.csv', and so on.
 
 
-## Notes:
+## Batch Processing
 <!--- TODO --->
 If you want to make tons of slices of a model, the outputs of this macro WILL get messy if used in the ParaView GUI. We recommend using the `pvpython` module on the command line to perform large batch processing like this. More details to come... stay tuned.
