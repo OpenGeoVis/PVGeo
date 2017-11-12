@@ -55,7 +55,7 @@ pages:
             - Many Slices Along Points: PVGPpy/macros/Many-Slices-Along-Points.md
 
 - Resources:
-    - Exporting Visualizations: Resources/Exporting-Visualizations.md
+    - Exporting Visualizations: Examples/Exporting-Visualizations.md
     - Examples/Tutorials:
         - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
     - Virtual Reality:
