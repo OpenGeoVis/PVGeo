@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Bane Sullivan">
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<title>Read GSLIB File - ParaViewGeophysics</title>
+
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../../css/highlight.css">
+        <link href="../../../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../../..">ParaViewGeophysics</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../../..">Home</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../../Getting-Started/">Getting Started</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Plugins <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../Plugins/">About ParaView Plugins</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../Build-Your-Own-Plugins/">Build Your Own Plugins</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Readers</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../Read-SGeMS-Grid/">Read SGeMS Grid</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Read GSLIB File</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Read-UBC-Mesh-Two-File-Format/">Read UBC Mesh Two File FormatRe</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Read-Binary-Packed-Data-to-Table/">Read Binary Packed Data</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Read-Delimited-File-to-Table/">Read Delimited File</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Filters</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../Filters/Table-to-Uniform-Grid/">Table to Uniform Grid</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../Filters/Flip-Grid-Axii/">Flip Grid Axii</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../Filters/Reshape-Table/">Reshape Table</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../Filters/Add-Cell-Connectivity-to-Points/">Add Cell Connectivity to Points</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../Filters/Points-to-Tube/">Points to Tube</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../Filters/Translate-Origin-of-Grid/">Translate Origin of Grid</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../Filters/Normalize-Array/">Normalize Array</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">PVGPpy <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../../PVGPpy/About-PVGPpy/">About PVGPpy</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Scripts</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../Scripts/Example-Script/">Example Script</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">PVGPpy Module</a>
+    <ul class="dropdown-menu">
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Export Sub-Module</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../PVGPpy/export/exportVTKjs/">Export as VTKjs</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Vis Sub-Module</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../PVGPpy/vis/Clip-Through/">Clip Through</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../PVGPpy/vis/Many-Slices-Along-Points/">Many Slices Along Points</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../../Examples/Exporting-Visualizations/">Exporting Visualizations</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Examples/Tutorials</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../Examples/Slice-Model-Along-PolyLine/">Slice Model Along PolyLine</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Virtual Reality</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../Virtual-Reality/Entering-Virtual-Reality/">Entering Virtual Reality</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../Read-SGeMS-Grid/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../Read-UBC-Mesh-Two-File-Format/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/banesullivan/ParaViewGeophysics">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#about-this-reader">About this Reader</a></li>
+        
+    
+        <li class="main "><a href="#file-format">File Format</a></li>
+        
+    
+        <li class="main "><a href="#down-the-pipeline">Down the Pipeline</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="about-this-reader">About this Reader</h1>
+<p>The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter: default is a space). The first header line contains the title or necessary information and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column). The output of this reader is a vtkTable of the input data. The table will have all the same columns as the input file with the column/data names set to their respective names from the input file.</p>
+<h1 id="file-format">File Format</h1>
+<p>Check out <a href="https://cals.arizona.edu/PLP/GIS/Case_Study_Af/GeoEAS/fileformat.html">this site</a> and <a href="http://www.gslib.com/gslib_help/format.html">this site</a> for more information on the specifics of the file format. The general format is as follows:</p>
+<pre><code class="txt">Header
+numberOfColumns
+Col1_name
+Col2_name
+Col3_name
+dataCol1 dataCol2 dataCol3
+dataCol1 dataCol2 dataCol3
+dataCol1 dataCol2 dataCol3
+dataCol1 dataCol2 dataCol3
+dataCol1 dataCol2 dataCol3
+...
+</code></pre>
+
+<p>An example file might look something like this:</p>
+<pre><code class="txt">Fun data set!
+3
+Variable1
+Variable2
+Variable3
+0.908793985844 -0.141859993339 0.76693302393
+0.909209012985 0.0264630001038 0.935671985149
+0.908389985561 -0.0224980004132 0.885891973972
+0.906355023384 -0.0762720033526 0.83008402586
+0.895779013634 0.0125150000677 0.908294022083
+0.876645028591 -0.0550080016255 0.821636974812
+0.856096029282 0.0719339996576 0.928031027317
+...
+</code></pre>
+
+<h1 id="down-the-pipeline">Down the Pipeline</h1>
+<ul>
+<li><a href="../../Filters/Table-to-Uniform-Grid/">Table to Uniform Grid</a></li>
+<li><a href="../../Filters/Reshape-Table/">Reshape Table</a></li>
+<li><a href="https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Points">Table to Points</a></li>
+<li><a href="https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Structured_Grid">Table to Structured Grid</a></li>
+<li><a href="../../Filters/Normalize-Array/">Normalize Array</a></li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/highlight.pack.js"></script>
+        <script>var base_url = '../../..';</script>
+        <script data-main="../../../mkdocs/js/search.js" src="../../../mkdocs/js/require.js"></script>
+        <script src="../../../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
