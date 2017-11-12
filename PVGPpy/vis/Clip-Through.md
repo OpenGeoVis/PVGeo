@@ -1,7 +1,7 @@
-# PVGPpy.macros.clipThrough
+# PVGPpy.vis.clipThrough
 
 ```py
-PVGPpy.macros.clipThrough(clip, ax, bounds, num=10, delay=1.0)
+PVGPpy.vis.clipThrough(clip, ax, bounds, num=10, delay=1.0)
 ```
 
 Description

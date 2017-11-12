@@ -39,17 +39,14 @@ pages:
         - Translate Origin of Grid: Plugins/Filters/Translate-Origin-of-Grid.md
         - Normalize Array: Plugins/Filters/Normalize-Array.md
 
-- PVGPpy and Macros:
+- PVGPpy & Macros:
     - About PVGPpy: PVGPpy/About-PVGPpy.md
-    - Using ParaView Macros: Macros/Using-PV-Macros.md
-    - Advice For Making Macros: Macros/Advice-For-Making-Macros.md
-    - Screenshot Macros: Macros/Screenshot-Macros.md
     - PVGPpy Python Module:
         - Export Sub-Module:
             - Export as VTKjs: PVGPpy/export/exportVTKjs.md
-        - Macros Sub-Module:
-            - Clip Through: PVGPpy/macros/Clip-Through.md
-            - Many Slices Along Points: PVGPpy/macros/Many-Slices-Along-Points.md
+        - Vis Sub-Module:
+            - Clip Through: PVGPpy/vis/Clip-Through.md
+            - Many Slices Along Points: PVGPpy/vis/Many-Slices-Along-Points.md
 
 - Resources:
     - Exporting Visualizations: Examples/Exporting-Visualizations.md

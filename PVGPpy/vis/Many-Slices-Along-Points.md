@@ -1,7 +1,7 @@
-# PVGPpy.macros.manySlicesAlongPoints
+# PVGPpy.vis.manySlicesAlongPoints
 
 ```py
-PVGPpy.macros.manySlicesAlongPoints(pointsNm, dataNm, numSlices=10, exportpath='', ext='.csv')
+PVGPpy.vis.manySlicesAlongPoints(pointsNm, dataNm, numSlices=10, exportpath='', ext='.csv')
 ```
 
 Description
