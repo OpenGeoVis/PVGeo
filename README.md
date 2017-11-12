@@ -23,7 +23,7 @@ If you have your own plugins either developed in C++ or as python programmable f
 
 -------
 # How To Use the Plugins in this Repository
-Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble or you are a windows user, please read through the detailed explanation [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/Install-Plugins/)
+Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble or you are a windows user, please read through the detailed explanation [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/#install-paraviewgeophysics).
 
 ## Quick and Easy Unix Installation
 
@@ -54,7 +54,7 @@ $ sh ./installMac.sh
 $ sh ./installWin.sh
 ```
 
-After executing the above tasks, you should be ready to go. The most common issue is having the incorrect `PVPATH` variable in your `~/.bash_profile`, so be sure to check that if errors arise. A more step-by-step process is [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/Install-Plugins/).
+After executing the above tasks, you should be ready to go. The most common issue is having the incorrect `PVPATH` variable in your `~/.bash_profile`, so be sure to check that if errors arise. A more step-by-step process is [here](http://paraviewgeophysics.readthedocs.io/en/latest/Getting-Started/#install-paraviewgeophysics).
 
 
 -----
