@@ -39,9 +39,11 @@ pages:
         - Translate Origin of Grid: Plugins/Filters/Translate-Origin-of-Grid.md
         - Normalize Array: Plugins/Filters/Normalize-Array.md
 
-- PVGPpy & Macros:
+- PVGPpy:
     - About PVGPpy: PVGPpy/About-PVGPpy.md
-    - PVGPpy Python Module:
+    - Scripts:
+        - Example Script: Scripts/Example-Script.md
+    - PVGPpy Module:
         - Export Sub-Module:
             - Export as VTKjs: PVGPpy/export/exportVTKjs.md
         - Vis Sub-Module:
