@@ -1,8 +1,6 @@
-# Welcome to the ParaView for Geophysics Documentation!
+# Welcome
 
-*NOTICE:* This documentation is under development and may currently lack content.
-
-This repository is all about using ParaView in the geosciences for data and model visualization. Through visualization, we can bring value to data and hold the products of geoscience in a new light to interested parties.
+Welcome to the ParaView for Geophysics Documentation! This repository is all about using ParaView in the geosciences for data and model visualization. Through visualization, we can bring value to data and hold the products of geoscience in a new light to interested parties.
 
 This repository was produced from the work of an undergraduate research project at the Colorado School of Mines titled: Illuminating the Value of Geophysical Imaging through Visualization and Virtual Reality. Checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-MFIwUy1uUTlfVHM/view?usp=sharing) standalone presentation to learn more about the project.
 
