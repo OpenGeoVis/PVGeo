@@ -15,11 +15,7 @@ plugins:
 pages:
 - Home: index.md
 
-- Getting Started:
-    - How to Use The Docs: Getting-Started/How-to-Use-The-Docs.md
-    - ParaView and VTK: Getting-Started/ParaView-and-VTK.md
-    - Install These Plugins: Getting-Started/Install-Plugins.md
-    - Using 3rd Party Py Libraries: Getting-Started/Using-Outside-Python-Modules.md
+- Getting Started: Getting-Started.md
 
 - Plugins:
     - About ParaView Plugins: Plugins/Plugins.md
