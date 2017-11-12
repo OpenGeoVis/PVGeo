@@ -45,8 +45,6 @@ pages:
     - Using ParaView Macros: Macros/Using-PV-Macros.md
     - Advice For Making Macros: Macros/Advice-For-Making-Macros.md
     - Screenshot Macros: Macros/Screenshot-Macros.md
-    - Our Macros:
-        - Many Slices Along Points: Macros/ours/Many-Slices-Along-Points.md
     - PVGPpy Python Module:
         - Export Sub-Module:
             - Export as VTKjs: PVGPpy/export/exportVTKjs.md
