@@ -9,17 +9,22 @@ This macro takes a clip source and progresses its location through a set of boun
 
 ## Parameters
 `clip` : string
+
 - The string name of the clip source to be translated.
 
 `ax` : int
+
 - This is the axis on which to translate (0 for x, 1 for y, 2 for z).
 - Think of this as the normal vector for the clip.
 
 `bounds` : 6-element list or tuple
+
 - These are the bounds to constrain the clip translation.
 
 `num` : int, optional
+
 - The number of discritizations in the clip translation.
 
 `delay` : float, optional
+
 - Time delay in seconds before conducting each clip translation.
