@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="author" content="Bane Sullivan">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Getting Started - ParaViewGeophysics</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/cinder.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">ParaViewGeophysics</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Getting Started</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Plugins <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../Plugins/Plugins/">About ParaView Plugins</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../Plugins/Build-Your-Own-Plugins/">Build Your Own Plugins</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Readers</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../Plugins/Readers/Read-SGeMS-Grid/">Read SGeMS Grid</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Plugins/Readers/Read-GSLIB-File-to-Table/">Read GSLIB File</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Plugins/Readers/Read-UBC-Mesh-Two-File-Format/">Read UBC Mesh Two File FormatRe</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Plugins/Readers/Read-Binary-Packed-Data-to-Table/">Read Binary Packed Data</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Plugins/Readers/Read-Delimited-File-to-Table/">Read Delimited File</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Filters</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../Plugins/Filters/Table-to-Uniform-Grid/">Table to Uniform Grid</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Plugins/Filters/Flip-Grid-Axii/">Flip Grid Axii</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Plugins/Filters/Reshape-Table/">Reshape Table</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Plugins/Filters/Add-Cell-Connectivity-to-Points/">Add Cell Connectivity to Points</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Plugins/Filters/Points-to-Tube/">Points to Tube</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Plugins/Filters/Translate-Origin-of-Grid/">Translate Origin of Grid</a>
+</li>
+
+        
+            
+<li >
+    <a href="../Plugins/Filters/Normalize-Array/">Normalize Array</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PVGPpy <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../PVGPpy/About-PVGPpy/">About PVGPpy</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Scripts</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../Scripts/Example-Script/">Example Script</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">PVGPpy Module</a>
+    <ul class="dropdown-menu">
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Export Sub-Module</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../PVGPpy/export/exportVTKjs/">Export as VTKjs</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Vis Sub-Module</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../PVGPpy/vis/Clip-Through/">Clip Through</a>
+</li>
+
+        
+            
+<li >
+    <a href="../PVGPpy/vis/Many-Slices-Along-Points/">Many Slices Along Points</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../Examples/Exporting-Visualizations/">Exporting Visualizations</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Examples/Tutorials</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../Examples/Slice-Model-Along-PolyLine/">Slice Model Along PolyLine</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Virtual Reality</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../Virtual-Reality/Entering-Virtual-Reality/">Entering Virtual Reality</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li >
+                        <a rel="next" href="..">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../Plugins/Plugins/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/banesullivan/ParaViewGeophysics">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="first-level active"><a href="#a-brief-introduction-to-paraview">A Brief Introduction to ParaView</a></li>
+        
+            <li class="second-level"><a href="#install-paraview">Install ParaView</a></li>
+            
+        
+            <li class="second-level"><a href="#notes">Notes</a></li>
+            
+        
+    
+        <li class="first-level "><a href="#install-paraviewgeophysics">Install ParaViewGeophysics</a></li>
+        
+            <li class="second-level"><a href="#windows-users">Windows Users</a></li>
+            
+        
+            <li class="second-level"><a href="#before-you-do-anything">Before You Do Anything!</a></li>
+            
+        
+            <li class="second-level"><a href="#cloning-the-repository">Cloning the Repository</a></li>
+            
+        
+            <li class="second-level"><a href="#installing-to-paraview">Installing to ParaView</a></li>
+            
+        
+            <li class="second-level"><a href="#how-to-update">How to Update</a></li>
+            
+        
+    
+        <li class="first-level "><a href="#using-outside-modules">Using Outside Modules</a></li>
+        
+            <li class="second-level"><a href="#windows-users_1">Windows Users</a></li>
+            
+        
+            <li class="second-level"><a href="#modules-currently-needed-for-this-repo">Modules Currently Needed for this Repo</a></li>
+            
+        
+    
+        <li class="first-level "><a href="#documentation">Documentation</a></li>
+        
+            <li class="second-level"><a href="#plugin-documentation">Plugin Documentation</a></li>
+            
+        
+            <li class="second-level"><a href="#macro-documentation">Macro documentation</a></li>
+            
+        
+    
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="a-brief-introduction-to-paraview">A Brief Introduction to ParaView</h1>
+<p>ParaView is an open-source platform that can visualize 2D, 3D, and 4D (time varying) datasets. ParaView can process multiple very large data sets in parallel then later collect the results to yield a responsive graphics environment with which a user can interact. The better the processor and graphics hardware the machine or machines hosting the software, the faster and better ParaView will run, however it can run quite well on a laptop with a standard graphics card such as a MacBook Pro.</p>
+<p>Since ParaView is an open source application, anyone can download the program and its source code for modifications. The easiest way to get started with ParaView is to download the compiled binary installers for your operating system from <a href="https://www.paraview.org/download/">here</a>.</p>
+<p>For further help, check out the <a href="https://www.paraview.org/documentation/">documentation</a> provided by Kitware. In particular, the two worth looking through for a quick tour of ParaView are the &lsquo;The ParaView Guide&rsquo; and &lsquo;The ParaView Tutorial.&rsquo; One is a tutorial of the ParaView software and shows the user how to create sources, apply filters, and more. The other is a guide on how to do scripting, macros, and more intense use of the application.</p>
+<h2 id="install-paraview">Install ParaView</h2>
+<p>Open the downloaded binary installer and follow the prompts then drag the application into your applications folder.</p>
+<p>Tour around software:
+Take a look at Section 2.1 of &lsquo;The ParaView Tutorial&rsquo; for details of the application’s GUI environment. Chapter 2 of the tutorial as a whole does an excellent job touring the software and its workflow for those unfamiliar with the software and its general capabilities.</p>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>Enable Auto Apply in the preferences for interactive slicers and so you don&rsquo;t always have to click apply. (<em>Note:</em> sometimes you may want this off when working with large datasets)</li>
+<li>One convenient feature is to save the state of the ParaView environment. This saves all the options you selected on all the filters you applied to visualize some data. Select File-&gt;Save State… (<em>Note:</em> this saves the absolute path of the files loaded into ParaView, so be sure to select &lsquo;Search for Files Under Directory&hellip;&rsquo; when opening these state files)</li>
+</ul>
+<hr />
+<h1 id="install-paraviewgeophysics">Install ParaViewGeophysics</h1>
+<p>To clone and use the plugins distributed in the repo for ParaView, you&rsquo;ll need <a href="https://www.python.org/downloads/">Python 2</a> with the SciPy and NumPy modules <a href="https://docs.python.org/2/installing/index.html">installed</a>, and <a href="https://www.paraview.org/download/">ParaView</a> installed on your computer. Note that this repository will only work with builds of ParaView that have Python. Currently, the VR build of ParaView does not have Python included, and we will describe some workarounds for sending data to the VR version on under the Resources section in the <a href="http://paraviewgeophysics.readthedocs.io/">Docs pages</a>.</p>
+<h2 id="windows-users">Windows Users</h2>
+<p>If you&rsquo;re on Windows, see <a href="https://git-for-windows.github.io">this</a> for GitHub and <a href="https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/">this</a> guide for using the Unix command line on windows.</p>
+<p>Download and use <a href="https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/">Cygwin</a> for the command line operation of the scripts in this repo. When installing Cygwin, <em>make sure to install the <code>bash</code>, <code>dos2unix</code>, <code>git</code>, and <code>python2-setuptools</code> packages</em>. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system! <strong>Make sure the line endings for all of the shell scripts are LF and not CRLF after cloning.</strong></p>
+<p>Also, be sure to place/install ParaView and this repository to a location that has general read/write privileges for all users such as on your <code>D:\\</code> drive. You will encounter all types of issues running the scripts and simply accessing the code via Cygwin if you need admin privileges to access where it is all saved. <em>Note: the install scripts will need access to the directory where ParaView is installed</em></p>
+<h2 id="before-you-do-anything">Before You Do Anything!</h2>
+<p>You <em>MUST</em> add a <code>PVPATH</code> variable in your bash profile! This variable will describe the path to ParaView&rsquo;s installation. It is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace <code>/ParaView-5.4.0.app</code> with the name of your version of ParaView under <code>/Applications/</code>.</p>
+<p>Add the <code>PVPATH</code> variable to your environment through your <code>~/.bash_profile</code> by adding this expression:</p>
+<pre><code class="bash"># edit your ~/.bash_profile with vim or some text editor
+$ vi ~/.bash_profile
+
+# Be sure to check that this path matches yours... Odds are it's different!
+# Path to the ParaView installation:
+export PVPATH=&quot;/Applications/ParaView-5.4.0.app&quot;
+</code></pre>
+
+<p>Windows users, open Cygwin and edit your <code>~/.bash_profile</code> through <code>vim</code> to place a <code>PVPATH</code> variable in your environment. Be sure to replace the path to ParaView with your path to ParaView (e.g. <code>/cygdrive/d/ParaView...</code> to <code>/cygdrive/d/ParaView-5.4.0...</code>)</p>
+<pre><code class="bash">## Be sure to check that this path matches yours... Odds are it's different!
+# Path to the ParaView installation:
+export PVPATH=&quot;/cygdrive/d/ParaView&quot;
+</code></pre>
+
+<p>Remember to source your edited <code>~/.bash_profile</code>:</p>
+<pre><code class="bash"># Resource your profile to export the new variable
+$ source ~/.bash_profile
+</code></pre>
+
+<h2 id="cloning-the-repository">Cloning the Repository</h2>
+<p>Clone the repository from your command line by navigating to the directory you would like to save all of the code from this repo.</p>
+<p><strong>NOTE:</strong> Windows users, you are going to want to clone to a folder/drive that has general read/write privileges such as your <code>D:\\</code> drive</p>
+<p>From your command line:</p>
+<pre><code class="bash"># Clone this repository
+$ git clone https://github.com/banesullivan/ParaViewGeophysics
+
+# Go into the repository
+$ cd ParaViewGeophysics
+</code></pre>
+
+<h2 id="installing-to-paraview">Installing to ParaView</h2>
+<p>Now to get started using the plugins and python modules included in this repository, we need to create links between your installation of ParaView and this repository. That&rsquo;s why we need a <code>PVPATH</code> variable to be set in your environment (above).</p>
+<p>To create these links, run the installation script at the top of the repository called <code>installMac.sh</code> or <code>installWin.sh</code> for your operating system. If errors arise, they will be printed in red. The most common cause of error is having an incorrect <code>PVPATH</code> variable.</p>
+<p><em>Note: Windows users, when running the <code>installWin.sh</code> script there will be some yellow outputs. Make sure they are just announcing successful links and not errors/permission denied.</em></p>
+<pre><code class="bash"># Install our repository to ParaView:
+#- Note: There are two install scripts. One for Mac/Linux and one for Windows
+#- Mac:
+$ sh ./installMac.sh
+#- Windows:
+$ sh ./installWin.sh
+</code></pre>
+
+<!--
+ÂIn the `src/` directory, there are four shell scripts. Be careful executing these unless you know what they are doing. No severe damage can be done by running any of these scripts by accident; you might just get weird errors or accidentally uninstall everything.
+
+To simply install the distributed filters from this repo, run the `src/install_plugins.sh` script *but first you MUST add the `PVPLUGINPATH` variable to your environment* (described above)! This script will simply copy over all the XML files from `build/` to the default directory for third-party plugins in ParaView so that they will all load when ParaView launches.
+
+To run these scripts on a Unix like system us the `sh` command: `sh src/install_plugins.sh`
+
+
+wzxhzdk:5
+
+
+### Building the Plugins
+To rebuild the plugins after you made changes or made your own plugins, run the `src/build_plugins.sh` script which will build up the XML Server Manager Configuration filters from the `.py` scripts and install them to ParaView. Only use this script if you are making your own filters or readers (or changing what is delivered in this repo). If you run this script, it will build and install all filters and readers to ParaView. This is not necessary as the repo contains a stable build of all the plugins upon cloning.
+
+
+
+wzxhzdk:6
+
+-->
+
+<h2 id="how-to-update">How to Update</h2>
+<p>We have included a script that will update the repository from GitHub and re-install everything. This script is simply executed by:</p>
+<pre><code class="bash">$ sh ./updatePVGP.sh
+</code></pre>
+
+<hr />
+<h1 id="using-outside-modules">Using Outside Modules</h1>
+<p>ParaView&rsquo;s Python environment, <code>pvpython</code>, can be a bit tricky to start using outside Python modules like SciPy or SimPEG. On Mac OS X, using Python modules installed via pip or anaconda should work simply with an <code>import ...</code> statement if you have your Python paths set up well. (Mac users: if you have trouble importing SciPy or other modules used in this repo let me know and I will develop a solution). Windows users on the other hand are going to have quite a bit of trouble as <code>pvpython</code> is its own environment nestled in the ParaView application. I have not been able to develop an elegant solution for Windows users to use 3rd party Python libraries other than a simple copy/paste of that module into the ParaView application contents.</p>
+<p><em>Note: Advanced users, try a symbolic link between ParaView&rsquo;s python library and the libraries you have installed. This is how we are installing our module so that it stays updated.</em></p>
+<h2 id="windows-users_1">Windows Users</h2>
+<p>To start using third party libraries, we are going to have copy over static versions of the modules into ParaView&rsquo;s <code>site-packages</code> directory. This folder should be under <code>.../ParaView/bin/site-packages/</code>. Effectively, we just perform a brute install of that module to <code>pvpython</code> on Windows so that when we make <code>import</code>s, the modules will be found in the <code>pvpython</code> environment.</p>
+<h2 id="modules-currently-needed-for-this-repo">Modules Currently Needed for this Repo</h2>
+<p>These are all of the modules that filters, readers, and macros might use in this repo. We recommend opening the Python Shell from ParaView (Tools-&gt;Python Shell) and testing the import of each of these modules. Copy/Paste the modules that failed to import from wherever you have them installed into <code>.../ParaView/bin/site-packages/</code>:</p>
+<ul>
+<li><a href="http://www.numpy.org">NumPy</a> (you may need update ParaView&rsquo;s version to the latest version for SciPy to be happy)</li>
+<li><a href="https://www.scipy.org/install.html">SciPy</a></li>
+<li><a href="https://www.vtk.org/download/">VTK</a></li>
+<li><a href="https://docs.python.org/2/library/datetime.html">datetime</a></li>
+<li><a href="https://docs.python.org/2/library/struct.html">struct</a></li>
+<li><a href="https://docs.python.org/2/library/csv.html">csv</a></li>
+</ul>
+<p>I suspect there is a more elegant solution to setting up the Python environment for <code>pvpython</code> on Windows to use modules installed from pip or anaconda, however Windows is not my area of expertise and I have had much trouble attempting to figure this out. I encourage a Windows user of this repository to figure this out so we don&rsquo;t have to make static version of these modules to use in ParaView.</p>
+<p>Someone <em>please</em> figure this out and post a more robust solution to the <a href="https://github.com/banesullivan/ParaViewGeophysics/issues">Issues page</a>.</p>
+<hr />
+<h1 id="documentation">Documentation</h1>
+<p>All documentation for the code produced from this project will be included in this website. The documentation will contain an explanation of all of the produced plugins (filters and readers) and macros. Use the Sidebar to explore the documentation content and to find all documentation for readers, filters, macros, and more as you need. There are also details on how to <a href="../Plugins/Build-Your-Own-Plugins/">build your own plugins</a>, how to <a href="../Examples/Exporting-Visualizations/">export data scenes</a>, and transferring your complex data scenes into <a href="../Virtual-Reality/Entering-Virtual-Reality/">virtual reality</a>.</p>
+<p>The purpose to including all this extra documentation is to provide a convenient location for geoscientists to learn how to tailor ParaView to their needs because data representation and communication are an integral part of success in science. To effectively represent our spatial data is the first step to becoming successful and effective geoscientists. This is the principle behind why we are publishing this documentation along with the code in the repository. Not only do we want to effectively communicate the effort and motivation for this project, but we want to empower others to effectively communicate their scientific endeavors through spatial visualizations.</p>
+<h2 id="plugin-documentation">Plugin Documentation</h2>
+<p>There is a page dedicated to every plugin in the respective readers and filters categories. On these pages, you will find implementation details, parameters, code quirks, and general usage information. As the project continues, we will also try to have an example for every reader and filter so that users can really get a feel for what is going on and how they might apply these plugins to address their needs. Since almost all geoscientific data is proprietary, these tutorials will likely come late so that we can find good open data sets and models that users can find outside of this repo for free.</p>
+<h2 id="macro-documentation">Macro documentation</h2>
+<p><!-- TODO: is this section consistent with PVGPpy? -->
+Each macro produced for this repository will have a distinct purpose, be it to export isometric screenshots of any data scene or to batch load / convert specific data sets. The macros will have broad applications and be formatted to work with generally any data scene or data of specific formats so that they can be easily expanded upon to complete specific tasks. For the macros we will try to immediately have sample data and a tutorial upon publishing with documentation of what we are doing and why. The Python scripts themselves will be heavily commented, so that every user can tailor the scripts to their individual needs.</p>
+<p>There is also a detailed page on how to easily start making your own macros/scripts. From the people that I have talked to, there tends to be quite a steep learning curve with ParaView scripting, so we want to compile our knowledge into one place for others to gain tips, tricks, and advice to start making their own macros.</p>
+<p>Remember, if you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the <a href="https://github.com/banesullivan/ParaViewGeophysics/issues">issues page</a>.</p>
+<hr /></div>
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p></small>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+    var base_url = '..';
+    </script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+</html>
