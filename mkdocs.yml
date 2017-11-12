@@ -6,6 +6,7 @@ repo_url: https://github.com/banesullivan/ParaViewGeophysics
 theme_dir: cinder
 
 error_page: 404.html
+404: 404.html
 
 markdown_extensions:
     - smarty
