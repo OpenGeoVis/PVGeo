@@ -63,7 +63,7 @@ To share these exported scenes with non-technical stakeholders, we recommend the
 Check out the data scene/model by downloading the attached file. Then go to the link below and open that downloaded file.
 
 https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
-``
+```
 
 ## A Bit More Robust
 Sometimes we might want to give someone a direct link to the web visualization so all they have to do is open the link on any device and they can see our visualization. Here is a method to share scenes that have a slightly easier process of viewing the file for the end user and will handle the case for mobile platforms.
