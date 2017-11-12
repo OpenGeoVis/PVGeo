@@ -9,9 +9,6 @@ markdown_extensions:
     - smarty
     - toc
 
-plugins:
-    - search
-
 pages:
 - Home: index.md
 - What's Next: What's-Next.md
