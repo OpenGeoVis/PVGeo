@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <meta name="author" content="Bane Sullivan">
-        
-        <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Getting Started - ParaViewGeophysics</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="author" content="Bane Sullivan">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
 
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/highlight.css">
-        <link href="../css/base.css" rel="stylesheet">
+    <title>Getting Started - ParaViewGeophysics</title>
 
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/cinder.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
-        
-    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
 
-    <body>
+    
+</head>
 
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
 
         <!-- Collapsed navigation -->
         <div class="navbar-header">
+            
             <!-- Expander button -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -39,6 +52,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            
 
             <!-- Main title -->
             <a class="navbar-brand" href="..">ParaViewGeophysics</a>
@@ -46,39 +60,40 @@
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
-            <!-- Main navigation -->
-            <ul class="nav navbar-nav">
             
-            
-                <li >
-                    <a href="..">Home</a>
-                </li>
-            
-            
-            
-                <li class="active">
-                    <a href="./">Getting Started</a>
-                </li>
-            
-            
-            
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Plugins <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Getting Started</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Plugins <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
                         
+                            
 <li >
     <a href="../Plugins/Plugins/">About ParaView Plugins</a>
 </li>
 
-                    
                         
+                            
 <li >
     <a href="../Plugins/Build-Your-Own-Plugins/">Build Your Own Plugins</a>
 </li>
 
-                    
                         
+                            
   <li class="dropdown-submenu">
     <a tabindex="-1" href="">Readers</a>
     <ul class="dropdown-menu">
@@ -116,8 +131,8 @@
     </ul>
   </li>
 
-                    
                         
+                            
   <li class="dropdown-submenu">
     <a tabindex="-1" href="">Filters</a>
     <ul class="dropdown-menu">
@@ -167,23 +182,23 @@
     </ul>
   </li>
 
-                    
-                    </ul>
-                </li>
-            
-            
-            
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">PVGPpy <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    
                         
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PVGPpy <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
 <li >
     <a href="../PVGPpy/About-PVGPpy/">About PVGPpy</a>
 </li>
 
-                    
                         
+                            
   <li class="dropdown-submenu">
     <a tabindex="-1" href="">Scripts</a>
     <ul class="dropdown-menu">
@@ -197,8 +212,8 @@
     </ul>
   </li>
 
-                    
                         
+                            
   <li class="dropdown-submenu">
     <a tabindex="-1" href="">PVGPpy Module</a>
     <ul class="dropdown-menu">
@@ -242,23 +257,23 @@
     </ul>
   </li>
 
-                    
-                    </ul>
-                </li>
-            
-            
-            
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    
                         
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
 <li >
     <a href="../Examples/Exporting-Visualizations/">Exporting Visualizations</a>
 </li>
 
-                    
                         
+                            
   <li class="dropdown-submenu">
     <a tabindex="-1" href="">Examples/Tutorials</a>
     <ul class="dropdown-menu">
@@ -272,8 +287,8 @@
     </ul>
   </li>
 
-                    
                         
+                            
   <li class="dropdown-submenu">
     <a tabindex="-1" href="">Virtual Reality</a>
     <ul class="dropdown-menu">
@@ -287,86 +302,100 @@
     </ul>
   </li>
 
-                    
-                    </ul>
-                </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
             
-            
-            </ul>
 
-            <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
                         <i class="fa fa-search"></i> Search
                     </a>
                 </li>
-                <li >
-                    <a rel="next" href="..">
-                        <i class="fa fa-arrow-left"></i> Previous
-                    </a>
-                </li>
-                <li >
-                    <a rel="prev" href="../Plugins/Plugins/">
-                        Next <i class="fa fa-arrow-right"></i>
-                    </a>
-                </li>
                 
-                <li>
-                    <a href="https://github.com/banesullivan/ParaViewGeophysics">
-                        
-                            <i class="fa fa-github"></i>
-                        
-                        GitHub
-                    </a>
-                </li>
+                    <li >
+                        <a rel="next" href="..">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../Plugins/Plugins/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/banesullivan/ParaViewGeophysics">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
                 
             </ul>
         </div>
     </div>
 </div>
 
-        <div class="container">
-            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#a-brief-introduction-to-paraview">A Brief Introduction to ParaView</a></li>
+        <li class="first-level active"><a href="#a-brief-introduction-to-paraview">A Brief Introduction to ParaView</a></li>
         
-            <li><a href="#install-paraview">Install ParaView</a></li>
+            <li class="second-level"><a href="#install-paraview">Install ParaView</a></li>
+            
         
-            <li><a href="#notes">Notes</a></li>
-        
-    
-        <li class="main "><a href="#install-paraviewgeophysics">Install ParaViewGeophysics</a></li>
-        
-            <li><a href="#windows-users">Windows Users</a></li>
-        
-            <li><a href="#before-you-do-anything">Before You Do Anything!</a></li>
-        
-            <li><a href="#cloning-the-repository">Cloning the Repository</a></li>
-        
-            <li><a href="#installing-to-paraview">Installing to ParaView</a></li>
-        
-            <li><a href="#how-to-update">How to Update</a></li>
+            <li class="second-level"><a href="#notes">Notes</a></li>
+            
         
     
-        <li class="main "><a href="#using-outside-modules">Using Outside Modules</a></li>
+        <li class="first-level "><a href="#install-paraviewgeophysics">Install ParaViewGeophysics</a></li>
         
-            <li><a href="#windows-users_1">Windows Users</a></li>
+            <li class="second-level"><a href="#windows-users">Windows Users</a></li>
+            
         
-            <li><a href="#modules-currently-needed-for-this-repo">Modules Currently Needed for this Repo</a></li>
+            <li class="second-level"><a href="#before-you-do-anything">Before You Do Anything!</a></li>
+            
+        
+            <li class="second-level"><a href="#cloning-the-repository">Cloning the Repository</a></li>
+            
+        
+            <li class="second-level"><a href="#installing-to-paraview">Installing to ParaView</a></li>
+            
+        
+            <li class="second-level"><a href="#how-to-update">How to Update</a></li>
+            
         
     
-        <li class="main "><a href="#documentation">Documentation</a></li>
+        <li class="first-level "><a href="#using-outside-modules">Using Outside Modules</a></li>
         
-            <li><a href="#plugin-documentation">Plugin Documentation</a></li>
+            <li class="second-level"><a href="#windows-users_1">Windows Users</a></li>
+            
         
-            <li><a href="#macro-documentation">Macro documentation</a></li>
+            <li class="second-level"><a href="#modules-currently-needed-for-this-repo">Modules Currently Needed for this Repo</a></li>
+            
+        
+    
+        <li class="first-level "><a href="#documentation">Documentation</a></li>
+        
+            <li class="second-level"><a href="#plugin-documentation">Plugin Documentation</a></li>
+            
+        
+            <li class="second-level"><a href="#macro-documentation">Macro documentation</a></li>
+            
         
     
     </ul>
 </div></div>
-            <div class="col-md-9" role="main">
+        <div class="col-md-9" role="main">
 
 <h1 id="a-brief-introduction-to-paraview">A Brief Introduction to ParaView</h1>
 <p>ParaView is an open-source platform that can visualize 2D, 3D, and 4D (time varying) datasets. ParaView can process multiple very large data sets in parallel then later collect the results to yield a responsive graphics environment with which a user can interact. The better the processor and graphics hardware the machine or machines hosting the software, the faster and better ParaView will run, however it can run quite well on a laptop with a standard graphics card such as a MacBook Pro.</p>
@@ -488,44 +517,52 @@ Each macro produced for this repository will have a distinct purpose, be it to e
 <p>There is also a detailed page on how to easily start making your own macros/scripts. From the people that I have talked to, there tends to be quite a steep learning curve with ParaView scripting, so we want to compile our knowledge into one place for others to gain tips, tricks, and advice to start making their own macros.</p>
 <p>Remember, if you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the <a href="https://github.com/banesullivan/ParaViewGeophysics/issues">issues page</a>.</p>
 <hr /></div>
-        </div>
+        
+    </div>
 
-        <footer class="col-md-12">
-            <hr>
-            
-            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
-        </footer>
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p></small>
+    </footer>
 
-        <script src="../js/jquery-1.10.2.min.js"></script>
-        <script src="../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../js/highlight.pack.js"></script>
-        <script>var base_url = '..';</script>
-        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
-        <script src="../js/base.js"></script>
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+    var base_url = '..';
+    </script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            From here you can search these documents. Enter
-                            your search terms below.
-                        </p>
-                        <form role="form">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
-                            </div>
-                        </form>
-                        <div id="mkdocs-search-results"></div>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
                 </div>
             </div>
         </div>
+    </div>
+
     </body>
+
 </html>
