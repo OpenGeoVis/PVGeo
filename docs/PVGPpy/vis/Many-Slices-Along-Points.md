@@ -65,7 +65,7 @@ If you have a series of points and a data set, go ahead and run this macro in th
 
 ```py
 >>> from PVGPpy import *
->>> macros.manySlicesAlongPoints('Points', 'Data')
+>>> vis.manySlicesAlongPoints('Points', 'Data')
 ```
 
 ## Saving
