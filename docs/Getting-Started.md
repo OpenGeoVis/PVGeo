@@ -34,31 +34,21 @@ Also, be sure to place/install ParaView and this repository to a location that h
 
 ## Before You Do Anything!
 
-You *MUST* add a `PVPATH` variable in your bash profile! This variable will describe the path to ParaView's installation. It is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app` with the name of your version of ParaView under `/Applications/`.
+You *MUST* add a `PVPATH` variable in your bash environment! This variable will describe the path to ParaView's installation. It is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app` with the name of your version of ParaView under `/Applications/`.
 
-Add the `PVPATH` variable to your environment through your `~/.bash_profile` by adding this expression:
+Add the `PVPATH` variable to your environment through this export expression:
 ```bash
-# edit your ~/.bash_profile with vim or some text editor
-$ vi ~/.bash_profile
-
 # Be sure to check that this path matches yours... Odds are it's different!
 # Path to the ParaView installation:
 export PVPATH="/Applications/ParaView-5.4.0.app"
 ```
 
-Windows users, open Cygwin and edit your `~/.bash_profile` through `vim` to place a `PVPATH` variable in your environment. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView...` to `/cygdrive/d/ParaView-5.4.0...`)
+Windows users, open Cygwin and add a `PVPATH` variable in your environment in the same manner. Its a bit trickier for you because we need the path on cygwin's map of your drive. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView...` to `/cygdrive/d/ParaView-5.4.0...`)
 
 ```bash
 ## Be sure to check that this path matches yours... Odds are it's different!
 # Path to the ParaView installation:
-export PVPATH="/cygdrive/d/ParaView"
-```
-
-Remember to source your edited `~/.bash_profile`:
-
-```bash
-# Resource your profile to export the new variable
-$ source ~/.bash_profile
+export PVPATH="/cygdrive/d/ParaView-version-something"
 ```
 
 ## Cloning the Repository
@@ -88,7 +78,7 @@ To create these links, run the installation script at the top of the repository 
 #- Note: There are two install scripts. One for Mac/Linux and one for Windows
 #- Mac:
 $ sh ./installMac.sh
-#- Windows:
+#- Windows via Cygwin:
 $ sh ./installWin.sh
 ```
 
@@ -113,9 +103,10 @@ $ sh src/build_plugins.sh
 -->
 
 ## How to Update
-We have included a script that will update the repository from GitHub and re-install everything. This script is simply executed by:
+We have included a script that will update the repository from GitHub and since the repo is already linked to ParaView, all changes to the repo will be directory reflected in ParaView. This script is simply executed by:
 
 ```bash
+# Run this to update ParaViewGeophysics in the future:
 $ sh ./updatePVGP.sh
 ```
 
