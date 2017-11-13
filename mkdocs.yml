@@ -27,7 +27,7 @@ pages:
     - Readers:
         - Read SGeMS Grid: Plugins/Readers/Read-SGeMS-Grid.md
         - Read GSLIB File: Plugins/Readers/Read-GSLIB-File-to-Table.md
-        - Read UBC Mesh Two File FormatRe: Plugins/Readers/Read-UBC-Mesh-Two-File-Format.md
+        - Read UBC Mesh Two File Format: Plugins/Readers/Read-UBC-Mesh-Two-File-Format.md
         - Read Binary Packed Data: Plugins/Readers/Read-Binary-Packed-Data-to-Table.md
         - Read Delimited File: Plugins/Readers/Read-Delimited-File-to-Table.md
     - Filters:

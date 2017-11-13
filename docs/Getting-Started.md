@@ -1,6 +1,6 @@
 # A Brief Introduction to ParaView
 
-ParaView is an open-source platform that can visualize 2D, 3D, and 4D (time varying) datasets. ParaView can process multiple very large data sets in parallel then later collect the results to yield a responsive graphics environment with which a user can interact. The better the processor and graphics hardware the machine or machines hosting the software, the faster and better ParaView will run, however it can run quite well on a laptop with a standard graphics card such as a MacBook Pro.
+ParaView is an open-source platform that can visualize 2D, 3D, and 4D (time-varying) datasets. ParaView can process multiple very large data sets in parallel then later collect the results to yield a responsive graphics environment with which a user can interact. The better the processor and graphics hardware the machine or machines hosting the software, the faster and better ParaView will run. However, it can run quite well on a laptop with a standard graphics card such as a MacBook Pro.
 
 Since ParaView is an open source application, anyone can download the program and its source code for modifications. The easiest way to get started with ParaView is to download the compiled binary installers for your operating system from [here](https://www.paraview.org/download/).
 
@@ -14,7 +14,7 @@ Take a look at Section 2.1 of 'The ParaView Tutorial' for details of the applica
 
 ## Notes
 * Enable Auto Apply in the preferences for interactive slicers and so you don't always have to click apply. (*Note:* sometimes you may want this off when working with large datasets)
-* One convenient feature is to save the state of the ParaView environment. This saves all the options you selected on all the filters you applied to visualize some data. Select File->Save State… (*Note:* this saves the absolute path of the files loaded into ParaView, so be sure to select 'Search for Files Under Directory...' when opening these state files)
+* One convenient feature is to save the state of the ParaView environment. This saves all the options you selected for all the filters you applied to visualize some data. Select File->Save State… (*Note:* this saves the absolute path of the files loaded into ParaView, so be sure to select 'Search for Files Under Directory...' when opening these state files)
 
 
 ----------
@@ -43,7 +43,7 @@ Add the `PVPATH` variable to your environment through this export expression:
 export PVPATH="/Applications/ParaView-5.4.0.app"
 ```
 
-Windows users, open Cygwin and add a `PVPATH` variable in your environment in the same manner. Its a bit trickier for you because we need the path on cygwin's map of your drive. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView...` to `/cygdrive/d/ParaView-5.4.0...`)
+Windows users, open Cygwin and add a `PVPATH` variable in your environment in the same manner. Its a bit trickier for you because we need the path on Cygwin's map of your drive. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView...` to `/cygdrive/d/ParaView-5.4.0...`)
 
 ```bash
 # Be sure to check that this path matches yours... Odds are it's different!
@@ -64,14 +64,14 @@ From your command line:
 # Clone this repository
 $ git clone https://github.com/banesullivan/ParaViewGeophysics
 
-# Go into the repository
+# Go in the cloned repository
 $ cd ParaViewGeophysics
 ```
 
 ## Installing to ParaView
 Now to get started using the plugins and python modules included in this repository, we need to create links between your installation of ParaView and this repository. That's why we need a `PVPATH` variable to be set in your environment (above).
 
-To create these links, run the installation script at the top of the repository called `installMac.sh` or `installWin.sh` for your operating system. If errors arise, they will be printed in red. The most common cause of error is having an incorrect `PVPATH` variable.
+To create these links, run the installation script at the top of the repository called `installMac.sh` or `installWin.sh` for your operating system. If errors arise, they will be printed in red. The most common cause of errors is having an incorrect `PVPATH` variable.
 
 *Note: Windows users, when running the `installWin.sh` script there will be some yellow outputs. Make sure they are just announcing successful links and not errors/permission denied.*
 
@@ -105,7 +105,7 @@ $ sh src/build_plugins.sh
 -->
 
 ## How to Update
-We have included a script that will update the repository from GitHub and since the repo is already linked to ParaView, all changes to the repo will be directory reflected in ParaView. This script is simply executed by:
+We have included a script that will update the repository from GitHub, and since the repo is already linked to ParaView, all changes to the repo will be directory reflected in ParaView. This script is simply executed by:
 
 ```bash
 # Run this to update ParaViewGeophysics in the future:
@@ -116,44 +116,41 @@ $ sh ./updatePVGP.sh
 --------------
 
 # Using Outside Modules
-ParaView's Python environment, `pvpython`, can be a bit tricky to start using outside Python modules like SciPy or SimPEG. On Mac OS X, using Python modules installed via pip or anaconda should work simply with an `import ...` statement if you have your Python paths set up well. (Mac users: if you have trouble importing SciPy or other modules used in this repo let me know and I will develop a solution). Windows users on the other hand are going to have quite a bit of trouble as `pvpython` is its own environment nestled in the ParaView application. I have not been able to develop an elegant solution for Windows users to use 3rd party Python libraries other than a simple copy/paste of that module into the ParaView application contents.
+ParaView's Python environment, `pvpython`, can be a bit tricky to start using outside Python modules like SciPy or SimPEG. On Mac OS X, using Python modules installed via pip or anaconda should work simply with an `import ...` statement if you have your Python paths set up well. (Mac users: if you have trouble importing SciPy or other modules used in this repo let me know and I will develop a solution). Windows users, on the other hand, are going to have quite a bit of trouble as `pvpython` is its own environment nestled in the ParaView application. I have not been able to develop an elegant solution for Windows users to use 3rd party Python libraries other than a simple copy/paste of that module into the ParaView application contents.
 
 *Note: Advanced users, try a symbolic link between ParaView's python library and the libraries you have installed. This is how we are installing our module so that it stays updated.*
 
 ## Windows Users
-To start using third party libraries, we are going to have copy over static versions of the modules into ParaView's `site-packages` directory. This folder should be under `.../ParaView/bin/site-packages/`. Effectively, we just perform a brute install of that module to `pvpython` on Windows so that when we make `import`s, the modules will be found in the `pvpython` environment.
+To start using third-party libraries, we are going to have to copy over static versions of the modules into ParaView's `site-packages` directory. This folder should be under `.../ParaView/bin/site-packages/`. Effectively, we just perform a brute install of that module to `pvpython` on Windows so that when we make `import`s, the modules will be found in the `pvpython` environment.
 
 ## Modules Currently Needed for this Repo
 These are all of the modules that filters, readers, and macros might use in this repo. We recommend opening the Python Shell from ParaView (Tools->Python Shell) and testing the import of each of these modules. Copy/Paste the modules that failed to import from wherever you have them installed into `.../ParaView/bin/site-packages/`:
 
-- [NumPy](http://www.numpy.org) (you may need update ParaView's version to the latest version for SciPy to be happy)
+- [NumPy](http://www.numpy.org) (you may need to update ParaView's version to the latest version for SciPy to be happy)
 - [SciPy](https://www.scipy.org/install.html)
 - [VTK](https://www.vtk.org/download/)
 - [datetime](https://docs.python.org/2/library/datetime.html)
 - [struct](https://docs.python.org/2/library/struct.html)
 - [csv](https://docs.python.org/2/library/csv.html)
 
-I suspect there is a more elegant solution to setting up the Python environment for `pvpython` on Windows to use modules installed from pip or anaconda, however Windows is not my area of expertise and I have had much trouble attempting to figure this out. I encourage a Windows user of this repository to figure this out so we don't have to make static version of these modules to use in ParaView.
+I suspect there is a more elegant solution to setting up the Python environment for `pvpython` on Windows to use modules installed from pip or anaconda, however, Windows is not my area of expertise and I have had much trouble attempting to figure this out. I encourage a Windows user of this repository to figure this out, so we don't have to make a static version of these modules to use in ParaView.
 
 Someone *please* figure this out and post a more robust solution to the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues).
 
 --------------
 
 # Documentation
-All documentation for the code produced from this project will be included in this website. The documentation will contain an explanation of all of the produced plugins (filters and readers) and macros. Use the Sidebar to explore the documentation content and to find all documentation for readers, filters, macros, and more as you need. There are also details on how to [build your own plugins](./Plugins/Build-Your-Own-Plugins.md), how to [export data scenes](./PVGPpy/export/exportVTKjs.md), and transferring your complex data scenes into [virtual reality](./Virtual-Reality/Entering-Virtual-Reality.md).
+All documentation for the code produced from this project will be included on this website. The documentation will contain an explanation of all of the produced plugins (filters and readers) and macros. Use the Sidebar to explore the documentation content and to find all documentation for readers, filters, macros, and more as you need. There are also details on how to [build your own plugins](./Plugins/Build-Your-Own-Plugins.md), how to [export data scenes](./PVGPpy/export/exportVTKjs.md), and transferring your complex data scenes into [virtual reality](./Virtual-Reality/Entering-Virtual-Reality.md).
 
-The purpose to including all this extra documentation is to provide a convenient location for geoscientists to learn how to tailor ParaView to their needs because data representation and communication are an integral part of success in science. To effectively represent our spatial data is the first step to becoming successful and effective geoscientists. This is the principle behind why we are publishing this documentation along with the code in the repository. Not only do we want to effectively communicate the effort and motivation for this project, but we want to empower others to effectively communicate their scientific endeavors through spatial visualizations.
+The purpose of including all this extra documentation is to provide a convenient location for geoscientists to learn how to tailor ParaView to their needs because data representation and communication are an integral part of success in science. To efficiently represent our spatial data is the first step to becoming successful and productive geoscientists. This is the principle behind why we are publishing this documentation along with the code in the repository. Not only do we want to communicate the effort and motivation for this project efficiently, but we want to empower others to communicate their scientific endeavors through spatial visualizations effectively.
 
 ## Plugin Documentation
-There is a page dedicated to every plugin in the respective readers and filters categories. On these pages, you will find implementation details, parameters, code quirks, and general usage information. As the project continues, we will also try to have an example for every reader and filter so that users can really get a feel for what is going on and how they might apply these plugins to address their needs. Since almost all geoscientific data is proprietary, these tutorials will likely come late so that we can find good open data sets and models that users can find outside of this repo for free.
+There is a page dedicated to every plugin in the respective readers and filters categories. On these pages, you will find implementation details, parameters, code quirks, and general usage information. As the project continues, we will also try to have an example for every reader and filter so that users can get a feel for what is going on and how they might apply these plugins to address their needs. Since almost all geoscientific data is proprietary, these tutorials will likely come late so that we can find good open data sets and models that users can find outside of this repo for free.
 
 ## Macro documentation
 <!-- TODO: is this section consistent with PVGPpy? -->
-Each macro produced for this repository will have a distinct purpose, be it to export isometric screenshots of any data scene or to batch load / convert specific data sets. The macros will have broad applications and be formatted to work with generally any data scene or data of specific formats so that they can be easily expanded upon to complete specific tasks. For the macros we will try to immediately have sample data and a tutorial upon publishing with documentation of what we are doing and why. The Python scripts themselves will be heavily commented, so that every user can tailor the scripts to their individual needs.
+Each macro produced for this repository will have a distinct purpose, be it to export isometric screenshots of any data scene or to batch load / convert specific data sets. The macros will have broad applications and be formatted to work with generally any data scene or data of specific formats so that they can be easily expanded upon to complete specific tasks. For the macros, we will try to immediately have sample data and a tutorial upon publishing with documentation of what we are doing and why. The Python scripts themselves will be heavily commented so that every user can tailor the scripts to their individual needs.
 
 There is also a detailed page on how to easily start making your own macros/scripts. From the people that I have talked to, there tends to be quite a steep learning curve with ParaView scripting, so we want to compile our knowledge into one place for others to gain tips, tricks, and advice to start making their own macros.
 
 Remember, if you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues).
-
-
---------------

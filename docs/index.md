@@ -4,7 +4,7 @@ Welcome to the ParaView for Geophysics Documentation! This repository is all abo
 
 This repository was produced from the work of an undergraduate research project at the Colorado School of Mines titled: Illuminating the Value of Geophysical Imaging through Visualization and Virtual Reality. Checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-MFIwUy1uUTlfVHM/view?usp=sharing) standalone presentation to learn more about the project.
 
-Use the Sidebar (to the left) to explore the the contents of the current page and use the menu bar at the top to find all the different pages (readers & filters for ParaView are under 'Plugins' while macros and code documentation for the PVGPpy module are under the 'PVGPpy' category). Explore around!
+Use the Sidebar (to the left) to explore the contents of the current page and use the menu bar at the top to find all the different pages (readers & filters for ParaView are under 'Plugins' while macros and code documentation for the PVGPpy module are under the 'PVGPpy' category). Explore around!
 
 
 ## Demo
@@ -48,20 +48,20 @@ These are the goals to achieve through publishing this repository but not necess
 
      * Document how to use ParaView’s native filters to complete common tasks in the visualization of geoscientific data. For example, applying satellite imagery to a surface that represents topography.
 
-* Develop customizable macros for the visualization of common data formats. This will include developing macros on an individual basis to help others quickly visualize their data and models for quality assessment and individual research needs.
+* Develop customizable macros for the visualization of common data formats. This will include developing macros on an individual basis to help others quickly visualize their data and models for quality assessment and unique research needs.
 
 
 -------
 
 
 # About the Author
-Unless otherwise specified at the top of the file, all code and documentation distributed here were produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
+Unless otherwise specified, all code and documentation distributed here were produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
 
 
 -------
 
 
-# Features on Their Way
+# Features to Come
 
 Here is a list of features that are shortly coming to this repo. This list will be regularly updated
 
@@ -84,7 +84,7 @@ Suggestions? Post on the [Issues page](https://github.com/banesullivan/ParaViewG
 - [ ] **Append Model to UBC Mesh:** This will load a model file and tag it on to vtkStructuredGrid loaded from a UBC Mesh reader. Think of it as appending models as attributes to the 3D mesh.
 - [ ] **Extract Array:** This will allow you to extract any array from any data structure as vtkPolyData.
 - [ ] **Transpose Grid:** Transpose or swap axii of grid data sets (vtkImageData and vtkRectilinearGrid)
-- [ ] **Reshape Table:** Adding ability to reshape using fortran ordering on the currently available filter.
+- [ ] **Reshape Table:** Adding ability to reshape using Fortran ordering on the currently available filter.
 - [ ] **Make Cubes from Point Set:** This will take a point set and generate cube of some specified size at every point
 
 <!---
@@ -94,11 +94,11 @@ Suggestions? Post on the [Issues page](https://github.com/banesullivan/ParaViewG
 ## Macros and Scripts
 - [ ] How to start making your own scripts (tips, tricks, and general advice)
 - [ ] Save screenshots in isometric views, side, top, etc. in an automated fashion
-- [x] [Many Slices Along Points:](PVGPpy/vis/Many-Slices-Along-Points.md) Export slices of data set along poly line at every point on that line (normal is the vector from that point to the next)
+- [x] [Many Slices Along Points:](PVGPpy/vis/Many-Slices-Along-Points.md) Export slices of dataset along polyline at every point on that line (normal is the vector from that point to the next)
 - [x] [Export a scene](PVGPpy/export/exportVTKjs.md) to a shareable 3D format
 
 ## Examples
 - [ ] Tutorials for each filter/reader/macro will be in their respective documentation.
 - [ ] Importing DEM topography (with/without satellite imagery)
 - [ ] Slicing/cropping a data scene through all components/datasets (managing links)
-- [x] [Slice Model Along PolyLine:](Examples/Slice-Model-Along-PolyLine.md) How to export a slice of a data set projected on a vtkPolyLine (capabilities are currently present in ParaView)
+- [x] [Slice Model Along PolyLine:](Examples/Slice-Model-Along-PolyLine.md) How to export a slice of a dataset projected on a vtkPolyLine (capabilities are currently present in ParaView)
