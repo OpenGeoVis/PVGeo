@@ -60,6 +60,8 @@ f.write(data)
 # Close the file
 f.close()
 ```
-Now select 'File->Open...' within ParaView and choose `test_file.bin` wherever you saved it. This reader will unpack the floats and load them into a table. You can now use this data in many ways. For example, apply a 'Table to Uniform Grid' filter (from this repository) and set the filter parameters to the information in the print out from when you ran the script above. Once you have vtkImageData made of the data, you can apply a 'Warp by Scalar' filter for a fun visualization effect to see 3D ripples like the image below!
+Now select 'File->Open...' within ParaView and choose `test_file.bin` wherever you saved it. This reader will unpack the floats and load them into a table. You can now use this data in many ways. For example, apply a 'Table to Uniform Grid' filter (from this repository) and set the filter parameters to the information in the print out from when you ran the script above. Once you have vtkImageData made of the data, you can apply a 'Warp by Scalar' filter for a fun visualization effect to see 3D ripples like the example below!
 
-![Ripple Example](figs/ripple.png)
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>

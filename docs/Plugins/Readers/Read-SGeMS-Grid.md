@@ -47,11 +47,15 @@ For example files to use with this reader, download any of the 2D or 3D files fr
 
 Here is the [Walker Lake Exhaustive DEM Categorized](http://www.trainingimages.org/uploads/3/4/0/5/3405352/a_wlreferencecat.zip) with a categorized color scale:
 
-![Walker Lake Cat](figs/walker_lake_cat.png)
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/abxnlro2skbjnyu/WL_cat.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
 
 and here is the [FLUVSIM object-based model](http://www.trainingimages.org/uploads/3/4/0/5/3405352/ti_fluvsim_big_channels3d.zip) with a categorized color scale (bounding surfaces are set to be transparent):
 
-![FLUVSIM](figs/fluvsim.png)
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/qnahdwedjwndo7t/fluvsim_channels.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
 
 We will later add in the ability to specify the spacing and origin of the produced vtkImageData as advanced properties of this reader, however you can easily do this by adding a Python Programmable Filter that copies the data and changes these properties with a script like this one:
 
