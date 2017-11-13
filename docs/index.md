@@ -75,12 +75,13 @@ Suggestions? Post on the [Issues page](https://github.com/banesullivan/ParaViewG
 - [ ] How to build your own plugins using this project's framework and build scripts
 
 ## Readers
-- [ ] **UBC Mesh:** both 2D and 3D. Details [here](https://www.eoas.ubc.ca/ubcgif/iag/sftwrdocs/technotes/faq.htm#mesh) and [here](https://gif.eos.ubc.ca/software/utility_programs#3DmodelsMeshes).
+- [ ] **UBC Mesh:** both 2D and 3D. Details [here](https://www.eoas.ubc.ca/ubcgif/iag/sftwrdocs/technotes/faq.htm#mesh) and [here](https://gif.eos.ubc.ca/software/utility_programs#3DmodelsMeshes). We're almost done with this!
 - [ ] **ESRI Grid:** Details [here](https://en.wikipedia.org/wiki/Esri_grid) and [here](http://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/esri-grid-format.htm)
 - [ ] **ESRI shape files:** Details [here](https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf) and [here](https://en.wikipedia.org/wiki/Shapefile)
 - [ ] **Well logs:** Readers for common formats and easy ways to project well logs in XYZ space
 
 ## Filters
+- [ ] **Append Model to UBC Mesh:** This will load a model file and tag it on to vtkStructuredGrid loaded from a UBC Mesh reader. Think of it as appending models as attributes to the 3D mesh.
 - [ ] **Extract Array:** This will allow you to extract any array from any data structure as vtkPolyData.
 - [ ] **Transpose Grid:** Transpose or swap axii of grid data sets (vtkImageData and vtkRectilinearGrid)
 - [ ] **Reshape Table:** Adding ability to reshape using fortran ordering on the currently available filter.
@@ -90,15 +91,14 @@ Suggestions? Post on the [Issues page](https://github.com/banesullivan/ParaViewG
 **Structure Point Set:** This will take scattered point data and create connectivity/structure either in the form of hexahedrons or quads. More info to come.
 -->
 
-## Macros
-- [ ] How to start making your own macros (tips, tricks, and general advice)
-- [ ] Save screenshots in isometric views, side, top, etc. views
-- [ ] Coming to all macros: ability to use a file selection prompt instead of hardcoding file names into the scripts.
+## Macros and Scripts
+- [ ] How to start making your own scripts (tips, tricks, and general advice)
+- [ ] Save screenshots in isometric views, side, top, etc. in an automated fashion
 - [x] [Many Slices Along Points:](PVGPpy/vis/Many-Slices-Along-Points.md) Export slices of data set along poly line at every point on that line (normal is the vector from that point to the next)
+- [x] [Export a scene](PVGPpy/export/exportVTKjs.md) to a shareable 3D format
 
 ## Examples
-- [ ] Tutorials for each filter / reader will be in their documentation.
-- [x] How to export a scene to a shareable 3D format
+- [ ] Tutorials for each filter/reader/macro will be in their respective documentation.
 - [ ] Importing DEM topography (with/without satellite imagery)
-- [ ] Slicing/cropping a data scene through all components/datasets
+- [ ] Slicing/cropping a data scene through all components/datasets (managing links)
 - [x] [Slice Model Along PolyLine:](Examples/Slice-Model-Along-PolyLine.md) How to export a slice of a data set projected on a vtkPolyLine (capabilities are currently present in ParaView)
