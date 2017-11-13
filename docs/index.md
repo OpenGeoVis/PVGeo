@@ -94,9 +94,9 @@ Suggestions? Post on the [Issues page](https://github.com/banesullivan/ParaViewG
 - [x] [Export a scene](PVGPpy/export/exportVTKjs.md) to a shareable 3D format
 
 ## Examples and Other Docs
+- Tutorials for each filter/reader/macro will be in their respective documentation.
 - [ ] How to send data scenes made using the Readers, Filters, and Macros in this repository over to the Virtual Reality build of ParaView
 - [ ] How to build your own plugins using this project's framework and build scripts
-- [ ] Tutorials for each filter/reader/macro will be in their respective documentation.
 - [ ] Importing DEM topography (with/without satellite imagery)
 - [ ] Slicing/cropping a data scene through all components/datasets (managing links)
 - [x] [Slice Model Along PolyLine:](Examples/Slice-Model-Along-PolyLine.md) How to export a slice of a dataset projected on a vtkPolyLine (capabilities are currently present in ParaView)
