@@ -4,7 +4,7 @@ Welcome to the ParaView for Geophysics Documentation! This repository is all abo
 
 This repository was produced from the work of an undergraduate research project at the Colorado School of Mines titled: Illuminating the Value of Geophysical Imaging through Visualization and Virtual Reality. Checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-MFIwUy1uUTlfVHM/view?usp=sharing) standalone presentation to learn more about the project.
 
-Use the Sidebar (to the left) to explore the docs page and to find all documentation for readers, filters, macros, and more as you need.
+Use the Sidebar (to the left) to explore the the contents of the current page and use the menu bar at the top to find all the different pages (readers & filters for ParaView are under 'Plugins' while macros and code documentation for the PVGPpy module are under the 'PVGPpy' category). Explore around!
 
 
 ## Demo
