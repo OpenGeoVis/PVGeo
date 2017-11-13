@@ -51,7 +51,7 @@ Would not it be great to send your client or interested parties an interactive 3
 
 The vtk.js library has an open-source [standalone scene viewer](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html) which they have a nice demo for [here](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html). The first link can either be downloaded as an HTML file to be ran locally, or you can go to that link and run from the vtk.js server. vtk.js also published a scene export macro for ParaView that compresses a data scene in ParaView to a shareable format for viewing on the web. The macro from the vtk.js library can be found [here](https://raw.githubusercontent.com/Kitware/vtk-js/master/Utilities/ParaView/export-scene-macro.py) but we also deploy an updated (we think more robust) version of this export macro in the sub-module `export` of our Python module `PVGPpy`.
 
-## Test It Out
+## Demo Shareable Format
 Here are some samples to demonstrate the web viewer. We have included a few of our scenes and one of the vtk.js sample scenes for you to demo:
 
 - [Volcano](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/volc.vtkjs?dl=0)
@@ -64,7 +64,7 @@ Here are some samples to demonstrate the web viewer. We have included a few of o
 -------
 
 
-# Make Your Own
+# Example Use
 First, make a complex scene in ParaView that you might like to share with someone. <!--For a simple example, download [this] folder and load the state file *(be sure to use relative file paths)*.--> Now that you have your scene loaded, open the python shell from Tools->Python Shell within ParaView. From here, import our Python module delivered in the repository called `PVGPpy`. From the `export` sub-module, there is a function called `exportVTKjs()` which takes two optional arguments (`FileName` string and `compress` boolean). Execute this function and note the output text as it will describe where the exported scene was saved.
 
 ```py
