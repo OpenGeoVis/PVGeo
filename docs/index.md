@@ -36,11 +36,13 @@ These are the goals to achieve through publishing this repository but not necess
 
 * Develop and document geoscientific plugins for ParaView. These plugins will take advantage of ParaView and VTK’s Python wrapping and use the Python Programmable Filter in ParaView. The advantage to using Python Programmable filters is that they are easily modified by the end user and can be wrapped in XML to create a GUI for its use in ParaView while having the option to directly edit the source code live in ParaView.
 
-    * Readers: Plugins that read common geoscientific and geophysical spatial data files (GSLIB, UBC mesh, ESRI grid, etc.). Also make readers that read common raw data files (packed binary floats, delimited ASCII, etc.)
+    * **Readers:** Plugins that read common geoscientific and geophysical spatial data files (GSLIB, UBC mesh, ESRI grid, etc.). Also make readers that read common raw data files (packed binary floats, delimited ASCII, etc.)
 
-    * Filters: Plugins that perform post-processing analysis of geoscientific data for visualization. For example, filters that build tubes from a series of points that represent a tunnel or filters that take a 1D array, reshape it to 2D or 3D, and make a volumetric model ready for visualization all while adding spatial reference for visual integration.  
+    * **Filters:** Plugins that perform post-processing analysis of geoscientific data for visualization. For example, filters that build tubes from a series of points that represent a tunnel or filters that take a 1D array, reshape it to 2D or 3D, and make a volumetric model ready for visualization all while adding spatial reference for visual integration.  
 
-    * Sources: Plugins that create simple synthetic data sources such as a sphere or cube with a specified attribute like a spatially varying density or electrical conductivity. Other sources might include using that synthetic sphere or cube to make a volumetric field of some response.
+    * **Sources:** Plugins that create simple synthetic data sources such as a sphere or cube with a specified attribute like a spatially varying density or electrical conductivity. Other sources might include using that synthetic sphere or cube to make a volumetric field of some response.
+
+* Develop and document the `PVGPpy` Python module for use in ParaView's Python Shell. This module will contain all of the macros, batch processing tasks, and common codes to apply to 3D data scenes.
 
 * Make tutorials on the use of ParaView's native features and the plugins distributed in this repository on open source data (for example):
 
