@@ -1,5 +1,6 @@
 #!/bin/bash
 # FOR WINDOWS OPERATING SYSTEM
+# NOTE: This needs to be run through Cygwin!
 # ONLY RUN THIS SCRIPT ONCE (at time of installation)
 
 pushd "$(dirname "$0")"
