@@ -45,7 +45,7 @@ Variable3
 # Example Use
 For example files to use with this reader, download any of the 2D or 3D files from [this website](http://www.trainingimages.org/training-images-library.html) and load them into ParaView using the 'Read SGeMS File to Uniform Grid' file reader. A 2D or 3D block of data should automatically be built and visualized.
 
-Here is the [Walker Lake Exhaustive DEM Categorized](http://www.trainingimages.org/uploads/3/4/0/5/3405352/a_wlreferencecat.zip) with a categorized color scale:
+Here is the [Walker Lake Exhaustive DEM Categorized](http://www.trainingimages.org/uploads/3/4/0/5/3405352/a_wlreferencecat.zip) with a categorized color scale and the surface warped by categorization to give it an interesting 3D representation:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
         <iframe src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/abxnlro2skbjnyu/WL_cat.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
