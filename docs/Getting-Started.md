@@ -46,8 +46,10 @@ export PVPATH="/Applications/ParaView-5.4.0.app"
 Windows users, open Cygwin and add a `PVPATH` variable in your environment in the same manner. Its a bit trickier for you because we need the path on cygwin's map of your drive. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView...` to `/cygdrive/d/ParaView-5.4.0...`)
 
 ```bash
-## Be sure to check that this path matches yours... Odds are it's different!
+# Be sure to check that this path matches yours... Odds are it's different!
+# Make sure there are NO SPACES in your path.
 # Path to the ParaView installation:
+#- If ParaView were installed at D:\\ParaView-version-something then you export looks like this:
 export PVPATH="/cygdrive/d/ParaView-version-something"
 ```
 
