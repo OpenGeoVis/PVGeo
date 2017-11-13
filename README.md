@@ -50,7 +50,7 @@ $ cd ParaViewGeophysics
 #- Note: There are two install scripts. One for Mac/Linux and one for Windows
 #- Mac:
 $ sh ./installMac.sh
-#- Windows:
+#- Windows users: Please use Cygwin. The install script is meant for Cygwin.
 $ sh ./installWin.sh
 ```
 
