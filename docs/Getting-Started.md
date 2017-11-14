@@ -53,6 +53,7 @@ export PVPATH="/Applications/ParaView-5.4.0.app"
 export PVPATH="/cygdrive/d/ParaView-version-something"
 
 #- Pull the updates: make sure you are in the ParaViewGeophysics directory!
+$ git checkout .
 $ git pull origin master
 
 #- Run the new installation
