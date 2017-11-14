@@ -1,10 +1,12 @@
 # Welcome
 
-Welcome to the ParaView for Geophysics Documentation! This repository is all about using ParaView in the geosciences for data and model visualization. Through visualization, we can bring value to data and hold the products of geoscience in a new light to interested parties.
+Welcome to the ParaView for Geophysics Documentation! This website documents the code base we are making for data visualization in geophysics on the application ParaView by Kitware. Through visualization, we can bring value to data and hold the products of geoscience in a new light to interested parties.
 
 This repository was produced from the work of an undergraduate research project at the Colorado School of Mines titled: Illuminating the Value of Geophysical Imaging through Visualization and Virtual Reality. Checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-MFIwUy1uUTlfVHM/view?usp=sharing) standalone presentation to learn more about the project.
 
 Use the Sidebar (to the left) to explore the contents of the current page and use the menu bar at the top to find all the different pages (readers & filters for ParaView are under 'Plugins' while macros and code documentation for the PVGPpy module are under the 'PVGPpy' category). Explore around!
+
+All code is published on the GitHub repository 'ParaViewGeophysics' linked to this page. Click the 'GitHub' link on the right side of the menu bar at the top to find all of the code.
 
 
 ## Demo

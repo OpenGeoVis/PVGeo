@@ -86,9 +86,9 @@ Select the exported scene as the input file for the web viewer from where you sa
 
 
 # How to Share
+To share these exported scenes with non-technical stakeholders, we recommend the following processes:
 
 ## Quick and Easy
-To share these exported scenes with non-technical stakeholders, we recommend the following process:
 
 - Create your scene and export to the vtk.js format (follow process above)
 - Quality control your visualization by viewing in web browser yourself (follow process above)
