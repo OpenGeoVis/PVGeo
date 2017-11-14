@@ -37,7 +37,7 @@ If you previously installed the repository during the Alpha release stage, pleas
 
 ```bash
 # How to update from the Alpha version to the Beta versions
-# This is a more robust installation that will be much easier to manage and updated
+# This is a more robust installation that will be much easier to manage and update
 
 # First, remove the plugins directory from your ParaView installation
 #- This should be the PVPLUGINPATH you declared in the previous installation
@@ -45,12 +45,13 @@ $ rm -r $PVPLUGINPATH
 
 # Now complete the following installation instructions in the next sections
 
-#- Be sure to check that this path matches yours... Odds are it's different!
 #- Path to the ParaView installation:
-export PVPATH="/Applications/ParaView-5.4.0.app"
+#- No need to add to you ~/.bash_profile, just export on the command line once
+#- Be sure to check that this path matches yours... Odds are it's different!
+$ export PVPATH="/Applications/ParaView-5.4.0.app"
 #- Or windows via Cygwin
-#-- If ParaView were installed at D:\\ParaView-version-something then you export looks like this:
-export PVPATH="/cygdrive/d/ParaView-version-something"
+#-- If ParaView were installed at D:\\ParaView-version-something
+$ export PVPATH="/cygdrive/d/ParaView-version-something"
 
 #- Pull the updates: make sure you are in the ParaViewGeophysics directory!
 $ git checkout .
@@ -72,7 +73,7 @@ Add the `PVPATH` variable to your environment through this export expression:
 ```bash
 # Be sure to check that this path matches yours... Odds are it's different!
 # Path to the ParaView installation:
-export PVPATH="/Applications/ParaView-5.4.0.app"
+$ export PVPATH="/Applications/ParaView-5.4.0.app"
 ```
 
 Windows users, open Cygwin and add a `PVPATH` variable in your environment in the same manner. Its a bit trickier for you because we need the path on Cygwin's map of your drive. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView...` to `/cygdrive/d/ParaView-5.4.0...`)
@@ -81,8 +82,8 @@ Windows users, open Cygwin and add a `PVPATH` variable in your environment in th
 # Be sure to check that this path matches yours... Odds are it's different!
 # Make sure there are NO SPACES in your path.
 # Path to the ParaView installation:
-#- If ParaView were installed at D:\\ParaView-version-something then you export looks like this:
-export PVPATH="/cygdrive/d/ParaView-version-something"
+#- If ParaView were installed at D:\\ParaView-version-something
+$ export PVPATH="/cygdrive/d/ParaView-version-something"
 ```
 
 ## Cloning the Repository
