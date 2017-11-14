@@ -31,6 +31,37 @@ Download and use [Cygwin](https://devtidbits.com/2011/07/01/cygwin-walkthrough-a
 
 Also, be sure to place/install ParaView and this repository to a location that has general read/write privileges for all users such as on your `D:\\` drive. You will encounter all types of issues running the scripts and simply accessing the code via Cygwin if you need admin privileges to access where it is all saved. *Note: the install scripts will need access to the directory where ParaView is installed*
 
+## Upgrading from the Alpha to Beta Version?
+
+If you previously installed the repository during the Alpha release stage, please follow this process to reinstall the project's framework. Moving forward, there will no longer be changes to the file structure and updates will be streamlined and simple.
+
+```bash
+# How to update from the Alpha version to the Beta versions
+# This is a more robust installation that will be much easier to manage and updated
+
+# First, remove the plugins directory from your ParaView installation
+#- This should be the PVPLUGINPATH you declared in the previous installation
+$ rm -r $PVPLUGINPATH
+
+# Now complete the following installation instructions in the next sections
+
+#- Be sure to check that this path matches yours... Odds are it's different!
+#- Path to the ParaView installation:
+export PVPATH="/Applications/ParaView-5.4.0.app"
+#- Or windows via Cygwin
+#-- If ParaView were installed at D:\\ParaView-version-something then you export looks like this:
+export PVPATH="/cygdrive/d/ParaView-version-something"
+
+#- Pull the updates: make sure you are in the ParaViewGeophysics directory!
+$ git pull origin master
+
+#- Run the new installation
+#-- Note: There are two install scripts. One for Mac/Linux and one for Windows
+#-- Mac:
+$ sh ./installMac.sh
+#-- Windows via Cygwin:
+$ sh ./installWin.sh
+```
 
 ## Before You Do Anything!
 
