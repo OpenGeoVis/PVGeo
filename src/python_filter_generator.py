@@ -352,12 +352,20 @@ def generatePythonFilter(info):
 def getFilterGroup(info):
     if "FilterCategory" not in info:
         return ''
-    else:
+    elif "Extensions" not in info and "ReaderDescription" not in info:
         return ('''\
         <Hints>
             <ShowInMenu category="%s" />
         </Hints>
-        ''' % info["FilterCategory"])
+        ''' % (info["FilterCategory"]))
+    else:
+        return ('''\
+        <Hints>
+            <ShowInMenu category="%s" />
+            <ReaderFactory extensions="%s"
+                           file_description="%s" />
+        </Hints>
+        ''' % (info["FilterCategory"], info["Extensions"], info["ReaderDescription"]))
 
 
 def replaceFunctionWithSourceString(namespace, functionName, allowEmpty=False):
