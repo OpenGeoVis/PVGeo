@@ -7,7 +7,7 @@ NumberOfInputs = 0
 OutputDataType = 'vtkImageData'
 ExtraXml = '''\
 <Hints>
-    <ReaderFactory extensions="sgems SGEMS SGeMS"
+    <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"
                    file_description="SGeMS Grid File Format" />
 </Hints>'''
 
@@ -15,7 +15,8 @@ ExtraXml = '''\
 Properties = dict(
     FileName='absolute path',
     Delimiter_Field=' ',
-    Use_tab_delimiter=False
+    Use_tab_delimiter=False,
+    # TODO: SEPLIB
 )
 
 
