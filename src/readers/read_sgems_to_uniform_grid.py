@@ -5,11 +5,8 @@ Help = ''
 
 NumberOfInputs = 0
 OutputDataType = 'vtkImageData'
-ExtraXml = '''\
-<Hints>
-    <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"
-                   file_description="SGeMS Grid File Format" />
-</Hints>'''
+Extensions = 'sgems SGEMS SGeMS dat txt'
+ReaderDescription = 'SGeMS Grid File Format'
 
 
 Properties = dict(

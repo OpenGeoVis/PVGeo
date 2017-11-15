@@ -7,12 +7,11 @@
       </Documentation>
         <Hints>
             <ShowInMenu category="CSM GP Readers" />
+            <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
+                           file_description="GSLIB File Format" />
         </Hints>
 
-<Hints>
-    <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
-                   file_description="GSLIB File Format" />
-</Hints>
+
 
 
             <StringVectorProperty

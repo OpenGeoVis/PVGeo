@@ -5,11 +5,8 @@ Help = 'This reader will take in any delimited text file and make a vtkTable fro
 
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'
-ExtraXml = '''\
-<Hints>
-    <ReaderFactory extensions="dat csv txt"
-                   file_description="CSM GP Delimited Text File" />
-</Hints>'''
+Extensions = 'dat csv txt'
+ReaderDescription = 'CSM GP Delimited Text File'
 
 
 Properties = dict(

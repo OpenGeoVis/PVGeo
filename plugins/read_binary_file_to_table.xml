@@ -7,12 +7,11 @@
       </Documentation>
         <Hints>
             <ShowInMenu category="CSM GP Readers" />
+            <ReaderFactory extensions="H@ bin"
+                           file_description="Binary Packed Floats or Doubles" />
         </Hints>
 
-<Hints>
-    <ReaderFactory extensions="H@ bin"
-                   file_description="Binary Packed Floats or Doubles" />
-</Hints>
+
 
 
           <StringVectorProperty

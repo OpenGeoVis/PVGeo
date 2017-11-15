@@ -5,11 +5,8 @@ Help = 'This filter reads in float or double data that is packed into a binary f
 
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'
-ExtraXml = '''\
-<Hints>
-    <ReaderFactory extensions="H@ bin"
-                   file_description="Binary Packed Floats or Doubles" />
-</Hints>'''
+Extensions = 'H@ bin'
+ReaderDescription = 'Binary Packed Floats or Doubles'
 
 
 Properties = dict(

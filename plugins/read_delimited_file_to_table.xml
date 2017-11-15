@@ -7,12 +7,11 @@
       </Documentation>
         <Hints>
             <ShowInMenu category="CSM GP Readers" />
+            <ReaderFactory extensions="dat csv txt"
+                           file_description="CSM GP Delimited Text File" />
         </Hints>
 
-<Hints>
-    <ReaderFactory extensions="dat csv txt"
-                   file_description="CSM GP Delimited Text File" />
-</Hints>
+
 
 
             <StringVectorProperty

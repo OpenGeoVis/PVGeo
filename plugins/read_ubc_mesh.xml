@@ -7,12 +7,11 @@
       </Documentation>
         <Hints>
             <ShowInMenu category="CSM GP Readers" />
+            <ReaderFactory extensions="mesh msh dat"
+                           file_description="UBC Mesh Two-File Format" />
         </Hints>
 
-<Hints>
-    <ReaderFactory extensions="mesh msh dat"
-                   file_description="UBC Mesh Two-File Format" />
-</Hints>
+
 
 
             <StringVectorProperty

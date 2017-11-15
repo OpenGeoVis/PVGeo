@@ -5,11 +5,8 @@ Help = 'The GSLIB file format has headers lines followed by the data as a space 
 
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'
-ExtraXml = '''\
-<Hints>
-    <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
-                   file_description="GSLIB File Format" />
-</Hints>'''
+Extensions = 'sgems dat geoeas gslib GSLIB txt SGEMS'
+ReaderDescription = 'GSLIB File Format'
 
 
 Properties = dict(

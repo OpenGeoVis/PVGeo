@@ -5,11 +5,8 @@ Help = 'UBC Mesh 3D models are defined using a 2-file format. The "mesh" file de
 
 NumberOfInputs = 0
 OutputDataType = 'vtkRectilinearGrid'
-ExtraXml = '''\
-<Hints>
-    <ReaderFactory extensions="mesh msh dat"
-                   file_description="UBC Mesh Two-File Format" />
-</Hints>'''
+Extensions = 'mesh msh dat'
+ReaderDescription = 'UBC Mesh Two-File Format'
 
 
 Properties = dict(

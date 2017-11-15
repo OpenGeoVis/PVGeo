@@ -7,12 +7,11 @@
       </Documentation>
         <Hints>
             <ShowInMenu category="CSM GP Readers" />
+            <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"
+                           file_description="SGeMS Grid File Format" />
         </Hints>
 
-<Hints>
-    <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"
-                   file_description="SGeMS Grid File Format" />
-</Hints>
+
 
 
             <StringVectorProperty
