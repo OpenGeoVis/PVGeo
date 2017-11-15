@@ -7,6 +7,8 @@
       </Documentation>
         <Hints>
             <ShowInMenu category="CSM GP Readers" />
+        </Hints>
+        <Hints>
             <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
                            file_description="GSLIB File Format" />
         </Hints>

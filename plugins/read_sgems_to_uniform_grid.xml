@@ -7,6 +7,8 @@
       </Documentation>
         <Hints>
             <ShowInMenu category="CSM GP Readers" />
+        </Hints>
+        <Hints>
             <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"
                            file_description="SGeMS Grid File Format" />
         </Hints>

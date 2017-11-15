@@ -362,6 +362,8 @@ def getFilterGroup(info):
         return ('''\
         <Hints>
             <ShowInMenu category="%s" />
+        </Hints>
+        <Hints>
             <ReaderFactory extensions="%s"
                            file_description="%s" />
         </Hints>
