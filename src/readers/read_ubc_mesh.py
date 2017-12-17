@@ -19,7 +19,7 @@ Properties = dict(
 
 
 def RequestData():
-    from PVGPpy.read import readUBCMesh, readUBCModel, placeModelOnMesh,readUBCGridData
+    from PVGPpy.read import ubcGridData
     import os
     # Make sure we have a file combo
     if FileName_Mesh == 'absolute path':
@@ -32,15 +32,15 @@ def RequestData():
     if Data_Name == '':
         Data_Name = os.path.basename(FileName_Model)
     # Read the UBC Mesh gridded data:
-    grd = readUBCGridData(FileName_Mesh, FileName_Model, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, dataNm=Data_Name)
+    grd = ubcGridData(FileName_Mesh, FileName_Model, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, dataNm=Data_Name)
     pdo.ShallowCopy(grd)
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.read import getUBCMeshExtnet
+    from PVGPpy.read import ubcMeshExtnet
     if FileName_Mesh == 'absolute path':
         raise Exception('No mesh file selected. Aborting.')
     # Preview the mesh file and get the mesh extents
-    ext = getUBCMeshExtnet(FileName_Mesh, deli=Delimiter_Field, useTab=Use_Tab_Delimiter)
+    ext = ubcMeshExtnet(FileName_Mesh, deli=Delimiter_Field, useTab=Use_Tab_Delimiter)
     # Set the mesh extents
     util.SetOutputWholeExtent(self, ext)

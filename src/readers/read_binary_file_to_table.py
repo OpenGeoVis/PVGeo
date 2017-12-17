@@ -11,13 +11,13 @@ ReaderDescription = 'Binary Packed Floats or Doubles'
 
 Properties = dict(
     FileName='absolute path',
-    data_name='', # TODO: can I set the default dynamically?
-    double_values=False
+    Data_Name='', # TODO: can I set the default dynamically?
+    Double_Values=False
 )
 
 
 def RequestData():
-    from PVGPpy.read import readPackedBinaries
+    from PVGPpy.read import packedBinaries
     pdo = self.GetOutput()
-    tbl = readPackedBinaries(FileName, dblVals=double_values, dataNm=data_name)
+    tbl = packedBinaries(FileName, dblVals=Double_Values, dataNm=Data_Name)
     pdo.ShallowCopy(tbl)

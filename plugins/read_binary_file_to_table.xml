@@ -16,6 +16,33 @@
 
 
 
+            <StringVectorProperty
+            panel_visibility="default"
+            name="Data_Name"
+            label="Data Name"
+            initial_string="Data_Name"
+            command="SetParameter"
+            animateable="1"
+            default_values=""
+            number_of_elements="1">
+            <Documentation></Documentation>
+            </StringVectorProperty>
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Double_Values"
+        label="Double Values"
+        initial_string="Double_Values"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
           <StringVectorProperty
             panel_visibility="default"
             name="FileName"
@@ -28,33 +55,6 @@
             <FileListDomain name="files"/>
             <Documentation></Documentation>
           </StringVectorProperty>
-
-
-            <StringVectorProperty
-            panel_visibility="default"
-            name="data_name"
-            label="data name"
-            initial_string="data_name"
-            command="SetParameter"
-            animateable="1"
-            default_values=""
-            number_of_elements="1">
-            <Documentation></Documentation>
-            </StringVectorProperty>
-
-
-      <IntVectorProperty
-        panel_visibility="default"
-        name="double_values"
-        label="double values"
-        initial_string="double_values"
-        command="SetParameter"
-        animateable="1"
-        default_values="0"
-        number_of_elements="1">
-        <BooleanDomain name="bool" />
-        <Documentation></Documentation>
-      </IntVectorProperty>
 
       <!-- Output data type: "vtkTable" -->
       <IntVectorProperty command="SetOutputDataSetType"
@@ -70,7 +70,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import readPackedBinaries&#xA;pdo = self.GetOutput()&#xA;tbl = readPackedBinaries(FileName, dblVals=double_values, dataNm=data_name)&#xA;pdo.ShallowCopy(tbl)&#xA;"
+        default_values="from PVGPpy.read import packedBinaries&#xA;pdo = self.GetOutput()&#xA;tbl = packedBinaries(FileName, dblVals=Double_Values, dataNm=Data_Name)&#xA;pdo.ShallowCopy(tbl)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>

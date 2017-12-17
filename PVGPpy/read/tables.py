@@ -5,7 +5,7 @@ import os
 from vtk.util import numpy_support as nps
 import vtk
 
-def readGSLIB(FileName, deli=' ', useTab=False, numIgLns=0):
+def gslib(FileName, deli=' ', useTab=False, numIgLns=0):
     """
     Description
     -----------
@@ -15,15 +15,15 @@ def readGSLIB(FileName, deli=' ', useTab=False, numIgLns=0):
     ----------
     `FileName` : str
 
-    - The absoulte file name with path to read.
+    - The absolute file name with path to read.
 
     `deli` : str
 
-    - The input files delimeter. To use a tab delimeter please set the `useTab`.
+    - The input files delimiter. To use a tab delimiter please set the `useTab`.
 
     `useTab` : boolean
 
-    - A boolean that describes whether to use a tab delimeter
+    - A boolean that describes whether to use a tab delimiter
 
     `numIgLns` : int
 
@@ -31,7 +31,7 @@ def readGSLIB(FileName, deli=' ', useTab=False, numIgLns=0):
 
     Returns
     -------
-    Retruns a vtkTable of the input data file.
+    Returns a vtkTable of the input data file.
 
     """
 
@@ -74,7 +74,7 @@ def readGSLIB(FileName, deli=' ', useTab=False, numIgLns=0):
 
 
 
-def readPackedBinaries(FileName, dblVals=False, dataNm=''):
+def packedBinaries(FileName, dblVals=False, dataNm=''):
     """
     Description
     -----------
@@ -84,7 +84,7 @@ def readPackedBinaries(FileName, dblVals=False, dataNm=''):
     ----------
     `FileName` : str
 
-    - The absoulte file name with path to read.
+    - The absolute file name with path to read.
 
     `dblVals` : boolean, optional
 
@@ -92,11 +92,11 @@ def readPackedBinaries(FileName, dblVals=False, dataNm=''):
 
     `dataNm` : str, optional
 
-    - A string name to use for the construted vtkDataArray
+    - A string name to use for the constructed vtkDataArray
 
     Returns
     -------
-    Retruns a vtkTable of the input data file with a single column being the data read.
+    Returns a vtkTable of the input data file with a single column being the data read.
 
     """
 
@@ -129,26 +129,26 @@ def readPackedBinaries(FileName, dblVals=False, dataNm=''):
     return pdo
 
 
-def readDelimetedFile(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0):
+def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0):
     """
     Description
     -----------
-    This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in Paraview, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
+    This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
 
 
     Parameters
     ----------
     `FileName` : str
 
-    - The absoulte file name with path to read.
+    - The absolute file name with path to read.
 
     `deli` : str
 
-    - The input files delimeter. To use a tab delimeter please set the `useTab`.
+    - The input files delimiter. To use a tab delimiter please set the `useTab`.
 
     `useTab` : boolean
 
-    - A boolean that describes whether to use a tab delimeter
+    - A boolean that describes whether to use a tab delimiter
 
     `numIgLns` : int
 
@@ -156,7 +156,7 @@ def readDelimetedFile(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0
 
     Returns
     -------
-    Retruns a vtkTable of the input data file.
+    Returns a vtkTable of the input data file.
 
     """
     pdo = vtk.vtkTable() # vtkTable

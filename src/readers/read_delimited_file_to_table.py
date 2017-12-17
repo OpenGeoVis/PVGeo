@@ -14,11 +14,11 @@ Properties = dict(
     Number_Ignore_Lines=0,
     Has_Titles=True,
     Delimiter_Field=' ',
-    Use_tab_delimiter=False
+    Use_Tab_Delimiter=False
 )
 
 def RequestData():
-    from PVGPpy.read import readDelimetedFile
+    from PVGPpy.read import delimitedText
     pdo = self.GetOutput()
-    tbl = readDelimetedFile(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines)
+    tbl = delimitedText(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines)
     pdo.ShallowCopy(tbl)

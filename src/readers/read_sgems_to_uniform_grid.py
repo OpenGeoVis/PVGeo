@@ -18,15 +18,15 @@ Properties = dict(
 
 
 def RequestData():
-    from PVGPpy.read import readSGeMSGrid
+    from PVGPpy.read import sgemsGrid
     pdo = self.GetOutput() # vtkTable
-    grd = readSGeMSGrid(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter)
+    grd = sgemsGrid(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter)
     pdo.ShallowCopy(grd)
 
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.read import getSGeMSExtent
-    ext = getSGeMSExtent(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter)
+    from PVGPpy.read import sgemsExtent
+    ext = sgemsExtent(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter)
     # ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:
     util.SetOutputWholeExtent(self, ext)

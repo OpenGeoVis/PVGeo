@@ -58,9 +58,9 @@
 
       <IntVectorProperty
         panel_visibility="default"
-        name="Use_tab_delimiter"
-        label="Use tab delimiter"
-        initial_string="Use_tab_delimiter"
+        name="Use_Tab_Delimiter"
+        label="Use Tab Delimiter"
+        initial_string="Use_Tab_Delimiter"
         command="SetParameter"
         animateable="1"
         default_values="0"
@@ -83,7 +83,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import os&#xA;from PVGPpy.read import readGSLIB&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = pdoreadGSLIB(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter, numIgLns=Number_Ignore_Lines)&#xA;pdo.ShallowCopy(tbl)&#xA;print(os.path.basename(FileName) + ': ' + h)&#xA;"
+        default_values="import os&#xA;from PVGPpy.read import gslib&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslib(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines)&#xA;pdo.ShallowCopy(tbl)&#xA;print(os.path.basename(FileName) + ': ' + h)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>

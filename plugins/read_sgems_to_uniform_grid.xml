@@ -70,7 +70,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import readSGeMSGrid&#xA;pdo = self.GetOutput() # vtkTable&#xA;grd = readSGeMSGrid(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;pdo.ShallowCopy(grd)&#xA;"
+        default_values="from PVGPpy.read import sgemsGrid&#xA;pdo = self.GetOutput() # vtkTable&#xA;grd = sgemsGrid(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;pdo.ShallowCopy(grd)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>
@@ -84,7 +84,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import getSGeMSExtent&#xA;ext = getSGeMSExtent(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.read import sgemsExtent&#xA;ext = sgemsExtent(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

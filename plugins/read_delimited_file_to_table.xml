@@ -72,9 +72,9 @@
 
       <IntVectorProperty
         panel_visibility="default"
-        name="Use_tab_delimiter"
-        label="Use tab delimiter"
-        initial_string="Use_tab_delimiter"
+        name="Use_Tab_Delimiter"
+        label="Use Tab Delimiter"
+        initial_string="Use_Tab_Delimiter"
         command="SetParameter"
         animateable="1"
         default_values="0"
@@ -97,7 +97,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import readDelimetedFile&#xA;pdo = self.GetOutput()&#xA;tbl = readDelimetedFile(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines)&#xA;pdo.ShallowCopy(tbl)&#xA;"
+        default_values="from PVGPpy.read import delimitedText&#xA;pdo = self.GetOutput()&#xA;tbl = delimitedText(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines)&#xA;pdo.ShallowCopy(tbl)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>

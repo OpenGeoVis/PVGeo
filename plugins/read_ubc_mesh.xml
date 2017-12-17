@@ -97,7 +97,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import readUBCMesh, readUBCModel, placeModelOnMesh,readUBCGridData&#xA;import os&#xA;# Make sure we have a file combo&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# If no name given for data by user, use the basename of the file&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileName_Model)&#xA;# Read the UBC Mesh gridded data:&#xA;grd = readUBCGridData(FileName_Mesh, FileName_Model, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, dataNm=Data_Name)&#xA;pdo.ShallowCopy(grd)&#xA;"
+        default_values="from PVGPpy.read import ubcGridData&#xA;import os&#xA;# Make sure we have a file combo&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# If no name given for data by user, use the basename of the file&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileName_Model)&#xA;# Read the UBC Mesh gridded data:&#xA;grd = ubcGridData(FileName_Mesh, FileName_Model, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, dataNm=Data_Name)&#xA;pdo.ShallowCopy(grd)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>
@@ -111,7 +111,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import getUBCMeshExtnet&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = getUBCMeshExtnet(FileName_Mesh, deli=Delimiter_Field, useTab=Use_Tab_Delimiter)&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.read import ubcMeshExtnet&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcMeshExtnet(FileName_Mesh, deli=Delimiter_Field, useTab=Use_Tab_Delimiter)&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

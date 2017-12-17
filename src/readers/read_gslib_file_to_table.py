@@ -13,14 +13,14 @@ Properties = dict(
     FileName='absolute path',
     Number_Ignore_Lines=0,
     Delimiter_Field=' ',
-    Use_tab_delimiter=False
+    Use_Tab_Delimiter=False
 )
 
 
 def RequestData():
     import os
-    from PVGPpy.read import readGSLIB
+    from PVGPpy.read import gslib
     pdo = self.GetOutput() # vtkTable
-    tbl, h = pdoreadGSLIB(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter, numIgLns=Number_Ignore_Lines)
+    tbl, h = gslib(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines)
     pdo.ShallowCopy(tbl)
     print(os.path.basename(FileName) + ': ' + h)
