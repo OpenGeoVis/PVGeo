@@ -17,32 +17,7 @@ Properties = dict(
 
 
 def RequestData():
-    import struct
-    import os
-    from vtk.util import numpy_support as nps
-
-    pdo = self.GetOutput() # vtkTable
-
-    num_bytes = 4 # FLOAT
-    typ = 'f' #FLOAT
-    if double_values:
-        num_bytes = 8 # DOUBLE
-        typ = 'd' # DOUBLE
-
-    tn = os.stat(FileName).st_size / num_bytes
-    tn_string = str(tn)
-    raw = []
-    with open(FileName, 'rb') as file:
-        # Unpack by num_bytes
-        raw = struct.unpack('>'+tn_string+typ, file.read(num_bytes*tn))
-
-    # Put raw data into vtk array
-    data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtk.VTK_FLOAT)
-
-    # If no name given for data by user, use the basename of the file
-    if data_name == '':
-        data_name = os.path.basename(FileName)
-    data.SetName(data_name)
-
-    # Table with single column of data only
-    pdo.AddColumn(data)
+    from PVGPpy.read import readPackedBinaries
+    pdo = self.GetOutput()
+    tbl = readPackedBinaries(FileName, dblVals=double_values, dataNm=data_name)
+    pdo.ShallowCopy(tbl)
