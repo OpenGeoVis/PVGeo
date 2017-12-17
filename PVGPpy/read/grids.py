@@ -5,6 +5,17 @@ from vtk.util import numpy_support as nps
 import vtk
 
 def readSGeMSGrid(FileName, deli=' ', useTab=False):
+    """
+    Description
+    -----------
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+
+    """
     pdo = vtk.vtkImageData() # vtkImageData
 
     if (useTab):
@@ -45,6 +56,17 @@ def readSGeMSGrid(FileName, deli=' ', useTab=False):
     return pdo
 
 def getSGeMSExtent(FileName, deli=' ', useTab=False):
+    """
+    Description
+    -----------
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+
+    """
     with open(FileName) as f:
         if (useTab):
             deli = '\t'
