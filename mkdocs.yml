@@ -44,11 +44,17 @@ pages:
 
 - PVGPpy:
     - About PVGPpy: PVGPpy/About-PVGPpy.md
-    - Export Sub-Module:
+    - Export:
         - Export as VTKjs: PVGPpy/export/exportVTKjs.md
-    - Vis Sub-Module:
+    - Vis:
         - Clip Through: PVGPpy/vis/Clip-Through.md
         - Many Slices Along Points: PVGPpy/vis/Many-Slices-Along-Points.md
+    - Read:
+        - Binary Packed Data: PVGPpy/read/Binary-Packed-Data.md
+        - Delimited Text: PVGPpy/read/Delimited-Text.md
+        - GSLIB: PVGPpy/read/GSLIB.md
+        - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
+        - UBC Mesh Grid: PVGPpy/read/UBC-Mesh.md
 
 - Resources:
     - Scripts:
