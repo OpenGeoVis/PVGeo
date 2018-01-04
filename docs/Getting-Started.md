@@ -31,6 +31,8 @@ Download and use [Cygwin](https://devtidbits.com/2011/07/01/cygwin-walkthrough-a
 
 Also, be sure to place/install ParaView and this repository to a location that has general read/write privileges for all users such as on your `D:\\` drive. You will encounter all types of issues running the scripts and simply accessing the code via Cygwin if you need admin privileges to access where it is all saved. *Note: the install scripts will need access to the directory where ParaView is installed*
 
+*NOTE: Windows users need to use ParaView version 5.4.0 or lower. Version 5.4.1 is currently not working. More details to come.*
+
 ## Upgrading from the Alpha to Beta Version?
 
 If you previously installed the repository during the Alpha release stage, please follow this process to reinstall the project's framework. Moving forward, there will no longer be changes to the file structure and updates will be streamlined and simple.
