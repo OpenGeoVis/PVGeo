@@ -3,7 +3,7 @@ site_author: Bane Sullivan
 site_description: "Documentation for the ParaViewGeophysics repository."
 repo_url: https://github.com/banesullivan/ParaViewGeophysics
 #repo_name: PVGP on GitHub
-site_url: https://gpvis.org/
+site_url: https://banesullivan.github.io/ParaViewGeophysics/
 edit_uri: ""
 copyright: Copyright &copy 2017, Christopher Bane Sullivan
 
