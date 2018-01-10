@@ -72,6 +72,8 @@ def RequestData():
         #image.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
         image.GetPointData().AddArray(c)
 
+    print("NOTE: This filter does not properly structure the ImageData at this time. Please use the \"Flip ImageData Axii\" filter and check the \"reverse y dir\" box. Working on a solution!")
+
 
 def RequestInformation():
     from paraview import util
