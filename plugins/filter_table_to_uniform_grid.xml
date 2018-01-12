@@ -54,6 +54,20 @@
 
       <IntVectorProperty
         panel_visibility="default"
+        name="Swap_XZ"
+        label="Swap XZ"
+        initial_string="Swap_XZ"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+
+      <IntVectorProperty
+        panel_visibility="default"
         name="extent"
         label="extent"
         initial_string="extent"
@@ -104,7 +118,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.vis import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;temp = tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, C_ordering=C_ordering)&#xA;&#xA;image.ShallowCopy(temp)&#xA;"
+        default_values="from PVGPpy.vis import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&quot;&quot;&quot;&#xA;&#xA;temp = tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, C_ordering=C_ordering)&#xA;&#xA;image.ShallowCopy(temp)&quot;&quot;&quot;&#xA;&#xA;def CtoF(arr, ext):&#xA;    &quot;&quot;&quot;&#xA;    Transforms for C- to F-Contiguosness&#xA;    &quot;&quot;&quot;&#xA;    n1,n2,n3 = extent[0],extent[1],extent[2]&#xA;    arr = np.reshape(arr, (n1,n2,n3))&#xA;    arr = np.swapaxes(arr,0,2)&#xA;    arr = np.reshape(arr, (n1*n2*n3))&#xA;    return arr&#xA;&#xA;def rearangeSEPlib(arr, ext):&#xA;    # SWAP D1 AND D3 THEN SWAP D2 AND D1&#xA;    n3,n1,n2 = ext[0],ext[1],ext[2]&#xA;    arr = np.reshape(arr, (n3,n1,n2))&#xA;    arr = np.swapaxes(arr,0,1)&#xA;    arr = np.swapaxes(arr,0,2)&#xA;    arr = np.reshape(arr, (n1*n2*n3))&#xA;    return arr&#xA;&#xA;&#xA;cols = pdi.GetNumberOfColumns()&#xA;rows = pdi.GetColumn(0).GetNumberOfTuples()&#xA;&#xA;# Output Data Type:&#xA;#image = vtk.vtkImageData() # vtkImageData&#xA;&#xA;# Setup the ImageData&#xA;if SEPlib:&#xA;    # SEPlib: d1=z, d2=x, d3=y&#xA;    nz,nx,ny = extent[0],extent[1],extent[2]&#xA;    sz,sx,sy = spacing[0],spacing[1],spacing[2]&#xA;    oz,ox,oy = origin[0],origin[1],origin[2]&#xA;else:&#xA;    # Cartesian: d1=x, d2=y, d3=z&#xA;    nx,ny,nz = extent[0],extent[1],extent[2]&#xA;    sx,sy,sz = spacing[0],spacing[1],spacing[2]&#xA;    ox,oy,oz = origin[0],origin[1],origin[2]&#xA;if Swap_XZ:&#xA;    ttt = nx&#xA;    nx = nz&#xA;    nz = ttt&#xA;&#xA;# make sure dimensions work&#xA;if (nx*ny*nz != rows):&#xA;    raise Exception('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))&#xA;&#xA;image.SetDimensions(nx, ny, nz)&#xA;image.SetOrigin(ox, oy, oz)&#xA;image.SetSpacing(sx, sy, sz)&#xA;image.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)&#xA;&#xA;&#xA;# Add all columns of the table as arrays to the PointData&#xA;for i in range(cols):&#xA;    c = pdi.GetColumn(i)&#xA;    name = c.GetName()&#xA;    arr = nps.vtk_to_numpy(c)&#xA;    if C_ordering:&#xA;        arr = CtoF(arr, (nx,ny,nz))&#xA;    if SEPlib:&#xA;        arr = rearangeSEPlib(arr, (nx,ny,nz))&#xA;    c = nps.numpy_to_vtk(num_array=arr,deep=True)&#xA;    c.SetName(name)&#xA;    #image.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...&#xA;    image.GetPointData().AddArray(c)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>
@@ -118,7 +132,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;# Setup the ImageData&#xA;# Cartesian: d1=x, d2=y, d3=z&#xA;nx,ny,nz = extent[0],extent[1],extent[2]&#xA;if SEPlib:&#xA;    # SEPlib: d1=z, d2=x, d3=y&#xA;    nz,nx,ny = extent[0],extent[1],extent[2]&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        default_values="from paraview import util&#xA;# Setup the ImageData&#xA;# Cartesian: d1=x, d2=y, d3=z&#xA;nx,ny,nz = extent[0],extent[1],extent[2]&#xA;if SEPlib:&#xA;    # SEPlib: d1=z, d2=x, d3=y&#xA;    nz,nx,ny = extent[0],extent[1],extent[2]&#xA;if Swap_XZ:&#xA;    ttt = nx&#xA;    nx = nz&#xA;    nz = ttt&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

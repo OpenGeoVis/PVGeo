@@ -21,7 +21,7 @@ def rearangeSEPlib(arr, extent):
     arr = np.swapaxes(arr,0,2)
     arr = np.swapaxes(arr,0,1)
     arr = np.reshape(arr, (n1*n2*n3))
-    return arr
+    return arr, (n3,n1,n2)
 
 
 def tableToGrid(pdi, extent, spacing, origin, SEPlib=False, C_ordering=True):
@@ -59,9 +59,11 @@ def tableToGrid(pdi, extent, spacing, origin, SEPlib=False, C_ordering=True):
         name = c.GetName()
         arr = nps.vtk_to_numpy(c)
         if C_ordering:
-            arr = CtoF(arr, extent)
+            arr = CtoF(arr, (nx,ny,nz))
         if SEPlib:
-            arr = rearangeSEPlib(arr, extent)
+            arr, ext = rearangeSEPlib(arr, (nx,ny,nz))
+            """if C_ordering:
+                arr = CtoF(arr, (nx,ny,nz))"""
         c = nps.numpy_to_vtk(num_array=arr,deep=True)
         c.SetName(name)
         #image.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
