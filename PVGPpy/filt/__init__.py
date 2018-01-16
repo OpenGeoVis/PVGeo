@@ -1,1 +1,3 @@
+#! pvpython
+
 from tableToGrid import *

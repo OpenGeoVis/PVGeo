@@ -1,9 +1,11 @@
 __all__ = [
     "vis",
     "export",
-    "readers"
+    "read",
+    "filt"
 ]
 
 from . import vis
 from . import export
 from . import read
+from . import filt
