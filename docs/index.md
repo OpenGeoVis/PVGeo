@@ -34,7 +34,7 @@ Through the deployment of this software, geophysicists will gain an ability to r
 ## About the Author
 <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
 
-<div style="float: left; margin:10px 10px 10px 10px"" class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="bane-sullivan"><a class="LI-simple-link" href='https://www.linkedin.com/in/bane-sullivan?trk=profile-badge'>Bane Sullivan</a></div>
+<div style="float: left; margin:10px 10px 10px 10px"" class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="bane-sullivan"><a class="LI-simple-link" href='https://www.linkedin.com/in/bane-sullivan?trk=profile-badge'>Linkedin: Bane Sullivan</a></div>
 
 Unless otherwise specified, all code and documentation distributed here were produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
 
