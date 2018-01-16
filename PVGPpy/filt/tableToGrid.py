@@ -2,7 +2,7 @@ import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
 
-def unpack(arr, extent, order='C'):
+def _unpack(arr, extent, order='C'):
     """
     This is a helper method that handles the initial unpacking of a data array.
     ParaView and VTK use Fortran packing so this is convert data saved in
@@ -19,7 +19,7 @@ def unpack(arr, extent, order='C'):
     return arr.flatten(), extent
 
 
-def rearangeSEPlib(arr, extent):
+def _rearangeSEPlib(arr, extent):
     """
     This is a helper method to swap axes when using SEPlib axial conventions.
     """
@@ -28,7 +28,7 @@ def rearangeSEPlib(arr, extent):
     arr = np.swapaxes(arr,0,2)
     return arr.flatten(), (n1,n2,n3)
 
-def transposeXY(arr, extent):
+def _transposeXY(arr, extent):
     """
     Transposes X and Y axes. Needed by Whitney's research group for PoroTomo.
     """
@@ -38,17 +38,17 @@ def transposeXY(arr, extent):
     return arr.flatten(), (n1,n3,n2)
 
 
-def refold(arr, extent, SEPlib=True, order='F', swapXY=False):
+def _refold(arr, extent, SEPlib=True, order='F', swapXY=False):
     """
     This is a helper method to handle grabbing a data array and make sure it is
     ready for VTK/Fortran ordering in vtkImageData.
     """
     # Fold into 3D using extents. Packing dimensions should be in order extent
-    arr, extent = unpack(arr, extent, order=order)
+    arr, extent = _unpack(arr, extent, order=order)
     if SEPlib:
-        arr, extent = rearangeSEPlib(arr, extent)
+        arr, extent = _rearangeSEPlib(arr, extent)
     if swapXY:
-        arr, extent = transposeXY(arr, extent)
+        arr, extent = _transposeXY(arr, extent)
     return arr, extent
 
 def refoldidx(SEPlib=True, swapXY=False):
@@ -94,7 +94,7 @@ def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), SEPlib=True, order
         c = pdi.GetColumn(i)
         name = c.GetName()
         arr = nps.vtk_to_numpy(c)
-        arr, ext = refold(arr, extent, SEPlib=SEPlib, order=order, swapXY=swapXY)
+        arr, ext = _refold(arr, extent, SEPlib=SEPlib, order=order, swapXY=swapXY)
         c = nps.numpy_to_vtk(num_array=arr,deep=True)
         c.SetName(name)
         #image.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
