@@ -30,6 +30,7 @@ Properties = dict(
     spacing=[1.0, 1.0, 1.0],
     origin=[0.0, 0.0, 0.0],
     SEPlib=True,
+    Transpose_XY=True,
     order=0
 )
 
@@ -52,7 +53,7 @@ def RequestData():
     pdi = self.GetInput()
     image = self.GetOutput() #vtkImageData
 
-    temp = tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem)
+    temp = tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem, swapXY=Transpose_XY)
 
     image.ShallowCopy(temp)
 
@@ -62,7 +63,7 @@ def RequestInformation():
     from paraview import util
     from PVGPpy.filt import refoldidx
     # Setup the ImageData
-    idx = refoldidx(SEPlib=SEPlib)
+    idx = refoldidx(SEPlib=SEPlib, swapXY=Transpose_XY)
     nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]
     # ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:
     util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])

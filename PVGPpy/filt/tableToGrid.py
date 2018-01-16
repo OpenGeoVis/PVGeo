@@ -28,35 +28,44 @@ def rearangeSEPlib(arr, extent):
     arr = np.swapaxes(arr,0,2)
     return arr.flatten(), (n1,n2,n3)
 
+def transposeXY(arr, extent):
+    """
+    Transposes X and Y axes. Needed by Whitney's research group for PoroTomo.
+    """
+    n1,n2,n3 = extent[0],extent[1],extent[2]
+    arr = np.reshape(arr, (n1,n2,n3))
+    arr = np.swapaxes(arr,1,2)
+    return arr.flatten(), (n1,n3,n2)
 
-def refold(arr, extent, SEPlib=True, order='F'):
+
+def refold(arr, extent, SEPlib=True, order='F', swapXY=False):
     """
     This is a helper method to handle grabbing a data array and make sure it is
     ready for VTK/Fortran ordering in vtkImageData.
     """
     # Fold into 3D using extents. Packing dimensions should be in order extent
-    if order == 'F' and not SEPlib:
-        arr, extent = unpack(arr, extent, order='F')
-    elif order == 'C' and not SEPlib:
-        arr, extent = unpack(arr, extent, order='C')
-    elif order == 'C' and SEPlib:
-        arr, extent = unpack(arr, extent, order='C')
+    arr, extent = unpack(arr, extent, order=order)
+    if SEPlib:
         arr, extent = rearangeSEPlib(arr, extent)
-    elif order == 'F' and SEPlib:
-        arr, extent = unpack(arr, extent, order='F')
-        arr, extent = rearangeSEPlib(arr, extent)
-    else:
-        raise Exception('Refold case not implemented.')
+    if swapXY:
+        arr, extent = transposeXY(arr, extent)
     return arr, extent
 
-def refoldidx(SEPlib=True):
+def refoldidx(SEPlib=True, swapXY=False):
+    """
+    Theses are indexing corrections to set the spacings and origin witht the correct axes after refolding.
+    """
     if SEPlib:
         idx = (2,1,0)
+        if swapXY:
+            idx = (1,2,0)
     else:
         idx = (0,1,2)
+        if swapXY:
+            idx = (1,0,2)
     return idx
 
-def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), SEPlib=True, order='F'):
+def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), SEPlib=True, order='F', swapXY=False):
     """
     Converts a table of data arrays to vtkImageData given an extent to reshape that table.
     Each column in the table will be treated as seperate data arrays for the described data space
@@ -67,7 +76,7 @@ def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), SEPlib=True, order
     # Output Data Type:
     image = vtk.vtkImageData() # vtkImageData
 
-    idx = refoldidx(SEPlib=SEPlib)
+    idx = refoldidx(SEPlib=SEPlib, swapXY=swapXY)
     nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]
     sx,sy,sz = spacing[idx[0]],spacing[idx[1]],spacing[idx[2]]
     ox,oy,oz = origin[idx[0]],origin[idx[1]],origin[idx[2]]
@@ -85,7 +94,7 @@ def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), SEPlib=True, order
         c = pdi.GetColumn(i)
         name = c.GetName()
         arr = nps.vtk_to_numpy(c)
-        arr, ext = refold(arr, extent, SEPlib=SEPlib, order=order)
+        arr, ext = refold(arr, extent, SEPlib=SEPlib, order=order, swapXY=swapXY)
         c = nps.numpy_to_vtk(num_array=arr,deep=True)
         c.SetName(name)
         #image.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
