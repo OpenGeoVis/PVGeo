@@ -70,7 +70,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="pdi = self.GetInput() # vtkImageData&#xA;pdo = self.GetOutput() # vtkImageData&#xA;&#xA;[nx, ny, nz] = pdi.GetDimensions()&#xA;[ox, oy, oz] = pdi.GetOrigin()&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;&#xA;xx,yy,zz = 0.0,0.0,0.0&#xA;&#xA;if Corner == 1:&#xA;    # South East Bottom&#xA;    xx = ox - nx&#xA;    yy = oy&#xA;    zz = oz&#xA;elif Corner == 2:&#xA;    # North West Bottom&#xA;    xx = ox&#xA;    yy = oy - ny&#xA;    zz = oz&#xA;elif Corner == 3:&#xA;    # North East Bottom&#xA;    xx = ox - nx&#xA;    yy = oy - ny&#xA;    zz = oz&#xA;elif Corner == 4:&#xA;    # South West Top&#xA;    xx = ox&#xA;    yy = oy&#xA;    zz = oz - nz&#xA;elif Corner == 5:&#xA;    # South East Top&#xA;    xx = ox - nx&#xA;    yy = oy&#xA;    zz = oz - nz&#xA;elif Corner == 6:&#xA;    # North West Top&#xA;    xx = ox&#xA;    yy = oy - ny&#xA;    zz = oz - nz&#xA;elif Corner == 7:&#xA;    # North East Top&#xA;    xx = ox - nx&#xA;    yy = oy - ny&#xA;    zz = oz - nz&#xA;&#xA;pdo.SetOrigin(xx, yy, zz)&#xA;"
+        default_values="from PVGPpy.filt import translateGridOrigin&#xA;pdi = self.GetInput() # vtkImageData&#xA;pdo = self.GetOutput() # vtkImageData&#xA;&#xA;translateGridOrigin(pdi, corner=Corner, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>
