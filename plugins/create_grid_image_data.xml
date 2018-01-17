@@ -5,10 +5,19 @@
         long_help=""
         short_help="">
       </Documentation>
-        <Hints>
-            <ShowInMenu category="CSM Geophysics Sources" />
-        </Hints>
+      <Hints>
+        <ShowInMenu category="CSM Geophysics Sources" />
+      </Hints>
 
+      <!-- Output data type: "vtkImageData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="6"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
 
 
 
@@ -24,7 +33,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-
       <DoubleVectorProperty
         panel_visibility="default"
         name="origin"
@@ -36,7 +44,6 @@
         number_of_elements="3">
         <Documentation></Documentation>
       </DoubleVectorProperty>
-
 
       <DoubleVectorProperty
         panel_visibility="default"
@@ -50,16 +57,6 @@
         <Documentation></Documentation>
       </DoubleVectorProperty>
 
-      <!-- Output data type: "vtkImageData" -->
-      <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="6"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
-        <Documentation>The value of this property determines the dataset type
-        for the output of the programmable filter.</Documentation>
-      </IntVectorProperty>
-
       <StringVectorProperty
         name="Script"
         command="SetScript"
@@ -67,11 +64,11 @@
         default_values="image = self.GetOutput() #vtkImageData&#xA;nx,ny,nz = extent[0],extent[1],extent[2]&#xA;sx,sy,sz = spacing[0],spacing[1],spacing[2]&#xA;ox,oy,oz = origin[0],origin[1],origin[2]&#xA;# Setup the ImageData&#xA;image.SetDimensions(nx, ny, nz)&#xA;image.SetOrigin(ox, oy, oz)&#xA;image.SetSpacing(sx, sy, sz)&#xA;image.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
 
       <StringVectorProperty
         name="InformationScript"

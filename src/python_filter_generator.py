@@ -46,11 +46,11 @@ def getScriptPropertiesXml(info):
         default_values="%s"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>''' % requestData
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>''' % requestData
 
     if requestInformation:
         requestInformation = '''
@@ -179,31 +179,31 @@ def getFilterPropertyXml(propertyInfo, propertyName, propertyHelpInfo):
     if propertyType is str:
         if 'FileName' in propertyName:
             return '''
-          <StringVectorProperty
-            panel_visibility="%s"
-            name="%s"
-            label="%s"
-            initial_string="%s"
-            command="SetParameter"
-            animateable="1"
-            default_values="%s"
-            number_of_elements="%s">
-            <FileListDomain name="files"/>
-            <Documentation>%s</Documentation>
-          </StringVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
+      <StringVectorProperty
+        panel_visibility="%s"
+        name="%s"
+        label="%s"
+        initial_string="%s"
+        command="SetParameter"
+        animateable="1"
+        default_values="%s"
+        number_of_elements="%s">
+        <FileListDomain name="files"/>
+        <Documentation>%s</Documentation>
+      </StringVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
         else:
             return '''
-            <StringVectorProperty
-            panel_visibility="%s"
-            name="%s"
-            label="%s"
-            initial_string="%s"
-            command="SetParameter"
-            animateable="1"
-            default_values="%s"
-            number_of_elements="%s">
-            <Documentation>%s</Documentation>
-            </StringVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
+      <StringVectorProperty
+        panel_visibility="%s"
+        name="%s"
+        label="%s"
+        initial_string="%s"
+        command="SetParameter"
+        animateable="1"
+        default_values="%s"
+        number_of_elements="%s">
+        <Documentation>%s</Documentation>
+      </StringVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
 
     raise Exception('Unknown property type: %r' % propertyType)
 
@@ -213,7 +213,7 @@ def getFilterPropertiesXml(info):
     propertyInfo = info['Properties']
     propertyHelpInfo = info.get('PropertiesHelp', {})
     xml = [getFilterPropertyXml(propertyInfo, name, propertyHelpInfo) for name in sorted(propertyInfo.keys())]
-    return '\n\n'.join(xml)
+    return '\n'.join(xml)
 
 
 def getNumberOfInputs(info):
@@ -344,8 +344,8 @@ def generatePythonFilter(info):
  </ProxyGroup>
 </ServerManagerConfiguration>
       ''' % (proxyGroup, proxyName, proxyLabel, longHelp, shortHelp,
-                filterGroup, extraXml, inputPropertyXml,
-                filterProperties, outputDataSetType, scriptProperties)
+                filterGroup, outputDataSetType, extraXml, inputPropertyXml,
+                filterProperties, scriptProperties)
 
     return textwrap.dedent(outputXml)
 
@@ -354,20 +354,18 @@ def getFilterGroup(info):
         return ''
     elif "Extensions" not in info and "ReaderDescription" not in info:
         return ('''\
-        <Hints>
-            <ShowInMenu category="%s" />
-        </Hints>
-        ''' % (info["FilterCategory"]))
+      <Hints>
+        <ShowInMenu category="%s" />
+      </Hints>''' % (info["FilterCategory"]))
     else:
         return ('''\
-        <Hints>
-            <ShowInMenu category="%s" />
-        </Hints>
-        <Hints>
-            <ReaderFactory extensions="%s"
-                           file_description="%s" />
-        </Hints>
-        ''' % (info["FilterCategory"], info["Extensions"], info["ReaderDescription"]))
+      <Hints>
+        <ShowInMenu category="%s" />
+      </Hints>
+      <Hints>
+        <ReaderFactory extensions="%s"
+          file_description="%s" />
+      </Hints>''' % (info["FilterCategory"], info["Extensions"], info["ReaderDescription"]))
 
 
 def replaceFunctionWithSourceString(namespace, functionName, allowEmpty=False):

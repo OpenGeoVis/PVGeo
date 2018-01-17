@@ -5,10 +5,19 @@
         long_help="This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation)."
         short_help="This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation).">
       </Documentation>
-        <Hints>
-            <ShowInMenu category="CSM Geophysics Filters" />
-        </Hints>
+      <Hints>
+        <ShowInMenu category="CSM Geophysics Filters" />
+      </Hints>
 
+      <!-- Output data type: "vtkPolyData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="0"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
 <IntVectorProperty
     name="Cell_Type"
     command="SetParameter"
@@ -50,7 +59,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-
       <IntVectorProperty
         panel_visibility="default"
         name="Use_nearest_nbr"
@@ -64,16 +72,6 @@
         <Documentation>Check this to use SciPy's cKDTree nearest neighbor algorithms to sort the points to before adding linear connectivity</Documentation>
       </IntVectorProperty>
 
-      <!-- Output data type: "vtkPolyData" -->
-      <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="0"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
-        <Documentation>The value of this property determines the dataset type
-        for the output of the programmable filter.</Documentation>
-      </IntVectorProperty>
-
       <StringVectorProperty
         name="Script"
         command="SetScript"
@@ -81,11 +79,11 @@
         default_values="from PVGPpy.filt import connectCells&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;connectCells(pdi, cellType=Cell_Type, nrNbr=Use_nearest_nbr, pdo=pdo, logTime=False)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
 
 
     </SourceProxy>

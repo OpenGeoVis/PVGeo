@@ -5,10 +5,19 @@
         long_help=""
         short_help="">
       </Documentation>
-        <Hints>
-            <ShowInMenu category="CSM Geophysics Sources" />
-        </Hints>
+      <Hints>
+        <ShowInMenu category="CSM Geophysics Sources" />
+      </Hints>
 
+      <!-- Output data type: "vtkPolyData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="0"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
 
 
 
@@ -24,16 +33,6 @@
         <Documentation></Documentation>
       </DoubleVectorProperty>
 
-      <!-- Output data type: "vtkPolyData" -->
-      <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="0"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
-        <Documentation>The value of this property determines the dataset type
-        for the output of the programmable filter.</Documentation>
-      </IntVectorProperty>
-
       <StringVectorProperty
         name="Script"
         command="SetScript"
@@ -41,11 +40,11 @@
         default_values="pdo = self.GetOutput()&#xA;earth = vtk.vtkEarthSource()&#xA;earth.SetRadius(Radius)&#xA;earth.OutlineOn()&#xA;earth.Update()&#xA;&#xA;pdo.DeepCopy(earth.GetOutput())&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
 
 
     </SourceProxy>

@@ -5,10 +5,19 @@
         long_help="This filter will translate the origin of vtkImageData to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior)."
         short_help="This filter will translate the origin of vtkImageData to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior).">
       </Documentation>
-        <Hints>
-            <ShowInMenu category="CSM Geophysics Filters" />
-        </Hints>
+      <Hints>
+        <ShowInMenu category="CSM Geophysics Filters" />
+      </Hints>
 
+      <!-- Output data type: "vtkImageData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="6"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
 <IntVectorProperty
     name="Corner"
     command="SetParameter"
@@ -56,16 +65,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-      <!-- Output data type: "vtkImageData" -->
-      <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="6"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
-        <Documentation>The value of this property determines the dataset type
-        for the output of the programmable filter.</Documentation>
-      </IntVectorProperty>
-
       <StringVectorProperty
         name="Script"
         command="SetScript"
@@ -73,11 +72,11 @@
         default_values="from PVGPpy.filt import translateGridOrigin&#xA;pdi = self.GetInput() # vtkImageData&#xA;pdo = self.GetOutput() # vtkImageData&#xA;&#xA;translateGridOrigin(pdi, corner=Corner, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
 
 
     </SourceProxy>

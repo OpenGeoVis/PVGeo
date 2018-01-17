@@ -5,43 +5,50 @@
         long_help="The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column)."
         short_help="The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column).">
       </Documentation>
-        <Hints>
-            <ShowInMenu category="CSM GP Readers" />
-        </Hints>
-        <Hints>
-            <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
-                           file_description="GSLIB File Format" />
-        </Hints>
+      <Hints>
+        <ShowInMenu category="CSM GP Readers" />
+      </Hints>
+      <Hints>
+        <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
+          file_description="GSLIB File Format" />
+      </Hints>
+
+      <!-- Output data type: "vtkTable" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="19"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
 
 
 
+      <StringVectorProperty
+        panel_visibility="default"
+        name="Delimiter_Field"
+        label="Delimiter Field"
+        initial_string="Delimiter_Field"
+        command="SetParameter"
+        animateable="1"
+        default_values=" "
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </StringVectorProperty>
 
-            <StringVectorProperty
-            panel_visibility="default"
-            name="Delimiter_Field"
-            label="Delimiter Field"
-            initial_string="Delimiter_Field"
-            command="SetParameter"
-            animateable="1"
-            default_values=" "
-            number_of_elements="1">
-            <Documentation></Documentation>
-            </StringVectorProperty>
-
-
-          <StringVectorProperty
-            panel_visibility="default"
-            name="FileName"
-            label="FileName"
-            initial_string="FileName"
-            command="SetParameter"
-            animateable="1"
-            default_values="absolute path"
-            number_of_elements="1">
-            <FileListDomain name="files"/>
-            <Documentation></Documentation>
-          </StringVectorProperty>
-
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName"
+        label="FileName"
+        initial_string="FileName"
+        command="SetParameter"
+        animateable="1"
+        default_values="absolute path"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation></Documentation>
+      </StringVectorProperty>
 
       <IntVectorProperty
         panel_visibility="default"
@@ -54,7 +61,6 @@
         number_of_elements="1">
         <Documentation></Documentation>
       </IntVectorProperty>
-
 
       <IntVectorProperty
         panel_visibility="default"
@@ -69,16 +75,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-      <!-- Output data type: "vtkTable" -->
-      <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="19"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
-        <Documentation>The value of this property determines the dataset type
-        for the output of the programmable filter.</Documentation>
-      </IntVectorProperty>
-
       <StringVectorProperty
         name="Script"
         command="SetScript"
@@ -86,11 +82,11 @@
         default_values="import os&#xA;from PVGPpy.read import gslib&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslib(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines)&#xA;pdo.ShallowCopy(tbl)&#xA;print(os.path.basename(FileName) + ': ' + h)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
 
 
     </SourceProxy>

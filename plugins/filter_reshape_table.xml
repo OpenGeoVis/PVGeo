@@ -5,10 +5,19 @@
         long_help="This filter will take a vtkTable object and reshape it. This filter essentially treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name."
         short_help="This filter will take a vtkTable object and reshape it. This filter essentially treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.">
       </Documentation>
-        <Hints>
-            <ShowInMenu category="CSM Geophysics Filters" />
-        </Hints>
+      <Hints>
+        <ShowInMenu category="CSM Geophysics Filters" />
+      </Hints>
 
+      <!-- Output data type: "vtkTable" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="19"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
 
 
       <InputProperty
@@ -36,7 +45,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-
       <IntVectorProperty
         panel_visibility="default"
         name="nrows"
@@ -49,16 +57,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-      <!-- Output data type: "vtkTable" -->
-      <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="19"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
-        <Documentation>The value of this property determines the dataset type
-        for the output of the programmable filter.</Documentation>
-      </IntVectorProperty>
-
       <StringVectorProperty
         name="Script"
         command="SetScript"
@@ -66,11 +64,11 @@
         default_values="from PVGPpy.filt import reshapeTable&#xA;&#xA;pdi = self.GetInput() #vtkTable&#xA;pdo = self.GetOutput() #vtkTable&#xA;&#xA;reshapeTable(pdi, nrows, ncols, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
 
 
     </SourceProxy>
