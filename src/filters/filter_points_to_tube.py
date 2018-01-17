@@ -12,26 +12,13 @@ ExtraXml = ''
 Properties = dict(
     Number_of_Sides=20,
     Radius=10.0,
+    Use_nearest_nbr=True,
 )
 
 
 def RequestData():
+    from PVGPpy.filt import pointsToTube
     pdi = self.GetInput() # VTK PolyData Type
     pdo = self.GetOutput() # VTK PolyData Type
 
-    pdo.DeepCopy(pdi)
-    numPoints = pdi.GetNumberOfPoints()
-
-    # VTK_POLY_LINE is 4
-    # Type map is specified in vtkCellType.h
-    Cell_Type = 4
-    ptsi = [i for i in range(numPoints)]
-    pdo.InsertNextCell(Cell_Type, numPoints, ptsi)
-
-    # Make a tube from the PolyData line:
-    tube = vtk.vtkTubeFilter()
-    tube.SetInputData(pdo)
-    tube.SetRadius(Radius)
-    tube.SetNumberOfSides(Number_of_Sides)
-    tube.Update()
-    pdo.ShallowCopy(tube.GetOutput())
+    pointsToTube(pdi, radius=Radius, numSides=Number_of_Sides, nrNbr=Use_nearest_nbr, pdo=pdo)

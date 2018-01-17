@@ -1,3 +1,5 @@
 #! pvpython
 
-from tableToGrid import *
+from grids import *
+from poly import *
+from tables import *

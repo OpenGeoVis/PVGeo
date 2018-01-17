@@ -132,7 +132,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filt import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;if order == 0:&#xA;    mem = 'F'&#xA;elif order == 1:&#xA;    mem = 'C'&#xA;else:&#xA;    mem = 'C'&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;temp = tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem, swapXY=Transpose_XY)&#xA;&#xA;image.ShallowCopy(temp)&#xA;"
+        default_values="from PVGPpy.filt import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;if order == 0:&#xA;    mem = 'F'&#xA;elif order == 1:&#xA;    mem = 'C'&#xA;else:&#xA;    mem = 'C'&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem, swapXY=Transpose_XY, pdo=image)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>

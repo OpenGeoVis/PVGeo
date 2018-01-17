@@ -34,50 +34,8 @@ PropertiesHelp = dict(
 )
 
 def RequestData():
-    from datetime import datetime
-    import numpy as np
-    from vtk.util import numpy_support as nps
-    from vtk.numpy_interface import dataset_adapter as dsa
-    # NOTE: Type map is specified in vtkCellType.h
-
-    startTime = datetime.now()
+    from PVGPpy.filt import connectCells
     pdi = self.GetInput() # VTK PolyData Type
     pdo = self.GetOutput() # VTK PolyData Type
 
-    # Get the Points over the NumPy interface
-    wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
-    points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
-
-    pdo.DeepCopy(pdi)
-    numPoints = pdi.GetNumberOfPoints()
-
-    if Use_nearest_nbr:
-        from scipy.spatial import cKDTree
-        # VTK_Line
-        if Cell_Type == 3:
-            sft = 0
-            while(len(points) > 1):
-                tree = cKDTree(points)
-                # Get indices of k nearest points
-                dist, ind = tree.query(points[0], k=2)
-                ptsi = [ind[0]+sft, ind[1]+sft]
-                pdo.InsertNextCell(Cell_Type, 2, ptsi)
-                points = np.delete(points, 0, 0) # Deletes first row
-                del(tree)
-                sft += 1
-        # VTK_PolyLine
-        elif Cell_Type == 4:
-            tree = cKDTree(points)
-            dist, ptsi = tree.query(points[0], k=numPoints)
-            pdo.InsertNextCell(Cell_Type, numPoints, ptsi)
-    else:
-        # VTK_PolyLine
-        if Cell_Type == 4:
-            ptsi = [i for i in range(numPoints)]
-            pdo.InsertNextCell(Cell_Type, numPoints, ptsi)
-        # VTK_Line
-        elif Cell_Type == 3:
-            for i in range(0, numPoints-1):
-                ptsi = [i, i+1]
-                pdo.InsertNextCell(Cell_Type, 2, ptsi)
-    #print((datetime.now() - startTime))
+    connectCells(pdi, cellType=Cell_Type, nrNbr=Use_nearest_nbr, pdo=pdo, logTime=False)

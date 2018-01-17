@@ -49,6 +49,20 @@
         <Documentation></Documentation>
       </DoubleVectorProperty>
 
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_nearest_nbr"
+        label="Use nearest nbr"
+        initial_string="Use_nearest_nbr"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
                          default_values="0"
@@ -63,7 +77,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pdo.DeepCopy(pdi)&#xA;numPoints = pdi.GetNumberOfPoints()&#xA;&#xA;# VTK_POLY_LINE is 4&#xA;# Type map is specified in vtkCellType.h&#xA;Cell_Type = 4&#xA;ptsi = [i for i in range(numPoints)]&#xA;pdo.InsertNextCell(Cell_Type, numPoints, ptsi)&#xA;&#xA;# Make a tube from the PolyData line:&#xA;tube = vtk.vtkTubeFilter()&#xA;tube.SetInputData(pdo)&#xA;tube.SetRadius(Radius)&#xA;tube.SetNumberOfSides(Number_of_Sides)&#xA;tube.Update()&#xA;pdo.ShallowCopy(tube.GetOutput())&#xA;"
+        default_values="from PVGPpy.filt import pointsToTube&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pointsToTube(pdi, radius=Radius, numSides=Number_of_Sides, nrNbr=Use_nearest_nbr, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
          <Widget type="multi_line" syntax="python"/>

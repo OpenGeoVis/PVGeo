@@ -53,9 +53,7 @@ def RequestData():
     pdi = self.GetInput()
     image = self.GetOutput() #vtkImageData
 
-    temp = tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem, swapXY=Transpose_XY)
-
-    image.ShallowCopy(temp)
+    tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem, swapXY=Transpose_XY, pdo=image)
 
 
 
