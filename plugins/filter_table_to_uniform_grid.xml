@@ -5,10 +5,19 @@
         long_help="This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a n1 by n2 by n3 vtkImageData structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (d1=z, d2=x, d3=y). When using SEPlib, specify n1 as the number of elements in the Z-direction, n2 as the number of elements in the X-direction, and n3 as the number of elements in the Y-direction (and so on for other parameters)."
         short_help="This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a n1 by n2 by n3 vtkImageData structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (d1=z, d2=x, d3=y). When using SEPlib, specify n1 as the number of elements in the Z-direction, n2 as the number of elements in the X-direction, and n3 as the number of elements in the Y-direction (and so on for other parameters).">
       </Documentation>
-        <Hints>
-            <ShowInMenu category="CSM Geophysics Filters" />
-        </Hints>
+      <Hints>
+        <ShowInMenu category="CSM Geophysics Filters" />
+      </Hints>
 
+      <!-- Output data type: "vtkImageData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="6"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
 
 <IntVectorProperty
     name="order"
@@ -52,7 +61,6 @@
         <Documentation>Use the Stanford Exploration Project's axial conventions (d1=z, d2=x, d3=y). Parameters would be entered [z,x,y].</Documentation>
       </IntVectorProperty>
 
-
       <IntVectorProperty
         panel_visibility="default"
         name="Transpose_XY"
@@ -66,7 +74,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-
       <IntVectorProperty
         panel_visibility="default"
         name="extent"
@@ -78,7 +85,6 @@
         number_of_elements="3">
         <Documentation></Documentation>
       </IntVectorProperty>
-
 
       <IntVectorProperty
         panel_visibility="default"
@@ -92,7 +98,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-
       <DoubleVectorProperty
         panel_visibility="default"
         name="origin"
@@ -104,7 +109,6 @@
         number_of_elements="3">
         <Documentation></Documentation>
       </DoubleVectorProperty>
-
 
       <DoubleVectorProperty
         panel_visibility="default"
@@ -118,16 +122,6 @@
         <Documentation></Documentation>
       </DoubleVectorProperty>
 
-      <!-- Output data type: "vtkImageData" -->
-      <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="6"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
-        <Documentation>The value of this property determines the dataset type
-        for the output of the programmable filter.</Documentation>
-      </IntVectorProperty>
-
       <StringVectorProperty
         name="Script"
         command="SetScript"
@@ -135,11 +129,11 @@
         default_values="from PVGPpy.filt import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;if order == 0:&#xA;    mem = 'F'&#xA;elif order == 1:&#xA;    mem = 'C'&#xA;else:&#xA;    mem = 'C'&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem, swapXY=Transpose_XY, pdo=image)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
 
       <StringVectorProperty
         name="InformationScript"

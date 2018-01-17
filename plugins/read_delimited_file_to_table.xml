@@ -5,43 +5,50 @@
         long_help="This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in Paraview, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import."
         short_help="This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in Paraview, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.">
       </Documentation>
-        <Hints>
-            <ShowInMenu category="CSM GP Readers" />
-        </Hints>
-        <Hints>
-            <ReaderFactory extensions="dat csv txt"
-                           file_description="CSM GP Delimited Text File" />
-        </Hints>
+      <Hints>
+        <ShowInMenu category="CSM GP Readers" />
+      </Hints>
+      <Hints>
+        <ReaderFactory extensions="dat csv txt"
+          file_description="CSM GP Delimited Text File" />
+      </Hints>
+
+      <!-- Output data type: "vtkTable" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="19"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
 
 
 
+      <StringVectorProperty
+        panel_visibility="default"
+        name="Delimiter_Field"
+        label="Delimiter Field"
+        initial_string="Delimiter_Field"
+        command="SetParameter"
+        animateable="1"
+        default_values=" "
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </StringVectorProperty>
 
-            <StringVectorProperty
-            panel_visibility="default"
-            name="Delimiter_Field"
-            label="Delimiter Field"
-            initial_string="Delimiter_Field"
-            command="SetParameter"
-            animateable="1"
-            default_values=" "
-            number_of_elements="1">
-            <Documentation></Documentation>
-            </StringVectorProperty>
-
-
-          <StringVectorProperty
-            panel_visibility="default"
-            name="FileName"
-            label="FileName"
-            initial_string="FileName"
-            command="SetParameter"
-            animateable="1"
-            default_values="absolute_path"
-            number_of_elements="1">
-            <FileListDomain name="files"/>
-            <Documentation></Documentation>
-          </StringVectorProperty>
-
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName"
+        label="FileName"
+        initial_string="FileName"
+        command="SetParameter"
+        animateable="1"
+        default_values="absolute_path"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation></Documentation>
+      </StringVectorProperty>
 
       <IntVectorProperty
         panel_visibility="default"
@@ -56,7 +63,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-
       <IntVectorProperty
         panel_visibility="default"
         name="Number_Ignore_Lines"
@@ -68,7 +74,6 @@
         number_of_elements="1">
         <Documentation></Documentation>
       </IntVectorProperty>
-
 
       <IntVectorProperty
         panel_visibility="default"
@@ -83,16 +88,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-      <!-- Output data type: "vtkTable" -->
-      <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="19"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
-        <Documentation>The value of this property determines the dataset type
-        for the output of the programmable filter.</Documentation>
-      </IntVectorProperty>
-
       <StringVectorProperty
         name="Script"
         command="SetScript"
@@ -100,11 +95,11 @@
         default_values="from PVGPpy.read import delimitedText&#xA;pdo = self.GetOutput()&#xA;tbl = delimitedText(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines)&#xA;pdo.ShallowCopy(tbl)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
 
 
     </SourceProxy>

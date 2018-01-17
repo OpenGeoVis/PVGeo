@@ -5,29 +5,37 @@
         long_help="This filter reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian and defaults to import as floats. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository."
         short_help="This filter reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian and defaults to import as floats. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.">
       </Documentation>
-        <Hints>
-            <ShowInMenu category="CSM GP Readers" />
-        </Hints>
-        <Hints>
-            <ReaderFactory extensions="H@ bin"
-                           file_description="Binary Packed Floats or Doubles" />
-        </Hints>
+      <Hints>
+        <ShowInMenu category="CSM GP Readers" />
+      </Hints>
+      <Hints>
+        <ReaderFactory extensions="H@ bin"
+          file_description="Binary Packed Floats or Doubles" />
+      </Hints>
+
+      <!-- Output data type: "vtkTable" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="19"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
 
 
 
-
-            <StringVectorProperty
-            panel_visibility="default"
-            name="Data_Name"
-            label="Data Name"
-            initial_string="Data_Name"
-            command="SetParameter"
-            animateable="1"
-            default_values=""
-            number_of_elements="1">
-            <Documentation></Documentation>
-            </StringVectorProperty>
-
+      <StringVectorProperty
+        panel_visibility="default"
+        name="Data_Name"
+        label="Data Name"
+        initial_string="Data_Name"
+        command="SetParameter"
+        animateable="1"
+        default_values=""
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </StringVectorProperty>
 
       <IntVectorProperty
         panel_visibility="default"
@@ -42,29 +50,18 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-
-          <StringVectorProperty
-            panel_visibility="default"
-            name="FileName"
-            label="FileName"
-            initial_string="FileName"
-            command="SetParameter"
-            animateable="1"
-            default_values="absolute path"
-            number_of_elements="1">
-            <FileListDomain name="files"/>
-            <Documentation></Documentation>
-          </StringVectorProperty>
-
-      <!-- Output data type: "vtkTable" -->
-      <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="19"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
-        <Documentation>The value of this property determines the dataset type
-        for the output of the programmable filter.</Documentation>
-      </IntVectorProperty>
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName"
+        label="FileName"
+        initial_string="FileName"
+        command="SetParameter"
+        animateable="1"
+        default_values="absolute path"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation></Documentation>
+      </StringVectorProperty>
 
       <StringVectorProperty
         name="Script"
@@ -73,11 +70,11 @@
         default_values="from PVGPpy.read import packedBinaries&#xA;pdo = self.GetOutput()&#xA;tbl = packedBinaries(FileName, dblVals=Double_Values, dataNm=Data_Name)&#xA;pdo.ShallowCopy(tbl)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
 
 
     </SourceProxy>

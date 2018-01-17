@@ -5,10 +5,19 @@
         long_help="This filter allow the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from two types of common normalizations: Feature Scaling and Standard Score."
         short_help="This filter allow the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from two types of common normalizations: Feature Scaling and Standard Score.">
       </Documentation>
-        <Hints>
-            <ShowInMenu category="CSM Geophysics Filters" />
-        </Hints>
+      <Hints>
+        <ShowInMenu category="CSM Geophysics Filters" />
+      </Hints>
 
+      <!-- Output data type: "Same as input" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="8"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
 <StringVectorProperty
     name="SelectInputScalars"
     label="Array"
@@ -77,19 +86,17 @@
         <Documentation></Documentation>
       </DoubleVectorProperty>
 
-
-            <StringVectorProperty
-            panel_visibility="default"
-            name="New_Array_Name"
-            label="New Array Name"
-            initial_string="New_Array_Name"
-            command="SetParameter"
-            animateable="1"
-            default_values=""
-            number_of_elements="1">
-            <Documentation></Documentation>
-            </StringVectorProperty>
-
+      <StringVectorProperty
+        panel_visibility="default"
+        name="New_Array_Name"
+        label="New Array Name"
+        initial_string="New_Array_Name"
+        command="SetParameter"
+        animateable="1"
+        default_values=""
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </StringVectorProperty>
 
       <IntVectorProperty
         panel_visibility="default"
@@ -103,16 +110,6 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-      <!-- Output data type: "Same as input" -->
-      <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="8"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
-        <Documentation>The value of this property determines the dataset type
-        for the output of the programmable filter.</Documentation>
-      </IntVectorProperty>
-
       <StringVectorProperty
         name="Script"
         command="SetScript"
@@ -120,11 +117,11 @@
         default_values="from PVGPpy.filt import normalizeArray&#xA;&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;&#xA;info = self.GetInputArrayInformation(0)&#xA;&#xA;normalizeArray(pdi, info, Normalization, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
-         <Widget type="multi_line" syntax="python"/>
-       </Hints>
-      <Documentation>This property contains the text of a python program that
-      the programmable source runs.</Documentation>
-      </StringVectorProperty>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
 
 
     </SourceProxy>
