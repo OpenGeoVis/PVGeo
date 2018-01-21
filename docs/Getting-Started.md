@@ -60,7 +60,7 @@ $ sh ./installMac.sh
 Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **CSM Geophysics Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` module by executing `import PVGPpy`. Errors should not arise but if they do, post to the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) and the errors will be *immediately* addressed.
 
 ### Windows Paths
-Setting up environmental variables is a bit more involved for Windows. First you need to open **Control Center** and search for **Advanced system settings**. Click **Environment variables**. In the section **User variables for *User*** add the following variable by clicking **New...**:
+Setting up environmental variables is a bit more involved for Windows. First you need to open **Control Center** and search for **Advanced system settings**. Click **Environment variables**. In the section **User variables for Name** add the following variable by clicking **New...**:
 
 - Variable Name: `PV_PLUGIN_PATH` then select **Browse Directory...** and navigate to the directory where you cloned ParaViewGeophysics and select the `plugins` directory.
 
