@@ -29,25 +29,81 @@ fi
 
 #### BEGIN INSTALLATION
 
-#- Check that PVPATH exists: The path to ParaView installation
-if [ -z ${PVPATH+x} ]; then
-    printf "${RED}%s${NORMAL}\n" "PVPATH is unset. Please set this path in your ~/.bash_profile and re-source."
-    return -1
-else
-    # Path exists so lets get to installing!
-    ##### Link PVGPpy to ParaView Python
-    # Create symbolic link between PVGPpy and ParaView's Python library
-    printf "${RED}\n" # Change printout color to red to signify errors
-    ln -s $PVGP/PVGPpy $PVPATH/Contents/Python/
-    printf "${NORMAL}"
-
-    #### Link the build folder to the Plugins folder in ParaView
-    # Create symbolic link for plugins in ParaView's 3rd party plugin folder
-    printf "${RED}" # Change printout color to red to signify errors
-    # TODO: this will not work for windows or linux users
-    ln -s $PVGP/plugins $PVPATH/Contents/MacOS/
-    printf "${NORMAL}"
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root. Run script as: sudo sh./installMac.sh"
+  exit
 fi
 
+pvplist="/Library/LaunchDaemons/pvgp.PV_PLUGIN_PATH.plist"
+pyplist="/Library/LaunchDaemons/pvgp.PYTHONPATH.plist"
+
+# check if the .plist files exits. Remove if so.
+if [ -f ${pvplist} ]; then
+    printf "${YELLOW}%s${NORMAL}\n" "${pvplist} Currently exists. Overwiting..."
+    sudo rm -f $pvplist
+fi
+if [ -f ${pyplist} ]; then
+    printf "${YELLOW}%s${NORMAL}\n" "${pyplist} Currently exists. Overwiting..."
+    sudo rm -f $pyplist
+fi
+
+# Unsetting the PV_PLUGIN_PATH variable
+printf "${RED}"
+launchctl unsetenv PV_PLUGIN_PATH
+printf "${NORMAL}"
+printf "${GREEN}%s${NORMAL}\n" "Setting environmental variables immediate use..."
+printf "${RED}"
+launchctl setenv PV_PLUGIN_PATH ${PVGP}/plugins
+launchctl setenv PYTHONPATH $PYTHONPATH:${PVGP}/
+printf "${NORMAL}"
+
+printf "${GREEN}%s${NORMAL}\n" "Writing environmental variables to '/Library/LaunchDaemons/'..."
+cat << EOF | sudo tee ${pvplist}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+  <plist version="1.0">
+  <dict>
+  <key>Label</key>
+  <string>setenv.PV_PLUGIN_PATH</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/launchctl</string>
+    <string>setenv</string>
+    <string>PV_PLUGIN_PATH</string>
+    <string>${PVGP}/plugins</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>ServiceIPC</key>
+  <false/>
+</dict>
+</plist>
+EOF
+
+cat << EOF | sudo tee ${pyplist}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+  <plist version="1.0">
+  <dict>
+  <key>Label</key>
+  <string>setenv.PYTHONPATH</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/launchctl</string>
+    <string>setenv</string>
+    <string>PYTHONPATH</string>
+    <string>${PYTHONPATH}:${PVGP}/</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>ServiceIPC</key>
+  <false/>
+</dict>
+</plist>
+EOF
+
+printf "${GREEN}%s${NORMAL}\n" "All Finished! Any version of ParaView will launch with the PVGP plugins and Python Module."
+
+printf "${YELLOW}%s${NORMAL}\n" "Virtual Reality Users: Beware that your version of ParaView has Python included as errors/crashes will occur if you use these plugins without Python."
 
 popd
