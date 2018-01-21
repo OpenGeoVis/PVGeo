@@ -4,17 +4,17 @@ ParaView is an open-source platform that can visualize 2D, 3D, and 4D (time-vary
 
 Since ParaView is an open source application, anyone can download the program and its source code for modifications. The easiest way to get started with ParaView is to download the compiled binary installers for your operating system from [here](https://www.paraview.org/download/).
 
-For further help, check out the [documentation](https://www.paraview.org/documentation/) provided by Kitware. In particular, the two worth looking through for a quick tour of ParaView are the 'The ParaView Guide' and 'The ParaView Tutorial.' One is a tutorial of the ParaView software and shows the user how to create sources, apply filters, and more. The other is a guide on how to do scripting, macros, and more intense use of the application.
+For further help, check out the [documentation](https://www.paraview.org/documentation/) provided by Kitware. In particular, the two worth looking through for a quick tour of ParaView are the **The ParaView Guide** and **The ParaView Tutorial.** One is a tutorial of the ParaView software and shows the user how to create sources, apply filters, and more. The other is a guide on how to do scripting, macros, and more intense use of the application.
 
 ## Install ParaView
-Open the downloaded binary installer and follow the prompts then drag the application into your applications folder.
+Open the downloaded installer and follow the prompts then drag the application into your applications folder.
 
 Tour around software:
-Take a look at Section 2.1 of 'The ParaView Tutorial' for details of the application’s GUI environment. Chapter 2 of the tutorial as a whole does an excellent job touring the software and its workflow for those unfamiliar with the software and its general capabilities.
+Take a look at Section 2.1 of **The ParaView Tutorial** for details of the application’s GUI environment. Chapter 2 of the tutorial as a whole does an excellent job touring the software and its workflow for those unfamiliar with the software and its general capabilities.
 
-## Notes
+## Tips
 * Enable Auto Apply in the preferences for interactive slicers and so you don't always have to click apply. (*Note:* sometimes you may want this off when working with large datasets)
-* One convenient feature is to save the state of the ParaView environment. This saves all the options you selected for all the filters you applied to visualize some data. Select File->Save State… (*Note:* this saves the absolute path of the files loaded into ParaView, so be sure to select 'Search for Files Under Directory...' when opening these state files)
+* One convenient feature is to save the state of the ParaView environment. This saves all the options you selected for all the filters you applied to visualize some data. Select File->Save State… (*Note:* this saves the absolute path of the files loaded into ParaView, so be sure to select **Search for Files Under Directory...** when opening these state files)
 
 
 ----------
@@ -31,62 +31,6 @@ Download and use [Cygwin](https://devtidbits.com/2011/07/01/cygwin-walkthrough-a
 
 Also, be sure to place/install ParaView and this repository to a location that has general read/write privileges for all users such as on your `D:\\` drive. You will encounter all types of issues running the scripts and simply accessing the code via Cygwin if you need admin privileges to access where it is all saved. *Note: the install scripts will need access to the directory where ParaView is installed*
 
-*NOTE: Windows users need to use ParaView version 5.4.0 or lower. Version 5.4.1 is currently not working. More details to come.*
-
-## Upgrading from the Alpha to Beta Version?
-
-If you previously installed the repository during the Alpha release stage, please follow this process to reinstall the project's framework. Moving forward, there will no longer be changes to the file structure and updates will be streamlined and simple.
-
-```bash
-# How to update from the Alpha version to the Beta versions
-# This is a more robust installation that will be much easier to manage and update
-
-# First, remove the plugins directory from your ParaView installation
-#- This should be the PVPLUGINPATH you declared in the previous installation
-$ rm -r $PVPLUGINPATH
-
-# Now complete the following installation instructions in the next sections
-
-#- Path to the ParaView installation:
-#- No need to add to you ~/.bash_profile, just export on the command line once
-#- Be sure to check that this path matches yours... Odds are it's different!
-$ export PVPATH="/Applications/ParaView-5.4.0.app"
-#- Or windows via Cygwin
-#-- If ParaView were installed at D:\\ParaView-version-something
-$ export PVPATH="/cygdrive/d/ParaView-version-something"
-
-#- Pull the updates: make sure you are in the ParaViewGeophysics directory!
-$ git checkout .
-$ git pull origin master
-
-#- Run the new installation
-#-- Note: There are two install scripts. One for Mac/Linux and one for Windows
-#-- Mac:
-$ sh ./installMac.sh
-#-- Windows via Cygwin:
-$ sh ./installWin.sh
-```
-
-## Before You Do Anything!
-
-You *MUST* add a `PVPATH` variable in your bash environment! This variable will describe the path to ParaView's installation. It is likely different depending on your OS and your version of ParaView. On MacOS, simply just replace `/ParaView-5.4.0.app` with the name of your version of ParaView under `/Applications/`.
-
-Add the `PVPATH` variable to your environment through this export expression:
-```bash
-# Be sure to check that this path matches yours... Odds are it's different!
-# Path to the ParaView installation:
-$ export PVPATH="/Applications/ParaView-5.4.0.app"
-```
-
-Windows users, open Cygwin and add a `PVPATH` variable in your environment in the same manner. Its a bit trickier for you because we need the path on Cygwin's map of your drive. Be sure to replace the path to ParaView with your path to ParaView (e.g. `/cygdrive/d/ParaView...` to `/cygdrive/d/ParaView-5.4.0...`)
-
-```bash
-# Be sure to check that this path matches yours... Odds are it's different!
-# Make sure there are NO SPACES in your path.
-# Path to the ParaView installation:
-#- If ParaView were installed at D:\\ParaView-version-something
-$ export PVPATH="/cygdrive/d/ParaView-version-something"
-```
 
 ## Cloning the Repository
 Clone the repository from your command line by navigating to the directory you would like to save all of the code from this repo.
@@ -103,43 +47,38 @@ $ git clone https://github.com/banesullivan/ParaViewGeophysics
 $ cd ParaViewGeophysics
 ```
 
-## Installing to ParaView
-Now to get started using the plugins and python modules included in this repository, we need to create links between your installation of ParaView and this repository. That's why we need a `PVPATH` variable to be set in your environment (above).
+## Installing the PVGP Repository
+Now to get started using the plugins and python modules included in this repository, we need to set up some environmental variables. For Mac users this is a breeze but for windows users this is a bit more involved. Be sure to never move the directory containing ParaViewGeophysics code (if it is not in a convenient location then you must move it before continuing the install).
 
-To create these links, run the installation script at the top of the repository called `installMac.sh` or `installWin.sh` for your operating system. If errors arise, they will be printed in red. The most common cause of errors is having an incorrect `PVPATH` variable.
-
-*Note: Windows users, when running the `installWin.sh` script there will be some yellow outputs. Make sure they are just announcing successful links and not errors/permission denied.*
-
-```bash
-# Install our repository to ParaView:
-#- Note: There are two install scripts. One for Mac/Linux and one for Windows
-#- Mac:
-$ sh ./installMac.sh
-#- Windows via Cygwin:
-$ sh ./installWin.sh
-```
-
-<!--
-ÂIn the `src/` directory, there are four shell scripts. Be careful executing these unless you know what they are doing. No severe damage can be done by running any of these scripts by accident; you might just get weird errors or accidentally uninstall everything.
-
-To simply install the distributed filters from this repo, run the `src/install_plugins.sh` script *but first you MUST add the `PVPLUGINPATH` variable to your environment* (described above)! This script will simply copy over all the XML files from `build/` to the default directory for third-party plugins in ParaView so that they will all load when ParaView launches.
-
-To run these scripts on a Unix like system us the `sh` command: `sh src/install_plugins.sh`
+### MacOS X Paths
+If you are on MacOS X, then your life is easy! Simply run the script `installMac.sh` with root privileges.
 
 ```bash
-$ sh src/install_plugins.sh
+$ sudo ./installMac.sh
 ```
 
-### Building the Plugins
-To rebuild the plugins after you made changes or made your own plugins, run the `src/build_plugins.sh` script which will build up the XML Server Manager Configuration filters from the `.py` scripts and install them to ParaView. Only use this script if you are making your own filters or readers (or changing what is delivered in this repo). If you run this script, it will build and install all filters and readers to ParaView. This is not necessary as the repo contains a stable build of all the plugins upon cloning.
+Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **CSM Geophysics Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` module by executing `import PVGPpy`. Errors should not arise but if they do, post to the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) and the errors will be *immediately* addressed.
+
+### Windows Paths
+Setting up environmental variables is a bit more involved for Windows. First you need to open **Control Center** and search for **Advanced system settings**. Click **Environment variables**. In the section **User variables for *User*** add the following variable by clicking **New...**:
+
+- Variable Name: `PV_PLUGIN_PATH` then select **Browse Directory...** and navigate to the directory where you cloned ParaViewGeophysics and select the `plugins` directory.
+
+Now we need to edit the `PYTHONPATH` variable that should already exit in your environment. This can get messy/tricky so please strictly follow these instructions:
+
+1. Copy the value in the `PV_PLUGIN_PATH` variable but **BE SURE NOT TO INCLUDE THE `plugins` DIRECTORY**. So basically this is the entire path leading up to the `plugins` directory.
+
+2. Edit the `PYTHONPATH` variable by selecting it then click **Edit...**.
+
+3. Pay attention to what that path Currently is because we need to reselect it. So if you path is currently `c:\python27\lib\site-packages` then click **Browse Directory...** and reselect that *exact* directory.
+
+4. Append the **Variable value**. At the end of your re-selected path, type a semi-colon `;` and then add the path to the ParaViewGeophysics repository which you copied in the first step by clicking paste. This is critical to be able to import outside Python modules in `pvpython`.
+
+5. Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **CSM Geophysics Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` module by executing `import PVGPpy`. If an error arises please double check your paths.
 
 
-```bash
-$ sh src/build_plugins.sh
-```
--->
 
-## How to Update
+## How to Update the PVGP Repository
 We have included a script that will update the repository from GitHub, and since the repo is already linked to ParaView, all changes to the repo will be directory reflected in ParaView. This script is simply executed by:
 
 ```bash
@@ -147,16 +86,14 @@ We have included a script that will update the repository from GitHub, and since
 $ sh ./updatePVGP.sh
 ```
 
+*Note: Windows users, be sure to run this in cygwin or a bash environment of your choice.*
+
 
 --------------
 
 # Using Outside Modules
-ParaView's Python environment, `pvpython`, can be a bit tricky to start using outside Python modules like SciPy or SimPEG. On Mac OS X, using Python modules installed via pip or anaconda should work simply with an `import ...` statement if you have your Python paths set up well. (Mac users: if you have trouble importing SciPy or other modules used in this repo let me know and I will develop a solution). Windows users, on the other hand, are going to have quite a bit of trouble as `pvpython` is its own environment nestled in the ParaView application. I have not been able to develop an elegant solution for Windows users to use 3rd party Python libraries other than a simple copy/paste of that module into the ParaView application contents.
+ParaView's Python environment, `pvpython`, can be a bit tricky to start using outside Python modules like SciPy or SimPEG. On Mac OS X, using Python modules installed via pip or anaconda should work simply with an `import ...` statement if you have your Python paths set up well. (Mac users: if you have trouble importing SciPy or other modules used in this repo let me know and I will develop a solution). Windows users: this should have been resolved if you followed the install instructions outlined [above](#windows-paths).
 
-*Note: Advanced users, try a symbolic link between ParaView's python library and the libraries you have installed. This is how we are installing our module so that it stays updated.*
-
-## Windows Users
-To start using third-party libraries, we are going to have to copy over static versions of the modules into ParaView's `site-packages` directory. This folder should be under `.../ParaView/bin/site-packages/`. Effectively, we just perform a brute install of that module to `pvpython` on Windows so that when we make `import`s, the modules will be found in the `pvpython` environment.
 
 ## Modules Currently Needed for this Repo
 These are all of the modules that filters, readers, and macros might use in this repo. We recommend opening the Python Shell from ParaView (Tools->Python Shell) and testing the import of each of these modules. Copy/Paste the modules that failed to import from wherever you have them installed into `.../ParaView/bin/site-packages/`:
@@ -168,9 +105,6 @@ These are all of the modules that filters, readers, and macros might use in this
 - [struct](https://docs.python.org/2/library/struct.html)
 - [csv](https://docs.python.org/2/library/csv.html)
 
-I suspect there is a more elegant solution to setting up the Python environment for `pvpython` on Windows to use modules installed from pip or anaconda, however, Windows is not my area of expertise and I have had much trouble attempting to figure this out. I encourage a Windows user of this repository to figure this out, so we don't have to make a static version of these modules to use in ParaView.
-
-Someone *please* figure this out and post a more robust solution to the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues).
 
 --------------
 
