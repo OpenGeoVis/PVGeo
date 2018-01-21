@@ -29,11 +29,6 @@ fi
 
 #### BEGIN INSTALLATION
 
-#if [ "$EUID" -ne 0 ]
-#  then echo "Please run as root. Run script as: sudo sh./installMac.sh"
-#  exit
-#fi
-
 pvplist="/Library/LaunchAgents/pvgp.PV_PLUGIN_PATH.plist"
 pyplist="/Library/LaunchAgents/pvgp.PYTHONPATH.plist"
 
