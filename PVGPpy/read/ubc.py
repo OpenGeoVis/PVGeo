@@ -49,7 +49,7 @@ def ubcMeshExtnet(FileName_Mesh, deli=' ', useTab=False):
     return (0,n1, 0,n2, 0,n3)
 
 
-def ubcMesh(FileName_Mesh, deli=' ', useTab=False):
+def ubcMesh(FileName_Mesh, deli=' ', useTab=False, pdo=None):
     """
     Description
     -----------
@@ -74,7 +74,8 @@ def ubcMesh(FileName_Mesh, deli=' ', useTab=False):
     Returns a vtkRectilinearGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the placeModelOnMesh() method to associate with model data.
 
     """
-    pdo = vtk.vtkRectilinearGrid() # vtkRectilinearGrid
+    if pdo is None:
+        pdo = vtk.vtkRectilinearGrid() # vtkRectilinearGrid
 
     # Set the tab delimiter if needed
     if (useTab):
@@ -236,7 +237,7 @@ def placeModelOnMesh(mesh, model, dataNm='Data'):
     mesh.GetCellData().AddArray(c)
     return mesh
 
-def ubcGridData(FileName_Mesh, FileName_Model, deli=' ', useTab=False, dataNm=''):
+def ubcGridData(FileName_Mesh, FileName_Model, deli=' ', useTab=False, dataNm='', pdo=None):
     """
     Description
     -----------
@@ -273,7 +274,7 @@ def ubcGridData(FileName_Mesh, FileName_Model, deli=' ', useTab=False, dataNm=''
     if dataNm == '':
         dataNm = os.path.basename(FileName_Model)
     # Construct/read the mesh
-    mesh = ubcMesh(FileName_Mesh, deli, useTab)
+    mesh = ubcMesh(FileName_Mesh, deli, useTab, pdo=pdo)
     # Read the model data
     model = ubcModel(FileName_Model, deli, useTab)
     # Place the model data onto the mesh

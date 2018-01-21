@@ -1,0 +1,102 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="AddUBCModelToMesh" class="vtkPythonProgrammableFilter" label="Add UBC Model To Mesh">
+      <Documentation
+        long_help="This filter allows you to choose a UBC model file to append as an attribute to an already created vtkRectilinearGrid of a UBC Mesh."
+        short_help="This filter allows you to choose a UBC model file to append as an attribute to an already created vtkRectilinearGrid of a UBC Mesh.">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="CSM Geophysics Filters" />
+      </Hints>
+
+      <!-- Output data type: "vtkRectilinearGrid" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="3"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkRectilinearGrid"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="Data_Name"
+        label="Data Name"
+        initial_string="Data_Name"
+        command="SetParameter"
+        animateable="1"
+        default_values=""
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="Delimiter_Field"
+        label="Delimiter Field"
+        initial_string="Delimiter_Field"
+        command="SetParameter"
+        animateable="1"
+        default_values=" "
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName_Model"
+        label="FileName Model"
+        initial_string="FileName_Model"
+        command="SetParameter"
+        animateable="1"
+        default_values="absolute path"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation></Documentation>
+      </StringVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_Tab_Delimiter"
+        label="Use Tab Delimiter"
+        initial_string="Use_Tab_Delimiter"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.read import ubcModel, placeModelOnMesh&#xA;&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;&#xA;pdi = self.GetInput() # vtkRectilinearGrid&#xA;pdo = self.GetOutput() # vtkRectilinearGrid&#xA;&#xA;pdo.DeepCopy(pdi) # ShallowCopy if you want changes to propagate&#xA;&#xA;model = ubcModel(FileName_Model, deli=Delimiter_Field, useTab=Use_Tab_Delimiter)&#xA;placeModelOnMesh(pdo, model, dataNm=Data_Name)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
