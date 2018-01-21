@@ -5,7 +5,7 @@ import os
 from vtk.util import numpy_support as nps
 import vtk
 
-def gslib(FileName, deli=' ', useTab=False, numIgLns=0):
+def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     """
     Description
     -----------
@@ -34,8 +34,8 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0):
     Returns a vtkTable of the input data file.
 
     """
-
-    pdo = vtk.vtkTable() # vtkTable
+    if pdo is None:
+        pdo = vtk.vtkTable() # vtkTable
 
     if (useTab):
         deli = '\t'
@@ -74,7 +74,7 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0):
 
 
 
-def packedBinaries(FileName, dblVals=False, dataNm=''):
+def packedBinaries(FileName, dblVals=False, dataNm='', pdo=None):
     """
     Description
     -----------
@@ -99,8 +99,8 @@ def packedBinaries(FileName, dblVals=False, dataNm=''):
     Returns a vtkTable of the input data file with a single column being the data read.
 
     """
-
-    pdo = vtk.vtkTable() # vtkTable
+    if pdo is None:
+        pdo = vtk.vtkTable() # vtkTable
 
     num_bytes = 4 # FLOAT
     typ = 'f' #FLOAT
@@ -129,7 +129,7 @@ def packedBinaries(FileName, dblVals=False, dataNm=''):
     return pdo
 
 
-def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0):
+def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pdo=None):
     """
     Description
     -----------
@@ -159,7 +159,8 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0):
     Returns a vtkTable of the input data file.
 
     """
-    pdo = vtk.vtkTable() # vtkTable
+    if pdo is None:
+        pdo = vtk.vtkTable() # vtkTable
 
     if (useTab):
         deli = '\t'

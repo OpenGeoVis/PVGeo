@@ -19,5 +19,4 @@ Properties = dict(
 def RequestData():
     from PVGPpy.read import packedBinaries
     pdo = self.GetOutput()
-    tbl = packedBinaries(FileName, dblVals=Double_Values, dataNm=Data_Name)
-    pdo.ShallowCopy(tbl)
+    packedBinaries(FileName, dblVals=Double_Values, dataNm=Data_Name, pdo=pdo)

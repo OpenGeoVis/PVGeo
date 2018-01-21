@@ -92,7 +92,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import delimitedText&#xA;pdo = self.GetOutput()&#xA;tbl = delimitedText(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines)&#xA;pdo.ShallowCopy(tbl)&#xA;"
+        default_values="from PVGPpy.read import delimitedText&#xA;pdo = self.GetOutput()&#xA;delimitedText(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

@@ -32,8 +32,7 @@ def RequestData():
     if Data_Name == '':
         Data_Name = os.path.basename(FileName_Model)
     # Read the UBC Mesh gridded data:
-    grd = ubcGridData(FileName_Mesh, FileName_Model, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, dataNm=Data_Name)
-    pdo.ShallowCopy(grd)
+    ubcGridData(FileName_Mesh, FileName_Model, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, dataNm=Data_Name, pdo=pdo)
 
 def RequestInformation():
     from paraview import util

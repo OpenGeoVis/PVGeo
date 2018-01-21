@@ -24,9 +24,12 @@ Properties = dict(
 
 def RequestData():
     from PVGPpy.read import ubcModel, placeModelOnMesh
+    import os
 
     if FileName_Model == 'absolute path':
         raise Exception('No model file selected. Aborting.')
+    if Data_Name == '':
+        Data_Name = os.path.basename(FileName_Model)
 
     pdi = self.GetInput() # vtkRectilinearGrid
     pdo = self.GetOutput() # vtkRectilinearGrid

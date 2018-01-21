@@ -4,7 +4,7 @@ import os
 from vtk.util import numpy_support as nps
 import vtk
 
-def sgemsGrid(FileName, deli=' ', useTab=False):
+def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
     """
     Description
     -----------
@@ -29,7 +29,8 @@ def sgemsGrid(FileName, deli=' ', useTab=False):
     Returns vtkImageData
 
     """
-    pdo = vtk.vtkImageData() # vtkImageData
+    if pdo is None:
+        pdo = vtk.vtkImageData() # vtkImageData
 
     if (useTab):
         deli = '\t'

@@ -20,5 +20,4 @@ Properties = dict(
 def RequestData():
     from PVGPpy.read import delimitedText
     pdo = self.GetOutput()
-    tbl = delimitedText(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines)
-    pdo.ShallowCopy(tbl)
+    delimitedText(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines, pdo=pdo)

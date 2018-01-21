@@ -67,7 +67,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import packedBinaries&#xA;pdo = self.GetOutput()&#xA;tbl = packedBinaries(FileName, dblVals=Double_Values, dataNm=Data_Name)&#xA;pdo.ShallowCopy(tbl)&#xA;"
+        default_values="from PVGPpy.read import packedBinaries&#xA;pdo = self.GetOutput()&#xA;packedBinaries(FileName, dblVals=Double_Values, dataNm=Data_Name, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

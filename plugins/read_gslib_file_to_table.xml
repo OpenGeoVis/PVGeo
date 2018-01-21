@@ -79,7 +79,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import os&#xA;from PVGPpy.read import gslib&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslib(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines)&#xA;pdo.ShallowCopy(tbl)&#xA;print(os.path.basename(FileName) + ': ' + h)&#xA;"
+        default_values="import os&#xA;from PVGPpy.read import gslib&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslib(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)&#xA;print(os.path.basename(FileName) + ': ' + h)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

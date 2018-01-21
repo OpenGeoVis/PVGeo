@@ -87,7 +87,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import ubcModel, placeModelOnMesh&#xA;&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;&#xA;pdi = self.GetInput() # vtkRectilinearGrid&#xA;pdo = self.GetOutput() # vtkRectilinearGrid&#xA;&#xA;pdo.DeepCopy(pdi) # ShallowCopy if you want changes to propagate&#xA;&#xA;model = ubcModel(FileName_Model, deli=Delimiter_Field, useTab=Use_Tab_Delimiter)&#xA;placeModelOnMesh(pdo, model, dataNm=Data_Name)&#xA;"
+        default_values="from PVGPpy.read import ubcModel, placeModelOnMesh&#xA;import os&#xA;&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileName_Model)&#xA;&#xA;pdi = self.GetInput() # vtkRectilinearGrid&#xA;pdo = self.GetOutput() # vtkRectilinearGrid&#xA;&#xA;pdo.DeepCopy(pdi) # ShallowCopy if you want changes to propagate&#xA;&#xA;model = ubcModel(FileName_Model, deli=Delimiter_Field, useTab=Use_Tab_Delimiter)&#xA;placeModelOnMesh(pdo, model, dataNm=Data_Name)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

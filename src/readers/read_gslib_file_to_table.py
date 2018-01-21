@@ -21,6 +21,5 @@ def RequestData():
     import os
     from PVGPpy.read import gslib
     pdo = self.GetOutput() # vtkTable
-    tbl, h = gslib(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines)
-    pdo.ShallowCopy(tbl)
+    tbl, h = gslib(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)
     print(os.path.basename(FileName) + ': ' + h)
