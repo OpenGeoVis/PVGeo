@@ -22,35 +22,29 @@ If you have your own plugins either developed in C++ or as python programmable f
 
 -------
 # How To Use the Plugins in this Repository
-Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble or you are a windows user, please read through the detailed explanation [here](https://banesullivan.github.io/ParaViewGeophysics/Getting-Started/#install-paraviewgeophysics).
+Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble *or you are a windows user, please read through the detailed explanation [here](https://banesullivan.github.io/ParaViewGeophysics/Getting-Started/#install-paraviewgeophysics).*
 
-## Quick and Easy Unix Installation
+## Cloning the Repository
+Clone the repository from your command line by navigating to the directory you would like to save all of the code from this repo.
 
-First, declare a `PVPATH` variable in your your environment. This is the path to the installation of ParaView. We need this path so that the installation script can make symbolic links between this repository and your installation of ParaView.
-
-```bash
-# Be sure to check that this path matches yours... Odds are it's different!
-# Path to the ParaView installation:
-export PVPATH="/Applications/ParaView-5.4.0.app"
-```
-
-Now clone the repository and get to work using our code:
+From your command line:
 
 ```bash
 # Clone this repository
 $ git clone https://github.com/banesullivan/ParaViewGeophysics
-# Go into the repository
-$ cd ParaViewGeophysics
 
-# Install everything:
-#- Note: There are two install scripts. One for Mac/Linux and one for Windows
-#- Mac:
-$ sh ./installMac.sh
-#- Windows users: Please use Cygwin. The install script is meant for Cygwin.
-$ sh ./installWin.sh
+# Go in the cloned repository
+$ cd ParaViewGeophysics
 ```
 
-After executing the above tasks, you should be ready to go. The most common issue is having the incorrect `PVPATH` variable, so be sure to check that if errors arise. A more step-by-step process is [here](https://banesullivan.github.io/ParaViewGeophysics/Getting-Started/#install-paraviewgeophysics).
+### MacOS X Install
+If you are on MacOS X, then your life is easy! Simply run the script `installMac.sh` with root privileges.
+
+```bash
+$ sudo ./installMac.sh
+```
+
+Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **CSM Geophysics Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` module by executing `import PVGPpy`. Errors should not arise but if they do, post to the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) and the errors will be *immediately* addressed.
 
 
 -----
