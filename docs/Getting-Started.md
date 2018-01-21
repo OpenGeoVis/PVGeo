@@ -78,7 +78,7 @@ Now we need to edit the `PYTHONPATH` variable that should already exit in your e
 
 
 
-## How to Update the PVGP Repository
+## Update the PVGP Repository
 We have included a script that will update the repository from GitHub, and since the repo is already linked to ParaView, all changes to the repo will be directory reflected in ParaView. This script is simply executed by:
 
 ```bash
@@ -95,7 +95,7 @@ $ sh ./updatePVGP.sh
 ParaView's Python environment, `pvpython`, can be a bit tricky to start using outside Python modules like SciPy or SimPEG. On Mac OS X, using Python modules installed via pip or anaconda should work simply with an `import ...` statement if you have your Python paths set up well. (Mac users: if you have trouble importing SciPy or other modules used in this repo let me know and I will develop a solution). Windows users: this should have been resolved if you followed the install instructions outlined [above](#windows-paths).
 
 
-## Modules Currently Needed for this Repo
+## Required Modules
 These are all of the modules that filters, readers, and macros might use in this repo. We recommend opening the Python Shell from ParaView (Tools->Python Shell) and testing the import of each of these modules.
 
 - [NumPy](http://www.numpy.org) (you may need to update ParaView's version to the latest version for SciPy to be happy)
