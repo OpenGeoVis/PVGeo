@@ -29,21 +29,23 @@ fi
 
 #### BEGIN INSTALLATION
 
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root. Run script as: sudo sh./installMac.sh"
-  exit
-fi
+#if [ "$EUID" -ne 0 ]
+#  then echo "Please run as root. Run script as: sudo sh./installMac.sh"
+#  exit
+#fi
 
-pvplist="/Library/LaunchDaemons/pvgp.PV_PLUGIN_PATH.plist"
-pyplist="/Library/LaunchDaemons/pvgp.PYTHONPATH.plist"
+pvplist="/Library/LaunchAgents/pvgp.PV_PLUGIN_PATH.plist"
+pyplist="/Library/LaunchAgents/pvgp.PYTHONPATH.plist"
 
 # check if the .plist files exits. Remove if so.
 if [ -f ${pvplist} ]; then
     printf "${YELLOW}%s${NORMAL}\n" "${pvplist} Currently exists. Overwiting..."
+    printf "${RED}%s${NORMAL}\n" "You will need to log out and back in after this script executes."
     sudo rm -f $pvplist
 fi
 if [ -f ${pyplist} ]; then
     printf "${YELLOW}%s${NORMAL}\n" "${pyplist} Currently exists. Overwiting..."
+    printf "${RED}%s${NORMAL}\n" "You will need to log out and back in after this script executes."
     sudo rm -f $pyplist
 fi
 
@@ -57,7 +59,8 @@ launchctl setenv PV_PLUGIN_PATH ${PVGP}/plugins
 launchctl setenv PYTHONPATH $PYTHONPATH:${PVGP}/
 printf "${NORMAL}"
 
-printf "${GREEN}%s${NORMAL}\n" "Writing environmental variables to '/Library/LaunchDaemons/'..."
+# Write plst files to LaunchAgents so Paths are always set at login
+printf "${GREEN}%s${NORMAL}\n" "Writing environmental variables to '/Library/LaunchAgents/'..."
 cat << EOF | sudo tee ${pvplist}
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
