@@ -98,12 +98,9 @@ ParaView's Python environment, `pvpython`, can be a bit tricky to start using ou
 ## Required Modules
 These are all of the modules that filters, readers, and macros might use in this repo. We recommend opening the Python Shell from ParaView (Tools->Python Shell) and testing the import of each of these modules.
 
-- [NumPy](http://www.numpy.org) (you may need to update ParaView's version to the latest version for SciPy to be happy)
 - [SciPy](https://www.scipy.org/install.html)
-- [VTK](https://www.vtk.org/download/)
-- [datetime](https://docs.python.org/2/library/datetime.html)
-- [struct](https://docs.python.org/2/library/struct.html)
-- [csv](https://docs.python.org/2/library/csv.html)
+- [NumPy](http://www.numpy.org) (you may need to update ParaView's version to the latest version for SciPy to be happy)
+- [VTK](https://www.vtk.org/download/) (included in ParaView)
 
 
 --------------
