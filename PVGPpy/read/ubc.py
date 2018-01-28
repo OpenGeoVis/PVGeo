@@ -111,7 +111,8 @@ def ubcMesh(FileName_Mesh, deli=' ', useTab=False, pdo=None):
             for j in range(1, nn[i]):
                 if (i == 2):
                     # Z dimension (down is positive Z!)
-                    s[j] = s[j-1] - float(h[j-1])
+                    #  TODO: what is the correct way to do this?
+                    s[j] = s[j-1] + float(h[j-1])
                 else:
                     # X and Y dimensions
                     s[j] = s[j-1] + float(h[j-1])
