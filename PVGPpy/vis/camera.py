@@ -5,6 +5,10 @@ from paraview.simple import RenderAllViews, GetActiveCamera
 
 class camLoc:
     def __init__(self,camera=GetActiveCamera()):
+        """
+        An object to store a single camera location/view
+        Make a list/dict of these objects to save interestin views
+        """
         self.orientation = camera.GetOrientation()
         self.position = camera.GetPosition()
         self.focus = camera.GetFocalPoint()
@@ -42,32 +46,38 @@ class camLoc:
         with open(filename, 'rb') as f:
             return pickle.load(f)
 
-    # Variable access
-    def getOrientation(self):
+    # Variable access for internal use
+    def _getOrientation(self):
         return self.orientation
 
-    def getPosition(self):
+    def _getPosition(self):
         return self.position
 
-    def getFocalPoint(self):
+    def _getFocalPoint(self):
         return self.focus
 
-    def getViewUp(self):
+    def _getViewUp(self):
         return self.viewup
 
     # Use new location
     def useLoc(self, camera=GetActiveCamera()):
+        """
+        Update the camera location
+        """
         self.orientation = camera.GetOrientation()
         self.position = camera.GetPosition()
         self.focus = camera.GetFocalPoint()
         self.viewup = camera.GetViewUp()
 
-    # change the camera view
+    # Change the camera view
     def view(self, camera=GetActiveCamera()):
-        orientation = self.getOrientation()
-        position = self.getPosition()
-        focus = self.getFocalPoint()
-        viewup = self.getViewUp()
+        """
+        Use this method to update the camera to the saved location
+        """
+        orientation = self._getOrientation()
+        position = self._getPosition()
+        focus = self._getFocalPoint()
+        viewup = self._getViewUp()
 
         # set the camera position and orientation
         camera.SetPosition(position)
