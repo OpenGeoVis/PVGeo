@@ -17,28 +17,6 @@ class camera:
         self.focus = cam.GetFocalPoint()
         self.viewup = cam.GetViewUp()
 
-    @staticmethod
-    def save(lib, filename='views', path=os.path.expanduser('~')):
-        """
-        Save a serialized dictionaty/list/whatever of views out to a file
-        Dafault saves to home directory
-        """
-        ext = '.camera'
-        os.chdir(path)
-        f = open(filename + ext, 'wb')
-        pickle.dump(lib, f, pickle.HIGHEST_PROTOCOL)
-        f.close()
-
-    @staticmethod
-    def load(filename, path=os.path.expanduser('~')):
-        """
-        Load a file containg a serialized camera object(s)
-        Dafault loads from home directory if relative path
-        """
-        os.chdir(path)
-        with open(filename, 'rb') as f:
-            return pickle.load(f)
-
     # Variable access for internal use
     def _getOrientation(self):
         return self.orientation
@@ -93,9 +71,33 @@ class camera:
             # This allows use to dynamicly select cameras
             cam = GetActiveCamera()
         os.chdir(path)
-        self.view(cam=camera)
-        WriteImage("%s_%s.png" % (basenm, v))
+        self.view(cam=cam)
+        WriteImage("%s.png" % (basenm))
 
+
+    # Static Methods for structures containt cameras
+
+    @staticmethod
+    def saveViews(lib, filename='views', path=os.path.expanduser('~')):
+        """
+        Save a serialized dictionaty/list/whatever of views out to a file
+        Dafault saves to home directory
+        """
+        ext = '.camera'
+        os.chdir(path)
+        f = open(filename + ext, 'wb')
+        pickle.dump(lib, f, pickle.HIGHEST_PROTOCOL)
+        f.close()
+
+    @staticmethod
+    def loadViews(filename, path=os.path.expanduser('~')):
+        """
+        Load a file containg a serialized camera objects
+        Dafault loads from home directory if relative path
+        """
+        os.chdir(path)
+        with open(filename, 'rb') as f:
+            return pickle.load(f)
 
     @staticmethod
     def screenShotViews(views, cam=None, path=os.path.expanduser('~'), basenm='view'):
@@ -111,5 +113,5 @@ class camera:
 
         os.chdir(path)
         for v in _iter(views):
-            views[v].view(cam=camera)
+            views[v].view(cam=cam)
             WriteImage("%s_%s.png" % (basenm, v))
