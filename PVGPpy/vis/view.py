@@ -1,9 +1,9 @@
 import numpy as np
 import os
 import pickle
-from paraview.simple import RenderAllViews, GetActiveCamera, GetActiveView, WriteImage
+from paraview.simple import RenderAllViews, GetActiveCamera, WriteImage
 
-class view:
+class camera:
     def __init__(self,camera=None):
         """
         An object to store a single camera location/view
@@ -23,7 +23,7 @@ class view:
         Save a serialized dictionaty/list/whatever of views out to a file
         Dafault saves to home directory
         """
-        ext = '.view'
+        ext = '.camera'
         os.chdir(path)
         f = open(filename + ext, 'wb')
         pickle.dump(lib, f, pickle.HIGHEST_PROTOCOL)
@@ -32,7 +32,7 @@ class view:
     @staticmethod
     def load(filename, path=os.path.expanduser('~')):
         """
-        Load a file containg a serialized view object(s)
+        Load a file containg a serialized camera object(s)
         Dafault loads from home directory if relative path
         """
         os.chdir(path)
@@ -87,13 +87,12 @@ class view:
     # Save Screenshot of single view
     def screenShot(self, camera=None, path=os.path.expanduser('~'), basenm='view'):
         """
-        Save a screenshot of a single view
+        Save a screenshot of a single camera view
         """
         if camera is None:
             # This allows use to dynamicly select cameras
             camera = GetActiveCamera()
         os.chdir(path)
-        view = GetActiveView()
         self.view(camera=camera)
         WriteImage("%s_%s.png" % (basenm, v))
 
@@ -111,7 +110,6 @@ class view:
             return obj if isinstance(obj, dict) else xrange(len(obj))
 
         os.chdir(path)
-        view = GetActiveView()
         for v in _iter(views):
             views[v].view(camera=camera)
             WriteImage("%s_%s.png" % (basenm, v))
