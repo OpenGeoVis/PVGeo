@@ -4,18 +4,18 @@ import pickle
 from paraview.simple import RenderAllViews, GetActiveCamera, WriteImage
 
 class camera:
-    def __init__(self,camera=None):
+    def __init__(self,cam=None):
         """
         An object to store a single camera location/view
         Make a list/dict of these objects to save interestin views
         """
-        if camera is None:
+        if cam is None:
             # This allows use to dynamicly select cameras
-            camera = GetActiveCamera()
-        self.orientation = camera.GetOrientation()
-        self.position = camera.GetPosition()
-        self.focus = camera.GetFocalPoint()
-        self.viewup = camera.GetViewUp()
+            cam = GetActiveCamera()
+        self.orientation = cam.GetOrientation()
+        self.position = cam.GetPosition()
+        self.focus = cam.GetFocalPoint()
+        self.viewup = cam.GetViewUp()
 
     @staticmethod
     def save(lib, filename='views', path=os.path.expanduser('~')):
@@ -53,63 +53,63 @@ class camera:
         return self.viewup
 
     # Use new location
-    def useLoc(self, camera=None):
+    def update(self, cam=None):
         """
         Update the camera location
         """
-        if camera is None:
+        if cam is None:
             # This allows use to dynamicly select cameras
-            camera = GetActiveCamera()
-        self.orientation = camera.GetOrientation()
-        self.position = camera.GetPosition()
-        self.focus = camera.GetFocalPoint()
-        self.viewup = camera.GetViewUp()
+            cam = GetActiveCamera()
+        self.orientation = cam.GetOrientation()
+        self.position = cam.GetPosition()
+        self.focus = cam.GetFocalPoint()
+        self.viewup = cam.GetViewUp()
 
     # Change the camera view
-    def view(self, camera=None):
+    def view(self, cam=None):
         """
         Use this method to update the camera to the saved location
         """
-        if camera is None:
+        if cam is None:
             # This allows use to dynamicly select cameras
-            camera = GetActiveCamera()
+            cam = GetActiveCamera()
         orientation = self._getOrientation()
         position = self._getPosition()
         focus = self._getFocalPoint()
         viewup = self._getViewUp()
 
         # set the camera position and orientation
-        camera.SetPosition(position)
-        camera.SetViewUp(viewup)
-        camera.SetFocalPoint(focus)
+        cam.SetPosition(position)
+        cam.SetViewUp(viewup)
+        cam.SetFocalPoint(focus)
         RenderAllViews()
 
     # Save Screenshot of single view
-    def screenShot(self, camera=None, path=os.path.expanduser('~'), basenm='view'):
+    def screenShot(self, cam=None, path=os.path.expanduser('~'), basenm='view'):
         """
         Save a screenshot of a single camera view
         """
-        if camera is None:
+        if cam is None:
             # This allows use to dynamicly select cameras
-            camera = GetActiveCamera()
+            cam = GetActiveCamera()
         os.chdir(path)
-        self.view(camera=camera)
+        self.view(cam=camera)
         WriteImage("%s_%s.png" % (basenm, v))
 
 
     @staticmethod
-    def screenShotViews(views, camera=None, path=os.path.expanduser('~'), basenm='view'):
+    def screenShotViews(views, cam=None, path=os.path.expanduser('~'), basenm='view'):
         """
         Save screenShot of many views
         """
-        if camera is None:
+        if cam is None:
             # This allows use to dynamicly select cameras
-            camera = GetActiveCamera()
+            cam = GetActiveCamera()
 
         def _iter(obj):
             return obj if isinstance(obj, dict) else xrange(len(obj))
 
         os.chdir(path)
         for v in _iter(views):
-            views[v].view(camera=camera)
+            views[v].view(cam=camera)
             WriteImage("%s_%s.png" % (basenm, v))
