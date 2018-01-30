@@ -50,9 +50,35 @@
 
       <IntVectorProperty
         panel_visibility="default"
-        name="Transpose_XY"
-        label="Transpose XY"
-        initial_string="Transpose_XY"
+        name="Flip_X"
+        label="Flip X"
+        initial_string="Flip_X"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Flip_Y"
+        label="Flip Y"
+        initial_string="Flip_Y"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Flip_Z"
+        label="Flip Z"
+        initial_string="Flip_Z"
         command="SetParameter"
         animateable="1"
         default_values="0"
@@ -113,7 +139,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filt import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;if order == 0:&#xA;    mem = 'C'&#xA;elif order == 1:&#xA;    mem = 'F'&#xA;else:&#xA;    mem = 'C'&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;tableToGrid(pdi, extent, spacing, origin, order=mem, swapXY=Transpose_XY, pdo=image)&#xA;"
+        default_values="from PVGPpy.filt import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;if order == 0:&#xA;    mem = 'C'&#xA;elif order == 1:&#xA;    mem = 'F'&#xA;else:&#xA;    mem = 'C'&#xA;&#xA;flips = []&#xA;if Flip_X: flips.append(0)&#xA;if Flip_Y: flips.append(1)&#xA;if Flip_Z: flips.append(2)&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;tableToGrid(pdi, extent, spacing, origin, order=mem, flip=flips, pdo=image)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -127,7 +153,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.filt import refoldidx&#xA;if order == 0:&#xA;    mem = 'C'&#xA;elif order == 1:&#xA;    mem = 'F'&#xA;else:&#xA;    mem = 'C'&#xA;# Setup the ImageData&#xA;idx = refoldidx(order=mem)&#xA;nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        default_values="from paraview import util&#xA;# Setup the ImageData&#xA;nx,ny,nz = extent[0],extent[1],extent[2]&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

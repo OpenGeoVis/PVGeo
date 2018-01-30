@@ -29,7 +29,9 @@ Properties = dict(
     extent=[1, 1, 1],
     spacing=[1.0, 1.0, 1.0],
     origin=[0.0, 0.0, 0.0],
-    Transpose_XY=False,
+    Flip_X=False,
+    Flip_Y=False,
+    Flip_Z=False,
     order=0
 )
 
@@ -45,24 +47,21 @@ def RequestData():
     else:
         mem = 'C'
 
+    flips = []
+    if Flip_X: flips.append(0)
+    if Flip_Y: flips.append(1)
+    if Flip_Z: flips.append(2)
+
     pdi = self.GetInput()
     image = self.GetOutput() #vtkImageData
 
-    tableToGrid(pdi, extent, spacing, origin, order=mem, swapXY=Transpose_XY, pdo=image)
+    tableToGrid(pdi, extent, spacing, origin, order=mem, flip=flips, pdo=image)
 
 
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.filt import refoldidx
-    if order == 0:
-        mem = 'C'
-    elif order == 1:
-        mem = 'F'
-    else:
-        mem = 'C'
     # Setup the ImageData
-    idx = refoldidx(order=mem)
-    nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]
+    nx,ny,nz = extent[0],extent[1],extent[2]
     # ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:
     util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])

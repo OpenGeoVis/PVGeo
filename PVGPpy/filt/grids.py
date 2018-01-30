@@ -4,8 +4,17 @@ import numpy as np
 
 #---- Table To Grid Stuff ----#
 
+def _flip(arr, axis):
+    if axis == 2:
+        return np.flipud(arr)
+    if axis == 1:
+        return np.fliplr(arr)
+    if axis == 0:
+        arr = np.transpose(arr, (2,1,0))
+        arr = np.flipud(arr)
+        return np.transpose(arr, (2,1,0))
 
-def _refold(arr, extent, order='F', swapXY=False):
+def _refold(arr, extent, order='F', flip=[]):
     """
     This is a helper method that handles the initial unpacking of a data array.
     ParaView and VTK use Fortran packing so this is convert data saved in
@@ -14,40 +23,22 @@ def _refold(arr, extent, order='F', swapXY=False):
         either C (nx,ny,nz) or F (nz,ny,nz)
     the extent returned is (nz,ny,nx)
     """
-    idx = refoldidx(order=order)
-    nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]
-    n1,n2,n3 = extent[0],extent[1],extent[2]
+    nx,ny,nz = extent[0],extent[1],extent[2]
 
     if order == 'C':
-        if swapXY:
-            arr = np.reshape(arr, (ny,nx,nz))
-            arr = np.swapaxes(arr,0,1)
-        else:
-            arr = np.reshape(arr, (nx,ny,nz))
+        arr = np.reshape(arr, (nx,ny,nz))
         arr = np.swapaxes(arr,0,2) # Shape should be (nz,ny,nx)
     elif order == 'F':
-        # Update extent to be fortran like
-        if swapXY:
-            arr = np.reshape(arr, (nz,ny,nx))
-            arr = np.swapaxes(arr,1,2) # Shape should be (nz,ny,nx)
+        arr = np.reshape(arr, (nz,ny,nx))
+
+    # flip
+    for i in flip:
+        print('Flipping axis:', i)
+        arr = _flip(arr, i)
 
     return arr.flatten(), (nz,ny,nx)
 
-def refoldidx(swapXY=False):
-    """
-    Theses are indexing corrections to set the spacings and origin witht the correct axes after refolding.
-    """
-    if order == 'F':
-        idx = (2,1,0)
-        if swapXY:
-            idx = (2,0,1)
-    else:
-        idx = (0,1,2)
-        if swapXY:
-            idx = (1,0,2)
-    return idx
-
-def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), order='F', swapXY=False, pdo=None):
+def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), order='F', flip=[], pdo=None):
     """
     Converts a table of data arrays to vtkImageData given an extent to reshape that table.
     Each column in the table will be treated as seperate data arrays for the described data space
@@ -59,10 +50,9 @@ def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), order='F', swapXY=
     if pdo is None:
         pdo = vtk.vtkImageData()
 
-    idx = refoldidx(order=order)
-    nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]
-    sx,sy,sz = spacing[idx[0]],spacing[idx[1]],spacing[idx[2]]
-    ox,oy,oz = origin[idx[0]],origin[idx[1]],origin[idx[2]]
+    nx,ny,nz = extent[0],extent[1],extent[2]
+    sx,sy,sz = spacing[0],spacing[1],spacing[2]
+    ox,oy,oz = origin[0],origin[1],origin[2]
     # make sure dimensions work
     if (nx*ny*nz != rows):
         raise Exception('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))
@@ -77,7 +67,7 @@ def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), order='F', swapXY=
         c = pdi.GetColumn(i)
         name = c.GetName()
         arr = nps.vtk_to_numpy(c)
-        arr, ext = _refold(arr, extent, order=order, swapXY=swapXY)
+        arr, ext = _refold(arr, extent, order=order, flip=flip)
         c = nps.numpy_to_vtk(num_array=arr,deep=True)
         c.SetName(name)
         #pdo.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
