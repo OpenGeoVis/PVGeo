@@ -14,8 +14,8 @@ ExtraXml = '''
     initial_string="test_drop_down_menu"
     default_values="0">
     <EnumerationDomain name="enum">
-            <Entry value="0" text="Fortran-style: column-major order"/>
-            <Entry value="1" text="C-style: Row-major order"/>
+            <Entry value="0" text="C-style: Row-major order"/>
+            <Entry value="1" text="Fortran-style: column-major order"/>
     </EnumerationDomain>
     <Documentation>
         This is the type of memory ordering to use.
@@ -29,13 +29,8 @@ Properties = dict(
     extent=[1, 1, 1],
     spacing=[1.0, 1.0, 1.0],
     origin=[0.0, 0.0, 0.0],
-    SEPlib=True,
-    Transpose_XY=True,
+    Transpose_XY=False,
     order=0
-)
-
-PropertiesHelp = dict(
-    SEPlib='Use the Stanford Exploration Project\'s axial conventions (d1=z, d2=x, d3=y). Parameters would be entered [z,x,y].'
 )
 
 def RequestData():
@@ -44,24 +39,30 @@ def RequestData():
     import numpy as np
 
     if order == 0:
-        mem = 'F'
-    elif order == 1:
         mem = 'C'
+    elif order == 1:
+        mem = 'F'
     else:
         mem = 'C'
 
     pdi = self.GetInput()
     image = self.GetOutput() #vtkImageData
 
-    tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem, swapXY=Transpose_XY, pdo=image)
+    tableToGrid(pdi, extent, spacing, origin, order=mem, swapXY=Transpose_XY, pdo=image)
 
 
 
 def RequestInformation():
     from paraview import util
     from PVGPpy.filt import refoldidx
+    if order == 0:
+        mem = 'C'
+    elif order == 1:
+        mem = 'F'
+    else:
+        mem = 'C'
     # Setup the ImageData
-    idx = refoldidx(SEPlib=SEPlib, swapXY=Transpose_XY)
+    idx = refoldidx(order=mem)
     nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]
     # ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:
     util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])
