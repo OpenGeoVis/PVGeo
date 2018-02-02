@@ -90,7 +90,7 @@ class camera:
         f.close()
 
     @staticmethod
-    def loadViews(filename, path=os.path.expanduser('~')):
+    def loadViews(filename='views.camera', path=os.path.expanduser('~')):
         """
         Load a file containg a serialized camera objects
         Dafault loads from home directory if relative path
