@@ -3,48 +3,8 @@ from vtk.util import numpy_support as nps
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
+from PVGPpy.helpers import *
 # NOTE: internal import - from scipy.spatial import cKDTree
-
-#---- Helpers ----#
-def _getArray(wpdi, field, name):
-    """
-    Grabs an array from vtkDataObject given its name and field association
-    """
-    # Point Data
-    if field == 0:
-        arr = wpdi.PointData[name]
-    # Cell Data:
-    elif field == 1:
-        arr = wpdi.CellData[name]
-    # Field Data:
-    elif field == 2:
-        arr = wpdi.FieldData[name]
-    # Row Data:
-    elif field == 6:
-        arr = wpdi.RowData[name]
-    else:
-        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
-    return arr
-
-def _addArray(pdo, field, vtkArray):
-    """
-    Adds an array to a vtkDataObject given its field association
-    """
-    # Point Data
-    if field == 0:
-        pdo.GetPointData().AddArray(vtkArray)
-    # Cell Data:
-    elif field == 1:
-        pdo.GetCellData().AddArray(vtkArray)
-    # Field Data:
-    elif field == 2:
-        pdo.GetFieldData().AddArray(vtkArray)
-    # Row Data:
-    elif field == 6:
-        pdo.GetRowData().AddArray(vtkArray)
-    else:
-        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
-    return pdo
 
 #---- Correlations ----#
 def _corr(arr1, arr2):
