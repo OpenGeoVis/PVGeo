@@ -10,7 +10,6 @@ ReaderDescription = 'CSM GP Delimited Text File'
 
 
 Properties = dict(
-    FileName='absolute_path',
     Number_Ignore_Lines=0,
     Has_Titles=True,
     Delimiter_Field=' ',
@@ -19,5 +18,40 @@ Properties = dict(
 
 def RequestData():
     from PVGPpy.read import delimitedText
+    import numpy as np
+
+    def GetUpdateTimestep(algorithm):
+        """Returns the requested time value, or None if not present"""
+        executive = algorithm.GetExecutive()
+        outInfo = executive.GetOutputInformation(0)
+        if outInfo.Has(executive.UPDATE_TIME_STEP()):
+            return outInfo.Get(executive.UPDATE_TIME_STEP())
+        else:
+            return None
+    # Get the current timestep
+    req_time = GetUpdateTimestep(self)
+    # Read the closest file
+    #np.asarray([get_time(file) for file in FileNames])
+    xtime = np.arange(len(FileNames), dtype=float)
+    i = np.argwhere(xtime == req_time)
+
+    # Generate Output
     pdo = self.GetOutput()
-    delimitedText(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines, pdo=pdo)
+    delimitedText(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines, pdo=pdo)
+
+def RequestInformation(self):
+    def setOutputTimesteps(algorithm):
+        executive = algorithm.GetExecutive()
+        outInfo = executive.GetOutputInformation(0)
+        # Calculate list of timesteps here
+        #np.asarray([get_time(file) for file in FileNames])
+        xtime = range(len(FileNames))
+        outInfo.Remove(executive.TIME_STEPS())
+        for i in range(len(FileNames)):
+            outInfo.Append(executive.TIME_STEPS(), xtime[i])
+        # Remove and set time range info
+        outInfo.Remove(executive.TIME_RANGE())
+        outInfo.Append(executive.TIME_RANGE(), xtime[0])
+        outInfo.Append(executive.TIME_RANGE(), xtime[-1])
+
+    setOutputTimesteps(self)

@@ -1,0 +1,101 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="sources">
+    <SourceProxy name="ExamplePythonReader" class="vtkPythonProgrammableFilter" label="Example Python Reader">
+      <Documentation
+        long_help="This reader provides a starting point for making a file reader in a Programmable Python Source."
+        short_help="This reader provides a starting point for making a file reader in a Programmable Python Source.">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="CSM GP Readers" />
+      </Hints>
+      <Hints>
+        <ReaderFactory extensions="H@ bin dat txt text"
+          file_description="All Files: Example Python Reader" />
+      </Hints>
+
+      <!-- Output data type: "vtkUnstructuredGrid" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="4"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+
+      <StringVectorProperty
+        name="FileNames"
+        initial_string="FileNames"
+        animateable="0"
+        number_of_elements="0"
+        command="AddParameter"
+        clean_command="ClearParameter"
+        repeat_command="1"
+        panel_visibility="advanced">
+        <FileListDomain name="files"/>
+            <Documentation>
+            The list of files to be read by the reader.
+            </Documentation>
+      </StringVectorProperty>
+
+      <DoubleVectorProperty
+        name="TimestepValues"
+        repeatable="1"
+        information_only="1">
+        <TimeStepsInformationHelper/>
+            <Documentation>
+            Available timestep values.
+            </Documentation>
+        </DoubleVectorProperty>
+        <Hints>
+            <ReaderFactory extensions="H@ bin dat txt text"
+                    file_description="All Files: Example Python Reader" />
+        </Hints>
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Print_File_Names"
+        label="Print File Names"
+        initial_string="Print_File_Names"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation>This is a description about the Print_File_Names property! This will simple print the file name at the current time step if set to true.</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="&quot;&quot;&quot;Create a VTK output given the list of filenames and the current timestep.&#xA;This script can access self and FileNames and should return an output of type&#xA;OutputDataType above&quot;&quot;&quot;&#xA;import numpy as np&#xA;&#xA;def GetUpdateTimestep(algorithm):&#xA;    &quot;&quot;&quot;Returns the requested time value, or None if not present&quot;&quot;&quot;&#xA;    executive = algorithm.GetExecutive()&#xA;    outInfo = executive.GetOutputInformation(0)&#xA;    if outInfo.Has(executive.UPDATE_TIME_STEP()):&#xA;        return outInfo.Get(executive.UPDATE_TIME_STEP())&#xA;    else:&#xA;        return None&#xA;# Get the current timestep&#xA;req_time = GetUpdateTimestep(self)&#xA;# Read the closest file&#xA;#np.asarray([get_time(file) for file in FileNames])&#xA;xtime = np.arange(len(FileNames), dtype=float)&#xA;i = np.argwhere(xtime == req_time)&#xA;&#xA;&quot;&quot;&quot;If you specifically do not want the ability to read time series&#xA;Then delete the above code and access the file name by adding a string&#xA;variable called `FileName` to the Properties dict. &quot;&quot;&quot;&#xA;# --------------------- #&#xA;# Generate Output Below&#xA;if Print_File_Names:&#xA;    print(FileNames[i])&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="def setOutputTimesteps(algorithm):&#xA;    executive = algorithm.GetExecutive()&#xA;    outInfo = executive.GetOutputInformation(0)&#xA;    # Calculate list of timesteps here&#xA;    #np.asarray([get_time(file) for file in FileNames])&#xA;    xtime = range(len(FileNames))&#xA;    outInfo.Remove(executive.TIME_STEPS())&#xA;    for i in range(len(FileNames)):&#xA;        outInfo.Append(executive.TIME_STEPS(), xtime[i])&#xA;    # Remove and set time range info&#xA;    outInfo.Remove(executive.TIME_RANGE())&#xA;    outInfo.Append(executive.TIME_RANGE(), xtime[0])&#xA;    outInfo.Append(executive.TIME_RANGE(), xtime[-1])&#xA;&#xA;# --------------------- #&#xA;# Generate Output Below&#xA;setOutputTimesteps(self)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>

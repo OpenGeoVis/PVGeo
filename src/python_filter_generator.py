@@ -308,6 +308,46 @@ def getProxyGroup(info):
     else:
         return info["Group"]
 
+def getFileReaderXml(info):
+    if getNumberOfInputs(info) > 0:
+        return ''
+    else:
+        if "Extensions" not in info and "ReaderDescription" not in info: #info["FilterCategory"]
+            #raise Exception('Reader needs `Extensions` and `ReaderDescription` attributes.')
+            return ''
+        extensions = info.get('Extensions', '')
+        readerDescription = info.get('ReaderDescription', '')
+        return '''
+      <StringVectorProperty
+        name="FileNames"
+        initial_string="FileNames"
+        animateable="0"
+        number_of_elements="0"
+        command="AddParameter"
+        clean_command="ClearParameter"
+        repeat_command="1"
+        panel_visibility="advanced">
+        <FileListDomain name="files"/>
+            <Documentation>
+            The list of files to be read by the reader.
+            </Documentation>
+      </StringVectorProperty>
+
+      <DoubleVectorProperty
+        name="TimestepValues"
+        repeatable="1"
+        information_only="1">
+        <TimeStepsInformationHelper/>
+            <Documentation>
+            Available timestep values.
+            </Documentation>
+        </DoubleVectorProperty>
+        <Hints>
+            <ReaderFactory extensions="%s"
+                    file_description="%s" />
+        </Hints>
+        ''' % (extensions, readerDescription)
+
 
 def generatePythonFilter(info):
     e = escapeForXmlAttribute
@@ -324,6 +364,7 @@ def generatePythonFilter(info):
     scriptProperties = getScriptPropertiesXml(info)
     filterProperties = getFilterPropertiesXml(info)
     filterGroup = getFilterGroup(info)
+    fileReaderProperties = getFileReaderXml(info)
 
 
     outputXml = '''\
@@ -340,12 +381,13 @@ def generatePythonFilter(info):
 %s
 %s
 %s
+%s
     </SourceProxy>
  </ProxyGroup>
 </ServerManagerConfiguration>
       ''' % (proxyGroup, proxyName, proxyLabel, longHelp, shortHelp,
                 filterGroup, outputDataSetType, extraXml, inputPropertyXml,
-                filterProperties, scriptProperties)
+                fileReaderProperties, filterProperties, scriptProperties)
 
     return textwrap.dedent(outputXml)
 
