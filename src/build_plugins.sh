@@ -35,6 +35,16 @@ fi
 # Jump to this directory so we can execute relative scripts
 pushd "$(dirname "$0")"
 
+#------ WRAP EXAMPLES IN XML ------#
+printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Attempting to wrap EXAMPLES in XML..."
+for filename in ./example_*.py; do
+    filtername="${filename%.*}"
+    printf "${YELLOW}%s${NORMAL}\n" "   |--> $(basename "$filtername")"
+    printf "${RED}" # Change printout color to red to signify errors
+    python2 python_filter_generator.py $filename "../plugins/$(basename "$filtername").xml"
+done
+printf "${NORMAL}"
+
 #------ WRAP FILTERS IN XML ------#
 printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Attempting to wrap FILTERS in XML..."
 

@@ -1,15 +1,15 @@
-Name = 'TestFilter'                 # Name to be used for coding/macros
-Label = 'Test Filter'               # Label for the filter menu
-FilterCategory = 'Test Category'    # The filter/source menu category
+Name = 'ExamplePythonFilter'        # Name to be used for coding/macros
+Label = 'Example Python Filter'     # Label for the filter menu
+FilterCategory = 'CSM GP Filters'   # The filter/source menu category
 
 # A general overview of the plugin
-Help = 'Help for the Test Filter'
+Help = 'This is a simple example of a Python Programmable Filter'
 
-NumberOfInputs = 1                  # Specify zero for readers
+NumberOfInputs = 1                  # Specify as many as you would like
 InputDataType = 'vtkPolyData'       # Leave blank if input doesn't matter
 OutputDataType = 'vtkPolyData'      # Leave blank to preserve input data type
 
-# Any extra XML GUI components you might like: (reader extnesions, etc)
+# Any extra XML GUI components you might like:
 ExtraXml = ''
 
 # These are the parameters/properties of the plugin:
@@ -45,5 +45,7 @@ def RequestData():
 #- Information, spatial extent, ect
 def RequestInformation():
     from paraview import util
+    # This script is usually not necessary for filters
     # Here's an example of setting extents that might be necessary for plugin to function correctly
     #util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])
+    print('Have a great day!')

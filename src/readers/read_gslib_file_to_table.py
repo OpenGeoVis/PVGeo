@@ -10,7 +10,6 @@ ReaderDescription = 'GSLIB File Format'
 
 
 Properties = dict(
-    FileName='absolute path',
     Number_Ignore_Lines=0,
     Delimiter_Field=' ',
     Use_Tab_Delimiter=False
@@ -20,6 +19,42 @@ Properties = dict(
 def RequestData():
     import os
     from PVGPpy.read import gslib
+    import numpy as np
+
+    def GetUpdateTimestep(algorithm):
+        """Returns the requested time value, or None if not present"""
+        executive = algorithm.GetExecutive()
+        outInfo = executive.GetOutputInformation(0)
+        if outInfo.Has(executive.UPDATE_TIME_STEP()):
+            return outInfo.Get(executive.UPDATE_TIME_STEP())
+        else:
+            return None
+    # Get the current timestep
+    req_time = GetUpdateTimestep(self)
+    # Read the closest file
+    #np.asarray([get_time(file) for file in FileNames])
+    xtime = np.arange(len(FileNames), dtype=float)
+    i = np.argwhere(xtime == req_time)
+
+    # Generate Output
     pdo = self.GetOutput() # vtkTable
-    tbl, h = gslib(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)
-    print(os.path.basename(FileName) + ': ' + h)
+    tbl, h = gslib(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)
+    #print(os.path.basename(FileNames[i]) + ': ' + h)
+
+def RequestInformation(self):
+
+    def setOutputTimesteps(algorithm):
+        executive = algorithm.GetExecutive()
+        outInfo = executive.GetOutputInformation(0)
+        # Calculate list of timesteps here
+        #np.asarray([get_time(file) for file in FileNames])
+        xtime = range(len(FileNames))
+        outInfo.Remove(executive.TIME_STEPS())
+        for i in range(len(FileNames)):
+            outInfo.Append(executive.TIME_STEPS(), xtime[i])
+        # Remove and set time range info
+        outInfo.Remove(executive.TIME_RANGE())
+        outInfo.Append(executive.TIME_RANGE(), xtime[0])
+        outInfo.Append(executive.TIME_RANGE(), xtime[-1])
+
+    setOutputTimesteps(self)

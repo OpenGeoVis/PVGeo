@@ -26,6 +26,36 @@
 
 
       <StringVectorProperty
+        name="FileNames"
+        initial_string="FileNames"
+        animateable="0"
+        number_of_elements="0"
+        command="AddParameter"
+        clean_command="ClearParameter"
+        repeat_command="1"
+        panel_visibility="advanced">
+        <FileListDomain name="files"/>
+            <Documentation>
+            The list of files to be read by the reader.
+            </Documentation>
+      </StringVectorProperty>
+
+      <DoubleVectorProperty
+        name="TimestepValues"
+        repeatable="1"
+        information_only="1">
+        <TimeStepsInformationHelper/>
+            <Documentation>
+            Available timestep values.
+            </Documentation>
+        </DoubleVectorProperty>
+        <Hints>
+            <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
+                    file_description="GSLIB File Format" />
+        </Hints>
+
+
+      <StringVectorProperty
         panel_visibility="default"
         name="Delimiter_Field"
         label="Delimiter Field"
@@ -34,19 +64,6 @@
         animateable="1"
         default_values=" "
         number_of_elements="1">
-        <Documentation></Documentation>
-      </StringVectorProperty>
-
-      <StringVectorProperty
-        panel_visibility="default"
-        name="FileName"
-        label="FileName"
-        initial_string="FileName"
-        command="SetParameter"
-        animateable="1"
-        default_values="absolute path"
-        number_of_elements="1">
-        <FileListDomain name="files"/>
         <Documentation></Documentation>
       </StringVectorProperty>
 
@@ -79,7 +96,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import os&#xA;from PVGPpy.read import gslib&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslib(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)&#xA;print(os.path.basename(FileName) + ': ' + h)&#xA;"
+        default_values="import os&#xA;from PVGPpy.read import gslib&#xA;import numpy as np&#xA;&#xA;def GetUpdateTimestep(algorithm):&#xA;    &quot;&quot;&quot;Returns the requested time value, or None if not present&quot;&quot;&quot;&#xA;    executive = algorithm.GetExecutive()&#xA;    outInfo = executive.GetOutputInformation(0)&#xA;    if outInfo.Has(executive.UPDATE_TIME_STEP()):&#xA;        return outInfo.Get(executive.UPDATE_TIME_STEP())&#xA;    else:&#xA;        return None&#xA;# Get the current timestep&#xA;req_time = GetUpdateTimestep(self)&#xA;# Read the closest file&#xA;#np.asarray([get_time(file) for file in FileNames])&#xA;xtime = np.arange(len(FileNames), dtype=float)&#xA;i = np.argwhere(xtime == req_time)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslib(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -88,6 +105,20 @@
         the programmable source runs.</Documentation>
         </StringVectorProperty>
 
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="&#xA;def setOutputTimesteps(algorithm):&#xA;    executive = algorithm.GetExecutive()&#xA;    outInfo = executive.GetOutputInformation(0)&#xA;    # Calculate list of timesteps here&#xA;    #np.asarray([get_time(file) for file in FileNames])&#xA;    xtime = range(len(FileNames))&#xA;    outInfo.Remove(executive.TIME_STEPS())&#xA;    for i in range(len(FileNames)):&#xA;        outInfo.Append(executive.TIME_STEPS(), xtime[i])&#xA;    # Remove and set time range info&#xA;    outInfo.Remove(executive.TIME_RANGE())&#xA;    outInfo.Append(executive.TIME_RANGE(), xtime[0])&#xA;    outInfo.Append(executive.TIME_RANGE(), xtime[-1])&#xA;&#xA;setOutputTimesteps(self)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
 
     </SourceProxy>
  </ProxyGroup>

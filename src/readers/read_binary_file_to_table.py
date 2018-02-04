@@ -10,7 +10,6 @@ ReaderDescription = 'Binary Packed Floats or Doubles'
 
 
 Properties = dict(
-    FileName='absolute path',
     Data_Name='', # TODO: can I set the default dynamically?
     Double_Values=False
 )
@@ -18,5 +17,41 @@ Properties = dict(
 
 def RequestData():
     from PVGPpy.read import packedBinaries
+    import numpy as np
+
+    def GetUpdateTimestep(algorithm):
+        """Returns the requested time value, or None if not present"""
+        executive = algorithm.GetExecutive()
+        outInfo = executive.GetOutputInformation(0)
+        if outInfo.Has(executive.UPDATE_TIME_STEP()):
+            return outInfo.Get(executive.UPDATE_TIME_STEP())
+        else:
+            return None
+    # Get the current timestep
+    req_time = GetUpdateTimestep(self)
+    # Read the closest file
+    #np.asarray([get_time(file) for file in FileNames])
+    xtime = np.arange(len(FileNames), dtype=float)
+    i = np.argwhere(xtime == req_time)
+
+    # Generate Output
     pdo = self.GetOutput()
-    packedBinaries(FileName, dblVals=Double_Values, dataNm=Data_Name, pdo=pdo)
+    packedBinaries(FileNames[i], dblVals=Double_Values, dataNm=Data_Name, pdo=pdo)
+
+
+def RequestInformation(self):
+    def setOutputTimesteps(algorithm):
+        executive = algorithm.GetExecutive()
+        outInfo = executive.GetOutputInformation(0)
+        # Calculate list of timesteps here
+        #np.asarray([get_time(file) for file in FileNames])
+        xtime = range(len(FileNames))
+        outInfo.Remove(executive.TIME_STEPS())
+        for i in range(len(FileNames)):
+            outInfo.Append(executive.TIME_STEPS(), xtime[i])
+        # Remove and set time range info
+        outInfo.Remove(executive.TIME_RANGE())
+        outInfo.Append(executive.TIME_RANGE(), xtime[0])
+        outInfo.Append(executive.TIME_RANGE(), xtime[-1])
+
+    setOutputTimesteps(self)
