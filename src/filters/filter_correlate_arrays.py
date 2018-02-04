@@ -4,65 +4,10 @@ FilterCategory = 'CSM GP Filters'
 Help = ''
 
 NumberOfInputs = 1
+NumberOfInputArrayChoices = 2
+
 # Works on any data type so no need to specify input/ouptut
-ExtraXml = '''\
-<StringVectorProperty
-    name="SelectInputScalars1"
-    label="Array 1"
-    command="SetInputArrayToProcess"
-    default_values="0 NULL"
-    number_of_elements="5"
-    element_types="0 0 0 0 2"
-    animateable="0">
-    <ArrayListDomain
-        name="array_list"
-        attribute_type="Scalars"
-        input_domain_name="inputs_array">
-        <RequiredProperties>
-            <Property
-                name="Input"
-                function="Input" />
-        </RequiredProperties>
-    </ArrayListDomain>
-    <FieldDataDomain
-        name="field_list">
-        <RequiredProperties>
-            <Property
-                name="Input"
-                function="Input" />
-        </RequiredProperties>
-    </FieldDataDomain>
-</StringVectorProperty>
-
-<StringVectorProperty
-    name="SelectInputScalars2"
-    label="Array 2"
-    command="SetInputArrayToProcess"
-    default_values="1 NULL"
-    number_of_elements="5"
-    element_types="0 0 0 0 2"
-    animateable="0">
-    <ArrayListDomain
-        name="array_list"
-        attribute_type="Scalars"
-        input_domain_name="inputs_array">
-        <RequiredProperties>
-            <Property
-                name="Input"
-                function="Input" />
-        </RequiredProperties>
-    </ArrayListDomain>
-    <FieldDataDomain
-        name="field_list">
-        <RequiredProperties>
-            <Property
-                name="Input"
-                function="Input" />
-        </RequiredProperties>
-    </FieldDataDomain>
-</StringVectorProperty>
-
-'''
+ExtraXml = ''
 
 
 Properties = dict(

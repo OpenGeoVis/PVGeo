@@ -274,6 +274,56 @@ def getInputPropertyXml(info):
 
     return inputPropertyXml
 
+def getInputArraysXML(info):
+    def _getInputArrayXML(idx, label):
+        return'''
+      <StringVectorProperty
+        name="SelectInputScalars%d"
+        label="%s"
+        command="SetInputArrayToProcess"
+        default_values="%d NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>''' % (idx, label, idx)
+
+    # Get details
+    if "NumberOfInputArrayChoices" not in info:
+        return ''
+    num = info.get("NumberOfInputArrayChoices")
+    labels = []
+    if "InputArrayLabels" not in info:
+        labels = ['Array %d' % (i+1) for i in range(num)]
+    else:
+        labels = info.get("InputArrayLabels")
+        if len(labels) < num:
+            toadd = num - len(labels)
+            for i in range(toadd):
+                labels.append('Array %d' % (i + len(labels) + 1))
+    xml = ''
+    for i in range(num):
+        xml += _getInputArrayXML(i, labels[i])
+        xml += '\n\n'
+    return xml
+
 
 def getOutputDataSetTypeXml(info):
 
@@ -383,6 +433,7 @@ def generatePythonFilter(info):
     filterProperties = getFilterPropertiesXml(info)
     filterGroup = getFilterGroup(info)
     fileReaderProperties = getFileReaderXml(info)
+    inputArrayDropDowns = getInputArraysXML(info)
 
 
     outputXml = '''\
@@ -400,12 +451,14 @@ def generatePythonFilter(info):
 %s
 %s
 %s
+%s
     </SourceProxy>
  </ProxyGroup>
 </ServerManagerConfiguration>
       ''' % (proxyGroup, proxyName, proxyLabel, longHelp, shortHelp,
                 filterGroup, outputDataSetType, extraXml, inputPropertyXml,
-                fileReaderProperties, filterProperties, scriptProperties)
+                inputArrayDropDowns, fileReaderProperties, filterProperties,
+                scriptProperties)
 
     return textwrap.dedent(outputXml)
 

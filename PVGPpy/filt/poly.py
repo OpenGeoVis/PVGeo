@@ -79,7 +79,7 @@ def correlateArrays(pdi, info1, info2, multiplyer=1.0, newName='', pdo=None):
     c.SetName(newName)
     # Build output
     pdo.DeepCopy(pdi)
-    pdo = _addArray(pdo, field, c)
+    pdo = _addArray(pdo, field1, c)
     return pdo
 
 #---- Normalizations ----#
