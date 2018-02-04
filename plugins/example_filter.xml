@@ -9,9 +9,9 @@
         <ShowInMenu category="CSM GP Filters" />
       </Hints>
 
-      <!-- Output data type: "vtkPolyData" -->
+      <!-- Output data type: "Same as input" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="0"
+                         default_values="8"
                          name="OutputDataSetType"
                          number_of_elements="1"
                          panel_visibility="never">
@@ -28,10 +28,36 @@
             <Group name="filters"/>
           </ProxyGroupDomain>
 
-          <DataTypeDomain name="input_type">
-            <DataType value="vtkPolyData"/>
-          </DataTypeDomain>
       </InputProperty>
+
+      <StringVectorProperty
+        name="SelectInputScalars0"
+        label="Array"
+        command="SetInputArrayToProcess"
+        default_values="0 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+
 
 
 
@@ -112,7 +138,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;pdi = self.GetInput() # VTK Data Type&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;&#xA;if test_bool:&#xA;    print(test_double_vector)&#xA;else:&#xA;    print(test_string)&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;pdi = self.GetInput() # VTK Data Type&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Get input array info (selection made in drop down menu)&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;&#xA;if test_bool:&#xA;    print(name)&#xA;else:&#xA;    print(field)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

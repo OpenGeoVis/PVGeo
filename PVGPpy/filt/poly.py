@@ -51,18 +51,12 @@ def _corr(arr1, arr2):
     return np.correlate(arr1, arr2, mode='same')
 
 
-def correlateArrays(pdi, info1, info2, multiplyer=1.0, newName='', pdo=None):
-    # TODO make arguments pass names not info
+def correlateArrays(pdi, (name1, field1), (name2, field2), multiplyer=1.0, newName='', pdo=None):
+    """Make sure to pass array names and integer associated fields.
+    Use helpers to get these properties."""
     if pdo is None:
         # TODO: test this
         pdo = pdi.DeepCopy()
-
-    # Get input array names
-    name1 = info1.Get(vtk.vtkDataObject.FIELD_NAME())
-    name2 = info2.Get(vtk.vtkDataObject.FIELD_NAME())
-    # Get field associations
-    field1 = info1.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
-    field2 = info2.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
     # Get the input arrays
     wpdi = dsa.WrapDataObject(pdi)
     arr1 = _getArray(wpdi, field1, name1)
@@ -98,7 +92,7 @@ def _logNatNorm(arr):
 
 
 # Here is the public function to call for the normalizations
-def normalizeArray(pdi, info, norm, multiplyer=1.0, newName='', pdo=None, abs=False):
+def normalizeArray(pdi, (name, field), norm, multiplyer=1.0, newName='', pdo=None, abs=False):
     """
     TODO: Descrption
     Perform normalize on a data array for any given VTK data object.
@@ -115,10 +109,6 @@ def normalizeArray(pdi, info, norm, multiplyer=1.0, newName='', pdo=None, abs=Fa
         # TODO: test this
         pdo = pdi.DeepCopy()
 
-    # Get input array name
-    name = info.Get(vtk.vtkDataObject.FIELD_NAME())
-    # Get field assocaition
-    field = info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
     # Get inout array
     wpdi = dsa.WrapDataObject(pdi)
     arr = _getArray(wpdi, field, name)

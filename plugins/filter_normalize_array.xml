@@ -133,7 +133,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filt import normalizeArray&#xA;&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;&#xA;info = self.GetInputArrayInformation(0)&#xA;&#xA;normalizeArray(pdi, info, Normalization, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value)&#xA;"
+        default_values="from PVGPpy.filt import normalizeArray&#xA;import PVGPpy.helpers as inputhelp&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;# Perfrom normalization&#xA;normalizeArray(pdi, (name,field), Normalization, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

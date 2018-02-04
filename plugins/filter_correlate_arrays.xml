@@ -2,8 +2,8 @@
   <ProxyGroup name="filters">
     <SourceProxy name="CorrelateArrays" class="vtkPythonProgrammableFilter" label="Correlate Arrays">
       <Documentation
-        long_help=""
-        short_help="">
+        long_help="Use `np.correlate()` on `mode='same'` on two selected arrays from one input."
+        short_help="Use `np.correlate()` on `mode='same'` on two selected arrays from one input.">
       </Documentation>
       <Hints>
         <ShowInMenu category="CSM GP Filters" />
@@ -121,7 +121,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filt import correlateArrays&#xA;&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;&#xA;info1 = self.GetInputArrayInformation(0)&#xA;info2 = self.GetInputArrayInformation(1)&#xA;&#xA;correlateArrays(pdi, info1, info2, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.filt import correlateArrays&#xA;import PVGPpy.helpers as inputhelp&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;field0 = inputhelp.getSelectedArrayField(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 1)&#xA;field1 = inputhelp.getSelectedArrayField(self, 1)&#xA;# Pass array names and associations on to process&#xA;correlateArrays(pdi, (name0,field0), (name1,field1), multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

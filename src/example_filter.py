@@ -10,9 +10,10 @@ FilterCategory = 'CSM GP Filters'   # The filter/source menu category
 Help = 'This is a simple example of a Python Programmable Filter'
 
 NumberOfInputs = 1                  # Specify as many as you would like
-InputDataType = 'vtkPolyData'       # Leave blank if input doesn't matter
-OutputDataType = 'vtkPolyData'      # Leave blank to preserve input data type
-
+InputDataType = ''                  # Leave blank if input doesn't matter
+OutputDataType = ''                 # Leave blank to preserve input data type
+NumberOfInputArrayChoices = 1       # Number of Input array drop down choices
+InputArrayLabels = ['Array']        # Labels for the array drop down choices
 # Any extra XML GUI components you might like:
 ExtraXml = ''
 
@@ -37,13 +38,17 @@ PropertiesHelp = dict(
 #- Data processing
 def RequestData():
     from vtk.util import numpy_support as nps
+    import PVGPpy.helpers as inputhelp
     pdi = self.GetInput() # VTK Data Type
     pdo = self.GetOutput() # VTK Data Type
+    # Get input array info (selection made in drop down menu)
+    name = inputhelp.getSelectedArrayName(self, 0)
+    field = inputhelp.getSelectedArrayField(self, 0)
 
     if test_bool:
-        print(test_double_vector)
+        print(name)
     else:
-        print(test_string)
+        print(field)
 
 # Use if you need to set extents and what not
 #- Information, spatial extent, ect

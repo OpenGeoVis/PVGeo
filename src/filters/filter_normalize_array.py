@@ -43,10 +43,13 @@ PropertiesHelp = dict(
 
 def RequestData():
     from PVGPpy.filt import normalizeArray
-
+    import PVGPpy.helpers as inputhelp
+    # Get input/output of Proxy
     pdi = self.GetInput()
     pdo = self.GetOutput()
-
-    info = self.GetInputArrayInformation(0)
-
-    normalizeArray(pdi, info, Normalization, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value)
+    # Grab input arrays to process from drop down menus
+    # Simply grab the name and field association
+    name = inputhelp.getSelectedArrayName(self, 0)
+    field = inputhelp.getSelectedArrayField(self, 0)
+    # Perfrom normalization
+    normalizeArray(pdi, (name,field), Normalization, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value)
