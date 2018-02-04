@@ -38,6 +38,9 @@ def _calculateTimeRange(num, dt=1.0):
 # Absolutely necessary functions for reading file series
 
 def getTimeStepFileIndex(algorithm, files, dt=1.0):
+    if len(files) < 2:
+        # Only one file...
+        return 0
     # Get the current timestep
     req_time = _getUpdateTimestep(algorithm)
     # Read the closest file
@@ -46,6 +49,9 @@ def getTimeStepFileIndex(algorithm, files, dt=1.0):
 
 
 def setOutputTimesteps(algorithm, files, dt=1.0):
+    if len(files) < 2:
+        # Only one file so do not update time steps
+        return algorithm
     executive = algorithm.GetExecutive()
     outInfo = executive.GetOutputInformation(0)
     # Calculate list of timesteps here
