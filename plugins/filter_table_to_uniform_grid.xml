@@ -6,7 +6,7 @@
         short_help="This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a n1 by n2 by n3 vtkImageData structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (d1=z, d2=y, d3=x). When using SEPlib, specify n1 as the number of elements in the Z-direction, n2 as the number of elements in the X-direction, and n3 as the number of elements in the Y-direction (and so on for other parameters).">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM GP Filters" />
+        <ShowInMenu category="CSM Geophysics Filters" />
       </Hints>
 
       <!-- Output data type: "vtkImageData" -->
@@ -26,8 +26,8 @@
     initial_string="test_drop_down_menu"
     default_values="0">
     <EnumerationDomain name="enum">
-            <Entry value="0" text="C-style: Row-major order"/>
-            <Entry value="1" text="Fortran-style: column-major order"/>
+            <Entry value="0" text="Fortran-style: column-major order"/>
+            <Entry value="1" text="C-style: Row-major order"/>
     </EnumerationDomain>
     <Documentation>
         This is the type of memory ordering to use.
@@ -51,38 +51,25 @@
 
       <IntVectorProperty
         panel_visibility="default"
-        name="Flip_X"
-        label="Flip X"
-        initial_string="Flip_X"
+        name="SEPlib"
+        label="SEPlib"
+        initial_string="SEPlib"
         command="SetParameter"
         animateable="1"
-        default_values="0"
+        default_values="1"
         number_of_elements="1">
         <BooleanDomain name="bool" />
-        <Documentation></Documentation>
+        <Documentation>Use the Stanford Exploration Project's axial conventions (d1=z, d2=x, d3=y). Parameters would be entered [z,x,y].</Documentation>
       </IntVectorProperty>
 
       <IntVectorProperty
         panel_visibility="default"
-        name="Flip_Y"
-        label="Flip Y"
-        initial_string="Flip_Y"
+        name="Transpose_XY"
+        label="Transpose XY"
+        initial_string="Transpose_XY"
         command="SetParameter"
         animateable="1"
-        default_values="0"
-        number_of_elements="1">
-        <BooleanDomain name="bool" />
-        <Documentation></Documentation>
-      </IntVectorProperty>
-
-      <IntVectorProperty
-        panel_visibility="default"
-        name="Flip_Z"
-        label="Flip Z"
-        initial_string="Flip_Z"
-        command="SetParameter"
-        animateable="1"
-        default_values="0"
+        default_values="1"
         number_of_elements="1">
         <BooleanDomain name="bool" />
         <Documentation></Documentation>
@@ -140,7 +127,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filt import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;if order == 0:&#xA;    mem = 'C'&#xA;elif order == 1:&#xA;    mem = 'F'&#xA;else:&#xA;    mem = 'C'&#xA;&#xA;flips = []&#xA;if Flip_X: flips.append(0)&#xA;if Flip_Y: flips.append(1)&#xA;if Flip_Z: flips.append(2)&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;tableToGrid(pdi, extent, spacing, origin, order=mem, flip=flips, pdo=image)&#xA;"
+        default_values="from PVGPpy.filt import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;if order == 0:&#xA;    mem = 'F'&#xA;elif order == 1:&#xA;    mem = 'C'&#xA;else:&#xA;    mem = 'C'&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem, swapXY=Transpose_XY, pdo=image)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -154,7 +141,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;# Setup the ImageData&#xA;nx,ny,nz = extent[0],extent[1],extent[2]&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.filt import refoldidx&#xA;# Setup the ImageData&#xA;idx = refoldidx(SEPlib=SEPlib, swapXY=Transpose_XY)&#xA;nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
