@@ -9,7 +9,7 @@
         <ShowInMenu category="CSM GP Readers" />
       </Hints>
       <Hints>
-        <ReaderFactory extensions="H@ bin dat txt text"
+        <ReaderFactory extensions=""
           file_description="All Files: Example Python Reader" />
       </Hints>
 
@@ -50,7 +50,7 @@
             </Documentation>
         </DoubleVectorProperty>
         <Hints>
-            <ReaderFactory extensions="H@ bin dat txt text"
+            <ReaderFactory extensions=""
                     file_description="All Files: Example Python Reader" />
         </Hints>
 

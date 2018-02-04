@@ -8,7 +8,7 @@ Name = 'ExamplePythonReader'        # Name to be used for coding/macros
 Label = 'Example Python Reader'     # Label for the reader in the menu
 FilterCategory = 'CSM GP Readers'   # The source menu category
 
-Extensions = 'H@ bin dat txt text'
+Extensions = ''
 ReaderDescription = 'All Files: Example Python Reader'
 
 # A general overview of the plugin
