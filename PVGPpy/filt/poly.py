@@ -34,7 +34,7 @@ def normalizeArray(pdi, info, norm, multiplyer=1.0, newName='', pdo=None):
 
     """
     if pdo is None:
-        pdo = vtk.vtkImageData()
+        pdo = pdi.DeepCopy()
 
     # Get input array name
     name = info.Get(vtk.vtkDataObject.FIELD_NAME())
