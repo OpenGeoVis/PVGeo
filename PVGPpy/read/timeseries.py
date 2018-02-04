@@ -10,27 +10,9 @@ def _getUpdateTimestep(algorithm):
     else:
         return None
 
-# --------------------------------- #
 
 def _calculateTimeRange(num, dt=1.0):
-    """
-    Description
-    -----------
-
-    Parameters
-    ----------
-    `num` : int
-
-    - The number of steps in the time range
-
-    `dt` : float, optional
-
-    - The discrete value in seconds for the time step
-
-    Return
-    ------
-
-    """
+    """Discretizes time range accoridng to step size `dt` in seconds"""
     return np.arange(0,num*dt,dt, dtype=float)
 
 
@@ -38,6 +20,30 @@ def _calculateTimeRange(num, dt=1.0):
 # Absolutely necessary functions for reading file series
 
 def getTimeStepFileIndex(algorithm, files, dt=1.0):
+    """
+    Description
+    -----------
+
+    Parameters
+    ----------
+    `algorithm` : vtkDataObject (Proxy)
+
+    - The data object on the pipeline (pass `self` from Programmable Sources)
+
+    `files` : list
+
+    - All the files. (Pass files incase we implement a method to read time value from file)
+
+    `dt` : float, optional
+
+    - The discrete value in seconds for the time step
+
+    Return
+    ------
+    int
+
+    - Returns the index for the file to be read in `files`
+    """
     if len(files) < 2:
         # Only one file...
         return 0
@@ -49,6 +55,28 @@ def getTimeStepFileIndex(algorithm, files, dt=1.0):
 
 
 def setOutputTimesteps(algorithm, files, dt=1.0):
+    """
+    Description
+    -----------
+
+    Parameters
+    ----------
+    `algorithm` : vtkDataObject (Proxy)
+
+    - The data object on the pipeline (pass `self` from Programmable Sources)
+
+    `files` : list
+
+    - All the files. (Pass files incase we implement a method to read time value from file)
+
+    `dt` : float, optional
+
+    - The discrete value in seconds for the time step
+
+    Return
+    ------
+    - Returns the argument `algorithm`
+    """
     if len(files) < 2:
         # Only one file so do not update time steps
         return algorithm
