@@ -31,7 +31,7 @@ def _calculateTimeRange(num, dt=1.0):
     ------
 
     """
-    return np.arange(0,num*dt+dt,dt, dtype=float)
+    return np.arange(0,num*dt,dt, dtype=float)
 
 
 # --------------------------------- #
