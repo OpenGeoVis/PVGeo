@@ -67,7 +67,7 @@ ExtraXml = '''\
 
 Properties = dict(
     Multiplyer=1.0,
-    New_Array_Name='',
+    New_Array_Name='Correlated',
 )
 
 PropertiesHelp = dict(

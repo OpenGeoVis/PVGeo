@@ -54,8 +54,9 @@ ExtraXml = '''\
 
 Properties = dict(
     Multiplyer=1.0,
-    New_Array_Name='',
+    New_Array_Name='Normalized',
     Normalization=0,
+    Absolute_Value=False
 )
 
 PropertiesHelp = dict(
@@ -72,4 +73,4 @@ def RequestData():
 
     info = self.GetInputArrayInformation(0)
 
-    normalizeArray(pdi, info, Normalization, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo)
+    normalizeArray(pdi, info, Normalization, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value)

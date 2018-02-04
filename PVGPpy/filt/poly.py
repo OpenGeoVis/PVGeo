@@ -3,7 +3,48 @@ from vtk.util import numpy_support as nps
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
+# NOTE: internal import - from scipy.spatial import cKDTree
 
+#---- Helpers ----#
+def _getArray(wpdi, field, name):
+    """
+    Grabs an array from vtkDataObject given its name and field association
+    """
+    # Point Data
+    if field == 0:
+        arr = wpdi.PointData[name]
+    # Cell Data:
+    elif field == 1:
+        arr = wpdi.CellData[name]
+    # Field Data:
+    elif field == 2:
+        arr = wpdi.FieldData[name]
+    # Row Data:
+    elif field == 6:
+        arr = wpdi.RowData[name]
+    else:
+        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+    return arr
+
+def _addArray(pdo, field, vtkArray):
+    """
+    Adds an array to a vtkDataObject given its field association
+    """
+    # Point Data
+    if field == 0:
+        pdo.GetPointData().AddArray(vtkArray)
+    # Cell Data:
+    elif field == 1:
+        pdo.GetCellData().AddArray(vtkArray)
+    # Field Data:
+    elif field == 2:
+        pdo.GetFieldData().AddArray(vtkArray)
+    # Row Data:
+    elif field == 6:
+        pdo.GetRowData().AddArray(vtkArray)
+    else:
+        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+    return pdo
 
 #---- Correlations ----#
 def _corr(arr1, arr2):
@@ -11,63 +52,34 @@ def _corr(arr1, arr2):
 
 
 def correlateArrays(pdi, info1, info2, multiplyer=1.0, newName='', pdo=None):
+    # TODO make arguments pass names not info
     if pdo is None:
+        # TODO: test this
         pdo = pdi.DeepCopy()
 
-    # Get input array name
+    # Get input array names
     name1 = info1.Get(vtk.vtkDataObject.FIELD_NAME())
     name2 = info2.Get(vtk.vtkDataObject.FIELD_NAME())
-    # Assume same field
-    field = info1.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
-
+    # Get field associations
+    field1 = info1.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
+    field2 = info2.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
+    # Get the input arrays
     wpdi = dsa.WrapDataObject(pdi)
-
-    # Point Data
-    if field == 0:
-        arr1 = wpdi.PointData[name1]
-        arr2 = wpdi.PointData[name2]
-    # Cell Data:
-    elif field == 1:
-        arr1 = wpdi.CellData[name1]
-        arr2 = wpdi.CellData[name2]
-    # Field Data:
-    elif field == 2:
-        arr1 = wpdi.FieldData[name1]
-        arr2 = wpdi.FieldData[name2]
-    # Row Data:
-    elif field == 6:
-        arr1 = wpdi.RowData[name1]
-        arr2 = wpdi.RowData[name2]
-
+    arr1 = _getArray(wpdi, field1, name1)
+    arr2 = _getArray(wpdi, field2, name2)
+    # Perform correlations
     carr = _corr(arr1, arr2)
-
     # Apply the multiplyer
     carr *= multiplyer
-
+    # Convert to a VTK array
     c = nps.numpy_to_vtk(num_array=carr,deep=True)
-
-    # If no name given for data by user, use the basename of the file
+    # If no name given for data by user, use operator name
     if newName == '':
         newName = 'Correlated'
     c.SetName(newName)
-
+    # Build output
     pdo.DeepCopy(pdi)
-
-    # Point Data
-    if field == 0:
-        pdo.GetPointData().AddArray(c)
-    # Cell Data:
-    elif field == 1:
-        pdo.GetCellData().AddArray(c)
-    # Field Data:
-    elif field == 2:
-        pdo.GetFieldData().AddArray(c)
-    # Row Data:
-    elif field == 6:
-        pdo.GetRowData().AddArray(c)
-    else:
-        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
-
+    pdo = _addArray(pdo, field, c)
     return pdo
 
 #---- Normalizations ----#
@@ -86,10 +98,11 @@ def _logNatNorm(arr):
 
 
 # Here is the public function to call for the normalizations
-def normalizeArray(pdi, info, norm, multiplyer=1.0, newName='', pdo=None):
+def normalizeArray(pdi, info, norm, multiplyer=1.0, newName='', pdo=None, abs=False):
     """
     TODO: Descrption
     Perform normalize on a data array for any given VTK data object.
+    `abs` will take the absolute value before the normalization
 
     Normalization Types:
         0 -> Feature Scale
@@ -99,30 +112,21 @@ def normalizeArray(pdi, info, norm, multiplyer=1.0, newName='', pdo=None):
 
     """
     if pdo is None:
+        # TODO: test this
         pdo = pdi.DeepCopy()
 
     # Get input array name
     name = info.Get(vtk.vtkDataObject.FIELD_NAME())
+    # Get field assocaition
     field = info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
-
+    # Get inout array
     wpdi = dsa.WrapDataObject(pdi)
-
-    # Point Data
-    if field == 0:
-        arr = wpdi.PointData[name]
-    # Cell Data:
-    elif field == 1:
-        arr = wpdi.CellData[name]
-    # Field Data:
-    elif field == 2:
-        arr = wpdi.FieldData[name]
-    # Row Data:
-    elif field == 6:
-        arr = wpdi.RowData[name]
-
+    arr = _getArray(wpdi, field, name)
     arr = np.array(arr)
-
-
+    # Take absolute value?
+    if abs:
+        arr = np.abs(arr)
+    # Perform normalization scheme
     # Feature Scale
     if norm == 0:
         arr = _featureScaleNorm(arr)
@@ -138,31 +142,15 @@ def normalizeArray(pdi, info, norm, multiplyer=1.0, newName='', pdo=None):
 
     # Apply the multiplyer
     arr *= multiplyer
-
+    # Convert to VTK array
     c = nps.numpy_to_vtk(num_array=arr,deep=True)
-
-    # If no name given for data by user, use the basename of the file
-    if newName == '':
+    # If no name given for data by user, use operator name
+    if newName == '' or newName == 'Normalized':
         newName = 'Normalized ' + name
     c.SetName(newName)
-
+    # Build output
     pdo.DeepCopy(pdi)
-
-    # Point Data
-    if field == 0:
-        pdo.GetPointData().AddArray(c)
-    # Cell Data:
-    elif field == 1:
-        pdo.GetCellData().AddArray(c)
-    # Field Data:
-    elif field == 2:
-        pdo.GetFieldData().AddArray(c)
-    # Row Data:
-    elif field == 6:
-        pdo.GetRowData().AddArray(c)
-    else:
-        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
-
+    pdo = _addArray(pdo, field, c)
     return pdo
 
 
@@ -176,7 +164,7 @@ def connectCells(pdi, cellType=4, nrNbr=True, pdo=None, logTime=False):
     <Entry value="3" text="Line"/>
     """
     if pdo is None:
-        pdo = vtk.vtkImageData()
+        pdo = vtk.vtkPolyData()
 
     if logTime:
         startTime = datetime.now()
@@ -232,7 +220,7 @@ def _polyLineToTube(pdi, pdo, radius=10.0, numSides=20):
     Takes points from a vtkPolyData with associated poly lines in cell data and builds a polygonal tube around that line with some specified radius and number of sides.
     """
     if pdo is None:
-        pdo = vtk.vtkImageData()
+        pdo = vtk.vtkPolyData()
         pdo.DeepCopy(pdi)
 
     # Make a tube from the PolyData line:
@@ -250,7 +238,7 @@ def pointsToTube(pdi, radius=10.0, numSides=20, nrNbr=False, pdo=None, logTime=F
     TODO: Descrption
     """
     if pdo is None:
-        pdo = vtk.vtkImageData()
+        pdo = vtk.vtkPolyData()
 
     numPoints = pdi.GetNumberOfPoints()
 

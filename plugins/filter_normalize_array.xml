@@ -77,6 +77,19 @@
       </InputProperty>
 
 
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Absolute_Value"
+        label="Absolute Value"
+        initial_string="Absolute_Value"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <DoubleVectorProperty
         panel_visibility="default"
         name="Multiplyer"
@@ -117,7 +130,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filt import normalizeArray&#xA;&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;&#xA;info = self.GetInputArrayInformation(0)&#xA;&#xA;normalizeArray(pdi, info, Normalization, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.filt import normalizeArray&#xA;&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;&#xA;info = self.GetInputArrayInformation(0)&#xA;&#xA;normalizeArray(pdi, info, Normalization, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
