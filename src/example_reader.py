@@ -1,8 +1,7 @@
 """
 Example python file reader demonstrating some of the features available for
 python programmable file readers.
-This file does not actually provide any output, but is just here to show the options
-available when using python_filter_generator.
+This file reader simply lists the file name at the requested time step
 Credit for implementing time series goes to: Daan van Vugt <daanvanvugt@gmail.com>
 """
 Name = 'ExamplePythonReader'        # Name to be used for coding/macros
