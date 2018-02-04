@@ -10,22 +10,32 @@ ReaderDescription = 'SGeMS Grid File Format'
 
 
 Properties = dict(
-    FileName='absolute path',
     Delimiter_Field=' ',
     Use_tab_delimiter=False,
-    # TODO: SEPLIB
+    Time_Step=1.0
+)
+
+PropertiesHelp = dict(
+    Use_Tab_Delimiter='A boolean to override the Delimiter_Field and use Tab delimiter.',
+    Time_Step='An advanced property for the time step in seconds.'
 )
 
 
 def RequestData():
-    from PVGPpy.read import sgemsGrid
+    from PVGPpy.read import sgemsGrid, getTimeStepFileIndex
+
+    # This finds the index for the FileNames for the requested timestep
+    i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
+
+    # Generate Output
     pdo = self.GetOutput() # vtkTable
-    sgemsGrid(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter, pdo=pdo)
+    sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, pdo=pdo)
 
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.read import sgemsExtent
-    ext = sgemsExtent(FileName, deli=Delimiter_Field, useTab=Use_tab_delimiter)
-    # ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:
+    from PVGPpy.read import sgemsExtent, setOutputTimesteps
+    # This is necessary to set time steps
+    setOutputTimesteps(self, FileNames, dt=Time_Step)
+    ext = sgemsExtent(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter)
     util.SetOutputWholeExtent(self, ext)

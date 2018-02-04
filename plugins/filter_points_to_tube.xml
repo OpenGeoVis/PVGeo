@@ -6,7 +6,7 @@
         short_help="Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM Geophysics Filters" />
+        <ShowInMenu category="CSM GP Filters" />
       </Hints>
 
       <!-- Output data type: "vtkPolyData" -->
@@ -32,6 +32,8 @@
             <DataType value="vtkPolyData"/>
           </DataTypeDomain>
       </InputProperty>
+
+
 
       <IntVectorProperty
         panel_visibility="default"

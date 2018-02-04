@@ -14,6 +14,7 @@ def _unpack(arr, extent, order='C'):
     if order == 'C':
         arr = np.reshape(arr, (n1,n2,n3))
         arr = np.swapaxes(arr,0,2)
+        extent = np.shape(arr)
     elif order == 'F':
         # effectively doing nothing
         #arr = np.reshape(arr, (n3,n2,n1))
@@ -23,21 +24,28 @@ def _unpack(arr, extent, order='C'):
 
 def _rearangeSEPlib(arr, extent):
     """
-    This is a helper method to swap axes when using SEPlib axial conventions.
+    This is a helper method to swap axes   when using SEPlib axial conventions.
     """
     n1,n2,n3 = extent[0],extent[1],extent[2]
     arr = np.reshape(arr, (n3,n2,n1))
     arr = np.swapaxes(arr,0,2)
     return arr.flatten(), (n1,n2,n3)
 
-def _transposeXY(arr, extent):
+def _transposeXY(arr, extent, SEPlib=False):
     """
     Transposes X and Y axes. Needed by Whitney's research group for PoroTomo.
     """
     n1,n2,n3 = extent[0],extent[1],extent[2]
     arr = np.reshape(arr, (n1,n2,n3))
-    arr = np.swapaxes(arr,1,2)
-    return arr.flatten(), (n1,n3,n2)
+    if SEPlib:
+        arr = np.swapaxes(arr,1,2)
+        ext = (n1,n3,n2)
+    else:
+        print('bef: ', np.shape(arr))
+        arr = np.swapaxes(arr,0,1)
+        print('aft: ', np.shape(arr))
+        ext = np.shape(arr)
+    return arr.flatten(), ext
 
 
 def _refold(arr, extent, SEPlib=True, order='F', swapXY=False):
@@ -50,7 +58,7 @@ def _refold(arr, extent, SEPlib=True, order='F', swapXY=False):
     if SEPlib:
         arr, extent = _rearangeSEPlib(arr, extent)
     if swapXY:
-        arr, extent = _transposeXY(arr, extent)
+        arr, extent = _transposeXY(arr, extent, SEPlib=SEPlib)
     return arr, extent
 
 def refoldidx(SEPlib=True, swapXY=False):
@@ -102,6 +110,7 @@ def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), SEPlib=True, order
         c.SetName(name)
         #pdo.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
         pdo.GetPointData().AddArray(c)
+        scal = pdo.GetPointData().GetArray(i)
 
     return pdo
 

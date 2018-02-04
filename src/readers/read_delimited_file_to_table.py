@@ -10,14 +10,29 @@ ReaderDescription = 'CSM GP Delimited Text File'
 
 
 Properties = dict(
-    FileName='absolute_path',
     Number_Ignore_Lines=0,
     Has_Titles=True,
     Delimiter_Field=' ',
-    Use_Tab_Delimiter=False
+    Use_Tab_Delimiter=False,
+    Time_Step=1.0
+)
+
+PropertiesHelp = dict(
+    Use_Tab_Delimiter='A boolean to override the Delimiter_Field and use Tab delimiter.',
+    Time_Step='An advanced property for the time step in seconds.'
 )
 
 def RequestData():
-    from PVGPpy.read import delimitedText
+    from PVGPpy.read import delimitedText, getTimeStepFileIndex
+
+    # This finds the index for the FileNames for the requested timestep
+    i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
+
+    # Generate Output
     pdo = self.GetOutput()
-    delimitedText(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines, pdo=pdo)
+    delimitedText(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines, pdo=pdo)
+
+def RequestInformation(self):
+    from PVGPpy.read import setOutputTimesteps
+    # This is necessary to set time steps
+    setOutputTimesteps(self, FileNames, dt=Time_Step)

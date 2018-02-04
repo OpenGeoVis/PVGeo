@@ -10,13 +10,29 @@ ReaderDescription = 'Binary Packed Floats or Doubles'
 
 
 Properties = dict(
-    FileName='absolute path',
-    Data_Name='', # TODO: can I set the default dynamically?
-    Double_Values=False
+    Data_Name='values',
+    Double_Values=False,
+    Time_Step=1.0
+)
+
+PropertiesHelp = dict(
+    Data_Name='The string name of the data array generated from the inut file.',
+    Time_Step='An advanced property for the time step in seconds.'
 )
 
 
 def RequestData():
-    from PVGPpy.read import packedBinaries
+    from PVGPpy.read import packedBinaries, getTimeStepFileIndex
+
+    # This finds the index for the FileNames for the requested timestep
+    i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
+
+    # Generate Output
     pdo = self.GetOutput()
-    packedBinaries(FileName, dblVals=Double_Values, dataNm=Data_Name, pdo=pdo)
+    packedBinaries(FileNames[i], dblVals=Double_Values, dataNm=Data_Name, pdo=pdo)
+
+
+def RequestInformation(self):
+    from PVGPpy.read import setOutputTimesteps
+    # This is necessary to set time steps
+    setOutputTimesteps(self, FileNames, dt=Time_Step)

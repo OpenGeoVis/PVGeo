@@ -10,16 +10,31 @@ ReaderDescription = 'GSLIB File Format'
 
 
 Properties = dict(
-    FileName='absolute path',
     Number_Ignore_Lines=0,
     Delimiter_Field=' ',
-    Use_Tab_Delimiter=False
+    Use_Tab_Delimiter=False,
+    Time_Step=1.0
+)
+
+PropertiesHelp = dict(
+    Use_Tab_Delimiter='A boolean to override the Delimiter_Field and use Tab delimiter.',
+    Time_Step='An advanced property for the time step in seconds.'
 )
 
 
 def RequestData():
     import os
-    from PVGPpy.read import gslib
+    from PVGPpy.read import gslib, getTimeStepFileIndex
+
+    # This finds the index for the FileNames for the requested timestep
+    i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
+
+    # Generate Output
     pdo = self.GetOutput() # vtkTable
-    tbl, h = gslib(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)
-    print(os.path.basename(FileName) + ': ' + h)
+    tbl, h = gslib(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)
+    #print(os.path.basename(FileNames[i]) + ': ' + h)
+
+def RequestInformation(self):
+    from PVGPpy.read import setOutputTimesteps
+    # This is necessary to set time steps
+    setOutputTimesteps(self, FileNames, dt=Time_Step)

@@ -1,21 +1,21 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="sources">
-    <SourceProxy name="ReadGSLIBFileToTable" class="vtkPythonProgrammableFilter" label="Read GSLIB File To Table">
+    <SourceProxy name="ExamplePythonReader" class="vtkPythonProgrammableFilter" label="Example Python Reader">
       <Documentation
-        long_help="The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column)."
-        short_help="The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column).">
+        long_help="This reader provides a starting point for making a file reader in a Programmable Python Source."
+        short_help="This reader provides a starting point for making a file reader in a Programmable Python Source.">
       </Documentation>
       <Hints>
         <ShowInMenu category="CSM GP Readers" />
       </Hints>
       <Hints>
-        <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
-          file_description="GSLIB File Format" />
+        <ReaderFactory extensions=""
+          file_description="All Files: Example Python Reader" />
       </Hints>
 
-      <!-- Output data type: "vtkTable" -->
+      <!-- Output data type: "vtkUnstructuredGrid" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="19"
+                         default_values="4"
                          name="OutputDataSetType"
                          number_of_elements="1"
                          panel_visibility="never">
@@ -51,33 +51,22 @@
             </Documentation>
         </DoubleVectorProperty>
         <Hints>
-            <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
-                    file_description="GSLIB File Format" />
+            <ReaderFactory extensions=""
+                    file_description="All Files: Example Python Reader" />
         </Hints>
 
 
-      <StringVectorProperty
-        panel_visibility="default"
-        name="Delimiter_Field"
-        label="Delimiter Field"
-        initial_string="Delimiter_Field"
-        command="SetParameter"
-        animateable="1"
-        default_values=" "
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </StringVectorProperty>
-
       <IntVectorProperty
         panel_visibility="default"
-        name="Number_Ignore_Lines"
-        label="Number Ignore Lines"
-        initial_string="Number_Ignore_Lines"
+        name="Print_File_Names"
+        label="Print File Names"
+        initial_string="Print_File_Names"
         command="SetParameter"
         animateable="1"
-        default_values="0"
+        default_values="1"
         number_of_elements="1">
-        <Documentation></Documentation>
+        <BooleanDomain name="bool" />
+        <Documentation>This is a description about the Print_File_Names property! This will simple print the file name at the current time step if set to true.</Documentation>
       </IntVectorProperty>
 
       <DoubleVectorProperty
@@ -92,24 +81,11 @@
         <Documentation>An advanced property for the time step in seconds.</Documentation>
       </DoubleVectorProperty>
 
-      <IntVectorProperty
-        panel_visibility="default"
-        name="Use_Tab_Delimiter"
-        label="Use Tab Delimiter"
-        initial_string="Use_Tab_Delimiter"
-        command="SetParameter"
-        animateable="1"
-        default_values="0"
-        number_of_elements="1">
-        <BooleanDomain name="bool" />
-        <Documentation>A boolean to override the Delimiter_Field and use Tab delimiter.</Documentation>
-      </IntVectorProperty>
-
       <StringVectorProperty
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import os&#xA;from PVGPpy.read import gslib, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslib(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)&#xA;"
+        default_values="&quot;&quot;&quot;Create a VTK output given the list of FileNames and the current timestep.&#xA;This script can access self and FileNames and should return an output of type&#xA;OutputDataType defined above&quot;&quot;&quot;&#xA;from PVGPpy.read import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;&quot;&quot;&quot;If you specifically do not want the ability to read time series&#xA;Then delete the above code and access the file name by adding a string&#xA;variable called `FileName` to the Properties dict. &quot;&quot;&quot;&#xA;# --------------------- #&#xA;# Generate Output Below&#xA;if Print_File_Names:&#xA;    print(FileNames[i])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

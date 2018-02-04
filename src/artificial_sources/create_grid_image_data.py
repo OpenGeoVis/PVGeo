@@ -1,6 +1,6 @@
 Name = 'CreateEmptyGrid'
 Label = 'Create Empty Grid'
-FilterCategory = 'CSM Geophysics Sources'
+FilterCategory = 'CSM GP Sources'
 Help = ''
 
 NumberOfInputs = 0

@@ -8,13 +8,14 @@ OutputDataType = 'vtkRectilinearGrid'
 Extensions = 'mesh msh dat'
 ReaderDescription = 'UBC Mesh Two-File Format'
 
-
+# TODO: implement FileNames to work with time series
 Properties = dict(
     FileName_Mesh='absolute path',
     FileName_Model='absolute path',
     Data_Name='',
     Delimiter_Field=' ',
-    Use_Tab_Delimiter=False
+    Use_Tab_Delimiter=False,
+    Time_Step=1.0
 )
 
 

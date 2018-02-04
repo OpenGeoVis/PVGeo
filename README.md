@@ -1,13 +1,15 @@
 # ParaView Geophysics Plugins
 This repository contains plugins for the open-source, multi-platform data analysis, and visualization application [ParaView by Kitware](https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D grids.
 
-Check out the [Docs pages](https://banesullivan.github.io/ParaViewGeophysics/) to explore the motivation for publishing this repo as well as to find all documentation and some visualization examples. This contains documentation for readers, filters, macros, and more as you need.
-
-Also checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-MFIwUy1uUTlfVHM/view?usp=sharing) standalone presentation about the project.
+Check out the [Docs pages](https://banesullivan.github.io/ParaViewGeophysics/) to explore the motivation for publishing this repo as well as to find all documentation and some visualization examples. This contains documentation for readers, filters, macros, and more as you need. **NOTE: These are currently out of date and will be updated and finished by May 2018**
 
 
 ## About the Author
 Unless otherwise specified, all code and documentation distributed here were produced by [Bane Sullivan](https://github.com/banesullivan/), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
+
+### Acknowledgements
+Thank you to Daan van Vugt for helping me implement the ability to read file series!
+Thank you to Pat Marion for building the foundation of the Pyhton Programmable Filter/Reader generation script! See details on [this blog post](https://blog.kitware.com/easy-customization-of-the-paraview-python-programmable-filter-property-panel/).
 
 
 -----

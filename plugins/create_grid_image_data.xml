@@ -6,7 +6,7 @@
         short_help="">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM Geophysics Sources" />
+        <ShowInMenu category="CSM GP Sources" />
       </Hints>
 
       <!-- Output data type: "vtkImageData" -->
@@ -18,6 +18,8 @@
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
+
+
 
 
 

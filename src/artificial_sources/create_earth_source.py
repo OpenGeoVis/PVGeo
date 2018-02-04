@@ -1,6 +1,6 @@
 Name = 'CreateEarthSource'
 Label = 'Create Earth Source'
-FilterCategory = 'CSM Geophysics Sources'
+FilterCategory = 'CSM GP Sources'
 Help = ''
 
 NumberOfInputs = 0

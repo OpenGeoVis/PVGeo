@@ -25,6 +25,37 @@
 
 
 
+
+      <StringVectorProperty
+        name="FileNames"
+        initial_string="FileNames"
+        animateable="0"
+        number_of_elements="0"
+        command="AddParameter"
+        clean_command="ClearParameter"
+        repeat_command="1"
+        panel_visibility="advanced">
+        <FileListDomain name="files"/>
+            <Documentation>
+            The list of files to be read by the reader.
+            </Documentation>
+      </StringVectorProperty>
+
+      <DoubleVectorProperty
+        name="TimestepValues"
+        repeatable="1"
+        information_only="1">
+        <TimeStepsInformationHelper/>
+            <Documentation>
+            Available timestep values.
+            </Documentation>
+        </DoubleVectorProperty>
+        <Hints>
+            <ReaderFactory extensions="dat csv txt"
+                    file_description="CSM GP Delimited Text File" />
+        </Hints>
+
+
       <StringVectorProperty
         panel_visibility="default"
         name="Delimiter_Field"
@@ -34,19 +65,6 @@
         animateable="1"
         default_values=" "
         number_of_elements="1">
-        <Documentation></Documentation>
-      </StringVectorProperty>
-
-      <StringVectorProperty
-        panel_visibility="default"
-        name="FileName"
-        label="FileName"
-        initial_string="FileName"
-        command="SetParameter"
-        animateable="1"
-        default_values="absolute_path"
-        number_of_elements="1">
-        <FileListDomain name="files"/>
         <Documentation></Documentation>
       </StringVectorProperty>
 
@@ -75,6 +93,18 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
+      <DoubleVectorProperty
+        panel_visibility="advanced"
+        name="Time_Step"
+        label="Time Step"
+        initial_string="Time_Step"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation>An advanced property for the time step in seconds.</Documentation>
+      </DoubleVectorProperty>
+
       <IntVectorProperty
         panel_visibility="default"
         name="Use_Tab_Delimiter"
@@ -85,14 +115,14 @@
         default_values="0"
         number_of_elements="1">
         <BooleanDomain name="bool" />
-        <Documentation></Documentation>
+        <Documentation>A boolean to override the Delimiter_Field and use Tab delimiter.</Documentation>
       </IntVectorProperty>
 
       <StringVectorProperty
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import delimitedText&#xA;pdo = self.GetOutput()&#xA;delimitedText(FileName, deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import delimitedText, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;delimitedText(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -101,6 +131,20 @@
         the programmable source runs.</Documentation>
         </StringVectorProperty>
 
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.read import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
 
     </SourceProxy>
  </ProxyGroup>

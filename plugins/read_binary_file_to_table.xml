@@ -25,6 +25,37 @@
 
 
 
+
+      <StringVectorProperty
+        name="FileNames"
+        initial_string="FileNames"
+        animateable="0"
+        number_of_elements="0"
+        command="AddParameter"
+        clean_command="ClearParameter"
+        repeat_command="1"
+        panel_visibility="advanced">
+        <FileListDomain name="files"/>
+            <Documentation>
+            The list of files to be read by the reader.
+            </Documentation>
+      </StringVectorProperty>
+
+      <DoubleVectorProperty
+        name="TimestepValues"
+        repeatable="1"
+        information_only="1">
+        <TimeStepsInformationHelper/>
+            <Documentation>
+            Available timestep values.
+            </Documentation>
+        </DoubleVectorProperty>
+        <Hints>
+            <ReaderFactory extensions="H@ bin"
+                    file_description="Binary Packed Floats or Doubles" />
+        </Hints>
+
+
       <StringVectorProperty
         panel_visibility="default"
         name="Data_Name"
@@ -32,9 +63,9 @@
         initial_string="Data_Name"
         command="SetParameter"
         animateable="1"
-        default_values=""
+        default_values="values"
         number_of_elements="1">
-        <Documentation></Documentation>
+        <Documentation>The string name of the data array generated from the inut file.</Documentation>
       </StringVectorProperty>
 
       <IntVectorProperty
@@ -50,24 +81,23 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
-      <StringVectorProperty
-        panel_visibility="default"
-        name="FileName"
-        label="FileName"
-        initial_string="FileName"
+      <DoubleVectorProperty
+        panel_visibility="advanced"
+        name="Time_Step"
+        label="Time Step"
+        initial_string="Time_Step"
         command="SetParameter"
         animateable="1"
-        default_values="absolute path"
+        default_values="1.0"
         number_of_elements="1">
-        <FileListDomain name="files"/>
-        <Documentation></Documentation>
-      </StringVectorProperty>
+        <Documentation>An advanced property for the time step in seconds.</Documentation>
+      </DoubleVectorProperty>
 
       <StringVectorProperty
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import packedBinaries&#xA;pdo = self.GetOutput()&#xA;packedBinaries(FileName, dblVals=Double_Values, dataNm=Data_Name, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import packedBinaries, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;packedBinaries(FileNames[i], dblVals=Double_Values, dataNm=Data_Name, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -76,6 +106,20 @@
         the programmable source runs.</Documentation>
         </StringVectorProperty>
 
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.read import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
 
     </SourceProxy>
  </ProxyGroup>

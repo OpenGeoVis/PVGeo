@@ -1,6 +1,6 @@
 Name = 'PointsToTube'
 Label = 'Points To Tube'
-FilterCategory = 'CSM Geophysics Filters'
+FilterCategory = 'CSM GP Filters'
 Help = 'Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.'
 
 NumberOfInputs = 1
