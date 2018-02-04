@@ -6,7 +6,7 @@
         short_help="">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM Geophysics Sources" />
+        <ShowInMenu category="CSM GP Sources" />
       </Hints>
 
       <!-- Output data type: "vtkPolyData" -->

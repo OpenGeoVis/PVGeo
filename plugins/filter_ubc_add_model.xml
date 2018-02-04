@@ -6,7 +6,7 @@
         short_help="This filter allows you to choose a UBC model file to append as an attribute to an already created vtkRectilinearGrid of a UBC Mesh.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM Geophysics Filters" />
+        <ShowInMenu category="CSM GP Filters" />
       </Hints>
 
       <!-- Output data type: "vtkRectilinearGrid" -->
