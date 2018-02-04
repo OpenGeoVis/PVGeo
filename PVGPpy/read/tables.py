@@ -74,7 +74,7 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
 
 
 
-def packedBinaries(FileName, dblVals=False, dataNm='', pdo=None):
+def packedBinaries(FileName, dblVals=False, dataNm='values', pdo=None):
     """
     Description
     -----------
@@ -117,10 +117,6 @@ def packedBinaries(FileName, dblVals=False, dataNm='', pdo=None):
 
     # Put raw data into vtk array
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtk.VTK_FLOAT)
-
-    # If no name given for data by user, use the basename of the file
-    if dataNm == '':
-        dataNm = os.path.basename(FileName)
     data.SetName(dataNm)
 
     # Table with single column of data only

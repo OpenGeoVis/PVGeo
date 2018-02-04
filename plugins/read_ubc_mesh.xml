@@ -105,6 +105,18 @@
         <Documentation></Documentation>
       </StringVectorProperty>
 
+      <DoubleVectorProperty
+        panel_visibility="advanced"
+        name="Time_Step"
+        label="Time Step"
+        initial_string="Time_Step"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
       <IntVectorProperty
         panel_visibility="default"
         name="Use_Tab_Delimiter"

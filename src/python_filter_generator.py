@@ -110,7 +110,7 @@ def getPythonPathProperty():
 def getFilterPropertyXml(propertyInfo, propertyName, propertyHelpInfo):
 
     vis = 'default'
-    if 'HIDE' in propertyName:
+    if 'HIDE' in propertyName or 'Time_Step' in propertyName:
         vis = 'advanced'
 
     propertyHelp = propertyHelpInfo.get(propertyName, '')
@@ -168,6 +168,19 @@ def getFilterPropertyXml(propertyInfo, propertyName, propertyHelpInfo):
       </IntVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
 
     if propertyType is float:
+        if propertyName is 'Time_Step':
+            return '''
+      <DoubleVectorProperty
+        panel_visibility="%s"
+        name="%s"
+        label="%s"
+        initial_string="%s"
+        command="SetParameter"
+        animateable="1"
+        default_values="%s"
+        number_of_elements="%s">
+        <Documentation>%s</Documentation>
+      </DoubleVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
         return '''
       <DoubleVectorProperty
         panel_visibility="%s"

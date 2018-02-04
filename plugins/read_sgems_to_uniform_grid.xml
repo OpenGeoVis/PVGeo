@@ -67,6 +67,18 @@
         <Documentation></Documentation>
       </StringVectorProperty>
 
+      <DoubleVectorProperty
+        panel_visibility="advanced"
+        name="Time_Step"
+        label="Time Step"
+        initial_string="Time_Step"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation>An advanced property for the time step in seconds.</Documentation>
+      </DoubleVectorProperty>
+
       <IntVectorProperty
         panel_visibility="default"
         name="Use_tab_delimiter"
@@ -84,7 +96,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import sgemsGrid&#xA;import numpy as np&#xA;&#xA;def GetUpdateTimestep(algorithm):&#xA;    &quot;&quot;&quot;Returns the requested time value, or None if not present&quot;&quot;&quot;&#xA;    executive = algorithm.GetExecutive()&#xA;    outInfo = executive.GetOutputInformation(0)&#xA;    if outInfo.Has(executive.UPDATE_TIME_STEP()):&#xA;        return outInfo.Get(executive.UPDATE_TIME_STEP())&#xA;    else:&#xA;        return None&#xA;# Get the current timestep&#xA;req_time = GetUpdateTimestep(self)&#xA;# Read the closest file&#xA;#np.asarray([get_time(file) for file in FileNames])&#xA;xtime = np.arange(len(FileNames), dtype=float)&#xA;i = np.argwhere(xtime == req_time)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import sgemsGrid, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -98,7 +110,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import sgemsExtent&#xA;&#xA;def setOutputTimesteps(algorithm):&#xA;    executive = algorithm.GetExecutive()&#xA;    outInfo = executive.GetOutputInformation(0)&#xA;    # Calculate list of timesteps here&#xA;    #np.asarray([get_time(file) for file in FileNames])&#xA;    xtime = range(len(FileNames))&#xA;    outInfo.Remove(executive.TIME_STEPS())&#xA;    for i in range(len(FileNames)):&#xA;        outInfo.Append(executive.TIME_STEPS(), xtime[i])&#xA;    # Remove and set time range info&#xA;    outInfo.Remove(executive.TIME_RANGE())&#xA;    outInfo.Append(executive.TIME_RANGE(), xtime[0])&#xA;    outInfo.Append(executive.TIME_RANGE(), xtime[-1])&#xA;&#xA;ext = sgemsExtent(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;util.SetOutputWholeExtent(self, ext)&#xA;setOutputTimesteps(self)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.read import sgemsExtent, setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;ext = sgemsExtent(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

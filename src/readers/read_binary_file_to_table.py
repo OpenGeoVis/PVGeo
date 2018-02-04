@@ -10,29 +10,22 @@ ReaderDescription = 'Binary Packed Floats or Doubles'
 
 
 Properties = dict(
-    Data_Name='', # TODO: can I set the default dynamically?
-    Double_Values=False
+    Data_Name='values',
+    Double_Values=False,
+    Time_Step=1.0
+)
+
+PropertiesHelp = dict(
+    Data_Name='The string name of the data array generated from the inut file.',
+    Time_Step='An advanced property for the time step in seconds.'
 )
 
 
 def RequestData():
-    from PVGPpy.read import packedBinaries
-    import numpy as np
+    from PVGPpy.read import packedBinaries, getTimeStepFileIndex
 
-    def GetUpdateTimestep(algorithm):
-        """Returns the requested time value, or None if not present"""
-        executive = algorithm.GetExecutive()
-        outInfo = executive.GetOutputInformation(0)
-        if outInfo.Has(executive.UPDATE_TIME_STEP()):
-            return outInfo.Get(executive.UPDATE_TIME_STEP())
-        else:
-            return None
-    # Get the current timestep
-    req_time = GetUpdateTimestep(self)
-    # Read the closest file
-    #np.asarray([get_time(file) for file in FileNames])
-    xtime = np.arange(len(FileNames), dtype=float)
-    i = np.argwhere(xtime == req_time)
+    # This finds the index for the FileNames for the requested timestep
+    i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
 
     # Generate Output
     pdo = self.GetOutput()
@@ -40,18 +33,6 @@ def RequestData():
 
 
 def RequestInformation(self):
-    def setOutputTimesteps(algorithm):
-        executive = algorithm.GetExecutive()
-        outInfo = executive.GetOutputInformation(0)
-        # Calculate list of timesteps here
-        #np.asarray([get_time(file) for file in FileNames])
-        xtime = range(len(FileNames))
-        outInfo.Remove(executive.TIME_STEPS())
-        for i in range(len(FileNames)):
-            outInfo.Append(executive.TIME_STEPS(), xtime[i])
-        # Remove and set time range info
-        outInfo.Remove(executive.TIME_RANGE())
-        outInfo.Append(executive.TIME_RANGE(), xtime[0])
-        outInfo.Append(executive.TIME_RANGE(), xtime[-1])
-
-    setOutputTimesteps(self)
+    from PVGPpy.read import setOutputTimesteps
+    # This is necessary to set time steps
+    setOutputTimesteps(self, FileNames, dt=Time_Step)
