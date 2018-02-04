@@ -1,0 +1,133 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <SourceProxy name="CorrelateArrays" class="vtkPythonProgrammableFilter" label="Correlate Arrays">
+      <Documentation
+        long_help=""
+        short_help="">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="CSM GP Filters" />
+      </Hints>
+
+      <!-- Output data type: "Same as input" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="8"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+<StringVectorProperty
+    name="SelectInputScalars1"
+    label="Array 1"
+    command="SetInputArrayToProcess"
+    default_values="0 NULL"
+    number_of_elements="5"
+    element_types="0 0 0 0 2"
+    animateable="0">
+    <ArrayListDomain
+        name="array_list"
+        attribute_type="Scalars"
+        input_domain_name="inputs_array">
+        <RequiredProperties>
+            <Property
+                name="Input"
+                function="Input" />
+        </RequiredProperties>
+    </ArrayListDomain>
+    <FieldDataDomain
+        name="field_list">
+        <RequiredProperties>
+            <Property
+                name="Input"
+                function="Input" />
+        </RequiredProperties>
+    </FieldDataDomain>
+</StringVectorProperty>
+
+<StringVectorProperty
+    name="SelectInputScalars2"
+    label="Array 2"
+    command="SetInputArrayToProcess"
+    default_values="1 NULL"
+    number_of_elements="5"
+    element_types="0 0 0 0 2"
+    animateable="0">
+    <ArrayListDomain
+        name="array_list"
+        attribute_type="Scalars"
+        input_domain_name="inputs_array">
+        <RequiredProperties>
+            <Property
+                name="Input"
+                function="Input" />
+        </RequiredProperties>
+    </ArrayListDomain>
+    <FieldDataDomain
+        name="field_list">
+        <RequiredProperties>
+            <Property
+                name="Input"
+                function="Input" />
+        </RequiredProperties>
+    </FieldDataDomain>
+</StringVectorProperty>
+
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkDataObject"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="Multiplyer"
+        label="Multiplyer"
+        initial_string="Multiplyer"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation>This is a static shifter/scale factor across the array after normalization.</Documentation>
+      </DoubleVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="New_Array_Name"
+        label="New Array Name"
+        initial_string="New_Array_Name"
+        command="SetParameter"
+        animateable="1"
+        default_values=""
+        number_of_elements="1">
+        <Documentation>Give the new normalized array a meaningful name.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.filt import correlateArrays&#xA;&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;&#xA;info1 = self.GetInputArrayInformation(0)&#xA;info2 = self.GetInputArrayInformation(1)&#xA;&#xA;correlateArrays(pdi, info1, info2, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>

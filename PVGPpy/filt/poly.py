@@ -5,6 +5,71 @@ from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 
 
+#---- Correlations ----#
+def _corr(arr1, arr2):
+    return np.correlate(arr1, arr2, mode='same')
+
+
+def correlateArrays(pdi, info1, info2, multiplyer=1.0, newName='', pdo=None):
+    if pdo is None:
+        pdo = pdi.DeepCopy()
+
+    # Get input array name
+    name1 = info1.Get(vtk.vtkDataObject.FIELD_NAME())
+    name2 = info2.Get(vtk.vtkDataObject.FIELD_NAME())
+    # Assume same field
+    field = info1.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
+
+    wpdi = dsa.WrapDataObject(pdi)
+
+    # Point Data
+    if field == 0:
+        arr1 = wpdi.PointData[name1]
+        arr2 = wpdi.PointData[name2]
+    # Cell Data:
+    elif field == 1:
+        arr1 = wpdi.CellData[name1]
+        arr2 = wpdi.CellData[name2]
+    # Field Data:
+    elif field == 2:
+        arr1 = wpdi.FieldData[name1]
+        arr2 = wpdi.FieldData[name2]
+    # Row Data:
+    elif field == 6:
+        arr1 = wpdi.RowData[name1]
+        arr2 = wpdi.RowData[name2]
+
+    carr = _corr(arr1, arr2)
+
+    # Apply the multiplyer
+    carr *= multiplyer
+
+    c = nps.numpy_to_vtk(num_array=carr,deep=True)
+
+    # If no name given for data by user, use the basename of the file
+    if newName == '':
+        newName = 'Correlated'
+    c.SetName(newName)
+
+    pdo.DeepCopy(pdi)
+
+    # Point Data
+    if field == 0:
+        pdo.GetPointData().AddArray(c)
+    # Cell Data:
+    elif field == 1:
+        pdo.GetCellData().AddArray(c)
+    # Field Data:
+    elif field == 2:
+        pdo.GetFieldData().AddArray(c)
+    # Row Data:
+    elif field == 6:
+        pdo.GetRowData().AddArray(c)
+    else:
+        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+
+    return pdo
+
 #---- Normalizations ----#
 # Here are some private functions to encompass the different normalizations
 def _featureScaleNorm(arr):

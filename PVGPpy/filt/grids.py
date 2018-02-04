@@ -111,7 +111,6 @@ def tableToGrid(pdi, extent, spacing=(1,1,1), origin=(0,0,0), SEPlib=True, order
         #pdo.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
         pdo.GetPointData().AddArray(c)
         scal = pdo.GetPointData().GetArray(i)
-        pdo.GetPointData().SetScalars(scal)
 
     return pdo
 
