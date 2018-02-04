@@ -14,7 +14,8 @@ Properties = dict(
     FileName_Model='absolute path',
     Data_Name='',
     Delimiter_Field=' ',
-    Use_Tab_Delimiter=False
+    Use_Tab_Delimiter=False,
+    Time_Step=1.0
 )
 
 

@@ -1,8 +1,13 @@
 #!/usr/bin/env python2
 
-# See blog for details: https://blog.kitware.com/easy-customization-of-the-paraview-python-programmable-filter-property-panel/
-#
-# This code has been heavily modified by Bane Sullivan (banesullivan@gmail.com) for making customized filters in the geoscience data visualization. Credit does not go to Bane for this script but to the author of the above blog post.
+"""See blog for details: https://blog.kitware.com/easy-customization-of-the-paraview-python-programmable-filter-property-panel/
+
+This code has been heavily modified by Bane Sullivan (banesullivan@gmail.com) for making customized filters in the geoscience data visualization. Credit does not go to Bane for this script but to the author of the above blog post.
+
+Acknowledgements:
+    Daan van Vugt <daanvanvugt@gmail.com> for file series implementation
+    Pat Marion (see blog post url above) for the foundation of this script
+"""
 
 
 import os
@@ -105,7 +110,7 @@ def getPythonPathProperty():
 def getFilterPropertyXml(propertyInfo, propertyName, propertyHelpInfo):
 
     vis = 'default'
-    if 'HIDE' in propertyName:
+    if 'HIDE' in propertyName or 'Time_Step' in propertyName:
         vis = 'advanced'
 
     propertyHelp = propertyHelpInfo.get(propertyName, '')
@@ -163,6 +168,19 @@ def getFilterPropertyXml(propertyInfo, propertyName, propertyHelpInfo):
       </IntVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
 
     if propertyType is float:
+        if propertyName is 'Time_Step':
+            return '''
+      <DoubleVectorProperty
+        panel_visibility="%s"
+        name="%s"
+        label="%s"
+        initial_string="%s"
+        command="SetParameter"
+        animateable="1"
+        default_values="%s"
+        number_of_elements="%s">
+        <Documentation>%s</Documentation>
+      </DoubleVectorProperty>''' % (vis, propertyName, propertyLabel, propertyName, defaultValues, numberOfElements, propertyHelp)
         return '''
       <DoubleVectorProperty
         panel_visibility="%s"

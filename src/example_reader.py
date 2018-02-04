@@ -1,15 +1,14 @@
 """
 Example python file reader demonstrating some of the features available for
 python programmable file readers.
-This file does not actually provide any output, but is just here to show the options
-available when using python_filter_generator.
+This file reader simply lists the file name at the requested time step
 Credit for implementing time series goes to: Daan van Vugt <daanvanvugt@gmail.com>
 """
 Name = 'ExamplePythonReader'        # Name to be used for coding/macros
 Label = 'Example Python Reader'     # Label for the reader in the menu
 FilterCategory = 'CSM GP Readers'   # The source menu category
 
-Extensions = 'H@ bin dat txt text'
+Extensions = ''
 ReaderDescription = 'All Files: Example Python Reader'
 
 # A general overview of the plugin
@@ -25,36 +24,26 @@ ExtraXml = ''
 # These are the parameters/properties of the plugin:
 Properties = dict(
     Print_File_Names=True,
+    Time_Step=1.0
 )
 
 # This is the description for each of the properties variable:
 #- Include if you'd like. Totally optional.
 #- The variable name (key) must be identical to the property described.
 PropertiesHelp = dict(
-    Print_File_Names='This is a description about the Print_File_Names property! This will simple print the file name at the current time step if set to true.'
+    Print_File_Names='This is a description about the Print_File_Names property! This will simple print the file name at the current time step if set to true.',
+    Time_Step='An advanced property for the time step in seconds.'
 )
 
 # from paraview import vtk is done automatically in the reader
 def RequestData(self):
-    """Create a VTK output given the list of filenames and the current timestep.
+    """Create a VTK output given the list of FileNames and the current timestep.
     This script can access self and FileNames and should return an output of type
-    OutputDataType above"""
-    import numpy as np
+    OutputDataType defined above"""
+    from PVGPpy.read import getTimeStepFileIndex
 
-    def GetUpdateTimestep(algorithm):
-        """Returns the requested time value, or None if not present"""
-        executive = algorithm.GetExecutive()
-        outInfo = executive.GetOutputInformation(0)
-        if outInfo.Has(executive.UPDATE_TIME_STEP()):
-            return outInfo.Get(executive.UPDATE_TIME_STEP())
-        else:
-            return None
-    # Get the current timestep
-    req_time = GetUpdateTimestep(self)
-    # Read the closest file
-    #np.asarray([get_time(file) for file in FileNames])
-    xtime = np.arange(len(FileNames), dtype=float)
-    i = np.argwhere(xtime == req_time)
+    # This finds the index for the FileNames for the requested timestep
+    i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
 
     """If you specifically do not want the ability to read time series
     Then delete the above code and access the file name by adding a string
@@ -65,25 +54,7 @@ def RequestData(self):
         print(FileNames[i])
 
 
-"""
-Given a list of filenames this script should output how many timesteps are available.
-See paraview guide 13.2.2
-"""
 def RequestInformation(self):
-    def setOutputTimesteps(algorithm):
-        executive = algorithm.GetExecutive()
-        outInfo = executive.GetOutputInformation(0)
-        # Calculate list of timesteps here
-        #np.asarray([get_time(file) for file in FileNames])
-        xtime = range(len(FileNames))
-        outInfo.Remove(executive.TIME_STEPS())
-        for i in range(len(FileNames)):
-            outInfo.Append(executive.TIME_STEPS(), xtime[i])
-        # Remove and set time range info
-        outInfo.Remove(executive.TIME_RANGE())
-        outInfo.Append(executive.TIME_RANGE(), xtime[0])
-        outInfo.Append(executive.TIME_RANGE(), xtime[-1])
-
-    # --------------------- #
-    # Generate Output Below
-    setOutputTimesteps(self)
+    from PVGPpy.read import setOutputTimesteps
+    # This is necessary to set time steps
+    setOutputTimesteps(self, FileNames, dt=Time_Step)

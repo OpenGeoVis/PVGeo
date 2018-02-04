@@ -9,7 +9,7 @@
         <ShowInMenu category="CSM GP Readers" />
       </Hints>
       <Hints>
-        <ReaderFactory extensions="H@ bin dat txt text"
+        <ReaderFactory extensions=""
           file_description="All Files: Example Python Reader" />
       </Hints>
 
@@ -50,7 +50,7 @@
             </Documentation>
         </DoubleVectorProperty>
         <Hints>
-            <ReaderFactory extensions="H@ bin dat txt text"
+            <ReaderFactory extensions=""
                     file_description="All Files: Example Python Reader" />
         </Hints>
 
@@ -68,11 +68,23 @@
         <Documentation>This is a description about the Print_File_Names property! This will simple print the file name at the current time step if set to true.</Documentation>
       </IntVectorProperty>
 
+      <DoubleVectorProperty
+        panel_visibility="advanced"
+        name="Time_Step"
+        label="Time Step"
+        initial_string="Time_Step"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation>An advanced property for the time step in seconds.</Documentation>
+      </DoubleVectorProperty>
+
       <StringVectorProperty
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="&quot;&quot;&quot;Create a VTK output given the list of filenames and the current timestep.&#xA;This script can access self and FileNames and should return an output of type&#xA;OutputDataType above&quot;&quot;&quot;&#xA;import numpy as np&#xA;&#xA;def GetUpdateTimestep(algorithm):&#xA;    &quot;&quot;&quot;Returns the requested time value, or None if not present&quot;&quot;&quot;&#xA;    executive = algorithm.GetExecutive()&#xA;    outInfo = executive.GetOutputInformation(0)&#xA;    if outInfo.Has(executive.UPDATE_TIME_STEP()):&#xA;        return outInfo.Get(executive.UPDATE_TIME_STEP())&#xA;    else:&#xA;        return None&#xA;# Get the current timestep&#xA;req_time = GetUpdateTimestep(self)&#xA;# Read the closest file&#xA;#np.asarray([get_time(file) for file in FileNames])&#xA;xtime = np.arange(len(FileNames), dtype=float)&#xA;i = np.argwhere(xtime == req_time)&#xA;&#xA;&quot;&quot;&quot;If you specifically do not want the ability to read time series&#xA;Then delete the above code and access the file name by adding a string&#xA;variable called `FileName` to the Properties dict. &quot;&quot;&quot;&#xA;# --------------------- #&#xA;# Generate Output Below&#xA;if Print_File_Names:&#xA;    print(FileNames[i])&#xA;"
+        default_values="&quot;&quot;&quot;Create a VTK output given the list of FileNames and the current timestep.&#xA;This script can access self and FileNames and should return an output of type&#xA;OutputDataType defined above&quot;&quot;&quot;&#xA;from PVGPpy.read import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;&quot;&quot;&quot;If you specifically do not want the ability to read time series&#xA;Then delete the above code and access the file name by adding a string&#xA;variable called `FileName` to the Properties dict. &quot;&quot;&quot;&#xA;# --------------------- #&#xA;# Generate Output Below&#xA;if Print_File_Names:&#xA;    print(FileNames[i])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -86,7 +98,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="def setOutputTimesteps(algorithm):&#xA;    executive = algorithm.GetExecutive()&#xA;    outInfo = executive.GetOutputInformation(0)&#xA;    # Calculate list of timesteps here&#xA;    #np.asarray([get_time(file) for file in FileNames])&#xA;    xtime = range(len(FileNames))&#xA;    outInfo.Remove(executive.TIME_STEPS())&#xA;    for i in range(len(FileNames)):&#xA;        outInfo.Append(executive.TIME_STEPS(), xtime[i])&#xA;    # Remove and set time range info&#xA;    outInfo.Remove(executive.TIME_RANGE())&#xA;    outInfo.Append(executive.TIME_RANGE(), xtime[0])&#xA;    outInfo.Append(executive.TIME_RANGE(), xtime[-1])&#xA;&#xA;# --------------------- #&#xA;# Generate Output Below&#xA;setOutputTimesteps(self)&#xA;"
+        default_values="from PVGPpy.read import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

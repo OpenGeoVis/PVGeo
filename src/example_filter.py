@@ -1,3 +1,7 @@
+"""
+Example python filter demonstrating some of the features available for
+python programmable filters.
+"""
 Name = 'ExamplePythonFilter'        # Name to be used for coding/macros
 Label = 'Example Python Filter'     # Label for the filter menu
 FilterCategory = 'CSM GP Filters'   # The filter/source menu category
