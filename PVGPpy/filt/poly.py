@@ -19,8 +19,8 @@ def correlateArrays(pdi, (name1, field1), (name2, field2), multiplyer=1.0, newNa
         pdo = pdi.DeepCopy()
     # Get the input arrays
     wpdi = dsa.WrapDataObject(pdi)
-    arr1 = _getArray(wpdi, field1, name1)
-    arr2 = _getArray(wpdi, field2, name2)
+    arr1 = getArray(wpdi, field1, name1)
+    arr2 = getArray(wpdi, field2, name2)
     # Perform correlations
     carr = _corr(arr1, arr2)
     # Apply the multiplyer
@@ -33,7 +33,7 @@ def correlateArrays(pdi, (name1, field1), (name2, field2), multiplyer=1.0, newNa
     c.SetName(newName)
     # Build output
     pdo.DeepCopy(pdi)
-    pdo = _addArray(pdo, field1, c)
+    pdo = addArray(pdo, field1, c)
     return pdo
 
 #---- Normalizations ----#
@@ -71,7 +71,7 @@ def normalizeArray(pdi, (name, field), norm, multiplyer=1.0, newName='', pdo=Non
 
     # Get inout array
     wpdi = dsa.WrapDataObject(pdi)
-    arr = _getArray(wpdi, field, name)
+    arr = getArray(wpdi, field, name)
     arr = np.array(arr)
     # Take absolute value?
     if abs:
@@ -100,7 +100,7 @@ def normalizeArray(pdi, (name, field), norm, multiplyer=1.0, newName='', pdo=Non
     c.SetName(newName)
     # Build output
     pdo.DeepCopy(pdi)
-    pdo = _addArray(pdo, field, c)
+    pdo = addArray(pdo, field, c)
     return pdo
 
 

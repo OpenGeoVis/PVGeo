@@ -1,2 +1,2 @@
 from progress import *
-from array_selection import *
+from arrays import *

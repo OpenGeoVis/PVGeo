@@ -8,7 +8,7 @@ def getSelectedArrayField(algorithm, idx):
     info = algorithm.GetInputArrayInformation(idx)
     return info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
 
-def _getArray(wpdi, field, name):
+def getArray(wpdi, field, name):
     """
     Grabs an array from vtkDataObject given its name and field association
     """
@@ -28,7 +28,7 @@ def _getArray(wpdi, field, name):
         raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
     return arr
 
-def _addArray(pdo, field, vtkArray):
+def addArray(pdo, field, vtkArray):
     """
     Adds an array to a vtkDataObject given its field association
     """
