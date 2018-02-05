@@ -2,8 +2,8 @@
   <ProxyGroup name="sources">
     <SourceProxy name="ReadSGeMSFileToUniformGrid" class="vtkPythonProgrammableFilter" label="Read SGeMS File To Uniform Grid">
       <Documentation
-        long_help=""
-        short_help="">
+        long_help="NOTE: if reading a time series, they must all have the same extent!"
+        short_help="NOTE: if reading a time series, they must all have the same extent!">
       </Documentation>
       <Hints>
         <ShowInMenu category="CSM GP Readers" />
@@ -97,7 +97,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import sgemsGrid, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import sgemsGrid, getTimeStepFileIndex&#xA;from paraview import util&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -111,7 +111,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import sgemsExtent, setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;ext = sgemsExtent(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.read import sgemsExtent, setOutputTimesteps, getTimeStepFileIndex&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;# Only grab extent for first file... requires all to have same extent&#xA;ext = sgemsExtent(FileNames[0], deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

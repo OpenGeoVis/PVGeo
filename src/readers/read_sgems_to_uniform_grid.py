@@ -1,7 +1,7 @@
 Name = 'ReadSGeMSFileToUniformGrid'
 Label = 'Read SGeMS File To Uniform Grid'
 FilterCategory = 'CSM GP Readers'
-Help = ''
+Help = 'NOTE: if reading a time series, they must all have the same extent!'
 
 NumberOfInputs = 0
 OutputDataType = 'vtkImageData'
@@ -23,6 +23,7 @@ PropertiesHelp = dict(
 
 def RequestData():
     from PVGPpy.read import sgemsGrid, getTimeStepFileIndex
+    from paraview import util
 
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
@@ -34,8 +35,9 @@ def RequestData():
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.read import sgemsExtent, setOutputTimesteps
+    from PVGPpy.read import sgemsExtent, setOutputTimesteps, getTimeStepFileIndex
     # This is necessary to set time steps
     setOutputTimesteps(self, FileNames, dt=Time_Step)
-    ext = sgemsExtent(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter)
+    # Only grab extent for first file... requires all to have same extent
+    ext = sgemsExtent(FileNames[0], deli=Delimiter_Field, useTab=Use_tab_delimiter)
     util.SetOutputWholeExtent(self, ext)
