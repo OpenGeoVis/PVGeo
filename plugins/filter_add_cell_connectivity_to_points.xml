@@ -78,7 +78,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filt import connectCells&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;connectCells(pdi, cellType=Cell_Type, nrNbr=Use_nearest_nbr, pdo=pdo, logTime=False)&#xA;"
+        default_values="from PVGPpy.filt import connectCells&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;# Perfrom task&#xA;connectCells(pdi, cellType=Cell_Type, nrNbr=Use_nearest_nbr, pdo=pdo, logTime=False)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
