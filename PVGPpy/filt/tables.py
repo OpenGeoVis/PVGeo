@@ -1,6 +1,8 @@
 import vtk
 import numpy as np
 from vtk.util import numpy_support as nps
+from vtk.numpy_interface import dataset_adapter as dsa
+from PVGPpy.helpers import *
 
 #---- Reshape Table ----#
 
@@ -52,53 +54,47 @@ def reshapeTable(pdi, nrows, ncols, pdo=None):
 
 
 #---- LatLon to Cartesian ----#
-def latLonTableToCartesian(pdi, lat_i, lon_i, radius=6371.0, pdo=None):
+def latLonTableToCartesian(pdi, (namelat, fieldlat), (namelon, fieldlon), radius=6371.0, pdo=None):
     # TODO: This is very poorly done
-    # TODO: filter works but assumes a spherical earth wich is very wrong
-    # NOTE: Msatches the vtkEarth SOurce however so we gonna keep it this way
+    # TODO: filter works but assumes a spherical earth wich is VERY wrong
+    # NOTE: Mismatches the vtkEarth Source however so we gonna keep it this way
+    raise Exception('latLonTableToCartesian() not currently implemented.')
     if pdo is None:
-        pdo = vtk.vtkTable()
-    pdo.DeepCopy(pdi)
+        pdo = vtk.vtkPolyData()
+    #pdo.DeepCopy(pdi)
+    wpdo = dsa.WrapDataObject(pdo)
 
-    # Get number of columns
-    ncols = pdi.GetNumberOfColumns()
-    nrows = pdi.GetColumn(0).GetNumberOfTuples()
-
-    # Make a 2D numpy array and fille with data from input table
-    data = np.empty((nrows,ncols))
-    for i in range(ncols):
-        c = pdi.GetColumn(i)
-        data[:,i] = nps.vtk_to_numpy(c)
+    # Get the input arrays
+    wpdi = dsa.WrapDataObject(pdi)
+    lat = getArray(wpdi, fieldlat, namelat)
+    lon = getArray(wpdi, fieldlon, namelon)
+    if len(lat) != len(lon):
+        raise Exception('Latitude and Longitude arrays must be same length.')
 
     rad = 2 * np.pi / 360.0
-    coords = np.empty((nrows,3))
-    row_i = 0
-    '''
-    for r in data:
-        x = radius * cos(r[lat_i] * rad) * cos(r[lon_i] * rad)
-        y = radius * cos(r[lat_i] * rad) * sin(r[lon_i] * rad)
-        z = radius * sin(r[lat_i] * rad)
-        coords[row_i] = [x,y,z]
-        row_i = row_i + 1
-    '''
-    x = radius * cos(data[:,lat_i] * rad) * cos(data[:,lon_i] * rad)
-    y = radius * cos(data[:,lat_i] * rad) * sin(data[:,lon_i] * rad)
-    z = radius * sin(data[:,lat_i] * rad)
-    coords[:,0] = x
-    coords[:,1] = y
-    coords[:,2] = z
+    coords = np.empty((len(lat),3))
+
+    coords[:,0] = radius * np.cos(lat * rad) * np.cos(lon * rad)
+    coords[:,1] = radius * np.cos(lat * rad) * np.sin(lon * rad)
+    coords[:,2] = radius * np.sin(lat * rad)
+
+    #insert = nps.numpy_to_vtk(num_array=coords, deep=True)
+    #insert.SetName('Coordinates')
     # Add coords to ouptut table
-    for i in range(3):
-        col = np.array(coords[:,i])
-        insert = nps.numpy_to_vtk(num_array=col, deep=True) # array_type=vtk.VTK_FLOAT
-        # VTK arrays need a name.
-        if i == 0:
-            insert.SetName('X')
-        elif i == 1:
-            insert.SetName('Y')
-        elif i == 2:
-            insert.SetName('Z')
-        #pdo.AddColumn(insert) # these are not getting added to the output table
-        # ... work around:
-        pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData
+    wpdo.Points = coords
+    pts = vtk.vtkPoints()
+    polys = vtk.vtkCellArray()
+    k = 1
+    # TODO: wee need point cells????
+    for r in coords:
+        pts.InsertNextPoint(r[0],r[1],r[2])
+        polys.InsertNextCell(1)
+        polys.InsertCellPoint(k)
+        k = k + 1
+    #polys.Allocate()
+    pdo.SetPoints(pts)
+    pdo.SetPolys(polys)
+    # Add other arrays to output appropriately
+    pdo = copyArraysToPointData(pdi, pdo, fieldlat)
+
     return pdo
