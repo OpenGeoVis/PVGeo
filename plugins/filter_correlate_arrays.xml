@@ -95,14 +95,14 @@
 
       <DoubleVectorProperty
         panel_visibility="default"
-        name="Multiplyer"
-        label="Multiplyer"
-        initial_string="Multiplyer"
+        name="Multiplier"
+        label="Multiplier"
+        initial_string="Multiplier"
         command="SetParameter"
         animateable="1"
         default_values="1.0"
         number_of_elements="1">
-        <Documentation>This is a static shifter/scale factor across the array after normalization.</Documentation>
+        <Documentation></Documentation>
       </DoubleVectorProperty>
 
       <StringVectorProperty
@@ -121,7 +121,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filt import correlateArrays&#xA;import PVGPpy.helpers as inputhelp&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;field0 = inputhelp.getSelectedArrayField(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 1)&#xA;field1 = inputhelp.getSelectedArrayField(self, 1)&#xA;# Pass array names and associations on to process&#xA;correlateArrays(pdi, (name0,field0), (name1,field1), multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.filt import correlateArrays&#xA;import PVGPpy.helpers as inputhelp&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;field0 = inputhelp.getSelectedArrayField(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 1)&#xA;field1 = inputhelp.getSelectedArrayField(self, 1)&#xA;# Pass array names and associations on to process&#xA;correlateArrays(pdi, (name0,field0), (name1,field1), multiplier=Multiplier, newName=New_Array_Name, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

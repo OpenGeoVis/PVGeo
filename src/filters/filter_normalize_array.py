@@ -28,15 +28,15 @@ ExtraXml = '''\
 
 
 Properties = dict(
-    Multiplyer=1.0,
+    Multiplier=1.0,
     New_Array_Name='Normalized',
     Normalization=0,
     Absolute_Value=False
 )
 
 PropertiesHelp = dict(
-    multiplyer="This is a static shifter/scale factor across the array after normalization.",
-    new_array_name="Give the new normalized array a meaningful name.",
+    Multiplier="This is a static shifter/scale factor across the array after normalization.",
+    New_Array_Name="Give the new normalized array a meaningful name.",
     Absolute_Value="This will take the absolute value of the array before normalization."
 )
 
@@ -52,4 +52,4 @@ def RequestData():
     name = inputhelp.getSelectedArrayName(self, 0)
     field = inputhelp.getSelectedArrayField(self, 0)
     # Perfrom normalization
-    normalizeArray(pdi, (name,field), Normalization, multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value)
+    normalizeArray(pdi, (name,field), Normalization, multiplier=Multiplier, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value)

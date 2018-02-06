@@ -11,7 +11,7 @@ def _corr(arr1, arr2):
     return np.correlate(arr1, arr2, mode='same')
 
 
-def correlateArrays(pdi, (name1, field1), (name2, field2), multiplyer=1.0, newName='', pdo=None):
+def correlateArrays(pdi, (name1, field1), (name2, field2), multiplier=1.0, newName='', pdo=None):
     """Make sure to pass array names and integer associated fields.
     Use helpers to get these properties."""
     if pdo is None:
@@ -23,8 +23,8 @@ def correlateArrays(pdi, (name1, field1), (name2, field2), multiplyer=1.0, newNa
     arr2 = getArray(wpdi, field2, name2)
     # Perform correlations
     carr = _corr(arr1, arr2)
-    # Apply the multiplyer
-    carr *= multiplyer
+    # Apply the multiplier
+    carr *= multiplier
     # Convert to a VTK array
     c = nps.numpy_to_vtk(num_array=carr,deep=True)
     # If no name given for data by user, use operator name
@@ -52,7 +52,7 @@ def _logNatNorm(arr):
 
 
 # Here is the public function to call for the normalizations
-def normalizeArray(pdi, (name, field), norm, multiplyer=1.0, newName='', pdo=None, abs=False):
+def normalizeArray(pdi, (name, field), norm, multiplier=1.0, newName='', pdo=None, abs=False):
     """
     TODO: Descrption
     Perform normalize on a data array for any given VTK data object.
@@ -90,8 +90,8 @@ def normalizeArray(pdi, (name, field), norm, multiplyer=1.0, newName='', pdo=Non
     else:
         raise Exception('Normalization %d is not implemented' % norm)
 
-    # Apply the multiplyer
-    arr *= multiplyer
+    # Apply the multiplier
+    arr *= multiplier
     # Convert to VTK array
     c = nps.numpy_to_vtk(num_array=arr,deep=True)
     # If no name given for data by user, use operator name

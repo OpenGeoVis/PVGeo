@@ -11,12 +11,12 @@ ExtraXml = ''
 
 
 Properties = dict(
-    Multiplyer=1.0,
+    Multiplier=1.0,
     New_Array_Name='Correlated',
 )
 
 PropertiesHelp = dict(
-    Multiplyer="This is a static shifter/scale factor across the array after normalization.",
+    Multiplier="This is a static shifter/scale factor across the array after normalization.",
     New_Array_Name="Give the new normalized array a meaningful name.",
 )
 
@@ -34,4 +34,4 @@ def RequestData():
     name1 = inputhelp.getSelectedArrayName(self, 1)
     field1 = inputhelp.getSelectedArrayField(self, 1)
     # Pass array names and associations on to process
-    correlateArrays(pdi, (name0,field0), (name1,field1), multiplyer=Multiplyer, newName=New_Array_Name, pdo=pdo)
+    correlateArrays(pdi, (name0,field0), (name1,field1), multiplier=Multiplier, newName=New_Array_Name, pdo=pdo)
