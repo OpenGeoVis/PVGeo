@@ -102,7 +102,7 @@
         animateable="1"
         default_values="1.0"
         number_of_elements="1">
-        <Documentation></Documentation>
+        <Documentation>This is a static shifter/scale factor across the array after normalization.</Documentation>
       </DoubleVectorProperty>
 
       <StringVectorProperty
@@ -131,6 +131,14 @@
         </StringVectorProperty>
 
 
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
     </SourceProxy>
  </ProxyGroup>
 </ServerManagerConfiguration>

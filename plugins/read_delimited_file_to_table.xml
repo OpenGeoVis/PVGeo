@@ -146,6 +146,14 @@
         such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
       </StringVectorProperty>
 
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
     </SourceProxy>
  </ProxyGroup>
 </ServerManagerConfiguration>

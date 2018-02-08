@@ -434,6 +434,7 @@ def generatePythonFilter(info):
     filterGroup = getFilterGroup(info)
     fileReaderProperties = getFileReaderXml(info)
     inputArrayDropDowns = getInputArraysXML(info)
+    pythonPath = getPythonPathProperty()
 
 
     outputXml = '''\
@@ -452,13 +453,14 @@ def generatePythonFilter(info):
 %s
 %s
 %s
+%s
     </SourceProxy>
  </ProxyGroup>
 </ServerManagerConfiguration>
       ''' % (proxyGroup, proxyName, proxyLabel, longHelp, shortHelp,
                 filterGroup, outputDataSetType, extraXml, inputPropertyXml,
                 inputArrayDropDowns, fileReaderProperties, filterProperties,
-                scriptProperties)
+                scriptProperties, pythonPath)
 
     return textwrap.dedent(outputXml)
 
