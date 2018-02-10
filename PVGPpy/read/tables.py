@@ -72,8 +72,6 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     return pdo, header
 
 
-
-
 def packedBinaries(FileName, dblVals=False, dataNm='values', pdo=None):
     """
     Description
@@ -113,7 +111,7 @@ def packedBinaries(FileName, dblVals=False, dataNm='values', pdo=None):
     raw = []
     with open(FileName, 'rb') as file:
         # Unpack by num_bytes
-        raw = struct.unpack('>'+tn_string+typ, file.read(num_bytes*tn))
+        raw = struct.unpack('='+tn_string+typ, file.read(num_bytes*tn))
 
     # Put raw data into vtk array
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtk.VTK_FLOAT)
@@ -180,13 +178,12 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pd
         # Read data
         for row in reader:
             data.append(row)
-
     # Put columns into table
     for i in range(len(titles)):
         col = []
         for row in data:
             col.append(row[i])
-        VTK_data = nps.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)
+        VTK_data = nps.numpy_to_vtk(num_array=np.asarray(col,dtype=float), deep=True, array_type=vtk.VTK_FLOAT)
         VTK_data.SetName(titles[i])
         pdo.AddColumn(VTK_data)
 
