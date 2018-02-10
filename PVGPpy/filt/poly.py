@@ -6,9 +6,16 @@ from datetime import datetime
 from PVGPpy.helpers import *
 # NOTE: internal import - from scipy.spatial import cKDTree
 
+
+#---- Table Math ----#
+
+
 #---- Correlations ----#
 def _corr(arr1, arr2):
     return np.correlate(arr1, arr2, mode='same')
+
+def _mult(arr1, arr2):
+    return arr1*arr2
 
 
 def correlateArrays(pdi, (name1, field1), (name2, field2), multiplier=1.0, newName='', pdo=None):
@@ -22,7 +29,9 @@ def correlateArrays(pdi, (name1, field1), (name2, field2), multiplier=1.0, newNa
     arr1 = getArray(wpdi, field1, name1)
     arr2 = getArray(wpdi, field2, name2)
     # Perform correlations
-    carr = _corr(arr1, arr2)
+    #carr = _corr(arr1, arr2)
+    # TODO
+    carr = _mult(arr1, arr2)
     # Apply the multiplier
     carr *= multiplier
     # Convert to a VTK array
@@ -38,8 +47,14 @@ def correlateArrays(pdi, (name1, field1), (name2, field2), multiplier=1.0, newNa
 
 #---- Normalizations ----#
 # Here are some private functions to encompass the different normalizations
-def _featureScaleNorm(arr):
-    return (arr - np.min(arr)) / (np.max(arr) - np.min(arr))
+def _featureScaleNorm(arr, rng=None):
+    if rng is not None:
+        mi = rng[0]
+        ma = rng[1]
+    else:
+        mi = np.min(arr)
+        ma = np.max(arr)
+    return (arr - mi) / (ma - mi)
 
 def _standardScoreNorm(arr):
     return (arr - np.mean(arr)) / (np.std(arr))
@@ -50,9 +65,15 @@ def _log10Norm(arr):
 def _logNatNorm(arr):
     return np.log(arr)
 
+def getArrayRange(pdi, (name, field)):
+    wpdi = dsa.WrapDataObject(pdi)
+    arr = getArray(wpdi, field, name)
+    arr = np.array(arr)
+    return [np.min(arr), np.max(arr)]
+
 
 # Here is the public function to call for the normalizations
-def normalizeArray(pdi, (name, field), norm, multiplier=1.0, newName='', pdo=None, abs=False):
+def normalizeArray(pdi, (name, field), norm, multiplier=1.0, newName='', pdo=None, abs=False, rng=None):
     """
     TODO: Descrption
     Perform normalize on a data array for any given VTK data object.
@@ -79,7 +100,7 @@ def normalizeArray(pdi, (name, field), norm, multiplier=1.0, newName='', pdo=Non
     # Perform normalization scheme
     # Feature Scale
     if norm == 0:
-        arr = _featureScaleNorm(arr)
+        arr = _featureScaleNorm(arr, rng)
     # Standard Score
     elif norm == 1:
         arr = _standardScoreNorm(arr)
