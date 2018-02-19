@@ -129,11 +129,36 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="Range"
+        label="Range"
+        initial_string="Range"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.0 0.0"
+        number_of_elements="2">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_Range"
+        label="Use Range"
+        initial_string="Use_Range"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <StringVectorProperty
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filt import normalizeArray&#xA;import PVGPpy.helpers as inputhelp&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;# Perfrom normalization&#xA;normalizeArray(pdi, (name,field), Normalization, multiplier=Multiplier, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value)&#xA;"
+        default_values="from PVGPpy.filt import normalizeArray&#xA;import PVGPpy.helpers as inputhelp&#xA;# Choose range to use:&#xA;if Use_Range:&#xA;    rng = Range&#xA;else:&#xA;    rng = None&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;# Perfrom normalization&#xA;normalizeArray(pdi, (name,field), Normalization, multiplier=Multiplier, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value, rng=rng)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

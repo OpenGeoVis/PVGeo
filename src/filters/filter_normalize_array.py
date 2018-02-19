@@ -31,7 +31,9 @@ Properties = dict(
     Multiplier=1.0,
     New_Array_Name='Normalized',
     Normalization=0,
-    Absolute_Value=False
+    Absolute_Value=False,
+    Use_Range=False,
+    Range=[0.0,0.0]
 )
 
 PropertiesHelp = dict(
@@ -44,6 +46,11 @@ PropertiesHelp = dict(
 def RequestData():
     from PVGPpy.filt import normalizeArray
     import PVGPpy.helpers as inputhelp
+    # Choose range to use:
+    if Use_Range:
+        rng = Range
+    else:
+        rng = None
     # Get input/output of Proxy
     pdi = self.GetInput()
     pdo = self.GetOutput()
@@ -52,4 +59,4 @@ def RequestData():
     name = inputhelp.getSelectedArrayName(self, 0)
     field = inputhelp.getSelectedArrayField(self, 0)
     # Perfrom normalization
-    normalizeArray(pdi, (name,field), Normalization, multiplier=Multiplier, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value)
+    normalizeArray(pdi, (name,field), Normalization, multiplier=Multiplier, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value, rng=rng)
