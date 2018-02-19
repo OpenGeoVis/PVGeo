@@ -111,7 +111,7 @@ def packedBinaries(FileName, dblVals=False, dataNm='values', pdo=None):
     raw = []
     with open(FileName, 'rb') as file:
         # Unpack by num_bytes
-        raw = struct.unpack('='+tn_string+typ, file.read(num_bytes*tn))
+        raw = struct.unpack('>'+tn_string+typ, file.read(num_bytes*tn))
 
     # Put raw data into vtk array
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtk.VTK_FLOAT)
