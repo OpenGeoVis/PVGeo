@@ -70,7 +70,6 @@ def RequestData():
     def unitVec(s, g):
         # Direction Vector: Vector points from receiver to source
         vec = (s[0]-g[0], s[1]-g[1], s[2]-g[2])
-        print("vec", vec)
         # Total spatial distance:
         dist = np.sqrt(vec[0]**2 + vec[1]**2 + vec[2]**2)
         # Get unit vector for direction
