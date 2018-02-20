@@ -25,7 +25,6 @@ InputArrayLabels = ['Head Easting', 'Head Northing', 'Head Elevation',
 
 Properties = dict(
     Diameter=17.45,
-    #Lengths=[1.66,7.76,10.17],
     dt=1.0
 )
 
@@ -42,8 +41,10 @@ def RequestData():
     pdi = self.GetInput()
     pdo = self.GetOutput()
     # Grab input arrays to process from drop down menus
-    #- Assume all fiels are same for now:
-    field = inputhelp.getSelectedArrayField(self, 0)
+    #- Grab all fields for input arrays:
+    fields = []
+    for i in range(3):
+        fields.append(inputhelp.getSelectedArrayField(self, i))
     #- Simply grab the names
     names = []
     for i in range(9):
@@ -53,7 +54,7 @@ def RequestData():
     wpdi = dsa.WrapDataObject(pdi)
     arrs = []
     for i in range(9):
-        arrs.append(inputhelp.getArray(wpdi, field, names[i]))
+        arrs.append(inputhelp.getArray(wpdi, fields[i], names[i]))
 
     # grab coordinates for each part of boring machine at time idx as row
     executive = self.GetExecutive()
@@ -64,10 +65,7 @@ def RequestData():
         x = arrs[i*3][idx]
         y = arrs[i*3+1][idx]
         z = arrs[i*3+2][idx]
-        # TODO: if we want to account for length of actual parts of the machine
-        # then calc extra points here and append to pts in correct order
         pts.append((x,y,z))
-        # TODO: if we want to add data attributes append them here
     # now exectute a points to tube filter
     vtk_pts = vtk.vtkPoints()
     for i in range(len(pts)):
