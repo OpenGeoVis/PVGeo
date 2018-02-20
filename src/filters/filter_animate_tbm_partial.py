@@ -1,7 +1,7 @@
 Name = 'AnimatePartialTBM'
 Label = 'Animate Partial Tunnel Boring Machine'
 FilterCategory = 'CSM GP Filters'
-Help = 'This filter analyzes a vtkTable containing position information about a Tunnel Boring Machine (TBM). This Filter iterates over each row of the table as a timestep and uses the XYZ coordinates of a single parts of the TBM to generate a tube that represents taht part of the TBM. To create a directional vector for the length of the cylider that represents the TBM component, this filter searches for the next different point and gets a unit vector bewtween the two. Then two points are constructed in the positive and negative directions of that vector for the ends of the cylinder.'
+Help = 'This filter analyzes a vtkTable containing position information about a Tunnel Boring Machine (TBM). This Filter iterates over each row of the table as a timestep and uses the XYZ coordinates of a single parts of the TBM to generate a tube that represents taht part of the TBM. To create a directional vector for the length of the cylider that represents the TBM component, this filter searches for the next different point and gets a unit vector bewtween the two. Then two points are constructed in the positive and negative directions of that vector for the ends of the cylinder. This only uses rows that have a Status of 2.'
 NumberOfInputs = 1
 InputDataType = 'vtkTable'
 OutputDataType = 'vtkPolyData'
@@ -55,19 +55,18 @@ def RequestData():
     for i in range(4):
         arrs.append(inputhelp.getArray(wpdi, fields[i], names[i]))
 
+    # Get indices for TimeSteps
+    idcs = np.where(arrs[3] == 2)[0]
     # grab coordinates for each part of boring machine at time idx as row
     executive = self.GetExecutive()
     outInfo = executive.GetOutputInformation(0)
     idx = int(outInfo.Get(executive.UPDATE_TIME_STEP())/dt)
-    x = arrs[0][idx]
-    y = arrs[1][idx]
-    z = arrs[2][idx]
+    index = idcs[idx]
+    x = arrs[0][index]
+    y = arrs[1][index]
+    z = arrs[2][index]
     center = (x,y,z)
     pts = []
-
-    # Get indices for TimeSteps
-    idcs = np.where(arrs[3] == 2)[0]
-    #nrows = int(self.GetInput().GetColumn(0).GetNumberOfTuples())
 
     # now compute unit vector.
     def unitVec(s, g):
@@ -96,7 +95,7 @@ def RequestData():
                 break
         index = idcs[idx+iii]
         vec = unitVec(center, (arrs[0][index],arrs[1][index],arrs[2][index]))
-    print(vec)
+
     # Generate two more points Length/2 away in pos/neg unit vector direction
     def genPts(vec, c, l):
         """Generates two points l dist away from c in direction vec"""
@@ -141,7 +140,6 @@ def RequestInformation(self):
     statarr = inputhelp.getArray(wpdi, field, name)
     idcs = np.where(statarr == 2)[0]
     #- Get number of rows in table and use that for num time steps
-    #nrows = int(self.GetInput().GetColumn(0).GetNumberOfTuples())
     xtime = np.arange(0,len(idcs)*dt,dt, dtype=float)
     outInfo.Remove(executive.TIME_STEPS())
     for i in range(len(xtime)):
