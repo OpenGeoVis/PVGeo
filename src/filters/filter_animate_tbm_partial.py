@@ -6,7 +6,7 @@ NumberOfInputs = 1
 InputDataType = 'vtkTable'
 OutputDataType = 'vtkPolyData'
 # Have two array selection drop downs for the two arrays to correlate
-NumberOfInputArrayChoices = 3
+NumberOfInputArrayChoices = 4
 ExtraXml = '''\
     <DoubleVectorProperty
       name="TimestepValues"
@@ -19,12 +19,12 @@ ExtraXml = '''\
     </DoubleVectorProperty>
 '''
 
-InputArrayLabels = ['Easting', 'Northing', 'Elevation']
+InputArrayLabels = ['Easting', 'Northing', 'Elevation', 'Status']
 
 Properties = dict(
     Diameter=17.45,
     Length=1.66,
-    dt=1.0
+    dt=1.0,
 )
 
 PropertiesHelp = dict(
@@ -42,17 +42,17 @@ def RequestData():
     # Grab input arrays to process from drop down menus
     #- Grab all fields for input arrays:
     fields = []
-    for i in range(3):
+    for i in range(4):
         fields.append(inputhelp.getSelectedArrayField(self, i))
     #- Simply grab the names
     names = []
-    for i in range(3):
+    for i in range(4):
         names.append(inputhelp.getSelectedArrayName(self, i))
     # Pass array names and associations on to process
     # Get the input arrays
     wpdi = dsa.WrapDataObject(pdi)
     arrs = []
-    for i in range(3):
+    for i in range(4):
         arrs.append(inputhelp.getArray(wpdi, fields[i], names[i]))
 
     # grab coordinates for each part of boring machine at time idx as row
@@ -64,7 +64,10 @@ def RequestData():
     z = arrs[2][idx]
     center = (x,y,z)
     pts = []
-    nrows = int(self.GetInput().GetColumn(0).GetNumberOfTuples())
+
+    # Get indices for TimeSteps
+    idcs = np.where(arrs[3] == 2)[0]
+    #nrows = int(self.GetInput().GetColumn(0).GetNumberOfTuples())
 
     # now compute unit vector.
     def unitVec(s, g):
@@ -75,23 +78,25 @@ def RequestData():
         # Get unit vector for direction
         return (vec[0]/dist, vec[1]/dist, vec[2]/dist)
 
-    if idx == (nrows - 1):
+    if idx == (len(idcs) - 1):
         # use vect between current and last different points
         iii = 1
         for i in range(1,idx):
-            if arrs[0][idx-i] != x or arrs[1][idx-i] != y or arrs[2][idx-i] != z:
+            if arrs[0][idcs[idx-i]] != x or arrs[1][idcs[idx-i]] != y or arrs[2][idcs[idx-i]] != z:
                 iii = i
                 break
-        vec = unitVec((arrs[0][idx-iii],arrs[1][idx-iii],arrs[2][idx-iii]), center)
+        index = idcs[idx-iii]
+        vec = unitVec((arrs[0][index],arrs[1][index],arrs[2][index]), center)
     else:
         # get vector from current point to next different point.
         iii = 1
-        for i in range(1,nrows-idx):
-            if arrs[0][idx+i] != x or arrs[1][idx+i] != y or arrs[2][idx+i] != z:
+        for i in range(1,len(idcs)-idx):
+            if arrs[0][idcs[idx+i]] != x or arrs[1][idcs[idx+i]] != y or arrs[2][idcs[idx+i]] != z:
                 iii = i
                 break
-        vec = unitVec(center, (arrs[0][idx+iii],arrs[1][idx+iii],arrs[2][idx+iii]))
-
+        index = idcs[idx+iii]
+        vec = unitVec(center, (arrs[0][index],arrs[1][index],arrs[2][index]))
+    print(vec)
     # Generate two more points Length/2 away in pos/neg unit vector direction
     def genPts(vec, c, l):
         """Generates two points l dist away from c in direction vec"""
@@ -122,13 +127,22 @@ def RequestData():
 
 
 def RequestInformation(self):
+    from vtk.numpy_interface import dataset_adapter as dsa
+    import PVGPpy.helpers as inputhelp
     import numpy as np
     executive = self.GetExecutive()
     outInfo = executive.GetOutputInformation(0)
+    pdi = self.GetInput()
     # Calculate list of timesteps here
+    #- Get status array
+    field = inputhelp.getSelectedArrayField(self, 3)
+    name = inputhelp.getSelectedArrayName(self, 3)
+    wpdi = dsa.WrapDataObject(pdi)
+    statarr = inputhelp.getArray(wpdi, field, name)
+    idcs = np.where(statarr == 2)[0]
     #- Get number of rows in table and use that for num time steps
-    nrows = int(self.GetInput().GetColumn(0).GetNumberOfTuples())
-    xtime = np.arange(0,nrows*dt,dt, dtype=float)
+    #nrows = int(self.GetInput().GetColumn(0).GetNumberOfTuples())
+    xtime = np.arange(0,len(idcs)*dt,dt, dtype=float)
     outInfo.Remove(executive.TIME_STEPS())
     for i in range(len(xtime)):
         outInfo.Append(executive.TIME_STEPS(), xtime[i])
