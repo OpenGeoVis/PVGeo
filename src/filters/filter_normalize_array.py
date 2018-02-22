@@ -19,6 +19,7 @@ ExtraXml = '''\
           <Entry value="1" text="Standard Score"/>
           <Entry value="2" text="Natural Log"/>
           <Entry value="3" text="Log Base 10"/>
+          <Entry value="4" text="Just Multiply"/>
         </EnumerationDomain>
         <Documentation>
           This is the type of normalization to apply to the input array.

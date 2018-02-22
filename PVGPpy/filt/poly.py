@@ -84,6 +84,7 @@ def normalizeArray(pdi, (name, field), norm, multiplier=1.0, newName='', pdo=Non
         1 -> Standard Score
         2 -> Natural Log
         3 -> Log Base 10
+        4 -> Simple Multiply by Multiplier
 
     """
     if pdo is None:
@@ -98,17 +99,21 @@ def normalizeArray(pdi, (name, field), norm, multiplier=1.0, newName='', pdo=Non
     if abs:
         arr = np.abs(arr)
     # Perform normalization scheme
-    # Feature Scale
     if norm == 0:
+        # Feature Scale
         arr = _featureScaleNorm(arr, rng)
-    # Standard Score
     elif norm == 1:
+        # Standard Score
         arr = _standardScoreNorm(arr)
     elif norm == 2:
+        # Natural Log
         arr = _logNatNorm(arr)
     elif norm == 3:
+        # Log base 10
         arr = _log10Norm(arr)
-    else:
+    # Just multiply (option 4): no function call
+    elif norm != 4:
+        # Catch bad normalization call
         raise Exception('Normalization %d is not implemented' % norm)
 
     # Apply the multiplier
