@@ -6,7 +6,7 @@ from PVGPpy.helpers import *
 
 #---- Reshape Table ----#
 
-def reshapeTable(pdi, nrows, ncols, pdo=None):
+def reshapeTable(pdi, nrows, ncols, names=None, order='C', pdo=None):
     """
     Todo Description
     """
@@ -17,25 +17,30 @@ def reshapeTable(pdi, nrows, ncols, pdo=None):
     # Get number of rows
     rows = pdi.GetColumn(0).GetNumberOfTuples() # TODO is the necessary?
 
-    # Make a 2D numpy array and fille with data from input table
+    if names is not None and len(names) is not 0:
+        # parse the names (a semicolon seperated list of names)
+        names = names.split(';')
+        num = len(names)
+        if num < ncols:
+            for i in range(num, ncols):
+                names.append('Field%d' % i)
+        elif num > ncols:
+            raise Exception('Too many array names. `ncols` specified as %d and %d names given.' % (ncols, num))
+    else:
+        names = ['Field%d' % i for i in range(ncols)]
+
+    # Make a 2D numpy array and fill with data from input table
     data = np.empty((cols,rows))
     for i in range(cols):
         c = pdi.GetColumn(i)
         data[i] = nps.vtk_to_numpy(c)
-
-    order = 'C'
-    '''
-    # Cannot use Fortran because nps needs contigous arrays
-    if Fortran_Ordering:
-        order = 'F'
-    '''
 
     if ((ncols*nrows) != (cols*rows)):
         raise Exception('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
 
     # Use numpy.reshape() to reshape data NOTE: only 2D because its a table
     # NOTE: column access of this reshape is not contigous
-    data = np.reshape(data, (nrows,ncols), order=order)
+    data = np.array(np.reshape(data, (nrows,ncols), order=order))
     pdo.SetNumberOfRows(nrows)
 
     # Add new array to output table and assign incremental names (e.g. Field0)
@@ -45,7 +50,7 @@ def reshapeTable(pdi, nrows, ncols, pdo=None):
         # allow type to be determined by input
         insert = nps.numpy_to_vtk(num_array=col, deep=True) # array_type=vtk.VTK_FLOAT
         # VTK arrays need a name. Set arbitrarily
-        insert.SetName('Field%d' % i)
+        insert.SetName(names[i])
         #pdo.AddColumn(insert) # these are not getting added to the output table
         # ... work around:
         pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData
