@@ -35,7 +35,6 @@ then
     printf "${GREEN}${BOLD}%s${NORMAL}\n" "--> Tsjakka!! ParaViewGeophysics has been updated and/or is at the current version."
     # Now lets clean out the old version
     pushd ./src
-    sh ./clean_out.sh
     # Now lets build and install everything (running a build incase user has their own plugins added to thier fork)
     sh ./build_plugins.sh
     popd
