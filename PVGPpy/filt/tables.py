@@ -23,11 +23,11 @@ def reshapeTable(pdi, nrows, ncols, names=None, order='C', pdo=None):
         num = len(names)
         if num < ncols:
             for i in range(num, ncols):
-                names.append('Field%d' % i)
+                names.append('Field %d' % i)
         elif num > ncols:
             raise Exception('Too many array names. `ncols` specified as %d and %d names given.' % (ncols, num))
     else:
-        names = ['Field%d' % i for i in range(ncols)]
+        names = ['Field %d' % i for i in range(ncols)]
 
     # Make a 2D numpy array and fill with data from input table
     data = np.empty((cols,rows))
