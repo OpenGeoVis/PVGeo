@@ -5,7 +5,7 @@ Help = 'This filter reads in float or double data that is packed into a binary f
 
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'
-Extensions = 'H@ bin'
+Extensions = 'H@ bin rsf rsf@ HH'
 ReaderDescription = 'Binary Packed Floats or Doubles'
 
 

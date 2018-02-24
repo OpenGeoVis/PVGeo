@@ -9,7 +9,7 @@
         <ShowInMenu category="CSM GP Readers" />
       </Hints>
       <Hints>
-        <ReaderFactory extensions="H@ bin"
+        <ReaderFactory extensions="H@ bin rsf rsf@ HH"
           file_description="Binary Packed Floats or Doubles" />
       </Hints>
 
@@ -51,7 +51,7 @@
             </Documentation>
         </DoubleVectorProperty>
         <Hints>
-            <ReaderFactory extensions="H@ bin"
+            <ReaderFactory extensions="H@ bin rsf rsf@ HH"
                     file_description="Binary Packed Floats or Doubles" />
         </Hints>
 
