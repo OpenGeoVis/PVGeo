@@ -36,7 +36,7 @@ def convertGitHubURL(url):
     return url
 
 def generateViewerURL(dataURL):
-    viewerURL = "https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html"
+    viewerURL = "https://banesullivan.github.io/PVGPvtk.js"
     return viewerURL + '%s%s' % ("?fileURL=", dataURL)
 
 def main():
