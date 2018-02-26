@@ -4,6 +4,19 @@ import csv
 import os
 from vtk.util import numpy_support as nps
 import vtk
+import ast
+
+
+def _parseString(val):
+    try:
+        val = ast.literal_eval(val)
+    except ValueError:
+        pass
+    return val
+
+
+"""def _getVTKtype(typ):
+    """
 
 def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     """
@@ -72,7 +85,7 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     return pdo, header
 
 
-def packedBinaries(FileName, dblVals=False, dataNm='values', pdo=None):
+def packedBinaries(FileName, dblVals=False, dataNm='values', pdo=None, endian='>'):
     """
     Description
     -----------
@@ -111,9 +124,10 @@ def packedBinaries(FileName, dblVals=False, dataNm='values', pdo=None):
     raw = []
     with open(FileName, 'rb') as file:
         # Unpack by num_bytes
-        raw = struct.unpack('>'+tn_string+typ, file.read(num_bytes*tn))
+        raw = struct.unpack(endian+tn_string+typ, file.read(num_bytes*tn))
 
     # Put raw data into vtk array
+    # TODO: dynamic typing
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtk.VTK_FLOAT)
     data.SetName(dataNm)
 
@@ -174,16 +188,30 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pd
             row = reader.next()
             data.append(row)
             for i in range(len(row)):
-                titles.append('Field' + str(i))
+                titles.append('Field %d' % i)
         # Read data
         for row in reader:
+            # Parse values here
+            rr = []
+            for r in row:
+                rr.append(_parseString(r))
             data.append(row)
-    # Put columns into table
+    # now rotate data and extract numpy arrays of same array_type
+    dlist = []
     for i in range(len(titles)):
         col = []
         for row in data:
             col.append(row[i])
-        VTK_data = nps.numpy_to_vtk(num_array=np.asarray(col,dtype=float), deep=True, array_type=vtk.VTK_FLOAT)
+        arr = np.asarray(col, dtype=type(col[0]))
+        dlist.append(arr)
+
+
+    # Put columns into table
+    for i in range(len(dlist)):
+        typ = _getVTKtype(type(dlist[i][0]))
+
+        VTK_data = nps.numpy_to_vtk(num_array=dlist[i], deep=True, array_type=typ)
+
         VTK_data.SetName(titles[i])
         pdo.AddColumn(VTK_data)
 

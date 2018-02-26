@@ -22,6 +22,21 @@
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
+      <IntVectorProperty
+        name="Endianness"
+        command="SetParameter"
+        number_of_elements="1"
+        initial_string="test_drop_down_menu"
+        default_values="0">
+        <EnumerationDomain name="enum">
+          <Entry value="0" text="Big-Endian"/>
+          <Entry value="1" text="Little-Endian"/>
+          <Entry value="2" text="Native"/>
+        </EnumerationDomain>
+        <Documentation>
+          This is the type of normalization to apply to the input array.
+        </Documentation>
+      </IntVectorProperty>
 
 
 
@@ -81,6 +96,18 @@
         <Documentation></Documentation>
       </IntVectorProperty>
 
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Endianness"
+        label="Endianness"
+        initial_string="Endianness"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <DoubleVectorProperty
         panel_visibility="advanced"
         name="Time_Step"
@@ -97,7 +124,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import packedBinaries, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;packedBinaries(FileNames[i], dblVals=Double_Values, dataNm=Data_Name, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import packedBinaries, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;endi = ['&gt;', '&lt;', '@']&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;packedBinaries(FileNames[i], dblVals=Double_Values, dataNm=Data_Name, pdo=pdo, endian=endi[Endianness])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

@@ -7,12 +7,30 @@ NumberOfInputs = 0
 OutputDataType = 'vtkTable'
 Extensions = 'H@ bin rsf rsf@ HH'
 ReaderDescription = 'Binary Packed Floats or Doubles'
+ExtraXml = '''\
+      <IntVectorProperty
+        name="Endianness"
+        command="SetParameter"
+        number_of_elements="1"
+        initial_string="test_drop_down_menu"
+        default_values="0">
+        <EnumerationDomain name="enum">
+          <Entry value="0" text="Big-Endian"/>
+          <Entry value="1" text="Little-Endian"/>
+          <Entry value="2" text="Native"/>
+        </EnumerationDomain>
+        <Documentation>
+          This is the type of normalization to apply to the input array.
+        </Documentation>
+      </IntVectorProperty>
+'''
 
 
 Properties = dict(
     Data_Name='values',
     Double_Values=False,
-    Time_Step=1.0
+    Time_Step=1.0,
+    Endianness=0
 )
 
 PropertiesHelp = dict(
@@ -26,10 +44,11 @@ def RequestData():
 
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
+    endi = ['>', '<', '@']
 
     # Generate Output
     pdo = self.GetOutput()
-    packedBinaries(FileNames[i], dblVals=Double_Values, dataNm=Data_Name, pdo=pdo)
+    packedBinaries(FileNames[i], dblVals=Double_Values, dataNm=Data_Name, pdo=pdo, endian=endi[Endianness])
 
 
 def RequestInformation(self):
