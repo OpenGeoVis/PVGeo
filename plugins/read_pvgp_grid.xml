@@ -1,0 +1,109 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="sources">
+    <SourceProxy name="PVGPGridReader" class="vtkPythonProgrammableFilter" label="PVGPGridReader">
+      <Documentation
+        long_help=""
+        short_help="">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="CSM GP Readers" />
+      </Hints>
+      <Hints>
+        <ReaderFactory extensions="pvgp"
+          file_description="PVGP Unifrom Grid Format" />
+      </Hints>
+
+      <!-- Output data type: "vtkImageData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="6"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+
+
+      <StringVectorProperty
+        name="FileNames"
+        initial_string="FileNames"
+        animateable="0"
+        number_of_elements="0"
+        command="AddParameter"
+        clean_command="ClearParameter"
+        repeat_command="1"
+        panel_visibility="advanced">
+        <FileListDomain name="files"/>
+            <Documentation>
+            The list of files to be read by the reader.
+            </Documentation>
+      </StringVectorProperty>
+
+      <DoubleVectorProperty
+        name="TimestepValues"
+        repeatable="1"
+        information_only="1">
+        <TimeStepsInformationHelper/>
+            <Documentation>
+            Available timestep values.
+            </Documentation>
+        </DoubleVectorProperty>
+        <Hints>
+            <ReaderFactory extensions="pvgp"
+                    file_description="PVGP Unifrom Grid Format" />
+        </Hints>
+
+
+      <DoubleVectorProperty
+        panel_visibility="advanced"
+        name="Time_Step"
+        label="Time Step"
+        initial_string="Time_Step"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="&quot;&quot;&quot;Create a VTK output given the list of FileNames and the current timestep.&#xA;This script can access self and FileNames and should return an output of type&#xA;OutputDataType defined above&quot;&quot;&quot;&#xA;from PVGPpy.read import getTimeStepFileIndex, readPVGPGrid&#xA;pdo = self.GetOutput()&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;readPVGPGrid(FileNames[i], pdo=pdo)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;from PVGPpy.read import setOutputTimesteps, readPVGPGridExtents&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames[0], dt=Time_Step)&#xA;ext = readPVGPGridExtents(FileNames[0])&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
