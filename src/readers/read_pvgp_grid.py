@@ -15,13 +15,15 @@ Properties = dict(
 )
 
 def RequestData(self):
+    import os
     from PVGPpy.read import getTimeStepFileIndex, readPVGPGrid
     pdo = self.GetOutput()
 
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
+    path = os.path.dirname(FileNames[i])
 
-    readPVGPGrid(FileNames[i], pdo=pdo)
+    readPVGPGrid(FileNames[i], pdo=pdo, path=path)
 
 
 def RequestInformation(self):

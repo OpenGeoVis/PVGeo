@@ -148,7 +148,7 @@ def readPVGPGridExtents(headerfile):
     return (0,n1-1, 0,n2-1, 0,n3-1)
 
 
-def readPVGPGrid(headerfile, pdo=None):
+def readPVGPGrid(headerfile, pdo=None, path=None):
     """if pdo is None:
         pdo = vtk.vtkImageData() # vtkImageData"""
     # Read and parse header file
@@ -162,7 +162,8 @@ def readPVGPGrid(headerfile, pdo=None):
     endian = lib['endian']
     numArrays = lib['numArrays']
     dataArrays = lib['dataArrays']
-    originalPath = lib['originalPath']
+    if path is None:
+        path = lib['originalPath']
 
     # Grab Parameters
     n1, n2, n3 = extent
@@ -181,7 +182,7 @@ def readPVGPGrid(headerfile, pdo=None):
         dataNames.append(darr)
         dtype, sdtype, num_bytes, vtktype = _getdtypes(dataArrays[darr]['dtype'])
         vtktypes.append(vtktype)
-        fopen = '%s/%s' % (originalPath, dataArrays[darr]['filemane'])
+        fopen = '%s/%s' % (path, dataArrays[darr]['filemane'])
         tn = int(os.stat(fopen).st_size / num_bytes)
         tn_string = str(tn)
         with open(fopen, 'rb') as f:
@@ -189,9 +190,9 @@ def readPVGPGrid(headerfile, pdo=None):
             raw = struct.unpack(endian+tn_string+sdtype, f.read(num_bytes*tn))
             dataArrs.append(raw)
 
-    #if order is not 'F':
+    if order is not 'F':
         # Reshape the arrays
-        #arr = np.reshape((n1,n2,n3), order=order).flatten()
+        arr = np.reshape((n1,n2,n3), order=order).flatten(order='C')
 
     # vtk data arrays
     for i in range(numArrays):

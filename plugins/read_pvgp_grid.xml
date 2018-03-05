@@ -72,7 +72,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import getTimeStepFileIndex, readPVGPGrid&#xA;pdo = self.GetOutput()&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;readPVGPGrid(FileNames[i], pdo=pdo)&#xA;"
+        default_values="import os&#xA;from PVGPpy.read import getTimeStepFileIndex, readPVGPGrid&#xA;pdo = self.GetOutput()&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;path = os.path.dirname(FileNames[i])&#xA;&#xA;readPVGPGrid(FileNames[i], pdo=pdo, path=path)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
