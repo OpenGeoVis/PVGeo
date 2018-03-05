@@ -20,7 +20,23 @@ ExtraXml = '''\
           <Entry value="2" text="Native"/>
         </EnumerationDomain>
         <Documentation>
-          This is the type of normalization to apply to the input array.
+          This is the type memory endianness.
+        </Documentation>
+      </IntVectorProperty>
+
+      <IntVectorProperty
+        name="DataType"
+        command="SetParameter"
+        number_of_elements="1"
+        initial_string="test_drop_down_menu"
+        default_values="0">
+        <EnumerationDomain name="enum">
+          <Entry value="0" text="Float"/>
+          <Entry value="1" text="Double"/>
+          <Entry value="2" text="Integer"/>
+        </EnumerationDomain>
+        <Documentation>
+          This is data type to read.
         </Documentation>
       </IntVectorProperty>
 '''
@@ -28,9 +44,9 @@ ExtraXml = '''\
 
 Properties = dict(
     Data_Name='values',
-    Double_Values=False,
     Time_Step=1.0,
-    Endianness=0
+    Endianness=0,
+    DataType=0
 )
 
 PropertiesHelp = dict(
@@ -45,10 +61,11 @@ def RequestData():
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
     endi = ['>', '<', '@']
+    dtype = ['f', 'd', 'i']
 
     # Generate Output
     pdo = self.GetOutput()
-    packedBinaries(FileNames[i], dblVals=Double_Values, dataNm=Data_Name, pdo=pdo, endian=endi[Endianness])
+    packedBinaries(FileNames[i], dataNm=Data_Name, pdo=pdo, endian=endi[Endianness], dtype=dtype[DataType])
 
 
 def RequestInformation(self):

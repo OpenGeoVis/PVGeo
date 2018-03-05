@@ -6,7 +6,6 @@ from vtk.util import numpy_support as nps
 import vtk
 import ast
 
-
 def _parseString(val):
     try:
         val = ast.literal_eval(val)
@@ -85,7 +84,7 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     return pdo, header
 
 
-def packedBinaries(FileName, dblVals=False, dataNm='values', pdo=None, endian='>'):
+def packedBinaries(FileName, dataNm='values', pdo=None, endian='>', dtype='f'):
     """
     Description
     -----------
@@ -113,22 +112,29 @@ def packedBinaries(FileName, dblVals=False, dataNm='values', pdo=None, endian='>
     if pdo is None:
         pdo = vtk.vtkTable() # vtkTable
 
-    num_bytes = 4 # FLOAT
-    typ = 'f' #FLOAT
-    if dblVals:
+
+    if dtype is 'd':
         num_bytes = 8 # DOUBLE
-        typ = 'd' # DOUBLE
+        vtktype = vtk.VTK_DOUBLE
+    elif dtype is 'f':
+        num_bytes = 4 # FLOAT
+        vtktype = vtk.VTK_FLOAT
+    elif dtype is 'i':
+        num_bytes = 4 # INTEGER
+        vtktype = vtk.VTK_INT
+    else:
+        raise Exception('dtype \'%s\' unknown/.' % dtype)
 
     tn = os.stat(FileName).st_size / num_bytes
     tn_string = str(tn)
     raw = []
     with open(FileName, 'rb') as file:
         # Unpack by num_bytes
-        raw = struct.unpack(endian+tn_string+typ, file.read(num_bytes*tn))
+        raw = struct.unpack(endian+tn_string+dtype, file.read(num_bytes*tn))
 
     # Put raw data into vtk array
     # TODO: dynamic typing
-    data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtk.VTK_FLOAT)
+    data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
     data.SetName(dataNm)
 
     # Table with single column of data only

@@ -34,7 +34,23 @@
           <Entry value="2" text="Native"/>
         </EnumerationDomain>
         <Documentation>
-          This is the type of normalization to apply to the input array.
+          This is the type memory endianness.
+        </Documentation>
+      </IntVectorProperty>
+
+      <IntVectorProperty
+        name="DataType"
+        command="SetParameter"
+        number_of_elements="1"
+        initial_string="test_drop_down_menu"
+        default_values="0">
+        <EnumerationDomain name="enum">
+          <Entry value="0" text="Float"/>
+          <Entry value="1" text="Double"/>
+          <Entry value="2" text="Integer"/>
+        </EnumerationDomain>
+        <Documentation>
+          This is data type to read.
         </Documentation>
       </IntVectorProperty>
 
@@ -71,6 +87,18 @@
         </Hints>
 
 
+      <IntVectorProperty
+        panel_visibility="default"
+        name="DataType"
+        label="DataType"
+        initial_string="DataType"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <StringVectorProperty
         panel_visibility="default"
         name="Data_Name"
@@ -82,19 +110,6 @@
         number_of_elements="1">
         <Documentation>The string name of the data array generated from the inut file.</Documentation>
       </StringVectorProperty>
-
-      <IntVectorProperty
-        panel_visibility="default"
-        name="Double_Values"
-        label="Double Values"
-        initial_string="Double_Values"
-        command="SetParameter"
-        animateable="1"
-        default_values="0"
-        number_of_elements="1">
-        <BooleanDomain name="bool" />
-        <Documentation></Documentation>
-      </IntVectorProperty>
 
       <IntVectorProperty
         panel_visibility="default"
@@ -124,7 +139,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import packedBinaries, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;endi = ['&gt;', '&lt;', '@']&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;packedBinaries(FileNames[i], dblVals=Double_Values, dataNm=Data_Name, pdo=pdo, endian=endi[Endianness])&#xA;"
+        default_values="from PVGPpy.read import packedBinaries, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;endi = ['&gt;', '&lt;', '@']&#xA;dtype = ['f', 'd', 'i']&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;packedBinaries(FileNames[i], dataNm=Data_Name, pdo=pdo, endian=endi[Endianness], dtype=dtype[DataType])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
