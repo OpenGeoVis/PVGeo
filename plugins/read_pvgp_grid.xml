@@ -1,6 +1,6 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="sources">
-    <SourceProxy name="PVGPGridReader" class="vtkPythonProgrammableFilter" label="PVGPGridReader">
+    <SourceProxy name="PVGPGridReader" class="vtkPythonProgrammableFilter" label="PVGP Uniform Grid Reader">
       <Documentation
         long_help=""
         short_help="">
@@ -9,8 +9,8 @@
         <ShowInMenu category="CSM GP Readers" />
       </Hints>
       <Hints>
-        <ReaderFactory extensions="pvgp"
-          file_description="PVGP Unifrom Grid Format" />
+        <ReaderFactory extensions="pvgp PVGP"
+          file_description="PVGP Unifrom Grid Reader. Opens a header file which points to data arrays to fill a uniform grid." />
       </Hints>
 
       <!-- Output data type: "vtkImageData" -->
@@ -51,8 +51,8 @@
             </Documentation>
         </DoubleVectorProperty>
         <Hints>
-            <ReaderFactory extensions="pvgp"
-                    file_description="PVGP Unifrom Grid Format" />
+            <ReaderFactory extensions="pvgp PVGP"
+                    file_description="PVGP Unifrom Grid Reader. Opens a header file which points to data arrays to fill a uniform grid." />
         </Hints>
 
 
@@ -72,7 +72,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="&quot;&quot;&quot;Create a VTK output given the list of FileNames and the current timestep.&#xA;This script can access self and FileNames and should return an output of type&#xA;OutputDataType defined above&quot;&quot;&quot;&#xA;from PVGPpy.read import getTimeStepFileIndex, readPVGPGrid&#xA;pdo = self.GetOutput()&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;readPVGPGrid(FileNames[i], pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import getTimeStepFileIndex, readPVGPGrid&#xA;pdo = self.GetOutput()&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;readPVGPGrid(FileNames[i], pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -86,7 +86,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import setOutputTimesteps, readPVGPGridExtents&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames[0], dt=Time_Step)&#xA;ext = readPVGPGridExtents(FileNames[0])&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.read import setOutputTimesteps, readPVGPGridExtents&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames[0], dt=Time_Step)&#xA;# NOTE: if using time series, they all must have the same extents&#xA;ext = readPVGPGridExtents(FileNames[0])&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
