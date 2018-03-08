@@ -6,7 +6,7 @@
         short_help="Use `np.correlate()` on `mode='same'` on two selected arrays from one input.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM GP Filters" />
+        <ShowInMenu category="PVGP Filters" />
       </Hints>
 
       <!-- Output data type: "Same as input" -->

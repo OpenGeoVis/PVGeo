@@ -6,7 +6,7 @@
         short_help="This filter will translate the origin of vtkImageData to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior).">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM GP Filters" />
+        <ShowInMenu category="PVGP Filters" />
       </Hints>
 
       <!-- Output data type: "vtkImageData" -->

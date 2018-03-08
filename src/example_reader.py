@@ -6,7 +6,7 @@ Credit for implementing time series goes to: Daan van Vugt <daanvanvugt@gmail.co
 """
 Name = 'ExamplePythonReader'        # Name to be used for coding/macros
 Label = 'Example Python Reader'     # Label for the reader in the menu
-FilterCategory = 'CSM GP Readers'   # The source menu category
+FilterCategory = 'PVGP Readers'   # The source menu category
 
 Extensions = ''
 ReaderDescription = 'All Files: Example Python Reader'

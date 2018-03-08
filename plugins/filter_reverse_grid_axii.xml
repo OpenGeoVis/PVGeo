@@ -6,7 +6,7 @@
         short_help="This filter will flip ImageData on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM GP Filters" />
+        <ShowInMenu category="PVGP Filters" />
       </Hints>
 
       <!-- Output data type: "vtkImageData" -->

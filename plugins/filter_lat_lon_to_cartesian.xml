@@ -6,7 +6,7 @@
         short_help="Help for the Test Filter">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM GP Filters" />
+        <ShowInMenu category="PVGP Filters" />
       </Hints>
 
       <!-- Output data type: "vtkPolyData" -->

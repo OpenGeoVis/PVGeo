@@ -1,6 +1,6 @@
 Name = 'LatLonToCartesian'
 Label = 'Lat Lon To Cartesian'
-FilterCategory = 'CSM GP Filters'
+FilterCategory = 'PVGP Filters'
 Help = 'Help for the Test Filter'
 
 NumberOfInputs = 1

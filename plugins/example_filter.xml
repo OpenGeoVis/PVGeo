@@ -6,7 +6,7 @@
         short_help="This is a simple example of a Python Programmable Filter">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM GP Filters" />
+        <ShowInMenu category="PVGP Filters" />
       </Hints>
 
       <!-- Output data type: "Same as input" -->

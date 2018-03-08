@@ -1,6 +1,6 @@
 Name = 'AnimateTBM'
 Label = 'Animate Tunnel Boring Machine'
-FilterCategory = 'CSM GP Filters'
+FilterCategory = 'PVGP Filters'
 Help = 'This filter analyzes a vtkTable containing position information about a Tunnel Boring Machine (TBM). This Filter iterates over each row of the table as a timestep and uses the XYZ coordinates of the three different parts of the TBM to generate a tube that represents the TBM.'
 NumberOfInputs = 1
 InputDataType = 'vtkTable'

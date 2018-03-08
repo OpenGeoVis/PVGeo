@@ -4,7 +4,7 @@ python programmable filters.
 """
 Name = 'ExamplePythonFilter'        # Name to be used for coding/macros
 Label = 'Example Python Filter'     # Label for the filter menu
-FilterCategory = 'CSM GP Filters'   # The filter/source menu category
+FilterCategory = 'PVGP Filters'   # The filter/source menu category
 
 # A general overview of the plugin
 Help = 'This is a simple example of a Python Programmable Filter'

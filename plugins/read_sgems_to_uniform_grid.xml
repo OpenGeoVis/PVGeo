@@ -6,7 +6,7 @@
         short_help="NOTE: if reading a time series, they must all have the same extent!">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM GP Readers" />
+        <ShowInMenu category="PVGP Readers" />
       </Hints>
       <Hints>
         <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"

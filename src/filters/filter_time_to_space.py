@@ -1,6 +1,6 @@
 Name = 'ProjectShotRecordToSpace'
 Label = 'Project Shot Record To Space'
-FilterCategory = 'CSM GP Filters'
+FilterCategory = 'PVGP Filters'
 Help = ''
 
 NumberOfInputs = 2

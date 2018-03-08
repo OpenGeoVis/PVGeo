@@ -6,7 +6,7 @@
         short_help="This reader provides a starting point for making a file reader in a Programmable Python Source.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM GP Readers" />
+        <ShowInMenu category="PVGP Readers" />
       </Hints>
       <Hints>
         <ReaderFactory extensions=""

@@ -58,5 +58,5 @@ To make a custom filter or reader, follow the outline in [src/example_filter.py]
 All of the distributed filters in this repo will appear in the menu category `CSM GP Filters`. As you develop your own, it may be useful to specify your own menu category as the variable `FilterCategory` in your python file as shown in [src/example_filter.py](src/example_filter.py).
 
 ```py
-FilterCategory = 'CSM GP Filters'
+FilterCategory = 'PVGP Filters'
 ```
