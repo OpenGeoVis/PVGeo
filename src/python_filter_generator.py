@@ -377,6 +377,7 @@ def getProxyGroup(info):
         return info["Group"]
 
 def getFileReaderXml(info):
+    """Author: Daan van Vugt <daanvanvugt@gmail.com>"""
     if getNumberOfInputs(info) > 0:
         return ''
     else:
