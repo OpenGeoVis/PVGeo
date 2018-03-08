@@ -1,6 +1,6 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="sources">
-    <SourceProxy name="PVGPGridReader" class="vtkPythonProgrammableFilter" label="PVGP Uniform Grid Reader">
+    <SourceProxy name="ReadPVGPGrid" class="vtkPythonProgrammableFilter" label="Read PVGP Uniform Grid">
       <Documentation
         long_help=""
         short_help="">

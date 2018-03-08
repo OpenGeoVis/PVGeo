@@ -1,5 +1,5 @@
-Name = 'PVGPGridReader'             # Name to be used for coding/macros
-Label = 'PVGP Uniform Grid Reader'  # Label for the reader in the menu
+Name = 'ReadPVGPGrid'             # Name to be used for coding/macros
+Label = 'Read PVGP Uniform Grid'  # Label for the reader in the menu
 FilterCategory = 'PVGP Readers'   # The source menu category
 Extensions = 'pvgp PVGP'
 ReaderDescription = 'PVGP Unifrom Grid Reader. Opens a header file which points to data arrays to fill a uniform grid.'
