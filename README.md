@@ -8,7 +8,8 @@ Check out the [Docs pages](https://banesullivan.github.io/ParaViewGeophysics/) t
 Unless otherwise specified, all code and documentation distributed here were produced by [Bane Sullivan](http://banesullivan.com), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
 
 ### Acknowledgements
-Thank you to Daan van Vugt for helping me implement the ability to read file series!
+Thank you to Daan van Vugt for helping me implement the ability to read file series and for developing a robust framework for making file readers found [here](https://github.com/Exteris/paraview-python-file-reader).
+
 Thank you to Pat Marion for building the foundation of the Pyhton Programmable Filter/Reader generation script! See details on [this blog post](https://blog.kitware.com/easy-customization-of-the-paraview-python-programmable-filter-property-panel/).
 
 

@@ -6,6 +6,7 @@ This code has been heavily modified by Bane Sullivan (banesullivan@gmail.com) fo
 
 Acknowledgements:
     Daan van Vugt <daanvanvugt@gmail.com> for file series implementation
+        https://github.com/Exteris/paraview-python-file-reader
     Pat Marion (see blog post url above) for the foundation of this script
 """
 
@@ -377,7 +378,9 @@ def getProxyGroup(info):
         return info["Group"]
 
 def getFileReaderXml(info):
-    """Author: Daan van Vugt <daanvanvugt@gmail.com>"""
+    """Author: Daan van Vugt <daanvanvugt@gmail.com>
+    https://github.com/Exteris/paraview-python-file-reader
+    """
     if getNumberOfInputs(info) > 0:
         return ''
     else:
