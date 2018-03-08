@@ -1,6 +1,6 @@
 Name = 'CreateEarthSource'
 Label = 'Create Earth Source'
-FilterCategory = 'CSM GP Sources'
+FilterCategory = 'PVGP Sources'
 Help = ''
 
 NumberOfInputs = 0

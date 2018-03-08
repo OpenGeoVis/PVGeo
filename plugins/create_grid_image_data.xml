@@ -6,7 +6,7 @@
         short_help="">
       </Documentation>
       <Hints>
-        <ShowInMenu category="CSM GP Sources" />
+        <ShowInMenu category="PVGP Sources" />
       </Hints>
 
       <!-- Output data type: "vtkImageData" -->

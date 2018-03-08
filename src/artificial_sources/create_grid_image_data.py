@@ -1,6 +1,6 @@
 Name = 'CreateEmptyGrid'
 Label = 'Create Empty Grid'
-FilterCategory = 'CSM GP Sources'
+FilterCategory = 'PVGP Sources'
 Help = ''
 
 NumberOfInputs = 0
