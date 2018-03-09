@@ -190,9 +190,10 @@ def readPVGPGrid(headerfile, pdo=None, path=None):
             raw = struct.unpack(endian+tn_string+sdtype, f.read(num_bytes*tn))
             dataArrs.append(raw)
 
+    """TODO:
     if order is not 'F':
         # Reshape the arrays
-        arr = np.reshape((n1,n2,n3), order=order).flatten(order='C')
+        arr = np.reshape(arr, (n1,n2,n3), order=order).flatten(order='C')"""
 
     # vtk data arrays
     for i in range(numArrays):
