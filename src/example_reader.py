@@ -4,9 +4,12 @@ python programmable file readers.
 This file reader simply lists the file name at the requested time step
 Credit for implementing time series goes to: Daan van Vugt <daanvanvugt@gmail.com>
 """
-Name = 'ExamplePythonReader'        # Name to be used for coding/macros
-Label = 'Example Python Reader'     # Label for the reader in the menu
-FilterCategory = 'PVGP Readers'   # The source menu category
+# Name to be used for coding/macros
+Name = 'ExamplePythonReader'
+# Label for the reader in the menu
+Label = 'Example Python Reader'
+# The source menu category
+FilterCategory = 'PVGP Readers'
 
 Extensions = ''
 ReaderDescription = 'All Files: Example Python Reader'
@@ -14,9 +17,11 @@ ReaderDescription = 'All Files: Example Python Reader'
 # A general overview of the plugin
 Help = 'This reader provides a starting point for making a file reader in a Programmable Python Source.'
 
-NumberOfInputs = 0                          # Specify zero for readers
+# Specify zero for readers
+NumberOfInputs = 0
 # No input data type
-OutputDataType = 'vtkUnstructuredGrid'      # NEED to specify
+# NEED to specify output type!
+OutputDataType = 'vtkUnstructuredGrid'
 
 # Any extra XML GUI components you might like:
 ExtraXml = ''

@@ -2,18 +2,25 @@
 Example python filter demonstrating some of the features available for
 python programmable filters.
 """
-Name = 'ExamplePythonFilter'        # Name to be used for coding/macros
-Label = 'Example Python Filter'     # Label for the filter menu
-FilterCategory = 'PVGP Filters'   # The filter/source menu category
+# Name to be used for coding/macros:
+Name = 'ExamplePythonFilter'
+# Label for the filter menu:
+Label = 'Example Python Filter'
+# The filter/source menu category:
+FilterCategory = 'PVGP Filters'
 
 # A general overview of the plugin
 Help = 'This is a simple example of a Python Programmable Filter'
 
-NumberOfInputs = 1                  # Specify as many as you would like
-InputDataType = ''                  # Leave blank if input doesn't matter
-OutputDataType = ''                 # Leave blank to preserve input data type
-NumberOfInputArrayChoices = 1       # Number of Input array drop down choices
-InputArrayLabels = ['Array']        # Labels for the array drop down choices
+NumberOfInputs = 1 # Specify as many as you would like
+InputDataType = '' # Leave blank if input doesn't matter
+OutputDataType = '' # Leave blank to preserve input data type
+
+# How to add input arrays:
+#- Number of Input array drop down choices
+NumberOfInputArrayChoices = 1
+#- Labels for the array drop down choices:
+InputArrayLabels = ['Array']
 # Any extra XML GUI components you might like:
 ExtraXml = ''
 
@@ -55,6 +62,6 @@ def RequestData():
 def RequestInformation():
     from paraview import util
     # This script is usually not necessary for filters
-    # Here's an example of setting extents that might be necessary for plugin to function correctly
+    # Here's an example of setting extents that might be necessary for plugin to function correctly:
     #util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])
     print('Have a great day!')
