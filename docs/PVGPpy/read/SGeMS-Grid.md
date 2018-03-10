@@ -57,7 +57,8 @@ and here is the [FLUVSIM object-based model](http://www.trainingimages.org/uploa
         <iframe src="https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/qnahdwedjwndo7t/fluvsim_channels.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
-We will later add in the ability to specify the spacing and origin of the produced vtkImageData as advanced properties of this reader, however you can easily do this by adding a Python Programmable Filter that copies the data and changes these properties with a script like this one:
+!!! note
+    We will later add in the ability to specify the spacing and origin of the produced vtkImageData as advanced properties of this reader, however you can easily do this by adding a Python Programmable Filter that copies the data and changes these properties with a script like this one:
 
 ```py
 ## Note: Set the output type to vtkImageData
@@ -76,9 +77,7 @@ pdo.SetSpacing(x_spacing, y_spacing, z_spacing)
 
 ## PVGPpy.read.sgemsGrid
 
-```py
-PVGPpy.read.sgemsGrid(FileName, deli=' ', useTab=False)
-```
+`PVGPpy.read.sgemsGrid(FileName, deli=' ', useTab=False)`
 
 ### Description
 Generates vtkImageData from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
@@ -102,9 +101,7 @@ Returns vtkImageData
 
 ## PVGPpy.read.sgemsExtent
 
-```py
-PVGPpy.read.sgemsExtent(FileName, deli=' ', useTab=False)
-```
+`PVGPpy.read.sgemsExtent(FileName, deli=' ', useTab=False)`
 
 ### Description
 Reads the input file for the SGeMS format to get output extents. Computationally inexpensive method to discover whole output extent.

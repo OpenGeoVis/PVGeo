@@ -14,7 +14,7 @@ There is a checkbox you can use to specify double precision if needed and a text
 ## Example Use
 For an example of how to use this reader, lets make our own test file of packed floats in binary format. Run this script outside of ParaView to create a test file. It will compute a ripple function and write out all the `Z` data as packed floats.
 
-```py
+```python hl_lines="29 33"
 import struct
 import numpy as np
 

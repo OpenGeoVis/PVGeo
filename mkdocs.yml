@@ -19,9 +19,13 @@ theme:
 
 markdown_extensions:
     - smarty
-    - toc
+    - toc:
+        permalink: true
+        title: "This Page"
     - admonition
-    - codehilite
+    - codehilite:
+        linenums: true
+    - meta
     - pymdownx.tasklist:
         custom_checkbox: true
 

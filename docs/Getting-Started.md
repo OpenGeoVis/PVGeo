@@ -37,7 +37,8 @@ Also, be sure to place/install ParaView and this repository to a location that h
 ### Cloning the Repository
 Clone the repository from your command line by navigating to the directory you would like to save all of the code from this repo.
 
-**NOTE:** Windows users, you are going to want to clone to a folder/drive that has general read/write privileges such as your `D:\\` drive
+!!! note
+    Windows users, you are going to want to clone to a folder that has general read/write privileges such as your `D:\\` drive
 
 From your command line:
 
@@ -122,4 +123,5 @@ Each macro produced for this repository will have a distinct purpose, be it to e
 
 There is also a detailed page on how to easily start making your own macros/scripts. From the people that I have talked to, there tends to be quite a steep learning curve with ParaView scripting, so we want to compile our knowledge into one place for others to gain tips, tricks, and advice to start making their own macros.
 
-Remember, if you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues).
+!!! info
+    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues).
