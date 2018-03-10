@@ -1,15 +1,13 @@
-# PVGPpy.vis.clipThrough
+## pvmacors.vis.clipThrough
 
 ```py
-PVGPpy.vis.clipThrough(clip, ax, bounds, num=10, delay=1.0)
+pvmacros.vis.clipThrough(clip, ax, bounds, num=10, delay=1.0)
 ```
 
-Description
------------
+### Description
 This macro takes a clip source and progresses its location through a set of bounds in the data scene. The macro requires that the clip already exist in the pipeline. This is especially useful if you have many clips linked together as all will move through the seen as a result of this macro.
 
-Parameters
-----------
+### Parameters
 `clip` : string
 
 - The string name of the clip source to be translated.

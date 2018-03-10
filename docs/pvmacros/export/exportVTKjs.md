@@ -1,15 +1,13 @@
-# PVGPpy.export.exportVTKjs
+## pvmacros.export.exportVTKjs
 
 ```py
-PVGPpy.export.exportVTKjs(FileName='', compress=False)
+pvmacros.export.exportVTKjs(FileName='', compress=False)
 ```
 
-Description
------------
+### Description
 This function will execute a script to export the current scene from your rendering into the VTKjs shareable file format.
 
-Parameters
-----------
+### Parameters
 `FileName` : string, optional
 
 - Use to specify the basename of the output file. Extension will always be '.vtkjs'
@@ -19,12 +17,10 @@ Parameters
 - Declares a preference to compress the data arrays.
 - Default False
 
-Returns
--------
+### Returns
 - No return type, but it will print the path to the saved '.vtkjs' file.
 
-Notes
------
+### Notes
 - To view, open the file in the VTKjs standalone web viewer found here: https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
 - Use the get_vtkjs_url.py script in the PVGP repository to get a shareable link for the exported file.
 
@@ -33,7 +29,7 @@ Notes
 ---------------
 
 
-# Motivation
+## Motivation
 In order to effectively communicate our geoscientific findings, we often need to share our 3D visualizations with interested stakeholders. These interested parties are likely not going to have ParaView or other visualization software at hand. Thus we desire to have a means to export our complex visualizations in ParaView to a simple, shareable format that anyone can view. To accomplish this, we will take advantage of vtk.js and its standalone web viewer for vtk.js formats.
 
 Would not it be great to send your client or interested parties an interactive 3D scene of your Geophysical findings like the example below?
@@ -46,12 +42,12 @@ Would not it be great to send your client or interested parties an interactive 3
 -------
 
 
-# VTK.js
+## VTK.js
 [vtk.js](https://kitware.github.io/vtk-js/) is a rendering library made for scientific visualization on the web. This code base brings high performance rendering into anyone's web browser. This library allows us to export complex scenes from ParaView and share them with anyone that has a web browser like Safari or Google Chrome.
 
-The vtk.js library has an open-source [standalone scene viewer](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html) which they have a nice demo for [here](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html). The first link can either be downloaded as an HTML file to be ran locally, or you can go to that link and run from the vtk.js server. vtk.js also published a scene export macro for ParaView that compresses a data scene in ParaView to a shareable format for viewing on the web. The macro from the vtk.js library can be found [here](https://raw.githubusercontent.com/Kitware/vtk-js/master/Utilities/ParaView/export-scene-macro.py) but we also deploy an updated (we think more robust) version of this export macro in the sub-module `export` of our Python module `PVGPpy`.
+The vtk.js library has an open-source [standalone scene viewer](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html) which they have a nice demo for [here](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html). The first link can either be downloaded as an HTML file to be ran locally, or you can go to that link and run from the vtk.js server. vtk.js also published a scene export macro for ParaView that compresses a data scene in ParaView to a shareable format for viewing on the web. The macro from the vtk.js library can be found [here](https://raw.githubusercontent.com/Kitware/vtk-js/master/Utilities/ParaView/export-scene-macro.py) but we also deploy an updated (we think more robust) version of this export macro in the sub-module `export` of our Python module `pvmacros`.
 
-## Demo Shareable Format
+### Demo Shareable Format
 Here are some samples to demonstrate the web viewer. We have included a few of our scenes and one of the vtk.js sample scenes for you to demo:
 
 - [Volcano](https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/volc.vtkjs?dl=0)
@@ -64,14 +60,14 @@ Here are some samples to demonstrate the web viewer. We have included a few of o
 -------
 
 
-# Example Use
-First, make a complex scene in ParaView that you might like to share with someone. <!--For a simple example, download [this] folder and load the state file *(be sure to use relative file paths)*.--> Now that you have your scene loaded, open the python shell from Tools->Python Shell within ParaView. From here, import our Python module delivered in the repository called `PVGPpy`. From the `export` sub-module, there is a function called `exportVTKjs()` which takes two optional arguments (`FileName` string and `compress` boolean). Execute this function and note the output text as it will describe where the exported scene was saved.
+## Example Use
+First, make a complex scene in ParaView that you might like to share with someone. <!--For a simple example, download [this] folder and load the state file *(be sure to use relative file paths)*.--> Now that you have your scene loaded, open the python shell from Tools->Python Shell within ParaView. From here, import our Python module delivered in the repository called `pvmacros`. From the `export` sub-module, there is a function called `exportVTKjs()` which takes two optional arguments (`FileName` string and `compress` boolean). Execute this function and note the output text as it will describe where the exported scene was saved.
 
 ```py
-# Import our Python module:
-from PVGPpy import *
+## Import our Python module:
+from pvmacros import *
 
-# Now run the exportVTKjs script from the export sub-module
+## Now run the exportVTKjs script from the export sub-module
 export.exportVTKjs(FileName='test_export')
 ```
 
@@ -85,10 +81,10 @@ Select the exported scene as the input file for the web viewer from where you sa
 -------
 
 
-# How to Share
+## How to Share
 To share these exported scenes with non-technical stakeholders, we recommend the following processes:
 
-## Quick and Easy
+### Quick and Easy
 
 - Create your scene and export to the vtk.js format (follow process above)
 - Quality control your visualization by viewing in web browser yourself (follow process above)
@@ -100,7 +96,7 @@ Check out the data scene/model by downloading the attached file. Then go to the 
 https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
 ```
 
-## A Bit More Robust
+### A Bit More Robust
 Sometimes we might want to give someone a direct link to the web visualization so all they have to do is open the link on any device and they can see our visualization. Here is a method to share scenes that have a slightly easier process of viewing the file for the end user and will handle the case for mobile platforms.
 
 Unfortunately, making the experience for the end user simple means making your experience a bit more complicated. You will need to host your file on a web service like GitHub or Dropbox *(we have been unsuccessful in getting Google Drive to work)*. Then get a public link to the `.vtkjs` file on that web service and append it to the web viewer URL.
@@ -112,15 +108,15 @@ The easiest way that we have found is to share the files on Dropbox. Use the des
 Once you have that link, use the this script on your URLs in this manner:
 
 ```bash
-# Usage:
+## Usage:
 $ python get_vtkjs_url.py <web file host> <file link>
 
-# Dropbox example:
+## Dropbox example:
 $ python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0"
 
 ```
 <!-- Hidden
-### Process to Generate Links on Your Own
+#### Process to Generate Links on Your Own
 
 - Copy the url to the web browser which we have cloned and host on on of our repos: `https://rawgit.com/banesullivan/PVGPvtk.js/master/StandaloneSceneLoader.html`
 - Now appended `?fileURL=`

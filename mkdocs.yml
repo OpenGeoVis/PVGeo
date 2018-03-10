@@ -5,14 +5,23 @@ repo_url: https://github.com/banesullivan/ParaViewGeophysics
 #repo_name: PVGP on GitHub
 site_url: https://banesullivan.github.io/ParaViewGeophysics/
 edit_uri: ""
-copyright: Copyright &copy 2017, Christopher Bane Sullivan
+copyright: Copyright &copy 2018, Christopher Bane Sullivan
 
 
-theme_dir: cinder
+#theme_dir: cinder
+theme:
+    name: material
+    palette:
+        primary: 'blue-grey'
+        accent: 'indigo'
+    custom_dir: custom_theme
+
 
 markdown_extensions:
     - smarty
     - toc
+    - admonition
+    - codehilite
     - pymdownx.tasklist:
         custom_checkbox: true
 
@@ -24,42 +33,41 @@ pages:
 
 - Getting Started: Getting-Started.md
 
-- Plugins:
-    - About ParaView Plugins: Plugins/Plugins.md
-    - Build Your Own Plugins: Plugins/Build-Your-Own-Plugins.md
-    - Readers:
-        - Read SGeMS Grid: Plugins/Readers/Read-SGeMS-Grid.md
-        - Read GSLIB File: Plugins/Readers/Read-GSLIB-File-to-Table.md
-        - Read UBC Mesh Two File Format: Plugins/Readers/Read-UBC-Mesh-Two-File-Format.md
-        - Read Binary Packed Data: Plugins/Readers/Read-Binary-Packed-Data-to-Table.md
-        - Read Delimited File: Plugins/Readers/Read-Delimited-File-to-Table.md
-    - Filters:
-        - Table to Uniform Grid: Plugins/Filters/Table-to-Uniform-Grid.md
-        - Flip Grid Axii: Plugins/Filters/Flip-Grid-Axii.md
-        - Reshape Table: Plugins/Filters/Reshape-Table.md
-        - Add Cell Connectivity to Points: Plugins/Filters/Add-Cell-Connectivity-to-Points.md
-        - Points to Tube: Plugins/Filters/Points-to-Tube.md
-        - Translate Origin of Grid: Plugins/Filters/Translate-Origin-of-Grid.md
-        - Normalize Array: Plugins/Filters/Normalize-Array.md
-
-- PVGPpy:
+- Plugins & PVGPpy:
     - About PVGPpy: PVGPpy/About-PVGPpy.md
-    - Export:
-        - Export as VTKjs: PVGPpy/export/exportVTKjs.md
-    - Vis:
-        - Clip Through: PVGPpy/vis/Clip-Through.md
-        - Many Slices Along Points: PVGPpy/vis/Many-Slices-Along-Points.md
+    - Build Your Own Plugins: PVGPpy/Build-Your-Own-Plugins.md
     - Read:
         - Binary Packed Data: PVGPpy/read/Binary-Packed-Data.md
         - Delimited Text: PVGPpy/read/Delimited-Text.md
         - GSLIB: PVGPpy/read/GSLIB.md
         - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
         - UBC Mesh Grid: PVGPpy/read/UBC-Mesh.md
+    - Filters:
+        - Table to Uniform Grid: PVGPpy/filt/Table-to-Uniform-Grid.md
+        - Flip Grid Axii: PVGPpy/filt/Flip-Grid-Axii.md
+        - Reshape Table: PVGPpy/filt/Reshape-Table.md
+        - Add Cell Connectivity to Points: PVGPpy/filt/Add-Cell-Connectivity-to-Points.md
+        - Points to Tube: PVGPpy/filt/Points-to-Tube.md
+        - Translate Origin of Grid: PVGPpy/filt/Translate-Origin-of-Grid.md
+        - Normalize Array: PVGPpy/filt/Normalize-Array.md
+
+- ParaView Macros:
+    - About pvmacors: pvmacros/About-pvmacros.md
+    - Export:
+        - Export as VTKjs:  pvmacros/export/exportVTKjs.md
+    - Vis:
+        - Clip Through:  pvmacros/vis/Clip-Through.md
+        - Many Slices Along Points:  pvmacros/vis/Many-Slices-Along-Points.md
 
 - Resources:
+    - Color Maps: cmaps.md
     - Scripts:
         - Example Script: Scripts/Example-Script.md
     - Examples/Tutorials:
         - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
+        - Editing the Axes: Examples/Edit-Axes.md
+        - Editing the Render View: Examples/Edit-Render-View.md
+        - Save Camera Views: Examples/Save-Camera-Locations.md
+        - Understand VTK Data Types: Examples/Understand-VTK.md
     - Virtual Reality:
         - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md

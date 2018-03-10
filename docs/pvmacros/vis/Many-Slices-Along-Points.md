@@ -1,15 +1,13 @@
-# PVGPpy.vis.manySlicesAlongPoints
+## pvmacros.vis.manySlicesAlongPoints
 
 ```py
-PVGPpy.vis.manySlicesAlongPoints(pointsNm, dataNm, numSlices=10, exportpath='', ext='.csv')
+pvmacros.vis.manySlicesAlongPoints(pointsNm, dataNm, numSlices=10, exportpath='', ext='.csv')
 ```
 
-Description
------------
+### Description
 This macro takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at intervals of that path along the vector of that path at that point. This constructs `numSlices` slices through the dataset `dataNm`.
 
-Parameters
-----------
+### Parameters
 `pointsNm` : string
 
 - The string name of the points source to construct the path.
@@ -33,8 +31,7 @@ Parameters
 - Default to '.csv'
 
 
-Notes
------
+### Notes
 - Make sure the input data source is slice-able.
 - The SciPy module is required for this macro.
 
@@ -48,10 +45,10 @@ Sometimes we might have a model, some input data, that we would like to have num
 ## Goal
 Create a macro that uses a series of points to create a path through a dataset that can then be sliced at many points (or customized to select ten or twenty points to slice on). The points will be converted into a sorted polyline using a nearest neighbor approximation so that we can have a coherent travel path through the model. The order in the poly line will be used to determine a normal vector for each slice.
 
-# Example Use
+## Example Use
 *Note: You will need the SciPy module in `pvpython` for this macro to work. [See details](../../Getting-Started.md#using-outside-modules).*
 
-## Set the inputs
+### Set the inputs
 This macro takes two data sources, some data containing the points for our travel path and some data that can be sliced. The function calls for the string name of both of those datasets as specified above.
 
 The `pointsNm` variable will be the string name of the data source that has the point data you would like to use. Think of these points as a travel path, as we will perform a nearest neighbor route between all of the points to create a polyline. A scattered point dataset will not work well for the macro as the slices will have seemingly random orientations.
@@ -64,11 +61,11 @@ The `dataNm` variable will be the string name of the data source or model of whi
 If you have a series of points and a data set, go ahead and run this macro in the Python Shell (Tools->Python Shell):
 
 ```py
->>> from PVGPpy import *
+>>> from pvmacros import *
 >>> vis.manySlicesAlongPoints('Points', 'Data')
 ```
 
-## Saving
+### Saving
 If you desire to save out the slices, you just made with this macro, then set the `exportpath` optional variable when calling the method. Be sure to give that directory a meaningful name and use that directory only for these slices as the slices will be saved out as 'slice0.csv', 'slice1.csv', and so on.
 
 
