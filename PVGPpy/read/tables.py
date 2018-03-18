@@ -13,9 +13,7 @@ def _parseString(val):
         pass
     return val
 
-
 def _getVTKtype(typ):
-    print("_getVTKtype(): ", typ)
     lookup = dict(
         char=vtk.VTK_CHAR,
         int=vtk.VTK_INT,
@@ -26,18 +24,23 @@ def _getVTKtype(typ):
         double=vtk.VTK_DOUBLE,
     )
     if typ is str or typ is np.string_:
-        print('lookup char')
         return lookup['char']
     if typ is np.float64:
-        print('lookup double')
         return lookup['double']
     if typ is float or typ is np.float or typ is np.float32:
-        print('lookup single')
         return lookup['single']
     if typ is int or np.int_:
-        print('lookup int')
         return lookup['int']
     raise Exception('Data type %s unknown to _getVTKtype() method.' % typ)
+
+def _placeArrInTable(dlist, titles, pdo):
+    # Put columns into table
+    for i in range(len(dlist)):
+        typ = _getVTKtype(type(dlist[i][0]))
+        VTK_data = nps.numpy_to_vtk(num_array=dlist[i], deep=True, array_type=typ)
+        VTK_data.SetName(titles[i])
+        pdo.AddColumn(VTK_data)
+    return None
 
 def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     """
@@ -94,14 +97,17 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
         for row in reader:
             data.append(row)
 
-    # Put first column into table
-    for i in range(numCols):
+    # now rotate data and extract numpy arrays of same array_type
+    dlist = []
+    for i in range(len(titles)):
         col = []
         for row in data:
-            col.append(row[i])
-        VTK_data = nps.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)
-        VTK_data.SetName(titles[i])
-        pdo.AddColumn(VTK_data)
+            col.append(_parseString(row[i]))
+        arr = np.asarray(col, dtype=type(col[0]))
+        dlist.append(arr)
+
+    # Put columns into table
+    _placeArrInTable(dlist, titles, pdo)
 
     return pdo, header
 
@@ -214,36 +220,24 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pd
         else:
             # Bulild arbitrary titles for length of first row
             row = reader.next()
-            rr = []
-            for r in row:
-                rr.append(_parseString(r))
-            data.append(rr)
+            data.append(row)
             for i in range(len(row)):
                 titles.append('Field %d' % i)
         # Read data
         for row in reader:
             # Parse values here
-            rr = []
-            for r in row:
-                rr.append(_parseString(r))
-            data.append(rr)
+            data.append(row)
+
     # now rotate data and extract numpy arrays of same array_type
     dlist = []
     for i in range(len(titles)):
         col = []
         for row in data:
-            col.append(row[i])
+            col.append(_parseString(row[i]))
         arr = np.asarray(col, dtype=type(col[0]))
         dlist.append(arr)
 
-
     # Put columns into table
-    for i in range(len(dlist)):
-        typ = _getVTKtype(type(dlist[i][0]))
-        print("vtk tpe: ", typ)
-        VTK_data = nps.numpy_to_vtk(num_array=dlist[i], deep=True, array_type=typ)
-
-        VTK_data.SetName(titles[i])
-        pdo.AddColumn(VTK_data)
+    _placeArrInTable(dlist, titles, pdo)
 
     return pdo

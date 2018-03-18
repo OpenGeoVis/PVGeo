@@ -31,42 +31,20 @@ def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
     Returns vtkImageData
 
     """
+    from PVGPpy.read import gslib
     if pdo is None:
         pdo = vtk.vtkImageData() # vtkImageData
 
-    if (useTab):
-        deli = '\t'
+    table, h = gslib(FileName, deli=deli, useTab=useTab, numIgLns=0, pdo=None)
 
-    titles = []
-    data = []
-    with open(FileName) as f:
-        reader = csv.reader(f, delimiter=deli)
+    n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
 
-        h = reader.next()
-        n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
+    pdo.SetDimensions(n1, n2, n3)
+    pdo.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)
 
-        pdo.SetDimensions(n1, n2, n3)
-        pdo.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)
-
-
-        # Get titles
-        numCols = int(next(f))
-        for i in range(numCols):
-            titles.append(next(f).rstrip('\r\n'))
-
-        # Read data
-        for row in reader:
-            data.append(row)
-        f.close()
-
-    # Put first column into data arrays
-    for i in range(numCols):
-        col = []
-        for row in data:
-            col.append(row[i])
-        VTK_data = nps.numpy_to_vtk(num_array=col, deep=True, array_type=vtk.VTK_FLOAT)
-        VTK_data.SetName(titles[i])
-        pdo.GetPointData().AddArray(VTK_data)
+    # now get arrays from table and add to point data of pdo
+    for i in range(table.GetNumberOfColumns()):
+        pdo.GetPointData().AddArray(table.GetColumn(i))
         #TODO: pdo.GetCellData().AddArray(VTK_data)
 
     return pdo
