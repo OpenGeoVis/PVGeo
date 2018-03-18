@@ -35,8 +35,8 @@ def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
     if pdo is None:
         pdo = vtk.vtkImageData() # vtkImageData
 
-    table, h = gslib(FileName, deli=deli, useTab=useTab, numIgLns=0, pdo=None)
-
+    table, header = gslib(FileName, deli=deli, useTab=useTab, numIgLns=0, pdo=None)
+    h = header.split(deli)
     n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
 
     pdo.SetDimensions(n1, n2, n3)
