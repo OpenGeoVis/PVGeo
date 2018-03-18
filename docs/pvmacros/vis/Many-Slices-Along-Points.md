@@ -1,3 +1,6 @@
+!!! info "Purpose"
+    This macro will use a series of points as a path to cut many slices through a given data set.
+
 ## pvmacros.vis.manySlicesAlongPoints
 
 ```py

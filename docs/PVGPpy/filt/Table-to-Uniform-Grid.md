@@ -1,5 +1,10 @@
 ## About this Filter
+
+!!! bug
+    This filter has some quirks and we are working to completely overhaul it to have correct SEPlib axial conventions (d1=z, d2=x, d3=y) and to be more robust. This documentation is very deprecated.
+
 This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a n1 by n2 by n3 vtkImageData structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (d1=z, d2=y, d3=x). When using SEPlib, specify n1 as the number of elements in the Z-direction, n2 as the number of elements in the X-direction, and n3 as the number of elements in the Y-direction (and so on for other parameters).
+
 
 ## Parameters
 - Order: The contiguity or indexing of the data array stored in memory. Default is Fortran like.

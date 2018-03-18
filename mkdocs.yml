@@ -8,7 +8,6 @@ edit_uri: ""
 copyright: Copyright &copy 2018, Christopher Bane Sullivan
 
 
-#theme_dir: cinder
 theme:
     name: material
     palette:
@@ -62,6 +61,7 @@ pages:
     - Vis:
         - Clip Through:  pvmacros/vis/Clip-Through.md
         - Many Slices Along Points:  pvmacros/vis/Many-Slices-Along-Points.md
+        - Many Slices Along Axis:  pvmacros/vis/Slices-Along-Axis.md
 
 - Resources:
     - Color Maps: cmaps.md

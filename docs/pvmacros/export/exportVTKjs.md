@@ -1,3 +1,6 @@
+!!! info "Purpose"
+    On this page, we demonstrate how to quickly share a 3D rendering of your ParaView visualizations with anyone who has access to the internet so that that can explore the whole scene in a dynamic manner.
+
 ## pvmacros.export.exportVTKjs
 
 ```py
