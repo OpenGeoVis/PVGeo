@@ -1,7 +1,7 @@
-from paraview.simple import LoadPlugin
-import os
 
 def loadPVGPplugins():
+    from paraview.simple import LoadPlugin
+    import os
     dir_path = os.path.dirname(os.path.realpath(__file__))
     # TODO: need directory not file
     PVPATH = "%s/../plugins/" % dir_path

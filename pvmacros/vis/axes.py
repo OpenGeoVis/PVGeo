@@ -1,6 +1,6 @@
-from paraview.simple import GetActiveViewOrCreate, RenderAllViews
 
 def customAxisTicks(rng, axis=0, uniform=False):
+    from paraview.simple import GetActiveViewOrCreate, RenderAllViews
     # note that third parameter is the step size
     # get the active view
     rv = GetActiveViewOrCreate('RenderView')

@@ -1,1 +1,1 @@
-from exportVTKjs import *
+from .exportVTKjs import *

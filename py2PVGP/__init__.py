@@ -3,5 +3,6 @@ This module is meant to be used outside of pvpython in python 2 or 3. This has f
 """
 __all__ = [
     "file_sinks",
-    "cmaps"
+    "cmaps",
+    #"ipython"
 ]
