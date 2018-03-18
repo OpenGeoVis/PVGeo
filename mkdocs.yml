@@ -2,11 +2,17 @@ site_name: ParaViewGeophysics
 site_author: Bane Sullivan
 site_description: "Documentation for the ParaViewGeophysics repository."
 repo_url: https://github.com/banesullivan/ParaViewGeophysics
-#repo_name: PVGP on GitHub
+repo_name: PVGP on GitHub
 site_url: https://banesullivan.github.io/ParaViewGeophysics/
 edit_uri: ""
 copyright: Copyright &copy 2018, Christopher Bane Sullivan
 
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/banesullivan'
+    - type: 'linkedin'
+      link: 'https://linkedin.com/in/bane-sullivan'
 
 theme:
     name: material
@@ -24,6 +30,7 @@ markdown_extensions:
     - admonition
     - codehilite:
         linenums: true
+        guess_lang: false
     - meta
     - pymdownx.tasklist:
         custom_checkbox: true
