@@ -14,8 +14,30 @@ def _parseString(val):
     return val
 
 
-"""def _getVTKtype(typ):
-    """
+def _getVTKtype(typ):
+    print("_getVTKtype(): ", typ)
+    lookup = dict(
+        char=vtk.VTK_CHAR,
+        int=vtk.VTK_INT,
+        uns_int=vtk.VTK_UNSIGNED_INT,
+        long=vtk.VTK_LONG,
+        uns_long=vtk.VTK_UNSIGNED_LONG,
+        single=vtk.VTK_FLOAT,
+        double=vtk.VTK_DOUBLE,
+    )
+    if typ is str or typ is np.string_:
+        print('lookup char')
+        return lookup['char']
+    if typ is np.float64:
+        print('lookup double')
+        return lookup['double']
+    if typ is float or typ is np.float or typ is np.float32:
+        print('lookup single')
+        return lookup['single']
+    if typ is int or np.int_:
+        print('lookup int')
+        return lookup['int']
+    raise Exception('Data type %s unknown to _getVTKtype() method.' % typ)
 
 def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     """
@@ -192,7 +214,10 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pd
         else:
             # Bulild arbitrary titles for length of first row
             row = reader.next()
-            data.append(row)
+            rr = []
+            for r in row:
+                rr.append(_parseString(r))
+            data.append(rr)
             for i in range(len(row)):
                 titles.append('Field %d' % i)
         # Read data
@@ -201,7 +226,7 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pd
             rr = []
             for r in row:
                 rr.append(_parseString(r))
-            data.append(row)
+            data.append(rr)
     # now rotate data and extract numpy arrays of same array_type
     dlist = []
     for i in range(len(titles)):
@@ -215,7 +240,7 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pd
     # Put columns into table
     for i in range(len(dlist)):
         typ = _getVTKtype(type(dlist[i][0]))
-
+        print("vtk tpe: ", typ)
         VTK_data = nps.numpy_to_vtk(num_array=dlist[i], deep=True, array_type=typ)
 
         VTK_data.SetName(titles[i])
