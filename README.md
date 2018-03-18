@@ -56,7 +56,7 @@ A detailed explanation can be found in the [Docs](https://banesullivan.github.io
 
 To make a custom filter or reader, follow the outline in [src/example_filter.py](src/example_filter.py) or [src/example_reader.py](src/example_reader.py)and place your script in either the `src/filters/` or `src/readers/` directories with a meaningful name. *Note* that the script will only compile `.py` files that contain either `filter_` or `reader_` in the file name. This is so you can save other `.py` files in those directories without issues. Then re-run the script  [src/build_plugins.sh](src/build_plugins.sh) to wrap in XML and install to ParaView.
 
-All of the distributed filters in this repo will appear in the menu category `CSM GP Filters`. As you develop your own, it may be useful to specify your own menu category as the variable `FilterCategory` in your python file as shown in [src/example_filter.py](src/example_filter.py).
+All of the distributed filters in this repo will appear in the menu category `PVGP Filters`. As you develop your own, it may be useful to specify your own menu category as the variable `FilterCategory` in your python file as shown in [src/example_filter.py](src/example_filter.py).
 
 ```py
 FilterCategory = 'PVGP Filters'
