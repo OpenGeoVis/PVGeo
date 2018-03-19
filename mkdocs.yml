@@ -3,7 +3,7 @@ site_author: Bane Sullivan
 site_description: "Documentation for the ParaViewGeophysics repository."
 repo_url: https://github.com/banesullivan/ParaViewGeophysics
 repo_name: PVGP on GitHub
-site_url: https://banesullivan.github.io/ParaViewGeophysics/
+site_url: http://pvgp.io/
 edit_uri: ""
 copyright: Copyright &copy 2017-2018, <a href="https://github.com/banesullivan">Bane Sullivan</a>
 
@@ -37,7 +37,8 @@ markdown_extensions:
     - codehilite:
         linenums: true
         guess_lang: true
-    - meta
+    - meta # see this page: https://squidfunk.github.io/mkdocs-material/extensions/metadata/
+    - footnotes # see this page: https://squidfunk.github.io/mkdocs-material/extensions/footnotes/
     - pymdownx.b64 # local images
     - pymdownx.superfences # code snippets
     - pymdownx.inlinehilite #example: import the NumPy module by `#!py import numpy`

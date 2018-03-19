@@ -1,13 +1,13 @@
 !!! warning "Pre-Release Notice"
     This is a Beta release of the ParaViewGeophysics code base and documentation. The plugins and Python modules might be changed in backward-incompatible ways and are not subject to any deprecation policy. The current documentation is a work in progress and may fall behind.
 
-Welcome to the ParaView for Geophysics Documentation! This website documents the code base we are making for data visualization in geophysics on the application ParaView by Kitware. Through visualization, we can bring value to data and hold the products of geoscience in a new light to interested parties.
+Welcome to the ParaViewGeophysics (PVGP) documentation! This website documents the code base we are making for data visualization in geophysics on the application ParaView by Kitware. Through visualization, we can bring value to data and hold the products of geoscience in a new light to interested parties.
 
 This repository was produced from the work of an undergraduate research project at the Colorado School of Mines titled: Illuminating the Value of Geophysical Imaging through Visualization and Virtual Reality. Checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-MFIwUy1uUTlfVHM/view?usp=sharing) standalone presentation to learn more about the project.
 
 
 !!! tip "How to explore this documentation"
-    Use the sidebar to the right to explore the contents of the current page and use the sidebar to the left to find all the different pages for this websote (readers & filters for ParaView are under 'Plugins & PVGPpy' while macros and code documentation for the `pvmacros` module are under the 'ParaView Macros' category). Explore around!
+    On a Desktop: Use the sidebar to the right to explore the contents of the current page and use the sidebar to the left to find all the different pages for this websote (readers & filters for ParaView are under 'Plugins & PVGPpy' while macros and code documentation for the `pvmacros` module are under the 'ParaView Macros' category). Explore around!
 
 !!! tip "Where to get the code"
     All code is published on the GitHub repository 'ParaViewGeophysics' linked to this page. Click the 'PVGP on GitHub' link on the right side of the menu bar at the top to find all of the code.
