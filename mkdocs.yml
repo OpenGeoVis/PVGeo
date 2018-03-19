@@ -21,9 +21,11 @@ extra:
 theme:
     name: material
     palette:
-        primary: 'blue-grey'
-        accent: 'indigo'
+        primary: 'blue'
+        accent: 'blue-grey'
     custom_dir: custom_theme
+    favicon: 'img/globe_small.png'
+    logo: 'img/globe_small.png'
 
 
 markdown_extensions:
@@ -36,6 +38,7 @@ markdown_extensions:
         linenums: true
         guess_lang: true
     - meta
+    - pymdownx.b64 # local images
     - pymdownx.superfences # code snippets
     - pymdownx.inlinehilite #example: import the NumPy module by `#!py import numpy`
     - pymdownx.caret # ability to add exponents with caret: a^3
