@@ -1,13 +1,16 @@
-Welcome to the ParaView for Geophysics Documentation! This website documents the code base we are making for data visualization in geophysics on the application ParaView by Kitware. Through visualization, we can bring value to data and hold the products of geoscience in a new light to interested parties.
-
 !!! warning "Pre-Release Notice"
     This is a Beta release of the ParaViewGeophysics code base and documentation. The plugins and Python modules might be changed in backward-incompatible ways and are not subject to any deprecation policy. The current documentation is a work in progress and may fall behind.
 
+Welcome to the ParaView for Geophysics Documentation! This website documents the code base we are making for data visualization in geophysics on the application ParaView by Kitware. Through visualization, we can bring value to data and hold the products of geoscience in a new light to interested parties.
+
 This repository was produced from the work of an undergraduate research project at the Colorado School of Mines titled: Illuminating the Value of Geophysical Imaging through Visualization and Virtual Reality. Checkout [this PDF](https://drive.google.com/file/d/0B6v2US3m042-MFIwUy1uUTlfVHM/view?usp=sharing) standalone presentation to learn more about the project.
 
-Use the sidebar to the right to explore the contents of the current page and use the sidebar to the left to find all the different pages for this websote (readers & filters for ParaView are under 'Plugins' while macros and code documentation for the PVGPpy module are under the 'PVGPpy' category). Explore around!
 
-All code is published on the GitHub repository 'ParaViewGeophysics' linked to this page. Click the 'GitHub' link on the right side of the menu bar at the top to find all of the code.
+!!! tip "How to explore this documentation"
+    Use the sidebar to the right to explore the contents of the current page and use the sidebar to the left to find all the different pages for this websote (readers & filters for ParaView are under 'Plugins & PVGPpy' while macros and code documentation for the `pvmacros` module are under the 'ParaView Macros' category). Explore around!
+
+!!! tip "Where to get the code"
+    All code is published on the GitHub repository 'ParaViewGeophysics' linked to this page. Click the 'PVGP on GitHub' link on the right side of the menu bar at the top to find all of the code.
 
 
 ## Demo
@@ -31,6 +34,9 @@ Our specific goal is to develop a heavily documented library of plugins, macros,
 
 Through the deployment of this software, geophysicists will gain an ability to represent their 3D spatially referenced data intuitively to interested parties and stakeholders. By integrating the visualization of various data, interested parties will gain insight into the value of the information in the models. A spatially defined 3D model yields minimal value to an outside party unless they can relate that model to other spatial features. For example, a 3D model of faults in the subsurface is unhelpful unless the location of known features to interested parties can be displayed simultaneously. To give a value of information, we must be able to show where the spatially referenced data is in relation to intuitive features like topography, well locations, survey points, or other known features. Through visual integration, we try to mimic the reality of the space in which data was acquired so that it will hold meaning to anyone that immerses into the visualization regardless of background.
 
+??? abstract "SAGEEP 2018 Abstract"
+    The results of geophysical imaging techniques often hold high significance to stakeholders in the problems addressed yet the effective perception of those results remains a dynamic challenge for all. To illuminate the value of geophysical imaging techniques, we are developing a framework to visually integrate geophysical data and models in 3D which extends into Virtual Reality (VR) as well as statistically analyzing interpretation advantages in VR. The motivation for this effort comes from a desire to directly engage stakeholders with geophysical data gaining Value of Information (VOI) and de-risking decision making in project planning. This framework is a code base that extends the functionality of the open-source visualization platform ParaView by Kitware. These extensions make it possible to visually integrate geophysical data in a multidimensional rendering space so that the end product is interpretable to non-geoscientists and that all parties can gain insight and VOI from geophysical imaging techniques. To show value in the VR presentation of multi-dimensional visualizations, we aim to develop metrics that will analyze the effectiveness of visual analysis in VR compared to traditional methods. We will evaluate these metrics through statistical gaming type protocol, where we will task subjects with making spatial decisions and finding features of interest in complex geoscientific scenes. We hypothesize that VR will bring the needed perception to most efficiently make spatial decisions and detect features of interest as well as convey information such as uncertainty in a usable manner. We will have preliminary results of the gaming protocol by March 2018 as well as share our visual framework along that journey in the form of a GitHub repository titled “ParaViewGeophysics.” Our goal in sharing the repository is to deliver a toolset that enables geophysicists to rapidly visualize their data and models as well as effectively communicate their findings to interested stakeholders.
+
 
 ### About the Author
 <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
@@ -41,10 +47,6 @@ Unless otherwise specified, all code and documentation distributed here were pro
 
 <div style="float: left; margin:10px 10px 10px 10px"" </div>
 
-
-
-!!! abstract "SAGEEP 2018 Abstract"
-    The results of geophysical imaging techniques often hold high significance to stakeholders in the problems addressed yet the effective perception of those results remains a dynamic challenge for all. To illuminate the value of geophysical imaging techniques, we are developing a framework to visually integrate geophysical data and models in 3D which extends into Virtual Reality (VR) as well as statistically analyzing interpretation advantages in VR. The motivation for this effort comes from a desire to directly engage stakeholders with geophysical data gaining Value of Information (VOI) and de-risking decision making in project planning. This framework is a code base that extends the functionality of the open-source visualization platform ParaView by Kitware. These extensions make it possible to visually integrate geophysical data in a multidimensional rendering space so that the end product is interpretable to non-geoscientists and that all parties can gain insight and VOI from geophysical imaging techniques. To show value in the VR presentation of multi-dimensional visualizations, we aim to develop metrics that will analyze the effectiveness of visual analysis in VR compared to traditional methods. We will evaluate these metrics through statistical gaming type protocol, where we will task subjects with making spatial decisions and finding features of interest in complex geoscientific scenes. We hypothesize that VR will bring the needed perception to most efficiently make spatial decisions and detect features of interest as well as convey information such as uncertainty in a usable manner. We will have preliminary results of the gaming protocol by March 2018 as well as share our visual framework along that journey in the form of a GitHub repository titled “ParaViewGeophysics.” Our goal in sharing the repository is to deliver a toolset that enables geophysicists to rapidly visualize their data and models as well as effectively communicate their findings to interested stakeholders.
 
 ## Outline of Goals
 These are the goals to achieve through publishing this repository but not necessarily the goals of the research project from which this repository was developed.

@@ -1,3 +1,6 @@
+!!! info
+    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues).
+
 ## A Brief Introduction to ParaView
 
 ParaView is an open-source platform that can visualize 2D, 3D, and 4D (time-varying) datasets. ParaView can process multiple very large data sets in parallel then later collect the results to yield a responsive graphics environment with which a user can interact. The better the processor and graphics hardware the machine or machines hosting the software, the faster and better ParaView will run. However, it can run quite well on a laptop with a standard graphics card such as a MacBook Pro.
@@ -12,10 +15,10 @@ Open the downloaded installer and follow the prompts then drag the application i
 Tour around software:
 Take a look at Section 2.1 of **The ParaView Tutorial** for details of the application’s GUI environment. Chapter 2 of the tutorial as a whole does an excellent job touring the software and its workflow for those unfamiliar with the software and its general capabilities.
 
-!!! tip
+??? tip "Tip: Auto Apply"
     Enable Auto Apply in the preferences for interactive slicers and so you don't always have to click apply. (*Note:* sometimes you may want this off when working with large datasets)
 
-!!! tip
+??? tip "Tip: State Files"
     One convenient feature is to save the state of the ParaView environment. This saves all the options you selected for all the filters you applied to visualize some data. Select File->Save State… (*Note:* this saves the absolute path of the files loaded into ParaView, so be sure to select **Search for Files Under Directory...** when opening these state files)
 
 
@@ -29,7 +32,10 @@ To clone and use the plugins distributed in the repo for ParaView, you'll need [
 ### Windows Users
 If you're on Windows, see [this](https://git-for-windows.github.io) for GitHub and [this](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) guide for using the Unix command line on windows.
 
-Download and use [Cygwin](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) for the command line operation of the scripts in this repo. When installing Cygwin, *make sure to install the `bash`, `dos2unix`, `git`, and `python2-setuptools` packages*. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system! **Make sure the line endings for all of the shell scripts are LF and not CRLF after cloning.**
+Download and use [Cygwin](https://devtidbits.com/2011/07/01/cygwin-walkthrough-and-beginners-guide-is-it-linux-for-windows-or-a-posix-compatible-alternative-to-powershell/) for the command line operation of the scripts in this repo. When installing Cygwin, *make sure to install the `bash`, `dos2unix`, `git`, and `python2-setuptools` packages*. Now you can use the Cygwin terminal as the command line just like you are on a Unix based operating system!
+
+!!! tip "Tip: Windows Users"
+    Some Windows use have found that it is necessary to make sure the line endings for all of the shell scripts are LF and not CRLF after cloning.
 
 Also, be sure to place/install ParaView and this repository to a location that has general read/write privileges for all users such as on your `D:\\` drive. You will encounter all types of issues running the scripts and simply accessing the code via Cygwin if you need admin privileges to access where it is all saved. *Note: the install scripts will need access to the directory where ParaView is installed*
 
@@ -37,17 +43,17 @@ Also, be sure to place/install ParaView and this repository to a location that h
 ### Cloning the Repository
 Clone the repository from your command line by navigating to the directory you would like to save all of the code from this repo.
 
-!!! note
+!!! tip "Tip: Windows Users"
     Windows users, you are going to want to clone to a folder that has general read/write privileges such as your `D:\\` drive
 
 From your command line:
 
 ```bash
 ## Clone this repository
-$ git clone https://github.com/banesullivan/ParaViewGeophysics
+git clone https://github.com/banesullivan/ParaViewGeophysics
 
 ## Go in the cloned repository
-$ cd ParaViewGeophysics
+cd ParaViewGeophysics
 ```
 
 ### Installing the PVGP Repository
@@ -57,19 +63,19 @@ Now to get started using the plugins and python modules included in this reposit
 If you are on MacOS X, then your life is easy! Simply run the script `installMac.sh`.
 
 ```bash
-$ sh ./installMac.sh
+sh ./installMac.sh
 ```
 
-Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **CSM Geophysics Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` module by executing `import PVGPpy`. Errors should not arise but if they do, post to the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) and the errors will be *immediately* addressed.
+Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **PVGP Filters** is in the **Filters** menu. Then open the **Python Shell** and import the modules delivered in this repo by executing `import PVGPpy` and `import pvmacros`. Errors should not arise but if they do, post to the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) and the errors will be *immediately* addressed.
 
 #### Windows Paths
 Setting up environmental variables is a bit more involved for Windows. First you need to open **Control Center** and search for **Advanced system settings**. Click **Environment variables**. In the section **User variables for Name** add the following variable by clicking **New...**:
 
 - Variable Name: `PV_PLUGIN_PATH` then select **Browse Directory...** and navigate to the directory where you cloned ParaViewGeophysics and select the `plugins` directory.
 
-Now we need to edit the `PYTHONPATH` variable that should already exit in your environment. This can get messy/tricky so please strictly follow these instructions:
+Now we need to edit the `PYTHONPATH` variable that should already exist in your environment. This can get messy/tricky so please strictly follow these instructions:
 
-1. Copy the value in the `PV_PLUGIN_PATH` variable but **BE SURE NOT TO INCLUDE THE `plugins` DIRECTORY**. So basically this is the entire path leading up to the `plugins` directory.
+1. Copy the value in the `PV_PLUGIN_PATH` variable but *BE SURE **NOT** TO INCLUDE THE `plugins` DIRECTORY*. So basically this is the entire path leading up to the `plugins` directory.
 
 2. Edit the `PYTHONPATH` variable by selecting it then click **Edit...**.
 
@@ -77,7 +83,10 @@ Now we need to edit the `PYTHONPATH` variable that should already exit in your e
 
 4. Append the **Variable value**. At the end of your re-selected path, type a semi-colon `;` and then add the path to the ParaViewGeophysics repository which you copied in the first step by clicking paste. This is critical to be able to import outside Python modules in `pvpython`.
 
-5. Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **CSM Geophysics Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` module by executing `import PVGPpy`. If an error arises please double check your paths.
+5. Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **PVGP Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` module by executing `import PVGPpy`.
+
+??? help
+    If an error arises: First, please double check your paths. If you are still having trouble, feel free to post to the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) which is regularly checked.
 
 
 
@@ -86,12 +95,8 @@ We have included a script that will update the repository from GitHub, and since
 
 ```bash
 ## Run this to update ParaViewGeophysics in the future:
-$ sh ./updatePVGP.sh
+sh ./updatePVGP.sh
 ```
-
-!!! note
-    Windows users, be sure to run this in cygwin or a bash environment of your choice.
-
 
 --------------
 
@@ -100,7 +105,7 @@ ParaView's Python environment, `pvpython`, can be a bit tricky to start using ou
 
 
 !!! info "Required Modules"
-    These are all of the modules that filters, readers, and macros might use in this repo. We recommend opening the Python Shell from ParaView (Tools->Python Shell) and testing the import of each of these modules
+    These are all of the modules that filters, readers, and macros might use in this repo. We recommend opening the Python Shell from ParaView (Tools->Python Shell) and testing the import of each of these modules. This list will be regularly updated.
 
     - [SciPy](https://www.scipy.org/install.html)
     - [NumPy](http://www.numpy.org) (you may need to update ParaView's version to the latest version for SciPy to be happy)
@@ -118,10 +123,9 @@ The purpose of including all this extra documentation is to provide a convenient
 There is a page dedicated to every plugin in the respective readers and filters categories. On these pages, you will find implementation details, parameters, code quirks, and general usage information. As the project continues, we will also try to have an example for every reader and filter so that users can get a feel for what is going on and how they might apply these plugins to address their needs. Since almost all geoscientific data is proprietary, these tutorials will likely come late so that we can find good open data sets and models that users can find outside of this repo for free.
 
 ### Macro documentation
+
 <!-- TODO: is this section consistent with PVGPpy? -->
+
 Each macro produced for this repository will have a distinct purpose, be it to export isometric screenshots of any data scene or to batch load / convert specific data sets. The macros will have broad applications and be formatted to work with generally any data scene or data of specific formats so that they can be easily expanded upon to complete specific tasks. For the macros, we will try to immediately have sample data and a tutorial upon publishing with documentation of what we are doing and why. The Python scripts themselves will be heavily commented so that every user can tailor the scripts to their individual needs.
 
 There is also a detailed page on how to easily start making your own macros/scripts. From the people that I have talked to, there tends to be quite a steep learning curve with ParaView scripting, so we want to compile our knowledge into one place for others to gain tips, tricks, and advice to start making their own macros.
-
-!!! info
-    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues).

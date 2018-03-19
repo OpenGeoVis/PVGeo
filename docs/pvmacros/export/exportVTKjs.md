@@ -1,37 +1,6 @@
 !!! info "Purpose"
     On this page, we demonstrate how to quickly share a 3D rendering of your ParaView visualizations with anyone who has access to the internet so that that can explore the whole scene in a dynamic manner.
 
-## pvmacros.export.exportVTKjs
-
-```py
-pvmacros.export.exportVTKjs(FileName='', compress=False)
-```
-
-### Description
-This function will execute a script to export the current scene from your rendering into the VTKjs shareable file format.
-
-### Parameters
-`FileName` : string, optional
-
-- Use to specify the basename of the output file. Extension will always be '.vtkjs'
-
-`compress` : boolean, optional
-
-- Declares a preference to compress the data arrays.
-- Default False
-
-### Returns
-- No return type, but it will print the path to the saved '.vtkjs' file.
-
-### Notes
-- To view, open the file in the VTKjs standalone web viewer found here: https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
-- Use the get_vtkjs_url.py script in the PVGP repository to get a shareable link for the exported file.
-
-
-
----------------
-
-
 ## Motivation
 In order to effectively communicate our geoscientific findings, we often need to share our 3D visualizations with interested stakeholders. These interested parties are likely not going to have ParaView or other visualization software at hand. Thus we desire to have a means to export our complex visualizations in ParaView to a simple, shareable format that anyone can view. To accomplish this, we will take advantage of vtk.js and its standalone web viewer for vtk.js formats.
 
@@ -64,17 +33,18 @@ Here are some samples to demonstrate the web viewer. We have included a few of o
 
 
 ## Example Use
-First, make a complex scene in ParaView that you might like to share with someone. <!--For a simple example, download [this] folder and load the state file *(be sure to use relative file paths)*.--> Now that you have your scene loaded, open the python shell from Tools->Python Shell within ParaView. From here, import our Python module delivered in the repository called `pvmacros`. From the `export` sub-module, there is a function called `exportVTKjs()` which takes two optional arguments (`FileName` string and `compress` boolean). Execute this function and note the output text as it will describe where the exported scene was saved.
+First, make a complex scene in ParaView that you might like to share with someone. <!--For a simple example, download [this] folder and load the state file *(be sure to use relative file paths)*.--> Now that you have your scene loaded, open the python shell from Tools->Python Shell within ParaView. From here, import our Python module delivered in the repository called `#!py pvmacros`. From the `#!py export` sub-module, there is a function called `#!py def exportVTKjs()` which takes two optional arguments (`FileName` string and `compress` boolean). Execute this function and note the output text as it will describe where the exported scene was saved.
 
 ```py
-## Import our Python module:
-from pvmacros import *
+## Import our ParaView Macros module:
+import pvmacros as pvm
 
 ## Now run the exportVTKjs script from the export sub-module
-export.exportVTKjs(FileName='test_export')
+pvm.export.exportVTKjs(FileName='test_export')
 ```
 
-*If you have trouble post on our [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) or read the vtk.js documentation [here](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html)*
+??? help
+    If you have trouble post on our [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) or read the vtk.js documentation [here](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html)
 
 Now open the standalone web viewer by opening [this link](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html).
 
@@ -112,12 +82,14 @@ Once you have that link, use the this script on your URLs in this manner:
 
 ```bash
 ## Usage:
-$ python get_vtkjs_url.py <web file host> <file link>
+python get_vtkjs_url.py <web file host> <file link>
 
 ## Dropbox example:
-$ python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0"
+python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0"
 
 ```
+
+
 <!-- Hidden
 #### Process to Generate Links on Your Own
 
@@ -147,3 +119,31 @@ $ python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/rip
 - This link can then be shared with anyone (on a computer, phone, or tablet)
 - Be sure to check the link yourself before sending to make sure everything worked
 -->
+
+------
+
+## pvmacros.export.exportVTKjs
+
+```py
+pvmacros.export.exportVTKjs(FileName='', compress=False)
+```
+
+### Description
+This function will execute a script to export the current scene from your rendering into the VTKjs shareable file format.
+
+### Parameters
+`FileName` : string, optional
+
+- Use to specify the basename of the output file. Extension will always be '.vtkjs'
+
+`compress` : boolean, optional
+
+- Declares a preference to compress the data arrays.
+- Default False
+
+### Returns
+- No return type, but it will print the path to the saved '.vtkjs' file.
+
+### Notes
+- To view, open the file in the VTKjs standalone web viewer found here: https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
+- Use the get_vtkjs_url.py script in the PVGP repository to get a shareable link for the exported file.

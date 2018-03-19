@@ -34,8 +34,12 @@ markdown_extensions:
     - admonition
     - codehilite:
         linenums: true
-        guess_lang: false
+        guess_lang: true
     - meta
+    - pymdownx.superfences # code snippets
+    - pymdownx.inlinehilite #example: import the NumPy module by `#!py import numpy`
+    - pymdownx.caret # ability to add exponents with caret: a^3
+    - pymdownx.details # collapsible widgets
     - pymdownx.tasklist:
         custom_checkbox: true
 
