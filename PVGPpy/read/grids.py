@@ -46,7 +46,7 @@ def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
     for i in range(table.GetNumberOfColumns()):
         pdo.GetPointData().AddArray(table.GetColumn(i))
         #TODO: pdo.GetCellData().AddArray(VTK_data)
-
+    del(table)
     return pdo
 
 def sgemsExtent(FileName, deli=' ', useTab=False):

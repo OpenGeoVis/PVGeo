@@ -42,6 +42,24 @@ def _placeArrInTable(dlist, titles, pdo):
         pdo.AddColumn(VTK_data)
     return None
 
+
+def _rows2table(rows, titles, pdo):
+    # now rotate data and extract numpy arrays of same array_type
+    data = np.asarray(rows).T
+    typs = []
+    dlist = []
+    for i in range(len(titles)):
+        # get data types
+        typs.append(type(_parseString(data[i][0])))
+        dlist.append(np.asarray(data[i], dtype=typs[i]))
+    # Put columns into table
+    _placeArrInTable(dlist, titles, pdo)
+    return None
+
+#-----------------
+# End of Helpers
+#-----------------
+
 def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     """
     Description
@@ -97,19 +115,10 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
         for row in reader:
             data.append(row)
 
-    # now rotate data and extract numpy arrays of same array_type
-    dlist = []
-    for i in range(len(titles)):
-        col = []
-        for row in data:
-            col.append(_parseString(row[i]))
-        arr = np.asarray(col, dtype=type(col[0]))
-        dlist.append(arr)
-
-    # Put columns into table
-    _placeArrInTable(dlist, titles, pdo)
+    _rows2table(data, titles, pdo)
 
     return pdo, header
+
 
 
 def packedBinaries(FileName, dataNm='values', pdo=None, endian='>', dtype='f'):
@@ -228,16 +237,6 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pd
             # Parse values here
             data.append(row)
 
-    # now rotate data and extract numpy arrays of same array_type
-    dlist = []
-    for i in range(len(titles)):
-        col = []
-        for row in data:
-            col.append(_parseString(row[i]))
-        arr = np.asarray(col, dtype=type(col[0]))
-        dlist.append(arr)
-
-    # Put columns into table
-    _placeArrInTable(dlist, titles, pdo)
+    _rows2table(data, titles, pdo)
 
     return pdo
