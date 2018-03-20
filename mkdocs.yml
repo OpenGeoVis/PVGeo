@@ -32,7 +32,6 @@ markdown_extensions:
     - smarty
     - toc:
         permalink: true
-        title: "This Page"
     - admonition
     - codehilite:
         linenums: true
