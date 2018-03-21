@@ -63,6 +63,7 @@ pages:
         - GSLIB: PVGPpy/read/GSLIB.md
         - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
         - UBC Mesh Grid: PVGPpy/read/UBC-Mesh.md
+        - PVGP Grid: PVGPpy/read/PVGP-Grid.md
     - Filters:
         - Table to Uniform Grid: PVGPpy/filt/Table-to-Uniform-Grid.md
         - Flip Grid Axii: PVGPpy/filt/Flip-Grid-Axii.md
@@ -71,6 +72,9 @@ pages:
         - Points to Tube: PVGPpy/filt/Points-to-Tube.md
         - Translate Origin of Grid: PVGPpy/filt/Translate-Origin-of-Grid.md
         - Normalize Array: PVGPpy/filt/Normalize-Array.md
+        - Animate Tunnel Boring Machine: PVGPpy/filt/Animate-TBM.md
+        - Correlate Arrays: PVGPpy/filt/Correlate-Arrays.md
+        - UBC Add Model: PVGPpy/filt/UBC-Add-Model.md
 
 - ParaView Macros:
     - About pvmacors: pvmacros/About-pvmacros.md
