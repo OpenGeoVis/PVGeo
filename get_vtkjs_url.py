@@ -36,7 +36,7 @@ def convertGitHubURL(url):
     return url
 
 def generateViewerURL(dataURL):
-    viewerURL = "https://banesullivan.github.io/PVGPvtk.js"
+    viewerURL = "http://gpvis.org/"
     return viewerURL + '%s%s' % ("?fileURL=", dataURL)
 
 def main():
