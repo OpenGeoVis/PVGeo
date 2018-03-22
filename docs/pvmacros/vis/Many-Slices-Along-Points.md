@@ -23,7 +23,7 @@ The `dataNm` variable will be the string name of the data source or model of whi
 
 <!-- TODO provide a pointset and a 3D model for an example -->
 
-If you have a series of points and a data set, go ahead and run this macro in the Python Shell (Tools->Python Shell):
+If you have a series of points and a data set, go ahead and run this macro in the Python Shell: 'View->Python Shell' (or 'Tools->Python Shell' depending on your ParaView version):
 
 ```py
 import pvmacros as pvm

@@ -33,7 +33,7 @@ Here are some samples to demonstrate the web viewer. We have included a few of o
 
 
 ## Example Use
-First, make a complex scene in ParaView that you might like to share with someone. <!--For a simple example, download [this] folder and load the state file *(be sure to use relative file paths)*.--> Now that you have your scene loaded, open the python shell from Tools->Python Shell within ParaView. From here, import our Python module delivered in the repository called `#!py pvmacros`. From the `#!py export` sub-module, there is a function called `#!py def exportVTKjs()` which takes two optional arguments (`FileName` string and `compress` boolean). Execute this function and note the output text as it will describe where the exported scene was saved.
+First, make a complex scene in ParaView that you might like to share with someone. <!--For a simple example, download [this] folder and load the state file *(be sure to use relative file paths)*.--> Now that you have your scene loaded, open the python shell from'View->Python Shell' (or 'Tools->Python Shell' depending on your ParaView version) within ParaView. From here, import our Python module delivered in the repository called `#!py pvmacros`. From the `#!py export` sub-module, there is a function called `#!py def exportVTKjs()` which takes two optional arguments (`FileName` string and `compress` boolean). Execute this function and note the output text as it will describe where the exported scene was saved.
 
 ```py
 ## Import our ParaView Macros module:

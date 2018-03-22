@@ -1,3 +1,5 @@
+# About `PVGPpy`
+
 !!! warning "This page is incomplete"
     There are a lot of pages in the documentation and we are trying to fill all content as soon as possible. Stay tuned for updates to this page
 
@@ -13,13 +15,15 @@ The development of plugins for the ParaView software platform can seem like a da
 ## Readers
 A reader takes data from files and puts them into the proper VTK data structures so that we can make conversions and visualize on the ParaView pipeline. ParaView comes native with a plethora of data format readers but there are a million more formats out there in the world. So by creating formats for common geoscientific formats, we hope to make the process of getting data into the ParaView pipeline as simple as possible. We also are doing this to show how easy it is to make custom readers and convey the message that if you can dream it, we can code it! Whatever your data format, there is likely a VTK data structure perfect for it.
 
+!!! info
+    Explore the different Reader Plugins by looking under the Readers Section of the Plugins & PVGPpy part of the navigation pane.
+
 
 ## Filters
 A filter modifies, transforms, combines, analyses, etc. data on the ParaView pipeline. Filters provide a means for changing how we visualize data or create a means of taking some data and generating other data from that. For example we might have a series of scattered points that we know represent the center of a tunnel. We can use a filter to transform those points into a connected line that we then construct a tunnel around. This allows us to save out minimal data (just XYZ points as opposed to complex geometries that make up the tunnel) to our hard drive while still having complex visualizations from that data.
 
+!!! info
+    Explore the different Filter Plugins by looking under the Filters Section of the Plugins & PVGPpy part of the navigation pane.
 
 ## PVGPpy
-PVGPpy is a python module we are developing for direct use of our macros in the ParaView shell. This module will contain the bulk of our macros for your use. We are publishing our macros in this manner to:
-
-1. Streamline their use by allowing users to call the macros like python functions directly from the ParaView shell.
-2. Easily update/change the macros without constant merge conflictions as users will need to input specific parameters for their use. This is much easier to do with function calls than overwriting the macro files.
+PVGPpy is a python module we are developing modulizing functionality common throughout the plugins. This module will contain the bulk of our code for fie reader and filter production. We are publishing the plugins code base in this manner so that we can easily update/change the code without deprecation issues.

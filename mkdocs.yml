@@ -57,7 +57,7 @@ pages:
 - Plugins & PVGPpy:
     - About PVGPpy: PVGPpy/About-PVGPpy.md
     - Build Your Own Plugins: PVGPpy/Build-Your-Own-Plugins.md
-    - Read:
+    - Readers:
         - Binary Packed Data: PVGPpy/read/Binary-Packed-Data.md
         - Delimited Text: PVGPpy/read/Delimited-Text.md
         - GSLIB: PVGPpy/read/GSLIB.md
