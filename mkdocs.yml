@@ -77,7 +77,7 @@ pages:
         - UBC Add Model: PVGPpy/filt/UBC-Add-Model.md
 
 - ParaView Macros:
-    - About pvmacors: pvmacros/About-pvmacros.md
+    - About pvmacros: pvmacros/About-pvmacros.md
     - Export:
         - Export as VTKjs:  pvmacros/export/exportVTKjs.md
     - Vis:
