@@ -1,2 +1,41 @@
+!!! failure "Further description to come!"
+    Current content is deprecated. There are a lot of pages in the documentation and we are trying to fill all content as soon as possible. Stay tuned for updates to this page
+
+
+## Macros vs. Scripts
+<!--- TODO: we need more info here --->
+We will from now on refer to macros as a set of standard codes that can be used regardless of data sets or scenes in ParaView. ParaView's sense of macro is not robust enough for us so that we will be referring to traditional macros in ParaView as 'scripts' from here on. Scripts will be used on specific sets of data whereas macros can be used on any set of data.
+
+### Macros
+Macros are Python codes that complete tedious or recurring tasks either in ParaView's GUI or ParaView's batch processing environment. We will use macros to complete everyday tasks like saving screenshots of isometric views of a data scene or tedious tasks like making many slices of a single data set along a line.
+
+### Scripts
+Scripts are Python codes we will use for tasks like loading scenes and for applying several macros at once. It is often helpful to set up a script for a project so that you can quickly run all the visualization processing at once each time you update your model files or create new versions of your data.
+
+
+-------
+
+
+## How to Run Scripts
+Use the Python Shell from 'Tools->Python Shell' in the ParaView GUI. Do not import scripts as macros in ParaView as they become static in the ParaView GUI and make managing/changing quite difficult. To use scripts in the batch processing environment, use the `pvpython` program delivered in ParaView. On my OS X operating system it is under the `Applications/ParaView/Contents/bin/pvpython`. More info on all of this to come! <!-- TODO -->
+
+To simply run the scripts in this repo, edit the script files under the `scripts/` directory for your use, then run them in ParaView by selecting 'Tools->Python Shell' then click 'Run Script'. Navigate to the `scripts/` directory in this repo and select the script you desire to use.
+
+
+-------
+
+
+## Make Your Own Scripts
+!!! failure "Description to come!"
+    There are a lot of pages in the documentation and we are trying to fill all content as soon as possible. Stay tuned for updates to this page
+<!--- TODO --->
+
+### Using the Trace Tool
+<!--- TODO: how to make meaning of the trace output --->
+!!! failure "Description to come!"
+    There are a lot of pages in the documentation and we are trying to fill all content as soon as possible. Stay tuned for updates to this page
+
+### Using PVPython
+<!--- TODO: Batch processing --->
 !!! failure "Description to come!"
     There are a lot of pages in the documentation and we are trying to fill all content as soon as possible. Stay tuned for updates to this page
