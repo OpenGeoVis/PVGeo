@@ -22,6 +22,7 @@ The vtk.js library has an open-source [standalone scene viewer](https://kitware.
 ### Demo Shareable Format
 Here are some samples to demonstrate the web viewer which we host on [gpvis.org](http://gpvis.org). We have included a few of our scenes and one of the vtk.js sample scenes for you to demo:
 
+- [Fluvial Channels](http://gpvis.org/?fileURL=https://dl.dropbox.com/s/qnahdwedjwndo7t/fluvsim_channels.vtkjs?dl=0)
 - [Volcano](http://volcano.gpvis.org)
 - [Ripple](http://ripple.gpvis.org)
 - [Tunnels](http://tunnels.gpvis.org)
