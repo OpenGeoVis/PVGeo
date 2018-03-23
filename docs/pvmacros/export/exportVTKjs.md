@@ -42,7 +42,7 @@ import pvmacros as pvm
 pvm.export.exportVTKjs(FileName='test_export')
 ```
 
-Now open the standalone web viewer by opening [this link](http://gpvis.org).
+Now open the standalone web viewer by opening [gpvis.org](http://gpvis.org).
 
 Select the exported scene as the input file for the web viewer from where you saved it (should be under `~/Dropbox/PVGP_vtkjs/`). The export macro should have printed out the location of the saved scene in the Python Shell.
 
@@ -64,7 +64,7 @@ To share these exported scenes with non-technical stakeholders, we recommend the
 
 > Check out the data scene/model by downloading the attached file. Then go to the link below and open that downloaded file.
 
-> https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html
+> [http://gpvis.org/](http://gpvis.org)
 
 
 ### A Bit More Robust
