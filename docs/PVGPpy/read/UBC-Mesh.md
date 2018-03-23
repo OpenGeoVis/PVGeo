@@ -94,8 +94,7 @@ Places model data onto a mesh. This is for the UBC Grid data reaers to associate
 
 - The name of the model data array once placed on the vtkRectilinearGrid.
 
-Returns
--------
+### Returns
 Returns the input vtkRectilinearGrid with model data appended.
 
 
