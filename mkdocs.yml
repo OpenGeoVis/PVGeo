@@ -30,7 +30,7 @@ theme:
 
 
 markdown_extensions:
-    - markdown_include.include
+    #- markdown_docs_include.docs-include
     - smarty
     - toc:
         permalink: true

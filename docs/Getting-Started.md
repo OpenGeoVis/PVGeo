@@ -112,7 +112,7 @@ ParaView's Python environment, `pvpython`, can be a bit tricky to start using ou
 
     ??? info "List of All Other Required Modules"
         Most of these modules come with standard distributions of Python or they come in the ParaView software platform ready for use. This list is just for completeness.
-        
+
         - paraview and [vtk](https://www.vtk.org/download/) (included in ParaView)
         - struct
         - csv
@@ -141,17 +141,12 @@ ParaView's Python environment, `pvpython`, can be a bit tricky to start using ou
 --------------
 
 ## Documentation
-All documentation for the code produced from this project will be included on this website. The documentation will contain an explanation of all of the produced plugins (filters and readers) and macros. Use the Sidebar to explore the documentation content and to find all documentation for readers, filters, macros, and more as you need. There are also details on how to [build your own plugins](./PVGPpy/Build-Your-Own-Plugins.md), how to [export data scenes](./pvmacros/export/exportVTKjs.md), and transferring your complex data scenes into [virtual reality](./Virtual-Reality/Entering-Virtual-Reality.md).
+All documentation for the code produced from this project is included on this website. The documentation contains an explanation of all of the produced plugins (filters and readers) and macros. Use the Sidebar to explore the documentation content and to find all documentation for readers, filters, macros, and more as you need. There are also details on how to [build your own plugins](./PVGPpy/Build-Your-Own-Plugins.md), how to [export data scenes](./pvmacros/export/exportVTKjs.md), and transferring your complex data scenes into [virtual reality](./Virtual-Reality/Entering-Virtual-Reality.md).
 
 The purpose of including all this extra documentation is to provide a convenient location for geoscientists to learn how to tailor ParaView to their needs because data representation and communication are an integral part of success in science. To efficiently represent our spatial data is the first step to becoming successful and productive geoscientists. This is the principle behind why we are publishing this documentation along with the code in the repository. Not only do we want to communicate the effort and motivation for this project efficiently, but we want to empower others to communicate their scientific endeavors through spatial visualizations effectively.
 
 ### Plugin Documentation
-There is a page dedicated to every plugin in the respective readers and filters categories. On these pages, you will find implementation details, parameters, code quirks, and general usage information. As the project continues, we will also try to have an example for every reader and filter so that users can get a feel for what is going on and how they might apply these plugins to address their needs. Since almost all geoscientific data is proprietary, these tutorials will likely come late so that we can find good open data sets and models that users can find outside of this repo for free.
+There is a page dedicated to every plugin in the respective readers and filters categories. On these pages, you will find implementation details, parameters, code quirks, and general usage information. We are working to have an example for every reader and filter so that users can get a feel for what is going on and how they might apply these plugins to address their needs. Since almost all geoscientific data is proprietary, these tutorials will likely come late so that we can find good open data sets and models that users can find outside of this repo for free.
 
 ### Macro documentation
-
-<!-- TODO: is this section consistent with PVGPpy? -->
-
-Each macro produced for this repository will have a distinct purpose, be it to export isometric screenshots of any data scene or to batch load / convert specific data sets. The macros will have broad applications and be formatted to work with generally any data scene or data of specific formats so that they can be easily expanded upon to complete specific tasks. For the macros, we will try to immediately have sample data and a tutorial upon publishing with documentation of what we are doing and why. The Python scripts themselves will be heavily commented so that every user can tailor the scripts to their individual needs.
-
-There is also a detailed page on how to easily start making your own macros/scripts. From the people that I have talked to, there tends to be quite a steep learning curve with ParaView scripting, so we want to compile our knowledge into one place for others to gain tips, tricks, and advice to start making their own macros.
+Each macro produced in `pvmacros` will have a distinct purpose, be it to export isometric screenshots of any data scene or create various types of slices through a data volume. The macros will have broad applications and be formatted to work with generally any data scene or data of specific formats so that they can be easily expanded upon to complete specific tasks. For the macros, we will try to immediately have sample data and a tutorial upon publishing with documentation of what we are doing and why.
