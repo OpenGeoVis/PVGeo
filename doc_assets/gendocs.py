@@ -1,4 +1,4 @@
-# This script generates mkdocs friendly Markdown documentation from a python package.
+# This script generates mkdocs friendly Markdown documentation from a function declaration in a python package.
 # It is based on the the following blog post by Christian Medina
 # https://medium.com/python-pandemonium/python-introspection-with-the-inspect-module-2c85d5aa5a48#.twcmlyack
 
@@ -6,18 +6,18 @@ import pydoc
 import os
 import sys
 
-module_header = "# Package {} Documentation\n"
-class_header = "## Class {}"
-function_header = "### {}"
+module_header = "## `{}` Documentation\n"
+class_header = "## Class `{}` \n"
+function_header = "### `{}` \n"
 
 
 def getmarkdown(module):
     output = [module_header.format(module.__name__)]
 
     if module.__doc__:
-        output.append(module.__doc__)
+        output.append(module.__doc__.replace('\n    ','\n'))
 
-    output.extend(getclasses(module))
+    output.extend(getfunctions(module))
     return "\n".join((str(x) for x in output))
 
 def getclasses(item):
@@ -75,5 +75,6 @@ def generatedocs(module):
         print("Error while trying to import " + module)
 
 if __name__ == '__main__':
-
-    print(generatedocs(sys.argv[1]))
+    docs = generatedocs(sys.argv[1])
+    with open(sys.argv[2], 'w') as f:
+        f.write(docs)
