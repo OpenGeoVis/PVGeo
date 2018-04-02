@@ -46,7 +46,7 @@ If you are on MacOS X, then your life is easy! Simply run the script `installMac
 $ sh ./installMac.sh
 ```
 
-Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **CSM GP Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` and `pvmacros` modules by executing `import PVGPpy` and `import pvmacros`. Errors should not arise but if they do, post to the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) and the errors will be *immediately* addressed.
+Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **PVGP Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` and `pvmacros` modules by executing `import PVGPpy` and `import pvmacros`. Errors should not arise but if they do, post to the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) and the errors will be *immediately* addressed.
 
 
 -----
