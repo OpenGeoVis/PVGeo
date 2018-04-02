@@ -43,7 +43,7 @@ ExtraXml = '''\
 
 
 Properties = dict(
-    Data_Name='values',
+    Data_Name='',
     Time_Step=1.0,
     Endianness=0,
     DataType=0

@@ -121,7 +121,7 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
 
 
 
-def packedBinaries(FileName, dataNm='values', pdo=None, endian='>', dtype='f'):
+def packedBinaries(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
     """
     Description
     -----------
@@ -173,7 +173,7 @@ def packedBinaries(FileName, dataNm='values', pdo=None, endian='>', dtype='f'):
     # TODO: dynamic typing
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
 
-    if dataNm is None or dataNm == 'values':
+    if dataNm is None or dataNm == '':
         dataNm = os.path.splitext(os.path.basename(FileName))[0]
     data.SetName(dataNm)
 

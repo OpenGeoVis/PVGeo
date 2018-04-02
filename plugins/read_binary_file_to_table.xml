@@ -106,7 +106,7 @@
         initial_string="Data_Name"
         command="SetParameter"
         animateable="1"
-        default_values="values"
+        default_values=""
         number_of_elements="1">
         <Documentation>The string name of the data array generated from the inut file.</Documentation>
       </StringVectorProperty>
