@@ -172,6 +172,9 @@ def packedBinaries(FileName, dataNm='values', pdo=None, endian='>', dtype='f'):
     # Put raw data into vtk array
     # TODO: dynamic typing
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
+
+    if dataNm is None or dataNm == 'values':
+        dataNm = os.path.splitext(os.path.basename(FileName))[0]
     data.SetName(dataNm)
 
     # Table with single column of data only
