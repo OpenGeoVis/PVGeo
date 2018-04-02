@@ -104,7 +104,7 @@ Here is a list of features that are shortly coming to this repo. This list will 
 - [x] [Many Slices Along Points:](pvmacros/vis/Many-Slices-Along-Points.md) Export slices of dataset along polyline at every point on that line (normal is the vector from that point to the next)
 - [x] [Export a scene](pvmacros/export/exportVTKjs.md) to a shareable 3D format
 
-### Macros and Scripts
+### Scripts
 - [ ] How to start making your own scripts (tips, tricks, and general advice)
 - [ ] A few sample scripts to set up tutorial environments.
 
