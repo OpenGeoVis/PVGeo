@@ -90,6 +90,7 @@ pages:
 - Resources:
     - Color Maps: cmaps.md
     - Scripts:
+        - About Scripts: Scripts/About-Scripts.md
         - Example Script: Scripts/Example-Script.md
     - Examples/Tutorials:
         - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
