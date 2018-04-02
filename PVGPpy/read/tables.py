@@ -173,7 +173,7 @@ def packedBinaries(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
     # TODO: dynamic typing
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
 
-    if dataNm is None or dataNm == '':
+    if dataNm is None or dataNm == '' or dataNm == 'values':
         dataNm = os.path.splitext(os.path.basename(FileName))[0]
     data.SetName(dataNm)
 
