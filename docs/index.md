@@ -77,7 +77,7 @@ Unless otherwise specified, all code and documentation distributed here were pro
 Here is a list of features that are shortly coming to this repo. This list will be regularly updated. More documentation is soon to come. We want to do it right: with tutorials, example data, and detailed justification for need and use of each reader, filter, and macro.
 
 !!! help "Suggestions?"
-    We need **your** suggestions for what kinds of file format readers to make as well as ideas for filters to meet your data needs. Post on the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) as a feature request. We
+    We need **your** suggestions for what kinds of file format readers to make as well as ideas for filters to meet your data needs. Post on the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) as a feature request.
 
 ### Readers
 - [ ] **Open Mining Format:** All file types and data types found [here](https://github.com/GMSGDataExchange/omf)
