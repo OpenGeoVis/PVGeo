@@ -1,0 +1,105 @@
+site_name: ParaViewGeophysics
+site_author: Bane Sullivan
+site_description: "Documentation for the ParaViewGeophysics repository."
+repo_url: https://github.com/banesullivan/ParaViewGeophysics
+repo_name: PVGP on GitHub
+site_url: http://pvgp.io/
+edit_uri: ""
+copyright: Copyright &copy 2017-2018, <a href="https://github.com/banesullivan">Bane Sullivan</a>
+
+google_analytics:
+  - 'UA-115959679-1'
+  - 'auto'
+
+extra:
+  disqus: 'pvgp'
+  social:
+    - type: 'github'
+      link: 'https://github.com/banesullivan'
+    - type: 'linkedin'
+      link: 'https://linkedin.com/in/bane-sullivan'
+
+theme:
+    name: material
+    palette:
+        primary: 'blue-grey'
+        accent: 'red'
+    custom_dir: custom_theme
+    favicon: 'img/globe_small.png'
+    logo: 'img/globe_small.png'
+
+
+
+markdown_extensions:
+    #- markdown_docs_include.docs-include
+    - smarty
+    - toc:
+        permalink: true
+    - admonition
+    - codehilite:
+        linenums: true
+        guess_lang: true
+    - meta # see this page: https://squidfunk.github.io/mkdocs-material/extensions/metadata/
+    - footnotes # see this page: https://squidfunk.github.io/mkdocs-material/extensions/footnotes/
+    - pymdownx.b64 # local images
+    - pymdownx.superfences # code snippets
+    - pymdownx.inlinehilite #example: import the NumPy module by `#!py import numpy`
+    - pymdownx.caret # ability to add exponents with caret: a^3
+    - pymdownx.details # collapsible widgets
+    - pymdownx.tasklist:
+        custom_checkbox: true
+
+plugins:
+    - search
+
+pages:
+- Home: index.md
+
+- Getting Started: Getting-Started.md
+
+- Plugins & PVGPpy:
+    - About PVGPpy: PVGPpy/About-PVGPpy.md
+    - Build Your Own Plugins: PVGPpy/Build-Your-Own-Plugins.md
+    - Readers:
+        - Binary Packed Data: PVGPpy/read/Binary-Packed-Data.md
+        - Delimited Text: PVGPpy/read/Delimited-Text.md
+        - GSLIB: PVGPpy/read/GSLIB.md
+        - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
+        - UBC Mesh Grid: PVGPpy/read/UBC-Mesh.md
+        - PVGP Grid: PVGPpy/read/PVGP-Grid.md
+    - Filters:
+        - Table to Uniform Grid: PVGPpy/filt/Table-to-Uniform-Grid.md
+        - Flip Grid Axii: PVGPpy/filt/Flip-Grid-Axii.md
+        - Reshape Table: PVGPpy/filt/Reshape-Table.md
+        - Add Cell Connectivity to Points: PVGPpy/filt/Add-Cell-Connectivity-to-Points.md
+        - Points to Tube: PVGPpy/filt/Points-to-Tube.md
+        - Translate Origin of Grid: PVGPpy/filt/Translate-Origin-of-Grid.md
+        - Normalize Array: PVGPpy/filt/Normalize-Array.md
+        - Animate Tunnel Boring Machine: PVGPpy/filt/Animate-TBM.md
+        - Correlate Arrays: PVGPpy/filt/Correlate-Arrays.md
+        - UBC Add Model: PVGPpy/filt/UBC-Add-Model.md
+
+- ParaView Macros:
+    - About pvmacros: pvmacros/About-pvmacros.md
+    - Export:
+        - Export as VTKjs:  pvmacros/export/exportVTKjs.md
+    - Vis:
+        - Clip Through:  pvmacros/vis/Clip-Through.md
+        - Many Slices Along Points:  pvmacros/vis/Many-Slices-Along-Points.md
+        - Many Slices Along Axis:  pvmacros/vis/Slices-Along-Axis.md
+
+- Resources:
+    - Color Maps: cmaps.md
+    - Scripts:
+        - About Scripts: Scripts/About-Scripts.md
+        - Example Script: Scripts/Example-Script.md
+    - Examples/Tutorials:
+        - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
+        - Editing the Axes: Examples/Edit-Axes.md
+        - Editing the Render View: Examples/Edit-Render-View.md
+        - Save Camera Views: Examples/Save-Camera-Locations.md
+        - Understand VTK Data Types: Examples/Understand-VTK.md
+    - Virtual Reality:
+        - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md
+
+- Features to Come: Upcoming.md

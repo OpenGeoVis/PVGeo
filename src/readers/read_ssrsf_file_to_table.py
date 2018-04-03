@@ -1,12 +1,12 @@
-Name = 'ReadPackedBinaryFileToTable'
-Label = 'Read Packed Binary File To Table'
+Name = 'ReadMadagascarFileToTable'
+Label = 'Read Madagascar File To Table'
 FilterCategory = 'PVGP Readers'
-Help = 'This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.'
+Help = 'This reads in float or double data that is packed into a Madagascar binary file format with a leader header. The reader ignores all of the ascii header details by searching for the sequence of three special characters: EOL EOL EOT (\014\014\004) and it will treat the followng binary packed data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We will later implement the ability to create a gridded volume from the header info. This reader is a quick fix for Samir. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository. Details: http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF'
 
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'
 Extensions = 'H@ bin rsf rsf@ HH'
-ReaderDescription = 'Binary Packed Floats or Doubles'
+ReaderDescription = 'Madagascar Single Stream RSF Format'
 ExtraXml = '''\
       <IntVectorProperty
         name="Endianness"
@@ -56,7 +56,7 @@ PropertiesHelp = dict(
 
 
 def RequestData():
-    from PVGPpy.read import packedBinaries, getTimeStepFileIndex
+    from PVGPpy.read import madagascar, getTimeStepFileIndex
 
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
@@ -65,7 +65,7 @@ def RequestData():
 
     # Generate Output
     pdo = self.GetOutput()
-    packedBinaries(FileNames[i], dataNm=Data_Name, pdo=pdo, endian=endi[Endianness], dtype=dtype[DataType])
+    madagascar(FileNames[i], dataNm=Data_Name, pdo=pdo, endian=endi[Endianness], dtype=dtype[DataType])
 
 
 def RequestInformation(self):

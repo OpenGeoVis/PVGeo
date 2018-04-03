@@ -5,6 +5,7 @@ import os
 from vtk.util import numpy_support as nps
 import vtk
 import ast
+import warnings
 
 def _parseString(val):
     try:
@@ -121,11 +122,11 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
 
 
 
-def packedBinaries(FileName, dataNm='values', pdo=None, endian='>', dtype='f'):
+def packedBinaries(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
     """
     Description
     -----------
-    This filter reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses big endian and defaults to import as floats. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
+    This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
 
     Parameters
     ----------
@@ -172,6 +173,78 @@ def packedBinaries(FileName, dataNm='values', pdo=None, endian='>', dtype='f'):
     # Put raw data into vtk array
     # TODO: dynamic typing
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
+
+    if dataNm is None or dataNm == '' or dataNm == 'values':
+        dataNm = os.path.splitext(os.path.basename(FileName))[0]
+    data.SetName(dataNm)
+
+    # Table with single column of data only
+    pdo.AddColumn(data)
+
+    return pdo
+
+def madagascar(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
+    """
+    Description
+    -----------
+    This reads in float or double data that is packed into a Madagascar binary file format with a leader header. The reader ignores all of the ascii header details by searching for the sequence of three special characters: EOL EOL EOT (\014\014\004) and it will treat the followng binary packed data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We will later implement the ability to create a gridded volume from the header info. This reader is a quick fix for Samir. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
+    Details: http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF
+
+    Parameters
+    ----------
+    `FileName` : str
+
+    - The absolute file name with path to read.
+
+    `dblVals` : boolean, optional
+
+    - A boolean flag to chose to treat the binary packed data as doubles instead of the default floats.
+
+    `dataNm` : str, optional
+
+    - A string name to use for the constructed vtkDataArray
+
+    Returns
+    -------
+    Returns a vtkTable of the input data file with a single column being the data read.
+
+    """
+    if pdo is None:
+        pdo = vtk.vtkTable() # vtkTable
+
+
+    if dtype is 'd':
+        num_bytes = 8 # DOUBLE
+        vtktype = vtk.VTK_DOUBLE
+    elif dtype is 'f':
+        num_bytes = 4 # FLOAT
+        vtktype = vtk.VTK_FLOAT
+    elif dtype is 'i':
+        num_bytes = 4 # INTEGER
+        vtktype = vtk.VTK_INT
+    else:
+        raise Exception('dtype \'%s\' unknown/.' % dtype)
+
+    raw = []
+    with open(FileName, 'r') as file:
+        ctlseq = b'\014\014\004'
+        rpl = b''
+        raw = file.read()
+        idx = raw.find(ctlseq)
+        if idx == -1:
+            warnings.warn('This is not a single stream RSF format file. Treating entire file as packed binary data.')
+        else:
+            raw = raw[idx:] # deletes the header
+            raw = raw.replace(ctlseq, rpl) # removes the control sequence
+        tn = len(raw)/num_bytes
+        fmt = endian+str(int(tn))+dtype
+        raw = struct.unpack(fmt, raw)
+
+    # Put raw data into vtk array
+    # TODO: dynamic typing
+    data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
+    if dataNm is None or dataNm == '' or dataNm == 'values':
+        dataNm = os.path.splitext(os.path.basename(FileName))[0]
     data.SetName(dataNm)
 
     # Table with single column of data only

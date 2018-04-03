@@ -1,5 +1,5 @@
-# ParaView Geophysics Plugins
-This repository contains plugins for the open-source, multi-platform data analysis, and visualization application [ParaView by Kitware](https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D grids.
+# ParaViewGeophysics
+This repository contains plugins tailored to data visualization in geophysics for the application [ParaView by Kitware](https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D time-varing grids.
 
 Check out the [demo page](http://demo.pvgp.io/) for a synopsis of the project and some visualization examples. Then check out the [Docs pages](http://pvgp.io/) to explore the motivation for publishing this repo as well as to find all code documentation. This contains documentation for readers, filters, macros, and more as you need. **NOTE: These are currently out of date and will be updated and finished by May 2018**
 
@@ -46,7 +46,7 @@ If you are on MacOS X, then your life is easy! Simply run the script `installMac
 $ sh ./installMac.sh
 ```
 
-Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **CSM GP Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` and `pvmacros` modules by executing `import PVGPpy` and `import pvmacros`. Errors should not arise but if they do, post to the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) and the errors will be *immediately* addressed.
+Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **PVGP Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` and `pvmacros` modules by executing `import PVGPpy` and `import pvmacros`. Errors should not arise but if they do, post to the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) and the errors will be *immediately* addressed.
 
 
 -----
