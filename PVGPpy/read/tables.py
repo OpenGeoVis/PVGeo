@@ -5,6 +5,7 @@ import os
 from vtk.util import numpy_support as nps
 import vtk
 import ast
+import warnings
 
 def _parseString(val):
     try:
@@ -227,14 +228,17 @@ def madagascar(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
     raw = []
     with open(FileName, 'r') as file:
         ctlseq = b'\014\014\004'
-        rpl = b'' 
+        rpl = b''
         raw = file.read()
         idx = raw.find(ctlseq)
-        raw = raw[idx:]
-        raw = raw.replace(ctlseq, rpl)
+        if idx == -1:
+            warnings.warn('This is not a single stream RSF format file. Treating entire file as packed binary data.')
+        else:
+            raw = raw[idx:] # deletes the header
+            raw = raw.replace(ctlseq, rpl) # removes the control sequence
         tn = len(raw)/num_bytes
-        tn_string = str(int(tn))
-        raw = struct.unpack(endian+tn_string+dtype, raw)
+        fmt = endian+str(int(tn))+dtype
+        raw = struct.unpack(fmt, raw)
 
     # Put raw data into vtk array
     # TODO: dynamic typing
