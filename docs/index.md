@@ -44,7 +44,7 @@ This code base deploys tools to perform post-processing visual analysis and inte
 
 Unless otherwise specified, all code and documentation distributed here were produced by [Bane Sullivan](http://banesullivan.com), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions through his contact information on [his website](http://banesullivan.com) or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
 
-<div style="float: left; margin:10px 10px 10px 10px"" </div>
+<div style="float: left; margin:10px 10px 10px 10px"> </div>
 
 
 ## Outline of Goals
