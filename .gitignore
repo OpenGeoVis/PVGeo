@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 # OS Files:
 **/.DS_Store
 **.pyc
 **/__pycache__/
+=======
+**/.DS_Store
+site/
+**/.pyc
+>>>>>>> docs
