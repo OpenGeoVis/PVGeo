@@ -12,6 +12,7 @@ google_analytics:
   - 'auto'
 
 extra:
+  disqus: 'pvgp'
   social:
     - type: 'github'
       link: 'https://github.com/banesullivan'
