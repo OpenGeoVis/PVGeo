@@ -7,7 +7,6 @@ from os.path import isfile, join
 from PVGPpy import *
 
 
-
 #### disable automatic camera reset on 'Show'
 paraview.simple._DisableFirstRenderCameraReset()
 
@@ -27,7 +26,6 @@ renderView1.ResetCamera()
 
 # update the view to ensure updated data information
 renderView1.Update()
-
 
 #### uncomment the following to render all views and export
 RenderAllViews()

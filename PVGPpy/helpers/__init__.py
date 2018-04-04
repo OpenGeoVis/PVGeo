@@ -1,2 +1,2 @@
-from progress import *
-from arrays import *
+from .progress import *
+from .arrays import *

@@ -15,15 +15,12 @@ def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
     Parameters
     ----------
     `FileName` : str
-
     - The file name / absolute path for the input file in SGeMS grid format.
 
     `deli` : str, optional
-
     - The input files delimiter. To use a tab delimiter please set the `useTab`.
 
     `useTab` : boolean, optional
-
     - A boolean that describes whether to use a tab delimiter.
 
     Returns
@@ -58,15 +55,12 @@ def sgemsExtent(FileName, deli=' ', useTab=False):
     Parameters
     ----------
     `FileName` : str
-
     - The file name / absolute path for the input file in SGeMS grid format.
 
     `deli` : str, optional
-
     - The input files delimiter. To use a tab delimiter please set the `useTab`.
 
     `useTab` : boolean, optional
-
     - A boolean that describes whether to use a tab delimiter.
 
     Returns

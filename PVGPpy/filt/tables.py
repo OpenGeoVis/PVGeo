@@ -59,7 +59,7 @@ def reshapeTable(pdi, nrows, ncols, names=None, order='C', pdo=None):
 
 
 #---- LatLon to Cartesian ----#
-def latLonTableToCartesian(pdi, (namelat, fieldlat), (namelon, fieldlon), radius=6371.0, pdo=None):
+def latLonTableToCartesian(pdi, arrlat, arrlon, radius=6371.0, pdo=None):
     # TODO: This is very poorly done
     # TODO: filter works but assumes a spherical earth wich is VERY wrong
     # NOTE: Mismatches the vtkEarth Source however so we gonna keep it this way
@@ -70,6 +70,8 @@ def latLonTableToCartesian(pdi, (namelat, fieldlat), (namelon, fieldlon), radius
     wpdo = dsa.WrapDataObject(pdo)
 
     # Get the input arrays
+    (namelat, fieldlat) = arrlat[0], arrlat[1]
+    (namelon, fieldlon) = arrlon[0], arrlon[1]
     wpdi = dsa.WrapDataObject(pdi)
     lat = getArray(wpdi, fieldlat, namelat)
     lon = getArray(wpdi, fieldlon, namelon)

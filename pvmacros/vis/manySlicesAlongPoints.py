@@ -7,24 +7,19 @@ def manySlicesAlongPoints(pointsNm, dataNm, numSlices=10, exportpath='', ext='.c
     Parameters
     ----------
     `pointsNm` : string
-
     - The string name of the points source to construct the path.
 
     `dataNm` : string
-
     - The string name of the data source to slice.
     - Make sure this data source is slice-able.
 
     `numSlices` : int, optional
-
     - The number of slices along the path.
 
     `exportpath` : string, optional
-
     - The absolute file path of where to save each slice
 
     `ext` : string, optional
-
     - The file extension for saving out the slices.
     - Default to '.csv'
 

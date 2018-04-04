@@ -70,19 +70,15 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     Parameters
     ----------
     `FileName` : str
-
     - The absolute file name with path to read.
 
     `deli` : str
-
     - The input files delimiter. To use a tab delimiter please set the `useTab`.
 
     `useTab` : boolean
-
     - A boolean that describes whether to use a tab delimiter
 
     `numIgLns` : int
-
     - The integer number of lines to ignore
 
     Returns
@@ -131,15 +127,12 @@ def packedBinaries(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
     Parameters
     ----------
     `FileName` : str
-
     - The absolute file name with path to read.
 
     `dblVals` : boolean, optional
-
     - A boolean flag to chose to treat the binary packed data as doubles instead of the default floats.
 
     `dataNm` : str, optional
-
     - A string name to use for the constructed vtkDataArray
 
     Returns
@@ -193,15 +186,12 @@ def madagascar(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
     Parameters
     ----------
     `FileName` : str
-
     - The absolute file name with path to read.
 
     `dblVals` : boolean, optional
-
     - A boolean flag to chose to treat the binary packed data as doubles instead of the default floats.
 
     `dataNm` : str, optional
-
     - A string name to use for the constructed vtkDataArray
 
     Returns
@@ -263,19 +253,15 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pd
     Parameters
     ----------
     `FileName` : str
-
     - The absolute file name with path to read.
 
     `deli` : str
-
     - The input files delimiter. To use a tab delimiter please set the `useTab`.
 
     `useTab` : boolean
-
     - A boolean that describes whether to use a tab delimiter
 
     `numIgLns` : int
-
     - The integer number of lines to ignore
 
     Returns

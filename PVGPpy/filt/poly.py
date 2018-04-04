@@ -18,13 +18,15 @@ def _mult(arr1, arr2):
     return arr1*arr2
 
 
-def correlateArrays(pdi, (name1, field1), (name2, field2), multiplier=1.0, newName='', pdo=None):
+def correlateArrays(pdi, arr1, arr2, multiplier=1.0, newName='', pdo=None):
     """Make sure to pass array names and integer associated fields.
     Use helpers to get these properties."""
     if pdo is None:
         # TODO: test this
         pdo = pdi.DeepCopy()
     # Get the input arrays
+    (name1, field1) = arr1[0], arr1[1]
+    (name2, field2) = arr2[0], arr2[1]
     wpdi = dsa.WrapDataObject(pdi)
     arr1 = getArray(wpdi, field1, name1)
     arr2 = getArray(wpdi, field2, name2)
@@ -65,7 +67,8 @@ def _log10Norm(arr):
 def _logNatNorm(arr):
     return np.log(arr)
 
-def getArrayRange(pdi, (name, field)):
+def getArrayRange(pdi, arr):
+    (name, field) = arr[0], arr[1]
     wpdi = dsa.WrapDataObject(pdi)
     arr = getArray(wpdi, field, name)
     arr = np.array(arr)
@@ -73,7 +76,7 @@ def getArrayRange(pdi, (name, field)):
 
 
 # Here is the public function to call for the normalizations
-def normalizeArray(pdi, (name, field), norm, multiplier=1.0, newName='', pdo=None, abs=False, rng=None):
+def normalizeArray(pdi, arr, norm, multiplier=1.0, newName='', pdo=None, abs=False, rng=None):
     """
     TODO: Descrption
     Perform normalize on a data array for any given VTK data object.
@@ -92,6 +95,7 @@ def normalizeArray(pdi, (name, field), norm, multiplier=1.0, newName='', pdo=Non
         pdo = pdi.DeepCopy()
 
     # Get inout array
+    (name, field) = arr[0], arr[1]
     wpdi = dsa.WrapDataObject(pdi)
     arr = getArray(wpdi, field, name)
     arr = np.array(arr)

@@ -1,3 +1,3 @@
-from grids import *
-from poly import *
-from tables import *
+from .grids import *
+from .poly import *
+from .tables import *

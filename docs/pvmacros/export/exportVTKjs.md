@@ -121,4 +121,6 @@ python get_vtkjs_url.py dropbox "https://www.dropbox.com/s/6m5ttdbv5bf4ngj/rippl
 
 ------
 
-<!-- TODO: code docs! -->
+## Code Docs
+
+{def:pvmacros.export.exportVTKjs}

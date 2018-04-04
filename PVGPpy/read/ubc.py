@@ -15,15 +15,12 @@ def ubcMeshExtnet(FileName_Mesh, deli=' ', useTab=False):
     Parameters
     ----------
     `FileName_Mesh` : str
-
     - The mesh filename as an absolute path for the input mesh file in UBCMesh Format.
 
     `deli` : str, optional
-
     - The delimiter field used in the input file. Default is a space character.
 
     `useTab` : boolean, optional
-
     - An optional flag to use a tab delimiter in the input file.
 
     Returns
@@ -58,15 +55,12 @@ def ubcMesh(FileName_Mesh, deli=' ', useTab=False, pdo=None):
     Parameters
     ----------
     `FileName_Mesh` : str
-
     - The mesh filename as an absolute path for the input mesh file in UBCMesh Format.
 
     `deli` : str, optional
-
     - The delimiter field used in the input file. Default is a space character.
 
     `useTab` : boolean, optional
-
     - An optional flag to use a tab delimiter in the input file.
 
     Returns
@@ -142,15 +136,12 @@ def ubcModel(FileName_Model, deli=' ', useTab=False):
     Parameters
     ----------
     `FileName_Model` : str
-
     - The model filename as an absolute path for the input model file in UBCMesh Format.
 
     `deli` : str, optional
-
     - The delimiter field used in the input file. Default is a space character.
 
     `useTab` : boolean, optional
-
     - An optional flag to use a tab delimiter in the input file.
 
     Returns
@@ -198,15 +189,12 @@ def placeModelOnMesh(mesh, model, dataNm='Data'):
     Parameters
     ----------
     `mesh` : vtkRectilinearGrid
-
     - The vtkRectilinearGrid that is the mesh to place the model data upon.
 
     `model` : NumPy float array
-
     - A NumPy float array that holds all of the data to place inside of the mesh's cells.
 
     `dataNm` : str, optional
-
     - The name of the model data array once placed on the vtkRectilinearGrid.
 
     Returns
@@ -247,23 +235,18 @@ def ubcGridData(FileName_Mesh, FileName_Model, deli=' ', useTab=False, dataNm=''
     Parameters
     ----------
     `FileName_Mesh` : str
-
     - The mesh filename as an absolute path for the input mesh file in UBCMesh Format
 
     `FileName_Model` : str
-
     - The model filename as an absolute path for the input model file in UBCMesh Format.
 
     `deli` : str, optional
-
     - The delimiter field used in the input file. Default is a space character.
 
     `useTab` : boolean, optional
-
     - An optional flag to use a tab delimiter in the input file.
 
     `dataNm` : str, optional
-
     - The name of the model data array once placed on the vtkRectilinearGrid.
 
     Returns

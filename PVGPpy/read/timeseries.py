@@ -27,15 +27,12 @@ def getTimeStepFileIndex(algorithm, files, dt=1.0):
     Parameters
     ----------
     `algorithm` : vtkDataObject (Proxy)
-
     - The data object on the pipeline (pass `self` from Programmable Sources)
 
     `files` : list
-
     - All the files. (Pass files incase we implement a method to read time value from file)
 
     `dt` : float, optional
-
     - The discrete value in seconds for the time step
 
     Return
@@ -62,15 +59,12 @@ def setOutputTimesteps(algorithm, files, dt=1.0):
     Parameters
     ----------
     `algorithm` : vtkDataObject (Proxy)
-
     - The data object on the pipeline (pass `self` from Programmable Sources)
 
     `files` : list
-
     - All the files. (Pass files incase we implement a method to read time value from file)
 
     `dt` : float, optional
-
     - The discrete value in seconds for the time step
 
     Return

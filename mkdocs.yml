@@ -31,7 +31,8 @@ theme:
 
 
 markdown_extensions:
-    #- markdown_docs_include.docs-include
+    - doc-include-method # custom docs include extension
+    - doc-include-script # custom script include extension
     - smarty
     - toc:
         permalink: true
