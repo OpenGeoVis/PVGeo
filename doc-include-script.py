@@ -76,9 +76,9 @@ class ScriptIncludePreprocessor(Preprocessor):
 
                 if m:
                     filename, hl = _parseArg(m.group(1))
-                    filename = '%s/%s' % (os.getcwd(), filename)
+                    pfilename = '%s/%s' % (os.getcwd(), filename)
                     try:
-                        with open(filename, 'r', encoding=self.encoding) as r:
+                        with open(pfilename, 'r', encoding=self.encoding) as r:
                             text = r.readlines()
                     except Exception as e:
                         print('Warning: could not find file {}. Ignoring '
@@ -90,8 +90,9 @@ class ScriptIncludePreprocessor(Preprocessor):
                     if len(text) == 0: text.append('')
                     for i in range(len(text)):
                         text[i] = text[i][0:-1]
-                    text = ['```py %s ' % hl] + text
                     text[-1] = '```'
+                    text = ['```py %s ' % hl] + text
+                    #text = ['File Included From: %s' % filename] + text
                     text[0] = line_split[0] + text[0]
                     text[-1] = text[-1] + line_split[2]
                     lines = lines[:loc] + text + lines[loc+1:]
