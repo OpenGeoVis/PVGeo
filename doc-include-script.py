@@ -60,7 +60,7 @@ class ScriptInclude(Extension):
 
 class ScriptIncludePreprocessor(Preprocessor):
     '''
-    This provides an "include" function for Python Scripts in mkdocs, similar to that found in LaTeX (also the C pre-processor and Fortran). The syntax is {py:filename}, which will be replaced by the contents of filename. Through in an argument after the filename to highlight specified lines {py:filename?6 9 3}. Any such statements in filename will also be replaced. This replacement is done prior to any other Markdown processing. All file-names are evaluated relative to the location from which mkdocs is being built (path of mkdocs.yml).
+    This provides an "include" function for Python Scripts in mkdocs, similar to that found in LaTeX (also the C pre-processor and Fortran). The syntax is {py:filename}, which will be replaced by the contents of filename in a python code block. Throw in an argument after the filename to highlight specified lines {py:filename?6 9 3}. This replacement is done prior to any other Markdown processing. All file-names are evaluated relative to the location from which mkdocs is being built (path of mkdocs.yml).
     '''
     def __init__(self, md, config):
         super(ScriptIncludePreprocessor, self).__init__(md)
