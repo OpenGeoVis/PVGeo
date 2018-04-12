@@ -35,11 +35,12 @@ def tryimport(name, globals={}, locals={}, fromlist=[], level=1):
         return DummyModule(name)
 
 
-INC_SYNTAX = re.compile(r'\{def:\s*(.+?)\s*\}')
+DEF_SYNTAX = re.compile(r'\{def:\s*(.+?)\s*\}')
+CLASS_SYNTAX = re.compile(r'\{class:\s*(.+?)\s*\}')
 
-def _cleandocstr(doc):
+def _cleandocstr(doc, level='####', rmv='\n    '):
     # Decrease indentation from method def
-    doc = doc.replace('\n    ','\n')
+    doc = doc.replace(rmv,'\n')
     # add a newline before list items
     doc = doc.replace('\n- ','\n\n- ')
 
@@ -50,7 +51,7 @@ def _cleandocstr(doc):
         ln = lines[i]
         if len(ln)>2 and ln[0] == '-' and ln[1] == '-':
             dels.append(i)
-            lines[i-1] = '#### ' + lines[i-1]
+            lines[i-1] = '%s '%level + lines[i-1]
 
     # Delete the underlines
     for i in range(len(dels)):
@@ -60,21 +61,44 @@ def _cleandocstr(doc):
     doc = "\n".join((str(x) for x in lines))
     return doc
 
-def _getmarkdown(method, module):
+################
+
+
+def _getDefMarkdown(method, module, level='###', rmv='\n    '):
     sig = inspect.signature(method)
-    output = ['### `%s`' % (method.__name__)]
+    output = ['%s `%s`' % (level, method.__name__)]
     output.append("""
 ```py
 %s.%s%s
 ```""" % (module.__name__, method.__name__, sig))
 
     if method.__doc__:
-        output.append(_cleandocstr(method.__doc__))
+        output.append(_cleandocstr(method.__doc__, level='#'+level, rmv=rmv))
 
     return "\n".join((str(x) for x in output))
 
 
-def generatedocs(modulename):
+####
+
+def _getClassMarkdown(cla, module):
+    rmv = '\n        '
+    output = ['## Class `%s`' % (cla.__name__)]
+    output.append("""
+```py
+%s.%s
+```""" % (module.__name__, cla.__name__))
+    if cla.__doc__:
+        output.append(_cleandocstr(cla.__doc__))
+    members = inspect.getmembers(cla)
+    for mem in members:
+        if mem[0][0] != '_':
+            output.append(_getDefMarkdown(mem[1], cla, level='###', rmv=rmv))
+    return "\n".join((str(x) for x in output))
+
+
+################
+
+def generateDefDocs(modulename):
     sys.path.append(os.getcwd())
     # Attempt import
     p, m = modulename.rsplit('.', 1)
@@ -84,8 +108,23 @@ def generatedocs(modulename):
         raise Exception("Module not found")
 
     # Module imported correctly, let's create the docs
-    return _getmarkdown(met, mod)
+    return _getDefMarkdown(met, mod)
 
+def generateClassDocs(classname):
+    sys.path.append(os.getcwd())
+    # Attempt import
+    p, c = classname.rsplit('.', 1)
+    mod = importlib.import_module(p)
+    cla = getattr(mod, c)
+    if cla is None:
+        raise Exception("Class not found")
+    if not inspect.isclass(cla):
+        raise Exception("Not a class: %s" % cla.__name__)
+
+    # Module imported correctly, let's create the docs
+    return _getClassMarkdown(cla, mod)
+
+##############
 
 class MethodInclude(Extension):
     def __init__(self, configs={}):
@@ -119,12 +158,22 @@ class MethodIncludePreprocessor(Preprocessor):
         while not done:
             for line in lines:
                 loc = lines.index(line)
-                m = INC_SYNTAX.search(line)
-
+                m = DEF_SYNTAX.search(line)
+                c = CLASS_SYNTAX.search(line)
                 if m:
                     modname = m.group(1)
-                    text = generatedocs(modname).split('\n')
-                    line_split = INC_SYNTAX.split(line,maxsplit=0)
+                    text = generateDefDocs(modname).split('\n')
+                    line_split = DEF_SYNTAX.split(line,maxsplit=0)
+                    if len(text) == 0:
+                        text.append('')
+                    text[0] = line_split[0] + text[0]
+                    text[-1] = text[-1] + line_split[2]
+                    lines = lines[:loc] + text + lines[loc+1:]
+                    break
+                elif c:
+                    classname = c.group(1)
+                    text = generateClassDocs(classname).split('\n')
+                    line_split = CLASS_SYNTAX.split(line,maxsplit=0)
                     if len(text) == 0:
                         text.append('')
                     text[0] = line_split[0] + text[0]

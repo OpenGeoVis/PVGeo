@@ -1,0 +1,1 @@
+{class:pvmacros.vis.camera}

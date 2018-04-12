@@ -31,7 +31,7 @@ theme:
 
 
 markdown_extensions:
-    - doc-include-method # custom docs include extension
+    - doc-include-import # custom docs include extension
     - doc-include-script # custom script include extension
     - smarty
     - toc:
@@ -85,6 +85,7 @@ pages:
     - Export:
         - Export as VTKjs:  pvmacros/export/exportVTKjs.md
     - Vis:
+        - Camera: pvmacros/vis/Camera.md
         - Clip Through:  pvmacros/vis/Clip-Through.md
         - Many Slices Along Points:  pvmacros/vis/Many-Slices-Along-Points.md
         - Many Slices Along Axis:  pvmacros/vis/Slices-Along-Axis.md
