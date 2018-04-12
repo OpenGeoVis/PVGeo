@@ -1,3 +1,5 @@
+__all__ = ['camera']
+
 import numpy as np
 import os
 import pickle

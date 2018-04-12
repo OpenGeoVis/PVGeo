@@ -1,3 +1,4 @@
+__all__ = ['customAxisTicks']
 
 def customAxisTicks(rng, axis=0, uniform=False):
     from paraview.simple import GetActiveViewOrCreate, RenderAllViews
@@ -14,3 +15,4 @@ def customAxisTicks(rng, axis=0, uniform=False):
         rv.AxesGrid.ZAxisUseCustomLabels = 1
         rv.AxesGrid.ZAxisLabels = rng
     RenderAllViews()
+    return None

@@ -1,3 +1,8 @@
+__all__ = [
+    'reshapeTable',
+    'latLonTableToCartesian'
+]
+
 import vtk
 import numpy as np
 from vtk.util import numpy_support as nps

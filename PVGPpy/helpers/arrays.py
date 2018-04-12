@@ -1,3 +1,11 @@
+__all__ = [
+    'getSelectedArrayName',
+    'getSelectedArrayField',
+    'copyArraysToPointData',
+    'getArray',
+    'addArray'
+]
+
 import vtk
 
 def getSelectedArrayName(algorithm, idx):

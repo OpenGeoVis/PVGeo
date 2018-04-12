@@ -1,3 +1,10 @@
+__all__ = [
+    'refoldidx',
+    'tableToGrid',
+    'reverseGridAxii',
+    'translateGridOrigin'
+]
+
 import vtk
 from vtk.util import numpy_support as nps
 import numpy as np

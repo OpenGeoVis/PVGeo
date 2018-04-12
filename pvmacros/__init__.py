@@ -1,8 +1,10 @@
-__all__ = [
-    "export",
-    "vis"
-]
 
-from .load_plugins import *
-from .export import *
-from .vis import *
+from .load_plugins import (
+    loadPVGPplugins
+)
+from . import export
+from . import vis
+
+__author__ = 'Bane Sullivan'
+__license__ = 'BSD-3-Clause'
+__copyright__ = '2018, Bane Sullivan'

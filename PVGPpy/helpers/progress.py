@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+__all__ = ['printProgressBar']
 
 # Print iterations progress
 def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=50, fill='#'):

@@ -1,3 +1,11 @@
+__all__ = [
+    'correlateArrays',
+    'getArrayRange',
+    'normalizeArray',
+    'connectCells',
+    'pointsToTube'
+]
+
 import vtk
 from vtk.util import numpy_support as nps
 import numpy as np

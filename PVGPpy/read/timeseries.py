@@ -1,3 +1,6 @@
+__all__ = ['getTimeStepFileIndex', 'setOutputTimesteps']
+
+
 import numpy as np
 
 # This is the function to get the requested time step

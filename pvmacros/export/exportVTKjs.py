@@ -27,6 +27,6 @@ def exportVTKjs(FileName='', compress=False):
     import sys
     path = os.path.dirname(os.path.abspath(__file__))
     # TODO: debug why compression sometimes fails
-    sys.argv = ['%s/%s' % (path, 'export-scene-macro.py'), FileName, False]
-    execfile('%s/%s' % (path, 'export-scene-macro.py'), globals())
+    sys.argv = ['%s/%s' % (path, '_export-scene-macro.py'), FileName, False]
+    execfile('%s/%s' % (path, '_export-scene-macro.py'), globals())
     return

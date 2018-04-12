@@ -1,7 +1,5 @@
 from __future__ import print_function
-from .manySlicesAlongPoints import *
-from .clipThrough import *
-from .camera import *
+from .objs import *
 from .axes import *
 from .slices import *
 
