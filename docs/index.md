@@ -6,7 +6,7 @@ This repository was produced from the work of an undergraduate research project 
 
 -->
 !!! warning "Pre-Release Notice"
-    This is a Beta release of the ParaViewGeophysics code base and documentation. The plugins and Python modules might be changed in backward-incompatible ways and are not subject to any deprecation policy. The current documentation is a work in progress and we are trying our best to get everything fully documented by May 2018.
+    This is a Beta release of the ParaViewGeophysics code base and documentation. The plugins and Python modules might be changed in backward-incompatible ways and are not subject to any deprecation policy. The current documentation is a work in progress and we are trying our best to get everything fully documented by June 2018.
 
 !!! info "Suggestions?"
     If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [issues page](https://github.com/banesullivan/ParaViewGeophysics/issues).
