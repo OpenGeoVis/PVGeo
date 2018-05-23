@@ -78,10 +78,13 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     - The input files delimiter. To use a tab delimiter please set the `useTab`.
 
     `useTab` : boolean
-    - A boolean that describes whether to use a tab delimiter
+    - A boolean that describes whether to use a tab delimiter.
 
     `numIgLns` : int
-    - The integer number of lines to ignore
+    - The integer number of lines to ignore.
+
+    `pdo` : vtk.vtkTable, optional
+    - A pointer to the output data object.
 
     Returns
     -------
@@ -120,7 +123,7 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
 
 
 
-def packedBinaries(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
+def packedBinaries(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
     """
     Description
     -----------
@@ -131,11 +134,17 @@ def packedBinaries(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
     `FileName` : str
     - The absolute file name with path to read.
 
-    `dblVals` : boolean, optional
-    - A boolean flag to chose to treat the binary packed data as doubles instead of the default floats.
-
     `dataNm` : str, optional
-    - A string name to use for the constructed vtkDataArray
+    - A string name to use for the constructed vtkDataArray.
+
+    `endian` : char, optional
+    - The endianness to unpack the values in struct.unpack(). Defaults to Big Endian `>`.
+
+    `dtype` : char, optional
+    - A char to chose the data type when unpacking with struct.unpack(). Defaults to float `f`.
+
+    `pdo` : vtk.vtkTable, optional
+    - A pointer to the output data object.
 
     Returns
     -------
@@ -178,7 +187,7 @@ def packedBinaries(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
 
     return pdo
 
-def madagascar(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
+def madagascar(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
     """
     Description
     -----------
@@ -190,11 +199,17 @@ def madagascar(FileName, dataNm=None, pdo=None, endian='>', dtype='f'):
     `FileName` : str
     - The absolute file name with path to read.
 
-    `dblVals` : boolean, optional
-    - A boolean flag to chose to treat the binary packed data as doubles instead of the default floats.
-
     `dataNm` : str, optional
-    - A string name to use for the constructed vtkDataArray
+    - A string name to use for the constructed vtkDataArray.
+
+    `endian` : char, optional
+    - The endianness to unpack the values in struct.unpack(). Defaults to Big Endian `>`.
+
+    `dtype` : char, optional
+    - A char to chose the data type when unpacking with struct.unpack(). Defaults to float `f`.
+
+    `pdo` : vtk.vtkTable, optional
+    - A pointer to the output data object.
 
     Returns
     -------
@@ -260,11 +275,17 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pd
     `deli` : str
     - The input files delimiter. To use a tab delimiter please set the `useTab`.
 
-    `useTab` : boolean
+    `useTab` : boolean, optional
     - A boolean that describes whether to use a tab delimiter
+
+    `hasTits` : boolean, optional
+    - A boolean for if the delimited file has header titles for the data arrays.
 
     `numIgLns` : int
     - The integer number of lines to ignore
+
+    `pdo` : vtk.vtkTable, optional
+    - A pointer to the output data object.
 
     Returns
     -------

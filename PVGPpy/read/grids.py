@@ -25,6 +25,9 @@ def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
     `useTab` : boolean, optional
     - A boolean that describes whether to use a tab delimiter.
 
+    `pdo` : vtk.vtkImageData, optional
+    - A pointer to the output data object.
+
     Returns
     -------
     Returns vtkImageData
@@ -123,8 +126,29 @@ def readPVGPGridExtents(headerfile):
 
 
 def readPVGPGrid(headerfile, pdo=None, path=None):
-    """if pdo is None:
-        pdo = vtk.vtkImageData() # vtkImageData"""
+    """
+    Description
+    -----------
+    Generates vtkImageData from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
+
+    Parameters
+    ----------
+    `headerfile` : str
+    - The file name / absolute path for the input header file that cotains all parameters and pointers to file locations.
+
+    `pdo` : vtk.vtkImageData, optional
+    - A pointer to the output data object.
+
+    `path` : str, optional
+    - The absolute path to the PVGP grid database to override the path in the header file.
+
+    Returns
+    -------
+    Returns vtkImageData
+
+    """
+    if pdo is None:
+        pdo = vtk.vtkImageData() # vtkImageData
     # Read and parse header file
     with open(headerfile, 'r') as f:
         lib = json.load(f)
