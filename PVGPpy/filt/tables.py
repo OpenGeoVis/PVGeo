@@ -64,31 +64,37 @@ def reshapeTable(pdi, nrows, ncols, names=None, order='C', pdo=None):
 
 
 #---- LatLon to Cartesian ----#
-def latLonTableToCartesian(pdi, arrlat, arrlon, radius=6371.0, pdo=None):
+def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None):
     # TODO: This is very poorly done
     # TODO: filter works but assumes a spherical earth wich is VERY wrong
     # NOTE: Mismatches the vtkEarth Source however so we gonna keep it this way
-    raise Exception('latLonTableToCartesian() not currently implemented.')
+    #raise Exception('latLonTableToCartesian() not currently implemented.')
     if pdo is None:
         pdo = vtk.vtkPolyData()
     #pdo.DeepCopy(pdi)
     wpdo = dsa.WrapDataObject(pdo)
+    import sys
+    sys.path.append('/Users/bane/miniconda3/lib/python3.6/site-packages/')
+    import utm
 
     # Get the input arrays
     (namelat, fieldlat) = arrlat[0], arrlat[1]
     (namelon, fieldlon) = arrlon[0], arrlon[1]
+    (namealt, fieldalt) = arralt[0], arralt[1]
     wpdi = dsa.WrapDataObject(pdi)
     lat = getArray(wpdi, fieldlat, namelat)
     lon = getArray(wpdi, fieldlon, namelon)
-    if len(lat) != len(lon):
-        raise Exception('Latitude and Longitude arrays must be same length.')
+    alt = getArray(wpdi, fieldalt, namealt)
+    if len(lat) != len(lon) or len(lat) != len(alt):
+        raise Exception('Latitude, Longitude, and Altitude arrays must be same length.')
 
-    rad = 2 * np.pi / 360.0
     coords = np.empty((len(lat),3))
 
-    coords[:,0] = radius * np.cos(lat * rad) * np.cos(lon * rad)
-    coords[:,1] = radius * np.cos(lat * rad) * np.sin(lon * rad)
-    coords[:,2] = radius * np.sin(lat * rad)
+    for i in range(len(lat)):
+        (e, n, zN, zL) = utm.from_latlon(lat[i], lon[i])
+        coords[i,0] = e
+        coords[i,1] = n
+    coords[:,2] = alt
 
     #insert = nps.numpy_to_vtk(num_array=coords, deep=True)
     #insert.SetName('Coordinates')

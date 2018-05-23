@@ -9,8 +9,8 @@ OutputDataType = 'vtkPolyData'
 ExtraXml = ''
 
 # Have two array selection drop downs for the two arrays to correlate
-NumberOfInputArrayChoices = 2
-InputArrayLabels = ['Latitude', 'Longitude']
+NumberOfInputArrayChoices = 3
+InputArrayLabels = ['Latitude', 'Longitude', 'Altitude']
 
 
 Properties = dict(
@@ -32,5 +32,7 @@ def RequestData():
     fieldlat = inputhelp.getSelectedArrayField(self, 0)
     namelon = inputhelp.getSelectedArrayName(self, 1)
     fieldlon = inputhelp.getSelectedArrayField(self, 1)
+    namealt = inputhelp.getSelectedArrayName(self, 2)
+    fieldalt = inputhelp.getSelectedArrayField(self, 2)
     # Pass on to do conversion
-    latLonTableToCartesian(pdi, (namelat, fieldlat), (namelon, fieldlon), radius=Radius, pdo=pdo)
+    latLonTableToCartesian(pdi, (namelat, fieldlat), (namelon, fieldlon), (namealt, fieldalt), radius=Radius, pdo=pdo)
