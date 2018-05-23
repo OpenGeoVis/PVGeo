@@ -2,8 +2,8 @@
   <ProxyGroup name="filters">
     <SourceProxy name="ProjectShotRecordToSpace" class="vtkPythonProgrammableFilter" label="Project Shot Record To Space">
       <Documentation
-        long_help=""
-        short_help="">
+        long_help="TODO: Should we keep this in the repo?"
+        short_help="TODO: Should we keep this in the repo?">
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP Filters" />

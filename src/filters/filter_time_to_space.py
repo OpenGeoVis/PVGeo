@@ -1,7 +1,7 @@
 Name = 'ProjectShotRecordToSpace'
 Label = 'Project Shot Record To Space'
 FilterCategory = 'PVGP Filters'
-Help = ''
+Help = 'TODO: Should we keep this in the repo?'
 
 NumberOfInputs = 2
 InputDataType = 'vtkTable'

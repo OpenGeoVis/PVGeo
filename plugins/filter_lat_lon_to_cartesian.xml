@@ -2,8 +2,8 @@
   <ProxyGroup name="filters">
     <SourceProxy name="LatLonToCartesian" class="vtkPythonProgrammableFilter" label="Lat Lon To Cartesian">
       <Documentation
-        long_help="Help for the Test Filter"
-        short_help="Help for the Test Filter">
+        long_help="A filter to convert a table with Latitude, Longitude, and Altitude information to XYZ points. ISSUE: Assumes spherical Earth."
+        short_help="A filter to convert a table with Latitude, Longitude, and Altitude information to XYZ points. ISSUE: Assumes spherical Earth.">
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP Filters" />
