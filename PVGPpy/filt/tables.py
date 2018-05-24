@@ -68,7 +68,7 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
     # TODO: This is very poorly done
     # TODO: filter works but assumes a spherical earth wich is VERY wrong
     # NOTE: Mismatches the vtkEarth Source however so we gonna keep it this way
-    #raise Exception('latLonTableToCartesian() not currently implemented.')
+    raise Exception('latLonTableToCartesian() not currently implemented.')
     if pdo is None:
         pdo = vtk.vtkPolyData()
     #pdo.DeepCopy(pdi)
