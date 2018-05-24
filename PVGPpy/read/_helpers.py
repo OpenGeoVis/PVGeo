@@ -13,6 +13,8 @@ def _parseString(val):
     try:
         val = ast.literal_eval(val)
     except ValueError:
+        if 'nan' in val.lower():
+            val = float('NaN')
         pass
     return val
 
