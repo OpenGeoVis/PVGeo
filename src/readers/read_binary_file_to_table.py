@@ -6,7 +6,7 @@ Help = 'This reads in float or double data that is packed into a binary file for
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'
 Extensions = 'H@ bin rsf rsf@ HH'
-ReaderDescription = 'Binary Packed Floats or Doubles'
+ReaderDescription = 'PVGP: Binary Packed Floats or Doubles'
 ExtraXml = '''\
       <IntVectorProperty
         name="Endianness"

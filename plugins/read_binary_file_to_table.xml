@@ -10,7 +10,7 @@
       </Hints>
       <Hints>
         <ReaderFactory extensions="H@ bin rsf rsf@ HH"
-          file_description="Binary Packed Floats or Doubles" />
+          file_description="PVGP: Binary Packed Floats or Doubles" />
       </Hints>
 
       <!-- Output data type: "vtkTable" -->
@@ -83,7 +83,7 @@
         </DoubleVectorProperty>
         <Hints>
             <ReaderFactory extensions="H@ bin rsf rsf@ HH"
-                    file_description="Binary Packed Floats or Doubles" />
+                    file_description="PVGP: Binary Packed Floats or Doubles" />
         </Hints>
 
 

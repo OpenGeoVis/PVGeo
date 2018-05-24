@@ -10,7 +10,7 @@
       </Hints>
       <Hints>
         <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
-          file_description="GSLIB File Format" />
+          file_description="PVGP: GSLIB File Format" />
       </Hints>
 
       <!-- Output data type: "vtkTable" -->
@@ -52,7 +52,7 @@
         </DoubleVectorProperty>
         <Hints>
             <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
-                    file_description="GSLIB File Format" />
+                    file_description="PVGP: GSLIB File Format" />
         </Hints>
 
 

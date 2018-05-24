@@ -10,7 +10,7 @@
       </Hints>
       <Hints>
         <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"
-          file_description="SGeMS Grid File Format" />
+          file_description="PVGP: SGeMS Grid File Format" />
       </Hints>
 
       <!-- Output data type: "vtkImageData" -->
@@ -52,7 +52,7 @@
         </DoubleVectorProperty>
         <Hints>
             <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"
-                    file_description="SGeMS Grid File Format" />
+                    file_description="PVGP: SGeMS Grid File Format" />
         </Hints>
 
 

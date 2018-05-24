@@ -10,7 +10,7 @@
       </Hints>
       <Hints>
         <ReaderFactory extensions="mesh msh dat"
-          file_description="UBC Mesh Two-File Format" />
+          file_description="PVGP: UBC Mesh Two-File Format" />
       </Hints>
 
       <!-- Output data type: "vtkRectilinearGrid" -->
@@ -52,7 +52,7 @@
         </DoubleVectorProperty>
         <Hints>
             <ReaderFactory extensions="mesh msh dat"
-                    file_description="UBC Mesh Two-File Format" />
+                    file_description="PVGP: UBC Mesh Two-File Format" />
         </Hints>
 
 

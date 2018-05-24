@@ -6,7 +6,7 @@ Help = 'This reader will take in any delimited text file and make a vtkTable fro
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'
 Extensions = 'dat csv txt'
-ReaderDescription = 'CSM GP Delimited Text File'
+ReaderDescription = 'PVGP: Delimited Text File'
 
 
 Properties = dict(

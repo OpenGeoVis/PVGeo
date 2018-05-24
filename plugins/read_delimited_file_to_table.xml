@@ -10,7 +10,7 @@
       </Hints>
       <Hints>
         <ReaderFactory extensions="dat csv txt"
-          file_description="CSM GP Delimited Text File" />
+          file_description="PVGP: Delimited Text File" />
       </Hints>
 
       <!-- Output data type: "vtkTable" -->
@@ -52,7 +52,7 @@
         </DoubleVectorProperty>
         <Hints>
             <ReaderFactory extensions="dat csv txt"
-                    file_description="CSM GP Delimited Text File" />
+                    file_description="PVGP: Delimited Text File" />
         </Hints>
 
 

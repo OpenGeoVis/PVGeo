@@ -6,7 +6,7 @@ Help = 'UBC Mesh 3D models are defined using a 2-file format. The "mesh" file de
 NumberOfInputs = 0
 OutputDataType = 'vtkRectilinearGrid'
 Extensions = 'mesh msh dat'
-ReaderDescription = 'UBC Mesh Two-File Format'
+ReaderDescription = 'PVGP: UBC Mesh Two-File Format'
 
 # TODO: implement FileNames to work with time series
 Properties = dict(
