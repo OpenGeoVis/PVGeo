@@ -129,7 +129,7 @@ def readPVGPGrid(headerfile, pdo=None, path=None):
     """
     Description
     -----------
-    Generates vtkImageData from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
+    Generates vtkImageData from the uniform grid defined in the PVGP uniformly gridded data format.
 
     Parameters
     ----------
