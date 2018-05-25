@@ -10,11 +10,11 @@ Currently 3D mesh files work. We are implementing 2D compatibility currently.
 
 ## Code Docs
 
-{def:PVGPpy.read.ubcGridData}
+{def:PVGPpy.read.ubcMeshData3D}
 
 -----
 
-{def:PVGPpy.read.ubcMeshExtnet}
+{def:PVGPpy.read.ubcExtnet3D}
 
 -----
 
@@ -22,8 +22,8 @@ Currently 3D mesh files work. We are implementing 2D compatibility currently.
 
 ------
 
-{def:PVGPpy.read.ubcMesh}
+{def:PVGPpy.read.ubcMesh3D}
 
 ------
 
-{def:PVGPpy.read.ubcModel}
+{def:PVGPpy.read.ubcModel3D}
