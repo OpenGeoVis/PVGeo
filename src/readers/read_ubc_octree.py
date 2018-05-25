@@ -18,8 +18,6 @@ ExtraXml = ''
 # These are the parameters/properties of the plugin:
 Properties = dict(
     Data_Name='',
-    Delimiter_Field=' ',
-    Use_Tab_Delimiter=False,
     Time_Step=1.0
 )
 
@@ -43,18 +41,17 @@ def RequestData(self):
     if Data_Name == '':
         Data_Name = os.path.basename(FileNames[0]) # use first file in series so representation/cmap does not change.
     # Read the UBC OcTree gridded data:
-    ubcOcTree(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, dataNm=Data_Name, pdo=pdo)
+    ubcOcTree(FileNames[i], dataNm=Data_Name, pdo=pdo)
 
 
 def RequestInformation(self):
     from paraview import util
     from PVGPpy.read import setOutputTimesteps, getTimeStepFileIndex
-    from PVGPpy.read import ubcExtnet
+    from PVGPpy.read import ubcExtnet3D
     # This is necessary to set time steps
     setOutputTimesteps(self, FileNames, dt=Time_Step)
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
     # Preview the mesh file and get the mesh extents
-    ext = ubcExtnet(FileNames[i])
+    ext = ubcExtnet3D(FileNames[i])
     # Set the mesh extents
-    print(ext)
     util.SetOutputWholeExtent(self, ext)

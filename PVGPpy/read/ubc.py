@@ -287,6 +287,9 @@ def ubcOcTree(FileName, dataNm='', pdo=None):
     `FileName` : str
     - The mesh filename as an absolute path for the input mesh file in UBC OcTree format.
 
+    `dataNm` : str, optional
+    - The name of the model data array once placed on the vtkRectilinearGrid.
+
     `pdo` : vtk.vtkUnstructuredGrid, optional
     - A pointer to the output data object.
 
@@ -309,7 +312,6 @@ def ubcOcTree(FileName, dataNm='', pdo=None):
     pad = dim[3:6] # TODO: check if there because optional... might throw error if not there
     dim = dim[0:3]
     ne,nn,nz = dim[0], dim[1], dim[2]
-    print(ne,nn,nz,' : ',pad)
     if np.unique(dim).size > 1:
         raise Exception('OcTree meshes must have the same number of cells in all directions.')
 
@@ -341,6 +343,8 @@ def ubcOcTree(FileName, dataNm='', pdo=None):
     ################
     # TODO: Construct vtk.vtkUnstructuredGrid() of data that we just read from file
     # NOTE: We want to use the `pdo` object already assigned as a vtkUnstructuredGrid
+    print('This reader is not fully implemented yet')
+    print(indArr)
     ################
 
     return pdo
