@@ -59,6 +59,7 @@ def _cleandocstr(doc, level='####', rmv='\n    '):
 
     # Join the lines
     doc = "\n".join((str(x) for x in lines))
+    doc = doc.replace('\n',rmv)
     return doc
 
 ################
@@ -67,10 +68,11 @@ def _cleandocstr(doc, level='####', rmv='\n    '):
 def _getDefMarkdown(method, module, level='###', rmv='\n    '):
     sig = inspect.signature(method)
     output = ['%s `%s`' % (level, method.__name__)]
+    output.append('\n!!! note "Docs"')
     output.append("""
-```py
-%s.%s%s
-```""" % (module.__name__, method.__name__, sig))
+    ```py
+    %s.%s%s
+    ```""" % (module.__name__, method.__name__, sig))
 
     if method.__doc__:
         output.append(_cleandocstr(method.__doc__, level='#'+level, rmv=rmv))
