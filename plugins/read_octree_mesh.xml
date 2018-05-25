@@ -1,21 +1,21 @@
 <ServerManagerConfiguration>
   <ProxyGroup name="sources">
-    <SourceProxy name="ReadUBCMesh3D" class="vtkPythonProgrammableFilter" label="Read UBC Mesh 3D Two-File Format">
+    <SourceProxy name="ReadOcTreeMesh" class="vtkPythonProgrammableFilter" label="Read OcTree Mesh">
       <Documentation
-        long_help="UBC Mesh 3D models are defined using a 2-file format. The &quot;mesh&quot; file describes how the data is descritized. The &quot;model&quot; file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. Default file delimiter is a space character."
-        short_help="UBC Mesh 3D models are defined using a 2-file format. The &quot;mesh&quot; file describes how the data is descritized. The &quot;model&quot; file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. Default file delimiter is a space character.">
+        long_help="TODO"
+        short_help="TODO">
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP Readers" />
       </Hints>
       <Hints>
-        <ReaderFactory extensions="mesh msh dat"
-          file_description="PVGP: UBC Mesh 3D Two-File Format" />
+        <ReaderFactory extensions="msh"
+          file_description="PVGP: UBC OcTree Mesh File Format." />
       </Hints>
 
-      <!-- Output data type: "vtkRectilinearGrid" -->
+      <!-- Output data type: "vtkUnstructuredGrid" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="3"
+                         default_values="4"
                          name="OutputDataSetType"
                          number_of_elements="1"
                          panel_visibility="never">
@@ -51,8 +51,8 @@
             </Documentation>
         </DoubleVectorProperty>
         <Hints>
-            <ReaderFactory extensions="mesh msh dat"
-                    file_description="PVGP: UBC Mesh 3D Two-File Format" />
+            <ReaderFactory extensions="msh"
+                    file_description="PVGP: UBC OcTree Mesh File Format." />
         </Hints>
 
 
@@ -70,27 +70,13 @@
 
       <StringVectorProperty
         panel_visibility="default"
-        name="FileName_Mesh"
-        label="FileName Mesh"
-        initial_string="FileName_Mesh"
+        name="Delimiter_Field"
+        label="Delimiter Field"
+        initial_string="Delimiter_Field"
         command="SetParameter"
         animateable="1"
-        default_values="absolute path"
+        default_values=" "
         number_of_elements="1">
-        <FileListDomain name="files"/>
-        <Documentation></Documentation>
-      </StringVectorProperty>
-
-      <StringVectorProperty
-        panel_visibility="default"
-        name="FileName_Model"
-        label="FileName Model"
-        initial_string="FileName_Model"
-        command="SetParameter"
-        animateable="1"
-        default_values="absolute path"
-        number_of_elements="1">
-        <FileListDomain name="files"/>
         <Documentation></Documentation>
       </StringVectorProperty>
 
@@ -106,11 +92,24 @@
         <Documentation></Documentation>
       </DoubleVectorProperty>
 
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_Tab_Delimiter"
+        label="Use Tab Delimiter"
+        initial_string="Use_Tab_Delimiter"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <StringVectorProperty
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import ubcMeshData3D&#xA;import os&#xA;# Make sure we have a file combo&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# If no name given for data by user, use the basename of the file&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileName_Model)&#xA;# Read the UBC Mesh gridded data:&#xA;ubcMeshData3D(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import getTimeStepFileIndex&#xA;from PVGPpy.read import ubcOcTree&#xA;import os&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# If no name given for data by user, use the basename of the file&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileNames[0]) # use first file in series so representation/cmap does not change.&#xA;# Read the UBC OcTree gridded data:&#xA;ubcOcTree(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, dataNm=Data_Name, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -124,7 +123,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import ubcExtnet3D&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtnet3D(FileName_Mesh)&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.read import setOutputTimesteps, getTimeStepFileIndex&#xA;from PVGPpy.read import ubcExtnet&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtnet(FileNames[i])&#xA;# Set the mesh extents&#xA;print(ext)&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

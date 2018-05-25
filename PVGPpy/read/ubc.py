@@ -1,4 +1,21 @@
-__all__ = ['ubcMeshExtnet', 'ubcMesh', 'ubcModel', 'placeModelOnMesh', 'ubcGridData']
+__all__ = [
+    # General Stuff
+    'ubcExtnet3D',
+    'placeModelOnMesh',
+
+    # 2D Mesh
+    # TODO: implement
+    #'ubcMesh2D',
+    #'ubcModel2D',
+    #'ubcMeshData2D',
+
+    # 3D Mesh
+    'ubcMesh3D',
+    'ubcModel3D',
+    'ubcMeshData3D',
+
+    # OcTree
+    'ubcOcTree']
 
 import numpy as np
 import struct
@@ -6,181 +23,43 @@ import csv
 import os
 from vtk.util import numpy_support as nps
 import vtk
+# Import Helpers:
+from ._helpers import *
 
-#-----------------------    UBC MESH    -------------------------#
-def ubcMeshExtnet(FileName_Mesh, deli=' ', useTab=False):
+#------------------------------------------------------------------#
+# General Methods for UBC Formats
+#------------------------------------------------------------------#
+
+def ubcExtnet3D(FileName):
     """
     Description
     -----------
-    Reads the mesh file for the UBCMesh format to get output extents. Computationally inexpensive method to discover whole output extent.
+    Reads the mesh file for the UBC 3D Mesh or OcTree format to get output extents. Computationally inexpensive method to discover whole output extent.
 
     Parameters
     ----------
-    `FileName_Mesh` : str
-    - The mesh filename as an absolute path for the input mesh file in UBCMesh Format.
-
-    `deli` : str, optional
-    - The delimiter field used in the input file. Default is a space character.
-
-    `useTab` : boolean, optional
-    - An optional flag to use a tab delimiter in the input file.
+    `FileName` : str
+    - The mesh filename as an absolute path for the input mesh file in a UBC Format with extents defined on the first line.
 
     Returns
     -------
-    This returns a tuple of the whole extent for the rectilinear grid to be made of the input mesh file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to util.SetOutputWholeExtent() when used in programmable filters or source generation on the pipeline.
+    This returns a tuple of the whole extent for the grid to be made of the input mesh file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to util.SetOutputWholeExtent() when used in programmable filters or source generation on the pipeline.
 
     """
-    if (useTab):
-        deli = '\t'
-
     # Read in the mesh and set up structure of output grid from mesh file input
-    with open(FileName_Mesh) as f:
-        reader = csv.reader(f, delimiter=deli)
-        h = reader.next()
-        # TODO: ignore header lines if start with '!'
-        # Ignore header lines if start with '!'
-        while h[0][0] == '!':
-            h = reader.next()
-        # Number of CELLS in each axial direction. Points would be +1
-        n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
-        f.close()
-
-    return (0,n1, 0,n2, 0,n3)
-
-
-def ubcMesh(FileName_Mesh, deli=' ', useTab=False, pdo=None):
-    """
-    Description
-    -----------
-    This method reads a UBC Mesh file and builds an empty vrtkRectilinearGrid for data to be inserted into. Default file delimiter is a space character.
-
-    Parameters
-    ----------
-    `FileName_Mesh` : str
-    - The mesh filename as an absolute path for the input mesh file in UBCMesh Format.
-
-    `deli` : str, optional
-    - The delimiter field used in the input file. Default is a space character.
-
-    `useTab` : boolean, optional
-    - An optional flag to use a tab delimiter in the input file.
-
-    Returns
-    -------
-    Returns a vtkRectilinearGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the placeModelOnMesh() method to associate with model data.
-
-    """
-    if pdo is None:
-        pdo = vtk.vtkRectilinearGrid() # vtkRectilinearGrid
-
-    # Set the tab delimiter if needed
-    if (useTab):
-        deli = '\t'
-
-    #--- Read in the mesh ---#
-    with open(FileName_Mesh) as f:
-        reader = csv.reader(f, delimiter=deli)
-        h = reader.next()
-        # Ignore header lines if start with '!'
-        while h[0][0] == '!':
-            h = reader.next()
-
-        # Number of CELLS in each axial direction
-        n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
-        numCells = n1*n2*n3
-        # Change to number of POINTS in each axial direction
-        #- We do ths because we have to specify the points along each axial dir
-        nn = [n1,n2,n3] = [n1+1,n2+1,n3+1]
-
-        # The origin corner (South-west-top)
-        #- Remember UBC Mesh Specifies down as the positive Z
-        h = reader.next()
-        oo = [o1,o2,o3] = [float(h[0]), float(h[1]), float(h[2])]
-
-        vv = [None, None, None]
-        for i in range(3):
-            # Get spacings for this dimension:
-            h = reader.next()
-            # Construct coordinates on this axis
-            s = np.zeros(nn[i])
-            s[0] = o1
-            for j in range(1, nn[i]):
-                if (i == 2):
-                    # Z dimension (down is positive Z!)
-                    #  TODO: what is the correct way to do this?
-                    s[j] = s[j-1] + float(h[j-1])
-                else:
-                    # X and Y dimensions
-                    s[j] = s[j-1] + float(h[j-1])
-            # Convert to VTK array for setting coordinates
-            vv[i] = nps.numpy_to_vtk(num_array=s,deep=True)
-
-        # Set the dims and coordinates for the output
-        pdo.SetDimensions(n1,n2,n3)
-        pdo.SetXCoordinates(vv[0])
-        pdo.SetYCoordinates(vv[1])
-        pdo.SetZCoordinates(vv[2])
-
-        f.close()
-
-    return pdo
-
-
-
-
-
-def ubcModel(FileName_Model, deli=' ', useTab=False):
-    """
-    Description
-    -----------
-    Reads the model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
-
-    Parameters
-    ----------
-    `FileName_Model` : str
-    - The model filename as an absolute path for the input model file in UBCMesh Format.
-
-    `deli` : str, optional
-    - The delimiter field used in the input file. Default is a space character.
-
-    `useTab` : boolean, optional
-    - An optional flag to use a tab delimiter in the input file.
-
-    Returns
-    -------
-    Returns a NumPy float array that holds the model data read from the file. Use the placeModelOnMesh() method to associate with a grid.
-    """
-    #--- Read in the model ---#
-    # Count number of lines in file
-    with open(FileName_Model) as f:
-        for i, l in enumerate(f):
-            pass
-        numLines = i + 1
-        f.close()
-    # Read in data from file with new iterator
-    with open(FileName_Model) as f:
-        h = f.next()
-        skipped = 0
-        # Ignore header lines if start with '!'
-        while h[0][0] == '!':
-            h = f.next()
-            skipped += 1
-        # Iterate over everyline of the file and pull data
-        # TODO: can we just iterate over each line for 1D then reshape to 3D?
-        data = np.zeros((numLines-skipped), dtype=float)
-        idx = 0
-        try:
-            for i, l in enumerate(f):
-                if idx >= numLines-skipped:
-                    break
-                data[idx] = float(str.strip(l))
-                idx += 1
-        except StopIteration:
-            print('StopIteration encountered while reading the model file.')
-            pass
-        f.close()
-
-    return data
+    #--- Read in first line of the mesh file ---#
+    v = np.array(np.__version__.split('.'), dtype=int)
+    if v[0] >= 1 and v[1] >= 10:
+        # max_rows in numpy versions >= 1.10
+        fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!', max_rows=1)
+    else:
+        # This reads whole file :(
+        fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+    # Get mesh dimensions
+    dim = np.array(fileLines[0].split('!')[0].split(), dtype=int)
+    dim = dim[0:3]
+    ne,nn,nz = dim[0], dim[1], dim[2]
+    return (0,ne, 0,nn, 0,nz)
 
 def placeModelOnMesh(mesh, model, dataNm='Data'):
     """
@@ -228,7 +107,137 @@ def placeModelOnMesh(mesh, model, dataNm='Data'):
     mesh.GetCellData().AddArray(c)
     return mesh
 
-def ubcGridData(FileName_Mesh, FileName_Model, deli=' ', useTab=False, dataNm='', pdo=None):
+
+#------------------------------------------------------------------#
+#----------------------     UBC MESH 2D    ------------------------#
+#------------------------------------------------------------------#
+
+def ubcMesh2D(FileName, pdo=None):
+    # Details: http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html
+    # TODO: Implement
+    raise Exception('2D UBC Mesh Format not implemented')
+    if pdo is None:
+        pdo = vtk.vtkRectilinearGrid() # vtkRectilinearGrid
+
+    fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+    nx = np.array(fileLines[0].split('!')[0].split(), dtype=int)[0]
+    # deal with lines
+    nz = np.array(fileLines[0].split('!')[0].split(), dtype=int)[0]
+    # deal with lines
+    return pdo
+
+def ubcModel2D(FileName):
+    # TODO: Implement
+    raise Exception('2D UBC Model Format not implemented')
+    return None
+
+def ubcMeshData2D(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
+    # If no name given for data by user, use the basename of the file
+    if dataNm == '':
+        dataNm = os.path.basename(FileName_Model)
+    # Construct/read the mesh
+    mesh = ubcMesh2D(FileName_Mesh, pdo=pdo)
+    # Read the model data
+    model = ubcModel2D(FileName_Model)
+    # Place the model data onto the mesh
+    grd = placeModelOnMesh(mesh, model, dataNm)
+    return grd
+
+
+#------------------------------------------------------------------#
+#----------------------     UBC MESH 3D    ------------------------#
+#------------------------------------------------------------------#
+
+def ubcMesh3D(FileName, pdo=None):
+    """
+    Description
+    -----------
+    This method reads a UBC Mesh file and builds an empty vtkRectilinearGrid for data to be inserted into. Default file delimiter is a space character.
+
+    Parameters
+    ----------
+    `FileName` : str
+    - The mesh filename as an absolute path for the input mesh file in UBCMesh Format.
+
+    `pdo` : vtk.vtkRectilinearGrid, optional
+    - The output data object
+
+    Returns
+    -------
+    Returns a vtkRectilinearGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the placeModelOnMesh() method to associate with model data.
+
+    """
+    if pdo is None:
+        pdo = vtk.vtkRectilinearGrid() # vtkRectilinearGrid
+
+    #--- Read in the mesh ---#
+    fileLines = np.genfromtxt(FileName, dtype=str,
+        delimiter='\n', comments='!')
+
+    # Get mesh dimensions
+    dim = np.array(fileLines[0].
+        split('!')[0].split(), dtype=int)
+    dim = (dim[0]+1, dim[1]+1, dim[2]+1)
+
+    # The origin corner (Southwest-top)
+    #- Remember UBC format specifies down as the positive Z
+    #- Easting, Northing, Altitude
+    oo = np.array(
+        fileLines[1].split('!')[0].split(),
+        dtype=float
+    )
+    oe,on,oz = oo[0],oo[1],oo[2]
+
+    vv = [None, None, None]
+    # Now extract cell sizes
+    for i in range(3):
+        # i+2 for file lines because we already dealt with first 2 lines
+        spac = np.array(
+            fileLines[i+2].split('!')[0].split(), dtype=float
+        )
+        if len(spac) != dim[i]-1:
+            raise Exception('More spacings specifed than extent defined allows for dimension %d' % i)
+        s = np.zeros(dim[i])
+        s[0] = oo[i]
+        for j in range(1, dim[i]):
+            if (i == 2):
+                # Z dimension (down is positive Z!)
+                #  TODO: what is the correct way to do this?
+                s[j] = s[j-1] + spac[j-1]
+            else:
+                # X and Y dimensions
+                s[j] = s[j-1] + spac[j-1]
+        # Convert to VTK array for setting coordinates
+        vv[i] = nps.numpy_to_vtk(num_array=s,deep=True)
+
+    # Set the dims and coordinates for the output
+    pdo.SetDimensions(dim[0],dim[1],dim[2])
+    pdo.SetXCoordinates(vv[0])
+    pdo.SetYCoordinates(vv[1])
+    pdo.SetZCoordinates(vv[2])
+
+    return pdo
+
+def ubcModel3D(FileName):
+    """
+    Description
+    -----------
+    Reads the model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
+
+    Parameters
+    ----------
+    `FileName` : str
+    - The model filename as an absolute path for the input model file in UBCMesh Model Format.
+
+    Returns
+    -------
+    Returns a NumPy float array that holds the model data read from the file. Use the placeModelOnMesh() method to associate with a grid.
+    """
+    fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+    data = np.genfromtxt((line.encode('utf8') for line in fileLines), dtype=np.float)
+    return data
+
+def ubcMeshData3D(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
     """
     Description
     -----------
@@ -242,12 +251,6 @@ def ubcGridData(FileName_Mesh, FileName_Model, deli=' ', useTab=False, dataNm=''
     `FileName_Model` : str
     - The model filename as an absolute path for the input model file in UBCMesh Format.
 
-    `deli` : str, optional
-    - The delimiter field used in the input file. Default is a space character.
-
-    `useTab` : boolean, optional
-    - An optional flag to use a tab delimiter in the input file.
-
     `dataNm` : str, optional
     - The name of the model data array once placed on the vtkRectilinearGrid.
 
@@ -260,9 +263,84 @@ def ubcGridData(FileName_Mesh, FileName_Model, deli=' ', useTab=False, dataNm=''
     if dataNm == '':
         dataNm = os.path.basename(FileName_Model)
     # Construct/read the mesh
-    mesh = ubcMesh(FileName_Mesh, deli, useTab, pdo=pdo)
+    mesh = ubcMesh3D(FileName_Mesh, pdo=pdo)
     # Read the model data
-    model = ubcModel(FileName_Model, deli, useTab)
+    model = ubcModel3D(FileName_Model)
     # Place the model data onto the mesh
     grd = placeModelOnMesh(mesh, model, dataNm)
     return grd
+
+
+
+#------------------------------------------------------------------#
+#-----------------------    UBC OcTree    -------------------------#
+#------------------------------------------------------------------#
+
+def ubcOcTree(FileName, dataNm='', pdo=None):
+    """
+    Description
+    -----------
+    This method reads a UBC OcTree Mesh file and builds a vtkUnstructuredGrid of the data in the file. File delimiter is blank space.
+
+    Parameters
+    ----------
+    `FileName` : str
+    - The mesh filename as an absolute path for the input mesh file in UBC OcTree format.
+
+    `pdo` : vtk.vtkUnstructuredGrid, optional
+    - A pointer to the output data object.
+
+    Returns
+    -------
+    Returns a vtkUnstructuredGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the placeModelOnMesh() method to associate with model data.
+
+    """
+    if pdo is None:
+        pdo = vtk.vtkUnstructuredGrid() # vtkUnstructuredGrid
+
+    #--- Read in the mesh ---#
+    fileLines = np.genfromtxt(FileName, dtype=str,
+        delimiter='\n', comments='!')
+
+    # Get mesh dimensions
+    dim = np.array(fileLines[0].
+        split('!')[0].split(), dtype=int)
+    # First three values are the number of cells in the core mesh and remaining 6 values are padding for the core region.
+    pad = dim[3:6] # TODO: check if there because optional... might throw error if not there
+    dim = dim[0:3]
+    ne,nn,nz = dim[0], dim[1], dim[2]
+    print(ne,nn,nz,' : ',pad)
+    if np.unique(dim).size > 1:
+        raise Exception('OcTree meshes must have the same number of cells in all directions.')
+
+    # The origin corner (Southwest-top)
+    #- Remember UBC format specifies down as the positive Z
+    #- Easting, Northing, Altitude
+    oo = np.array(
+        fileLines[1].split('!')[0].split(),
+        dtype=float
+    )
+    oe,on,oz = oo[0],oo[1],oo[2]
+
+    # Widths of the core cells in the Easting, Northing, and Vertical directions.
+    ww = np.array(
+        fileLines[2].split('!')[0].split(),
+        dtype=float
+    )
+    we,wn,wz = ww[0],ww[1],ww[2]
+
+    # Number of cells in OcTree mesh
+    numCells = np.array(
+        fileLines[3].split('!')[0].split(),
+        dtype=float
+    )
+
+    # Read the remainder of the file containing the index arrays
+    indArr = np.genfromtxt((line.encode('utf8') for line in fileLines[4::]), dtype=np.int)
+
+    ################
+    # TODO: Construct vtk.vtkUnstructuredGrid() of data that we just read from file
+    # NOTE: We want to use the `pdo` object already assigned as a vtkUnstructuredGrid
+    ################
+
+    return pdo
