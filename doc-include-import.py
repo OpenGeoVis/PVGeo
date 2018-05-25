@@ -38,20 +38,19 @@ def tryimport(name, globals={}, locals={}, fromlist=[], level=1):
 DEF_SYNTAX = re.compile(r'\{def:\s*(.+?)\s*\}')
 CLASS_SYNTAX = re.compile(r'\{class:\s*(.+?)\s*\}')
 
-def _cleandocstr(doc, level='####', rmv='\n    '):
+def _cleandocstr(doc, rmv='\n    '):
     # Decrease indentation from method def
     doc = doc.replace(rmv,'\n')
     # add a newline before list items
     doc = doc.replace('\n- ','\n\n- ')
 
-    # make H3 headers
     lines = doc.split('\n')
     dels = []
     for i in range(len(lines)):
         ln = lines[i]
         if len(ln)>2 and ln[0] == '-' and ln[1] == '-':
             dels.append(i)
-            lines[i-1] = '%s '%level + lines[i-1]
+            lines[i-1] = '**' + lines[i-1] + '**\n'
 
     # Delete the underlines
     for i in range(len(dels)):
@@ -59,23 +58,19 @@ def _cleandocstr(doc, level='####', rmv='\n    '):
 
     # Join the lines
     doc = "\n".join((str(x) for x in lines))
-    doc = doc.replace('\n',rmv)
+    doc = doc.replace('\n','\n    ')
     return doc
 
 ################
 
 
-def _getDefMarkdown(method, module, level='###', rmv='\n    '):
+def _getDefMarkdown(method, module, rmv='\n    '):
     sig = inspect.signature(method)
-    output = ['%s `%s`' % (level, method.__name__)]
-    output.append('\n!!! note "Docs"')
-    output.append("""
-    ```py
-    %s.%s%s
-    ```""" % (module.__name__, method.__name__, sig))
+    output = ['\n??? abstract "%s.%s"'% (module.__name__, method.__name__)]
+    output.append('    `:::py %s.%s%s`'% (module.__name__, method.__name__, sig))
 
     if method.__doc__:
-        output.append(_cleandocstr(method.__doc__, level='#'+level, rmv=rmv))
+        output.append(_cleandocstr(method.__doc__, rmv=rmv))
 
     return "\n".join((str(x) for x in output))
 
@@ -84,17 +79,14 @@ def _getDefMarkdown(method, module, level='###', rmv='\n    '):
 
 def _getClassMarkdown(cla, module):
     rmv = '\n        '
-    output = ['## Class `%s`' % (cla.__name__)]
-    output.append("""
-```py
-%s.%s
-```""" % (module.__name__, cla.__name__))
+    output = ['### Class `%s.%s`' % (module.__name__, cla.__name__)]
     if cla.__doc__:
-        output.append(_cleandocstr(cla.__doc__))
+        output.append(_cleandocstr(cla.__doc__).replace('\n    ','\n'))
+    # Now handle member function just like normal functions
     members = inspect.getmembers(cla)
     for mem in members:
         if mem[0][0] != '_':
-            output.append(_getDefMarkdown(mem[1], cla, level='###', rmv=rmv))
+            output.append(_getDefMarkdown(mem[1], cla, rmv=rmv))
     return "\n".join((str(x) for x in output))
 
 
