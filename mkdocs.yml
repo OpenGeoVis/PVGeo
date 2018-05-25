@@ -103,5 +103,8 @@ pages:
         - Understand VTK Data Types: Examples/Understand-VTK.md
     - Virtual Reality:
         - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md
+    - Development Guide:
+        - Contributing: Dev-Guide/Contributing-to-PVGP.md
+        - Repo Structure: Dev-Guide/Repo-Structure.md
 
 - Features to Come: Upcoming.md
