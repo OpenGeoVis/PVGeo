@@ -428,7 +428,7 @@ def ubcOcTree(FileName, dataNm='', pdo=None):
     """
     Description
     -----------
-    This method reads a UBC OcTree Mesh file and builds a vtkUnstructuredGrid of the data in the file. File delimiter is blank space.
+    This method reads a UBC OcTree Mesh file and builds a vtkUnstructuredGrid of the data in the file. This method generates the vtkUnstructuredGrid without any data attributes. 
 
     Parameters
     ----------
