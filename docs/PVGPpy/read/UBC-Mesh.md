@@ -10,30 +10,20 @@ UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describ
 
 ## Code Docs
 
+{def:PVGPpy.read.ubcExtent}
+
+{def:PVGPpy.read.readUBCMesh}
+
 {def:PVGPpy.read.placeModelOnMesh}
 
 ### 3D
 
-{def:PVGPpy.read.ubcMeshData3D}
-
-
-{def:PVGPpy.read.ubcExtent3D}
-
-
 {def:PVGPpy.read.ubcMesh3D}
-
 
 {def:PVGPpy.read.ubcModel3D}
 
 ### 2D
 
-{def:PVGPpy.read.ubcMeshData2D}
-
-
-{def:PVGPpy.read.ubcExtent2D}
-
-
 {def:PVGPpy.read.ubcMesh2D}
-
 
 {def:PVGPpy.read.ubcModel2D}

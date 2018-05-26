@@ -47,11 +47,11 @@ def RequestData(self):
 def RequestInformation(self):
     from paraview import util
     from PVGPpy.read import setOutputTimesteps, getTimeStepFileIndex
-    from PVGPpy.read import ubcExtnet3D
+    from PVGPpy.read import ubcExtent
     # This is necessary to set time steps
     setOutputTimesteps(self, FileNames, dt=Time_Step)
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
     # Preview the mesh file and get the mesh extents
-    ext = ubcExtnet3D(FileNames[i])
+    ext = ubcExtent(FileNames[i])
     # Set the mesh extents
     util.SetOutputWholeExtent(self, ext)

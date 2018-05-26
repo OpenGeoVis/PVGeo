@@ -98,7 +98,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import setOutputTimesteps, getTimeStepFileIndex&#xA;from PVGPpy.read import ubcExtnet3D&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtnet3D(FileNames[i])&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.read import setOutputTimesteps, getTimeStepFileIndex&#xA;from PVGPpy.read import ubcExtent&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtent(FileNames[i])&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
