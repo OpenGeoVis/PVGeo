@@ -35,10 +35,10 @@ def RequestData():
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.read import ubcExtnet3D
+    from PVGPpy.read import ubcExtent3D
     if FileName_Mesh == 'absolute path':
         raise Exception('No mesh file selected. Aborting.')
     # Preview the mesh file and get the mesh extents
-    ext = ubcExtnet3D(FileName_Mesh)
+    ext = ubcExtent3D(FileName_Mesh)
     # Set the mesh extents
     util.SetOutputWholeExtent(self, ext)

@@ -1,10 +1,9 @@
 __all__ = [
     # General Stuff
-    'ubcExtnet3D',
+    'ubcExtent3D',
     'placeModelOnMesh',
 
     # 2D Mesh
-    # TODO: implement
     #'ubcMesh2D',
     #'ubcModel2D',
     #'ubcMeshData2D',
@@ -30,7 +29,7 @@ from ._helpers import *
 # General Methods for UBC Formats
 #------------------------------------------------------------------#
 
-def ubcExtnet3D(FileName):
+def ubcExtent3D(FileName):
     """
     Description
     -----------
