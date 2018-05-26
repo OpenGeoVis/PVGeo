@@ -1,12 +1,12 @@
-Name = 'ReadUBCMesh3D'
-Label = 'Read UBC Mesh 3D Two-File Format'
+Name = 'ReadUBCMesh'
+Label = 'Read UBC Mesh 2D/3D Two-File Format'
 FilterCategory = 'PVGP Readers'
-Help = 'UBC Mesh 3D models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. Default file delimiter is a space character.'
+Help = 'UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. The reader will automatically detect if the mesh is 2D or 3D and read the remainder of the data with that dimensionality assumption. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D).'
 
 NumberOfInputs = 0
 OutputDataType = 'vtkRectilinearGrid'
 Extensions = 'mesh msh dat'
-ReaderDescription = 'PVGP: UBC Mesh 3D Two-File Format'
+ReaderDescription = 'PVGP: UBC Mesh 2D/3D Two-File Format'
 
 # TODO: implement FileNames to work with time series
 Properties = dict(
@@ -18,7 +18,7 @@ Properties = dict(
 
 
 def RequestData():
-    from PVGPpy.read import ubcMeshData3D
+    from PVGPpy.read import readUBCMesh
     import os
     # Make sure we have a file combo
     if FileName_Mesh == 'absolute path':
@@ -31,14 +31,14 @@ def RequestData():
     if Data_Name == '':
         Data_Name = os.path.basename(FileName_Model)
     # Read the UBC Mesh gridded data:
-    ubcMeshData3D(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)
+    readUBCMesh(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.read import ubcExtent3D
+    from PVGPpy.read import ubcExtent
     if FileName_Mesh == 'absolute path':
         raise Exception('No mesh file selected. Aborting.')
     # Preview the mesh file and get the mesh extents
-    ext = ubcExtent3D(FileName_Mesh)
+    ext = ubcExtent(FileName_Mesh)
     # Set the mesh extents
     util.SetOutputWholeExtent(self, ext)
