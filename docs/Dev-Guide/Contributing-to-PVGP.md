@@ -1,4 +1,4 @@
-!!! success "👍🎉 Thanks for taking the time to contribute! 🎉👍"
+!!! success "Thanks for taking the time to contribute!"
 
 We absolutely welcome contributions and input from the developers and users and we hope that this guide will facilitate an understanding of the *ParaViewGeophysics* code repository. It is important to note that the *ParaViewGeophysics* software package is maintained on a volunteer basis and thus we need to foster a community that can support user questions and develop new features to make this software a useful tool for geoscientists.
 

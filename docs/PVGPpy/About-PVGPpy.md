@@ -18,6 +18,18 @@ We are doing this to show how easy it is to make custom readers and convey the m
 !!! info
     Explore the different reader plugins by looking under the **Readers** section of the **Plugins & PVGPpy** part of the navigation pane.
 
+??? info "implemented Formats"
+    - Grids:
+        - [UBC GIF Meshes 2D and 3D](read/UBC-Mesh.md)
+        - [SGeMS Uniform Grid](read/SGeMS-Grid.md)
+        - [The PVGP Uniform Grid](read/PVGP-Grid.md)
+    - Tables:
+        - [Binary Packed Data](read/Binary-Packed-Data.md)
+        - [Madagascar Single Stream RSF](read/Madagascar-SSRSF.md)
+        - [Delimited Text](read/Delimited-Text.md)
+        - [GSLIB](read/GSLIB.md)
+
+
 
 ## Filters
 A filter modifies, transforms, combines, analyses, etc. data on the ParaView pipeline. Filters provide a means for changing how we visualize data or create a means of taking some data and generating other data from that. For example we might have a series of scattered points that we know represent the center of a tunnel or tube that represents a well. We can use a filter to transform those points into a connected line that we then construct a cylinder around. This allows us to save out minimal data (just XYZ points as opposed to complex geometries that make up the tunnel) to our hard drive while still having complex visualizations from that data.

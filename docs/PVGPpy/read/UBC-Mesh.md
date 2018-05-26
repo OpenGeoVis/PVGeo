@@ -10,6 +10,8 @@ UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describ
 
 ## Code Docs
 
+{def:PVGPpy.read.placeModelOnMesh}
+
 ### 3D
 
 {def:PVGPpy.read.ubcMeshData3D}
@@ -35,6 +37,3 @@ UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describ
 
 
 {def:PVGPpy.read.ubcModel2D}
-
-### Both
-{def:PVGPpy.read.placeModelOnMesh}
