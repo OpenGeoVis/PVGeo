@@ -151,19 +151,19 @@ def ubcMesh3D(FileName, pdo=None):
     """
     Description
     -----------
-    This method reads a UBC Mesh file and builds an empty vtkRectilinearGrid for data to be inserted into. Default file delimiter is a space character.
+    This method reads a UBC 3D Mesh file and builds an empty vtkRectilinearGrid for data to be inserted into.
 
     Parameters
     ----------
     `FileName` : str
-    - The mesh filename as an absolute path for the input mesh file in UBCMesh Format.
+    - The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
 
     `pdo` : vtk.vtkRectilinearGrid, optional
     - The output data object
 
     Returns
     -------
-    Returns a vtkRectilinearGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the placeModelOnMesh() method to associate with model data.
+    Returns a vtkRectilinearGrid generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the placeModelOnMesh() method to associate with model data.
 
     """
     if pdo is None:
@@ -239,12 +239,12 @@ def ubcModel3D(FileName):
     """
     Description
     -----------
-    Reads the model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
+    Reads the 3D model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
 
     Parameters
     ----------
     `FileName` : str
-    - The model filename as an absolute path for the input model file in UBCMesh Model Format.
+    - The model filename as an absolute path for the input model file in UBC 3D Model Model Format.
 
     Returns
     -------
@@ -258,22 +258,22 @@ def ubcMeshData3D(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
     """
     Description
     -----------
-    UBC Mesh 3D models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. Default file delimiter is a space character.
+    UBC Mesh 3D models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file.
 
     Parameters
     ----------
     `FileName_Mesh` : str
-    - The mesh filename as an absolute path for the input mesh file in UBCMesh Format
+    - The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format
 
     `FileName_Model` : str
-    - The model filename as an absolute path for the input model file in UBCMesh Format.
+    - The model filename as an absolute path for the input model file in UBC 3D Model Format.
 
     `dataNm` : str, optional
     - The name of the model data array once placed on the vtkRectilinearGrid.
 
     Returns
     -------
-    Returns a vtkRectilinearGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
+    Returns a vtkRectilinearGrid generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
 
     """
     # If no name given for data by user, use the basename of the file
