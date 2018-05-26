@@ -1,6 +1,6 @@
 ---
 name: Other Issue/Question
-about: Concisely describe this issue here.
+about: Describe a question or concern about the ParaViewGeophysics code repository.
 
 ---
 
