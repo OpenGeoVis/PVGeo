@@ -4,3 +4,7 @@ This module is meant to be used outside of pvpython in python 2 or 3. This has f
 from .cmaps import *
 from .file_sinks import *
 #from .ipython import *
+
+__author__ = 'Bane Sullivan'
+__license__ = 'BSD-3-Clause'
+__copyright__ = '2018, Bane Sullivan'

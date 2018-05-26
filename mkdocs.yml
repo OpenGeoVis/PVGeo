@@ -63,6 +63,7 @@ pages:
     - Build Your Own Plugins: PVGPpy/Build-Your-Own-Plugins.md
     - Readers:
         - Binary Packed Data: PVGPpy/read/Binary-Packed-Data.md
+        - Madagascar SSRSF: PVGPpy/read/Madagascar-SSRSF.md
         - Delimited Text: PVGPpy/read/Delimited-Text.md
         - GSLIB: PVGPpy/read/GSLIB.md
         - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
@@ -103,5 +104,8 @@ pages:
         - Understand VTK Data Types: Examples/Understand-VTK.md
     - Virtual Reality:
         - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md
+    - Development Guide:
+        - Contributing: Dev-Guide/Contributing-to-PVGP.md
+        - Repo Structure: Dev-Guide/Repo-Structure.md
 
 - Features to Come: Upcoming.md

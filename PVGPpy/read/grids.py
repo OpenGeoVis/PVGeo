@@ -7,6 +7,7 @@ from vtk.util import numpy_support as nps
 import vtk
 import json
 import struct
+import base64
 
 def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
     """
@@ -129,7 +130,7 @@ def readPVGPGrid(headerfile, pdo=None, path=None):
     """
     Description
     -----------
-    Generates vtkImageData from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
+    Generates vtkImageData from the uniform grid defined in the PVGP uniformly gridded data format.
 
     Parameters
     ----------
@@ -180,13 +181,11 @@ def readPVGPGrid(headerfile, pdo=None, path=None):
         dataNames.append(darr)
         dtype, sdtype, num_bytes, vtktype = _getdtypes(dataArrays[darr]['dtype'])
         vtktypes.append(vtktype)
-        fopen = '%s/%s' % (path, dataArrays[darr]['filemane'])
-        tn = int(os.stat(fopen).st_size / num_bytes)
-        tn_string = str(tn)
-        with open(fopen, 'rb') as f:
-            # Unpack by num_bytes
-            raw = struct.unpack(endian+tn_string+sdtype, f.read(num_bytes*tn))
-            dataArrs.append(raw)
+        # Grab and decode data array
+        encoded = base64.b64decode(dataArrays[darr]['data'])
+
+        raw = struct.unpack(endian+str(n1*n2*n3)+sdtype, encoded)
+        dataArrs.append(np.asarray(raw, dtype=dtype))
 
     """TODO:
     if order is not 'F':
