@@ -4,9 +4,10 @@ __all__ = [
     'placeModelOnMesh',
 
     # 2D Mesh
-    #'ubcMesh2D',
-    #'ubcModel2D',
-    #'ubcMeshData2D',
+    'ubcExtent2D',
+    'ubcMesh2D',
+    'ubcModel2D',
+    'ubcMeshData2D',
 
     # 3D Mesh
     'ubcMesh3D',
@@ -111,26 +112,156 @@ def placeModelOnMesh(mesh, model, dataNm='Data'):
 #----------------------     UBC MESH 2D    ------------------------#
 #------------------------------------------------------------------#
 
+def _ubcMesh2D_part(FileName):
+    # This is a helper method to read file contents of mesh
+    fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+
+    def _genTup(sft, n):
+        # This reads in the data for a dimension
+        pts = []
+        disc = []
+        for i in range(n):
+            ln = fileLines[i+sft].split('!')[0].split()
+            if i is 0:
+                o = ln[0]
+                pts.append(o)
+                ln = [ln[1],ln[2]]
+            pts.append(ln[0])
+            disc.append(ln[1])
+        return pts, disc
+
+    # Get the number of lines for each dimension
+    nx = int(fileLines[0].split('!')[0])
+    nz = int(fileLines[nx+1].split('!')[0])
+
+    # Get the origins and tups for both dimensions
+    xpts, xdisc = _genTup(1, nx)
+    zpts, zdisc = _genTup(2+nx, nz)
+
+    return xpts, xdisc, zpts, zdisc
+
+def ubcExtent2D(FileName):
+    """
+    Description
+    -----------
+    Reads the mesh file for the UBC 2D Mesh format to get output extents.
+
+    Parameters
+    ----------
+    `FileName` : str
+    - The mesh filename as an absolute path for the input mesh file in a UBC 2D Mesh Format.
+
+    Returns
+    -------
+    This returns a tuple of the whole extent for the grid to be made of the input mesh file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to util.SetOutputWholeExtent() when used in programmable filters or source generation on the pipeline.
+
+    """
+    # Read in data from file
+    xpts, xdisc, zpts, zdisc = _ubcMesh2D_part(FileName)
+
+    nx = np.sum(np.array(xdisc,dtype=int))+1
+    nz = np.sum(np.array(zdisc,dtype=int))+1
+
+    return (0,nx, 0,1,  0,nz)
+
 def ubcMesh2D(FileName, pdo=None):
-    # Details: http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html
-    # TODO: Implement
-    raise Exception('2D UBC Mesh Format not implemented')
+    """
+    Description
+    -----------
+    This method reads a UBC 2D Mesh file and builds an empty vtkRectilinearGrid for data to be inserted into. [Format Specs](http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html)
+
+    Parameters
+    ----------
+    `FileName` : str
+    - The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
+
+    `pdo` : vtk.vtkRectilinearGrid, optional
+    - The output data object
+
+    Returns
+    -------
+    Returns a vtkRectilinearGrid generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the placeModelOnMesh() method to associate with model data.
+
+    """
     if pdo is None:
         pdo = vtk.vtkRectilinearGrid() # vtkRectilinearGrid
 
-    fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
-    nx = np.array(fileLines[0].split('!')[0].split(), dtype=int)[0]
-    # deal with lines
-    nz = np.array(fileLines[0].split('!')[0].split(), dtype=int)[0]
-    # deal with lines
+    # Read in data from file
+    xpts, xdisc, zpts, zdisc = _ubcMesh2D_part(FileName)
+
+    nx = np.sum(np.array(xdisc,dtype=int))+1
+    nz = np.sum(np.array(zdisc,dtype=int))+1
+
+    # Now generate the vtkRectilinear Grid
+    def _genCoords(pts, disc):
+        c = [float(pts[0])]
+        for i in range(len(pts)-1):
+            start = float(pts[i])
+            stop = float(pts[i+1])
+            num = int(disc[i])
+            w = (stop-start)/num
+
+            for j in range(1,num):
+                c.append(start + (j)*w)
+            c.append(stop)
+        c = np.array(c,dtype=float)
+        return nps.numpy_to_vtk(num_array=c,deep=True)
+
+    xcoords = _genCoords(xpts, xdisc)
+    zcoords = _genCoords(zpts, zdisc)
+    ycoords = nps.numpy_to_vtk(num_array=np.zeros(1),deep=True)
+
+    pdo.SetDimensions(nx,2,nz) # note this subtracts 1
+    pdo.SetXCoordinates(xcoords)
+    pdo.SetYCoordinates(ycoords)
+    pdo.SetZCoordinates(zcoords)
+
     return pdo
 
 def ubcModel2D(FileName):
-    # TODO: Implement
-    raise Exception('2D UBC Model Format not implemented')
-    return None
+    """
+    Description
+    -----------
+    Reads a 2D model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
+
+    Parameters
+    ----------
+    `FileName` : str
+    - The model filename as an absolute path for the input model file in UBCMesh Model Format.
+
+    Returns
+    -------
+    Returns a NumPy float array that holds the model data read from the file. Use the placeModelOnMesh() method to associate with a grid.
+    """
+    fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+    dim = np.array(fileLines[0].split(), dtype=int)
+    data = np.genfromtxt((line.encode('utf8') for line in fileLines[1::]), dtype=np.float)
+    if np.shape(data)[0] != dim[1] and np.shape(data)[1] != dim[0]:
+        raise Exception('Mode file `%s` improperly formatted.' % FileName)
+    return data.flatten(order='F')
 
 def ubcMeshData2D(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
+    """
+    Description
+    -----------
+    UBC Mesh 2D models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file.
+
+    Parameters
+    ----------
+    `FileName_Mesh` : str
+    - The mesh filename as an absolute path for the input mesh file in UBC 2D Mesh Format
+
+    `FileName_Model` : str
+    - The model filename as an absolute path for the input model file in UBC 2D Model Format.
+
+    `dataNm` : str, optional
+    - The name of the model data array once placed on the vtkRectilinearGrid.
+
+    Returns
+    -------
+    Returns a vtkRectilinearGrid generated from the UBC 2D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
+
+    """
     # If no name given for data by user, use the basename of the file
     if dataNm == '':
         dataNm = os.path.basename(FileName_Model)

@@ -1,0 +1,147 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="sources">
+    <SourceProxy name="ReadUBCMesh2D" class="vtkPythonProgrammableFilter" label="Read UBC Mesh 2D Two-File Format">
+      <Documentation
+        long_help="UBC Mesh 2D models are defined using a 2-file format. The &quot;mesh&quot; file describes how the data is descritized. The &quot;model&quot; file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. Default file delimiter is a space character."
+        short_help="UBC Mesh 2D models are defined using a 2-file format. The &quot;mesh&quot; file describes how the data is descritized. The &quot;model&quot; file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. Default file delimiter is a space character.">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGP Readers" />
+      </Hints>
+      <Hints>
+        <ReaderFactory extensions="mesh msh dat"
+          file_description="PVGP: UBC Mesh 2D Two-File Format" />
+      </Hints>
+
+      <!-- Output data type: "vtkRectilinearGrid" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="3"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+
+
+      <StringVectorProperty
+        name="FileNames"
+        initial_string="FileNames"
+        animateable="0"
+        number_of_elements="0"
+        command="AddParameter"
+        clean_command="ClearParameter"
+        repeat_command="1"
+        panel_visibility="advanced">
+        <FileListDomain name="files"/>
+            <Documentation>
+            The list of files to be read by the reader.
+            </Documentation>
+      </StringVectorProperty>
+
+      <DoubleVectorProperty
+        name="TimestepValues"
+        repeatable="1"
+        information_only="1">
+        <TimeStepsInformationHelper/>
+            <Documentation>
+            Available timestep values.
+            </Documentation>
+        </DoubleVectorProperty>
+        <Hints>
+            <ReaderFactory extensions="mesh msh dat"
+                    file_description="PVGP: UBC Mesh 2D Two-File Format" />
+        </Hints>
+
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="Data_Name"
+        label="Data Name"
+        initial_string="Data_Name"
+        command="SetParameter"
+        animateable="1"
+        default_values=""
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName_Mesh"
+        label="FileName Mesh"
+        initial_string="FileName_Mesh"
+        command="SetParameter"
+        animateable="1"
+        default_values="absolute path"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation></Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName_Model"
+        label="FileName Model"
+        initial_string="FileName_Model"
+        command="SetParameter"
+        animateable="1"
+        default_values="absolute path"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation></Documentation>
+      </StringVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="advanced"
+        name="Time_Step"
+        label="Time Step"
+        initial_string="Time_Step"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.read import ubcMeshData2D&#xA;import os&#xA;# Make sure we have a file combo&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;#if FileName_Model == 'absolute path':&#xA;#    raise Exception('No model file selected. Aborting.')&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# If no name given for data by user, use the basename of the file&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileName_Model)&#xA;# Read the UBC Mesh gridded data:&#xA;ubcMeshData2D(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;from PVGPpy.read import ubcExtent2D&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtent2D(FileName_Mesh)&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
