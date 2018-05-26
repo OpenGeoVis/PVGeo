@@ -1,5 +1,5 @@
 # OS Files:
 **/.DS_Store
-**.pyc
+**/*.pyc
 **/__pycache__/
 site/
