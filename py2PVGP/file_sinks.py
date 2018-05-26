@@ -1,7 +1,10 @@
+__all__ = ['savePVGPGrid']
+
 import os
 import json
 import struct
 import numpy as np
+import base64
 
 def _getdtypes(dtype):
     if dtype == 'float64':
@@ -21,8 +24,39 @@ def _getdtypes(dtype):
 
 def savePVGPGrid(data, path, basename, spacing=(1,1,1), origin=(0,0,0), order='F', dataNames=None, endian='@'):
     """
-    ## The import is working!!!!
+    Description
+    -----------
+    The method is for use outside of pvpython in Python 2 or 3 to save a regularly sampled grid in the PVGP format. Pass lists of multidimensional numpy arrays of same shape to save out.
 
+    Parameters
+    ----------
+    `data` : list of numpy.ndarray
+    - The attirbutes for a single model in a multidimensional array. Max dimensionality of 3. All arrays in the list must have the same shape.
+
+    `path` : str
+    - The absolute path to the location to save the file.
+
+    `basename` : str
+    - The basename of the file to be saved out.
+
+    `spacing` : tuple of ints, optional
+    - The spacings along each axial dimension
+
+    `origin` : tuple of floats, optional
+    - The XYZ location of the origin to build the volume out from
+
+    `order` : char, optional
+    - The order to unpack/pack the data arrays.
+
+    `dataNames` : list of strings, optional
+    - A list of the data names for each model attribute. Must have same number of names as number of model inputs in the `data` parameter.
+
+    `endian` : char, optional
+    - The endianness to pack the data when compressing it. Not necessary anymore.
+
+    Returns
+    -------
+    None. This method saves out a file in the PVGP Grid format.
 
     """
     if type(data) is not list:
@@ -54,13 +88,10 @@ def savePVGPGrid(data, path, basename, spacing=(1,1,1), origin=(0,0,0), order='F
         no, sdtype, num_bytes = _getdtypes(str(dd.dtype))
         dd = struct.pack(endian+str(len(dd))+sdtype,*dd)
 
-        fname = '%s-%s.pvgp@' % (basename,dataNames[i])
         dataArrsDict[dataNames[i]] = dict(
-            filemane=fname,
-            dtype=dtypes[i]
+            dtype=dtypes[i],
+            data=base64.encodestring(dd).decode('ascii')
         )
-        with open('%s/%s' % (path, fname), 'wb') as f:
-            f.write(dd)
 
     # Parse out the header
     lib = dict(
@@ -71,8 +102,8 @@ def savePVGPGrid(data, path, basename, spacing=(1,1,1), origin=(0,0,0), order='F
         order=order,
         endian=endian,
         numArrays=numArrays,
-        dataArrays=dataArrsDict,
-        originalPath=path
+        originalPath=path,
+        dataArrays=dataArrsDict
     )
 
     # save the header
