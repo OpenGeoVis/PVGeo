@@ -191,11 +191,29 @@ def ubcMesh3D(FileName, pdo=None):
     # Now extract cell sizes
     for i in range(3):
         # i+2 for file lines because we already dealt with first 2 lines
-        spac = np.array(
-            fileLines[i+2].split('!')[0].split(), dtype=float
-        )
+        spac_str = fileLines[i+2].split('!')[0].split()
+        # Now check if there are any of the repeating spacings
+        #- format example: 5*10.0 for five cells of width 10.0
+        ins_idx = []
+        ins_spac = []
+        for j in range(len(spac_str)):
+            if '*' in spac_str[j]:
+                parsed = spac_str[j].split('*')
+                ins_idx.append(j)
+                num, dist = int(parsed[0]), parsed[1]
+                ins = [dist]*num
+                ins_spac.append(ins)
+        for j in range(len(ins_idx)):
+            del spac_str[ins_idx[j]] # remove the parsed element
+            # Now insert the spacings into the spacing array
+            for k in range(len(ins_spac[j])):
+                spac_str.insert(ins_idx[j]+k,ins_spac[j][k])
+        # Now make a numpy flaot array
+        spac = np.array(spac_str, dtype=float)
+        # Now check that we have correct number widths for given dimension
         if len(spac) != dim[i]-1:
             raise Exception('More spacings specifed than extent defined allows for dimension %d' % i)
+        # Now generate the coordinates for this dimension
         s = np.zeros(dim[i])
         s[0] = oo[i]
         for j in range(1, dim[i]):
