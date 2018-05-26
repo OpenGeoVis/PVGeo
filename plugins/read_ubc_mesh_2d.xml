@@ -110,7 +110,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import ubcMeshData2D&#xA;import os&#xA;# Make sure we have a file combo&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;#if FileName_Model == 'absolute path':&#xA;#    raise Exception('No model file selected. Aborting.')&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# If no name given for data by user, use the basename of the file&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileName_Model)&#xA;# Read the UBC Mesh gridded data:&#xA;ubcMeshData2D(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import ubcMeshData2D&#xA;import os&#xA;# Make sure we have a file combo&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# If no name given for data by user, use the basename of the file&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileName_Model)&#xA;# Read the UBC Mesh gridded data:&#xA;ubcMeshData2D(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
