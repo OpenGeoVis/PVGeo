@@ -23,8 +23,8 @@ def RequestData():
     # Make sure we have a file combo
     if FileName_Mesh == 'absolute path':
         raise Exception('No mesh file selected. Aborting.')
-    #if FileName_Model == 'absolute path':
-    #    raise Exception('No model file selected. Aborting.')
+    if FileName_Model == 'absolute path':
+        raise Exception('No model file selected. Aborting.')
     # Get output
     pdo = self.GetOutput()
     # If no name given for data by user, use the basename of the file
