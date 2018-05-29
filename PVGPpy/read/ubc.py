@@ -88,7 +88,7 @@ def ubcMesh2D(FileName, pdo=None):
     nz = np.sum(np.array(zdisc,dtype=int))+1
 
     # Now generate the vtkRectilinear Grid
-    def _genCoords(pts, disc):
+    def _genCoords(pts, disc, z=False):
         c = [float(pts[0])]
         for i in range(len(pts)-1):
             start = float(pts[i])
@@ -100,10 +100,12 @@ def ubcMesh2D(FileName, pdo=None):
                 c.append(start + (j)*w)
             c.append(stop)
         c = np.array(c,dtype=float)
+        if z:
+            c = -c[::-1]
         return nps.numpy_to_vtk(num_array=c,deep=True)
 
     xcoords = _genCoords(xpts, xdisc)
-    zcoords = _genCoords(zpts, zdisc)
+    zcoords = _genCoords(zpts, zdisc, z=True)
     ycoords = nps.numpy_to_vtk(num_array=np.zeros(1),deep=True)
 
     pdo.SetDimensions(nx,2,nz) # note this subtracts 1
