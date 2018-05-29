@@ -2,7 +2,7 @@
     There are a lot of pages in the documentation and we are trying to fill all content as soon as possible. Stay tuned for updates to this page
 
 !!! tip "Examples Featuring This Filter"
-    - [Slice Model Along PolyLine](../Examples/Slice-Model-Along-PolyLine.md)
+    - [Slice Model Along PolyLine](../../Examples/Slice-Model-Along-PolyLine.md)
 
 <!--- TODO --->
 
