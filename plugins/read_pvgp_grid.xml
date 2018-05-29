@@ -7,8 +7,6 @@
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP Readers" />
-      </Hints>
-      <Hints>
         <ReaderFactory extensions="pvgp PVGP"
           file_description="PVGP Unifrom Grid Reader. Opens a header file which points to data arrays to fill a uniform grid." />
       </Hints>

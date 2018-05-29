@@ -7,8 +7,6 @@
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP Readers" />
-      </Hints>
-      <Hints>
         <ReaderFactory extensions="H@ bin rsf rsf@ HH"
           file_description="PVGP: Binary Packed Floats or Doubles" />
       </Hints>

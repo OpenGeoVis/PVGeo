@@ -7,8 +7,6 @@
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP Readers" />
-      </Hints>
-      <Hints>
         <ReaderFactory extensions=""
           file_description="All Files: Example Python Reader" />
       </Hints>

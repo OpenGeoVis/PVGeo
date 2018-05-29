@@ -7,8 +7,6 @@
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP Readers" />
-      </Hints>
-      <Hints>
         <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
           file_description="PVGP: GSLIB File Format" />
       </Hints>

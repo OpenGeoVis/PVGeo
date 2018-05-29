@@ -7,8 +7,6 @@
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP Readers" />
-      </Hints>
-      <Hints>
         <ReaderFactory extensions="dat csv txt"
           file_description="PVGP: Delimited Text File" />
       </Hints>

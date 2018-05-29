@@ -469,15 +469,25 @@ def generatePythonFilter(info):
     return textwrap.dedent(outputXml)
 
 def getFilterGroup(info):
-    if "FilterCategory" not in info:
-        return ''
-    elif "Extensions" not in info and "ReaderDescription" not in info:
-        return ('''\
+    # If reader
+    if "Extensions" in info and "ReaderDescription" in info:
+        # Just reader attributes, no category
+        if "FilterCategory" not in info:
+            return ('''\
+      <Hints>
+        <ReaderFactory extensions="%s"
+          file_description="%s" />
+      </Hints>''' % (info["Extensions"], info["ReaderDescription"]))
+        # Has category and reader attributes
+        if info.get('FileSeries', True):
+            return ('''\
       <Hints>
         <ShowInMenu category="%s" />
-      </Hints>''' % (info["FilterCategory"]))
-    else:
-        return ('''\
+        <ReaderFactory extensions="%s"
+          file_description="%s" />
+      </Hints>''' % (info["FilterCategory"], info["Extensions"], info["ReaderDescription"]))
+        else:
+            return ('''\
       <Hints>
         <ShowInMenu category="%s" />
       </Hints>
@@ -485,6 +495,14 @@ def getFilterGroup(info):
         <ReaderFactory extensions="%s"
           file_description="%s" />
       </Hints>''' % (info["FilterCategory"], info["Extensions"], info["ReaderDescription"]))
+    # not reader and no category
+    elif "FilterCategory" not in info:
+            return ''
+    # Otherwise its has a category and is not a reader
+    return ('''\
+      <Hints>
+        <ShowInMenu category="%s" />
+      </Hints>''' % (info["FilterCategory"]))
 
 
 def replaceFunctionWithSourceString(namespace, functionName, allowEmpty=False):

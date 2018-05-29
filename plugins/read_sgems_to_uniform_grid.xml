@@ -7,8 +7,6 @@
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP Readers" />
-      </Hints>
-      <Hints>
         <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"
           file_description="PVGP: SGeMS Grid File Format" />
       </Hints>
