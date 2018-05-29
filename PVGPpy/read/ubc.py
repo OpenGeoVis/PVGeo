@@ -293,7 +293,7 @@ def ubcExtent(FileName):
 
     """
     # Read the mesh file as line strings, remove lines with comment = !
-    v = np.array(np.__version__.split('.'), dtype=int)
+    v = np.array(np.__version__.split('.')[0:2], dtype=int)
     if v[0] >= 1 and v[1] >= 10:
         # max_rows in numpy versions >= 1.10
         msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str,comments='!', max_rows=1)
@@ -391,7 +391,7 @@ def readUBCMesh(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
     Returns a vtkRectilinearGrid generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
     """
     # Read the mesh file as line strings, remove lines with comment = !
-    v = np.array(np.__version__.split('.'), dtype=int)
+    v = np.array(np.__version__.split('.')[0:2], dtype=int)
     if v[0] >= 1 and v[1] >= 10:
         # max_rows in numpy versions >= 1.10
         msh = np.genfromtxt(FileName_Mesh, delimiter='\n', dtype=np.str,comments='!', max_rows=1)
