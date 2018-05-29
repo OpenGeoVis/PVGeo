@@ -11,6 +11,7 @@ Help = 'TODO'
 
 NumberOfInputs = 0
 OutputDataType = 'vtkUnstructuredGrid'
+FileSeries = False
 
 # Any extra XML GUI components you might like:
 ExtraXml = ''

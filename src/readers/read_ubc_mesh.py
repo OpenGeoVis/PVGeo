@@ -7,6 +7,7 @@ NumberOfInputs = 0
 OutputDataType = 'vtkRectilinearGrid'
 Extensions = 'mesh msh dat txt'
 ReaderDescription = 'PVGP: UBC Mesh 2D/3D Two-File Format'
+FileSeries = False
 
 # TODO: implement FileNames to work with time series
 Properties = dict(

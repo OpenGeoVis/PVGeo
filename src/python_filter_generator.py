@@ -381,7 +381,7 @@ def getFileReaderXml(info):
     """Author: Daan van Vugt <daanvanvugt@gmail.com>
     https://github.com/Exteris/paraview-python-file-reader
     """
-    if getNumberOfInputs(info) > 0:
+    if getNumberOfInputs(info) > 0 or not info.get('FileSeries', True):
         return ''
     else:
         if "Extensions" not in info and "ReaderDescription" not in info: #info["FilterCategory"]

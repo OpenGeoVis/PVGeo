@@ -26,35 +26,6 @@
 
 
 
-      <StringVectorProperty
-        name="FileNames"
-        initial_string="FileNames"
-        animateable="0"
-        number_of_elements="0"
-        command="AddParameter"
-        clean_command="ClearParameter"
-        repeat_command="1"
-        panel_visibility="advanced">
-        <FileListDomain name="files"/>
-            <Documentation>
-            The list of files to be read by the reader.
-            </Documentation>
-      </StringVectorProperty>
-
-      <DoubleVectorProperty
-        name="TimestepValues"
-        repeatable="1"
-        information_only="1">
-        <TimeStepsInformationHelper/>
-            <Documentation>
-            Available timestep values.
-            </Documentation>
-        </DoubleVectorProperty>
-        <Hints>
-            <ReaderFactory extensions="mesh msh dat txt"
-                    file_description="PVGP: UBC OcTree Mesh File Format." />
-        </Hints>
-
 
       <StringVectorProperty
         panel_visibility="default"
