@@ -9,30 +9,48 @@ Extensions = 'mesh msh dat txt'
 ReaderDescription = 'PVGP: UBC Mesh 2D/3D Two-File Format'
 FileSeries = False
 
-# TODO: implement FileNames to work with time series
+# Handle FileName parameters manually
+# NOTE: Mesh needs to be SetParameter while model needs to be AddParameter
+ExtraXml = '''
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName_Mesh"
+        label="FileName Mesh"
+        initial_string="FileName_Mesh"
+        command="SetParameter"
+        animateable="1"
+        clean_command="ClearParameter"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation>This is the mesh file for a 2D or 3D UBC Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName_Model"
+        label="FileName Model"
+        initial_string="FileName_Model"
+        command="AddParameter"
+        animateable="1"
+        repeat_command="1"
+        clean_command="ClearParameter"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation>These are the model files to append to the mesh as data attributes. You can chose as many files as you would like for this.</Documentation>
+      </StringVectorProperty>
+'''
+
 Properties = dict(
-    FileName_Mesh='absolute path',
-    FileName_Model='absolute path',
-    Data_Name='',
-    Time_Step=1.0
 )
 
 
 def RequestData():
     from PVGPpy.read import ubcTensorMesh
     import os
-    # Make sure we have a file combo
-    if FileName_Mesh == 'absolute path':
-        raise Exception('No mesh file selected. Aborting.')
-    if FileName_Model == 'absolute path':
-        raise Exception('No model file selected. Aborting.')
     # Get output
     pdo = self.GetOutput()
-    # If no name given for data by user, use the basename of the file
-    if Data_Name == '':
-        Data_Name = os.path.basename(FileName_Model)
     # Read the UBC Mesh gridded data:
-    ubcTensorMesh(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)
+    ubcTensorMesh(FileName_Mesh, FileName_Model, pdo=pdo)
 
 def RequestInformation():
     from paraview import util

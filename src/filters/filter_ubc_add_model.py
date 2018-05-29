@@ -9,24 +9,32 @@ NumberOfInputs = 1
 InputDataType = 'vtkRectilinearGrid'
 OutputDataType = 'vtkRectilinearGrid'
 
-# Any extra XML GUI components you might like: (reader extnesions, etc)
-ExtraXml = ''
+# Handle FileName parameters manually
+# NOTE: Mesh needs to be SetParameter while model needs to be AddParameter
+ExtraXml = '''
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName_Model"
+        label="FileName Model"
+        initial_string="FileName_Model"
+        command="AddParameter"
+        animateable="1"
+        repeat_command="1"
+        clean_command="ClearParameter"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation>These are the model files to append to the mesh as data attributes. You can chose as many files as you would like for this.</Documentation>
+      </StringVectorProperty>
+'''
 
 # These are the parameters/properties of the plugin:
 Properties = dict(
     _2D=False,
-    FileName_Model='absolute path',
-    Data_Name=''
 )
 
 def RequestData():
     from PVGPpy.read import ubcModel3D, ubcModel2D, placeModelOnMesh
     import os
-
-    if FileName_Model == 'absolute path':
-        raise Exception('No model file selected. Aborting.')
-    if Data_Name == '':
-        Data_Name = os.path.basename(FileName_Model)
 
     pdi = self.GetInput() # vtkRectilinearGrid
     pdo = self.GetOutput() # vtkRectilinearGrid
@@ -36,4 +44,4 @@ def RequestData():
     if _2D: model = ubcModel2D(FileName_Model)
     else: model = ubcModel3D(FileName_Model)
     # Place read model on the mesh
-    placeModelOnMesh(pdo, model, dataNm=Data_Name)
+    placeModelOnMesh(pdo, model)

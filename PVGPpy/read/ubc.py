@@ -124,12 +124,18 @@ def ubcModel2D(FileName):
     Parameters
     ----------
     `FileName` : str
-    - The model filename as an absolute path for the input model file in UBCMesh Model Format.
+    - The model filename as an absolute path for the input model file in UBCMesh Model Format. Also accepts a list of string file names.
 
     Returns
     -------
-    Returns a NumPy float array that holds the model data read from the file. Use the placeModelOnMesh() method to associate with a grid.
+    Returns a NumPy float array that holds the model data read from the file. Use the placeModelOnMesh() method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
     """
+    if type(FileName) is list:
+        out = {}
+        for f in FileName:
+            out[os.path.basename(f)] = ubcModel2D(f)
+        return out
+
     fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
     dim = np.array(fileLines[0].split(), dtype=int)
     data = np.genfromtxt((line.encode('utf8') for line in fileLines[1::]), dtype=np.float)
@@ -137,17 +143,14 @@ def ubcModel2D(FileName):
         raise Exception('Mode file `%s` improperly formatted.' % FileName)
     return data.flatten(order='F')
 
-def _ubcMeshData2D(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
+def _ubcMeshData2D(FileName_Mesh, FileName_Model, pdo=None):
     """Helper method to read a 2D mesh"""
-    # If no name given for data by user, use the basename of the file
-    if dataNm == '':
-        dataNm = os.path.basename(FileName_Model)
     # Construct/read the mesh
     mesh = ubcMesh2D(FileName_Mesh, pdo=pdo)
     # Read the model data
     model = ubcModel2D(FileName_Model)
     # Place the model data onto the mesh
-    grd = placeModelOnMesh(mesh, model, dataNm)
+    grd = placeModelOnMesh(mesh, model)
     return grd
 
 
@@ -241,28 +244,31 @@ def ubcModel3D(FileName):
 
     Parameters
     ----------
-    `FileName` : str
-    - The model filename as an absolute path for the input model file in UBC 3D Model Model Format.
+    `FileName` : str or list of str
+    - The model filename as an absolute path for the input model file in UBC 3D Model Model Format. Also accepts a list of string file names.
 
     Returns
     -------
-    Returns a NumPy float array that holds the model data read from the file. Use the placeModelOnMesh() method to associate with a grid.
+    Returns a NumPy float array that holds the model data read from the file. Use the placeModelOnMesh() method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
     """
+    if type(FileName) is list:
+        out = {}
+        for f in FileName:
+            out[os.path.basename(f)] = ubcModel3D(f)
+        return out
+
     fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
     data = np.genfromtxt((line.encode('utf8') for line in fileLines), dtype=np.float)
     return data
 
-def _ubcMeshData3D(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
+def _ubcMeshData3D(FileName_Mesh, FileName_Model, pdo=None):
     """Helper method to read a 3D mesh"""
-    # If no name given for data by user, use the basename of the file
-    if dataNm == '':
-        dataNm = os.path.basename(FileName_Model)
     # Construct/read the mesh
     mesh = ubcMesh3D(FileName_Mesh, pdo=pdo)
     # Read the model data
     model = ubcModel3D(FileName_Model)
     # Place the model data onto the mesh
-    grd = placeModelOnMesh(mesh, model, dataNm)
+    grd = placeModelOnMesh(mesh, model)
     return grd
 
 #------------------------------------------------------------------#
@@ -334,14 +340,19 @@ def placeModelOnMesh(mesh, model, dataNm='Data'):
     Returns the input vtkRectilinearGrid with model data appended.
 
     """
+    if type(model) is dict:
+        for key in model.keys():
+            mesh = placeModelOnMesh(mesh, model[key], dataNm=key)
+        return mesh
+
     # model.GetNumberOfValues() if model is vtkDataArray
     # Make sure this model file fits the dimensions of the mesh
     ext = mesh.GetExtent()
     n1,n2,n3 = ext[1],ext[3],ext[5]
     if (n1*n2*n3 < len(model)):
-        raise Exception('This model file has more data than the given mesh has cells to hold.')
+        raise Exception('Model `%s` has more data than the given mesh has cells to hold.' % dataNm)
     elif (n1*n2*n3 > len(model)):
-        raise Exception('This model file does not have enough data to fill the given mesh\'s cells.')
+        raise Exception('Model `%s` does not have enough data to fill the given mesh\'s cells.' % dataNm)
 
     # Swap axes because VTK structures the coordinates a bit differently
     #-  This is absolutely crucial!
@@ -361,7 +372,7 @@ def placeModelOnMesh(mesh, model, dataNm='Data'):
     return mesh
 
 
-def ubcTensorMesh(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
+def ubcTensorMesh(FileName_Mesh, FileName_Model, pdo=None):
     """
     Description
     -----------
@@ -374,9 +385,6 @@ def ubcTensorMesh(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
 
     `FileName_Model` : str
     - The model filename as an absolute path for the input model file in UBC 2D/3D Model Format.
-
-    `dataNm` : str, optional
-    - The name of the model data array once placed on the vtkRectilinearGrid.
 
     `pdo` : vtk.vtkRectilinearGrid, optional
     - The output data object
@@ -397,10 +405,10 @@ def ubcTensorMesh(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
     sizeM = np.array(msh.ravel()[0].split(), dtype=float)
     # Check if the mesh is a UBC 2D mesh
     if sizeM.shape[0] == 1:
-        pdo = _ubcMeshData2D(FileName_Mesh, FileName_Model, dataNm=dataNm, pdo=pdo)
+        pdo = _ubcMeshData2D(FileName_Mesh, FileName_Model, pdo=pdo)
     # Check if the mesh is a UBC 3D mesh
     elif sizeM.shape[0] == 3:
-        pdo = _ubcMeshData3D(FileName_Mesh, FileName_Model, dataNm=dataNm, pdo=pdo)
+        pdo = _ubcMeshData3D(FileName_Mesh, FileName_Model, pdo=pdo)
     else:
         raise Exception('File format not recognized')
     return pdo
@@ -422,9 +430,6 @@ def ubcOcTreeMesh(FileName, pdo=None):
     ----------
     `FileName` : str
     - The mesh filename as an absolute path for the input mesh file in UBC OcTree format.
-
-    `dataNm` : str, optional
-    - The name of the model data array once placed on the vtkRectilinearGrid.
 
     `pdo` : vtk.vtkUnstructuredGrid, optional
     - A pointer to the output data object.
@@ -448,9 +453,6 @@ def ubcOcTreeMesh(FileName, pdo=None):
     pad = dim[3:6] # TODO: check if there because optional... might throw error if not there
     dim = dim[0:3]
     ne,nn,nz = dim[0], dim[1], dim[2]
-    # This is not true
-    # if np.unique(dim).size > 1:
-    #     raise Exception('OcTree meshes must have the same number of cells in all directions.')
 
     # The origin corner (Southwest-top)
     #- Remember UBC format specifies down as the positive Z
@@ -569,8 +571,7 @@ def ubcOcTreeMesh(FileName, pdo=None):
         nps.numpy_to_vtkIdTypeArray(
             np.ascontiguousarray(ind_nodes_full), deep=1))
 
-    # Make the object
-    #pdo = vtk.vtkUnstructuredGrid()
+    # Construct the VTK object declared in `pdo`
     # Set the objects properties
     pdo.SetPoints(vtkPts)
     pdo.SetCells(vtk.VTK_VOXEL, CellArr)
@@ -580,11 +581,6 @@ def ubcOcTreeMesh(FileName, pdo=None):
         np.ascontiguousarray(ind_cell_corner.ravel()), deep=1)
     vtkIndexArr.SetName('index_cell_corner')
     pdo.GetCellData().AddArray(vtkIndexArr)
-
-    ################
-    print('This reader is not fully implemented yet')
-    # print(indArr)
-    ################
 
     return pdo
 
@@ -612,7 +608,10 @@ def placeModelOnOcTreeMesh(mesh, model, dataNm='Data'):
     Returns the input vtkUnstructuredGrid with model data appended.
 
     """
-    # model.GetNumberOfValues() if model is vtkDataArray
+    if type(model) is dict:
+        for key in model.keys():
+            mesh = placeModelOnOcTreeMesh(mesh, model[key], dataNm=key)
+        return mesh
     # Make sure this model file fits the dimensions of the mesh
     numCells = mesh.GetNumberOfCells()
     if (numCells < len(model)):
@@ -620,9 +619,8 @@ def placeModelOnOcTreeMesh(mesh, model, dataNm='Data'):
     elif (numCells > len(model)):
         raise Exception('This model file does not have enough data to fill the given mesh\'s cells.')
 
-    # Swap axes because VTK structures the coordinates a bit differently
-    #-  This is absolutely crucial!
-    #-  Do not play with unless you know what you are doing!
+    # This is absolutely crucial!
+    # Do not play with unless you know what you are doing!
     ind_reorder = nps.vtk_to_numpy(
         mesh.GetCellData().GetArray('index_cell_corner'))
 
@@ -637,7 +635,7 @@ def placeModelOnOcTreeMesh(mesh, model, dataNm='Data'):
 
 
 
-def ubcOcTree(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
+def ubcOcTree(FileName_Mesh, FileName_Model, pdo=None):
     """
     Description
     -----------
@@ -651,9 +649,6 @@ def ubcOcTree(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
     `FileName_Model` : str
     - The model filename as an absolute path for the input model file in UBC OcTree Model Format.
 
-    `dataNm` : str, optional
-    - The name of the model data array once placed on the vtkUnstructuredGrid.
-
     `pdo` : vtk.vtkUnstructuredGrid, optional
     - The output data object
 
@@ -661,14 +656,11 @@ def ubcOcTree(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
     -------
     Returns a vtkUnstructuredGrid generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
     """
-    # If no name given for data by user, use the basename of the file
-    if dataNm == '':
-        dataNm = os.path.basename(FileName_Model)
     # Construct/read the mesh
     mesh = ubcOcTreeMesh(FileName_Mesh, pdo=pdo)
     # Read the model data
-    # TODO: implement ability to read model file for OcTree format
-    #TODO: model = ubcModel3D(FileName_Model)
+    # - read model file for OcTree format
+    model = ubcModel3D(FileName_Model)
     # Place the model data onto the mesh
-    #TODO:grd = placeModelOnOcTreeMesh(mesh, model, dataNm=dataNm)
-    return mesh #TODO:grd
+    grd = placeModelOnOcTreeMesh(mesh, model)
+    return grd

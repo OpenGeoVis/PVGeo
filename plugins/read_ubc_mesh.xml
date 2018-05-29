@@ -23,22 +23,6 @@
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
 
-
-
-
-
-      <StringVectorProperty
-        panel_visibility="default"
-        name="Data_Name"
-        label="Data Name"
-        initial_string="Data_Name"
-        command="SetParameter"
-        animateable="1"
-        default_values=""
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </StringVectorProperty>
-
       <StringVectorProperty
         panel_visibility="default"
         name="FileName_Mesh"
@@ -46,10 +30,10 @@
         initial_string="FileName_Mesh"
         command="SetParameter"
         animateable="1"
-        default_values="absolute path"
+        clean_command="ClearParameter"
         number_of_elements="1">
         <FileListDomain name="files"/>
-        <Documentation></Documentation>
+        <Documentation>This is the mesh file for a 2D or 3D UBC Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
       </StringVectorProperty>
 
       <StringVectorProperty
@@ -57,31 +41,25 @@
         name="FileName_Model"
         label="FileName Model"
         initial_string="FileName_Model"
-        command="SetParameter"
+        command="AddParameter"
         animateable="1"
-        default_values="absolute path"
+        repeat_command="1"
+        clean_command="ClearParameter"
         number_of_elements="1">
         <FileListDomain name="files"/>
-        <Documentation></Documentation>
+        <Documentation>These are the model files to append to the mesh as data attributes. You can chose as many files as you would like for this.</Documentation>
       </StringVectorProperty>
 
-      <DoubleVectorProperty
-        panel_visibility="advanced"
-        name="Time_Step"
-        label="Time Step"
-        initial_string="Time_Step"
-        command="SetParameter"
-        animateable="1"
-        default_values="1.0"
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
+
+
+
+
 
       <StringVectorProperty
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import ubcTensorMesh&#xA;import os&#xA;# Make sure we have a file combo&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# If no name given for data by user, use the basename of the file&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileName_Model)&#xA;# Read the UBC Mesh gridded data:&#xA;ubcTensorMesh(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import ubcTensorMesh&#xA;import os&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# Read the UBC Mesh gridded data:&#xA;ubcTensorMesh(FileName_Mesh, FileName_Model, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

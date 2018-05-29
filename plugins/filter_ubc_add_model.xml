@@ -19,6 +19,20 @@
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
 
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName_Model"
+        label="FileName Model"
+        initial_string="FileName_Model"
+        command="AddParameter"
+        animateable="1"
+        repeat_command="1"
+        clean_command="ClearParameter"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation>These are the model files to append to the mesh as data attributes. You can chose as many files as you would like for this.</Documentation>
+      </StringVectorProperty>
+
 
       <InputProperty
         name="Input"
@@ -34,31 +48,6 @@
       </InputProperty>
 
 
-
-      <StringVectorProperty
-        panel_visibility="default"
-        name="Data_Name"
-        label="Data Name"
-        initial_string="Data_Name"
-        command="SetParameter"
-        animateable="1"
-        default_values=""
-        number_of_elements="1">
-        <Documentation></Documentation>
-      </StringVectorProperty>
-
-      <StringVectorProperty
-        panel_visibility="default"
-        name="FileName_Model"
-        label="FileName Model"
-        initial_string="FileName_Model"
-        command="SetParameter"
-        animateable="1"
-        default_values="absolute path"
-        number_of_elements="1">
-        <FileListDomain name="files"/>
-        <Documentation></Documentation>
-      </StringVectorProperty>
 
       <IntVectorProperty
         panel_visibility="default"
@@ -77,7 +66,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import ubcModel3D, ubcModel2D, placeModelOnMesh&#xA;import os&#xA;&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileName_Model)&#xA;&#xA;pdi = self.GetInput() # vtkRectilinearGrid&#xA;pdo = self.GetOutput() # vtkRectilinearGrid&#xA;&#xA;pdo.DeepCopy(pdi) # ShallowCopy if you want changes to propagate&#xA;&#xA;if _2D: model = ubcModel2D(FileName_Model)&#xA;else: model = ubcModel3D(FileName_Model)&#xA;# Place read model on the mesh&#xA;placeModelOnMesh(pdo, model, dataNm=Data_Name)&#xA;"
+        default_values="from PVGPpy.read import ubcModel3D, ubcModel2D, placeModelOnMesh&#xA;import os&#xA;&#xA;pdi = self.GetInput() # vtkRectilinearGrid&#xA;pdo = self.GetOutput() # vtkRectilinearGrid&#xA;&#xA;pdo.DeepCopy(pdi) # ShallowCopy if you want changes to propagate&#xA;&#xA;if _2D: model = ubcModel2D(FileName_Model)&#xA;else: model = ubcModel3D(FileName_Model)&#xA;# Place read model on the mesh&#xA;placeModelOnMesh(pdo, model)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
