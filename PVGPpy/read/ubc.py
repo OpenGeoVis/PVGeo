@@ -191,53 +191,43 @@ def ubcMesh3D(FileName, pdo=None):
         fileLines[1].split('!')[0].split(),
         dtype=float
     )
-    oe,on,oz = oo[0],oo[1],oo[2]
+    ox,oy,oz = oo[0],oo[1],oo[2]
 
-    vv = [None, None, None]
-    # Now extract cell sizes
-    for i in range(3):
-        # i+2 for file lines because we already dealt with first 2 lines
-        spac_str = fileLines[i+2].split('!')[0].split()
-        # Now check if there are any of the repeating spacings
-        #- format example: 5*10.0 for five cells of width 10.0
-        ins_idx = []
-        ins_spac = []
-        for j in range(len(spac_str)):
-            if '*' in spac_str[j]:
-                parsed = spac_str[j].split('*')
-                ins_idx.append(j)
-                num, dist = int(parsed[0]), parsed[1]
-                ins = [dist]*num
-                ins_spac.append(ins)
-        for j in range(len(ins_idx)):
-            del spac_str[ins_idx[j]] # remove the parsed element
-            # Now insert the spacings into the spacing array
-            for k in range(len(ins_spac[j])):
-                spac_str.insert(ins_idx[j]+k,ins_spac[j][k])
-        # Now make a numpy flaot array
-        spac = np.array(spac_str, dtype=float)
-        # Now check that we have correct number widths for given dimension
-        if len(spac) != dim[i]-1:
-            raise Exception('More spacings specifed than extent defined allows for dimension %d' % i)
-        # Now generate the coordinates for this dimension
-        s = np.zeros(dim[i])
-        s[0] = oo[i]
-        for j in range(1, dim[i]):
-            if (i == 2):
-                # Z dimension (down is positive Z!)
-                #  TODO: what is the correct way to do this?
-                s[j] = s[j-1] + spac[j-1]
+    # Read cell sizes for each line in the UBC mesh files
+    def _readCellLine(line):
+        line_list = []
+        for seg in line.split():
+            if '*' in seg:
+                sp = seg.split('*')
+                seg_arr = np.ones((int(sp[0]),), dtype=float) * float(sp[1])
             else:
-                # X and Y dimensions
-                s[j] = s[j-1] + spac[j-1]
-        # Convert to VTK array for setting coordinates
-        vv[i] = nps.numpy_to_vtk(num_array=s,deep=True)
+                seg_arr = np.array([float(seg)], dtype=float)
+            line_list.append(seg_arr)
+        return np.concatenate(line_list)
+
+    # Read the cell sizes
+    cx = _readCellLine(fileLines[2].split('!')[0])
+    cy = _readCellLine(fileLines[3].split('!')[0])
+    cz = _readCellLine(fileLines[4].split('!')[0])
+    # Invert the indexing of the vector to start from the bottom.
+    cz = cz[::-1]
+    # Adjust the reference point to the bottom south west corner
+    oz = oz - np.sum(cz)
+
+    # Now generate the coordinates for from cell width and origin
+    cox = ox + np.cumsum(cx)
+    cox = np.insert(cox,0,ox)
+    coy = oy + np.cumsum(cy)
+    coy = np.insert(coy,0,oy)
+    coz = oz + np.cumsum(cz)
+    coz = np.insert(coz,0,oz)
 
     # Set the dims and coordinates for the output
     pdo.SetDimensions(dim[0],dim[1],dim[2])
-    pdo.SetXCoordinates(vv[0])
-    pdo.SetYCoordinates(vv[1])
-    pdo.SetZCoordinates(vv[2])
+    # Convert to VTK array for setting coordinates
+    pdo.SetXCoordinates(nps.numpy_to_vtk(num_array=cox,deep=True))
+    pdo.SetYCoordinates(nps.numpy_to_vtk(num_array=coy,deep=True))
+    pdo.SetZCoordinates(nps.numpy_to_vtk(num_array=coz,deep=True))
 
     return pdo
 
@@ -357,6 +347,8 @@ def placeModelOnMesh(mesh, model, dataNm='Data'):
     model = np.reshape(model, (n1,n2,n3))
     model = np.swapaxes(model,0,1)
     model = np.swapaxes(model,0,2)
+    # Now reverse Z axis
+    model = model[::-1,:,:] # Note it is in Fortran ordering
     model = model.flatten()
 
     # Convert data to VTK data structure and append to output
