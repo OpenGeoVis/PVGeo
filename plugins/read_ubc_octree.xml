@@ -39,6 +39,32 @@
         <Documentation></Documentation>
       </StringVectorProperty>
 
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName_Mesh"
+        label="FileName Mesh"
+        initial_string="FileName_Mesh"
+        command="SetParameter"
+        animateable="1"
+        default_values="absolute path"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation></Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="FileName_Model"
+        label="FileName Model"
+        initial_string="FileName_Model"
+        command="SetParameter"
+        animateable="1"
+        default_values="absolute path"
+        number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation></Documentation>
+      </StringVectorProperty>
+
       <DoubleVectorProperty
         panel_visibility="advanced"
         name="Time_Step"
@@ -55,7 +81,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import getTimeStepFileIndex&#xA;from PVGPpy.read import ubcOcTree&#xA;import os&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# If no name given for data by user, use the basename of the file&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileNames[0]) # use first file in series so representation/cmap does not change.&#xA;# Read the UBC OcTree gridded data:&#xA;ubcOcTree(FileNames[i], dataNm=Data_Name, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import ubcOcTree&#xA;import os&#xA;# Make sure we have a file combo&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;if FileName_Model == 'absolute path':&#xA;    raise Exception('No model file selected. Aborting.')&#xA;&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# If no name given for data by user, use the basename of the file&#xA;if Data_Name == '':&#xA;    Data_Name = os.path.basename(FileName_Model)&#xA;# Read the UBC OcTree gridded data:&#xA;ubcOcTree(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -69,7 +95,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import setOutputTimesteps, getTimeStepFileIndex&#xA;from PVGPpy.read import ubcExtent&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtent(FileNames[i])&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.read import ubcExtent&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtent(FileName_Mesh)&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

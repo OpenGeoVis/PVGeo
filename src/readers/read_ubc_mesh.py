@@ -19,7 +19,7 @@ Properties = dict(
 
 
 def RequestData():
-    from PVGPpy.read import readUBCMesh
+    from PVGPpy.read import ubcTensorMesh
     import os
     # Make sure we have a file combo
     if FileName_Mesh == 'absolute path':
@@ -32,7 +32,7 @@ def RequestData():
     if Data_Name == '':
         Data_Name = os.path.basename(FileName_Model)
     # Read the UBC Mesh gridded data:
-    readUBCMesh(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)
+    ubcTensorMesh(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)
 
 def RequestInformation():
     from paraview import util

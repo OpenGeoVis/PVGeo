@@ -10,11 +10,12 @@ __all__ = [
     # General Stuff
     'ubcExtent',
     'placeModelOnMesh',
-    'readUBCMesh',
+    'ubcTensorMesh',
 
     # OcTree
-    'ubcOcTree',
-    'placeModelOnOcTreeMesh']
+    'ubcOcTreeMesh',
+    'placeModelOnOcTreeMesh',
+    'ubcOcTree']
 
 import numpy as np
 import struct
@@ -366,7 +367,7 @@ def placeModelOnMesh(mesh, model, dataNm='Data'):
     return mesh
 
 
-def readUBCMesh(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
+def ubcTensorMesh(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
     """
     Description
     -----------
@@ -402,10 +403,10 @@ def readUBCMesh(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
     sizeM = np.array(msh.ravel()[0].split(), dtype=float)
     # Check if the mesh is a UBC 2D mesh
     if sizeM.shape[0] == 1:
-        _ubcMeshData2D(FileName_Mesh, FileName_Model, dataNm=dataNm, pdo=pdo)
+        pdo = _ubcMeshData2D(FileName_Mesh, FileName_Model, dataNm=dataNm, pdo=pdo)
     # Check if the mesh is a UBC 3D mesh
     elif sizeM.shape[0] == 3:
-        _ubcMeshData3D(FileName_Mesh, FileName_Model, dataNm=dataNm, pdo=pdo)
+        pdo = _ubcMeshData3D(FileName_Mesh, FileName_Model, dataNm=dataNm, pdo=pdo)
     else:
         raise Exception('File format not recognized')
     return pdo
@@ -417,7 +418,7 @@ def readUBCMesh(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
 #-----------------------    UBC OcTree    -------------------------#
 #------------------------------------------------------------------#
 
-def ubcOcTree(FileName, dataNm='', pdo=None):
+def ubcOcTreeMesh(FileName, pdo=None):
     """
     Description
     -----------
@@ -575,7 +576,7 @@ def ubcOcTree(FileName, dataNm='', pdo=None):
             np.ascontiguousarray(ind_nodes_full), deep=1))
 
     # Make the object
-    pdo = vtk.vtkUnstructuredGrid()
+    #pdo = vtk.vtkUnstructuredGrid()
     # Set the objects properties
     pdo.SetPoints(vtkPts)
     pdo.SetCells(vtk.VTK_VOXEL, CellArr)
@@ -639,3 +640,41 @@ def placeModelOnOcTreeMesh(mesh, model, dataNm='Data'):
     # THIS IS CELL DATA! Add the model data to CELL data:
     mesh.GetCellData().AddArray(c)
     return mesh
+
+
+
+def ubcOcTree(FileName_Mesh, FileName_Model, dataNm='', pdo=None):
+    """
+    Description
+    -----------
+    Wrapper to Read UBC GIF OcTree mesh and model file pairs. UBC OcTree models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. This only handles OcTree formats
+
+    Parameters
+    ----------
+    `FileName_Mesh` : str
+    - The OcTree Mesh filename as an absolute path for the input mesh file in UBC OcTree Mesh Format
+
+    `FileName_Model` : str
+    - The model filename as an absolute path for the input model file in UBC OcTree Model Format.
+
+    `dataNm` : str, optional
+    - The name of the model data array once placed on the vtkUnstructuredGrid.
+
+    `pdo` : vtk.vtkUnstructuredGrid, optional
+    - The output data object
+
+    Returns
+    -------
+    Returns a vtkUnstructuredGrid generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
+    """
+    # If no name given for data by user, use the basename of the file
+    if dataNm == '':
+        dataNm = os.path.basename(FileName_Model)
+    # Construct/read the mesh
+    mesh = ubcOcTreeMesh(FileName_Mesh, pdo=pdo)
+    # Read the model data
+    # TODO: implement ability to read model file for OcTree format
+    #TODO: model = ubcModel3D(FileName_Model)
+    # Place the model data onto the mesh
+    #TODO:grd = placeModelOnOcTreeMesh(mesh, model, dataNm=dataNm)
+    return mesh #TODO:grd

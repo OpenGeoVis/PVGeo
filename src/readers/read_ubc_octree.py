@@ -18,6 +18,8 @@ ExtraXml = ''
 
 # These are the parameters/properties of the plugin:
 Properties = dict(
+    FileName_Mesh='absolute path',
+    FileName_Model='absolute path',
     Data_Name='',
     Time_Step=1.0
 )
@@ -30,29 +32,27 @@ PropertiesHelp = dict(
 
 # from paraview import vtk is done automatically in the reader
 def RequestData(self):
-    from PVGPpy.read import getTimeStepFileIndex
     from PVGPpy.read import ubcOcTree
     import os
-    # This finds the index for the FileNames for the requested timestep
-    i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
+    # Make sure we have a file combo
+    if FileName_Mesh == 'absolute path':
+        raise Exception('No mesh file selected. Aborting.')
+    if FileName_Model == 'absolute path':
+        raise Exception('No model file selected. Aborting.')
 
     # Get output
     pdo = self.GetOutput()
     # If no name given for data by user, use the basename of the file
     if Data_Name == '':
-        Data_Name = os.path.basename(FileNames[0]) # use first file in series so representation/cmap does not change.
+        Data_Name = os.path.basename(FileName_Model)
     # Read the UBC OcTree gridded data:
-    ubcOcTree(FileNames[i], dataNm=Data_Name, pdo=pdo)
+    ubcOcTree(FileName_Mesh, FileName_Model, dataNm=Data_Name, pdo=pdo)
 
 
 def RequestInformation(self):
     from paraview import util
-    from PVGPpy.read import setOutputTimesteps, getTimeStepFileIndex
     from PVGPpy.read import ubcExtent
-    # This is necessary to set time steps
-    setOutputTimesteps(self, FileNames, dt=Time_Step)
-    i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
     # Preview the mesh file and get the mesh extents
-    ext = ubcExtent(FileNames[i])
+    ext = ubcExtent(FileName_Mesh)
     # Set the mesh extents
     util.SetOutputWholeExtent(self, ext)
