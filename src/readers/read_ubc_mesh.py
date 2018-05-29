@@ -5,7 +5,7 @@ Help = 'UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file
 
 NumberOfInputs = 0
 OutputDataType = 'vtkRectilinearGrid'
-Extensions = 'mesh msh dat'
+Extensions = 'mesh msh dat txt'
 ReaderDescription = 'PVGP: UBC Mesh 2D/3D Two-File Format'
 
 # TODO: implement FileNames to work with time series

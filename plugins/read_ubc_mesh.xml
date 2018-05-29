@@ -9,7 +9,7 @@
         <ShowInMenu category="PVGP Readers" />
       </Hints>
       <Hints>
-        <ReaderFactory extensions="mesh msh dat"
+        <ReaderFactory extensions="mesh msh dat txt"
           file_description="PVGP: UBC Mesh 2D/3D Two-File Format" />
       </Hints>
 
@@ -51,7 +51,7 @@
             </Documentation>
         </DoubleVectorProperty>
         <Hints>
-            <ReaderFactory extensions="mesh msh dat"
+            <ReaderFactory extensions="mesh msh dat txt"
                     file_description="PVGP: UBC Mesh 2D/3D Two-File Format" />
         </Hints>
 
