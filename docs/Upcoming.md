@@ -1,4 +1,6 @@
-Here is a list of features that are shortly coming to this repo. This list will be regularly updated. More documentation is soon to come. We want to do it right: with tutorials, example data, and detailed justification for need and use of each reader, filter, and macro.
+Here is a list of features that are shortly coming to this repo.We will try to regularly update this page; for a more update view of our activity, please check out the different projects on the GitHub page [here](https://github.com/banesullivan/ParaViewGeophysics/projects).
+
+More documentation is soon to come. We want to do it right: with tutorials, example data, and detailed justification for need and use of each reader, filter, and macro.
 
 !!! info "Suggestions?"
     We need **your** suggestions for what kinds of file format readers to make as well as ideas for filters to meet your data needs. Post on the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) on GitHub as a feature request.
@@ -7,8 +9,8 @@ Here is a list of features that are shortly coming to this repo. This list will 
 
 ### Readers
 - [ ] **Open Mining Format:** All file types and data types found [here](https://github.com/GMSGDataExchange/omf)
-- [ ] **UBC Mesh:** both 2D and 3D. Details [here](https://www.eoas.ubc.ca/ubcgif/iag/sftwrdocs/technotes/faq.htm#mesh) and [here](https://gif.eos.ubc.ca/software/utility_programs#3DmodelsMeshes). We're almost done with this!
-- [ ] **Well logs:** Readers for common formats (LAS) and easy ways to project well logs in XYZ space
+- [x] **UBC Mesh:** both 2D and 3D. Details [here](https://www.eoas.ubc.ca/ubcgif/iag/sftwrdocs/technotes/faq.htm#mesh) and [here](https://gif.eos.ubc.ca/software/utility_programs#3DmodelsMeshes). We're almost done with this!
+- [ ] **Well logs:** Readers for common formats (LAS) and easy ways to project well logs in XYZ space. [Details here](http://www.cwls.org/las/)
 
 <!---
 - [ ] **ESRI Grid:** Details [here](https://en.wikipedia.org/wiki/Esri_grid) and [here](http://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/esri-grid-format.htm)
