@@ -42,9 +42,16 @@ This code base deploys tools to perform post-processing visual analysis and inte
 
 <div style="float: left; margin:10px 10px 10px 10px"" class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="bane-sullivan"><a class="LI-simple-link" href='https://www.linkedin.com/in/bane-sullivan?trk=profile-badge'>Linkedin: Bane Sullivan</a></div>
 
-Unless otherwise specified, all code and documentation distributed here were produced by [Bane Sullivan](http://banesullivan.com), undergraduate research assistant in the Geophysics Department at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions through his contact information on [his website](http://banesullivan.com) or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
+The code and documentation distributed here were produced by [Bane Sullivan](http://banesullivan.com), graduate student of Hydrogeophysics in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane through his contact information on [his website](http://banesullivan.com) for questions or through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) for custom filters/readers to visualize geoscience data.
 
 <div style="float: left; margin:10px 10px 10px 10px"> </div>
+
+
+!!! info "Thank you to our contributors!"
+    It is important to note the project is open source and that many features in this repository were made possible by contributors volunteering their time. The following people deserve many thanks and acknowledgments for their contributions:
+
+    - [Daan van Vugt](https://github.com/Exteris)
+    - [Gudni Karl Rosenkjaer](https://github.com/grosenkj)
 
 
 ## Outline of Goals
