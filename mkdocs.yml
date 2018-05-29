@@ -1,11 +1,11 @@
 site_name: ParaViewGeophysics
 site_author: Bane Sullivan
-site_description: "Documentation for the ParaViewGeophysics repository."
+site_description: "Welcome to the documentation for the ParaViewGeophysics code repository. ParaViewGeophysics is a code base tailored to the visualization of spatially referenced data in the geosciences on the ParaView software platform. "
 repo_url: https://github.com/banesullivan/ParaViewGeophysics
 repo_name: PVGP on GitHub
 site_url: http://pvgp.io/
 edit_uri: ""
-copyright: Copyright &copy 2017-2018, <a href="https://github.com/banesullivan">Bane Sullivan</a>
+copyright: Copyright &copy 2017-2018, <a href="http://banesullivan.com">Bane Sullivan</a>
 
 google_analytics:
   - 'UA-115959679-1'
@@ -13,11 +13,13 @@ google_analytics:
 
 extra:
   disqus: 'pvgp'
-  social:
+  social: # check https://fontawesome.com/ for more icons
     - type: 'github'
       link: 'https://github.com/banesullivan'
     - type: 'linkedin'
       link: 'https://linkedin.com/in/bane-sullivan'
+    - type: 'address-card'
+      link: 'http://banesullivan.com'
 
 theme:
     name: material
