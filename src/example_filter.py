@@ -43,7 +43,7 @@ PropertiesHelp = dict(
 
 # Where your main processing occurs
 #- Data processing
-def RequestData():
+def RequestData(self):
     from vtk.util import numpy_support as nps
     import PVGPpy.helpers as inputhelp
     pdi = self.GetInput() # VTK Data Type
@@ -59,7 +59,7 @@ def RequestData():
 
 # Use if you need to set extents and what not
 #- Information, spatial extent, ect
-def RequestInformation():
+def RequestInformation(self):
     from paraview import util
     # This script is usually not necessary for filters
     # Here's an example of setting extents that might be necessary for plugin to function correctly:

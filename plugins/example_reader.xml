@@ -83,7 +83,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="&quot;&quot;&quot;Create a VTK output given the list of FileNames and the current timestep.&#xA;This script can access self and FileNames and should return an output of type&#xA;OutputDataType defined above&quot;&quot;&quot;&#xA;from PVGPpy.read import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;&quot;&quot;&quot;If you specifically do not want the ability to read time series&#xA;Then delete the above code and access the file name by adding a string&#xA;variable called `FileName` to the Properties dict. &quot;&quot;&quot;&#xA;# --------------------- #&#xA;# Generate Output Below&#xA;if Print_File_Names:&#xA;    print(FileNames[i])&#xA;"
+        default_values="&quot;&quot;&quot;Create a VTK output given the list of FileNames and the current timestep.&#xA;This script can access self and FileNames and should return an output of type OutputDataType defined above&quot;&quot;&quot;&#xA;from PVGPpy.read import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;&quot;&quot;&quot;If you specifically do not want the ability to read time series&#xA;Then delete the above code and access the file name by adding a string&#xA;variable called `FileName` to the Properties dict. &quot;&quot;&quot;&#xA;# --------------------- #&#xA;# Generate Output Below&#xA;if Print_File_Names:&#xA;    print(FileNames[i])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

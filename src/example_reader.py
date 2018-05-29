@@ -29,7 +29,7 @@ ExtraXml = ''
 # These are the parameters/properties of the plugin:
 Properties = dict(
     Print_File_Names=True,
-    Time_Step=1.0
+    Time_Step=1.0 # This parameter should be present for all READERS that have `FileSeries` set to True. It will show up as an advanced parameter in the GUI. This will not work for FILTERS.
 )
 
 # This is the description for each of the properties variable:
@@ -43,8 +43,7 @@ PropertiesHelp = dict(
 # from paraview import vtk is done automatically in the reader
 def RequestData(self):
     """Create a VTK output given the list of FileNames and the current timestep.
-    This script can access self and FileNames and should return an output of type
-    OutputDataType defined above"""
+    This script can access self and FileNames and should return an output of type OutputDataType defined above"""
     from PVGPpy.read import getTimeStepFileIndex
 
     # This finds the index for the FileNames for the requested timestep
