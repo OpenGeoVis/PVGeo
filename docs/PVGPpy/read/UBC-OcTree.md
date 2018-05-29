@@ -9,6 +9,14 @@ We tested this model using the OcTree mesh found in [**this example**](http://gi
 - Mesh file: `CompleteTask/octree_mesh.txt`
 - Model file: `CompleteTack/active_cells_topo.txt`
 
+To use the plugin:
+
+- Make sure to clone/update the ParaViewGeophysics repo and [**install if you haven't already**](http://pvgp.io/Getting-Started/#install-paraviewgeophysics)
+- Select **File->Open...** in ParaView
+- Choose the mesh file for you OcTree (we have enabled extensions: `.mesh` `.msh` `.dat` `.txt`)
+- *Optional:* Click the **...** button next to the **FileName Model** parameter field. You can select as many model files as you desire (each will be appended as separate attributes).
+- Click **Apply** and wait... the load for larger OcTrees takes about 30 seconds.
+
 !!! success "[Example Visualization](http://gpvis.org/?fileURL=https://dl.dropbox.com/s/qybpnsn11lghnq9/OcTree.vtkjs?dl=0)"
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
             <iframe src="http://gpvis.org/?fileURL=https://dl.dropbox.com/s/qybpnsn11lghnq9/OcTree.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
