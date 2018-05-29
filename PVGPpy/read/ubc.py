@@ -660,7 +660,8 @@ def ubcOcTree(FileName_Mesh, FileName_Model, pdo=None):
     mesh = ubcOcTreeMesh(FileName_Mesh, pdo=pdo)
     # Read the model data
     # - read model file for OcTree format
-    model = ubcModel3D(FileName_Model)
-    # Place the model data onto the mesh
-    grd = placeModelOnOcTreeMesh(mesh, model)
-    return grd
+    if FileName_Model is not None:
+        model = ubcModel3D(FileName_Model)
+        # Place the model data onto the mesh
+        mesh = placeModelOnOcTreeMesh(mesh, model)
+    return mesh

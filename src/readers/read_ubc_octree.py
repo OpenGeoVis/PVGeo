@@ -62,7 +62,10 @@ def RequestData(self):
     # Get output
     pdo = self.GetOutput()
     # Read the UBC OcTree gridded data:
-    ubcOcTree(FileName_Mesh, FileName_Model, pdo=pdo)
+    try:
+        ubcOcTree(FileName_Mesh, FileName_Model, pdo=pdo)
+    except NameError:
+        ubcOcTree(FileName_Mesh, None, pdo=pdo)
 
 
 def RequestInformation(self):
