@@ -87,7 +87,8 @@ pages:
         - Correlate Arrays: PVGPpy/filt/Correlate-Arrays.md
         - UBC Add Model: PVGPpy/filt/UBC-Add-Model.md
 
-- ParaView Macros:
+
+- PV Macros:
     - About pvmacros: pvmacros/About-pvmacros.md
     - Export:
         - Export as VTKjs:  pvmacros/export/exportVTKjs.md
@@ -97,21 +98,22 @@ pages:
         - Many Slices Along Points:  pvmacros/vis/Many-Slices-Along-Points.md
         - Many Slices Along Axis:  pvmacros/vis/Slices-Along-Axis.md
 
+- Examples:
+    - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
+    - Editing the Axes: Examples/Edit-Axes.md
+    - Editing the Render View: Examples/Edit-Render-View.md
+    - Save Camera Views: Examples/Save-Camera-Locations.md
+    - Understand VTK Data Types: Examples/Understand-VTK.md
+
 - Resources:
     - Color Maps: cmaps.md
     - Scripts:
         - About Scripts: Scripts/About-Scripts.md
         - Example Script: Scripts/Example-Script.md
-    - Examples/Tutorials:
-        - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
-        - Editing the Axes: Examples/Edit-Axes.md
-        - Editing the Render View: Examples/Edit-Render-View.md
-        - Save Camera Views: Examples/Save-Camera-Locations.md
-        - Understand VTK Data Types: Examples/Understand-VTK.md
-    - Virtual Reality:
-        - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md
-    - Development Guide:
-        - Contributing: Dev-Guide/Contributing-to-PVGP.md
-        - Repo Structure: Dev-Guide/Repo-Structure.md
+    - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md
+
+- Development Guide:
+    - Contributing: Dev-Guide/Contributing-to-PVGP.md
+    - Repo Structure: Dev-Guide/Repo-Structure.md
 
 - Features to Come: Upcoming.md
