@@ -4,7 +4,7 @@ This repository contains plugins tailored to data visualization in geophysics fo
 Check out the [demo page](http://demo.pvgp.io/) for a synopsis of the project and some visualization examples. Then check out the [Docs pages](http://pvgp.io/) to explore the motivation for publishing this repo as well as to find all code documentation. This contains documentation for readers, filters, macros, and more as you need. **NOTE: These are currently out of date and will be updated and finished by May 2018**
 
 ## About the Author
-Unless otherwise specified, all code and documentation distributed here were produced by [Bane Sullivan](http://banesullivan.com), graduate student of hydrogeophysics in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane for questions or for custom filters/readers to visualize geoscience data through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues)
+The code and documentation distributed here were produced by [Bane Sullivan](http://banesullivan.com), graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane through his contact information on [his website](http://banesullivan.com) for questions or through the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) for custom filters/readers to visualize geoscience data.
 
 ### Acknowledgements
 Thank you to [Gudni Karl Rosenkjaer](https://github.com/grosenkj) for implementing the UBC OcTree file format reader.
