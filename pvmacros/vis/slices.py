@@ -106,8 +106,8 @@ def manySlicesAlongAxis(dataNm, rng, axis=0, exportpath='', ext='.csv'):
     - The string name of the data source to slice.
     - Make sure this data source is slice-able.
 
-    `numSlices` : int, optional
-    - The number of slices along the path.
+    `rng` : list, tuple, or 1D np.array
+    - A range of values along `axis` specified for the slice locations. Each element in `rng` will be a slice location along the `axis` chosen.
 
     `exportpath` : string, optional
     - The absolute file path of where to save each slice
