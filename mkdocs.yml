@@ -59,8 +59,8 @@ plugins:
 
 pages:
 - Home: index.md
-
 - Getting Started: Getting-Started.md
+- Features to Come: Upcoming.md
 
 - Plugins & PVGPpy:
     - About PVGPpy: PVGPpy/About-PVGPpy.md
@@ -87,7 +87,6 @@ pages:
         - Animate Tunnel Boring Machine: PVGPpy/filt/Animate-TBM.md
         - Correlate Arrays: PVGPpy/filt/Correlate-Arrays.md
         - UBC Add Model: PVGPpy/filt/UBC-Add-Model.md
-
 
 - PV Macros:
     - About pvmacros: pvmacros/About-pvmacros.md
@@ -117,5 +116,3 @@ pages:
     - Contributing: Dev-Guide/Contributing-to-PVGP.md
     - Repo Structure: Dev-Guide/Repo-Structure.md
     - Build Your Own Plugins: Dev-Guide/Build-Your-Own-Plugins.md
-
-- Features to Come: Upcoming.md
