@@ -1,9 +1,9 @@
 !!! question "Questions or Concerns?"
     If you have any questions or concerns about how to make your own plugins, post a comment at the bottom of this page.
 
-All of the plugins for ParaView that we develop in this repository are expansions of the **Programmable Source/Filter** native to ParaView. These are general purpose sources/filters that you can program using Python within the ParaView GUI. We are expanding these general purpose sources/filters to have more specific functionality, and thus we treat the native **Programmable Source/Filter** in a [class hierarchy](https://en.wikipedia.org/wiki/Class_hierarchy) manner such that our plugins inherit the functionality of those sources/filters then specialize that functionality to a specific task. Ways we specialize the plugins include added GUI parameters, specifying output data types, and designating input/output types.
+All of the plugins for ParaView that we develop in this repository are expansions of the **Programmable Source/Filter** native to ParaView. These are general purpose sources/filters that you can program using Python within the ParaView GUI. We are expanding these general purpose sources/filters to have more specific functionality, and thus we treat the native **Programmable Source/Filter** in a [**class hierarchy**](https://en.wikipedia.org/wiki/Class_hierarchy) manner such that our plugins inherit the functionality of those sources/filters then specialize that functionality to a specific task. Ways we specialize the plugins include added GUI parameters, specifying output data types, and designating input/output types.
 
-Since a comprehensive guide on using the general purpose **Programmable Source/Filter** in ParaView can be found [**here**](https://www.paraview.org/Wiki/Python_Programmable_Filter), we will focus on describing how you can use the build scripts and format of the PVGeophysics code base to build plugins like what we have developed.
+Since a comprehensive guide on using the general purpose **Programmable Source/Filter** in ParaView can be found [**here**](https://www.paraview.org/Wiki/Python_Programmable_Filter), we will focus on describing how you can use the build scripts and format of the *PVGeophysics* code base to build plugins like what we have developed.
 
 
 ## Plugin Components
@@ -24,7 +24,7 @@ First, let's take a look at the example plugins found under the `src/` directory
 | `OutputDataType` | This is the type of VTK data object that this plugin will output on the pipeline. For a list of possible VTK data types, see this list below this table. | `:::py OutputDataType = 'vtkUnstructuredGrid'`| ✅ | ✅ |
 | `NumberOfInputArrayChoices` | Specify the number of input array choices you would like to have for the filter. This enables a drop-down menu for the user to select data arrays from the input data object.| `:::py NumberOfInputArrayChoices = 1`| ❌ | ✅ |
 | `InputArrayLabels` | This is an optional list of `str` display names for the input arrays if you specified to have one or more in `NumberOfInputArrayChoices`| `:::py InputArrayLabels = ['Input Array']`| ❌ | ✅ |
-| `ExtraXml`       |  Any extra XML GUI components you might like to add to the plugin that are not incorporated in the build script. See [this web page](https://www.paraview.org/Wiki/ParaView/Plugin_HowTo) for more info on possible features to add. | `:::py ExtraXml = ''`| ✅ | ✅ |
+| `ExtraXml`       |  Any extra XML GUI components you might like to add to the plugin that are not incorporated in the build script. See [**this webpage**](https://www.paraview.org/Wiki/ParaView/Plugin_HowTo) for more info on possible features to add. | `:::py ExtraXml = ''`| ✅ | ✅ |
 | `FileSeries`     | A boolean to control whether or not you want to use file series on a reader plugin. Defaults to `:::py True` | `:::py FileSeries = True` | ✅ | ❌ |
 
 

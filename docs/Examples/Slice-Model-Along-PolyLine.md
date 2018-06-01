@@ -17,7 +17,7 @@ First, lets load some data onto the ParaView pipeline. For this example, we want
     Data File 1: 'topexample.sgems'
 
     - **Original source:** http://www.trainingimages.org/training-images-library.html
-    - **Reader to Use:** *SGeMS Grid* from the PVGP repo found [here](../PVGPpy/read/SGeMS-Grid.md)
+    - **Reader to Use:** *SGeMS Grid* from the PVGP repo found [**here**](../PVGPpy/read/SGeMS-Grid.md)
     - **Description:** This data file is the 3D model that we will slice through
 
     Data File 2: 'points.csv'
@@ -38,7 +38,7 @@ Now that you have the two data files loaded onto the pipeline in ParaView, lets 
     - Uncheck *Use nearest nbr*
 
 !!! warning
-    The [**Add Cell Connectivity to Points**](../PVGPpy/filt/Add-Cell-Connectivity-to-Points.md) filter uses the SciPy python module. You may get an error if you do not have SciPy linked to ParaView Python. To work around this, make sure the **Use nearest nbr** parameter is not checked. Since the points file we give you in this example is in sequential order, this will not matter.  [See details](../Getting-Started.md#using-outside-modules) to learn more about enabling the SciPy module in `pvpython`.
+    The [**Add Cell Connectivity to Points**](../PVGPpy/filt/Add-Cell-Connectivity-to-Points.md) filter uses the SciPy python module. You may get an error if you do not have SciPy linked to ParaView Python. To work around this, make sure the **Use nearest nbr** parameter is not checked. Since the points file we give you in this example is in sequential order, this will not matter.  [**See details**](../Getting-Started.md#using-outside-modules) to learn more about enabling the SciPy module in `pvpython`.
 
 
 Once you have points will poly line connectivity, then we can use the [`:::py manySlicesAlongPoints()`](../pvmacros/vis/Many-Slices-Along-Points.md) macro to complete the task. First, open the Python Shell in ParaView and import the `pvmacros` module and use the macro in the following manner making sure that the data names on the pipeline match what is in the function call.

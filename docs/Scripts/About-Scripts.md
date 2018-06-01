@@ -1,7 +1,7 @@
 ### Scripts
 Scripts are Python codes we will use for tasks like loading scenes and for applying several macros at once for a specific project. It is often helpful to set up a script for a project so that you can quickly run all the visualization processing at once each time you update your model files or create new versions of your data.
 
-*Scripts are used on specific sets of data whereas macros can be used on any set of data.* For details on macros, please look [here](../pvmacros/About-pvmacros.md).
+*Scripts are used on specific sets of data whereas macros can be used on any set of data.* For details on macros, please look [**here**](../pvmacros/About-pvmacros.md).
 
 -------
 

@@ -23,6 +23,8 @@ extra:
 
 theme:
     name: material
+    feature:
+        tabs: true
     palette:
         primary: 'blue-grey'
         accent: 'red'
