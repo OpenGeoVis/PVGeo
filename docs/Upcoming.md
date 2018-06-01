@@ -1,9 +1,9 @@
-Here is a list of features that are shortly coming to this repo.We will try to regularly update this page; for a more update view of our activity, please check out the different projects on the GitHub page [here](https://github.com/banesullivan/ParaViewGeophysics/projects).
+Here is a list of features that are shortly coming to this repo.We will try to regularly update this page; for a more update view of our activity, please check out the different projects on the GitHub page [here](https://github.com/banesullivan/PVGeophysics/projects).
 
 More documentation is soon to come. We want to do it right: with tutorials, example data, and detailed justification for need and use of each reader, filter, and macro.
 
 !!! info "Suggestions?"
-    We need **your** suggestions for what kinds of file format readers to make as well as ideas for filters to meet your data needs. Post on the [Issues page](https://github.com/banesullivan/ParaViewGeophysics/issues) on GitHub as a feature request.
+    We need **your** suggestions for what kinds of file format readers to make as well as ideas for filters to meet your data needs. Post on the [Issues page](https://github.com/banesullivan/PVGeophysics/issues) on GitHub as a feature request.
 
     Don't have a GitHub account but still have ideas or questions? Post a comment at the [bottom of this page](#Comments)!
 
