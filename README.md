@@ -1,4 +1,4 @@
-# ParaViewGeophysics
+# PVGeophysics
 This repository contains plugins tailored to data visualization in geophysics for the application [ParaView by Kitware](https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D time-varing grids.
 
 Check out the [demo page](http://demo.pvgp.io/) for a synopsis of the project and some visualization examples. Then check out the [Docs pages](http://pvgp.io/) to explore the motivation for publishing this repo as well as to find all code documentation. This contains documentation for readers, filters, macros, and more as you need. **NOTE: These are currently out of date and will be updated and finished by late June 2018**
@@ -35,10 +35,10 @@ From your command line:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/banesullivan/ParaViewGeophysics
+$ git clone https://github.com/banesullivan/PVGeophysics
 
 # Go in the cloned repository
-$ cd ParaViewGeophysics
+$ cd PVGeophysics
 ```
 
 ### MacOS X Install

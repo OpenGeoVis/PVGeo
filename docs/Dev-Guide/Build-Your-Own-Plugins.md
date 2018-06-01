@@ -3,7 +3,7 @@
 
 All of the plugins for ParaView that we develop in this repository are expansions of the **Programmable Source/Filter** native to ParaView. These are general purpose sources/filters that you can program using Python within the ParaView GUI. We are expanding these general purpose sources/filters to have more specific functionality, and thus we treat the native **Programmable Source/Filter** in a [class hierarchy](https://en.wikipedia.org/wiki/Class_hierarchy) manner such that our plugins inherit the functionality of those sources/filters then specialize that functionality to a specific task. Ways we specialize the plugins include added GUI parameters, specifying output data types, and designating input/output types.
 
-Since a comprehensive guide on using the general purpose **Programmable Source/Filter** in ParaView can be found [**here**](https://www.paraview.org/Wiki/Python_Programmable_Filter), we will focus on describing how you can use the build scripts and format of the ParaViewGeophysics code base to build plugins like what we have developed.
+Since a comprehensive guide on using the general purpose **Programmable Source/Filter** in ParaView can be found [**here**](https://www.paraview.org/Wiki/Python_Programmable_Filter), we will focus on describing how you can use the build scripts and format of the PVGeophysics code base to build plugins like what we have developed.
 
 
 ## Plugin Components
