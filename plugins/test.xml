@@ -1,0 +1,43 @@
+<ServerManagerConfiguration>
+ <ProxyGroup name="filters">
+   <SourceProxy name="TestMuliPort" class="vtkPythonProgrammableFilter" label="TestMuliPort SFE"
+      post_creation="SetNumberOfInputPorts"
+      input_ports="2">
+
+      <InputProperty name="Source" command="SetInputConnection" port_index="0">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkDataSet"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <InputProperty name="Target" command="SetInputConnection" port_index="1">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkDataSet"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <IntVectorProperty command="SetOutputDataSetType" default_values="8" name="OutputDataSetType" number_of_elements="1" panel_visibility="never">
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="print self.GetInputDataObject(0, 0)&#xA;print self.GetInputDataObject(1, 0)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+         <Widget type="multi_line"/>
+       </Hints>
+      </StringVectorProperty>
+
+    </SourceProxy>
+ </ProxyGroup>
+</ServerManagerConfiguration>
