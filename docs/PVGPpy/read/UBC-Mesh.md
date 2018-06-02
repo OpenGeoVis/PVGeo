@@ -1,3 +1,5 @@
+# UBC Tensor Meshes
+
 ## About this Reader
 UBC Tensor Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describes how the data is discretized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. The reader will automatically detect if the mesh is 2D or 3D and read the remainder of the data with that dimensionality assumption. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D). Full details for the UBC Tensor Mesh formats can be found [**here**](http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/format_index.html#meshes)
 

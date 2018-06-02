@@ -67,7 +67,7 @@ pages:
     - Readers:
         - Grids:
             - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
-            - UBC Mesh Grid: PVGPpy/read/UBC-Mesh.md
+            - UBC Tensor Meshes: PVGPpy/read/UBC-Mesh.md
             - UBC OcTree: PVGPpy/read/UBC-OcTree.md
             - PVGP Grid: PVGPpy/read/PVGP-Grid.md
         - Tables:

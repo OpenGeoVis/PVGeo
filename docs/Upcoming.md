@@ -9,7 +9,8 @@ More documentation is soon to come. We want to do it right: with tutorials, exam
 
 ### Readers
 - [ ] **Open Mining Format:** All file types and data types found [**here**](https://github.com/GMSGDataExchange/omf)
-- [x] **UBC Mesh:** both 2D and 3D. Details [**here**](https://www.eoas.ubc.ca/ubcgif/iag/sftwrdocs/technotes/faq.htm#mesh) and [**here**](https://gif.eos.ubc.ca/software/utility_programs#3DmodelsMeshes). We're almost done with this!
+- [x] [**UBC Tensor Meshes**](PVGPpy/read/UBC-Mesh.md): both 2D and 3D implemented
+- [x] [**UBC OcTree Mesh**](PVGPpy/read/UBC-OcTree.md): fully implemented but we need test mesh-model file pairs
 - [ ] **Well logs:** Readers for common formats (LAS) and easy ways to project well logs in XYZ space. [Details here](http://www.cwls.org/las/)
 
 <!---
