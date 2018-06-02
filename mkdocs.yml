@@ -65,16 +65,14 @@ pages:
 - Plugins & PVGPpy:
     - About PVGPpy: PVGPpy/About-PVGPpy.md
     - Readers:
-        - Grids:
-            - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
-            - UBC Tensor Meshes: PVGPpy/read/UBC-Mesh.md
-            - UBC OcTree: PVGPpy/read/UBC-OcTree.md
-            - PVGP Grid: PVGPpy/read/PVGP-Grid.md
-        - Tables:
-            - Binary Packed Data: PVGPpy/read/Binary-Packed-Data.md
-            - Madagascar SSRSF: PVGPpy/read/Madagascar-SSRSF.md
-            - Delimited Text: PVGPpy/read/Delimited-Text.md
-            - GSLIB: PVGPpy/read/GSLIB.md
+        - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
+        - UBC Tensor Meshes: PVGPpy/read/UBC-Mesh.md
+        - UBC OcTree: PVGPpy/read/UBC-OcTree.md
+        - PVGP Grid: PVGPpy/read/PVGP-Grid.md
+        - Binary Packed Data: PVGPpy/read/Binary-Packed-Data.md
+        - Madagascar SSRSF: PVGPpy/read/Madagascar-SSRSF.md
+        - Delimited Text: PVGPpy/read/Delimited-Text.md
+        - GSLIB: PVGPpy/read/GSLIB.md
 
     - Filters:
         - Table to Uniform Grid: PVGPpy/filt/Table-to-Uniform-Grid.md
