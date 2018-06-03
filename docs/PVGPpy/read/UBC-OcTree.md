@@ -7,7 +7,7 @@
 We tested this model using the OcTree mesh found in [**this example**](http://giftoolscookbook.readthedocs.io/en/latest/content/AtoZ/DCIP/index.html) on the [**GIFtoolsCookbook website**](http://giftoolscookbook.readthedocs.io/en/latest/index.html):
 
 - Mesh file: `CompleteTask/octree_mesh.txt`
-- Model file: `CompleteTack/active_cells_topo.txt`
+- Model file: `CompleteTask/active_cells_topo.txt`
 
 To use the plugin:
 
