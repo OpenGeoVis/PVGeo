@@ -23,6 +23,8 @@ extra:
 
 theme:
     name: material
+    feature:
+        tabs: true
     palette:
         primary: 'blue-grey'
         accent: 'red'
@@ -40,7 +42,7 @@ markdown_extensions:
         permalink: true
     - admonition
     - codehilite:
-        linenums: true
+        #linenums: true
         guess_lang: true
     - meta # see this page: https://squidfunk.github.io/mkdocs-material/extensions/metadata/
     - footnotes # see this page: https://squidfunk.github.io/mkdocs-material/extensions/footnotes/
@@ -57,22 +59,20 @@ plugins:
 
 pages:
 - Home: index.md
-
 - Getting Started: Getting-Started.md
+- Features to Come: Upcoming.md
 
 - Plugins & PVGPpy:
     - About PVGPpy: PVGPpy/About-PVGPpy.md
     - Readers:
-        - Grids:
-            - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
-            - UBC Mesh Grid: PVGPpy/read/UBC-Mesh.md
-            - UBC OcTree: PVGPpy/read/UBC-OcTree.md
-            - PVGP Grid: PVGPpy/read/PVGP-Grid.md
-        - Tables:
-            - Binary Packed Data: PVGPpy/read/Binary-Packed-Data.md
-            - Madagascar SSRSF: PVGPpy/read/Madagascar-SSRSF.md
-            - Delimited Text: PVGPpy/read/Delimited-Text.md
-            - GSLIB: PVGPpy/read/GSLIB.md
+        - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
+        - UBC Tensor Meshes: PVGPpy/read/UBC-Mesh.md
+        - UBC OcTree: PVGPpy/read/UBC-OcTree.md
+        - PVGP Grid: PVGPpy/read/PVGP-Grid.md
+        - Binary Packed Data: PVGPpy/read/Binary-Packed-Data.md
+        - Madagascar SSRSF: PVGPpy/read/Madagascar-SSRSF.md
+        - Delimited Text: PVGPpy/read/Delimited-Text.md
+        - GSLIB: PVGPpy/read/GSLIB.md
 
     - Filters:
         - Table to Uniform Grid: PVGPpy/filt/Table-to-Uniform-Grid.md
@@ -85,7 +85,6 @@ pages:
         - Animate Tunnel Boring Machine: PVGPpy/filt/Animate-TBM.md
         - Correlate Arrays: PVGPpy/filt/Correlate-Arrays.md
         - UBC Add Model: PVGPpy/filt/UBC-Add-Model.md
-
 
 - PV Macros:
     - About pvmacros: pvmacros/About-pvmacros.md
@@ -115,5 +114,3 @@ pages:
     - Contributing: Dev-Guide/Contributing-to-PVGP.md
     - Repo Structure: Dev-Guide/Repo-Structure.md
     - Build Your Own Plugins: Dev-Guide/Build-Your-Own-Plugins.md
-
-- Features to Come: Upcoming.md

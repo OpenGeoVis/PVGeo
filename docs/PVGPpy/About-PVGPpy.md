@@ -18,9 +18,10 @@ We are doing this to show how easy it is to make custom readers and convey the m
 !!! info
     Explore the different reader plugins by looking under the **Readers** section of the **Plugins & PVGPpy** part of the navigation pane.
 
-??? info "implemented Formats"
+??? info "Implemented Formats"
     - Grids:
-        - [UBC GIF Meshes 2D and 3D](read/UBC-Mesh.md)
+        - [UBC GIF Tensor Meshes](read/UBC-Mesh.md)
+        - [UBC GIF OcTree Mesh](read/UBC-OcTree.md)
         - [SGeMS Uniform Grid](read/SGeMS-Grid.md)
         - [The PVGP Uniform Grid](read/PVGP-Grid.md)
     - Tables:

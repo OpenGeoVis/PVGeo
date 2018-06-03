@@ -32,7 +32,7 @@ printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Updating PVGeophysics..."
 if git pull --rebase --stat origin master
 then
     # Succesful update from GitHub
-    printf "${GREEN}${BOLD}%s${NORMAL}\n" "--> Tsjakka!! PVGeophysics has been updated and/or is at the current version."
+    printf "${GREEN}${BOLD}%s${NORMAL}\n" "--> Tsjakka!! *PVGeophysics* has been updated and/or is at the current version."
     # Now lets clean out the old version
     pushd ./src
     # Now lets build and install everything (running a build incase user has their own plugins added to thier fork)

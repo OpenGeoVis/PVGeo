@@ -7,11 +7,11 @@
 We tested this model using the OcTree mesh found in [**this example**](http://giftoolscookbook.readthedocs.io/en/latest/content/AtoZ/DCIP/index.html) on the [**GIFtoolsCookbook website**](http://giftoolscookbook.readthedocs.io/en/latest/index.html):
 
 - Mesh file: `CompleteTask/octree_mesh.txt`
-- Model file: `CompleteTack/active_cells_topo.txt`
+- Model file: `CompleteTask/active_cells_topo.txt`
 
 To use the plugin:
 
-- Make sure to clone/update the PVGeophysics repo and [**install if you haven't already**](http://pvgp.io/Getting-Started/#install-paraviewgeophysics)
+- Make sure to clone/update the *PVGeophysics* repo and [**install if you haven't already**](http://pvgp.io/Getting-Started/#install-paraviewgeophysics)
 - Select **File->Open...** in ParaView
 - Choose the mesh file for your OcTree (we have enabled extensions: `.mesh` `.msh` `.dat` `.txt`)
 - Select the **PVGP: UBC OcTree Mesh File Format** reader when prompted.
