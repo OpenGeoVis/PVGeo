@@ -42,7 +42,7 @@ markdown_extensions:
         permalink: true
     - admonition
     - codehilite:
-        linenums: true
+        #linenums: true
         guess_lang: true
     - meta # see this page: https://squidfunk.github.io/mkdocs-material/extensions/metadata/
     - footnotes # see this page: https://squidfunk.github.io/mkdocs-material/extensions/footnotes/
