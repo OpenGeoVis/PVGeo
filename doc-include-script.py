@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  include.py
+#  doc-include-imports.py
 #
 #  Copyright 2015 Christopher MacMackin <cmacmackin@gmail.com>
 #   Heavily Edited by Bane Sullivan <banesullivan@gmail.com>
