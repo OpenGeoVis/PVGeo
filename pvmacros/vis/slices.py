@@ -11,32 +11,17 @@ import time
 
 def manySlicesAlongPoints(pointsNm, dataNm, numSlices=10, exportpath='', ext='.csv'):
     """
-    Description
-    -----------
+    @desc:
     This macro takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at intervals of that path along the vector of that path at that point. This constructs `numSlices` slices through the dataset `dataNm`.
 
-    Parameters
-    ----------
-    `pointsNm` : string
-    - The string name of the points source to construct the path.
+    @params:
+    pointsNm : string : The string name of the points source to construct the path.
+    dataNm : string : The string name of the data source to slice. Make sure this data source is slice-able.
+    numSlices : int : optional : The number of slices along the path.
+    exportpath : string : optional : The absolute file path of where to save each slice
+    ext : string : optional : The file extension for saving out the slices. Default to '.csv'
 
-    `dataNm` : string
-    - The string name of the data source to slice.
-    - Make sure this data source is slice-able.
-
-    `numSlices` : int, optional
-    - The number of slices along the path.
-
-    `exportpath` : string, optional
-    - The absolute file path of where to save each slice
-
-    `ext` : string, optional
-    - The file extension for saving out the slices.
-    - Default to '.csv'
-
-
-    Notes
-    -----
+    @notes:
     - Make sure the input data source is slice-able.
     - The SciPy module is required for this macro.
 
@@ -96,29 +81,16 @@ def manySlicesAlongPoints(pointsNm, dataNm, numSlices=10, exportpath='', ext='.c
 
 def manySlicesAlongAxis(dataNm, rng, axis=0, exportpath='', ext='.csv'):
     """
-    Description
-    -----------
+    @desc:
 
 
-    Parameters
-    ----------
-    `dataNm` : string
-    - The string name of the data source to slice.
-    - Make sure this data source is slice-able.
+    @params:
+    dataNm : string : The string name of the data source to slice. Make sure this data source is slice-able.
+    rng : list, tuple, or 1D np.array : A range of values along `axis` specified for the slice locations. Each element in `rng` will be a slice location along the `axis` chosen.
+    exportpath : string : optional : The absolute file path of where to save each slice
+    ext : string : optional : The file extension for saving out the slices. Default to '.csv'
 
-    `rng` : list, tuple, or 1D np.array
-    - A range of values along `axis` specified for the slice locations. Each element in `rng` will be a slice location along the `axis` chosen.
-
-    `exportpath` : string, optional
-    - The absolute file path of where to save each slice
-
-    `ext` : string, optional
-    - The file extension for saving out the slices.
-    - Default to '.csv'
-
-
-    Notes
-    -----
+    @notes:
     - Make sure the input data source is slice-able.
     - The SciPy module is required for this macro.
 
@@ -181,27 +153,15 @@ def manySlicesAlongAxis(dataNm, rng, axis=0, exportpath='', ext='.csv'):
 
 def clipThrough(clip, ax, bounds, num=10, delay=1.0):
     """
-    Description
-    -----------
+    @desc:
     This macro takes a clip source and progresses its location through a set of bounds in the data scene. The macro requires that the clip already exist in the pipeline. This is especially useful if you have many clips linked together as all will move through the seen as a result of this macro.
 
-    Parameters
-    ----------
-    `clip` : string
-    - The string name of the clip source to be translated.
-
-    `ax` : int
-    - This is the axis on which to translate (0 for x, 1 for y, 2 for z).
-    - Think of this as the normal vector for the clip.
-
-    `bounds` : 6-element list or tuple
-    - These are the bounds to constrain the clip translation.
-
-    `num` : int, optional
-    - The number of discritizations in the clip translation.
-
-    `delay` : float, optional
-    - Time delay in seconds before conducting each clip translation.
+    @params:
+    clip : string : The string name of the clip source to be translated.
+    ax : int : This is the axis on which to translate (0 for x, 1 for y, 2 for z). Think of this as the normal vector for the clip.
+    bounds : list or tuple : These are the bounds to constrain the clip translation. 6 elements.
+    num : int : optional : The number of discritizations in the clip translation.
+    delay : float : optional : Time delay in seconds before conducting each clip translation.
 
     """
 

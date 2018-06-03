@@ -61,21 +61,15 @@ def _ubcMesh2D_part(FileName):
 
 def ubcMesh2D(FileName, pdo=None):
     """
-    Description
-    -----------
+    @desc:
     This method reads a UBC 2D Mesh file and builds an empty vtkRectilinearGrid for data to be inserted into. [Format Specs](http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html)
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
+    @params:
+    FileName : str : The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
+    pdo : vtk.vtkRectilinearGrid : opt : The output data object
 
-    `pdo` : vtk.vtkRectilinearGrid, optional
-    - The output data object
-
-    Returns
-    -------
-    Returns a vtkRectilinearGrid generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the placeModelOnMesh() method to associate with model data.
+    @return:
+    vtkRectilinearGrid : Returns a vtkRectilinearGrid generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `placeModelOnMesh()` method to associate with model data.
 
     """
     if pdo is None:
@@ -117,18 +111,14 @@ def ubcMesh2D(FileName, pdo=None):
 
 def ubcModel2D(FileName):
     """
-    Description
-    -----------
+    @desc:
     Reads a 2D model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The model filename as an absolute path for the input model file in UBCMesh Model Format. Also accepts a list of string file names.
+    @params:
+    FileName : str : The model filename as an absolute path for the input model file in UBCMesh Model Format. Also accepts a list of string file names.
 
-    Returns
-    -------
-    Returns a NumPy float array that holds the model data read from the file. Use the placeModelOnMesh() method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
+    @returns:
+    np.array : Returns a NumPy float array that holds the model data read from the file. Use the `placeModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
     """
     if type(FileName) is list:
         out = {}
@@ -160,21 +150,15 @@ def _ubcMeshData2D(FileName_Mesh, FileName_Model, pdo=None):
 
 def ubcMesh3D(FileName, pdo=None):
     """
-    Description
-    -----------
+    @desc:
     This method reads a UBC 3D Mesh file and builds an empty vtkRectilinearGrid for data to be inserted into.
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
+    @params:
+    FileName : str : The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
+    pdo : vtk.vtkRectilinearGrid : opt : The output data object
 
-    `pdo` : vtk.vtkRectilinearGrid, optional
-    - The output data object
-
-    Returns
-    -------
-    Returns a vtkRectilinearGrid generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the placeModelOnMesh() method to associate with model data.
+    @returns:
+    vtkRectilinearGrid : Returns a vtkRectilinearGrid generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `placeModelOnMesh()` method to associate with model data.
 
     """
     if pdo is None:
@@ -238,18 +222,14 @@ def ubcMesh3D(FileName, pdo=None):
 
 def ubcModel3D(FileName):
     """
-    Description
-    -----------
+    @desc:
     Reads the 3D model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
 
-    Parameters
-    ----------
-    `FileName` : str or list of str
-    - The model filename as an absolute path for the input model file in UBC 3D Model Model Format. Also accepts a list of string file names.
+    @params:
+    FileName : str : The model file name(s) as an absolute path for the input model file in UBC 3D Model Model Format. Also accepts a `list` of string file names.
 
-    Returns
-    -------
-    Returns a NumPy float array that holds the model data read from the file. Use the placeModelOnMesh() method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
+    @returns:
+    np.array : Returns a NumPy float array that holds the model data read from the file. Use the `placeModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
     """
     if type(FileName) is list:
         out = {}
@@ -277,18 +257,14 @@ def _ubcMeshData3D(FileName_Mesh, FileName_Model, pdo=None):
 
 def ubcExtent(FileName):
     """
-    Description
-    -----------
+    @desc:
     Reads the mesh file for the UBC 2D/3D Mesh or OcTree format to get output extents. Computationally inexpensive method to discover whole output extent.
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The mesh filename as an absolute path for the input mesh file in a UBC Format with extents defined on the first line.
+    @params:
+    FileName : str : The mesh filename as an absolute path for the input mesh file in a UBC Format with extents defined on the first line.
 
-    Returns
-    -------
-    This returns a tuple of the whole extent for the grid to be made of the input mesh file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to util.SetOutputWholeExtent() when used in programmable filters or source generation on the pipeline.
+    @returns:
+    tuple : This returns a tuple of the whole extent for the grid to be made of the input mesh file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to `util.SetOutputWholeExtent()` when used in programmable filters or source generation on the pipeline.
 
     """
     # Read the mesh file as line strings, remove lines with comment = !
@@ -320,24 +296,16 @@ def ubcExtent(FileName):
 
 def placeModelOnMesh(mesh, model, dataNm='Data'):
     """
-    Description
-    -----------
+    @desc:
     Places model data onto a mesh. This is for the UBC Grid data reaers to associate model data with the mesh grid.
 
-    Parameters
-    ----------
-    `mesh` : vtkRectilinearGrid
-    - The vtkRectilinearGrid that is the mesh to place the model data upon.
+    @params:
+    mesh : vtkRectilinearGrid : The vtkRectilinearGrid that is the mesh to place the model data upon.
+    model : np.array : A NumPy float array that holds all of the data to place inside of the mesh's cells.
+    dataNm : str : opt : The name of the model data array once placed on the vtkRectilinearGrid.
 
-    `model` : NumPy float array
-    - A NumPy float array that holds all of the data to place inside of the mesh's cells.
-
-    `dataNm` : str, optional
-    - The name of the model data array once placed on the vtkRectilinearGrid.
-
-    Returns
-    -------
-    Returns the input vtkRectilinearGrid with model data appended.
+    @returns:
+    vtkRectilinearGrid : Returns the input vtkRectilinearGrid with model data appended.
 
     """
     if type(model) is dict:
@@ -374,24 +342,16 @@ def placeModelOnMesh(mesh, model, dataNm='Data'):
 
 def ubcTensorMesh(FileName_Mesh, FileName_Model, pdo=None):
     """
-    Description
-    -----------
+    @desc:
     Wrapper to Read UBC GIF 2D and 3D meshes. UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D).
 
-    Parameters
-    ----------
-    `FileName_Mesh` : str
-    - The mesh filename as an absolute path for the input mesh file in UBC 2D/3D Mesh Format
+    @params:
+    FileName_Mesh : str : The mesh filename as an absolute path for the input mesh file in UBC 2D/3D Mesh Format
+    FileName_Model : str : The model filename as an absolute path for the input model file in UBC 2D/3D Model Format.
+    pdo : vtk.vtkRectilinearGrid : opt : The output data object
 
-    `FileName_Model` : str
-    - The model filename as an absolute path for the input model file in UBC 2D/3D Model Format.
-
-    `pdo` : vtk.vtkRectilinearGrid, optional
-    - The output data object
-
-    Returns
-    -------
-    Returns a vtkRectilinearGrid generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
+    @return:
+    vtkRectilinearGrid : Returns a vtkRectilinearGrid generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
     """
     # Read the mesh file as line strings, remove lines with comment = !
     v = np.array(np.__version__.split('.')[0:2], dtype=int)
@@ -422,21 +382,15 @@ def ubcTensorMesh(FileName_Mesh, FileName_Model, pdo=None):
 
 def ubcOcTreeMesh(FileName, pdo=None):
     """
-    Description
-    -----------
+    @desc:
     This method reads a UBC OcTree Mesh file and builds a vtkUnstructuredGrid of the data in the file. This method generates the vtkUnstructuredGrid without any data attributes.
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The mesh filename as an absolute path for the input mesh file in UBC OcTree format.
+    @params:
+    FileName : str : The mesh filename as an absolute path for the input mesh file in UBC OcTree format.
+    pdo : vtk.vtkUnstructuredGrid : opt : A pointer to the output data object.
 
-    `pdo` : vtk.vtkUnstructuredGrid, optional
-    - A pointer to the output data object.
-
-    Returns
-    -------
-    Returns a vtkUnstructuredGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the placeModelOnMesh() method to associate with model data.
+    @returns:
+    vtkUnstructuredGrid : Returns a vtkUnstructuredGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `placeModelOnMesh()` method to associate with model data.
 
     """
     if pdo is None:
@@ -587,25 +541,16 @@ def ubcOcTreeMesh(FileName, pdo=None):
 
 def placeModelOnOcTreeMesh(mesh, model, dataNm='Data'):
     """
-    Description
-    -----------
+    @desc:
     Places model data onto a mesh. This is for the UBC Grid data reaers to associate model data with the mesh grid.
 
-    Parameters
-    ----------
-    `mesh` : vtkUnstructuredGrid
-    - The vtkUnstructuredGrid that is the mesh to place the model data upon.
-        Needs to have been read in by ubcOcTree
+    @params:
+    mesh : vtkUnstructuredGrid : The vtkUnstructuredGrid that is the mesh to place the model data upon. Needs to have been read in by ubcOcTree
+    model : np.ndarray : A NumPy float array that holds all of the data to place inside of the mesh's cells.
+    dataNm : str : optional : The name of the model data array once placed on the vtkUnstructuredGrid.
 
-    `model` : NumPy float array
-    - A NumPy float array that holds all of the data to place inside of the mesh's cells.
-
-    `dataNm` : str, optional
-    - The name of the model data array once placed on the vtkUnstructuredGrid.
-
-    Returns
-    -------
-    Returns the input vtkUnstructuredGrid with model data appended.
+    @returns:
+    vtkUnstructuredGrid : Returns the input vtkUnstructuredGrid with model data appended.
 
     """
     if type(model) is dict:
@@ -637,24 +582,16 @@ def placeModelOnOcTreeMesh(mesh, model, dataNm='Data'):
 
 def ubcOcTree(FileName_Mesh, FileName_Model, pdo=None):
     """
-    Description
-    -----------
+    @desc:
     Wrapper to Read UBC GIF OcTree mesh and model file pairs. UBC OcTree models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. This only handles OcTree formats
 
-    Parameters
-    ----------
-    `FileName_Mesh` : str
-    - The OcTree Mesh filename as an absolute path for the input mesh file in UBC OcTree Mesh Format
+    @params:
+    FileName_Mesh : str : The OcTree Mesh filename as an absolute path for the input mesh file in UBC OcTree Mesh Format
+    FileName_Model : str : The model filename as an absolute path for the input model file in UBC OcTree Model Format.
+    pdo : vtk.vtkUnstructuredGrid : optional : The output data object
 
-    `FileName_Model` : str
-    - The model filename as an absolute path for the input model file in UBC OcTree Model Format.
-
-    `pdo` : vtk.vtkUnstructuredGrid, optional
-    - The output data object
-
-    Returns
-    -------
-    Returns a vtkUnstructuredGrid generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
+    @returns:
+    vtkUnstructuredGrid : Returns a vtkUnstructuredGrid generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
     """
     # Construct/read the mesh
     mesh = ubcOcTreeMesh(FileName_Mesh, pdo=pdo)

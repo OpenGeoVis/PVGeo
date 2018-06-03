@@ -5,15 +5,15 @@ __all__ = ['printProgressBar']
 # Print iterations progress
 def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=50, fill='#'):
     """
-    Call in a loop to create terminal progress bar
+    @desc: Call in a loop to create terminal progress bar
     @params:
-        iteration   - Required  : current iteration (Int)
-        total       - Required  : total iterations (Int)
-        prefix      - Optional  : prefix string (Str)
-        suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent complete (Int)
-        length      - Optional  : character length of bar (Int)
-        fill        - Optional  : bar fill character (Str)
+        iteration: int : required : current iteration
+        total : int : required : total iterations
+        prefix : str : ptional  : prefix string
+        suffix : str : optional  : suffix string
+        decimals : int : optional  : positive number of decimals in percent complete
+        length : int : optional  : character length of bar
+        fill : str : optional  : bar fill character
 
     Example Use:
     printProgressBar(i, len(arr), prefix = 'Progress:', suffix = 'Complete', length = 50)

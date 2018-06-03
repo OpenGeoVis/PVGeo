@@ -24,25 +24,17 @@ def _calculateTimeRange(num, dt=1.0):
 
 def getTimeStepFileIndex(algorithm, files, dt=1.0):
     """
-    Description
-    -----------
+    @desc:
+    Given a file reader and a list of files being the time series of data, this will reuturn the current index in that series for the current time step.
 
-    Parameters
-    ----------
-    `algorithm` : vtkDataObject (Proxy)
-    - The data object on the pipeline (pass `self` from Programmable Sources)
+    @params:
+    algorithm : vtkDataObject : req : The data object (Proxy) on the pipeline (pass `self` from Programmable Sources)
+    files : list : req : All the files. (Pass files incase we implement a method to read time value from file)
+    dt : float : optional : The discrete value in seconds for the time step
 
-    `files` : list
-    - All the files. (Pass files incase we implement a method to read time value from file)
+    @return:
+    int : The index for the file to be read in `files`
 
-    `dt` : float, optional
-    - The discrete value in seconds for the time step
-
-    Return
-    ------
-    int
-
-    - Returns the index for the file to be read in `files`
     """
     if len(files) < 2:
         # Only one file...
@@ -56,23 +48,16 @@ def getTimeStepFileIndex(algorithm, files, dt=1.0):
 
 def setOutputTimesteps(algorithm, files, dt=1.0):
     """
-    Description
-    -----------
+    @desc:
+    Handles setting up the timesteps on on the pipeline for a file series reader.
 
-    Parameters
-    ----------
-    `algorithm` : vtkDataObject (Proxy)
-    - The data object on the pipeline (pass `self` from Programmable Sources)
+    @params:
+    algorithm : vtkDataObject : req : The data object (Proxy) on the pipeline (pass `self` from Programmable Sources)
+    files : list : req : All the files. (Pass files incase we implement a method to read time value from file)
+    dt : float : optional : The discrete value in seconds for the time step
 
-    `files` : list
-    - All the files. (Pass files incase we implement a method to read time value from file)
-
-    `dt` : float, optional
-    - The discrete value in seconds for the time step
-
-    Return
-    ------
-    - Returns the argument `algorithm`
+    @return:
+    algorithm : Returns the argument 
     """
     if len(files) < 2:
         # Only one file so do not update time steps

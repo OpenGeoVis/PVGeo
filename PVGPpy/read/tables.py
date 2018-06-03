@@ -14,30 +14,18 @@ from ._helpers import *
 
 def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
     """
-    Description
-    -----------
+    @desc:
     Reads a GSLIB file format to a vtkTable. The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column).
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The absolute file name with path to read.
+    @params:
+    FileName : str : req : The absolute file name with path to read.
+    deli : str : opt :The input files delimiter. To use a tab delimiter please set the `useTab`.
+    useTab : boolean : opt : A boolean that describes whether to use a tab delimiter.
+    numIgLns : int : opt : The integer number of lines to ignore.
+    pdo : vtk.vtkTable : opt : A pointer to the output data object.
 
-    `deli` : str
-    - The input files delimiter. To use a tab delimiter please set the `useTab`.
-
-    `useTab` : boolean
-    - A boolean that describes whether to use a tab delimiter.
-
-    `numIgLns` : int
-    - The integer number of lines to ignore.
-
-    `pdo` : vtk.vtkTable, optional
-    - A pointer to the output data object.
-
-    Returns
-    -------
-    Returns a vtkTable of the input data file.
+    @return:
+    vtkTable : Returns a vtkTable of the input data file.
 
     """
     if pdo is None:
@@ -74,30 +62,18 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
 
 def packedBinaries(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
     """
-    Description
-    -----------
+    @desc:
     This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The absolute file name with path to read.
+    @params:
+    FileName : str : req : The absolute file name with path to read.
+    dataNm : str : opt : A string name to use for the constructed vtkDataArray.
+    endian : char : opt : The endianness to unpack the values in `struct.unpack()`. Defaults to Big Endian `>`.
+    dtype : char : opt : A char to chose the data type when unpacking with struct.unpack(). Defaults to float `f`.
+    pdo : vtk.vtkTable : opt : A pointer to the output data object.
 
-    `dataNm` : str, optional
-    - A string name to use for the constructed vtkDataArray.
-
-    `endian` : char, optional
-    - The endianness to unpack the values in struct.unpack(). Defaults to Big Endian `>`.
-
-    `dtype` : char, optional
-    - A char to chose the data type when unpacking with struct.unpack(). Defaults to float `f`.
-
-    `pdo` : vtk.vtkTable, optional
-    - A pointer to the output data object.
-
-    Returns
-    -------
-    Returns a vtkTable of the input data file with a single column being the data read.
+    @return:
+    vtkTable : Returns a vtkTable of the input data file with a single column being the data read.
 
     """
     if pdo is None:
@@ -138,31 +114,19 @@ def packedBinaries(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
 
 def madagascar(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
     """
-    Description
-    -----------
+    @desc:
     This reads in float or double data that is packed into a Madagascar binary file format with a leader header. The reader ignores all of the ascii header details by searching for the sequence of three special characters: EOL EOL EOT (\014\014\004) and it will treat the followng binary packed data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We will later implement the ability to create a gridded volume from the header info. This reader is a quick fix for Samir. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
-    Details: http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF
+    [Details Here](http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF)
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The absolute file name with path to read.
+    @params:
+    FileName : str : req : The absolute file name with path to read.
+    dataNm : str : opt : A string name to use for the constructed vtkDataArray.
+    endian : char : opt : The endianness to unpack the values in `struct.unpack()``. Defaults to Big Endian `>`.
+    dtype : char : opt : A char to chose the data type when unpacking with struct.unpack(). Defaults to float `f`.
+    pdo : vtk.vtkTable : opt : A pointer to the output data object.
 
-    `dataNm` : str, optional
-    - A string name to use for the constructed vtkDataArray.
-
-    `endian` : char, optional
-    - The endianness to unpack the values in struct.unpack(). Defaults to Big Endian `>`.
-
-    `dtype` : char, optional
-    - A char to chose the data type when unpacking with struct.unpack(). Defaults to float `f`.
-
-    `pdo` : vtk.vtkTable, optional
-    - A pointer to the output data object.
-
-    Returns
-    -------
-    Returns a vtkTable of the input data file with a single column being the data read.
+    @return:
+    vtkTable : Returns a vtkTable of the input data file with a single column being the data read.
 
     """
     if pdo is None:
@@ -211,34 +175,20 @@ def madagascar(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
 
 def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, numIgLns=0, pdo=None):
     """
-    Description
-    -----------
+    @desc:
     This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
 
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The absolute file name with path to read.
+    @params:
+    FileName : str: req : The absolute file name with path to read.
+    deli : str : opt : The input files delimiter. To use a tab delimiter please set the `useTab`.
+    useTab : boolean : opt : A boolean that describes whether to use a tab delimiter
+    hasTits : boolean : opt : A boolean for if the delimited file has header titles for the data arrays.
+    numIgLns : int : opt : The integer number of lines to ignore
+    pdo : vtk.vtkTable : opt : A pointer to the output data object.
 
-    `deli` : str
-    - The input files delimiter. To use a tab delimiter please set the `useTab`.
-
-    `useTab` : boolean, optional
-    - A boolean that describes whether to use a tab delimiter
-
-    `hasTits` : boolean, optional
-    - A boolean for if the delimited file has header titles for the data arrays.
-
-    `numIgLns` : int
-    - The integer number of lines to ignore
-
-    `pdo` : vtk.vtkTable, optional
-    - A pointer to the output data object.
-
-    Returns
-    -------
-    Returns a vtkTable of the input data file.
+    @return:
+    vtkTable : Returns a vtkTable of the input data file.
 
     """
     if pdo is None:

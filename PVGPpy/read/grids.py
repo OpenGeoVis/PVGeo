@@ -11,27 +11,17 @@ import base64
 
 def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
     """
-    Description
-    -----------
-    Generates vtkImageData from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
+    @desc:
+        Generates vtkImageData from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The file name / absolute path for the input file in SGeMS grid format.
+    @params:
+        FileName : str : req : The file name / absolute path for the input file in SGeMS grid format.
+        deli : str : opt : The input files delimiter. To use a tab delimiter please set the `useTab`.
+        useTab : boolean : opt : A boolean that describes whether to use a tab delimiter.
+        pdo : vtkImageData : opt : A pointer to the output data object.
 
-    `deli` : str, optional
-    - The input files delimiter. To use a tab delimiter please set the `useTab`.
-
-    `useTab` : boolean, optional
-    - A boolean that describes whether to use a tab delimiter.
-
-    `pdo` : vtk.vtkImageData, optional
-    - A pointer to the output data object.
-
-    Returns
-    -------
-    Returns vtkImageData
+    @return:
+        vtkImageData : A uniformly spaced gridded volume of data from input file
 
     """
     from PVGPpy.read import gslib
@@ -54,24 +44,16 @@ def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
 
 def sgemsExtent(FileName, deli=' ', useTab=False):
     """
-    Description
-    -----------
+    @desc:
     Reads the input file for the SGeMS format to get output extents. Computationally inexpensive method to discover whole output extent.
 
-    Parameters
-    ----------
-    `FileName` : str
-    - The file name / absolute path for the input file in SGeMS grid format.
+    @params:
+    FileName : str : req : The file name / absolute path for the input file in SGeMS grid format.
+    deli : str : opt : The input files delimiter. To use a tab delimiter please set the `useTab`.
+    useTab : boolean : opt : A boolean that describes whether to use a tab delimiter.
 
-    `deli` : str, optional
-    - The input files delimiter. To use a tab delimiter please set the `useTab`.
-
-    `useTab` : boolean, optional
-    - A boolean that describes whether to use a tab delimiter.
-
-    Returns
-    -------
-    This returns a tuple of the whole extent for the uniform grid to be made of the input file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to util.SetOutputWholeExtent() when used in programmable filters or source generation on the pipeline.
+    @return:
+    tuple : This returns a tuple of the whole extent for the uniform grid to be made of the input file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to `util.SetOutputWholeExtent()` when used in programmable filters or source generation on the pipeline.
 
     """
     with open(FileName) as f:
@@ -128,24 +110,16 @@ def readPVGPGridExtents(headerfile):
 
 def readPVGPGrid(headerfile, pdo=None, path=None):
     """
-    Description
-    -----------
+    @desc:
     Generates vtkImageData from the uniform grid defined in the PVGP uniformly gridded data format.
 
-    Parameters
-    ----------
-    `headerfile` : str
-    - The file name / absolute path for the input header file that cotains all parameters and pointers to file locations.
+    @params:
+    headerfile : str: req : The file name / absolute path for the input header file that cotains all parameters and pointers to file locations.
+    pdo : vtk.vtkImageData : opt : A pointer to the output data object.
+    path : str : opt : The absolute path to the PVGP grid database to override the path in the header file.
 
-    `pdo` : vtk.vtkImageData, optional
-    - A pointer to the output data object.
-
-    `path` : str, optional
-    - The absolute path to the PVGP grid database to override the path in the header file.
-
-    Returns
-    -------
-    Returns vtkImageData
+    @return:
+    vtkImageData : A uniformly spaced gridded volume of data from input file
 
     """
     if pdo is None:
