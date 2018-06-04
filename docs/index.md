@@ -20,10 +20,10 @@ This repository was produced from the work of an undergraduate research project 
     This is a Beta release of the *PVGeophysics* code base and documentation. The plugins and Python modules might be changed in backward-incompatible ways and are not subject to any deprecation policy. The current documentation is a work in progress and we are trying our best to get everything fully documented by June 2018.
 
 !!! question "Suggestions?"
-    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [**issues page**](https://github.com/banesullivan/PVGeophysics/issues).
+    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues).
 
 !!! tip "Where to get the code"
-    All code is published on the GitHub repository *PVGeophysics* linked to this page. Click the 'PVGP on GitHub' link on the right side of the menu bar at the top to find all of the code or you can follow [**this link**](https://github.com/banesullivan/PVGeophysics).
+    All code is published on the GitHub repository *PVGeophysics* linked to this page. Click the 'PVGP on GitHub' link on the right side of the menu bar at the top to find all of the code or you can follow [**this link**](https://github.com/OpenGeoVis/PVGeophysics).
 
 
 ## Demo
@@ -50,7 +50,7 @@ This code base deploys tools to perform post-processing visual analysis and inte
 
 <div style="float: left; margin:10px 10px 10px 10px"" class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="bane-sullivan"><a class="LI-simple-link" href='https://www.linkedin.com/in/bane-sullivan?trk=profile-badge'>Linkedin: Bane Sullivan</a></div>
 
-The code and documentation distributed here were produced by [**Bane Sullivan**](http://banesullivan.com), graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane through his contact information on [**his website**](http://banesullivan.com) for questions or through the [**issues page**](https://github.com/banesullivan/PVGeophysics/issues) for custom filters/readers to visualize geoscience data.
+The code and documentation distributed here were produced by [**Bane Sullivan**](http://banesullivan.com), graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane through his contact information on [**his website**](http://banesullivan.com) for questions or through the [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues) for custom filters/readers to visualize geoscience data.
 
 <div style="float: left; margin:10px 10px 10px 10px"> </div>
 

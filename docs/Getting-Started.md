@@ -1,5 +1,5 @@
 !!! info
-    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [**issues page**](https://github.com/banesullivan/PVGeophysics/issues).
+    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues).
 
 ## A Brief Introduction to ParaView
 
@@ -50,7 +50,7 @@ From your command line:
 
 ```bash
 ## Clone this repository
-git clone https://github.com/banesullivan/PVGeophysics
+git clone https://github.com/OpenGeoVis/PVGeophysics
 
 ## Go in the cloned repository
 cd PVGeophysics
@@ -66,7 +66,7 @@ If you are on MacOS X, then your life is easy! Simply run the script `installMac
 sh ./installMac.sh
 ```
 
-Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **PVGP Filters** is in the **Filters** menu. Then open the **Python Shell** and import the modules delivered in this repo by executing `import PVGPpy` and `import pvmacros`. Errors should not arise but if they do, post to the [**issues page**](https://github.com/banesullivan/PVGeophysics/issues) and the errors will be *immediately* addressed.
+Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **PVGP Filters** is in the **Filters** menu. Then open the **Python Shell** and import the modules delivered in this repo by executing `import PVGPpy` and `import pvmacros`. Errors should not arise but if they do, post to the [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues) and the errors will be *immediately* addressed.
 
 #### Windows Paths
 Setting up environmental variables is a bit more involved for Windows. First you need to open **Control Center** and search for **Advanced system settings**. Click **Environment variables**. In the section **User variables for Name** add the following variable by clicking **New...**:
@@ -86,7 +86,7 @@ Now we need to edit the `PYTHONPATH` variable that should already exist in your 
 5. Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **PVGP Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` module by executing `import PVGPpy`.
 
 ??? help
-    If an error arises: First, please double check your paths. If you are still having trouble, feel free to post to the [**issues page**](https://github.com/banesullivan/PVGeophysics/issues) which is regularly checked.
+    If an error arises: First, please double check your paths. If you are still having trouble, feel free to post to the [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues) which is regularly checked.
 
 
 
