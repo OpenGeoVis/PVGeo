@@ -201,7 +201,6 @@ def generateClassDocs(classname):
     sys.path.append(os.getcwd())
     # Attempt import
     p, c = classname.rsplit('.', 1)
-    print(p,c)
     mod = importlib.import_module(p)
     clas = getattr(mod, c)
     if mod is None:
