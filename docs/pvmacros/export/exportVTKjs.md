@@ -48,7 +48,7 @@ Now open the standalone web viewer by opening [gpvis.org](http://gpvis.org).
 Select the exported scene as the input file for the web viewer from where you saved it (should be under `~/Dropbox/PVGP_vtkjs/`). The export macro should have printed out the location of the saved scene in the Python Shell.
 
 !!! help
-    If you have trouble post on our [**issues page**](https://github.com/banesullivan/PVGeophysics/issues) or read the vtk.js documentation [**here**](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html)
+    If you have trouble post on our [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues) or read the vtk.js documentation [**here**](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html)
 
 -------
 
@@ -73,7 +73,7 @@ Sometimes we might want to give someone a direct link to the web visualization s
 
 Unfortunately, making the experience for the end user simple means making your experience a bit more complicated. You will need to host your file on a web service like GitHub or Dropbox *(we have been unsuccessful in getting Google Drive to work)*. Then get a public link to the `*.vtkjs` file on that web service and append it to the web viewer URL.
 
-We have created a Python script to generate these links for you if you are sharing your data file on either Dropbox or GitHub. The script is delivered in the repository and can also be found [**here**](https://github.com/banesullivan/PVGeophysics/blob/master/get_vtkjs_url.py).
+We have created a Python script to generate these links for you if you are sharing your data file on either Dropbox or GitHub. The script is delivered in the repository and can also be found [**here**](https://github.com/OpenGeoVis/PVGeophysics/blob/master/get_vtkjs_url.py).
 
 The easiest way that we have found is to share the files on Dropbox. Use the desktop client for Dropbox and right-click your exported `*.vtkjs` file and select "Copy Dropbox Link."
 

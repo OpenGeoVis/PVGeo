@@ -11,21 +11,25 @@ First, let's take a look at the example plugins found under the `src/` directory
 
 ### Plugin Attributes
 
-| Attributes       | Description                    | Example              | Reader | Filter |
-| :--------------- | :----------------------------- | :------------------- | :---: | :---:|
-| `Name`           | Name of the plugin to be used for coding/macros or reference within ParaView. Think of this link a data object name. This cannot contain spaces. | `:::py Name = 'ExamplePythonReader'`  | ✅ | ✅ |
-| `Label`          | Label for the reader in the menu. This is the name you will see appear in GUI menus. Make this label easy to read and concise.| `:::py Label = 'Example Python Reader'`| ✅ | ✅ |
-| `FilterCategory` | The menu category this plugin will appear in under the appropriate menu of **Sources** or **Filters** within ParaView. | `:::py FilterCategory = 'PVGP Readers'`| ✅ | ✅ |
-| `Extensions`     | An attribute to contain possible file extensions for a reader plugin so ParaView can autodetect whether or not to use this plugin as a file reader when you open a file. The is a single `str` of extensions separated by spaces. Do not include the dot part of the extensions. | `:::py Extensions = 'txt dat csv'` | ✅ | ❌ |
-| `ReaderDescription`| This is a brief Description of the plugin that will appear in the ParaView GUI. Keep this to a small phrase. | `:::py ReaderDescription = 'All Files: Example Python Reader'` | ✅ | ❌ |
-| `Help`           | A general overview of the plugin. This should be an encompassing description of the plugin's functionality, i.e. write a paragraph. | `:::py Help = 'This reader provides a starting point for making a file reader in a Programmable Python Source.'` | ✅ | ✅ |
-| `NumberOfInputs` | This is the number of inputs this plugin will have. For readers, it is necessary to specify this as **zero**! A filter can have many but we wouldn't advise going over three. | `:::py NumberOfInputs = 1` | ✅ | ✅ |
-| `InputDataType`  | This is the type of VTK data object that this plugin will will take as an input from the upstream pipeline object. For a list of possible VTK data types, see this list below this table.| `:::py InputDataType = 'vtkTable'` | ❌ | ✅ |
-| `OutputDataType` | This is the type of VTK data object that this plugin will output on the pipeline. For a list of possible VTK data types, see this list below this table. | `:::py OutputDataType = 'vtkUnstructuredGrid'`| ✅ | ✅ |
-| `NumberOfInputArrayChoices` | Specify the number of input array choices you would like to have for the filter. This enables a drop-down menu for the user to select data arrays from the input data object.| `:::py NumberOfInputArrayChoices = 1`| ❌ | ✅ |
-| `InputArrayLabels` | This is an optional list of `str` display names for the input arrays if you specified to have one or more in `NumberOfInputArrayChoices`| `:::py InputArrayLabels = ['Input Array']`| ❌ | ✅ |
-| `ExtraXml`       |  Any extra XML GUI components you might like to add to the plugin that are not incorporated in the build script. See [**this webpage**](https://www.paraview.org/Wiki/ParaView/Plugin_HowTo) for more info on possible features to add. | `:::py ExtraXml = ''`| ✅ | ✅ |
-| `FileSeries`     | A boolean to control whether or not you want to use file series on a reader plugin. Defaults to `:::py True` | `:::py FileSeries = True` | ✅ | ❌ |
+Examine the table below to learn how to use each of the plugin attributes. Hover over the <a class="md-footer-social__link fa fa-info-circle" title="This is an example description"></a> icons to see a description of that attribute.
+
+
+
+| Attribute               | Info | Example | Reader | Filter |
+| :---------------------- |:--: |:------------------- | :-: | :-:|
+| `Name` | <a class="md-footer-social__link fa fa-info-circle" title="Name of the plugin to be used for coding/macros or reference within ParaView. Think of this link a data object name. This cannot contain spaces."></a> | `:::py Name = 'ExamplePythonReader'`  | ✅ | ✅ |
+| `Label` | <a class="md-footer-social__link fa fa-info-circle" title="Label for the reader in the menu. This is the name you will see appear in GUI menus. Make this label easy to read and concise."></a>| `:::py Label = 'Example Python Reader'`| ✅ | ✅ |
+| `FilterCategory` | <a class="md-footer-social__link fa fa-info-circle" title="The menu category this plugin will appear in under the appropriate menu of Sources or Filters within ParaView."></a> | `:::py FilterCategory = 'PVGP Readers'`| ✅ | ✅ |
+| `Extensions` | <a class="md-footer-social__link fa fa-info-circle" title="An attribute to contain possible file extensions for a reader plugin so ParaView can autodetect whether or not to use this plugin as a file reader when you open a file. The is a single str of extensions separated by spaces. Do not include the dot part of the extensions."></a> | `:::py Extensions = 'txt dat csv'` | ✅ | ❌ |
+| `ReaderDescription` | <a class="md-footer-social__link fa fa-info-circle" title="This is a brief Description of the plugin that will appear in the ParaView GUI. Keep this to a small phrase."></a> | `:::py ReaderDescription = 'All Files: Example Python Reader'` | ✅ | ❌ |
+| `Help` | <a class="md-footer-social__link fa fa-info-circle" title="A general overview of the plugin. This should be an encompassing description of the plugin's functionality, i.e. write a paragraph."></a> | `:::py Help = 'This reader provides a starting point for making a file reader in a Programmable Python Source.'` | ✅ | ✅ |
+| `NumberOfInputs` | <a class="md-footer-social__link fa fa-info-circle" title="This is the number of inputs this plugin will have. For readers, it is necessary to specify this as ZERO! A filter can have many but we wouldn't advise going over three."></a> | `:::py NumberOfInputs = 1` | ✅ | ✅ |
+| `InputDataType` | <a class="md-footer-social__link fa fa-info-circle" title="This is the type of VTK data object that this plugin will will take as an input from the upstream pipeline object. For a list of possible VTK data types, see this list below this table."></a> | `:::py InputDataType = 'vtkTable'` | ❌ | ✅ |
+| `OutputDataType` | <a class="md-footer-social__link fa fa-info-circle" title="This is the type of VTK data object that this plugin will output on the pipeline. For a list of possible VTK data types, see this list below this table."></a> | `:::py OutputDataType = 'vtkUnstructuredGrid'`| ✅ | ✅ |
+| `NumberOfInputArrayChoices` | <a class="md-footer-social__link fa fa-info-circle" title="Specify the number of input array choices you would like to have for the filter. This enables a drop-down menu for the user to select data arrays from the input data object."></a> | `:::py NumberOfInputArrayChoices = 1`| ❌ | ✅ |
+| `InputArrayLabels` | <a class="md-footer-social__link fa fa-info-circle" title="This is an optional list of str display names for the input arrays if you specified to have one or more in NumberOfInputArrayChoices"></a>| `:::py InputArrayLabels = ['Input Array']`| ❌ | ✅ |
+| `ExtraXml`  | <a class="md-footer-social__link fa fa-info-circle" title="Any extra XML GUI components you might like to add to the plugin that are not incorporated in the build script. See the link for more info on possible features to add."></a><a href="https://www.paraview.org/Wiki/ParaView/Plugin_HowTo" class="md-footer-social__link fa fa-link" title="See this webpage for more info on possible XML features to add."></a>| `:::py ExtraXml = ''`| ✅ | ✅ |
+| `FileSeries` | <a class="md-footer-social__link fa fa-info-circle" title="A boolean to control whether or not you want to use file series on a reader plugin. Defaults to True"></a> | `:::py FileSeries = True` | ✅ | ❌ |
 
 
 ??? info "VTK Data Types Implemented"
