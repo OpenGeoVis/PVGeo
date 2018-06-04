@@ -40,7 +40,7 @@ CLASS_SYNTAX = re.compile(r'\{class:\s*(.+?)\s*\}')
 
 ################
 
-def getSections(doc):
+def _getSections(doc):
     """Possible sections: @desc, @param, @return, @notes, @example"""
     keys = re.findall('@\S+:', doc)
     vals = re.split('@\S+:', doc)
@@ -117,16 +117,23 @@ def beautifySections(secs):
 def _beautifySig(sig):
     return sig
 
-def makeMkDown(doc, title, sig):
-    secs = getSections(doc)
+
+################
+
+def _joinSections(doc):
+    secs = _getSections(doc)
     try:
         secs = beautifySections(secs)
     except Exception as er:
         print('While generating docs for %s, Exception caught: %s' % (title, er))
+    return '\n'.join(s for s in secs.values())
 
-    docs = sig + \
-        '\n\n' + \
-        '\n'.join(s for s in secs.values())
+
+def makeMkDown(doc, title, sig):
+    secs = _joinSections(doc)
+
+    docs = sig + '\n\n' + secs
+
     # Now indent for admonition widget
     docs = '!!! abstract "%s"\n' % title + re.sub( '^',' '*4, docs ,flags=re.MULTILINE )
     return docs
@@ -146,6 +153,34 @@ def _getDefMarkdown(method, module):
     return sig
 
 
+def _getClassMarkdown(clas, module):
+    """This method id for the class docs and __init__ method for a class"""
+    sig = inspect.signature(clas)
+
+    sig = '<big><big>`#!py %s%s`</big></big>' % ( clas.__name__, sig)
+    title = '%s.%s' % (module.__name__, clas.__name__)
+
+    docs = ''
+    if clas.__doc__:
+        # get class docs
+        docs = sig + '\n\n' + clas.__doc__.lstrip()
+        # TODO: constructor/init def docs
+        docs += '\n\n' + _joinSections(clas.__init__.__doc__)
+        # Now indent for admonition widget for whole class (top level)
+        docs = '!!! abstract "%s"\n' % title + re.sub( '^',' '*4, docs, flags=re.MULTILINE)
+
+    members = inspect.getmembers(clas)
+    methods = []
+    for mem in members:
+        if mem[0][0] != '_':
+            methods.append(_getDefMarkdown(mem[1], clas))
+
+    methods = "\n\n".join((met for met in methods))
+    # ident one more level to be nested in class admonition
+    methods = re.sub( '^',' '*4, methods , flags=re.MULTILINE)
+    return docs + '\n\n' + methods
+
+
 
 
 ################
@@ -161,6 +196,19 @@ def generateDefDocs(modulename):
 
     # Module imported correctly, let's create the docs
     return _getDefMarkdown(met, mod)
+
+def generateClassDocs(classname):
+    sys.path.append(os.getcwd())
+    # Attempt import
+    p, c = classname.rsplit('.', 1)
+    print(p,c)
+    mod = importlib.import_module(p)
+    clas = getattr(mod, c)
+    if mod is None:
+        raise Exception("Module not found")
+
+    # Module imported correctly, let's create the docs
+    return _getClassMarkdown(clas, mod)
 
 ##############
 
@@ -198,27 +246,21 @@ class MethodIncludePreprocessor(Preprocessor):
                 loc = lines.index(line)
                 m = DEF_SYNTAX.search(line)
                 c = CLASS_SYNTAX.search(line)
-                if m:
-                    modname = m.group(1)
-                    text = generateDefDocs(modname).split('\n')
-                    line_split = DEF_SYNTAX.split(line,maxsplit=0)
+                if m or c:
+                    if m :
+                        modname = m.group(1)
+                        text = generateDefDocs(modname).split('\n')
+                        line_split = DEF_SYNTAX.split(line,maxsplit=0)
+                    if c:
+                        classname = c.group(1)
+                        text = generateClassDocs(classname).split('\n')
+                        line_split = CLASS_SYNTAX.split(line,maxsplit=0)
                     if len(text) == 0:
                         text.append('')
                     text[0] = line_split[0] + text[0]
                     text[-1] = text[-1] + line_split[2]
                     lines = lines[:loc] + text + lines[loc+1:]
                     break
-                """elif c:
-                    raise Exception('Classes not implemented yet')
-                    classname = c.group(1)
-                    text = generateClassDocs(classname).split('\n')
-                    line_split = CLASS_SYNTAX.split(line,maxsplit=0)
-                    if len(text) == 0:
-                        text.append('')
-                    text[0] = line_split[0] + text[0]
-                    text[-1] = text[-1] + line_split[2]
-                    lines = lines[:loc] + text + lines[loc+1:]
-                    break"""
             else:
                 done = True
         builtins.__import__ = realimport

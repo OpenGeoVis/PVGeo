@@ -7,10 +7,13 @@ from paraview.simple import RenderAllViews, GetActiveCamera, WriteImage
 
 class camera:
     """
-    @desc:
     An object to store a single camera location/view. You can make a list/dict of these objects to save interesting views for your project. This object saves just a few parameters about the camera so that it can easily be reconstructed.
     """
     def __init__(self,cam=None):
+        """
+        @params:
+        cam : vtkRenderingOpenGL2Python.vtkOpenGLCamera : optional : The camera you wish to update this object to. Totally optional
+        """
         if cam is None:
             # This allows use to dynamicly select cameras
             cam = GetActiveCamera()
@@ -103,7 +106,7 @@ class camera:
         Save a serialized dictionaty/list/whatever of views out to a file. Dafault saves to user's home directory
 
         @params:
-        lib : dict list : some iterable object containg multiple `camera` objects
+        lib : dict or list : some iterable object containg multiple `camera` objects
         filename : string : optional : The file basename for the serialized file
         path : string : optional : The directory you wish to save the views. Defaults to user home directory
         """
@@ -134,7 +137,7 @@ class camera:
         Save screenshots of many views/cameras
 
         @params:
-        view : dict list : some iterable object containg multiple `camera` objects
+        view : dict or list : some iterable object containg multiple `camera` objects
         cam : vtkRenderingOpenGL2Python.vtkOpenGLCamera : optional : The camera you wish to view then save a screenshot
         path : string : optional : The directory you wish to save the screenshot. Defaults to user home directory
         basenm : string : optional : The file basename for the screenshot
