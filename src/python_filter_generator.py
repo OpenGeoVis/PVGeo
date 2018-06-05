@@ -438,7 +438,7 @@ def _genGroupContainor(proxyGroup, pluginXml):
   </ProxyGroup>''' % (proxyGroup.upper(), proxyGroup, pluginXml)
     return outputXml
 
-def generatePythonFilter(info, embed=False):
+def generatePythonFilter(info, embed=False, category=None):
     e = escapeForXmlAttribute
 
     proxyName = info['Name']
@@ -452,7 +452,7 @@ def generatePythonFilter(info, embed=False):
     outputDataSetType = getOutputDataSetTypeXml(info)
     scriptProperties = getScriptPropertiesXml(info)
     filterProperties = getFilterPropertiesXml(info)
-    filterGroup = getFilterGroup(info)
+    filterGroup = getFilterGroup(info, category=category)
     fileReaderProperties = getFileReaderXml(info)
     inputArrayDropDowns = getInputArraysXML(info)
     pythonPath = getPythonPathProperty()
@@ -482,11 +482,13 @@ def generatePythonFilter(info, embed=False):
         return pluginXml, proxyGroup
     return _genFileContainor(_genGroupContainor(proxyGroup, pluginXml))
 
-def getFilterGroup(info):
+def getFilterGroup(info, category=None):
+    if category is None and "FilterCategory" in info:
+        category = info["FilterCategory"]
     # If reader
     if "Extensions" in info and "ReaderDescription" in info:
         # Just reader attributes, no category
-        if "FilterCategory" not in info:
+        if category is None:
             return ('''\
       <Hints>
         <ReaderFactory extensions="%s"
@@ -499,7 +501,7 @@ def getFilterGroup(info):
         <ShowInMenu category="%s" />
         <ReaderFactory extensions="%s"
           file_description="%s" />
-      </Hints>''' % (info["FilterCategory"], info["Extensions"], info["ReaderDescription"]))
+      </Hints>''' % (category, info["Extensions"], info["ReaderDescription"]))
         else:
             return ('''\
       <Hints>
@@ -508,15 +510,15 @@ def getFilterGroup(info):
       <Hints>
         <ReaderFactory extensions="%s"
           file_description="%s" />
-      </Hints>''' % (info["FilterCategory"], info["Extensions"], info["ReaderDescription"]))
+      </Hints>''' % (category, info["Extensions"], info["ReaderDescription"]))
     # not reader and no category
-    elif "FilterCategory" not in info:
+    elif category is None:
             return ''
     # Otherwise its has a category and is not a reader
     return ('''\
       <Hints>
         <ShowInMenu category="%s" />
-      </Hints>''' % (info["FilterCategory"]))
+      </Hints>''' % (category))
 
 
 def replaceFunctionWithSourceString(namespace, functionName, allowEmpty=False):
@@ -543,7 +545,7 @@ def replaceFunctionWithSourceString(namespace, functionName, allowEmpty=False):
     namespace[functionName] = sourceCode
 
 
-def generatePythonFilterFromFiles(scriptFile, outputFile=None):
+def generatePythonFilterFromFiles(scriptFile, outputFile=None, category=None):
     embed = False
     if outputFile is None:
         embed = True
@@ -554,7 +556,7 @@ def generatePythonFilterFromFiles(scriptFile, outputFile=None):
     replaceFunctionWithSourceString(namespace, 'RequestInformation', allowEmpty=True)
     replaceFunctionWithSourceString(namespace, 'RequestUpdateExtent', allowEmpty=True)
 
-    xmlOutput = generatePythonFilter(namespace, embed=embed)
+    xmlOutput = generatePythonFilter(namespace, embed=embed, category=category)
 
     if embed:
         return xmlOutput
@@ -567,12 +569,14 @@ def getConfig(dir):
     root = tree.getroot()
     return root.attrib
 
-def generatePluginSuite(indir,outdir):
+def generatePluginSuite(indir, outdir, category=None):
     # find config file
     try:
         config = getConfig(indir + '/build.config')
     except FileNotFoundError:
         raise Exception("No config file for directory: %s" % indir)
+    category = config.get("category", None)
+
     # get all plugin files in that directory
     # iterate over all plugins in that dir and make one plugin XML file
     readersGroup = ''
@@ -580,7 +584,7 @@ def generatePluginSuite(indir,outdir):
     for o in os.listdir(indir):
         if o.startswith(('read_','filter_', 'reader_')):
             script = indir + '/' + o
-            xml, group = generatePythonFilterFromFiles(script)
+            xml, group = generatePythonFilterFromFiles(script, category=category)
             comment = '\n\n%s<!-- %s -->' % (' '*4, script)
             if group is 'sources':
                 readersGroup += comment + xml
