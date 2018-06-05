@@ -12,6 +12,8 @@ import ast
 def _parseString(val):
     try:
         val = ast.literal_eval(val)
+        if val is 0:
+            val = float(0.0)
     except ValueError:
         if 'nan' in val.lower():
             val = float('NaN')
