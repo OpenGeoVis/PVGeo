@@ -36,6 +36,7 @@ theme:
 
 markdown_extensions:
     - doc-include-import # custom docs include docs or script extension
+    - doc-download-button # Adds ability to have full width download buttons
     - smarty
     - toc:
         permalink: true
