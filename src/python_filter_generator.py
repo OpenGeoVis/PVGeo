@@ -576,13 +576,12 @@ def generatePluginSuite(indir, outdir, category=None):
     except FileNotFoundError:
         raise Exception("No config file for directory: %s" % indir)
     category = config.get("category", None)
-
     # get all plugin files in that directory
     # iterate over all plugins in that dir and make one plugin XML file
     readersGroup = ''
     filtersGroup = ''
     for o in os.listdir(indir):
-        if o.startswith(('read_','filter_', 'reader_')):
+        if o.endswith(('.py')):
             script = indir + '/' + o
             xml, group = generatePythonFilterFromFiles(script, category=category)
             comment = '\n\n%s<!-- %s -->' % (' '*4, script)

@@ -5,6 +5,7 @@ Help = ''
 NumberOfInputs = 0
 OutputDataType = 'vtkPolyData'
 ExtraXml = ''
+FileSeries = False # ABSOLUTELY NECESSARY
 
 Properties = dict(
     Radius=6371.0,

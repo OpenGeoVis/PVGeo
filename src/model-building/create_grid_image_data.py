@@ -5,6 +5,7 @@ Help = ''
 NumberOfInputs = 0
 OutputDataType = 'vtkImageData'
 ExtraXml = ''
+FileSeries = False # ABSOLUTELY NECESSARY
 
 Properties = dict(
     extent=[1, 1, 1],
