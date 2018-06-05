@@ -35,44 +35,22 @@ fi
 # Jump to this directory so we can execute relative scripts
 pushd "$(dirname "$0")"
 
-#------ WRAP EXAMPLES IN XML ------#
-printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Attempting to wrap EXAMPLES in XML..."
-for filename in ./example_*.py; do
-    filtername="${filename%.*}"
-    printf "${YELLOW}%s${NORMAL}\n" "   |--> $(basename "$filtername")"
-    printf "${RED}" # Change printout color to red to signify errors
-    python2 python_filter_generator.py $filename "../plugins/$(basename "$filtername").xml"
+# Clean out the plugins directory
+printf "${RED}"
+for plugin in ../plugins/*.xml; do
+    rm "${plugin}"
 done
 printf "${NORMAL}"
 
-#------ WRAP FILTERS IN XML ------#
-printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Attempting to wrap FILTERS in XML..."
-
-for filename in ./filters/filter_*.py; do
-    filtername="${filename%.*}"
-    printf "${YELLOW}%s${NORMAL}\n" "   |--> $(basename "$filtername")"
+#------ PLUGINS IN A SUBDIRECTORY ------#
+printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Attempting to build plugin categories..."
+for directory in ./*/; do
+    #dirname="${directory%.*}"
+    printf "${YELLOW}%s${NORMAL}\n" "   |--> $(basename "$directory")"
     printf "${RED}" # Change printout color to red to signify errors
-    python2 python_filter_generator.py $filename "../plugins/$(basename "$filtername").xml"
+    python2 python_filter_generator.py $directory "../plugins"
 done
 printf "${NORMAL}"
 
-#------ WRAP SOURCES IN XML ------#
-printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Attempting to wrap SOURCES in XML..."
-for filename in ./artificial_sources/create_*.py; do
-    filtername="${filename%.*}"
-    printf "${YELLOW}%s${NORMAL}\n" "   |--> $(basename "$filtername")"
-    printf "${RED}" # Change printout color to red to signify errors
-    python2 python_filter_generator.py $filename "../plugins/$(basename "$filtername").xml"
-done
-printf "${NORMAL}"
-#------ WRAP READERS IN XML ------#
-printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Attempting to wrap READERS in XML..."
-for filename in ./readers/read_*.py; do
-    filtername="${filename%.*}"
-    printf "${YELLOW}%s${NORMAL}\n" "   |--> $(basename "$filtername")"
-    printf "${RED}" # Change printout color to red to signify errors
-    python2 python_filter_generator.py $filename "../plugins/$(basename "$filtername").xml"
-done
-printf "${NORMAL}"
 
 popd

@@ -1,23 +1,28 @@
+[filter]: ../plugin-suites/filters-general/add-cell-connectivity-to-points.md
+[macro]: ../pvmacros/vis/many-slices-along-points.md
+[reader]: ../plugin-suites/gslib/sgems-grid.md
+[getstart]: ../getting-started.md#using-outside-modules
+
 !!! info
     This example will demonstrate how to slice a 3D data source along some arbitrary line or sequence of points specified in another data source to have many slices of the 3D data perpendicular to that travel path.
 
     PVGP features demonstrated:
 
-    - Filter [Add Cell Connectivity to Points](../PVGPpy/filt/Add-Cell-Connectivity-to-Points.md)
-    - Macro [`manySlicesAlongPoints()`](../pvmacros/vis/Many-Slices-Along-Points.md)
+    - Filter [Add Cell Connectivity to Points][filter]
+    - Macro [`manySlicesAlongPoints()`][macro]
 
 
 Sometimes, we desire to take a path through a model and construct various slices along that path. This example will outline a macro we have developed to take some 3D data set on the pipeline and construct various slices of that model along a path. The slices will be perpendicular to that path at specified intervals. We also play with a filter that comes native in ParaView to slice that entire model along the travel path to have a single warped slice.
 
 
-First, lets load some data onto the ParaView pipeline. For this example, we want to use a 3D model of rock density in a homogeneous layer of a carbonate reservoir found on [this website](http://www.trainingimages.org/training-images-library.html). You can download the model in the [SGeMS gridded data format](../PVGPpy/read/SGeMS-Grid.md) in the link below this paragraph.
+First, lets load some data onto the ParaView pipeline. For this example, we want to use a 3D model of rock density in a homogeneous layer of a carbonate reservoir found on [this website](http://www.trainingimages.org/training-images-library.html). You can download the model in the [SGeMS gridded data format][reader] in the link below this paragraph.
 
 <!--- TODO: make a zip file to download the data --->
 !!! example "[Download the data for this example here](https://www.dropbox.com/s/87izk92h49jzrli/PVGP-Example.zip?dl=0)"
     Data File 1: 'topexample.sgems'
 
     - **Original source:** http://www.trainingimages.org/training-images-library.html
-    - **Reader to Use:** *SGeMS Grid* from the PVGP repo found [**here**](../PVGPpy/read/SGeMS-Grid.md)
+    - **Reader to Use:** *SGeMS Grid* from the PVGP repo found [**here**][reader]
     - **Description:** This data file is the 3D model that we will slice through
 
     Data File 2: 'points.csv'
@@ -25,7 +30,7 @@ First, lets load some data onto the ParaView pipeline. For this example, we want
     - **Reader to Use:** *Delimited Text* reader native to ParaView
     - **Description:** You will perform a *Table to Points* filter on this data source and it holds the points for which we will construct a path to slice the 3D model.
 
-Now that you have the two data files loaded onto the pipeline in ParaView, lets add connectivity to the points so that they form a continuous poly line. To do this, first select the points table on the pipeline that you loaded directly from the data file and apply a **Table to Points** filter on this data source. Select the proper parameters and apply this filter. Now display these points in the render view by clicking the render view then enabling the eyeball icon next to this filter on the pipeline. The points should appear. Now we need to add connectivity to these points such that they form a poly line by applying an [**Add Cell Connectivity to Points**](../PVGPpy/filt/Add-Cell-Connectivity-to-Points.md) filter which is in the *PVGP Filters* menu. Make sure the **Poly Line** option is selected for the **Cell Type** parameter and click apply. You can zoom into the line in the render view and see a small line connecting all the points.
+Now that you have the two data files loaded onto the pipeline in ParaView, lets add connectivity to the points so that they form a continuous poly line. To do this, first select the points table on the pipeline that you loaded directly from the data file and apply a **Table to Points** filter on this data source. Select the proper parameters and apply this filter. Now display these points in the render view by clicking the render view then enabling the eyeball icon next to this filter on the pipeline. The points should appear. Now we need to add connectivity to these points such that they form a poly line by applying an [**Add Cell Connectivity to Points**][filter] filter which is in the *PVGP Filters* menu. Make sure the **Poly Line** option is selected for the **Cell Type** parameter and click apply. You can zoom into the line in the render view and see a small line connecting all the points.
 
 ??? tip "Filters applied to the points"
     **Table to Points:**
@@ -38,10 +43,10 @@ Now that you have the two data files loaded onto the pipeline in ParaView, lets 
     - Uncheck *Use nearest nbr*
 
 !!! warning
-    The [**Add Cell Connectivity to Points**](../PVGPpy/filt/Add-Cell-Connectivity-to-Points.md) filter uses the SciPy python module. You may get an error if you do not have SciPy linked to ParaView Python. To work around this, make sure the **Use nearest nbr** parameter is not checked. Since the points file we give you in this example is in sequential order, this will not matter.  [**See details**](../Getting-Started.md#using-outside-modules) to learn more about enabling the SciPy module in `pvpython`.
+    The [**Add Cell Connectivity to Points**][filter] filter uses the SciPy python module. You may get an error if you do not have SciPy linked to ParaView Python. To work around this, make sure the **Use nearest nbr** parameter is not checked. Since the points file we give you in this example is in sequential order, this will not matter.  [**See details**][getstart] to learn more about enabling the SciPy module in `pvpython`.
 
 
-Once you have points will poly line connectivity, then we can use the [`:::py manySlicesAlongPoints()`](../pvmacros/vis/Many-Slices-Along-Points.md) macro to complete the task. First, open the Python Shell in ParaView and import the `pvmacros` module and use the macro in the following manner making sure that the data names on the pipeline match what is in the function call.
+Once you have points will poly line connectivity, then we can use the [`:::py manySlicesAlongPoints()`][macro] macro to complete the task. First, open the Python Shell in ParaView and import the `pvmacros` module and use the macro in the following manner making sure that the data names on the pipeline match what is in the function call.
 
 ??? tip "Opening the ParaView Python Shell"
     Open the Python Shell in ParaView from **View->Python Shell** (or **Tools->Python Shell** depending on your ParaView version).

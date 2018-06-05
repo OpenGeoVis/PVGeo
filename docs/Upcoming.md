@@ -5,12 +5,12 @@ More documentation is soon to come. We want to do it right: with tutorials, exam
 !!! info "Suggestions?"
     We need **your** suggestions for what kinds of file format readers to make as well as ideas for filters to meet your data needs. Post on the [Issues page](https://github.com/OpenGeoVis/PVGeophysics/issues) on GitHub as a feature request.
 
-    Don't have a GitHub account but still have ideas or questions? Post a comment at the [bottom of this page](#Comments)!
+    Don't have a GitHub account but still have ideas or questions? Post a comment at the [bottom of this page](#comments)!
 
 ### Readers
 - [ ] **Open Mining Format:** All file types and data types found [**here**](https://github.com/GMSGDataExchange/omf)
-- [x] [**UBC Tensor Meshes**](PVGPpy/read/UBC-Mesh.md): both 2D and 3D implemented
-- [x] [**UBC OcTree Mesh**](PVGPpy/read/UBC-OcTree.md): fully implemented but we need test mesh-model file pairs
+- [x] [**UBC Tensor Meshes**](plugin-suites/ubc/tensor-grids.md): both 2D and 3D implemented
+- [x] [**UBC OcTree Mesh**](plugin-suites/ubc/octree.md): fully implemented but we need test mesh-model file pairs
 - [ ] **Well logs:** Readers for common formats (LAS) and easy ways to project well logs in XYZ space. [Details here](http://www.cwls.org/las/)
 
 <!---
@@ -30,8 +30,8 @@ More documentation is soon to come. We want to do it right: with tutorials, exam
 -->
 ### Macros in `pvmacros`
 - [x] Save screenshots in isometric views, side, top, etc. in an automated fashion
-- [x] [Many Slices Along Points:](pvmacros/vis/Many-Slices-Along-Points.md) Export slices of dataset along polyline at every point on that line (normal is the vector from that point to the next)
-- [x] [Export a scene](pvmacros/export/exportVTKjs.md) to a shareable 3D format
+- [x] [Many Slices Along Points:](pvmacros/vis/many-slices-along-points.md) Export slices of dataset along polyline at every point on that line (normal is the vector from that point to the next)
+- [x] [Export a scene](pvmacros/export/exportvtkjs.md) to a shareable 3D format
 
 ### Scripts
 - [ ] How to start making your own scripts (tips, tricks, and general advice)
@@ -43,4 +43,4 @@ More documentation is soon to come. We want to do it right: with tutorials, exam
 - [ ] How to build your own plugins using this project's framework and build scripts
 - [ ] Importing DEM topography (with/without satellite imagery)
 - [ ] Slicing/cropping a data scene through all components/datasets (managing links)
-- [x] [Slice Model Along PolyLine:](Examples/Slice-Model-Along-PolyLine.md) How to export a slice of a dataset projected on a vtkPolyLine (capabilities are currently present in ParaView)
+- [x] [Slice Model Along PolyLine:](examples/slice-model-along-polyline.md) How to export a slice of a dataset projected on a vtkPolyLine (capabilities are currently present in ParaView)
