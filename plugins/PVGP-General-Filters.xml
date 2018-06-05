@@ -10,7 +10,7 @@
         short_help="This filter will take a vtkTable object and reshape it. This filter essentially treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Filters" />
+        <ShowInMenu category="PVGP General GeoSci" />
       </Hints>
 
       <!-- Output data type: "vtkTable" -->
@@ -46,7 +46,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkTable"/>
           </DataTypeDomain>
@@ -133,7 +133,7 @@
         short_help="Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Filters" />
+        <ShowInMenu category="PVGP General GeoSci" />
       </Hints>
 
       <!-- Output data type: "vtkPolyData" -->
@@ -154,7 +154,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkPolyData"/>
           </DataTypeDomain>
@@ -230,7 +230,7 @@
         short_help="This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation).">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Filters" />
+        <ShowInMenu category="PVGP General GeoSci" />
       </Hints>
 
       <!-- Output data type: "vtkPolyData" -->
@@ -265,7 +265,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkPolyData"/>
           </DataTypeDomain>
@@ -329,7 +329,7 @@
         short_help="Use `np.correlate()` on `mode='same'` on two selected arrays from one input.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Filters" />
+        <ShowInMenu category="PVGP General GeoSci" />
       </Hints>
 
       <!-- Output data type: "Same as input" -->
@@ -350,7 +350,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkDataObject"/>
           </DataTypeDomain>
@@ -471,7 +471,7 @@
         short_help="This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested).">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Filters" />
+        <ShowInMenu category="PVGP General GeoSci" />
       </Hints>
 
       <!-- Output data type: "Same as input" -->
@@ -509,7 +509,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkDataObject"/>
           </DataTypeDomain>

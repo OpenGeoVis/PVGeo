@@ -10,7 +10,7 @@
         short_help="">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Readers" />
+        <ShowInMenu category="PVGP General Readers" />
         <ReaderFactory extensions="pvgp PVGP"
           file_description="PVGP Unifrom Grid Reader. Opens a header file which points to data arrays to fill a uniform grid." />
       </Hints>
@@ -115,7 +115,7 @@
         short_help="This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in Paraview, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Readers" />
+        <ShowInMenu category="PVGP General Readers" />
         <ReaderFactory extensions="dat csv txt"
           file_description="PVGP: Delimited Text File" />
       </Hints>
@@ -270,7 +270,7 @@
         short_help="This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Readers" />
+        <ShowInMenu category="PVGP General Readers" />
         <ReaderFactory extensions="H@ bin rsf rsf@ HH"
           file_description="PVGP: Binary Packed Floats or Doubles" />
       </Hints>
@@ -442,7 +442,7 @@
         short_help="This reads in float or double data that is packed into a Madagascar Single Stream RSF binary file format with a leader header. The reader ignores all of the ascii header details by searching for the sequence of three special characters: EOL EOL EOT () and it will treat the following binary packed data as one long array and make a `vtkTable` with one column of that data. The reader defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We will later implement the ability to create a gridded volume from the header info. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository. Details: http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Readers" />
+        <ShowInMenu category="PVGP General Readers" />
         <ReaderFactory extensions="H@ bin rsf rsf@ HH"
           file_description="PVGP: Madagascar Single Stream RSF Format" />
       </Hints>

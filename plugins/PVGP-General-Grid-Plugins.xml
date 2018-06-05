@@ -10,7 +10,7 @@
         short_help="This filter will flip ImageData on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Filters" />
+        <ShowInMenu category="PVGP General Grids" />
       </Hints>
 
       <!-- Output data type: "vtkImageData" -->
@@ -109,7 +109,7 @@
         short_help="This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a n1 by n2 by n3 vtkImageData structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (d1=z, d2=y, d3=x). When using SEPlib, specify n1 as the number of elements in the Z-direction, n2 as the number of elements in the X-direction, and n3 as the number of elements in the Y-direction (and so on for other parameters).">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Filters" />
+        <ShowInMenu category="PVGP General Grids" />
       </Hints>
 
       <!-- Output data type: "vtkImageData" -->
@@ -272,7 +272,7 @@
         short_help="This filter will translate the origin of vtkImageData to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior).">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Filters" />
+        <ShowInMenu category="PVGP General Grids" />
       </Hints>
 
       <!-- Output data type: "vtkImageData" -->
@@ -364,7 +364,7 @@
         short_help="TODO: Should we keep this in the repo?">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Filters" />
+        <ShowInMenu category="PVGP General Grids" />
       </Hints>
 
       <!-- Output data type: "vtkPolyData" -->

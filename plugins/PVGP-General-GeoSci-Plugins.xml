@@ -10,7 +10,7 @@
         short_help="A filter to convert a table with Latitude, Longitude, and Altitude information to XYZ points. ISSUE: Assumes spherical Earth.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Filters" />
+        <ShowInMenu category="PVGP General GeoSci" />
       </Hints>
 
       <!-- Output data type: "vtkPolyData" -->
