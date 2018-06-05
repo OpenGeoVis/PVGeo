@@ -31,7 +31,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkImageData"/>
           </DataTypeDomain>
@@ -145,7 +145,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkTable"/>
           </DataTypeDomain>
@@ -313,7 +313,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkImageData"/>
           </DataTypeDomain>
@@ -379,15 +379,30 @@
 
 
       <InputProperty
-        name="Input"
-                    clean_command="RemoveAllInputs"
-            command="AddInputConnection"
-            multiple_input="1">
+        name="Input 1"
+        command="SetInputConnection"
+        port_index="0"
+        >
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkTable"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <InputProperty
+        name="Input 2"
+        command="SetInputConnection"
+        port_index="1"
+        >
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkTable"/>
           </DataTypeDomain>
