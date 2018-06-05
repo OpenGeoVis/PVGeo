@@ -15,6 +15,7 @@ import os
 import sys
 import inspect
 import textwrap
+import xml.etree.ElementTree as ET
 
 
 def escapeForXmlAttribute(s):
@@ -420,8 +421,24 @@ def getFileReaderXml(info):
         </Hints>
         ''' % (extensions, readerDescription)
 
+def _genFileContainor(allXml):
+    outputXml = '''\
+<ServerManagerConfiguration>
+%s
+</ServerManagerConfiguration>''' % (allXml)
+    return outputXml
 
-def generatePythonFilter(info):
+def _genGroupContainor(proxyGroup, pluginXml):
+    if len(pluginXml) < 1:
+        return pluginXml
+    outputXml = '''\
+  <!-- CATEGORY %s -->
+  <ProxyGroup name="%s">
+%s
+  </ProxyGroup>''' % (proxyGroup.upper(), proxyGroup, pluginXml)
+    return outputXml
+
+def generatePythonFilter(info, embed=False, category=None):
     e = escapeForXmlAttribute
 
     proxyName = info['Name']
@@ -435,15 +452,12 @@ def generatePythonFilter(info):
     outputDataSetType = getOutputDataSetTypeXml(info)
     scriptProperties = getScriptPropertiesXml(info)
     filterProperties = getFilterPropertiesXml(info)
-    filterGroup = getFilterGroup(info)
+    filterGroup = getFilterGroup(info, category=category)
     fileReaderProperties = getFileReaderXml(info)
     inputArrayDropDowns = getInputArraysXML(info)
     pythonPath = getPythonPathProperty()
 
-
-    outputXml = '''\
-<ServerManagerConfiguration>
-  <ProxyGroup name="%s">
+    pluginXml = '''
     <SourceProxy name="%s" class="vtkPythonProgrammableFilter" label="%s">
       <Documentation
         long_help="%s"
@@ -458,21 +472,23 @@ def generatePythonFilter(info):
 %s
 %s
 %s
-    </SourceProxy>
- </ProxyGroup>
-</ServerManagerConfiguration>
-      ''' % (proxyGroup, proxyName, proxyLabel, longHelp, shortHelp,
+    </SourceProxy>''' % (proxyName, proxyLabel, longHelp, shortHelp,
                 filterGroup, outputDataSetType, extraXml, inputPropertyXml,
                 inputArrayDropDowns, fileReaderProperties, filterProperties,
                 scriptProperties, pythonPath)
 
-    return textwrap.dedent(outputXml)
 
-def getFilterGroup(info):
+    if embed:
+        return pluginXml, proxyGroup
+    return _genFileContainor(_genGroupContainor(proxyGroup, pluginXml))
+
+def getFilterGroup(info, category=None):
+    if category is None and "FilterCategory" in info:
+        category = info["FilterCategory"]
     # If reader
     if "Extensions" in info and "ReaderDescription" in info:
         # Just reader attributes, no category
-        if "FilterCategory" not in info:
+        if category is None:
             return ('''\
       <Hints>
         <ReaderFactory extensions="%s"
@@ -485,7 +501,7 @@ def getFilterGroup(info):
         <ShowInMenu category="%s" />
         <ReaderFactory extensions="%s"
           file_description="%s" />
-      </Hints>''' % (info["FilterCategory"], info["Extensions"], info["ReaderDescription"]))
+      </Hints>''' % (category, info["Extensions"], info["ReaderDescription"]))
         else:
             return ('''\
       <Hints>
@@ -494,15 +510,15 @@ def getFilterGroup(info):
       <Hints>
         <ReaderFactory extensions="%s"
           file_description="%s" />
-      </Hints>''' % (info["FilterCategory"], info["Extensions"], info["ReaderDescription"]))
+      </Hints>''' % (category, info["Extensions"], info["ReaderDescription"]))
     # not reader and no category
-    elif "FilterCategory" not in info:
+    elif category is None:
             return ''
     # Otherwise its has a category and is not a reader
     return ('''\
       <Hints>
         <ShowInMenu category="%s" />
-      </Hints>''' % (info["FilterCategory"]))
+      </Hints>''' % (category))
 
 
 def replaceFunctionWithSourceString(namespace, functionName, allowEmpty=False):
@@ -529,8 +545,10 @@ def replaceFunctionWithSourceString(namespace, functionName, allowEmpty=False):
     namespace[functionName] = sourceCode
 
 
-def generatePythonFilterFromFiles(scriptFile, outputFile):
-
+def generatePythonFilterFromFiles(scriptFile, outputFile=None, category=None):
+    embed = False
+    if outputFile is None:
+        embed = True
     namespace = {}
     execfile(scriptFile, namespace)
 
@@ -538,10 +556,49 @@ def generatePythonFilterFromFiles(scriptFile, outputFile):
     replaceFunctionWithSourceString(namespace, 'RequestInformation', allowEmpty=True)
     replaceFunctionWithSourceString(namespace, 'RequestUpdateExtent', allowEmpty=True)
 
-    xmlOutput = generatePythonFilter(namespace)
+    xmlOutput = generatePythonFilter(namespace, embed=embed, category=category)
+
+    if embed:
+        return xmlOutput
 
     open(outputFile, 'w').write(xmlOutput)
+    return None
 
+def getConfig(dir):
+    tree = ET.parse(dir)
+    root = tree.getroot()
+    return root.attrib
+
+def generatePluginSuite(indir, outdir, category=None):
+    # find config file
+    try:
+        config = getConfig(indir + '/build.config')
+    except FileNotFoundError:
+        raise Exception("No config file for directory: %s" % indir)
+    category = config.get("category", None)
+    # get all plugin files in that directory
+    # iterate over all plugins in that dir and make one plugin XML file
+    readersGroup = ''
+    filtersGroup = ''
+    for o in os.listdir(indir):
+        if o.endswith(('.py')):
+            script = indir + '/' + o
+            xml, group = generatePythonFilterFromFiles(script, category=category)
+            comment = '\n\n%s<!-- %s -->' % (' '*4, script)
+            if group is 'sources':
+                readersGroup += comment + xml
+            elif group is 'filters':
+                filtersGroup += comment + xml
+            else: raise Exception('Group %s unknown.' % group)
+    # Now put groups into XML Proxy Groups
+    readersGroup = _genGroupContainor('sources', readersGroup)
+    filtersGroup = _genGroupContainor('filters', filtersGroup)
+    xmlOutput = readersGroup + filtersGroup
+    xmlOutput = _genFileContainor(xmlOutput)
+    # Assumes output is a directory
+    filename = '%s/%s.xml' % (outdir, config['name'].replace(' ', '-'))
+    open(filename, 'w').write(xmlOutput)
+    return None
 
 def main():
 
@@ -552,7 +609,15 @@ def main():
     inputScript = sys.argv[1]
     outputFile = sys.argv[2]
 
-    generatePythonFilterFromFiles(inputScript, outputFile)
+    # if outputFile is a directory then:
+    if os.path.isdir(inputScript):
+        if not os.path.isdir(outputFile):
+            raise Exception('Two paths must be given for plugin suite.')
+        generatePluginSuite(inputScript, outputFile)
+    # else it is a file:
+    else:
+        generatePythonFilterFromFiles(inputScript, outputFile)
+    return None
 
 
 if __name__ == '__main__':
