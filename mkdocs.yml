@@ -59,58 +59,66 @@ plugins:
 
 pages:
 - Home: index.md
-- Getting Started: Getting-Started.md
-- Features to Come: Upcoming.md
+- Getting Started: getting-started.md
+- Features to Come: upcoming.md
 
-- Plugins & PVGPpy:
-    - About PVGPpy: PVGPpy/About-PVGPpy.md
-    - Readers:
-        - SGeMS Grid: PVGPpy/read/SGeMS-Grid.md
-        - UBC Tensor Meshes: PVGPpy/read/UBC-Mesh.md
-        - UBC OcTree: PVGPpy/read/UBC-OcTree.md
-        - PVGP Grid: PVGPpy/read/PVGP-Grid.md
-        - Binary Packed Data: PVGPpy/read/Binary-Packed-Data.md
-        - Madagascar SSRSF: PVGPpy/read/Madagascar-SSRSF.md
-        - Delimited Text: PVGPpy/read/Delimited-Text.md
-        - GSLIB: PVGPpy/read/GSLIB.md
+# Each of the different plugin suites:
+- Plugin Suites:
+    - About Plugin Suites: plugin-suites/about-plugin-suites.md
+    - General Filters:
+        - Normalize Array: plugin-suites/filters-general/normalize-array.md
+        - Correlate Arrays: plugin-suites/filters-general/correlate-arrays.md
+        - Reshape Table: plugin-suites/filters-general/reshape-table.md
+        - Add Cell Connectivity to Points: plugin-suites/filters-general/add-cell-connectivity-to-points.md
+        - Points to Tube: plugin-suites/filters-general/points-to-tube.md
+    - General Readers:
+        - Binary Packed Data: plugin-suites/readers-general/binary-packed-data.md
+        - Madagascar SSRSF: plugin-suites/readers-general/madagascar-ssrsf.md
+        - Delimited Text: plugin-suites/readers-general/delimited-text.md
+    - UBC Mesh Tools:
+        - Read Tensor Meshes: plugin-suites/ubc/tensor-grids.md
+        - Read OcTree: plugin-suites/ubc/octree.md
+        - Append Model: plugin-suites/ubc/add-model.md
+    - GSLIB & SGeMS:
+        - SGeMS Grid: plugin-suites/gslib/sgems-grid.md
+        - GSLIB Table: plugin-suites/gslib/gslib.md
+    - Model Building:
+        - Create Unifrom Grid: plugin-suites/model-building/create-uniform-grid.md
+    - PVGP Grids:
+        - PVGP Grid: plugin-suites/pvgp-grids/pvgp-grid.md
+        - Table to Uniform Grid: plugin-suites/pvgp-grids/table-to-uniform-grid.md
+        - Flip Grid Axii: plugin-suites/pvgp-grids/flip-grid-axii.md
+        - Translate Origin of Grid: plugin-suites/pvgp-grids/translate-origin-of-grid.md
+    - Tunneling:
+        - Animate TBM: plugin-suites/tunneling/animate-tbm.md
 
-    - Filters:
-        - Table to Uniform Grid: PVGPpy/filt/Table-to-Uniform-Grid.md
-        - Flip Grid Axii: PVGPpy/filt/Flip-Grid-Axii.md
-        - Reshape Table: PVGPpy/filt/Reshape-Table.md
-        - Add Cell Connectivity to Points: PVGPpy/filt/Add-Cell-Connectivity-to-Points.md
-        - Points to Tube: PVGPpy/filt/Points-to-Tube.md
-        - Translate Origin of Grid: PVGPpy/filt/Translate-Origin-of-Grid.md
-        - Normalize Array: PVGPpy/filt/Normalize-Array.md
-        - Animate Tunnel Boring Machine: PVGPpy/filt/Animate-TBM.md
-        - Correlate Arrays: PVGPpy/filt/Correlate-Arrays.md
-        - UBC Add Model: PVGPpy/filt/UBC-Add-Model.md
+
 
 - PV Macros:
-    - About pvmacros: pvmacros/About-pvmacros.md
+    - About pvmacros: pvmacros/about-pvmacros.md
     - Export:
-        - Export as VTKjs:  pvmacros/export/exportVTKjs.md
+        - Export as VTKjs:  pvmacros/export/exportvtkjs.md
     - Vis:
-        - Camera: pvmacros/vis/Camera.md
-        - Clip Through:  pvmacros/vis/Clip-Through.md
-        - Many Slices Along Points:  pvmacros/vis/Many-Slices-Along-Points.md
-        - Many Slices Along Axis:  pvmacros/vis/Slices-Along-Axis.md
+        - Camera: pvmacros/vis/camera.md
+        - Clip Through:  pvmacros/vis/clip-through.md
+        - Many Slices Along Points:  pvmacros/vis/many-slices-along-points.md
+        - Many Slices Along Axis:  pvmacros/vis/slices-along-axis.md
 
 - Examples:
-    - Slice Model Along PolyLine: Examples/Slice-Model-Along-PolyLine.md
-    - Editing the Axes: Examples/Edit-Axes.md
-    - Editing the Render View: Examples/Edit-Render-View.md
-    - Save Camera Views: Examples/Save-Camera-Locations.md
-    - Understand VTK Data Types: Examples/Understand-VTK.md
+    - Slice Model Along PolyLine: examples/slice-model-along-polyline.md
+    - Editing the Axes: examples/edit-axes.md
+    - Editing the Render View: examples/edit-render-view.md
+    - Save Camera Views: examples/save-camera-locations.md
+    - Understand VTK Data Types: examples/understand-vtk.md
 
 - Resources:
     - Color Maps: cmaps.md
     - Scripts:
-        - About Scripts: Scripts/About-Scripts.md
-        - Example Script: Scripts/Example-Script.md
-    - Entering Virtual Reality: Virtual-Reality/Entering-Virtual-Reality.md
+        - About Scripts: scripts/about-scripts.md
+        - Example Script: scripts/example-script.md
+    - Entering Virtual Reality: virtual-reality/entering-virtual-reality.md
 
 - Development Guide:
-    - Contributing: Dev-Guide/Contributing-to-PVGP.md
-    - Repo Structure: Dev-Guide/Repo-Structure.md
-    - Build Your Own Plugins: Dev-Guide/Build-Your-Own-Plugins.md
+    - Contributing: dev-guide/contributing.md
+    - Repo Structure: dev-guide/repo-structure.md
+    - Build Your Own Plugins: dev-guide/build-your-own-plugins.md

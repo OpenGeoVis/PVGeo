@@ -18,18 +18,6 @@ We are doing this to show how easy it is to make custom readers and convey the m
 !!! info
     Explore the different reader plugins by looking under the **Readers** section of the **Plugins & PVGPpy** part of the navigation pane.
 
-??? info "Implemented Formats"
-    - Grids:
-        - [UBC GIF Tensor Meshes](read/UBC-Mesh.md)
-        - [UBC GIF OcTree Mesh](read/UBC-OcTree.md)
-        - [SGeMS Uniform Grid](read/SGeMS-Grid.md)
-        - [The PVGP Uniform Grid](read/PVGP-Grid.md)
-    - Tables:
-        - [Binary Packed Data](read/Binary-Packed-Data.md)
-        - [Madagascar Single Stream RSF](read/Madagascar-SSRSF.md)
-        - [Delimited Text](read/Delimited-Text.md)
-        - [GSLIB](read/GSLIB.md)
-
 
 
 ## Filters

@@ -10,8 +10,8 @@ UBC Tensor Mesh 2D/3D models are defined using a 2-file format. The "mesh" file 
 
 
 ## Down the Pipeline
-- [UBC Add Model](../filt/UBC-Add-Model.md)
-- [Normalize Array](../filt/Normalize-Array.md)
+- [UBC Add Model](add-model.md)
+- [Normalize Array](../filters-general/normalize-array.md)
 - [Contour](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Contour)
 - [Threshold](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Threshold)
 - [Cell Data to Point Data](https://www.paraview.org/ParaView/Doc/Nightly/www/py-doc/paraview.simple.CellDatatoPointData.html)

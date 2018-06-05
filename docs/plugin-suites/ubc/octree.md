@@ -1,3 +1,5 @@
+# UBC OcTree Mesh
+
 ## About this Reader
 !!! failure "More to come!"
     There are a lot of pages in the documentation and we are trying to fill all content as soon as possible. Stay tuned for updates to this page
@@ -11,7 +13,7 @@ We tested this model using the OcTree mesh found in [**this example**](http://gi
 
 To use the plugin:
 
-- Make sure to clone/update the *PVGeophysics* repo and [**install if you haven't already**](http://pvgp.io/Getting-Started/#install-paraviewgeophysics)
+- Make sure to clone/update the *PVGeophysics* repo and [**install if you haven't already**](../../getting-started.md)
 - Select **File->Open...** in ParaView
 - Choose the mesh file for your OcTree (we have enabled extensions: `.mesh` `.msh` `.dat` `.txt`)
 - Select the **PVGP: UBC OcTree Mesh File Format** reader when prompted.

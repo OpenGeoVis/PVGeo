@@ -1,3 +1,5 @@
+# Madagascar SSRSF
+
 !!! warning
     This file format reader is not fully implemeted but a working quick fix has been published so that Madagascar SSRSF data files can be imported to the ParaView pipeline.
 
@@ -9,11 +11,11 @@ This reads in float or double data that is packed into a Madagascar Single Strea
 
 
 ## Down the Pipeline
-- [Table to Uniform Grid](../filt/Table-to-Uniform-Grid.md)
-- [Reshape Table](../filt/Reshape-Table.md)
+- [Table to Uniform Grid](../pvgp-grids/table-to-uniform-grid.md)
+- [Reshape Table](../filters-general/reshape-table.md)
 - [Table to Points](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Points)
 - [Table to Structured Grid](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Structured_Grid)
-- [Normalize Array](../filt/Normalize-Array.md)
+- [Normalize Array](../filters-general/normalize-array.md)
 
 
 ## Code Docs

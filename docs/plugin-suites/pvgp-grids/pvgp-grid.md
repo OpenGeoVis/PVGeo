@@ -1,3 +1,4 @@
+# PVGP Grid
 
 ## About this Reader
 The PVGP Grid Format is a custom format we have developed to easily save out gridded data to a file format that can fully ready by a plugin in ParaView for immediate viewing. This format consists of meta data describing a regularly sampled grid on which data attributes reside. The metadata is fully encompassed in a `.pvgp` file which is in JSON format with sub libraries containing model data attributes for that grid in an encoded format to save memory. A PVGP grid can have infinitely many data attributes.

@@ -26,7 +26,7 @@ If you have your own plugins either developed in C++ or as python programmable f
 
 -------
 # How To Use the Plugins in this Repository
-Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble *or you are a windows user, please read through the detailed explanation [here](http://pvgp.io/Getting-Started/#install-paraviewgeophysics).*
+Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble *or you are a windows user, please read through the detailed explanation [here](http://pvgp.io/getting-started/#install-pvgeophysics).*
 
 ## Cloning the Repository
 Clone the repository from your command line by navigating to the directory you would like to save all of the code from this repo.
@@ -53,12 +53,4 @@ Now test that the install worked by opening ParaView (close it and reopen if nee
 
 -----
 # Make Your Own Filters and Readers
-A detailed explanation can be found in the [Docs](http://pvgp.io/Dev-Guide/Build-Your-Own-Plugins/) but here is a quick run through:
-
-To make a custom filter or reader, follow the outline in [src/example_filter.py](src/example_filter.py) or [src/example_reader.py](src/example_reader.py)and place your script in either the `src/filters/` or `src/readers/` directories with a meaningful name. *Note* that the script will only compile `.py` files that contain either `filter_` or `reader_` in the file name. This is so you can save other `.py` files in those directories without issues. Then re-run the script  [src/build_plugins.sh](src/build_plugins.sh) to wrap in XML and install to ParaView.
-
-All of the distributed filters in this repo will appear in the menu category `PVGP Filters`. As you develop your own, it may be useful to specify your own menu category as the variable `FilterCategory` in your python file as shown in [src/example_filter.py](src/example_filter.py).
-
-```py
-FilterCategory = 'PVGP Filters'
-```
+A detailed explanation can be found in the [Docs](http://pvgp.io/dev-guide/build-your-own-plugins/).
