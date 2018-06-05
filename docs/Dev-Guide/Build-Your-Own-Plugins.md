@@ -10,7 +10,7 @@ Since a comprehensive guide on using the general purpose **Programmable Source/F
 
 
 ## Plugin Components
-First, let's take a look at the example plugins found under the `src/` directory. There are two example plugins here: a reader (`src/example_reader.py`) and a filter (`src/example_filter.py`). These two example plugins overall have the same structure with subtle differences for their respective functionality as a reader (no input data source) of data filter (has 1 or many data input sources). We have generated these two examples as templates for you when you decide to start coding up your own plugins as they outline all of the available features of our build scripts for what you can implement into your plugin. Let's start by taking a look at the example reader plugin.
+First, let's take a look at the example plugins found under the `src/` directory. There are two example plugins here: a reader (`src/readers-general/example_reader.py`) and a filter (`src/filters-general/example_filter.py`). These two example plugins overall have the same structure with subtle differences for their respective functionality as a reader (no input data source) of data filter (has 1 or many data input sources). We have generated these two examples as templates for you when you decide to start coding up your own plugins as they outline all of the available features of our build scripts for what you can implement into your plugin. Let's start by taking a look at the example reader plugin.
 
 ### Plugin Attributes
 
@@ -22,7 +22,7 @@ Examine the table below to learn how to use each of the plugin attributes. Hover
 | :---------------------- |:--: |:------------------- | :-: | :-:|
 | `Name` | <a class="md-footer-social__link fa fa-info-circle" title="Name of the plugin to be used for coding/macros or reference within ParaView. Think of this link a data object name. This cannot contain spaces."></a> | `:::py Name = 'ExamplePythonReader'`  | ✅ | ✅ |
 | `Label` | <a class="md-footer-social__link fa fa-info-circle" title="Label for the reader in the menu. This is the name you will see appear in GUI menus. Make this label easy to read and concise."></a>| `:::py Label = 'Example Python Reader'`| ✅ | ✅ |
-| `FilterCategory` | <a class="md-footer-social__link fa fa-info-circle" title="The menu category this plugin will appear in under the appropriate menu of Sources or Filters within ParaView."></a> | `:::py FilterCategory = 'PVGP Readers'`| ✅ | ✅ |
+| `FilterCategory` | <a class="md-footer-social__link fa fa-info-circle" title="The menu category this plugin will appear in under the appropriate menu of Sources or Filters within ParaView. If your plugin is a part of a suite and that suite has a specified category in its config file then this variable will be overwritten."></a> | `:::py FilterCategory = 'PVGP Readers'`| ✅ | ✅ |
 | `Extensions` | <a class="md-footer-social__link fa fa-info-circle" title="An attribute to contain possible file extensions for a reader plugin so ParaView can autodetect whether or not to use this plugin as a file reader when you open a file. The is a single str of extensions separated by spaces. Do not include the dot part of the extensions."></a> | `:::py Extensions = 'txt dat csv'` | ✅ | ❌ |
 | `ReaderDescription` | <a class="md-footer-social__link fa fa-info-circle" title="This is a brief Description of the plugin that will appear in the ParaView GUI. Keep this to a small phrase."></a> | `:::py ReaderDescription = 'All Files: Example Python Reader'` | ✅ | ❌ |
 | `Help` | <a class="md-footer-social__link fa fa-info-circle" title="A general overview of the plugin. This should be an encompassing description of the plugin's functionality, i.e. write a paragraph."></a> | `:::py Help = 'This reader provides a starting point for making a file reader in a Programmable Python Source.'` | ✅ | ✅ |
@@ -154,10 +154,28 @@ This method is where we set metadata about the output of the plugin. Use if you 
     ```
 
 ## Make Your Own
-We think the best way to demonstrate how to do this is for you to check out a plugin already developed in the PVGP repository. For an example reader, check out the **Read Delimited Text File To Table** reader in `src/readers/read_delimited_file_to_table.py`. For an example filter, check out the **Normalize Array** filter in `src/filters/filter_normalize_array.py` which demonstrates how to add custom XML and how to specify input arrays to process.
+We think the best way to demonstrate how to do this is for you to check out a plugin already developed in the PVGP repository. For an example reader, check out the **Read Delimited Text File To Table** reader in `src/readers-general/read_delimited_file_to_table.py`. For an example filter, check out the **Normalize Array** filter in `src/filters-general/filter_normalize_array.py` which demonstrates how to add custom XML and how to specify input arrays to process.
 
 !!! warning
     Note how that in our plugins, the bulk of the VTK data object construction occurs in a call to the `PVGPpy` module. We do this so that we can version control the backend functionality of these plugins. This is necessary to implement in this manner as ParaView state files will save the scripts specified in the plugin at a given time, and if a bug in that functionality is fixed and you update PVGP, it might not reflect in some of your saved projects unless we abstract the functionality the way we do. Think of plugins built in the `src/` directory as abstractions or high level instructions whereas the bulk functionality and processing of these plugins occur in the `PVGPpy` package which we modulize and version control.
 
 
-Now that you have an idea of how to construct plugins so that our build scripts will add GUI parameters and install the plugin to ParaView, let's get started describing how to make a plugin! First, make a copy of either the example reader or filter template and rename it to something meaningful and place that file in either the `src/readers/` or `src/filters/` directory appropriately. Then go ahead and change all of the attributes specified [**above**](#plugin-attributes) to declare the metadata for your new plugin. Then add the necessary parameters for your plugin like shown [**above**](#plugin-parameters) and decide what kind of action you plugin will take given its input and parameters to construct the `:::py def RequestData(self)` script. Once you think you are done creating the plugin, run the `src/build_plugins.sh` script through your terminal by executing `:::bash sh src/build_plugins.sh` and make sure no red errors output when building your plugin. If the build was successful, restart ParaView and try using your new plugin!
+Now that you have an idea of how to construct plugins so that our build scripts will add GUI parameters and install the plugin to ParaView, let's get started describing how to make a plugin! First, make a copy of either the example reader or filter template and rename it to something meaningful and place that file in either the `src/readers-general/` or `src/filters-general/` directory appropriately. Then go ahead and change all of the attributes specified [**above**](#plugin-attributes) to declare the metadata for your new plugin. Then add the necessary parameters for your plugin like shown [**above**](#plugin-parameters) and decide what kind of action you plugin will take given its input and parameters to construct the `:::py def RequestData(self)` script. Once you think you are done creating the plugin, run the `src/build_plugins.sh` script through your terminal by executing `:::bash sh src/build_plugins.sh` and make sure no red errors output when building your plugin. If the build was successful, restart ParaView and try using your new plugin!
+
+## Declaring a Suite of Plugins
+To make new a suite of plugins, simply create a new directory in the `src/` directory with a meaningful name. Then add a config named `build.config` file that the build script can interpret. This config file is a simple XML file with the following declared at a minimum:
+
+```XML
+<PluginSuite
+    name="PVGP New Suite">
+</PluginSuite>
+```
+
+An optional parameter in the `:::xml PluginSuite` variable called `category` can be given to overid the `FilterCategory` variable in the plugin python files. This will be the menu category in ParaView that all of the plugins for this suite will appear within:
+
+```XML
+<PluginSuite
+    name="PVGP New Suite"
+    category="PVGP New Menu Category">
+</PluginSuite>
+```
