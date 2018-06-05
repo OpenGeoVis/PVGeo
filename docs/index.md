@@ -4,7 +4,7 @@
     *On a Desktop:* There are six main sections to this website shown in the navigation tab at the top of the page. Use these tabs to explore the different aspects of the project! Use the sidebar to the right to explore the contents of the current page and use the sidebar to the left to find all the different pages for this active section/tab. Here is an overview of each section:
 
     - **Home:** An introduction to the project with installation details on how to get started.
-    - **Plugins & PVGPpy:** A guide to all of the plugins we have implemented for use directly in ParaView. This section has all the information you will need to Understand how to use our plugins. The code docs for the `PVGPpy` module are included here.
+    - **Plugin Suites:** A guide to all of the plugins we have implemented for use directly in ParaView. This section has all the information you will need to understand how to use our plugins and how we group them together into what we call *suites*. The code docs for the `PVGPpy` module are included here.
     - **PV Macros:** A guide on how to use all of the macros developed in the `pvmacros` module. This section contains all of the code docs for the `pvmacros` module as well.
     - **Examples:** A series of exercises to demonstrate the use of different plugins and macros developed in `PVGPpy` and `pvmacros` respectively.
     - **Resources:** A conglomerate of additional resources that are helpful when using ParaView for geoscientific applications.
