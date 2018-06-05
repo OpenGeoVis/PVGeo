@@ -1,0 +1,647 @@
+<ServerManagerConfiguration>
+  <!-- CATEGORY FILTERS -->
+  <ProxyGroup name="filters">
+
+
+    <!-- ./filters-general//filter_reshape_table.py -->
+    <SourceProxy name="ReshapeTable" class="vtkPythonProgrammableFilter" label="Reshape Table">
+      <Documentation
+        long_help="This filter will take a vtkTable object and reshape it. This filter essentially treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name."
+        short_help="This filter will take a vtkTable object and reshape it. This filter essentially treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGP Filters" />
+      </Hints>
+
+      <!-- Output data type: "vtkTable" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="19"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+<IntVectorProperty
+    name="Order"
+    command="SetParameter"
+    number_of_elements="1"
+    initial_string="test_drop_down_menu"
+    default_values="0">
+    <EnumerationDomain name="enum">
+            <Entry value="0" text="Fortran-style: column-major order"/>
+            <Entry value="1" text="C-style: Row-major order"/>
+    </EnumerationDomain>
+    <Documentation>
+        This is the type of memory ordering to use.
+    </Documentation>
+</IntVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+          
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkTable"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="Array_Names"
+        label="Array Names"
+        initial_string="Array_Names"
+        command="SetParameter"
+        animateable="1"
+        default_values=""
+        number_of_elements="1">
+        <Documentation>A semicolon (;) seperated list of names for the arrays</Documentation>
+      </StringVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Order"
+        label="Order"
+        initial_string="Order"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="ncols"
+        label="ncols"
+        initial_string="ncols"
+        command="SetParameter"
+        animateable="1"
+        default_values="6"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="nrows"
+        label="nrows"
+        initial_string="nrows"
+        command="SetParameter"
+        animateable="1"
+        default_values="126"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.filt import reshapeTable&#xA;&#xA;pdi = self.GetInput() #vtkTable&#xA;pdo = self.GetOutput() #vtkTable&#xA;&#xA;mem = 'C'&#xA;if Order == 0:&#xA;    mem = 'F'&#xA;&#xA;reshapeTable(pdi, nrows, ncols, names=Array_Names, order=mem, pdo=pdo)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+
+    <!-- ./filters-general//filter_points_to_tube.py -->
+    <SourceProxy name="PointsToTube" class="vtkPythonProgrammableFilter" label="Points To Tube">
+      <Documentation
+        long_help="Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides."
+        short_help="Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGP Filters" />
+      </Hints>
+
+      <!-- Output data type: "vtkPolyData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="0"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+          
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkPolyData"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Number_of_Sides"
+        label="Number of Sides"
+        initial_string="Number_of_Sides"
+        command="SetParameter"
+        animateable="1"
+        default_values="20"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="Radius"
+        label="Radius"
+        initial_string="Radius"
+        command="SetParameter"
+        animateable="1"
+        default_values="10.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_nearest_nbr"
+        label="Use nearest nbr"
+        initial_string="Use_nearest_nbr"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.filt import pointsToTube&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pointsToTube(pdi, radius=Radius, numSides=Number_of_Sides, nrNbr=Use_nearest_nbr, pdo=pdo)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+
+    <!-- ./filters-general//filter_add_cell_connectivity_to_points.py -->
+    <SourceProxy name="AddCellConnectivityToPoints" class="vtkPythonProgrammableFilter" label="Add Cell Connectivity To Points">
+      <Documentation
+        long_help="This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation)."
+        short_help="This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation).">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGP Filters" />
+      </Hints>
+
+      <!-- Output data type: "vtkPolyData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="0"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+<IntVectorProperty
+    name="Cell_Type"
+    command="SetParameter"
+    number_of_elements="1"
+    initial_string="test_drop_down_menu"
+    default_values="0">
+    <EnumerationDomain name="enum">
+          <Entry value="4" text="Poly Line"/>
+          <Entry value="3" text="Line"/>
+    </EnumerationDomain>
+    <Documentation>
+        Choose what type of cell connectivity to have.
+    </Documentation>
+</IntVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+          
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkPolyData"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Cell_Type"
+        label="Cell Type"
+        initial_string="Cell_Type"
+        command="SetParameter"
+        animateable="1"
+        default_values="4"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_nearest_nbr"
+        label="Use nearest nbr"
+        initial_string="Use_nearest_nbr"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation>Check this to use SciPy's cKDTree nearest neighbor algorithms to sort the points to before adding linear connectivity</Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.filt import connectCells&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;# Perfrom task&#xA;connectCells(pdi, cellType=Cell_Type, nrNbr=Use_nearest_nbr, pdo=pdo, logTime=False)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+
+    <!-- ./filters-general//filter_correlate_arrays.py -->
+    <SourceProxy name="CorrelateArrays" class="vtkPythonProgrammableFilter" label="Correlate Arrays">
+      <Documentation
+        long_help="Use `np.correlate()` on `mode='same'` on two selected arrays from one input."
+        short_help="Use `np.correlate()` on `mode='same'` on two selected arrays from one input.">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGP Filters" />
+      </Hints>
+
+      <!-- Output data type: "Same as input" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="8"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+          
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkDataObject"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <StringVectorProperty
+        name="SelectInputScalars0"
+        label="Array 1"
+        command="SetInputArrayToProcess"
+        default_values="0 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+
+
+      <StringVectorProperty
+        name="SelectInputScalars1"
+        label="Array 2"
+        command="SetInputArrayToProcess"
+        default_values="1 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+
+
+
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="Multiplier"
+        label="Multiplier"
+        initial_string="Multiplier"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation>This is a static shifter/scale factor across the array after normalization.</Documentation>
+      </DoubleVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="New_Array_Name"
+        label="New Array Name"
+        initial_string="New_Array_Name"
+        command="SetParameter"
+        animateable="1"
+        default_values="Correlated"
+        number_of_elements="1">
+        <Documentation>Give the new normalized array a meaningful name.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.filt import correlateArrays&#xA;import PVGPpy.helpers as inputhelp&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;field0 = inputhelp.getSelectedArrayField(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 1)&#xA;field1 = inputhelp.getSelectedArrayField(self, 1)&#xA;# Pass array names and associations on to process&#xA;correlateArrays(pdi, (name0,field0), (name1,field1), multiplier=Multiplier, newName=New_Array_Name, pdo=pdo)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+
+    <!-- ./filters-general//filter_normalize_array.py -->
+    <SourceProxy name="NormalizeArray" class="vtkPythonProgrammableFilter" label="Normalize Array">
+      <Documentation
+        long_help="This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested)."
+        short_help="This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested).">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGP Filters" />
+      </Hints>
+
+      <!-- Output data type: "Same as input" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="8"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+      <IntVectorProperty
+        name="Normalization"
+        command="SetParameter"
+        number_of_elements="1"
+        initial_string="test_drop_down_menu"
+        default_values="0">
+        <EnumerationDomain name="enum">
+          <Entry value="0" text="Feature Scaling"/>
+          <Entry value="1" text="Standard Score"/>
+          <Entry value="2" text="Natural Log"/>
+          <Entry value="3" text="Log Base 10"/>
+          <Entry value="4" text="Just Multiply"/>
+        </EnumerationDomain>
+        <Documentation>
+          This is the type of normalization to apply to the input array.
+        </Documentation>
+      </IntVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+          
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkDataObject"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <StringVectorProperty
+        name="SelectInputScalars0"
+        label="Array"
+        command="SetInputArrayToProcess"
+        default_values="0 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+
+
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Absolute_Value"
+        label="Absolute Value"
+        initial_string="Absolute_Value"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation>This will take the absolute value of the array before normalization.</Documentation>
+      </IntVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="Multiplier"
+        label="Multiplier"
+        initial_string="Multiplier"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation>This is a static shifter/scale factor across the array after normalization.</Documentation>
+      </DoubleVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="New_Array_Name"
+        label="New Array Name"
+        initial_string="New_Array_Name"
+        command="SetParameter"
+        animateable="1"
+        default_values="Normalized"
+        number_of_elements="1">
+        <Documentation>Give the new normalized array a meaningful name.</Documentation>
+      </StringVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Normalization"
+        label="Normalization"
+        initial_string="Normalization"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="Range"
+        label="Range"
+        initial_string="Range"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.0 0.0"
+        number_of_elements="2">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_Range"
+        label="Use Range"
+        initial_string="Use_Range"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.filt import normalizeArray&#xA;import PVGPpy.helpers as inputhelp&#xA;# Choose range to use:&#xA;if Use_Range:&#xA;    rng = Range&#xA;else:&#xA;    rng = None&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;# Perfrom normalization&#xA;normalizeArray(pdi, (name,field), Normalization, multiplier=Multiplier, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value, rng=rng)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+  </ProxyGroup>
+</ServerManagerConfiguration>

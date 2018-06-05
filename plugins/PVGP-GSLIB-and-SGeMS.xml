@@ -1,5 +1,9 @@
 <ServerManagerConfiguration>
+  <!-- CATEGORY SOURCES -->
   <ProxyGroup name="sources">
+
+
+    <!-- ./gslib//read_gslib_file_to_table.py -->
     <SourceProxy name="ReadGSLIBFileToTable" class="vtkPythonProgrammableFilter" label="Read GSLIB File To Table">
       <Documentation
         long_help="The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column)."
@@ -52,7 +56,7 @@
             <ReaderFactory extensions="sgems dat geoeas gslib GSLIB txt SGEMS"
                     file_description="PVGP: GSLIB File Format" />
         </Hints>
-
+        
 
       <StringVectorProperty
         panel_visibility="default"
@@ -140,5 +144,135 @@
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
- </ProxyGroup>
+
+    <!-- ./gslib//read_sgems_to_uniform_grid.py -->
+    <SourceProxy name="ReadSGeMSFileToUniformGrid" class="vtkPythonProgrammableFilter" label="Read SGeMS File To Uniform Grid">
+      <Documentation
+        long_help="NOTE: if reading a time series, they must all have the same extent!"
+        short_help="NOTE: if reading a time series, they must all have the same extent!">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGP Readers" />
+        <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"
+          file_description="PVGP: SGeMS Grid File Format" />
+      </Hints>
+
+      <!-- Output data type: "vtkImageData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="6"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+
+
+      <StringVectorProperty
+        name="FileNames"
+        initial_string="FileNames"
+        animateable="0"
+        number_of_elements="0"
+        command="AddParameter"
+        clean_command="ClearParameter"
+        repeat_command="1"
+        panel_visibility="advanced">
+        <FileListDomain name="files"/>
+            <Documentation>
+            The list of files to be read by the reader.
+            </Documentation>
+      </StringVectorProperty>
+
+      <DoubleVectorProperty
+        name="TimestepValues"
+        repeatable="1"
+        information_only="1">
+        <TimeStepsInformationHelper/>
+            <Documentation>
+            Available timestep values.
+            </Documentation>
+        </DoubleVectorProperty>
+        <Hints>
+            <ReaderFactory extensions="sgems SGEMS SGeMS dat txt"
+                    file_description="PVGP: SGeMS Grid File Format" />
+        </Hints>
+        
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="Delimiter_Field"
+        label="Delimiter Field"
+        initial_string="Delimiter_Field"
+        command="SetParameter"
+        animateable="1"
+        default_values=" "
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </StringVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="advanced"
+        name="Time_Step"
+        label="Time Step"
+        initial_string="Time_Step"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation>An advanced property for the time step in seconds.</Documentation>
+      </DoubleVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Use_tab_delimiter"
+        label="Use tab delimiter"
+        initial_string="Use_tab_delimiter"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from PVGPpy.read import sgemsGrid, getTimeStepFileIndex&#xA;from paraview import util&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, pdo=pdo)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;from PVGPpy.read import sgemsExtent, setOutputTimesteps, getTimeStepFileIndex&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;# Only grab extent for first file... requires all to have same extent&#xA;ext = sgemsExtent(FileNames[0], deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+  </ProxyGroup>
 </ServerManagerConfiguration>
