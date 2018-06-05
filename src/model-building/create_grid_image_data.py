@@ -1,6 +1,5 @@
 Name = 'CreateEmptyGrid'
 Label = 'Create Empty Grid'
-FilterCategory = 'PVGP Sources'
 Help = ''
 
 NumberOfInputs = 0

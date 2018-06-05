@@ -1,6 +1,5 @@
 Name = 'CreateEarthSource'
 Label = 'Create Earth Source'
-FilterCategory = 'PVGP Sources'
 Help = ''
 
 NumberOfInputs = 0

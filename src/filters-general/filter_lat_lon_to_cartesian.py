@@ -1,6 +1,5 @@
 Name = 'LatLonToCartesian'
 Label = 'Lat Lon To Cartesian'
-FilterCategory = 'PVGP Filters'
 Help = 'A filter to convert a table with Latitude, Longitude, and Altitude information to XYZ points. ISSUE: Assumes spherical Earth.'
 
 NumberOfInputs = 1

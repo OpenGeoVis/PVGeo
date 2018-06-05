@@ -1,6 +1,5 @@
 Name = 'ReadPVGPGrid'             # Name to be used for coding/macros
 Label = 'Read PVGP Uniform Grid'  # Label for the reader in the menu
-FilterCategory = 'PVGP Readers'   # The source menu category
 Extensions = 'pvgp PVGP'
 ReaderDescription = 'PVGP Unifrom Grid Reader. Opens a header file which points to data arrays to fill a uniform grid.'
 # A general overview of the plugin

@@ -1,6 +1,5 @@
 Name = 'AddUBCModelToMesh'
 Label = 'Add UBC Model To Mesh'
-FilterCategory = 'PVGP Filters'
 
 # A general overview of the plugin
 Help = 'This filter allows you to choose a UBC model file to append as an attribute to an already created vtkRectilinearGrid of a UBC 2D or 3D Mesh.'

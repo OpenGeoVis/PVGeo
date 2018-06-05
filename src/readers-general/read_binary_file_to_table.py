@@ -1,6 +1,5 @@
 Name = 'ReadPackedBinaryFileToTable'
 Label = 'Read Packed Binary File To Table'
-FilterCategory = 'PVGP Readers'
 Help = 'This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.'
 
 NumberOfInputs = 0

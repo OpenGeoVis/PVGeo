@@ -1,6 +1,5 @@
 Name = 'ProjectShotRecordToSpace'
 Label = 'Project Shot Record To Space'
-FilterCategory = 'PVGP Filters'
 Help = 'TODO: Should we keep this in the repo?'
 
 NumberOfInputs = 2

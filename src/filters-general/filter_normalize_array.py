@@ -1,6 +1,5 @@
 Name = 'NormalizeArray'
 Label = 'Normalize Array'
-FilterCategory = 'PVGP Filters'
 Help = 'This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested).'
 
 NumberOfInputs = 1

@@ -1,6 +1,5 @@
 Name = 'CorrelateArrays'
 Label = 'Correlate Arrays'
-FilterCategory = 'PVGP Filters'
 Help = 'Use `np.correlate()` on `mode=\'same\'` on two selected arrays from one input.'
 NumberOfInputs = 1
 # Have two array selection drop downs for the two arrays to correlate

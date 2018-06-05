@@ -1,6 +1,5 @@
 Name = 'ReadSGeMSFileToUniformGrid'
 Label = 'Read SGeMS File To Uniform Grid'
-FilterCategory = 'PVGP Readers'
 Help = 'NOTE: if reading a time series, they must all have the same extent!'
 
 NumberOfInputs = 0
