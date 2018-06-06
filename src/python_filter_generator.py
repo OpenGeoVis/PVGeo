@@ -10,7 +10,7 @@ Acknowledgements:
     Pat Marion (see blog post url above) for the foundation of this script
 """
 
-__version__ = '0.6.0'
+__version__ = '0.6.1'
 
 import os
 import sys
