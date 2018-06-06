@@ -331,13 +331,17 @@ def getInputArraysXML(info):
 def getVersionAttribute():
     return '''
       <!-- Built on version: %s -->
-      <StringVectorProperty command="SetParameter"
-                         default_values="%s"
-                         name="__version__"
-                         number_of_elements="1"
-                         panel_visibility="never">
+      <StringVectorProperty
+        panel_visibility="default"
+        name="pvgpversion"
+        label="PVGP Version"
+        initial_string="pvgpversion"
+        command="SetParameter"
+        animateable="1"
+        default_values="%s"
+        number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
-      </IntVectorProperty>''' % (__version__, __version__)
+      </StringVectorProperty>''' % (__version__, __version__)
 
 
 def getOutputDataSetTypeXml(info):

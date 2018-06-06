@@ -14,13 +14,17 @@
       </Hints>
 
       <!-- Built on version: 0.6.0 -->
-      <StringVectorProperty command="SetParameter"
-                         default_values="0.6.0"
-                         name="__version__"
-                         number_of_elements="1"
-                         panel_visibility="never">
+      <StringVectorProperty
+        panel_visibility="default"
+        name="pvgpversion"
+        label="PVGP Version"
+        initial_string="pvgpversion"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.0"
+        number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
-      </IntVectorProperty>
+      </StringVectorProperty>
 
       <!-- Output data type: "vtkTable" -->
       <IntVectorProperty command="SetOutputDataSetType"
@@ -146,13 +150,17 @@
       </Hints>
 
       <!-- Built on version: 0.6.0 -->
-      <StringVectorProperty command="SetParameter"
-                         default_values="0.6.0"
-                         name="__version__"
-                         number_of_elements="1"
-                         panel_visibility="never">
+      <StringVectorProperty
+        panel_visibility="default"
+        name="pvgpversion"
+        label="PVGP Version"
+        initial_string="pvgpversion"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.0"
+        number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
-      </IntVectorProperty>
+      </StringVectorProperty>
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
@@ -252,13 +260,17 @@
       </Hints>
 
       <!-- Built on version: 0.6.0 -->
-      <StringVectorProperty command="SetParameter"
-                         default_values="0.6.0"
-                         name="__version__"
-                         number_of_elements="1"
-                         panel_visibility="never">
+      <StringVectorProperty
+        panel_visibility="default"
+        name="pvgpversion"
+        label="PVGP Version"
+        initial_string="pvgpversion"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.0"
+        number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
-      </IntVectorProperty>
+      </StringVectorProperty>
 
       <!-- Output data type: "Same as input" -->
       <IntVectorProperty command="SetOutputDataSetType"
@@ -434,13 +446,17 @@
       </Hints>
 
       <!-- Built on version: 0.6.0 -->
-      <StringVectorProperty command="SetParameter"
-                         default_values="0.6.0"
-                         name="__version__"
-                         number_of_elements="1"
-                         panel_visibility="never">
+      <StringVectorProperty
+        panel_visibility="default"
+        name="pvgpversion"
+        label="PVGP Version"
+        initial_string="pvgpversion"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.0"
+        number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
-      </IntVectorProperty>
+      </StringVectorProperty>
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
@@ -542,13 +558,17 @@
       </Hints>
 
       <!-- Built on version: 0.6.0 -->
-      <StringVectorProperty command="SetParameter"
-                         default_values="0.6.0"
-                         name="__version__"
-                         number_of_elements="1"
-                         panel_visibility="never">
+      <StringVectorProperty
+        panel_visibility="default"
+        name="pvgpversion"
+        label="PVGP Version"
+        initial_string="pvgpversion"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.0"
+        number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
-      </IntVectorProperty>
+      </StringVectorProperty>
 
       <!-- Output data type: "Same as input" -->
       <IntVectorProperty command="SetOutputDataSetType"
@@ -693,13 +713,17 @@
       </Hints>
 
       <!-- Built on version: 0.6.0 -->
-      <StringVectorProperty command="SetParameter"
-                         default_values="0.6.0"
-                         name="__version__"
-                         number_of_elements="1"
-                         panel_visibility="never">
+      <StringVectorProperty
+        panel_visibility="default"
+        name="pvgpversion"
+        label="PVGP Version"
+        initial_string="pvgpversion"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.0"
+        number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
-      </IntVectorProperty>
+      </StringVectorProperty>
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
@@ -861,13 +885,17 @@
       </Hints>
 
       <!-- Built on version: 0.6.0 -->
-      <StringVectorProperty command="SetParameter"
-                         default_values="0.6.0"
-                         name="__version__"
-                         number_of_elements="1"
-                         panel_visibility="never">
+      <StringVectorProperty
+        panel_visibility="default"
+        name="pvgpversion"
+        label="PVGP Version"
+        initial_string="pvgpversion"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.0"
+        number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
-      </IntVectorProperty>
+      </StringVectorProperty>
 
       <!-- Output data type: "Same as input" -->
       <IntVectorProperty command="SetOutputDataSetType"
