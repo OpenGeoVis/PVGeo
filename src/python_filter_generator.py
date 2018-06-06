@@ -332,10 +332,10 @@ def getVersionAttribute():
     return '''
       <!-- Built on version: %s -->
       <StringVectorProperty
-        panel_visibility="default"
-        name="pvgpversion"
-        label="PVGP Version"
-        initial_string="pvgpversion"
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
         command="SetParameter"
         animateable="1"
         default_values="%s"
