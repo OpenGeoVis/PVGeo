@@ -1,6 +1,6 @@
 # *PVGeophysics*
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/46d8b98101d44fb286420e7289611205)](https://app.codacy.com/app/banesullivan/PVGeophysics?utm_source=github.com&utm_medium=referral&utm_content=OpenGeoVis/PVGeophysics&utm_campaign=badger)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/46d8b98101d44fb286420e7289611205)](https://app.codacy.com/app/banesullivan/PVGeophysics?utm_source=github.com&utm_medium=referral&utm_content=OpenGeoVis/PVGeophysics&utm_campaign=badger) [![codecov](https://codecov.io/gh/OpenGeoVis/PVGeophysics/branch/master/graph/badge.svg)](https://codecov.io/gh/OpenGeoVis/PVGeophysics)
 
 This repository contains plugins tailored to data visualization in geophysics for the application [ParaView by Kitware](https://www.paraview.org). These plugins are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D time-varing grids.
 
