@@ -47,7 +47,7 @@
         initial_string="extent"
         command="SetParameter"
         animateable="1"
-        default_values="1 1 1"
+        default_values="10 10 10"
         number_of_elements="3">
         <Documentation></Documentation>
       </IntVectorProperty>
