@@ -17,8 +17,9 @@ Sometimes, we desire to take a path through a model and construct various slices
 
 First, lets load some data onto the ParaView pipeline. For this example, we want to use a 3D model of rock density in a homogeneous layer of a carbonate reservoir found on [this website](http://www.trainingimages.org/training-images-library.html). You can download the model in the [SGeMS gridded data format][reader] in the link below this paragraph.
 
-<!--- TODO: make a zip file to download the data --->
-!!! example "[Download the data for this example here](https://www.dropbox.com/s/87izk92h49jzrli/PVGP-Example.zip?dl=0)"
+{btn:https://dl.dropbox.com/s/87izk92h49jzrli/PVGP-Example.zip?dl=0}
+
+??? example "Data Description"
     Data File 1: 'topexample.sgems'
 
     - **Original source:** http://www.trainingimages.org/training-images-library.html

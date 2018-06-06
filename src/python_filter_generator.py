@@ -10,6 +10,7 @@ Acknowledgements:
     Pat Marion (see blog post url above) for the foundation of this script
 """
 
+__version__ = '0.6.1'
 
 import os
 import sys
@@ -408,6 +409,22 @@ def getInputArraysXML(info):
         return _helpArraysXML(info, inputName=None, numArrays=numArrays, labels=labels)
 
 
+def getVersionAttribute():
+    return '''
+      <!-- Built on version: %s -->
+      <StringVectorProperty
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
+        command="SetParameter"
+        animateable="1"
+        default_values="%s"
+        number_of_elements="1">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </StringVectorProperty>''' % (__version__, __version__)
+
+
 def getOutputDataSetTypeXml(info):
 
 
@@ -537,6 +554,7 @@ def generatePythonFilter(info, embed=False, category=None):
     extraXml = info.get('ExtraXml', '')
 
     proxyGroup = getProxyGroup(info)
+    versionXml = getVersionAttribute()
     inputPropertyXml = getInputPropertyXml(info)
     outputDataSetType = getOutputDataSetTypeXml(info)
     scriptProperties = getScriptPropertiesXml(info)
@@ -561,8 +579,9 @@ def generatePythonFilter(info, embed=False, category=None):
 %s
 %s
 %s
+%s
     </SourceProxy>''' % (proxyName, proxyLabel, longHelp, shortHelp,
-                filterGroup, outputDataSetType, extraXml, inputPropertyXml,
+                filterGroup, versionXml, outputDataSetType, extraXml, inputPropertyXml,
                 inputArrayDropDowns, fileReaderProperties, filterProperties,
                 scriptProperties, pythonPath)
 

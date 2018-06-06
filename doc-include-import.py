@@ -37,6 +37,7 @@ def tryimport(name, globals={}, locals={}, fromlist=[], level=1):
 
 DEF_SYNTAX = re.compile(r'\{def:\s*(.+?)\s*\}')
 CLASS_SYNTAX = re.compile(r'\{class:\s*(.+?)\s*\}')
+INC_SYNTAX = re.compile(r'\{py:\s*(.+?)\s*\}')
 
 ################
 
@@ -209,6 +210,15 @@ def generateClassDocs(classname):
     # Module imported correctly, let's create the docs
     return _getClassMarkdown(clas, mod)
 
+def _parseArg(arg):
+    args = arg.split('?')
+    filename = args[0]
+    hl = ''
+    if len(args) > 1:
+        hl = 'hl_lines="%s"' % args[1]
+    return filename, hl
+
+
 ##############
 
 class MethodInclude(Extension):
@@ -245,6 +255,7 @@ class MethodIncludePreprocessor(Preprocessor):
                 loc = lines.index(line)
                 m = DEF_SYNTAX.search(line)
                 c = CLASS_SYNTAX.search(line)
+                s = INC_SYNTAX.search(line)
                 if m or c:
                     if m :
                         modname = m.group(1)
@@ -256,6 +267,29 @@ class MethodIncludePreprocessor(Preprocessor):
                         line_split = CLASS_SYNTAX.split(line,maxsplit=0)
                     if len(text) == 0:
                         text.append('')
+                    text[0] = line_split[0] + text[0]
+                    text[-1] = text[-1] + line_split[2]
+                    lines = lines[:loc] + text + lines[loc+1:]
+                    break
+                if s:
+                    filename, hl = _parseArg(s.group(1))
+                    pfilename = '%s/%s' % (os.getcwd(), filename)
+                    try:
+                        with open(pfilename, 'r', encoding=self.encoding) as r:
+                            text = r.readlines()
+                    except Exception as e:
+                        print('Warning: could not find file {}. Ignoring '
+                            'include statement. Error: {}'.format(filename, e))
+                        lines[loc] = INC_SYNTAX.sub('',line)
+                        break
+
+                    line_split = INC_SYNTAX.split(line,maxsplit=0)
+                    if len(text) == 0: text.append('')
+                    for i in range(len(text)):
+                        text[i] = text[i][0:-1]
+                    text[-1] = '```'
+                    text = ['```py %s ' % hl] + text
+                    #text = ['File Included From: %s' % filename] + text
                     text[0] = line_split[0] + text[0]
                     text[-1] = text[-1] + line_split[2]
                     lines = lines[:loc] + text + lines[loc+1:]
