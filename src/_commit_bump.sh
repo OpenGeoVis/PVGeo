@@ -7,5 +7,6 @@ if [ "$#" -eq 1 ]; then
     pushd "$(dirname "$0")"
     git add ..
     git commit -m "Build on version: ${VERSION}"
+    git tag "${VERSION}"
     popd
 fi
