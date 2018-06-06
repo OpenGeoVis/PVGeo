@@ -35,6 +35,18 @@ fi
 # Jump to this directory so we can execute relative scripts
 pushd "$(dirname "$0")"
 
+# Bump the version if asked to
+if [ "$#" -eq 1 ]; then
+    pushd ..
+    if ! (bumpversion --no-tag $1) &> /dev/null; then
+        # handle error
+        echo "Git working directory is not clean."
+        popd
+        exit 1
+    fi
+    popd
+fi
+
 # Clean out the plugins directory
 printf "${RED}"
 for plugin in ../plugins/*.xml; do
@@ -52,5 +64,9 @@ for directory in ./*/; do
 done
 printf "${NORMAL}"
 
+# Commit the build for the new version
+if [ "$#" -eq 1 ]; then
+    sh _commit_bump.sh $1
+fi
 
 popd

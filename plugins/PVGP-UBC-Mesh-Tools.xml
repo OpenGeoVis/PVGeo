@@ -17,6 +17,19 @@
           file_description="PVGP: UBC OcTree Mesh File Format." />
       </Hints>
 
+      <!-- Built on version: 0.6.1 -->
+      <StringVectorProperty
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.1"
+        number_of_elements="1">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </StringVectorProperty>
+
       <!-- Output data type: "vtkUnstructuredGrid" -->
       <IntVectorProperty command="SetOutputDataSetType"
                          default_values="4"
@@ -122,6 +135,19 @@
           file_description="PVGP: UBC Mesh 2D/3D Two-File Format" />
       </Hints>
 
+      <!-- Built on version: 0.6.1 -->
+      <StringVectorProperty
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.1"
+        number_of_elements="1">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </StringVectorProperty>
+
       <!-- Output data type: "vtkRectilinearGrid" -->
       <IntVectorProperty command="SetOutputDataSetType"
                          default_values="3"
@@ -214,6 +240,19 @@
       <Hints>
         <ShowInMenu category="PVGP UBC Mesh Tools" />
       </Hints>
+
+      <!-- Built on version: 0.6.1 -->
+      <StringVectorProperty
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.1"
+        number_of_elements="1">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </StringVectorProperty>
 
       <!-- Output data type: "vtkRectilinearGrid" -->
       <IntVectorProperty command="SetOutputDataSetType"

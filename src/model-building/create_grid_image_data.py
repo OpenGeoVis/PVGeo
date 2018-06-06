@@ -8,7 +8,7 @@ ExtraXml = ''
 FileSeries = False # ABSOLUTELY NECESSARY
 
 Properties = dict(
-    extent=[1, 1, 1],
+    extent=[10, 10, 10],
     spacing=[1.0, 1.0, 1.0],
     origin=[0.0, 0.0, 0.0]
 )
