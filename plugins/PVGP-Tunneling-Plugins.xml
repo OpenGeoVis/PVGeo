@@ -13,6 +13,15 @@
         <ShowInMenu category="PVGP Tunneling" />
       </Hints>
 
+      <!-- Built on version: 0.6.0 -->
+      <StringVectorProperty command="SetParameter"
+                         default_values="0.6.0"
+                         name="__version__"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </IntVectorProperty>
+
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
                          default_values="0"
@@ -247,6 +256,15 @@
       <Hints>
         <ShowInMenu category="PVGP Tunneling" />
       </Hints>
+
+      <!-- Built on version: 0.6.0 -->
+      <StringVectorProperty command="SetParameter"
+                         default_values="0.6.0"
+                         name="__version__"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </IntVectorProperty>
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
