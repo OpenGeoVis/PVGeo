@@ -8,7 +8,7 @@ ExtraXml = ''
 FileSeries = False # ABSOLUTELY NECESSARY
 
 Properties = dict(
-    Num_Cells=[1, 1, 1],
+    Num_Cells=[10, 10, 10],
     X_Range=[0.0, 1.0],
     Y_Range=[0.0, 1.0],
     Z_Range=[0.0, 1.0]

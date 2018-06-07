@@ -8,10 +8,10 @@ ExtraXml = ''
 FileSeries = False # ABSOLUTELY NECESSARY
 
 Properties = dict(
-    Num_Cells=[1, 1, 1],
-    X_Range=[0.0, 1.0],
-    Y_Range=[0.0, 1.0],
-    Z_Range=[0.0, 1.0]
+    Num_Cells=[10, 10, 10],
+    X_Range=[1957240.0, 1982840.0],
+    Y_Range=[5827170.0, 5852770.0],
+    Z_Range=[-25267.4, 332.6]
 )
 
 def RequestData():
@@ -31,13 +31,13 @@ def RequestData():
     xcoords = nps.numpy_to_vtk(num_array=xcoords,deep=True)
     ycoords = nps.numpy_to_vtk(num_array=ycoords,deep=True)
     zcoords = nps.numpy_to_vtk(num_array=zcoords,deep=True)
-    data = nps.numpy_to_vtk(num_array=data,deep=True)
 
     pdo.SetDimensions(nx+1,ny+1,nz+1) # note this subtracts 1
     pdo.SetXCoordinates(xcoords)
     pdo.SetYCoordinates(ycoords)
     pdo.SetZCoordinates(zcoords)
 
+    data = nps.numpy_to_vtk(num_array=data,deep=True)
     data.SetName('Random Data')
     # THIS IS CELL DATA! Add the model data to CELL data:
     pdo.GetCellData().AddArray(data)
