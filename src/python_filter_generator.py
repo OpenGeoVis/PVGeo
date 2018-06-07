@@ -291,9 +291,10 @@ def getInputPropertyXml(info, inputDataType=None, name="Input", port=0):
 
     inputPropertyAttributes = 'command="SetInputConnection"'
     if numberOfInputs > 1:
-        inputPropertyAttributes = '''command="SetInputConnection"
+        inputPropertyAttributes = '''command="AddInputConnection"
         port_index="%d"
-        ''' % (port) # clean_command="RemoveAllInputs" multiple_input="1"
+        ''' % 0 #(port) # clean_command="RemoveAllInputs" multiple_input="1"
+        # TODO: Find a way for python filters to take multiple input ports
 
     inputPropertyXml = '''
       <InputProperty
@@ -321,7 +322,7 @@ def _helpArraysXML(info, inputName=None, numArrays=None, labels=None):
         name="SelectInputScalars%d"
         label="%s"
         command="SetInputArrayToProcess"
-        default_values="%d NULL"
+        default_values="0 %d"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">

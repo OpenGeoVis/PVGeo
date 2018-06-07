@@ -19,9 +19,9 @@ OutputDataType = 'vtkDataObject' # Leave blank to preserve input data type
 
 # How to add input arrays:
 #- Number of Input array drop down choices
-#NumberOfInputArrayChoices = [1,1]
+NumberOfInputArrayChoices = [1,1]
 #- Labels for the array drop down choices:
-#InputArrayLabels = [['Array from foo 1'], ['Array from foo 2']]
+InputArrayLabels = [['Array from foo 1'], ['Array from foo 2']]
 
 
 # Any extra XML GUI components you might like:
@@ -52,13 +52,13 @@ def RequestData(self):
     pdi = self.GetInput() # VTK Data Type
     pdo = self.GetOutput() # VTK Data Type
     # Get input array info (selection made in drop down menu)
-    #name = inputhelp.getSelectedArrayName(self, 0)
-    #field = inputhelp.getSelectedArrayField(self, 0)
+    name0 = inputhelp.getSelectedArrayName(self, 0)
+    field0 = inputhelp.getSelectedArrayField(self, 0)
+    name1 = inputhelp.getSelectedArrayName(self, 0)
+    field1 = inputhelp.getSelectedArrayField(self, 0)
+    print(name0,name1)
 
-    #if test_bool:
-    #    print(name)
-    #else:
-    #    print(field)
+
 
 # Use if you need to set extents and what not
 #- Information, spatial extent, ect

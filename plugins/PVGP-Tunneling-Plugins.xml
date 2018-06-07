@@ -63,7 +63,7 @@
         name="SelectInputScalars0"
         label="Easting"
         command="SetInputArrayToProcess"
-        default_values="0 NULL"
+        default_values="0 0"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -92,7 +92,7 @@
         name="SelectInputScalars1"
         label="Northing"
         command="SetInputArrayToProcess"
-        default_values="1 NULL"
+        default_values="0 1"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -121,7 +121,7 @@
         name="SelectInputScalars2"
         label="Elevation"
         command="SetInputArrayToProcess"
-        default_values="2 NULL"
+        default_values="0 2"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -150,7 +150,7 @@
         name="SelectInputScalars3"
         label="Status"
         command="SetInputArrayToProcess"
-        default_values="3 NULL"
+        default_values="0 3"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -311,7 +311,7 @@
         name="SelectInputScalars0"
         label="Head Easting"
         command="SetInputArrayToProcess"
-        default_values="0 NULL"
+        default_values="0 0"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -340,7 +340,7 @@
         name="SelectInputScalars1"
         label="Head Northing"
         command="SetInputArrayToProcess"
-        default_values="1 NULL"
+        default_values="0 1"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -369,7 +369,7 @@
         name="SelectInputScalars2"
         label="Head Elevation"
         command="SetInputArrayToProcess"
-        default_values="2 NULL"
+        default_values="0 2"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -398,7 +398,7 @@
         name="SelectInputScalars3"
         label="Arti Easting"
         command="SetInputArrayToProcess"
-        default_values="3 NULL"
+        default_values="0 3"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -427,7 +427,7 @@
         name="SelectInputScalars4"
         label="Arti Northing"
         command="SetInputArrayToProcess"
-        default_values="4 NULL"
+        default_values="0 4"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -456,7 +456,7 @@
         name="SelectInputScalars5"
         label="Arti Elevation"
         command="SetInputArrayToProcess"
-        default_values="5 NULL"
+        default_values="0 5"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -485,7 +485,7 @@
         name="SelectInputScalars6"
         label="Tail Easting"
         command="SetInputArrayToProcess"
-        default_values="6 NULL"
+        default_values="0 6"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -514,7 +514,7 @@
         name="SelectInputScalars7"
         label="Tail Northing"
         command="SetInputArrayToProcess"
-        default_values="7 NULL"
+        default_values="0 7"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -543,7 +543,7 @@
         name="SelectInputScalars8"
         label="Tail Elevation"
         command="SetInputArrayToProcess"
-        default_values="8 NULL"
+        default_values="0 8"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">

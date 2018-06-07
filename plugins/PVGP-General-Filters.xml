@@ -272,7 +272,7 @@
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
       </StringVectorProperty>
 
-      <!-- Output data type: "Same as input" -->
+      <!-- Output data type: "vtkDataObject" -->
       <IntVectorProperty command="SetOutputDataSetType"
                          default_values="7"
                          name="OutputDataSetType"
@@ -285,7 +285,7 @@
 
       <InputProperty
         name="Input foo 1"
-        command="SetInputConnection"
+        command="AddInputConnection"
         port_index="0"
         >
           <ProxyGroupDomain name="groups">
@@ -300,8 +300,8 @@
 
       <InputProperty
         name="Input foo 2"
-        command="SetInputConnection"
-        port_index="1"
+        command="AddInputConnection"
+        port_index="0"
         >
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
@@ -312,6 +312,65 @@
             <DataType value="vtkDataObject"/>
           </DataTypeDomain>
       </InputProperty>
+
+      <StringVectorProperty
+        name="SelectInputScalars0"
+        label="Array from foo 1"
+        command="SetInputArrayToProcess"
+        default_values="0 0"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input foo 1"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input foo 1"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+
+
+
+      <StringVectorProperty
+        name="SelectInputScalars0"
+        label="Array from foo 2"
+        command="SetInputArrayToProcess"
+        default_values="0 0"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input foo 2"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input foo 2"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+
 
 
 
@@ -392,7 +451,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;pdi = self.GetInput() # VTK Data Type&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;pdi = self.GetInput() # VTK Data Type&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Get input array info (selection made in drop down menu)&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;field0 = inputhelp.getSelectedArrayField(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 0)&#xA;field1 = inputhelp.getSelectedArrayField(self, 0)&#xA;print(name0,name1)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -589,7 +648,7 @@
         name="SelectInputScalars0"
         label="Array 1"
         command="SetInputArrayToProcess"
-        default_values="0 NULL"
+        default_values="0 0"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -618,7 +677,7 @@
         name="SelectInputScalars1"
         label="Array 2"
         command="SetInputArrayToProcess"
-        default_values="1 NULL"
+        default_values="0 1"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -744,7 +803,7 @@
         name="SelectInputScalars0"
         label="Latitude"
         command="SetInputArrayToProcess"
-        default_values="0 NULL"
+        default_values="0 0"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -773,7 +832,7 @@
         name="SelectInputScalars1"
         label="Longitude"
         command="SetInputArrayToProcess"
-        default_values="1 NULL"
+        default_values="0 1"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -802,7 +861,7 @@
         name="SelectInputScalars2"
         label="Altitude"
         command="SetInputArrayToProcess"
-        default_values="2 NULL"
+        default_values="0 2"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -933,7 +992,7 @@
         name="SelectInputScalars0"
         label="Array"
         command="SetInputArrayToProcess"
-        default_values="0 NULL"
+        default_values="0 0"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -1039,6 +1098,112 @@
         command="SetScript"
         number_of_elements="1"
         default_values="from PVGPpy.filt import normalizeArray&#xA;import PVGPpy.helpers as inputhelp&#xA;# Choose range to use:&#xA;if Use_Range:&#xA;    rng = Range&#xA;else:&#xA;    rng = None&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;# Perfrom normalization&#xA;normalizeArray(pdi, (name,field), Normalization, multiplier=Multiplier, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value, rng=rng)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+
+    <!-- ./filters-general//example_filter_mult.py -->
+    <SourceProxy name="ExampleMult" class="vtkPythonProgrammableFilter" label="ExampleMult">
+      <Documentation
+        long_help="This is a simple example of a Python Programmable Filter"
+        short_help="This is a simple example of a Python Programmable Filter">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGP General Filters" />
+      </Hints>
+
+      <!-- Built on version: 0.6.1 -->
+      <StringVectorProperty
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.1"
+        number_of_elements="1">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </StringVectorProperty>
+
+      <!-- Output data type: "vtkPolyData" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="0"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+      <InputProperty
+        name="Input 1"
+        command="AddInputConnection"
+        port_index="0"
+        >
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value=""/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <InputProperty
+        name="Input 2"
+        command="AddInputConnection"
+        port_index="0"
+        >
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value=""/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <InputProperty
+        name="Input 3"
+        command="AddInputConnection"
+        port_index="0"
+        >
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value=""/>
+          </DataTypeDomain>
+      </InputProperty>
+
+
+
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;pdi = self.GetInput() # VTK Data Type&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Get input array info (selection made in drop down menu)&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;&#xA;print(name, field)&#xA;print(inputs)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
