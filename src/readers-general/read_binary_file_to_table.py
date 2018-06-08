@@ -30,8 +30,8 @@ ExtraXml = '''\
         initial_string="test_drop_down_menu"
         default_values="0">
         <EnumerationDomain name="enum">
-          <Entry value="0" text="Float"/>
-          <Entry value="1" text="Double"/>
+          <Entry value="0" text="Float 64"/>
+          <Entry value="1" text="Float 32"/>
           <Entry value="2" text="Integer"/>
         </EnumerationDomain>
         <Documentation>
@@ -59,8 +59,8 @@ def RequestData():
 
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
-    endi = ['@', '<', '>']
-    dtype = ['f', 'd', 'i']
+    endi = ['', '<', '>']
+    dtype = ['d', 'f', 'i']
 
     # Generate Output
     pdo = self.GetOutput()
