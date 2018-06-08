@@ -4,7 +4,10 @@
 
 
     <!-- ./model-building//create_grid_even_rectilinear.py -->
-    <SourceProxy name="CreateEvenRectilinearGrid" class="vtkPythonProgrammableFilter" label="Create Even Rectilinear Grid">
+    <SourceProxy
+      name="CreateEvenRectilinearGrid"
+      class="vtkPythonProgrammableFilter"
+      label="Create Even Rectilinear Grid">
       <Documentation
         long_help="This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed."
         short_help="This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.">
@@ -28,10 +31,10 @@
 
       <!-- Output data type: "vtkRectilinearGrid" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="3"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="3"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -117,17 +120,21 @@
       </StringVectorProperty>
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./model-building//create_grid_image_data.py -->
-    <SourceProxy name="CreateUniformGrid" class="vtkPythonProgrammableFilter" label="Create Uniform Grid">
+    <SourceProxy
+      name="CreateUniformGrid"
+      class="vtkPythonProgrammableFilter"
+      label="Create Uniform Grid">
       <Documentation
         long_help=""
         short_help="">
@@ -151,10 +158,10 @@
 
       <!-- Output data type: "vtkImageData" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="6"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="6"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -228,17 +235,21 @@
       </StringVectorProperty>
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./model-building//create_grid_odd_rectilinear.py -->
-    <SourceProxy name="CreateOddRectilinearGrid" class="vtkPythonProgrammableFilter" label="Create Odd Rectilinear Grid">
+    <SourceProxy
+      name="CreateOddRectilinearGrid"
+      class="vtkPythonProgrammableFilter"
+      label="Create Odd Rectilinear Grid">
       <Documentation
         long_help="This creates a vtkRectilinearGrid."
         short_help="This creates a vtkRectilinearGrid.">
@@ -262,10 +273,10 @@
 
       <!-- Output data type: "vtkRectilinearGrid" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="3"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="3"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -351,10 +362,11 @@
       </StringVectorProperty>
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>

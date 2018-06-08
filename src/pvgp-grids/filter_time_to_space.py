@@ -2,9 +2,10 @@ Name = 'ProjectShotRecordToSpace'
 Label = 'Project Shot Record To Space'
 Help = 'TODO: Should we keep this in the repo?'
 
-NumberOfInputs = 2
-InputDataType = 'vtkTable'
-OutputDataType = 'vtkPolyData'
+NumberOfInputs = 2 # Specify as many as you would like
+InputNames = ['Data', 'Coords']
+InputDataType = ['vtkTable', 'vtkTable']
+OutputDataType = 'vtkPolyData' # Must be specified when many inputs specified
 ExtraXml = ''
 
 Properties = dict(
@@ -20,16 +21,9 @@ def RequestData():
 
     pdo = self.GetOutput()
 
-    idata = 0
-    icoord = 1
-
-    if 'coord' in inputs[0].GetColumn(0).GetName():
-        idata = 1
-        icoord = 0
-
-    # connect to input ports
-    data_in = inputs[idata]
-    coords_in = inputs[icoord]
+    # Inputs from different ports:
+    data_in = self.GetInputDataObject(0, 0) # PORT 0
+    coords_in = self.GetInputDataObject(1, 0) # PORT 1
 
     #print('Data: ', data_in.GetColumn(0).GetName())
     #print('Coords: ', coords_in.GetColumn(0).GetName())

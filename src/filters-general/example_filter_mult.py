@@ -37,8 +37,14 @@ PropertiesHelp = dict(
 def RequestData(self):
     from vtk.util import numpy_support as nps
     import PVGPpy.helpers as inputhelp
-    # NOTE: `inputs` is a global variable containing the inputs in order.
     pdo = self.GetOutput() # VTK Data Type
+    # Inputs from different ports:
+    pdi0 = self.GetInputDataObject(0, 0) # PORT 0
+    pdi1 = self.GetInputDataObject(1, 0) # PORT 1
+    print(type(pdi0))
+    print(type(pdi1))
 
-    print(inputs[0])
-    print(inputs[1])
+    name = inputhelp.getSelectedArrayName(self, 0)
+    field = inputhelp.getSelectedArrayField(self, )
+
+    print(name,field)

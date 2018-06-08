@@ -100,10 +100,11 @@ def getScriptPropertiesXml(info):
 
 def getPythonPathProperty():
     return '''
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>'''
@@ -293,9 +294,8 @@ def getInputPropertyXml(info, inputDataType=None, name="Input", port=0):
 
     inputPropertyAttributes = 'command="SetInputConnection"'
     if numberOfInputs > 1:
-        inputPropertyAttributes = '''command="AddInputConnection"
-        port_index="%d"''' % 0 #(port) # clean_command="RemoveAllInputs" multiple_input="1"
-        # TODO: Find a way for python filters to take multiple input ports
+        inputPropertyAttributes = '''command="SetInputConnection"
+        port_index="%d"''' % (port) # clean_command="RemoveAllInputs" multiple_input="1"
 
     inputPropertyXml = '''
       <InputProperty
@@ -481,10 +481,10 @@ def getOutputDataSetTypeXml(info):
     return '''
       <!-- Output data type: "%s" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="%s"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="%s"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>''' % (outputDataType or 'Same as input', typeValue)
@@ -561,6 +561,7 @@ def generatePythonFilter(info, embed=False, category=None):
 
     proxyName = info['Name']
     proxyLabel = info['Label']
+    numberOfInputs = getNumberOfInputs(info)
     shortHelp = e(info['Help'])
     longHelp = e(info['Help'])
     extraXml = info.get('ExtraXml', '')
@@ -576,8 +577,17 @@ def generatePythonFilter(info, embed=False, category=None):
     inputArrayDropDowns = getInputArraysXML(info)
     pythonPath = getPythonPathProperty()
 
+    if numberOfInputs > 1:
+        inpPorts='''
+      input_ports="%d"''' % numberOfInputs
+    else:
+        inpPorts = ''
+
     pluginXml = '''
-    <SourceProxy name="%s" class="vtkPythonProgrammableFilter" label="%s">
+    <SourceProxy
+      name="%s"
+      class="vtkPythonProgrammableFilter"
+      label="%s"%s>
       <Documentation
         long_help="%s"
         short_help="%s">
@@ -592,7 +602,7 @@ def generatePythonFilter(info, embed=False, category=None):
 %s
 %s
 %s
-    </SourceProxy>''' % (proxyName, proxyLabel, longHelp, shortHelp,
+    </SourceProxy>''' % (proxyName, proxyLabel, inpPorts, longHelp, shortHelp,
                 filterGroup, versionXml, outputDataSetType, extraXml, inputPropertyXml,
                 inputArrayDropDowns, fileReaderProperties, filterProperties,
                 scriptProperties, pythonPath)

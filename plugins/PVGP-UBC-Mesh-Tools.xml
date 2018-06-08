@@ -4,7 +4,10 @@
 
 
     <!-- ./ubc//read_ubc_octree.py -->
-    <SourceProxy name="ReadOcTreeMesh" class="vtkPythonProgrammableFilter" label="Read OcTree Mesh">
+    <SourceProxy
+      name="ReadOcTreeMesh"
+      class="vtkPythonProgrammableFilter"
+      label="Read OcTree Mesh">
       <Documentation
         long_help="TODO"
         short_help="TODO">
@@ -32,10 +35,10 @@
 
       <!-- Output data type: "vtkUnstructuredGrid" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="4"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="4"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -112,17 +115,21 @@
       </StringVectorProperty>
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./ubc//read_ubc_mesh.py -->
-    <SourceProxy name="ReadUBCMesh" class="vtkPythonProgrammableFilter" label="Read UBC Mesh 2D/3D Two-File Format">
+    <SourceProxy
+      name="ReadUBCMesh"
+      class="vtkPythonProgrammableFilter"
+      label="Read UBC Mesh 2D/3D Two-File Format">
       <Documentation
         long_help="UBC Mesh 2D/3D models are defined using a 2-file format. The &quot;mesh&quot; file describes how the data is discretized. The &quot;model&quot; file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. The reader will automatically detect if the mesh is 2D or 3D and read the remainder of the data with that dimensionality assumption. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D)."
         short_help="UBC Mesh 2D/3D models are defined using a 2-file format. The &quot;mesh&quot; file describes how the data is discretized. The &quot;model&quot; file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. The reader will automatically detect if the mesh is 2D or 3D and read the remainder of the data with that dimensionality assumption. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D).">
@@ -150,10 +157,10 @@
 
       <!-- Output data type: "vtkRectilinearGrid" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="3"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="3"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -219,10 +226,11 @@
       </StringVectorProperty>
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
@@ -232,7 +240,10 @@
 
 
     <!-- ./ubc//filter_ubc_add_model.py -->
-    <SourceProxy name="AddUBCModelToMesh" class="vtkPythonProgrammableFilter" label="Add UBC Model To Mesh">
+    <SourceProxy
+      name="AddUBCModelToMesh"
+      class="vtkPythonProgrammableFilter"
+      label="Add UBC Model To Mesh">
       <Documentation
         long_help="This filter allows you to choose a UBC model file to append as an attribute to an already created vtkRectilinearGrid of a UBC 2D or 3D Mesh."
         short_help="This filter allows you to choose a UBC model file to append as an attribute to an already created vtkRectilinearGrid of a UBC 2D or 3D Mesh.">
@@ -256,10 +267,10 @@
 
       <!-- Output data type: "vtkRectilinearGrid" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="3"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="3"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -322,10 +333,11 @@
 
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>

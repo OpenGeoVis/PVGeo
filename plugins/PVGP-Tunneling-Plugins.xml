@@ -4,7 +4,10 @@
 
 
     <!-- ./tunneling//filter_animate_tbm_partial.py -->
-    <SourceProxy name="AnimatePartialTBM" class="vtkPythonProgrammableFilter" label="Animate Partial Tunnel Boring Machine">
+    <SourceProxy
+      name="AnimatePartialTBM"
+      class="vtkPythonProgrammableFilter"
+      label="Animate Partial Tunnel Boring Machine">
       <Documentation
         long_help="This filter analyzes a vtkTable containing position information about a Tunnel Boring Machine (TBM). This Filter iterates over each row of the table as a timestep and uses the XYZ coordinates of a single parts of the TBM to generate a tube that represents taht part of the TBM. To create a directional vector for the length of the cylider that represents the TBM component, this filter searches for the next different point and gets a unit vector bewtween the two. Then two points are constructed in the positive and negative directions of that vector for the ends of the cylinder. This only uses rows that have a Status of 2."
         short_help="This filter analyzes a vtkTable containing position information about a Tunnel Boring Machine (TBM). This Filter iterates over each row of the table as a timestep and uses the XYZ coordinates of a single parts of the TBM to generate a tube that represents taht part of the TBM. To create a directional vector for the length of the cylider that represents the TBM component, this filter searches for the next different point and gets a unit vector bewtween the two. Then two points are constructed in the positive and negative directions of that vector for the ends of the cylinder. This only uses rows that have a Status of 2.">
@@ -28,10 +31,10 @@
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="0"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="0"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -242,17 +245,21 @@
       </StringVectorProperty>
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./tunneling//filter_animate_tbm.py -->
-    <SourceProxy name="AnimateTBM" class="vtkPythonProgrammableFilter" label="Animate Tunnel Boring Machine">
+    <SourceProxy
+      name="AnimateTBM"
+      class="vtkPythonProgrammableFilter"
+      label="Animate Tunnel Boring Machine">
       <Documentation
         long_help="This filter analyzes a vtkTable containing position information about a Tunnel Boring Machine (TBM). This Filter iterates over each row of the table as a timestep and uses the XYZ coordinates of the three different parts of the TBM to generate a tube that represents the TBM."
         short_help="This filter analyzes a vtkTable containing position information about a Tunnel Boring Machine (TBM). This Filter iterates over each row of the table as a timestep and uses the XYZ coordinates of the three different parts of the TBM to generate a tube that represents the TBM.">
@@ -276,10 +283,10 @@
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="0"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="0"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -623,10 +630,11 @@
       </StringVectorProperty>
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>

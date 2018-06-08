@@ -4,7 +4,10 @@
 
 
     <!-- ./filters-general//filter_reshape_table.py -->
-    <SourceProxy name="ReshapeTable" class="vtkPythonProgrammableFilter" label="Reshape Table">
+    <SourceProxy
+      name="ReshapeTable"
+      class="vtkPythonProgrammableFilter"
+      label="Reshape Table">
       <Documentation
         long_help="This filter will take a vtkTable object and reshape it. This filter essentially treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name."
         short_help="This filter will take a vtkTable object and reshape it. This filter essentially treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.">
@@ -28,10 +31,10 @@
 
       <!-- Output data type: "vtkTable" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="19"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="19"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -130,17 +133,21 @@
 
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./filters-general//filter_points_to_tube.py -->
-    <SourceProxy name="PointsToTube" class="vtkPythonProgrammableFilter" label="Points To Tube">
+    <SourceProxy
+      name="PointsToTube"
+      class="vtkPythonProgrammableFilter"
+      label="Points To Tube">
       <Documentation
         long_help="Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides."
         short_help="Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.">
@@ -164,10 +171,10 @@
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="0"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="0"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -240,17 +247,21 @@
 
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./filters-general//example_filter.py -->
-    <SourceProxy name="ExamplePythonFilter" class="vtkPythonProgrammableFilter" label="Example Python Filter">
+    <SourceProxy
+      name="ExamplePythonFilter"
+      class="vtkPythonProgrammableFilter"
+      label="Example Python Filter">
       <Documentation
         long_help="This is a simple example of a Python Programmable Filter"
         short_help="This is a simple example of a Python Programmable Filter">
@@ -274,10 +285,10 @@
 
       <!-- Output data type: "vtkDataObject" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="7"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="7"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -458,17 +469,21 @@
       </StringVectorProperty>
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./filters-general//filter_add_cell_connectivity_to_points.py -->
-    <SourceProxy name="AddCellConnectivityToPoints" class="vtkPythonProgrammableFilter" label="Add Cell Connectivity To Points">
+    <SourceProxy
+      name="AddCellConnectivityToPoints"
+      class="vtkPythonProgrammableFilter"
+      label="Add Cell Connectivity To Points">
       <Documentation
         long_help="This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation)."
         short_help="This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation).">
@@ -492,10 +507,10 @@
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="0"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="0"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -570,17 +585,21 @@
 
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./filters-general//filter_correlate_arrays.py -->
-    <SourceProxy name="CorrelateArrays" class="vtkPythonProgrammableFilter" label="Correlate Arrays">
+    <SourceProxy
+      name="CorrelateArrays"
+      class="vtkPythonProgrammableFilter"
+      label="Correlate Arrays">
       <Documentation
         long_help="Use `np.correlate()` on `mode='same'` on two selected arrays from one input."
         short_help="Use `np.correlate()` on `mode='same'` on two selected arrays from one input.">
@@ -604,10 +623,10 @@
 
       <!-- Output data type: "Same as input" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="8"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="8"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -725,17 +744,21 @@
 
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./filters-general//filter_lat_lon_to_cartesian.py -->
-    <SourceProxy name="LatLonToCartesian" class="vtkPythonProgrammableFilter" label="Lat Lon To Cartesian">
+    <SourceProxy
+      name="LatLonToCartesian"
+      class="vtkPythonProgrammableFilter"
+      label="Lat Lon To Cartesian">
       <Documentation
         long_help="A filter to convert a table with Latitude, Longitude, and Altitude information to XYZ points. ISSUE: Assumes spherical Earth."
         short_help="A filter to convert a table with Latitude, Longitude, and Altitude information to XYZ points. ISSUE: Assumes spherical Earth.">
@@ -759,10 +782,10 @@
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="0"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="0"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -897,17 +920,21 @@
 
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./filters-general//filter_normalize_array.py -->
-    <SourceProxy name="NormalizeArray" class="vtkPythonProgrammableFilter" label="Normalize Array">
+    <SourceProxy
+      name="NormalizeArray"
+      class="vtkPythonProgrammableFilter"
+      label="Normalize Array">
       <Documentation
         long_help="This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested)."
         short_help="This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested).">
@@ -931,10 +958,10 @@
 
       <!-- Output data type: "Same as input" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="8"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="8"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -1090,17 +1117,22 @@
 
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
     </SourceProxy>
 
     <!-- ./filters-general//example_filter_mult.py -->
-    <SourceProxy name="ExampleFilterMultInput" class="vtkPythonProgrammableFilter" label="Example Filter Multiple Inputs">
+    <SourceProxy
+      name="ExampleFilterMultInput"
+      class="vtkPythonProgrammableFilter"
+      label="Example Filter Multiple Inputs"
+      input_ports="2">
       <Documentation
         long_help="This is a simple example of a Python Programmable Filter with mutiple inputs."
         short_help="This is a simple example of a Python Programmable Filter with mutiple inputs.">
@@ -1124,10 +1156,10 @@
 
       <!-- Output data type: "vtkPolyData" -->
       <IntVectorProperty command="SetOutputDataSetType"
-                         default_values="0"
-                         name="OutputDataSetType"
-                         number_of_elements="1"
-                         panel_visibility="never">
+        default_values="0"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
         <Documentation>The value of this property determines the dataset type
         for the output of the programmable filter.</Documentation>
       </IntVectorProperty>
@@ -1135,7 +1167,7 @@
 
       <InputProperty
         name="Input foo 1"
-        command="AddInputConnection"
+        command="SetInputConnection"
         port_index="0">
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
@@ -1149,8 +1181,8 @@
 
       <InputProperty
         name="Input foo 2"
-        command="AddInputConnection"
-        port_index="0">
+        command="SetInputConnection"
+        port_index="1">
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
             <Group name="filters"/>
@@ -1168,7 +1200,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;# NOTE: `inputs` is a global variable containing the inputs in order.&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;&#xA;print(inputs[0])&#xA;print(inputs[1])&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Inputs from different ports:&#xA;pdi0 = self.GetInputDataObject(0, 0) # PORT 0&#xA;pdi1 = self.GetInputDataObject(1, 0) # PORT 1&#xA;print(type(pdi0))&#xA;print(type(pdi1))&#xA;&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, )&#xA;&#xA;print(name,field)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -1179,10 +1211,11 @@
 
 
 
-      <StringVectorProperty command="SetPythonPath"
-                            name="PythonPath"
-                            number_of_elements="1"
-                            panel_visibility="advanced">
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
         <Documentation>A semi-colon (;) separated list of directories to add to
         the python library search path.</Documentation>
       </StringVectorProperty>
