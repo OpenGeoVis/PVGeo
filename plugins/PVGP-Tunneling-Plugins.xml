@@ -89,8 +89,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars1"
         label="Northing"
@@ -118,8 +116,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars2"
         label="Elevation"
@@ -147,8 +143,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars3"
         label="Status"
@@ -176,8 +170,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
 
 
       <DoubleVectorProperty
@@ -341,8 +333,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars1"
         label="Head Northing"
@@ -370,8 +360,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars2"
         label="Head Elevation"
@@ -399,8 +387,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars3"
         label="Arti Easting"
@@ -428,8 +414,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars4"
         label="Arti Northing"
@@ -457,8 +441,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars5"
         label="Arti Elevation"
@@ -486,8 +468,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars6"
         label="Tail Easting"
@@ -515,8 +495,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars7"
         label="Tail Northing"
@@ -544,8 +522,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars8"
         label="Tail Elevation"
@@ -573,8 +549,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
 
 
       <DoubleVectorProperty

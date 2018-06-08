@@ -334,8 +334,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars1"
         label="Array Input 2"
@@ -363,8 +361,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
 
 
       <IntVectorProperty
@@ -672,8 +668,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars1"
         label="Array 2"
@@ -701,8 +695,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
 
 
       <DoubleVectorProperty
@@ -831,8 +823,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars1"
         label="Longitude"
@@ -860,8 +850,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
       <StringVectorProperty
         name="SelectInputScalars2"
         label="Altitude"
@@ -889,8 +877,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
 
 
       <DoubleVectorProperty
@@ -1024,8 +1010,6 @@
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
-
-
 
 
       <IntVectorProperty
@@ -1193,6 +1177,61 @@
           </DataTypeDomain>
       </InputProperty>
 
+      <StringVectorProperty
+        name="SelectInputScalars0"
+        label="Array Input 1"
+        command="SetInputArrayToProcess"
+        default_values="0 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input foo 1"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input foo 1"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        name="SelectInputScalars1"
+        label="Array Input 2"
+        command="SetInputArrayToProcess"
+        default_values="1 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input foo 2"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input foo 2"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
 
 
 
@@ -1200,7 +1239,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Inputs from different ports:&#xA;pdi0 = self.GetInputDataObject(0, 0) # PORT 0&#xA;pdi1 = self.GetInputDataObject(1, 0) # PORT 1&#xA;print(type(pdi0))&#xA;print(type(pdi1))&#xA;&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, )&#xA;&#xA;print(name,field)&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Inputs from different ports:&#xA;pdi0 = self.GetInputDataObject(0, 0) # PORT 0&#xA;pdi1 = self.GetInputDataObject(1, 0) # PORT 1&#xA;&#xA;# DO STUFF WITH INOUTS AND OUTPUTS&#xA;print(type(pdi0))&#xA;print(type(pdi1))&#xA;&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 1)&#xA;&#xA;print(name0,name1)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

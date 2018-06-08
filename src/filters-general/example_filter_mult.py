@@ -17,7 +17,11 @@ InputNames = ['Input foo 1', 'Input foo 2']
 InputDataType = ['vtkDataObject', 'vtkDataObject']
 OutputDataType = 'vtkPolyData' # Must be specified when many inputs specified
 
-# NOTE: Input arrays are not supported for filters with multiple inputs.
+# How to add input arrays:
+#- Number of Input array drop down choices
+NumberOfInputArrayChoices = [1,1]
+#- Labels for the array drop down choices:
+InputArrayLabels = [['Array Input 1'], ['Array Input 2']]
 
 # Any extra XML GUI components you might like:
 ExtraXml = ''
@@ -41,10 +45,12 @@ def RequestData(self):
     # Inputs from different ports:
     pdi0 = self.GetInputDataObject(0, 0) # PORT 0
     pdi1 = self.GetInputDataObject(1, 0) # PORT 1
+
+    # DO STUFF WITH INOUTS AND OUTPUTS
     print(type(pdi0))
     print(type(pdi1))
 
-    name = inputhelp.getSelectedArrayName(self, 0)
-    field = inputhelp.getSelectedArrayField(self, )
+    name0 = inputhelp.getSelectedArrayName(self, 0)
+    name1 = inputhelp.getSelectedArrayName(self, 1)
 
-    print(name,field)
+    print(name0,name1)

@@ -312,13 +312,12 @@ def getInputPropertyXml(info, inputDataType=None, name="Input", port=0):
 
 
 
-def _helpArraysXML(info, inputName=None, numArrays=None, labels=None):
-    # Gets input arrays XML for each input
-    ###################################################
-    # Perfrom XML generation for single input at a time
-    def _getInputArrayXML(idx, label, name=None):
-        if name is None: name = 'Input'
-        return'''
+def _helpArraysXML(info, idx, inputName=None, label=None):
+    if inputName is None:
+        inputName = 'Input'
+    if label is None:
+        label = 'Array%d' % idx
+    return'''
       <StringVectorProperty
         name="SelectInputScalars%d"
         label="%s"
@@ -345,14 +344,7 @@ def _helpArraysXML(info, inputName=None, numArrays=None, labels=None):
               function="Input" />
           </RequiredProperties>
         </FieldDataDomain>
-      </StringVectorProperty>''' % (idx, label, idx, name, name)
-
-
-    xml = ''
-    for i in range(numArrays):
-        xml += _getInputArrayXML(i, labels[i], name=inputName)
-        xml += '\n\n'
-    return xml
+      </StringVectorProperty>''' % (idx, label, idx, inputName, inputName)
 
 
 
@@ -366,20 +358,19 @@ def getInputArraysXML(info):
     numberOfInputs = getNumberOfInputs(info)
     numArrays = info.get("NumberOfInputArrayChoices")
 
-    if numberOfInputs > 1:
+    """if numberOfInputs > 1:
         print('WARNING: Filters with multiple inputs do not support input selection arrays at this time.')
-        return ''
+        return ''"""
 
     def getLabels():
         labels = info.get('InputArrayLabels', None)
-        """FOR MULTIPLE INPUTS
         if labels is None and numberOfInputs > 1:
             labels = [None]*numberOfInputs
             return labels
         if numberOfInputs > 1:
             for l in labels:
                 if type(l) is not list:
-                    raise Exception('`InputArrayLabels` is improperly structured. Must be a list of lists.')"""
+                    raise Exception('`InputArrayLabels` is improperly structured. Must be a list of lists.')
         return labels
 
     labels = getLabels()
@@ -397,28 +388,31 @@ def getInputArraysXML(info):
         return labels
 
     # Recursively call for each input
-    """FOR MULTIPLE INPUTS
     if numberOfInputs > 1:
         if type(numArrays) is not list:
             raise Exception('When multiple inputs, the `NumberOfInputArrayChoices` must be a list of ints for the number of arrays from each input.')
         if len(numArrays) != numberOfInputs:
             raise Exception('You must spectify how many arrays come from each input. `len(NumberOfInputArrayChoices) != NumberOfInputs`.')
         inputNames = info.get('InputNames')
-        print(inputNames)
 
         # Now perfrom recursion
         out = []
         for i in range(numberOfInputs):
             # Fix labels
-            print(i)
             labs = fixArrayLabels(labels[i], numArrays[i])
-            out.append(_helpArraysXML(info, inputName=inputNames[i], numArrays=numArrays[i], labels=labs))
+            xml = ''
+            for j in range(numArrays[i]):
+                xml += _helpArraysXML(info, i+j, inputName=inputNames[i], label=labs[j])
+            out.append(xml)
         outstr = "\n".join(inp for inp in out)
         return outstr
-    else:"""
-    # Get parameters from info and call:
-    labels = fixArrayLabels(labels, numArrays)
-    return _helpArraysXML(info, inputName=None, numArrays=numArrays, labels=labels)
+    else:
+        # Get parameters from info and call:
+        labs = fixArrayLabels(labels, numArrays)
+        xml = ''
+        for j in range(numArrays):
+            xml += _helpArraysXML(info, j, inputName=None, label=labs[j])
+        return xml
 
 
 def getVersionAttribute():
