@@ -13,7 +13,7 @@
         <ShowInMenu category="PVGP General Grids" />
       </Hints>
 
-      <!-- Built on version: 0.6.1 -->
+      <!-- Built on version: 0.6.2 -->
       <StringVectorProperty
         panel_visibility="never"
         name="BUILDVERSION"
@@ -21,7 +21,7 @@
         initial_string="BUILDVERSION"
         command="SetParameter"
         animateable="1"
-        default_values="0.6.1"
+        default_values="0.6.2"
         number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
       </StringVectorProperty>
@@ -125,7 +125,7 @@
         <ShowInMenu category="PVGP General Grids" />
       </Hints>
 
-      <!-- Built on version: 0.6.1 -->
+      <!-- Built on version: 0.6.2 -->
       <StringVectorProperty
         panel_visibility="never"
         name="BUILDVERSION"
@@ -133,7 +133,7 @@
         initial_string="BUILDVERSION"
         command="SetParameter"
         animateable="1"
-        default_values="0.6.1"
+        default_values="0.6.2"
         number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
       </StringVectorProperty>
@@ -301,7 +301,7 @@
         <ShowInMenu category="PVGP General Grids" />
       </Hints>
 
-      <!-- Built on version: 0.6.1 -->
+      <!-- Built on version: 0.6.2 -->
       <StringVectorProperty
         panel_visibility="never"
         name="BUILDVERSION"
@@ -309,7 +309,7 @@
         initial_string="BUILDVERSION"
         command="SetParameter"
         animateable="1"
-        default_values="0.6.1"
+        default_values="0.6.2"
         number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
       </StringVectorProperty>
@@ -406,7 +406,7 @@
         <ShowInMenu category="PVGP General Grids" />
       </Hints>
 
-      <!-- Built on version: 0.6.1 -->
+      <!-- Built on version: 0.6.2 -->
       <StringVectorProperty
         panel_visibility="never"
         name="BUILDVERSION"
@@ -414,7 +414,7 @@
         initial_string="BUILDVERSION"
         command="SetParameter"
         animateable="1"
-        default_values="0.6.1"
+        default_values="0.6.2"
         number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
       </StringVectorProperty>
