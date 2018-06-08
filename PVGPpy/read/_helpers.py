@@ -2,12 +2,21 @@
 These are helpers specifically for the file readers for private use only.
 @author: Bane Sullivan
 """
-__all__ = ['_parseString', '_getVTKtype', '_placeArrInTable', '_rows2table']
+__all__ = [
+    '_parseString',
+    '_getVTKtype',
+    '_placeArrInTable',
+    '_rows2table',
+    '_getdTypes',
+    '_cleanDataNm'
+]
 
 import numpy as np
 from vtk.util import numpy_support as nps
 import vtk
 import ast
+import os
+
 
 def _parseString(val):
     try:
@@ -19,6 +28,7 @@ def _parseString(val):
             val = float('NaN')
         pass
     return val
+
 
 def _getVTKtype(typ):
     lookup = dict(
@@ -39,6 +49,7 @@ def _getVTKtype(typ):
     if typ is int or np.int_:
         return lookup['int']
     raise Exception('Data type %s unknown to _getVTKtype() method.' % typ)
+
 
 def _placeArrInTable(dlist, titles, pdo):
     # Put columns into table
@@ -64,3 +75,33 @@ def _rows2table(rows, titles, pdo, toVTK=True):
         _placeArrInTable(dlist, titles, pdo)
         return None
     return dlist
+
+
+def _getdTypes(dtype='', endian=None):
+    # If native `@` was chosen then do not pass an endian
+    if endian is '@':
+        #print('WARNING: Native endianness no longer supported for packed binary reader. Please chose `>` or `<`. This defaults to big `>`.')
+        endian = ''
+    # No endian specified:
+    elif endian is None:
+        endian = ''
+    # Get numpy and VTK data types and return them both
+    if dtype is 'd':
+        dtype = np.dtype('%sf64'%endian) # DOUBLE
+        vtktype = vtk.VTK_DOUBLE
+    elif dtype is 'f':
+        dtype = np.dtype('%sf32'%endian) # FLOAT
+        vtktype = vtk.VTK_FLOAT
+    elif dtype is 'i':
+        dtype = np.dtype('%si4'%endian) # INTEGER
+        vtktype = vtk.VTK_INT
+    else:
+        raise Exception('dtype \'%s\' unknown/.' % dtype)
+    # Return data types
+    return dtype, vtktype
+
+
+def _cleanDataNm(dataNm, FileName):
+    if dataNm is None or dataNm == '' or dataNm == 'values':
+        dataNm = os.path.splitext(os.path.basename(FileName))[0]
+    return dataNm

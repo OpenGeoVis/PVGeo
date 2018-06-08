@@ -1,7 +1,10 @@
-__all__ = ['gslib', 'packedBinaries', 'madagascar', 'delimitedText']
+__all__ = [
+    'gslib',
+    'packedBinaries',
+    'madagascar',
+    'delimitedText']
 
 import numpy as np
-import struct
 import csv
 import os
 from vtk.util import numpy_support as nps
@@ -60,7 +63,7 @@ def gslib(FileName, deli=' ', useTab=False, numIgLns=0, pdo=None):
 
 
 
-def packedBinaries(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
+def packedBinaries(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
     """
     @desc:
     This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
@@ -68,8 +71,8 @@ def packedBinaries(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
     @params:
     FileName : str : req : The absolute file name with path to read.
     dataNm : str : opt : A string name to use for the constructed vtkDataArray.
-    endian : char : opt : The endianness to unpack the values in `struct.unpack()`. Defaults to Big Endian `>`.
-    dtype : char : opt : A char to chose the data type when unpacking with struct.unpack(). Defaults to float `f`.
+    endian : char : opt : The endianness to unpack the values. Defaults to Native.
+    dtype : char : opt : A char to chose the data type when unpacking. `d` for float64 (double), `f` for float32 (float), or `i` for int
     pdo : vtk.vtkTable : opt : A pointer to the output data object.
 
     @return:
@@ -79,40 +82,20 @@ def packedBinaries(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
     if pdo is None:
         pdo = vtk.vtkTable() # vtkTable
 
+    dtype, vtktype = _getdTypes(dtype=dtype, endian=endian)
 
-    if dtype is 'd':
-        num_bytes = 8 # DOUBLE
-        vtktype = vtk.VTK_DOUBLE
-    elif dtype is 'f':
-        num_bytes = 4 # FLOAT
-        vtktype = vtk.VTK_FLOAT
-    elif dtype is 'i':
-        num_bytes = 4 # INTEGER
-        vtktype = vtk.VTK_INT
-    else:
-        raise Exception('dtype \'%s\' unknown/.' % dtype)
-
-    tn = os.stat(FileName).st_size / num_bytes
-    tn_string = str(tn)
-    raw = []
-    with open(FileName, 'rb') as file:
-        # Unpack by num_bytes
-        raw = struct.unpack(endian+tn_string+dtype, file.read(num_bytes*tn))
+    raw = np.fromfile(FileName, dtype=dtype)
 
     # Put raw data into vtk array
-    # TODO: dynamic typing
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
-
-    if dataNm is None or dataNm == '' or dataNm == 'values':
-        dataNm = os.path.splitext(os.path.basename(FileName))[0]
-    data.SetName(dataNm)
+    data.SetName(_cleanDataNm(dataNm, FileName))
 
     # Table with single column of data only
     pdo.AddColumn(data)
 
     return pdo
 
-def madagascar(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
+def madagascar(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
     """
     @desc:
     This reads in float or double data that is packed into a Madagascar binary file format with a leader header. The reader ignores all of the ascii header details by searching for the sequence of three special characters: EOL EOL EOT (\014\014\004) and it will treat the followng binary packed data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We will later implement the ability to create a gridded volume from the header info. This reader is a quick fix for Samir. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
@@ -121,8 +104,8 @@ def madagascar(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
     @params:
     FileName : str : req : The absolute file name with path to read.
     dataNm : str : opt : A string name to use for the constructed vtkDataArray.
-    endian : char : opt : The endianness to unpack the values in `struct.unpack()``. Defaults to Big Endian `>`.
-    dtype : char : opt : A char to chose the data type when unpacking with struct.unpack(). Defaults to float `f`.
+    endian : char : opt : The endianness to unpack the values. Defaults to Native.
+    dtype : char : opt : A char to chose the data type when unpacking. `d` for float64 (double), `f` for float32 (float), or `i` for int
     pdo : vtk.vtkTable : opt : A pointer to the output data object.
 
     @return:
@@ -132,40 +115,24 @@ def madagascar(FileName, dataNm=None, endian='>', dtype='f', pdo=None):
     if pdo is None:
         pdo = vtk.vtkTable() # vtkTable
 
+    dtype, vtktype = _getdTypes(dtype=dtype, endian=endian)
 
-    if dtype is 'd':
-        num_bytes = 8 # DOUBLE
-        vtktype = vtk.VTK_DOUBLE
-    elif dtype is 'f':
-        num_bytes = 4 # FLOAT
-        vtktype = vtk.VTK_FLOAT
-    elif dtype is 'i':
-        num_bytes = 4 # INTEGER
-        vtktype = vtk.VTK_INT
-    else:
-        raise Exception('dtype \'%s\' unknown/.' % dtype)
-
+    CTLSEQ = b'\014\014\004' # The control sequence to seperate header from data
+    rpl = b''
     raw = []
     with open(FileName, 'r') as file:
-        ctlseq = b'\014\014\004'
-        rpl = b''
         raw = file.read()
-        idx = raw.find(ctlseq)
+        idx = raw.find(CTLSEQ)
         if idx == -1:
             warnings.warn('This is not a single stream RSF format file. Treating entire file as packed binary data.')
         else:
             raw = raw[idx:] # deletes the header
-            raw = raw.replace(ctlseq, rpl) # removes the control sequence
-        tn = len(raw)/num_bytes
-        fmt = endian+str(int(tn))+dtype
-        raw = struct.unpack(fmt, raw)
+            raw = raw.replace(CTLSEQ, rpl) # removes the control sequence
+        raw = np.fromstring(raw, dtype=dtype)
 
     # Put raw data into vtk array
-    # TODO: dynamic typing
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
-    if dataNm is None or dataNm == '' or dataNm == 'values':
-        dataNm = os.path.splitext(os.path.basename(FileName))[0]
-    data.SetName(dataNm)
+    data.SetName(_cleanDataNm(dataNm, FileName))
 
     # Table with single column of data only
     pdo.AddColumn(data)
