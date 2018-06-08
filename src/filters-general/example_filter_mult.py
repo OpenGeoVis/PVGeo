@@ -3,9 +3,9 @@ Example python filter demonstrating some of the features available for
 python programmable filters.
 """
 # Name to be used for coding/macros:
-Name = 'ExampleMult'
+Name = 'ExampleFilterMultInput'
 # Label for the filter menu:
-Label = 'ExampleMult'
+Label = 'Example FIlter Multiple Inputs'
 # The filter/source menu category:
 FilterCategory = 'PVGP Filters'
 
@@ -17,11 +17,7 @@ InputNames = ['Input foo 1', 'Input foo 2']
 InputDataType = ['vtkDataObject', 'vtkDataObject']
 OutputDataType = 'vtkPolyData' # Must be specified when many inputs specified
 
-# How to add input arrays:
-#- Number of Input array drop down choices
-NumberOfInputArrayChoices = [1,1]
-#- Labels for the array drop down choices:
-InputArrayLabels = [['Array1'],[]]
+# NOTE: Input arrays are not supported for filters with multiple inputs.
 
 # Any extra XML GUI components you might like:
 ExtraXml = ''
@@ -41,11 +37,8 @@ PropertiesHelp = dict(
 def RequestData(self):
     from vtk.util import numpy_support as nps
     import PVGPpy.helpers as inputhelp
-    pdi = self.GetInput() # VTK Data Type
+    # NOTE: `inputs` is a global variable containing the inputs in order.
     pdo = self.GetOutput() # VTK Data Type
-    # Get input array info (selection made in drop down menu)
-    name = inputhelp.getSelectedArrayName(self, 0)
-    field = inputhelp.getSelectedArrayField(self, 0)
 
-    print(name, field)
-    print(inputs)
+    print(inputs[0])
+    print(inputs[1])

@@ -364,15 +364,20 @@ def getInputArraysXML(info):
     numberOfInputs = getNumberOfInputs(info)
     numArrays = info.get("NumberOfInputArrayChoices")
 
+    if numberOfInputs > 1:
+        print('WARNING: Filters with multiple inputs do not support input selection arrays at this time.')
+        return ''
+
     def getLabels():
         labels = info.get('InputArrayLabels', None)
+        """FOR MULTIPLE INPUTS
         if labels is None and numberOfInputs > 1:
             labels = [None]*numberOfInputs
             return labels
         if numberOfInputs > 1:
             for l in labels:
                 if type(l) is not list:
-                    raise Exception('`InputArrayLabels` is improperly structured. Must be a list of lists.')
+                    raise Exception('`InputArrayLabels` is improperly structured. Must be a list of lists.')"""
         return labels
 
     labels = getLabels()
@@ -390,6 +395,7 @@ def getInputArraysXML(info):
         return labels
 
     # Recursively call for each input
+    """FOR MULTIPLE INPUTS
     if numberOfInputs > 1:
         if type(numArrays) is not list:
             raise Exception('When multiple inputs, the `NumberOfInputArrayChoices` must be a list of ints for the number of arrays from each input.')
@@ -407,10 +413,10 @@ def getInputArraysXML(info):
             out.append(_helpArraysXML(info, inputName=inputNames[i], numArrays=numArrays[i], labels=labs))
         outstr = "\n".join(inp for inp in out)
         return outstr
-    else:
-        # Get parameters from info and call:
-        labels = fixArrayLabels(labels, numArrays)
-        return _helpArraysXML(info, inputName=None, numArrays=numArrays, labels=labels)
+    else:"""
+    # Get parameters from info and call:
+    labels = fixArrayLabels(labels, numArrays)
+    return _helpArraysXML(info, inputName=None, numArrays=numArrays, labels=labels)
 
 
 def getVersionAttribute():

@@ -1100,7 +1100,7 @@
     </SourceProxy>
 
     <!-- ./filters-general//example_filter_mult.py -->
-    <SourceProxy name="ExampleMult" class="vtkPythonProgrammableFilter" label="ExampleMult">
+    <SourceProxy name="ExampleFilterMultInput" class="vtkPythonProgrammableFilter" label="Example FIlter Multiple Inputs">
       <Documentation
         long_help="This is a simple example of a Python Programmable Filter with mutiple inputs."
         short_help="This is a simple example of a Python Programmable Filter with mutiple inputs.">
@@ -1161,65 +1161,6 @@
           </DataTypeDomain>
       </InputProperty>
 
-      <StringVectorProperty
-        name="SelectInputScalars0"
-        label="Array1"
-        command="SetInputArrayToProcess"
-        default_values="0 NULL"
-        number_of_elements="5"
-        element_types="0 0 0 0 2"
-        animateable="0">
-        <ArrayListDomain
-          name="array_list"
-          attribute_type="Scalars"
-          input_domain_name="inputs_array">
-          <RequiredProperties>
-            <Property
-              name="Input foo 1"
-              function="Input" />
-          </RequiredProperties>
-        </ArrayListDomain>
-        <FieldDataDomain
-          name="field_list">
-          <RequiredProperties>
-            <Property
-              name="Input foo 1"
-              function="Input" />
-          </RequiredProperties>
-        </FieldDataDomain>
-      </StringVectorProperty>
-
-
-
-      <StringVectorProperty
-        name="SelectInputScalars0"
-        label="Array 1"
-        command="SetInputArrayToProcess"
-        default_values="0 NULL"
-        number_of_elements="5"
-        element_types="0 0 0 0 2"
-        animateable="0">
-        <ArrayListDomain
-          name="array_list"
-          attribute_type="Scalars"
-          input_domain_name="inputs_array">
-          <RequiredProperties>
-            <Property
-              name="Input foo 2"
-              function="Input" />
-          </RequiredProperties>
-        </ArrayListDomain>
-        <FieldDataDomain
-          name="field_list">
-          <RequiredProperties>
-            <Property
-              name="Input foo 2"
-              function="Input" />
-          </RequiredProperties>
-        </FieldDataDomain>
-      </StringVectorProperty>
-
-
 
 
 
@@ -1227,7 +1168,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;pdi = self.GetInput() # VTK Data Type&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Get input array info (selection made in drop down menu)&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;&#xA;print(name, field)&#xA;print(inputs)&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;# NOTE: `inputs` is a global variable containing the inputs in order.&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;&#xA;print(inputs[0])&#xA;print(inputs[1])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
