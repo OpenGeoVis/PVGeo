@@ -5,7 +5,9 @@ import numpy as np
 
 # This is the function to get the requested time step
 def _getUpdateTimestep(algorithm):
-    """Returns the requested time value, or None if not present"""
+    """
+    desc: Returns the requested time value, or None if not present
+    """
     executive = algorithm.GetExecutive()
     outInfo = executive.GetOutputInformation(0)
     if outInfo.Has(executive.UPDATE_TIME_STEP()):
@@ -15,7 +17,9 @@ def _getUpdateTimestep(algorithm):
 
 
 def _calculateTimeRange(num, dt=1.0):
-    """Discretizes time range accoridng to step size `dt` in seconds"""
+    """
+    desc: Discretizes time range accoridng to step size `dt` in seconds
+    """
     return np.arange(0,num*dt,dt, dtype=float)
 
 
@@ -57,7 +61,7 @@ def setOutputTimesteps(algorithm, files, dt=1.0):
     dt : float : optional : The discrete value in seconds for the time step
 
     @return:
-    algorithm : Returns the argument 
+    algorithm : Returns the argument
     """
     if len(files) < 2:
         # Only one file so do not update time steps
