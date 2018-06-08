@@ -282,6 +282,8 @@ def getInputPropertyXml(info, inputDataType=None, name="Input", port=0):
     # Now build each input's XML
     if inputDataType is None:
         inputDataType = info.get('InputDataType', 'vtkDataObject')
+    if inputDataType is '':
+        inputDataType = 'vtkDataObject'
 
     inputDataTypeDomain = ''
     inputDataTypeDomain = '''
