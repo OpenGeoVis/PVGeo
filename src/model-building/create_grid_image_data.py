@@ -1,5 +1,5 @@
-Name = 'CreateEmptyGrid'
-Label = 'Create Empty Grid'
+Name = 'CreateUniformGrid'
+Label = 'Create Uniform Grid'
 Help = ''
 
 NumberOfInputs = 0

@@ -3,8 +3,131 @@
   <ProxyGroup name="sources">
 
 
+    <!-- ./model-building//create_grid_even_rectilinear.py -->
+    <SourceProxy name="CreateEvenRectilinearGrid" class="vtkPythonProgrammableFilter" label="Create Even Rectilinear Grid">
+      <Documentation
+        long_help="This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed."
+        short_help="This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGP Model Building" />
+      </Hints>
+
+      <!-- Built on version: 0.6.1 -->
+      <StringVectorProperty
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.1"
+        number_of_elements="1">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </StringVectorProperty>
+
+      <!-- Output data type: "vtkRectilinearGrid" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="3"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Num_Cells"
+        label="Num Cells"
+        initial_string="Num_Cells"
+        command="SetParameter"
+        animateable="1"
+        default_values="10 10 10"
+        number_of_elements="3">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="X_Range"
+        label="X Range"
+        initial_string="X_Range"
+        command="SetParameter"
+        animateable="1"
+        default_values="1957240.0 1982840.0"
+        number_of_elements="2">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="Y_Range"
+        label="Y Range"
+        initial_string="Y_Range"
+        command="SetParameter"
+        animateable="1"
+        default_values="5827170.0 5852770.0"
+        number_of_elements="2">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="Z_Range"
+        label="Z Range"
+        initial_string="Z_Range"
+        command="SetParameter"
+        animateable="1"
+        default_values="-25267.4 332.6"
+        number_of_elements="2">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="import numpy as np&#xA;from vtk.util import numpy_support as nps&#xA;&#xA;pdo = self.GetOutput() #vtkRectilinearGrid&#xA;nx,ny,nz = Num_Cells[0]+1,Num_Cells[1]+1,Num_Cells[2]+1&#xA;&#xA;xcoords = np.linspace(X_Range[0], X_Range[1], num=nx)&#xA;ycoords = np.linspace(Y_Range[0], Y_Range[1], num=ny)&#xA;zcoords = np.linspace(Z_Range[0], Z_Range[1], num=nz)&#xA;&#xA;data = np.random.rand(nx*ny*nz)&#xA;&#xA;# CONVERT TO VTK #&#xA;xcoords = nps.numpy_to_vtk(num_array=xcoords,deep=True)&#xA;ycoords = nps.numpy_to_vtk(num_array=ycoords,deep=True)&#xA;zcoords = nps.numpy_to_vtk(num_array=zcoords,deep=True)&#xA;&#xA;pdo.SetDimensions(nx+1,ny+1,nz+1) # note this subtracts 1&#xA;pdo.SetXCoordinates(xcoords)&#xA;pdo.SetYCoordinates(ycoords)&#xA;pdo.SetZCoordinates(zcoords)&#xA;&#xA;data = nps.numpy_to_vtk(num_array=data,deep=True)&#xA;data.SetName('Random Data')&#xA;# THIS IS CELL DATA! Add the model data to CELL data:&#xA;pdo.GetCellData().AddArray(data)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;nx,ny,nz = Num_Cells[0]+1,Num_Cells[1]+1,Num_Cells[2]+1&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+
     <!-- ./model-building//create_grid_image_data.py -->
-    <SourceProxy name="CreateEmptyGrid" class="vtkPythonProgrammableFilter" label="Create Empty Grid">
+    <SourceProxy name="CreateUniformGrid" class="vtkPythonProgrammableFilter" label="Create Uniform Grid">
       <Documentation
         long_help=""
         short_help="">
@@ -95,6 +218,129 @@
         command="SetInformationScript"
         number_of_elements="1"
         default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;nx,ny,nz = extent[0],extent[1],extent[2]&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property is a python script that is executed during
+        the RequestInformation pipeline pass. Use this to provide information
+        such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+      </StringVectorProperty>
+
+
+      <StringVectorProperty command="SetPythonPath"
+                            name="PythonPath"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+
+    <!-- ./model-building//create_grid_odd_rectilinear.py -->
+    <SourceProxy name="CreateOddRectilinearGrid" class="vtkPythonProgrammableFilter" label="Create Odd Rectilinear Grid">
+      <Documentation
+        long_help="This creates a vtkRectilinearGrid."
+        short_help="This creates a vtkRectilinearGrid.">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGP Model Building" />
+      </Hints>
+
+      <!-- Built on version: 0.6.1 -->
+      <StringVectorProperty
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.6.1"
+        number_of_elements="1">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </StringVectorProperty>
+
+      <!-- Output data type: "vtkRectilinearGrid" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+                         default_values="3"
+                         name="OutputDataSetType"
+                         number_of_elements="1"
+                         panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+
+
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Num_Cells"
+        label="Num Cells"
+        initial_string="Num_Cells"
+        command="SetParameter"
+        animateable="1"
+        default_values="10 10 10"
+        number_of_elements="3">
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="X_Range"
+        label="X Range"
+        initial_string="X_Range"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.0 1.0"
+        number_of_elements="2">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="Y_Range"
+        label="Y Range"
+        initial_string="Y_Range"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.0 1.0"
+        number_of_elements="2">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="Z_Range"
+        label="Z Range"
+        initial_string="Z_Range"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.0 1.0"
+        number_of_elements="2">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="import numpy as np&#xA;from vtk.util import numpy_support as nps&#xA;&#xA;pdo = self.GetOutput() #vtkRectilinearGrid&#xA;nx,ny,nz = Num_Cells[0]+1,Num_Cells[1]+1,Num_Cells[2]+1&#xA;&#xA;xcoords = np.linspace(X_Range[0], X_Range[1], num=nx)&#xA;ycoords = np.linspace(Y_Range[0], Y_Range[1], num=ny)&#xA;zcoords = np.linspace(Z_Range[0], Z_Range[1], num=nz)&#xA;&#xA;data = np.random.rand(nx*ny*nz)&#xA;&#xA;# CONVERT TO VTK #&#xA;xcoords = nps.numpy_to_vtk(num_array=xcoords,deep=True)&#xA;ycoords = nps.numpy_to_vtk(num_array=ycoords,deep=True)&#xA;zcoords = nps.numpy_to_vtk(num_array=zcoords,deep=True)&#xA;data = nps.numpy_to_vtk(num_array=data,deep=True)&#xA;&#xA;pdo.SetDimensions(nx+1,ny+1,nz+1) # note this subtracts 1&#xA;pdo.SetXCoordinates(xcoords)&#xA;pdo.SetYCoordinates(ycoords)&#xA;pdo.SetZCoordinates(zcoords)&#xA;&#xA;data.SetName('Random Data')&#xA;# THIS IS CELL DATA! Add the model data to CELL data:&#xA;pdo.GetCellData().AddArray(data)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+      <StringVectorProperty
+        name="InformationScript"
+        label="RequestInformation Script"
+        command="SetInformationScript"
+        number_of_elements="1"
+        default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;nx,ny,nz = Num_Cells[0]+1,Num_Cells[1]+1,Num_Cells[2]+1&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
