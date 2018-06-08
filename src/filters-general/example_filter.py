@@ -12,15 +12,17 @@ FilterCategory = 'PVGP Filters'
 # A general overview of the plugin
 Help = 'This is a simple example of a Python Programmable Filter'
 
-NumberOfInputs = 2 # Specify as many as you would like
-InputDataType = '' # Leave blank if input doesn't matter
-OutputDataType = '' # Leave blank to preserve input data type
+NumberOfInputs = 1 # Specify as many as you would like
+InputDataType = 'vtkDataObject' # Leave blank if input doesn't matter
+OutputDataType = 'vtkDataObject' # Leave blank to preserve input data type
 
 # How to add input arrays:
 #- Number of Input array drop down choices
-NumberOfInputArrayChoices = 1
+NumberOfInputArrayChoices = 2
 #- Labels for the array drop down choices:
-InputArrayLabels = ['Array']
+InputArrayLabels = ['Array Input 1', 'Array Input 2']
+
+
 # Any extra XML GUI components you might like:
 ExtraXml = ''
 
@@ -53,9 +55,11 @@ def RequestData(self):
     field = inputhelp.getSelectedArrayField(self, 0)
 
     if test_bool:
-        print(name)
+        print(name,field)
     else:
-        print(field)
+        print(test_string)
+
+
 
 # Use if you need to set extents and what not
 #- Information, spatial extent, ect

@@ -2,7 +2,7 @@
 
 """See blog for details: https://blog.kitware.com/easy-customization-of-the-paraview-python-programmable-filter-property-panel/
 
-This code has been heavily modified by Bane Sullivan (banesullivan@gmail.com) for making customized filters in the geoscience data visualization. Credit does not go to Bane for this script but to the author of the above blog post.
+This code has been heavily modified by Bane Sullivan <banesullivan@gmail.com> for making customized filters in the geoscience data visualization. Credit does not go to Bane for this script but to the author of the above blog post.
 
 Acknowledgements:
     Daan van Vugt <daanvanvugt@gmail.com> for file series implementation
@@ -241,44 +241,83 @@ def getNumberOfInputs(info):
     return info.get('NumberOfInputs', 1)
 
 
-def getInputPropertyXml(info):
+def getInputPropertyXml(info, inputDataType=None, name="Input", port=0):
 
     numberOfInputs = getNumberOfInputs(info)
     if not numberOfInputs:
         return ''
 
+    # Recursively call if multiple inputs
+    if numberOfInputs > 1 and inputDataType is None:
+        inputDataType = info.get('InputDataType', 'vtkDataObject')
+        if type(inputDataType) is not list:
+            inputDataType = [inputDataType] * numberOfInputs
+        if len(inputDataType) != numberOfInputs:
+            raise Exception('You must specify `InputDataType` as list with `NumberOfInputs` elements.')
+        # Now handle input names: InputNames
+        inputNames = info.get('InputNames', [])
+        if type(inputNames) is not list:
+            raise Exception('`InputNames` must be a list of names.')
+        if type(inputNames) is not list or len(inputNames) != numberOfInputs:
+            num = len(inputNames)
+            if num > numberOfInputs:
+                raise Exception('Too many `InputNames` given.')
+            # Autogenerate input names
+            print('WARNING: length of `InputNames` does not match `numberOfInputs`.')
+            # Fill in missing input names
+            fill = numberOfInputs - num
+            for i in range(fill):
+                inputNames.append('Input %d' % (num + i + 1))
+            # Reset InputNames in info so other functions can access them
+            info['InputNames'] = inputNames
+        # Now perfrom recursion
+        inputs = []
+        for i in range(len(inputDataType)):
+            inputs.append(getInputPropertyXml(info,inputDataType=inputDataType[i], name=inputNames[i], port=i))
+        outstr = "\n".join(inp for inp in inputs)
+        return outstr
 
-    inputDataType = info.get('InputDataType', 'vtkDataObject')
+    ############
+    # TODO: this doesn't work because: vtkPythonProgrammableFilter (0x6080007a7ee0): Attempt to connect input port index 1 for an algorithm with 1 input ports.
+    # Now build each input's XML
+    if inputDataType is None:
+        inputDataType = info.get('InputDataType', 'vtkDataObject')
+    if inputDataType is '':
+        inputDataType = 'vtkDataObject'
 
     inputDataTypeDomain = ''
-    if inputDataType:
-        inputDataTypeDomain = '''
+    inputDataTypeDomain = '''
           <DataTypeDomain name="input_type">
             <DataType value="%s"/>
           </DataTypeDomain>''' % inputDataType
 
     inputPropertyAttributes = 'command="SetInputConnection"'
     if numberOfInputs > 1:
-        inputPropertyAttributes = '''\
-            clean_command="RemoveAllInputs"
-            command="AddInputConnection"
-            multiple_input="1"'''
+        inputPropertyAttributes = '''command="AddInputConnection"
+        port_index="%d"''' % 0 #(port) # clean_command="RemoveAllInputs" multiple_input="1"
+        # TODO: Find a way for python filters to take multiple input ports
 
     inputPropertyXml = '''
       <InputProperty
-        name="Input"
+        name="%s"
         %s>
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          %s
-      </InputProperty>''' % (inputPropertyAttributes, inputDataTypeDomain)
+%s
+      </InputProperty>''' % (name, inputPropertyAttributes, inputDataTypeDomain)
 
     return inputPropertyXml
 
-def getInputArraysXML(info):
-    def _getInputArrayXML(idx, label):
+
+
+def _helpArraysXML(info, inputName=None, numArrays=None, labels=None):
+    # Gets input arrays XML for each input
+    ###################################################
+    # Perfrom XML generation for single input at a time
+    def _getInputArrayXML(idx, label, name=None):
+        if name is None: name = 'Input'
         return'''
       <StringVectorProperty
         name="SelectInputScalars%d"
@@ -294,7 +333,7 @@ def getInputArraysXML(info):
           input_domain_name="inputs_array">
           <RequiredProperties>
             <Property
-              name="Input"
+              name="%s"
               function="Input" />
           </RequiredProperties>
         </ArrayListDomain>
@@ -302,30 +341,84 @@ def getInputArraysXML(info):
           name="field_list">
           <RequiredProperties>
             <Property
-              name="Input"
+              name="%s"
               function="Input" />
           </RequiredProperties>
         </FieldDataDomain>
-      </StringVectorProperty>''' % (idx, label, idx)
+      </StringVectorProperty>''' % (idx, label, idx, name, name)
 
+
+    xml = ''
+    for i in range(numArrays):
+        xml += _getInputArrayXML(i, labels[i], name=inputName)
+        xml += '\n\n'
+    return xml
+
+
+
+
+def getInputArraysXML(info):
+    # TODO: make sure this is called AFTER input XML is built
+    # TODO: handle multiple inputs case
     # Get details
     if "NumberOfInputArrayChoices" not in info:
         return ''
-    num = info.get("NumberOfInputArrayChoices")
-    labels = []
-    if "InputArrayLabels" not in info:
-        labels = ['Array %d' % (i+1) for i in range(num)]
-    else:
-        labels = info.get("InputArrayLabels")
-        if len(labels) < num:
-            toadd = num - len(labels)
+    numberOfInputs = getNumberOfInputs(info)
+    numArrays = info.get("NumberOfInputArrayChoices")
+
+    if numberOfInputs > 1:
+        print('WARNING: Filters with multiple inputs do not support input selection arrays at this time.')
+        return ''
+
+    def getLabels():
+        labels = info.get('InputArrayLabels', None)
+        """FOR MULTIPLE INPUTS
+        if labels is None and numberOfInputs > 1:
+            labels = [None]*numberOfInputs
+            return labels
+        if numberOfInputs > 1:
+            for l in labels:
+                if type(l) is not list:
+                    raise Exception('`InputArrayLabels` is improperly structured. Must be a list of lists.')"""
+        return labels
+
+    labels = getLabels()
+
+    def fixArrayLabels(labels, numArrays):
+        if numArrays is 0:
+            return ''
+        if labels is None:
+            labels = ['Array %d' % (i+1) for i in range(numArrays)]
+            return labels
+        if len(labels) < numArrays:
+            toadd = numArrays - len(labels)
             for i in range(toadd):
                 labels.append('Array %d' % (i + len(labels) + 1))
-    xml = ''
-    for i in range(num):
-        xml += _getInputArrayXML(i, labels[i])
-        xml += '\n\n'
-    return xml
+        return labels
+
+    # Recursively call for each input
+    """FOR MULTIPLE INPUTS
+    if numberOfInputs > 1:
+        if type(numArrays) is not list:
+            raise Exception('When multiple inputs, the `NumberOfInputArrayChoices` must be a list of ints for the number of arrays from each input.')
+        if len(numArrays) != numberOfInputs:
+            raise Exception('You must spectify how many arrays come from each input. `len(NumberOfInputArrayChoices) != NumberOfInputs`.')
+        inputNames = info.get('InputNames')
+        print(inputNames)
+
+        # Now perfrom recursion
+        out = []
+        for i in range(numberOfInputs):
+            # Fix labels
+            print(i)
+            labs = fixArrayLabels(labels[i], numArrays[i])
+            out.append(_helpArraysXML(info, inputName=inputNames[i], numArrays=numArrays[i], labels=labs))
+        outstr = "\n".join(inp for inp in out)
+        return outstr
+    else:"""
+    # Get parameters from info and call:
+    labels = fixArrayLabels(labels, numArrays)
+    return _helpArraysXML(info, inputName=None, numArrays=numArrays, labels=labels)
 
 
 def getVersionAttribute():
@@ -348,6 +441,9 @@ def getOutputDataSetTypeXml(info):
 
 
     outputDataType = info.get('OutputDataType', '')
+
+    if type(outputDataType) is list:
+        raise Exception('Cannot have multiple OutputDataType as there can only be one output.')
 
     # these values come from vtkType.h in VTK Code Base
     typeMap = {
@@ -376,6 +472,11 @@ def getOutputDataSetTypeXml(info):
     }
 
     typeValue = typeMap[outputDataType]
+
+    # Make sure output type is specified if more than one input
+    # TODO: we could check to see if all input types are same and use that...
+    if typeValue is 8 and getNumberOfInputs(info) > 1:
+        raise Exception('OutputDataType must be specified when there are multiple inputs.')
 
     return '''
       <!-- Output data type: "%s" -->

@@ -53,7 +53,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkTable"/>
           </DataTypeDomain>
@@ -301,7 +301,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkTable"/>
           </DataTypeDomain>
