@@ -5,7 +5,7 @@ python programmable filters.
 # Name to be used for coding/macros:
 Name = 'ExampleFilterMultInput'
 # Label for the filter menu:
-Label = 'Example FIlter Multiple Inputs'
+Label = 'Example Filter Multiple Inputs'
 # The filter/source menu category:
 FilterCategory = 'PVGP Filters'
 

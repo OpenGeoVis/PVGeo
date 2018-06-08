@@ -1100,7 +1100,7 @@
     </SourceProxy>
 
     <!-- ./filters-general//example_filter_mult.py -->
-    <SourceProxy name="ExampleFilterMultInput" class="vtkPythonProgrammableFilter" label="Example FIlter Multiple Inputs">
+    <SourceProxy name="ExampleFilterMultInput" class="vtkPythonProgrammableFilter" label="Example Filter Multiple Inputs">
       <Documentation
         long_help="This is a simple example of a Python Programmable Filter with mutiple inputs."
         short_help="This is a simple example of a Python Programmable Filter with mutiple inputs.">
