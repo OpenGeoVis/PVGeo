@@ -12,7 +12,7 @@ FilterCategory = 'PVGP Filters'
 # A general overview of the plugin
 Help = 'This is a simple example of a Python Programmable Filter'
 
-NumberOfInputs = 1 # Specify as many as you would like
+NumberOfInputs = 2 # Specify as many as you would like
 InputDataType = '' # Leave blank if input doesn't matter
 OutputDataType = '' # Leave blank to preserve input data type
 

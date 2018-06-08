@@ -59,7 +59,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkTable"/>
           </DataTypeDomain>
@@ -180,7 +180,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkPolyData"/>
           </DataTypeDomain>
@@ -285,12 +285,14 @@
 
       <InputProperty
         name="Input"
-        command="SetInputConnection">
+                    clean_command="RemoveAllInputs"
+            command="AddInputConnection"
+            multiple_input="2">
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
       </InputProperty>
 
       <StringVectorProperty
@@ -490,7 +492,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkPolyData"/>
           </DataTypeDomain>
@@ -588,7 +590,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkDataObject"/>
           </DataTypeDomain>
@@ -743,7 +745,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkTable"/>
           </DataTypeDomain>
@@ -932,7 +934,7 @@
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
-          
+
           <DataTypeDomain name="input_type">
             <DataType value="vtkDataObject"/>
           </DataTypeDomain>
