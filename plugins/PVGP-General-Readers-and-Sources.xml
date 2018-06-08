@@ -260,7 +260,7 @@
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP General Sources" />
-        <ReaderFactory extensions="dat csv txt"
+        <ReaderFactory extensions="dat csv txt text ascii"
           file_description="PVGP: Delimited Text File" />
       </Hints>
 
@@ -315,10 +315,22 @@
             </Documentation>
         </DoubleVectorProperty>
         <Hints>
-            <ReaderFactory extensions="dat csv txt"
+            <ReaderFactory extensions="dat csv txt text ascii"
                     file_description="PVGP: Delimited Text File" />
         </Hints>
         
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="Comments"
+        label="Comments"
+        initial_string="Comments"
+        command="SetParameter"
+        animateable="1"
+        default_values="#"
+        number_of_elements="1">
+        <Documentation>The identifier for comments within the file.</Documentation>
+      </StringVectorProperty>
 
       <StringVectorProperty
         panel_visibility="default"
@@ -329,7 +341,7 @@
         animateable="1"
         default_values=" "
         number_of_elements="1">
-        <Documentation></Documentation>
+        <Documentation>The input file's delimiter. To use a tab delimiter please set the Use_Tab_Delimiter parameter.</Documentation>
       </StringVectorProperty>
 
       <IntVectorProperty
@@ -342,19 +354,19 @@
         default_values="1"
         number_of_elements="1">
         <BooleanDomain name="bool" />
-        <Documentation></Documentation>
+        <Documentation>A boolean for if the delimited file has header titles for the data arrays.</Documentation>
       </IntVectorProperty>
 
       <IntVectorProperty
         panel_visibility="default"
-        name="Number_Ignore_Lines"
-        label="Number Ignore Lines"
-        initial_string="Number_Ignore_Lines"
+        name="Skiprows"
+        label="Skiprows"
+        initial_string="Skiprows"
         command="SetParameter"
         animateable="1"
         default_values="0"
         number_of_elements="1">
-        <Documentation></Documentation>
+        <Documentation>The integer number of rows to skip at the top of the file</Documentation>
       </IntVectorProperty>
 
       <DoubleVectorProperty
@@ -379,14 +391,14 @@
         default_values="0"
         number_of_elements="1">
         <BooleanDomain name="bool" />
-        <Documentation>A boolean to override the Delimiter_Field and use Tab delimiter.</Documentation>
+        <Documentation>A boolean to override the Delimiter_Field and use a Tab delimiter.</Documentation>
       </IntVectorProperty>
 
       <StringVectorProperty
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import delimitedText, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;delimitedText(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, numIgLns=Number_Ignore_Lines, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import delimitedText, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;delimitedText(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, skiprows=Skiprows, comments=Comments, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

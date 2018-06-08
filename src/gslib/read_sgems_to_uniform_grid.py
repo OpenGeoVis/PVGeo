@@ -9,13 +9,18 @@ ReaderDescription = 'PVGP: SGeMS Grid File Format'
 
 
 Properties = dict(
+    Skiprows=0,
     Delimiter_Field=' ',
     Use_tab_delimiter=False,
+    Comments='#',
     Time_Step=1.0
 )
 
 PropertiesHelp = dict(
+    Skiprows='The integer number of rows to skip at the top of the file',
+    Delimiter_Field="The input file's delimiter. To use a tab delimiter please set the Use_Tab_Delimiter parameter.",
     Use_Tab_Delimiter='A boolean to override the Delimiter_Field and use Tab delimiter.',
+    Comments='The identifier for comments within the file.',
     Time_Step='An advanced property for the time step in seconds.'
 )
 
@@ -29,7 +34,7 @@ def RequestData():
 
     # Generate Output
     pdo = self.GetOutput() # vtkTable
-    sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, pdo=pdo)
+    sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, skiprows=Skiprows, comments=Comments, pdo=pdo)
 
 
 def RequestInformation():
