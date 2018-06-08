@@ -9,14 +9,18 @@ ReaderDescription = 'PVGP: GSLIB File Format'
 
 
 Properties = dict(
-    Number_Ignore_Lines=0,
+    Skiprows=0,
     Delimiter_Field=' ',
     Use_Tab_Delimiter=False,
+    Comments='#',
     Time_Step=1.0
 )
 
 PropertiesHelp = dict(
+    Skiprows='The integer number of rows to skip at the top of the file',
+    Delimiter_Field="The input file's delimiter. To use a tab delimiter please set the Use_Tab_Delimiter parameter.",
     Use_Tab_Delimiter='A boolean to override the Delimiter_Field and use Tab delimiter.',
+    Comments='The identifier for comments within the file.',
     Time_Step='An advanced property for the time step in seconds.'
 )
 
@@ -28,10 +32,9 @@ def RequestData():
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
 
-    # Generate Output
+    # Generate Output, use: print(os.path.basename(FileNames[i]) + ': ' + h)
     pdo = self.GetOutput() # vtkTable
-    tbl, h = gslib(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)
-    #print(os.path.basename(FileNames[i]) + ': ' + h)
+    tbl, h = gslib(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, skiprows=Skiprows, comments=Comments, pdo=pdo)
 
 def RequestInformation(self):
     from PVGPpy.read import setOutputTimesteps

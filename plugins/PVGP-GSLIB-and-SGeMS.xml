@@ -73,6 +73,18 @@
 
       <StringVectorProperty
         panel_visibility="default"
+        name="Comments"
+        label="Comments"
+        initial_string="Comments"
+        command="SetParameter"
+        animateable="1"
+        default_values="#"
+        number_of_elements="1">
+        <Documentation>The identifier for comments within the file.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
         name="Delimiter_Field"
         label="Delimiter Field"
         initial_string="Delimiter_Field"
@@ -80,19 +92,19 @@
         animateable="1"
         default_values=" "
         number_of_elements="1">
-        <Documentation></Documentation>
+        <Documentation>The input file's delimiter. To use a tab delimiter please set the Use_Tab_Delimiter parameter.</Documentation>
       </StringVectorProperty>
 
       <IntVectorProperty
         panel_visibility="default"
-        name="Number_Ignore_Lines"
-        label="Number Ignore Lines"
-        initial_string="Number_Ignore_Lines"
+        name="Skiprows"
+        label="Skiprows"
+        initial_string="Skiprows"
         command="SetParameter"
         animateable="1"
         default_values="0"
         number_of_elements="1">
-        <Documentation></Documentation>
+        <Documentation>The integer number of rows to skip at the top of the file</Documentation>
       </IntVectorProperty>
 
       <DoubleVectorProperty
@@ -124,7 +136,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import os&#xA;from PVGPpy.read import gslib, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslib(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, numIgLns=Number_Ignore_Lines, pdo=pdo)&#xA;"
+        default_values="import os&#xA;from PVGPpy.read import gslib, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output, use: print(os.path.basename(FileNames[i]) + ': ' + h)&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslib(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, skiprows=Skiprows, comments=Comments, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -228,6 +240,18 @@
 
       <StringVectorProperty
         panel_visibility="default"
+        name="Comments"
+        label="Comments"
+        initial_string="Comments"
+        command="SetParameter"
+        animateable="1"
+        default_values="#"
+        number_of_elements="1">
+        <Documentation>The identifier for comments within the file.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
         name="Delimiter_Field"
         label="Delimiter Field"
         initial_string="Delimiter_Field"
@@ -235,8 +259,20 @@
         animateable="1"
         default_values=" "
         number_of_elements="1">
-        <Documentation></Documentation>
+        <Documentation>The input file's delimiter. To use a tab delimiter please set the Use_Tab_Delimiter parameter.</Documentation>
       </StringVectorProperty>
+
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Skiprows"
+        label="Skiprows"
+        initial_string="Skiprows"
+        command="SetParameter"
+        animateable="1"
+        default_values="0"
+        number_of_elements="1">
+        <Documentation>The integer number of rows to skip at the top of the file</Documentation>
+      </IntVectorProperty>
 
       <DoubleVectorProperty
         panel_visibility="advanced"
@@ -267,7 +303,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import sgemsGrid, getTimeStepFileIndex&#xA;from paraview import util&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.read import sgemsGrid, getTimeStepFileIndex&#xA;from paraview import util&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, skiprows=Skiprows, comments=Comments, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

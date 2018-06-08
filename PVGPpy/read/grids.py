@@ -9,7 +9,7 @@ import json
 import struct
 import base64
 
-def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
+def sgemsGrid(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=None):
     """
     @desc:
         Generates vtkImageData from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
@@ -18,6 +18,8 @@ def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
         FileName : str : req : The file name / absolute path for the input file in SGeMS grid format.
         deli : str : opt : The input files delimiter. To use a tab delimiter please set the `useTab`.
         useTab : boolean : opt : A boolean that describes whether to use a tab delimiter.
+        skiprows : int : opt : The integer number of rows to skip at the top of the file.
+        comments : char : opt : The identifier for comments within the file.
         pdo : vtkImageData : opt : A pointer to the output data object.
 
     @return:
@@ -28,7 +30,7 @@ def sgemsGrid(FileName, deli=' ', useTab=False, pdo=None):
     if pdo is None:
         pdo = vtk.vtkImageData() # vtkImageData
 
-    table, header = gslib(FileName, deli=deli, useTab=useTab, numIgLns=0, pdo=None)
+    table, header = gslib(FileName, deli=deli, useTab=useTab, skiprows=skiprows, comments='#', pdo=None)
     h = header.split(deli)
     n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
 
@@ -63,7 +65,7 @@ def sgemsExtent(FileName, deli=' ', useTab=False):
         h = reader.next()
         n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
         f.close()
-        return (0,n1-1, 0,n2-1, 0,n3-1)
+    return (0,n1-1, 0,n2-1, 0,n3-1)
 
 
 
