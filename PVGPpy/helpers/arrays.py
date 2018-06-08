@@ -8,9 +8,11 @@ __all__ = [
 
 import vtk
 
+
 def getSelectedArrayName(algorithm, idx):
     info = algorithm.GetInputArrayInformation(idx)
     return info.Get(vtk.vtkDataObject.FIELD_NAME())
+
 
 def getSelectedArrayField(algorithm, idx):
     info = algorithm.GetInputArrayInformation(idx)
@@ -18,6 +20,7 @@ def getSelectedArrayField(algorithm, idx):
 
 
 def copyArraysToPointData(pdi, pdo, field):
+    """@desc: Copys arrays from an input to an ouput's point data."""
     # Point Data
     if field == 0:
         for i in range(pdi.GetPointData().GetNumberOfArrays()):
@@ -45,9 +48,10 @@ def copyArraysToPointData(pdi, pdo, field):
     # Field Data
     return pdo
 
+
 def getArray(wpdi, field, name):
     """
-    Grabs an array from vtkDataObject given its name and field association
+    @desc: Grabs an array from vtkDataObject given its name and field association.
     """
     # Point Data
     if field == 0:
@@ -67,7 +71,7 @@ def getArray(wpdi, field, name):
 
 def addArray(pdo, field, vtkArray):
     """
-    Adds an array to a vtkDataObject given its field association
+    @desc: Adds an array to a vtkDataObject given its field association.
     """
     # Point Data
     if field == 0:
