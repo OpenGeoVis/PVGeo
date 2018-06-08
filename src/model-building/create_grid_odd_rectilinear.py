@@ -8,43 +8,31 @@ ExtraXml = ''
 FileSeries = False # ABSOLUTELY NECESSARY
 
 Properties = dict(
-    Num_Cells=[10, 10, 10],
-    X_Range=[0.0, 1.0],
-    Y_Range=[0.0, 1.0],
-    Z_Range=[0.0, 1.0]
+    Origin=[-350.0, -400.0, 0.0],
+    X_Cells='200 100 50 20*50.0 50 100 200',
+    Y_Cells='200 100 50 21*50.0 50 100 200',
+    Z_Cells='20*25.0 50 100 200'
+)
+
+PropertiesHelp = dict(
+    Origin='The XYZ origin of the Southwest-top of the grid.',
+    X_Cells='A space delimited list of cell sizes along the X axis. You can use cell repeaters like 20*50.0 for twenty cells of width 50.0.',
+    Y_Cells='A space delimited list of cell sizes along the Y axis. You can use cell repeaters like 20*50.0 for twenty cells of width 50.0.',
+    Z_Cells='A space delimited list of cell sizes along the Z axis. You can use cell repeaters like 20*50.0 for twenty cells of width 50.0. These are orderd in the negative Z direction such that the first cell is at the highest in altitude.'
 )
 
 def RequestData():
     import numpy as np
     from vtk.util import numpy_support as nps
+    from PVGPpy.model_building import oddModel
 
     pdo = self.GetOutput() #vtkRectilinearGrid
-    nx,ny,nz = Num_Cells[0]+1,Num_Cells[1]+1,Num_Cells[2]+1
-
-    xcoords = np.linspace(X_Range[0], X_Range[1], num=nx)
-    ycoords = np.linspace(Y_Range[0], Y_Range[1], num=ny)
-    zcoords = np.linspace(Z_Range[0], Z_Range[1], num=nz)
-
-    data = np.random.rand(nx*ny*nz)
-
-    # CONVERT TO VTK #
-    xcoords = nps.numpy_to_vtk(num_array=xcoords,deep=True)
-    ycoords = nps.numpy_to_vtk(num_array=ycoords,deep=True)
-    zcoords = nps.numpy_to_vtk(num_array=zcoords,deep=True)
-    data = nps.numpy_to_vtk(num_array=data,deep=True)
-
-    pdo.SetDimensions(nx+1,ny+1,nz+1) # note this subtracts 1
-    pdo.SetXCoordinates(xcoords)
-    pdo.SetYCoordinates(ycoords)
-    pdo.SetZCoordinates(zcoords)
-
-    data.SetName('Random Data')
-    # THIS IS CELL DATA! Add the model data to CELL data:
-    pdo.GetCellData().AddArray(data)
+    oddModel(Origin, X_Cells, Y_Cells, Z_Cells, data=None, dataNm='Data', pdo=pdo)
 
 
 def RequestInformation():
     from paraview import util
-    # ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:
-    nx,ny,nz = Num_Cells[0]+1,Num_Cells[1]+1,Num_Cells[2]+1
-    util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])
+    from PVGPpy.model_building import oddModelExtent
+    # ABSOLUTELY NECESSARY FOR THE SOURCE TO WORK:
+    ext = oddModelExtent(X_Cells, Y_Cells, Z_Cells)
+    util.SetOutputWholeExtent(self, ext)

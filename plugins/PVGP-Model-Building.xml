@@ -59,7 +59,7 @@
         initial_string="X_Range"
         command="SetParameter"
         animateable="1"
-        default_values="1957240.0 1982840.0"
+        default_values="-1.0 1.0"
         number_of_elements="2">
         <Documentation></Documentation>
       </DoubleVectorProperty>
@@ -71,7 +71,7 @@
         initial_string="Y_Range"
         command="SetParameter"
         animateable="1"
-        default_values="5827170.0 5852770.0"
+        default_values="-1.0 1.0"
         number_of_elements="2">
         <Documentation></Documentation>
       </DoubleVectorProperty>
@@ -83,7 +83,7 @@
         initial_string="Z_Range"
         command="SetParameter"
         animateable="1"
-        default_values="-25267.4 332.6"
+        default_values="-1.0 1.0"
         number_of_elements="2">
         <Documentation></Documentation>
       </DoubleVectorProperty>
@@ -274,59 +274,59 @@
 
 
 
-      <IntVectorProperty
+      <DoubleVectorProperty
         panel_visibility="default"
-        name="Num_Cells"
-        label="Num Cells"
-        initial_string="Num_Cells"
+        name="Origin"
+        label="Origin"
+        initial_string="Origin"
         command="SetParameter"
         animateable="1"
-        default_values="10 10 10"
+        default_values="-350.0 -400.0 0.0"
         number_of_elements="3">
-        <Documentation></Documentation>
-      </IntVectorProperty>
-
-      <DoubleVectorProperty
-        panel_visibility="default"
-        name="X_Range"
-        label="X Range"
-        initial_string="X_Range"
-        command="SetParameter"
-        animateable="1"
-        default_values="0.0 1.0"
-        number_of_elements="2">
-        <Documentation></Documentation>
+        <Documentation>The XYZ origin of the Southwest-top of the grid.</Documentation>
       </DoubleVectorProperty>
 
-      <DoubleVectorProperty
+      <StringVectorProperty
         panel_visibility="default"
-        name="Y_Range"
-        label="Y Range"
-        initial_string="Y_Range"
+        name="X_Cells"
+        label="X Cells"
+        initial_string="X_Cells"
         command="SetParameter"
         animateable="1"
-        default_values="0.0 1.0"
-        number_of_elements="2">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
+        default_values="200 100 50 20*50.0 50 100 200"
+        number_of_elements="1">
+        <Documentation>A space delimited list of cell sizes along the X axis. You can use cell repeaters like 20*50.0 for twenty cells of width 50.0.</Documentation>
+      </StringVectorProperty>
 
-      <DoubleVectorProperty
+      <StringVectorProperty
         panel_visibility="default"
-        name="Z_Range"
-        label="Z Range"
-        initial_string="Z_Range"
+        name="Y_Cells"
+        label="Y Cells"
+        initial_string="Y_Cells"
         command="SetParameter"
         animateable="1"
-        default_values="0.0 1.0"
-        number_of_elements="2">
-        <Documentation></Documentation>
-      </DoubleVectorProperty>
+        default_values="200 100 50 21*50.0 50 100 200"
+        number_of_elements="1">
+        <Documentation>A space delimited list of cell sizes along the Y axis. You can use cell repeaters like 20*50.0 for twenty cells of width 50.0.</Documentation>
+      </StringVectorProperty>
+
+      <StringVectorProperty
+        panel_visibility="default"
+        name="Z_Cells"
+        label="Z Cells"
+        initial_string="Z_Cells"
+        command="SetParameter"
+        animateable="1"
+        default_values="20*25.0 50 100 200"
+        number_of_elements="1">
+        <Documentation>A space delimited list of cell sizes along the Z axis. You can use cell repeaters like 20*50.0 for twenty cells of width 50.0. These are orderd in the negative Z direction such that the first cell is at the highest in altitude.</Documentation>
+      </StringVectorProperty>
 
       <StringVectorProperty
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import numpy as np&#xA;from vtk.util import numpy_support as nps&#xA;&#xA;pdo = self.GetOutput() #vtkRectilinearGrid&#xA;nx,ny,nz = Num_Cells[0]+1,Num_Cells[1]+1,Num_Cells[2]+1&#xA;&#xA;xcoords = np.linspace(X_Range[0], X_Range[1], num=nx)&#xA;ycoords = np.linspace(Y_Range[0], Y_Range[1], num=ny)&#xA;zcoords = np.linspace(Z_Range[0], Z_Range[1], num=nz)&#xA;&#xA;data = np.random.rand(nx*ny*nz)&#xA;&#xA;# CONVERT TO VTK #&#xA;xcoords = nps.numpy_to_vtk(num_array=xcoords,deep=True)&#xA;ycoords = nps.numpy_to_vtk(num_array=ycoords,deep=True)&#xA;zcoords = nps.numpy_to_vtk(num_array=zcoords,deep=True)&#xA;data = nps.numpy_to_vtk(num_array=data,deep=True)&#xA;&#xA;pdo.SetDimensions(nx+1,ny+1,nz+1) # note this subtracts 1&#xA;pdo.SetXCoordinates(xcoords)&#xA;pdo.SetYCoordinates(ycoords)&#xA;pdo.SetZCoordinates(zcoords)&#xA;&#xA;data.SetName('Random Data')&#xA;# THIS IS CELL DATA! Add the model data to CELL data:&#xA;pdo.GetCellData().AddArray(data)&#xA;"
+        default_values="import numpy as np&#xA;from vtk.util import numpy_support as nps&#xA;from PVGPpy.model_building import oddModel&#xA;&#xA;pdo = self.GetOutput() #vtkRectilinearGrid&#xA;oddModel(Origin, X_Cells, Y_Cells, Z_Cells, data=None, dataNm='Data', pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -340,7 +340,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;nx,ny,nz = Num_Cells[0]+1,Num_Cells[1]+1,Num_Cells[2]+1&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.model_building import oddModelExtent&#xA;# ABSOLUTELY NECESSARY FOR THE SOURCE TO WORK:&#xA;ext = oddModelExtent(X_Cells, Y_Cells, Z_Cells)&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

@@ -9,9 +9,9 @@ FileSeries = False # ABSOLUTELY NECESSARY
 
 Properties = dict(
     Num_Cells=[10, 10, 10],
-    X_Range=[1957240.0, 1982840.0],
-    Y_Range=[5827170.0, 5852770.0],
-    Z_Range=[-25267.4, 332.6]
+    X_Range=[-1.0, 1.0],
+    Y_Range=[-1.0, 1.0],
+    Z_Range=[-1.0, 1.0]
 )
 
 def RequestData():

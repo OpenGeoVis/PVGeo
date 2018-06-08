@@ -285,9 +285,7 @@
 
       <InputProperty
         name="Input"
-                    clean_command="RemoveAllInputs"
-            command="AddInputConnection"
-            multiple_input="2">
+        command="SetInputConnection">
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
             <Group name="filters"/>
