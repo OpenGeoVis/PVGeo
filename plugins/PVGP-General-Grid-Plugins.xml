@@ -433,8 +433,7 @@
       <InputProperty
         name="Input 1"
         command="AddInputConnection"
-        port_index="0"
-        >
+        port_index="0">
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
             <Group name="filters"/>
@@ -448,8 +447,7 @@
       <InputProperty
         name="Input 2"
         command="AddInputConnection"
-        port_index="0"
-        >
+        port_index="0">
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
             <Group name="filters"/>

@@ -284,25 +284,8 @@
 
 
       <InputProperty
-        name="Input foo 1"
-        command="AddInputConnection"
-        port_index="0"
-        >
-          <ProxyGroupDomain name="groups">
-            <Group name="sources"/>
-            <Group name="filters"/>
-          </ProxyGroupDomain>
-
-          <DataTypeDomain name="input_type">
-            <DataType value="vtkDataObject"/>
-          </DataTypeDomain>
-      </InputProperty>
-
-      <InputProperty
-        name="Input foo 2"
-        command="AddInputConnection"
-        port_index="0"
-        >
+        name="Input"
+        command="SetInputConnection">
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
             <Group name="filters"/>
@@ -315,9 +298,9 @@
 
       <StringVectorProperty
         name="SelectInputScalars0"
-        label="Array from foo 1"
+        label="Array Input 1"
         command="SetInputArrayToProcess"
-        default_values="0 0"
+        default_values="0 NULL"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -327,7 +310,7 @@
           input_domain_name="inputs_array">
           <RequiredProperties>
             <Property
-              name="Input foo 1"
+              name="Input"
               function="Input" />
           </RequiredProperties>
         </ArrayListDomain>
@@ -335,19 +318,18 @@
           name="field_list">
           <RequiredProperties>
             <Property
-              name="Input foo 1"
+              name="Input"
               function="Input" />
           </RequiredProperties>
         </FieldDataDomain>
       </StringVectorProperty>
 
 
-
       <StringVectorProperty
-        name="SelectInputScalars0"
-        label="Array from foo 2"
+        name="SelectInputScalars1"
+        label="Array Input 2"
         command="SetInputArrayToProcess"
-        default_values="0 0"
+        default_values="1 NULL"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -357,7 +339,7 @@
           input_domain_name="inputs_array">
           <RequiredProperties>
             <Property
-              name="Input foo 2"
+              name="Input"
               function="Input" />
           </RequiredProperties>
         </ArrayListDomain>
@@ -365,7 +347,7 @@
           name="field_list">
           <RequiredProperties>
             <Property
-              name="Input foo 2"
+              name="Input"
               function="Input" />
           </RequiredProperties>
         </FieldDataDomain>
@@ -451,7 +433,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;pdi = self.GetInput() # VTK Data Type&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Get input array info (selection made in drop down menu)&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;field0 = inputhelp.getSelectedArrayField(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 0)&#xA;field1 = inputhelp.getSelectedArrayField(self, 0)&#xA;print(name0,name1)&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy.helpers as inputhelp&#xA;pdi = self.GetInput() # VTK Data Type&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Get input array info (selection made in drop down menu)&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;&#xA;if test_bool:&#xA;    print(name,field)&#xA;else:&#xA;    print(test_string)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -648,7 +630,7 @@
         name="SelectInputScalars0"
         label="Array 1"
         command="SetInputArrayToProcess"
-        default_values="0 0"
+        default_values="0 NULL"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -677,7 +659,7 @@
         name="SelectInputScalars1"
         label="Array 2"
         command="SetInputArrayToProcess"
-        default_values="0 1"
+        default_values="1 NULL"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -803,7 +785,7 @@
         name="SelectInputScalars0"
         label="Latitude"
         command="SetInputArrayToProcess"
-        default_values="0 0"
+        default_values="0 NULL"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -832,7 +814,7 @@
         name="SelectInputScalars1"
         label="Longitude"
         command="SetInputArrayToProcess"
-        default_values="0 1"
+        default_values="1 NULL"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -861,7 +843,7 @@
         name="SelectInputScalars2"
         label="Altitude"
         command="SetInputArrayToProcess"
-        default_values="0 2"
+        default_values="2 NULL"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -992,7 +974,7 @@
         name="SelectInputScalars0"
         label="Array"
         command="SetInputArrayToProcess"
-        default_values="0 0"
+        default_values="0 NULL"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -1120,14 +1102,14 @@
     <!-- ./filters-general//example_filter_mult.py -->
     <SourceProxy name="ExampleMult" class="vtkPythonProgrammableFilter" label="ExampleMult">
       <Documentation
-        long_help="This is a simple example of a Python Programmable Filter"
-        short_help="This is a simple example of a Python Programmable Filter">
+        long_help="This is a simple example of a Python Programmable Filter with mutiple inputs."
+        short_help="This is a simple example of a Python Programmable Filter with mutiple inputs.">
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGP General Filters" />
       </Hints>
 
-      <!-- Built on version: 0.6.1 -->
+      <!-- Built on version: 0.6.2 -->
       <StringVectorProperty
         panel_visibility="never"
         name="BUILDVERSION"
@@ -1135,7 +1117,7 @@
         initial_string="BUILDVERSION"
         command="SetParameter"
         animateable="1"
-        default_values="0.6.1"
+        default_values="0.6.2"
         number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
       </StringVectorProperty>
@@ -1152,49 +1134,91 @@
 
 
       <InputProperty
-        name="Input 1"
+        name="Input foo 1"
         command="AddInputConnection"
-        port_index="0"
-        >
+        port_index="0">
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
 
           <DataTypeDomain name="input_type">
-            <DataType value=""/>
+            <DataType value="vtkDataObject"/>
           </DataTypeDomain>
       </InputProperty>
 
       <InputProperty
-        name="Input 2"
+        name="Input foo 2"
         command="AddInputConnection"
-        port_index="0"
-        >
+        port_index="0">
           <ProxyGroupDomain name="groups">
             <Group name="sources"/>
             <Group name="filters"/>
           </ProxyGroupDomain>
 
           <DataTypeDomain name="input_type">
-            <DataType value=""/>
+            <DataType value="vtkDataObject"/>
           </DataTypeDomain>
       </InputProperty>
 
-      <InputProperty
-        name="Input 3"
-        command="AddInputConnection"
-        port_index="0"
-        >
-          <ProxyGroupDomain name="groups">
-            <Group name="sources"/>
-            <Group name="filters"/>
-          </ProxyGroupDomain>
+      <StringVectorProperty
+        name="SelectInputScalars0"
+        label="Array1"
+        command="SetInputArrayToProcess"
+        default_values="0 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input foo 1"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input foo 1"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
 
-          <DataTypeDomain name="input_type">
-            <DataType value=""/>
-          </DataTypeDomain>
-      </InputProperty>
+
+
+      <StringVectorProperty
+        name="SelectInputScalars0"
+        label="Array 1"
+        command="SetInputArrayToProcess"
+        default_values="0 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input foo 2"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input foo 2"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+
 
 
 

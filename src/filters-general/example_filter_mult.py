@@ -10,17 +10,19 @@ Label = 'ExampleMult'
 FilterCategory = 'PVGP Filters'
 
 # A general overview of the plugin
-Help = 'This is a simple example of a Python Programmable Filter'
+Help = 'This is a simple example of a Python Programmable Filter with mutiple inputs.'
 
-NumberOfInputs = 3 # Specify as many as you would like
-InputDataType = '' # Leave blank if input doesn't matter
-OutputDataType = 'vtkPolyData' # Leave blank to preserve input data type
+NumberOfInputs = 2 # Specify as many as you would like
+InputNames = ['Input foo 1', 'Input foo 2']
+InputDataType = ['vtkDataObject', 'vtkDataObject']
+OutputDataType = 'vtkPolyData' # Must be specified when many inputs specified
 
 # How to add input arrays:
 #- Number of Input array drop down choices
-#NumberOfInputArrayChoices = 0
+NumberOfInputArrayChoices = [1,1]
 #- Labels for the array drop down choices:
-#InputArrayLabels = ['Array']
+InputArrayLabels = [['Array1'],[]]
+
 # Any extra XML GUI components you might like:
 ExtraXml = ''
 

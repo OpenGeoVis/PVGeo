@@ -12,16 +12,15 @@ FilterCategory = 'PVGP Filters'
 # A general overview of the plugin
 Help = 'This is a simple example of a Python Programmable Filter'
 
-NumberOfInputs = 2 # Specify as many as you would like
-InputNames = ['Input foo 1', 'Input foo 2']
-InputDataType = ['vtkDataObject', 'vtkDataObject'] # Leave blank if input doesn't matter
+NumberOfInputs = 1 # Specify as many as you would like
+InputDataType = 'vtkDataObject' # Leave blank if input doesn't matter
 OutputDataType = 'vtkDataObject' # Leave blank to preserve input data type
 
 # How to add input arrays:
 #- Number of Input array drop down choices
-NumberOfInputArrayChoices = [1,1]
+NumberOfInputArrayChoices = 2
 #- Labels for the array drop down choices:
-InputArrayLabels = [['Array from foo 1'], ['Array from foo 2']]
+InputArrayLabels = ['Array Input 1', 'Array Input 2']
 
 
 # Any extra XML GUI components you might like:
@@ -52,11 +51,13 @@ def RequestData(self):
     pdi = self.GetInput() # VTK Data Type
     pdo = self.GetOutput() # VTK Data Type
     # Get input array info (selection made in drop down menu)
-    name0 = inputhelp.getSelectedArrayName(self, 0)
-    field0 = inputhelp.getSelectedArrayField(self, 0)
-    name1 = inputhelp.getSelectedArrayName(self, 0)
-    field1 = inputhelp.getSelectedArrayField(self, 0)
-    print(name0,name1)
+    name = inputhelp.getSelectedArrayName(self, 0)
+    field = inputhelp.getSelectedArrayField(self, 0)
+
+    if test_bool:
+        print(name,field)
+    else:
+        print(test_string)
 
 
 

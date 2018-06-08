@@ -292,8 +292,7 @@ def getInputPropertyXml(info, inputDataType=None, name="Input", port=0):
     inputPropertyAttributes = 'command="SetInputConnection"'
     if numberOfInputs > 1:
         inputPropertyAttributes = '''command="AddInputConnection"
-        port_index="%d"
-        ''' % 0 #(port) # clean_command="RemoveAllInputs" multiple_input="1"
+        port_index="%d"''' % 0 #(port) # clean_command="RemoveAllInputs" multiple_input="1"
         # TODO: Find a way for python filters to take multiple input ports
 
     inputPropertyXml = '''
@@ -322,7 +321,7 @@ def _helpArraysXML(info, inputName=None, numArrays=None, labels=None):
         name="SelectInputScalars%d"
         label="%s"
         command="SetInputArrayToProcess"
-        default_values="0 %d"
+        default_values="%d NULL"
         number_of_elements="5"
         element_types="0 0 0 0 2"
         animateable="0">
@@ -373,12 +372,14 @@ def getInputArraysXML(info):
         if numberOfInputs > 1:
             for l in labels:
                 if type(l) is not list:
-                    raise Exception('`InputArrayLabels` is improperly structured.')
+                    raise Exception('`InputArrayLabels` is improperly structured. Must be a list of lists.')
         return labels
 
     labels = getLabels()
 
     def fixArrayLabels(labels, numArrays):
+        if numArrays is 0:
+            return ''
         if labels is None:
             labels = ['Array %d' % (i+1) for i in range(numArrays)]
             return labels
@@ -395,11 +396,13 @@ def getInputArraysXML(info):
         if len(numArrays) != numberOfInputs:
             raise Exception('You must spectify how many arrays come from each input. `len(NumberOfInputArrayChoices) != NumberOfInputs`.')
         inputNames = info.get('InputNames')
+        print(inputNames)
 
         # Now perfrom recursion
         out = []
         for i in range(numberOfInputs):
             # Fix labels
+            print(i)
             labs = fixArrayLabels(labels[i], numArrays[i])
             out.append(_helpArraysXML(info, inputName=inputNames[i], numArrays=numArrays[i], labels=labs))
         outstr = "\n".join(inp for inp in out)
