@@ -1,3 +1,6 @@
+**WARNING: We are completely rebuilding the repository to be encapsulated in a single Python Module called PVGPpy. This is in accordance with the new Python capabilities of ParaView outlined in [Merge Request !2516](https://gitlab.kitware.com/paraview/paraview/merge_requests/2516/) for ParaView. The current structure of the project will be entirely deprecated when that merge request is complete. If you would like to help develop please take a look at the active branch `rebuild-pvpy`.**
+
+
 # *PVGeophysics*
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/46d8b98101d44fb286420e7289611205)](https://app.codacy.com/app/banesullivan/PVGeophysics?utm_source=github.com&utm_medium=referral&utm_content=OpenGeoVis/PVGeophysics&utm_campaign=badger)
