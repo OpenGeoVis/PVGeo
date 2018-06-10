@@ -1,5 +1,4 @@
 __all__ = [
-    'reshapeTable',
     'latLonTableToCartesian'
 ]
 
@@ -9,58 +8,6 @@ from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 from PVGPpy.helpers import *
 
-#---- Reshape Table ----#
-
-def reshapeTable(pdi, nrows, ncols, names=None, order='C', pdo=None):
-    """
-    Todo Description
-    """
-    if pdo is None:
-        pdo = vtk.vtkTable()
-    # Get number of columns
-    cols = pdi.GetNumberOfColumns()
-    # Get number of rows
-    rows = pdi.GetColumn(0).GetNumberOfTuples() # TODO is the necessary?
-
-    if names is not None and len(names) is not 0:
-        # parse the names (a semicolon seperated list of names)
-        names = names.split(';')
-        num = len(names)
-        if num < ncols:
-            for i in range(num, ncols):
-                names.append('Field %d' % i)
-        elif num > ncols:
-            raise Exception('Too many array names. `ncols` specified as %d and %d names given.' % (ncols, num))
-    else:
-        names = ['Field %d' % i for i in range(ncols)]
-
-    # Make a 2D numpy array and fill with data from input table
-    data = np.empty((cols,rows))
-    for i in range(cols):
-        c = pdi.GetColumn(i)
-        data[i] = nps.vtk_to_numpy(c)
-
-    if ((ncols*nrows) != (cols*rows)):
-        raise Exception('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
-
-    # Use numpy.reshape() to reshape data NOTE: only 2D because its a table
-    # NOTE: column access of this reshape is not contigous
-    data = np.array(np.reshape(data, (nrows,ncols), order=order))
-    pdo.SetNumberOfRows(nrows)
-
-    # Add new array to output table and assign incremental names (e.g. Field0)
-    for i in range(ncols):
-        # Make a contigous array from the column we want
-        col = np.array(data[:,i])
-        # allow type to be determined by input
-        insert = nps.numpy_to_vtk(num_array=col, deep=True) # array_type=vtk.VTK_FLOAT
-        # VTK arrays need a name. Set arbitrarily
-        insert.SetName(names[i])
-        #pdo.AddColumn(insert) # these are not getting added to the output table
-        # ... work around:
-        pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData
-
-    return pdo
 
 
 #---- LatLon to Cartesian ----#
