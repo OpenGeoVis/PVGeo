@@ -9,6 +9,8 @@ import os
 from vtk.util import numpy_support as nps
 import vtk
 
+from .gslib import gslib
+
 def sgemsGrid(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=None):
     """
     @desc:
@@ -26,7 +28,6 @@ def sgemsGrid(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=No
         vtkImageData : A uniformly spaced gridded volume of data from input file
 
     """
-    from PVGPpy.read import gslib
     if pdo is None:
         pdo = vtk.vtkImageData() # vtkImageData
 
