@@ -1,4 +1,7 @@
-__all__ = ['getTimeStepFileIndex', 'setOutputTimesteps']
+__all__ = [
+    'getTimeStepFileIndex',
+    'setOutputTimesteps'
+]
 
 
 import numpy as np

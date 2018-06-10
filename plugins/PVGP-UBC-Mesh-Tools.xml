@@ -90,7 +90,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import ubcOcTree&#xA;import os&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# Read the UBC OcTree gridded data:&#xA;try:&#xA;    ubcOcTree(FileName_Mesh, FileName_Model, pdo=pdo)&#xA;except NameError:&#xA;    ubcOcTree(FileName_Mesh, None, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.ubc import ubcOcTree&#xA;import os&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# Read the UBC OcTree gridded data:&#xA;mfile = None&#xA;try:&#xA;    mfile = FileName_Model&#xA;except NameError:&#xA;    mfile = None&#xA;ubcOcTree(FileName_Mesh, mfile, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -104,7 +104,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import ubcExtent&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtent(FileName_Mesh)&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.ubc import ubcExtent&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtent(FileName_Mesh)&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -201,7 +201,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import ubcTensorMesh&#xA;import os&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# Read the UBC Mesh gridded data:&#xA;ubcTensorMesh(FileName_Mesh, FileName_Model, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.ubc import ubcTensorMesh&#xA;import os&#xA;# Get output&#xA;pdo = self.GetOutput()&#xA;# Read the UBC Mesh gridded data:&#xA;ubcTensorMesh(FileName_Mesh, FileName_Model, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -215,7 +215,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import ubcExtent&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtent(FileName_Mesh)&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy.ubc import ubcExtent&#xA;if FileName_Mesh == 'absolute path':&#xA;    raise Exception('No mesh file selected. Aborting.')&#xA;# Preview the mesh file and get the mesh extents&#xA;ext = ubcExtent(FileName_Mesh)&#xA;# Set the mesh extents&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -322,7 +322,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import ubcModel3D, ubcModel2D, placeModelOnMesh&#xA;import os&#xA;&#xA;pdi = self.GetInput() # vtkRectilinearGrid&#xA;pdo = self.GetOutput() # vtkRectilinearGrid&#xA;&#xA;pdo.DeepCopy(pdi) # ShallowCopy if you want changes to propagate&#xA;&#xA;if _2D: model = ubcModel2D(FileName_Model)&#xA;else: model = ubcModel3D(FileName_Model)&#xA;# Place read model on the mesh&#xA;placeModelOnMesh(pdo, model)&#xA;"
+        default_values="from PVGPpy.ubc import ubcModel3D, ubcModel2D, placeModelOnMesh&#xA;import os&#xA;&#xA;pdi = self.GetInput() # vtkRectilinearGrid&#xA;pdo = self.GetOutput() # vtkRectilinearGrid&#xA;&#xA;pdo.DeepCopy(pdi) # ShallowCopy if you want changes to propagate&#xA;&#xA;if _2D: model = ubcModel2D(FileName_Model)&#xA;else: model = ubcModel3D(FileName_Model)&#xA;# Place read model on the mesh&#xA;placeModelOnMesh(pdo, model)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

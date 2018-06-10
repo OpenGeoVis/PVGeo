@@ -35,37 +35,37 @@ def translateGridOrigin(pdi, corner=1, pdo=None):
 
     xx,yy,zz = 0.0,0.0,0.0
 
-    if Corner == 1:
+    if corner == 1:
         # South East Bottom
         xx = ox - nx
         yy = oy
         zz = oz
-    elif Corner == 2:
+    elif corner == 2:
         # North West Bottom
         xx = ox
         yy = oy - ny
         zz = oz
-    elif Corner == 3:
+    elif corner == 3:
         # North East Bottom
         xx = ox - nx
         yy = oy - ny
         zz = oz
-    elif Corner == 4:
+    elif corner == 4:
         # South West Top
         xx = ox
         yy = oy
         zz = oz - nz
-    elif Corner == 5:
+    elif corner == 5:
         # South East Top
         xx = ox - nx
         yy = oy
         zz = oz - nz
-    elif Corner == 6:
+    elif corner == 6:
         # North West Top
         xx = ox
         yy = oy - ny
         zz = oz - nz
-    elif Corner == 7:
+    elif corner == 7:
         # North East Top
         xx = ox - nx
         yy = oy - ny

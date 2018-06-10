@@ -18,6 +18,7 @@ def ubcExtent(FileName):
     tuple : This returns a tuple of the whole extent for the grid to be made of the input mesh file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to `util.SetOutputWholeExtent()` when used in programmable filters or source generation on the pipeline.
 
     """
+    import numpy as np
     # Read the mesh file as line strings, remove lines with comment = !
     v = np.array(np.__version__.split('.')[0:2], dtype=int)
     if v[0] >= 1 and v[1] >= 10:

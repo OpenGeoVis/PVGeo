@@ -47,7 +47,7 @@ PropertiesHelp = dict(
 #- Data processing
 def RequestData(self):
     from vtk.util import numpy_support as nps
-    import PVGPpy.helpers as inputhelp
+    import PVGPpy._helpers as inputhelp
     pdi = self.GetInput() # VTK Data Type
     pdo = self.GetOutput() # VTK Data Type
     # Get input array info (selection made in drop down menu)

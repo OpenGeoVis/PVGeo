@@ -56,20 +56,22 @@ PropertiesHelp = dict(
 
 # from paraview import vtk is done automatically in the reader
 def RequestData(self):
-    from PVGPpy.read import ubcOcTree
+    from PVGPpy.ubc import ubcOcTree
     import os
     # Get output
     pdo = self.GetOutput()
     # Read the UBC OcTree gridded data:
+    mfile = None
     try:
-        ubcOcTree(FileName_Mesh, FileName_Model, pdo=pdo)
+        mfile = FileName_Model
     except NameError:
-        ubcOcTree(FileName_Mesh, None, pdo=pdo)
+        mfile = None
+    ubcOcTree(FileName_Mesh, mfile, pdo=pdo)
 
 
 def RequestInformation(self):
     from paraview import util
-    from PVGPpy.read import ubcExtent
+    from PVGPpy.ubc import ubcExtent
     # Preview the mesh file and get the mesh extents
     ext = ubcExtent(FileName_Mesh)
     # Set the mesh extents

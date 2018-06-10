@@ -55,7 +55,8 @@ PropertiesHelp = dict(
 
 
 def RequestData():
-    from PVGPpy.read import madagascar, getTimeStepFileIndex
+    from PVGPpy.readers_general import madagascar
+    from PVGPpy._helpers import getTimeStepFileIndex
 
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
@@ -68,6 +69,6 @@ def RequestData():
 
 
 def RequestInformation(self):
-    from PVGPpy.read import setOutputTimesteps
+    from PVGPpy._helpers import setOutputTimesteps
     # This is necessary to set time steps
     setOutputTimesteps(self, FileNames, dt=Time_Step)

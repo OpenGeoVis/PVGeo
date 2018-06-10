@@ -10,7 +10,7 @@ import vtk
 import ast
 import warnings
 # Import Helpers:
-from ._helpers import *
+from .. import _helpers
 
 
 def packedBinaries(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
@@ -32,13 +32,13 @@ def packedBinaries(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
     if pdo is None:
         pdo = vtk.vtkTable() # vtkTable
 
-    dtype, vtktype = _getdTypes(dtype=dtype, endian=endian)
+    dtype, vtktype = _helpers._getdTypes(dtype=dtype, endian=endian)
 
     raw = np.fromfile(FileName, dtype=dtype)
 
     # Put raw data into vtk array
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
-    data.SetName(_cleanDataNm(dataNm, FileName))
+    data.SetName(_helpers._cleanDataNm(dataNm, FileName))
 
     # Table with single column of data only
     pdo.AddColumn(data)
@@ -65,7 +65,7 @@ def madagascar(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
     if pdo is None:
         pdo = vtk.vtkTable() # vtkTable
 
-    dtype, vtktype = _getdTypes(dtype=dtype, endian=endian)
+    dtype, vtktype = _helpers._getdTypes(dtype=dtype, endian=endian)
 
     CTLSEQ = b'\014\014\004' # The control sequence to seperate header from data
     rpl = b''
@@ -82,7 +82,7 @@ def madagascar(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
 
     # Put raw data into vtk array
     data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
-    data.SetName(_cleanDataNm(dataNm, FileName))
+    data.SetName(_helpers._cleanDataNm(dataNm, FileName))
 
     # Table with single column of data only
     pdo.AddColumn(data)

@@ -27,16 +27,17 @@ PropertiesHelp = dict(
 
 def RequestData():
     import os
-    from PVGPpy.read import gslib, getTimeStepFileIndex
+    from PVGPpy.gslib import gslibRead
+    from PVGPpy._helpers import getTimeStepFileIndex
 
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
 
     # Generate Output, use: print(os.path.basename(FileNames[i]) + ': ' + h)
     pdo = self.GetOutput() # vtkTable
-    tbl, h = gslib(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, skiprows=Skiprows, comments=Comments, pdo=pdo)
+    tbl, h = gslibRead(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, skiprows=Skiprows, comments=Comments, pdo=pdo)
 
 def RequestInformation(self):
-    from PVGPpy.read import setOutputTimesteps
+    from PVGPpy._helpers import setOutputTimesteps
     # This is necessary to set time steps
     setOutputTimesteps(self, FileNames, dt=Time_Step)

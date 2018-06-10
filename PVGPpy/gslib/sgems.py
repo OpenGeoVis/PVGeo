@@ -9,7 +9,7 @@ import os
 from vtk.util import numpy_support as nps
 import vtk
 
-from .gslib import gslib
+from .gslib import gslibRead
 
 def sgemsGrid(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=None):
     """
@@ -31,7 +31,7 @@ def sgemsGrid(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=No
     if pdo is None:
         pdo = vtk.vtkImageData() # vtkImageData
 
-    table, header = gslib(FileName, deli=deli, useTab=useTab, skiprows=skiprows, comments='#', pdo=None)
+    table, header = gslibRead(FileName, deli=deli, useTab=useTab, skiprows=skiprows, comments='#', pdo=None)
     h = header.split(deli)
     n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
 

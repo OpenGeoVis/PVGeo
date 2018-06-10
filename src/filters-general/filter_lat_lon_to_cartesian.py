@@ -20,8 +20,8 @@ Properties = dict(
 # NOTE: Msatches the vtkEarth SOurce however so we gonna keep it this way
 
 def RequestData():
-    from PVGPpy.filt import latLonTableToCartesian
-    import PVGPpy.helpers as inputhelp
+    from PVGPpy.filters_general import latLonTableToCartesian
+    import PVGPpy._helpers as inputhelp
     # Get input/output of Proxy
     pdi = self.GetInput()
     pdo = self.GetOutput()

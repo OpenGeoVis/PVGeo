@@ -40,7 +40,7 @@ PropertiesHelp = dict(
 #- Data processing
 def RequestData(self):
     from vtk.util import numpy_support as nps
-    import PVGPpy.helpers as inputhelp
+    import PVGPpy._helpers as inputhelp
     pdo = self.GetOutput() # VTK Data Type
     # Inputs from different ports:
     pdi0 = self.GetInputDataObject(0, 0) # PORT 0

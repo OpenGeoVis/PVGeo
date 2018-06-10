@@ -5,14 +5,11 @@ __all__ = [
     'ubcOcTree']
 
 import numpy as np
-import struct
-import csv
-import os
 from vtk.util import numpy_support as nps
 import vtk
-# Import Helpers:
-from ._helpers import *
+import os
 
+from .tensor_mesh import ubcModel3D
 
 #------------------------------------------------------------------#
 #-----------------------    UBC OcTree    -------------------------#
@@ -234,7 +231,6 @@ def ubcOcTree(FileName_Mesh, FileName_Model, pdo=None):
     # Construct/read the mesh
     mesh = ubcOcTreeMesh(FileName_Mesh, pdo=pdo)
     # Read the model data
-    # - read model file for OcTree format
     if FileName_Model is not None:
         model = ubcModel3D(FileName_Model)
         # Place the model data onto the mesh

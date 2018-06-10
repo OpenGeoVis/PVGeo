@@ -6,7 +6,8 @@ import vtk
 import numpy as np
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
-from PVGPpy.helpers import *
+# Import Helpers:
+from .. import _helpers
 
 
 
@@ -29,9 +30,9 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
     (namelon, fieldlon) = arrlon[0], arrlon[1]
     (namealt, fieldalt) = arralt[0], arralt[1]
     wpdi = dsa.WrapDataObject(pdi)
-    lat = getArray(wpdi, fieldlat, namelat)
-    lon = getArray(wpdi, fieldlon, namelon)
-    alt = getArray(wpdi, fieldalt, namealt)
+    lat = _helpers.getArray(wpdi, fieldlat, namelat)
+    lon = _helpers.getArray(wpdi, fieldlon, namelon)
+    alt = _helpers.getArray(wpdi, fieldalt, namealt)
     if len(lat) != len(lon) or len(lat) != len(alt):
         raise Exception('Latitude, Longitude, and Altitude arrays must be same length.')
 

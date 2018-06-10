@@ -21,7 +21,7 @@ PropertiesHelp = dict(
 )
 
 def RequestData():
-    from PVGPpy.filt import reverseGridAxii
+    from PVGPpy.grids import reverseGridAxii
     pdi = self.GetInput() # vtkImageData
     image = self.GetOutput() # vtkImageData
 

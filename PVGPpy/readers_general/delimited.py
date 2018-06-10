@@ -1,6 +1,4 @@
 __all__ = [
-    'packedBinaries',
-    'madagascar',
     'delimitedText']
 
 import numpy as np
@@ -11,7 +9,7 @@ import vtk
 import ast
 import warnings
 # Import Helpers:
-from ._helpers import *
+from .. import _helpers
 
 
 
@@ -55,6 +53,6 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, skiprows=0, co
         cols = np.shape(data)[1]
         for i in range(cols):titles.append('Field %d' % i)
 
-    _placeArrInTable(data, titles, pdo)
+    _helpers._placeArrInTable(data, titles, pdo)
 
     return pdo

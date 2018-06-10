@@ -35,7 +35,7 @@ Properties = dict(
 
 
 def RequestData():
-    from PVGPpy.filt import translateGridOrigin
+    from PVGPpy.grids import translateGridOrigin
     pdi = self.GetInput() # vtkImageData
     pdo = self.GetOutput() # vtkImageData
 

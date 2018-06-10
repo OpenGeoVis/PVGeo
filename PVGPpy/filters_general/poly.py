@@ -11,7 +11,8 @@ from vtk.util import numpy_support as nps
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
-from PVGPpy.helpers import *
+# Import Helpers:
+from .. import _helpers
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
@@ -36,8 +37,8 @@ def correlateArrays(pdi, arr1, arr2, multiplier=1.0, newName='', pdo=None):
     (name1, field1) = arr1[0], arr1[1]
     (name2, field2) = arr2[0], arr2[1]
     wpdi = dsa.WrapDataObject(pdi)
-    arr1 = getArray(wpdi, field1, name1)
-    arr2 = getArray(wpdi, field2, name2)
+    arr1 = _helpers.getArray(wpdi, field1, name1)
+    arr2 = _helpers.getArray(wpdi, field2, name2)
     # Perform correlations
     #carr = _corr(arr1, arr2)
     # TODO
@@ -52,7 +53,7 @@ def correlateArrays(pdi, arr1, arr2, multiplier=1.0, newName='', pdo=None):
     c.SetName(newName)
     # Build output
     pdo.DeepCopy(pdi)
-    pdo = addArray(pdo, field1, c)
+    pdo = _helpers.addArray(pdo, field1, c)
     return pdo
 
 #---- Normalizations ----#
@@ -78,7 +79,7 @@ def _logNatNorm(arr):
 def getArrayRange(pdi, arr):
     (name, field) = arr[0], arr[1]
     wpdi = dsa.WrapDataObject(pdi)
-    arr = getArray(wpdi, field, name)
+    arr = _helpers.getArray(wpdi, field, name)
     arr = np.array(arr)
     return [np.min(arr), np.max(arr)]
 
@@ -105,7 +106,7 @@ def normalizeArray(pdi, arr, norm, multiplier=1.0, newName='', pdo=None, abs=Fal
     # Get inout array
     (name, field) = arr[0], arr[1]
     wpdi = dsa.WrapDataObject(pdi)
-    arr = getArray(wpdi, field, name)
+    arr = _helpers.getArray(wpdi, field, name)
     arr = np.array(arr)
     # Take absolute value?
     if abs:
@@ -138,7 +139,7 @@ def normalizeArray(pdi, arr, norm, multiplier=1.0, newName='', pdo=None, abs=Fal
     c.SetName(newName)
     # Build output
     pdo.DeepCopy(pdi)
-    pdo = addArray(pdo, field, c)
+    pdo = _helpers.addArray(pdo, field, c)
     return pdo
 
 

@@ -90,7 +90,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import os&#xA;from PVGPpy.read import getTimeStepFileIndex, readPVGPGrid&#xA;pdo = self.GetOutput()&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;path = os.path.dirname(FileNames[i])&#xA;&#xA;readPVGPGrid(FileNames[i], pdo=pdo, path=path)&#xA;"
+        default_values="import os&#xA;from PVGPpy.grids import readPVGPGrid&#xA;from PVGPpy._helpers import getTimeStepFileIndex&#xA;pdo = self.GetOutput()&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;path = os.path.dirname(FileNames[i])&#xA;&#xA;readPVGPGrid(FileNames[i], pdo=pdo, path=path)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -104,7 +104,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.read import setOutputTimesteps, readPVGPGridExtents&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames[0], dt=Time_Step)&#xA;# NOTE: if using time series, they all must have the same extents&#xA;ext = readPVGPGridExtents(FileNames[0])&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGPpy._helpers import setOutputTimesteps&#xA;from PVGPpy.grids import readPVGPGridExtents&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames[0], dt=Time_Step)&#xA;# NOTE: if using time series, they all must have the same extents&#xA;ext = readPVGPGridExtents(FileNames[0])&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -225,7 +225,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="&quot;&quot;&quot;Create a VTK output given the list of FileNames and the current timestep.&#xA;This script can access self and FileNames and should return an output of type OutputDataType defined above&quot;&quot;&quot;&#xA;from PVGPpy.read import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;&quot;&quot;&quot;If you specifically do not want the ability to read time series&#xA;Then delete the above code know that a list of file names will be given in the parameter `FileNames` which you can iterate over. &quot;&quot;&quot;&#xA;# --------------------- #&#xA;pdo = self.GetOutput() # VTK Data Type specified in `OutputDataType`&#xA;# Generate Output Below&#xA;if Print_File_Names:&#xA;    print(FileNames[i])&#xA;"
+        default_values="&quot;&quot;&quot;Create a VTK output given the list of FileNames and the current timestep.&#xA;This script can access self and FileNames and should return an output of type OutputDataType defined above&quot;&quot;&quot;&#xA;from PVGPpy._helpers import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;&quot;&quot;&quot;If you specifically do not want the ability to read time series&#xA;Then delete the above code know that a list of file names will be given in the parameter `FileNames` which you can iterate over. &quot;&quot;&quot;&#xA;# --------------------- #&#xA;pdo = self.GetOutput() # VTK Data Type specified in `OutputDataType`&#xA;# Generate Output Below&#xA;if Print_File_Names:&#xA;    print(FileNames[i])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -239,7 +239,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
+        default_values="from PVGPpy._helpers import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -409,7 +409,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import delimitedText, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;delimitedText(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, skiprows=Skiprows, comments=Comments, pdo=pdo)&#xA;"
+        default_values="from PVGPpy.readers_general import delimitedText&#xA;from PVGPpy._helpers import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;delimitedText(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, skiprows=Skiprows, comments=Comments, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -423,7 +423,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
+        default_values="from PVGPpy._helpers import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -675,7 +675,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import packedBinaries, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;endi = ['', '&lt;', '&gt;']&#xA;dtype = ['d', 'f', 'i']&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;packedBinaries(FileNames[i], dataNm=Data_Name, pdo=pdo, endian=endi[Endianness], dtype=dtype[DataType])&#xA;"
+        default_values="from PVGPpy.readers_general import packedBinaries&#xA;from PVGPpy._helpers import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;endi = ['', '&lt;', '&gt;']&#xA;dtype = ['d', 'f', 'i']&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;packedBinaries(FileNames[i], dataNm=Data_Name, pdo=pdo, endian=endi[Endianness], dtype=dtype[DataType])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -689,7 +689,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
+        default_values="from PVGPpy._helpers import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -864,7 +864,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import madagascar, getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;endi = ['', '&lt;', '&gt;']&#xA;dtype = ['d', 'f', 'i']&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;madagascar(FileNames[i], dataNm=Data_Name, pdo=pdo, endian=endi[Endianness], dtype=dtype[DataType])&#xA;"
+        default_values="from PVGPpy.readers_general import madagascar&#xA;from PVGPpy._helpers import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;endi = ['', '&lt;', '&gt;']&#xA;dtype = ['d', 'f', 'i']&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput()&#xA;madagascar(FileNames[i], dataNm=Data_Name, pdo=pdo, endian=endi[Endianness], dtype=dtype[DataType])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -878,7 +878,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from PVGPpy.read import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
+        default_values="from PVGPpy._helpers import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

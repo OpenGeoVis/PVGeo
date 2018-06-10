@@ -2,6 +2,7 @@ __all__ = [
     # 2D Mesh
     'ubcMesh2D',
     'ubcModel2D',
+    '_ubcMesh2D_part',
 
     # 3D Mesh
     'ubcMesh3D',
@@ -13,13 +14,9 @@ __all__ = [
 ]
 
 import numpy as np
-import struct
-import csv
-import os
 from vtk.util import numpy_support as nps
 import vtk
-# Import Helpers:
-from ._helpers import *
+import os
 
 
 #------------------------------------------------------------------#

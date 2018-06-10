@@ -1,6 +1,12 @@
-from . import read
-from . import filt
-from . import helpers
+from . import filters_general
+from . import grids
+from . import gslib
+from . import model_build
+from . import readers_general
+from . import tunneling
+from . import ubc
+
+from . import _helpers
 
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'

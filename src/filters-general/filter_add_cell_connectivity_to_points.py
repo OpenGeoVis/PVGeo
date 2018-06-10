@@ -33,7 +33,7 @@ PropertiesHelp = dict(
 )
 
 def RequestData():
-    from PVGPpy.filt import connectCells
+    from PVGPpy.filters_general import connectCells
     # Get input/output of Proxy
     pdi = self.GetInput() # VTK PolyData Type
     pdo = self.GetOutput() # VTK PolyData Type

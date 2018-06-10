@@ -26,7 +26,8 @@ PropertiesHelp = dict(
 
 
 def RequestData():
-    from PVGPpy.read import sgemsGrid, getTimeStepFileIndex
+    from PVGPpy.gslib import sgemsGrid
+    from PVGPpy._helpers import getTimeStepFileIndex
     from paraview import util
 
     # This finds the index for the FileNames for the requested timestep
@@ -39,7 +40,8 @@ def RequestData():
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.read import sgemsExtent, setOutputTimesteps, getTimeStepFileIndex
+    from PVGPpy.gslib import sgemsExtent
+    from PVGPpy._helpers import setOutputTimesteps, getTimeStepFileIndex
     # This is necessary to set time steps
     setOutputTimesteps(self, FileNames, dt=Time_Step)
     # Only grab extent for first file... requires all to have same extent
