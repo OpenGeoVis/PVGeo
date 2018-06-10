@@ -1,3 +1,2 @@
-from .grids import *
+from .lat_lon import *
 from .poly import *
-from .tables import *
