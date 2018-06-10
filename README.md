@@ -1,5 +1,7 @@
 **WARNING: We are completely rebuilding the repository to be encapsulated in a single Python Module called PVGPpy. This is in accordance with the new Python capabilities of ParaView outlined in [Merge Request !2516](https://gitlab.kitware.com/paraview/paraview/merge_requests/2516/) for ParaView. The current structure of the project will be entirely deprecated when that merge request is complete. If you would like to help develop please take a look at the active branch `rebuild-pvpy`.**
 
+**Proceed with caution until next minor release: *0.8.0***
+
 
 # *PVGeophysics*
 
