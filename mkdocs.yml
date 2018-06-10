@@ -31,7 +31,8 @@ theme:
     custom_dir: custom_theme
     favicon: 'img/globe_small.png'
     logo: 'img/globe_small.png'
-
+extra_css:
+    - stylesheets/extra.css
 
 
 markdown_extensions:
@@ -58,9 +59,11 @@ plugins:
     - search
 
 pages:
-- Home: index.md
-- Getting Started: getting-started.md
-- Features to Come: upcoming.md
+- Overview:
+    - Home: index.md
+    - Why PVGeophysics?: overview/why-pvgp.md
+    - Getting Started: overview/getting-started.md
+    - Features to Come: overview/upcoming.md
 
 # Each of the different plugin suites:
 - Plugin Suites:

@@ -1,7 +1,7 @@
 [filter]: ../plugin-suites/filters-general/add-cell-connectivity-to-points.md
 [macro]: ../pvmacros/vis/many-slices-along-points.md
 [reader]: ../plugin-suites/gslib/sgems-grid.md
-[getstart]: ../getting-started.md#using-outside-modules
+[getstart]: ../overview/getting-started.md#using-outside-modules
 
 !!! info
     This example will demonstrate how to slice a 3D data source along some arbitrary line or sequence of points specified in another data source to have many slices of the 3D data perpendicular to that travel path.

@@ -1,0 +1,48 @@
+/* Extra CSS for keeping Tab Bar Visible upon scrolling */
+/********************************************************/
+
+/* Remove shadow from header */
+.md-header[data-md-state="shadow"] {
+  box-shadow: none;
+}
+
+/* Make tabs fixed */
+.md-tabs {
+  transition: background 0.25s, box-shadow 0.25s;
+  position: fixed;
+  left: 0;
+  top: 4.8rem;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Add shadow to tabs */
+.md-header[data-md-state="shadow"] + .md-container > .md-tabs {
+  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.1), 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+}
+
+/* Tab links always visible */
+.md-tabs[data-md-state="hidden"] .md-tabs__link {
+  transform: none;
+  opacity: 1;
+}
+
+/* Respect tabs height for main content (+ 4.8rem) */
+.md-main__inner {
+  padding-top: 7.8rem;
+}
+
+/* Respect tabs height for sidebars (+ 4.8rem) */
+.md-sidebar[data-md-state="lock"] {
+  top: 9.6rem;
+  padding-bottom: 7.2rem;
+}
+
+/* Make sure tab links are active and clickable */
+.md-tabs[data-md-state="hidden"] .md-tabs__link--active,
+.md-tabs[data-md-state="hidden"] .md-tabs__link:hover {
+  opacity: 1;
+}
+.md-tabs[data-md-state="hidden"] {
+  pointer-events: auto;
+}

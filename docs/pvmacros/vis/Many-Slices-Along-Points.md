@@ -2,7 +2,7 @@
     This macro will use a series of points as a path to cut many slices through a given data set.
 
 !!! warning
-    You will need the SciPy module in `pvpython` for this macro to work. [**See details**](../../getting-started.md#using-outside-modules).
+    You will need the SciPy module in `pvpython` for this macro to work. [**See details**](../../overview/getting-started.md#using-outside-modules).
 
 !!! tip "Examples Featuring This Macro"
     - [Slice Model Along PolyLine](../../examples/slice-model-along-polyline.md)

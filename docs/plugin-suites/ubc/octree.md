@@ -13,7 +13,7 @@ We tested this model using the OcTree mesh found in [**this example**](http://gi
 
 To use the plugin:
 
-- Make sure to clone/update the *PVGeophysics* repo and [**install if you haven't already**](../../getting-started.md)
+- Make sure to clone/update the *PVGeophysics* repo and [**install if you haven't already**](../../overview/getting-started.md)
 - Select **File->Open...** in ParaView
 - Choose the mesh file for your OcTree (we have enabled extensions: `.mesh` `.msh` `.dat` `.txt`)
 - Select the **PVGP: UBC OcTree Mesh File Format** reader when prompted.
