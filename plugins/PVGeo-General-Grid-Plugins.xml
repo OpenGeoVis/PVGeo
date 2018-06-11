@@ -3,7 +3,7 @@
   <ProxyGroup name="filters">
 
 
-    <!-- ./pvgeo-grids//filter_reverse_grid_axii.py -->
+    <!-- ./pvgp-grids//filter_reverse_grid_axii.py -->
     <SourceProxy
       name="ReverseImageDataAxii"
       class="vtkPythonProgrammableFilter"
@@ -119,7 +119,7 @@
       </StringVectorProperty>
     </SourceProxy>
 
-    <!-- ./pvgeo-grids//filter_table_to_uniform_grid.py -->
+    <!-- ./pvgp-grids//filter_table_to_uniform_grid.py -->
     <SourceProxy
       name="TableToUniformGrid"
       class="vtkPythonProgrammableFilter"
@@ -299,7 +299,7 @@
       </StringVectorProperty>
     </SourceProxy>
 
-    <!-- ./pvgeo-grids//filter_translate_origin_uniform_grid.py -->
+    <!-- ./pvgp-grids//filter_translate_origin_uniform_grid.py -->
     <SourceProxy
       name="TranslateOriginOfUniformGrid"
       class="vtkPythonProgrammableFilter"
@@ -408,7 +408,7 @@
       </StringVectorProperty>
     </SourceProxy>
 
-    <!-- ./pvgeo-grids//filter_time_to_space.py -->
+    <!-- ./pvgp-grids//filter_time_to_space.py -->
     <SourceProxy
       name="ProjectShotRecordToSpace"
       class="vtkPythonProgrammableFilter"

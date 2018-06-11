@@ -3,7 +3,7 @@
   <ProxyGroup name="sources">
 
 
-    <!-- ./readers-general//read_pvgeo_grid.py -->
+    <!-- ./readers-general//read_pvgp_grid.py -->
     <SourceProxy
       name="ReadPVGeoGrid"
       class="vtkPythonProgrammableFilter"
