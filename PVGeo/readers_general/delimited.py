@@ -1,5 +1,7 @@
 __all__ = [
-    'delimitedText']
+    'delimitedText',
+    'xyzRead'
+]
 
 import numpy as np
 from vtk.util import numpy_support as nps
@@ -41,13 +43,35 @@ def delimitedText(FileName, deli=' ', useTab=False, hasTits=True, skiprows=0, co
         titles = fileLines[idx+skiprows].split(deli)
         idx += 1
     else:
+        cols = len(fileLines[idx+skiprows].split(deli))
         titles = []
+        for i in range(cols):
+            titles.append('Field %d' % i)
 
-    data = np.genfromtxt((line.encode('utf8') for line in fileLines[idx+skiprows::]), dtype=None)
+    data = np.genfromtxt((line.encode('utf8') for line in fileLines[idx+skiprows::]), delimiter=deli, dtype=None)
 
-    if not hasTits:
-        cols = np.shape(data)[1]
-        for i in range(cols):titles.append('Field %d' % i)
+    _helpers._placeArrInTable(data, titles, pdo)
+
+    return pdo
+
+
+
+
+
+def xyzRead(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=None):
+    if pdo is None:
+        pdo = vtk.vtkTable() # vtkTable
+
+    if (useTab):
+        deli = '\t'
+
+    fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments=comments)
+
+    idx = 0
+    titles = fileLines[idx+skiprows][1::].split(', ') # first characer of header is '!'
+    idx += 1
+
+    data = np.genfromtxt((line.encode('utf8') for line in fileLines[idx+skiprows::]), delimiter=deli, dtype=float)
 
     _helpers._placeArrInTable(data, titles, pdo)
 
