@@ -4,8 +4,6 @@ __all__ = [
 ]
 
 import numpy as np
-import csv
-import os
 from vtk.util import numpy_support as nps
 import vtk
 import json
