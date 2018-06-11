@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="0.7.0"
+VERSION="0.7.1"
 
 # Build on bumped version
 if [ "$#" -eq 1 ]; then
