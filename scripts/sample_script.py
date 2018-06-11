@@ -4,7 +4,7 @@
 from paraview.simple import *
 from os import listdir
 from os.path import isfile, join
-from PVGeo import *
+from pvmacros import *
 
 
 #### disable automatic camera reset on 'Show'
