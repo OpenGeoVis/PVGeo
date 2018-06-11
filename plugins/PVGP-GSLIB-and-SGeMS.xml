@@ -139,7 +139,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import os&#xA;from PVGPpy.gslib import gslibRead&#xA;from PVGPpy._helpers import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output, use: print(os.path.basename(FileNames[i]) + ': ' + h)&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslibRead(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, skiprows=Skiprows, comments=Comments, pdo=pdo)&#xA;"
+        default_values="import os&#xA;from PVGeo.gslib import gslibRead&#xA;from PVGeo._helpers import getTimeStepFileIndex&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output, use: print(os.path.basename(FileNames[i]) + ': ' + h)&#xA;pdo = self.GetOutput() # vtkTable&#xA;tbl, h = gslibRead(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, skiprows=Skiprows, comments=Comments, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -153,7 +153,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from PVGPpy._helpers import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
+        default_values="from PVGeo._helpers import setOutputTimesteps&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -310,7 +310,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.gslib import sgemsGrid&#xA;from PVGPpy._helpers import getTimeStepFileIndex&#xA;from paraview import util&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, skiprows=Skiprows, comments=Comments, pdo=pdo)&#xA;"
+        default_values="from PVGeo.gslib import sgemsGrid&#xA;from PVGeo._helpers import getTimeStepFileIndex&#xA;from paraview import util&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;&#xA;# Generate Output&#xA;pdo = self.GetOutput() # vtkTable&#xA;sgemsGrid(FileNames[i], deli=Delimiter_Field, useTab=Use_tab_delimiter, skiprows=Skiprows, comments=Comments, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -324,7 +324,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.gslib import sgemsExtent&#xA;from PVGPpy._helpers import setOutputTimesteps, getTimeStepFileIndex&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;# Only grab extent for first file... requires all to have same extent&#xA;ext = sgemsExtent(FileNames[0], deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGeo.gslib import sgemsExtent&#xA;from PVGeo._helpers import setOutputTimesteps, getTimeStepFileIndex&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames, dt=Time_Step)&#xA;# Only grab extent for first file... requires all to have same extent&#xA;ext = sgemsExtent(FileNames[0], deli=Delimiter_Field, useTab=Use_tab_delimiter)&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

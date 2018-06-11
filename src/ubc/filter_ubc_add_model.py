@@ -32,7 +32,7 @@ Properties = dict(
 )
 
 def RequestData():
-    from PVGPpy.ubc import ubcModel3D, ubcModel2D, placeModelOnMesh
+    from PVGeo.ubc import ubcModel3D, ubcModel2D, placeModelOnMesh
     import os
 
     pdi = self.GetInput() # vtkRectilinearGrid

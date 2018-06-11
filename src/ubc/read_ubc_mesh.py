@@ -44,7 +44,7 @@ Properties = dict(
 
 
 def RequestData():
-    from PVGPpy.ubc import ubcTensorMesh
+    from PVGeo.ubc import ubcTensorMesh
     import os
     # Get output
     pdo = self.GetOutput()
@@ -53,7 +53,7 @@ def RequestData():
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.ubc import ubcExtent
+    from PVGeo.ubc import ubcExtent
     if FileName_Mesh == 'absolute path':
         raise Exception('No mesh file selected. Aborting.')
     # Preview the mesh file and get the mesh extents

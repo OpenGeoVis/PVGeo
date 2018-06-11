@@ -44,7 +44,7 @@ PropertiesHelp = dict(
 def RequestData(self):
     """Create a VTK output given the list of FileNames and the current timestep.
     This script can access self and FileNames and should return an output of type OutputDataType defined above"""
-    from PVGPpy._helpers import getTimeStepFileIndex
+    from PVGeo._helpers import getTimeStepFileIndex
 
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
@@ -59,6 +59,6 @@ def RequestData(self):
 
 
 def RequestInformation(self):
-    from PVGPpy._helpers import setOutputTimesteps
+    from PVGeo._helpers import setOutputTimesteps
     # This is necessary to set time steps
     setOutputTimesteps(self, FileNames, dt=Time_Step)

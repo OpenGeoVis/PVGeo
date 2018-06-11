@@ -24,7 +24,7 @@ PropertiesHelp = dict(
 def RequestData():
     import numpy as np
     from vtk.util import numpy_support as nps
-    from PVGPpy.model_build import oddModel
+    from PVGeo.model_build import oddModel
 
     pdo = self.GetOutput() #vtkRectilinearGrid
     oddModel(Origin, X_Cells, Y_Cells, Z_Cells, data=None, dataNm='Data', pdo=pdo)
@@ -32,7 +32,7 @@ def RequestData():
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.model_build import oddModelExtent
+    from PVGeo.model_build import oddModelExtent
     # ABSOLUTELY NECESSARY FOR THE SOURCE TO WORK:
     ext = oddModelExtent(X_Cells, Y_Cells, Z_Cells)
     util.SetOutputWholeExtent(self, ext)

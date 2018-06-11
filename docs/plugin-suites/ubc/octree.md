@@ -29,7 +29,7 @@ To use the plugin:
 
 ## Code Docs
 
-{def:PVGPpy.read.ubcOcTree}
-{def:PVGPpy.read.ubcOcTreeMesh}
-{def:PVGPpy.read.placeModelOnOcTreeMesh}
-{def:PVGPpy.read.ubcExtent}
+{def:PVGeo.read.ubcOcTree}
+{def:PVGeo.read.ubcOcTreeMesh}
+{def:PVGeo.read.placeModelOnOcTreeMesh}
+{def:PVGeo.read.ubcExtent}

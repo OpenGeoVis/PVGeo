@@ -15,8 +15,8 @@ Properties = dict(
 
 def RequestData(self):
     import os
-    from PVGPpy.grids import readPVGPGrid
-    from PVGPpy._helpers import getTimeStepFileIndex
+    from PVGeo.grids import readPVGPGrid
+    from PVGeo._helpers import getTimeStepFileIndex
     pdo = self.GetOutput()
 
     # This finds the index for the FileNames for the requested timestep
@@ -28,8 +28,8 @@ def RequestData(self):
 
 def RequestInformation(self):
     from paraview import util
-    from PVGPpy._helpers import setOutputTimesteps
-    from PVGPpy.grids import readPVGPGridExtents
+    from PVGeo._helpers import setOutputTimesteps
+    from PVGeo.grids import readPVGPGridExtents
     # This is necessary to set time steps
     setOutputTimesteps(self, FileNames[0], dt=Time_Step)
     # NOTE: if using time series, they all must have the same extents

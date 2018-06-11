@@ -58,4 +58,4 @@ Use the following script to construct to 3D numpy arrays with the same dimension
 
 {def:py2PVGP.savePVGPGrid}
 
-{def:PVGPpy.read.readPVGPGrid}
+{def:PVGeo.read.readPVGPGrid}

@@ -29,5 +29,5 @@ A source creates simple synthetic data sources such as a sphere or cube with a s
 
 
 
-### About `PVGPpy`
-PVGPpy is a python module we are developing to modulize all functionality common throughout the plugins. This module will contain the bulk of our code for file readers and visual filters. We are publishing the plugins code base in this manner so that we can easily update/change the code with minor deprecation issues.
+### About `PVGeo`
+PVGeo is a python module we are developing to modulize all functionality common throughout the plugins. This module will contain the bulk of our code for file readers and visual filters. We are publishing the plugins code base in this manner so that we can easily update/change the code with minor deprecation issues.

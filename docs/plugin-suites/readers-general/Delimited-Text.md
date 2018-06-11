@@ -15,4 +15,4 @@ This reader will take in any delimited text file and make a vtkTable from it. Th
 
 ## Code Docs
 
-{def:PVGPpy.read.delimitedText}
+{def:PVGeo.read.delimitedText}

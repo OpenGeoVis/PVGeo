@@ -34,8 +34,8 @@ PropertiesHelp = dict(
 def RequestData():
     import numpy as np
     from vtk.numpy_interface import dataset_adapter as dsa
-    import PVGPpy._helpers as inputhelp
-    from PVGPpy.filters_general import pointsToTube
+    import PVGeo._helpers as inputhelp
+    from PVGeo.filters_general import pointsToTube
     # Get input/output of Proxy
     pdi = self.GetInput()
     pdo = self.GetOutput()

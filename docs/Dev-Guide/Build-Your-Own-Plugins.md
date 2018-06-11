@@ -92,7 +92,7 @@ This method is where all of the main processing should occur. It constructs the 
     ```py
     # Example for a READER
     def RequestData(self):
-        from PVGPpy.read import getTimeStepFileIndex
+        from PVGeo.read import getTimeStepFileIndex
 
         # This finds the index for the FileNames for the requested timestep
         i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
@@ -112,7 +112,7 @@ This method is where all of the main processing should occur. It constructs the 
     ```py
     # Example for a FILTER
     def RequestData(self):
-        import PVGPpy.helpers as inputhelp
+        import PVGeo.helpers as inputhelp
         # Here we grab the input and output data objects.
         pdi = self.GetInput() # VTK Data Type specified in `InputDataType`
         pdo = self.GetOutput() # VTK Data Type specified in `OutputDataType`
@@ -134,7 +134,7 @@ This method is where we set metadata about the output of the plugin. Use if you 
     # Example for a READER
     def RequestInformation(self):
         from paraview import util
-        from PVGPpy.read import setOutputTimesteps
+        from PVGeo.read import setOutputTimesteps
         # This is necessary to set time steps
         setOutputTimesteps(self, FileNames, dt=Time_Step)
         # Here's an example of setting extents that might be necessary for plugin to function correctly:
@@ -157,7 +157,7 @@ This method is where we set metadata about the output of the plugin. Use if you 
 We think the best way to demonstrate how to do this is for you to check out a plugin already developed in the PVGP repository. For an example reader, check out the **Read Delimited Text File To Table** reader in `src/readers-general/read_delimited_file_to_table.py`. For an example filter, check out the **Normalize Array** filter in `src/filters-general/filter_normalize_array.py` which demonstrates how to add custom XML and how to specify input arrays to process.
 
 !!! warning
-    Note how that in our plugins, the bulk of the VTK data object construction occurs in a call to the `PVGPpy` module. We do this so that we can version control the backend functionality of these plugins. This is necessary to implement in this manner as ParaView state files will save the scripts specified in the plugin at a given time, and if a bug in that functionality is fixed and you update PVGP, it might not reflect in some of your saved projects unless we abstract the functionality the way we do. Think of plugins built in the `src/` directory as abstractions or high level instructions whereas the bulk functionality and processing of these plugins occur in the `PVGPpy` package which we modulize and version control.
+    Note how that in our plugins, the bulk of the VTK data object construction occurs in a call to the `PVGeo` module. We do this so that we can version control the backend functionality of these plugins. This is necessary to implement in this manner as ParaView state files will save the scripts specified in the plugin at a given time, and if a bug in that functionality is fixed and you update PVGP, it might not reflect in some of your saved projects unless we abstract the functionality the way we do. Think of plugins built in the `src/` directory as abstractions or high level instructions whereas the bulk functionality and processing of these plugins occur in the `PVGeo` package which we modulize and version control.
 
 
 Now that you have an idea of how to construct plugins so that our build scripts will add GUI parameters and install the plugin to ParaView, let's get started describing how to make a plugin! First, make a copy of either the example reader or filter template and rename it to something meaningful and place that file in either the `src/readers-general/` or `src/filters-general/` directory appropriately. Then go ahead and change all of the attributes specified [**above**](#plugin-attributes) to declare the metadata for your new plugin. Then add the necessary parameters for your plugin like shown [**above**](#plugin-parameters) and decide what kind of action you plugin will take given its input and parameters to construct the `:::py def RequestData(self)` script. Once you think you are done creating the plugin, run the `src/build_plugins.sh` script through your terminal by executing `:::bash sh src/build_plugins.sh` and make sure no red errors output when building your plugin. If the build was successful, restart ParaView and try using your new plugin!

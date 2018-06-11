@@ -44,8 +44,8 @@ PropertiesHelp = dict(
 
 
 def RequestData():
-    from PVGPpy.filters_general import normalizeArray
-    import PVGPpy._helpers as inputhelp
+    from PVGeo.filters_general import normalizeArray
+    import PVGeo._helpers as inputhelp
     # Choose range to use:
     if Use_Range:
         rng = Range

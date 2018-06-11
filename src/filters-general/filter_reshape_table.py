@@ -36,7 +36,7 @@ PropertiesHelp = dict(
 
 
 def RequestData():
-    from PVGPpy.filters_general import reshapeTable
+    from PVGeo.filters_general import reshapeTable
 
     pdi = self.GetInput() #vtkTable
     pdo = self.GetOutput() #vtkTable

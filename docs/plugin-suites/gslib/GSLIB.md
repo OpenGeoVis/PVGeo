@@ -52,4 +52,4 @@ The GSLIB file format has headers lines followed by the data as a space delimite
 
 ## Code Docs
 
-{def:PVGPpy.read.gslib}
+{def:PVGeo.read.gslib}
