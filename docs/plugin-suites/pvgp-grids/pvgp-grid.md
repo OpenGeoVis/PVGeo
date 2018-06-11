@@ -56,6 +56,6 @@ Use the following script to construct to 3D numpy arrays with the same dimension
 -----
 ## Code Docs
 
-{def:py2PVGP.savePVGPGrid}
+{def:PVGeo.grids.savePVGPGrid}
 
 {def:PVGeo.grids.readPVGPGrid}
