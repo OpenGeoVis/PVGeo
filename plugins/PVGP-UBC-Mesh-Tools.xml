@@ -13,11 +13,11 @@
         short_help="TODO">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP UBC Mesh Tools" />
+        <ShowInMenu category="PVGeo UBC Mesh Tools" />
       </Hints>
       <Hints>
         <ReaderFactory extensions="mesh msh dat txt"
-          file_description="PVGP: UBC OcTree Mesh File Format." />
+          file_description="PVGeo: UBC OcTree Mesh File Format." />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->
@@ -135,11 +135,11 @@
         short_help="UBC Mesh 2D/3D models are defined using a 2-file format. The &quot;mesh&quot; file describes how the data is discretized. The &quot;model&quot; file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. The reader will automatically detect if the mesh is 2D or 3D and read the remainder of the data with that dimensionality assumption. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D).">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP UBC Mesh Tools" />
+        <ShowInMenu category="PVGeo UBC Mesh Tools" />
       </Hints>
       <Hints>
         <ReaderFactory extensions="mesh msh dat txt"
-          file_description="PVGP: UBC Mesh 2D/3D Two-File Format" />
+          file_description="PVGeo: UBC Mesh 2D/3D Two-File Format" />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->
@@ -249,7 +249,7 @@
         short_help="This filter allows you to choose a UBC model file to append as an attribute to an already created vtkRectilinearGrid of a UBC 2D or 3D Mesh.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP UBC Mesh Tools" />
+        <ShowInMenu category="PVGeo UBC Mesh Tools" />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->

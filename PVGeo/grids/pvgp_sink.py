@@ -1,4 +1,4 @@
-__all__ = ['savePVGPGrid']
+__all__ = ['savePVGeoGrid']
 
 import json
 import struct
@@ -21,10 +21,10 @@ def _getdtypes(dtype):
     return dtype, sdtype, num_bytes
 
 
-def savePVGPGrid(data, path, basename, spacing=(1,1,1), origin=(0,0,0), order='F', dataNames=None, endian='@'):
+def savePVGeoGrid(data, path, basename, spacing=(1,1,1), origin=(0,0,0), order='F', dataNames=None, endian='@'):
     """
     @desc:
-    The method is for use outside of pvpython in Python 2 or 3 to save a regularly sampled grid in the PVGP format. Pass lists of multidimensional numpy arrays of same shape to save out.
+    The method is for use outside of pvpython in Python 2 or 3 to save a regularly sampled grid in the PVGeo format. Pass lists of multidimensional numpy arrays of same shape to save out.
 
     @params:
     data : list of numpy.ndarray : The attirbutes for a single model in a multidimensional array. Max dimensionality of 3. All arrays in the list must have the same shape.
@@ -37,7 +37,7 @@ def savePVGPGrid(data, path, basename, spacing=(1,1,1), origin=(0,0,0), order='F
     endian : char : optional : The endianness to pack the data when compressing it. Not necessary anymore.
 
     @returns:
-    None : This method saves out a file in the PVGP Grid format.
+    None : This method saves out a file in the PVGeo Grid format.
 
     """
     if type(data) is not list:
@@ -64,7 +64,7 @@ def savePVGPGrid(data, path, basename, spacing=(1,1,1), origin=(0,0,0), order='F
     dataArrsDict = dict()
     for i in range(numArrays):
         # save out each data array to own file
-        #format is `basename-%d.pvgp@`
+        #format is `basename-%d.pvgeo@`
         dd = data[i].flatten(order=order)
         no, sdtype, num_bytes = _getdtypes(str(dd.dtype))
         dd = struct.pack(endian+str(len(dd))+sdtype,*dd)
@@ -88,7 +88,7 @@ def savePVGPGrid(data, path, basename, spacing=(1,1,1), origin=(0,0,0), order='F
     )
 
     # save the header
-    with open('%s/%s.pvgp' % (path, basename), 'w') as fp:
+    with open('%s/%s.pvgeo' % (path, basename), 'w') as fp:
         json.dump(lib, fp, indent=4)
 
     return None

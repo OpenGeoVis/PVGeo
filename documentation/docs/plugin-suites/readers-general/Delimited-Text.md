@@ -5,7 +5,7 @@
 This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
 
 ## Down the Pipeline
-- [Table to Uniform Grid](../pvgp-grids/table-to-uniform-grid.md)
+- [Table to Uniform Grid](../pvgeo-grids/table-to-uniform-grid.md)
 - [Reshape Table](../filters-general/reshape-table.md)
 - [Table to Points](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Points)
 - [Table to Structured Grid](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Structured_Grid)

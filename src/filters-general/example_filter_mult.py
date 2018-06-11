@@ -7,7 +7,7 @@ Name = 'ExampleFilterMultInput'
 # Label for the filter menu:
 Label = 'Example Filter Multiple Inputs'
 # The filter/source menu category:
-FilterCategory = 'PVGP Filters'
+FilterCategory = 'PVGeo Filters'
 
 # A general overview of the plugin
 Help = 'This is a simple example of a Python Programmable Filter with mutiple inputs.'

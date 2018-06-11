@@ -5,7 +5,7 @@ Help = 'NOTE: if reading a time series, they must all have the same extent!'
 NumberOfInputs = 0
 OutputDataType = 'vtkImageData'
 Extensions = 'sgems SGEMS SGeMS dat txt'
-ReaderDescription = 'PVGP: SGeMS Grid File Format'
+ReaderDescription = 'PVGeo: SGeMS Grid File Format'
 
 
 Properties = dict(

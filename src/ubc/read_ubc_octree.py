@@ -4,7 +4,7 @@
 Name = 'ReadOcTreeMesh' # Name to be used for coding/macros
 Label = 'Read OcTree Mesh' # Label for the reader in the menu
 Extensions = 'mesh msh dat txt'
-ReaderDescription = 'PVGP: UBC OcTree Mesh File Format.'
+ReaderDescription = 'PVGeo: UBC OcTree Mesh File Format.'
 # A general overview of the plugin
 Help = 'TODO'
 

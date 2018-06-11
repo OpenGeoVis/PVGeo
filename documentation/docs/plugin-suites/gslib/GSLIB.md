@@ -42,7 +42,7 @@ The GSLIB file format has headers lines followed by the data as a space delimite
     ```
 
 ## Down the Pipeline
-- [Table to Uniform Grid](../pvgp-grids/table-to-uniform-grid.md)
+- [Table to Uniform Grid](../pvgeo-grids/table-to-uniform-grid.md)
 - [Reshape Table](../filters-general/reshape-table.md)
 - [Table to Points](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Points)
 - [Table to Structured Grid](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Table_To_Structured_Grid)

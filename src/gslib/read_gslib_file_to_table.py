@@ -5,7 +5,7 @@ Help = 'The GSLIB file format has headers lines followed by the data as a space 
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'
 Extensions = 'sgems dat geoeas gslib GSLIB txt SGEMS'
-ReaderDescription = 'PVGP: GSLIB File Format'
+ReaderDescription = 'PVGeo: GSLIB File Format'
 
 
 Properties = dict(

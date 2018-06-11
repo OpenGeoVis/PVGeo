@@ -26,13 +26,13 @@ else
     NORMAL=""
 fi
 
-printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Updating PVGeophysics..."
+printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Updating PVGeo..."
 
 #  Pull from github
 if git pull --rebase --stat origin master
 then
     # Succesful update from GitHub
-    printf "${GREEN}${BOLD}%s${NORMAL}\n" "--> Tsjakka!! *PVGeophysics* has been updated and/or is at the current version."
+    printf "${GREEN}${BOLD}%s${NORMAL}\n" "--> Tsjakka!! *PVGeo* has been updated and/or is at the current version."
     # Now lets clean out the old version
     pushd ./src
     # Now lets build and install everything (running a build incase user has their own plugins added to thier fork)
@@ -40,7 +40,7 @@ then
     popd
     printf "${GREEN}${BOLD}%s${NORMAL}\n" "--> All plugins should be up to date and installed."
     printf "${BLUE}${BOLD}%s${NORMAL}\n" "--> Learn more about updates and features to come on the Read the Docs page at:"
-    printf "${BLUE}${BOLD}${UND}%s${NORMAL}\n" "https://banesullivan.github.io/PVGeophysics/"
+    printf "${BLUE}${BOLD}${UND}%s${NORMAL}\n" "https://banesullivan.github.io/PVGeo/"
 else
   printf "${RED}${BOLD}%s${NORMAL}\n" '--> There was an error updating. Try again later or run a `git status` to see if you have unstaged changes. If you have made changes to files in the repo, you will need to stage them.'
 fi

@@ -9,7 +9,7 @@
 ###   ${USER_HOME} : Will be replaced by the current user's home directory
 ### ----------------------------------------------------------------------- ###
 
-EXPORT_DIRECTORY = '${USER_HOME}/Dropbox/PVGP_vtkjs'
+EXPORT_DIRECTORY = '${USER_HOME}/Dropbox/PVGeo_vtkjs'
 FILENAME_EXTENSION = '.vtkjs'
 
 ### ----------------------------------------------------------------------- ###

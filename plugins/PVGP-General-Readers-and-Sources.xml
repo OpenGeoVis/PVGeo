@@ -3,19 +3,19 @@
   <ProxyGroup name="sources">
 
 
-    <!-- ./readers-general//read_pvgp_grid.py -->
+    <!-- ./readers-general//read_pvgeo_grid.py -->
     <SourceProxy
-      name="ReadPVGPGrid"
+      name="ReadPVGeoGrid"
       class="vtkPythonProgrammableFilter"
-      label="Read PVGP Uniform Grid">
+      label="Read PVGeo Uniform Grid">
       <Documentation
         long_help=""
         short_help="">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP General Sources" />
-        <ReaderFactory extensions="pvgp PVGP"
-          file_description="PVGP Unifrom Grid Reader. Opens a header file which points to data arrays to fill a uniform grid." />
+        <ShowInMenu category="PVGeo General Sources" />
+        <ReaderFactory extensions="pvgeo PVGeo"
+          file_description="PVGeo Unifrom Grid Reader. Opens a header file which points to data arrays to fill a uniform grid." />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->
@@ -69,8 +69,8 @@
             </Documentation>
         </DoubleVectorProperty>
         <Hints>
-            <ReaderFactory extensions="pvgp PVGP"
-                    file_description="PVGP Unifrom Grid Reader. Opens a header file which points to data arrays to fill a uniform grid." />
+            <ReaderFactory extensions="pvgeo PVGeo"
+                    file_description="PVGeo Unifrom Grid Reader. Opens a header file which points to data arrays to fill a uniform grid." />
         </Hints>
         
 
@@ -90,7 +90,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="import os&#xA;from PVGeo.grids import readPVGPGrid&#xA;from PVGeo._helpers import getTimeStepFileIndex&#xA;pdo = self.GetOutput()&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;path = os.path.dirname(FileNames[i])&#xA;&#xA;readPVGPGrid(FileNames[i], pdo=pdo, path=path)&#xA;"
+        default_values="import os&#xA;from PVGeo.grids import readPVGeoGrid&#xA;from PVGeo._helpers import getTimeStepFileIndex&#xA;pdo = self.GetOutput()&#xA;&#xA;# This finds the index for the FileNames for the requested timestep&#xA;i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)&#xA;path = os.path.dirname(FileNames[i])&#xA;&#xA;readPVGeoGrid(FileNames[i], pdo=pdo, path=path)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -104,7 +104,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGeo._helpers import setOutputTimesteps&#xA;from PVGeo.grids import readPVGPGridExtents&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames[0], dt=Time_Step)&#xA;# NOTE: if using time series, they all must have the same extents&#xA;ext = readPVGPGridExtents(FileNames[0])&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
+        default_values="from paraview import util&#xA;from PVGeo._helpers import setOutputTimesteps&#xA;from PVGeo.grids import readPVGeoGridExtents&#xA;# This is necessary to set time steps&#xA;setOutputTimesteps(self, FileNames[0], dt=Time_Step)&#xA;# NOTE: if using time series, they all must have the same extents&#xA;ext = readPVGeoGridExtents(FileNames[0])&#xA;util.SetOutputWholeExtent(self, ext)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -135,7 +135,7 @@
         short_help="This reader provides a starting point for making a file reader in a Programmable Python Source.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP General Sources" />
+        <ShowInMenu category="PVGeo General Sources" />
         <ReaderFactory extensions=""
           file_description="All Files: Example Python Reader" />
       </Hints>
@@ -270,9 +270,9 @@
         short_help="This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in Paraview, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP General Sources" />
+        <ShowInMenu category="PVGeo General Sources" />
         <ReaderFactory extensions="dat csv txt text ascii"
-          file_description="PVGP: Delimited Text File" />
+          file_description="PVGeo: Delimited Text File" />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->
@@ -327,7 +327,7 @@
         </DoubleVectorProperty>
         <Hints>
             <ReaderFactory extensions="dat csv txt text ascii"
-                    file_description="PVGP: Delimited Text File" />
+                    file_description="PVGeo: Delimited Text File" />
         </Hints>
         
 
@@ -454,7 +454,7 @@
         short_help="">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP General Sources" />
+        <ShowInMenu category="PVGeo General Sources" />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->
@@ -531,9 +531,9 @@
         short_help="This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP General Sources" />
+        <ShowInMenu category="PVGeo General Sources" />
         <ReaderFactory extensions="H@ bin rsf rsf@ HH"
-          file_description="PVGP: Binary Packed Floats or Doubles" />
+          file_description="PVGeo: Binary Packed Floats or Doubles" />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->
@@ -619,7 +619,7 @@
         </DoubleVectorProperty>
         <Hints>
             <ReaderFactory extensions="H@ bin rsf rsf@ HH"
-                    file_description="PVGP: Binary Packed Floats or Doubles" />
+                    file_description="PVGeo: Binary Packed Floats or Doubles" />
         </Hints>
         
 
@@ -720,9 +720,9 @@
         short_help="This reads in float or double data that is packed into a Madagascar Single Stream RSF binary file format with a leader header. The reader ignores all of the ascii header details by searching for the sequence of three special characters: EOL EOL EOT and it will treat the following binary packed data as one long array and make a `vtkTable` with one column of that data. The reader defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We will later implement the ability to create a gridded volume from the header info. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository. Details: http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP General Sources" />
+        <ShowInMenu category="PVGeo General Sources" />
         <ReaderFactory extensions="H@ bin rsf rsf@ HH"
-          file_description="PVGP: Madagascar Single Stream RSF Format" />
+          file_description="PVGeo: Madagascar Single Stream RSF Format" />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->
@@ -808,7 +808,7 @@
         </DoubleVectorProperty>
         <Hints>
             <ReaderFactory extensions="H@ bin rsf rsf@ HH"
-                    file_description="PVGP: Madagascar Single Stream RSF Format" />
+                    file_description="PVGeo: Madagascar Single Stream RSF Format" />
         </Hints>
         
 

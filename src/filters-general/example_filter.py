@@ -7,7 +7,7 @@ Name = 'ExamplePythonFilter'
 # Label for the filter menu:
 Label = 'Example Python Filter'
 # The filter/source menu category:
-FilterCategory = 'PVGP Filters'
+FilterCategory = 'PVGeo Filters'
 
 # A general overview of the plugin
 Help = 'This is a simple example of a Python Programmable Filter'

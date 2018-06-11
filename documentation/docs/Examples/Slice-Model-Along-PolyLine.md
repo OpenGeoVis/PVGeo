@@ -6,7 +6,7 @@
 !!! info
     This example will demonstrate how to slice a 3D data source along some arbitrary line or sequence of points specified in another data source to have many slices of the 3D data perpendicular to that travel path.
 
-    PVGP features demonstrated:
+    PVGeo features demonstrated:
 
     - Filter [Add Cell Connectivity to Points][filter]
     - Macro [`manySlicesAlongPoints()`][macro]
@@ -23,7 +23,7 @@ First, lets load some data onto the ParaView pipeline. For this example, we want
     Data File 1: 'topexample.sgems'
 
     - **Original source:** http://www.trainingimages.org/training-images-library.html
-    - **Reader to Use:** *SGeMS Grid* from the PVGP repo found [**here**][reader]
+    - **Reader to Use:** *SGeMS Grid* from the PVGeo repo found [**here**][reader]
     - **Description:** This data file is the 3D model that we will slice through
 
     Data File 2: 'points.csv'
@@ -31,7 +31,7 @@ First, lets load some data onto the ParaView pipeline. For this example, we want
     - **Reader to Use:** *Delimited Text* reader native to ParaView
     - **Description:** You will perform a *Table to Points* filter on this data source and it holds the points for which we will construct a path to slice the 3D model.
 
-Now that you have the two data files loaded onto the pipeline in ParaView, lets add connectivity to the points so that they form a continuous poly line. To do this, first select the points table on the pipeline that you loaded directly from the data file and apply a **Table to Points** filter on this data source. Select the proper parameters and apply this filter. Now display these points in the render view by clicking the render view then enabling the eyeball icon next to this filter on the pipeline. The points should appear. Now we need to add connectivity to these points such that they form a poly line by applying an [**Add Cell Connectivity to Points**][filter] filter which is in the *PVGP Filters* menu. Make sure the **Poly Line** option is selected for the **Cell Type** parameter and click apply. You can zoom into the line in the render view and see a small line connecting all the points.
+Now that you have the two data files loaded onto the pipeline in ParaView, lets add connectivity to the points so that they form a continuous poly line. To do this, first select the points table on the pipeline that you loaded directly from the data file and apply a **Table to Points** filter on this data source. Select the proper parameters and apply this filter. Now display these points in the render view by clicking the render view then enabling the eyeball icon next to this filter on the pipeline. The points should appear. Now we need to add connectivity to these points such that they form a poly line by applying an [**Add Cell Connectivity to Points**][filter] filter which is in the *PVGeo Filters* menu. Make sure the **Poly Line** option is selected for the **Cell Type** parameter and click apply. You can zoom into the line in the render view and see a small line connecting all the points.
 
 ??? tip "Filters applied to the points"
     **Table to Points:**

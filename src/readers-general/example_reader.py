@@ -9,7 +9,7 @@ Name = 'ExamplePythonReader'
 # Label for the reader in the menu
 Label = 'Example Python Reader'
 # The source menu category
-FilterCategory = 'PVGP Readers'
+FilterCategory = 'PVGeo Readers'
 
 Extensions = ''
 ReaderDescription = 'All Files: Example Python Reader'

@@ -13,7 +13,7 @@
         short_help="This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Model Building" />
+        <ShowInMenu category="PVGeo Model Building" />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->
@@ -140,7 +140,7 @@
         short_help="">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Model Building" />
+        <ShowInMenu category="PVGeo Model Building" />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->
@@ -255,7 +255,7 @@
         short_help="This creates a vtkRectilinearGrid.">
       </Documentation>
       <Hints>
-        <ShowInMenu category="PVGP Model Building" />
+        <ShowInMenu category="PVGeo Model Building" />
       </Hints>
 
       <!-- Built on version: 0.7.1 -->

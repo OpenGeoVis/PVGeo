@@ -1,6 +1,6 @@
 
 from .load_plugins import (
-    loadPVGPplugins
+    loadPVGeoplugins
 )
 from . import export
 from . import vis

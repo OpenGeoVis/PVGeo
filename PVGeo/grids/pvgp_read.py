@@ -1,6 +1,6 @@
 __all__ = [
-    'readPVGPGridExtents',
-    'readPVGPGrid'
+    'readPVGeoGridExtents',
+    'readPVGeoGrid'
 ]
 
 import numpy as np
@@ -12,7 +12,7 @@ import base64
 
 
 #-----------
-# PVGP Custom Grid file type
+# PVGeo Custom Grid file type
 """
 This file reader will open a header file that points to a packed binary data files
 The header will have Parameters for extent, spacing, origin, and number of arrays
@@ -41,22 +41,22 @@ def _getdtypes(dtype):
     return dtype, sdtype, num_bytes, vtktype
 
 
-def readPVGPGridExtents(headerfile):
+def readPVGeoGridExtents(headerfile):
     with open(headerfile, 'r') as f:
         lib = json.load(f)
     n1,n2,n3 = lib['extent']
     return (0,n1-1, 0,n2-1, 0,n3-1)
 
 
-def readPVGPGrid(headerfile, pdo=None, path=None):
+def readPVGeoGrid(headerfile, pdo=None, path=None):
     """
     @desc:
-    Generates vtkImageData from the uniform grid defined in the PVGP uniformly gridded data format.
+    Generates vtkImageData from the uniform grid defined in the PVGeo uniformly gridded data format.
 
     @params:
     headerfile : str: req : The file name / absolute path for the input header file that cotains all parameters and pointers to file locations.
     pdo : vtk.vtkImageData : opt : A pointer to the output data object.
-    path : str : opt : The absolute path to the PVGP grid database to override the path in the header file.
+    path : str : opt : The absolute path to the PVGeo grid database to override the path in the header file.
 
     @return:
     vtkImageData : A uniformly spaced gridded volume of data from input file

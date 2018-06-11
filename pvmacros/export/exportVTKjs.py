@@ -13,7 +13,7 @@ def exportVTKjs(FileName='', compress=False):
 
     @notes:
     - To view, open the file in the VTKjs standalone web viewer found [here](https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html)
-    - Use the `get_vtkjs_url.py` script in the PVGP repository to get a shareable link for the exported file.
+    - Use the `get_vtkjs_url.py` script in the PVGeo repository to get a shareable link for the exported file.
 
     """
     import os

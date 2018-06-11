@@ -1,16 +1,16 @@
-# *PVGeophysics*
+# *PVGeo*
 
-Welcome to the *PVGeophysics* (PVGP) website! Through visualization, we can bring value to data and hold the products of geoscience in a more intuitive light to interested parties. *PVGeophysics* is a code repository for visualizing geophysical data and this website documents the entire code base and includes several examples and tutorials of how to use the ParaView plugins delivered in this repo for common tasks in the visualization of geophysical data.
+Welcome to the *PVGeo* (PVGeo) website! Through visualization, we can bring value to data and hold the products of geoscience in a more intuitive light to interested parties. *PVGeo* is a code repository for visualizing geophysical data and this website documents the entire code base and includes several examples and tutorials of how to use the ParaView plugins delivered in this repo for common tasks in the visualization of geophysical data.
 
 
 ??? warning "Pre-Release Notice"
-    This is a Beta release of the *PVGeophysics* code base and documentation. The plugins and Python modules might be changed in backward-incompatible ways and are not subject to any deprecation policy. The current documentation is a work in progress and we are trying our best to get everything fully documented by end of June 2018.
+    This is a Beta release of the *PVGeo* code base and documentation. The plugins and Python modules might be changed in backward-incompatible ways and are not subject to any deprecation policy. The current documentation is a work in progress and we are trying our best to get everything fully documented by end of June 2018.
 
 ??? question "Suggestions?"
-    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues).
+    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues).
 
 ??? tip "Where to get the code"
-    All code is published on the GitHub repository *PVGeophysics* linked to this page. Click the 'PVGP on GitHub' link on the right side of the menu bar at the top to find all of the code or you can follow [**this link**](https://github.com/OpenGeoVis/PVGeophysics).
+    All code is published on the GitHub repository *PVGeo* linked to this page. Click the 'PVGeo on GitHub' link on the right side of the menu bar at the top to find all of the code or you can follow [**this link**](https://github.com/OpenGeoVis/PVGeo).
 
 ??? tip "How to explore this documentation"
     *On a Desktop:* There are six main sections to this website shown in the navigation tab at the top of the page. Use these tabs to explore the different aspects of the project! Use the sidebar to the right to explore the contents of the current page and use the sidebar to the left to find all the different pages for this active section/tab. Here is an overview of each section:
@@ -20,11 +20,11 @@ Welcome to the *PVGeophysics* (PVGP) website! Through visualization, we can brin
     - **PV Macros:** A guide on how to use all of the macros developed in the `pvmacros` module. This section contains all of the code docs for the `pvmacros` module as well.
     - **Examples:** A series of exercises to demonstrate the use of different plugins and macros developed in `PVGeo` and `pvmacros` respectively.
     - **Resources:** A conglomerate of additional resources that are helpful when using ParaView for geoscientific applications.
-    - **Development Guide:** This is an all encompassing guid on how to start making your own plugins as well as how to contribute to the *PVGeophysics* repository.
+    - **Development Guide:** This is an all encompassing guid on how to start making your own plugins as well as how to contribute to the *PVGeo* repository.
 
 
 ## Demo
-Check out the [**Demo Page**](http://demo.pvgp.io) to see video demos and interactive demos like the scene below. This is an example of three data sets visually integrated using our framework within ParaView then exported to a shareable format. Go ahead, click it and move it around!
+Check out the [**Demo Page**](http://demo.pvgeo.org) to see video demos and interactive demos like the scene below. This is an example of three data sets visually integrated using our framework within ParaView then exported to a shareable format. Go ahead, click it and move it around!
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
         <iframe src="http://gpvis.org?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/volc.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
@@ -38,7 +38,7 @@ Check out the [**Demo Page**](http://demo.pvgp.io) to see video demos and intera
 
 <div style="float: left; margin:10px 10px 10px 10px"" class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="bane-sullivan"><a class="LI-simple-link" href='https://www.linkedin.com/in/bane-sullivan?trk=profile-badge'>Linkedin: Bane Sullivan</a></div>
 
-The code and documentation distributed here were produced by [**Bane Sullivan**](http://banesullivan.com), graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Dr. Whitney Trainor-Guitton. Feel free to contact Bane through his contact information on [**his website**](http://banesullivan.com) for questions or through the [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues) for custom plugins to visualize geoscience data in ParaView.
+The code and documentation distributed here were produced by [**Bane Sullivan**](http://banesullivan.com), graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Dr. Whitney Trainor-Guitton. Feel free to contact Bane through his contact information on [**his website**](http://banesullivan.com) for questions or through the [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues) for custom plugins to visualize geoscience data in ParaView.
 
 <div style="float: left; margin:10px 10px 10px 10px"> </div>
 

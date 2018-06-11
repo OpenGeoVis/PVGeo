@@ -1,5 +1,5 @@
 !!! info
-    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues).
+    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues).
 
 ## A Brief Introduction to ParaView
 
@@ -25,7 +25,7 @@ Take a look at Section 2.1 of **The ParaView Tutorial** for details of the appli
 ----------
 
 
-## Install *PVGeophysics*
+## Install *PVGeo*
 
 To clone and use the plugins distributed in the repo for ParaView, you'll need [Python 2](https://www.python.org/downloads/) with the SciPy and NumPy modules [installed](https://docs.python.org/2/installing/index.html), and [ParaView](https://www.paraview.org/download/) installed on your computer. Note that this repository will only work with builds of ParaView that have Python.
 
@@ -50,14 +50,14 @@ From your command line:
 
 ```bash
 # Clone this repository
-git clone https://github.com/OpenGeoVis/PVGeophysics
+git clone https://github.com/OpenGeoVis/PVGeo
 
 # Go in the cloned repository
-cd PVGeophysics
+cd PVGeo
 ```
 
-### Installing the PVGP Repository
-Now to get started using the plugins and python modules included in this repository, we need to set up some environmental variables. For Mac users this is a breeze but for windows users this is a bit more involved. Be sure to never move the directory containing *PVGeophysics* code (if it is not in a convenient location then you must move it before continuing the install).
+### Installing the PVGeo Repository
+Now to get started using the plugins and python modules included in this repository, we need to set up some environmental variables. For Mac users this is a breeze but for windows users this is a bit more involved. Be sure to never move the directory containing *PVGeo* code (if it is not in a convenient location then you must move it before continuing the install).
 
 #### MacOS X Paths
 If you are on MacOS X, then your life is easy! Simply run the script `installMac.sh`.
@@ -66,12 +66,12 @@ If you are on MacOS X, then your life is easy! Simply run the script `installMac
 sh ./installMac.sh
 ```
 
-Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the various categories for the PVGP filters are in the **Filters** menu such as **PVGP General Filters**. Then open the **Python Shell** and import the modules delivered in this repo by executing `import PVGeo` and `import pvmacros`. Errors should not arise but if they do, post to the [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues) and the errors will be *immediately* addressed.
+Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the various categories for the PVGeo filters are in the **Filters** menu such as **PVGeo General Filters**. Then open the **Python Shell** and import the modules delivered in this repo by executing `import PVGeo` and `import pvmacros`. Errors should not arise but if they do, post to the [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues) and the errors will be *immediately* addressed.
 
 #### Windows Paths
 Setting up environmental variables is a bit more involved for Windows. First you need to open **Control Center** and search for **Advanced system settings**. Click **Environment variables**. In the section **User variables for Name** add the following variable by clicking **New...**:
 
-- Variable Name: `PV_PLUGIN_PATH` then select **Browse Directory...** and navigate to the directory where you cloned *PVGeophysics* and select the `plugins` directory.
+- Variable Name: `PV_PLUGIN_PATH` then select **Browse Directory...** and navigate to the directory where you cloned *PVGeo* and select the `plugins` directory.
 
 Now we need to edit the `PYTHONPATH` variable that should already exist in your environment. This can get messy/tricky so please strictly follow these instructions:
 
@@ -81,21 +81,21 @@ Now we need to edit the `PYTHONPATH` variable that should already exist in your 
 
 3. Pay attention to what that path Currently is because we need to reselect it. So if you path is currently `c:\python27\lib\site-packages` then click **Browse Directory...** and reselect that *exact* directory.
 
-4. Append the **Variable value**. At the end of your re-selected path, type a semi-colon `;` and then add the path to the *PVGeophysics* repository which you copied in the first step by clicking paste. This is critical to be able to import outside Python modules in `pvpython`.
+4. Append the **Variable value**. At the end of your re-selected path, type a semi-colon `;` and then add the path to the *PVGeo* repository which you copied in the first step by clicking paste. This is critical to be able to import outside Python modules in `pvpython`.
 
-5. Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the various categories for the PVGP filters are in the **Filters** menu such as **PVGP General Filters**.. Then open the **Python Shell** and import the `PVGeo` module by executing `import PVGeo`.
+5. Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the various categories for the PVGeo filters are in the **Filters** menu such as **PVGeo General Filters**.. Then open the **Python Shell** and import the `PVGeo` module by executing `import PVGeo`.
 
 ??? help
-    If an error arises: First, please double check your paths. If you are still having trouble, feel free to post to the [**issues page**](https://github.com/OpenGeoVis/PVGeophysics/issues) which is regularly checked.
+    If an error arises: First, please double check your paths. If you are still having trouble, feel free to post to the [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues) which is regularly checked.
 
 
 
-### Update the PVGP Repository
+### Update the PVGeo Repository
 We have included a script that will update the repository from GitHub, and since the repo is already linked to ParaView, all changes to the repo will be directory reflected in ParaView. This script is simply executed by:
 
 ```bash
-## Run this to update *PVGeophysics* in the future:
-sh ./updatePVGP.sh
+## Run this to update *PVGeo* in the future:
+sh ./updatePVGeo.sh
 ```
 
 --------------

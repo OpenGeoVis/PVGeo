@@ -5,7 +5,7 @@ Help = 'This reads in float or double data that is packed into a Madagascar Sing
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'
 Extensions = 'H@ bin rsf rsf@ HH'
-ReaderDescription = 'PVGP: Madagascar Single Stream RSF Format'
+ReaderDescription = 'PVGeo: Madagascar Single Stream RSF Format'
 ExtraXml = '''\
       <IntVectorProperty
         name="Endianness"

@@ -13,10 +13,10 @@ We tested this model using the OcTree mesh found in [**this example**](http://gi
 
 To use the plugin:
 
-- Make sure to clone/update the *PVGeophysics* repo and [**install if you haven't already**](../../overview/getting-started.md)
+- Make sure to clone/update the *PVGeo* repo and [**install if you haven't already**](../../overview/getting-started.md)
 - Select **File->Open...** in ParaView
 - Choose the mesh file for your OcTree (we have enabled extensions: `.mesh` `.msh` `.dat` `.txt`)
-- Select the **PVGP: UBC OcTree Mesh File Format** reader when prompted.
+- Select the **PVGeo: UBC OcTree Mesh File Format** reader when prompted.
 - *Optional:* Click the **...** button next to the **FileName Model** parameter field. You can select as many model files as you desire (each will be appended as separate attributes).
 - Click **Apply** and wait... the load for larger OcTrees takes about 30 seconds.
 

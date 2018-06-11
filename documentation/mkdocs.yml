@@ -1,9 +1,9 @@
-site_name: PVGeophysics
+site_name: PVGeo
 site_author: Bane Sullivan
-site_description: "Welcome to the documentation for the PVGeophysics code repository. PVGeophysics is a code base tailored to the visualization of spatially referenced data in the geosciences on the ParaView software platform. "
-repo_url: https://github.com/OpenGeoVis/PVGeophysics
-repo_name: PVGP on GitHub
-site_url: http://pvgp.io/
+site_description: "Welcome to the documentation for the PVGeo code repository. PVGeo is a code base tailored to the visualization of spatially referenced data in the geosciences on the ParaView software platform. "
+repo_url: https://github.com/OpenGeoVis/PVGeo
+repo_name: PVGeo on GitHub
+site_url: http://pvgeo.org/
 edit_uri: ""
 copyright: Copyright &copy 2017-2018, <a href="http://banesullivan.com">Bane Sullivan</a>
 
@@ -12,7 +12,7 @@ google_analytics:
   - 'auto'
 
 extra:
-  disqus: 'pvgp'
+  disqus: 'pvgeo'
   social: # check https://fontawesome.com/ for more icons
     - type: 'github'
       link: 'https://github.com/banesullivan'
@@ -61,7 +61,7 @@ plugins:
 pages:
 - Overview:
     - Home: index.md
-    - Why PVGeophysics?: overview/why-pvgp.md
+    - Why PVGeo?: overview/why-pvgeo.md
     - Getting Started: overview/getting-started.md
     - Features to Come: overview/upcoming.md
 
@@ -87,11 +87,11 @@ pages:
         - GSLIB Table: plugin-suites/gslib/gslib.md
     - Model Building:
         - Create Unifrom Grid: plugin-suites/model-building/create-uniform-grid.md
-    - PVGP Grids:
-        - PVGP Grid: plugin-suites/pvgp-grids/pvgp-grid.md
-        - Table to Uniform Grid: plugin-suites/pvgp-grids/table-to-uniform-grid.md
-        - Flip Grid Axii: plugin-suites/pvgp-grids/flip-grid-axii.md
-        - Translate Origin of Grid: plugin-suites/pvgp-grids/translate-origin-of-grid.md
+    - PVGeo Grids:
+        - PVGeo Grid: plugin-suites/pvgeo-grids/pvgeo-grid.md
+        - Table to Uniform Grid: plugin-suites/pvgeo-grids/table-to-uniform-grid.md
+        - Flip Grid Axii: plugin-suites/pvgeo-grids/flip-grid-axii.md
+        - Translate Origin of Grid: plugin-suites/pvgeo-grids/translate-origin-of-grid.md
     - Tunneling:
         - Animate TBM: plugin-suites/tunneling/animate-tbm.md
 

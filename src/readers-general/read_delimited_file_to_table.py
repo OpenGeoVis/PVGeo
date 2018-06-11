@@ -5,7 +5,7 @@ Help = 'This reader will take in any delimited text file and make a vtkTable fro
 NumberOfInputs = 0
 OutputDataType = 'vtkTable'
 Extensions = 'dat csv txt text ascii'
-ReaderDescription = 'PVGP: Delimited Text File'
+ReaderDescription = 'PVGeo: Delimited Text File'
 
 
 Properties = dict(

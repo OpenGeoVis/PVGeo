@@ -3,8 +3,8 @@
 # ONLY RUN THIS SCRIPT ONCE (at time of installation)
 
 pushd "$(dirname "$0")"
-# The PVGP Path:
-PVGP="$( cd "$(dirname "$0")" ; pwd -P )"
+# The PVGeo Path:
+PVGeo="$( cd "$(dirname "$0")" ; pwd -P )"
 
 # Use colors if connected to a terminal, and that terminal supports them.
 if which tput >/dev/null 2>&1; then
@@ -29,8 +29,8 @@ fi
 
 #### BEGIN INSTALLATION
 
-pvplist="/Library/LaunchAgents/pvgp.PV_PLUGIN_PATH.plist"
-pyplist="/Library/LaunchAgents/pvgp.PYTHONPATH.plist"
+pvplist="/Library/LaunchAgents/pvgeo.PV_PLUGIN_PATH.plist"
+pyplist="/Library/LaunchAgents/pvgeo.PYTHONPATH.plist"
 
 # check if the .plist files exits. Remove if so.
 if [ -f ${pvplist} ]; then
@@ -50,8 +50,8 @@ launchctl unsetenv PV_PLUGIN_PATH
 printf "${NORMAL}"
 printf "${GREEN}%s${NORMAL}\n" "Setting environmental variables immediate use..."
 printf "${RED}"
-launchctl setenv PV_PLUGIN_PATH ${PVGP}/plugins
-launchctl setenv PYTHONPATH $PYTHONPATH:${PVGP}/
+launchctl setenv PV_PLUGIN_PATH ${PVGeo}/plugins
+launchctl setenv PYTHONPATH $PYTHONPATH:${PVGeo}/
 printf "${NORMAL}"
 
 # Write plst files to LaunchAgents so Paths are always set at login
@@ -68,7 +68,7 @@ cat << EOF | sudo tee ${pvplist}
     <string>/bin/launchctl</string>
     <string>setenv</string>
     <string>PV_PLUGIN_PATH</string>
-    <string>${PVGP}/plugins</string>
+    <string>${PVGeo}/plugins</string>
   </array>
   <key>RunAtLoad</key>
   <true/>
@@ -90,7 +90,7 @@ cat << EOF | sudo tee ${pyplist}
     <string>/bin/launchctl</string>
     <string>setenv</string>
     <string>PYTHONPATH</string>
-    <string>${PYTHONPATH}:${PVGP}/</string>
+    <string>${PYTHONPATH}:${PVGeo}/</string>
   </array>
   <key>RunAtLoad</key>
   <true/>
@@ -100,7 +100,7 @@ cat << EOF | sudo tee ${pyplist}
 </plist>
 EOF
 
-printf "${GREEN}%s${NORMAL}\n" "All Finished! Any version of ParaView will launch with the PVGP plugins and Python Module."
+printf "${GREEN}%s${NORMAL}\n" "All Finished! Any version of ParaView will launch with the PVGeo plugins and Python Module."
 
 printf "${YELLOW}%s${NORMAL}\n" "Virtual Reality Users: Beware that your version of ParaView has Python included as errors/crashes will occur if you use these plugins without Python."
 
