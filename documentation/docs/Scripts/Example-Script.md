@@ -8,4 +8,4 @@ source: scripts/sample_script.py
 -------
 
 
-{py:scripts/sample_script.py?1 4 7}
+{py:../scripts/sample_script.py?1 4 7}
