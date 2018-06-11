@@ -1,6 +1,6 @@
 # *PVGeo*
 
-Welcome to the *PVGeo* (PVGeo) website! Through visualization, we can bring value to data and hold the products of geoscience in a more intuitive light to interested parties. *PVGeo* is a code repository for visualizing geophysical data and this website documents the entire code base and includes several examples and tutorials of how to use the ParaView plugins delivered in this repo for common tasks in the visualization of geophysical data.
+Welcome to the *PVGeo* website! Through visualization, we can bring value to data and hold the products of geoscience in a more intuitive light to interested parties. *PVGeo* is a code repository for visualizing geophysical data and this website documents the entire code base and includes several examples and tutorials of how to use the ParaView plugins delivered in this repo for common tasks in the visualization of geophysical data.
 
 
 ??? warning "Pre-Release Notice"
