@@ -8,7 +8,7 @@ from . import vis
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
-__version__ = '0.7.1'
+__version__ = '0.7.2'
 
 
 def deleteDownstream(input=None):

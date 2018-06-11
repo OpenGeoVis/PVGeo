@@ -11,7 +11,7 @@ from . import _helpers
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
-__version__ = '0.7.1'
+__version__ = '0.7.2'
 
 def checkNumpy():
     import numpy as np
