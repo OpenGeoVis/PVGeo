@@ -1,6 +1,5 @@
 __all__ = ['savePVGPGrid']
 
-import os
 import json
 import struct
 import numpy as np
