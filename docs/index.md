@@ -16,9 +16,9 @@ Welcome to the *PVGeophysics* (PVGP) website! Through visualization, we can brin
     *On a Desktop:* There are six main sections to this website shown in the navigation tab at the top of the page. Use these tabs to explore the different aspects of the project! Use the sidebar to the right to explore the contents of the current page and use the sidebar to the left to find all the different pages for this active section/tab. Here is an overview of each section:
 
     - **Overview:** An introduction to the project with installation details on how to get started.
-    - **Plugin Suites:** A guide to all of the plugins we have implemented for use directly in ParaView. This section has all the information you will need to understand how to use our plugins and how we group them together into what we call *suites*. The code docs for the `PVGPpy` module are included here.
+    - **Plugin Suites:** A guide to all of the plugins we have implemented for use directly in ParaView. This section has all the information you will need to understand how to use our plugins and how we group them together into what we call *suites*. The code docs for the `PVGeo` module are included here.
     - **PV Macros:** A guide on how to use all of the macros developed in the `pvmacros` module. This section contains all of the code docs for the `pvmacros` module as well.
-    - **Examples:** A series of exercises to demonstrate the use of different plugins and macros developed in `PVGPpy` and `pvmacros` respectively.
+    - **Examples:** A series of exercises to demonstrate the use of different plugins and macros developed in `PVGeo` and `pvmacros` respectively.
     - **Resources:** A conglomerate of additional resources that are helpful when using ParaView for geoscientific applications.
     - **Development Guide:** This is an all encompassing guid on how to start making your own plugins as well as how to contribute to the *PVGeophysics* repository.
 

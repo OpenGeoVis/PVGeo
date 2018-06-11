@@ -19,9 +19,9 @@ This code base deploys tools to perform post-processing visual analysis and inte
 
     * **Sources:** Plugins that create simple synthetic data sources that could be used for model generation. We are creating a suite of plugins for generating various types of discretized models/meshes which can be exported. Another example could include a sphere or cube with a specified attribute like a spatially varying density or electrical conductivity. Other sources might include using that synthetic sphere or cube to make a volumetric field of some response. These plugins will tailor to the educational needs in applications of this code base.
 
-* Develop and document the `PVGPpy` and `pvmacros` Python modules for use in ParaView's Python Shell. These modules will contain all of the macros, batch processing tasks, and common codes to apply to 3D data scenes.
+* Develop and document the `PVGeo` and `pvmacros` Python modules for use in ParaView's Python Shell. These modules will contain all of the macros, batch processing tasks, and common codes to apply to 3D data scenes.
 
-    * The `PVGPpy` module will hold all of the code used in the plugins so that shared features across plugins can be called rather the rewritten and so that we can version control the plugins. This module will be primarily for use in the plugins scripts and not necessary for use in the ParaViewPython shell.
+    * The `PVGeo` module will hold all of the code used in the plugins so that shared features across plugins can be called rather the rewritten and so that we can version control the plugins. This module will be primarily for use in the plugins scripts and not necessary for use in the ParaViewPython shell.
 
     * The `pvmacros` module with be full of macros and other data-independent scripts that can be used directly in the ParaViewPython shell.
 

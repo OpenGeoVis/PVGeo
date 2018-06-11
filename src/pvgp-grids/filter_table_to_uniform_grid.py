@@ -38,7 +38,7 @@ PropertiesHelp = dict(
 )
 
 def RequestData():
-    from PVGPpy.grids import tableToGrid
+    from PVGeo.grids import tableToGrid
     from vtk.util import numpy_support as nps
     import numpy as np
 
@@ -58,7 +58,7 @@ def RequestData():
 
 def RequestInformation():
     from paraview import util
-    from PVGPpy.grids import refoldidx
+    from PVGeo.grids import refoldidx
     # Setup the ImageData
     idx = refoldidx(SEPlib=SEPlib, swapXY=Transpose_XY)
     nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]

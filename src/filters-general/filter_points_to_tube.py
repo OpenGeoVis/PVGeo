@@ -16,7 +16,7 @@ Properties = dict(
 
 
 def RequestData():
-    from PVGPpy.filters_general import pointsToTube
+    from PVGeo.filters_general import pointsToTube
     pdi = self.GetInput() # VTK PolyData Type
     pdo = self.GetOutput() # VTK PolyData Type
 

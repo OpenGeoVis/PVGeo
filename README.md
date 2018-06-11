@@ -1,4 +1,4 @@
-**WARNING: We are completely rebuilding the repository to be encapsulated in a single Python Module called PVGPpy. This is in accordance with the new Python capabilities of ParaView outlined in [Merge Request !2516](https://gitlab.kitware.com/paraview/paraview/merge_requests/2516/) for ParaView. The current structure of the project will be entirely deprecated when that merge request is complete. If you would like to help develop please take a look at the active branch `rebuild-pvpy`.**
+**WARNING: We are completely rebuilding the repository to be encapsulated in a single Python Module called `PVGeo`. This is in accordance with the new Python capabilities of ParaView outlined in [Merge Request !2516](https://gitlab.kitware.com/paraview/paraview/merge_requests/2516/) for ParaView. The current structure of the project will be entirely deprecated when that merge request is complete. If you would like to help develop please take a look at the active branch `rebuild-pvpy`.**
 
 **Proceed with caution until next minor release: *0.8.0***
 
@@ -34,7 +34,7 @@ If you have your own plugins either developed in C++ or as python programmable f
 
 -------
 # How To Use the Plugins in this Repository
-Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble *or you are a windows user, please read through the detailed explanation [here](http://pvgp.io/getting-started/#install-pvgeophysics).*
+Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble *or you are a windows user, please read through the detailed explanation [here](http://pvgp.io/overview/getting-started/#install-pvgeophysics).*
 
 ## Cloning the Repository
 Clone the repository from your command line by navigating to the directory you would like to save all of the code from this repo.
@@ -56,7 +56,7 @@ If you are on MacOS X, then your life is easy! Simply run the script `installMac
 $ sh ./installMac.sh
 ```
 
-Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the category **PVGP Filters** is in the **Filters** menu. Then open the **Python Shell** and import the `PVGPpy` and `pvmacros` modules by executing `import PVGPpy` and `import pvmacros`. Errors should not arise but if they do, post to the [issues page](https://github.com/OpenGeoVis/PVGeophysics/issues) and the errors will be *immediately* addressed.
+Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the various **PVGP** categories are in the **Filters** menu. Then open the **Python Shell** and import the `PVGeo` and `pvmacros` modules by executing `import PVGeo` and `import pvmacros`. Errors should not arise but if they do, post to the [issues page](https://github.com/OpenGeoVis/PVGeophysics/issues) and the errors will be *immediately* addressed.
 
 
 -----

@@ -98,7 +98,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.grids import reverseGridAxii&#xA;pdi = self.GetInput() # vtkImageData&#xA;image = self.GetOutput() # vtkImageData&#xA;&#xA;# Make user selection iterable&#xA;axes = [reverse_x_dir, reverse_y_dir, reverse_z_dir]&#xA;&#xA;reverseGridAxii(pdi, axes=axes, pdo=image)&#xA;"
+        default_values="from PVGeo.grids import reverseGridAxii&#xA;pdi = self.GetInput() # vtkImageData&#xA;image = self.GetOutput() # vtkImageData&#xA;&#xA;# Make user selection iterable&#xA;axes = [reverse_x_dir, reverse_y_dir, reverse_z_dir]&#xA;&#xA;reverseGridAxii(pdi, axes=axes, pdo=image)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -264,7 +264,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.grids import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;if order == 0:&#xA;    mem = 'F'&#xA;elif order == 1:&#xA;    mem = 'C'&#xA;else:&#xA;    mem = 'C'&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem, swapXY=Transpose_XY, pdo=image)&#xA;"
+        default_values="from PVGeo.grids import tableToGrid&#xA;from vtk.util import numpy_support as nps&#xA;import numpy as np&#xA;&#xA;if order == 0:&#xA;    mem = 'F'&#xA;elif order == 1:&#xA;    mem = 'C'&#xA;else:&#xA;    mem = 'C'&#xA;&#xA;pdi = self.GetInput()&#xA;image = self.GetOutput() #vtkImageData&#xA;&#xA;tableToGrid(pdi, extent, spacing, origin, SEPlib=SEPlib, order=mem, swapXY=Transpose_XY, pdo=image)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -278,7 +278,7 @@
         label="RequestInformation Script"
         command="SetInformationScript"
         number_of_elements="1"
-        default_values="from paraview import util&#xA;from PVGPpy.grids import refoldidx&#xA;# Setup the ImageData&#xA;idx = refoldidx(SEPlib=SEPlib, swapXY=Transpose_XY)&#xA;nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
+        default_values="from paraview import util&#xA;from PVGeo.grids import refoldidx&#xA;# Setup the ImageData&#xA;idx = refoldidx(SEPlib=SEPlib, swapXY=Transpose_XY)&#xA;nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]&#xA;# ABSOLUTELY NECESSARY FOR THE FILTER TO WORK:&#xA;util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -387,7 +387,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.grids import translateGridOrigin&#xA;pdi = self.GetInput() # vtkImageData&#xA;pdo = self.GetOutput() # vtkImageData&#xA;&#xA;translateGridOrigin(pdi, corner=Corner, pdo=pdo)&#xA;"
+        default_values="from PVGeo.grids import translateGridOrigin&#xA;pdi = self.GetInput() # vtkImageData&#xA;pdo = self.GetOutput() # vtkImageData&#xA;&#xA;translateGridOrigin(pdi, corner=Corner, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

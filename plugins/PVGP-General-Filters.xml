@@ -122,7 +122,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filters_general import reshapeTable&#xA;&#xA;pdi = self.GetInput() #vtkTable&#xA;pdo = self.GetOutput() #vtkTable&#xA;&#xA;mem = 'C'&#xA;if Order == 0:&#xA;    mem = 'F'&#xA;&#xA;reshapeTable(pdi, nrows, ncols, names=Array_Names, order=mem, pdo=pdo)&#xA;"
+        default_values="from PVGeo.filters_general import reshapeTable&#xA;&#xA;pdi = self.GetInput() #vtkTable&#xA;pdo = self.GetOutput() #vtkTable&#xA;&#xA;mem = 'C'&#xA;if Order == 0:&#xA;    mem = 'F'&#xA;&#xA;reshapeTable(pdi, nrows, ncols, names=Array_Names, order=mem, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -236,7 +236,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filters_general import pointsToTube&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pointsToTube(pdi, radius=Radius, numSides=Number_of_Sides, nrNbr=Use_nearest_nbr, pdo=pdo)&#xA;"
+        default_values="from PVGeo.filters_general import pointsToTube&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;&#xA;pointsToTube(pdi, radius=Radius, numSides=Number_of_Sides, nrNbr=Use_nearest_nbr, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -440,7 +440,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy._helpers as inputhelp&#xA;pdi = self.GetInput() # VTK Data Type&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Get input array info (selection made in drop down menu)&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;&#xA;if test_bool:&#xA;    print(name,field)&#xA;else:&#xA;    print(test_string)&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGeo._helpers as inputhelp&#xA;pdi = self.GetInput() # VTK Data Type&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Get input array info (selection made in drop down menu)&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;&#xA;if test_bool:&#xA;    print(name,field)&#xA;else:&#xA;    print(test_string)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -570,7 +570,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filters_general import connectCells&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;# Perfrom task&#xA;connectCells(pdi, cellType=Cell_Type, nrNbr=Use_nearest_nbr, pdo=pdo, logTime=False)&#xA;"
+        default_values="from PVGeo.filters_general import connectCells&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput() # VTK PolyData Type&#xA;pdo = self.GetOutput() # VTK PolyData Type&#xA;# Perfrom task&#xA;connectCells(pdi, cellType=Cell_Type, nrNbr=Use_nearest_nbr, pdo=pdo, logTime=False)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -725,7 +725,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filters_general import correlateArrays&#xA;import PVGPpy._helpers as inputhelp&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;field0 = inputhelp.getSelectedArrayField(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 1)&#xA;field1 = inputhelp.getSelectedArrayField(self, 1)&#xA;# Pass array names and associations on to process&#xA;correlateArrays(pdi, (name0,field0), (name1,field1), multiplier=Multiplier, newName=New_Array_Name, pdo=pdo)&#xA;"
+        default_values="from PVGeo.filters_general import correlateArrays&#xA;import PVGeo._helpers as inputhelp&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;field0 = inputhelp.getSelectedArrayField(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 1)&#xA;field1 = inputhelp.getSelectedArrayField(self, 1)&#xA;# Pass array names and associations on to process&#xA;correlateArrays(pdi, (name0,field0), (name1,field1), multiplier=Multiplier, newName=New_Array_Name, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -895,7 +895,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filters_general import latLonTableToCartesian&#xA;import PVGPpy._helpers as inputhelp&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;namelat = inputhelp.getSelectedArrayName(self, 0)&#xA;fieldlat = inputhelp.getSelectedArrayField(self, 0)&#xA;namelon = inputhelp.getSelectedArrayName(self, 1)&#xA;fieldlon = inputhelp.getSelectedArrayField(self, 1)&#xA;namealt = inputhelp.getSelectedArrayName(self, 2)&#xA;fieldalt = inputhelp.getSelectedArrayField(self, 2)&#xA;# Pass on to do conversion&#xA;latLonTableToCartesian(pdi, (namelat, fieldlat), (namelon, fieldlon), (namealt, fieldalt), radius=Radius, pdo=pdo)&#xA;"
+        default_values="from PVGeo.filters_general import latLonTableToCartesian&#xA;import PVGeo._helpers as inputhelp&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;namelat = inputhelp.getSelectedArrayName(self, 0)&#xA;fieldlat = inputhelp.getSelectedArrayField(self, 0)&#xA;namelon = inputhelp.getSelectedArrayName(self, 1)&#xA;fieldlon = inputhelp.getSelectedArrayField(self, 1)&#xA;namealt = inputhelp.getSelectedArrayName(self, 2)&#xA;fieldalt = inputhelp.getSelectedArrayField(self, 2)&#xA;# Pass on to do conversion&#xA;latLonTableToCartesian(pdi, (namelat, fieldlat), (namelon, fieldlon), (namealt, fieldalt), radius=Radius, pdo=pdo)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -1090,7 +1090,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from PVGPpy.filters_general import normalizeArray&#xA;import PVGPpy._helpers as inputhelp&#xA;# Choose range to use:&#xA;if Use_Range:&#xA;    rng = Range&#xA;else:&#xA;    rng = None&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;# Perfrom normalization&#xA;normalizeArray(pdi, (name,field), Normalization, multiplier=Multiplier, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value, rng=rng)&#xA;"
+        default_values="from PVGeo.filters_general import normalizeArray&#xA;import PVGeo._helpers as inputhelp&#xA;# Choose range to use:&#xA;if Use_Range:&#xA;    rng = Range&#xA;else:&#xA;    rng = None&#xA;# Get input/output of Proxy&#xA;pdi = self.GetInput()&#xA;pdo = self.GetOutput()&#xA;# Grab input arrays to process from drop down menus&#xA;# Simply grab the name and field association&#xA;name = inputhelp.getSelectedArrayName(self, 0)&#xA;field = inputhelp.getSelectedArrayField(self, 0)&#xA;# Perfrom normalization&#xA;normalizeArray(pdi, (name,field), Normalization, multiplier=Multiplier, newName=New_Array_Name, pdo=pdo, abs=Absolute_Value, rng=rng)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -1239,7 +1239,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;import PVGPpy._helpers as inputhelp&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Inputs from different ports:&#xA;pdi0 = self.GetInputDataObject(0, 0) # PORT 0&#xA;pdi1 = self.GetInputDataObject(1, 0) # PORT 1&#xA;&#xA;# DO STUFF WITH INOUTS AND OUTPUTS&#xA;print(type(pdi0))&#xA;print(type(pdi1))&#xA;&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 1)&#xA;&#xA;print(name0,name1)&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGeo._helpers as inputhelp&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Inputs from different ports:&#xA;pdi0 = self.GetInputDataObject(0, 0) # PORT 0&#xA;pdi1 = self.GetInputDataObject(1, 0) # PORT 1&#xA;&#xA;# DO STUFF WITH INOUTS AND OUTPUTS&#xA;print(type(pdi0))&#xA;print(type(pdi1))&#xA;&#xA;name0 = inputhelp.getSelectedArrayName(self, 0)&#xA;name1 = inputhelp.getSelectedArrayName(self, 1)&#xA;&#xA;print(name0,name1)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

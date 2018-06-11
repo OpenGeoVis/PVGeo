@@ -27,8 +27,8 @@ PropertiesHelp = dict(
 )
 
 def RequestData():
-    from PVGPpy.readers_general import delimitedText
-    from PVGPpy._helpers import getTimeStepFileIndex
+    from PVGeo.readers_general import delimitedText
+    from PVGeo._helpers import getTimeStepFileIndex
 
     # This finds the index for the FileNames for the requested timestep
     i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
@@ -38,6 +38,6 @@ def RequestData():
     delimitedText(FileNames[i], deli=Delimiter_Field, useTab=Use_Tab_Delimiter, hasTits=Has_Titles, skiprows=Skiprows, comments=Comments, pdo=pdo)
 
 def RequestInformation(self):
-    from PVGPpy._helpers import setOutputTimesteps
+    from PVGeo._helpers import setOutputTimesteps
     # This is necessary to set time steps
     setOutputTimesteps(self, FileNames, dt=Time_Step)

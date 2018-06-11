@@ -56,7 +56,7 @@ PropertiesHelp = dict(
 
 # from paraview import vtk is done automatically in the reader
 def RequestData(self):
-    from PVGPpy.ubc import ubcOcTree
+    from PVGeo.ubc import ubcOcTree
     import os
     # Get output
     pdo = self.GetOutput()
@@ -71,7 +71,7 @@ def RequestData(self):
 
 def RequestInformation(self):
     from paraview import util
-    from PVGPpy.ubc import ubcExtent
+    from PVGeo.ubc import ubcExtent
     # Preview the mesh file and get the mesh extents
     ext = ubcExtent(FileName_Mesh)
     # Set the mesh extents

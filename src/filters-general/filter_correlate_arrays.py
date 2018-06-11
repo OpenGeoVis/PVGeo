@@ -21,8 +21,8 @@ PropertiesHelp = dict(
 
 
 def RequestData():
-    from PVGPpy.filters_general import correlateArrays
-    import PVGPpy._helpers as inputhelp
+    from PVGeo.filters_general import correlateArrays
+    import PVGeo._helpers as inputhelp
     # Get input/output of Proxy
     pdi = self.GetInput()
     pdo = self.GetOutput()
