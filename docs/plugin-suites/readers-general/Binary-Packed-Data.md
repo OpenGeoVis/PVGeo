@@ -78,4 +78,4 @@ Now select 'File->Open...' within ParaView and choose `test_file.bin` wherever y
 
 ## Code Docs
 
-{def:PVGeo.read.packedBinaries}
+{def:PVGeo.readers_general.packedBinaries}

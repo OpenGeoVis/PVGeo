@@ -23,20 +23,20 @@ For example files to use with this reader, download the example from [the GIFtoo
 
 ## Code Docs
 
-{def:PVGeo.read.ubcExtent}
+{def:PVGeo.ubc.ubcExtent}
 
-{def:PVGeo.read.ubcTensorMesh}
+{def:PVGeo.ubc.ubcTensorMesh}
 
-{def:PVGeo.read.placeModelOnMesh}
+{def:PVGeo.ubc.placeModelOnMesh}
 
 ### 3D
 
-{def:PVGeo.read.ubcMesh3D}
+{def:PVGeo.ubc.ubcMesh3D}
 
-{def:PVGeo.read.ubcModel3D}
+{def:PVGeo.ubc.ubcModel3D}
 
 ### 2D
 
-{def:PVGeo.read.ubcMesh2D}
+{def:PVGeo.ubc.ubcMesh2D}
 
-{def:PVGeo.read.ubcModel2D}
+{def:PVGeo.ubc.ubcModel2D}
