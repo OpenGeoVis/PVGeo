@@ -67,7 +67,7 @@ def madagascar(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
     CTLSEQ = b'\014\014\004' # The control sequence to seperate header from data
     rpl = b''
     raw = []
-    with open(FileName, 'r') as file:
+    with open(FileName, 'rb') as file:
         raw = file.read()
         idx = raw.find(CTLSEQ)
         if idx == -1:
