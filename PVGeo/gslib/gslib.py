@@ -26,8 +26,10 @@ def gslibRead(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=No
     vtkTable : Returns a vtkTable of the input data file.
 
     """
+    retAll = False
     if pdo is None:
         pdo = vtk.vtkTable() # vtkTable
+        retAll = True
 
     if (useTab):
         deli = '\t'
@@ -49,4 +51,6 @@ def gslibRead(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=No
 
     _helpers._placeArrInTable(data, titles, pdo)
 
-    return pdo, header
+    if retAll:
+        return pdo, header
+    return header

@@ -1,3 +1,7 @@
+# Import base classes
+from .base import *
+
+# Import Suites
 from . import filters_general
 from . import grids
 from . import gslib

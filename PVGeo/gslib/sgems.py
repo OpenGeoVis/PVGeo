@@ -44,7 +44,7 @@ def sgemsGrid(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=No
     del(table)
     return pdo
 
-def sgemsExtent(FileName, deli=' ', useTab=False):
+def sgemsExtent(FileName, deli=' ', useTab=False, comments='#'):
     """
     @desc:
     Reads the input file for the SGeMS format to get output extents. Computationally inexpensive method to discover whole output extent.
@@ -53,16 +53,17 @@ def sgemsExtent(FileName, deli=' ', useTab=False):
     FileName : str : req : The file name / absolute path for the input file in SGeMS grid format.
     deli : str : opt : The input files delimiter. To use a tab delimiter please set the `useTab`.
     useTab : boolean : opt : A boolean that describes whether to use a tab delimiter.
+    comments : char : opt : The identifier for comments within the file.
 
     @return:
     tuple : This returns a tuple of the whole extent for the uniform grid to be made of the input file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to `util.SetOutputWholeExtent()` when used in programmable filters or source generation on the pipeline.
 
     """
-    with open(FileName) as f:
-        if (useTab):
-            deli = '\t'
-        reader = csv.reader(f, delimiter=deli)
-        h = reader.next()
-        n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
-        f.close()
+    # Read first file... extent cannot vary with time
+    if (useTab):
+        deli = '\t'
+    # TODO: make more efficient to only reader header of file
+    fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments=comments)
+    h = fileLines[0].split(deli)
+    n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
     return (0,n1-1, 0,n2-1, 0,n3-1)
