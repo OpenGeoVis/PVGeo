@@ -43,13 +43,17 @@ def getTimeStepFileIndex(algorithm, files, dt=1.0):
     int : The index for the file to be read in `files`
 
     """
-    if len(files) < 2:
+    if type(files) is list:
+        num = len(files)
+    else:
+        num = files
+    if num < 2:
         # Only one file...
         return 0
     # Get the current timestep
     req_time = _getUpdateTimestep(algorithm)
     # Read the closest file
-    xtime = _calculateTimeRange(len(files), dt=dt)
+    xtime = _calculateTimeRange(num, dt=dt)
     return np.argmin(np.abs(xtime - req_time))
 
 
@@ -66,15 +70,19 @@ def setOutputTimesteps(algorithm, files, dt=1.0):
     @return:
     algorithm : Returns the argument
     """
-    if len(files) < 2:
+    if type(files) is list:
+        num = len(files)
+    else:
+        num = files
+    if num < 2:
         # Only one file so do not update time steps
         return algorithm
     executive = algorithm.GetExecutive()
     outInfo = executive.GetOutputInformation(0)
     # Calculate list of timesteps here
-    xtime = _calculateTimeRange(len(files), dt=dt)
+    xtime = _calculateTimeRange(num, dt=dt)
     outInfo.Remove(executive.TIME_STEPS())
-    for i in range(len(files)):
+    for i in range(num):
         outInfo.Append(executive.TIME_STEPS(), xtime[i])
     # Remove and set time range info
     outInfo.Remove(executive.TIME_RANGE())
