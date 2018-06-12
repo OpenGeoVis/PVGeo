@@ -62,13 +62,13 @@ def _getdTypes(dtype='', endian=None):
         endian = ''
     # Get numpy and VTK data types and return them both
     if dtype is 'd':
-        dtype = np.dtype('%sf64'%endian) # DOUBLE
+        dtype = np.dtype('%sd'%endian) # DOUBLE
         vtktype = vtk.VTK_DOUBLE
     elif dtype is 'f':
-        dtype = np.dtype('%sf32'%endian) # FLOAT
+        dtype = np.dtype('%sf'%endian) # FLOAT
         vtktype = vtk.VTK_FLOAT
     elif dtype is 'i':
-        dtype = np.dtype('%si4'%endian) # INTEGER
+        dtype = np.dtype('%si'%endian) # INTEGER
         vtktype = vtk.VTK_INT
     else:
         raise Exception('dtype \'%s\' unknown/.' % dtype)
