@@ -39,10 +39,8 @@ def _placeArrInTable(ndarr, titles, pdo):
     if len(np.shape(ndarr)) > 2:
         raise Exception('Input np.ndarray must be 1D or 2D to be converted to vtkTable.')
     if len(np.shape(ndarr)) == 1:
-        cols = 1
         ndarr = np.reshape(ndarr, (-1, 1))
-    else:
-        cols = np.shape(ndarr)[1]
+    cols = np.shape(ndarr)[1]
 
     for i in range(cols):
         typ = _getVTKtype(ndarr[:,i].dtype)
