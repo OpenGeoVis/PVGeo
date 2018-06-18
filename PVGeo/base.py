@@ -9,7 +9,7 @@ from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
 
 
 # Base Reader
-class PVGeoReaderBase(VTKPythonAlgorithmBase):
+class vtkPVGeoReaderBase(VTKPythonAlgorithmBase):
     def __init__(self, nOutputPorts=1, outputType='vtkTable'):
         VTKPythonAlgorithmBase.__init__(self,
             nInputPorts=0,
