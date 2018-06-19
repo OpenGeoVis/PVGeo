@@ -45,7 +45,7 @@ class vtkPackedBinariesReader(vtkPVGeoReaderBase):
         # Get output:
         output = vtk.vtkTable.GetData(outInfo)
         # Get requested time index
-        i = _helpers.getTimeStepFileIndex(self, self.GetFileNames(), dt=self.GetTimeStep())
+        i = self._get_update_time(outInfo.GetInformationObject(0))
 
         if self.__madagascar:
             madagascar(self.GetFileNames()[i], dataNm=self.GetDataName(), endian=self.GetEndian(), dtype=self.GetDType(), pdo=output)
@@ -55,16 +55,21 @@ class vtkPackedBinariesReader(vtkPVGeoReaderBase):
         return 1
 
     #### Seters and Geters ####
-    @smproperty.stringvector(name="FileNames")
-    @smdomain.filelist()
-    def SetFileNames(self, fnames):
-        vtkPVGeoReaderBase.SetFileNames(self, fnames)
+    @smproperty.xml(_helpers.getFileReaderXml("dat gslib sgems SGEMS", readerDescription='SGeMS Uniform Grid'))
+    def AddFileName(self, fname):
+        vtkPVGeoReaderBase.AddFileName(self, fname)
 
-    @smproperty.doublevector(name="TimeStep", default_values=1.0, panel_visibility="adcanced")
-    def SetTimeStep(self, timeStep):
-        vtkPVGeoReaderBase.SetTimeStep(self, timeStep)
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="adcanced")
+    def SetTimeDelta(self, timeStep):
+        vtkPVGeoReaderBase.SetTimeDelta(self, timeStep)
 
+    @smproperty.xml(_helpers.getDropDownXml('Endian','SetEndian',
+        ['Native', 'Little-Endian', 'Big-Endian'],
+        help='This is the type memory endianness.'))
     def SetEndian(self, endian):
+        pos = ['', '<', '>']
+        if isinstance(endian, int):
+            endian = pos[endian]
         if endian != self.__endian:
             self.__endian = endian
             self.Modified()
@@ -72,7 +77,13 @@ class vtkPackedBinariesReader(vtkPVGeoReaderBase):
     def GetEndian(self):
         return self.__endian
 
+    @smproperty.xml(_helpers.getDropDownXml('DataType','SetDType',
+        ['Float64', 'Float32', 'Integer4'],
+        help='This is data type to read.'))
     def SetDType(self, dtype):
+        pos = ['d', 'f', 'i']
+        if isinstance(dtype, int):
+            dtype = pos[dtype]
         if dtype != self.__dtype:
             self.__dtype = dtype
             self.Modified()
@@ -80,6 +91,7 @@ class vtkPackedBinariesReader(vtkPVGeoReaderBase):
     def GetDType(self):
         return self.__dtype
 
+    @smproperty.stringvector(name='DataName', default_values='Data')
     def SetDataName(self, dataName):
         if dataName != self.__dataName:
             self.__dataName = dataName
@@ -88,6 +100,7 @@ class vtkPackedBinariesReader(vtkPVGeoReaderBase):
     def GetDataName(self):
         return self.__dataName
 
+    @smproperty.xml(_helpers.getPropertyXml('Madagascar', 'Madagascar SSRSF', 'SetMadagascar', False, help='A boolean to tell the reader to treat the file as a Madagascar SSRSF file.'))
     def SetMadagascar(self, flag):
         if flag != self.__madagascar:
             self.__madagascar = flag
@@ -118,7 +131,7 @@ class vtkDelimitedTextReader(vtkPVGeoReaderBase):
         # Get output:
         output = vtk.vtkTable.GetData(outInfo)
         # Get requested time index
-        i = _helpers.getTimeStepFileIndex(self, self.GetFileNames(), dt=self.GetTimeStep())
+        i = self._get_update_time(outInfo.GetInformationObject(0))
         # Read file and generate output
         delimitedText(self.GetFileNames()[i], deli=self.__delimiter,
             useTab=self.__useTab, hasTits=self.__hasTitles,
@@ -127,30 +140,33 @@ class vtkDelimitedTextReader(vtkPVGeoReaderBase):
 
 
     #### Seters and Geters ####
-    @smproperty.stringvector(name="FileNames")
-    @smdomain.filelist()
-    def SetFileNames(self, fnames):
-        vtkPVGeoReaderBase.SetFileNames(self, fnames)
+    @smproperty.xml(_helpers.getFileReaderXml("dat gslib sgems SGEMS", readerDescription='SGeMS Uniform Grid'))
+    def AddFileName(self, fname):
+        vtkPVGeoReaderBase.AddFileName(self, fname)
 
-    @smproperty.doublevector(name="TimeStep", default_values=1.0, panel_visibility="adcanced")
-    def SetTimeStep(self, timeStep):
-        vtkPVGeoReaderBase.SetTimeStep(self, timeStep)
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="adcanced")
+    def SetTimeDelta(self, timeStep):
+        vtkPVGeoReaderBase.SetTimeDelta(self, timeStep)
 
+    @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):
         if deli != self.__delimiter:
             self.__delimiter = deli
             self.Modified()
 
+    @smproperty.xml(_helpers.getPropertyXml('UseTab', 'Use Tab Delimiter', 'SetUseTab', False, help='A boolean to override the Delimiter_Field and use a Tab delimiter.'))
     def SetUseTab(self, flag):
         if flag != self.__useTab:
             self.__useTab = flag
             self.Modified()
 
+    @smproperty.intvector(name="SkipRows", default_values=0)
     def SetSkipRows(self, skip):
         if skip != self.__skipRows:
             self.__skipRows = skip
             self.Modified()
 
+    @smproperty.stringvector(name="Comments", default_values="#")
     def SetComments(self, identifier):
         if identifier != self.__comments:
             self.__comments = identifier
@@ -174,18 +190,17 @@ class vtkXYZTextReader(vtkPVGeoReaderBase):
         # Get output:
         output = vtk.vtkTable.GetData(outInfo)
         # Get requested time index
-        i = _helpers.getTimeStepFileIndex(self, self.GetFileNames(), dt=self.GetTimeStep())
+        i = self._get_update_time(outInfo.GetInformationObject(0))
         # Read file and generate output
         xyzRead(self.GetFileNames(i), deli=self.__delimiter,
             useTab=self.__useTab, skiprows=self.__skipRows,
             comments=self.__comments, pdo=output)
 
     #### Seters and Geters ####
-    @smproperty.stringvector(name="FileNames")
-    @smdomain.filelist()
-    def SetFileNames(self, fnames):
-        vtkPVGeoReaderBase.SetFileNames(self, fnames)
+    @smproperty.xml(_helpers.getFileReaderXml("dat gslib sgems SGEMS", readerDescription='SGeMS Uniform Grid'))
+    def AddFileName(self, fname):
+        vtkPVGeoReaderBase.AddFileName(self, fname)
 
-    @smproperty.doublevector(name="TimeStep", default_values=1.0, panel_visibility="adcanced")
-    def SetTimeStep(self, timeStep):
-        vtkPVGeoReaderBase.SetTimeStep(self, timeStep)
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="adcanced")
+    def SetTimeDelta(self, timeStep):
+        vtkPVGeoReaderBase.SetTimeDelta(self, timeStep)

@@ -1,6 +1,8 @@
 __all__ = [
     'getTimeStepFileIndex',
-    'setOutputTimesteps'
+    'setOutputTimesteps',
+    # new:
+    'updateTimesteps',
 ]
 
 
@@ -89,3 +91,25 @@ def setOutputTimesteps(algorithm, files, dt=1.0):
     outInfo.Append(executive.TIME_RANGE(), xtime[0])
     outInfo.Append(executive.TIME_RANGE(), xtime[-1])
     return algorithm
+
+
+
+
+
+
+
+##### New stuf for the conversion
+
+def updateTimesteps(algorithm, outInfo, nt, dt):
+    if isinstance(nt, list):
+        nt = len(nt)
+    executive = algorithm.GetExecutive()
+    oi = outInfo.GetInformationObject(0)
+    oi.Remove(executive.TIME_STEPS())
+    oi.Remove(executive.TIME_RANGE())
+    timesteps = np.arange(0, nt*dt, dt, dtype=float)
+    for t in timesteps:
+        oi.Append(executive.TIME_STEPS(), t)
+    oi.Append(executive.TIME_RANGE(), timesteps[0])
+    oi.Append(executive.TIME_RANGE(), timesteps[-1])
+    return timesteps

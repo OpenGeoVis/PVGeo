@@ -31,7 +31,7 @@ from PVGeo.gslib import sgemsGrid, sgemsExtent, gslibRead
 @smproxy.reader(name="gslibRead",
        label="PVGeo: GSLIB File Format",
        extensions="sgems dat geoeas gslib GSLIB txt SGEMS",
-       file_description="The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column).")
+       file_description="GSLib Table")
 class vtkGSLibReader(vtkPVGeoReaderBase):
     def __init__(self):
         vtkPVGeoReaderBase.__init__(self,
@@ -50,23 +50,21 @@ class vtkGSLibReader(vtkPVGeoReaderBase):
         # Get output:
         output = vtk.vtkTable.GetData(outInfo)
         # Get requested time index
-        i = _helpers.getTimeStepFileIndex(self, self.GetFileNames(), dt=self.GetTimeStep())
-        print(i)
-        self.__header = gslibRead(self.GetFileNames(i),             deli=self.__delimiter,
+        i = self._get_update_time(outInfo.GetInformationObject(0))
+        self.__header = gslibRead(self.GetFileNames(i),
+            deli=self.__delimiter,
             useTab=self.__useTab, skiprows=self.__skipRows,
             comments=self.__comments, pdo=output)
         return 1
 
 
     #### Seters and Geters ####
-    @smproperty.stringvector(name="FileNames", panel_visibility="adcanced")
-    @smdomain.filelist()
-    def SetFileNames(self, fnames):
-        vtkPVGeoReaderBase.SetFileNames(self, fnames)
-
-    @smproperty.doublevector(name="TimeStep", default_values=1.0, panel_visibility="adcanced")
-    def SetTimeStep(self, timeStep):
-        vtkPVGeoReaderBase.SetTimeStep(self, timeStep)
+    #@smproperty.stringvector(name="FileNames", panel_visibility="adcanced")
+    #@smdomain.filelist()
+    #@smhint.filechooser(extensions="sgems dat geoeas gslib GSLIB txt SGEMS", file_description="GSLib Tables")
+    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+    def AddFileName(self, fname):
+        vtkPVGeoReaderBase.AddFileName(self, fname)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):
@@ -105,7 +103,7 @@ class vtkGSLibReader(vtkPVGeoReaderBase):
 @smproxy.reader(name="SGeMSGridReader",
        label="SGeMSGridReader",
        extensions="dat gslib sgems SGEMS",
-       file_description="Dummy Reader... gslibRead")
+       file_description="SGeMS Uniform Grid")
 class vtkSGeMSGridReader(vtkPVGeoReaderBase):
     def __init__(self):
         vtkPVGeoReaderBase.__init__(self,
@@ -120,7 +118,7 @@ class vtkSGeMSGridReader(vtkPVGeoReaderBase):
 
     def RequestData(self, request, inInfo, outInfo):
         # Get requested time index
-        i = _helpers.getTimeStepFileIndex(self, self.GetFileNames(), dt=self.GetTimeStep())
+        i = self._get_update_time(outInfo.GetInformationObject(0))
         output = vtk.vtkImageData.GetData(outInfo)
         sgemsGrid(self.GetFileNames(i), deli=self.__delimiter,
             useTab=self.__useTab, skiprows=self.__skipRows,
@@ -129,7 +127,8 @@ class vtkSGeMSGridReader(vtkPVGeoReaderBase):
 
 
     def RequestInformation(self, request, inInfo, outInfo):
-        _helpers.setOutputTimesteps(self, self.GetFileNames(), dt=self.GetTimeStep())
+        # Call parent to handle time stuff
+        vtkPVGeoReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
         ext = sgemsExtent(self.GetFileNames(0), deli=self.__delimiter,
             useTab=self.__useTab, comments=self.__comments)
@@ -140,11 +139,10 @@ class vtkSGeMSGridReader(vtkPVGeoReaderBase):
 
 
     #### Seters and Geters ####
-    @smproperty.stringvector(name="FileNames")
-    @smdomain.filelist()
-    def SetFileNames(self, fnames):
-        vtkPVGeoReaderBase.SetFileNames(self, fnames)
+    @smproperty.xml(_helpers.getFileReaderXml("dat gslib sgems SGEMS", readerDescription='SGeMS Uniform Grid'))
+    def AddFileName(self, fname):
+        vtkPVGeoReaderBase.AddFileName(self, fname)
 
-    @smproperty.doublevector(name="TimeStep", default_values=1.0, panel_visibility="adcanced")
-    def SetTimeStep(self, timeStep):
-        vtkPVGeoReaderBase.SetTimeStep(self, timeStep)
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="adcanced")
+    def SetTimeDelta(self, timeStep):
+        vtkPVGeoReaderBase.SetTimeDelta(self, timeStep)
