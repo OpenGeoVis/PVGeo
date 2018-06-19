@@ -3,6 +3,100 @@
   <ProxyGroup name="filters">
 
 
+    <!-- ./filters-general//filter_append_tables.py -->
+    <SourceProxy
+      name="CombineTables"
+      class="vtkPythonProgrammableFilter"
+      label="Combine Tables"
+      input_ports="2">
+      <Documentation
+        long_help="Takes two tables and combines them if they have the same number of rows."
+        short_help="Takes two tables and combines them if they have the same number of rows.">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGeo General Filters" />
+      </Hints>
+
+      <!-- Built on version: 0.7.2 -->
+      <StringVectorProperty
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.7.2"
+        number_of_elements="1">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </StringVectorProperty>
+
+      <!-- Output data type: "vtkTable" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+        default_values="19"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+      <InputProperty
+        name="Input Table 1"
+        command="SetInputConnection"
+        port_index="0">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkTable"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <InputProperty
+        name="Input Table 2"
+        command="SetInputConnection"
+        port_index="1">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkTable"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+
+
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGeo._helpers as inputhelp&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Inputs from different ports:&#xA;pdi0 = self.GetInputDataObject(0, 0) # PORT 0&#xA;pdi1 = self.GetInputDataObject(1, 0) # PORT 1&#xA;&#xA;pdo.DeepCopy(pdi0)&#xA;&#xA;# Get number of columns&#xA;ncols1 = pdi1.GetNumberOfColumns()&#xA;# Get number of rows&#xA;nrows = pdi0.GetNumberOfRows()&#xA;nrows1 = pdi1.GetNumberOfRows()&#xA;assert(nrows == nrows1)&#xA;&#xA;for i in range(pdi1.GetRowData().GetNumberOfArrays()):&#xA;    arr = pdi1.GetRowData().GetArray(i)&#xA;    pdo.GetRowData().AddArray(arr)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+
+
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+
     <!-- ./filters-general//filter_reshape_table.py -->
     <SourceProxy
       name="ReshapeTable"
@@ -123,6 +217,165 @@
         command="SetScript"
         number_of_elements="1"
         default_values="from PVGeo.filters_general import reshapeTable&#xA;&#xA;pdi = self.GetInput() #vtkTable&#xA;pdo = self.GetOutput() #vtkTable&#xA;&#xA;mem = 'C'&#xA;if Order == 0:&#xA;    mem = 'F'&#xA;&#xA;reshapeTable(pdi, nrows, ncols, names=Array_Names, order=mem, pdo=pdo)&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
+
+
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+
+    <!-- ./filters-general//filter_points_to_voxels.py -->
+    <SourceProxy
+      name="PointsToVoxels"
+      class="vtkPythonProgrammableFilter"
+      label="Points To Voxels">
+      <Documentation
+        long_help="This makes a vtkUnstructuredGrid of scattered points given voxel sizes as input arrays"
+        short_help="This makes a vtkUnstructuredGrid of scattered points given voxel sizes as input arrays">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGeo General Filters" />
+      </Hints>
+
+      <!-- Built on version: 0.7.2 -->
+      <StringVectorProperty
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.7.2"
+        number_of_elements="1">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </StringVectorProperty>
+
+      <!-- Output data type: "vtkUnstructuredGrid" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+        default_values="4"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkPolyData"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+      <StringVectorProperty
+        name="SelectInputScalars0"
+        label="dx"
+        command="SetInputArrayToProcess"
+        default_values="0 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+      <StringVectorProperty
+        name="SelectInputScalars1"
+        label="dy"
+        command="SetInputArrayToProcess"
+        default_values="1 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+      <StringVectorProperty
+        name="SelectInputScalars2"
+        label="dz"
+        command="SetInputArrayToProcess"
+        default_values="2 NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="Input"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>
+
+
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from vtk.util import numpy_support as nps&#xA;from vtk.numpy_interface import dataset_adapter as dsa&#xA;import PVGeo._helpers as inputhelp&#xA;from PVGeo.filters_general import points2grid, addCellData&#xA;pdi = self.GetInput() # poly data with points&#xA;pdo = self.GetOutput() # vtkUnstructuredGrid&#xA;wpdi = dsa.WrapDataObject(pdi)&#xA;&#xA;pts = wpdi.Points&#xA;x,y,z = pts[:,0], pts[:,1], pts[:,2]&#xA;# Get input array info (selection made in drop down menu)&#xA;dx = inputhelp.getSelectedArray(self, wpdi, 0)&#xA;dy = inputhelp.getSelectedArray(self, wpdi, 1)&#xA;dz = inputhelp.getSelectedArray(self, wpdi, 2)&#xA;names = [&#xA;    inputhelp.getSelectedArrayName(self, 0),&#xA;    inputhelp.getSelectedArrayName(self, 1),&#xA;    inputhelp.getSelectedArrayName(self, 2)&#xA;]&#xA;&#xA;&#xA;points2grid(x,y,z,dx,dy,dz, grid=pdo)&#xA;for i in range(pdi.GetPointData().GetNumberOfArrays()):&#xA;    arr = pdi.GetPointData().GetArray(i)&#xA;    if arr.GetName() in names:&#xA;        continue&#xA;    inputhelp.addArray(pdo, 1, arr) # adds to CELL data&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -463,6 +716,119 @@
         the RequestInformation pipeline pass. Use this to provide information
         such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
       </StringVectorProperty>
+
+
+      <StringVectorProperty
+        command="SetPythonPath"
+        name="PythonPath"
+        number_of_elements="1"
+        panel_visibility="advanced">
+        <Documentation>A semi-colon (;) separated list of directories to add to
+        the python library search path.</Documentation>
+      </StringVectorProperty>
+    </SourceProxy>
+
+    <!-- ./filters-general//filter_points_to_uniform_voxels.py -->
+    <SourceProxy
+      name="PointsToUniformVoxels"
+      class="vtkPythonProgrammableFilter"
+      label="Points To Uniform Voxels">
+      <Documentation
+        long_help="This makes a vtkUnstructuredGrid of scattered points given voxel sizes"
+        short_help="This makes a vtkUnstructuredGrid of scattered points given voxel sizes">
+      </Documentation>
+      <Hints>
+        <ShowInMenu category="PVGeo General Filters" />
+      </Hints>
+
+      <!-- Built on version: 0.7.2 -->
+      <StringVectorProperty
+        panel_visibility="never"
+        name="BUILDVERSION"
+        label="BUILDVERSION"
+        initial_string="BUILDVERSION"
+        command="SetParameter"
+        animateable="1"
+        default_values="0.7.2"
+        number_of_elements="1">
+        <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
+      </StringVectorProperty>
+
+      <!-- Output data type: "vtkUnstructuredGrid" -->
+      <IntVectorProperty command="SetOutputDataSetType"
+        default_values="4"
+        name="OutputDataSetType"
+        number_of_elements="1"
+        panel_visibility="never">
+        <Documentation>The value of this property determines the dataset type
+        for the output of the programmable filter.</Documentation>
+      </IntVectorProperty>
+
+
+      <InputProperty
+        name="Input"
+        command="SetInputConnection">
+          <ProxyGroupDomain name="groups">
+            <Group name="sources"/>
+            <Group name="filters"/>
+          </ProxyGroupDomain>
+
+          <DataTypeDomain name="input_type">
+            <DataType value="vtkPolyData"/>
+          </DataTypeDomain>
+      </InputProperty>
+
+
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="dx"
+        label="dx"
+        initial_string="dx"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="dy"
+        label="dy"
+        initial_string="dy"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <DoubleVectorProperty
+        panel_visibility="default"
+        name="dz"
+        label="dz"
+        initial_string="dz"
+        command="SetParameter"
+        animateable="1"
+        default_values="1.0"
+        number_of_elements="1">
+        <Documentation></Documentation>
+      </DoubleVectorProperty>
+
+      <StringVectorProperty
+        name="Script"
+        command="SetScript"
+        number_of_elements="1"
+        default_values="from vtk.util import numpy_support as nps&#xA;from vtk.numpy_interface import dataset_adapter as dsa&#xA;import PVGeo._helpers as inputhelp&#xA;from PVGeo.filters_general import points2grid, addCellData&#xA;pdi = self.GetInput() # poly data with points&#xA;pdo = self.GetOutput() # vtkUnstructuredGrid&#xA;wpdi = dsa.WrapDataObject(pdi)&#xA;&#xA;pts = wpdi.Points&#xA;x,y,z = pts[:,0], pts[:,1], pts[:,2]&#xA;points2grid(x,y,z,dx,dy,dz, grid=pdo)&#xA;for i in range(pdi.GetPointData().GetNumberOfArrays()):&#xA;    arr = pdi.GetPointData().GetArray(i)&#xA;    inputhelp.addArray(pdo, 1, arr) # adds to CELL data&#xA;"
+        panel_visibility="advanced">
+        <Hints>
+          <Widget type="multi_line" syntax="python"/>
+        </Hints>
+        <Documentation>This property contains the text of a python program that
+        the programmable source runs.</Documentation>
+        </StringVectorProperty>
+
 
 
       <StringVectorProperty
