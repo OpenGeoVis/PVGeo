@@ -3,7 +3,8 @@ __all__ = [
     'getSelectedArrayField',
     'copyArraysToPointData',
     'getArray',
-    'addArray'
+    'addArray',
+    'getSelectedArray'
 ]
 
 import vtk
@@ -47,6 +48,13 @@ def copyArraysToPointData(pdi, pdo, field):
 
     # Field Data
     return pdo
+
+
+def getSelectedArray(algorithm, wpdi, idx):
+    """@desc: gets selectected array ad index idx wrapped for NumPy"""
+    name = getSelectedArrayName(algorithm, idx)
+    field = getSelectedArrayField(algorithm, idx)
+    return getArray(wpdi, field, name)
 
 
 def getArray(wpdi, field, name):
