@@ -1,5 +1,6 @@
 all = [
     'PVGeoReaderBase',
+    'vtkPVGeoFilterBase',
 ]
 
 from . import _helpers
@@ -36,7 +37,8 @@ class vtkPVGeoReaderBase(VTKPythonAlgorithmBase):
 
 
     def RequestInformation(self, request, inInfo, outInfo):
-        self.__timesteps = _helpers.updateTimesteps(self, outInfo, self.__fileNames, self.__dt)
+        self.__timesteps = _helpers.updateTimesteps(self, outInfo,
+                self.__fileNames, self.__dt)
         return 1
 
 
@@ -69,3 +71,6 @@ class vtkPVGeoReaderBase(VTKPythonAlgorithmBase):
         if idx is None:
             return self.__fileNames
         return self.__fileNames[idx]
+
+
+###############################################################################

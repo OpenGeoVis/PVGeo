@@ -138,12 +138,14 @@ def getFileReaderXml(extensions, readerDescription='', command="AddFileName"):
         </Hints>''' % (command, extensions, readerDescription)
 
 
-def getDropDownXml(name,command,labels, help=''):
+def getDropDownXml(name, command, labels, help='', values=None):
 
-    def _enum(labels):
+    def _enum(labels, values=None):
+        if values is None:
+            values = range(len(labels))
         els = []
         for i in range(len(labels)):
-            els.append('<Entry value="%d" text="%s"/>' % (i,labels[i]))
+            els.append('<Entry value="%d" text="%s"/>' % (values[i],labels[i]))
 
         formatter = r'%s\n'*len(els)
         dom = '''\
@@ -155,7 +157,7 @@ def getDropDownXml(name,command,labels, help=''):
         </EnumerationDomain>''')
         return dom
 
-    domain = _enum(labels)
+    domain = _enum(labels, values)
     return '''\
       <IntVectorProperty
         name="%s"
@@ -167,3 +169,96 @@ def getDropDownXml(name,command,labels, help=''):
           %s
         </Documentation>
       </IntVectorProperty>''' % (name,command,domain,help)
+
+
+
+
+
+def _helpArraysXml(idx, inputName=None, label=None):
+    if inputName is None:
+        inputName = 'Input'
+    if label is None:
+        label = 'Array%d' % idx
+    return'''
+      <StringVectorProperty
+        name="SelectInputScalars%d"
+        label="%s"
+        command="SetInputArrayToProcess"
+        default_values="%d NULL"
+        number_of_elements="5"
+        element_types="0 0 0 0 2"
+        animateable="0">
+        <ArrayListDomain
+          name="array_list"
+          attribute_type="Scalars"
+          input_domain_name="inputs_array">
+          <RequiredProperties>
+            <Property
+              name="%s"
+              function="Input" />
+          </RequiredProperties>
+        </ArrayListDomain>
+        <FieldDataDomain
+          name="field_list">
+          <RequiredProperties>
+            <Property
+              name="%s"
+              function="Input" />
+          </RequiredProperties>
+        </FieldDataDomain>
+      </StringVectorProperty>''' % (idx, label, idx, inputName, inputName)
+
+
+
+
+def getInputArrayXml(labels=None, nInputPorts=1, numArrays=1, inputNames='Input'):
+
+    def getLabels(labels):
+        if labels is None and nInputPorts > 1:
+            labels = [None]*nInputPorts
+            return labels
+        if nInputPorts > 1:
+            for l in labels:
+                if type(l) is not list:
+                    raise Exception('`InputArrayLabels` is improperly structured. Must be a list of lists.')
+        return labels
+
+    labels = getLabels(labels)
+
+    def fixArrayLabels(labels, numArrays):
+        if numArrays is 0:
+            return ''
+        if labels is None:
+            labels = ['Array %d' % (i+1) for i in range(numArrays)]
+            return labels
+        if len(labels) < numArrays:
+            toadd = numArrays - len(labels)
+            for i in range(toadd):
+                labels.append('Array %d' % (i + len(labels) + 1))
+        return labels
+
+    # Recursively call for each input
+    if nInputPorts > 1:
+        if type(numArrays) is not list:
+            raise Exception('When multiple inputs, the `NumberOfInputArrayChoices` must be a list of ints for the number of arrays from each input.')
+        if len(numArrays) != nInputPorts:
+            raise Exception('You must spectify how many arrays come from each input. `len(NumberOfInputArrayChoices) != nInputPorts`.')
+
+        # Now perfrom recursion
+        out = []
+        for i in range(nInputPorts):
+            # Fix labels
+            labs = fixArrayLabels(labels[i], numArrays[i])
+            xml = ''
+            for j in range(numArrays[i]):
+                xml += _helpArraysXml(i+j, inputName=inputNames[i], label=labs[j])
+            out.append(xml)
+        outstr = "\n".join(inp for inp in out)
+        return outstr
+    else:
+        # Get parameters from info and call:
+        labs = fixArrayLabels(labels, numArrays)
+        xml = ''
+        for j in range(numArrays):
+            xml += _helpArraysXml(j, inputName=None, label=labs[j])
+        return xml
