@@ -15,9 +15,9 @@ ExtraXml = ''
 
 # These are the parameters/properties of the plugin:
 Properties = dict(
-    dx=1.0,
-    dy=1.0,
-    dz=1.0,
+    dx=10.0,
+    dy=10.0,
+    dz=10.0,
 )
 
 # This is the description for each of the properties variable:
