@@ -1,6 +1,5 @@
 all = [
-    'PVGeoReaderBase',
-    'vtkPVGeoFilterBase',
+    'ReaderBase',
 ]
 
 from . import _helpers
@@ -11,7 +10,7 @@ import numpy as np
 
 
 # Base Reader
-class vtkPVGeoReaderBase(VTKPythonAlgorithmBase):
+class ReaderBase(VTKPythonAlgorithmBase):
     def __init__(self, nOutputPorts=1, outputType='vtkTable'):
         VTKPythonAlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -21,10 +20,11 @@ class vtkPVGeoReaderBase(VTKPythonAlgorithmBase):
         self.__fileNames = []
 
 
-    def _get_update_time(self, outInfo):
-        # USAGE: i = self._get_update_time(outInfo.GetInformationObject(0))
+    def _GetRequestedTime(self, outInfo, idx=0):
+        # USAGE: i = self._GetRequestedTime(outInfo)
         executive = self.GetExecutive()
         timesteps = self.__timesteps
+        outInfo = outInfo.GetInformationObject(idx)
         if timesteps is None or len(timesteps) == 0:
             return 0
         elif outInfo.Has(executive.UPDATE_TIME_STEP()) and len(timesteps) > 0:

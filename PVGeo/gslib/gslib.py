@@ -1,5 +1,5 @@
 __all__ = [
-    'gslibRead',
+    'GSLibReader',
 ]
 
 import numpy as np
@@ -7,9 +7,9 @@ from vtk.util import numpy_support as nps
 import vtk
 # Import Helpers:
 from .. import _helpers
+from ..readers_general import DelimitedTextReader
 
-
-def gslibRead(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=None):
+class GSLibReader(DelimitedTextReader):
     """
     @desc:
     Reads a GSLIB file format to a vtkTable. The GSLIB file format has headers lines followed by the data as a space delimited ASCI file (this filter is set up to allow you to choose any single character delimiter). The first header line is the title and will be printed to the console. This line may have the dimensions for a grid to be made of the data. The second line is the number (n) of columns of data. The next n lines are the variable names for the data in each column. You are allowed up to ten characters for the variable name. The data follow with a space between each field (column).
@@ -26,31 +26,32 @@ def gslibRead(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=No
     vtkTable : Returns a vtkTable of the input data file.
 
     """
-    retAll = False
-    if pdo is None:
-        pdo = vtk.vtkTable() # vtkTable
-        retAll = True
+    def __init__(self, outputType='vtkTable'):
+        DelimitedTextReader.__init__(self, outputType=outputType)
+        self.SetDelimiter(" ")
+        # These are attributes the derived from file contents:
+        self.__header = None
 
-    if (useTab):
-        deli = '\t'
+    def _ExtractHeader(self, fileLines):
+        self.__header = fileLines[0]
+        try:
+            num = int(fileLines[1]) # number of data columns
+        except ValueError:
+            raise RuntimeError('This file is not in proper GSLIB format.')
 
-    fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments=comments,)
+        titles = []
+        for i in range(2, 2 + num):
+            titles.append(fileLines[i].rstrip('\r\n'))
+        return titles, fileLines[2 + num::]
 
-    header = fileLines[0+skiprows]
 
-    try:
-        num = int(fileLines[1+skiprows]) # number of data columns
-    except ValueError:
-        raise Exception('This file is not in proper GSLIB format.')
+    #### Seters and Geters ####
 
-    titles = []
-    for i in range(2+skiprows,2+num+skiprows):
-        titles.append(fileLines[i].rstrip('\r\n'))
+    def GetFileHeader(self):
+        if self.__header is None:
+            raise RuntimeError("Input file has not been read yet.")
+        return self.__header
 
-    data = np.genfromtxt((line.encode('utf8') for line in fileLines[2+num+skiprows::]), dtype=None)
-
-    _helpers._placeArrInTable(data, titles, pdo)
-
-    if retAll:
-        return pdo, header
-    return header
+    def _SetFileHeader(self, header):
+        self.__header = header
+        return 1
