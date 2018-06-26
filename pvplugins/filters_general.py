@@ -142,6 +142,12 @@ class PVGeoVoxelizePoints(VoxelizePoints):
 
     #### Seters and Geters ####
 
+    @smproperty.xml(_helpers.getPropertyXml('SetEstimateGrid', 'Estimate Grid Spacing',
+        'SetEstimateGrid', True,
+        help='A boolean to set whether to try to estimate the proper dx, dy, and dz spacings for a grid on a regular cartesian coordinate system.'))
+    def SetEstimateGrid(self, flag):
+        VoxelizePoints.SetEstimateGrid(self, flag)
+
     @smproperty.doublevector(name="dx", default_values=10.0)
     def SetDeltaX(self, dx):
         VoxelizePoints.SetDeltaX(self, dx)
@@ -165,6 +171,16 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         self.__dx_id = [None, None]
         self.__dy_id = [None, None]
         self.__dz_id = [None, None]
+        self.SetEstimateGrid(False) # CRUCIAL
+
+    def _CopyArrays(self, pdi, pdo):
+        """Override to not pass spacing arrays to output"""
+        exclude = [self.__dx_id[1], self.__dy_id[1], self.__dz_id[1]]
+        for i in range(pdi.GetPointData().GetNumberOfArrays()):
+            arr = pdi.GetPointData().GetArray(i)
+            if arr.GetName() not in exclude:
+                _helpers.addArray(pdo, 1, arr) # adds to CELL data
+        return pdo
 
     def RequestData(self, request, inInfo, outInfo):
         # Handle input arrays
@@ -176,7 +192,7 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         VoxelizePoints.SetDeltaX(self, dx)
         VoxelizePoints.SetDeltaY(self, dy)
         VoxelizePoints.SetDeltaZ(self, dz)
-        # call parent
+        # call parent and make sure EstimateGrid is set to False
         return VoxelizePoints.RequestData(self, request, inInfo, outInfo)
 
     #### Seters and Geters ####
