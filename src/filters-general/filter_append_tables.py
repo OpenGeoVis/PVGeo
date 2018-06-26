@@ -47,7 +47,8 @@ def RequestData(self):
     # Get number of rows
     nrows = pdi0.GetNumberOfRows()
     nrows1 = pdi1.GetNumberOfRows()
-    assert(nrows == nrows1)
+    if (nrows != nrows1):
+        raise RuntimeError('These tables do not have the same number of rows.')
 
     for i in range(pdi1.GetRowData().GetNumberOfArrays()):
         arr = pdi1.GetRowData().GetArray(i)
