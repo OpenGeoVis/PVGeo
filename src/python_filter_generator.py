@@ -10,7 +10,7 @@ Acknowledgements:
     Pat Marion (see blog post url above) for the foundation of this script
 """
 
-__version__ = '0.7.3'
+__version__ = '0.7.4'
 
 import os
 import sys
@@ -130,7 +130,8 @@ def getFilterPropertyXml(propertyInfo, propertyName, propertyHelpInfo):
 
     if isinstance(propertyValue, list):
         numberOfElements = len(propertyValue)
-        assert numberOfElements > 0
+        if not numberOfElements > 0:
+            raise RuntimeError('Number of Elements <= 0.')
         propertyType = type(propertyValue[0])
         defaultValues = ' '.join([str(v) for v in propertyValue])
     else:

@@ -3,7 +3,7 @@ __all__ = ['manySlicesAlongPoints', 'manySlicesAlongAxis', 'clipThrough']
 # import the simple module from the paraview and other needed libraries
 import paraview.simple as pvs
 import numpy as np
-from scipy.spatial import cKDTree
+#from scipy.spatial import cKDTree
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 import time
@@ -26,7 +26,7 @@ def manySlicesAlongPoints(pointsNm, dataNm, numSlices=10, exportpath='', ext='.c
     - The SciPy module is required for this macro.
 
     """
-
+    from scipy.spatial import cKDTree
     # exportpath: Where to save data. Absolute path:
 
     # Specify Points for the Line Source:
