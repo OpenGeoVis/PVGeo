@@ -130,7 +130,8 @@ def getFilterPropertyXml(propertyInfo, propertyName, propertyHelpInfo):
 
     if isinstance(propertyValue, list):
         numberOfElements = len(propertyValue)
-        assert numberOfElements > 0
+        if not numberOfElements > 0:
+            raise RuntimeError('Number of Elements <= 0.')
         propertyType = type(propertyValue[0])
         defaultValues = ' '.join([str(v) for v in propertyValue])
     else:

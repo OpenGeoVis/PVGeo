@@ -28,7 +28,9 @@ def _estimateUniformSpacing(x, y, z, dx=None, dy=None, dz=None, safe=10.0):
     """
     # TODO: implement ability to rotate around Z axis (think PoroTomo vs UTM)
     # TODO: implement way to estimate rotation
-    assert(len(x)==len(y)==len(z))
+    if (len(x) != len(y) != len(z)):
+        raise RuntimeError('The coordinate arrays must have the same lengths.')
+
     num = len(x)
     default = [dx,dy,dz]
     if num == 1:

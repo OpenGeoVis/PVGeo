@@ -76,7 +76,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;import PVGeo._helpers as inputhelp&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Inputs from different ports:&#xA;pdi0 = self.GetInputDataObject(0, 0) # PORT 0&#xA;pdi1 = self.GetInputDataObject(1, 0) # PORT 1&#xA;&#xA;pdo.DeepCopy(pdi0)&#xA;&#xA;# Get number of columns&#xA;ncols1 = pdi1.GetNumberOfColumns()&#xA;# Get number of rows&#xA;nrows = pdi0.GetNumberOfRows()&#xA;nrows1 = pdi1.GetNumberOfRows()&#xA;assert(nrows == nrows1)&#xA;&#xA;for i in range(pdi1.GetRowData().GetNumberOfArrays()):&#xA;    arr = pdi1.GetRowData().GetArray(i)&#xA;    pdo.GetRowData().AddArray(arr)&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;import PVGeo._helpers as inputhelp&#xA;pdo = self.GetOutput() # VTK Data Type&#xA;# Inputs from different ports:&#xA;pdi0 = self.GetInputDataObject(0, 0) # PORT 0&#xA;pdi1 = self.GetInputDataObject(1, 0) # PORT 1&#xA;&#xA;pdo.DeepCopy(pdi0)&#xA;&#xA;# Get number of columns&#xA;ncols1 = pdi1.GetNumberOfColumns()&#xA;# Get number of rows&#xA;nrows = pdi0.GetNumberOfRows()&#xA;nrows1 = pdi1.GetNumberOfRows()&#xA;if (nrows != nrows1):&#xA;    raise RuntimeError('These tables do not have the same number of rows.')&#xA;&#xA;for i in range(pdi1.GetRowData().GetNumberOfArrays()):&#xA;    arr = pdi1.GetRowData().GetArray(i)&#xA;    pdo.GetRowData().AddArray(arr)&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
