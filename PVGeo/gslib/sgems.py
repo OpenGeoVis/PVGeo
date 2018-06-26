@@ -1,16 +1,16 @@
 __all__ = [
-    'sgemsGrid',
-    'sgemsExtent'
+    'SGeMSGridReader',
 ]
 
 import numpy as np
-import csv
 from vtk.util import numpy_support as nps
 import vtk
 
-from .gslib import gslibRead
+from .gslib import GSLibReader
+from .. import _helpers
 
-def sgemsGrid(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=None):
+
+class SGeMSGridReader(GSLibReader):
     """
     @desc:
         Generates vtkImageData from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
@@ -27,43 +27,68 @@ def sgemsGrid(FileName, deli=' ', useTab=False, skiprows=0, comments='#', pdo=No
         vtkImageData : A uniformly spaced gridded volume of data from input file
 
     """
-    if pdo is None:
-        pdo = vtk.vtkImageData() # vtkImageData
+    def __init__(self):
+        GSLibReader.__init__(self, outputType='vtkImageData')
+        self.__extent = None
 
-    table, header = gslibRead(FileName, deli=deli, useTab=useTab, skiprows=skiprows, comments='#', pdo=None)
-    h = header.split(deli)
-    n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
+    def _ReadExtent(self):
+        """
+        @desc:
+        Reads the input file for the SGeMS format to get output extents. Computationally inexpensive method to discover whole output extent.
 
-    pdo.SetDimensions(n1, n2, n3)
-    pdo.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)
+        @params:
+        FileName : str : req : The file name / absolute path for the input file in SGeMS grid format.
+        deli : str : opt : The input files delimiter. To use a tab delimiter please set the `useTab`.
+        useTab : boolean : opt : A boolean that describes whether to use a tab delimiter.
+        comments : char : opt : The identifier for comments within the file.
 
-    # now get arrays from table and add to point data of pdo
-    for i in range(table.GetNumberOfColumns()):
-        pdo.GetPointData().AddArray(table.GetColumn(i))
-        #TODO: pdo.GetCellData().AddArray(VTK_data)
-    del(table)
-    return pdo
+        @return:
+        tuple : This returns a tuple of the whole extent for the uniform grid to be made of the input file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to `util.SetOutputWholeExtent()` when used in programmable filters or source generation on the pipeline.
 
-def sgemsExtent(FileName, deli=' ', useTab=False, comments='#'):
-    """
-    @desc:
-    Reads the input file for the SGeMS format to get output extents. Computationally inexpensive method to discover whole output extent.
+        """
+        # Read first file... extent cannot vary with time
+        # TODO: make more efficient to only reader header of file
+        fileLines = self._GetFileLines(idx=0)
+        h = fileLines[0+self.GetSkipRows()].split(self._GetDeli())
+        n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
+        return (0,n1-1, 0,n2-1, 0,n3-1)
 
-    @params:
-    FileName : str : req : The file name / absolute path for the input file in SGeMS grid format.
-    deli : str : opt : The input files delimiter. To use a tab delimiter please set the `useTab`.
-    useTab : boolean : opt : A boolean that describes whether to use a tab delimiter.
-    comments : char : opt : The identifier for comments within the file.
+    def _ExtractHeader(self, fileLines):
+        titles, fileLines = GSLibReader._ExtractHeader(self, fileLines)
+        h = self.GetFileHeader().split(self._GetDeli())
+        self.__extent = int(h[0]), int(h[1]), int(h[2])
+        return titles, fileLines
 
-    @return:
-    tuple : This returns a tuple of the whole extent for the uniform grid to be made of the input file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to `util.SetOutputWholeExtent()` when used in programmable filters or source generation on the pipeline.
+    def RequestData(self, request, inInfo, outInfo):
+        # Get output:
+        output = vtk.vtkImageData.GetData(outInfo)
+        # Get requested time index
+        i = self._GetRequestedTime(outInfo)
+        # Perform Read
+        fileLines = self._GetFileLines(idx=i)
+        titles, fileLines = self._ExtractHeader(fileLines)
+        data = self._GetNumPyData(fileLines)
+        # Generate the data object
+        n1, n2, n3 = self.__extent
+        output.SetDimensions(n1, n2, n3)
+        output.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)
+        # Use table generater and convert because its easy:
+        table = vtk.vtkTable()
+        _helpers._placeArrInTable(data, titles, table)
+        # now get arrays from table and add to point data of pdo
+        for i in range(table.GetNumberOfColumns()):
+            output.GetPointData().AddArray(table.GetColumn(i))
+            #TODO: maybe we ought to add the data as cell data
+        del(table)
+        return 1
 
-    """
-    # Read first file... extent cannot vary with time
-    if (useTab):
-        deli = '\t'
-    # TODO: make more efficient to only reader header of file
-    fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments=comments)
-    h = fileLines[0].split(deli)
-    n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
-    return (0,n1-1, 0,n2-1, 0,n3-1)
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        # Call parent to handle time stuff
+        GSLibReader.RequestInformation(self, request, inInfo, outInfo)
+        # Now set whole output extent
+        ext = self._ReadExtent()
+        info = outInfo.GetInformationObject(0)
+        # Set WHOLE_EXTENT: This is absolutely necessary
+        info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
+        return 1
