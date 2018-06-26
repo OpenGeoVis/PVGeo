@@ -39,7 +39,14 @@ def _placeArrInTable(ndarr, titles, pdo):
     if len(np.shape(ndarr)) > 2:
         raise Exception('Input np.ndarray must be 1D or 2D to be converted to vtkTable.')
     if len(np.shape(ndarr)) == 1:
-        ndarr = np.reshape(ndarr, (-1, 1))
+        # First check if it is an array full of tuples (varying type)
+        if isinstance(ndarr[0], (tuple, np.void)):
+            for i in range(len(titles)):
+                _placeArrInTable(ndarr['f%d' % i], [titles[i]], pdo)
+            return pdo
+        # Otherwise it is just a 1D array which needs to be 2D
+        else:
+            ndarr = np.reshape(ndarr, (-1, 1))
     cols = np.shape(ndarr)[1]
 
     for i in range(cols):
@@ -79,6 +86,6 @@ def _getdTypes(dtype='', endian=None):
 
 
 def _cleanDataNm(dataNm, FileName):
-    if dataNm is None or dataNm == '' or dataNm == 'values':
+    if dataNm is None or dataNm == '':
         dataNm = os.path.splitext(os.path.basename(FileName))[0]
     return dataNm
