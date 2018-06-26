@@ -1,11 +1,11 @@
-__all__ = [
-    'reshapeTable',
-    'correlateArrays',
-    'getArrayRange',
-    'normalizeArray',
-    'connectCells',
-    'pointsToTube'
-]
+# __all__ = [
+#     'reshapeTable',
+#     'correlateArrays',
+#     'getArrayRange',
+#     'normalizeArray',
+#     'AddCellConnToPoints',
+#     'pointsToTube'
+# ]
 
 import vtk
 from vtk.util import numpy_support as nps
@@ -13,6 +13,7 @@ import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
+from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
 from .. import _helpers
 # NOTE: internal import - from scipy.spatial import cKDTree
 
@@ -20,56 +21,106 @@ from .. import _helpers
 
 #---- Reshape Table ----#
 
-def reshapeTable(pdi, nrows, ncols, names=None, order='C', pdo=None):
-    """
-    Todo Description
-    """
-    if pdo is None:
-        pdo = vtk.vtkTable()
-    # Get number of columns
-    cols = pdi.GetNumberOfColumns()
-    # Get number of rows
-    rows = pdi.GetColumn(0).GetNumberOfTuples() # TODO is the necessary?
+class ReshapeTable(VTKPythonAlgorithmBase):
+    """This filter will take a vtkTable object and reshape it. This filter essentially treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name."""
+    def __init__(self):
+        VTKPythonAlgorithmBase.__init__(self,
+            nInputPorts=1, inputType='vtkTable',
+            nOutputPorts=1, outputType='vtkTable')
+        # Parameters
+        self.__nrows = 4
+        self.__ncols = False
+        self.__names = []
+        self.__order = 'F'
 
-    if names is not None and len(names) is not 0:
+    def _Reshape(self, pdi, pdo):
+        """
+        Todo Description
+        """
+        # Get number of columns
+        cols = pdi.GetNumberOfColumns()
+        # Get number of rows
+        rows = pdi.GetColumn(0).GetNumberOfTuples()
+
+        if len(self.__names) is not 0:
+            num = len(self.__names)
+            if num < self.__ncols:
+                for i in range(num, self.__ncols):
+                    self.__names.append('Field %d' % i)
+            elif num > self.__ncols:
+                raise Exception('Too many array names. `ncols` specified as %d and %d names given.' % (self.__ncols, num))
+        else:
+            self.__names = ['Field %d' % i for i in range(self.__ncols)]
+
+        # Make a 2D numpy array and fill with data from input table
+        data = np.empty((cols,rows))
+        for i in range(cols):
+            c = pdi.GetColumn(i)
+            data[i] = nps.vtk_to_numpy(c)
+
+        if ((self.__ncols*self.__nrows) != (cols*rows)):
+            raise Exception('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
+
+        # Use numpy.reshape() to reshape data NOTE: only 2D because its a table
+        # NOTE: column access of this reshape is not contigous
+        data = np.array(np.reshape(data, (self.__nrows,self.__ncols), order=self.__order))
+        pdo.SetNumberOfRows(self.__nrows)
+
+        # Add new array to output table and assign incremental names (e.g. Field0)
+        for i in range(self.__ncols):
+            # Make a contigous array from the column we want
+            col = np.array(data[:,i])
+            # allow type to be determined by input
+            insert = nps.numpy_to_vtk(num_array=col, deep=True) # array_type=vtk.VTK_FLOAT
+            # VTK arrays need a name. Set arbitrarily
+            insert.SetName(self.__names[i])
+            #pdo.AddColumn(insert) # these are not getting added to the output table
+            # ... work around:
+            pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData
+
+        return pdo
+
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Perfrom task
+        self._Reshape(pdi, pdo)
+        return 1
+
+
+    #### Seters and Geters ####
+
+    def SetNames(self, names):
+        """Set names using a semicolon (;) seperated list"""
         # parse the names (a semicolon seperated list of names)
         names = names.split(';')
-        num = len(names)
-        if num < ncols:
-            for i in range(num, ncols):
-                names.append('Field %d' % i)
-        elif num > ncols:
-            raise Exception('Too many array names. `ncols` specified as %d and %d names given.' % (ncols, num))
-    else:
-        names = ['Field %d' % i for i in range(ncols)]
+        if self.__names != names:
+            self.__names = names
+            self.Modified()
 
-    # Make a 2D numpy array and fill with data from input table
-    data = np.empty((cols,rows))
-    for i in range(cols):
-        c = pdi.GetColumn(i)
-        data[i] = nps.vtk_to_numpy(c)
+    def AddName(self, name):
+        """Use to append a name to the names list"""
+        self.__names.append(name)
+        self.Modified()
 
-    if ((ncols*nrows) != (cols*rows)):
-        raise Exception('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
+    def GetNames(self):
+        return self.__names
 
-    # Use numpy.reshape() to reshape data NOTE: only 2D because its a table
-    # NOTE: column access of this reshape is not contigous
-    data = np.array(np.reshape(data, (nrows,ncols), order=order))
-    pdo.SetNumberOfRows(nrows)
+    def SetNumberOfColumns(self, ncols):
+        if self.__ncols != ncols:
+            self.__ncols = ncols
+            self.Modified()
 
-    # Add new array to output table and assign incremental names (e.g. Field0)
-    for i in range(ncols):
-        # Make a contigous array from the column we want
-        col = np.array(data[:,i])
-        # allow type to be determined by input
-        insert = nps.numpy_to_vtk(num_array=col, deep=True) # array_type=vtk.VTK_FLOAT
-        # VTK arrays need a name. Set arbitrarily
-        insert.SetName(names[i])
-        #pdo.AddColumn(insert) # these are not getting added to the output table
-        # ... work around:
-        pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData
+    def SetNumberOfRows(self, nrows):
+        if self.__nrows != nrows:
+            self.__nrows = nrows
+            self.Modified()
 
-    return pdo
+    def SetOrder(self, order):
+        if self.__order != order:
+            self.__order = order
+            self.Modified
 
 
 #---- Correlations ----#
@@ -199,96 +250,172 @@ def normalizeArray(pdi, arr, norm, multiplier=1.0, newName='', pdo=None, abs=Fal
 
 #---- Cell Connectivity ----#
 
-def connectCells(pdi, cellType=4, nrNbr=True, pdo=None, logTime=False):
-    # NOTE: Type map is specified in vtkCellType.h
-    """
-    <Entry value="4" text="Poly Line"/>
-    <Entry value="3" text="Line"/>
-    """
-    if pdo is None:
-        pdo = vtk.vtkPolyData()
+class AddCellConnToPoints(VTKPythonAlgorithmBase):
+    """This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation)."""
+    def __init__(self):
+        VTKPythonAlgorithmBase.__init__(self,
+            nInputPorts=1, inputType='vtkPolyData',
+            nOutputPorts=1, outputType='vtkPolyData')
+        # Parameters
+        self.__cellType = 4
+        self.__usenbr = False
 
-    if logTime:
-        startTime = datetime.now()
 
-    # Get the Points over the NumPy interface
-    wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
-    points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+    def _ConnectCells(self, pdi, pdo, logTime=False):
+        # NOTE: Type map is specified in vtkCellType.h
+        """
+        <Entry value="4" text="Poly Line"/>
+        <Entry value="3" text="Line"/>
+        """
+        cellType = self.__cellType
+        nrNbr = self.__usenbr
 
-    pdo.DeepCopy(pdi)
-    numPoints = pdi.GetNumberOfPoints()
+        if logTime:
+            startTime = datetime.now()
 
-    if nrNbr:
-        from scipy.spatial import cKDTree
-        # VTK_Line
-        if cellType == 3:
-            sft = 0
-            while(len(points) > 1):
-                tree = cKDTree(points)
-                # Get indices of k nearest points
-                dist, ind = tree.query(points[0], k=2)
-                ptsi = [ind[0]+sft, ind[1]+sft]
-                pdo.InsertNextCell(cellType, 2, ptsi)
-                points = np.delete(points, 0, 0) # Deletes first row
-                del(tree)
-                sft += 1
-        # VTK_PolyLine
-        elif cellType == 4:
-            tree = cKDTree(points)
-            dist, ptsi = tree.query(points[0], k=numPoints)
-            pdo.InsertNextCell(cellType, numPoints, ptsi)
-        else:
-            raise Exception('Cell Type %d not ye implemented.' % cellType)
-    else:
-        # VTK_PolyLine
-        if cellType == 4:
-            ptsi = [i for i in range(numPoints)]
-            pdo.InsertNextCell(cellType, numPoints, ptsi)
-        # VTK_Line
-        elif cellType == 3:
-            for i in range(0, numPoints-1):
-                ptsi = [i, i+1]
-                pdo.InsertNextCell(cellType, 2, ptsi)
-        else:
-            raise Exception('Cell Type %d not ye implemented.' % cellType)
+        # Get the Points over the NumPy interface
+        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
+        points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
 
-    if logTime:
-        print((datetime.now() - startTime))
-
-    return pdo
-
-def _polyLineToTube(pdi, pdo, radius=10.0, numSides=20):
-    """
-    Takes points from a vtkPolyData with associated poly lines in cell data and builds a polygonal tube around that line with some specified radius and number of sides.
-    """
-    if pdo is None:
-        pdo = vtk.vtkPolyData()
         pdo.DeepCopy(pdi)
+        numPoints = pdi.GetNumberOfPoints()
 
-    # Make a tube from the PolyData line:
-    tube = vtk.vtkTubeFilter()
-    tube.SetInputData(pdo)
-    tube.SetRadius(radius)
-    tube.SetNumberOfSides(numSides)
-    tube.Update()
-    pdo.ShallowCopy(tube.GetOutput())
+        if nrNbr:
+            from scipy.spatial import cKDTree
+            # VTK_Line
+            if cellType == 3:
+                sft = 0
+                while(len(points) > 1):
+                    tree = cKDTree(points)
+                    # Get indices of k nearest points
+                    dist, ind = tree.query(points[0], k=2)
+                    ptsi = [ind[0]+sft, ind[1]+sft]
+                    pdo.InsertNextCell(cellType, 2, ptsi)
+                    points = np.delete(points, 0, 0) # Deletes first row
+                    del(tree)
+                    sft += 1
+            # VTK_PolyLine
+            elif cellType == 4:
+                tree = cKDTree(points)
+                dist, ptsi = tree.query(points[0], k=numPoints)
+                pdo.InsertNextCell(cellType, numPoints, ptsi)
+            else:
+                raise Exception('Cell Type %d not ye implemented.' % cellType)
+        else:
+            # VTK_PolyLine
+            if cellType == 4:
+                ptsi = [i for i in range(numPoints)]
+                pdo.InsertNextCell(cellType, numPoints, ptsi)
+            # VTK_Line
+            elif cellType == 3:
+                for i in range(0, numPoints-1):
+                    ptsi = [i, i+1]
+                    pdo.InsertNextCell(cellType, 2, ptsi)
+            else:
+                raise Exception('Cell Type %d not ye implemented.' % cellType)
 
-    return pdo
+        if logTime:
+            print((datetime.now() - startTime))
 
-def pointsToTube(pdi, radius=10.0, numSides=20, nrNbr=False, pdo=None, logTime=False):
-    """
-    TODO: Descrption
-    """
-    if pdo is None:
-        pdo = vtk.vtkPolyData()
+        return pdo
 
-    numPoints = pdi.GetNumberOfPoints()
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Perfrom task
+        self._ConnectCells(pdi, pdo)
+        return 1
 
-    # VTK_POLY_LINE is 4
-    # Type map is specified in vtkCellType.h
-    connectCells(pdi, cellType=4, nrNbr=nrNbr, pdo=pdo, logTime=logTime)
 
-    # Make a tube from the PolyData line:
-    _polyLineToTube(pdi, pdo, radius=radius, numSides=numSides)
+    #### Seters and Geters ####
+    def SetCellType(self, cellType):
+        if cellType != self.__cellType:
+            self.__cellType = cellType
+            self.Modified()
 
-    return pdo
+    def SetUseNearestNbr(self, flag):
+        """A flag on whether to use SciPy's cKDTree nearest neighbor algorithms to sort the points to before adding linear connectivity"""
+        if flag != self.__usenbr:
+            self.__usenbr = flag
+            self.Modified()
+
+
+
+
+
+
+
+class PointsToTube(AddCellConnToPoints):
+    """Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides."""
+    def __init__(self):
+        AddCellConnToPoints.__init__(self)
+        # Additional Parameters
+        # NOTE: CellType should remain 4 for VTK_PolyLine connection
+        self.__numSides = 20
+        self.__radius = 10.0
+
+
+    def _ConnectCells(self, pdi, pdo, logTime=False):
+        """This uses the parent's _ConnectCells() to build a tub around"""
+        AddCellConnToPoints._ConnectCells(self, pdi, pdo, logTime=logTime)
+        tube = vtk.vtkTubeFilter()
+        tube.SetInputData(pdo)
+        tube.SetRadius(self.__radius)
+        tube.SetNumberOfSides(self.__numSides)
+        tube.Update()
+        pdo.ShallowCopy(tube.GetOutput())
+        return pdo
+
+
+    #### Seters and Geters ####
+
+    def SetRadius(self, radius):
+        if self.__radius != radius:
+            self.__radius = radius
+            self.Modified()
+
+    def SetNumberOfSides(self, num):
+        if self.__numSides != num:
+            self.__numSides = num
+            self.Modified()
+
+
+
+
+
+
+class CombineTables(VTKPythonAlgorithmBase):
+    """Takes two tables and combines them if they have the same number of rows."""
+    def __init__(self):
+        VTKPythonAlgorithmBase.__init__(self,
+            nInputPorts=2, inputType='vtkTable',
+            nOutputPorts=1, outputType='vtkTable')
+        # Parameters... none
+
+    # CRITICAL for multiple input ports
+    def FillInputPortInformation(self, port, info):
+        # all are tables so no need to check port
+        info.Set(self.INPUT_REQUIRED_DATA_TYPE(), "vtkTable")
+        return 1
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        # Inputs from different ports:
+        pdi0 = self.GetInputData(inInfo, 0, 0)
+        pdi1 = self.GetInputData(inInfo, 1, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+
+        pdo.DeepCopy(pdi0)
+
+        # Get number of columns
+        ncols1 = pdi1.GetNumberOfColumns()
+        # Get number of rows
+        nrows = pdi0.GetNumberOfRows()
+        nrows1 = pdi1.GetNumberOfRows()
+        assert(nrows == nrows1)
+
+        for i in range(pdi1.GetRowData().GetNumberOfArrays()):
+            arr = pdi1.GetRowData().GetArray(i)
+            pdo.GetRowData().AddArray(arr)
+        return 1
