@@ -1,7 +1,7 @@
 # Name to be used for coding/macros:
-Name = 'PointsToVoxels'
+Name = 'VoxelizePointsSpacing'
 # Label for the filter menu:
-Label = 'Points To Voxels'
+Label = 'Voxelize Points with Spacing Arrays'
 
 # A general overview of the plugin
 Help = 'This makes a vtkUnstructuredGrid of scattered points given voxel sizes as input arrays'
@@ -35,7 +35,7 @@ def RequestData(self):
     from vtk.util import numpy_support as nps
     from vtk.numpy_interface import dataset_adapter as dsa
     import PVGeo._helpers as inputhelp
-    from PVGeo.filters_general import points2grid, addCellData
+    from PVGeo.filters_general import voxelizePoints, addCellData
     pdi = self.GetInput() # poly data with points
     pdo = self.GetOutput() # vtkUnstructuredGrid
     wpdi = dsa.WrapDataObject(pdi)
@@ -53,7 +53,7 @@ def RequestData(self):
     ]
 
 
-    points2grid(x,y,z,dx,dy,dz, grid=pdo)
+    voxelizePoints(x,y,z,dx,dy,dz, grid=pdo, estimate_grid=False)
     for i in range(pdi.GetPointData().GetNumberOfArrays()):
         arr = pdi.GetPointData().GetArray(i)
         if arr.GetName() in names:
