@@ -198,7 +198,7 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
     #### Seters and Geters ####
 
     #(int idx, int port, int connection, int fieldAssociation, const char *name)
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=3))
+    @smproperty.xml(_helpers.getInputArrayXml(labels=['dx','dy','dz'], nInputPorts=1, numArrays=3))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         if idx == 0:
             self.__dx_id = [field, name]
