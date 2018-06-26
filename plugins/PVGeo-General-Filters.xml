@@ -239,9 +239,9 @@
 
     <!-- ./filters-general//filter_points_to_voxels.py -->
     <SourceProxy
-      name="PointsToVoxels"
+      name="VoxelizePointsSpacing"
       class="vtkPythonProgrammableFilter"
-      label="Points To Voxels">
+      label="Voxelize Points with Spacing Arrays">
       <Documentation
         long_help="This makes a vtkUnstructuredGrid of scattered points given voxel sizes as input arrays"
         short_help="This makes a vtkUnstructuredGrid of scattered points given voxel sizes as input arrays">
@@ -375,7 +375,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;from vtk.numpy_interface import dataset_adapter as dsa&#xA;import PVGeo._helpers as inputhelp&#xA;from PVGeo.filters_general import points2grid, addCellData&#xA;pdi = self.GetInput() # poly data with points&#xA;pdo = self.GetOutput() # vtkUnstructuredGrid&#xA;wpdi = dsa.WrapDataObject(pdi)&#xA;&#xA;pts = wpdi.Points&#xA;x,y,z = pts[:,0], pts[:,1], pts[:,2]&#xA;# Get input array info (selection made in drop down menu)&#xA;dx = inputhelp.getSelectedArray(self, wpdi, 0)&#xA;dy = inputhelp.getSelectedArray(self, wpdi, 1)&#xA;dz = inputhelp.getSelectedArray(self, wpdi, 2)&#xA;names = [&#xA;    inputhelp.getSelectedArrayName(self, 0),&#xA;    inputhelp.getSelectedArrayName(self, 1),&#xA;    inputhelp.getSelectedArrayName(self, 2)&#xA;]&#xA;&#xA;&#xA;points2grid(x,y,z,dx,dy,dz, grid=pdo)&#xA;for i in range(pdi.GetPointData().GetNumberOfArrays()):&#xA;    arr = pdi.GetPointData().GetArray(i)&#xA;    if arr.GetName() in names:&#xA;        continue&#xA;    inputhelp.addArray(pdo, 1, arr) # adds to CELL data&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;from vtk.numpy_interface import dataset_adapter as dsa&#xA;import PVGeo._helpers as inputhelp&#xA;from PVGeo.filters_general import voxelizePoints, addCellData&#xA;pdi = self.GetInput() # poly data with points&#xA;pdo = self.GetOutput() # vtkUnstructuredGrid&#xA;wpdi = dsa.WrapDataObject(pdi)&#xA;&#xA;pts = wpdi.Points&#xA;x,y,z = pts[:,0], pts[:,1], pts[:,2]&#xA;# Get input array info (selection made in drop down menu)&#xA;dx = inputhelp.getSelectedArray(self, wpdi, 0)&#xA;dy = inputhelp.getSelectedArray(self, wpdi, 1)&#xA;dz = inputhelp.getSelectedArray(self, wpdi, 2)&#xA;names = [&#xA;    inputhelp.getSelectedArrayName(self, 0),&#xA;    inputhelp.getSelectedArrayName(self, 1),&#xA;    inputhelp.getSelectedArrayName(self, 2)&#xA;]&#xA;&#xA;&#xA;voxelizePoints(x,y,z,dx,dy,dz, grid=pdo, estimate_grid=False)&#xA;for i in range(pdi.GetPointData().GetNumberOfArrays()):&#xA;    arr = pdi.GetPointData().GetArray(i)&#xA;    if arr.GetName() in names:&#xA;        continue&#xA;    inputhelp.addArray(pdo, 1, arr) # adds to CELL data&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>
@@ -730,12 +730,12 @@
 
     <!-- ./filters-general//filter_points_to_uniform_voxels.py -->
     <SourceProxy
-      name="PointsToUniformVoxels"
+      name="VoxelizePointsUniformly"
       class="vtkPythonProgrammableFilter"
-      label="Points To Uniform Voxels">
+      label="Voxelize Points Uniformly">
       <Documentation
-        long_help="This makes a vtkUnstructuredGrid of scattered points given voxel sizes"
-        short_help="This makes a vtkUnstructuredGrid of scattered points given voxel sizes">
+        long_help="This makes a vtkUnstructuredGrid of scattered points by estimating a uniform voxel size. The user can also give the filter a voxel size to use."
+        short_help="This makes a vtkUnstructuredGrid of scattered points by estimating a uniform voxel size. The user can also give the filter a voxel size to use.">
       </Documentation>
       <Hints>
         <ShowInMenu category="PVGeo General Filters" />
@@ -780,6 +780,19 @@
 
 
 
+      <IntVectorProperty
+        panel_visibility="default"
+        name="Estimate_Grid"
+        label="Estimate Grid"
+        initial_string="Estimate_Grid"
+        command="SetParameter"
+        animateable="1"
+        default_values="1"
+        number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation></Documentation>
+      </IntVectorProperty>
+
       <DoubleVectorProperty
         panel_visibility="default"
         name="dx"
@@ -820,7 +833,7 @@
         name="Script"
         command="SetScript"
         number_of_elements="1"
-        default_values="from vtk.util import numpy_support as nps&#xA;from vtk.numpy_interface import dataset_adapter as dsa&#xA;import PVGeo._helpers as inputhelp&#xA;from PVGeo.filters_general import points2grid, addCellData&#xA;pdi = self.GetInput() # poly data with points&#xA;pdo = self.GetOutput() # vtkUnstructuredGrid&#xA;wpdi = dsa.WrapDataObject(pdi)&#xA;&#xA;pts = wpdi.Points&#xA;x,y,z = pts[:,0], pts[:,1], pts[:,2]&#xA;points2grid(x,y,z,dx,dy,dz, grid=pdo)&#xA;for i in range(pdi.GetPointData().GetNumberOfArrays()):&#xA;    arr = pdi.GetPointData().GetArray(i)&#xA;    inputhelp.addArray(pdo, 1, arr) # adds to CELL data&#xA;"
+        default_values="from vtk.util import numpy_support as nps&#xA;from vtk.numpy_interface import dataset_adapter as dsa&#xA;import PVGeo._helpers as inputhelp&#xA;from PVGeo.filters_general import voxelizePoints, addCellData&#xA;pdi = self.GetInput() # poly data with points&#xA;pdo = self.GetOutput() # vtkUnstructuredGrid&#xA;wpdi = dsa.WrapDataObject(pdi)&#xA;&#xA;pts = wpdi.Points&#xA;x,y,z = pts[:,0], pts[:,1], pts[:,2]&#xA;voxelizePoints(x,y,z,dx,dy,dz, grid=pdo, estimate_grid=Estimate_Grid)&#xA;for i in range(pdi.GetPointData().GetNumberOfArrays()):&#xA;    arr = pdi.GetPointData().GetArray(i)&#xA;    inputhelp.addArray(pdo, 1, arr) # adds to CELL data&#xA;"
         panel_visibility="advanced">
         <Hints>
           <Widget type="multi_line" syntax="python"/>

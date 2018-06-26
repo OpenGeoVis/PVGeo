@@ -6,8 +6,8 @@ Author: Bane Sullivan
 
 __all__ = [
     'addCellData',
-    'points2grid',
-    'points2gridWrapper'
+    'voxelizePoints',
+    'voxelizePointsWrapper'
 ]
 
 import numpy as np
@@ -18,6 +18,58 @@ from ..version import checkNumpy
 
 
 
+
+def _estimateUniformSpacing(x, y, z, dx=None, dy=None, dz=None, safe=10.0):
+    """
+    This assumes that the input points make up some sort of uniformly spaced
+    grid. If those points do not vary along a specified axis, then use
+    (dx,dy,dz) args to set a default spacing. Otherwise nonvarying axis spacings
+    will be determined by other axii.
+    """
+    # TODO: implement ability to rotate around Z axis (think PoroTomo vs UTM)
+    # TODO: implement way to estimate rotation
+    assert(len(x)==len(y)==len(z))
+    num = len(x)
+    default = [dx,dy,dz]
+    if num == 1:
+        # Only one point.. use default
+        for i in range(3):
+            if default[i] is None:
+                default[i] = safe
+        return default
+
+    # Get unique elements
+    us = [np.unique(x), np.unique(y), np.unique(z)]
+    diffs = []
+    for u in us:
+        diffs.append(np.diff(u))
+    for i in range(3):
+        if len(diffs[i]) > 0:
+            # Get average spacing
+            diffs[i] = np.average(diffs[i])
+
+    # If an axis did not vary, then use one of the other axii to determine spacing
+    diffs.append(diffs[0])
+    diffs.append(diffs[1])
+    for i in range(3):
+        # Axis does not vary and no default given
+        if isinstance(diffs[i], np.ndarray) and default[i] is None:
+            if isinstance(diffs[i+1], np.ndarray):
+                default[i] = default[i+2]
+            else: default[i] = diffs[i+1]
+        elif isinstance(diffs[i], np.ndarray) and default[i] is not None:
+            pass
+        else: default[i] = diffs[i]
+
+
+    # This is an easy way if the points definitely make a 3D grid...
+    # dx = np.average(np.diff(np.unique(x)))
+    # dy = np.average(np.diff(np.unique(y)))
+    # dz = np.average(np.diff(np.unique(z)))
+
+    return default[0], default[1], default[2]
+
+
 def addCellData(grid, arr, name):
     c = nps.numpy_to_vtk(num_array=arr, deep=True)
     c.SetName(name)
@@ -25,12 +77,15 @@ def addCellData(grid, arr, name):
     return grid
 
 
-def points2grid(x,y,z,dx,dy,dz, grid=None):
-    if not checkNumpy():
+def voxelizePoints(x, y, z, dx, dy, dz, grid=None, safe=10.0, estimate_grid=True):
+    if not checkNumpy(warn=False):
         raise RuntimeError("points2grid() cannot work with versions of NumPy below 1.10.x . You must update ParaView\'s NumPy")
         return None
     if grid is None:
         grid = vtk.vtkUnstructuredGrid()
+
+    if estimate_grid:
+        dx, dy, dz = _estimateUniformSpacing(x, y, z, dx=dx, dy=dy, dz=dz)
 
     numCells = len(x)
 
@@ -90,23 +145,24 @@ def points2grid(x,y,z,dx,dy,dz, grid=None):
     return grid
 
 
-## For Testing:
-# x = np.array([0.0,1.0])
-# y = np.array([0.0,0.0])
-# z = np.array([0.0,0.0])
-# dx = 1.0
-# dy = 1.0
-# dz = 1.0
+def voxelizePointsWrapper(grid, tup):
+    x,dx,y,dy,z,dz = tup
+    return voxelizePoints(x,y,z, dx,dy,dz, grid=grid)
+
+
+###############################################################################
+
+# ## For Testing:
+# x = np.array([0.0,1.0,0.0])
+# y = np.array([0.0,0.0,1.0])
+# z = np.array([0.0,0.0,0.0])
+# dx = 10.0
+# dy = 10.0
+# dz = 10.0
 # grid = points2grid(x,y,z,dx,dy,dz)
 # # Write out for viewing in ParaView
 # writer = vtk.vtkXMLUnstructuredGridWriter()
-# writer.SetFileName('../testme.vtu')
+# writer.SetFileName('/Users/bane/Desktop/testme.vtu')
 # ###writer.SetDataModeToAscii() # Only for testing. Do not use.
 # writer.SetInputData(grid)
 # writer.Write()
-
-
-
-def points2gridWrapper(grid, tup):
-    x,dx,y,dy,z,dz = tup
-    return points2grid(x,y,z, dx,dy,dz, grid=grid)
