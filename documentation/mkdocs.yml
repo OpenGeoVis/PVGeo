@@ -13,15 +13,13 @@ google_analytics:
 
 extra:
   disqus: 'pvgeo'
-  social: # check https://fontawesome.com/ for more icons
+  social: # check https://fontawesome.com/icons?d=gallery for more icons
     - type: 'slack'
       link: 'http://slack.pvgeo.org'
     - type: 'github'
-      link: 'https://github.com/banesullivan'
-    - type: 'linkedin'
-      link: 'https://linkedin.com/in/bane-sullivan'
-    - type: 'address-card'
-      link: 'http://banesullivan.com'
+      link: 'https://github.com/OpenGeoVis'
+    - type: 'envelope'
+      link: 'mailto:info@pvgeo.org'
 
 theme:
     name: material

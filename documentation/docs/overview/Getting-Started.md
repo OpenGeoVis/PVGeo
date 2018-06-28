@@ -1,5 +1,5 @@
 !!! info
-    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues).
+    If you have an idea for a macro, plugin, or would like to see how we would address a geoscientific visualization problem with ParaView, please post your thoughts on the [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues) or get involved with the *PVGeo* community on Slack to discuss adding new features: <script async defer src="http://slack.pvgeo.org/slackin.js"></script>
 
 ## A Brief Introduction to ParaView
 
@@ -85,8 +85,10 @@ Now we need to edit the `PYTHONPATH` variable that should already exist in your 
 
 5. Now test that the install worked by opening ParaView (close it and reopen if needed). Check that the various categories for the PVGeo filters are in the **Filters** menu such as **PVGeo General Filters**.. Then open the **Python Shell** and import the `PVGeo` module by executing `import PVGeo`.
 
-??? help
-    If an error arises: First, please double check your paths. If you are still having trouble, feel free to post to the [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues) which is regularly checked.
+!!! help
+    If an error arises: First, please double check your paths. If you are still having trouble, feel free to join the *PVGeo* community on Slack and ask for help: <script async defer src="http://slack.pvgeo.org/slackin.js"></script>
+
+    You can also post to the [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues) if you think you are encountering a bug.
 
 
 
