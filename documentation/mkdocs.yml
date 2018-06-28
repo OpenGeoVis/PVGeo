@@ -14,6 +14,8 @@ google_analytics:
 extra:
   disqus: 'pvgeo'
   social: # check https://fontawesome.com/ for more icons
+    - type: 'slack'
+      link: 'http://slack.pvgeo.org'
     - type: 'github'
       link: 'https://github.com/banesullivan'
     - type: 'linkedin'
@@ -31,13 +33,16 @@ theme:
     custom_dir: custom_theme
     favicon: 'img/globe_small.png'
     logo: 'img/globe_small.png'
+
 extra_css:
     - stylesheets/extra.css
 
 
 markdown_extensions:
-    - include-import # custom docs include docs or script extension
-    - download-button # Adds ability to have full width download buttons
+    # Make sure parent directory is in pyhton path when building docs
+    - download_button # Adds ability to have full width download buttons
+    - include_import # custom docs include docs or script extension
+
     - smarty
     - toc:
         permalink: true
