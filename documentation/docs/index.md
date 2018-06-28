@@ -40,16 +40,13 @@ Check out the [**Demo Page**](http://demo.pvgeo.org) to see video demos and inte
 
 <div style="float: left; margin:10px 10px 10px 10px"" class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="bane-sullivan"><a class="LI-simple-link" href='https://www.linkedin.com/in/bane-sullivan?trk=profile-badge'>Linkedin: Bane Sullivan</a></div>
 
-The code and documentation distributed here were produced by [**Bane Sullivan**](http://banesullivan.com), graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Dr. Whitney Trainor-Guitton. Feel free to contact Bane through his contact information on [**his website**](http://banesullivan.com) for questions or through joining *PVGeo* on Slack: <script async defer src="http://slack.pvgeo.org/slackin.js"></script>
+The *PVGeo* code library is managed by [**Bane Sullivan**](http://banesullivan.com), graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Whitney Trainor-Guitton. If you have questions please inquire with [info@pvgeo.org](mailto:info@pvgeo.org) or join the *PVGeo* community on Slack: <script async defer src="http://slack.pvgeo.org/slackin.js"></script>
 
 <div style="float: left; margin:10px 10px 10px 10px"> </div>
 
 
 !!! info "Thank you to our contributors!"
-    It is important to note the project is open source and that many features in this repository were made possible by contributors volunteering their time. The following people deserve many thanks and acknowledgments for their contributions:
-
-    - [**Daan van Vugt**](https://github.com/Exteris)
-    - [**Gudni Karl Rosenkjaer**](https://github.com/grosenkj)
+    It is important to note the project is open source and that many features in this repository were made possible by contributors volunteering their time. Please take a look at the [**Contributors Page**](https://github.com/OpenGeoVis/PVGeo/graphs/contributors) to learn more about the developers of *PVGeo*.
 
 ------
 

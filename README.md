@@ -12,14 +12,13 @@ This repository contains plugins tailored to data visualization in geophysics fo
 Check out the [demo page](http://demo.pvgeo.org/) for a synopsis of the project and some visualization examples. Then check out the [Docs pages](http://pvgeo.org/) to explore the motivation for publishing this repo as well as to find all code documentation. This contains documentation for readers, filters, macros, and more as you need. **NOTE: These are currently out of date and will be updated and finished by late June 2018**
 
 ## About the Author
-The code and documentation distributed here were produced by [Bane Sullivan](http://banesullivan.com), graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Dr. Whitney J. Trainor-Guitton. Feel free to contact Bane through his contact information on [his website](http://banesullivan.com) for questions or through the [Issues page](https://github.com/OpenGeoVis/PVGeo/issues) for custom filters/readers to visualize geoscience data.
+The *PVGeo* code library is managed by [**Bane Sullivan**](http://banesullivan.com), graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Whitney Trainor-Guitton. If you have questions please inquire with [info@pvgeo.org](mailto:info@pvgeo.org) or join the *PVGeo* community on Slack: <script async defer src="http://slack.pvgeo.org/slackin.js"></script>
+
+
+It is important to note the project is open source and that many features in this repository were made possible by contributors volunteering their time. Please take a look at the contributors page to learn more about the developers of *PVGeo*.
 
 ### Acknowledgements
-Thank you to [Gudni Karl Rosenkjaer](https://github.com/grosenkj) for implementing the UBC OcTree file format reader.
-
-Thank you to [Daan van Vugt](https://github.com/Exteris) for helping me implement the ability to read file series and for developing a robust framework for making file readers found [here](https://github.com/Exteris/paraview-python-file-reader).
-
-Thank you to Pat Marion for building the foundation of the Pyhton Programmable Filter/Reader generation script! See details on [this blog post](https://blog.kitware.com/easy-customization-of-the-paraview-python-programmable-filter-property-panel/).
+It is important to note the project is open source and that many features in this repository were made possible by contributors volunteering their time. Please take a look at the [**Contributors Page**](https://github.com/OpenGeoVis/PVGeo/graphs/contributors) to learn more about the developers of *PVGeo*.
 
 
 -----
