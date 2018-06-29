@@ -1,11 +1,12 @@
-# __all__ = [
-#     'reshapeTable',
-#     'correlateArrays',
-#     'getArrayRange',
-#     'normalizeArray',
-#     'AddCellConnToPoints',
-#     'pointsToTube'
-# ]
+__all__ = [
+    'ReshapeTable',
+    'correlateArrays',
+    'getArrayRange',
+    'normalizeArray',
+    'AddCellConnToPoints',
+    'PointsToTube',
+    'CombineTables'
+]
 
 import vtk
 from vtk.util import numpy_support as nps
@@ -120,7 +121,7 @@ class ReshapeTable(VTKPythonAlgorithmBase):
     def SetOrder(self, order):
         if self.__order != order:
             self.__order = order
-            self.Modified
+            self.Modified()
 
 
 #---- Correlations ----#
