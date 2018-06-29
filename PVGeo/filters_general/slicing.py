@@ -243,29 +243,20 @@ class ClipThroughTime(ManySlicesAlongAxis):
     delay : float : optional : Time delay in seconds before conducting each clip translation.
 
     """
-    def __init__(self, numSlices=10):
+    def __init__(self, numSlices=5):
         ManySlicesAlongAxis.__init__(self, numSlices=numSlices, outputType='vtkPolyData')
         # Parameters
         self.__dt = 1.0
-        self.__outInfo = None
         self.__timesteps = None
 
+    def _GetTimeSteps(self):
+        return self.__timesteps.tolist() if self.__timesteps is not None else None
 
-    def _GetRequestedTime(self, outInfo, idx=0):
-        # USAGE: i = self._GetRequestedTime(outInfo)
-        executive = self.GetExecutive()
-        timesteps = self.__timesteps
-        outInfo = outInfo.GetInformationObject(idx)
-        if timesteps is None or len(timesteps) == 0:
-            return 0
-        elif outInfo.Has(executive.UPDATE_TIME_STEP()) and len(timesteps) > 0:
-            utime = outInfo.Get(executive.UPDATE_TIME_STEP())
-            print(utime)
-            return np.argmin(np.abs(timesteps - utime))
-        else:
-            # if we cant match the time, give first
-            assert(len(timesteps) > 0)
-            return 0
+    def _UpdateTimeSteps(self):
+        """for internal use only"""
+        self.__timesteps = _helpers.UpdateTimesteps(self, self.GetNumberOfSlices(), self.__dt)
+
+
 
     #### Algorithm Methods ####
 
@@ -274,8 +265,7 @@ class ClipThroughTime(ManySlicesAlongAxis):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         self._SetAxialRange(pdi)
-        i = self._GetRequestedTime(outInfo)
-        print('req time', i)
+        i = _helpers.GetRequestedTime(self, outInfo)
         # Perfrom task
         normal = self.GetNormal()
         origin = self._GetOrigin(pdi, i)
@@ -283,26 +273,24 @@ class ClipThroughTime(ManySlicesAlongAxis):
         self._Slice(pdi, pdo, plane)
         return 1
 
-    def RequestInformation(self, request, inInfo, outInfo):
-        pdi = self.GetInputData(inInfo, 0, 0)
-        self.__outInfo = outInfo
-        # TODO: fix how ParaView is not registering time
-        self.__timesteps = _helpers.updateTimesteps(self, self.__outInfo,
-                self.GetNumberOfSlices(), self.__dt)
-        print(self.__timesteps)
-        print(self.__outInfo)
+    def RequestInformation(self, request, inInfoVec, outInfoVec):
+        # register time:
+        self._UpdateTimeSteps()
         return 1
 
     #### Getters / Setters ####
 
     def SetNumberOfSlices(self, num):
         ManySlicesAlongAxis.SetNumberOfSlices(self, num)
-        if self.__outInfo is not None:
-            self.__timesteps = _helpers.updateTimesteps(self, self.__outInfo,
-                self.GetNumberOfSlices(), self.__dt)
+        self._UpdateTimeSteps()
         self.Modified()
 
     def SetTimeDelta(self, dt):
         if self.__dt != dt:
             self.__dt = dt
+            self._UpdateTimeSteps()
             self.Modified()
+
+    def GetTimestepValues(self):
+        """Use this in ParaView decorator to register timesteps"""
+        return self._GetTimeSteps()

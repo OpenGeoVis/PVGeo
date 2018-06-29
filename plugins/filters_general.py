@@ -346,6 +346,11 @@ class PVGeoClipThroughTime(ClipThroughTime):
     def SetAxis(self, axis):
         ClipThroughTime.SetAxis(self, axis)
 
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return ClipThroughTime.GetTimestepValues(self)
+
 
 ###############################################################################
 
