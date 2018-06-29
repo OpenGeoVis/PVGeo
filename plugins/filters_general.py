@@ -309,7 +309,7 @@ class PVGeoManySlicesAlongAxis(ManySlicesAlongAxis):
         ManySlicesAlongAxis.__init__(self)
 
     @smproperty.intvector(name="Number of Slices", default_values=5)
-    @smdomain.intrange(min=2, max=100)
+    @smdomain.intrange(min=2, max=25)
     def SetNumberOfSlices(self, num):
         ManySlicesAlongAxis.SetNumberOfSlices(self, num)
 
@@ -332,7 +332,7 @@ class PVGeoClipThroughTime(ClipThroughTime):
         ClipThroughTime.__init__(self)
 
     @smproperty.intvector(name="Number of Slices", default_values=10)
-    @smdomain.intrange(min=2, max=1000)
+    @smdomain.intrange(min=2, max=50)
     def SetNumberOfSlices(self, num):
         ClipThroughTime.SetNumberOfSlices(self, num)
 
@@ -366,7 +366,7 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
         ManySlicesAlongPoints.__init__(self)
 
     @smproperty.intvector(name="Number of Slices", default_values=10)
-    @smdomain.intrange(min=2, max=1000)
+    @smdomain.intrange(min=2, max=25)
     def SetNumberOfSlices(self, num):
         ManySlicesAlongPoints.SetNumberOfSlices(self, num)
 
