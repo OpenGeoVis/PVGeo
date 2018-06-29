@@ -348,3 +348,22 @@ class PVGeoClipThroughTime(ClipThroughTime):
 
 
 ###############################################################################
+
+
+@smproxy.filter(name='PVGeoManySlicesAlongPoints', label='Many Slices Along Points')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Data Set", port_index=1)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+@smproperty.input(name="Points", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
+    def __init__(self):
+        ManySlicesAlongPoints.__init__(self)
+
+    @smproperty.intvector(name="Number of Slices", default_values=10)
+    @smdomain.intrange(min=2, max=1000)
+    def SetNumberOfSlices(self, num):
+        ManySlicesAlongPoints.SetNumberOfSlices(self, num)
+
+
+###############################################################################
