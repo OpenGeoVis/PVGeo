@@ -18,7 +18,7 @@
           file_description="PVGeo: GSLIB File Format" />
       </Hints>
 
-      <!-- Built on version: 0.7.2 -->
+      <!-- Built on version: 0.7.4 -->
       <StringVectorProperty
         panel_visibility="never"
         name="BUILDVERSION"
@@ -26,7 +26,7 @@
         initial_string="BUILDVERSION"
         command="SetParameter"
         animateable="1"
-        default_values="0.7.2"
+        default_values="0.7.4"
         number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
       </StringVectorProperty>
@@ -189,7 +189,7 @@
           file_description="PVGeo: SGeMS Grid File Format" />
       </Hints>
 
-      <!-- Built on version: 0.7.2 -->
+      <!-- Built on version: 0.7.4 -->
       <StringVectorProperty
         panel_visibility="never"
         name="BUILDVERSION"
@@ -197,7 +197,7 @@
         initial_string="BUILDVERSION"
         command="SetParameter"
         animateable="1"
-        default_values="0.7.2"
+        default_values="0.7.4"
         number_of_elements="1">
         <Documentation>This is an attribute to the filter to know what version it was built on. This is necessary for plugins that have major changes across versions and might need to alert a user that their state file is out of date.</Documentation>
       </StringVectorProperty>

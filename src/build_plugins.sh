@@ -60,7 +60,7 @@ for directory in ./*/; do
     #dirname="${directory%.*}"
     printf "${YELLOW}%s${NORMAL}\n" "   |--> $(basename "$directory")"
     printf "${RED}" # Change printout color to red to signify errors
-    python2 python_filter_generator.py $directory "../plugins"
+    python python_filter_generator.py $directory "../plugins"
 done
 printf "${NORMAL}"
 

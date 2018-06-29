@@ -1,6 +1,6 @@
 __all__ = [
-    'packedBinaries',
-    'madagascar']
+    'PackedBinariesReader',
+    'MadagascarReader']
 
 import numpy as np
 from vtk.util import numpy_support as nps
@@ -8,9 +8,11 @@ import vtk
 import warnings
 # Import Helpers:
 from .. import _helpers
+from ..base import ReaderBase
 
 
-def packedBinaries(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
+
+class PackedBinariesReader(ReaderBase):
     """
     @desc:
     This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
@@ -24,25 +26,79 @@ def packedBinaries(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
 
     @return:
     vtkTable : Returns a vtkTable of the input data file with a single column being the data read.
-
     """
-    if pdo is None:
-        pdo = vtk.vtkTable() # vtkTable
+    def __init__(self):
+        ReaderBase.__init__(self,
+            nOutputPorts=1, outputType='vtkTable')
+        # Other Parameters
+        self.__dataName = "Data"
+        self.__endian = ''
+        self.__dtype = 'f'
+        self.__madagascar = False
 
-    dtype, vtktype = _helpers._getdTypes(dtype=dtype, endian=endian)
+    def _GetTypes(self):
+        # Usage: dtype, vtktype = self._GetTypes()
+        return _helpers._getdTypes(dtype=self.__dtype, endian=self.__endian)
 
-    raw = np.fromfile(FileName, dtype=dtype)
+    def _ReadRawFile(self, idx=0):
+        dtype, vtktype = _helpers._getdTypes(dtype=self.__dtype, endian=self.__endian)
+        arr = np.fromfile(self.GetFileNames(idx=idx), dtype=dtype)
+        return arr
 
-    # Put raw data into vtk array
-    data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
-    data.SetName(_helpers._cleanDataNm(dataNm, FileName))
 
-    # Table with single column of data only
-    pdo.AddColumn(data)
+    def _ConvertArray(self, arr):
+        # Put raw data into vtk array
+        dtype, vtktype = _helpers._getdTypes(dtype=self.__dtype, endian=self.__endian)
+        data = nps.numpy_to_vtk(num_array=arr, deep=True, array_type=vtktype)
+        data.SetName(self.__dataName)
+        return data
 
-    return pdo
 
-def madagascar(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
+    def RequestData(self, request, inInfo, outInfo):
+        # Get output:
+        output = vtk.vtkTable.GetData(outInfo)
+        # Get requested time index
+        i = self._GetRequestedTime(outInfo)
+        arr = self._ReadRawFile(idx=i)
+        data = self._ConvertArray(arr)
+        output.AddColumn(data)
+        return 1
+
+
+    #### Seters and Geters ####
+    def SetEndian(self, endian):
+        pos = ['', '<', '>']
+        if isinstance(endian, int):
+            endian = pos[endian]
+        if endian != self.__endian:
+            self.__endian = endian
+            self.Modified()
+
+    def GetEndian(self):
+        return self.__endian
+
+    def SetDType(self, dtype):
+        pos = ['d', 'f', 'i']
+        if isinstance(dtype, int):
+            dtype = pos[dtype]
+        if dtype != self.__dtype:
+            self.__dtype = dtype
+            self.Modified()
+
+    def GetDType(self):
+        return self.__dtype
+
+    def SetDataName(self, dataName):
+        if dataName != self.__dataName:
+            self.__dataName = dataName
+            self.Modified()
+
+    def GetDataName(self):
+        return self.__dataName
+
+
+
+class MadagascarReader(PackedBinariesReader):
     """
     @desc:
     This reads in float or double data that is packed into a Madagascar binary file format with a leader header. The reader ignores all of the ascii header details by searching for the sequence of three special characters: EOL EOL EOT (\014\014\004) and it will treat the followng binary packed data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We will later implement the ability to create a gridded volume from the header info. This reader is a quick fix for Samir. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
@@ -59,29 +115,21 @@ def madagascar(FileName, dataNm=None, endian=None, dtype='f', pdo=None):
     vtkTable : Returns a vtkTable of the input data file with a single column being the data read.
 
     """
-    if pdo is None:
-        pdo = vtk.vtkTable() # vtkTable
+    def __init__(self):
+        PackedBinariesReader.__init__(self)
 
-    dtype, vtktype = _helpers._getdTypes(dtype=dtype, endian=endian)
-
-    CTLSEQ = b'\014\014\004' # The control sequence to seperate header from data
-    rpl = b''
-    raw = []
-    with open(FileName, 'rb') as file:
-        raw = file.read()
-        idx = raw.find(CTLSEQ)
-        if idx == -1:
-            warnings.warn('This is not a single stream RSF format file. Treating entire file as packed binary data.')
-        else:
-            raw = raw[idx:] # deletes the header
-            raw = raw.replace(CTLSEQ, rpl) # removes the control sequence
-        raw = np.fromstring(raw, dtype=dtype)
-
-    # Put raw data into vtk array
-    data = nps.numpy_to_vtk(num_array=raw, deep=True, array_type=vtktype)
-    data.SetName(_helpers._cleanDataNm(dataNm, FileName))
-
-    # Table with single column of data only
-    pdo.AddColumn(data)
-
-    return pdo
+    def _ReadRawFile(self, idx=0):
+        dtype, vtktype = self._GetTypes()
+        CTLSEQ = b'\014\014\004' # The control sequence to seperate header from data
+        rpl = b''
+        raw = []
+        with open(self.GetFileNames(idx=idx), 'rb') as file:
+            raw = file.read()
+            idx = raw.find(CTLSEQ)
+            if idx == -1:
+                warnings.warn('This is not a single stream RSF format file. Treating entire file as packed binary data.')
+            else:
+                raw = raw[idx:] # deletes the header
+                raw = raw.replace(CTLSEQ, rpl) # removes the control sequence
+        arr = np.fromstring(raw, dtype=dtype)
+        return arr

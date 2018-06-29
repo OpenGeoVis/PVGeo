@@ -10,7 +10,7 @@ Since a comprehensive guide on using the general purpose **Programmable Source/F
 
 
 ## Plugin Components
-First, let's take a look at the example plugins found under the `src/` directory. There are two example plugins here: a reader (`src/readers-general/example_reader.py`) and a filter (`src/filters-general/example_filter.py`). These two example plugins overall have the same structure with subtle differences for their respective functionality as a reader (no input data source) of data filter (has 1 or many data input sources). We have generated these two examples as templates for you when you decide to start coding up your own plugins as they outline all of the available features of our build scripts for what you can implement into your plugin. Let's start by taking a look at the example reader plugin.
+First, let's take a look at the example plugins found under the `src/` directory. There are three key example plugins here: a reader (`src/readers-general/example_reader.py`) and two filters (`src/filters-general/example_filter.py` and `src/filters-general/example_filter_mult.py`). These three example plugins overall have the same structure with subtle differences for their respective functionality as a reader (no input data source) or data filter (1 vs. many data input ports). We have generated these examples as templates for you when you decide to start coding up your own plugins as they outline all of the available features of our build scripts for what you can implement into your plugin. Let's start by taking a look at the example reader plugin.
 
 ### Plugin Attributes
 
@@ -29,8 +29,8 @@ Examine the table below to learn how to use each of the plugin attributes. Hover
 | `NumberOfInputs` | <a class="md-footer-social__link fa fa-info-circle" title="This is the number of inputs this plugin will have. For readers, it is necessary to specify this as ZERO! A filter can have many but we wouldn't advise going over three."></a> | `:::py NumberOfInputs = 1` | ✅ | ✅ |
 | `InputDataType` | <a class="md-footer-social__link fa fa-info-circle" title="This is the type of VTK data object that this plugin will will take as an input from the upstream pipeline object. For a list of possible VTK data types, see this list below this table."></a> | `:::py InputDataType = 'vtkTable'` | ❌ | ✅ |
 | `OutputDataType` | <a class="md-footer-social__link fa fa-info-circle" title="This is the type of VTK data object that this plugin will output on the pipeline. For a list of possible VTK data types, see this list below this table."></a> | `:::py OutputDataType = 'vtkUnstructuredGrid'`| ✅ | ✅ |
-| `NumberOfInputArrayChoices` | <a class="md-footer-social__link fa fa-info-circle" title="Specify the number of input array choices you would like to have for the filter. This enables a drop-down menu for the user to select data arrays from the input data object."></a> | `:::py NumberOfInputArrayChoices = 1`| ❌ | ✅ |
-| `InputArrayLabels` | <a class="md-footer-social__link fa fa-info-circle" title="This is an optional list of str display names for the input arrays if you specified to have one or more in NumberOfInputArrayChoices"></a>| `:::py InputArrayLabels = ['Input Array']`| ❌ | ✅ |
+| `NumberOfInputArrayChoices` | <a class="md-footer-social__link fa fa-info-circle" title="Specify the number of input array choices you would like to have for the filter. This enables a drop-down menu for the user to select data arrays from the input data object. If your filter has more than one input port, then specify this as a list of ints (each int in the list represents how many array choices to have from the port of that index.)"></a> | `:::py NumberOfInputArrayChoices = 1`| ❌ | ✅ |
+| `InputArrayLabels` | <a class="md-footer-social__link fa fa-info-circle" title="This is an optional list of str display names for the input arrays if you specified to have one or more in NumberOfInputArrayChoices. If your filter has more than one input port, then specify this as a list of lists of strings."></a>| `:::py InputArrayLabels = ['Input Array']`| ❌ | ✅ |
 | `ExtraXml`  | <a class="md-footer-social__link fa fa-info-circle" title="Any extra XML GUI components you might like to add to the plugin that are not incorporated in the build script. See the link for more info on possible features to add."></a><a href="https://www.paraview.org/Wiki/ParaView/Plugin_HowTo" class="md-footer-social__link fa fa-link" title="See this webpage for more info on possible XML features to add."></a>| `:::py ExtraXml = ''`| ✅ | ✅ |
 | `FileSeries` | <a class="md-footer-social__link fa fa-info-circle" title="A boolean to control whether or not you want to use file series on a reader plugin. Defaults to True"></a> | `:::py FileSeries = True` | ✅ | ❌ |
 
@@ -92,18 +92,17 @@ This method is where all of the main processing should occur. It constructs the 
     ```py
     # Example for a READER
     def RequestData(self):
-        from PVGeo.read import getTimeStepFileIndex
-
+        from PVGeo._helpers import getTimeStepFileIndex
+        pdo = self.GetOutput() # VTK Data Type specified in `OutputDataType`
         # This finds the index for the FileNames for the requested timestep
         i = getTimeStepFileIndex(self, FileNames, dt=Time_Step)
 
         """If you specifically do not want the ability to read time series
         Then delete the above code know that a list of file names will be given in the parameter `FileNames` which you can iterate over. """
         # --------------------- #
-        pdo = self.GetOutput() # VTK Data Type specified in `OutputDataType`
+        # Now fill in your processing for what you would like to do
         # Generate Output Below
         if Print_File_Names:
-            # NOTE: FileNames is accessible here for READERS
             print(FileNames[i])
 
     ```
@@ -112,11 +111,12 @@ This method is where all of the main processing should occur. It constructs the 
     ```py
     # Example for a FILTER
     def RequestData(self):
-        import PVGeo.helpers as inputhelp
-        # Here we grab the input and output data objects.
-        pdi = self.GetInput() # VTK Data Type specified in `InputDataType`
-        pdo = self.GetOutput() # VTK Data Type specified in `OutputDataType`
-
+        import PVGeo._helpers as inputhelp
+        pdi = self.GetInput() # VTK Data Type
+        pdo = self.GetOutput() # VTK Data Type
+        # Get input array info (selection made in drop down menu)
+        name = inputhelp.getSelectedArrayName(self, 0)
+        field = inputhelp.getSelectedArrayField(self, 0)
         # --------------------- #
         # Now fill in your processing for what you would like to do
         if test_bool:
@@ -134,11 +134,11 @@ This method is where we set metadata about the output of the plugin. Use if you 
     # Example for a READER
     def RequestInformation(self):
         from paraview import util
-        from PVGeo.read import setOutputTimesteps
+        from PVGeo._helpers import setOutputTimesteps
         # This is necessary to set time steps
         setOutputTimesteps(self, FileNames, dt=Time_Step)
         # Here's an example of setting extents that might be necessary for plugin to function correctly:
-        # Get nx,ny,nz from input file somehow
+        # TODO: Get nx,ny,nz from input file somehow
         util.SetOutputWholeExtent(self, [0,nx-1, 0,ny-1, 0,nz-1])
     ```
 
