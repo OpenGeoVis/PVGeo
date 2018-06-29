@@ -13,13 +13,13 @@ google_analytics:
 
 extra:
   disqus: 'pvgeo'
-  social: # check https://fontawesome.com/ for more icons
+  social: # check https://fontawesome.com/icons?d=gallery for more icons
+    - type: 'slack'
+      link: 'http://slack.pvgeo.org'
     - type: 'github'
-      link: 'https://github.com/banesullivan'
-    - type: 'linkedin'
-      link: 'https://linkedin.com/in/bane-sullivan'
-    - type: 'address-card'
-      link: 'http://banesullivan.com'
+      link: 'https://github.com/OpenGeoVis'
+    - type: 'envelope'
+      link: 'mailto:info@pvgeo.org'
 
 theme:
     name: material
@@ -31,13 +31,16 @@ theme:
     custom_dir: custom_theme
     favicon: 'img/globe_small.png'
     logo: 'img/globe_small.png'
+
 extra_css:
     - stylesheets/extra.css
 
 
 markdown_extensions:
-    - include-import # custom docs include docs or script extension
-    - download-button # Adds ability to have full width download buttons
+    # Make sure parent directory is in pyhton path when building docs
+    - download_button # Adds ability to have full width download buttons
+    - include_import # custom docs include docs or script extension
+
     - smarty
     - toc:
         permalink: true
