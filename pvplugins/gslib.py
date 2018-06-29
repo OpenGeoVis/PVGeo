@@ -20,7 +20,7 @@ class PVGeoGSLibReader(GSLibReader):
         GSLibReader.__init__(self)
 
     #### Seters and Geters ####
-    # @smproperty.stringvector(name="FileNames", panel_visibility="adcanced")
+    # @smproperty.stringvector(name="FileNames", panel_visibility="advanced")
     # @smdomain.filelist()
     # @smhint.filechooser(extensions="sgems dat geoeas gslib GSLIB txt SGEMS", file_description="GSLib Tables")
     @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))

@@ -43,6 +43,8 @@ class ReaderBase(VTKPythonAlgorithmBase):
 
 
     #### Seters and Geters ####
+
+
     def SetTimeSteps(self,timesteps):
         """Only use this internally"""
         self.__timesteps = timesteps
@@ -60,6 +62,8 @@ class ReaderBase(VTKPythonAlgorithmBase):
         self.__fileNames = []
 
     def AddFileName(self, fname):
+        if fname is None:
+            return # do nothing if None is passed by a constructor on accident
         if isinstance(fname, list):
             for f in fname:
                 self.AddFileName(f)
