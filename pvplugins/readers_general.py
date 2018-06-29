@@ -30,7 +30,7 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
 
 
 
-    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="adcanced")
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, timeStep):
         PackedBinariesReader.SetTimeDelta(self, timeStep)
 
@@ -73,7 +73,7 @@ class PVGeoMadagascarReader(MadagascarReader):
 
 
 
-    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="adcanced")
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, timeStep):
         MadagascarReader.SetTimeDelta(self, timeStep)
 
@@ -115,7 +115,7 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 
 
 
-    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="adcanced")
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, timeStep):
         DelimitedTextReader.SetTimeDelta(self, timeStep)
 
@@ -157,7 +157,7 @@ class PVGeoXYZTextReader(XYZTextReader):
 
 
 
-    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="adcanced")
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, timeStep):
         DelimitedTextReader.SetTimeDelta(self, timeStep)
 
