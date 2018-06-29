@@ -49,6 +49,11 @@ class PVGeoGSLibReader(GSLibReader):
     def SetTimeDelta(self, dt):
         GSLibReader.SetTimeDelta(self, dt)
 
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return GSLibReader.GetTimestepValues(self)
+
 
 ###############################################################################
 
@@ -86,3 +91,8 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, dt):
         SGeMSGridReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return SGeMSGridReader.GetTimestepValues(self)

@@ -74,7 +74,7 @@ class DelimitedTextReader(ReaderBase):
         # Get output:
         output = vtk.vtkTable.GetData(outInfo)
         # Get requested time index
-        i = self._GetRequestedTime(outInfo)
+        i = _helpers.GetRequestedTime(self, outInfo)
         # Perform Read
         fileLines = self._GetFileLines(idx=i)
         titles, fileLines = self._ExtractHeader(fileLines)

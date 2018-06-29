@@ -20,37 +20,23 @@ class ReaderBase(VTKPythonAlgorithmBase):
         self.__fileNames = []
 
 
-    def _GetRequestedTime(self, outInfo, idx=0):
-        # USAGE: i = self._GetRequestedTime(outInfo)
-        executive = self.GetExecutive()
-        timesteps = self.__timesteps
-        outInfo = outInfo.GetInformationObject(idx)
-        if timesteps is None or len(timesteps) == 0:
-            return 0
-        elif outInfo.Has(executive.UPDATE_TIME_STEP()) and len(timesteps) > 0:
-            utime = outInfo.Get(executive.UPDATE_TIME_STEP())
-            return np.argmin(np.abs(timesteps - utime))
-        else:
-            # if we cant match the time, give first
-            assert(len(timesteps) > 0)
-            return 0
+    def _GetTimeSteps(self):
+        return self.__timesteps.tolist() if self.__timesteps is not None else None
 
+    def _UpdateTimeSteps(self):
+        """for internal use only"""
+        self.__timesteps = _helpers.UpdateTimesteps(self, self.__fileNames, self.__dt)
 
     def RequestInformation(self, request, inInfo, outInfo):
-        self.__timesteps = _helpers.UpdateTimesteps(self, self.__fileNames, self.__dt)
+        self._UpdateTimeSteps()
         return 1
 
 
     #### Seters and Geters ####
 
-
-    def SetTimeSteps(self, timesteps):
-        """Only use this internally"""
-        self.__timesteps = timesteps
-        self.Modified()
-
-    def GetTimeSteps(self):
-        return self.__timesteps
+    def GetTimestepValues(self):
+        """Use this in ParaView decorator to register timesteps"""
+        return self._GetTimeSteps()
 
     def SetTimeDelta(self, dt):
         """An advanced property for the time step in seconds."""

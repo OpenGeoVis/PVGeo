@@ -58,7 +58,7 @@ class PackedBinariesReader(ReaderBase):
         # Get output:
         output = vtk.vtkTable.GetData(outInfo)
         # Get requested time index
-        i = self._GetRequestedTime(outInfo)
+        i = _helpers.GetRequestedTime(self, outInfo)
         arr = self._ReadRawFile(idx=i)
         data = self._ConvertArray(arr)
         output.AddColumn(data)

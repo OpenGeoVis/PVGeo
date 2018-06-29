@@ -95,7 +95,14 @@ class ManySlicesAlongPoints(_SliceBase):
             nInputPorts=2, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid')
 
-
+    # CRITICAL for multiple input ports
+    def FillInputPortInformation(self, port, info):
+        """This simply makes sure the user selects the correct inputs"""
+        typ = 'vtkDataSet'
+        if port == 0:
+            typ = 'vtkPolyData' # Make sure points are poly data
+        info.Set(self.INPUT_REQUIRED_DATA_TYPE(), typ)
+        return 1
 
     def _ManySlicesAlongPoints(self, pdipts, pdidata, pdo):
         from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
@@ -129,8 +136,8 @@ class ManySlicesAlongPoints(_SliceBase):
 
     def RequestData(self, request, inInfo, outInfo):
         # Get input/output of Proxy
-        pdipts = self.GetInputData(inInfo, 0, 0)
-        pdidata = self.GetInputData(inInfo, 1, 0)
+        pdipts = self.GetInputData(inInfo, 0, 0) # Port 0: points
+        pdidata = self.GetInputData(inInfo, 1, 0) # Port 1: sliceable data
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
         self._ManySlicesAlongPoints(pdipts, pdidata, pdo)

@@ -14,6 +14,8 @@ from .. import _helpers
 
 
 class ReverseImageDataAxii(VTKPythonAlgorithmBase):
+    """This filter will flip ImageData on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data.
+    TODO: This currently only flips PointData (no CellData)"""
     def __init__(self):
         VTKPythonAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
