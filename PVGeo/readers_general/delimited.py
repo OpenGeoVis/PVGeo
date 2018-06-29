@@ -58,7 +58,7 @@ class DelimitedTextReader(ReaderBase):
             titles = fileLines[idx].split(self._GetDeli())
             idx += 1
         else:
-            cols = len(fileLines[idx+skiprows].split(self._GetDeli()))
+            cols = len(fileLines[idx].split(self._GetDeli()))
             titles = []
             for i in range(cols):
                 titles.append('Field %d' % i)
@@ -107,6 +107,15 @@ class DelimitedTextReader(ReaderBase):
         if identifier != self.__comments:
             self.__comments = identifier
             self.Modified()
+
+    def SetHasTitles(self, flag):
+        """A boolean for if the delimited file has header titles for the data arrays."""
+        if self.__hasTitles != flag:
+            self.__hasTitles = flag
+            self.Modified()
+
+    def GetHasTitles(self):
+        return self.__hasTitles
 
 
 
