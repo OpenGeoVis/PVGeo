@@ -1,3 +1,4 @@
-from .lat_lon import *
+from .tables import *
+from .xyz import *
 from .poly import *
-from .grid_maker import *
+from .voxelize import *

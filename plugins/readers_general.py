@@ -12,6 +12,10 @@ from PVGeo import _helpers
 from PVGeo.readers_general import PackedBinariesReader, MadagascarReader
 from PVGeo.readers_general import DelimitedTextReader, XYZTextReader
 
+
+###############################################################################
+
+
 PACKED_EXTS = 'bin H@ npz rsf@'
 PACKED_DESC = 'Packed Binaries Reader'
 
@@ -52,7 +56,7 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
         PackedBinariesReader.SetDataName(self, dataName)
 
 
-#########
+###############################################################################
 
 
 MADAGASCAR_EXTS = 'bin H@ rsf rsf@'
@@ -94,7 +98,10 @@ class PVGeoMadagascarReader(MadagascarReader):
     def SetDataName(self, dataName):
         MadagascarReader.SetDataName(self, dataName)
 
-#########
+
+
+###############################################################################
+
 
 DELIMITED_EXTS = 'text txt dat csv tsv'
 DELIMITED_DESC = 'Delimited Text Files'
@@ -136,7 +143,9 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
         DelimitedTextReader.SetComments(self, identifier)
 
 
-###
+
+###############################################################################
+
 
 XYZ_EXTS = 'xyz text txt dat csv tsv'
 XYZ_DESC = 'XYZ Delimited Text Files where header has comma delimiter.'

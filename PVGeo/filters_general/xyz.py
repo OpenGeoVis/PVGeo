@@ -10,7 +10,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 from .. import _helpers
 
 
-
+###############################################################################
 #---- LatLon to Cartesian ----#
 def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None):
     # TODO: This is very poorly done
