@@ -31,8 +31,8 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, timeStep):
-        PackedBinariesReader.SetTimeDelta(self, timeStep)
+    def SetTimeDelta(self, dt):
+        PackedBinariesReader.SetTimeDelta(self, dt)
 
     @smproperty.xml(_helpers.getDropDownXml('Endian','SetEndian',
         ['Native', 'Little-Endian', 'Big-Endian'],
@@ -74,8 +74,8 @@ class PVGeoMadagascarReader(MadagascarReader):
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, timeStep):
-        MadagascarReader.SetTimeDelta(self, timeStep)
+    def SetTimeDelta(self, dt):
+        MadagascarReader.SetTimeDelta(self, dt)
 
     @smproperty.xml(_helpers.getDropDownXml('Endian','SetEndian',
         ['Native', 'Little-Endian', 'Big-Endian'],
@@ -116,8 +116,8 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, timeStep):
-        DelimitedTextReader.SetTimeDelta(self, timeStep)
+    def SetTimeDelta(self, dt):
+        DelimitedTextReader.SetTimeDelta(self, dt)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):
@@ -158,8 +158,8 @@ class PVGeoXYZTextReader(XYZTextReader):
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, timeStep):
-        DelimitedTextReader.SetTimeDelta(self, timeStep)
+    def SetTimeDelta(self, dt):
+        DelimitedTextReader.SetTimeDelta(self, dt)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):
