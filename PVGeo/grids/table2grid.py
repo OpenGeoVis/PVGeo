@@ -12,8 +12,11 @@ from .. import _helpers
 
 #---- Table To Grid Stuff ----#
 
+
+
 class TableToGrid(VTKPythonAlgorithmBase):
-    def __init__(self, extent=None):
+    """This filter takes a vtkTable object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a n1 by n2 by n3 vtkImageData structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the vtkTable will represent a data attribute of the vtkImageData formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (d1=z, d2=y, d3=x). When using SEPlib, specify n1 as the number of elements in the Z-direction, n2 as the number of elements in the X-direction, and n3 as the number of elements in the Y-direction (and so on for other parameters)."""
+    def __init__(self, extent=[10, 10, 10]):
         VTKPythonAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkImageData')
@@ -99,7 +102,7 @@ class TableToGrid(VTKPythonAlgorithmBase):
                 idx = (1,0,2)
         return idx
 
-    def tableToGrid(pdi, pdo):
+    def _TableToGrid(self, pdi, ido):
         """
         Converts a table of data arrays to vtkImageData given an extent to reshape that table.
         Each column in the table will be treated as seperate data arrays for the described data space
@@ -107,18 +110,18 @@ class TableToGrid(VTKPythonAlgorithmBase):
         cols = pdi.GetNumberOfColumns()
         rows = pdi.GetColumn(0).GetNumberOfTuples()
 
-        idx = TableToGrid.RefoldIdx(SEPlib=SEPlib, swapXY=swapXY)
+        idx = TableToGrid.RefoldIdx(SEPlib=self.__SEPlib, swapXY=self.__swapXY)
         nx,ny,nz = self.__extent[idx[0]],self.__extent[idx[1]],self.__extent[idx[2]]
         sx,sy,sz = self.__spacing[idx[0]],self.__spacing[idx[1]],self.__spacing[idx[2]]
         ox,oy,oz = self.__origin[idx[0]],self.__origin[idx[1]],self.__origin[idx[2]]
         # make sure dimensions work
         if (nx*ny*nz != rows):
-            raise Exception('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))
+            raise RuntimeError('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))
 
-        pdo.SetDimensions(nx, ny, nz)
-        pdo.SetOrigin(ox, oy, oz)
-        pdo.SetSpacing(sx, sy, sz)
-        pdo.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
+        ido.SetDimensions(nx, ny, nz)
+        ido.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
+        ido.SetOrigin(ox, oy, oz)
+        ido.SetSpacing(sx, sy, sz)
 
         # Add all columns of the table as arrays to the PointData
         for i in range(cols):
@@ -128,18 +131,21 @@ class TableToGrid(VTKPythonAlgorithmBase):
             arr, ext = TableToGrid._refold(arr, self.__extent, SEPlib=self.__SEPlib, order=self.__order, swapXY=self.__swapXY)
             c = nps.numpy_to_vtk(num_array=arr, deep=True)
             c.SetName(name)
-            #pdo.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
-            pdo.GetPointData().AddArray(c)
-            #scal = pdo.GetPointData().GetArray(i)
+            #ido.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
+            # Also, image data is built by points from numrows in table
+            ido.GetPointData().AddArray(c)
+            #scal = ido.GetPointData().GetArray(i)
 
-        return pdo
+        return ido
 
     def RequestData(self, request, inInfo, outInfo):
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
-        pdo = self.GetOutputData(outInfo, 0)
+        ido = self.GetOutputData(outInfo, 0)
         # Perfrom task
-        self._Translate(pdi, pdo)
+        self._TableToGrid(pdi, ido)
+        # TODO: why isn't the ImageData being constructed properly?!
+        print(ido)
         return 1
 
 
@@ -152,9 +158,12 @@ class TableToGrid(VTKPythonAlgorithmBase):
         # Set WHOLE_EXTENT: This is absolutely necessary
         ext = [0,nx-1, 0,ny-1, 0,nz-1]
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
+        print(ext)
+        return 1
 
 
     #### Setters / Getters ####
+
 
     def SetExtent(self, nx, ny, nz):
         if self.__extent != [nx, ny, nz]:

@@ -66,19 +66,19 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoTableToGrid', label='Table to Grid')
+@smproxy.filter(name='PVGeoTableToGrid', label='Table To Grid')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
 class PVGeoTableToGrid(TableToGrid):
-    def __init__(self, extent=None):
+    def __init__(self):
         TableToGrid.__init__(self)
 
 
     #### Setters / Getters ####
 
 
-    @smproperty.intvector(name="Extent", default_values=[1, 1, 1])
+    @smproperty.intvector(name="Extent", default_values=[10, 10, 10])
     def SetExtent(self, nx, ny, nz):
         TableToGrid.SetExtent(self, nx, ny, nz)
 
