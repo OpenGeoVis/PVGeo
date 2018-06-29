@@ -13,7 +13,7 @@ import os
 
 # Import Helpers:
 from ..base import ReaderBase
-from .. import _helpers
+#from .. import _helpers
 
 class wsMesh3DReader(ReaderBase):
     """

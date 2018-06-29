@@ -3,9 +3,6 @@
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import *
 
-import numpy as np
-import vtk
-
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
@@ -32,8 +29,8 @@ class PVGeowsMesh3DReader(wsMesh3DReader):
         wsMesh3DReader.AddFileName(self, fname)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, timeStep):
-        wsMesh3DReader.SetTimeDelta(self, timeStep)
+    def SetTimeDelta(self, dt):
+        wsMesh3DReader.SetTimeDelta(self, dt)
 
     # Plugin specific Parameter decorators:
 
