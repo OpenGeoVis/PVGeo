@@ -41,3 +41,8 @@ class PVGeowsMesh3DReader(wsMesh3DReader):
     @smproperty.doublevector(name="Rotation", default_values=0.0)
     def SetAngle(self, angle):
         wsMesh3DReader.SetAngle(self, angle)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return wsMesh3DReader.GetTimestepValues(self)

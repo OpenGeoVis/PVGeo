@@ -13,7 +13,7 @@ import os
 
 # Import Helpers:
 from ..base import ReaderBase
-#from .. import _helpers
+from .. import _helpers
 
 class wsMesh3DReader(ReaderBase):
     """
@@ -157,9 +157,9 @@ class wsMesh3DReader(ReaderBase):
         # Get output:
         output = vtk.vtkStructuredGrid.GetData(outInfo)
         # Get requested time index
-        idx = self._GetRequestedTime(outInfo)
+        i = _helpers.GetRequestedTime(self, outInfo)
         # Perform Read
-        self._wsMesh3D(self.GetFileNames(idx=idx), output)
+        self._wsMesh3D(self.GetFileNames(idx=i), output)
         return 1
 
 
