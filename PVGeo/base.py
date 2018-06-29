@@ -45,7 +45,7 @@ class ReaderBase(VTKPythonAlgorithmBase):
     #### Seters and Geters ####
 
 
-    def SetTimeSteps(self,timesteps):
+    def SetTimeSteps(self, timesteps):
         """Only use this internally"""
         self.__timesteps = timesteps
         self.Modified()
@@ -53,15 +53,18 @@ class ReaderBase(VTKPythonAlgorithmBase):
     def GetTimeSteps(self):
         return self.__timesteps
 
-    def SetTimeDelta(self,dt):
+    def SetTimeDelta(self, dt):
+        """An advanced property for the time step in seconds."""
         if dt != self.__dt:
             self.__dt = dt
             self.Modified()
 
     def ClearFileNames(self):
+        """Use to clear file names"""
         self.__fileNames = []
 
     def AddFileName(self, fname):
+        """Use to set the file names for the reader. Handles singlt string or list of strings."""
         if fname is None:
             return # do nothing if None is passed by a constructor on accident
         if isinstance(fname, list):
@@ -72,6 +75,7 @@ class ReaderBase(VTKPythonAlgorithmBase):
         self.Modified()
 
     def GetFileNames(self, idx=None):
+        """Returns the list of file names or given and index returns a specified timestep's filename"""
         if idx is None:
             return self.__fileNames
         return self.__fileNames[idx]

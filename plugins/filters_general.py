@@ -16,7 +16,7 @@ from PVGeo.filters_general import * #AddCellConnToPoints, CombineTables
 MENU_CAT = 'PVGeo: General Filters'
 
 
-######################################################################
+###############################################################################
 
 
 # Add Cell Connectivity To Points
@@ -44,7 +44,7 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
 
 
 
-######################################################################
+###############################################################################
 
 
 # Combine Tables
@@ -62,7 +62,7 @@ class PVGeoCombineTables(CombineTables):
 
 
 
-######################################################################
+###############################################################################
 
 # PointsToTube
 @smproxy.filter(name='PVGeoPointsToTube', label='Points To Tube')
@@ -93,7 +93,7 @@ class PVGeoPointsToTube(PointsToTube):
         PointsToTube.SetUseNearestNbr(self, flag)
 
 
-######################################################################
+###############################################################################
 
 
 @smproxy.filter(name='PVGeoReshapeTable', label='Reshape Table')
@@ -129,7 +129,7 @@ class PVGeoReshapeTable(ReshapeTable):
 
 
 
-######################################################################
+###############################################################################
 
 
 @smproxy.filter(name='PVGeoVoxelizePoints', label='Voxelize Points')
@@ -159,6 +159,9 @@ class PVGeoVoxelizePoints(VoxelizePoints):
     @smproperty.doublevector(name="dz", default_values=10.0)
     def SetDeltaZ(self, dz):
         VoxelizePoints.SetDeltaZ(self, dz)
+
+
+###############################################################################
 
 
 @smproxy.filter(name='PVGeoVoxelizePointsFromArrays', label='Voxelize Points from Arrays')
@@ -211,7 +214,8 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         return 1
 
 
-######################################################################
+###############################################################################
+
 # TODO: how do we preserve input/output types?
 # Correlate Arrays
 # @smproxy.filter(name='vtkCorrelateArrays', label='Correlate Arrays')

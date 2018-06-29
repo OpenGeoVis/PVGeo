@@ -58,7 +58,7 @@ class DelimitedTextReader(ReaderBase):
             titles = fileLines[idx].split(self._GetDeli())
             idx += 1
         else:
-            cols = len(fileLines[idx+skiprows].split(self._GetDeli()))
+            cols = len(fileLines[idx].split(self._GetDeli()))
             titles = []
             for i in range(cols):
                 titles.append('Field %d' % i)
@@ -85,17 +85,22 @@ class DelimitedTextReader(ReaderBase):
 
 
     #### Seters and Geters ####
+
+
     def SetDelimiter(self, deli):
+        """The input file's delimiter. To use a tab delimiter please use `SetUseTab()`"""
         if deli != self.__delimiter:
             self.__delimiter = deli
             self.Modified()
 
     def SetUseTab(self, flag):
+        """A boolean to override the SetDelimiter() and use a Tab delimiter."""
         if flag != self.__useTab:
             self.__useTab = flag
             self.Modified()
 
     def SetSkipRows(self, skip):
+        """The integer number of rows to skip at the top of the file"""
         if skip != self.__skipRows:
             self.__skipRows = skip
             self.Modified()
@@ -104,14 +109,25 @@ class DelimitedTextReader(ReaderBase):
         return self.__skipRows
 
     def SetComments(self, identifier):
+        """The character identifier for comments within the file."""
         if identifier != self.__comments:
             self.__comments = identifier
             self.Modified()
+
+    def SetHasTitles(self, flag):
+        """A boolean for if the delimited file has header titles for the data arrays."""
+        if self.__hasTitles != flag:
+            self.__hasTitles = flag
+            self.Modified()
+
+    def GetHasTitles(self):
+        return self.__hasTitles
 
 
 
 
 class XYZTextReader(DelimitedTextReader):
+    """A makeshift reader for XYZ files where titles have comma delimiter and data has space delimiter"""
     def __init__(self):
         DelimitedTextReader.__init__(self)
 

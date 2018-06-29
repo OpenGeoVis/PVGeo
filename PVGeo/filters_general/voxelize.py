@@ -12,6 +12,8 @@ from .. import _helpers
 from ..version import checkNumpy
 
 
+###############################################################################
+
 
 class VoxelizePoints(VTKPythonAlgorithmBase):
     """This makes a vtkUnstructuredGrid of scattered points given voxel sizes as input arrays."""

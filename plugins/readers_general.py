@@ -12,7 +12,11 @@ from PVGeo import _helpers
 from PVGeo.readers_general import PackedBinariesReader, MadagascarReader
 from PVGeo.readers_general import DelimitedTextReader, XYZTextReader
 
-PACKED_EXTS = 'bin H@ npz rsf@'
+
+###############################################################################
+
+
+PACKED_EXTS = 'H@ bin rsf rsf@ HH npz'
 PACKED_DESC = 'Packed Binaries Reader'
 
 @smproxy.reader(name="PVGeoPackedBinariesReader",
@@ -52,10 +56,10 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
         PackedBinariesReader.SetDataName(self, dataName)
 
 
-#########
+###############################################################################
 
 
-MADAGASCAR_EXTS = 'bin H@ rsf rsf@'
+MADAGASCAR_EXTS = 'bin H@ rsf rsf@ HH'
 MADAGASCAR_DESC = 'Madagascar Single Stream RSF Files'
 
 @smproxy.reader(name="PVGeoMadagascarReader",
@@ -94,9 +98,12 @@ class PVGeoMadagascarReader(MadagascarReader):
     def SetDataName(self, dataName):
         MadagascarReader.SetDataName(self, dataName)
 
-#########
 
-DELIMITED_EXTS = 'text txt dat csv tsv'
+
+###############################################################################
+
+
+DELIMITED_EXTS = 'dat csv txt text ascii xyz'
 DELIMITED_DESC = 'Delimited Text Files'
 
 @smproxy.reader(name="PVGeoDelimitedTextReader",
@@ -135,8 +142,14 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
     def SetComments(self, identifier):
         DelimitedTextReader.SetComments(self, identifier)
 
+    @smproperty.xml(_helpers.getPropertyXml(name='Has Titles', command='SetHasTitles', default_values=True, help='A boolean for if the delimited file has header titles for the data arrays.'))
+    def SetHasTitles(self, flag):
+        DelimitedTextReader.SetHasTitles(self, flag)
 
-###
+
+
+###############################################################################
+
 
 XYZ_EXTS = 'xyz text txt dat csv tsv'
 XYZ_DESC = 'XYZ Delimited Text Files where header has comma delimiter.'

@@ -11,6 +11,8 @@ from PVGeo import _helpers
 # Classes to Decorate
 from PVGeo.gslib import GSLibReader, SGeMSGridReader
 
+###############################################################################
+
 @smproxy.reader(name="PVGeoGSLibReader",
        label="PVGeo: GSLib File Format",
        extensions="sgems dat geoeas gslib GSLIB txt SGEMS",
@@ -44,7 +46,7 @@ class PVGeoGSLibReader(GSLibReader):
         GSLibReader.SetComments(self, identifier)
 
 
-##########
+###############################################################################
 
 
 @smproxy.reader(name="PVGeoSGeMSGridReader",
