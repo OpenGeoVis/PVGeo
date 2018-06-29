@@ -300,10 +300,75 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
 
 ###############################################################################
 
+@smproxy.filter(name='PVGeoManySlicesAlongAxis', label='Many Slices Along Axis')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+class PVGeoManySlicesAlongAxis(ManySlicesAlongAxis):
+    def __init__(self):
+        ManySlicesAlongAxis.__init__(self)
+
+    @smproperty.intvector(name="Number of Slices", default_values=5)
+    @smdomain.intrange(min=2, max=100)
+    def SetNumberOfSlices(self, num):
+        ManySlicesAlongAxis.SetNumberOfSlices(self, num)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Axis', command='SetAxis',
+        labels=['X Axis', 'Y Axis', 'Z Axis'],
+        values=[0, 1, 2]))
+    def SetAxis(self, axis):
+        ManySlicesAlongAxis.SetAxis(self, axis)
+
+
+
+###############################################################################
+
+@smproxy.filter(name='PVGeoClipThroughTime', label='Clip Through Time')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+class PVGeoClipThroughTime(ClipThroughTime):
+    def __init__(self):
+        ClipThroughTime.__init__(self)
+
+    @smproperty.intvector(name="Number of Slices", default_values=10)
+    @smdomain.intrange(min=2, max=1000)
+    def SetNumberOfSlices(self, num):
+        ClipThroughTime.SetNumberOfSlices(self, num)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        ClipThroughTime.SetTimeDelta(self, dt)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Axis', command='SetAxis',
+        labels=['X Axis', 'Y Axis', 'Z Axis'],
+        values=[0, 1, 2]))
+    def SetAxis(self, axis):
+        ClipThroughTime.SetAxis(self, axis)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return ClipThroughTime.GetTimestepValues(self)
+
 
 ###############################################################################
 
 
+@smproxy.filter(name='PVGeoManySlicesAlongPoints', label='Many Slices Along Points')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Data Set", port_index=1)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+@smproperty.input(name="Points", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
+    def __init__(self):
+        ManySlicesAlongPoints.__init__(self)
+
+    @smproperty.intvector(name="Number of Slices", default_values=10)
+    @smdomain.intrange(min=2, max=1000)
+    def SetNumberOfSlices(self, num):
+        ManySlicesAlongPoints.SetNumberOfSlices(self, num)
 
 
 ###############################################################################

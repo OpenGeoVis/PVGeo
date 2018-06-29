@@ -2,7 +2,8 @@ __all__ = [
     'getTimeStepFileIndex',
     'setOutputTimesteps',
     # new:
-    'updateTimesteps',
+    'UpdateTimesteps',
+    'GetRequestedTime',
 ]
 
 
@@ -100,11 +101,13 @@ def setOutputTimesteps(algorithm, files, dt=1.0):
 
 ##### New stuf for the conversion
 
-def updateTimesteps(algorithm, outInfo, nt, dt):
+
+def UpdateTimesteps(algorithm, nt, dt):
     if isinstance(nt, list):
         nt = len(nt)
     executive = algorithm.GetExecutive()
-    oi = outInfo.GetInformationObject(0)
+    oi = executive.GetOutputInformation(0)
+    #oi = outInfo.GetInformationObject(0)
     oi.Remove(executive.TIME_STEPS())
     oi.Remove(executive.TIME_RANGE())
     timesteps = np.arange(0, nt*dt, dt, dtype=float)
@@ -113,3 +116,18 @@ def updateTimesteps(algorithm, outInfo, nt, dt):
     oi.Append(executive.TIME_RANGE(), timesteps[0])
     oi.Append(executive.TIME_RANGE(), timesteps[-1])
     return timesteps
+
+def GetRequestedTime(algorithm, outInfo, idx=0):
+    # USAGE: i = _helpers.GetRequestedTime(algorithm, outInfo)
+    executive = algorithm.GetExecutive()
+    timesteps = algorithm.GetTimestepValues()
+    outInfo = outInfo.GetInformationObject(idx)
+    if timesteps is None or len(timesteps) == 0:
+        return 0
+    elif outInfo.Has(executive.UPDATE_TIME_STEP()) and len(timesteps) > 0:
+        utime = outInfo.Get(executive.UPDATE_TIME_STEP())
+        return np.argmin(np.abs(np.array(timesteps) - utime))
+    else:
+        # if we cant match the time, give first
+        assert(len(timesteps) > 0)
+        return 0

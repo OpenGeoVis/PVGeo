@@ -37,8 +37,7 @@ class ReaderBase(VTKPythonAlgorithmBase):
 
 
     def RequestInformation(self, request, inInfo, outInfo):
-        self.__timesteps = _helpers.updateTimesteps(self, outInfo,
-                self.__fileNames, self.__dt)
+        self.__timesteps = _helpers.UpdateTimesteps(self, self.__fileNames, self.__dt)
         return 1
 
 
