@@ -3,7 +3,7 @@ __all__ = [
     'wsMesh3D',
 
     # Both
-    'wsTensorMesh',
+    #TODO: 'wsTensorMesh',
 ]
 
 import numpy as np
@@ -43,7 +43,7 @@ def wsMesh3D(FileName, x0=0.0, y0=0.0, z0=0.0, ang0=0.0, pdo=None):
         if not os.path.isfile(FileName):
             raise IOError('modelFile : {:s}'.format(FileName))
     except Exception as e:
-         raise e
+        raise e
     # Read the model file
     with open(FileName, 'r') as fid:
         fileLines = fid.readlines()
@@ -80,7 +80,7 @@ def wsMesh3D(FileName, x0=0.0, y0=0.0, z0=0.0, ang0=0.0, pdo=None):
         (np.prod(model.shape), 1)
     )
     # Model Array - switch between S/m and Ohm*m
-    VTKArrName ='Ohm*m'
+    VTKArrName = 'Ohm*m'
     modVTKArr = npsup.numpy_to_vtk(mod, deep=1)
     modVTKArr.SetName(VTKArrName)
 
