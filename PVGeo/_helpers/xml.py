@@ -1,6 +1,7 @@
 # This file has a ton of convienance methods for generating extra XML for
 # the pvpluginss
 
+
 def getPythonPathProperty():
     return '''
       <StringVectorProperty
@@ -59,10 +60,11 @@ def getVTKTypeMap():
 
 
 
-def getPropertyXml(name, label, command, value, visibility='default', help=''):
+def getPropertyXml(name, command, default_values, visibility='default', help=''):
     # A helper to build XML for any data type/method
+    value = default_values
 
-    def _propXML(typ, visibility, name, label, command, defaultValues, num, help, extra=''):
+    def _propXML(typ, visibility, name, command, defaultValues, num, help, extra=''):
         return '''
       <%sVectorProperty
         panel_visibility="%s"
@@ -73,7 +75,7 @@ def getPropertyXml(name, label, command, value, visibility='default', help=''):
         number_of_elements="%s">
         %s
         <Documentation>%s</Documentation>
-      </%sVectorProperty>''' % (typ, visibility, name, label, command, defaultValues, num, extra, help, typ)
+      </%sVectorProperty>''' % (typ, visibility, command, name, command, defaultValues, num, extra, help, typ)
 
     if isinstance(value, list):
         num = len(value)
@@ -98,7 +100,7 @@ def getPropertyXml(name, label, command, value, visibility='default', help=''):
     else:
         raise RuntimeError('getPropertyXml(): Unknown property type: %r' % propertyType)
 
-    return _propXML(typ, visibility, name, label, command, defaultValues, num, help, extra)
+    return _propXML(typ, visibility, name, command, defaultValues, num, help, extra)
 
 
 
@@ -262,3 +264,71 @@ def getInputArrayXml(labels=None, nInputPorts=1, numArrays=1, inputNames='Input'
         for j in range(numArrays):
             xml += _helpArraysXml(j, inputName=None, label=labs[j])
         return xml
+
+
+
+
+
+# import inspect
+# import textwrap
+#
+# def escapeForXmlAttribute(s):
+#
+#     # http://www.w3.org/TR/2000/WD-xml-c14n-20000119.html#charescaping
+#     # In character data and attribute values, the character information items "<" and "&" are represented by "&lt;" and "&amp;" respectively.
+#     # In attribute values, the double-quote character information item (") is represented by "&quot;".
+#     # In attribute values, the character information items TAB (#x9), newline (#xA), and carriage-return (#xD) are represented by "&#x9;", "&#xA;", and "&#xD;" respectively.
+#
+#     s = s.replace('&', '&amp;') # Must be done first!
+#     s = s.replace('<', '&lt;')
+#     s = s.replace('>', '&gt;')
+#     s = s.replace('"', '&quot;')
+#     s = s.replace('\r', '&#xD;')
+#     s = s.replace('\n', '&#xA;')
+#     s = s.replace('\t', '&#x9;')
+#     return s
+#
+#
+# def _replaceFunctionWithSourceString(func, allowEmpty=True):
+#
+#     if not func:
+#         if allowEmpty:
+#             namespace[functionName] = ''
+#             return
+#         else:
+#             raise Exception('Function not found.')
+#
+#     # if not inspect.isfunction(func):
+#     #     raise Exception('Object is not a function object.')
+#
+#     lines = inspect.getsourcelines(func)[0]
+#
+#     if len(lines) <= 1:
+#         raise Exception('Function %s must not be a single line of code.' % functionName)
+#
+#     # skip first line (the declaration) and then dedent the source code
+#     sourceCode = textwrap.dedent(''.join(lines[1:]))
+#
+#     return sourceCode
+#
+#
+#
+# def getRequestInfoScriptXml(func):
+#     """For testing only"""
+#     e = escapeForXmlAttribute
+#     rinfo = e(_replaceFunctionWithSourceString(func))
+#     return '''
+#       <StringVectorProperty
+#         name="InformationScript"
+#         label="RequestInformation Script"
+#         command="SetInformationScript"
+#         number_of_elements="1"
+#         default_values="%s"
+#         panel_visibility="advanced">
+#         <Hints>
+#           <Widget type="multi_line" syntax="python"/>
+#         </Hints>
+#         <Documentation>This property is a python script that is executed during
+#         the RequestInformation pipeline pass. Use this to provide information
+#         such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
+#       </StringVectorProperty>''' % rinfo

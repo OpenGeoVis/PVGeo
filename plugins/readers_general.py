@@ -123,7 +123,7 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
     def SetDelimiter(self, deli):
         DelimitedTextReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml('UseTab', 'Use Tab Delimiter', 'SetUseTab', False, help='A boolean to override the Delimiter_Field and use a Tab delimiter.'))
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Tab Delimiter', command='SetUseTab', default_values=False, help='A boolean to override the Delimiter_Field and use a Tab delimiter.'))
     def SetUseTab(self, flag):
         DelimitedTextReader.SetUseTab(self, flag)
 
@@ -165,7 +165,7 @@ class PVGeoXYZTextReader(XYZTextReader):
     def SetDelimiter(self, deli):
         DelimitedTextReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml('UseTab', 'Use Tab Delimiter', 'SetUseTab', False, help='A boolean to override the Delimiter_Field and use a Tab delimiter.'))
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Tab Delimiter', command='SetUseTab', default_values=False, help='A boolean to override the Delimiter_Field and use a Tab delimiter.'))
     def SetUseTab(self, flag):
         DelimitedTextReader.SetUseTab(self, flag)
 
