@@ -38,6 +38,11 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
     def SetTimeDelta(self, dt):
         PackedBinariesReader.SetTimeDelta(self, dt)
 
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return PackedBinariesReader.GetTimestepValues(self)
+
     @smproperty.xml(_helpers.getDropDownXml('Endian','SetEndian',
         ['Native', 'Little-Endian', 'Big-Endian'],
         help='This is the type memory endianness.'))
@@ -71,15 +76,21 @@ class PVGeoMadagascarReader(MadagascarReader):
         MadagascarReader.__init__(self)
 
     #### Seters and Geters ####
+
+
     @smproperty.xml(_helpers.getFileReaderXml(MADAGASCAR_EXTS, readerDescription=MADAGASCAR_DESC))
     def AddFileName(self, fname):
         MadagascarReader.AddFileName(self, fname)
 
 
-
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, dt):
         MadagascarReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return MadagascarReader.GetTimestepValues(self)
 
     @smproperty.xml(_helpers.getDropDownXml('Endian','SetEndian',
         ['Native', 'Little-Endian', 'Big-Endian'],
@@ -126,6 +137,11 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
     def SetTimeDelta(self, dt):
         DelimitedTextReader.SetTimeDelta(self, dt)
 
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return DelimitedTextReader.GetTimestepValues(self)
+
     @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):
         DelimitedTextReader.SetDelimiter(self, deli)
@@ -166,26 +182,31 @@ class PVGeoXYZTextReader(XYZTextReader):
     #### Seters and Geters ####
     @smproperty.xml(_helpers.getFileReaderXml(XYZ_EXTS, readerDescription=XYZ_DESC))
     def AddFileName(self, fname):
-        DelimitedTextReader.AddFileName(self, fname)
+        XYZTextReader.AddFileName(self, fname)
 
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, dt):
-        DelimitedTextReader.SetTimeDelta(self, dt)
+        XYZTextReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return XYZTextReader.GetTimestepValues(self)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):
-        DelimitedTextReader.SetDelimiter(self, deli)
+        XYZTextReader.SetDelimiter(self, deli)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Use Tab Delimiter', command='SetUseTab', default_values=False, help='A boolean to override the Delimiter_Field and use a Tab delimiter.'))
     def SetUseTab(self, flag):
-        DelimitedTextReader.SetUseTab(self, flag)
+        XYZTextReader.SetUseTab(self, flag)
 
     @smproperty.intvector(name="SkipRows", default_values=0)
     def SetSkipRows(self, skip):
-        DelimitedTextReader.SetSkipRows(self, skip)
+        XYZTextReader.SetSkipRows(self, skip)
 
     @smproperty.stringvector(name="Comments", default_values="#")
     def SetComments(self, identifier):
-        DelimitedTextReader.SetComments(self, identifier)
+        XYZTextReader.SetComments(self, identifier)

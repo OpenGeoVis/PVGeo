@@ -118,7 +118,7 @@ def UpdateTimesteps(algorithm, nt, dt):
     return timesteps
 
 def GetRequestedTime(algorithm, outInfo, idx=0):
-    # USAGE: i = _helpers.GetRequestedTime(algorithm, outInfo)
+    """USAGE: i = _helpers.GetRequestedTime(self, outInfo)"""
     executive = algorithm.GetExecutive()
     timesteps = algorithm.GetTimestepValues()
     outInfo = outInfo.GetInformationObject(idx)
