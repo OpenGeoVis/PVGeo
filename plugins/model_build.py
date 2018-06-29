@@ -89,3 +89,17 @@ class PVGeoCreateUniformGrid(CreateUniformGrid):
     @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0, 0.0])
     def SetOrigin(self, x0, y0, z0):
         CreateUniformGrid.SetOrigin(self, x0, y0, z0)
+
+
+###############################################################################
+
+
+@smproxy.source(name='PVGeoEarthSource', label='Create Earth Source')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+class PVGeoEarthSource(EarthSource):
+    def __init__(self):
+        EarthSource.__init__(self)
+
+    @smproperty.doublevector(name="Radius", default_values=6371.0)
+    def SetRadius(self, radius):
+        EarthSource.SetRadius(self, radius)
