@@ -1,5 +1,5 @@
 all = [
-    'CreateOddRectilinearGrid',
+    'CreateTensorMesh',
 ]
 
 import vtk
@@ -11,15 +11,15 @@ from datetime import datetime
 from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
 from .. import _helpers
 
-class CreateOddRectilinearGrid(VTKPythonAlgorithmBase):
+class CreateTensorMesh(VTKPythonAlgorithmBase):
     """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed."""
     def __init__(self):
         VTKPythonAlgorithmBase.__init__(self, nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')
         self.__origin = [-350.0, -400.0, 0.0]
-        self.__xcells = CreateOddRectilinearGrid._ReadCellLine('200 100 50 20*50.0 50 100 200')
-        self.__ycells = CreateOddRectilinearGrid._ReadCellLine('200 100 50 21*50.0 50 100 200')
-        self.__zcells = CreateOddRectilinearGrid._ReadCellLine('20*25.0 50 100 200')
+        self.__xcells = CreateTensorMesh._ReadCellLine('200 100 50 20*50.0 50 100 200')
+        self.__ycells = CreateTensorMesh._ReadCellLine('200 100 50 21*50.0 50 100 200')
+        self.__zcells = CreateTensorMesh._ReadCellLine('20*25.0 50 100 200')
         self.__dataName = 'Data'
 
 
@@ -134,13 +134,13 @@ class CreateOddRectilinearGrid(VTKPythonAlgorithmBase):
             self.Modified()
 
     def SetXCellsStr(self, xcellstr):
-        xcells = CreateOddRectilinearGrid._ReadCellLine(xcellstr)
+        xcells = CreateTensorMesh._ReadCellLine(xcellstr)
         self.SetXCells(xcells)
 
     def SetYCellsStr(self, ycellstr):
-        ycells = CreateOddRectilinearGrid._ReadCellLine(ycellstr)
+        ycells = CreateTensorMesh._ReadCellLine(ycellstr)
         self.SetYCells(ycells)
 
     def SetZCellsStr(self, zcellstr):
-        zcells = CreateOddRectilinearGrid._ReadCellLine(zcellstr)
+        zcells = CreateTensorMesh._ReadCellLine(zcellstr)
         self.SetZCells(zcells)

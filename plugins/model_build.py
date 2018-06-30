@@ -20,6 +20,7 @@ MENU_CAT = 'PVGeo: Model Building'
 
 @smproxy.source(name='PVGeoCreateEvenRectilinearGrid', label='Create Even Rectilinear Grid')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoCreateEvenRectilinearGrid(CreateEvenRectilinearGrid):
     def __init__(self):
         CreateEvenRectilinearGrid.__init__(self)
@@ -46,23 +47,24 @@ class PVGeoCreateEvenRectilinearGrid(CreateEvenRectilinearGrid):
 ###############################################################################
 
 
-@smproxy.source(name='PVGeoCreateOddRectilinearGrid', label='Create Odd Rectilinear Grid')
+@smproxy.source(name='PVGeoCreateTensorMesh', label='Create Tensor Mesh')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
-class PVGeoCreateOddRectilinearGrid(CreateOddRectilinearGrid):
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+class PVGeoCreateTensorMesh(CreateTensorMesh):
     def __init__(self):
-        CreateOddRectilinearGrid.__init__(self)
+        CreateTensorMesh.__init__(self)
 
     @smproperty.stringvector(name="X Cells", default_values='200 100 50 20*50.0 50 100 200')
     def SetXCellsStr(self, xcellstr):
-        CreateOddRectilinearGrid.SetXCellsStr(self, xcellstr)
+        CreateTensorMesh.SetXCellsStr(self, xcellstr)
 
     @smproperty.stringvector(name="Y Cells", default_values='200 100 50 21*50.0 50 100 200')
     def SetYCellsStr(self, ycellstr):
-        CreateOddRectilinearGrid.SetYCellsStr(self, ycellstr)
+        CreateTensorMesh.SetYCellsStr(self, ycellstr)
 
     @smproperty.stringvector(name="Z Cells", default_values='20*25.0 50 100 200')
     def SetZCellsStr(self, zcellstr):
-        CreateOddRectilinearGrid.SetZCellsStr(self, zcellstr)
+        CreateTensorMesh.SetZCellsStr(self, zcellstr)
 
 
 ###############################################################################
@@ -70,6 +72,7 @@ class PVGeoCreateOddRectilinearGrid(CreateOddRectilinearGrid):
 
 @smproxy.source(name='PVGeoCreateUniformGrid', label='Create Uniform Grid')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoCreateUniformGrid(CreateUniformGrid):
     def __init__(self):
         CreateUniformGrid.__init__(self)

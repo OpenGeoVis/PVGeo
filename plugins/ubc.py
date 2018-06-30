@@ -11,80 +11,104 @@ from PVGeo import _helpers
 # Classes to Decorate
 from PVGeo.ubc import *
 
-# # TODO: finish implementing
-# class vtkUBCTensorMeshReader(VTKPythonAlgorithmBase):
-#     def __init__(self):
-#         PVTKPythonAlgorithmBase.__init__(self,
-#             nInputPorts=0,
-#             nOutputPorts=1, outputType='vtkRectilinearGrid')
-#
-#         self.__timeStep = 1.0
-#         # Other Parameters:
-#         self.__MeshFileName = None
-#         self.__ModelFileNames = None
-#         self.__MeshBuilt = False
-#
-#     def _updateModel(output, model):
-#         return None
-#
-#
-#     def RequestData(self, request, inInfo, outInfo):
-#         # Get requested time index
-#         i = _helpers.getTimeStepFileIndex(self, self.GetModelFileNames(), dt=self.GetTimeStep())
-#         output = vtk.vtkRectilinearGrid.GetData(outInfo)
-#         """if not self.__MeshBuilt:
-#             # The mesh file has not been read in yet
-#             ubcTensorMesh(self.__MeshFileName, self.__ModelFileNames[i], pdo=output)
-#         # Read in desired model for time step
-#         else:
-#             model =
-#             placeModelOnMesh(outp, model, dataNm='Data')"""
-#
-#         return 1
-#
-#
-#     def RequestInformation(self, request, inInfo, outInfo):
-#         _helpers.setOutputTimesteps(self, self.GetFileNames(), dt=self.GetTimeStep())
-#         # Now set whole output extent
-#         ext = sgemsExtent(self.GetFileNames(0), deli=self.__delimiter,
-#             useTab=self.__useTab, comments=self.__comments)
-#         info = outInfo.GetInformationObject(0)
-#         # Set WHOLE_EXTENT: This is absolutely necessary
-#         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
-#         return 1
-#
-#
-#     #### Seters and Geters ####
-#
-#     def SetTimeStep(self, timeStep):
-#         if timeStep != self.__timeStep:
-#             self.__timeStep = timeStep
-#             self.Modified()
-#
-#     def GetTimeStep(self):
-#         return self.__timeStep
-#
-#     def SetMeshFileName(self, meshfile):
-#         if type(meshfile) is list or type(meshfile) is tuple:
-#             raise Exception('Tensor Meshes cannot have a varying mesh file.')
-#         if meshfile != self.__FileNameModel:
-#             self.__FileNameModel = meshfile
-#             self.Modified()
-#
-#     def GetMeshFileName(self):
-#         return self.__MeshFileName
-#
-#     def SetModelFileNames(self, fnames):
-#         if type(fnames) is not list and type(fnames) is not tuple:
-#             fnames = [fnames]
-#         if fnames != self.__fileNames:
-#             self.__ModelFileNames = fnames
-#             self.Modified()
-#
-#     def GetModelFileNames(self, idx=None):
-#         if idx is None:
-#             return self.__ModelFileNames
-#         return self.__ModelFileNames[idx]
+#### GLOBAL VARIABLES ####
+MENU_CAT = 'PVGeo: UBC Mesh Tools'
+
+MESH_EXTS = 'mesh msh dat txt'
+TMESH_DESC = 'PVGeo: UBC Mesh 2D/3D Two-File Format'
+
+
+@smproxy.reader(name="PVGeoUBCTensorMeshReader",
+       label="PVGeo: UBC Tensor Mesh Reader",
+       extensions=MESH_EXTS,
+       file_description=TMESH_DESC)
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+class PVGeoUBCTensorMeshReader(ubcTensorMeshReader):
+    def __init__(self):
+        ubcTensorMeshReader.__init__(self)
+
+
+    #### Seters and Geters ####
+
+    @smproperty.xml('''
+        <StringVectorProperty
+            panel_visibility="advanced"
+            name="MeshFile"
+            label="File Name Mesh"
+            command="SetMeshFileName"
+            animateable="1"
+            clean_command="ClearMeshFileName"
+            number_of_elements="1">
+            <FileListDomain name="meshfile"/>
+            <Documentation>This is the mesh file for a 2D or 3D UBC Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
+        </StringVectorProperty>''')
+    def SetMeshFileName(self, fname):
+        ubcTensorMeshReader.SetMeshFileName(self, fname)
+
+    @smproperty.xml('''
+        <StringVectorProperty
+          panel_visibility="default"
+          name="ModelFiles"
+          label="File Name(s) Model"
+          command="AddModelFileName"
+          animateable="1"
+          repeat_command="1"
+          clean_command="ClearModelFileNames"
+          number_of_elements="1">
+          <FileListDomain name="modelfiles"/>
+          <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
+        </StringVectorProperty>''')
+    def AddModelFileName(self, fname):
+        """Use to set the file names for the reader. Handles singlt string or list of strings."""
+        ubcTensorMeshReader.AddModelFileName(self, fname)
+
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        ubcTensorMeshReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return ubcTensorMeshReader.GetTimestepValues(self)
+
+    @smproperty.stringvector(name='DataName', default_values='Data')
+    def SetDataName(self, name):
+        ubcTensorMeshReader.SetDataName(self, name)
+
+@smproxy.filter(name="PVGeoUBCTensorMeshAppender",
+       label="Append Model To Tensor Mesh")
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
+class PVGeoUBCTensorMeshAppender(ubcTensorMeshAppender):
+    """This assumes the input vtkRectilinearGrid has already handled the timesteps"""
+    def __init__(self):
+        ubcTensorMeshAppender.__init__(self)
+
+    @smproperty.xml('''
+        <StringVectorProperty
+          panel_visibility="default"
+          name="ModelFiles"
+          label="File Name(s) Model"
+          command="AddModelFileName"
+          animateable="1"
+          repeat_command="1"
+          clean_command="ClearModelFileNames"
+          number_of_elements="1">
+          <FileListDomain name="modelfiles"/>
+          <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
+        </StringVectorProperty>''')
+    def AddModelFileName(self, fname):
+        """Use to set the file names for the reader. Handles singlt string or list of strings."""
+        ubcTensorMeshAppender.AddModelFileName(self, fname)
+
+    @smproperty.stringvector(name='DataName', default_values='Appended Data')
+    def SetDataName(self, name):
+        ubcTensorMeshAppender.SetDataName(self, name)
+
+
 
 
 #------------------------------------------------------------------------------
