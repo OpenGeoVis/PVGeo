@@ -133,11 +133,11 @@ def getFileReaderXml(extensions, readerDescription='', command="AddFileName"):
             <Documentation>
             Available timestep values.
             </Documentation>
-        </DoubleVectorProperty>
-        <Hints>
+      </DoubleVectorProperty>
+      <Hints>
             <ReaderFactory extensions="%s"
                     file_description="%s" />
-        </Hints>''' % (command, extensions, readerDescription)
+      </Hints>''' % (command, extensions, readerDescription)
 
 
 def getDropDownXml(name, command, labels, help='', values=None):

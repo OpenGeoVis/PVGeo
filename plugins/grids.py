@@ -70,6 +70,7 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoTableToGrid(TableToGrid):
     def __init__(self):
         TableToGrid.__init__(self)

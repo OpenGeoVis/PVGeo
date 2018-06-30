@@ -62,6 +62,7 @@ class PVGeoGSLibReader(GSLibReader):
        label="PVGeo: SGeMS Grid Reader",
        extensions="dat gslib sgems SGEMS",
        file_description="SGeMS Uniform Grid")
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoSGeMSGridReader(SGeMSGridReader):
     def __init__(self):
         SGeMSGridReader.__init__(self)
