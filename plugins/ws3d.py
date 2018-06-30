@@ -16,6 +16,7 @@ WS3D_DESC = 'The WS3D Format' # TODO: Description of this format for GUI
        label="PVGeo: WS3D Reader",
        extensions=WS3D_EXTS,
        file_description=WS3D_DESC)
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeowsMesh3DReader(wsMesh3DReader):
     def __init__(self):
         wsMesh3DReader.__init__(self)
