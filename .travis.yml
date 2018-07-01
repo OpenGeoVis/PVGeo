@@ -8,7 +8,19 @@ sudo: false
 
 # command to install dependencies
 install:
-  - pip install -r requirements.txt
+    - pip install -r requirements.txt
 
 script:
     - python -m PVGeo test
+
+notifications:
+    slack:
+        on_success: never
+        on_failure: always
+        rooms:
+            - pvgeo:m3aUlu4IVCCVrPnbTuX1C3J5#developers
+    email:
+        recipients:
+            - info@pvgeo.org
+        on_success: never # default: change
+        on_failure: never # default: always # Letting slack be the place for notifications
