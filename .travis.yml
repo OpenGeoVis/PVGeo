@@ -15,7 +15,8 @@ script:
 
 notifications:
     slack:
-        on_success: always
+        on_success: never
+        on_failure: always
         rooms:
             - pvgeo:m3aUlu4IVCCVrPnbTuX1C3J5#developers
     email:
