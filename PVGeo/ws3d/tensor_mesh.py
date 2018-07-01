@@ -166,12 +166,6 @@ class wsMesh3DReader(ReaderBase):
     #### Seters and Geters ####
 
 
-    def SetOrigin(self, x0, y0, z0):
-        self.__x0 = x0
-        self.__y0 = y0
-        self.__z0 = z0
-        self.Modified() # Lets VTK/ParaView/Parent Classes know the algroithm was updated
-
     def GetOrigin(self):
         return (self.__x0, self.__y0, self.__z0)
 
@@ -194,3 +188,8 @@ class wsMesh3DReader(ReaderBase):
         if self.__z0 != z0:
             self.__z0 = z0
             self.Modified()
+
+    def SetOrigin(self, x0, y0, z0):
+        self.SetX0(x0)
+        self.SetY0(y0)
+        self.SetZ0(z0)
