@@ -2,7 +2,7 @@ __all__ = [
     'test',
 ]
 
-def test():
+def test(close=False):
     """
     @desc: This is a convienance method to run all of the tests in `PVGeo`.
 
@@ -32,14 +32,16 @@ def test():
     suites = [unittest.defaultTestLoader.loadTestsFromName(str) for str
               in module_strings]
     testSuite = unittest.TestSuite(suites)
-    unittest.TextTestRunner(verbosity=2).run(testSuite)
-    return None
+    run = unittest.TextTestRunner(verbosity=2).run(testSuite)
+    if close:
+        exit(len(run.failures) > 0 or len(run.errors) > 0)
+    return run
 
 
 if __name__ == '__main__':
     import sys
     arg = sys.argv[1]
     if arg.lower() == 'test':
-        test()
+        test(True)
     else:
         raise RuntimeError('Unknown argument: %s' % arg)
