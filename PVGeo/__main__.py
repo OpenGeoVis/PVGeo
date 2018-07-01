@@ -19,10 +19,16 @@ def test():
     ```
     """
     import unittest
-    import glob
-    test_file_strings = glob.glob('**/__test__.py', recursive=True)
+    import fnmatch
+    import os
+    path = os.path.dirname(__file__) # path to remove
+    path = path[0:path.rfind('/')]
+    test_file_strings = []
+    for root, dirnames, filenames in os.walk(os.path.dirname(__file__)):
+        for filename in fnmatch.filter(filenames, '__test__.py'):
+            test_file_strings.append(os.path.join(root, filename).replace(path, ''))
     # Remove extensions and change to module import syle
-    module_strings = [str[0:len(str)-3].replace('/', '.') for str in test_file_strings]
+    module_strings = [str[1:len(str)-3].replace('/', '.') for str in test_file_strings]
     suites = [unittest.defaultTestLoader.loadTestsFromName(str) for str
               in module_strings]
     testSuite = unittest.TestSuite(suites)
