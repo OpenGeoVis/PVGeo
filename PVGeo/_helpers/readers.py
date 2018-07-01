@@ -22,7 +22,24 @@ def _getVTKtype(typ):
     @notes:
     Types are specified in vtkType.h
     """
-    return nps.get_vtk_array_type(typ)
+    typ = nps.get_vtk_array_type(typ)
+    if typ is 3:
+        return 13
+    return typ
+
+def _converStringArray(arr):
+    vtkarr = vtk.vtkStringArray()
+    for val in arr:
+        vtkarr.InsertNextValue(val)
+    return vtkarr
+
+def _convertArray(arr):
+    typ = _getVTKtype(arr.dtype)
+    if typ is 13:
+        VTK_data = _converStringArray(arr)
+    else:
+        VTK_data = nps.numpy_to_vtk(num_array=arr, deep=True, array_type=typ)
+    return VTK_data
 
 
 def _placeArrInTable(ndarr, titles, pdo):
@@ -50,8 +67,7 @@ def _placeArrInTable(ndarr, titles, pdo):
     cols = np.shape(ndarr)[1]
 
     for i in range(cols):
-        typ = _getVTKtype(ndarr[:,i].dtype)
-        VTK_data = nps.numpy_to_vtk(num_array=ndarr[:,i], deep=True, array_type=typ)
+        VTK_data = _convertArray(ndarr[:,i])
         VTK_data.SetName(titles[i])
         pdo.AddColumn(VTK_data)
     return pdo
@@ -71,17 +87,15 @@ def _getdTypes(dtype='', endian=None):
         endian = ''
     # Get numpy and VTK data types and return them both
     if dtype is 'd':
-        dtype = np.dtype('%sd'%endian) # DOUBLE
         vtktype = vtk.VTK_DOUBLE
     elif dtype is 'f':
-        dtype = np.dtype('%sf'%endian) # FLOAT
         vtktype = vtk.VTK_FLOAT
     elif dtype is 'i':
-        dtype = np.dtype('%si'%endian) # INTEGER
         vtktype = vtk.VTK_INT
     else:
-        raise Exception('dtype \'%s\' unknown/.' % dtype)
+        raise Exception('dtype \'%s\' unknown:' % dtype)
     # Return data types
+    dtype = np.dtype('%s%s' % (endian, dtype))
     return dtype, vtktype
 
 
