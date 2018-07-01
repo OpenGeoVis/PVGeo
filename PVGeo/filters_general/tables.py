@@ -3,6 +3,9 @@ __all__ = [
     'ReshapeTable',
 ]
 
+import numpy as np
+from vtk.util import numpy_support as nps
+from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
 from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
 from .. import _helpers
@@ -84,17 +87,17 @@ class ReshapeTable(VTKPythonAlgorithmBase):
             self.__names = ['Field %d' % i for i in range(self.__ncols)]
 
         # Make a 2D numpy array and fill with data from input table
-        data = np.empty((cols,rows))
+        data = np.empty((rows,cols))
         for i in range(cols):
             c = pdi.GetColumn(i)
-            data[i] = nps.vtk_to_numpy(c)
+            data[:,i] = nps.vtk_to_numpy(c)
 
         if ((self.__ncols*self.__nrows) != (cols*rows)):
             raise Exception('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
 
         # Use numpy.reshape() to reshape data NOTE: only 2D because its a table
         # NOTE: column access of this reshape is not contigous
-        data = np.array(np.reshape(data, (self.__nrows,self.__ncols), order=self.__order))
+        data = np.array(np.reshape(data.flatten(), (self.__nrows,self.__ncols), order=self.__order))
         pdo.SetNumberOfRows(self.__nrows)
 
         # Add new array to output table and assign incremental names (e.g. Field0)
@@ -123,9 +126,10 @@ class ReshapeTable(VTKPythonAlgorithmBase):
     #### Seters and Geters ####
 
     def SetNames(self, names):
-        """Set names using a semicolon (;) seperated list"""
+        """Set names using a semicolon (;) seperated string or a list of strings"""
         # parse the names (a semicolon seperated list of names)
-        names = names.split(';')
+        if isinstance(names, str):
+            names = names.split(';')
         if self.__names != names:
             self.__names = names
             self.Modified()
@@ -139,11 +143,15 @@ class ReshapeTable(VTKPythonAlgorithmBase):
         return self.__names
 
     def SetNumberOfColumns(self, ncols):
+        if isinstance(ncols, float):
+            ncols = int(ncols)
         if self.__ncols != ncols:
             self.__ncols = ncols
             self.Modified()
 
     def SetNumberOfRows(self, nrows):
+        if isinstance(nrows, float):
+            nrows = int(nrows)
         if self.__nrows != nrows:
             self.__nrows = nrows
             self.Modified()
