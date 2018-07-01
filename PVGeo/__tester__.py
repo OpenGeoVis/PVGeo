@@ -1,6 +1,9 @@
 __all__ = [
     'test',
 ]
+import unittest
+import fnmatch
+import os
 
 def test(close=False):
     """
@@ -18,18 +21,13 @@ def test(close=False):
     >>> PVGeo.test()
     ```
     """
-    import unittest
-    import fnmatch
-    import os
-    path = os.path.dirname(__file__) # path to remove
-    path = path[0:path.rfind('/')]
     test_file_strings = []
-    for root, dirnames, filenames in os.walk(os.path.dirname(__file__)):
+    for root, dirnames, filenames in os.walk('.'):
         for filename in fnmatch.filter(filenames, '__test__.py'):
-            test_file_strings.append(os.path.join(root, filename).replace(path, ''))
+            test_file_strings.append(os.path.join(root, filename))
     # Remove extensions and change to module import syle
-    module_strings = [str[1:len(str)-3].replace('/', '.') for str in test_file_strings]
-    suites = [unittest.defaultTestLoader.loadTestsFromName(str) for str
+    module_strings = [mod[2:len(mod)-3].replace('/', '.') for mod in test_file_strings]
+    suites = [unittest.defaultTestLoader.loadTestsFromName(mod) for mod
               in module_strings]
     testSuite = unittest.TestSuite(suites)
     run = unittest.TextTestRunner(verbosity=2).run(testSuite)
