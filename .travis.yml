@@ -12,3 +12,10 @@ install:
 
 script:
     - python -m PVGeo test
+
+notifications:
+  email:
+    recipients:
+      - info@pvgeo.org
+    on_success: never # default: change
+    on_failure: always # default: always
