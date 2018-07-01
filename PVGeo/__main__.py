@@ -32,8 +32,7 @@ def test():
     suites = [unittest.defaultTestLoader.loadTestsFromName(str) for str
               in module_strings]
     testSuite = unittest.TestSuite(suites)
-    unittest.TextTestRunner(verbosity=2).run(testSuite)
-    return None
+    return unittest.TextTestRunner(verbosity=2).run(testSuite)
 
 
 if __name__ == '__main__':
