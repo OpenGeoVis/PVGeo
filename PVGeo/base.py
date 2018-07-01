@@ -1,5 +1,6 @@
 all = [
     'ReaderBase',
+    'FilterPreserveTypeBase'
 ]
 
 from . import _helpers
@@ -67,3 +68,19 @@ class ReaderBase(VTKPythonAlgorithmBase):
 
 
 ###############################################################################
+
+
+class FilterPreserveTypeBase(VTKPythonAlgorithmBase):
+    def __init__(self):
+        VTKPythonAlgorithmBase.__init__(self,
+            nInputPorts=1, inputType='vtkDataSet',
+            nOutputPorts=1)
+
+    # THIS IS CRUCIAL to preserve data type through filter
+    def RequestDataObject(self, request, inInfo, outInfo):
+        """Overwritten by subclass to manage data object creation.
+        There is not need to overwrite this class if the output can
+        be created based on the OutputType data member."""
+        self.OutputType = self.GetInputData(inInfo, 0, 0).GetClassName()
+        self.FillOutputPortInformation(0, outInfo.GetInformationObject(0))
+        return 1
