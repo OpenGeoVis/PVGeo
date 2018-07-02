@@ -29,7 +29,7 @@ Welcome to the *PVGeo* website! Through visualization, we can bring value to dat
 Check out the [**Demo Page**](http://demo.pvgeo.org) to see video demos and interactive demos like the scene below. This is an example of three data sets visually integrated using our framework within ParaView then exported to a shareable format. Go ahead, click it and move it around!
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-        <iframe src="http://gpvis.org?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/volc.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        <iframe src="http://viewer.pvgeo.org?fileURL=https://dl.dropbox.com/s/6gxax6fp9muk65e/volc.vtkjs?dl=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
 
