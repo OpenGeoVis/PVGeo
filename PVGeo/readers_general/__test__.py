@@ -175,14 +175,14 @@ class TestXYZTextReader(unittest.TestCase):
     ###########################################
 
     def test_data_aray_titles(self):
-        """Test `XYZTextReader`: check data array names"""
+        """`XYZTextReader`: check data array names"""
         titles = self.header.split(', ')
         for i in range(self.ncols):
             self.assertEqual(self.TABLE.GetColumnName(i), titles[i])
         return
 
     def test_data_fidelity(self):
-        """Test `XYZTextReader`: check data fidelity"""
+        """`XYZTextReader`: check data fidelity"""
         titles = self.header.split(', ')
         for i in range(self.ncols):
             arr = nps.vtk_to_numpy(self.TABLE.GetColumnByName(titles[i]))
@@ -190,7 +190,7 @@ class TestXYZTextReader(unittest.TestCase):
         return
 
     def test_shape(self):
-        """`XYZTextReader`: read a randomly generated data file"""
+        """`XYZTextReader`: data table shape"""
         self.assertEqual(self.TABLE.GetNumberOfRows(), self.nrows)
         self.assertEqual(self.TABLE.GetNumberOfColumns(), self.ncols)
         return
@@ -222,7 +222,7 @@ class TestPackedBinariesReader(unittest.TestCase):
     ###########################################
 
     def test_floats(self):
-        """Test `PackedBinariesReader`: floats"""
+        """`PackedBinariesReader`: floats"""
         # Make data and write out
         dtype = np.dtype('f')
         arr = np.array(np.random.random(self.n), dtype=dtype)
@@ -240,7 +240,7 @@ class TestPackedBinariesReader(unittest.TestCase):
         return
 
     def test_doubles(self):
-        """Test `PackedBinariesReader`: doubles"""
+        """`PackedBinariesReader`: doubles"""
         # Make data and write out
         dtype = np.dtype('d')
         arr = np.array(np.random.random(self.n), dtype=dtype)
@@ -258,7 +258,7 @@ class TestPackedBinariesReader(unittest.TestCase):
         return
 
     def test_ints(self):
-        """Test `PackedBinariesReader`: ints"""
+        """`PackedBinariesReader`: ints"""
         # Make data and write out
         dtype = np.dtype('i')
         arr = np.array(np.random.random(self.n), dtype=dtype)
@@ -296,7 +296,7 @@ class TestPackedBinariesReader(unittest.TestCase):
     #     return
 
     def test_little_endian(self):
-        """Test `PackedBinariesReader`: floats with little-endianness"""
+        """`PackedBinariesReader`: floats with little-endianness"""
         # Make data and write out
         dtype = np.dtype('<f')
         arr = np.array(np.random.random(self.n), dtype=dtype)
@@ -353,7 +353,7 @@ class TestMadagascarReader(unittest.TestCase):
     ###########################################
 
     def test_data_fidelity(self):
-        """Test `MadagascarReader`: Check data fidelity"""
+        """`MadagascarReader`: Check data fidelity"""
         arr = nps.vtk_to_numpy(self.TABLE.GetColumn(0))
         self.assertTrue(np.allclose(self.data, arr))#, rtol=0.0001))
         return
