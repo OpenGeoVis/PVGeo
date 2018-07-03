@@ -187,6 +187,7 @@ ROTATED_TEXT = """326819.497,4407450.636,1287.5
 326923.399,4407591.453,1287.5
 326938.242,4407611.57,1287.5
 326953.086,4407631.686,1287.5"""
+
 ROTATED_POINTS = np.genfromtxt((line.encode('utf8') for line in ROTATED_TEXT.split('\n')), delimiter=',''', dtype=float)
 
 class TestRotationTool(unittest.TestCase):
@@ -256,7 +257,7 @@ class TestVoxelizePoints(unittest.TestCase):
     """
 
     def test_simple_case(self):
-        """Test `VoxelizePoints`: simple case"""
+        """`VoxelizePoints`: simple case"""
         x = np.array([0.0,1.0,0.0])
         y = np.array([0.0,0.0,1.0])
         z = np.array([0.0,0.0,0.0])

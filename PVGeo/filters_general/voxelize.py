@@ -73,7 +73,7 @@ class VoxelizePoints(VTKPythonAlgorithmBase):
             return x, y, z, self.__safe, self.__safe, self.__safe, 0.0
 
         r = RotationTool()
-        x, y, z, dx, dy, angle = r.EstimateAndRotate(x, y, z)
+        xr, yr, zr, dx, dy, angle = r.EstimateAndRotate(x, y, z)
         self.__angle = angle
         uz = np.diff(np.unique(z))
         if len(uz) > 0: dz = np.average(uz)
@@ -81,7 +81,7 @@ class VoxelizePoints(VTKPythonAlgorithmBase):
         self.__dx = dx
         self.__dy = dy
         self.__dz = dz
-        return x, y, z
+        return xr, yr, zr
 
 
     def PointsToGrid(self, xo,yo,zo, dx,dy,dz, grid=None):
@@ -177,7 +177,6 @@ class VoxelizePoints(VTKPythonAlgorithmBase):
         return pdo
 
     def RequestData(self, request, inInfoVec, outInfoVec):
-        self.__info = outInfoVec.GetInformationObject(0)
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfoVec, 0, 0)
         pdo = self.GetOutputData(outInfoVec, 0)
