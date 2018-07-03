@@ -4,10 +4,12 @@ __all__ = [
     'copyArraysToPointData',
     'getArray',
     'addArray',
-    'getSelectedArray'
+    'getSelectedArray',
+    'GetDecimalPlaces'
 ]
 
 import vtk
+import numpy as np
 
 
 def getSelectedArrayName(algorithm, idx):
@@ -96,3 +98,15 @@ def addArray(pdo, field, vtkArray):
     else:
         raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
     return pdo
+
+
+def GetDecimalPlaces(arr, barrier=6):
+    arr = np.array(arr.flatten(), dtype=str)
+    num = 0
+    for val in arr:
+        n = len(str(val).split('.')[1])
+        if n > num:
+            num = n
+    # Now do not let exceed barrier
+    if num > barrier: return barrier
+    return num

@@ -153,15 +153,13 @@ class PVGeoVoxelizePoints(VoxelizePoints):
 
     @smproperty.xml(_helpers.getPropertyXml(name='Estimate Grid Spacing',
         command='SetEstimateGrid', default_values=True,
-        help='A boolean to set whether to try to estimate the proper dx, dy, and dz spacings for a grid on a regular cartesian coordinate system.'))
+        help='A boolean to set whether to try to estimate the proper dx, dy, and dz spacings for a grid on a regular cartesian coordinate system.', visibility='advanced'))
     def SetEstimateGrid(self, flag):
         VoxelizePoints.SetEstimateGrid(self, flag)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Cell Size', command='SetCellSize', default_values=[10.0, 10.0, 10.0], help='The cell size (dx, dy, dz) to use as a default for all generated voxels.'))
+    @smproperty.xml(_helpers.getPropertyXml(name='Cell Size', command='SetCellSize', default_values=[10.0, 10.0, 10.0], help='The cell size (dx, dy, dz) to use as a default for all generated voxels.', visibility='advanced'))
     def SetCellSize(self, dx, dy, dz):
-        VoxelizePoints.SetDeltaX(self, dx)
-        VoxelizePoints.SetDeltaY(self, dy)
-        VoxelizePoints.SetDeltaZ(self, dz)
+        VoxelizePoints.SetDeltas(self, dx, dy, dz)
 
 
 ###############################################################################
@@ -201,9 +199,7 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         dx = _helpers.getArray(wpdi, self.__dx_id[0], self.__dx_id[1])
         dy = _helpers.getArray(wpdi, self.__dy_id[0], self.__dy_id[1])
         dz = _helpers.getArray(wpdi, self.__dz_id[0], self.__dz_id[1])
-        VoxelizePoints.SetDeltaX(self, dx)
-        VoxelizePoints.SetDeltaY(self, dy)
-        VoxelizePoints.SetDeltaZ(self, dz)
+        VoxelizePoints.SetDeltas(self, dx, dy, dz)
         # call parent and make sure EstimateGrid is set to False
         return VoxelizePoints.RequestData(self, request, inInfo, outInfo)
 
@@ -364,6 +360,49 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
     @smdomain.intrange(min=2, max=25)
     def SetNumberOfSlices(self, num):
         ManySlicesAlongPoints.SetNumberOfSlices(self, num)
+
+
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoRotateCoordinates', label='Rotate Coordinates')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
+class PVGeoAddCellConnToPoints(RotateCoordinates):
+    def __init__(self):
+        RotateCoordinates.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.doublevector(name="Rotation Angle", default_values=45.0)
+    @smdomain.doublerange(min=-90.0, max=90.0)
+    def SetRotationDegrees(self, theta):
+        RotateCoordinates.SetRotationDegrees(self, theta)
+
+    @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0], visibility='advanced')
+    def SetOrigin(self, xo, yo):
+        RotateCoordinates.SetOrigin(self, xo, yo)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Corner',
+        command='SetUseCorner', default_values=True,
+        help='Use the corner as the rotation origin.', visibility='advanced'))
+    def SetUseCorner(self, flag):
+        RotateCoordinates.SetUseCorner(self, flag)
+
+
+###############################################################################
+@smproxy.filter(name='PVGeoExtractPoints', label='Extract Points')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
+class PVGeoExtractPoints(ExtractPoints):
+    def __init__(self):
+        ExtractPoints.__init__(self)
 
 
 ###############################################################################
