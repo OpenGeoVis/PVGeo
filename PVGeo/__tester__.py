@@ -5,6 +5,12 @@ import unittest
 import fnmatch
 import os
 
+try:
+    from colour_runner.runner import ColourTextTestRunner as TextTestRunner
+except ImportError:
+    from unittest import TextTestRunner
+
+
 def test(close=False):
     """
     @desc: This is a convienance method to run all of the tests in `PVGeo`.
@@ -30,7 +36,7 @@ def test(close=False):
     suites = [unittest.defaultTestLoader.loadTestsFromName(mod) for mod
               in module_strings]
     testSuite = unittest.TestSuite(suites)
-    run = unittest.TextTestRunner(verbosity=2).run(testSuite)
+    run = TextTestRunner(verbosity=2).run(testSuite)
     if close:
         exit(len(run.failures) > 0 or len(run.errors) > 0)
     return run
