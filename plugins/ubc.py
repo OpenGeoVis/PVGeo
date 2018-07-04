@@ -14,7 +14,7 @@ from PVGeo.ubc import *
 #### GLOBAL VARIABLES ####
 MENU_CAT = 'PVGeo: UBC Mesh Tools'
 
-MESH_EXTS = 'mesh msh dat txt'
+MESH_EXTS = 'mesh msh dat txt text'
 TMESH_DESC = 'PVGeo: UBC Mesh 2D/3D Two-File Format'
 
 
@@ -77,7 +77,7 @@ class PVGeoUBCTensorMeshReader(ubcTensorMeshReader):
         ubcTensorMeshReader.SetDataName(self, name)
 
 @smproxy.filter(name="PVGeoUBCTensorMeshAppender",
-       label="Append Model To Tensor Mesh")
+       label="Append Model To UBC Tensor Mesh")
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -101,7 +101,7 @@ class PVGeoUBCTensorMeshAppender(ubcTensorMeshAppender):
           <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
         </StringVectorProperty>''')
     def AddModelFileName(self, fname):
-        """Use to set the file names for the reader. Handles singlt string or list of strings."""
+        """Use to set the file names for the reader. Handles single string or list of strings."""
         ubcTensorMeshAppender.AddModelFileName(self, fname)
 
     @smproperty.stringvector(name='DataName', default_values='Appended Data')
@@ -109,6 +109,103 @@ class PVGeoUBCTensorMeshAppender(ubcTensorMeshAppender):
         ubcTensorMeshAppender.SetDataName(self, name)
 
 
+
+#------------------------------------------------------------------------------
+# Read OcTree Mesh
+#------------------------------------------------------------------------------
+
+
+@smproxy.reader(name="PVGeoUBCOcTreeMeshReader",
+       label="PVGeo: UBC OcTree Mesh Reader",
+       extensions=MESH_EXTS,
+       file_description='PVGeo: UBC OcTree Mesh')
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+class PVGeoUBCOcTreeMeshReader(ubcOcTreeReader):
+    def __init__(self):
+        ubcOcTreeReader.__init__(self)
+
+
+    #### Seters and Geters ####
+
+    @smproperty.xml('''
+        <StringVectorProperty
+            panel_visibility="advanced"
+            name="MeshFile"
+            label="File Name Mesh"
+            command="SetMeshFileName"
+            animateable="1"
+            clean_command="ClearMeshFileName"
+            number_of_elements="1">
+            <FileListDomain name="meshfile"/>
+            <Documentation>This is the mesh file for a OcTree Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
+        </StringVectorProperty>''')
+    def SetMeshFileName(self, fname):
+        ubcOcTreeReader.SetMeshFileName(self, fname)
+
+    @smproperty.xml('''
+        <StringVectorProperty
+          panel_visibility="default"
+          name="ModelFiles"
+          label="File Name(s) Model"
+          command="AddModelFileName"
+          animateable="1"
+          repeat_command="1"
+          clean_command="ClearModelFileNames"
+          number_of_elements="1">
+          <FileListDomain name="modelfiles"/>
+          <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
+        </StringVectorProperty>''')
+    def AddModelFileName(self, fname):
+        """Use to set the file names for the reader. Handles singlt string or list of strings."""
+        ubcOcTreeReader.AddModelFileName(self, fname)
+
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        ubcOcTreeReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return ubcOcTreeReader.GetTimestepValues(self)
+
+    @smproperty.stringvector(name='DataName', default_values='Data')
+    def SetDataName(self, name):
+        ubcOcTreeReader.SetDataName(self, name)
+
+
+
+@smproxy.filter(name="PVGeoUBCOcTreeAppender",
+       label="Append Model To UBC OcTree Mesh")
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkUnstructuredGrid"], composite_data_supported=False)
+class PVGeoUBCOcTreeAppender(ubcOcTreeAppender):
+    """This assumes the input vtkUnstructuredGrid has already handled the timesteps"""
+    def __init__(self):
+        ubcOcTreeAppender.__init__(self)
+
+    @smproperty.xml('''
+        <StringVectorProperty
+          panel_visibility="default"
+          name="ModelFiles"
+          label="File Name(s) Model"
+          command="AddModelFileName"
+          animateable="1"
+          repeat_command="1"
+          clean_command="ClearModelFileNames"
+          number_of_elements="1">
+          <FileListDomain name="modelfiles"/>
+          <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
+        </StringVectorProperty>''')
+    def AddModelFileName(self, fname):
+        """Use to set the file names for the reader. Handles single string or list of strings."""
+        ubcOcTreeAppender.AddModelFileName(self, fname)
+
+    @smproperty.stringvector(name='DataName', default_values='Appended Data')
+    def SetDataName(self, name):
+        ubcOcTreeAppender.SetDataName(self, name)
 
 
 #------------------------------------------------------------------------------

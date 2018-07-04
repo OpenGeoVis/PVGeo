@@ -100,6 +100,7 @@ class ubcMeshReaderBase(TwoFileReaderBase):
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         TwoFileReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
+        self.__dataname = 'Data'
 
     @staticmethod
     def _ubcMesh2D_part(FileName):
@@ -168,3 +169,35 @@ class ubcMeshReaderBase(TwoFileReaderBase):
             return (0,ne, 0,nn, 0,nz)
         else:
             raise Exception('File format not recognized')
+
+
+    @staticmethod
+    def ubcModel3D(FileName):
+        """
+        @desc:
+        Reads the 3D model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
+
+        @params:
+        FileName : str : The model file name(s) as an absolute path for the input model file in UBC 3D Model Model Format. Also accepts a `list` of string file names.
+
+        @returns:
+        np.array : Returns a NumPy float array that holds the model data read from the file. Use the `placeModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
+        """
+        if type(FileName) is list:
+            out = {}
+            for f in FileName:
+                out[os.path.basename(f)] = ubcTensorMeshReader.ubcModel3D(f)
+            return out
+
+        fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+        data = np.genfromtxt((line.encode('utf8') for line in fileLines), dtype=np.float)
+        return data
+
+
+    def SetDataName(self, name):
+        if self.__dataname != name:
+            self.__dataname = name
+            self.Modified()
+
+    def GetDataName(self):
+        return self.__dataname
