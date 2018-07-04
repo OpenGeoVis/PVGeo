@@ -39,7 +39,7 @@ class wsMesh3DReader(ReaderBase):
 
     """
     def __init__(self, filename=None, x0=0.0, y0=0.0, z0=0.0, angle=0.0):
-        ReaderBase.__init__(self, nOutputPorts=1, outputType='vtkStructuredGrid')
+        ReaderBase.__init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid')
 
         # Parameters:
         self.__x0 = x0
@@ -53,7 +53,7 @@ class wsMesh3DReader(ReaderBase):
     def _wsMesh3D(self, FileName, pdo):
         """
         @desc:
-        This method reads a ws3dinv Mesh file and builds a vtkStructuredGrid with topology
+        This method reads a ws3dinv Mesh file and builds a vtkRectilinearGrid with topology
         and model data.
         Information about the files can be found
             Siripunvaraporn, W.; Egbert, G.; Lenbury, Y. & Uyeshima, M.
@@ -63,10 +63,10 @@ class wsMesh3DReader(ReaderBase):
         @params:
         FileName : str : The mesh filename as an absolute path for the input mesh
             file in ws3dinv Mesh/Model Format.
-        pdo : vtk.vtkStructuredGrid : The output data object
+        pdo : vtk.vtkRectilinearGrid : The output data object
 
         @returns:
-        vtkStructuredGrid : Returns a vtkStructuredGrid generated from the ws3dinv Mesh/Model grid.
+        vtkRectilinearGrid : Returns a vtkRectilinearGrid generated from the ws3dinv Mesh/Model grid.
         Mesh is defined by the input mesh file and does contain data attributes.
 
         """
@@ -125,28 +125,16 @@ class wsMesh3DReader(ReaderBase):
         nodeY = np.cumsum(np.append(np.array([0]), dy)) - y0int
         nodeZ = np.cumsum(np.append(np.array([0]), dz))
         # Make nodal grid
-        # NOTE: Don't fully understand way, but mesh grids need northing,easting,elev in/output to correspond with VTK
+        # NOTE: Don't fully understand way, but mesh grids need northing,easting,elev
+        # in/output to correspond with VTK
         ly, lx, lz = np.meshgrid(nodeY, nodeX, nodeZ)
         # Rotate the nodal grid
-        angRad = np.deg2rad(self.__angle)
-        rot = np.array([
-            [np.cos(angRad), -np.sin(angRad)],
-            [np.sin(angRad), np.cos(angRad)]])
-        nodeRot = np.hstack((
-            lx.T.reshape((np.prod(lx.shape), 1)),
-            ly.T.reshape((np.prod(ly.shape), 1))
-        )).dot(rot)
-        nodCoordGlo = np.hstack(
-            (nodeRot, -lz.T.reshape((np.prod(lz.shape), 1)))
-        ) + np.array([self.__x0, self.__y0, self.__z0])
-        vtkCoordDoub = nps.numpy_to_vtk(nodCoordGlo, deep=1)
-        vtkNodeCoordPts = vtk.vtkPoints()
-        vtkNodeCoordPts.SetData(vtkCoordDoub)
-
-        # Assign to a vts object from passed input
-        pdo.SetDimensions(nx + 1, ny + 1, nz + 1)
-        pdo.SetPoints(vtkNodeCoordPts)
-        pdo.GetCellData().AddArray(modVTKArr)
+        # Set the dims and coordinates for the output
+        pdo.SetDimensions(dim[0],dim[1],dim[2])
+        # Convert to VTK array for setting coordinates
+        pdo.SetXCoordinates(nps.numpy_to_vtk(num_array=cox,deep=True))
+        pdo.SetYCoordinates(nps.numpy_to_vtk(num_array=coy,deep=True))
+        pdo.SetZCoordinates(nps.numpy_to_vtk(num_array=coz,deep=True))
 
         # Return the object
         return pdo
@@ -193,3 +181,70 @@ class wsMesh3DReader(ReaderBase):
         self.SetX0(x0)
         self.SetY0(y0)
         self.SetZ0(z0)
+
+
+def _write_ws3d(file_name, mesh, model):
+    """
+    @desc
+    Function that write a WS3D file from a SimPEG mesh object and model dict.
+
+    :param string file_name: path of the WS3D model file to be written
+    :param discretize.TensorMesh: mesh object
+    :param numpy.ndarray model: Model vector to be writen
+        (has to be resistivity [Ohm*m])
+
+    """
+ @desc:
+        This method reads a ws3dinv Mesh file and builds a vtkStructuredGrid with topology
+        and model data.
+        Information about the files can be found
+            Siripunvaraporn, W.; Egbert, G.; Lenbury, Y. & Uyeshima, M.
+            Three-dimensional magnetotelluric inversion: data-space method
+            Physics of The Earth and Planetary Interiors, 2005, 150, 3-14
+
+        @params:
+        FileName : str : The mesh filename as an absolute path for the input mesh
+            file in ws3dinv Mesh/Model Format.
+        pdo : vtk.vtkStructuredGrid : The output data object
+
+        @returns:
+        vtkStructuredGrid : Returns a vtkStructuredGrid generated from the ws3dinv Mesh/Model grid.
+        Mesh is defined by the input mesh file and does contain data attributes.
+
+    # Small internal help function
+    def write_8_val_per_line(file_id, array):
+        """
+        Function to write cell sizes no more then 8 values per line
+        """
+        for nr, item in enumerate(array):
+            file_id.write('{:2.7E} '.format(item))
+            if not (nr + 1)%8 or nr == array.size - 1:
+                file_id.write('\n')
+    # Error check
+    if mesh.nC != model.size:
+        raise IOError('Given model does not match the size of the mesh')
+    # Read the physical property data
+    mod_mat = mesh.r(model,'CC','CC','M').transpose(1, 0, 2)
+    # The values are listed from the NW-top corner of the internal ref frame, need to flip in order
+    # to be complient with vtk structured grid
+    mod_vec = simpeg.mkvc(mod_mat[::-1, :, ::-1])
+    # Write the model file
+    with open(file_name,'w') as fid:
+        fid.write(
+            '# Model written by simpeg_meshmodel_to_ws3d on {}\n'.format(
+                datetime.datetime.now()))
+        # NOTE: The line indexing is hard coded into the program so if there are additional
+        #  lines it will cause a miss read
+        # NOTE: The WS3D model coord frame is x=j(northing),y=i(easting),z=depth(positive down).
+        #  In order for the grid to be in a cartisian ref frame, with x,y,z obeing the right hand rule
+        #       Globaly x is Easting, y is Northing and z is Elevation(that is positive upwards).
+        fid.write('{:d} {:d} {:d} 0\n'.format(mesh.nCy, mesh.nCx, mesh.nCz))
+        write_8_val_per_line(fid, mesh.hy[::-1])
+        write_8_val_per_line(fid, mesh.hx)
+        write_8_val_per_line(fid, mesh.hz[::-1])
+        # Write the
+        np.savetxt(fid, mod_vec, fmt='%2.7E')
+
+    # Calculate the center location
+    center_loc = mesh.x0 + np.array([np.sum(mesh.hx)/2., np.sum(mesh.hy)/2., np.sum(mesh.hz)])
+    return center_loc
