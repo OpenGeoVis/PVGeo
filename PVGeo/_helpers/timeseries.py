@@ -2,7 +2,7 @@ __all__ = [
     'getTimeStepFileIndex',
     'setOutputTimesteps',
     # new:
-    'UpdateTimesteps',
+    'UpdateTimeSteps',
     'GetRequestedTime',
 ]
 
@@ -102,7 +102,7 @@ def setOutputTimesteps(algorithm, files, dt=1.0):
 ##### New stuf for the conversion
 
 
-def UpdateTimesteps(algorithm, nt, dt):
+def UpdateTimeSteps(algorithm, nt, dt):
     if isinstance(nt, list):
         nt = len(nt)
     executive = algorithm.GetExecutive()

@@ -107,7 +107,7 @@ class DelimitedTextReader(PVGeoReaderBase):
         contents = self._GetFileContents()
         self.__titles, contents = self.__ExtractHeaders(contents)
         self.__data = self.__FileContentsToDataArray(contents)
-        self._SetAsRead()
+        self.NeedToRead(flag=False)
         return 1
 
     #### Methods for accessing the data read in #####
@@ -124,7 +124,7 @@ class DelimitedTextReader(PVGeoReaderBase):
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
         i = _helpers.GetRequestedTime(self, outInfo)
-        if self._NeedToRead():
+        if self.NeedToRead():
             self._ReadUpFront()
         # Generate the data object
         _helpers._placeArrInTable(self._GetRawData(idx=i), self.__titles, output)

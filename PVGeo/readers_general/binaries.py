@@ -63,7 +63,7 @@ class PackedBinariesReader(PVGeoReaderBase):
         """Should not need to be overridden"""
         # Perform Read
         self.__data = self._GetFileContents()
-        self._SetAsRead()
+        self.NeedToRead(flag=False)
         return 1
 
     def _GetRawData(self, idx=0):
@@ -80,7 +80,7 @@ class PackedBinariesReader(PVGeoReaderBase):
     def RequestData(self, request, inInfo, outInfo):
         # Get output:
         output = vtk.vtkTable.GetData(outInfo)
-        if self._NeedToRead():
+        if self.NeedToRead():
             self._ReadUpFront()
         # Get requested time index
         i = _helpers.GetRequestedTime(self, outInfo)
