@@ -4,9 +4,8 @@ all = [
 ]
 
 from .. import _helpers
-
-# Outside Imports:
 from ..base import PVGeoAlgorithmBase
+# Outside Imports:
 import numpy as np
 
 
@@ -20,6 +19,7 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
         self.__timesteps = None
         self.__meshFileName = None # Can only be one!
         self.__modelFileNames = [] # Can be many (single attribute, manytimesteps)
+        self.__needToRead = True
 
 
     def _GetTimeSteps(self):
@@ -31,6 +31,11 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
             return -1
         self.__timesteps = _helpers.UpdateTimesteps(self, self.__modelFileNames, self.__dt)
         return 1
+
+    def Modified(self, readAgain=True):
+        """Call modified if the files needs to be read again again"""
+        self.__needToRead = readAgain
+        PVGeoAlgorithmBase.Modified(self)
 
     def RequestInformation(self, request, inInfo, outInfo):
         self._UpdateTimeSteps()
@@ -57,7 +62,7 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
         """An advanced property for the time step in seconds."""
         if dt != self.__dt:
             self.__dt = dt
-            self.Modified()
+            self.Modified(readAgain=False)
 
     def ClearMeshFileName(self):
         """Use to clear mesh file name"""
