@@ -81,7 +81,7 @@ class TestReshapeTable(unittest.TestCase):
         self.t0 = vtk.vtkTable()
         # Populate the tables
         self.arrs = [None, None, None]
-        self.n = 4
+        self.n = 400
         self.ncols = 2
         self.nrows = int(self.n * len(self.arrs) / self.ncols)
         self.titles = ('Array 0', 'Array 1', 'Array 2')
@@ -206,7 +206,6 @@ class TestRotationTool(unittest.TestCase):
     # ])
 
     def setUp(self):
-        # Create some input tables
         self.RTOL = 0.00001 # As higi as rotation precision can get
         return
 
@@ -245,11 +244,33 @@ class TestRotationTool(unittest.TestCase):
 
 
 
-        # pts = np.array([[-193663.0, 1964850.0, 0.0], [-192847.0, 1963460.0, 0.0]])
-        #print(pts[:,0])
+class TestRotateCoordinates(unittest.TestCase):
+    """
+    Test the `RotateCoordinates` filter
+    """
+    def setUp(self):
+        self.RTOL = 0.00001 # As higi as rotation precision can get
+        x = np.array([0.0,1.0,0.0])
+        y = np.array([0.0,0.0,1.0])
+        z = np.array([0.0,0.0,0.0])
+        x = np.reshape(x, (len(x), -1))
+        y = np.reshape(y, (len(y), -1))
+        z = np.reshape(z, (len(z), -1))
+        self.pts = np.concatenate((x,y,z), axis=1)
+        self.vtkpoints = PointsToPolyData(self.pts)
+        return
+
+    def test_rotation(self):
+        f = RotateCoordinates()
+        f.SetInputDataObject(self.vtkpoints)
+        f.SetRotationDegrees(33.3)
+        f.Update()
+        output = f.GetOutput()
+        self.assertIsNotNone(output)
 
 
 ###############################################################################
+
 
 class TestVoxelizePoints(unittest.TestCase):
     """
@@ -307,8 +328,91 @@ class TestArrayMath(unittest.TestCase):
     Test the `ArrayMath` filter
     """
 
-    def test_(self):
-        self.assertTrue(False)
+    def setUp(self):
+        # Create some input tables
+        self.t0 = vtk.vtkTable()
+        # Populate the tables
+        self.arrs = [None, None]
+        self.n = 400
+        self.titles = ('Array 0', 'Array 1')
+        self.arrs[0] = np.random.random(self.n) # Table 0
+        self.arrs[1] = np.random.random(self.n) # Table 0
+        self.t0.AddColumn(_numToVTK(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(_numToVTK(self.arrs[1], self.titles[1]))
+        return
+
+    def test_get_operations(self):
+        op = ArrayMath.GetOperation('add')
+        self.assertIsNotNone(op)
+        op = ArrayMath.GetOperation('subtract')
+        self.assertIsNotNone(op)
+        op = ArrayMath.GetOperation('multiply')
+        self.assertIsNotNone(op)
+        op = ArrayMath.GetOperation('divide')
+        self.assertIsNotNone(op)
+        op = ArrayMath.GetOperation('correlate')
+        self.assertIsNotNone(op)
+
+    def _gen_and_check(self, op, check, flip=False):
+        # Perform filter
+        f = ArrayMath()
+        f.SetInputDataObject(self.t0)
+        if flip:
+            f.SetInputArrayToProcess(1, 0, 0, 6, self.titles[0]) # field 6 is row data
+            f.SetInputArrayToProcess(0, 0, 0, 6, self.titles[1]) # field 6 is row data
+        else:
+            f.SetInputArrayToProcess(0, 0, 0, 6, self.titles[0]) # field 6 is row data
+            f.SetInputArrayToProcess(1, 0, 0, 6, self.titles[1]) # field 6 is row data
+        f.SetOperation(op)
+        f.SetNewArrayName('test')
+        f.Update()
+        # Now test the result
+        output = f.GetOutput()
+        wout = dsa.WrapDataObject(output)
+        arr = wout.RowData['test']
+        self.assertTrue(np.allclose(arr, check, rtol=RTOL))
+
+
+    def test_add(self):
+        op = ArrayMath.GetOperation('add')
+        check = self.arrs[0] + self.arrs[1]
+        self._gen_and_check(op, check)
+        # now flip order and check
+        # result should be same
+        self._gen_and_check(op, check, flip=True)
+
+
+    def test_subtract(self):
+        op = ArrayMath.GetOperation('subtract')
+        check = self.arrs[0] - self.arrs[1]
+        self._gen_and_check(op, check)
+        # now flip order and check
+        check = self.arrs[1] - self.arrs[0]
+        self._gen_and_check(op, check, flip=True)
+
+    def test_multiply(self):
+        op = ArrayMath.GetOperation('multiply')
+        check = self.arrs[0] * self.arrs[1]
+        self._gen_and_check(op, check)
+        # now flip order and check
+        # result should be same
+        self._gen_and_check(op, check, flip=True)
+
+    def test_divide(self):
+        op = ArrayMath.GetOperation('divide')
+        check = self.arrs[0] / self.arrs[1]
+        self._gen_and_check(op, check)
+        # now flip order and check
+        check = self.arrs[1] / self.arrs[0]
+        self._gen_and_check(op, check, flip=True)
+
+    def test_correlate(self):
+        op = ArrayMath.GetOperation('correlate')
+        check = np.correlate(self.arrs[0], self.arrs[1], mode='same')
+        self._gen_and_check(op, check)
+        # now flip order and check
+        check = np.correlate(self.arrs[1], self.arrs[0], mode='same')
+        self._gen_and_check(op, check, flip=True)
 
 
 
@@ -319,8 +423,72 @@ class TestNormalizeArray(unittest.TestCase):
     Test the `NormalizeArray` filter
     """
 
-    def test_(self):
-        self.assertTrue(False)
+    def setUp(self):
+        # Create some input tables
+        self.t0 = vtk.vtkTable()
+        # Populate the tables
+        self.n = 400
+        self.title = 'Array 0'
+        self.arr = np.random.random(self.n) # Table 0
+        self.t0.AddColumn(_numToVTK(self.arr, self.title))
+        return
+
+    def test_get_operations(self):
+        op = NormalizeArray.GetNormalization('feature_scale')
+        self.assertIsNotNone(op)
+        op = NormalizeArray.GetNormalization('standard_score')
+        self.assertIsNotNone(op)
+        op = NormalizeArray.GetNormalization('log10')
+        self.assertIsNotNone(op)
+        op = NormalizeArray.GetNormalization('natural_log')
+        self.assertIsNotNone(op)
+        op = NormalizeArray.GetNormalization('just_multiply')
+        self.assertIsNotNone(op)
+
+    def _gen_and_check(self, op, check, flip=False):
+        # Perform filter
+        f = NormalizeArray()
+        f.SetInputDataObject(self.t0)
+        f.SetInputArrayToProcess(0, 0, 0, 6, self.title) # field 6 is row data
+        f.SetNormalization(op)
+        f.SetNewArrayName('test')
+        f.Update()
+        # Now test the result
+        output = f.GetOutput()
+        wout = dsa.WrapDataObject(output)
+        arr = wout.RowData['test']
+        self.assertTrue(np.allclose(arr, check, rtol=RTOL))
+
+
+    def test_feature_scale(self):
+        op = NormalizeArray.GetNormalization('feature_scale')
+        check = NormalizeArray._featureScale(self.arr)
+        self._gen_and_check(op, check)
+
+    def test_standard_score(self):
+        op = NormalizeArray.GetNormalization('standard_score')
+        check = NormalizeArray._standardScore(self.arr)
+        self._gen_and_check(op, check)
+
+    def test_standard_score(self):
+        op = NormalizeArray.GetNormalization('standard_score')
+        check = NormalizeArray._standardScore(self.arr)
+        self._gen_and_check(op, check)
+
+    def test_log10(self):
+        op = NormalizeArray.GetNormalization('log10')
+        check = NormalizeArray._log10(self.arr)
+        self._gen_and_check(op, check)
+
+    def test_natural_log(self):
+        op = NormalizeArray.GetNormalization('natural_log')
+        check = NormalizeArray._logNat(self.arr)
+        self._gen_and_check(op, check)
+
+    def test_just_multiply(self):
+        op = NormalizeArray.GetNormalization('just_multiply')
+        check = NormalizeArray._passArray(self.arr)
+        self._gen_and_check(op, check)
 
 
 ###############################################################################
@@ -330,8 +498,84 @@ class TestAddCellConnToPoints(unittest.TestCase):
     Test the `AddCellConnToPoints` filter
     """
 
-    def test_(self):
-        self.assertTrue(False)
+    def makeSimpleInput(self):
+        x = np.array([0.0,1.0,0.0])
+        y = np.array([0.0,0.0,1.0])
+        z = np.array([0.0,0.0,0.0])
+        x = np.reshape(x, (len(x), -1))
+        y = np.reshape(y, (len(y), -1))
+        z = np.reshape(z, (len(z), -1))
+        self.pts = np.concatenate((x,y,z), axis=1)
+        self.vtkpoints = PointsToPolyData(self.pts)
+
+    def makeComplicatedInput(self, shuffle=True):
+        def path1(y):
+            # Equation: x = a(y-h)^2 + k
+            k = 110.0
+            h = 0.0
+            a = - k / 160.0**2
+            x = a*(y-h)**2 + k
+            idxs = np.argwhere(x>0)
+            return x[idxs][:,0], y[idxs][:,0]
+
+        y = np.arange(0.0,10.0)
+        zo = np.linspace(9.0,11.0, num=len(y))
+        x,y = path1(y)
+
+        coords = np.zeros((len(y),3))
+        coords[:,0] = x
+        coords[:,1] = y
+        coords[:,2] = zo
+
+        np.random.shuffle(coords)
+        self.pts = coords
+        self.vtkpoints = PointsToPolyData(self.pts)
+
+    def test_poly_line(self):
+        self.makeSimpleInput()
+        f = AddCellConnToPoints()
+        f.SetInputDataObject(self.vtkpoints)
+        f.SetCellType(vtk.VTK_POLY_LINE)
+        f.Update()
+        output = f.GetOutput()
+        self.assertEqual(1, output.GetNumberOfCells())
+        # Now test nearest neighbor functionality
+        self.makeComplicatedInput()
+        f = AddCellConnToPoints()
+        f.SetInputDataObject(self.vtkpoints)
+        f.SetCellType(vtk.VTK_POLY_LINE)
+        f.SetUseNearestNbr(True)
+        f.Update()
+        output = f.GetOutput()
+        self.assertEqual(1, output.GetNumberOfCells())
+        # Its fairly difficult to test the nearest neighbor approximations...
+        # This was done visually in ParaView.
+        # The above test is just there to make sure no errors are thrown
+        # NOTE: assumes developers visually inspect in ParaView if functionality changes
+        return
+
+    def test_line(self):
+        self.makeSimpleInput()
+        f = AddCellConnToPoints()
+        f.SetInputDataObject(self.vtkpoints)
+        f.SetCellType(vtk.VTK_LINE)
+        f.Update()
+        output = f.GetOutput()
+        self.assertEqual(len(self.pts)-1, output.GetNumberOfCells())
+        # Now test nearest neighbor functionality
+        self.makeComplicatedInput()
+        f = AddCellConnToPoints()
+        f.SetInputDataObject(self.vtkpoints)
+        f.SetCellType(vtk.VTK_LINE)
+        f.SetUseNearestNbr(True)
+        f.Update()
+        output = f.GetOutput()
+        self.assertEqual(len(self.pts)-1, output.GetNumberOfCells())
+        # Its fairly difficult to test the nearest neighbor approximations...
+        # This was done visually in ParaView.
+        # The above test is just there to make sure no errors are thrown
+        # NOTE: assumes developers visually inspect in ParaView if functionality changes
+        return
 
 
 ###############################################################################
@@ -340,78 +584,86 @@ class TestPointsToTube(unittest.TestCase):
     """
     Test the `PointsToTube` filter
     """
+    def makeComplicatedInput(self, shuffle=True):
+        def path1(y):
+            # Equation: x = a(y-h)^2 + k
+            k = 110.0
+            h = 0.0
+            a = - k / 160.0**2
+            x = a*(y-h)**2 + k
+            idxs = np.argwhere(x>0)
+            return x[idxs][:,0], y[idxs][:,0]
+
+        y = np.linspace(0.0, 200.0, num=100)
+        x,y = path1(y)
+        zo = np.linspace(9.0,11.0, num=len(y))
+
+        coords = np.zeros((len(y),3))
+        coords[:,0] = x
+        coords[:,1] = y
+        coords[:,2] = zo
+
+        np.random.shuffle(coords)
+        self.pts = coords
+        self.vtkpoints = PointsToPolyData(self.pts)
 
     def test_(self):
-        self.assertTrue(False)
+        self.makeComplicatedInput()
+        f = PointsToTube()
+        f.SetInputDataObject(self.vtkpoints)
+        f.SetRadius(20)
+        f.SetNumberOfSides(10)
+        f.SetUseNearestNbr(True)
+        f.Update()
+        output = f.GetOutput()
+        self.assertEqual(10, output.GetNumberOfCells())
+        self.assertEqual(10*len(self.pts), output.GetNumberOfPoints())
 
 
-###############################################################################
-
-
-class TestManySlicesAlongPoints(unittest.TestCase):
-    """
-    Test the `ManySlicesAlongPoints` filter
-    """
-
-    def test_(self):
-        self.assertTrue(False)
-
-
-
-###############################################################################
-
-class TestManySlicesAlongAxis(unittest.TestCase):
-    """
-    Test the `ManySlicesAlongAxis` filter
-    """
-
-    def test_(self):
-        self.assertTrue(False)
-
-
-###############################################################################
-
-class TestSliceThroughTime(unittest.TestCase):
-    """
-    Test the `SliceThroughTime` filter
-    """
-
-    def test_(self):
-        self.assertTrue(False)
-
-
-###############################################################################
-
-
-class TestPointsToPolyData(unittest.TestCase):
-    """
-    Test the `PointsToPolyData` filter
-    """
-
-    def test_(self):
-        self.assertTrue(False)
-
-
-###############################################################################
-
-class TestExtractPoints(unittest.TestCase):
-    """
-    Test the `ExtractPoints` filter
-    """
-
-    def test_(self):
-        self.assertTrue(False)
-
-
-###############################################################################
-
-class TestRotateCoordinates(unittest.TestCase):
-    """
-    Test the `ExtractPoints` filter
-    """
-
-    def test_(self):
-        self.assertTrue(False)
-
-
-###############################################################################
+# ###############################################################################
+#
+#
+# class TestManySlicesAlongPoints(unittest.TestCase):
+#     """
+#     Test the `ManySlicesAlongPoints` filter
+#     """
+#
+#     def test_(self):
+#         self.assertTrue(False)
+#
+#
+#
+# ###############################################################################
+#
+# class TestManySlicesAlongAxis(unittest.TestCase):
+#     """
+#     Test the `ManySlicesAlongAxis` filter
+#     """
+#
+#     def test_(self):
+#         self.assertTrue(False)
+#
+#
+# ###############################################################################
+#
+# class TestSliceThroughTime(unittest.TestCase):
+#     """
+#     Test the `SliceThroughTime` filter
+#     """
+#
+#     def test_(self):
+#         self.assertTrue(False)
+#
+#
+# ###############################################################################
+#
+# class TestExtractPoints(unittest.TestCase):
+#     """
+#     Test the `ExtractPoints` filter
+#     """
+#
+#     def test_(self):
+#         self.assertTrue(False)
+#
+#
+# ###############################################################################

@@ -157,20 +157,20 @@ def getDropDownXml(name, command, labels, help='', values=None):
           %s''' % el)
         dom += ('''
         </EnumerationDomain>''')
-        return dom
+        return dom, values
 
-    domain = _enum(labels, values)
+    domain, values = _enum(labels, values)
     return '''\
       <IntVectorProperty
         name="%s"
         command="%s"
         number_of_elements="1"
-        default_values="0">
+        default_values="%d">
 %s
         <Documentation>
           %s
         </Documentation>
-      </IntVectorProperty>''' % (name,command,domain,help)
+      </IntVectorProperty>''' % (name, command, values[0], domain, help)
 
 
 
