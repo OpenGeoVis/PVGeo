@@ -10,17 +10,17 @@ import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase
 from .. import _helpers
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
 
-class _SliceBase(VTKPythonAlgorithmBase):
+class _SliceBase(PVGeoAlgorithmBase):
     def __init__(self, numSlices=5,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid'):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=nInputPorts, inputType=inputType,
             nOutputPorts=nOutputPorts, outputType=outputType)
         # Parameters

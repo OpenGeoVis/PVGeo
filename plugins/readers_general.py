@@ -49,11 +49,11 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
     def SetEndian(self, endian):
         PackedBinariesReader.SetEndian(self, endian)
 
-    @smproperty.xml(_helpers.getDropDownXml('DataType','SetDType',
+    @smproperty.xml(_helpers.getDropDownXml('DataType','SetDataType',
         ['Float64', 'Float32', 'Integer4'],
         help='This is data type to read.'))
-    def SetDType(self, dtype):
-        PackedBinariesReader.SetDType(self, dtype)
+    def SetDataType(self, dtype):
+        PackedBinariesReader.SetDataType(self, dtype)
 
 
     @smproperty.stringvector(name='DataName', default_values='Data')
@@ -98,11 +98,11 @@ class PVGeoMadagascarReader(MadagascarReader):
     def SetEndian(self, endian):
         MadagascarReader.SetEndian(self, endian)
 
-    @smproperty.xml(_helpers.getDropDownXml('DataType','SetDType',
+    @smproperty.xml(_helpers.getDropDownXml('DataType','SetDataType',
         ['Float64', 'Float32', 'Integer4'],
         help='This is data type to read.'))
-    def SetDType(self, dtype):
-        MadagascarReader.SetDType(self, dtype)
+    def SetDataType(self, dtype):
+        MadagascarReader.SetDataType(self, dtype)
 
 
     @smproperty.stringvector(name='DataName', default_values='Data')
@@ -171,7 +171,7 @@ XYZ_EXTS = 'xyz text txt dat csv tsv'
 XYZ_DESC = 'XYZ Delimited Text Files where header has comma delimiter.'
 
 @smproxy.reader(name="PVGeoXYZTextReader",
-       label="PVGeo: XYZ File ReaderBase",
+       label="PVGeo: XYZ File Reader",
        extensions=XYZ_EXTS,
        file_description=XYZ_DESC)
 class PVGeoXYZTextReader(XYZTextReader):

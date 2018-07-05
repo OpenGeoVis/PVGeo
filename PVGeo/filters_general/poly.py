@@ -11,9 +11,8 @@ import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase, FilterPreserveTypeBase
 from .. import _helpers
-from ..base import FilterPreserveTypeBase
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
@@ -354,10 +353,10 @@ class NormalizeArray(FilterPreserveTypeBase):
 ###############################################################################
 #---- Cell Connectivity ----#
 
-class AddCellConnToPoints(VTKPythonAlgorithmBase):
+class AddCellConnToPoints(PVGeoAlgorithmBase):
     """This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation)."""
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters

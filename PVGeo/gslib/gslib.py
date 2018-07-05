@@ -32,17 +32,17 @@ class GSLibReader(DelimitedTextReader):
         # These are attributes the derived from file contents:
         self.__header = None
 
-    def _ExtractHeader(self, fileLines):
-        self.__header = fileLines[0]
+    def _ExtractHeader(self, content):
+        self.__header = content[0]
         try:
-            num = int(fileLines[1]) # number of data columns
+            num = int(content[1]) # number of data columns
         except ValueError:
             raise RuntimeError('This file is not in proper GSLIB format.')
 
         titles = []
         for i in range(2, 2 + num):
-            titles.append(fileLines[i].rstrip('\r\n'))
-        return titles, fileLines[2 + num::]
+            titles.append(content[i].rstrip('\r\n'))
+        return titles, content[2 + num::]
 
 
     #### Seters and Geters ####
