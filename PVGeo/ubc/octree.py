@@ -9,7 +9,7 @@ from vtk.util import numpy_support as nps
 import vtk
 import os
 
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase
 from .two_file_base import ubcMeshReaderBase
 from .. import _helpers
 
@@ -277,10 +277,10 @@ class ubcOcTreeReader(ubcMeshReaderBase):
 
 
 
-class ubcOcTreeAppender(VTKPythonAlgorithmBase):
+class ubcOcTreeAppender(PVGeoAlgorithmBase):
     """This assumes the input vtkRectilinearGrid has already handled the timesteps"""
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkUnstructuredGrid',
             nOutputPorts=1, outputType='vtkUnstructuredGrid')
         self.__modelFileNames = []
