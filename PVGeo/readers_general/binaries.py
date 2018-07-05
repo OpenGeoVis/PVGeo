@@ -40,8 +40,12 @@ class PackedBinariesReader(PVGeoReaderBase):
         self.__data = []
 
     def _ReadRawFile(self, fileName):
-        arr = np.fromfile(fileName, dtype=self.__dtype)
-        return arr
+        dtype = self.__dtype
+        if dtype == np.dtype('>f'):
+            # Checks if big-endian and fixes read
+            dtype = np.dtype('f')
+        arr = np.fromfile(fileName, dtype=dtype)
+        return np.asarray(arr, dtype=self.__dtype)
 
     def _GetFileContents(self, idx=None):
         if idx is not None:

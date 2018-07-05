@@ -217,7 +217,7 @@ class TestPackedBinariesReader(unittest.TestCase):
     def _check_data(self, table, data):
         arr = nps.vtk_to_numpy(table.GetColumn(0))
         self.assertTrue(np.allclose(data, arr, rtol=RTOL))
-        return
+        return arr
 
     ###########################################
 
@@ -275,27 +275,26 @@ class TestPackedBinariesReader(unittest.TestCase):
         self._check_data(table, arr)
         return
 
-    # TODO: fix big endian?
-    # def test_big_endian(self):
-    #     """Test `PackedBinariesReader`: floats with big-endianness"""
-    #     # Make data and write out
-    #     dtype = np.dtype('>f')
-    #     arr = np.array(np.random.random(self.n), dtype=dtype)
-    #     fname = os.path.join(self.test_dir, 'test.bin')
-    #     arr.tofile(fname)
-    #     # Set up reader
-    #     reader = PackedBinariesReader()
-    #     reader.AddFileName(fname)
-    #     reader.SetDataType('f')
-    #     reader.SetEndian('>')
-    #     # Perfrom Read
-    #     reader.Update()
-    #     table = reader.GetOutput()
-    #     # Check output
-    #     self._check_data(table, arr)
-    #     return
+    def test_endian_big(self):
+        """`PackedBinariesReader`: floats with big-endianness"""
+        # Make data and write out
+        dtype = np.dtype('>f')
+        arr = np.asarray(np.random.random(self.n), dtype=dtype)
+        fname = os.path.join(self.test_dir, 'test.bin')
+        arr.tofile(fname)
+        # Set up reader
+        reader = PackedBinariesReader()
+        reader.AddFileName(fname)
+        reader.SetDataType('f')
+        reader.SetEndian('>')
+        # Perfrom Read
+        reader.Update()
+        table = reader.GetOutput()
+        # Check output
+        self._check_data(table, arr)
+        return
 
-    def test_little_endian(self):
+    def test_endian_little(self):
         """`PackedBinariesReader`: floats with little-endianness"""
         # Make data and write out
         dtype = np.dtype('<f')
