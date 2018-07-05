@@ -40,8 +40,12 @@ class PackedBinariesReader(PVGeoReaderBase):
         self.__data = []
 
     def _ReadRawFile(self, fileName):
-        arr = np.fromfile(fileName, dtype=self.__dtype)
-        return arr
+        dtype = self.__dtype
+        if dtype == np.dtype('>f'):
+            # Checks if big-endian and fixes read
+            dtype = np.dtype('f')
+        arr = np.fromfile(fileName, dtype=dtype)
+        return np.asarray(arr, dtype=self.__dtype)
 
     def _GetFileContents(self, idx=None):
         if idx is not None:
@@ -59,7 +63,7 @@ class PackedBinariesReader(PVGeoReaderBase):
         """Should not need to be overridden"""
         # Perform Read
         self.__data = self._GetFileContents()
-        self._SetAsRead()
+        self.NeedToRead(flag=False)
         return 1
 
     def _GetRawData(self, idx=0):
@@ -76,7 +80,7 @@ class PackedBinariesReader(PVGeoReaderBase):
     def RequestData(self, request, inInfo, outInfo):
         # Get output:
         output = vtk.vtkTable.GetData(outInfo)
-        if self._NeedToRead():
+        if self.NeedToRead():
             self._ReadUpFront()
         # Get requested time index
         i = _helpers.GetRequestedTime(self, outInfo)

@@ -21,7 +21,6 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
     def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid'):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
-        self.__dataname = 'Data'
 
 
     @staticmethod
@@ -234,27 +233,6 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
 
         return output
 
-    @staticmethod
-    def ubcModel3D(FileName):
-        """
-        @desc:
-        Reads the 3D model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
-
-        @params:
-        FileName : str : The model file name(s) as an absolute path for the input model file in UBC 3D Model Model Format. Also accepts a `list` of string file names.
-
-        @returns:
-        np.array : Returns a NumPy float array that holds the model data read from the file. Use the `placeModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
-        """
-        if type(FileName) is list:
-            out = {}
-            for f in FileName:
-                out[os.path.basename(f)] = ubcTensorMeshReader.ubcModel3D(f)
-            return out
-
-        fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
-        data = np.genfromtxt((line.encode('utf8') for line in fileLines), dtype=np.float)
-        return data
 
     @staticmethod
     def _ubcMeshData3D(FileName_Mesh, FileName_Model, output, dataNm='Data'):
@@ -263,7 +241,7 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
         ubcTensorMeshReader.ubcMesh3D(FileName_Mesh, output)
         if ubcTensorMeshReader.HasModels(FileName_Model):
             # Read the model data
-            model = ubcTensorMeshReader.ubcModel3D(FileName_Model)
+            model = ubcMeshReaderBase.ubcModel3D(FileName_Model)
             # Place the model data onto the mesh
             ubcTensorMeshReader.placeModelOnMesh(output, model, dataNm)
         return output
@@ -311,7 +289,7 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
             self.GetMeshFileName(),
             self.GetModelFileNames(idx=i),
             output,
-            self.__dataname)
+            self.GetDataName())
 
         return 1
 
@@ -325,13 +303,6 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
-
-
-    def SetDataName(self, name):
-        if self.__dataname != name:
-            self.__dataname = name
-            self.Modified()
-
 
 
 
@@ -358,7 +329,7 @@ class ubcTensorMeshAppender(PVGeoAlgorithmBase):
             # This will only work prior to rotations to account for real spatial reference
             model = ubcTensorMeshReader.ubcModel2D(self.__modelFileNames[i])
         else:
-            model = ubcTensorMeshReader.ubcModel3D(self.__modelFileNames[i])
+            model = ubcMeshReaderBase.ubcModel3D(self.__modelFileNames[i])
         #- Place read model on the mesh
         ubcTensorMeshReader.placeModelOnMesh(output, model, self.__dataname)
         return 1

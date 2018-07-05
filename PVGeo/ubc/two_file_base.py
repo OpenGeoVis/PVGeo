@@ -4,9 +4,8 @@ all = [
 ]
 
 from .. import _helpers
-
-# Outside Imports:
 from ..base import PVGeoAlgorithmBase
+# Outside Imports:
 import numpy as np
 
 
@@ -20,17 +19,20 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
         self.__timesteps = None
         self.__meshFileName = None # Can only be one!
         self.__modelFileNames = [] # Can be many (single attribute, manytimesteps)
+        self.__needToRead = True
 
-
-    def _GetTimeSteps(self):
-        return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def _UpdateTimeSteps(self):
         """for internal use only"""
         if len(self.__modelFileNames) < 1:
             return -1
-        self.__timesteps = _helpers.UpdateTimesteps(self, self.__modelFileNames, self.__dt)
+        self.__timesteps = _helpers.UpdateTimeSteps(self, self.__modelFileNames, self.__dt)
         return 1
+
+    def Modified(self, readAgain=True):
+        """Call modified if the files needs to be read again again"""
+        self.__needToRead = readAgain
+        PVGeoAlgorithmBase.Modified(self)
 
     def RequestInformation(self, request, inInfo, outInfo):
         self._UpdateTimeSteps()
@@ -51,13 +53,13 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
 
     def GetTimestepValues(self):
         """Use this in ParaView decorator to register timesteps"""
-        return self._GetTimeSteps()
+        return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def SetTimeDelta(self, dt):
         """An advanced property for the time step in seconds."""
         if dt != self.__dt:
             self.__dt = dt
-            self.Modified()
+            self.Modified(readAgain=False)
 
     def ClearMeshFileName(self):
         """Use to clear mesh file name"""
@@ -100,6 +102,7 @@ class ubcMeshReaderBase(TwoFileReaderBase):
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         TwoFileReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
+        self.__dataname = 'Data'
 
     @staticmethod
     def _ubcMesh2D_part(FileName):
@@ -168,3 +171,35 @@ class ubcMeshReaderBase(TwoFileReaderBase):
             return (0,ne, 0,nn, 0,nz)
         else:
             raise Exception('File format not recognized')
+
+
+    @staticmethod
+    def ubcModel3D(FileName):
+        """
+        @desc:
+        Reads the 3D model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
+
+        @params:
+        FileName : str : The model file name(s) as an absolute path for the input model file in UBC 3D Model Model Format. Also accepts a `list` of string file names.
+
+        @returns:
+        np.array : Returns a NumPy float array that holds the model data read from the file. Use the `placeModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
+        """
+        if type(FileName) is list:
+            out = {}
+            for f in FileName:
+                out[os.path.basename(f)] = ubcTensorMeshReader.ubcModel3D(f)
+            return out
+
+        fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+        data = np.genfromtxt((line.encode('utf8') for line in fileLines), dtype=np.float)
+        return data
+
+
+    def SetDataName(self, name):
+        if self.__dataname != name:
+            self.__dataname = name
+            self.Modified()
+
+    def GetDataName(self):
+        return self.__dataname

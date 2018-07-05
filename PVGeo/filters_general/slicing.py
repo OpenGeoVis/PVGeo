@@ -1,7 +1,7 @@
 __all__ = [
     'ManySlicesAlongPoints',
     'ManySlicesAlongAxis',
-    'ClipThroughTime'
+    'SliceThroughTime'
 ]
 
 import vtk
@@ -237,7 +237,7 @@ class ManySlicesAlongAxis(_SliceBase):
 ###############################################################################
 
 
-class ClipThroughTime(ManySlicesAlongAxis):
+class SliceThroughTime(ManySlicesAlongAxis):
     """
     @desc:
     This macro takes a clip source and progresses its location through a set of bounds in the data scene. The macro requires that the clip already exist in the pipeline. This is especially useful if you have many clips linked together as all will move through the seen as a result of this macro.
@@ -256,12 +256,10 @@ class ClipThroughTime(ManySlicesAlongAxis):
         self.__dt = 1.0
         self.__timesteps = None
 
-    def _GetTimeSteps(self):
-        return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def _UpdateTimeSteps(self):
         """for internal use only"""
-        self.__timesteps = _helpers.UpdateTimesteps(self, self.GetNumberOfSlices(), self.__dt)
+        self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetNumberOfSlices(), self.__dt)
 
 
 
@@ -285,7 +283,7 @@ class ClipThroughTime(ManySlicesAlongAxis):
         self._UpdateTimeSteps()
         return 1
 
-    #### Getters / Setters ####
+    #### Public Getters / Setters ####
 
     def SetNumberOfSlices(self, num):
         ManySlicesAlongAxis.SetNumberOfSlices(self, num)
@@ -300,4 +298,4 @@ class ClipThroughTime(ManySlicesAlongAxis):
 
     def GetTimestepValues(self):
         """Use this in ParaView decorator to register timesteps"""
-        return self._GetTimeSteps()
+        return self.__timesteps.tolist() if self.__timesteps is not None else None
