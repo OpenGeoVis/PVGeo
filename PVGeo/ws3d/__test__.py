@@ -31,8 +31,35 @@ class TestwsMesh3DReader(unittest.TestCase):
         self.rot = 45.0
         ##### Now generate output for testing ####
         fname = os.path.join(self.test_dir, 'test.ws3d')
-        #self.data = np.random.random(100)
         # TODO: write out a temporary file to test the reader
+        """# Script for making a test file:
+        # Adopted from: http://docs.simpeg.xyz/content/examples/08-nsem/plot_foward_MTTipper3D.html#sphx-glr-content-examples-08-nsem-plot-foward-mttipper3d-py
+        import SimPEG as simpeg
+        from SimPEG.EM import NSEM
+        import numpy as np
+
+        # Make a mesh
+        M = simpeg.Mesh.TensorMesh(
+            [
+                [(100, 9, -1.5), (100., 13), (100, 9, 1.5)],
+                [(100, 9, -1.5), (100., 13), (100, 9, 1.5)],
+                [(50, 10, -1.6), (50., 10), (50, 6, 2)]
+            ], x0=['C', 'C', -14926.8217]
+        )
+        # Setup the model
+        conds = [1,1e-2]
+        sig = simpeg.Utils.ModelBuilder.defineBlock(
+            M.gridCC, [-100, -100, -350], [100, 100, -150], conds
+        )
+        sig[M.gridCC[:, 2] > 0] = 1e-8
+        sig[M.gridCC[:, 2] < -1000] = 1e-1
+        sigBG = np.zeros(M.nC) + conds[1]
+        sigBG[M.gridCC[:, 2] > 0] = 1e-8
+
+        # Now saveout
+        import PVGeo
+        PVGeo.ws3d._write_ws3d(fname, M, sig)
+        """
 
         # Set up the reader
         reader = wsMesh3DReader()

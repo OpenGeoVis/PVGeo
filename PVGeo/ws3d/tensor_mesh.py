@@ -19,7 +19,7 @@ from .. import _helpers
 class wsMesh3DReader(PVGeoReaderBase):
     """
     @desc:
-    This method reads a ws3dinv Mesh file and builds a vtkStructuredGrid with topology
+    This method reads a ws3dinv Mesh file and builds a vtkRectilinearGrid with topology
     and model data.
     Information about the files can be found
         Siripunvaraporn, W.; Egbert, G.; Lenbury, Y. & Uyeshima, M.
@@ -35,7 +35,7 @@ class wsMesh3DReader(PVGeoReaderBase):
     angle : float : angle rotation for the model (clockwise rotation)
 
     @returns:
-    vtkStructuredGrid : Returns a vtkStructuredGrid generated from the ws3dinv Mesh/Model grid.
+    vtkRectilinearGrid : Returns a vtkRectilinearGrid generated from the ws3dinv Mesh/Model grid.
     Mesh is defined by the input mesh file and does contain data attributes.
 
     """
@@ -115,7 +115,7 @@ class wsMesh3DReader(PVGeoReaderBase):
         )
         # Model Array - switch between S/m and Ohm*m
         VTKArrName = 'Ohm*m'
-        modVTKArr = npsup.numpy_to_vtk(mod, deep=1)
+        modVTKArr = nps.numpy_to_vtk(mod, deep=1)
         modVTKArr.SetName(VTKArrName)
 
         ## Calculate the global nodal coordintes
@@ -144,7 +144,7 @@ class wsMesh3DReader(PVGeoReaderBase):
 
     def RequestData(self, request, inInfo, outInfo):
         # Get output:
-        output = vtk.vtkStructuredGrid.GetData(outInfo)
+        output = vtk.vtkRectilinearGrid.GetData(outInfo)
         # Get requested time index
         i = _helpers.GetRequestedTime(self, outInfo)
         # Perform Read
@@ -195,6 +195,8 @@ def _write_ws3d(file_name, mesh, model):
         (has to be resistivity [Ohm*m])
 
     """
+    import SimPEG as simpeg
+    import datetime
     # Small internal help function
     def write_8_val_per_line(file_id, array):
         """
