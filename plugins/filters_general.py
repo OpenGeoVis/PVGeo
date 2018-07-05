@@ -310,35 +310,35 @@ class PVGeoManySlicesAlongAxis(ManySlicesAlongAxis):
 
 ###############################################################################
 
-@smproxy.filter(name='PVGeoClipThroughTime', label='Clip Through Time')
+@smproxy.filter(name='PVGeoSliceThroughTime', label='Slice Through Time')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
 @smhint.xml('''<View type="RenderView" />''')
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
-class PVGeoClipThroughTime(ClipThroughTime):
+class PVGeoSliceThroughTime(SliceThroughTime):
     def __init__(self):
-        ClipThroughTime.__init__(self)
+        SliceThroughTime.__init__(self)
 
     @smproperty.intvector(name="Number of Slices", default_values=10)
     @smdomain.intrange(min=2, max=50)
     def SetNumberOfSlices(self, num):
-        ClipThroughTime.SetNumberOfSlices(self, num)
+        SliceThroughTime.SetNumberOfSlices(self, num)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, dt):
-        ClipThroughTime.SetTimeDelta(self, dt)
+        SliceThroughTime.SetTimeDelta(self, dt)
 
     @smproperty.xml(_helpers.getDropDownXml(name='Axis', command='SetAxis',
         labels=['X Axis', 'Y Axis', 'Z Axis'],
         values=[0, 1, 2]))
     def SetAxis(self, axis):
-        ClipThroughTime.SetAxis(self, axis)
+        SliceThroughTime.SetAxis(self, axis)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
     def GetTimestepValues(self):
         """This is critical for registering the timesteps"""
-        return ClipThroughTime.GetTimestepValues(self)
+        return SliceThroughTime.GetTimestepValues(self)
 
 
 ###############################################################################

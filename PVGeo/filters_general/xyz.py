@@ -310,13 +310,13 @@ class ExtractPoints(PVGeoAlgorithmBase):
         pdo = self.GetOutputData(outInfo, 0)
         #### Perfrom task ####
         # Get the Points over the NumPy interface
-        #wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
-        points = pdi.GetPoints()#np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
-        pdo.DeepCopy(points)
+        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
+        points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
         # Now transfer data
         f = vtk.vtkCellDataToPointData()
         f.SetInputData(pdi)
         f.Update()
         d = f.GetOutput()
+        pdo.ShallowCopy(PointsToPolyData(points))
         _helpers.copyArraysToPointData(d, pdo, 0) # 0 is point data
         return 1

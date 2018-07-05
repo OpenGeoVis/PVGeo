@@ -32,6 +32,7 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=nOutputPorts, outputType=outputType)
+        # Attributes are namemangled to ensure proper setters/getters are used
         # For the VTK/ParaView pipeline
         self.__dt = 1.0
         self.__timesteps = None
@@ -40,30 +41,35 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
         # To know whether or not the read needs to perform
         self.__needToRead = True
 
-    def _NeedToRead(self):
-        """Ask self if the reader needs to read the files again"""
+    def NeedToRead(self, flag=None):
+        """Ask self if the reader needs to read the files again
+        if the flag is set then this method will set the read status"""
+        if flag is not None and isinstance(flag, (bool, int)):
+            self.__needToRead = flag
         return self.__needToRead
-
-    def _SetAsRead(self):
-        self.__needToRead = False
 
     def Modified(self, readAgain=True):
         """Call modified if the files needs to be read again again"""
         self.__needToRead = readAgain
         PVGeoAlgorithmBase.Modified(self)
 
-    def _GetTimeSteps(self):
-        return self.__timesteps.tolist() if self.__timesteps is not None else None
-
     def _UpdateTimeSteps(self):
-        """for internal use only"""
-        self.__timesteps = _helpers.UpdateTimesteps(self, self.__fileNames, self.__dt)
+        """for internal use only: appropriately sets the timesteps"""
+        self.__timesteps = _helpers.UpdateTimeSteps(self, self.__fileNames, self.__dt)
+        return 1
+
+    #### Algorithm Methods ####
 
     def RequestInformation(self, request, inInfo, outInfo):
+        """This is a conveience method that should be overwritten when needed
+        This will handle setting the timesteps appropriately based on the number
+        of file names when the pipeline needs to know the time information.
+        """
         self._UpdateTimeSteps()
         return 1
 
     #### Methods for performing the read ####
+    # These are meant to be overwritten by child classes
 
     def _GetFileContents(self):
         raise NotImplementedError()
@@ -78,7 +84,7 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
 
     def GetTimestepValues(self):
         """Use this in ParaView decorator to register timesteps"""
-        return self._GetTimeSteps()
+        return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def SetTimeDelta(self, dt):
         """An advanced property for the time step in seconds."""

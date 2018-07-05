@@ -124,7 +124,7 @@ class VoxelizePoints(PVGeoAlgorithmBase):
             c_n7,
             c_n8), axis=0)
 
-        # Search for unique nodes and use the max cell size as the tolerance
+        # Search for unique nodes and use the min cell size as the tolerance
         TOLERANCE = np.min([dx, dy]) / 2.0
         # Round XY plane by the tolerance
         txy = np.around(all_nodes[:,0:2]/TOLERANCE)

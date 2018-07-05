@@ -22,14 +22,14 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
         self.__needToRead = True
 
 
-    def _GetTimeSteps(self):
+    def GetTimeSteps(self):
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def _UpdateTimeSteps(self):
         """for internal use only"""
         if len(self.__modelFileNames) < 1:
             return -1
-        self.__timesteps = _helpers.UpdateTimesteps(self, self.__modelFileNames, self.__dt)
+        self.__timesteps = _helpers.UpdateTimeSteps(self, self.__modelFileNames, self.__dt)
         return 1
 
     def Modified(self, readAgain=True):
@@ -56,7 +56,7 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
 
     def GetTimestepValues(self):
         """Use this in ParaView decorator to register timesteps"""
-        return self._GetTimeSteps()
+        return self.GetTimeSteps()
 
     def SetTimeDelta(self, dt):
         """An advanced property for the time step in seconds."""

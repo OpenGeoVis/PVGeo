@@ -67,7 +67,7 @@ class SGeMSGridReader(GSLibReader):
         output = vtk.vtkImageData.GetData(outInfo)
         # Get requested time index
         i = _helpers.GetRequestedTime(self, outInfo)
-        if self._NeedToRead():
+        if self.NeedToRead():
             self._ReadUpFront()
         # Generate the data object
         n1, n2, n3 = self.__extent
