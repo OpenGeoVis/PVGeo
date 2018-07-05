@@ -48,33 +48,34 @@ class SGeMSGridReader(GSLibReader):
         """
         # Read first file... extent cannot vary with time
         # TODO: make more efficient to only reader header of file
-        fileLines = self._GetFileLines(idx=0)
+        fileLines = self._GetFileContents(idx=0)
         h = fileLines[0+self.GetSkipRows()].split(self._GetDeli())
         n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
         return (0,n1-1, 0,n2-1, 0,n3-1)
 
-    def _ExtractHeader(self, fileLines):
-        titles, fileLines = GSLibReader._ExtractHeader(self, fileLines)
+    def _ExtractHeader(self, content):
+        titles, content = GSLibReader._ExtractHeader(self, content)
         h = self.GetFileHeader().split(self._GetDeli())
-        self.__extent = int(h[0]), int(h[1]), int(h[2])
-        return titles, fileLines
+        if self.__extent is None:
+            self.__extent = (int(h[0]), int(h[1]), int(h[2]))
+        elif self.__extent != (int(h[0]), int(h[1]), int(h[2])):
+            raise RuntimeError('Grid dimensions change in file time series.')
+        return titles, content
 
     def RequestData(self, request, inInfo, outInfo):
         # Get output:
         output = vtk.vtkImageData.GetData(outInfo)
         # Get requested time index
         i = _helpers.GetRequestedTime(self, outInfo)
-        # Perform Read
-        fileLines = self._GetFileLines(idx=i)
-        titles, fileLines = self._ExtractHeader(fileLines)
-        data = self._GetNumPyData(fileLines)
+        if self._NeedToRead():
+            self._ReadUpFront()
         # Generate the data object
         n1, n2, n3 = self.__extent
         output.SetDimensions(n1, n2, n3)
         output.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)
         # Use table generater and convert because its easy:
         table = vtk.vtkTable()
-        _helpers._placeArrInTable(data, titles, table)
+        _helpers._placeArrInTable(self._GetRawData(idx=i), self.GetTitles(), table)
         # now get arrays from table and add to point data of pdo
         for i in range(table.GetNumberOfColumns()):
             output.GetPointData().AddArray(table.GetColumn(i))

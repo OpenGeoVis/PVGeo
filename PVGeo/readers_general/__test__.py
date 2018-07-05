@@ -100,7 +100,7 @@ class TestDelimitedTextReader(unittest.TestCase):
         reader.SetSkipRows(1)
         reader.SetComments('!')
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         self._check_shape(table)
         self._check_titles(table)
         self._check_array_types(table)
@@ -115,7 +115,7 @@ class TestDelimitedTextReader(unittest.TestCase):
         reader.SetSkipRows(1)
         reader.SetComments('!')
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         self._check_shape(table)
         self._check_titles(table)
         self._check_array_types(table)
@@ -131,7 +131,7 @@ class TestDelimitedTextReader(unittest.TestCase):
         reader.SetHasTitles(False)
         reader.SetComments('!')
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         self._check_shape(table)
         self._check_titles(table, titles=['Field 0', 'Field 1', 'Field 2'])
         self._check_array_types(table)
@@ -165,7 +165,7 @@ class TestXYZTextReader(unittest.TestCase):
         reader = XYZTextReader()
         reader.AddFileName(self.fname)
         reader.Update()
-        self.TABLE = reader.GetOutputDataObject(0)
+        self.TABLE = reader.GetOutput()
         return
 
     def tearDown(self):
@@ -231,10 +231,10 @@ class TestPackedBinariesReader(unittest.TestCase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
-        reader.SetDType('f')
+        reader.SetDataType('f')
         # Perfrom Read
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         # Check output
         self._check_data(table, arr)
         return
@@ -249,10 +249,10 @@ class TestPackedBinariesReader(unittest.TestCase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
-        reader.SetDType('d')
+        reader.SetDataType('d')
         # Perfrom Read
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         # Check output
         self._check_data(table, arr)
         return
@@ -267,10 +267,10 @@ class TestPackedBinariesReader(unittest.TestCase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
-        reader.SetDType('i')
+        reader.SetDataType('i')
         # Perfrom Read
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         # Check output
         self._check_data(table, arr)
         return
@@ -286,11 +286,11 @@ class TestPackedBinariesReader(unittest.TestCase):
     #     # Set up reader
     #     reader = PackedBinariesReader()
     #     reader.AddFileName(fname)
-    #     reader.SetDType('f')
+    #     reader.SetDataType('f')
     #     reader.SetEndian('>')
     #     # Perfrom Read
     #     reader.Update()
-    #     table = reader.GetOutputDataObject(0)
+    #     table = reader.GetOutput()
     #     # Check output
     #     self._check_data(table, arr)
     #     return
@@ -305,11 +305,11 @@ class TestPackedBinariesReader(unittest.TestCase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
-        reader.SetDType('f')
+        reader.SetDataType('f')
         reader.SetEndian('<')
         # Perfrom Read
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         # Check output
         self._check_data(table, arr)
         return
@@ -340,10 +340,10 @@ class TestMadagascarReader(unittest.TestCase):
         # Set up reader
         reader = MadagascarReader()
         reader.AddFileName(fname)
-        reader.SetDType('f')
+        reader.SetDataType('f')
         # Perfrom Read
         reader.Update()
-        self.TABLE = reader.GetOutputDataObject(0)
+        self.TABLE = reader.GetOutput()
         return
 
     def tearDown(self):

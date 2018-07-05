@@ -6,18 +6,18 @@ import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
 # Import Helpers:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase
 from .. import _helpers
 
 
 #---- Reverse Grid Axii ----#
 
 
-class ReverseImageDataAxii(VTKPythonAlgorithmBase):
+class ReverseImageDataAxii(PVGeoAlgorithmBase):
     """This filter will flip ImageData on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data.
     TODO: This currently only flips PointData (no CellData)"""
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
             nOutputPorts=1, outputType='vtkImageData')
         self.__axes = [True, True, True]

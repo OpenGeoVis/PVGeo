@@ -7,7 +7,7 @@ import numpy as np
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase
 from .. import _helpers
 
 
@@ -16,10 +16,10 @@ from .. import _helpers
 ###############################################################################
 
 
-class CombineTables(VTKPythonAlgorithmBase):
+class CombineTables(PVGeoAlgorithmBase):
     """Takes two tables and combines them if they have the same number of rows."""
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=2, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkTable')
         # Parameters... none
@@ -55,10 +55,10 @@ class CombineTables(VTKPythonAlgorithmBase):
 ###############################################################################
 #---- Reshape Table ----#
 
-class ReshapeTable(VTKPythonAlgorithmBase):
+class ReshapeTable(PVGeoAlgorithmBase):
     """This filter will take a vtkTable object and reshape it. This filter essentially treats vtkTables as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name."""
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkTable')
         # Parameters

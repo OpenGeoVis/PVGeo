@@ -6,14 +6,14 @@ all = [
 from .. import _helpers
 
 # Outside Imports:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase
 import numpy as np
 
 
 # Two File Reader Base
-class TwoFileReaderBase(VTKPythonAlgorithmBase):
+class TwoFileReaderBase(PVGeoAlgorithmBase):
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=nOutputPorts, outputType=outputType)
         self.__dt = 1.0

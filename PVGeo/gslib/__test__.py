@@ -40,8 +40,8 @@ class TestGSLibReader(unittest.TestCase):
         reader.AddFileName(fname)
         # Perform the read
         reader.Update()
-        self.HEADER = reader.GetHeader()
-        self.TABLE = reader.GetOutputDataObject(0)
+        self.HEADER = reader.GetFileHeader()
+        self.TABLE = reader.GetOutput()
 
     def tearDown(self):
         # Remove the test data directory after the test
@@ -59,7 +59,7 @@ class TestGSLibReader(unittest.TestCase):
         """`GSLibReader`: data fidelity"""
         for i in range(len(self.titles)):
             arr = nps.vtk_to_numpy(self.TABLE.GetColumn(i))
-            self.assertTrue(np.allclose(data[:,i], arr, rtol=RTOL))
+            self.assertTrue(np.allclose(self.data[:,i], arr, rtol=RTOL))
         return
 
     def test_header_catch(self):
@@ -97,7 +97,7 @@ class TestGSLibReader(unittest.TestCase):
         reader.AddFileName(fname)
         # Perform the read
         reader.Update()
-        self.GRID = reader.GetOutputDataObject(0)
+        self.GRID = reader.GetOutput()
 
     def tearDown(self):
         # Remove the test data directory after the test

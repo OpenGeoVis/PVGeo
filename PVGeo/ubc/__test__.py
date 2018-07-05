@@ -83,7 +83,7 @@ class Test3DTensorMeshReader(ubcMeshTesterBase):
         reader.SetDataName(self.dataName)
         # Get and test output:
         reader.Update()
-        self.GRID = reader.GetOutputDataObject(0)
+        self.GRID = reader.GetOutput()
 
     def tearDown(self):
         # Remove the test data directory after the test
@@ -184,7 +184,7 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
         reader.SetDataName(self.dataName)
         # Get and test output:
         reader.Update()
-        self.GRID = reader.GetOutputDataObject(0)
+        self.GRID = reader.GetOutput()
         return
 
     def tearDown(self):

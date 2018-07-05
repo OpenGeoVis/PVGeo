@@ -11,7 +11,7 @@ import numpy as np
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase
 from .. import _helpers
 
 
@@ -100,9 +100,9 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
 ###############################################################################
 
 
-class RotationTool(VTKPythonAlgorithmBase):
+class RotationTool(PVGeoAlgorithmBase):
     def __init__(self, decimals=6):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
@@ -245,10 +245,10 @@ class RotationTool(VTKPythonAlgorithmBase):
 
 #---- Coordinate Rotations ----#
 
-class RotateCoordinates(VTKPythonAlgorithmBase):
+class RotateCoordinates(PVGeoAlgorithmBase):
     """Rotates XYZ coordinates"""
     def __init__(self, angle=45.0, origin=[0.0, 0.0]):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
@@ -297,10 +297,10 @@ class RotateCoordinates(VTKPythonAlgorithmBase):
 
 ###############################################################################
 
-class ExtractPoints(VTKPythonAlgorithmBase):
+class ExtractPoints(PVGeoAlgorithmBase):
     """Extracts XYZ coordinates and point data"""
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkPolyData')
 
