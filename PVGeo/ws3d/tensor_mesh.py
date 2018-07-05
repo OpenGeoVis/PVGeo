@@ -1,6 +1,7 @@
 __all__ = [
     # 3D Mesh
     'wsMesh3DReader',
+    '_write_ws3d',
 
     # Both
     #TODO: 'wsTensorMesh',
@@ -12,10 +13,10 @@ import vtk
 import os
 
 # Import Helpers:
-from ..base import ReaderBase
+from ..base import PVGeoReaderBase
 from .. import _helpers
 
-class wsMesh3DReader(ReaderBase):
+class wsMesh3DReader(PVGeoReaderBase):
     """
     @desc:
     This method reads a ws3dinv Mesh file and builds a vtkStructuredGrid with topology
@@ -39,7 +40,7 @@ class wsMesh3DReader(ReaderBase):
 
     """
     def __init__(self, filename=None, x0=0.0, y0=0.0, z0=0.0, angle=0.0):
-        ReaderBase.__init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid')
+        PVGeoReaderBase.__init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid')
 
         # Parameters:
         self.__x0 = x0
@@ -185,7 +186,7 @@ class wsMesh3DReader(ReaderBase):
 
 def _write_ws3d(file_name, mesh, model):
     """
-    @desc
+    @desc:
     Function that write a WS3D file from a SimPEG mesh object and model dict.
 
     :param string file_name: path of the WS3D model file to be written
@@ -194,23 +195,6 @@ def _write_ws3d(file_name, mesh, model):
         (has to be resistivity [Ohm*m])
 
     """
- @desc:
-        This method reads a ws3dinv Mesh file and builds a vtkStructuredGrid with topology
-        and model data.
-        Information about the files can be found
-            Siripunvaraporn, W.; Egbert, G.; Lenbury, Y. & Uyeshima, M.
-            Three-dimensional magnetotelluric inversion: data-space method
-            Physics of The Earth and Planetary Interiors, 2005, 150, 3-14
-
-        @params:
-        FileName : str : The mesh filename as an absolute path for the input mesh
-            file in ws3dinv Mesh/Model Format.
-        pdo : vtk.vtkStructuredGrid : The output data object
-
-        @returns:
-        vtkStructuredGrid : Returns a vtkStructuredGrid generated from the ws3dinv Mesh/Model grid.
-        Mesh is defined by the input mesh file and does contain data attributes.
-
     # Small internal help function
     def write_8_val_per_line(file_id, array):
         """
