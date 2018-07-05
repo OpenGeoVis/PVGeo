@@ -83,7 +83,7 @@ class Test3DTensorMeshReader(ubcMeshTesterBase):
         reader.SetDataName(self.dataName)
         # Get and test output:
         reader.Update()
-        self.GRID = reader.GetOutputDataObject(0)
+        self.GRID = reader.GetOutput()
 
     def tearDown(self):
         # Remove the test data directory after the test
@@ -92,19 +92,19 @@ class Test3DTensorMeshReader(ubcMeshTesterBase):
     ###########################################
 
     def test_grid_spatial_reference(self):
-        """Test 3D `ubcTensorMeshReader`: Spatial reference"""
+        """`ubcTensorMeshReader` 3D: Spatial reference"""
         self._check_spatial_reference(self.GRID)
 
     def test_grid_shape(self):
-        """Test 3D `ubcTensorMeshReader`: Shape of output grid"""
+        """`ubcTensorMeshReader` 3D: Shape of output grid"""
         self._check_shape(self.GRID)
 
     def test_grid_data(self):
-        """Test 3D `ubcTensorMeshReader`: Data fidelity"""
+        """`ubcTensorMeshReader` 3D: Data fidelity"""
         self._check_data(self.GRID, self.data)
 
     def test_grid_data_name(self):
-        """Test 3D `ubcTensorMeshReader`: Data array name"""
+        """`ubcTensorMeshReader` 3D: Data array name"""
         self.assertEqual(self.GRID.GetCellData().GetArrayName(0), self.dataName)
 
 ###############################################################################
@@ -184,7 +184,7 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
         reader.SetDataName(self.dataName)
         # Get and test output:
         reader.Update()
-        self.GRID = reader.GetOutputDataObject(0)
+        self.GRID = reader.GetOutput()
         return
 
     def tearDown(self):
@@ -194,19 +194,19 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
     ###########################################
 
     def test_grid_spatial_reference(self):
-        """Test 2D `ubcTensorMeshReader`: Spatial reference"""
+        """`ubcTensorMeshReader` 2D: Spatial reference"""
         self._check_spatial_reference(self.GRID)
 
     def test_grid_shape(self):
-        """Test 2D `ubcTensorMeshReader`: Shape of output grid"""
+        """`ubcTensorMeshReader` 2D: Shape of output grid"""
         self._check_shape(self.GRID)
 
     def test_grid_data(self):
-        """Test 2D `ubcTensorMeshReader`: Data fidelity"""
+        """`ubcTensorMeshReader` 2D: Data fidelity"""
         self._check_data(self.GRID, self.data)
 
     def test_grid_data_name(self):
-        """Test `ubcTensorMeshReader`: Data array name"""
+        """`ubcTensorMeshReader` 2D: Data array name"""
         self.assertEqual(self.GRID.GetCellData().GetArrayName(0), self.dataName)
 
 ###############################################################################

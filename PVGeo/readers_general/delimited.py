@@ -8,11 +8,11 @@ from vtk.util import numpy_support as nps
 import vtk
 
 # Import Helpers:
-from PVGeo import ReaderBase
+from ..base import PVGeoReaderBase
 from .. import _helpers
 
 
-class DelimitedTextReader(ReaderBase):
+class DelimitedTextReader(PVGeoReaderBase):
     """
     @desc:
     This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
@@ -32,16 +32,19 @@ class DelimitedTextReader(ReaderBase):
 
     """
     def __init__(self, nOutputPorts=1, outputType='vtkTable'):
-        ReaderBase.__init__(self,
+        PVGeoReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
 
-        # Other Parameters:
+        # Parameters to control the file read:
+        #- if these are set/changed, we must reperform the read
         self.__delimiter = " "
         self.__useTab = False
         self.__skipRows = 0
         self.__comments = "#"
         self.__hasTitles = True
-
+        # Data objects to hold the read data for access by the pipeline methods
+        self.__data = []
+        self.__titles = []
 
     def _GetDeli(self):
         """For itenral use"""
@@ -49,38 +52,82 @@ class DelimitedTextReader(ReaderBase):
             return '\t'
         return self.__delimiter
 
-    def _GetFileLines(self, idx=0):
-        return np.genfromtxt(self.GetFileNames(idx=idx), dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::]
+    #### Methods for performing the read ####
 
-    def _ExtractHeader(self, fileLines):
+    def _GetFileContents(self, idx=None):
+        if idx is not None:
+            fileNames = [self.GetFileNames(idx=idx)]
+        else:
+            fileNames = self.GetFileNames()
+        contents = []
+        for f in fileNames:
+            contents.append(np.genfromtxt(f, dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::])
+        if idx is not None: return contents[0]
+        return contents
+
+    def _ExtractHeader(self, content):
+        """Override this. Remove header from single file's content"""
+        if len(np.shape(content)) > 2:
+            raise RuntimeError("`_ExtractHeader()` can only handle a sigle file's content")
         idx = 0
         if self.__hasTitles:
-            titles = fileLines[idx].split(self._GetDeli())
+            titles = content[idx].split(self._GetDeli())
             idx += 1
         else:
-            cols = len(fileLines[idx].split(self._GetDeli()))
+            cols = len(content[idx].split(self._GetDeli()))
             titles = []
             for i in range(cols):
                 titles.append('Field %d' % i)
-        return titles, fileLines[idx::]
+        return titles, content[idx::]
+
+    def __ExtractHeaders(self, contents):
+        """Should NOT be overriden"""
+        ts = []
+        for i in range(len(contents)):
+            titles, newcontent = self._ExtractHeader(contents[i])
+            contents[i] = newcontent
+            ts.append(titles)
+        # Check that the titles are the same across files:
+        ts = np.unique(np.asarray(ts), axis=0)
+        if len(ts) > 1:
+            raise RuntimeError('Data array titles varied across file timesteps. This data is invalid as a timeseries.')
+        return ts[0], contents
 
 
-    def _GetNumPyData(self, fileLines):
-        return np.genfromtxt((line.encode('utf8') for line in fileLines), delimiter=self._GetDeli(), dtype=None)
+    def __FileContentsToDataArray(self, contents):
+        """Should not need to be overriden"""
+        data = []
+        for content in contents:
+            data.append(np.genfromtxt((line.encode('utf8') for line in content), delimiter=self._GetDeli(), dtype=None))
+        return data
+
+    def _ReadUpFront(self):
+        """Should not need to be overridden"""
+        # Perform Read
+        contents = self._GetFileContents()
+        self.__titles, contents = self.__ExtractHeaders(contents)
+        self.__data = self.__FileContentsToDataArray(contents)
+        self._SetAsRead()
+        return 1
+
+    #### Methods for accessing the data read in #####
+
+    def _GetRawData(self, idx=0):
+        """This will return the proper data for the given timestep"""
+        return self.__data[idx]
 
 
+    #### Algorithm Methods ####
 
     def RequestData(self, request, inInfo, outInfo):
         # Get output:
-        output = vtk.vtkTable.GetData(outInfo)
+        output = self.GetOutputData(outInfo, 0)
         # Get requested time index
         i = _helpers.GetRequestedTime(self, outInfo)
-        # Perform Read
-        fileLines = self._GetFileLines(idx=i)
-        titles, fileLines = self._ExtractHeader(fileLines)
-        data = self._GetNumPyData(fileLines)
+        if self._NeedToRead():
+            self._ReadUpFront()
         # Generate the data object
-        _helpers._placeArrInTable(data, titles, output)
+        _helpers._placeArrInTable(self._GetRawData(idx=i), self.__titles, output)
         return 1
 
 
@@ -122,6 +169,9 @@ class DelimitedTextReader(ReaderBase):
 
     def GetHasTitles(self):
         return self.__hasTitles
+
+    def GetTitles(self):
+        return self.__titles
 
 
 

@@ -6,15 +6,15 @@ import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
 # Import Helpers:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase
 from .. import _helpers
 
 
 #---- Translate Grid Origin ----#
 
-class TranslateGridOrigin(VTKPythonAlgorithmBase):
+class TranslateGridOrigin(PVGeoAlgorithmBase):
     def __init__(self, corner=1):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
             nOutputPorts=1, outputType='vtkImageData')
         self.__corner = corner

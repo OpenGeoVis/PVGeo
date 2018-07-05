@@ -1,7 +1,6 @@
 __all__ = [
-    'correlateArrays',
-    'getArrayRange',
-    'normalizeArray',
+    'ArrayMath',
+    'NormalizeArray',
     'AddCellConnToPoints',
     'PointsToTube',
 ]
@@ -12,7 +11,7 @@ import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase, FilterPreserveTypeBase
 from .. import _helpers
 # NOTE: internal import - from scipy.spatial import cKDTree
 
@@ -20,141 +19,344 @@ from .. import _helpers
 
 ###############################################################################
 
-#---- Correlations ----#
-def _corr(arr1, arr2):
-    return np.correlate(arr1, arr2, mode='same')
+#---- ArrayMath ----#
+class ArrayMath(FilterPreserveTypeBase):
+    """This filter allows the user to select two input data array on which to perfrom math operations."""
+    def __init__(self):
+        FilterPreserveTypeBase.__init__(self)
+        # Parameters:
+        self.__multiplier = 1.0
+        self.__newName = 'Mathed Up'
+        self.__inputArray1 = [None, None]
+        self.__inputArray2 = [None, None]
+        self.__operation = ArrayMath._add
 
-def _mult(arr1, arr2):
-    return arr1*arr2
+
+    @staticmethod
+    def _correlate(arr1, arr2):
+        """Use `np.correlate()` on `mode=\'same\'` on two selected arrays from one input."""
+        return np.correlate(arr1, arr2, mode='same')
+
+    @staticmethod
+    def _multiply(arr1, arr2):
+        return arr1*arr2
+
+    @staticmethod
+    def _divide(arr1, arr2):
+        return arr1/arr2
+
+    @staticmethod
+    def _add(arr1, arr2):
+        return arr1+arr2
+
+    @staticmethod
+    def _subtract(arr1, arr2):
+        return arr1-arr2
+
+    @staticmethod
+    def GetOperations():
+        ops = dict(
+            Add=ArrayMath._add,
+            Subtract=ArrayMath._subtract,
+            Multiply=ArrayMath._multiply,
+            Divide=ArrayMath._divide,
+            Correlate=ArrayMath._correlate,
+        )
+        return ops
+
+    @staticmethod
+    def GetOperationNames():
+        ops = ArrayMath.GetOperations()
+        return list(ops.keys())
+
+    @staticmethod
+    def GetOperation(idx):
+        n = ArrayMath.GetOperationNames()[idx]
+        return ArrayMath.GetOperations()[n]
 
 
-def correlateArrays(pdi, arr1, arr2, multiplier=1.0, newName='', pdo=None):
-    """Make sure to pass array names and integer associated fields.
-    Use helpers to get these properties."""
-    if pdo is None:
-        # TODO: test this
-        pdo = pdi.DeepCopy()
-    # Get the input arrays
-    (name1, field1) = arr1[0], arr1[1]
-    (name2, field2) = arr2[0], arr2[1]
-    wpdi = dsa.WrapDataObject(pdi)
-    arr1 = _helpers.getArray(wpdi, field1, name1)
-    arr2 = _helpers.getArray(wpdi, field2, name2)
-    # Perform correlations
-    #carr = _corr(arr1, arr2)
-    # TODO
-    carr = _mult(arr1, arr2)
-    # Apply the multiplier
-    carr *= multiplier
-    # Convert to a VTK array
-    c = nps.numpy_to_vtk(num_array=carr,deep=True)
-    # If no name given for data by user, use operator name
-    if newName == '':
-        newName = 'Correlated'
-    c.SetName(newName)
-    # Build output
-    pdo.DeepCopy(pdi)
-    pdo = _helpers.addArray(pdo, field1, c)
-    return pdo
+    def _MathUp(self, pdi, pdo):
+        """Make sure to pass array names and integer associated fields.
+        Use helpers to get these properties."""
+        if pdo is None:
+            # TODO: test this
+            pdo = pdi.DeepCopy()
+        # Get the input arrays
+        field1, name1 = self.__inputArray1[0], self.__inputArray1[1]
+        field2, name2 = self.__inputArray2[0], self.__inputArray2[1]
+        wpdi = dsa.WrapDataObject(pdi)
+        arr1 = _helpers.getArray(wpdi, field1, name1)
+        arr2 = _helpers.getArray(wpdi, field2, name2)
+        # Perform Math Operation
+        carr = self.__operation(arr1, arr2)
+        # Apply the multiplier
+        carr *= self.__multiplier
+        # Convert to a VTK array
+        c = nps.numpy_to_vtk(num_array=carr,deep=True)
+        # If no name given for data by user, use operator name
+        newName = self.__newName
+        if newName == '':
+            newName = 'Mathed Up'
+        c.SetName(newName)
+        # Build output
+        pdo.DeepCopy(pdi)
+        pdo = _helpers.addArray(pdo, field1, c)
+        return pdo
+
+
+    #### Algorithm Methods ####
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Perfrom task
+        self._MathUp(pdi, pdo)
+        return 1
+
+
+    #### Seters and Geters ####
+
+
+    def _SetInputArray1(self, field, name):
+        if self.__inputArray1[0] != field:
+            self.__inputArray1[0] = field
+            self.Modified()
+        if self.__inputArray1[1] != name:
+            self.__inputArray1[1] = name
+            self.Modified()
+
+    def _SetInputArray2(self, field, name):
+        if self.__inputArray2[0] != field:
+            self.__inputArray2[0] = field
+            self.Modified()
+        if self.__inputArray2[1] != name:
+            self.__inputArray2[1] = name
+            self.Modified()
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        if idx == 0:
+            self._SetInputArray1(field, name)
+        elif idx == 1:
+            self._SetInputArray2(field, name)
+        else:
+            raise RuntimeError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
+        return 1
+
+    def SetMultiplier(self, val):
+        """This is a static shifter/scale factor across the array after normalization."""
+        if self.__multiplier != val:
+            self.__multiplier = val
+            self.Modified()
+
+    def GetMultiplier(self):
+        return self.__multiplier
+
+    def SetNewArrayName(self, name):
+        """Give the new normalized array a meaningful name."""
+        if self.__newName != name:
+            self.__newName = name
+            self.Modified()
+
+    def GetNewArrayName(self):
+        return self.__newName
+
+    def SetOperation(self, op):
+        if isinstance(op, str):
+            op = ArrayMath.GetOperations()[op]
+        elif isinstance(op, int):
+            op = ArrayMath.GetOperation(op)
+        if self.__operation != op:
+            self.__operation = op
+            self.Modified()
+
 
 
 ###############################################################################
 
 #---- Normalizations ----#
-# Here are some private functions to encompass the different normalizations
-def _featureScaleNorm(arr, rng=None):
-    if rng is not None:
-        mi = rng[0]
-        ma = rng[1]
-    else:
+
+class NormalizeArray(FilterPreserveTypeBase):
+    """This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested).
+    """
+    def __init__(self):
+        FilterPreserveTypeBase.__init__(self)
+        # Parameters:
+        self.__multiplier = 1.0
+        self.__newName = 'Normalized'
+        self.__absolute = False
+        self.__inputArray = [None, None]
+        self.__normalization = NormalizeArray._featureScale
+        #self.__range = None
+
+
+    #### Array normalization methods ####
+
+
+    @staticmethod
+    def _passArray(arr):
+        return arr
+
+    @staticmethod
+    def _featureScale(arr):
+        # TODO: implement ability to use custom range
+        # if rng is not None:
+        #     mi = rng[0]
+        #     ma = rng[1]
+        # else:
         mi = np.min(arr)
         ma = np.max(arr)
-    return (arr - mi) / (ma - mi)
+        return (arr - mi) / (ma - mi)
 
-def _standardScoreNorm(arr):
-    return (arr - np.mean(arr)) / (np.std(arr))
+    @staticmethod
+    def _standardScore(arr):
+        return (arr - np.mean(arr)) / (np.std(arr))
 
-def _log10Norm(arr):
-    return np.log10(arr)
+    @staticmethod
+    def _log10(arr):
+        return np.log10(arr)
 
-def _logNatNorm(arr):
-    return np.log(arr)
+    @staticmethod
+    def _logNat(arr):
+        return np.log(arr)
 
-def getArrayRange(pdi, arr):
-    (name, field) = arr[0], arr[1]
-    wpdi = dsa.WrapDataObject(pdi)
-    arr = _helpers.getArray(wpdi, field, name)
-    arr = np.array(arr)
-    return [np.min(arr), np.max(arr)]
+    @staticmethod
+    def GetOperations():
+        ops = dict(
+            Feature_Scale=NormalizeArray._featureScale,
+            Standard_Score=NormalizeArray._standardScore,
+            Log10=NormalizeArray._log10,
+            Natural_Log=NormalizeArray._logNat,
+            Just_Multiply=NormalizeArray._passArray,
+        )
+        return ops
+
+    @staticmethod
+    def GetOperationNames():
+        ops = NormalizeArray.GetOperations()
+        return list(ops.keys())
+
+    @staticmethod
+    def GetOperation(idx):
+        n = NormalizeArray.GetOperationNames()[idx]
+        return NormalizeArray.GetOperations()[n]
+
+    @staticmethod
+    def GetArrayRange(pdi, field, name):
+        wpdi = dsa.WrapDataObject(pdi)
+        arr = _helpers.getArray(wpdi, field, name)
+        arr = np.array(arr)
+        return (np.min(arr), np.max(arr))
 
 
-# Here is the public function to call for the normalizations
-def normalizeArray(pdi, arr, norm, multiplier=1.0, newName='', pdo=None, abs=False, rng=None):
-    """
-    TODO: Descrption
-    Perform normalize on a data array for any given VTK data object.
-    `abs` will take the absolute value before the normalization
+    def _Normalize(self, pdi, pdo):
+        """
+        TODO: Descrption
+        Perform normalize on a data array for any given VTK data object.
+        `abs` will take the absolute value before the normalization
 
-    Normalization Types:
-        0 -> Feature Scale
-        1 -> Standard Score
-        2 -> Natural Log
-        3 -> Log Base 10
-        4 -> Simple Multiply by Multiplier
+        Normalization Types:
+            0 -> Feature Scale
+            1 -> Standard Score
+            2 -> Natural Log
+            3 -> Log Base 10
+            4 -> Simple Multiply by Multiplier
 
-    """
-    if pdo is None:
-        # TODO: test this
-        pdo = pdi.DeepCopy()
+        """
+        # Get inout array
+        field, name = self.__inputArray[0], self.__inputArray[1]
+        #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
+        wpdi = dsa.WrapDataObject(pdi)
+        arr = _helpers.getArray(wpdi, field, name)
+        arr = np.array(arr)
+        # Take absolute value?
+        if self.__absolute:
+            arr = np.abs(arr)
+        # Perform normalization scheme
+        arr = self.__normalization(arr)
+        # Apply the multiplier
+        arr *= self.__multiplier
+        # Convert to VTK array
+        c = nps.numpy_to_vtk(num_array=arr,deep=True)
+        # If no name given for data by user, use operator name
+        newName = self.__newName
+        if newName == '' or newName == 'Normalized':
+            newName = 'Normalized ' + name
+        c.SetName(newName)
+        # Build output
+        pdo.DeepCopy(pdi)
+        pdo = _helpers.addArray(pdo, field, c)
+        return pdo
 
-    # Get inout array
-    (name, field) = arr[0], arr[1]
-    wpdi = dsa.WrapDataObject(pdi)
-    arr = _helpers.getArray(wpdi, field, name)
-    arr = np.array(arr)
-    # Take absolute value?
-    if abs:
-        arr = np.abs(arr)
-    # Perform normalization scheme
-    if norm == 0:
-        # Feature Scale
-        arr = _featureScaleNorm(arr, rng)
-    elif norm == 1:
-        # Standard Score
-        arr = _standardScoreNorm(arr)
-    elif norm == 2:
-        # Natural Log
-        arr = _logNatNorm(arr)
-    elif norm == 3:
-        # Log base 10
-        arr = _log10Norm(arr)
-    # Just multiply (option 4): no function call
-    elif norm != 4:
-        # Catch bad normalization call
-        raise Exception('Normalization %d is not implemented' % norm)
+    #### Algorithm Methods ####
 
-    # Apply the multiplier
-    arr *= multiplier
-    # Convert to VTK array
-    c = nps.numpy_to_vtk(num_array=arr,deep=True)
-    # If no name given for data by user, use operator name
-    if newName == '' or newName == 'Normalized':
-        newName = 'Normalized ' + name
-    c.SetName(newName)
-    # Build output
-    pdo.DeepCopy(pdi)
-    pdo = _helpers.addArray(pdo, field, c)
-    return pdo
+
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Perfrom task
+        self._Normalize(pdi, pdo)
+        return 1
+
+    #### Seters and Geters ####
+
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        if self.__inputArray[0] != field:
+            self.__inputArray[0] = field
+            self.Modified()
+        if self.__inputArray[1] != name:
+            self.__inputArray[1] = name
+            self.Modified()
+        return 1
+
+    def SetMultiplier(self, val):
+        """This is a static shifter/scale factor across the array after normalization."""
+        if self.__multiplier != val:
+            self.__multiplier = val
+            self.Modified()
+
+
+    def GetMultiplier(self):
+        return self.__multiplier
+
+
+    def SetNewArrayName(self, name):
+        """Give the new normalized array a meaningful name."""
+        if self.__newName != name:
+            self.__newName = name
+            self.Modified()
+
+
+    def GetNewArrayName(self):
+        return self.__newName
+
+    def SetTakeAbsoluteValue(self, flag):
+        """This will take the absolute value of the array before normalization."""
+        if self.__absolute != flag:
+            self.__absolute = flag
+            self.Modified()
+
+    def SetNormalization(self, norm):
+        if isinstance(norm, str):
+            norm = NormalizeArray.GetOperations()[norm]
+        elif isinstance(norm, int):
+            norm = NormalizeArray.GetOperation(norm)
+        if self.__normalization != norm:
+            self.__normalization = norm
+            self.Modified()
 
 
 
 ###############################################################################
 #---- Cell Connectivity ----#
 
-class AddCellConnToPoints(VTKPythonAlgorithmBase):
+class AddCellConnToPoints(PVGeoAlgorithmBase):
     """This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation)."""
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
@@ -230,6 +432,8 @@ class AddCellConnToPoints(VTKPythonAlgorithmBase):
 
 
     #### Seters and Geters ####
+
+
     def SetCellType(self, cellType):
         if cellType != self.__cellType:
             self.__cellType = cellType

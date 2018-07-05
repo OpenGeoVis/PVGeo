@@ -12,7 +12,7 @@ from . import ubc
 from . import ws3d
 
 from . import _helpers
-from .__main__ import test
+from .__tester__ import test
 
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'

@@ -40,8 +40,8 @@ class TestGSLibReader(unittest.TestCase):
         reader.AddFileName(fname)
         # Perform the read
         reader.Update()
-        self.HEADER = reader.GetHeader()
-        self.TABLE = reader.GetOutputDataObject(0)
+        self.HEADER = reader.GetFileHeader()
+        self.TABLE = reader.GetOutput()
 
     def tearDown(self):
         # Remove the test data directory after the test
@@ -49,21 +49,21 @@ class TestGSLibReader(unittest.TestCase):
 
     ###########################################
 
-    def test_data_aray_titles(self):
-        """Test `GSLibReader`: check data array names"""
+    def test_data_array_titles(self):
+        """`GSLibReader`: data array names"""
         for i in range(len(self.titles)):
             self.assertEqual(self.TABLE.GetColumnName(i), self.titles[i])
         return
 
     def test_data_fidelity(self):
-        """Test `GSLibReader`: data fidelity"""
+        """`GSLibReader`: data fidelity"""
         for i in range(len(self.titles)):
             arr = nps.vtk_to_numpy(self.TABLE.GetColumn(i))
-            self.assertTrue(np.allclose(data[:,i], arr, rtol=RTOL))
+            self.assertTrue(np.allclose(self.data[:,i], arr, rtol=RTOL))
         return
 
     def test_header_catch(self):
-        """Test `GSLibReader`: check header caught by reader"""
+        """`GSLibReader`: check header caught by reader"""
         self.assertEqual(self.HEADER, self.header)
         return
 
@@ -97,7 +97,7 @@ class TestGSLibReader(unittest.TestCase):
         reader.AddFileName(fname)
         # Perform the read
         reader.Update()
-        self.GRID = reader.GetOutputDataObject(0)
+        self.GRID = reader.GetOutput()
 
     def tearDown(self):
         # Remove the test data directory after the test
@@ -105,20 +105,20 @@ class TestGSLibReader(unittest.TestCase):
 
     ###########################################
 
-    def test_titles(self):
-        """Test `SGeMSGridReader`"""
+    def test_data_array_titles(self):
+        """`SGeMSGridReader`: data array titles"""
         for i in range(len(self.titles)):
             self.assertEqual(self.GRID.GetPointData().GetArrayName(i), self.titles[i])
         return
 
     def test_shape(self):
-        """Test `SGeMSGridReader`"""
+        """`SGeMSGridReader`: check output grid shape"""
         self.assertEqual(self.GRID.GetExtent(), self.extent)
         self.assertEqual(self.GRID.GetNumberOfCells(), self.extent[1]*self.extent[3]*self.extent[5])
         return
 
     def test_data(self,):
-        """Test `SGeMSGridReader`"""
+        """`SGeMSGridReader`: data fidelity"""
         for i in range(len(self.titles)):
             arr = nps.vtk_to_numpy(self.GRID.GetPointData().GetArray(i))
             self.assertTrue(np.allclose(self.data[:,i], arr, rtol=RTOL))

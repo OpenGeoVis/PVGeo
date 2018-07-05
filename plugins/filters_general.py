@@ -24,6 +24,8 @@ MENU_CAT = 'PVGeo: General Filters'
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoAddCellConnToPoints(AddCellConnToPoints):
     def __init__(self):
         AddCellConnToPoints.__init__(self)
@@ -36,8 +38,8 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
         print(cellType)
         AddCellConnToPoints.SetCellType(self, cellType)
 
-    @smproperty.xml(_helpers.getPropertyXml('SetUseNearestNbr', 'Use Neareast Nbr Approx',
-        'SetUseNearestNbr', False,
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Neareast Nbr Approx',
+        command='SetUseNearestNbr', default_values=False,
         help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
     def SetUseNearestNbr(self, flag):
         AddCellConnToPoints.SetUseNearestNbr(self, flag)
@@ -69,6 +71,8 @@ class PVGeoCombineTables(CombineTables):
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoPointsToTube(PointsToTube):
     def __init__(self):
         PointsToTube.__init__(self)
@@ -86,8 +90,8 @@ class PVGeoPointsToTube(PointsToTube):
     def SetNumberOfSides(self, num):
         PointsToTube.SetNumberOfSides(self, num)
 
-    @smproperty.xml(_helpers.getPropertyXml('UseNearestNbr', 'Use Nearest Neighbor',
-        'SetUseNearestNbr', False,
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Nearest Neighbor',
+        command='SetUseNearestNbr', default_values=False,
         help='A boolean to set whether to use a nearest neighbor approxiamtion when building path from input points.'))
     def SetUseNearestNbr(self, flag):
         PointsToTube.SetUseNearestNbr(self, flag)
@@ -136,38 +140,41 @@ class PVGeoReshapeTable(ReshapeTable):
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smhint.xml('''<RepresentationType view="RenderView" type="Wireframe" />''')
+@smhint.xml('''<WarnOnCreate title="Axial Assumptions">
+  **Voxelize Points** filter assumes the input points to be sampled on a regular XYZ coordinate system at an even spacing.
+  Do you want to continue?
+    </WarnOnCreate>''')
 class PVGeoVoxelizePoints(VoxelizePoints):
     def __init__(self):
         VoxelizePoints.__init__(self)
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getPropertyXml('SetEstimateGrid', 'Estimate Grid Spacing',
-        'SetEstimateGrid', True,
-        help='A boolean to set whether to try to estimate the proper dx, dy, and dz spacings for a grid on a regular cartesian coordinate system.'))
+    @smproperty.xml(_helpers.getPropertyXml(name='Estimate Grid Spacing',
+        command='SetEstimateGrid', default_values=True,
+        help='A boolean to set whether to try to estimate the proper dx, dy, and dz spacings for a grid on a regular cartesian coordinate system.', visibility='advanced'))
     def SetEstimateGrid(self, flag):
         VoxelizePoints.SetEstimateGrid(self, flag)
 
-    @smproperty.doublevector(name="dx", default_values=10.0)
-    def SetDeltaX(self, dx):
-        VoxelizePoints.SetDeltaX(self, dx)
-
-    @smproperty.doublevector(name="dy", default_values=10.0)
-    def SetDeltaY(self, dy):
-        VoxelizePoints.SetDeltaY(self, dy)
-
-    @smproperty.doublevector(name="dz", default_values=10.0)
-    def SetDeltaZ(self, dz):
-        VoxelizePoints.SetDeltaZ(self, dz)
+    @smproperty.xml(_helpers.getPropertyXml(name='Cell Size', command='SetCellSize', default_values=[10.0, 10.0, 10.0], help='The cell size (dx, dy, dz) to use as a default for all generated voxels.', visibility='advanced'))
+    def SetCellSize(self, dx, dy, dz):
+        VoxelizePoints.SetDeltas(self, dx, dy, dz)
 
 
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoVoxelizePointsFromArrays', label='Voxelize Points from Arrays')
+@smproxy.filter(name='PVGeoVoxelizePointsFromArrays', label='Voxelize Points From Arrays')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Wireframe" />''')
+@smhint.xml('''<WarnOnCreate title="Axial Assumptions">
+  **Voxelize Points From Arrays** filter assumes the input points to be sampled on a regular XYZ coordinate system.
+  Do you want to continue?
+</WarnOnCreate>''')
 class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
     def __init__(self):
         VoxelizePoints.__init__(self)
@@ -192,9 +199,7 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         dx = _helpers.getArray(wpdi, self.__dx_id[0], self.__dx_id[1])
         dy = _helpers.getArray(wpdi, self.__dy_id[0], self.__dy_id[1])
         dz = _helpers.getArray(wpdi, self.__dz_id[0], self.__dz_id[1])
-        VoxelizePoints.SetDeltaX(self, dx)
-        VoxelizePoints.SetDeltaY(self, dy)
-        VoxelizePoints.SetDeltaZ(self, dz)
+        VoxelizePoints.SetDeltas(self, dx, dy, dz)
         # call parent and make sure EstimateGrid is set to False
         return VoxelizePoints.RequestData(self, request, inInfo, outInfo)
 
@@ -216,86 +221,66 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
 
 ###############################################################################
 
-# TODO: how do we preserve input/output types?
-# Correlate Arrays
-# @smproxy.filter(name='vtkCorrelateArrays', label='Correlate Arrays')
-# @smhint.xml('<ShowInMenu category="%s"/>' % MENUT_CAT)
-# @smproperty.input(name="Input", port_index=0)
-# @smdomain.datatype(dataTypes=["vtkDataObject"], composite_data_supported=False)
-# class vtkCorrelateArrays(VTKPythonAlgorithmBase):
-#     """Use `np.correlate()` on `mode=\'same\'` on two selected arrays from one input."""
-#     def __init__(self):
-#         VTKPythonAlgorithmBase.__init__(self,
-#             nInputPorts=1, nOutputPorts=1, inputType='vtkDataObject', outputType='vtkDataObject')
-#         # Parameters... none
-#         self.__multiplier = 1.0
-#         self.__newName = 'Correlated'
-#
-#     # # THIS IS CRUCIAL to preserve data type through filter
-#     def RequestDataObject(self, request, inInfoVec, outInfoVec):
-#         """Overwritten by subclass to manage data object creation.
-#         There is not need to overwrite this class if the output can
-#         be created based on the OutputType data member."""
-#         #print(inInfoVec[0])
-#         #typ = inInfoVec[0].Get(vtkDataObject.DATA_OBJECT()).Get(vtkDataObject.DATA_OBJECT())
-#         #print(typ)
-#         outInfoVec[0].Set(vtkDataObject.DATA_TYPE_NAME(), "vtkTable")
-#         return 1
-#
-#     def RequestData(self, request, inInfo, outInfo):
-#         from PVGeo.filters_general import correlateArrays
-#         import PVGeo._helpers as inputhelp
-#         # Get input/output of Proxy
-#         pdi = self.GetInputData(inInfo, 0, 0)
-#         pdo = self.GetOutputData(outInfo, 0)
-#         # Grab input arrays to process from drop down menus
-#         # Simply grab the name and field association
-#         # TODO: use new array helpers
-#         # name0 = inputhelp.getSelectedArrayName(self, 0)
-#         # field0 = inputhelp.getSelectedArrayField(self, 0)
-#         # name1 = inputhelp.getSelectedArrayName(self, 1)
-#         # field1 = inputhelp.getSelectedArrayField(self, 1)
-#         # # Pass array names and associations on to process
-#         # correlateArrays(pdi, (name0,field0), (name1,field1), multiplier=self.__multiplier, newName=self.__newName, pdo=pdo)
-#         print('does this work???')
-#         print(pdi)
-#         print(pdo)
-#         pdo.DeepCopy(pdi)
-#         return 1
-#
-#
-#     # Array selection API is typical with filters in VTK
-#     # This is intended to allow ability for users to choose which arrays to
-#     # process. To expose that in ParaView, simply use the
-#     # @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=2))
-#     # def SetInputArrayToProcess(self, idx, info):
-#     #     return vtkPVGeoFilterBase.SetInputArrayToProcess(idx, info)
-#
-#     #### SETTERS AND GETTERS ####
-#
-#     @smproperty.doublevector(name="Multiplier", default_values=1.0)
-#     def SetMultiplier(self, val):
-#         if self.__multiplier != val:
-#             self.__multiplier = val
-#             self.Modified()
-#
-#
-#     def GetMultiplier(self):
-#         return self.__multiplier
-#
-#
-#     @smproperty.stringvector(name="NewArrayName", default="Correlated")
-#     def SetNewArrayName(self, name):
-#         if self.__newName != name:
-#             self.__newName = name
-#             self.Modified()
-#
-#
-#     def GetNewArrayName(self):
-#         return self.__newName
+# Normalize Arrays
+@smproxy.filter(name='PVGeoNormalizeArray', label='Normalize Array')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataObject"], composite_data_supported=False)
+class PVGeoNormalizeArray(NormalizeArray):
+    def __init__(self):
+        NormalizeArray.__init__(self)
+
+    #### SETTERS AND GETTERS ####
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return NormalizeArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+    @smproperty.doublevector(name="Multiplier", default_values=1.0)
+    def SetMultiplier(self, val):
+        NormalizeArray.SetMultiplier(self, val)
+
+    @smproperty.stringvector(name="New Array Name", default_values="Normalized")
+    def SetNewArrayName(self, name):
+        NormalizeArray.SetNewArrayName(self, name)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Normalization', command='SetNormalization', labels=NormalizeArray.GetOperationNames(), help='This is the type of normalization to apply to the input array.'))
+    def SetNormalization(self, norm):
+        NormalizeArray.SetNormalization(self, norm)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Absolute Value', command='SetTakeAbsoluteValue', default_values=False, help='This will take the absolute value of the array before normalization.'))
+    def SetTakeAbsoluteValue(self, flag):
+        NormalizeArray.SetTakeAbsoluteValue(self, flag)
 
 
+###############################################################################
 
+# Array Math
+@smproxy.filter(name='PVGeoArrayMath', label='Array Math')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataObject"], composite_data_supported=False)
+class PVGeoArrayMath(ArrayMath):
+    def __init__(self):
+        ArrayMath.__init__(self)
+
+    #### SETTERS AND GETTERS ####
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=2))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return ArrayMath.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+    @smproperty.doublevector(name="Multiplier", default_values=1.0)
+    def SetMultiplier(self, val):
+        ArrayMath.SetMultiplier(self, val)
+
+    @smproperty.stringvector(name="New Array Name", default_values="Mathed Up")
+    def SetNewArrayName(self, name):
+        ArrayMath.SetNewArrayName(self, name)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Operation', command='SetOperation', labels=ArrayMath.GetOperationNames(), help='This is the type of operation to apply to the input arrays.'))
+    def SetOperation(self, op):
+        ArrayMath.SetOperation(self, op)
 
 
 ###############################################################################
@@ -304,6 +289,8 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoManySlicesAlongAxis(ManySlicesAlongAxis):
     def __init__(self):
         ManySlicesAlongAxis.__init__(self)
@@ -327,6 +314,8 @@ class PVGeoManySlicesAlongAxis(ManySlicesAlongAxis):
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoClipThroughTime(ClipThroughTime):
     def __init__(self):
         ClipThroughTime.__init__(self)
@@ -361,6 +350,8 @@ class PVGeoClipThroughTime(ClipThroughTime):
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
 @smproperty.input(name="Points", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
     def __init__(self):
         ManySlicesAlongPoints.__init__(self)
@@ -369,6 +360,49 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
     @smdomain.intrange(min=2, max=25)
     def SetNumberOfSlices(self, num):
         ManySlicesAlongPoints.SetNumberOfSlices(self, num)
+
+
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoRotateCoordinates', label='Rotate Coordinates')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
+class PVGeoAddCellConnToPoints(RotateCoordinates):
+    def __init__(self):
+        RotateCoordinates.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.doublevector(name="Rotation Angle", default_values=45.0)
+    @smdomain.doublerange(min=-90.0, max=90.0)
+    def SetRotationDegrees(self, theta):
+        RotateCoordinates.SetRotationDegrees(self, theta)
+
+    @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0], visibility='advanced')
+    def SetOrigin(self, xo, yo):
+        RotateCoordinates.SetOrigin(self, xo, yo)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Corner',
+        command='SetUseCorner', default_values=True,
+        help='Use the corner as the rotation origin.', visibility='advanced'))
+    def SetUseCorner(self, flag):
+        RotateCoordinates.SetUseCorner(self, flag)
+
+
+###############################################################################
+@smproxy.filter(name='PVGeoExtractPoints', label='Extract Points')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
+class PVGeoExtractPoints(ExtractPoints):
+    def __init__(self):
+        ExtractPoints.__init__(self)
 
 
 ###############################################################################

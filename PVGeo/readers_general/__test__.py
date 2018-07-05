@@ -1,4 +1,5 @@
 import unittest
+import warnings
 import shutil
 import tempfile
 import os
@@ -100,7 +101,7 @@ class TestDelimitedTextReader(unittest.TestCase):
         reader.SetSkipRows(1)
         reader.SetComments('!')
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         self._check_shape(table)
         self._check_titles(table)
         self._check_array_types(table)
@@ -115,7 +116,7 @@ class TestDelimitedTextReader(unittest.TestCase):
         reader.SetSkipRows(1)
         reader.SetComments('!')
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         self._check_shape(table)
         self._check_titles(table)
         self._check_array_types(table)
@@ -131,7 +132,7 @@ class TestDelimitedTextReader(unittest.TestCase):
         reader.SetHasTitles(False)
         reader.SetComments('!')
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         self._check_shape(table)
         self._check_titles(table, titles=['Field 0', 'Field 1', 'Field 2'])
         self._check_array_types(table)
@@ -165,7 +166,7 @@ class TestXYZTextReader(unittest.TestCase):
         reader = XYZTextReader()
         reader.AddFileName(self.fname)
         reader.Update()
-        self.TABLE = reader.GetOutputDataObject(0)
+        self.TABLE = reader.GetOutput()
         return
 
     def tearDown(self):
@@ -175,14 +176,14 @@ class TestXYZTextReader(unittest.TestCase):
     ###########################################
 
     def test_data_aray_titles(self):
-        """Test `XYZTextReader`: check data array names"""
+        """`XYZTextReader`: check data array names"""
         titles = self.header.split(', ')
         for i in range(self.ncols):
             self.assertEqual(self.TABLE.GetColumnName(i), titles[i])
         return
 
     def test_data_fidelity(self):
-        """Test `XYZTextReader`: check data fidelity"""
+        """`XYZTextReader`: check data fidelity"""
         titles = self.header.split(', ')
         for i in range(self.ncols):
             arr = nps.vtk_to_numpy(self.TABLE.GetColumnByName(titles[i]))
@@ -190,7 +191,7 @@ class TestXYZTextReader(unittest.TestCase):
         return
 
     def test_shape(self):
-        """`XYZTextReader`: read a randomly generated data file"""
+        """`XYZTextReader`: data table shape"""
         self.assertEqual(self.TABLE.GetNumberOfRows(), self.nrows)
         self.assertEqual(self.TABLE.GetNumberOfColumns(), self.ncols)
         return
@@ -222,7 +223,7 @@ class TestPackedBinariesReader(unittest.TestCase):
     ###########################################
 
     def test_floats(self):
-        """Test `PackedBinariesReader`: floats"""
+        """`PackedBinariesReader`: floats"""
         # Make data and write out
         dtype = np.dtype('f')
         arr = np.array(np.random.random(self.n), dtype=dtype)
@@ -231,16 +232,16 @@ class TestPackedBinariesReader(unittest.TestCase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
-        reader.SetDType('f')
+        reader.SetDataType('f')
         # Perfrom Read
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         # Check output
         self._check_data(table, arr)
         return
 
     def test_doubles(self):
-        """Test `PackedBinariesReader`: doubles"""
+        """`PackedBinariesReader`: doubles"""
         # Make data and write out
         dtype = np.dtype('d')
         arr = np.array(np.random.random(self.n), dtype=dtype)
@@ -249,16 +250,16 @@ class TestPackedBinariesReader(unittest.TestCase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
-        reader.SetDType('d')
+        reader.SetDataType('d')
         # Perfrom Read
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         # Check output
         self._check_data(table, arr)
         return
 
     def test_ints(self):
-        """Test `PackedBinariesReader`: ints"""
+        """`PackedBinariesReader`: ints"""
         # Make data and write out
         dtype = np.dtype('i')
         arr = np.array(np.random.random(self.n), dtype=dtype)
@@ -267,36 +268,37 @@ class TestPackedBinariesReader(unittest.TestCase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
-        reader.SetDType('i')
+        reader.SetDataType('i')
         # Perfrom Read
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         # Check output
         self._check_data(table, arr)
         return
 
     # TODO: fix big endian?
-    # def test_big_endian(self):
-    #     """Test `PackedBinariesReader`: floats with big-endianness"""
-    #     # Make data and write out
-    #     dtype = np.dtype('>f')
-    #     arr = np.array(np.random.random(self.n), dtype=dtype)
-    #     fname = os.path.join(self.test_dir, 'test.bin')
-    #     arr.tofile(fname)
-    #     # Set up reader
-    #     reader = PackedBinariesReader()
-    #     reader.AddFileName(fname)
-    #     reader.SetDType('f')
-    #     reader.SetEndian('>')
-    #     # Perfrom Read
-    #     reader.Update()
-    #     table = reader.GetOutputDataObject(0)
-    #     # Check output
-    #     self._check_data(table, arr)
-    #     return
+    def test_endian_big(self):
+        """`PackedBinariesReader`: floats with big-endianness"""
+        warnings.warn('`PackedBinariesReader`: big-endianness not implemented')
+        # # Make data and write out
+        # dtype = np.dtype('>f')
+        # arr = np.array(np.random.random(self.n), dtype=dtype)
+        # fname = os.path.join(self.test_dir, 'test.bin')
+        # arr.tofile(fname)
+        # # Set up reader
+        # reader = PackedBinariesReader()
+        # reader.AddFileName(fname)
+        # reader.SetDataType('f')
+        # reader.SetEndian('>')
+        # # Perfrom Read
+        # reader.Update()
+        # table = reader.GetOutput()
+        # # Check output
+        # self._check_data(table, arr)
+        return
 
-    def test_little_endian(self):
-        """Test `PackedBinariesReader`: floats with little-endianness"""
+    def test_endian_little(self):
+        """`PackedBinariesReader`: floats with little-endianness"""
         # Make data and write out
         dtype = np.dtype('<f')
         arr = np.array(np.random.random(self.n), dtype=dtype)
@@ -305,11 +307,11 @@ class TestPackedBinariesReader(unittest.TestCase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
-        reader.SetDType('f')
+        reader.SetDataType('f')
         reader.SetEndian('<')
         # Perfrom Read
         reader.Update()
-        table = reader.GetOutputDataObject(0)
+        table = reader.GetOutput()
         # Check output
         self._check_data(table, arr)
         return
@@ -340,10 +342,10 @@ class TestMadagascarReader(unittest.TestCase):
         # Set up reader
         reader = MadagascarReader()
         reader.AddFileName(fname)
-        reader.SetDType('f')
+        reader.SetDataType('f')
         # Perfrom Read
         reader.Update()
-        self.TABLE = reader.GetOutputDataObject(0)
+        self.TABLE = reader.GetOutput()
         return
 
     def tearDown(self):
@@ -353,7 +355,7 @@ class TestMadagascarReader(unittest.TestCase):
     ###########################################
 
     def test_data_fidelity(self):
-        """Test `MadagascarReader`: Check data fidelity"""
+        """`MadagascarReader`: Check data fidelity"""
         arr = nps.vtk_to_numpy(self.TABLE.GetColumn(0))
         self.assertTrue(np.allclose(self.data, arr))#, rtol=0.0001))
         return
