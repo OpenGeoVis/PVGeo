@@ -40,3 +40,6 @@ def test(close=False):
     if close:
         exit(len(run.failures) > 0 or len(run.errors) > 0)
     return run
+
+if __name__ == '__main__':
+    test(True)

@@ -12,6 +12,8 @@ install:
 
 script:
     - python -m PVGeo test
+    - coverage run PVGeo/__tester__.py
+    - codecov --token=8da9d332-1618-450d-8654-09a8ecf3c2dc
 
 notifications:
     slack:
