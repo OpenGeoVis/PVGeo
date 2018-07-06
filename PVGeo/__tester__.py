@@ -27,6 +27,7 @@ def test(close=False):
     >>> PVGeo.test()
     ```
     """
+    print('in the tester: ', __file__)
     test_file_strings = []
     for root, dirnames, filenames in os.walk('.'):
         for filename in fnmatch.filter(filenames, '__test__.py'):
