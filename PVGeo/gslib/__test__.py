@@ -1,4 +1,5 @@
 import unittest
+import warnings
 import shutil
 import tempfile
 import os
@@ -8,6 +9,7 @@ import numpy as np
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
+from .. import _helpers
 # Functionality to test:
 from .gslib import *
 from .sgems import *
@@ -67,13 +69,30 @@ class TestGSLibReader(unittest.TestCase):
         self.assertEqual(self.HEADER, self.header)
         return
 
+    def test_bad_file(self):
+        """`GSLibReader`: check handling of bad input file"""
+        fname = os.path.join(self.test_dir, 'test_bad.dat')
+        header = ['A header line', 'Bad number of titles']
+        for ln in self.titles:
+            header.append(ln + '\n')
+        header = '\n'.join(header)
+        np.savetxt(fname, self.data, delimiter=' ', header=header, comments='')
+        # Set up the reader
+        reader = GSLibReader()
+        reader.AddFileName(fname)
+        # Perform the read
+        e = _helpers.ErrorObserver()
+        e.MakeObserver(reader)
+        reader.Update()
+        self.assertTrue(e.ErrorOccurred())
+
 
 
 
 ###############################################################################
 
 
-class TestGSLibReader(unittest.TestCase):
+class TestSGeMSGridReader(unittest.TestCase):
     """
     Test the `SGeMSGridReader`
     """
@@ -124,11 +143,19 @@ class TestGSLibReader(unittest.TestCase):
             self.assertTrue(np.allclose(self.data[:,i], arr, rtol=RTOL))
         return
 
-
-
-
-###############################################################################
-
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_bad_file(self):
+        """`SGeMSGridReader`: check handling of bad input file"""
+        fname = os.path.join(self.test_dir, 'test_bad.dat')
+        header = ['Bad header', '%d' % len(self.titles)]
+        for ln in self.titles:
+            header.append(ln + '\n')
+        header = '\n'.join(header)
+        np.savetxt(fname, self.data, delimiter=' ', header=header, comments='')
+        # Set up the reader
+        reader = SGeMSGridReader()
+        reader.AddFileName(fname)
+        # Perform the read
+        e = _helpers.ErrorObserver()
+        e.MakeObserver(reader)
+        reader.Update()
+        self.assertTrue(e.ErrorOccurred())

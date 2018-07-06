@@ -50,16 +50,22 @@ class SGeMSGridReader(GSLibReader):
         # TODO: make more efficient to only reader header of file
         fileLines = self._GetFileContents(idx=0)
         h = fileLines[0+self.GetSkipRows()].split(self._GetDeli())
-        n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
+        try:
+            n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
+        except ValueError:
+            raise RuntimeError('File not in proper SGeMS Grid fromat.')
         return (0,n1-1, 0,n2-1, 0,n3-1)
 
     def _ExtractHeader(self, content):
         titles, content = GSLibReader._ExtractHeader(self, content)
         h = self.GetFileHeader().split(self._GetDeli())
-        if self.__extent is None:
-            self.__extent = (int(h[0]), int(h[1]), int(h[2]))
-        elif self.__extent != (int(h[0]), int(h[1]), int(h[2])):
-            raise RuntimeError('Grid dimensions change in file time series.')
+        try:
+            if self.__extent is None:
+                self.__extent = (int(h[0]), int(h[1]), int(h[2]))
+            elif self.__extent != (int(h[0]), int(h[1]), int(h[2])):
+                raise RuntimeError('Grid dimensions change in file time series.')
+        except ValueError:
+            raise RuntimeError('File not in proper SGeMS Grid fromat.')
         return titles, content
 
     def RequestData(self, request, inInfo, outInfo):

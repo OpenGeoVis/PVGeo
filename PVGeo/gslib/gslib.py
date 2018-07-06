@@ -48,10 +48,5 @@ class GSLibReader(DelimitedTextReader):
     #### Seters and Geters ####
 
     def GetFileHeader(self):
-        if self.__header is None:
-            raise RuntimeError("Input file has not been read yet.")
+        """returns the file header. If file hasn't been read, returns None"""
         return self.__header
-
-    def _SetFileHeader(self, header):
-        self.__header = header
-        return 1
