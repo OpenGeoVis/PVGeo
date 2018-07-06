@@ -56,11 +56,11 @@ class ArrayMath(FilterPreserveTypeBase):
     @staticmethod
     def GetOperations():
         ops = dict(
-            Add=ArrayMath._add,
-            Subtract=ArrayMath._subtract,
-            Multiply=ArrayMath._multiply,
-            Divide=ArrayMath._divide,
-            Correlate=ArrayMath._correlate,
+            add=ArrayMath._add,
+            subtract=ArrayMath._subtract,
+            multiply=ArrayMath._multiply,
+            divide=ArrayMath._divide,
+            correlate=ArrayMath._correlate,
         )
         return ops
 
@@ -71,6 +71,8 @@ class ArrayMath(FilterPreserveTypeBase):
 
     @staticmethod
     def GetOperation(idx):
+        if isinstance(idx, str):
+            return ArrayMath.GetOperations()[idx]
         n = ArrayMath.GetOperationNames()[idx]
         return ArrayMath.GetOperations()[n]
 
@@ -222,25 +224,27 @@ class NormalizeArray(FilterPreserveTypeBase):
         return np.log(arr)
 
     @staticmethod
-    def GetOperations():
+    def GetNormalizations():
         ops = dict(
-            Feature_Scale=NormalizeArray._featureScale,
-            Standard_Score=NormalizeArray._standardScore,
-            Log10=NormalizeArray._log10,
-            Natural_Log=NormalizeArray._logNat,
-            Just_Multiply=NormalizeArray._passArray,
+            feature_scale=NormalizeArray._featureScale,
+            standard_score=NormalizeArray._standardScore,
+            log10=NormalizeArray._log10,
+            natural_log=NormalizeArray._logNat,
+            just_multiply=NormalizeArray._passArray,
         )
         return ops
 
     @staticmethod
-    def GetOperationNames():
-        ops = NormalizeArray.GetOperations()
+    def GetNormalizationNames():
+        ops = NormalizeArray.GetNormalizations()
         return list(ops.keys())
 
     @staticmethod
-    def GetOperation(idx):
-        n = NormalizeArray.GetOperationNames()[idx]
-        return NormalizeArray.GetOperations()[n]
+    def GetNormalization(idx):
+        if isinstance(idx, str):
+            return NormalizeArray.GetNormalizations()[idx]
+        n = NormalizeArray.GetNormalizationNames()[idx]
+        return NormalizeArray.GetNormalizations()[n]
 
     @staticmethod
     def GetArrayRange(pdi, field, name):
@@ -341,9 +345,9 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     def SetNormalization(self, norm):
         if isinstance(norm, str):
-            norm = NormalizeArray.GetOperations()[norm]
+            norm = NormalizeArray.GetNormalizations()[norm]
         elif isinstance(norm, int):
-            norm = NormalizeArray.GetOperation(norm)
+            norm = NormalizeArray.GetNormalization(norm)
         if self.__normalization != norm:
             self.__normalization = norm
             self.Modified()
@@ -360,7 +364,7 @@ class AddCellConnToPoints(PVGeoAlgorithmBase):
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
-        self.__cellType = 4
+        self.__cellType = vtk.VTK_POLY_LINE
         self.__usenbr = False
 
 
@@ -380,46 +384,66 @@ class AddCellConnToPoints(PVGeoAlgorithmBase):
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
 
-        pdo.DeepCopy(pdi)
-        numPoints = pdi.GetNumberOfPoints()
+        def _makePolyCell(ptsi):
+            cell = vtk.vtkPolyLine()
+            cell.GetPointIds().SetNumberOfIds(len(ptsi))
+            for i in ptsi:
+                cell.GetPointIds().SetId(i, ptsi[i])
+            return cell
 
+        def _makeLineCell(pts):
+            if len(ptsi) != 2:
+                raise RuntimeError('_makeLineCell() only handles two points')
+            aLine = vtk.vtkLine()
+            aLine.GetPointIds().SetId(0, ptsi[0])
+            aLine.GetPointIds().SetId(1, ptsi[1])
+            return aLine
+
+
+        cells = vtk.vtkCellArray()
+        numPoints = pdi.GetNumberOfPoints()
         if nrNbr:
             from scipy.spatial import cKDTree
             # VTK_Line
-            if cellType == 3:
-                sft = 0
-                while(len(points) > 1):
-                    tree = cKDTree(points)
-                    # Get indices of k nearest points
-                    dist, ind = tree.query(points[0], k=2)
-                    ptsi = [ind[0]+sft, ind[1]+sft]
-                    pdo.InsertNextCell(cellType, 2, ptsi)
-                    points = np.delete(points, 0, 0) # Deletes first row
-                    del(tree)
-                    sft += 1
-            # VTK_PolyLine
-            elif cellType == 4:
+            if cellType == vtk.VTK_LINE:
                 tree = cKDTree(points)
-                dist, ptsi = tree.query(points[0], k=numPoints)
-                pdo.InsertNextCell(cellType, numPoints, ptsi)
+                dist, ind = tree.query([0.0,0.0,0.0], k=numPoints)
+                for i in range(len(ind)-1):
+                    # Get indices of k nearest points
+                    ptsi = [ind[i], ind[i+1]]
+                    cell = _makeLineCell(ptsi)
+                    cells.InsertNextCell(cell)
+                    points = np.delete(points, 0, 0) # Deletes first row
+            # VTK_PolyLine
+            elif cellType == vtk.VTK_POLY_LINE:
+                tree = cKDTree(points)
+                dist, ptsi = tree.query([0.0,0.0,0.0], k=numPoints)
+                cell = _makePolyCell(ptsi)
+                cells.InsertNextCell(cell)
             else:
                 raise Exception('Cell Type %d not ye implemented.' % cellType)
         else:
             # VTK_PolyLine
-            if cellType == 4:
+            if cellType == vtk.VTK_POLY_LINE:
                 ptsi = [i for i in range(numPoints)]
-                pdo.InsertNextCell(cellType, numPoints, ptsi)
+                cell = _makePolyCell(ptsi)
+                cells.InsertNextCell(cell)
             # VTK_Line
-            elif cellType == 3:
+            elif cellType == vtk.VTK_LINE:
                 for i in range(0, numPoints-1):
                     ptsi = [i, i+1]
-                    pdo.InsertNextCell(cellType, 2, ptsi)
+                    cell = _makeLineCell(ptsi)
+                    cells.InsertNextCell(cell)
             else:
                 raise Exception('Cell Type %d not ye implemented.' % cellType)
 
         if logTime:
             print((datetime.now() - startTime))
-
+        # Now add points and cells to output
+        pdo.SetPoints(pdi.GetPoints())
+        pdo.SetLines(cells)
+        # copy point data
+        _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):
@@ -456,7 +480,7 @@ class PointsToTube(AddCellConnToPoints):
     def __init__(self):
         AddCellConnToPoints.__init__(self)
         # Additional Parameters
-        # NOTE: CellType should remain 4 for VTK_PolyLine connection
+        # NOTE: CellType should remain vtk.VTK_POLY_LINE (4) connection
         self.__numSides = 20
         self.__radius = 10.0
 

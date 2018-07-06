@@ -120,7 +120,7 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
 class FilterPreserveTypeBase(PVGeoAlgorithmBase):
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
-            nInputPorts=1, inputType='vtkDataSet',
+            nInputPorts=1, inputType='vtkDataObject',
             nOutputPorts=1)
 
     # THIS IS CRUCIAL to preserve data type through filter

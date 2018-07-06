@@ -27,6 +27,7 @@ def test(close=False):
     >>> PVGeo.test()
     ```
     """
+    print('in the tester: ', __file__)
     test_file_strings = []
     for root, dirnames, filenames in os.walk('.'):
         for filename in fnmatch.filter(filenames, '__test__.py'):
@@ -40,3 +41,6 @@ def test(close=False):
     if close:
         exit(len(run.failures) > 0 or len(run.errors) > 0)
     return run
+
+if __name__ == '__main__':
+    test(True)

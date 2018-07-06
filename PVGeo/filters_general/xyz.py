@@ -266,15 +266,13 @@ class RotateCoordinates(PVGeoAlgorithmBase):
         points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
         origin = self.__origin
         if self.__useCorner:
-            idx = np.argwhere(np.min(points[:,0]))
-            origin = [points[:,0][idx], points[:,1][idx]]
-
+            idx = np.argmin(points[:,0])
+            origin = [points[idx,0], points[:,1]]
         points[:,0:2] = RotationTool.RotateAround(points[:,0:2], self.__angle, origin)
         pdo.DeepCopy(pdi)
         pts = pdo.GetPoints()
         for i in range(len(points)):
             pts.SetPoint(i, points[i])
-
         return 1
 
     def SetRotationDegrees(self, theta):

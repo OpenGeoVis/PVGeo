@@ -9,8 +9,7 @@ import vtk
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.filters_general import * #AddCellConnToPoints, CombineTables
-# from PVGeo.filters_general import PointsToTube, ReshapeTable, VoxelizePoints
+from PVGeo.filters_general import *
 
 #### GLOBAL VARIABLES ####
 MENU_CAT = 'PVGeo: General Filters'
@@ -33,9 +32,8 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
     #### Seters and Geters ####
 
     @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
-        labels=['Poly Line', 'Line'],values=[4, 3]))
+        labels=['Poly Line', 'Line'], values=[4, 3]))
     def SetCellType(self, cellType):
-        print(cellType)
         AddCellConnToPoints.SetCellType(self, cellType)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Use Neareast Nbr Approx',
@@ -244,7 +242,7 @@ class PVGeoNormalizeArray(NormalizeArray):
     def SetNewArrayName(self, name):
         NormalizeArray.SetNewArrayName(self, name)
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Normalization', command='SetNormalization', labels=NormalizeArray.GetOperationNames(), help='This is the type of normalization to apply to the input array.'))
+    @smproperty.xml(_helpers.getDropDownXml(name='Normalization', command='SetNormalization', labels=NormalizeArray.GetNormalizationNames(), help='This is the type of normalization to apply to the input array.'))
     def SetNormalization(self, norm):
         NormalizeArray.SetNormalization(self, norm)
 
@@ -371,7 +369,7 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
 @smhint.xml('''<View type="RenderView" />''')
 @smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
-class PVGeoAddCellConnToPoints(RotateCoordinates):
+class PVGeoRotateCoordinates(RotateCoordinates):
     def __init__(self):
         RotateCoordinates.__init__(self)
 
