@@ -50,7 +50,7 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
 
     def Modified(self, readAgain=True):
         """Call modified if the files needs to be read again again"""
-        self.__needToRead = readAgain
+        if readAgain: self.__needToRead = readAgain
         PVGeoAlgorithmBase.Modified(self)
 
     def _UpdateTimeSteps(self):

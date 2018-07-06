@@ -232,10 +232,12 @@ class TestPackedBinariesReader(unittest.TestCase):
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
         reader.SetDataType('f')
+        reader.SetDataName('Test Data')
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
         # Check output
+        self.assertEqual(table.GetColumnName(0), 'Test Data')
         self._check_data(table, arr)
         return
 
@@ -267,7 +269,7 @@ class TestPackedBinariesReader(unittest.TestCase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
-        reader.SetDataType('i')
+        reader.SetDataType(2) # 'i' test that sending an int choice works
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
@@ -305,7 +307,7 @@ class TestPackedBinariesReader(unittest.TestCase):
         reader = PackedBinariesReader()
         reader.AddFileName(fname)
         reader.SetDataType('f')
-        reader.SetEndian('<')
+        reader.SetEndian(1) # '<' test that sending an int choice works
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
@@ -320,7 +322,15 @@ class TestMadagascarReader(unittest.TestCase):
     Test the `MadagascarReader`
     Does not test inherrited functionality
     """
-    def setUp(self):
+
+    def tearDown(self):
+        # Remove the test data directory after the test
+        shutil.rmtree(self.test_dir)
+
+    ###########################################
+
+    def test_data_fidelity(self):
+        """`MadagascarReader`: Check data fidelity"""
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
         self.n = 100
@@ -340,21 +350,14 @@ class TestMadagascarReader(unittest.TestCase):
         reader = MadagascarReader()
         reader.AddFileName(fname)
         reader.SetDataType('f')
+        reader.SetDataName('Test Data')
+        self.assertEqual(reader.GetDataName(), 'Test Data')
         # Perfrom Read
         reader.Update()
-        self.TABLE = reader.GetOutput()
-        return
-
-    def tearDown(self):
-        # Remove the test data directory after the test
-        shutil.rmtree(self.test_dir)
-
-    ###########################################
-
-    def test_data_fidelity(self):
-        """`MadagascarReader`: Check data fidelity"""
-        arr = nps.vtk_to_numpy(self.TABLE.GetColumn(0))
+        table = reader.GetOutput()
+        arr = nps.vtk_to_numpy(table.GetColumn(0))
         self.assertTrue(np.allclose(self.data, arr))#, rtol=0.0001))
+        self.assertEqual(table.GetColumnName(0), 'Test Data')
         return
 
 
