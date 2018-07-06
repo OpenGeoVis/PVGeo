@@ -470,11 +470,6 @@ class TestNormalizeArray(unittest.TestCase):
         check = NormalizeArray._standardScore(self.arr)
         self._gen_and_check(op, check)
 
-    def test_standard_score(self):
-        op = NormalizeArray.GetNormalization('standard_score')
-        check = NormalizeArray._standardScore(self.arr)
-        self._gen_and_check(op, check)
-
     def test_log10(self):
         op = NormalizeArray.GetNormalization('log10')
         check = NormalizeArray._log10(self.arr)
