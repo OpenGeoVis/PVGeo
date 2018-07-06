@@ -5,7 +5,7 @@ __all__ = [
     'getArray',
     'addArray',
     'getSelectedArray',
-    'GetDecimalPlaces'
+    #'GetDecimalPlaces',
 ]
 
 import vtk
@@ -100,13 +100,13 @@ def addArray(pdo, field, vtkArray):
     return pdo
 
 
-def GetDecimalPlaces(arr, barrier=6):
-    arr = np.array(arr.flatten(), dtype=str)
-    num = 0
-    for val in arr:
-        n = len(str(val).split('.')[1])
-        if n > num:
-            num = n
-    # Now do not let exceed barrier
-    if num > barrier: return barrier
-    return num
+# def GetDecimalPlaces(arr, barrier=6):
+#     arr = np.array(arr.flatten(), dtype=str)
+#     num = 0
+#     for val in arr:
+#         n = len(str(val).split('.')[1])
+#         if n > num:
+#             num = n
+#     # Now do not let exceed barrier
+#     if num > barrier: return barrier
+#     return num

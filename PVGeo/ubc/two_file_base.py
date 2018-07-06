@@ -296,7 +296,7 @@ class ubcModelAppenderBase(PVGeoAlgorithmBase):
         output = self.GetOutputData(outInfo, 0)
         output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
         # Get requested time index
-        i = _helpers.getTimeStepFileIndex(self, self._modelFileNames, dt=self.__dt)
+        i = _helpers.GetRequestedTime(self, outInfo)
         # Perfrom task:
         if self.__needToRead:
             self._ReadUpFront()
