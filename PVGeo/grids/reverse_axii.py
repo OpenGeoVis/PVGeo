@@ -4,6 +4,7 @@ __all__ = [
 
 import vtk
 from vtk.util import numpy_support as nps
+from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np
 # Import Helpers:
 from ..base import PVGeoAlgorithmBase
@@ -20,9 +21,9 @@ class ReverseImageDataAxii(PVGeoAlgorithmBase):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
             nOutputPorts=1, outputType='vtkImageData')
-        self.__axes = [True, True, True]
+        self.__axes = [True, True, True] # Z Y X (FORTRAN)
 
-    def _ReverseGridAxii(self, pdi, pdo):
+    def _ReverseGridAxii(self, idi, ido):
         """
         Reverses data along different axial directions
 
@@ -31,29 +32,42 @@ class ReverseImageDataAxii(PVGeoAlgorithmBase):
 
         # Copy over input to output to be flipped around
         # Deep copy keeps us from messing with the input data
-        pdo.DeepCopy(pdi)
-        print(self.__axes)
+        ox, oy, oz = idi.GetOrigin()
+        ido.SetOrigin(ox, oy, oz)
+        sx, sy, sz = idi.GetSpacing()
+        ido.SetSpacing(sx, sy, sz)
+        ext = idi.GetExtent()
+        nx, ny, nz = ext[1]+1, ext[3]+1, ext[5]+1
+        ido.SetDimensions(nx, ny, nz)
 
+        widi = dsa.WrapDataObject(idi)
         # Iterate over all array in the PointData
-        for j in range(pdo.GetPointData().GetNumberOfArrays()):
-            # Swap Scalars with all Arrays in PointData so that all data gets filtered
-            scal = pdo.GetPointData().GetScalars()
-            arr = pdi.GetPointData().GetArray(j)
-            pdo.GetPointData().SetScalars(arr)
-            pdo.GetPointData().AddArray(scal)
+        for j in range(idi.GetPointData().GetNumberOfArrays()):
+            # Go through each axis and rotate if needed
+            arr = widi.PointData[j]
+            arr = np.reshape(arr, (nz,ny,nx))
             for i in range(3):
-                # Rotate ImageData on each axis if needed
-                # Go through each axis and rotate if needed
-                # Note: ShallowCopy is necessary!!
                 if self.__axes[i]:
-                    flipper = vtk.vtkImageFlip()
-                    flipper.SetInputData(pdo)
-                    flipper.SetFilteredAxis(i)
-                    flipper.Update()
-                    flipper.UpdateWholeExtent()
-                    pdo.ShallowCopy(flipper.GetOutput())
-        # TODO: flip the cell data as well!
-        return pdo
+                    arr = np.flip(arr, axis=i)
+            # Now add that data array to the output
+            data = nps.numpy_to_vtk(num_array=arr.flatten(), deep=True)
+            data.SetName(idi.GetPointData().GetArrayName(j))
+            ido.GetPointData().AddArray(data)
+
+        # Iterate over all array in the CellData
+        for j in range(idi.GetCellData().GetNumberOfArrays()):
+            # Go through each axis and rotate if needed
+            arr = widi.CellData[j]
+            arr = np.reshape(arr, (nz-1,ny-1,nx-1))
+            for i in range(3):
+                if self.__axes[i]:
+                    arr = np.flip(arr, axis=i)
+            # Now add that data array to the output
+            data = nps.numpy_to_vtk(num_array=arr.flatten(), deep=True)
+            data.SetName(idi.GetCellData().GetArrayName(j))
+            ido.GetCellData().AddArray(data)
+
+        return ido
 
     def RequestData(self, request, inInfo, outInfo):
         # Get input/output of Proxy
@@ -68,8 +82,8 @@ class ReverseImageDataAxii(PVGeoAlgorithmBase):
 
 
     def SetFlipX(self, flag):
-        if self.__axes[0] != flag:
-            self.__axes[0] = flag
+        if self.__axes[2] != flag:
+            self.__axes[2] = flag
             self.Modified()
 
     def SetFlipY(self, flag):
@@ -78,6 +92,6 @@ class ReverseImageDataAxii(PVGeoAlgorithmBase):
             self.Modified()
 
     def SetFlipZ(self, flag):
-        if self.__axes[2] != flag:
-            self.__axes[2] = flag
+        if self.__axes[0] != flag:
+            self.__axes[0] = flag
             self.Modified()
