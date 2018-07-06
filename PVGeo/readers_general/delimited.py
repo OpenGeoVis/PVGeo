@@ -180,6 +180,6 @@ class XYZTextReader(DelimitedTextReader):
         DelimitedTextReader.__init__(self)
 
     # Simply override the extract titles functionality
-    def _ExtractHeader(self, fileLines):
-        titles = fileLines[0][2::].split(', ') # first two characers of header is '! '
-        return titles, fileLines[1::]
+    def _ExtractHeader(self, content):
+        titles = content[0][2::].split(', ') # first two characers of header is '! '
+        return titles, content[1::]

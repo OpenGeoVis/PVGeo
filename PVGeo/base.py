@@ -71,7 +71,7 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
     #### Methods for performing the read ####
     # These are meant to be overwritten by child classes
 
-    def _GetFileContents(self):
+    def _GetFileContents(self, idx=None):
         raise NotImplementedError()
 
     def _ReadUpFront(self):

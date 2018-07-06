@@ -164,12 +164,6 @@ class VoxelizePoints(PVGeoAlgorithmBase):
         #VoxelizePoints.AddCellData(grid, arridx, 'Voxel ID') # For testing
         return grid
 
-    @staticmethod
-    def PointsToGridWrapper(grid, tup):
-        """tup = (x,dx,y,dy,z,dz)"""
-        x, dx, y, dy, z, dz = tup
-        return VoxelizePoints.PointsToGrid(x, y, z, dx, dy, dz, grid=grid)
-
     def _CopyArrays(self, pdi, pdo):
         for i in range(pdi.GetPointData().GetNumberOfArrays()):
             arr = pdi.GetPointData().GetArray(i)
