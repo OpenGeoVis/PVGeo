@@ -119,7 +119,7 @@ class TableToGrid(PVGeoAlgorithmBase):
             raise RuntimeError('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))
 
         ido.SetDimensions(nx, ny, nz)
-        ido.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
+        #ido.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
         ido.SetOrigin(ox, oy, oz)
         ido.SetSpacing(sx, sy, sz)
 
@@ -144,21 +144,16 @@ class TableToGrid(PVGeoAlgorithmBase):
         ido = self.GetOutputData(outInfo, 0)
         # Perfrom task
         self._TableToGrid(pdi, ido)
-        # TODO: why isn't the ImageData being constructed properly?!
-        print(ido)
         return 1
 
 
     def RequestInformation(self, request, inInfo, outInfo):
         # Setup the ImageData
         idx = TableToGrid.RefoldIdx(SEPlib=self.__SEPlib, swapXY=self.__swapXY)
-        extent = self.__extent
-        nx,ny,nz = extent[idx[0]],extent[idx[1]],extent[idx[2]]
+        ext = [0, self.__extent[idx[0]]-1, 0,self.__extent[idx[1]]-1, 0,self.__extent[idx[2]]-1]
         info = outInfo.GetInformationObject(0)
         # Set WHOLE_EXTENT: This is absolutely necessary
-        ext = [0,nx-1, 0,ny-1, 0,nz-1]
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
-        print(ext)
         return 1
 
 

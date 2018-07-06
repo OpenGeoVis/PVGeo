@@ -83,7 +83,7 @@ class PVGeoTableToGrid(TableToGrid):
     def SetExtent(self, nx, ny, nz):
         TableToGrid.SetExtent(self, nx, ny, nz)
 
-    @smproperty.doublevector(name="Spacing", default_values=[0.0, 0.0, 0.0])
+    @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0])
     def SetSpacing(self, dx, dy, dz):
         TableToGrid.SetSpacing(self, dx, dy, dz)
 

@@ -42,7 +42,7 @@ class CreateUniformGrid(PVGeoAlgorithmBase):
         pdo.SetDimensions(nx, ny, nz)
         pdo.SetOrigin(ox, oy, oz)
         pdo.SetSpacing(sx, sy, sz)
-        pdo.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
+        #pdo.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
         # Add CELL data
         data = _makeSpatialCellData(nx-1, ny-1, nz-1) # minus 1 b/c cell data not point data
         data = nps.numpy_to_vtk(num_array=data, deep=True)

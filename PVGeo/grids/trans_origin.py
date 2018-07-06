@@ -28,6 +28,7 @@ class TranslateGridOrigin(PVGeoAlgorithmBase):
             pdo = vtk.vtkImageData()
 
         [nx, ny, nz] = pdi.GetDimensions()
+        [sx, sy, sz] = pdi.GetSpacing()
         [ox, oy, oz] = pdi.GetOrigin()
 
         pdo.DeepCopy(pdi)
@@ -36,39 +37,39 @@ class TranslateGridOrigin(PVGeoAlgorithmBase):
 
         if self.__corner == 1:
             # South East Bottom
-            xx = ox - nx
+            xx = ox - (nx-1)*sx
             yy = oy
             zz = oz
         elif self.__corner == 2:
             # North West Bottom
             xx = ox
-            yy = oy - ny
+            yy = oy - (ny-1)*sy
             zz = oz
         elif self.__corner == 3:
             # North East Bottom
-            xx = ox - nx
-            yy = oy - ny
+            xx = ox - (nx-1)*sx
+            yy = oy - (ny-1)*sy
             zz = oz
         elif self.__corner == 4:
             # South West Top
             xx = ox
             yy = oy
-            zz = oz - nz
+            zz = oz - (nz-1)*sz
         elif self.__corner == 5:
             # South East Top
-            xx = ox - nx
+            xx = ox - (nx-1)*sx
             yy = oy
-            zz = oz - nz
+            zz = oz - (nz-1)*sz
         elif self.__corner == 6:
             # North West Top
             xx = ox
-            yy = oy - ny
-            zz = oz - nz
+            yy = oy - (ny-1)*sy
+            zz = oz - (nz-1)*sz
         elif self.__corner == 7:
             # North East Top
-            xx = ox - nx
-            yy = oy - ny
-            zz = oz - nz
+            xx = ox - (nx-1)*sx
+            yy = oy - (ny-1)*sy
+            zz = oz - (nz-1)*sz
 
         pdo.SetOrigin(xx, yy, zz)
 
