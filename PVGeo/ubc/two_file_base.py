@@ -1,12 +1,14 @@
 all = [
     'TwoFileReaderBase',
     'ubcMeshReaderBase',
+    'ubcModelAppenderBase',
 ]
 
 from .. import _helpers
 from ..base import PVGeoAlgorithmBase
 # Outside Imports:
 import numpy as np
+import vtk
 
 
 # Two File Reader Base
@@ -19,23 +21,38 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
         self.__timesteps = None
         self.__meshFileName = None # Can only be one!
         self.__modelFileNames = [] # Can be many (single attribute, manytimesteps)
-        self.__needToRead = True
+        self.__needToReadMesh = True
+        self.__needToReadModels = True
 
 
-    def _UpdateTimeSteps(self):
+    def __UpdateTimeSteps(self):
         """for internal use only"""
-        if len(self.__modelFileNames) < 1:
-            return -1
-        self.__timesteps = _helpers.UpdateTimeSteps(self, self.__modelFileNames, self.__dt)
+        if len(self.__modelFileNames) > 0:
+            self.__timesteps = _helpers.UpdateTimeSteps(self, self.__modelFileNames, self.__dt)
         return 1
 
-    def Modified(self, readAgain=True):
+    def NeedToReadMesh(self, flag=None):
+        """Ask self if the reader needs to read the mesh file again
+        if the flag is set then this method will set the read status"""
+        if flag is not None and isinstance(flag, (bool, int)):
+            self.__needToReadMesh = flag
+        return self.__needToReadMesh
+
+    def NeedToReadModels(self, flag=None):
+        """Ask self if the reader needs to read the model files again
+        if the flag is set then this method will set the read status"""
+        if flag is not None and isinstance(flag, (bool, int)):
+            self.__needToReadModels = flag
+        return self.__needToReadModels
+
+    def Modified(self, readAgainMesh=True, readAgainModels=True):
         """Call modified if the files needs to be read again again"""
-        self.__needToRead = readAgain
+        if readAgainMesh: self.NeedToReadMesh(flag=readAgainMesh)
+        if readAgainModels: self.NeedToReadModels(flag=readAgainModels)
         PVGeoAlgorithmBase.Modified(self)
 
     def RequestInformation(self, request, inInfo, outInfo):
-        self._UpdateTimeSteps()
+        self.__UpdateTimeSteps()
         return 1
 
 
@@ -59,19 +76,22 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
         """An advanced property for the time step in seconds."""
         if dt != self.__dt:
             self.__dt = dt
-            self.Modified(readAgain=False)
+            self.Modified(readAgainMesh=False, readAgainModels=False)
 
-    def ClearMeshFileName(self):
+    def ClearMesh(self):
         """Use to clear mesh file name"""
         self.__meshFileName = None
+        self.Modified(readAgainMesh=True, readAgainModels=False)
 
-    def ClearModelFileNames(self):
+    def ClearModels(self):
         """Use to clear data file names"""
         self.__modelFileNames = []
+        self.Modified(readAgainMesh=False, readAgainModels=True)
 
     def SetMeshFileName(self, fname):
         if self.__meshFileName != fname:
             self.__meshFileName = fname
+            self.Modified(readAgainMesh=True, readAgainModels=False)
 
     def AddModelFileName(self, fname):
         """Use to set the file names for the reader. Handles singlt string or list of strings."""
@@ -80,9 +100,11 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
         if isinstance(fname, list):
             for f in fname:
                 self.AddModelFileName(f)
+            self.Modified(readAgainMesh=False, readAgainModels=True)
         elif fname not in self.__modelFileNames:
             self.__modelFileNames.append(fname)
-        self.Modified()
+            self.Modified(readAgainMesh=False, readAgainModels=True)
+        return 1
 
     def GetModelFileNames(self, idx=None):
         """Returns the list of file names or given and index returns a specified timestep's filename"""
@@ -103,6 +125,15 @@ class ubcMeshReaderBase(TwoFileReaderBase):
         TwoFileReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
         self.__dataname = 'Data'
+        # For keeping track of type (2D vs 3D)
+        self.__sizeM = None
+
+
+    def Is3D(self):
+        return self.__sizeM.shape[0] >= 3
+
+    def Is2D(self):
+        return self.__sizeM.shape[0] == 1
 
     @staticmethod
     def _ubcMesh2D_part(FileName):
@@ -155,18 +186,18 @@ class ubcMeshReaderBase(TwoFileReaderBase):
             # This reads whole file :(
             msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str, comments='!')[0]
         # Fist line is the size of the model
-        sizeM = np.array(msh.ravel()[0].split(), dtype=int)
+        self.__sizeM = np.array(msh.ravel()[0].split(), dtype=int)
         # Check if the mesh is a UBC 2D mesh
-        if sizeM.shape[0] == 1:
+        if self.__sizeM.shape[0] == 1:
             # Read in data from file
             xpts, xdisc, zpts, zdisc = ubcMeshReaderBase._ubcMesh2D_part(FileName)
             nx = np.sum(np.array(xdisc,dtype=int))+1
             nz = np.sum(np.array(zdisc,dtype=int))+1
             return (0,nx, 0,1, 0,nz)
         # Check if the mesh is a UBC 3D mesh or OcTree
-        elif sizeM.shape[0] >= 3:
+        elif self.__sizeM.shape[0] >= 3:
             # Get mesh dimensions
-            dim = sizeM[0:3]
+            dim = self.__sizeM[0:3]
             ne,nn,nz = dim[0], dim[1], dim[2]
             return (0,ne, 0,nn, 0,nz)
         else:
@@ -199,7 +230,129 @@ class ubcMeshReaderBase(TwoFileReaderBase):
     def SetDataName(self, name):
         if self.__dataname != name:
             self.__dataname = name
-            self.Modified()
+            self.Modified(readAgainMesh=False, readAgainModels=False)
 
     def GetDataName(self):
         return self.__dataname
+
+
+
+
+###############################################################################
+
+
+# UBC Model Appender Base
+class ubcModelAppenderBase(PVGeoAlgorithmBase):
+    def __init__(self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid'):
+        PVGeoAlgorithmBase.__init__(self,
+            nInputPorts=1, inputType=inputType,
+            nOutputPorts=1, outputType=outputType)
+        self._modelFileNames = []
+        self._dataname = 'Appended Data'
+        self._models = []
+        self.__needToRead = True
+        self._is3D = None
+        # For the VTK/ParaView pipeline
+        self.__dt = 1.0
+        self.__timesteps = None
+        self.__inTimesteps = None
+
+    def __SetInputTimesteps(self):
+        ints = _helpers.GetInputTimeSteps(self)
+        self.__inTimesteps = ints if ints is not None else []
+        return self.__inTimesteps
+
+    def NeedToRead(self, flag=None):
+        """Ask self if the reader needs to read the files again
+        if the flag is set then this method will set the read status"""
+        if flag is not None and isinstance(flag, (bool, int)):
+            self.__needToRead = flag
+            self.__UpdateTimeSteps()
+        return self.__needToRead
+
+    def Modified(self, readAgain=True):
+        """Call modified if the files needs to be read again again"""
+        if readAgain: self.__needToRead = readAgain
+        PVGeoAlgorithmBase.Modified(self)
+
+    def __UpdateTimeSteps(self):
+        """for internal use only: appropriately sets the timesteps"""
+        if len(self._modelFileNames) > 0 and len(self._modelFileNames) > len(self.__inTimesteps):
+            self.__timesteps = _helpers.UpdateTimeSteps(self, self._modelFileNames, self.__dt)
+        # Just use input's time steps which is set by pipeline
+        return 1
+
+    def _ReadUpFront(self):
+        raise NotImpelementedError()
+
+    def _PlaceOnMesh(self, output, idx=0):
+        raise NotImplementedError()
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """DO NOT OVERRIDE"""
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        output = self.GetOutputData(outInfo, 0)
+        output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
+        # Get requested time index
+        i = _helpers.getTimeStepFileIndex(self, self._modelFileNames, dt=self.__dt)
+        # Perfrom task:
+        if self.__needToRead:
+            self._ReadUpFront()
+        # Place the model data for given timestep onto the mesh
+        if len(self._models) > i:
+            self._PlaceOnMesh(output, idx=i)
+        return 1
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        """DO NOT OVERRIDE"""
+        self.__SetInputTimesteps()
+        self.__UpdateTimeSteps()
+        pdi = self.GetInputData(inInfo, 0, 0)
+        # Determine if 2D or 3D and read
+        if isinstance(pdi, vtk.vtkRectilinearGrid) and pdi.GetExtent()[3] == 1:
+            self._is3D = False
+        else:
+            self._is3D = True
+        return 1
+
+    #### Setters and Getters ####
+
+    def HasModels(self):
+        return len(self._modelFileNames) > 0
+
+    def GetTimestepValues(self):
+        """Use this in ParaView decorator to register timesteps"""
+        if self.__timesteps is None: self.__timesteps = self.__SetInputTimesteps()
+        return self.__timesteps.tolist() if self.__timesteps is not None else None
+
+    def ClearModels(self):
+        """Use to clear data file names"""
+        self._modelFileNames = []
+        self._models = []
+        self.Modified(readAgain=True)
+
+    def AddModelFileName(self, fname):
+        """Use to set the file names for the reader. Handles singlt string or list of strings."""
+        if fname is None:
+            return # do nothing if None is passed by a constructor on accident
+        if isinstance(fname, list):
+            for f in fname:
+                self.AddModelFileName(f)
+            self.Modified()
+        elif fname not in self._modelFileNames:
+            self._modelFileNames.append(fname)
+            self.Modified()
+        return 1
+
+    def GetModelFileNames(self, idx=None):
+        """Returns the list of file names or given and index returns a specified timestep's filename"""
+        if idx is None or not self.HasModels():
+            return self._modelFileNames
+        return self._modelFileNames[idx]
+
+    def SetDataName(self, name):
+        if self._dataname != name:
+            self._dataname = name
+            self.Modified(readAgain=False)

@@ -10,7 +10,7 @@ import vtk
 import os
 
 from ..base import PVGeoAlgorithmBase
-from .two_file_base import ubcMeshReaderBase
+from .two_file_base import ubcMeshReaderBase, ubcModelAppenderBase
 from .. import _helpers
 
 
@@ -22,6 +22,9 @@ class ubcOcTreeReader(ubcMeshReaderBase):
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
+
+        self.__mesh = vtk.vtkUnstructuredGrid()
+        self.__models = []
 
 
     @staticmethod
@@ -224,28 +227,33 @@ class ubcOcTreeReader(ubcMeshReaderBase):
         return mesh
 
 
-    @staticmethod
-    def ubcOcTree(FileName_Mesh, FileName_Model, pdo=None, dataNm='Data'):
+
+    def __ubcOcTree(self, FileName_Mesh, FileName_Models, output):
         """
         @desc:
         Wrapper to Read UBC GIF OcTree mesh and model file pairs. UBC OcTree models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. This only handles OcTree formats
 
         @params:
         FileName_Mesh : str : The OcTree Mesh filename as an absolute path for the input mesh file in UBC OcTree Mesh Format
-        FileName_Model : str : The model filename as an absolute path for the input model file in UBC OcTree Model Format.
+        FileName_Models : list of str : The model filenames as absolute paths for the input model timesteps in UBC OcTree Model Format.
         pdo : vtk.vtkUnstructuredGrid : optional : The output data object
 
         @returns:
         vtkUnstructuredGrid : Returns a vtkUnstructuredGrid generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
         """
-        # Construct/read the mesh
-        mesh = ubcOcTreeReader.ubcOcTreeMesh(FileName_Mesh, pdo=pdo)
-        # Read the model data
-        if FileName_Model is not None:
-            model = ubcMeshReaderBase.ubcModel3D(FileName_Model)
-            # Place the model data onto the mesh
-            mesh = ubcOcTreeReader.placeModelOnOcTreeMesh(mesh, model, dataNm=dataNm)
-        return mesh
+        if self.NeedToReadMesh():
+            # Construct/read the mesh
+            ubcOcTreeReader.ubcOcTreeMesh(FileName_Mesh, pdo=self.__mesh)
+            self.NeedToReadMesh(flag=False)
+        output.DeepCopy(self.__mesh)
+        if self.NeedToReadModels() and self.ThisHasModels():
+            # Read the model data
+            self.__models = []
+            for f in FileName_Models:
+                # Read the model data
+                self.__models.append(ubcMeshReaderBase.ubcModel3D(f))
+            self.NeedToReadModels(flag=False)
+        return output
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -253,11 +261,14 @@ class ubcOcTreeReader(ubcMeshReaderBase):
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
         i = _helpers.GetRequestedTime(self, outInfo)
-        self.ubcOcTree(
+        self.__ubcOcTree(
             self.GetMeshFileName(),
-            self.GetModelFileNames(idx=i),
-            output,
-            self.GetDataName())
+            self.GetModelFileNames(),
+            output)
+
+        # Place the model data for given timestep onto the mesh
+        if len(self.__models) > i:
+            ubcOcTreeReader.placeModelOnOcTreeMesh(output, self.__models[i], self.GetDataName())
 
         return 1
 
@@ -266,66 +277,43 @@ class ubcOcTreeReader(ubcMeshReaderBase):
         # Call parent to handle time stuff
         ubcMeshReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
-        ext = self._ReadExtent()
-        info = outInfo.GetInformationObject(0)
-        # Set WHOLE_EXTENT: This is absolutely necessary
-        info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
+        if self.NeedToReadMesh():
+            ext = self._ReadExtent()
+            info = outInfo.GetInformationObject(0)
+            # Set WHOLE_EXTENT: This is absolutely necessary
+            info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
+    def ClearMesh(self):
+        self.__mesh = vtk.vtkUnstructuredGrid()
+        ubcMeshReaderBase.ClearModels(self)
+
+    def ClearModels(self):
+        self.__models = []
+        ubcMeshReaderBase.ClearModels(self)
 
 
 
 
 
-class ubcOcTreeAppender(PVGeoAlgorithmBase):
-    """This assumes the input vtkRectilinearGrid has already handled the timesteps"""
+################################################################################
+
+class ubcOcTreeAppender(ubcModelAppenderBase):
     def __init__(self):
-        PVGeoAlgorithmBase.__init__(self,
-            nInputPorts=1, inputType='vtkUnstructuredGrid',
-            nOutputPorts=1, outputType='vtkUnstructuredGrid')
-        self.__modelFileNames = []
-        self.__dataname = 'Appended Data'
+        ubcModelAppenderBase.__init__(self,
+            inputType='vtkUnstructuredGrid',
+            outputType='vtkUnstructuredGrid')
 
-    def RequestData(self, request, inInfo, outInfo):
-        # Get input/output of Proxy
-        pdi = self.GetInputData(inInfo, 0, 0)
-        output = self.GetOutputData(outInfo, 0)
-        output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
-        # Get requested time index
-        i = _helpers.getTimeStepFileIndex(self, self.__modelFileNames, dt=1.0)
-        # Perfrom task:
-        model = ubcMeshReaderBase.ubcModel3D(self.__modelFileNames[i])
-        #- Place read model on the mesh
-        ubcOcTreeReader.placeModelOnOcTreeMesh(output, model, self.__dataname)
-        return 1
 
-    #### Setters and Getters ####
+    def _ReadUpFront(self):
+        reader = ubcMeshReaderBase.ubcModel3D
+        self._models = []
+        for f in self._modelFileNames:
+            # Read the model data
+            self._models.append(reader(f))
+        self.NeedToRead(flag=False)
+        return
 
-    def HasModels(self):
-        return len(self.__modelFileNames) > 0
-
-    def ClearModelFileNames(self):
-        """Use to clear data file names"""
-        self.__modelFileNames = []
-
-    def AddModelFileName(self, fname):
-        """Use to set the file names for the reader. Handles singlt string or list of strings."""
-        if fname is None:
-            return # do nothing if None is passed by a constructor on accident
-        if isinstance(fname, list):
-            for f in fname:
-                self.AddModelFileName(f)
-        elif fname not in self.__modelFileNames:
-            self.__modelFileNames.append(fname)
-        self.Modified()
-
-    def GetModelFileNames(self, idx=None):
-        """Returns the list of file names or given and index returns a specified timestep's filename"""
-        if idx is None or not self.HasModels():
-            return self.__modelFileNames
-        return self.__modelFileNames[idx]
-
-    def SetDataName(self, name):
-        if self.__dataname != name:
-            self.__dataname = name
-            self.Modified()
+    def _PlaceOnMesh(self, output, idx=0):
+        ubcOcTreeReader.placeModelOnOcTreeMesh(output, self._models[idx], self._dataname)
+        return

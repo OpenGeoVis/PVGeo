@@ -124,16 +124,6 @@ def getFileReaderXml(extensions, readerDescription='', command="AddFileName"):
             The list of files to be read by the reader.
             </Documentation>
       </StringVectorProperty>
-
-      <DoubleVectorProperty
-        name="TimestepValues"
-        repeatable="1"
-        information_only="1">
-        <TimeStepsInformationHelper/>
-            <Documentation>
-            Available timestep values.
-            </Documentation>
-      </DoubleVectorProperty>
       <Hints>
             <ReaderFactory extensions="%s"
                     file_description="%s" />

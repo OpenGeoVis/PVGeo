@@ -4,6 +4,7 @@ __all__ = [
     # new:
     'UpdateTimeSteps',
     'GetRequestedTime',
+    'GetInputTimeSteps',
 ]
 
 
@@ -131,3 +132,8 @@ def GetRequestedTime(algorithm, outInfo, idx=0):
         # if we cant match the time, give first
         assert(len(timesteps) > 0)
         return 0
+
+def GetInputTimeSteps(algorithm):
+    executive = algorithm.GetExecutive()
+    ii = executive.GetInputInformation(0, 0)
+    return ii.Get(executive.TIME_STEPS())
