@@ -67,9 +67,9 @@ class TableToGrid(PVGeoAlgorithmBase):
             arr = np.swapaxes(arr,1,2)
             ext = (n1,n3,n2)
         else:
-            print('bef: ', np.shape(arr))
+            # print('bef: ', np.shape(arr))
             arr = np.swapaxes(arr,0,1)
-            print('aft: ', np.shape(arr))
+            # print('aft: ', np.shape(arr))
             ext = np.shape(arr)
         return arr.flatten(), ext
 

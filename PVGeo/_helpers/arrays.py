@@ -1,4 +1,5 @@
 __all__ = [
+    'numToVTK',
     'getSelectedArrayName',
     'getSelectedArrayField',
     'copyArraysToPointData',
@@ -10,6 +11,12 @@ __all__ = [
 
 import vtk
 import numpy as np
+from vtk.util import numpy_support as nps
+
+def numToVTK(arr, name):
+    c = nps.numpy_to_vtk(num_array=arr, deep=True)
+    c.SetName(name)
+    return c
 
 
 def getSelectedArrayName(algorithm, idx):
