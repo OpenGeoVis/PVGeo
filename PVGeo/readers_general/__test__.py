@@ -156,7 +156,7 @@ class TestXYZTextReader(unittest.TestCase):
         self.nrows = 100
         self.ncols = 8 # LEAVE ALONE
         self.header = 'X, dx, Y, dy, Z, dz, approximate distance, cell index'
-        self.data = arr = np.random.random((self.nrows, self.ncols))
+        self.data = np.random.random((self.nrows, self.ncols))
         np.savetxt(self.fname, self.data,
                    header=self.header,
                    comments='! ',

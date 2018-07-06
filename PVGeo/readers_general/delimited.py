@@ -4,8 +4,6 @@ __all__ = [
 ]
 
 import numpy as np
-from vtk.util import numpy_support as nps
-import vtk
 
 # Import Helpers:
 from ..base import PVGeoReaderBase

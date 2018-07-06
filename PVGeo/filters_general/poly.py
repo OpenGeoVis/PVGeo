@@ -407,7 +407,7 @@ class AddCellConnToPoints(PVGeoAlgorithmBase):
             # VTK_Line
             if cellType == vtk.VTK_LINE:
                 tree = cKDTree(points)
-                dist, ind = tree.query([0.0,0.0,0.0], k=numPoints)
+                ind = tree.query([0.0,0.0,0.0], k=numPoints)[1]
                 for i in range(len(ind)-1):
                     # Get indices of k nearest points
                     ptsi = [ind[i], ind[i+1]]

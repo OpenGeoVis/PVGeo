@@ -2,7 +2,6 @@ __all__ = [
     'ReverseImageDataAxii',
 ]
 
-import vtk
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np

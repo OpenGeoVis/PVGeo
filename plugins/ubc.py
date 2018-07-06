@@ -3,9 +3,6 @@
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import *
 
-import numpy as np
-import vtk
-
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate

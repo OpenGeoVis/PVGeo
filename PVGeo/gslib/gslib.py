@@ -4,9 +4,8 @@ __all__ = [
 
 import numpy as np
 from vtk.util import numpy_support as nps
-import vtk
 # Import Helpers:
-from .. import _helpers
+#from .. import _helpers
 from ..readers_general import DelimitedTextReader
 
 class GSLibReader(DelimitedTextReader):

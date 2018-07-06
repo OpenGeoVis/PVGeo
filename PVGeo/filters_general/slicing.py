@@ -111,7 +111,7 @@ class ManySlicesAlongPoints(_SliceBase):
         points = np.array(wpdi.Points) # New NumPy array of points so we dont destroy input
         numPoints = pdipts.GetNumberOfPoints()
         tree = cKDTree(points)
-        dist, ptsi = tree.query(points[0], k=numPoints)
+        ptsi = tree.query(points[0], k=numPoints)[1]
 
         # iterate of points in order (skips last point):
         app = vtk.vtkAppendFilter()

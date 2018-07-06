@@ -9,7 +9,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
 from ..base import PVGeoAlgorithmBase
-from .. import _helpers
+#from .. import _helpers
 
 class CreateTensorMesh(PVGeoAlgorithmBase):
     """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed."""

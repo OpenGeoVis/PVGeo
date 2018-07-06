@@ -14,7 +14,6 @@ For Example:
         - GitHub
 """
 
-import os
 import sys
 
 class stf:

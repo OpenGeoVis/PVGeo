@@ -6,7 +6,6 @@
 
 from __future__ import print_function
 import re
-import os.path
 from codecs import open
 from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor

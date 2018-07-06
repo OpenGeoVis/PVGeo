@@ -7,7 +7,6 @@ import numpy as np
 
 # VTK imports:
 from vtk.util import numpy_support as nps
-from vtk.numpy_interface import dataset_adapter as dsa
 
 from .. import _helpers
 # Functionality to test:

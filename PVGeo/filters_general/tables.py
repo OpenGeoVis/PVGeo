@@ -39,8 +39,6 @@ class CombineTables(PVGeoAlgorithmBase):
 
         pdo.DeepCopy(pdi0)
 
-        # Get number of columns
-        ncols1 = pdi1.GetNumberOfColumns()
         # Get number of rows
         nrows = pdi0.GetNumberOfRows()
         nrows1 = pdi1.GetNumberOfRows()

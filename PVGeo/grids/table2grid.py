@@ -85,7 +85,7 @@ class TableToGrid(PVGeoAlgorithmBase):
             arr, extent = TableToGrid._rearangeSEPlib(arr, extent)
         if swapXY:
             arr, extent = TableToGrid._transposeXY(arr, extent, SEPlib=SEPlib)
-        return arr, extent
+        return arr#, extent
 
     @staticmethod
     def RefoldIdx(SEPlib=True, swapXY=False):
@@ -128,7 +128,7 @@ class TableToGrid(PVGeoAlgorithmBase):
             c = pdi.GetColumn(i)
             name = c.GetName()
             arr = nps.vtk_to_numpy(c)
-            arr, ext = TableToGrid._refold(arr, self.__extent, SEPlib=self.__SEPlib, order=self.__order, swapXY=self.__swapXY)
+            arr = TableToGrid._refold(arr, self.__extent, SEPlib=self.__SEPlib, order=self.__order, swapXY=self.__swapXY)
             c = nps.numpy_to_vtk(num_array=arr, deep=True)
             c.SetName(name)
             #ido.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...

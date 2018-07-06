@@ -6,7 +6,7 @@ all = [
 import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
-from vtk.numpy_interface import dataset_adapter as dsa
+#from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
 from ..base import PVGeoAlgorithmBase
