@@ -13,6 +13,7 @@ from .. import _helpers
 #---- Translate Grid Origin ----#
 
 class TranslateGridOrigin(PVGeoAlgorithmBase):
+    """This filter will translate the origin of vtkImageData to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior)."""
     def __init__(self, corner=1):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
