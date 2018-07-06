@@ -66,6 +66,10 @@ class PVGeoCreateTensorMesh(CreateTensorMesh):
     def SetZCellsStr(self, zcellstr):
         CreateTensorMesh.SetZCellsStr(self, zcellstr)
 
+    @smproperty.doublevector(name="Origin", default_values=[-350.0, -400.0, 0.0])
+    def SetOrigin(self, x0, y0, z0):
+        CreateTensorMesh.SetOrigin(self, x0, y0, z0)
+
 
 ###############################################################################
 

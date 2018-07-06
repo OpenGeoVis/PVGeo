@@ -4,13 +4,13 @@ all = [
 
 import vtk
 # Import Helpers:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase
 from .. import _helpers
 
 
-class EarthSource(VTKPythonAlgorithmBase):
+class EarthSource(PVGeoAlgorithmBase):
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkPolyData')
         self.__radius = 6371.0
