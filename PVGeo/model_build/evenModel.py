@@ -24,6 +24,7 @@ def _makeSpatialCellData(nx, ny, nz):
 
 
 class CreateUniformGrid(PVGeoAlgorithmBase):
+    """@desc: Create uniform grid (`vtkImageData`)"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -71,16 +72,19 @@ class CreateUniformGrid(PVGeoAlgorithmBase):
 
 
     def SetExtent(self, nx, ny, nz):
+        """@desc: Set the extent of the output grid"""
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
     def SetSpacing(self, dx, dy, dz):
+        """@desc: Set the spacing for the points along each axial direction"""
         if self.__spacing != [dx, dy, dz]:
             self.__spacing = [dx, dy, dz]
             self.Modified()
 
     def SetOrigin(self, x0, y0, z0):
+        """@desc: Set the origin of the output grid"""
         if self.__origin != [x0, y0, z0]:
             self.__origin = [x0, y0, z0]
             self.Modified()
@@ -142,21 +146,25 @@ class CreateEvenRectilinearGrid(PVGeoAlgorithmBase):
 
 
     def SetExtent(self, nx, ny, nz):
+        """@desc: Set the extent of the output grid"""
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
     def SetXRange(self, start, stop):
+        """@desc: Set range (min, max) for the grid in the X-direction"""
         if self.__xrange != [start, stop]:
             self.__xrange = [start, stop]
             self.Modified()
 
     def SetYRange(self, start, stop):
+        """@desc: Set range (min, max) for the grid in the Y-direction"""
         if self.__yrange != [start, stop]:
             self.__yrange = [start, stop]
             self.Modified()
 
     def SetZRange(self, start, stop):
+        """@desc: Set range (min, max) for the grid in the Z-direction"""
         if self.__zrange != [start, stop]:
             self.__zrange = [start, stop]
             self.Modified()

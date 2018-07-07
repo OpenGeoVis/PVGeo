@@ -114,33 +114,52 @@ class CreateTensorMesh(PVGeoAlgorithmBase):
 
 
     def SetOrigin(self, x0, y0, z0):
+        """@desc: Set the origin of the output"""
         if self.__origin != [x0, y0, z0]:
             self.__origin = [x0, y0, z0]
             self.Modified()
 
     def SetXCells(self, xcells):
+        """@desc: Set the spacings for the cells in the X direction
+        @params:
+        xcells : list or array of floats : the spacings along the X-axis"""
         if len(xcells) != len(self.__xcells) or not np.allclose(self.__xcells, xcells):
             self.__xcells = xcells
             self.Modified()
 
     def SetYCells(self, ycells):
+        """@desc: Set the spacings for the cells in the Y direction
+        @params:
+        ycells : list or array of floats : the spacings along the Y-axis"""
         if len(ycells) != len(self.__ycells) or not np.allclose(self.__ycells, ycells):
             self.__ycells = ycells
             self.Modified()
 
     def SetZCells(self, zcells):
+        """@desc: Set the spacings for the cells in the Z direction
+        @params:
+        zcells : list or array of floats : the spacings along the Z-axis"""
         if len(zcells) != len(self.__zcells) or not np.allclose(self.__zcells, zcells):
             self.__zcells = zcells
             self.Modified()
 
     def SetXCellsStr(self, xcellstr):
+        """@desc: Set the spacings for the cells in the X direction
+        @params:
+        xcellstr : string : the spacings along the X-axis in the UBC style"""
         xcells = CreateTensorMesh._ReadCellLine(xcellstr)
         self.SetXCells(xcells)
 
     def SetYCellsStr(self, ycellstr):
+        """@desc: Set the spacings for the cells in the Y direction
+        @params:
+        ycellstr : string : the spacings along the Y-axis in the UBC style"""
         ycells = CreateTensorMesh._ReadCellLine(ycellstr)
         self.SetYCells(ycells)
 
     def SetZCellsStr(self, zcellstr):
+        """@desc: Set the spacings for the cells in the Z direction
+        @params:
+        zcellstr : string : the spacings along the Z-axis in the UBC style"""
         zcells = CreateTensorMesh._ReadCellLine(zcellstr)
         self.SetZCells(zcells)

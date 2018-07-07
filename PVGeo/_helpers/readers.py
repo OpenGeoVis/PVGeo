@@ -3,10 +3,10 @@ These are helpers specifically for the file readers for private use only.
 @author: Bane Sullivan
 """
 __all__ = [
-    '_getVTKtype',
-    '_placeArrInTable',
-    '_getdTypes',
-    '_cleanDataNm'
+    'getVTKtype',
+    'placeArrInTable',
+    'getdTypes',
+    'cleanDataNm'
 ]
 
 import numpy as np
@@ -15,36 +15,51 @@ import vtk
 import os
 
 
-def _getVTKtype(typ):
+def getVTKtype(typ):
     """
     @desc: This looks up the VTK type for a give python data type.
 
-    @notes:
-    Types are specified in vtkType.h
+    @return:
+    int : the integer type id specified in vtkType.h
     """
     typ = nps.get_vtk_array_type(typ)
     if typ is 3:
         return 13
     return typ
 
-def _converStringArray(arr):
+def converStringArray(arr):
+    """
+    @desc: A helper to convert a numpy array of strings to a vtkStringArray
+
+    @return:
+    vtkStringArray : the converted array
+    """
     vtkarr = vtk.vtkStringArray()
     for val in arr:
         vtkarr.InsertNextValue(val)
     return vtkarr
 
-def _convertArray(arr):
-    typ = _getVTKtype(arr.dtype)
+def convertArray(arr):
+    """
+    @desc: A helper to convert a numpy array to a vtkDataArray
+
+    @return:
+    vtkDataArray : the converted array
+
+    @notes:
+    this converts the data array but does not set a name. The name must be set for this data array to be added to a vtkDataSet `array.SetName('Data')`
+    """
+    typ = getVTKtype(arr.dtype)
     if typ is 13:
-        VTK_data = _converStringArray(arr)
+        VTK_data = converStringArray(arr)
     else:
         VTK_data = nps.numpy_to_vtk(num_array=arr, deep=True, array_type=typ)
     return VTK_data
 
 
-def _placeArrInTable(ndarr, titles, pdo):
+def placeArrInTable(ndarr, titles, pdo):
     """
-    @desc: Takes a 2D numpy array and makes a vtkTable of it
+    @desc: Takes a 1D/2D numpy array and makes a vtkTable of it
     @params:
         ndarr : np.ndarray : The 1D/2D array to be converted to a table
         titles : list or tuple : The titles for the arrays in the table. Must have same number of elements as columns in input ndarray
@@ -59,7 +74,7 @@ def _placeArrInTable(ndarr, titles, pdo):
         # First check if it is an array full of tuples (varying type)
         if isinstance(ndarr[0], (tuple, np.void)):
             for i in range(len(titles)):
-                _placeArrInTable(ndarr['f%d' % i], [titles[i]], pdo)
+                placeArrInTable(ndarr['f%d' % i], [titles[i]], pdo)
             return pdo
         # Otherwise it is just a 1D array which needs to be 2D
         else:
@@ -67,16 +82,19 @@ def _placeArrInTable(ndarr, titles, pdo):
     cols = np.shape(ndarr)[1]
 
     for i in range(cols):
-        VTK_data = _convertArray(ndarr[:,i])
+        VTK_data = convertArray(ndarr[:,i])
         VTK_data.SetName(titles[i])
         pdo.AddColumn(VTK_data)
     return pdo
 
 
 
-def _getdTypes(dtype='', endian=None):
+def getdTypes(dtype='', endian=None):
     """
     @desc: This converts char dtypes and an endian to a numpy and VTK data type.
+
+    @return:
+    tuple (np.dtype, int) : the numpy data type and the integer type id specified in vtkType.h for VTK data types
     """
     # If native `@` was chosen then do not pass an endian
     if endian is '@':
@@ -99,7 +117,8 @@ def _getdTypes(dtype='', endian=None):
     return dtype, vtktype
 
 
-def _cleanDataNm(dataNm, FileName):
+def cleanDataNm(dataNm, FileName):
+    """@desc: a helper to clead a FileName to make a useful data array name"""
     if dataNm is None or dataNm == '':
         dataNm = os.path.splitext(os.path.basename(FileName))[0]
     return dataNm

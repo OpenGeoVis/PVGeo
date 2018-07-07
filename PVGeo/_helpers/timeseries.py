@@ -18,9 +18,7 @@ def _calculateTimeRange(nt, dt=1.0):
 
 
 def UpdateTimeSteps(algorithm, nt, dt):
-    """
-    @desc:
-    Handles setting up the timesteps on on the pipeline for a file series reader.
+    """@desc: Handles setting up the timesteps on on the pipeline for a file series reader.
 
     @params:
     algorithm : vtkDataObject : req : The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
@@ -44,11 +42,26 @@ def UpdateTimeSteps(algorithm, nt, dt):
     oi.Append(executive.TIME_RANGE(), timesteps[-1])
     return timesteps
 
-def GetRequestedTime(algorithm, outInfo, idx=0):
-    """USAGE: i = _helpers.GetRequestedTime(self, outInfo)"""
+def GetRequestedTime(algorithm, outInfoVec, idx=0):
+    """@desc: Handles setting up the timesteps on on the pipeline for a file series reader.
+
+    @params:
+    algorithm : vtkDataObject : req : The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
+    outInfoVec : vtkInformationVector : The output information for the algorithm
+    idx : int : optional : the index for the output port
+
+    @return:
+    int : the index of the requested time
+
+    @notes:
+    ```py
+    # Get requested time index
+    i = _helpers.GetRequestedTime(self, outInfoVec)
+    ```
+    """
     executive = algorithm.GetExecutive()
     timesteps = algorithm.GetTimestepValues()
-    outInfo = outInfo.GetInformationObject(idx)
+    outInfo = outInfoVec.GetInformationObject(idx)
     if timesteps is None or len(timesteps) == 0:
         return 0
     elif outInfo.Has(executive.UPDATE_TIME_STEP()) and len(timesteps) > 0:
@@ -59,7 +72,17 @@ def GetRequestedTime(algorithm, outInfo, idx=0):
         assert(len(timesteps) > 0)
         return 0
 
-def GetInputTimeSteps(algorithm):
+def GetInputTimeSteps(algorithm, port=0, idx=0):
+    """@desc: Get the timestep values for the algorithm's input
+
+    @params:
+    algorithm : vtkDataObject : req : The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
+    port : int : optional : the input port
+    idx : int : optional : the connection index on the input port
+
+    @return:
+    list : the time step values of the input
+    """
     executive = algorithm.GetExecutive()
-    ii = executive.GetInputInformation(0, 0)
+    ii = executive.GetInputInformation(port, idx)
     return ii.Get(executive.TIME_STEPS())

@@ -14,8 +14,7 @@ from .. import _helpers
 
 
 class ReverseImageDataAxii(PVGeoAlgorithmBase):
-    """This filter will flip ImageData on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data.
-    TODO: This currently only flips PointData (no CellData)"""
+    """@desc: This filter will flip `vtkImageData` on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data."""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
@@ -23,12 +22,6 @@ class ReverseImageDataAxii(PVGeoAlgorithmBase):
         self.__axes = [True, True, True] # Z Y X (FORTRAN)
 
     def _ReverseGridAxii(self, idi, ido):
-        """
-        Reverses data along different axial directions
-
-        TODO: Description
-        """
-
         # Copy over input to output to be flipped around
         # Deep copy keeps us from messing with the input data
         ox, oy, oz = idi.GetOrigin()
@@ -81,16 +74,19 @@ class ReverseImageDataAxii(PVGeoAlgorithmBase):
 
 
     def SetFlipX(self, flag):
+        """@desc: Set the filter to flip th input data along the X-axis"""
         if self.__axes[2] != flag:
             self.__axes[2] = flag
             self.Modified()
 
     def SetFlipY(self, flag):
+        """@desc: Set the filter to flip th input data along the Y-axis"""
         if self.__axes[1] != flag:
             self.__axes[1] = flag
             self.Modified()
 
     def SetFlipZ(self, flag):
+        """@desc: Set the filter to flip th input data along the Z-axis"""
         if self.__axes[0] != flag:
             self.__axes[0] = flag
             self.Modified()

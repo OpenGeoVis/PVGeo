@@ -17,7 +17,7 @@ from .xyz import RotationTool
 
 
 class VoxelizePoints(PVGeoAlgorithmBase):
-    """This makes a vtkUnstructuredGrid of scattered points given voxel sizes as input arrays.
+    """@desc: This makes a `vtkUnstructuredGrid` of scattered points given voxel sizes as input arrays.
     This assumes that the data is at least 2-Dimensional on the XY Plane."""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
@@ -35,6 +35,7 @@ class VoxelizePoints(PVGeoAlgorithmBase):
 
 
     def AddFieldData(self, grid):
+        """@desc: an internal helper to add the recovered information as field data"""
         # Add angle
         a = vtk.vtkDoubleArray()
         a.SetName('Recovered Angle (Deg.)')
@@ -51,6 +52,7 @@ class VoxelizePoints(PVGeoAlgorithmBase):
 
     @staticmethod
     def AddCellData(grid, arr, name):
+        """@desc: Add a NumPy array as cell data to the given grid input"""
         c = nps.numpy_to_vtk(num_array=arr, deep=True)
         c.SetName(name)
         grid.GetCellData().AddArray(c)
@@ -58,11 +60,8 @@ class VoxelizePoints(PVGeoAlgorithmBase):
 
 
     def EstimateUniformSpacing(self, x, y, z):
-        """
-        This assumes that the input points make up some sort of uniformly spaced
-        grid. If those points do not vary along a specified axis, then use
-        (dx,dy,dz) args to set a default spacing. Otherwise nonvarying axis spacings
-        will be determined by other axii.
+        """@desc: This assumes that the input points make up some sort of uniformly spaced
+        grid on at least an XY Plane
         """
         # TODO: implement ability to rotate around Z axis (think PoroTomo vs UTM)
         # TODO: implement way to estimate rotation
@@ -189,29 +188,46 @@ class VoxelizePoints(PVGeoAlgorithmBase):
 
 
     def SetSafeSize(self, safe):
+        """@desc: A voxel size to use if a spacing cannot be determined for an axis"""
         if self.__safe != safe:
             self.__safe = safe
             self.Modified()
 
     def SetDeltaX(self, dx):
+        """@desc: Set the X cells spacing
+        @params:
+        dx : float or array of floats : the spacing(s) for the cells in the X-direction"""
         self.__dx = dx
         self.Modified()
 
     def SetDeltaY(self, dy):
+        """@desc: Set the Y cells spacing
+        @params:
+        dy : float or array of floats : the spacing(s) for the cells in the Y-direction"""
         self.__dy = dy
         self.Modified()
 
     def SetDeltaZ(self, dz):
+        """@desc: Set the Z cells spacing
+        @params:
+        dz : float or array of floats : the spacing(s) for the cells in the Z-direction"""
         self.__dz = dz
         self.SetSafeSize(dz)
         self.Modified()
 
     def SetDeltas(self, dx, dy, dz):
+        """@desc: Set the cell spacings for each axial direction
+        @params:
+        dx : float or array of floats : the spacing(s) for the cells in the X-direction
+        dy : float or array of floats : the spacing(s) for the cells in the Y-direction
+        dz : float or array of floats : the spacing(s) for the cells in the Z-direction
+        """
         self.SetDeltaX(dx)
         self.SetDeltaY(dy)
         self.SetDeltaZ(dz)
 
     def SetEstimateGrid(self, flag):
+        """@desc: Set a flag on whether or not to estimate the grid spacing/rotation"""
         if self.__estimateGrid != flag:
             self.__estimateGrid = flag
             self.Modified()

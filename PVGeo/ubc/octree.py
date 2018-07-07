@@ -16,9 +16,8 @@ from .. import _helpers
 
 
 class ubcOcTreeReader(ubcMeshReaderBase):
-    """This class reads a UBC OcTree Mesh file and builds a vtkUnstructuredGrid of the data in the file. This method generates the vtkUnstructuredGrid without any data attributes.
-
-    Model File is optional. Reader will still construct vtkUnstructuredGrid safely."""
+    """@desc: This class reads a UBC OcTree Mesh file and builds a `vtkUnstructuredGrid` of the data in the file.
+    Model File is optional. Reader will still construct `vtkUnstructuredGrid` safely."""
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -236,10 +235,10 @@ class ubcOcTreeReader(ubcMeshReaderBase):
         @params:
         FileName_Mesh : str : The OcTree Mesh filename as an absolute path for the input mesh file in UBC OcTree Mesh Format
         FileName_Models : list of str : The model filenames as absolute paths for the input model timesteps in UBC OcTree Model Format.
-        pdo : vtk.vtkUnstructuredGrid : optional : The output data object
+        output : vtk.vtkUnstructuredGrid : optional : The output data object
 
         @returns:
-        vtkUnstructuredGrid : Returns a vtkUnstructuredGrid generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
+        vtkUnstructuredGrid : Returns a `vtkUnstructuredGrid` generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
         """
         if self.NeedToReadMesh():
             # Construct/read the mesh
@@ -285,10 +284,12 @@ class ubcOcTreeReader(ubcMeshReaderBase):
         return 1
 
     def ClearMesh(self):
+        """@desc: use to clean/rebuild the mesh"""
         self.__mesh = vtk.vtkUnstructuredGrid()
         ubcMeshReaderBase.ClearModels(self)
 
     def ClearModels(self):
+        """@desc: use to clean the models and reread"""
         self.__models = []
         ubcMeshReaderBase.ClearModels(self)
 
@@ -299,6 +300,7 @@ class ubcOcTreeReader(ubcMeshReaderBase):
 ################################################################################
 
 class ubcOcTreeAppender(ubcModelAppenderBase):
+    """@desc: This filter reads a timeseries of models and appends it to an input `vtkUnstructuredGrid`"""
     def __init__(self):
         ubcModelAppenderBase.__init__(self,
             inputType='vtkUnstructuredGrid',

@@ -13,19 +13,7 @@ from ..base import PVGeoReaderBase
 
 
 class PackedBinariesReader(PVGeoReaderBase):
-    """
-    @desc:
-    This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
-
-    @params:
-    FileName : str : req : The absolute file name with path to read.
-    dataNm : str : opt : A string name to use for the constructed vtkDataArray.
-    endian : char : opt : The endianness to unpack the values. Defaults to Native.
-    dtype : char : opt : A char to chose the data type when unpacking. `d` for float64 (double), `f` for float32 (float), or `i` for int
-    pdo : vtk.vtkTable : opt : A pointer to the output data object.
-
-    @return:
-    vtkTable : Returns a vtkTable of the input data file with a single column being the data read.
+    """@desc: This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a `vtkTable` with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a `vtkTable` object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
     """
     def __init__(self):
         PVGeoReaderBase.__init__(self,
@@ -34,7 +22,7 @@ class PackedBinariesReader(PVGeoReaderBase):
         self.__dataName = "Data"
         self.__dtypechar = 'f'
         self.__endian = ''
-        self.__dtype, self.__vtktype = _helpers._getdTypes(dtype=self.__dtypechar, endian=self.__endian)
+        self.__dtype, self.__vtktype = _helpers.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
         self.__madagascar = False
         # Data objects to hold the read data for access by the pipeline methods
         self.__data = []
@@ -67,10 +55,10 @@ class PackedBinariesReader(PVGeoReaderBase):
         return 1
 
     def _GetRawData(self, idx=0):
-        """This will return the proper data for the given timestep"""
+        """@desc: This will return the proper data for the given timestep"""
         return self.__data[idx]
 
-    def _ConvertArray(self, arr):
+    def convertArray(self, arr):
         # Put raw data into vtk array
         data = nps.numpy_to_vtk(num_array=arr, deep=True, array_type=self.__vtktype)
         data.SetName(self.__dataName)
@@ -86,7 +74,7 @@ class PackedBinariesReader(PVGeoReaderBase):
         i = _helpers.GetRequestedTime(self, outInfo)
         # Generate the data object
         arr = self._GetRawData(idx=i)
-        data = self._ConvertArray(arr)
+        data = self.convertArray(arr)
         output.AddColumn(data)
         return 1
 
@@ -95,33 +83,33 @@ class PackedBinariesReader(PVGeoReaderBase):
 
 
     def SetEndian(self, endian):
-        """The endianness of the data file. Little='<' or Big='>'"""
+        """@desc: The endianness of the data file. `Little = '<'` or `Big = '>'`"""
         pos = ['', '<', '>']
         if isinstance(endian, int):
             endian = pos[endian]
         if endian != self.__endian:
             self.__endian = endian
-            self.__dtype, self.__vtktype = _helpers._getdTypes(dtype=self.__dtypechar, endian=self.__endian)
+            self.__dtype, self.__vtktype = _helpers.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
             self.Modified()
 
     def GetEndian(self):
         return self.__endian
 
     def SetDataType(self, dtype):
-        """The data type of the binary file: double='d', float='f', int='i'"""
+        """@desc: The data type of the binary file: `double='d'`, `float='f'`, `int='i'`"""
         pos = ['d', 'f', 'i']
         if isinstance(dtype, int):
             dtype = pos[dtype]
         if dtype != self.__dtype:
             self.__dtypechar = dtype
-            self.__dtype, self.__vtktype = _helpers._getdTypes(dtype=self.__dtypechar, endian=self.__endian)
+            self.__dtype, self.__vtktype = _helpers.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
             self.Modified()
 
     def GetDataTypes(self):
         return self.__dtype, self.__vtktype
 
     def SetDataName(self, dataName):
-        """The string name of the data array generated from the inut file."""
+        """@desc: The string name of the data array generated from the inut file."""
         if dataName != self.__dataName:
             self.__dataName = dataName
             self.Modified(readAgain=False) # Don't re-read. Just request data again
@@ -133,21 +121,8 @@ class PackedBinariesReader(PVGeoReaderBase):
 
 
 class MadagascarReader(PackedBinariesReader):
-    """
-    @desc:
-    This reads in float or double data that is packed into a Madagascar binary file format with a leader header. The reader ignores all of the ascii header details by searching for the sequence of three special characters: EOL EOL EOT (\014\014\004) and it will treat the followng binary packed data as one long array and make a vtkTable with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We will later implement the ability to create a gridded volume from the header info. This reader is a quick fix for Samir. We chose to use a vtkTable object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
+    """@desc: This reads in float or double data that is packed into a Madagascar binary file format with a leader header. The reader ignores all of the ascii header details by searching for the sequence of three special characters: EOL EOL EOT (\014\014\004) and it will treat the followng binary packed data as one long array and make a `vtkTable` with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We will later implement the ability to create a gridded volume from the header info. This reader is a quick fix for Samir. We chose to use a `vtkTable` object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
     [Details Here](http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF)
-
-    @params:
-    FileName : str : req : The absolute file name with path to read.
-    dataNm : str : opt : A string name to use for the constructed vtkDataArray.
-    endian : char : opt : The endianness to unpack the values. Defaults to Native.
-    dtype : char : opt : A char to chose the data type when unpacking. `d` for float64 (double), `f` for float32 (float), or `i` for int
-    pdo : vtk.vtkTable : opt : A pointer to the output data object.
-
-    @return:
-    vtkTable : Returns a vtkTable of the input data file with a single column being the data read.
-
     """
     def __init__(self):
         PackedBinariesReader.__init__(self)

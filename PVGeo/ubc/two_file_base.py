@@ -13,6 +13,7 @@ import vtk
 
 # Two File Reader Base
 class TwoFileReaderBase(PVGeoAlgorithmBase):
+    """@desc: A base clase for readers that need to handle two input files. One meta-data file and a series of data files."""
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -32,21 +33,21 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
         return 1
 
     def NeedToReadMesh(self, flag=None):
-        """Ask self if the reader needs to read the mesh file again
+        """@desc: Ask self if the reader needs to read the mesh file again
         if the flag is set then this method will set the read status"""
         if flag is not None and isinstance(flag, (bool, int)):
             self.__needToReadMesh = flag
         return self.__needToReadMesh
 
     def NeedToReadModels(self, flag=None):
-        """Ask self if the reader needs to read the model files again
+        """@desc: Ask self if the reader needs to read the model files again
         if the flag is set then this method will set the read status"""
         if flag is not None and isinstance(flag, (bool, int)):
             self.__needToReadModels = flag
         return self.__needToReadModels
 
     def Modified(self, readAgainMesh=True, readAgainModels=True):
-        """Call modified if the files needs to be read again again"""
+        """@desc: Call modified if the files needs to be read again again"""
         if readAgainMesh: self.NeedToReadMesh(flag=readAgainMesh)
         if readAgainModels: self.NeedToReadModels(flag=readAgainModels)
         PVGeoAlgorithmBase.Modified(self)
@@ -69,7 +70,7 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
         return TwoFileReaderBase.HasModels(self.__modelFileNames)
 
     def GetTimestepValues(self):
-        """Use this in ParaView decorator to register timesteps"""
+        """@desc: Use this in ParaView decorator to register timesteps"""
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def SetTimeDelta(self, dt):
@@ -79,12 +80,12 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
             self.Modified(readAgainMesh=False, readAgainModels=False)
 
     def ClearMesh(self):
-        """Use to clear mesh file name"""
+        """@desc: Use to clear mesh file name"""
         self.__meshFileName = None
         self.Modified(readAgainMesh=True, readAgainModels=False)
 
     def ClearModels(self):
-        """Use to clear data file names"""
+        """@desc: Use to clear data file names"""
         self.__modelFileNames = []
         self.Modified(readAgainMesh=False, readAgainModels=True)
 
@@ -94,7 +95,7 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
             self.Modified(readAgainMesh=True, readAgainModels=False)
 
     def AddModelFileName(self, fname):
-        """Use to set the file names for the reader. Handles singlt string or list of strings."""
+        """@desc: Use to set the file names for the reader. Handles singlt string or list of strings."""
         if fname is None:
             return # do nothing if None is passed by a constructor on accident
         if isinstance(fname, list):
@@ -107,7 +108,7 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
         return 1
 
     def GetModelFileNames(self, idx=None):
-        """Returns the list of file names or given and index returns a specified timestep's filename"""
+        """@desc: Returns the list of file names or given and index returns a specified timestep's filename"""
         if idx is None or not self.ThisHasModels():
             return self.__modelFileNames
         return self.__modelFileNames[idx]
@@ -121,6 +122,7 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
 
 # UBC Mesh Reader Base
 class ubcMeshReaderBase(TwoFileReaderBase):
+    """@desc: A base class for the UBC mesh readers"""
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         TwoFileReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -168,9 +170,6 @@ class ubcMeshReaderBase(TwoFileReaderBase):
         """
         @desc:
         Reads the mesh file for the UBC 2D/3D Mesh or OcTree format to get output extents. Computationally inexpensive method to discover whole output extent.
-
-        @params:
-        FileName : str : The mesh filename as an absolute path for the input mesh file in a UBC Format with extents defined on the first line.
 
         @returns:
         tuple : This returns a tuple of the whole extent for the grid to be made of the input mesh file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to `util.SetOutputWholeExtent()` when used in programmable filters or source generation on the pipeline.
@@ -228,6 +227,7 @@ class ubcMeshReaderBase(TwoFileReaderBase):
 
 
     def SetDataName(self, name):
+        """@desc: Set te data array name for the model data on the output grid"""
         if self.__dataname != name:
             self.__dataname = name
             self.Modified(readAgainMesh=False, readAgainModels=False)

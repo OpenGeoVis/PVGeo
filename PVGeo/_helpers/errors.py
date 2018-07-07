@@ -1,7 +1,8 @@
 
 
 class ErrorObserver:
-    """A class for catching errors when testing
+    """@desc: A class for catching errors when testing
+
     Usage:
     ```py
     e = _helpers.ErrorObserver()
