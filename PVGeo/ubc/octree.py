@@ -37,7 +37,7 @@ class ubcOcTreeReader(ubcMeshReaderBase):
         pdo : vtk.vtkUnstructuredGrid : opt : A pointer to the output data object.
 
         @returns:
-        vtkUnstructuredGrid : Returns a vtkUnstructuredGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `placeModelOnOcTreeMesh()` method to associate with model data.
+        vtkUnstructuredGrid : Returns a vtkUnstructuredGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `PlaceModelOnOcTreeMesh()` method to associate with model data.
 
         """
         if pdo is None:
@@ -186,7 +186,7 @@ class ubcOcTreeReader(ubcMeshReaderBase):
         return pdo
 
     @staticmethod
-    def placeModelOnOcTreeMesh(mesh, model, dataNm='Data'):
+    def PlaceModelOnOcTreeMesh(mesh, model, dataNm='Data'):
         """
         @desc:
         Places model data onto a mesh. This is for the UBC Grid data reaers to associate model data with the mesh grid.
@@ -202,7 +202,7 @@ class ubcOcTreeReader(ubcMeshReaderBase):
         """
         if type(model) is dict:
             for key in model.keys():
-                mesh = ubcOcTreeReader.placeModelOnOcTreeMesh(mesh, model[key], dataNm=key)
+                mesh = ubcOcTreeReader.PlaceModelOnOcTreeMesh(mesh, model[key], dataNm=key)
             return mesh
         # Make sure this model file fits the dimensions of the mesh
         numCells = mesh.GetNumberOfCells()
@@ -267,7 +267,7 @@ class ubcOcTreeReader(ubcMeshReaderBase):
 
         # Place the model data for given timestep onto the mesh
         if len(self.__models) > i:
-            ubcOcTreeReader.placeModelOnOcTreeMesh(output, self.__models[i], self.GetDataName())
+            ubcOcTreeReader.PlaceModelOnOcTreeMesh(output, self.__models[i], self.GetDataName())
 
         return 1
 
@@ -317,5 +317,5 @@ class ubcOcTreeAppender(ubcModelAppenderBase):
         return
 
     def _PlaceOnMesh(self, output, idx=0):
-        ubcOcTreeReader.placeModelOnOcTreeMesh(output, self._models[idx], self._dataname)
+        ubcOcTreeReader.PlaceModelOnOcTreeMesh(output, self._models[idx], self._dataname)
         return

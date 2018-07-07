@@ -22,6 +22,7 @@ import importlib
 import inspect
 import PVGeo
 import vtk
+import numpy as np
 
 realimport = builtins.__import__
 
@@ -56,8 +57,8 @@ def _getSections(doc):
     return secs
 
 def _beautifyDesc(val):
-    val = '**Description:**\n\n%s' % val
-    return val
+    lines = [v.lstrip() for v in val.splitlines()]
+    return '**Description:**\n\n%s\n' % ('\n'.join((l for l in lines)))
 
 def _beautifyParams(val):
     """param1 : str : req : A string variable about foo"""
@@ -101,8 +102,9 @@ def _beautifyReturn(val):
 
 def _beautifyExample(val):
     lines = [v.lstrip() for v in val.splitlines()]
-    lines.insert(0, '```py\n')
-    lines.append('\n```')
+    if '```' not in val:
+        lines.insert(0, '```py\n')
+        lines.append('\n```')
     return '**Example:**\n\n%s\n' % ('\n'.join((ln for ln in lines)).format(val))
 
 def beautifySections(secs):
@@ -136,51 +138,92 @@ def _joinSections(doc):
     return '\n'.join(s for s in secs.values())
 
 
-def makeMkDown(doc, title, sig):
+def makeMkDown(doc, title, sig, admon='!!!'):
     secs = _joinSections(doc)
+    tit = 'abstract "%s"' % title
+    if ' _' in title: # it is a private/internal method
+        tit = 'quote "%s (private)"' % title
+
+    atype = '%s %s\n' % (admon, tit)
+    if len(secs.strip()) < 1:
+        admon = '!!!' # overide
+        atype = '%s %s\n' % (admon, tit)
 
     docs = sig + '\n\n' + secs
 
     # Now indent for admonition widget
-    docs = '!!! abstract "%s"\n' % title + re.sub( '^',' '*4, docs ,flags=re.MULTILINE )
+    docs = atype + re.sub( '^',' '*4, docs ,flags=re.MULTILINE )
     return docs
 
 ################
 
 
-def _getDefMarkdown(method, module):
+def _getDefMarkdown(method, module, admon='!!!'):
     sig = inspect.signature(method)
 
-    sig = '<big><big>`#!py %s%s`</big></big>' % ( method.__name__, sig)
-    title = '%s.%s' % (module.__name__, method.__name__)
+    sig = '<big>`#!py %s%s`</big>' % ( method.__name__, sig)
+    title = '%s' % (method.__name__)#'%s.%s' % (module.__name__, method.__name__)
 
     #if method.__doc__:
-    return makeMkDown(method.__doc__, title, sig)
-
-    return sig
+    return makeMkDown(method.__doc__, sig, '', admon=admon) # TODO: clean up
 
 
 def _getClassMarkdown(clas, module):
     """This method id for the class docs and __init__ method for a class"""
+    HEAD = r'<big><big>%s</big></big>'
     sig = inspect.signature(clas)
-    sig = '<big><big>`#!py %s%s`</big></big>' % ( clas.__name__, sig)
+    sig = HEAD % '`#!py %s%s`' % ( clas.__name__, sig)
     title = '%s.%s' % (module.__name__, clas.__name__)
 
+    # Get the class doc string and signature to start
     docs = ''
-    if clas.__doc__:
-        # get class docs
-        docs = sig + '\n\n' + clas.__doc__.lstrip()
-        # TODO: constructor/init def docs
-        #docs += '\n\n' + _joinSections(clas.__init__.__doc__)
-        # Now indent for admonition widget for whole class (top level)
-        docs = '!!! abstract "%s"\n' % title + re.sub( '^',' '*4, docs, flags=re.MULTILINE)
-    all = inspect.getmembers(clas)
-    base = inspect.getmembers(clas.__bases__[0])#vtk.util.vtkAlgorithm.VTKPythonAlgorithmBase)
-    members = [mem for mem in all if mem not in base]
     methods = []
-    for mem in members:
-        if mem[0][0] != '_':
-            methods.append(_getDefMarkdown(mem[1], clas))
+    # get class docs
+    bases = ', '.join('`' + c.__name__ + '`' for c in clas.__bases__)
+    gram = 'es' if len(clas.__bases__) > 1 else ''
+    base = '*Base Class%s:* %s' % (gram, bases)
+    csecs = _joinSections(clas.__doc__) if clas.__doc__ else ''
+    docs = sig + ('\n\n%s\n\n' % (base)) + csecs
+    # TODO: constructor/init def docs
+    #docs += '\n\n' + _joinSections(clas.__init__.__doc__)
+    # Now indent for admonition widget for whole class (top level)
+    docs = '!!! abstract "%s"\n' % title + re.sub( '^',' '*4, docs, flags=re.MULTILINE)
+
+    def _getMems(clas, base, methods, USED, name=''):
+        all = inspect.getmembers(clas, predicate=inspect.isfunction)
+        basemem = inspect.getmembers(clas.__bases__[0])
+        members = [mem for mem in all if mem not in basemem and mem[0] not in USED and mem[0][1] != '_']
+        USED += [mem[0] for mem in members]
+        if len(members) < 1:
+            return USED
+        methods.append(name)
+        def _isabstract(method):
+            sig = '%s' % inspect.signature(method[1])
+            return '(self' not in sig
+        # First do static methods:
+        memstats = [mem for mem in members if _isabstract(mem)]
+        if len(memstats) > 0:
+            methods.append('<big>Static Methods:</big>')
+            for mem in memstats:
+                methods.append(_getDefMarkdown(mem[1], clas, admon='???'))
+        members = [mem for mem in members if mem not in memstats]
+        if len(members) > 0:
+            methods.append('<big>Instance Methods:</big>')
+            for mem in members:
+                methods.append(_getDefMarkdown(mem[1], clas, admon='???'))
+        return USED
+
+
+    USED = []
+
+    # Get this class' explicitly defined functions:
+    USED = _getMems(clas, clas.__bases__[0], methods, USED)
+
+    # Iterate over inherreted functionality
+    base = clas.__bases__[0] # TODO: assumes class only inhere functionality of a single other class
+    while (base is not vtk.util.vtkAlgorithm.VTKPythonAlgorithmBase and base is not object):
+        USED = _getMems(base, base.__bases__[0], methods, USED, name=(HEAD % 'Inherreted from: `%s`' % base.__name__))
+        base = base.__bases__[0]
 
     methods = "\n\n".join((met for met in methods))
     # ident one more level to be nested in class admonition

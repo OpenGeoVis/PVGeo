@@ -207,13 +207,13 @@ class ubcMeshReaderBase(TwoFileReaderBase):
     def ubcModel3D(FileName):
         """
         @desc:
-        Reads the 3D model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
+        Reads the 3D model file and returns a 1D NumPy float array. Use the PlaceModelOnMesh() method to associate with a grid.
 
         @params:
         FileName : str : The model file name(s) as an absolute path for the input model file in UBC 3D Model Model Format. Also accepts a `list` of string file names.
 
         @returns:
-        np.array : Returns a NumPy float array that holds the model data read from the file. Use the `placeModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
+        np.array : Returns a NumPy float array that holds the model data read from the file. Use the `PlaceModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
         """
         if type(FileName) is list:
             out = {}

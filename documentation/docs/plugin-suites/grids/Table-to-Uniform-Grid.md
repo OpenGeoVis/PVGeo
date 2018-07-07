@@ -18,7 +18,7 @@ This filter takes a vtkTable object with columns that represent data to be trans
 
 ## Down the Pipeline
 - [Translate Origin of Grid](translate-origin-of-grid.md)
-- [Flip Grid Axii](flip-grid-axii.md)
+- [Reverse Grid Axii](reverse-grid-axii.md)
 - [Normalize Array](../filters-general/normalize-array.md)
 - [Contour](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Contour)
 - [Threshold](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Threshold)
@@ -31,3 +31,10 @@ This filter takes a vtkTable object with columns that represent data to be trans
 Say we have some data in 1D format or a series of 1D data sets, like a vtkTable where we have columns of data which we know can be restructured into a 2D or 3D volume. One great example is the the table made in the example for using the [Read Binary Packed Data][reader-bin] reader. Follow the instructions to read in that data to a vtkTable. Once you have sample data in a vtkTable, we can apply a the 'Table to Uniform Grid' Filter and specify the shape of our volumetric data (for 2D data like this example, specify n1 and n2 accordingly and leave n3 as 1). The script provided in the example will output the extent, origin, and spacing parameters for you to use (best to copy/paste from that output into the parameter fields). This example will produce the 2D grid depicted on the [Read Binary Packed Data][reader-bin] page (that image adds the 'Warp by Scalar' filter).
 
 Another example is to use one of the data files from [this website](http://www.trainingimages.org/training-images-library.html) and load it in using the [GSLIB File to Table][reader-gslib] reader. These files are in the SGeMS file format but can also be read by the GSLIB file reader. Through loading this data into a table and then applying a Table to Uniform Grid Filter, we are effectively mimicking what the [SGeMS Grid][reader-grid] reader is doing behind the scenes. These SGeMS files make great example because they outline how we can transfer any data with any number of data arrays to a uniform grid (each data array in the input table will represent a different attribute of the space made up by the vtkImageData grid). The GSLIB reader will print out the dimensions of the grid to the Output Messages console (to see this, select View->Output Messages). Use those dimensions for the n1, n2, and n3 parameters. Play around with the other parameters to get a feel for how this filter behaves.
+
+
+-----
+
+## Code Docs
+
+{class:PVGeo.grids.TableToGrid}

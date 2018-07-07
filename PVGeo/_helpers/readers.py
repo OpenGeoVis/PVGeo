@@ -39,7 +39,7 @@ def converStringArray(arr):
         vtkarr.InsertNextValue(val)
     return vtkarr
 
-def convertArray(arr):
+def ConvertArray(arr):
     """
     @desc: A helper to convert a numpy array to a vtkDataArray
 
@@ -82,7 +82,7 @@ def placeArrInTable(ndarr, titles, pdo):
     cols = np.shape(ndarr)[1]
 
     for i in range(cols):
-        VTK_data = convertArray(ndarr[:,i])
+        VTK_data = ConvertArray(ndarr[:,i])
         VTK_data.SetName(titles[i])
         pdo.AddColumn(VTK_data)
     return pdo

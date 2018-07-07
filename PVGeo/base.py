@@ -1,4 +1,5 @@
 all = [
+    'PVGeoAlgorithmBase',
     'PVGeoReaderBase',
     'FilterPreserveTypeBase'
 ]

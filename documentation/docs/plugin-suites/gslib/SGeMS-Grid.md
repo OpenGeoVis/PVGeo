@@ -40,8 +40,8 @@ The Stanford Geostatistical Modeling Software (SGeMS) ASCII format is much like 
 
 
 ## Down the Pipeline
-- [Translate Origin of Grid](../pvgeo-grids/translate-origin-of-grid.md)
-- [Flip Grid Axii](../pvgeo-grids/flip-grid-axii.md)
+- [Translate Origin of Grid](../grids/translate-origin-of-grid.md)
+- [Reverse Grid Axii](../grids/reverse-grid-axii.md)
 - [Normalize Array](../filters-general/normalize-array.md)
 - [Contour](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Contour)
 - [Threshold](https://www.paraview.org/Wiki/ParaView/Users_Guide/List_of_filters#Threshold)

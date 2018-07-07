@@ -71,16 +71,24 @@ pages:
 # Each of the different plugin suites:
 - Plugin Suites:
     - About Plugin Suites: plugin-suites/about-plugin-suites.md
+    - Base Classes: plugin-suites/base.md
     - General Filters:
+        - Voxelize Points: plugin-suites/filters-general/voxelize-points.md
         - Normalize Array: plugin-suites/filters-general/normalize-array.md
-        - Correlate Arrays: plugin-suites/filters-general/correlate-arrays.md
+        - Array Math: plugin-suites/filters-general/array-math.md
         - Reshape Table: plugin-suites/filters-general/reshape-table.md
+        - Combine Tables: plugin-suites/filters-general/combine-tables.md
+        - Extract Points: plugin-suites/filters-general/extract-points.md
+        - Points to PolyData: plugin-suites/filters-general/points-to-polydata.md
+        - Rotate Coordinates: plugin-suites/filters-general/rotate-coordinates.md
+        - Rotation Tool: plugin-suites/filters-general/rotation-tool.md
         - Add Cell Connectivity to Points: plugin-suites/filters-general/add-cell-connectivity-to-points.md
         - Points to Tube: plugin-suites/filters-general/points-to-tube.md
     - General Readers:
         - Binary Packed Data: plugin-suites/readers-general/binary-packed-data.md
         - Madagascar SSRSF: plugin-suites/readers-general/madagascar-ssrsf.md
         - Delimited Text: plugin-suites/readers-general/delimited-text.md
+        - XYZ Files: plugin-suites/readers-general/xyz-reader.md
     - UBC Mesh Tools:
         - Read Tensor Meshes: plugin-suites/ubc/tensor-grids.md
         - Read OcTree: plugin-suites/ubc/octree.md
@@ -89,12 +97,13 @@ pages:
         - SGeMS Grid: plugin-suites/gslib/sgems-grid.md
         - GSLIB Table: plugin-suites/gslib/gslib.md
     - Model Building:
+        - Create Rectilinear Grid: plugin-suites/model-building/create-rectilinear-grid.md
         - Create Unifrom Grid: plugin-suites/model-building/create-uniform-grid.md
-    - PVGeo Grids:
-        - PVGeo Grid: plugin-suites/pvgeo-grids/pvgeo-grid.md
-        - Table to Uniform Grid: plugin-suites/pvgeo-grids/table-to-uniform-grid.md
-        - Flip Grid Axii: plugin-suites/pvgeo-grids/flip-grid-axii.md
-        - Translate Origin of Grid: plugin-suites/pvgeo-grids/translate-origin-of-grid.md
+        - Create Earth Source: plugin-suites/model-building/create-earth-source.md
+    - Grids Tools:
+        - Table to Uniform Grid: plugin-suites/grids/table-to-uniform-grid.md
+        - Flip Grid Axii: plugin-suites/grids/reverse-grid-axii.md
+        - Translate Origin of Grid: plugin-suites/grids/translate-origin-of-grid.md
     - Tunneling:
         - Animate TBM: plugin-suites/tunneling/animate-tbm.md
 

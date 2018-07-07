@@ -27,7 +27,7 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
 
 
     @staticmethod
-    def placeModelOnMesh(mesh, model, dataNm='Data'):
+    def PlaceModelOnMesh(mesh, model, dataNm='Data'):
         """
         @desc:
         Places model data onto a mesh. This is for the UBC Grid data reaers to associate model data with the mesh grid.
@@ -43,7 +43,7 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
         """
         if type(model) is dict:
             for key in model.keys():
-                ubcTensorMeshReader.placeModelOnMesh(mesh, model[key], dataNm=key)
+                ubcTensorMeshReader.PlaceModelOnMesh(mesh, model[key], dataNm=key)
             return mesh
 
         # model.GetNumberOfValues() if model is vtkDataArray
@@ -87,7 +87,7 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
         output : vtk.vtkRectilinearGrid : The output data object
 
         @return:
-        vtkRectilinearGrid : Returns a `vtkRectilinearGrid` generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `placeModelOnMesh()` method to associate with model data.
+        vtkRectilinearGrid : Returns a `vtkRectilinearGrid` generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `PlaceModelOnMesh()` method to associate with model data.
 
         """
         # Read in data from file
@@ -128,13 +128,13 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
     def ubcModel2D(FileName):
         """
         @desc:
-        Reads a 2D model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
+        Reads a 2D model file and returns a 1D NumPy float array. Use the PlaceModelOnMesh() method to associate with a grid.
 
         @params:
         FileName : str : The model filename as an absolute path for the input model file in UBCMesh Model Format. Also accepts a list of string file names.
 
         @returns:
-        np.array : Returns a NumPy float array that holds the model data read from the file. Use the `placeModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
+        np.array : Returns a NumPy float array that holds the model data read from the file. Use the `PlaceModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
         """
         if type(FileName) is list:
             out = {}
@@ -181,7 +181,7 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
         output : vtk.vtkRectilinearGrid : The output data object
 
         @returns:
-        vtkRectilinearGrid : Returns a `vtkRectilinearGrid` generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `placeModelOnMesh()` method to associate with model data.
+        vtkRectilinearGrid : Returns a `vtkRectilinearGrid` generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `PlaceModelOnMesh()` method to associate with model data.
 
         """
 
@@ -291,7 +291,7 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
             output)
         # Place the model data for given timestep onto the mesh
         if len(self.__models) > i:
-            ubcTensorMeshReader.placeModelOnMesh(output, self.__models[i], self.GetDataName())
+            ubcTensorMeshReader.PlaceModelOnMesh(output, self.__models[i], self.GetDataName())
         return 1
 
 
@@ -340,5 +340,5 @@ class ubcTensorMeshAppender(ubcModelAppenderBase):
         return
 
     def _PlaceOnMesh(self, output, idx=0):
-        ubcTensorMeshReader.placeModelOnMesh(output, self._models[idx], self._dataname)
+        ubcTensorMeshReader.PlaceModelOnMesh(output, self._models[idx], self._dataname)
         return

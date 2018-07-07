@@ -58,7 +58,7 @@ class PackedBinariesReader(PVGeoReaderBase):
         """@desc: This will return the proper data for the given timestep"""
         return self.__data[idx]
 
-    def convertArray(self, arr):
+    def ConvertArray(self, arr):
         # Put raw data into vtk array
         data = nps.numpy_to_vtk(num_array=arr, deep=True, array_type=self.__vtktype)
         data.SetName(self.__dataName)
@@ -74,7 +74,7 @@ class PackedBinariesReader(PVGeoReaderBase):
         i = _helpers.GetRequestedTime(self, outInfo)
         # Generate the data object
         arr = self._GetRawData(idx=i)
-        data = self.convertArray(arr)
+        data = self.ConvertArray(arr)
         output.AddColumn(data)
         return 1
 
