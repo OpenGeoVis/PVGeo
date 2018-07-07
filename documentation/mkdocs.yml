@@ -74,6 +74,9 @@ pages:
     - Base Classes: plugin-suites/base.md
     - General Filters:
         - Voxelize Points: plugin-suites/filters-general/voxelize-points.md
+        - Many Slices Along Points: plugin-suites/filters-general/many-slices-along-points.md
+        - Many Slices Along Axis: plugin-suites/filters-general/many-slices-along-axis.md
+        - Slice Through Time: plugin-suites/filters-general/slice-through-time.md
         - Normalize Array: plugin-suites/filters-general/normalize-array.md
         - Array Math: plugin-suites/filters-general/array-math.md
         - Reshape Table: plugin-suites/filters-general/reshape-table.md
@@ -115,12 +118,8 @@ pages:
         - Export as VTKjs:  pvmacros/export/exportvtkjs.md
     - Vis:
         - Camera: pvmacros/vis/camera.md
-        - Clip Through:  pvmacros/vis/clip-through.md
-        - Many Slices Along Points:  pvmacros/vis/many-slices-along-points.md
-        - Many Slices Along Axis:  pvmacros/vis/slices-along-axis.md
 
 - Examples:
-    - Slice Model Along PolyLine: examples/slice-model-along-polyline.md
     - Editing the Axes: examples/edit-axes.md
     - Editing the Render View: examples/edit-render-view.md
     - Save Camera Views: examples/save-camera-locations.md

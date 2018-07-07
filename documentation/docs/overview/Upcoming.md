@@ -19,18 +19,18 @@ More documentation is soon to come. We want to do it right: with tutorials, exam
 -->
 
 ### Filters
-- [x] **Append Model to UBC Mesh:** This will load a model file and tag it on to vtkStructuredGrid loaded from a UBC Mesh reader. Think of it as appending models as attributes to the 3D mesh.
 - [ ] **Extract Array:** This will allow you to extract any array from any data structure as vtkPolyData.
 - [ ] **Transpose Grid:** Transpose or swap axii of grid data sets (vtkImageData and vtkRectilinearGrid)
 - [x] **Reshape Table:** Adding ability to reshape using Fortran ordering on the currently available filter.
-- [ ] **Make Cubes from Point Set:** This will take a point set and generate cube of some specified size at every point
+- [x] **[Voxelize Points](../plugin-suites/filters-general/voxelize-points.md):** This will take a point set and generate voxels of some specified size at every point or estimate an appropriate voxel size if the points are uniformly spaced.
+- [x] **[Many Slices Along Points](../plugin-suites/filters-general/many-slices-along-points.md):** Generate many slices of dataset along a line at every point on that line (normal is the vector from that point to the next).
+- [x] **[Append Model to UBC Mesh](../plugin-suites/ubc/add-model.md):** This will load a model file and tag it on to vtkStructuredGrid loaded from a UBC Mesh reader. Think of it as appending models as attributes to the 3D mesh.
 
 <!---
 **Structure Point Set:** This will take scattered point data and create connectivity/structure either in the form of hexahedrons or quads. More info to come.
 -->
 ### Macros in `pvmacros`
 - [x] Save screenshots in isometric views, side, top, etc. in an automated fashion
-- [x] [Many Slices Along Points:](../pvmacros/vis/many-slices-along-points.md) Export slices of dataset along polyline at every point on that line (normal is the vector from that point to the next)
 - [x] [Export a scene](../pvmacros/export/exportvtkjs.md) to a shareable 3D format
 
 ### Scripts
@@ -43,4 +43,3 @@ More documentation is soon to come. We want to do it right: with tutorials, exam
 - [ ] How to build your own plugins using this project's framework and build scripts
 - [ ] Importing DEM topography (with/without satellite imagery)
 - [ ] Slicing/cropping a data scene through all components/datasets (managing links)
-- [x] [Slice Model Along PolyLine:](../examples/slice-model-along-polyline.md) How to export a slice of a dataset projected on a vtkPolyLine (capabilities are currently present in ParaView)

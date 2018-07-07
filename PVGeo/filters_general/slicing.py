@@ -77,6 +77,7 @@ class ManySlicesAlongPoints(_SliceBase):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=2, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid')
+        self.__useNearestNbr = True
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):
@@ -88,13 +89,16 @@ class ManySlicesAlongPoints(_SliceBase):
         return 1
 
     def _ManySlicesAlongPoints(self, pdipts, pdidata, pdo):
-        from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdipts) # NumPy wrapped points
         points = np.array(wpdi.Points) # New NumPy array of points so we dont destroy input
         numPoints = pdipts.GetNumberOfPoints()
-        tree = cKDTree(points)
-        ptsi = tree.query(points[0], k=numPoints)[1]
+        if self.__useNearestNbr:
+            from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
+            tree = cKDTree(points)
+            ptsi = tree.query(points[0], k=numPoints)[1]
+        else:
+            ptsi = [i for i in range(numPoints)]
 
         # iterate of points in order (skips last point):
         app = vtk.vtkAppendFilter()
@@ -129,6 +133,11 @@ class ManySlicesAlongPoints(_SliceBase):
 
 
     #### Getters / Setters ####
+
+    def SetUseNearestNbr(self, flag):
+        if self.__useNearestNbr != flag:
+            self.__useNearestNbr = flag
+            self.Modified()
 
 
 ###############################################################################

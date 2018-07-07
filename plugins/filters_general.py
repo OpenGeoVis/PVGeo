@@ -358,6 +358,13 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
         ManySlicesAlongPoints.SetNumberOfSlices(self, num)
 
 
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Neareast Nbr Approx',
+        command='SetUseNearestNbr', default_values=False,
+        help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
+    def SetUseNearestNbr(self, flag):
+        ManySlicesAlongPoints.SetUseNearestNbr(self, flag)
+
+
 ###############################################################################
 
 
