@@ -159,7 +159,7 @@ def makeMkDown(doc, title, sig, admon='!!!'):
 
 
 def _getDefMarkdown(method, module, admon='!!!'):
-    sig = inspect.signature(method)
+    sig = str(inspect.signature(method)).replace('(self, ', '(').replace('(self', '(')
 
     sig = '<big>`#!py %s%s`</big>' % ( method.__name__, sig)
     title = '%s' % (method.__name__)#'%s.%s' % (module.__name__, method.__name__)
