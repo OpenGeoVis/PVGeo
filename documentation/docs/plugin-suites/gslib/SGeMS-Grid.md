@@ -80,9 +80,4 @@ and here is the [FLUVSIM object-based model](http://www.trainingimages.org/uploa
 ## Code Docs
 
 
-{def:PVGeo.gslib.sgemsGrid}
-
-
------
-
-{def:PVGeo.gslib.sgemsExtent}
+{class:PVGeo.gslib.SGeMSGridReader}

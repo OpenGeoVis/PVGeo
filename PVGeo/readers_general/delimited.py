@@ -124,7 +124,7 @@ class DelimitedTextReader(PVGeoReaderBase):
             self.Modified()
 
     def SetUseTab(self, flag):
-        """@desc: Set a boolean flag to override the `SetDelimiter()` and use a Tab (\t) delimiter."""
+        """@desc: Set a boolean flag to override the `SetDelimiter()` and use a Tab delimiter."""
         if flag != self.__useTab:
             self.__useTab = flag
             self.Modified()
@@ -150,7 +150,7 @@ class DelimitedTextReader(PVGeoReaderBase):
             self.__hasTitles = flag
             self.Modified()
 
-    def GetHasTitles(self):
+    def HasTitles(self):
         return self.__hasTitles
 
     def GetTitles(self):

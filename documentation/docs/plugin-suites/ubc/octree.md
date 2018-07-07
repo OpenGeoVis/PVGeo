@@ -29,7 +29,5 @@ To use the plugin:
 
 ## Code Docs
 
-{def:PVGeo.ubc.ubcOcTree}
-{def:PVGeo.ubc.ubcOcTreeMesh}
-{def:PVGeo.ubc.placeModelOnOcTreeMesh}
-{def:PVGeo.ubc.ubcExtent}
+{class:PVGeo.ubc.ubcOcTreeReader}
+{class:PVGeo.ubc.ubcOcTreeAppender}

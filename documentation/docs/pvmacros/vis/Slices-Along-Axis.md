@@ -6,4 +6,4 @@
 
 ## Code Docs
 
-{def:pvmacros.vis.manySlicesAlongAxis}
+{class:PVGeo.filters_general.ManySlicesAlongAxis}

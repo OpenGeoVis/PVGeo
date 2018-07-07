@@ -46,4 +46,4 @@ If you want to make tons of slices of a model, the outputs of this macro WILL ge
 
 ## Code Docs
 
-{def:pvmacros.vis.manySlicesAlongPoints}
+{class:PVGeo.filters_general.ManySlicesAlongPoints}

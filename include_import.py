@@ -20,8 +20,11 @@ import sys
 from types import ModuleType
 import importlib
 import inspect
+import PVGeo
+import vtk
 
 realimport = builtins.__import__
+
 
 class DummyModule(ModuleType):
     def __getattr__(self, key):
@@ -29,9 +32,10 @@ class DummyModule(ModuleType):
     __all__ = []   # support wildcard imports
 
 def tryimport(name, globals={}, locals={}, fromlist=[], level=1):
+    #globals = dict(globals)
     try:
         return realimport(name, globals, locals, fromlist, level)
-    except ImportError:
+    except (ImportError):
         return DummyModule(name)
 
 
@@ -122,6 +126,8 @@ def _beautifySig(sig):
 ################
 
 def _joinSections(doc):
+    if doc is None or len(doc) < 1:
+        return ''
     secs = _getSections(doc)
     try:
         secs = beautifySections(secs)
@@ -148,8 +154,8 @@ def _getDefMarkdown(method, module):
     sig = '<big><big>`#!py %s%s`</big></big>' % ( method.__name__, sig)
     title = '%s.%s' % (module.__name__, method.__name__)
 
-    if method.__doc__:
-        return makeMkDown(method.__doc__, title, sig)
+    #if method.__doc__:
+    return makeMkDown(method.__doc__, title, sig)
 
     return sig
 
@@ -157,7 +163,6 @@ def _getDefMarkdown(method, module):
 def _getClassMarkdown(clas, module):
     """This method id for the class docs and __init__ method for a class"""
     sig = inspect.signature(clas)
-
     sig = '<big><big>`#!py %s%s`</big></big>' % ( clas.__name__, sig)
     title = '%s.%s' % (module.__name__, clas.__name__)
 
@@ -166,11 +171,12 @@ def _getClassMarkdown(clas, module):
         # get class docs
         docs = sig + '\n\n' + clas.__doc__.lstrip()
         # TODO: constructor/init def docs
-        docs += '\n\n' + _joinSections(clas.__init__.__doc__)
+        #docs += '\n\n' + _joinSections(clas.__init__.__doc__)
         # Now indent for admonition widget for whole class (top level)
         docs = '!!! abstract "%s"\n' % title + re.sub( '^',' '*4, docs, flags=re.MULTILINE)
-
-    members = inspect.getmembers(clas)
+    all = inspect.getmembers(clas)
+    base = inspect.getmembers(clas.__bases__[0])#vtk.util.vtkAlgorithm.VTKPythonAlgorithmBase)
+    members = [mem for mem in all if mem not in base]
     methods = []
     for mem in members:
         if mem[0][0] != '_':

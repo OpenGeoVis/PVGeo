@@ -20,4 +20,4 @@ This reads in float or double data that is packed into a Madagascar Single Strea
 
 ## Code Docs
 
-{def:PVGeo.readers_general.madagascar}
+{class:PVGeo.readers_general.MadagascarReader}

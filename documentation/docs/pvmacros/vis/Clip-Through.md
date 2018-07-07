@@ -3,4 +3,4 @@
 
 ## Code Docs
 
-{def:pvmacros.vis.clipThrough}
+{class:PVGeo.filters_general.SliceThroughTime}

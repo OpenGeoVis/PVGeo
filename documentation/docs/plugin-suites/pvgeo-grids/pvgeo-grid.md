@@ -51,11 +51,3 @@ Use the following script to construct to 3D numpy arrays with the same dimension
     py2PVGeo.savePVGeoGrid([dd1,dd2], path, basename, spacing=(step,step,step))
 
     ```
-
-
------
-## Code Docs
-
-{def:PVGeo.grids.savePVGeoGrid}
-
-{def:PVGeo.grids.readPVGeoGrid}

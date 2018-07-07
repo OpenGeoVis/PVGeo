@@ -23,20 +23,5 @@ For example files to use with this reader, download the example from [the GIFtoo
 
 ## Code Docs
 
-{def:PVGeo.ubc.ubcExtent}
-
-{def:PVGeo.ubc.ubcTensorMesh}
-
-{def:PVGeo.ubc.placeModelOnMesh}
-
-### 3D
-
-{def:PVGeo.ubc.ubcMesh3D}
-
-{def:PVGeo.ubc.ubcModel3D}
-
-### 2D
-
-{def:PVGeo.ubc.ubcMesh2D}
-
-{def:PVGeo.ubc.ubcModel2D}
+{class:PVGeo.ubc.ubcTensorMeshReader}
+{class:PVGeo.ubc.ubcTensorMeshAppender}
