@@ -5,9 +5,6 @@ __version__ = '1.0.1'
 with open("README.md", "r") as f:
     long_description = f.read()
 
-with open("requirements.txt", "r") as f:
-    reqs = f.read().splitlines()
-
 setuptools.setup(
     name="PVGeo",
     version=__version__,
@@ -18,7 +15,13 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/OpenGeoVis/PVGeo",
     packages=setuptools.find_packages(),
-    install_requires=reqs,
+    install_requires=[
+        'numpy>=1.10',
+        'scipy>=1.1',
+        'vtk>=8.1',
+        'colour-runner==0.0.5',
+        'codecov==2.0.15',
+    ],
     classifiers=(
         "Programming Language :: Python",
         "License :: OSI Approved :: BSD License",
