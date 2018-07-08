@@ -1,7 +1,3 @@
-
-from .load_plugins import (
-    loadPVGeoplugins
-)
 from . import export
 from . import vis
 
