@@ -17,6 +17,12 @@ from .. import _helpers
 
 
 class _SliceBase(PVGeoAlgorithmBase):
+    """@desc: a helper class for making slicing fileters
+
+    @notes:
+    - Make sure the input data source is slice-able.
+    - The SciPy module is required for this macro.
+    """
     def __init__(self, numSlices=5,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid'):
@@ -37,20 +43,7 @@ class _SliceBase(PVGeoAlgorithmBase):
         return plane
 
     def _Slice(self, pdi, pdo, plane):
-        """
-        @desc:
-
-        @params:
-        dataNm : string : The string name of the data source to slice. Make sure this data source is slice-able.
-        rng : list, tuple, or 1D np.array : A range of values along `axis` specified for the slice locations. Each element in `rng` will be a slice location along the `axis` chosen.
-        exportpath : string : optional : The absolute file path of where to save each slice
-        ext : string : optional : The file extension for saving out the slices. Default to '.csv'
-
-        @notes:
-        - Make sure the input data source is slice-able.
-        - The SciPy module is required for this macro.
-
-        """
+        """@desc: Slica an input on a plane and produce the output"""
         # create slice
         cutter = vtk.vtkCutter() # Construct the cutter object
         cutter.SetInputData(pdi) # Use the grid as the data we desire to cut
@@ -74,30 +67,21 @@ class _SliceBase(PVGeoAlgorithmBase):
 
 
 class ManySlicesAlongPoints(_SliceBase):
-    """
-    @desc:
-    This macro takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at intervals of that path along the vector of that path at that point. This constructs `numSlices` slices through the dataset `dataNm`.
-
-    @params:
-    pointsNm : string : The string name of the points source to construct the path.
-    dataNm : string : The string name of the data source to slice. Make sure this data source is slice-able.
-    numSlices : int : optional : The number of slices along the path.
-    exportpath : string : optional : The absolute file path of where to save each slice
-    ext : string : optional : The file extension for saving out the slices. Default to '.csv'
+    """@desc: Takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at intervals of that path along the vector of that path at that point. This constructs many slices through the input dataset as an appended output `vtkUnstructuredGrid`.
 
     @notes:
     - Make sure the input data source is slice-able.
     - The SciPy module is required for this macro.
-
     """
     def __init__(self, numSlices=5):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=2, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid')
+        self.__useNearestNbr = True
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):
-        """This simply makes sure the user selects the correct inputs"""
+        """@desc: This simply makes sure the user selects the correct inputs"""
         typ = 'vtkDataSet'
         if port == 0:
             typ = 'vtkPolyData' # Make sure points are poly data
@@ -105,13 +89,16 @@ class ManySlicesAlongPoints(_SliceBase):
         return 1
 
     def _ManySlicesAlongPoints(self, pdipts, pdidata, pdo):
-        from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdipts) # NumPy wrapped points
         points = np.array(wpdi.Points) # New NumPy array of points so we dont destroy input
         numPoints = pdipts.GetNumberOfPoints()
-        tree = cKDTree(points)
-        dist, ptsi = tree.query(points[0], k=numPoints)
+        if self.__useNearestNbr:
+            from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
+            tree = cKDTree(points)
+            ptsi = tree.query(points[0], k=numPoints)[1]
+        else:
+            ptsi = [i for i in range(numPoints)]
 
         # iterate of points in order (skips last point):
         app = vtk.vtkAppendFilter()
@@ -147,12 +134,18 @@ class ManySlicesAlongPoints(_SliceBase):
 
     #### Getters / Setters ####
 
+    def SetUseNearestNbr(self, flag):
+        if self.__useNearestNbr != flag:
+            self.__useNearestNbr = flag
+            self.Modified()
+
 
 ###############################################################################
 
 
 
 class ManySlicesAlongAxis(_SliceBase):
+    """@desc: Slices a `vtkDataSet` along a given axis many times"""
     def __init__(self, numSlices=5, outputType='vtkUnstructuredGrid'):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=1, inputType='vtkDataSet',
@@ -220,6 +213,9 @@ class ManySlicesAlongAxis(_SliceBase):
 
 
     def SetAxis(self, axis):
+        """@desc: set the axis on which to slice
+        @params:
+        axis : int : the axial index (0, 1, 2) = (x, y, z)"""
         if axis not in (0,1,2):
             raise Exception('Axis choice must be 0, 1, or 2 (x, y, or z)')
         if self.__axis != axis:
@@ -238,17 +234,7 @@ class ManySlicesAlongAxis(_SliceBase):
 
 
 class SliceThroughTime(ManySlicesAlongAxis):
-    """
-    @desc:
-    This macro takes a clip source and progresses its location through a set of bounds in the data scene. The macro requires that the clip already exist in the pipeline. This is especially useful if you have many clips linked together as all will move through the seen as a result of this macro.
-
-    @params:
-    clip : string : The string name of the clip source to be translated.
-    ax : int : This is the axis on which to translate (0 for x, 1 for y, 2 for z). Think of this as the normal vector for the clip.
-    bounds : list or tuple : These are the bounds to constrain the clip translation. 6 elements.
-    num : int : optional : The number of discritizations in the clip translation.
-    delay : float : optional : Time delay in seconds before conducting each clip translation.
-
+    """@desc: Takes a sliceable `vtkDataSet` and progresses a slice of it along a given axis. The macro requires that the clip already exist in the pipeline. This is especially useful if you have many clips linked together as all will move through the seen as a result of this macro.
     """
     def __init__(self, numSlices=5):
         ManySlicesAlongAxis.__init__(self, numSlices=numSlices, outputType='vtkPolyData')
@@ -258,7 +244,7 @@ class SliceThroughTime(ManySlicesAlongAxis):
 
 
     def _UpdateTimeSteps(self):
-        """for internal use only"""
+        """@desc: For internal use only"""
         self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetNumberOfSlices(), self.__dt)
 
 
@@ -286,16 +272,18 @@ class SliceThroughTime(ManySlicesAlongAxis):
     #### Public Getters / Setters ####
 
     def SetNumberOfSlices(self, num):
+        """@desc: Set the number of slices/timesteps to generate"""
         ManySlicesAlongAxis.SetNumberOfSlices(self, num)
         self._UpdateTimeSteps()
         self.Modified()
 
     def SetTimeDelta(self, dt):
+        """@desc: Set the time step interval in seconds"""
         if self.__dt != dt:
             self.__dt = dt
             self._UpdateTimeSteps()
             self.Modified()
 
     def GetTimestepValues(self):
-        """Use this in ParaView decorator to register timesteps"""
+        """@desc: Use this in ParaView decorator to register timesteps"""
         return self.__timesteps.tolist() if self.__timesteps is not None else None

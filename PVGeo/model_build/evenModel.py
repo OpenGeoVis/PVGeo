@@ -6,10 +6,10 @@ all = [
 import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
-from vtk.numpy_interface import dataset_adapter as dsa
+#from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
+from ..base import PVGeoAlgorithmBase
 from .. import _helpers
 
 
@@ -23,9 +23,10 @@ def _makeSpatialCellData(nx, ny, nz):
     return arr.flatten()
 
 
-class CreateUniformGrid(VTKPythonAlgorithmBase):
+class CreateUniformGrid(PVGeoAlgorithmBase):
+    """@desc: Create uniform grid (`vtkImageData`)"""
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkImageData')
         self.__extent = [10, 10, 10]
@@ -42,7 +43,7 @@ class CreateUniformGrid(VTKPythonAlgorithmBase):
         pdo.SetDimensions(nx, ny, nz)
         pdo.SetOrigin(ox, oy, oz)
         pdo.SetSpacing(sx, sy, sz)
-        pdo.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
+        #pdo.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
         # Add CELL data
         data = _makeSpatialCellData(nx-1, ny-1, nz-1) # minus 1 b/c cell data not point data
         data = nps.numpy_to_vtk(num_array=data, deep=True)
@@ -71,16 +72,19 @@ class CreateUniformGrid(VTKPythonAlgorithmBase):
 
 
     def SetExtent(self, nx, ny, nz):
+        """@desc: Set the extent of the output grid"""
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
     def SetSpacing(self, dx, dy, dz):
+        """@desc: Set the spacing for the points along each axial direction"""
         if self.__spacing != [dx, dy, dz]:
             self.__spacing = [dx, dy, dz]
             self.Modified()
 
     def SetOrigin(self, x0, y0, z0):
+        """@desc: Set the origin of the output grid"""
         if self.__origin != [x0, y0, z0]:
             self.__origin = [x0, y0, z0]
             self.Modified()
@@ -89,10 +93,10 @@ class CreateUniformGrid(VTKPythonAlgorithmBase):
 
 
 
-class CreateEvenRectilinearGrid(VTKPythonAlgorithmBase):
+class CreateEvenRectilinearGrid(PVGeoAlgorithmBase):
     """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed."""
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self,
+        PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')
         self.__extent = [10, 10, 10]
@@ -108,7 +112,7 @@ class CreateEvenRectilinearGrid(VTKPythonAlgorithmBase):
         nx,ny,nz = self.__extent[0]+1, self.__extent[1]+1, self.__extent[2]+1
 
         xcoords = np.linspace(self.__xrange[0], self.__xrange[1], num=nx)
-        ycoords = np.linspace(self.__xrange[0], self.__xrange[1], num=ny)
+        ycoords = np.linspace(self.__yrange[0], self.__yrange[1], num=ny)
         zcoords = np.linspace(self.__zrange[0], self.__zrange[1], num=nz)
 
         # CONVERT TO VTK #
@@ -116,12 +120,12 @@ class CreateEvenRectilinearGrid(VTKPythonAlgorithmBase):
         ycoords = nps.numpy_to_vtk(num_array=ycoords,deep=True)
         zcoords = nps.numpy_to_vtk(num_array=zcoords,deep=True)
 
-        pdo.SetDimensions(nx+1,ny+1,nz+1) # note this subtracts 1
+        pdo.SetDimensions(nx,ny,nz)
         pdo.SetXCoordinates(xcoords)
         pdo.SetYCoordinates(ycoords)
         pdo.SetZCoordinates(zcoords)
 
-        data = _makeSpatialCellData(nx, ny, nz)
+        data = _makeSpatialCellData(nx-1, ny-1, nz-1)
         data = nps.numpy_to_vtk(num_array=data, deep=True)
         data.SetName('Spatial Data')
         # THIS IS CELL DATA! Add the model data to CELL data:
@@ -131,7 +135,7 @@ class CreateEvenRectilinearGrid(VTKPythonAlgorithmBase):
 
     def RequestInformation(self, request, inInfo, outInfo):
         # Now set whole output extent
-        ext = [0, self.__extent[0]-2, 0,self.__extent[1]-2, 0,self.__extent[2]-2]
+        ext = [0, self.__extent[0], 0,self.__extent[1], 0,self.__extent[2]]
         info = outInfo.GetInformationObject(0)
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
@@ -142,21 +146,25 @@ class CreateEvenRectilinearGrid(VTKPythonAlgorithmBase):
 
 
     def SetExtent(self, nx, ny, nz):
+        """@desc: Set the extent of the output grid"""
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
     def SetXRange(self, start, stop):
+        """@desc: Set range (min, max) for the grid in the X-direction"""
         if self.__xrange != [start, stop]:
             self.__xrange = [start, stop]
             self.Modified()
 
     def SetYRange(self, start, stop):
+        """@desc: Set range (min, max) for the grid in the Y-direction"""
         if self.__yrange != [start, stop]:
             self.__yrange = [start, stop]
             self.Modified()
 
     def SetZRange(self, start, stop):
+        """@desc: Set range (min, max) for the grid in the Z-direction"""
         if self.__zrange != [start, stop]:
             self.__zrange = [start, stop]
             self.Modified()

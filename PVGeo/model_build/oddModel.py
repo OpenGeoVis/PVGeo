@@ -8,13 +8,13 @@ import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
-from .. import _helpers
+from ..base import PVGeoAlgorithmBase
+#from .. import _helpers
 
-class CreateTensorMesh(VTKPythonAlgorithmBase):
+class CreateTensorMesh(PVGeoAlgorithmBase):
     """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed."""
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self, nInputPorts=0,
+        PVGeoAlgorithmBase.__init__(self, nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')
         self.__origin = [-350.0, -400.0, 0.0]
         self.__xcells = CreateTensorMesh._ReadCellLine('200 100 50 20*50.0 50 100 200')
@@ -114,33 +114,52 @@ class CreateTensorMesh(VTKPythonAlgorithmBase):
 
 
     def SetOrigin(self, x0, y0, z0):
+        """@desc: Set the origin of the output"""
         if self.__origin != [x0, y0, z0]:
             self.__origin = [x0, y0, z0]
             self.Modified()
 
     def SetXCells(self, xcells):
-        if not np.allclose(self.__xcells, xcells):
+        """@desc: Set the spacings for the cells in the X direction
+        @params:
+        xcells : list or array of floats : the spacings along the X-axis"""
+        if len(xcells) != len(self.__xcells) or not np.allclose(self.__xcells, xcells):
             self.__xcells = xcells
             self.Modified()
 
     def SetYCells(self, ycells):
-        if not np.allclose(self.__ycells, ycells):
+        """@desc: Set the spacings for the cells in the Y direction
+        @params:
+        ycells : list or array of floats : the spacings along the Y-axis"""
+        if len(ycells) != len(self.__ycells) or not np.allclose(self.__ycells, ycells):
             self.__ycells = ycells
             self.Modified()
 
     def SetZCells(self, zcells):
-        if not np.allclose(self.__zcells, zcells):
+        """@desc: Set the spacings for the cells in the Z direction
+        @params:
+        zcells : list or array of floats : the spacings along the Z-axis"""
+        if len(zcells) != len(self.__zcells) or not np.allclose(self.__zcells, zcells):
             self.__zcells = zcells
             self.Modified()
 
     def SetXCellsStr(self, xcellstr):
+        """@desc: Set the spacings for the cells in the X direction
+        @params:
+        xcellstr : string : the spacings along the X-axis in the UBC style"""
         xcells = CreateTensorMesh._ReadCellLine(xcellstr)
         self.SetXCells(xcells)
 
     def SetYCellsStr(self, ycellstr):
+        """@desc: Set the spacings for the cells in the Y direction
+        @params:
+        ycellstr : string : the spacings along the Y-axis in the UBC style"""
         ycells = CreateTensorMesh._ReadCellLine(ycellstr)
         self.SetYCells(ycells)
 
     def SetZCellsStr(self, zcellstr):
+        """@desc: Set the spacings for the cells in the Z direction
+        @params:
+        zcellstr : string : the spacings along the Z-axis in the UBC style"""
         zcells = CreateTensorMesh._ReadCellLine(zcellstr)
         self.SetZCells(zcells)

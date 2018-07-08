@@ -3,8 +3,6 @@
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import *
 from vtk.numpy_interface import dataset_adapter as dsa
-import numpy as np
-import vtk
 
 # Helpers:
 from PVGeo import _helpers
@@ -190,16 +188,16 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
                 _helpers.addArray(pdo, 1, arr) # adds to CELL data
         return pdo
 
-    def RequestData(self, request, inInfo, outInfo):
+    def RequestData(self, request, inInfoVec, outInfoVec):
         # Handle input arrays
-        pdi = self.GetInputData(inInfo, 0, 0)
+        pdi = self.GetInputData(inInfoVec, 0, 0)
         wpdi = dsa.WrapDataObject(pdi)
         dx = _helpers.getArray(wpdi, self.__dx_id[0], self.__dx_id[1])
         dy = _helpers.getArray(wpdi, self.__dy_id[0], self.__dy_id[1])
         dz = _helpers.getArray(wpdi, self.__dz_id[0], self.__dz_id[1])
         VoxelizePoints.SetDeltas(self, dx, dy, dz)
         # call parent and make sure EstimateGrid is set to False
-        return VoxelizePoints.RequestData(self, request, inInfo, outInfo)
+        return VoxelizePoints.RequestData(self, request, inInfoVec, outInfoVec)
 
     #### Seters and Geters ####
 
@@ -358,6 +356,13 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
     @smdomain.intrange(min=2, max=25)
     def SetNumberOfSlices(self, num):
         ManySlicesAlongPoints.SetNumberOfSlices(self, num)
+
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Neareast Nbr Approx',
+        command='SetUseNearestNbr', default_values=False,
+        help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
+    def SetUseNearestNbr(self, flag):
+        ManySlicesAlongPoints.SetUseNearestNbr(self, flag)
 
 
 ###############################################################################

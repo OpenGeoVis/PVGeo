@@ -3,11 +3,6 @@
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import *
 
-import numpy as np
-import vtk
-
-# Helpers:
-from PVGeo import _helpers
 # Classes to Decorate
 from PVGeo.model_build import *
 
@@ -65,6 +60,10 @@ class PVGeoCreateTensorMesh(CreateTensorMesh):
     @smproperty.stringvector(name="Z Cells", default_values='20*25.0 50 100 200')
     def SetZCellsStr(self, zcellstr):
         CreateTensorMesh.SetZCellsStr(self, zcellstr)
+
+    @smproperty.doublevector(name="Origin", default_values=[-350.0, -400.0, 0.0])
+    def SetOrigin(self, x0, y0, z0):
+        CreateTensorMesh.SetOrigin(self, x0, y0, z0)
 
 
 ###############################################################################

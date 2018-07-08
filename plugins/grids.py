@@ -3,9 +3,6 @@
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import *
 
-import numpy as np
-import vtk
-
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
@@ -30,16 +27,16 @@ class PVGeoReverseImageDataAxii(ReverseImageDataAxii):
     #### Seters and Geters ####
 
     @smproperty.xml(_helpers.getPropertyXml(name='Flip X Axis', command='SetFlipX', default_values=True, help='A boolean to set whether to flip the X axis.'))
-    def SetFlipX(self, xbool):
-        ReverseImageDataAxii.SetFlipX(self, xbool)
+    def SetFlipX(self, flag):
+        ReverseImageDataAxii.SetFlipX(self, flag)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Flip Y Axis', command='SetFlipY', default_values=True, help='A boolean to set whether to flip the Y axis.'))
-    def SetFlipY(self, ybool):
-        ReverseImageDataAxii.SetFlipY(self, ybool)
+    def SetFlipY(self, flag):
+        ReverseImageDataAxii.SetFlipY(self, flag)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Flip Z Axis', command='SetFlipZ', default_values=True, help='A boolean to set whether to flip the Z axis.'))
-    def SetFlipZ(self, zbool):
-        ReverseImageDataAxii.SetFlipZ(self, zbool)
+    def SetFlipZ(self, flag):
+        ReverseImageDataAxii.SetFlipZ(self, flag)
 
 
 ###############################################################################
@@ -83,7 +80,7 @@ class PVGeoTableToGrid(TableToGrid):
     def SetExtent(self, nx, ny, nz):
         TableToGrid.SetExtent(self, nx, ny, nz)
 
-    @smproperty.doublevector(name="Spacing", default_values=[0.0, 0.0, 0.0])
+    @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0])
     def SetSpacing(self, dx, dy, dz):
         TableToGrid.SetSpacing(self, dx, dy, dz)
 

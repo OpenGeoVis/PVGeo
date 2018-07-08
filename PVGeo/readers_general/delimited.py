@@ -4,8 +4,6 @@ __all__ = [
 ]
 
 import numpy as np
-from vtk.util import numpy_support as nps
-import vtk
 
 # Import Helpers:
 from ..base import PVGeoReaderBase
@@ -13,22 +11,7 @@ from .. import _helpers
 
 
 class DelimitedTextReader(PVGeoReaderBase):
-    """
-    @desc:
-    This reader will take in any delimited text file and make a vtkTable from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
-
-
-    @params:
-    FileName : str: req : The absolute file name with path to read.
-    deli : str : opt : The input files delimiter. To use a tab delimiter please set the `useTab`.
-    useTab : boolean : opt : A boolean that describes whether to use a tab delimiter
-    hasTits : boolean : opt : A boolean for if the delimited file has header titles for the data arrays.
-    skiprows : int : opt : The integer number of rows to skip at the top of the file
-    comments : char : opt : The identifier for comments within the file.
-    pdo : vtk.vtkTable : opt : A pointer to the output data object.
-
-    @return:
-    vtkTable : Returns a vtkTable of the input data file.
+    """@desc: This reader will take in any delimited text file and make a `vtkTable` from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
 
     """
     def __init__(self, nOutputPorts=1, outputType='vtkTable'):
@@ -127,7 +110,7 @@ class DelimitedTextReader(PVGeoReaderBase):
         if self.NeedToRead():
             self._ReadUpFront()
         # Generate the data object
-        _helpers._placeArrInTable(self._GetRawData(idx=i), self.__titles, output)
+        _helpers.placeArrInTable(self._GetRawData(idx=i), self.__titles, output)
         return 1
 
 
@@ -135,19 +118,19 @@ class DelimitedTextReader(PVGeoReaderBase):
 
 
     def SetDelimiter(self, deli):
-        """The input file's delimiter. To use a tab delimiter please use `SetUseTab()`"""
+        """@desc: The input file's delimiter. To use a tab delimiter please use `SetUseTab()`"""
         if deli != self.__delimiter:
             self.__delimiter = deli
             self.Modified()
 
     def SetUseTab(self, flag):
-        """A boolean to override the SetDelimiter() and use a Tab delimiter."""
+        """@desc: Set a boolean flag to override the `SetDelimiter()` and use a Tab delimiter."""
         if flag != self.__useTab:
             self.__useTab = flag
             self.Modified()
 
     def SetSkipRows(self, skip):
-        """The integer number of rows to skip at the top of the file"""
+        """@desc: The integer number of rows to skip at the top of the file"""
         if skip != self.__skipRows:
             self.__skipRows = skip
             self.Modified()
@@ -156,18 +139,18 @@ class DelimitedTextReader(PVGeoReaderBase):
         return self.__skipRows
 
     def SetComments(self, identifier):
-        """The character identifier for comments within the file."""
+        """@desc: The character identifier for comments within the file."""
         if identifier != self.__comments:
             self.__comments = identifier
             self.Modified()
 
     def SetHasTitles(self, flag):
-        """A boolean for if the delimited file has header titles for the data arrays."""
+        """@ddesc: A boolean for if the delimited file has header titles for the data arrays."""
         if self.__hasTitles != flag:
             self.__hasTitles = flag
             self.Modified()
 
-    def GetHasTitles(self):
+    def HasTitles(self):
         return self.__hasTitles
 
     def GetTitles(self):
@@ -177,11 +160,11 @@ class DelimitedTextReader(PVGeoReaderBase):
 
 
 class XYZTextReader(DelimitedTextReader):
-    """A makeshift reader for XYZ files where titles have comma delimiter and data has space delimiter"""
+    """@desc: A makeshift reader for XYZ files where titles have comma delimiter and data has space delimiter"""
     def __init__(self):
         DelimitedTextReader.__init__(self)
 
     # Simply override the extract titles functionality
-    def _ExtractHeader(self, fileLines):
-        titles = fileLines[0][2::].split(', ') # first two characers of header is '! '
-        return titles, fileLines[1::]
+    def _ExtractHeader(self, content):
+        titles = content[0][2::].split(', ') # first two characers of header is '! '
+        return titles, content[1::]

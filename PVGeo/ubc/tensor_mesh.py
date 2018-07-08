@@ -9,38 +9,41 @@ import vtk
 import os
 
 from ..base import PVGeoAlgorithmBase
-from .two_file_base import ubcMeshReaderBase
+from .two_file_base import ubcMeshReaderBase, ubcModelAppenderBase
 from .. import _helpers
 
 
 
 class ubcTensorMeshReader(ubcMeshReaderBase):
-    """UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describes how the data is discretized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. The reader will automatically detect if the mesh is 2D or 3D and read the remainder of the data with that dimensionality assumption. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D).
+    """@desc: UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describes how the data is discretized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. The reader will automatically detect if the mesh is 2D or 3D and read the remainder of the data with that dimensionality assumption. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D).
 
     Model File is optional. Reader will still construct vtkRectilinearGrid safely."""
     def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid'):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
 
+        self.__mesh = vtk.vtkRectilinearGrid()
+        self.__models = []
+
 
     @staticmethod
-    def placeModelOnMesh(mesh, model, dataNm='Data'):
+    def PlaceModelOnMesh(mesh, model, dataNm='Data'):
         """
         @desc:
         Places model data onto a mesh. This is for the UBC Grid data reaers to associate model data with the mesh grid.
 
         @params:
-        mesh : vtkRectilinearGrid : The vtkRectilinearGrid that is the mesh to place the model data upon.
+        mesh : vtkRectilinearGrid : The `vtkRectilinearGrid` that is the mesh to place the model data upon.
         model : np.array : A NumPy float array that holds all of the data to place inside of the mesh's cells.
-        dataNm : str : opt : The name of the model data array once placed on the vtkRectilinearGrid.
+        dataNm : str : opt : The name of the model data array once placed on the `vtkRectilinearGrid`.
 
         @returns:
-        vtkRectilinearGrid : Returns the input vtkRectilinearGrid with model data appended.
+        vtkRectilinearGrid : Returns the input `vtkRectilinearGrid` with model data appended.
 
         """
         if type(model) is dict:
             for key in model.keys():
-                mesh = ubcTensorMeshReader.placeModelOnMesh(mesh, model[key], dataNm=key)
+                ubcTensorMeshReader.PlaceModelOnMesh(mesh, model[key], dataNm=key)
             return mesh
 
         # model.GetNumberOfValues() if model is vtkDataArray
@@ -77,14 +80,14 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
     def ubcMesh2D(FileName, output):
         """
         @desc:
-        This method reads a UBC 2D Mesh file and builds an empty vtkRectilinearGrid for data to be inserted into. [Format Specs](http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html)
+        This method reads a UBC 2D Mesh file and builds an empty `vtkRectilinearGrid` for data to be inserted into. [Format Specs](http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html)
 
         @params:
         FileName : str : The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
         output : vtk.vtkRectilinearGrid : The output data object
 
         @return:
-        vtkRectilinearGrid : Returns a vtkRectilinearGrid generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `placeModelOnMesh()` method to associate with model data.
+        vtkRectilinearGrid : Returns a `vtkRectilinearGrid` generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `PlaceModelOnMesh()` method to associate with model data.
 
         """
         # Read in data from file
@@ -125,13 +128,13 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
     def ubcModel2D(FileName):
         """
         @desc:
-        Reads a 2D model file and returns a 1D NumPy float array. Use the placeModelOnMesh() method to associate with a grid.
+        Reads a 2D model file and returns a 1D NumPy float array. Use the PlaceModelOnMesh() method to associate with a grid.
 
         @params:
         FileName : str : The model filename as an absolute path for the input model file in UBCMesh Model Format. Also accepts a list of string file names.
 
         @returns:
-        np.array : Returns a NumPy float array that holds the model data read from the file. Use the `placeModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
+        np.array : Returns a NumPy float array that holds the model data read from the file. Use the `PlaceModelOnMesh()` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
         """
         if type(FileName) is list:
             out = {}
@@ -146,16 +149,20 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
             raise Exception('Mode file `%s` improperly formatted.' % FileName)
         return data.flatten(order='F')
 
-    @staticmethod
-    def _ubcMeshData2D(FileName_Mesh, FileName_Model, output, dataNm='Data'):
-        """Helper method to read a 2D mesh"""
+
+    def __ubcMeshData2D(self, FileName_Mesh, FileName_Models, output):
+        """@desc: Helper method to read a 2D mesh"""
         # Construct/read the mesh
-        ubcTensorMeshReader.ubcMesh2D(FileName_Mesh, output)
-        if ubcTensorMeshReader.HasModels(FileName_Model):
-            # Read the model data
-            model = ubcTensorMeshReader.ubcModel2D(FileName_Model)
-            # Place the model data onto the mesh
-            ubcTensorMeshReader.placeModelOnMesh(output, model, dataNm)
+        if self.NeedToReadMesh():
+            ubcTensorMeshReader.ubcMesh2D(FileName_Mesh, self.__mesh)
+            self.NeedToReadMesh(flag=False)
+        output.DeepCopy(self.__mesh)
+        if self.NeedToReadModels() and self.ThisHasModels():
+            self.__models = []
+            for f in FileName_Models:
+                # Read the model data
+                self.__models.append(ubcTensorMeshReader.ubcModel2D(f))
+            self.NeedToReadModels(flag=False)
         return output
 
 
@@ -167,14 +174,14 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
     def ubcMesh3D(FileName, output):
         """
         @desc:
-        This method reads a UBC 3D Mesh file and builds an empty vtkRectilinearGrid for data to be inserted into.
+        This method reads a UBC 3D Mesh file and builds an empty `vtkRectilinearGrid` for data to be inserted into.
 
         @params:
         FileName : str : The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
         output : vtk.vtkRectilinearGrid : The output data object
 
         @returns:
-        vtkRectilinearGrid : Returns a vtkRectilinearGrid generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `placeModelOnMesh()` method to associate with model data.
+        vtkRectilinearGrid : Returns a `vtkRectilinearGrid` generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `PlaceModelOnMesh()` method to associate with model data.
 
         """
 
@@ -234,48 +241,41 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
         return output
 
 
-    @staticmethod
-    def _ubcMeshData3D(FileName_Mesh, FileName_Model, output, dataNm='Data'):
+    def __ubcMeshData3D(self, FileName_Mesh, FileName_Models, output):
         """Helper method to read a 3D mesh"""
         # Construct/read the mesh
-        ubcTensorMeshReader.ubcMesh3D(FileName_Mesh, output)
-        if ubcTensorMeshReader.HasModels(FileName_Model):
-            # Read the model data
-            model = ubcMeshReaderBase.ubcModel3D(FileName_Model)
-            # Place the model data onto the mesh
-            ubcTensorMeshReader.placeModelOnMesh(output, model, dataNm)
+        if self.NeedToReadMesh():
+            ubcTensorMeshReader.ubcMesh3D(FileName_Mesh, self.__mesh)
+            self.NeedToReadMesh(flag=False)
+        output.DeepCopy(self.__mesh)
+        if self.NeedToReadModels() and self.ThisHasModels():
+            self.__models = []
+            for f in FileName_Models:
+                # Read the model data
+                self.__models.append(ubcTensorMeshReader.ubcModel3D(f))
+            self.NeedToReadModels(flag=False)
         return output
 
-    @staticmethod
-    def ubcTensorMesh(FileName_Mesh, FileName_Model, output, dataNm='Data'):
+
+    def __ubcTensorMesh(self, FileName_Mesh, FileName_Models, output):
         """
         @desc:
         Wrapper to Read UBC GIF 2D and 3D meshes. UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D).
 
         @params:
         FileName_Mesh : str : The mesh filename as an absolute path for the input mesh file in UBC 2D/3D Mesh Format
-        FileName_Model : str : The model filename as an absolute path for the input model file in UBC 2D/3D Model Format.
+        FileName_Models : str or list of str : The model filename(s) as an absolute path for the input model file in UBC 2D/3D Model Format.
         output : vtk.vtkRectilinearGrid : The output data object
 
         @return:
-        vtkRectilinearGrid : Returns a vtkRectilinearGrid generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
+        vtkRectilinearGrid : Returns a `vtkRectilinearGrid` generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
         """
-        # Read the mesh file as line strings, remove lines with comment = !
-        v = np.array(np.__version__.split('.')[0:2], dtype=int)
-        if v[0] >= 1 and v[1] >= 10:
-            # max_rows in numpy versions >= 1.10
-            msh = np.genfromtxt(FileName_Mesh, delimiter='\n', dtype=np.str,comments='!', max_rows=1)
-        else:
-            # This reads whole file :(
-            msh = np.genfromtxt(FileName_Mesh, delimiter='\n', dtype=np.str, comments='!')[0]
-        # Fist line is the size of the model
-        sizeM = np.array(msh.ravel()[0].split(), dtype=float)
         # Check if the mesh is a UBC 2D mesh
-        if sizeM.shape[0] == 1:
-            ubcTensorMeshReader._ubcMeshData2D(FileName_Mesh, FileName_Model, output, dataNm)
+        if self.Is2D():
+            self.__ubcMeshData2D(FileName_Mesh, FileName_Models, output)
         # Check if the mesh is a UBC 3D mesh
-        elif sizeM.shape[0] == 3:
-            ubcTensorMeshReader._ubcMeshData3D(FileName_Mesh, FileName_Model, output, dataNm)
+        elif self.Is3D():
+            self.__ubcMeshData3D(FileName_Mesh, FileName_Models, output)
         else:
             raise Exception('File format not recognized')
         return output
@@ -285,12 +285,13 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
         i = _helpers.GetRequestedTime(self, outInfo)
-        ubcTensorMeshReader.ubcTensorMesh(
+        self.__ubcTensorMesh(
             self.GetMeshFileName(),
-            self.GetModelFileNames(idx=i),
-            output,
-            self.GetDataName())
-
+            self.GetModelFileNames(),
+            output)
+        # Place the model data for given timestep onto the mesh
+        if len(self.__models) > i:
+            ubcTensorMeshReader.PlaceModelOnMesh(output, self.__models[i], self.GetDataName())
         return 1
 
 
@@ -298,69 +299,46 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
         # Call parent to handle time stuff
         ubcMeshReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
-        ext = self._ReadExtent()
-        info = outInfo.GetInformationObject(0)
-        # Set WHOLE_EXTENT: This is absolutely necessary
-        info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
+        if self.NeedToReadMesh():
+            ext = self._ReadExtent()
+            info = outInfo.GetInformationObject(0)
+            # Set WHOLE_EXTENT: This is absolutely necessary
+            info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
+    def ClearMesh(self):
+        """@desc: use to clean/rebuild the mesh"""
+        self.__mesh = vtk.vtkRectilinearGrid()
+        ubcMeshReaderBase.ClearModels(self)
 
+    def ClearModels(self):
+        """@desc: use to clean the models and reread"""
+        self.__models = []
+        ubcMeshReaderBase.ClearModels(self)
 
-class ubcTensorMeshAppender(PVGeoAlgorithmBase):
-    """This assumes the input vtkRectilinearGrid has already handled the timesteps"""
+################################################################################
+
+class ubcTensorMeshAppender(ubcModelAppenderBase):
+    """@desc: This filter reads a timeseries of models and appends it to an input `vtkRectilinearGrid`"""
     def __init__(self):
-        PVGeoAlgorithmBase.__init__(self,
-            nInputPorts=1, inputType='vtkRectilinearGrid',
-            nOutputPorts=1, outputType='vtkRectilinearGrid')
-        self.__modelFileNames = []
-        self.__dataname = 'Appended Data'
+        ubcModelAppenderBase.__init__(self,
+            inputType='vtkRectilinearGrid',
+            outputType='vtkRectilinearGrid')
 
-    def RequestData(self, request, inInfo, outInfo):
-        # Get input/output of Proxy
-        pdi = self.GetInputData(inInfo, 0, 0)
-        output = self.GetOutputData(outInfo, 0)
-        output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
-        # Get requested time index
-        i = _helpers.getTimeStepFileIndex(self, self.__modelFileNames, dt=1.0)
-        # Perfrom task:
-        #- Determine if 2D or 3D and read
-        if pdi.GetExtent()[3] == 1:
-            # Not how in UBC format, 2D grids are specified on an XZ plane (no Y component)
+
+    def _ReadUpFront(self):
+        reader = ubcMeshReaderBase.ubcModel3D
+        if not self._is3D:
+            # Note how in UBC format, 2D grids are specified on an XZ plane (no Y component)
             # This will only work prior to rotations to account for real spatial reference
-            model = ubcTensorMeshReader.ubcModel2D(self.__modelFileNames[i])
-        else:
-            model = ubcMeshReaderBase.ubcModel3D(self.__modelFileNames[i])
-        #- Place read model on the mesh
-        ubcTensorMeshReader.placeModelOnMesh(output, model, self.__dataname)
-        return 1
+            reader = ubcTensorMeshReader.ubcModel2D
+        self._models = []
+        for f in self._modelFileNames:
+            # Read the model data
+            self._models.append(reader(f))
+        self.NeedToRead(flag=False)
+        return
 
-    #### Setters and Getters ####
-
-    def HasModels(self):
-        return len(self.__modelFileNames) > 0
-
-    def ClearModelFileNames(self):
-        """Use to clear data file names"""
-        self.__modelFileNames = []
-
-    def AddModelFileName(self, fname):
-        """Use to set the file names for the reader. Handles singlt string or list of strings."""
-        if fname is None:
-            return # do nothing if None is passed by a constructor on accident
-        if isinstance(fname, list):
-            for f in fname:
-                self.AddModelFileName(f)
-        elif fname not in self.__modelFileNames:
-            self.__modelFileNames.append(fname)
-        self.Modified()
-
-    def GetModelFileNames(self, idx=None):
-        """Returns the list of file names or given and index returns a specified timestep's filename"""
-        if idx is None or not self.HasModels():
-            return self.__modelFileNames
-        return self.__modelFileNames[idx]
-
-    def SetDataName(self, name):
-        if self.__dataname != name:
-            self.__dataname = name
-            self.Modified()
+    def _PlaceOnMesh(self, output, idx=0):
+        ubcTensorMeshReader.PlaceModelOnMesh(output, self._models[idx], self._dataname)
+        return

@@ -1,4 +1,5 @@
 all = [
+    'PVGeoAlgorithmBase',
     'PVGeoReaderBase',
     'FilterPreserveTypeBase'
 ]
@@ -12,7 +13,7 @@ import numpy as np
 ###############################################################################
 
 class PVGeoAlgorithmBase(VTKPythonAlgorithmBase):
-    """This is a base class to add convienace methods to the `VTKPythonAlgorithmBase`"""
+    """@desc: This is a base class to add convienace methods to the `VTKPythonAlgorithmBase` for all algorithms implemented in `PVGeo`"""
     def __init__(self,
                 nInputPorts=1, inputType='vtkDataSet',
                 nOutputPorts=1, outputType='vtkTable'):
@@ -21,6 +22,7 @@ class PVGeoAlgorithmBase(VTKPythonAlgorithmBase):
             nOutputPorts=nOutputPorts, outputType=outputType)
 
     def GetOutput(self, port=0):
+        """@desc: A conveience method to get the output of a `PVGeo` algorithm"""
         return self.GetOutputDataObject(port)
 
 
@@ -42,26 +44,26 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
         self.__needToRead = True
 
     def NeedToRead(self, flag=None):
-        """Ask self if the reader needs to read the files again
+        """@desc: Ask self if the reader needs to read the files again.
         if the flag is set then this method will set the read status"""
         if flag is not None and isinstance(flag, (bool, int)):
             self.__needToRead = flag
         return self.__needToRead
 
     def Modified(self, readAgain=True):
-        """Call modified if the files needs to be read again again"""
-        self.__needToRead = readAgain
+        """@desc: Call modified if the files needs to be read again again"""
+        if readAgain: self.__needToRead = readAgain
         PVGeoAlgorithmBase.Modified(self)
 
     def _UpdateTimeSteps(self):
-        """for internal use only: appropriately sets the timesteps"""
+        """@desc: for internal use only: appropriately sets the timesteps"""
         self.__timesteps = _helpers.UpdateTimeSteps(self, self.__fileNames, self.__dt)
         return 1
 
     #### Algorithm Methods ####
 
     def RequestInformation(self, request, inInfo, outInfo):
-        """This is a conveience method that should be overwritten when needed
+        """@desc: This is a conveience method that should be overwritten when needed.
         This will handle setting the timesteps appropriately based on the number
         of file names when the pipeline needs to know the time information.
         """
@@ -71,7 +73,7 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
     #### Methods for performing the read ####
     # These are meant to be overwritten by child classes
 
-    def _GetFileContents(self):
+    def _GetFileContents(self, idx=None):
         raise NotImplementedError()
 
     def _ReadUpFront(self):
@@ -83,21 +85,23 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
     #### Seters and Geters ####
 
     def GetTimestepValues(self):
-        """Use this in ParaView decorator to register timesteps"""
+        """@desc: Use this in ParaView decorator to register timesteps"""
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def SetTimeDelta(self, dt):
-        """An advanced property for the time step in seconds."""
+        """@desc: An advanced property for the time step in seconds."""
         if dt != self.__dt:
             self.__dt = dt
             self.Modified()
 
     def ClearFileNames(self):
-        """Use to clear file names"""
+        """@desc: Use to clear file names"""
         self.__fileNames = []
 
     def AddFileName(self, fname):
-        """Use to set the file names for the reader. Handles singlt string or list of strings."""
+        """@desc: Use to set the file names for the reader. Handles singlt string or list of strings.
+        @params:
+        fname : str : req : The absolute file name with path to read."""
         if fname is None:
             return # do nothing if None is passed by a constructor on accident
         if isinstance(fname, list):
@@ -108,7 +112,7 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
         self.Modified()
 
     def GetFileNames(self, idx=None):
-        """Returns the list of file names or given and index returns a specified timestep's filename"""
+        """@desc: Returns the list of file names or given and index returns a specified timestep's filename"""
         if idx is None:
             return self.__fileNames
         return self.__fileNames[idx]

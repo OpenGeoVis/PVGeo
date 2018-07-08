@@ -3,9 +3,6 @@
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import *
 
-import numpy as np
-import vtk
-
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
@@ -37,7 +34,7 @@ class PVGeoUBCTensorMeshReader(ubcTensorMeshReader):
             label="File Name Mesh"
             command="SetMeshFileName"
             animateable="1"
-            clean_command="ClearMeshFileName"
+            clean_command="ClearMesh"
             number_of_elements="1">
             <FileListDomain name="meshfile"/>
             <Documentation>This is the mesh file for a 2D or 3D UBC Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
@@ -53,7 +50,7 @@ class PVGeoUBCTensorMeshReader(ubcTensorMeshReader):
           command="AddModelFileName"
           animateable="1"
           repeat_command="1"
-          clean_command="ClearModelFileNames"
+          clean_command="ClearModels"
           number_of_elements="1">
           <FileListDomain name="modelfiles"/>
           <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
@@ -95,7 +92,7 @@ class PVGeoUBCTensorMeshAppender(ubcTensorMeshAppender):
           command="AddModelFileName"
           animateable="1"
           repeat_command="1"
-          clean_command="ClearModelFileNames"
+          clean_command="ClearModels"
           number_of_elements="1">
           <FileListDomain name="modelfiles"/>
           <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
@@ -107,6 +104,11 @@ class PVGeoUBCTensorMeshAppender(ubcTensorMeshAppender):
     @smproperty.stringvector(name='DataName', default_values='Appended Data')
     def SetDataName(self, name):
         ubcTensorMeshAppender.SetDataName(self, name)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return ubcTensorMeshAppender.GetTimestepValues(self)
 
 
 
@@ -134,7 +136,7 @@ class PVGeoUBCOcTreeMeshReader(ubcOcTreeReader):
             label="File Name Mesh"
             command="SetMeshFileName"
             animateable="1"
-            clean_command="ClearMeshFileName"
+            clean_command="ClearMesh"
             number_of_elements="1">
             <FileListDomain name="meshfile"/>
             <Documentation>This is the mesh file for a OcTree Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
@@ -150,7 +152,7 @@ class PVGeoUBCOcTreeMeshReader(ubcOcTreeReader):
           command="AddModelFileName"
           animateable="1"
           repeat_command="1"
-          clean_command="ClearModelFileNames"
+          clean_command="ClearModels"
           number_of_elements="1">
           <FileListDomain name="modelfiles"/>
           <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
@@ -194,7 +196,7 @@ class PVGeoUBCOcTreeAppender(ubcOcTreeAppender):
           command="AddModelFileName"
           animateable="1"
           repeat_command="1"
-          clean_command="ClearModelFileNames"
+          clean_command="ClearModels"
           number_of_elements="1">
           <FileListDomain name="modelfiles"/>
           <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>

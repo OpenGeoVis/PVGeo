@@ -3,9 +3,6 @@
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import *
 
-import numpy as np
-import vtk
-
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
@@ -54,6 +51,13 @@ class PVGeoGSLibReader(GSLibReader):
         """This is critical for registering the timesteps"""
         return GSLibReader.GetTimestepValues(self)
 
+    @smproperty.xml("""<Property name="Print File Header" command="PrintFileHeader" panel_widget="command_button"/>""")
+    def PrintFileHeader(self):
+        print(GSLibReader.GetFileHeader(self))
+        return 1
+
+
+
 
 ###############################################################################
 
@@ -62,7 +66,7 @@ class PVGeoGSLibReader(GSLibReader):
        label="PVGeo: SGeMS Grid Reader",
        extensions="dat gslib sgems SGEMS",
        file_description="SGeMS Uniform Grid")
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoSGeMSGridReader(SGeMSGridReader):
     def __init__(self):
         SGeMSGridReader.__init__(self)

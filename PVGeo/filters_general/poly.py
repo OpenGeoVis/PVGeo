@@ -21,7 +21,17 @@ from .. import _helpers
 
 #---- ArrayMath ----#
 class ArrayMath(FilterPreserveTypeBase):
-    """This filter allows the user to select two input data array on which to perfrom math operations."""
+    """@desc: This filter allows the user to select two input data arrays on which to perfrom math operations. The input arrays are used in their order of selection for the operations.
+
+    **Available Math Operation:**
+
+    - `add`: This adds the two data arrays together
+    - `subtract`: This subtracts input array 2 from input array 1
+    - `multiply`: Multiplies the two data arrays together
+    - `divide`: Divide input array 1 by input array 2 (arr1/arr2)
+    - `correlate`: Use `np.correlate(arr1, arr2, mode='same')`
+
+    """
     def __init__(self):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -55,6 +65,7 @@ class ArrayMath(FilterPreserveTypeBase):
 
     @staticmethod
     def GetOperations():
+        """@desc: Returns the math operation methods as callable objects in a dictionary"""
         ops = dict(
             add=ArrayMath._add,
             subtract=ArrayMath._subtract,
@@ -66,11 +77,19 @@ class ArrayMath(FilterPreserveTypeBase):
 
     @staticmethod
     def GetOperationNames():
+        """@desc: Gets a list of the math operation keys
+        @return:
+        list of strings: the keys for getting the math operations
+        """
         ops = ArrayMath.GetOperations()
         return list(ops.keys())
 
     @staticmethod
     def GetOperation(idx):
+        """@desc: Gets a math operation based on an index in the keys
+        @return:
+        callable: the math operation method
+        """
         if isinstance(idx, str):
             return ArrayMath.GetOperations()[idx]
         n = ArrayMath.GetOperationNames()[idx]
@@ -147,7 +166,7 @@ class ArrayMath(FilterPreserveTypeBase):
         return 1
 
     def SetMultiplier(self, val):
-        """This is a static shifter/scale factor across the array after normalization."""
+        """@desc: This is a static shifter/scale factor across the array after normalization."""
         if self.__multiplier != val:
             self.__multiplier = val
             self.Modified()
@@ -156,7 +175,7 @@ class ArrayMath(FilterPreserveTypeBase):
         return self.__multiplier
 
     def SetNewArrayName(self, name):
-        """Give the new normalized array a meaningful name."""
+        """@desc: Give the new array a meaningful name."""
         if self.__newName != name:
             self.__newName = name
             self.Modified()
@@ -165,6 +184,12 @@ class ArrayMath(FilterPreserveTypeBase):
         return self.__newName
 
     def SetOperation(self, op):
+        """@desc: Set the math operation to perform
+        @params:
+        op : object : The operation as a string key, int index, or callable method
+
+        @notes:
+        This can accept a callable method to set a custom operation as long as its signature is: `<callable>(arr1, arr2)`"""
         if isinstance(op, str):
             op = ArrayMath.GetOperations()[op]
         elif isinstance(op, int):
@@ -180,7 +205,15 @@ class ArrayMath(FilterPreserveTypeBase):
 #---- Normalizations ----#
 
 class NormalizeArray(FilterPreserveTypeBase):
-    """This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested).
+    """@desc: This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested).
+
+    **Normalization Types:**
+
+    - `feature_scale`: Feature Scale
+    - `standard_score`: tandard Score
+    - `log10`: Natural Log
+    - `natural_log`: Log Base 10
+    - `just_multiply`: Only Multiply by Multiplier
     """
     def __init__(self):
         FilterPreserveTypeBase.__init__(self)
@@ -236,11 +269,19 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     @staticmethod
     def GetNormalizationNames():
+        """@desc: Gets a list of the normalization keys
+        @return:
+        list of strings: the keys for getting the normalizations
+        """
         ops = NormalizeArray.GetNormalizations()
         return list(ops.keys())
 
     @staticmethod
     def GetNormalization(idx):
+        """@desc: Gets a normalization based on an index in the keys
+        @return:
+        callable: the normalization method
+        """
         if isinstance(idx, str):
             return NormalizeArray.GetNormalizations()[idx]
         n = NormalizeArray.GetNormalizationNames()[idx]
@@ -248,6 +289,7 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     @staticmethod
     def GetArrayRange(pdi, field, name):
+        """@desc: returns a tuple of the range for a vtkDataArray on a vtkDataObject"""
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getArray(wpdi, field, name)
         arr = np.array(arr)
@@ -255,19 +297,7 @@ class NormalizeArray(FilterPreserveTypeBase):
 
 
     def _Normalize(self, pdi, pdo):
-        """
-        TODO: Descrption
-        Perform normalize on a data array for any given VTK data object.
-        `abs` will take the absolute value before the normalization
-
-        Normalization Types:
-            0 -> Feature Scale
-            1 -> Standard Score
-            2 -> Natural Log
-            3 -> Log Base 10
-            4 -> Simple Multiply by Multiplier
-
-        """
+        """@desc: Perform normalize on a data array for any given VTK data object."""
         # Get inout array
         field, name = self.__inputArray[0], self.__inputArray[1]
         #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
@@ -317,7 +347,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         return 1
 
     def SetMultiplier(self, val):
-        """This is a static shifter/scale factor across the array after normalization."""
+        """@desc: This is a static shifter/scale factor across the array after normalization."""
         if self.__multiplier != val:
             self.__multiplier = val
             self.Modified()
@@ -328,7 +358,7 @@ class NormalizeArray(FilterPreserveTypeBase):
 
 
     def SetNewArrayName(self, name):
-        """Give the new normalized array a meaningful name."""
+        """@desc: Give the new array a meaningful name."""
         if self.__newName != name:
             self.__newName = name
             self.Modified()
@@ -338,12 +368,18 @@ class NormalizeArray(FilterPreserveTypeBase):
         return self.__newName
 
     def SetTakeAbsoluteValue(self, flag):
-        """This will take the absolute value of the array before normalization."""
+        """@desc: This will take the absolute value of the array before normalization."""
         if self.__absolute != flag:
             self.__absolute = flag
             self.Modified()
 
     def SetNormalization(self, norm):
+        """@desc: Set the normalization operation to perform
+        @params:
+        norm : object : The operation as a string key, int index, or callable method
+
+        @notes:
+        This can accept a callable method to set a custom operation as long as its signature is: `<callable>(arr)`"""
         if isinstance(norm, str):
             norm = NormalizeArray.GetNormalizations()[norm]
         elif isinstance(norm, int):
@@ -358,7 +394,14 @@ class NormalizeArray(FilterPreserveTypeBase):
 #---- Cell Connectivity ----#
 
 class AddCellConnToPoints(PVGeoAlgorithmBase):
-    """This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation)."""
+    """@desc: This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation). Type map is specified in vtkCellType.h
+
+    **Cell Connectivity Types**
+
+    - 4: Poly Line
+    - 3: Line
+
+    """
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -370,10 +413,6 @@ class AddCellConnToPoints(PVGeoAlgorithmBase):
 
     def _ConnectCells(self, pdi, pdo, logTime=False):
         # NOTE: Type map is specified in vtkCellType.h
-        """
-        <Entry value="4" text="Poly Line"/>
-        <Entry value="3" text="Line"/>
-        """
         cellType = self.__cellType
         nrNbr = self.__usenbr
 
@@ -407,7 +446,7 @@ class AddCellConnToPoints(PVGeoAlgorithmBase):
             # VTK_Line
             if cellType == vtk.VTK_LINE:
                 tree = cKDTree(points)
-                dist, ind = tree.query([0.0,0.0,0.0], k=numPoints)
+                ind = tree.query([0.0,0.0,0.0], k=numPoints)[1]
                 for i in range(len(ind)-1):
                     # Get indices of k nearest points
                     ptsi = [ind[i], ind[i+1]]
@@ -459,12 +498,13 @@ class AddCellConnToPoints(PVGeoAlgorithmBase):
 
 
     def SetCellType(self, cellType):
+        """@desc: Set the cell typ by the integer id as specified in vtkCellType.h"""
         if cellType != self.__cellType:
             self.__cellType = cellType
             self.Modified()
 
     def SetUseNearestNbr(self, flag):
-        """A flag on whether to use SciPy's cKDTree nearest neighbor algorithms to sort the points to before adding linear connectivity"""
+        """@desc: Set a flag on whether to use SciPy's cKDTree nearest neighbor algorithms to sort the points to before adding linear connectivity"""
         if flag != self.__usenbr:
             self.__usenbr = flag
             self.Modified()
@@ -476,7 +516,7 @@ class AddCellConnToPoints(PVGeoAlgorithmBase):
 
 
 class PointsToTube(AddCellConnToPoints):
-    """Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides."""
+    """@desc: Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides."""
     def __init__(self):
         AddCellConnToPoints.__init__(self)
         # Additional Parameters
@@ -500,11 +540,13 @@ class PointsToTube(AddCellConnToPoints):
     #### Seters and Geters ####
 
     def SetRadius(self, radius):
+        """@desc: set the radius of the tube"""
         if self.__radius != radius:
             self.__radius = radius
             self.Modified()
 
     def SetNumberOfSides(self, num):
+        """@desc: set the number of sides (resolution) for the tube"""
         if self.__numSides != num:
             self.__numSides = num
             self.Modified()

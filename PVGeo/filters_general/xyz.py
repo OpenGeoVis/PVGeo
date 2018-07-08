@@ -17,7 +17,9 @@ from .. import _helpers
 
 
 def PointsToPolyData(points):
-    """Create vtkPolyData from a numpy array of XYZ points"""
+    """@desc: Create `vtkPolyData` from a numpy array of XYZ points
+    @returns:
+    vtkPolyData : points with point-vertex cells"""
     if points.ndim != 2:
         points = points.reshape((-1, 3))
 
@@ -101,6 +103,7 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
 
 
 class RotationTool(PVGeoAlgorithmBase):
+    """@desc: a class that holds a set of methods/tools for performing and estimating coordinate rotations"""
     def __init__(self, decimals=6):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -117,6 +120,7 @@ class RotationTool(PVGeoAlgorithmBase):
 
     @staticmethod
     def RotateAround(pts, theta, origin):
+        """@desc: rotate points around an origins given an anlge on the XY plane"""
         xarr, yarr = pts[:,0], pts[:,1]
         ox, oy = origin[0], origin[1]
         qx = ox + np.cos(theta) * (xarr - ox) - np.sin(theta) * (yarr - oy)
@@ -124,12 +128,14 @@ class RotationTool(PVGeoAlgorithmBase):
         return np.vstack((qx, qy)).T
 
     @staticmethod
-    def Rotate(pts, theta, origin=None):
+    def Rotate(pts, theta):
+        """@desc: rotate points around (0,0,0) given an anlge on the XY plane"""
         rot = RotationTool._GetRotationMatrix(theta)
         return pts.dot(rot)
 
     @staticmethod
     def DistanceBetween(pts):
+        """@desc: Gets the distance between two points"""
         return np.sqrt((pts[0,0] - pts[1,0])**2 + (pts[0,1] - pts[1,1])**2)
 
     @staticmethod
@@ -234,6 +240,7 @@ class RotationTool(PVGeoAlgorithmBase):
 
 
     def EstimateAndRotate(self, x, y, z):
+        """"@desc: a method to estimat the rotation of a set of points and correct that rotation on the XY plane"""
         assert(len(x) == len(y) == len(z))
         idxs = np.argwhere(z == z[0])
         pts = np.hstack((x[idxs], y[idxs]))
@@ -246,7 +253,7 @@ class RotationTool(PVGeoAlgorithmBase):
 #---- Coordinate Rotations ----#
 
 class RotateCoordinates(PVGeoAlgorithmBase):
-    """Rotates XYZ coordinates"""
+    """@desc: Rotates XYZ coordinates in `vtkPolyData` around an origin at a given angle on the XY plane"""
     def __init__(self, angle=45.0, origin=[0.0, 0.0]):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -276,17 +283,20 @@ class RotateCoordinates(PVGeoAlgorithmBase):
         return 1
 
     def SetRotationDegrees(self, theta):
+        """@desc: Sets the rotational angle in degrees"""
         theta = np.deg2rad(theta)
         if self.__angle != theta:
             self.__angle = theta
             self.Modified()
 
     def SetOrigin(self, xo, yo):
+        """@desc: Sets the origin to perform the rotate around"""
         if self.__origin != [xo, yo]:
             self.__origin = [xo, yo]
             self.Modified()
 
     def SetUseCorner(self, flag):
+        """@desc: a flag to use a corner of the input data set as the rotational origin"""
         if self.__useCorner != flag:
             self.__useCorner = flag
             self.Modified()
@@ -296,7 +306,7 @@ class RotateCoordinates(PVGeoAlgorithmBase):
 ###############################################################################
 
 class ExtractPoints(PVGeoAlgorithmBase):
-    """Extracts XYZ coordinates and point data"""
+    """@desc: Extracts XYZ coordinates and point/cell data from an input `vtkDataSet`"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkDataSet',

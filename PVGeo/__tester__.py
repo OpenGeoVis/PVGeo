@@ -16,8 +16,9 @@ def test(close=False):
     @desc: This is a convienance method to run all of the tests in `PVGeo`.
 
     @notes:
-    This can be executed from either the command line of within a standard Python environment:
+    This can be executed from either the command line of within a standard Python environment.
 
+    @example:
     ```bash
     $ python -m PVGeo test
     ```

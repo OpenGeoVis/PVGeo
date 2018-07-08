@@ -5,6 +5,7 @@ import numpy as np
 import vtk
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
+from .. import _helpers
 
 # Functionality to test:
 from .poly import *
@@ -15,10 +16,6 @@ from .xyz import *
 
 RTOL = 0.000001
 
-def _numToVTK(arr, name):
-    c = nps.numpy_to_vtk(num_array=arr, deep=True)
-    c.SetName(name)
-    return c
 
 ###############################################################################
 ###############################################################################
@@ -38,9 +35,9 @@ class TestCombineTables(unittest.TestCase):
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
         self.arrs[2] = np.random.random(self.n) # Table 1
-        self.t0.AddColumn(_numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(_numToVTK(self.arrs[1], self.titles[1]))
-        self.t1.AddColumn(_numToVTK(self.arrs[2], self.titles[2]))
+        self.t0.AddColumn(_helpers.numToVTK(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(_helpers.numToVTK(self.arrs[1], self.titles[1]))
+        self.t1.AddColumn(_helpers.numToVTK(self.arrs[2], self.titles[2]))
         # Now use the `CombineTables` filter:
         f = CombineTables()
         f.SetInputDataObject(0, self.t0)
@@ -88,9 +85,9 @@ class TestReshapeTable(unittest.TestCase):
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
         self.arrs[2] = np.random.random(self.n) # Table 1
-        self.t0.AddColumn(_numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(_numToVTK(self.arrs[1], self.titles[1]))
-        self.t0.AddColumn(_numToVTK(self.arrs[2], self.titles[2]))
+        self.t0.AddColumn(_helpers.numToVTK(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(_helpers.numToVTK(self.arrs[1], self.titles[1]))
+        self.t0.AddColumn(_helpers.numToVTK(self.arrs[2], self.titles[2]))
         return
 
 
@@ -236,7 +233,7 @@ class TestRotationTool(unittest.TestCase):
         """`RotationTool`: This is primarily to make sure no errors arise"""
         r = RotationTool()
         pts = ROTATED_POINTS
-        xx, yy, zz, dx, dy, angle = r.EstimateAndRotate(pts[:,0], pts[:,1], pts[:,2])
+        dx, dy, angle = r.EstimateAndRotate(pts[:,0], pts[:,1], pts[:,2])[3::]
         self.assertTrue(np.allclose(angle, np.deg2rad(53.55), rtol=self.RTOL), msg='Recovered angle is incorrect.')
         self.assertTrue(np.allclose(dx, 25.0, rtol=self.RTOL), msg='Recovered x-spacing is incorrect.')
         self.assertTrue(np.allclose(dy, 25.0, rtol=self.RTOL), msg='Recovered y-spacing is incorrect.')
@@ -337,8 +334,8 @@ class TestArrayMath(unittest.TestCase):
         self.titles = ('Array 0', 'Array 1')
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
-        self.t0.AddColumn(_numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(_numToVTK(self.arrs[1], self.titles[1]))
+        self.t0.AddColumn(_helpers.numToVTK(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(_helpers.numToVTK(self.arrs[1], self.titles[1]))
         return
 
     def test_get_operations(self):
@@ -430,7 +427,7 @@ class TestNormalizeArray(unittest.TestCase):
         self.n = 400
         self.title = 'Array 0'
         self.arr = np.random.random(self.n) # Table 0
-        self.t0.AddColumn(_numToVTK(self.arr, self.title))
+        self.t0.AddColumn(_helpers.numToVTK(self.arr, self.title))
         return
 
     def test_get_operations(self):
@@ -463,11 +460,6 @@ class TestNormalizeArray(unittest.TestCase):
     def test_feature_scale(self):
         op = NormalizeArray.GetNormalization('feature_scale')
         check = NormalizeArray._featureScale(self.arr)
-        self._gen_and_check(op, check)
-
-    def test_standard_score(self):
-        op = NormalizeArray.GetNormalization('standard_score')
-        check = NormalizeArray._standardScore(self.arr)
         self._gen_and_check(op, check)
 
     def test_standard_score(self):
