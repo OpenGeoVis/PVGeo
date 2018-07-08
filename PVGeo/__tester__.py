@@ -28,19 +28,17 @@ def test(close=False):
     >>> PVGeo.test()
     ```
     """
-    print('in the tester: ', __file__)
     test_file_strings = []
-    for root, dirnames, filenames in os.walk('.'):
+    for root, dirnames, filenames in os.walk(os.path.dirname(__file__)):
         for filename in fnmatch.filter(filenames, '__test__.py'):
             test_file_strings.append(os.path.join(root, filename))
     # Remove extensions and change to module import syle
-    module_strings = [mod[2:len(mod)-3].replace('/', '.') for mod in test_file_strings]
-    print(module_strings)
+    test_file_strings = [s.replace(os.path.dirname(os.path.dirname(__file__)), '') for s in test_file_strings]
+    module_strings = [mod[1:len(mod)-3].replace('/', '.') for mod in test_file_strings]
     suites = [unittest.defaultTestLoader.loadTestsFromName(mod) for mod
               in module_strings]
     testSuite = unittest.TestSuite(suites)
     run = TextTestRunner(verbosity=2).run(testSuite)
-    print('run done')
     if close:
         exit(len(run.failures) > 0 or len(run.errors) > 0)
     return run
