@@ -14,7 +14,8 @@ fi
 python setup.py sdist bdist_wheel
 
 # Upload tp PyPi
-python -m twine upload dist/*
+#python -m twine upload dist/*
+python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 # Remove the builds locally
 rm -r build/
