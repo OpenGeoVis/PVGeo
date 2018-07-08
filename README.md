@@ -26,4 +26,4 @@ $ source activate PVGeoEnv
 $ pip install PVGeo
 ```
 
-Now *PVGeo* is ready for use in you standard python environment. To use the *PVGeo* library as plugins in ParaView, please see the detailed explanation [here](http://pvgeo.org/overview/getting-started/).*
+Now *PVGeo* is ready for use in your standard python environment. To use the *PVGeo* library as plugins in ParaView, please see the detailed explanation [here](http://pvgeo.org/overview/getting-started/).
