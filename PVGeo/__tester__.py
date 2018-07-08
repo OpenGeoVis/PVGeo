@@ -34,7 +34,6 @@ def test(close=False):
             test_file_strings.append(os.path.join(root, filename))
     # Remove extensions and change to module import syle
     test_file_strings = [s.replace(os.path.dirname(os.path.dirname(__file__)), '') for s in test_file_strings]
-    print(test_file_strings)
     idx = 0
     if test_file_strings[0][0] == '/':
         idx = 1
