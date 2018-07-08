@@ -16,7 +16,7 @@ It is important to note the project is open source and that many features in thi
 Please feel free to post features you would like to see from this repo on the [**Issues page**](https://github.com/OpenGeoVis/PVGeo/issues) as a feature request. If you stumble across any bugs or crashes while using code distributed here, please report it in the Issues section so we can promptly address it. For other questions please join the [***PVGeo* community on Slack**](http://slack.pvgeo.org).
 
 
-# How To Use the Plugins in this Repository
+# Getting Started
 To begin using the *PVGeo* python package, create a new virtual environment and install *PVGeo* through pip.
 
 ```bash
