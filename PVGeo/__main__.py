@@ -7,7 +7,7 @@ def GetInstallationPaths():
     PYTHONPATH = path
     PV_PLUGIN_PATH = '%s/%s' % (path, 'PVPlugins')
 
-    script = 'sudo sh "$(curl -fsl https://github.com/OpenGeoVis/PVGeo/blob/master/installMac.sh)"'
+    script = 'sudo sh "$(curl -fsl https://raw.github.com/OpenGeoVis/PVGeo/blob/master/installMac.sh)"'
 
     if 'darwin' in platform.system().lower():
         # Install launch agents
