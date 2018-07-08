@@ -2,9 +2,9 @@
 # FOR MAC OS X OPERATING SYSTEM
 # ONLY RUN THIS SCRIPT ONCE (at time of installation)
 
-pushd "$(dirname "$0")"
-# The PVGeo Path:
-PVGeo="$( cd "$(dirname "$0")" ; pwd -P )"
+
+# The PVGeo Path from the argument
+PVGeo="$1"
 
 # Use colors if connected to a terminal, and that terminal supports them.
 if which tput >/dev/null 2>&1; then
@@ -50,7 +50,7 @@ launchctl unsetenv PV_PLUGIN_PATH
 printf "${NORMAL}"
 printf "${GREEN}%s${NORMAL}\n" "Setting environmental variables immediate use..."
 printf "${RED}"
-launchctl setenv PV_PLUGIN_PATH ${PVGeo}/plugins
+launchctl setenv PV_PLUGIN_PATH ${PVGeo}/PVPlugins
 launchctl setenv PYTHONPATH $PYTHONPATH:${PVGeo}/
 printf "${NORMAL}"
 
@@ -103,5 +103,3 @@ EOF
 printf "${GREEN}%s${NORMAL}\n" "All Finished! Any version of ParaView will launch with the PVGeo plugins and Python Module."
 
 printf "${YELLOW}%s${NORMAL}\n" "Virtual Reality Users: Beware that your version of ParaView has Python included as errors/crashes will occur if you use these plugins without Python."
-
-popd
