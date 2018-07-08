@@ -35,13 +35,12 @@ def test(close=False):
             test_file_strings.append(os.path.join(root, filename))
     # Remove extensions and change to module import syle
     module_strings = [mod[2:len(mod)-3].replace('/', '.') for mod in test_file_strings]
+    print(module_strings)
     suites = [unittest.defaultTestLoader.loadTestsFromName(mod) for mod
               in module_strings]
     testSuite = unittest.TestSuite(suites)
     run = TextTestRunner(verbosity=2).run(testSuite)
+    print('run done')
     if close:
         exit(len(run.failures) > 0 or len(run.errors) > 0)
     return run
-
-if __name__ == '__main__':
-    test(True)
