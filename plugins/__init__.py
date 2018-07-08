@@ -5,3 +5,4 @@ from .model_build import *
 from .readers_general import *
 from .tunneling import *
 from .ubc import *
+from .ws3d import *

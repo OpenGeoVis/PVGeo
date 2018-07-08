@@ -9,6 +9,7 @@ from . import model_build
 from . import readers_general
 from . import tunneling
 from . import ubc
+from . import ws3d
 
 from . import _helpers
 from .__tester__ import test
