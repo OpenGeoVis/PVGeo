@@ -18,7 +18,7 @@ setuptools.setup(
     install_requires=[
         'numpy>=1.10',
         'scipy>=1.1',
-        'vtk>=8.1',
+        'vtk',
         'colour-runner==0.0.5',
         'codecov==2.0.15',
     ],
