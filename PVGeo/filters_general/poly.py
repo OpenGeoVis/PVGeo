@@ -1,10 +1,8 @@
 __all__ = [
-    'reshapeTable',
-    'correlateArrays',
-    'getArrayRange',
-    'normalizeArray',
-    'connectCells',
-    'pointsToTube'
+    'ArrayMath',
+    'NormalizeArray',
+    'AddCellConnToPoints',
+    'PointsToTube',
 ]
 
 import vtk
@@ -13,282 +11,546 @@ import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
+from ..base import PVGeoAlgorithmBase, FilterPreserveTypeBase
 from .. import _helpers
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
 
-#---- Reshape Table ----#
+###############################################################################
 
-def reshapeTable(pdi, nrows, ncols, names=None, order='C', pdo=None):
+#---- ArrayMath ----#
+class ArrayMath(FilterPreserveTypeBase):
+    """@desc: This filter allows the user to select two input data arrays on which to perfrom math operations. The input arrays are used in their order of selection for the operations.
+
+    **Available Math Operation:**
+
+    - `add`: This adds the two data arrays together
+    - `subtract`: This subtracts input array 2 from input array 1
+    - `multiply`: Multiplies the two data arrays together
+    - `divide`: Divide input array 1 by input array 2 (arr1/arr2)
+    - `correlate`: Use `np.correlate(arr1, arr2, mode='same')`
+
     """
-    Todo Description
-    """
-    if pdo is None:
-        pdo = vtk.vtkTable()
-    # Get number of columns
-    cols = pdi.GetNumberOfColumns()
-    # Get number of rows
-    rows = pdi.GetColumn(0).GetNumberOfTuples() # TODO is the necessary?
-
-    if names is not None and len(names) is not 0:
-        # parse the names (a semicolon seperated list of names)
-        names = names.split(';')
-        num = len(names)
-        if num < ncols:
-            for i in range(num, ncols):
-                names.append('Field %d' % i)
-        elif num > ncols:
-            raise Exception('Too many array names. `ncols` specified as %d and %d names given.' % (ncols, num))
-    else:
-        names = ['Field %d' % i for i in range(ncols)]
-
-    # Make a 2D numpy array and fill with data from input table
-    data = np.empty((cols,rows))
-    for i in range(cols):
-        c = pdi.GetColumn(i)
-        data[i] = nps.vtk_to_numpy(c)
-
-    if ((ncols*nrows) != (cols*rows)):
-        raise Exception('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
-
-    # Use numpy.reshape() to reshape data NOTE: only 2D because its a table
-    # NOTE: column access of this reshape is not contigous
-    data = np.array(np.reshape(data, (nrows,ncols), order=order))
-    pdo.SetNumberOfRows(nrows)
-
-    # Add new array to output table and assign incremental names (e.g. Field0)
-    for i in range(ncols):
-        # Make a contigous array from the column we want
-        col = np.array(data[:,i])
-        # allow type to be determined by input
-        insert = nps.numpy_to_vtk(num_array=col, deep=True) # array_type=vtk.VTK_FLOAT
-        # VTK arrays need a name. Set arbitrarily
-        insert.SetName(names[i])
-        #pdo.AddColumn(insert) # these are not getting added to the output table
-        # ... work around:
-        pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData
-
-    return pdo
+    def __init__(self):
+        FilterPreserveTypeBase.__init__(self)
+        # Parameters:
+        self.__multiplier = 1.0
+        self.__newName = 'Mathed Up'
+        self.__inputArray1 = [None, None]
+        self.__inputArray2 = [None, None]
+        self.__operation = ArrayMath._add
 
 
-#---- Correlations ----#
-def _corr(arr1, arr2):
-    return np.correlate(arr1, arr2, mode='same')
+    @staticmethod
+    def _correlate(arr1, arr2):
+        """Use `np.correlate()` on `mode=\'same\'` on two selected arrays from one input."""
+        return np.correlate(arr1, arr2, mode='same')
 
-def _mult(arr1, arr2):
-    return arr1*arr2
+    @staticmethod
+    def _multiply(arr1, arr2):
+        return arr1*arr2
+
+    @staticmethod
+    def _divide(arr1, arr2):
+        return arr1/arr2
+
+    @staticmethod
+    def _add(arr1, arr2):
+        return arr1+arr2
+
+    @staticmethod
+    def _subtract(arr1, arr2):
+        return arr1-arr2
+
+    @staticmethod
+    def GetOperations():
+        """@desc: Returns the math operation methods as callable objects in a dictionary"""
+        ops = dict(
+            add=ArrayMath._add,
+            subtract=ArrayMath._subtract,
+            multiply=ArrayMath._multiply,
+            divide=ArrayMath._divide,
+            correlate=ArrayMath._correlate,
+        )
+        return ops
+
+    @staticmethod
+    def GetOperationNames():
+        """@desc: Gets a list of the math operation keys
+        @return:
+        list of strings: the keys for getting the math operations
+        """
+        ops = ArrayMath.GetOperations()
+        return list(ops.keys())
+
+    @staticmethod
+    def GetOperation(idx):
+        """@desc: Gets a math operation based on an index in the keys
+        @return:
+        callable: the math operation method
+        """
+        if isinstance(idx, str):
+            return ArrayMath.GetOperations()[idx]
+        n = ArrayMath.GetOperationNames()[idx]
+        return ArrayMath.GetOperations()[n]
 
 
-def correlateArrays(pdi, arr1, arr2, multiplier=1.0, newName='', pdo=None):
-    """Make sure to pass array names and integer associated fields.
-    Use helpers to get these properties."""
-    if pdo is None:
-        # TODO: test this
-        pdo = pdi.DeepCopy()
-    # Get the input arrays
-    (name1, field1) = arr1[0], arr1[1]
-    (name2, field2) = arr2[0], arr2[1]
-    wpdi = dsa.WrapDataObject(pdi)
-    arr1 = _helpers.getArray(wpdi, field1, name1)
-    arr2 = _helpers.getArray(wpdi, field2, name2)
-    # Perform correlations
-    #carr = _corr(arr1, arr2)
-    # TODO
-    carr = _mult(arr1, arr2)
-    # Apply the multiplier
-    carr *= multiplier
-    # Convert to a VTK array
-    c = nps.numpy_to_vtk(num_array=carr,deep=True)
-    # If no name given for data by user, use operator name
-    if newName == '':
-        newName = 'Correlated'
-    c.SetName(newName)
-    # Build output
-    pdo.DeepCopy(pdi)
-    pdo = _helpers.addArray(pdo, field1, c)
-    return pdo
+    def _MathUp(self, pdi, pdo):
+        """Make sure to pass array names and integer associated fields.
+        Use helpers to get these properties."""
+        if pdo is None:
+            # TODO: test this
+            pdo = pdi.DeepCopy()
+        # Get the input arrays
+        field1, name1 = self.__inputArray1[0], self.__inputArray1[1]
+        field2, name2 = self.__inputArray2[0], self.__inputArray2[1]
+        wpdi = dsa.WrapDataObject(pdi)
+        arr1 = _helpers.getArray(wpdi, field1, name1)
+        arr2 = _helpers.getArray(wpdi, field2, name2)
+        # Perform Math Operation
+        carr = self.__operation(arr1, arr2)
+        # Apply the multiplier
+        carr *= self.__multiplier
+        # Convert to a VTK array
+        c = nps.numpy_to_vtk(num_array=carr,deep=True)
+        # If no name given for data by user, use operator name
+        newName = self.__newName
+        if newName == '':
+            newName = 'Mathed Up'
+        c.SetName(newName)
+        # Build output
+        pdo.DeepCopy(pdi)
+        pdo = _helpers.addArray(pdo, field1, c)
+        return pdo
+
+
+    #### Algorithm Methods ####
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Perfrom task
+        self._MathUp(pdi, pdo)
+        return 1
+
+
+    #### Seters and Geters ####
+
+
+    def _SetInputArray1(self, field, name):
+        if self.__inputArray1[0] != field:
+            self.__inputArray1[0] = field
+            self.Modified()
+        if self.__inputArray1[1] != name:
+            self.__inputArray1[1] = name
+            self.Modified()
+
+    def _SetInputArray2(self, field, name):
+        if self.__inputArray2[0] != field:
+            self.__inputArray2[0] = field
+            self.Modified()
+        if self.__inputArray2[1] != name:
+            self.__inputArray2[1] = name
+            self.Modified()
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        if idx == 0:
+            self._SetInputArray1(field, name)
+        elif idx == 1:
+            self._SetInputArray2(field, name)
+        else:
+            raise RuntimeError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
+        return 1
+
+    def SetMultiplier(self, val):
+        """@desc: This is a static shifter/scale factor across the array after normalization."""
+        if self.__multiplier != val:
+            self.__multiplier = val
+            self.Modified()
+
+    def GetMultiplier(self):
+        return self.__multiplier
+
+    def SetNewArrayName(self, name):
+        """@desc: Give the new array a meaningful name."""
+        if self.__newName != name:
+            self.__newName = name
+            self.Modified()
+
+    def GetNewArrayName(self):
+        return self.__newName
+
+    def SetOperation(self, op):
+        """@desc: Set the math operation to perform
+        @params:
+        op : object : The operation as a string key, int index, or callable method
+
+        @notes:
+        This can accept a callable method to set a custom operation as long as its signature is: `<callable>(arr1, arr2)`"""
+        if isinstance(op, str):
+            op = ArrayMath.GetOperations()[op]
+        elif isinstance(op, int):
+            op = ArrayMath.GetOperation(op)
+        if self.__operation != op:
+            self.__operation = op
+            self.Modified()
+
+
+
+###############################################################################
 
 #---- Normalizations ----#
-# Here are some private functions to encompass the different normalizations
-def _featureScaleNorm(arr, rng=None):
-    if rng is not None:
-        mi = rng[0]
-        ma = rng[1]
-    else:
+
+class NormalizeArray(FilterPreserveTypeBase):
+    """@desc: This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested).
+
+    **Normalization Types:**
+
+    - `feature_scale`: Feature Scale
+    - `standard_score`: tandard Score
+    - `log10`: Natural Log
+    - `natural_log`: Log Base 10
+    - `just_multiply`: Only Multiply by Multiplier
+    """
+    def __init__(self):
+        FilterPreserveTypeBase.__init__(self)
+        # Parameters:
+        self.__multiplier = 1.0
+        self.__newName = 'Normalized'
+        self.__absolute = False
+        self.__inputArray = [None, None]
+        self.__normalization = NormalizeArray._featureScale
+        #self.__range = None
+
+
+    #### Array normalization methods ####
+
+
+    @staticmethod
+    def _passArray(arr):
+        return arr
+
+    @staticmethod
+    def _featureScale(arr):
+        # TODO: implement ability to use custom range
+        # if rng is not None:
+        #     mi = rng[0]
+        #     ma = rng[1]
+        # else:
         mi = np.min(arr)
         ma = np.max(arr)
-    return (arr - mi) / (ma - mi)
+        return (arr - mi) / (ma - mi)
 
-def _standardScoreNorm(arr):
-    return (arr - np.mean(arr)) / (np.std(arr))
+    @staticmethod
+    def _standardScore(arr):
+        return (arr - np.mean(arr)) / (np.std(arr))
 
-def _log10Norm(arr):
-    return np.log10(arr)
+    @staticmethod
+    def _log10(arr):
+        return np.log10(arr)
 
-def _logNatNorm(arr):
-    return np.log(arr)
+    @staticmethod
+    def _logNat(arr):
+        return np.log(arr)
 
-def getArrayRange(pdi, arr):
-    (name, field) = arr[0], arr[1]
-    wpdi = dsa.WrapDataObject(pdi)
-    arr = _helpers.getArray(wpdi, field, name)
-    arr = np.array(arr)
-    return [np.min(arr), np.max(arr)]
+    @staticmethod
+    def GetNormalizations():
+        ops = dict(
+            feature_scale=NormalizeArray._featureScale,
+            standard_score=NormalizeArray._standardScore,
+            log10=NormalizeArray._log10,
+            natural_log=NormalizeArray._logNat,
+            just_multiply=NormalizeArray._passArray,
+        )
+        return ops
 
+    @staticmethod
+    def GetNormalizationNames():
+        """@desc: Gets a list of the normalization keys
+        @return:
+        list of strings: the keys for getting the normalizations
+        """
+        ops = NormalizeArray.GetNormalizations()
+        return list(ops.keys())
 
-# Here is the public function to call for the normalizations
-def normalizeArray(pdi, arr, norm, multiplier=1.0, newName='', pdo=None, abs=False, rng=None):
-    """
-    TODO: Descrption
-    Perform normalize on a data array for any given VTK data object.
-    `abs` will take the absolute value before the normalization
+    @staticmethod
+    def GetNormalization(idx):
+        """@desc: Gets a normalization based on an index in the keys
+        @return:
+        callable: the normalization method
+        """
+        if isinstance(idx, str):
+            return NormalizeArray.GetNormalizations()[idx]
+        n = NormalizeArray.GetNormalizationNames()[idx]
+        return NormalizeArray.GetNormalizations()[n]
 
-    Normalization Types:
-        0 -> Feature Scale
-        1 -> Standard Score
-        2 -> Natural Log
-        3 -> Log Base 10
-        4 -> Simple Multiply by Multiplier
-
-    """
-    if pdo is None:
-        # TODO: test this
-        pdo = pdi.DeepCopy()
-
-    # Get inout array
-    (name, field) = arr[0], arr[1]
-    wpdi = dsa.WrapDataObject(pdi)
-    arr = _helpers.getArray(wpdi, field, name)
-    arr = np.array(arr)
-    # Take absolute value?
-    if abs:
-        arr = np.abs(arr)
-    # Perform normalization scheme
-    if norm == 0:
-        # Feature Scale
-        arr = _featureScaleNorm(arr, rng)
-    elif norm == 1:
-        # Standard Score
-        arr = _standardScoreNorm(arr)
-    elif norm == 2:
-        # Natural Log
-        arr = _logNatNorm(arr)
-    elif norm == 3:
-        # Log base 10
-        arr = _log10Norm(arr)
-    # Just multiply (option 4): no function call
-    elif norm != 4:
-        # Catch bad normalization call
-        raise Exception('Normalization %d is not implemented' % norm)
-
-    # Apply the multiplier
-    arr *= multiplier
-    # Convert to VTK array
-    c = nps.numpy_to_vtk(num_array=arr,deep=True)
-    # If no name given for data by user, use operator name
-    if newName == '' or newName == 'Normalized':
-        newName = 'Normalized ' + name
-    c.SetName(newName)
-    # Build output
-    pdo.DeepCopy(pdi)
-    pdo = _helpers.addArray(pdo, field, c)
-    return pdo
+    @staticmethod
+    def GetArrayRange(pdi, field, name):
+        """@desc: returns a tuple of the range for a vtkDataArray on a vtkDataObject"""
+        wpdi = dsa.WrapDataObject(pdi)
+        arr = _helpers.getArray(wpdi, field, name)
+        arr = np.array(arr)
+        return (np.min(arr), np.max(arr))
 
 
+    def _Normalize(self, pdi, pdo):
+        """@desc: Perform normalize on a data array for any given VTK data object."""
+        # Get inout array
+        field, name = self.__inputArray[0], self.__inputArray[1]
+        #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
+        wpdi = dsa.WrapDataObject(pdi)
+        arr = _helpers.getArray(wpdi, field, name)
+        arr = np.array(arr)
+        # Take absolute value?
+        if self.__absolute:
+            arr = np.abs(arr)
+        # Perform normalization scheme
+        arr = self.__normalization(arr)
+        # Apply the multiplier
+        arr *= self.__multiplier
+        # Convert to VTK array
+        c = nps.numpy_to_vtk(num_array=arr,deep=True)
+        # If no name given for data by user, use operator name
+        newName = self.__newName
+        if newName == '' or newName == 'Normalized':
+            newName = 'Normalized ' + name
+        c.SetName(newName)
+        # Build output
+        pdo.DeepCopy(pdi)
+        pdo = _helpers.addArray(pdo, field, c)
+        return pdo
 
+    #### Algorithm Methods ####
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Perfrom task
+        self._Normalize(pdi, pdo)
+        return 1
+
+    #### Seters and Geters ####
+
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        if self.__inputArray[0] != field:
+            self.__inputArray[0] = field
+            self.Modified()
+        if self.__inputArray[1] != name:
+            self.__inputArray[1] = name
+            self.Modified()
+        return 1
+
+    def SetMultiplier(self, val):
+        """@desc: This is a static shifter/scale factor across the array after normalization."""
+        if self.__multiplier != val:
+            self.__multiplier = val
+            self.Modified()
+
+
+    def GetMultiplier(self):
+        return self.__multiplier
+
+
+    def SetNewArrayName(self, name):
+        """@desc: Give the new array a meaningful name."""
+        if self.__newName != name:
+            self.__newName = name
+            self.Modified()
+
+
+    def GetNewArrayName(self):
+        return self.__newName
+
+    def SetTakeAbsoluteValue(self, flag):
+        """@desc: This will take the absolute value of the array before normalization."""
+        if self.__absolute != flag:
+            self.__absolute = flag
+            self.Modified()
+
+    def SetNormalization(self, norm):
+        """@desc: Set the normalization operation to perform
+        @params:
+        norm : object : The operation as a string key, int index, or callable method
+
+        @notes:
+        This can accept a callable method to set a custom operation as long as its signature is: `<callable>(arr)`"""
+        if isinstance(norm, str):
+            norm = NormalizeArray.GetNormalizations()[norm]
+        elif isinstance(norm, int):
+            norm = NormalizeArray.GetNormalization(norm)
+        if self.__normalization != norm:
+            self.__normalization = norm
+            self.Modified()
+
+
+
+###############################################################################
 #---- Cell Connectivity ----#
 
-def connectCells(pdi, cellType=4, nrNbr=True, pdo=None, logTime=False):
-    # NOTE: Type map is specified in vtkCellType.h
+class AddCellConnToPoints(PVGeoAlgorithmBase):
+    """@desc: This filter will add linear cell connectivity between scattered points. You have the option to add VTK_Line or VTK_PolyLine connectivity. VTK_Line connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The VTK_PolyLine adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation). Type map is specified in vtkCellType.h
+
+    **Cell Connectivity Types**
+
+    - 4: Poly Line
+    - 3: Line
+
     """
-    <Entry value="4" text="Poly Line"/>
-    <Entry value="3" text="Line"/>
-    """
-    if pdo is None:
-        pdo = vtk.vtkPolyData()
+    def __init__(self):
+        PVGeoAlgorithmBase.__init__(self,
+            nInputPorts=1, inputType='vtkPolyData',
+            nOutputPorts=1, outputType='vtkPolyData')
+        # Parameters
+        self.__cellType = vtk.VTK_POLY_LINE
+        self.__usenbr = False
 
-    if logTime:
-        startTime = datetime.now()
 
-    # Get the Points over the NumPy interface
-    wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
-    points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+    def _ConnectCells(self, pdi, pdo, logTime=False):
+        # NOTE: Type map is specified in vtkCellType.h
+        cellType = self.__cellType
+        nrNbr = self.__usenbr
 
-    pdo.DeepCopy(pdi)
-    numPoints = pdi.GetNumberOfPoints()
+        if logTime:
+            startTime = datetime.now()
 
-    if nrNbr:
-        from scipy.spatial import cKDTree
-        # VTK_Line
-        if cellType == 3:
-            sft = 0
-            while(len(points) > 1):
+        # Get the Points over the NumPy interface
+        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
+        points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+
+        def _makePolyCell(ptsi):
+            cell = vtk.vtkPolyLine()
+            cell.GetPointIds().SetNumberOfIds(len(ptsi))
+            for i in ptsi:
+                cell.GetPointIds().SetId(i, ptsi[i])
+            return cell
+
+        def _makeLineCell(pts):
+            if len(ptsi) != 2:
+                raise RuntimeError('_makeLineCell() only handles two points')
+            aLine = vtk.vtkLine()
+            aLine.GetPointIds().SetId(0, ptsi[0])
+            aLine.GetPointIds().SetId(1, ptsi[1])
+            return aLine
+
+
+        cells = vtk.vtkCellArray()
+        numPoints = pdi.GetNumberOfPoints()
+        if nrNbr:
+            from scipy.spatial import cKDTree
+            # VTK_Line
+            if cellType == vtk.VTK_LINE:
                 tree = cKDTree(points)
-                # Get indices of k nearest points
-                dist, ind = tree.query(points[0], k=2)
-                ptsi = [ind[0]+sft, ind[1]+sft]
-                pdo.InsertNextCell(cellType, 2, ptsi)
-                points = np.delete(points, 0, 0) # Deletes first row
-                del(tree)
-                sft += 1
-        # VTK_PolyLine
-        elif cellType == 4:
-            tree = cKDTree(points)
-            dist, ptsi = tree.query(points[0], k=numPoints)
-            pdo.InsertNextCell(cellType, numPoints, ptsi)
+                ind = tree.query([0.0,0.0,0.0], k=numPoints)[1]
+                for i in range(len(ind)-1):
+                    # Get indices of k nearest points
+                    ptsi = [ind[i], ind[i+1]]
+                    cell = _makeLineCell(ptsi)
+                    cells.InsertNextCell(cell)
+                    points = np.delete(points, 0, 0) # Deletes first row
+            # VTK_PolyLine
+            elif cellType == vtk.VTK_POLY_LINE:
+                tree = cKDTree(points)
+                dist, ptsi = tree.query([0.0,0.0,0.0], k=numPoints)
+                cell = _makePolyCell(ptsi)
+                cells.InsertNextCell(cell)
+            else:
+                raise Exception('Cell Type %d not ye implemented.' % cellType)
         else:
-            raise Exception('Cell Type %d not ye implemented.' % cellType)
-    else:
-        # VTK_PolyLine
-        if cellType == 4:
-            ptsi = [i for i in range(numPoints)]
-            pdo.InsertNextCell(cellType, numPoints, ptsi)
-        # VTK_Line
-        elif cellType == 3:
-            for i in range(0, numPoints-1):
-                ptsi = [i, i+1]
-                pdo.InsertNextCell(cellType, 2, ptsi)
-        else:
-            raise Exception('Cell Type %d not ye implemented.' % cellType)
+            # VTK_PolyLine
+            if cellType == vtk.VTK_POLY_LINE:
+                ptsi = [i for i in range(numPoints)]
+                cell = _makePolyCell(ptsi)
+                cells.InsertNextCell(cell)
+            # VTK_Line
+            elif cellType == vtk.VTK_LINE:
+                for i in range(0, numPoints-1):
+                    ptsi = [i, i+1]
+                    cell = _makeLineCell(ptsi)
+                    cells.InsertNextCell(cell)
+            else:
+                raise Exception('Cell Type %d not ye implemented.' % cellType)
 
-    if logTime:
-        print((datetime.now() - startTime))
+        if logTime:
+            print((datetime.now() - startTime))
+        # Now add points and cells to output
+        pdo.SetPoints(pdi.GetPoints())
+        pdo.SetLines(cells)
+        # copy point data
+        _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        return pdo
 
-    return pdo
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Perfrom task
+        self._ConnectCells(pdi, pdo)
+        return 1
 
-def _polyLineToTube(pdi, pdo, radius=10.0, numSides=20):
-    """
-    Takes points from a vtkPolyData with associated poly lines in cell data and builds a polygonal tube around that line with some specified radius and number of sides.
-    """
-    if pdo is None:
-        pdo = vtk.vtkPolyData()
-        pdo.DeepCopy(pdi)
 
-    # Make a tube from the PolyData line:
-    tube = vtk.vtkTubeFilter()
-    tube.SetInputData(pdo)
-    tube.SetRadius(radius)
-    tube.SetNumberOfSides(numSides)
-    tube.Update()
-    pdo.ShallowCopy(tube.GetOutput())
+    #### Seters and Geters ####
 
-    return pdo
 
-def pointsToTube(pdi, radius=10.0, numSides=20, nrNbr=False, pdo=None, logTime=False):
-    """
-    TODO: Descrption
-    """
-    if pdo is None:
-        pdo = vtk.vtkPolyData()
+    def SetCellType(self, cellType):
+        """@desc: Set the cell typ by the integer id as specified in vtkCellType.h"""
+        if cellType != self.__cellType:
+            self.__cellType = cellType
+            self.Modified()
 
-    numPoints = pdi.GetNumberOfPoints()
+    def SetUseNearestNbr(self, flag):
+        """@desc: Set a flag on whether to use SciPy's cKDTree nearest neighbor algorithms to sort the points to before adding linear connectivity"""
+        if flag != self.__usenbr:
+            self.__usenbr = flag
+            self.Modified()
 
-    # VTK_POLY_LINE is 4
-    # Type map is specified in vtkCellType.h
-    connectCells(pdi, cellType=4, nrNbr=nrNbr, pdo=pdo, logTime=logTime)
 
-    # Make a tube from the PolyData line:
-    _polyLineToTube(pdi, pdo, radius=radius, numSides=numSides)
 
-    return pdo
+
+###############################################################################
+
+
+class PointsToTube(AddCellConnToPoints):
+    """@desc: Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides."""
+    def __init__(self):
+        AddCellConnToPoints.__init__(self)
+        # Additional Parameters
+        # NOTE: CellType should remain vtk.VTK_POLY_LINE (4) connection
+        self.__numSides = 20
+        self.__radius = 10.0
+
+
+    def _ConnectCells(self, pdi, pdo, logTime=False):
+        """This uses the parent's _ConnectCells() to build a tub around"""
+        AddCellConnToPoints._ConnectCells(self, pdi, pdo, logTime=logTime)
+        tube = vtk.vtkTubeFilter()
+        tube.SetInputData(pdo)
+        tube.SetRadius(self.__radius)
+        tube.SetNumberOfSides(self.__numSides)
+        tube.Update()
+        pdo.ShallowCopy(tube.GetOutput())
+        return pdo
+
+
+    #### Seters and Geters ####
+
+    def SetRadius(self, radius):
+        """@desc: set the radius of the tube"""
+        if self.__radius != radius:
+            self.__radius = radius
+            self.Modified()
+
+    def SetNumberOfSides(self, num):
+        """@desc: set the number of sides (resolution) for the tube"""
+        if self.__numSides != num:
+            self.__numSides = num
+            self.Modified()
+
+
+
+###############################################################################

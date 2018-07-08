@@ -1,0 +1,30 @@
+language: python
+
+python:
+  - 3.6
+  - 2.7
+
+sudo: false
+
+# command to install dependencies
+install:
+    - pip install -r requirements.txt
+
+script:
+    # Run Code coverage report on the tests
+    - coverage run .test.py
+    - codecov --token=8da9d332-1618-450d-8654-09a8ecf3c2dc
+    # Re-run tests to tell travis the build failed if errors/failures occur
+    - python -m PVGeo test
+
+notifications:
+    slack:
+        on_success: never
+        on_failure: always
+        rooms:
+            - pvgeo:m3aUlu4IVCCVrPnbTuX1C3J5#developers
+    email:
+        recipients:
+            - info@pvgeo.org
+        on_success: never # default: change
+        on_failure: never # default: always # Letting slack be the place for notifications
