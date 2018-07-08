@@ -17,4 +17,13 @@ Please feel free to post features you would like to see from this repo on the [*
 
 
 # How To Use the Plugins in this Repository
-Here we will outline everything you need to do in one spot to quickly install these plugins and get working. If you encounter trouble *or you are a windows user, please read through the detailed explanation [here](http://pvgeo.org/overview/getting-started/#install-PVGeo).*
+To begin using the *PVGeo* python package, create a new virtual environment and install *PVGeo* through pip.
+
+```bash
+$ conda create -n PVGeoEnv python=3.6
+$ source activate PVGeoEnv
+
+$ pip install PVGeo
+```
+
+Now *PVGeo* is ready for use in you standard python environment. To use the *PVGeo* library as plugins in ParaView, please see the detailed explanation [here](http://pvgeo.org/overview/getting-started/).*
