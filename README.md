@@ -20,9 +20,14 @@ Please feel free to post features you would like to see from this repo on the [*
 To begin using the *PVGeo* python package, create a new virtual environment and install *PVGeo* through pip.
 
 ```bash
-$ conda create -n PVGeoEnv python=3.6
-$ source activate PVGeoEnv
+$ conda create -n PVGeoEnv python=2.7
 
+# Install VTK through conda as this is OS-independent
+# Best of luck, Windows users...
+# Mac/Linux users can replace this with `pip install vtk`
+$ conda install -n PVGeoEnv vtk
+
+$ source activate PVGeoEnv
 $ pip install PVGeo
 ```
 
