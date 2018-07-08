@@ -2,13 +2,13 @@
 This package is a set of module files for each sub-package in PVGeo. Each file here
 contains the neccessary wrappings for PVGeo to be used directly in ParaView.
 """
-from .filters_general import *
-from .grids import *
-from .gslib import *
-from .model_build import *
-from .readers_general import *
-from .tunneling import *
-from .ubc import *
+from .PVGeo_Filters import *
+from .PVGeo_Grid_Tools import *
+from .PVGeo_GSLib import *
+from .PVGeo_Model_Builder import *
+from .PVGeo_Readers import *
+from .PVGeo_Tunneling import *
+from .PVGeo_UBC_Tools import *
 
 
 __author__ = 'Bane Sullivan'
