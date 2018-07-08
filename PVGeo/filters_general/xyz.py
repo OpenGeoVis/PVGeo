@@ -274,7 +274,7 @@ class RotateCoordinates(PVGeoAlgorithmBase):
         origin = self.__origin
         if self.__useCorner:
             idx = np.argmin(points[:,0])
-            origin = [points[idx,0], points[:,1]]
+            origin = [points[idx,0], points[idx,1]]
         points[:,0:2] = RotationTool.RotateAround(points[:,0:2], self.__angle, origin)
         pdo.DeepCopy(pdi)
         pts = pdo.GetPoints()
