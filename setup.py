@@ -2,8 +2,11 @@ import setuptools
 
 __version__ = '0.7.6'
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+with open("README.md", "r") as f:
+    long_description = f.read()
+
+with open("requirements.txt", "r") as f:
+    reqs = f.read().splitlines()
 
 setuptools.setup(
     name="PVGeo",
@@ -15,6 +18,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/OpenGeoVis/PVGeo",
     packages=setuptools.find_packages(),
+    install_requires=reqs,
     classifiers=(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",
