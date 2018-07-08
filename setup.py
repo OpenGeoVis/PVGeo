@@ -1,6 +1,6 @@
 import setuptools
 
-__version__ = '1.0.5'
+__version__ = '1.0.4'
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -18,7 +18,7 @@ setuptools.setup(
     install_requires=[
         'numpy>=1.10',
         'scipy>=1.1',
-        'vtk',
+        #'vtk>=8.1',
         'colour-runner==0.0.5',
         'codecov==2.0.15',
     ],
