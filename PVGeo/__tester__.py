@@ -7,27 +7,6 @@ import os
 
 try:
     from colour_runner.runner import ColourTextTestRunner as TextTestRunner
-    from blessings import Terminal
-    try:
-        # Python 2
-        text_type = unicode
-        from pygments.lexers import PythonTracebackLexer as Lexer
-    except NameError:
-        # Python 3
-        text_type = str
-        from pygments.lexers import Python3TracebackLexer as Lexer
-    _terminal = Terminal()
-    colours = {
-        None: text_type,
-        'error': _terminal.bold_red,
-        'expected': _terminal.bold_yellow,
-        'fail': _terminal.bold_yellow,
-        'skip': text_type,
-        'success': _terminal.green,
-        'title': _terminal.bold_yellow,
-        'unexpected': _terminal.bold_red,
-    }
-    TextTestRunner.colours = colours
 except ImportError:
     from unittest import TextTestRunner
 
