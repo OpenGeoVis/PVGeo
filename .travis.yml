@@ -21,8 +21,8 @@ notifications:
     email:
         recipients:
             - info@pvgeo.org
-                on_success: never
-                on_failure: never
+        on_success: never
+        on_failure: never
 deploy:
     provider: pypi
     user: "pvgeosupport"
