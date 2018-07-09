@@ -2,8 +2,8 @@ language: python
 os:
     - linux
 python:
-    - 3.6
-    - 2.7
+    - 2.7 # build on Python 2 first
+    - 3.6 # Build and deploy here
 sudo: false
 install:
     - pip install -r requirements.txt
@@ -31,3 +31,5 @@ deploy:
         repo: OpenGeoVis/PVGeo
         branch: master
         tags: true
+        #python: 3.6 # Only deploy from python 3
+        after_success: true
