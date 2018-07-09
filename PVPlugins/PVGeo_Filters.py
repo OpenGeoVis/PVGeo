@@ -211,7 +211,7 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         elif idx == 2:
             self.__dz_id = [field, name]
         else:
-            raise RuntimeError('Bad input array inex.')
+            raise RuntimeError('Bad input array index.')
         return 1
 
 

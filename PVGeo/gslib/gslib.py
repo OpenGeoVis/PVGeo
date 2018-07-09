@@ -5,7 +5,7 @@ __all__ = [
 import numpy as np
 from vtk.util import numpy_support as nps
 # Import Helpers:
-#from .. import _helpers
+from .. import _helpers
 from ..readers_general import DelimitedTextReader
 
 class GSLibReader(DelimitedTextReader):
@@ -25,7 +25,7 @@ class GSLibReader(DelimitedTextReader):
         try:
             num = int(content[1]) # number of data columns
         except ValueError:
-            raise RuntimeError('This file is not in proper GSLIB format.')
+            raise _helpers.PVGeoError('This file is not in proper GSLIB format.')
 
         titles = []
         for i in range(2, 2 + num):

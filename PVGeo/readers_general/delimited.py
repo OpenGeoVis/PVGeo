@@ -51,7 +51,7 @@ class DelimitedTextReader(PVGeoReaderBase):
     def _ExtractHeader(self, content):
         """Override this. Remove header from single file's content"""
         if len(np.shape(content)) > 2:
-            raise RuntimeError("`_ExtractHeader()` can only handle a sigle file's content")
+            raise _helpers.PVGeoError("`_ExtractHeader()` can only handle a sigle file's content")
         idx = 0
         if self.__hasTitles:
             titles = content[idx].split(self._GetDeli())
@@ -73,7 +73,7 @@ class DelimitedTextReader(PVGeoReaderBase):
         # Check that the titles are the same across files:
         ts = np.unique(np.asarray(ts), axis=0)
         if len(ts) > 1:
-            raise RuntimeError('Data array titles varied across file timesteps. This data is invalid as a timeseries.')
+            raise _helpers.PVGeoError('Data array titles varied across file timesteps. This data is invalid as a timeseries.')
         return ts[0], contents
 
 

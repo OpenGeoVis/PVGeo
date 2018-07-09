@@ -20,10 +20,23 @@ class PVGeoAlgorithmBase(VTKPythonAlgorithmBase):
         VTKPythonAlgorithmBase.__init__(self,
             nInputPorts=nInputPorts, inputType=inputType,
             nOutputPorts=nOutputPorts, outputType=outputType)
+        # Add error handler to make errors easier to deal with
+        self.__errorObserver = _helpers.ErrorObserver()
+        self.__errorObserver.MakeObserver(self)
 
     def GetOutput(self, port=0):
-        """@desc: A conveience method to get the output of a `PVGeo` algorithm"""
+        """@desc: A conveience method to get the output data object of this `PVGeo` algorithm"""
         return self.GetOutputDataObject(port)
+
+    def ErrorOccurred(self):
+        """@desc: A conveience method for handling errors on the VTK pipeline
+        @return:
+        boolean : returns true if an error has ovvured since last checked"""
+        return self.__errorObserver.ErrorOccurred()
+
+    def ErrorMessage(self):
+        """@desc: A conveience method to print the error message"""
+        return self.__errorObserver.ErrorMessage()
 
 
 ###############################################################################

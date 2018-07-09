@@ -108,7 +108,7 @@ class TableToGrid(PVGeoAlgorithmBase):
         ox,oy,oz = self.__origin[idx[0]],self.__origin[idx[1]],self.__origin[idx[2]]
         # make sure dimensions work
         if (nx*ny*nz != rows):
-            raise RuntimeError('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))
+            raise _helpers.PVGeoError('Total number of elements must remain %d. Check reshape dimensions (n1 by n2 by n3).' % (rows))
 
         ido.SetDimensions(nx, ny, nz)
         #ido.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)

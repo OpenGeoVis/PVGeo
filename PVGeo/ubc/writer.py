@@ -13,7 +13,7 @@
 #     filename is absolute path
 #     """
 #     if type(grid) is not vtk.vtkImageData or type(grid) is not vtk.vtkRectilinearGrid:
-#         raise RuntimeError('`writeUBCTensorMesh()` can on handle `vtk.vtkImageData` or `vtk.vtkRectilinearGrid`.')
+#         raise _helpers.PVGeoError('`writeUBCTensorMesh()` can on handle `vtk.vtkImageData` or `vtk.vtkRectilinearGrid`.')
 #     # get the points along each axis:
 #
 #     # TODO: decide if 2D or 3D
