@@ -31,5 +31,4 @@ deploy:
         repo: OpenGeoVis/PVGeo
         branch: master
         tags: true
-        #python: 3.6 # Only deploy from python 3
-        after_success: true
+        python: 2.7 # Only deploy from python 2 as more likely to prevent broken builds
