@@ -80,10 +80,8 @@ class TestGSLibReader(unittest.TestCase):
         reader = GSLibReader()
         reader.AddFileName(fname)
         # Perform the read
-        e = _helpers.ErrorObserver()
-        e.MakeObserver(reader)
         reader.Update()
-        self.assertTrue(e.ErrorOccurred())
+        self.assertTrue(reader.ErrorOccurred())
 
 
 
@@ -154,7 +152,5 @@ class TestSGeMSGridReader(unittest.TestCase):
         reader = SGeMSGridReader()
         reader.AddFileName(fname)
         # Perform the read
-        e = _helpers.ErrorObserver()
-        e.MakeObserver(reader)
         reader.Update()
-        self.assertTrue(e.ErrorOccurred())
+        self.assertTrue(reader.ErrorOccurred())

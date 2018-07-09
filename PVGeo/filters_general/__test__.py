@@ -149,24 +149,27 @@ class TestReshapeTable(unittest.TestCase):
 
 
     def test_reshape_c(self):
-        """`ReshapeTable`: C-order, no input names"""
-        order = 'C'
-        table = self._generate_output(order, titles=None)
-        # Check output:
-        self._check_shape(table)
-        self._check_data_fidelity(table, order)
-        self._check_data_array_titles(table, ['Field %d' % i for i in range(self.ncols)])
-        return
-
-    def test_reshape_c_names(self):
-        """`ReshapeTable`: C-order, input names given"""
+        """`ReshapeTable`: C-order, input names given as string"""
         order = 'C'
         titles = ['Title %d' % i for i in range(self.ncols)]
-        table = self._generate_output(order, titles=titles)
+        ts = ';'.join(t for t in titles)
+        table = self._generate_output(order, titles=ts)
         # Check output:
         self._check_shape(table)
         self._check_data_fidelity(table, order)
         self._check_data_array_titles(table, titles)
+        return
+
+    def test_reshape_c_names(self):
+        """`ReshapeTable`: C-order, few input names given"""
+        order = 'C'
+        fewtitles = ['Title %d' % i for i in range(self.ncols - 2)]
+        rest = ['Field %d' % i for i in range(2)]
+        table = self._generate_output(order, titles=fewtitles)
+        # Check output:
+        self._check_shape(table)
+        self._check_data_fidelity(table, order)
+        self._check_data_array_titles(table, fewtitles + rest)
         return
 
 
@@ -289,7 +292,7 @@ class TestVoxelizePoints(unittest.TestCase):
         v.SetInputDataObject(vtkpoints)
         v.SetSafeSize(5.0)
         v.Update()
-        grid = v.GetOutputDataObject(0)
+        grid = v.GetOutput()
         # Checkout output:
         self.assertEqual(grid.GetNumberOfCells(), 3, msg='Number of CELLS is incorrect')
         self.assertEqual(grid.GetNumberOfPoints(), 16, msg='Number of POINTS is incorrect')
@@ -307,7 +310,7 @@ class TestVoxelizePoints(unittest.TestCase):
         v.SetInputDataObject(vtkpoints)
         v.SetSafeSize(5.0)
         v.Update()
-        grid = v.GetOutputDataObject(0)
+        grid = v.GetOutput()
         # Checkout output:
         #- Assumes this same data's rotation was checked by `TestRotationTool`
         self.assertEqual(grid.GetNumberOfCells(), len(pts), msg='Number of CELLS is incorrect')
@@ -315,6 +318,65 @@ class TestVoxelizePoints(unittest.TestCase):
         self.assertEqual(grid.GetNumberOfPoints(), numPts, msg='Number of POINTS is incorrect')
         return
 
+    def test_mesh_grid_uniform(self):
+        """`VoxelizePoints`: uniform mesh grid with given spacings"""
+        # make the mesh grid
+        dd = 5
+        x = y = z = np.arange(0, 100, dd)
+        g = np.meshgrid(x, y, z)
+        # Convert to XYZ points
+        points = np.vstack(map(np.ravel, g)).T
+        rand = np.random.random(len(points))
+        vtkpoints = PointsToPolyData(points)
+        vtkpoints.GetPointData().AddArray(_helpers.numToVTK(rand, 'Random'))
+        # Use filter
+        v = VoxelizePoints()
+        v.SetInputDataObject(vtkpoints)
+        v.SetEstimateGrid(False) # Cell size is explicitly set
+        v.SetDeltaX(10)
+        v.SetDeltaY(10)
+        v.SetDeltaZ(10)
+        v.Update()
+        grid = v.GetOutput()
+        wgrd = dsa.WrapDataObject(grid)
+        celldata = wgrd.CellData['Random']
+        # Checkout output:
+        self.assertEqual(grid.GetNumberOfCells(), 8*10**3, msg='Number of CELLS is incorrect')
+        numPts = (len(x)+2)**3
+        self.assertEqual(grid.GetNumberOfPoints(), numPts, msg='Number of POINTS is incorrect')
+        self.assertTrue(np.allclose(celldata, rand))
+
+        # Now check that we can set the spacing for every cell
+        spac = np.full((len(points)), 10.0)
+        v.SetDeltas(spac, spac, spac)
+        v.Update()
+        grid = v.GetOutput()
+        wgrd = dsa.WrapDataObject(grid)
+        celldata = wgrd.CellData['Random']
+        self.assertEqual(grid.GetNumberOfCells(), 8*10**3, msg='Number of CELLS is incorrect')
+        self.assertEqual(grid.GetNumberOfPoints(), numPts, msg='Number of POINTS is incorrect')
+        self.assertTrue(np.allclose(celldata, rand))
+        return
+
+
+
+
+###############################################################################
+
+
+class TestExtractPoints(unittest.TestCase):
+    """
+    Test the `ExtractPoints` filter
+    """
+    def test_bad_extraction(self):
+        """`ExtractPoints`: catch a bad extraction"""
+        img = vtk.vtkImageData()
+        img.SetDimensions(10, 10, 10)
+        f = ExtractPoints()
+        f.SetInputDataObject(img)
+        f.Update()
+        self.assertTrue(f.ErrorOccurred())
+        return
 
 
 

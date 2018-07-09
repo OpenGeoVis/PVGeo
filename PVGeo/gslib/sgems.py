@@ -33,7 +33,7 @@ class SGeMSGridReader(GSLibReader):
         try:
             n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
         except ValueError:
-            raise RuntimeError('File not in proper SGeMS Grid fromat.')
+            raise _helpers.PVGeoError('File not in proper SGeMS Grid fromat.')
         return (0,n1-1, 0,n2-1, 0,n3-1)
 
     def _ExtractHeader(self, content):
@@ -43,9 +43,9 @@ class SGeMSGridReader(GSLibReader):
             if self.__extent is None:
                 self.__extent = (int(h[0]), int(h[1]), int(h[2]))
             elif self.__extent != (int(h[0]), int(h[1]), int(h[2])):
-                raise RuntimeError('Grid dimensions change in file time series.')
+                raise _helpers.PVGeoError('Grid dimensions change in file time series.')
         except ValueError:
-            raise RuntimeError('File not in proper SGeMS Grid fromat.')
+            raise _helpers.PVGeoError('File not in proper SGeMS Grid fromat.')
         return titles, content
 
     def RequestData(self, request, inInfo, outInfo):

@@ -170,7 +170,7 @@ class RotationTool(PVGeoAlgorithmBase):
     #     elif len(yidx) == 1 and len(xidx) == 0:
     #         return 1, np.pi/2-angles[yidx], dist[yidx]
     #     else:
-    #         raise RuntimeError('No angle found')
+    #         raise _helpers.PVGeoError('No angle found')
 
 
     def _ConvergeAngle(self, pt1, pt2):
@@ -197,7 +197,7 @@ class RotationTool(PVGeoAlgorithmBase):
         self.DECIMALS -= 1
         if self.DECIMALS < 0:
             self.DECIMALS = 0
-            raise RuntimeError('No angle found. Precision too low/high.')
+            raise _helpers.PVGeoError('No angle found. Precision too low/high.')
         return self._ConvergeAngle(pt1, pt2)
 
 
@@ -235,7 +235,7 @@ class RotationTool(PVGeoAlgorithmBase):
         # if len(angles) > 1:
         #     # This algorithm assumes the input data has uniform spacing throughout.
         #     # If multiple angles were found then that assumption must be False making the input data invalid.
-        #     raise RuntimeError('More than one angle recovered: Input data is invalid. Seek help with <info@pvgeo.org>.')
+        #     raise _helpers.PVGeoError('More than one angle recovered: Input data is invalid. Seek help with <info@pvgeo.org>.')
         return angle, dx[0], dy[0]
 
 
@@ -274,7 +274,7 @@ class RotateCoordinates(PVGeoAlgorithmBase):
         origin = self.__origin
         if self.__useCorner:
             idx = np.argmin(points[:,0])
-            origin = [points[idx,0], points[:,1]]
+            origin = [points[idx,0], points[idx,1]]
         points[:,0:2] = RotationTool.RotateAround(points[:,0:2], self.__angle, origin)
         pdo.DeepCopy(pdi)
         pts = pdo.GetPoints()
@@ -319,6 +319,8 @@ class ExtractPoints(PVGeoAlgorithmBase):
         #### Perfrom task ####
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
+        if not hasattr(wpdi, 'Points'):
+            raise _helpers.PVGeoError('Input data object does not have XYZ points.')
         points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
         # Now transfer data
         f = vtk.vtkCellDataToPointData()

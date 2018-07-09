@@ -1,22 +1,16 @@
 language: python
-
+os:
+    - linux
 python:
-  - 3.6
-  - 2.7
-
+    - 2.7 # build on Python 2 first
+    - 3.6 # Build and deploy here
 sudo: false
-
-# command to install dependencies
 install:
     - pip install -r requirements.txt
-
 script:
-    # Run Code coverage report on the tests
     - coverage run .test.py
     - codecov --token=8da9d332-1618-450d-8654-09a8ecf3c2dc
-    # Re-run tests to tell travis the build failed if errors/failures occur
     - python -m PVGeo test
-
 notifications:
     slack:
         on_success: never
@@ -26,5 +20,15 @@ notifications:
     email:
         recipients:
             - info@pvgeo.org
-        on_success: never # default: change
-        on_failure: never # default: always # Letting slack be the place for notifications
+        on_success: never
+        on_failure: never
+deploy:
+    provider: pypi
+    user: "pvgeosupport"
+    password:
+        secure: L3eSpvBG9sJeGpUCybkisOdpjIv3BxEy2BPHDimSrJE26UnJ4my/8Xq05GWejH4IOBhyo6ZmlKy2olZeTaIY+0+kf2zpR8C0b5DW4B2mXKkiEm7JpVdWmlc/Kcw7aBOvn3APH5K52if58p3M65P+9nkKE91FdmZUQP41e32lHl6yYMo8PBU8x7imMdL4Myl5J+5DxtYnr4tC07Td4KTvhNJyUM0Y5i3Qyp1AELlB36M6gcvUnRCAKqQDq5phtufrQHM/TjAeyuX2RwzDtZhILWEYHYPDZ0m8emPV5OYbklqHaEM5DcY4Vd50l/yw22mm154nqsOUr3nz2URLV5u3qea+5WZeQRaDjFNVHe0udO8axhT8I2VPyatnCX2q9GmDCF77Dl9Fv/ZLXP80qanL1BfwjPIB1vkMPR+6y0n8DcI3MM5SMZYm80igPLY/AMqBFsWoU9Fsp+luvx6Dcmf3s7RTKf0tqOJcog07GRzK0c4up8uZwBir3rjQzhv4y0DT3IfillQB7SmMzH4xW0vpi/txvaBNvlI0OT3eIiygH79FoxzWZO0YdzZLV33ZUU7nKk+TsQka4LmjksVQw2+aK5fVoJ9VuUVYYfZDtoJICKfktfv7UFdl0tJkjHArSOrPVmsrit54uESmKsMIMzeQi+fY/Baz63utkXFm+8U6D3k=
+    on:
+        repo: OpenGeoVis/PVGeo
+        branch: master
+        tags: true
+        python: 2.7 # Only deploy from python 2 as more likely to prevent broken builds
