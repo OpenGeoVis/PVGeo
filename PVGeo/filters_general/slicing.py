@@ -22,6 +22,8 @@ class _SliceBase(PVGeoAlgorithmBase):
     @notes:
     - Make sure the input data source is slice-able.
     - The SciPy module is required for this macro.
+
+    @type: base
     """
     def __init__(self, numSlices=5,
             nInputPorts=1, inputType='vtkDataSet',
@@ -72,6 +74,8 @@ class ManySlicesAlongPoints(_SliceBase):
     @notes:
     - Make sure the input data source is slice-able.
     - The SciPy module is required for this macro.
+
+    @type: filter
     """
     def __init__(self, numSlices=5):
         _SliceBase.__init__(self, numSlices=numSlices,
@@ -145,7 +149,8 @@ class ManySlicesAlongPoints(_SliceBase):
 
 
 class ManySlicesAlongAxis(_SliceBase):
-    """@desc: Slices a `vtkDataSet` along a given axis many times"""
+    """@desc: Slices a `vtkDataSet` along a given axis many times.
+    @type: filter"""
     def __init__(self, numSlices=5, outputType='vtkUnstructuredGrid'):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=1, inputType='vtkDataSet',
@@ -235,6 +240,7 @@ class ManySlicesAlongAxis(_SliceBase):
 
 class SliceThroughTime(ManySlicesAlongAxis):
     """@desc: Takes a sliceable `vtkDataSet` and progresses a slice of it along a given axis. The macro requires that the clip already exist in the pipeline. This is especially useful if you have many clips linked together as all will move through the seen as a result of this macro.
+    @type: filter
     """
     def __init__(self, numSlices=5):
         ManySlicesAlongAxis.__init__(self, numSlices=numSlices, outputType='vtkPolyData')

@@ -17,7 +17,8 @@ from .. import _helpers
 
 class ubcOcTreeReader(ubcMeshReaderBase):
     """@desc: This class reads a UBC OcTree Mesh file and builds a `vtkUnstructuredGrid` of the data in the file.
-    Model File is optional. Reader will still construct `vtkUnstructuredGrid` safely."""
+    Model File is optional. Reader will still construct `vtkUnstructuredGrid` safely.
+    @type: reader"""
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -300,7 +301,8 @@ class ubcOcTreeReader(ubcMeshReaderBase):
 ################################################################################
 
 class ubcOcTreeAppender(ubcModelAppenderBase):
-    """@desc: This filter reads a timeseries of models and appends it to an input `vtkUnstructuredGrid`"""
+    """@desc: This filter reads a timeseries of models and appends it to an input `vtkUnstructuredGrid`
+    @type: filter"""
     def __init__(self):
         ubcModelAppenderBase.__init__(self,
             inputType='vtkUnstructuredGrid',

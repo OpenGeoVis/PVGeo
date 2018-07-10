@@ -17,7 +17,9 @@ from .. import _helpers
 class ubcTensorMeshReader(ubcMeshReaderBase):
     """@desc: UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describes how the data is discretized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. The reader will automatically detect if the mesh is 2D or 3D and read the remainder of the data with that dimensionality assumption. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D).
 
-    Model File is optional. Reader will still construct vtkRectilinearGrid safely."""
+    Model File is optional. Reader will still construct vtkRectilinearGrid safely.
+
+    @type: reader"""
     def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid'):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -319,7 +321,8 @@ class ubcTensorMeshReader(ubcMeshReaderBase):
 ################################################################################
 
 class ubcTensorMeshAppender(ubcModelAppenderBase):
-    """@desc: This filter reads a timeseries of models and appends it to an input `vtkRectilinearGrid`"""
+    """@desc: This filter reads a timeseries of models and appends it to an input `vtkRectilinearGrid`
+    @type: filter"""
     def __init__(self):
         ubcModelAppenderBase.__init__(self,
             inputType='vtkRectilinearGrid',

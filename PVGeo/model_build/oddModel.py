@@ -12,7 +12,9 @@ from ..base import PVGeoAlgorithmBase
 #from .. import _helpers
 
 class CreateTensorMesh(PVGeoAlgorithmBase):
-    """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed."""
+    """@desc: This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.
+    
+    @type: source"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self, nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')

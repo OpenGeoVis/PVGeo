@@ -24,7 +24,8 @@ def _makeSpatialCellData(nx, ny, nz):
 
 
 class CreateUniformGrid(PVGeoAlgorithmBase):
-    """@desc: Create uniform grid (`vtkImageData`)"""
+    """@desc: Create uniform grid (`vtkImageData`)
+    @type: source"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -94,7 +95,8 @@ class CreateUniformGrid(PVGeoAlgorithmBase):
 
 
 class CreateEvenRectilinearGrid(PVGeoAlgorithmBase):
-    """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed."""
+    """@desc: This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.
+    @type: source"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,

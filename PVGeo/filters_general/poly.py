@@ -31,6 +31,7 @@ class ArrayMath(FilterPreserveTypeBase):
     - `divide`: Divide input array 1 by input array 2 (arr1/arr2)
     - `correlate`: Use `np.correlate(arr1, arr2, mode='same')`
 
+    @type: filter
     """
     def __init__(self):
         FilterPreserveTypeBase.__init__(self)
@@ -214,6 +215,8 @@ class NormalizeArray(FilterPreserveTypeBase):
     - `log10`: Natural Log
     - `natural_log`: Log Base 10
     - `just_multiply`: Only Multiply by Multiplier
+
+    @type: filter
     """
     def __init__(self):
         FilterPreserveTypeBase.__init__(self)
@@ -401,6 +404,7 @@ class AddCellConnToPoints(PVGeoAlgorithmBase):
     - 4: Poly Line
     - 3: Line
 
+    @type: filter
     """
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
@@ -516,7 +520,9 @@ class AddCellConnToPoints(PVGeoAlgorithmBase):
 
 
 class PointsToTube(AddCellConnToPoints):
-    """@desc: Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides."""
+    """@desc: Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.
+
+    @type: filter"""
     def __init__(self):
         AddCellConnToPoints.__init__(self)
         # Additional Parameters

@@ -13,7 +13,8 @@ import numpy as np
 ###############################################################################
 
 class PVGeoAlgorithmBase(VTKPythonAlgorithmBase):
-    """@desc: This is a base class to add convienace methods to the `VTKPythonAlgorithmBase` for all algorithms implemented in `PVGeo`"""
+    """@desc: This is a base class to add convienace methods to the `VTKPythonAlgorithmBase` for all algorithms implemented in `PVGeo`
+    @type: base"""
     def __init__(self,
                 nInputPorts=1, inputType='vtkDataSet',
                 nOutputPorts=1, outputType='vtkTable'):
@@ -43,6 +44,8 @@ class PVGeoAlgorithmBase(VTKPythonAlgorithmBase):
 
 # Base Reader
 class PVGeoReaderBase(PVGeoAlgorithmBase):
+    """@desc: a base class for inherrited functionality common to all reader algorithms
+    @type: base"""
     def __init__(self, nOutputPorts=1, outputType='vtkTable'):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -135,6 +138,7 @@ class PVGeoReaderBase(PVGeoAlgorithmBase):
 
 # Base filter to preserve input data type
 class FilterPreserveTypeBase(PVGeoAlgorithmBase):
+    """@type: base"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkDataObject',

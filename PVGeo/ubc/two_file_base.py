@@ -13,7 +13,9 @@ import vtk
 
 # Two File Reader Base
 class TwoFileReaderBase(PVGeoAlgorithmBase):
-    """@desc: A base clase for readers that need to handle two input files. One meta-data file and a series of data files."""
+    """@desc: A base clase for readers that need to handle two input files. One meta-data file and a series of data files.
+
+    @type: base"""
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -122,7 +124,8 @@ class TwoFileReaderBase(PVGeoAlgorithmBase):
 
 # UBC Mesh Reader Base
 class ubcMeshReaderBase(TwoFileReaderBase):
-    """@desc: A base class for the UBC mesh readers"""
+    """@desc: A base class for the UBC mesh readers
+    @type: base"""
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         TwoFileReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -243,6 +246,7 @@ class ubcMeshReaderBase(TwoFileReaderBase):
 
 # UBC Model Appender Base
 class ubcModelAppenderBase(PVGeoAlgorithmBase):
+    """@type: base"""
     def __init__(self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid'):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType=inputType,

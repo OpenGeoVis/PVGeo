@@ -14,7 +14,8 @@ from .. import _helpers
 
 
 class ReverseImageDataAxii(PVGeoAlgorithmBase):
-    """@desc: This filter will flip `vtkImageData` on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data."""
+    """@desc: This filter will flip `vtkImageData` on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data.
+    @type: filter"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',

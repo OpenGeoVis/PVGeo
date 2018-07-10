@@ -17,7 +17,8 @@ from .. import _helpers
 
 
 class CombineTables(PVGeoAlgorithmBase):
-    """@desc: Takes two tables and combines them if they have the same number of rows."""
+    """@desc: Takes two tables and combines them if they have the same number of rows.
+    @type: filter"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=2, inputType='vtkTable',
@@ -54,7 +55,8 @@ class CombineTables(PVGeoAlgorithmBase):
 #---- Reshape Table ----#
 
 class ReshapeTable(PVGeoAlgorithmBase):
-    """@desc: This filter will take a `vtkTable` object and reshape it. This filter essentially treats `vtkTables` as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name."""
+    """@desc: This filter will take a `vtkTable` object and reshape it. This filter essentially treats `vtkTables` as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.
+    @type: filter"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',

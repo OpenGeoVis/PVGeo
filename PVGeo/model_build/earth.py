@@ -9,7 +9,8 @@ from .. import _helpers
 
 
 class EarthSource(PVGeoAlgorithmBase):
-    """@desc: a simple data source to produce a `vtkEarthSource`"""
+    """@desc: a simple data source to produce a `vtkEarthSource`
+    @type: source"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=0,

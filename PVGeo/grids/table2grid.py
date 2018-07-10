@@ -19,6 +19,8 @@ class TableToGrid(PVGeoAlgorithmBase):
 
     @notes:
     **Work in progress**
+
+    @type: filter
     """
     def __init__(self, extent=[10, 10, 10]):
         PVGeoAlgorithmBase.__init__(self,

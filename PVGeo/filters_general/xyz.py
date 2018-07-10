@@ -103,7 +103,8 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
 
 
 class RotationTool(PVGeoAlgorithmBase):
-    """@desc: a class that holds a set of methods/tools for performing and estimating coordinate rotations"""
+    """@desc: a class that holds a set of methods/tools for performing and estimating coordinate rotations
+    @type: helper"""
     def __init__(self, decimals=6):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -253,7 +254,8 @@ class RotationTool(PVGeoAlgorithmBase):
 #---- Coordinate Rotations ----#
 
 class RotateCoordinates(PVGeoAlgorithmBase):
-    """@desc: Rotates XYZ coordinates in `vtkPolyData` around an origin at a given angle on the XY plane"""
+    """@desc: Rotates XYZ coordinates in `vtkPolyData` around an origin at a given angle on the XY plane.
+    @type: filter"""
     def __init__(self, angle=45.0, origin=[0.0, 0.0]):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -306,7 +308,8 @@ class RotateCoordinates(PVGeoAlgorithmBase):
 ###############################################################################
 
 class ExtractPoints(PVGeoAlgorithmBase):
-    """@desc: Extracts XYZ coordinates and point/cell data from an input `vtkDataSet`"""
+    """@desc: Extracts XYZ coordinates and point/cell data from an input `vtkDataSet`.
+    @type: filter"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkDataSet',

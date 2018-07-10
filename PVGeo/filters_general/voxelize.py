@@ -18,7 +18,8 @@ from .xyz import RotationTool
 
 class VoxelizePoints(PVGeoAlgorithmBase):
     """@desc: This makes a `vtkUnstructuredGrid` of scattered points given voxel sizes as input arrays.
-    This assumes that the data is at least 2-Dimensional on the XY Plane."""
+    This assumes that the data is at least 2-Dimensional on the XY Plane.
+    @type: filter"""
     def __init__(self):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
