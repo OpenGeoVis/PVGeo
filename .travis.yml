@@ -16,7 +16,7 @@ notifications:
         on_success: change
         on_failure: change
         rooms:
-            - pvgeo:m3aUlu4IVCCVrPnbTuX1C3J5#developers
+            - pvgeo:m3aUlu4IVCCVrPnbTuX1C3J5#robots
     email:
         recipients:
             - info@pvgeo.org
