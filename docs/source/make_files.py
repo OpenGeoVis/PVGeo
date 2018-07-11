@@ -12,6 +12,15 @@ import PVGeo
 
 ##########
 
+moddoccer = r'''
+
+%s
+%s
+
+.. automodule:: %s
+
+'''
+
 classdoccer = r'''
 
 %s
@@ -56,13 +65,13 @@ for mod in mods:
     index += '\n   suites/%s' % fname
 
     with open('./suites/%s' % fname, 'w') as fid:
-        fid.write('%s\n%s' % (name, '='*len(name))) # Page header is mosule name
+        fid.write(moddoccer % (name, '='*len(name), mod[1].__name__)) # Page header is module name
         for f in feats:
             if inspect.isclass(f[1]):
-                #print('\t' + f[1].__name__)
                 fid.write(classdoccer % (f[1].__name__, '-'*len(f[1].__name__), 'class', '%s.%s' % (mod[1].__name__, f[1].__name__) ))
             elif inspect.isfunction(f[1]):
                  fid.write(defdoccer % (f[1].__name__, '-'*len(f[1].__name__), 'function', '%s.%s' % (mod[1].__name__, f[1].__name__) ))
+            # TODO: now check for stats report
 
 
         fid.close()
