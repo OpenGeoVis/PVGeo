@@ -5,7 +5,3 @@
 
 Welcome to PVGeo's code docs!
 =================================
-
-.. toctree::
-   :maxdepth: 3
-   :caption: Contents:

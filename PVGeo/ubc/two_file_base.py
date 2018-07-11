@@ -16,6 +16,8 @@ class TwoFileReaderBase(AlgorithmBase):
     """A base clase for readers that need to handle two input files.
     One meta-data file and a series of data files.
     """
+    __displayname__ = 'Two File Reader Base'
+    __type__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -154,6 +156,8 @@ class TwoFileReaderBase(AlgorithmBase):
 class ubcMeshReaderBase(TwoFileReaderBase):
     """A base class for the UBC mesh readers
     """
+    __displayname__ = 'UBC Mesh Reader Base'
+    __type__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         TwoFileReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -271,6 +275,10 @@ class ubcMeshReaderBase(TwoFileReaderBase):
 
 # UBC Model Appender Base
 class ModelAppenderBase(AlgorithmBase):
+    """A base class for create mesh-model appenders on the UBC Mesh formats
+    """
+    __displayname__ = 'Model Appender Base'
+    __type__ = 'base'
     def __init__(self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid'):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType=inputType,

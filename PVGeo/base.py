@@ -19,6 +19,9 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     """This is a base class to add convienace methods to the
     ``VTKPythonAlgorithmBase`` for all algorithms implemented in ``PVGeo``.
     """
+    __displayname__ = 'Algorithm Base'
+    __type__ = 'base'
+
     def __init__(self,
                 nInputPorts=1, inputType='vtkDataSet',
                 nOutputPorts=1, outputType='vtkTable'):
@@ -52,6 +55,10 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
 
 # Base Reader
 class ReaderBase(AlgorithmBase):
+    """A base class for inherrited functionality common to all reader algorithms
+    """
+    __displayname__ = 'Reader Base'
+    __type__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkTable'):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -162,8 +169,10 @@ class ReaderBase(AlgorithmBase):
 # Base filter to preserve input data type
 class FilterPreserveTypeBase(AlgorithmBase):
     """A Base class for implementing filters that preserve the data type of
-    their input.
+    their arbitray input.
     """
+    __displayname__ = 'Filter Preserve Type Base'
+    __type__ = 'base'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkDataObject',

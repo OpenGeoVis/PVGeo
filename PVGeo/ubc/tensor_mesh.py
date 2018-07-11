@@ -26,6 +26,8 @@ class TensorMeshReader(ubcMeshReaderBase):
     Note:
         Model File is optional. Reader will still construct ``vtkRectilinearGrid`` safely.
     """
+    __displayname__ = 'UBC Tensor Mesh Reader'
+    __type__ = 'reader'
     def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid'):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -330,6 +332,8 @@ class TensorMeshAppender(ModelAppenderBase):
     """This filter reads a timeseries of models and appends it to an input
     ``vtkRectilinearGrid``
     """
+    __displayname__ = 'UBC Tensor Mesh Reader'
+    __type__ = 'filter'
     def __init__(self):
         ModelAppenderBase.__init__(self,
             inputType='vtkRectilinearGrid',

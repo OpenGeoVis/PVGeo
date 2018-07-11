@@ -22,6 +22,8 @@ def PointsToPolyData(points):
     Return:
         vtkPolyData : points with point-vertex cells
     """
+    __displayname__ = 'Points to PolyData'
+    __type__ = 'filter'
     if points.ndim != 2:
         points = points.reshape((-1, 3))
 
@@ -109,6 +111,8 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
 class RotationTool(AlgorithmBase):
     """A class that holds a set of methods/tools for performing and estimating coordinate rotations.
     """
+    __displayname__ = 'Rotation Tool'
+    __type__ = 'filter'
     def __init__(self, decimals=6):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -266,6 +270,8 @@ class RotationTool(AlgorithmBase):
 class RotatePoints(AlgorithmBase):
     """Rotates XYZ coordinates in `vtkPolyData` around an origin at a given angle on the XY plane.
     """
+    __displayname__ = 'Rotate Points'
+    __type__ = 'filter'
     def __init__(self, angle=45.0, origin=[0.0, 0.0]):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -325,6 +331,8 @@ class RotatePoints(AlgorithmBase):
 class ExtractPoints(AlgorithmBase):
     """Extracts XYZ coordinates and point/cell data from an input ``vtkDataSet``
     """
+    __displayname__ = 'Extract Points'
+    __type__ = 'filter'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkDataSet',

@@ -15,6 +15,8 @@ from .. import _helpers
 class TranslateGridOrigin(AlgorithmBase):
     """This filter will translate the origin of `vtkImageData` to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior).
     """
+    __displayname__ = 'Translate Grid Origin'
+    __type__ = 'filter'
     def __init__(self, corner=1):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',

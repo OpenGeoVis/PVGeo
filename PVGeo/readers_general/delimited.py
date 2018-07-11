@@ -13,6 +13,8 @@ from .. import _helpers
 class DelimitedTextReader(ReaderBase):
     """This reader will take in any delimited text file and make a ``vtkTable`` from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
     """
+    __displayname__ = 'Delimited Text Reader'
+    __type__ = 'reader'
     def __init__(self, nOutputPorts=1, outputType='vtkTable'):
         ReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -177,6 +179,8 @@ class DelimitedTextReader(ReaderBase):
 class XYZTextReader(DelimitedTextReader):
     """A makeshift reader for XYZ files where titles have comma delimiter and data has space delimiter.
     """
+    __displayname__ = 'XYZ Text Reader'
+    __type__ = 'reader'
     def __init__(self):
         DelimitedTextReader.__init__(self)
 

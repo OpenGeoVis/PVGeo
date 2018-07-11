@@ -26,6 +26,8 @@ def _makeSpatialCellData(nx, ny, nz):
 class CreateUniformGrid(AlgorithmBase):
     """Create uniform grid (``vtkImageData``)
     """
+    __displayname__ = 'Create Uniform Grid'
+    __type__ = 'source'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -100,6 +102,8 @@ class CreateUniformGrid(AlgorithmBase):
 class CreateEvenRectilinearGrid(AlgorithmBase):
     """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.
     """
+    __displayname__ = 'Create Even Rectilinear Grid'
+    __type__ = 'source'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=0,

@@ -19,6 +19,8 @@ from .. import _helpers
 class CombineTables(AlgorithmBase):
     """Takes two tables and combines them if they have the same number of rows.
     """
+    __displayname__ = 'Combine Tables'
+    __type__ = 'filter'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=2, inputType='vtkTable',
@@ -61,6 +63,8 @@ class CombineTables(AlgorithmBase):
 class ReshapeTable(AlgorithmBase):
     """This filter will take a ``vtkTable`` object and reshape it. This filter essentially treats ``vtkTable``s as 2D matrices and reshapes them using ``numpy.reshape`` in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.
     """
+    __displayname__ = 'Reshape Table'
+    __type__ = 'filter'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',

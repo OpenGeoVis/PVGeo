@@ -30,8 +30,9 @@ class ArrayMath(FilterPreserveTypeBase):
     - `multiply`: Multiplies the two data arrays together
     - `divide`: Divide input array 1 by input array 2 (arr1/arr2)
     - `correlate`: Use `np.correlate(arr1, arr2, mode='same')`
-
     """
+    __displayname__ = 'Array Math'
+    __type__ = 'filter'
     def __init__(self):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -230,6 +231,8 @@ class NormalizeArray(FilterPreserveTypeBase):
     - `natural_log`: Log Base 10
     - `just_multiply`: Only Multiply by Multiplier
     """
+    __displayname__ = 'Normalize Array'
+    __type__ = 'filter'
     def __init__(self):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -435,8 +438,9 @@ class AddCellConnToPoints(AlgorithmBase):
 
     - 4: Poly Line
     - 3: Line
-
     """
+    __displayname__ = 'Add Cell Connectivity to Points'
+    __type__ = 'filter'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -559,6 +563,8 @@ class AddCellConnToPoints(AlgorithmBase):
 class PointsToTube(AddCellConnToPoints):
     """Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.
     """
+    __displayname__ = 'Points to Tube'
+    __type__ = 'filter'
     def __init__(self):
         AddCellConnToPoints.__init__(self)
         # Additional Parameters
