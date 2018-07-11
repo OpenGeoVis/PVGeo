@@ -9,3 +9,6 @@ coverage.xml
 build/
 dist/
 PVGeo.egg-info/
+docs/build/
+docs/source/suites
+docs/source/index.rst
