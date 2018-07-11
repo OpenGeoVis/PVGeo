@@ -1,3 +1,7 @@
+"""PVGeo: an open-source python package for geoscientific visualization in VTK
+and ParaView.
+"""
+
 import setuptools
 
 __version__ = '1.1.1'
@@ -26,5 +30,10 @@ setuptools.setup(
         "Programming Language :: Python",
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
+        'Topic :: Scientific/Engineering',
+        'Topic :: Scientific/Engineering :: Visualization',
+        'Topic :: Scientific/Engineering :: GIS',
+        'Intended Audience :: Science/Research',
+        'Natural Language :: English',
     ),
 )
