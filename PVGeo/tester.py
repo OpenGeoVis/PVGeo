@@ -7,11 +7,6 @@ import unittest
 import fnmatch
 import os
 
-try:
-    from colour_runner.runner import ColourTextTestRunner as TextTestRunner
-except ImportError:
-    from unittest import TextTestRunner
-
 
 def test(close=False):
     """This is a convienance method to run all of the tests in ``PVGeo`` while
@@ -27,6 +22,10 @@ def test(close=False):
         >>> PVGeo.test()
 
     """
+    try:
+        from colour_runner.runner import ColourTextTestRunner as TextTestRunner
+    except ImportError:
+        from unittest import TextTestRunner
     test_file_strings = []
     for root, dirnames, filenames in os.walk(os.path.dirname(__file__)):
         for filename in fnmatch.filter(filenames, '__test__.py'):

@@ -87,7 +87,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         """This method reads a UBC 2D Mesh file and builds an empty ``vtkRectilinearGrid``
         for data to be inserted into. `Format Specs`_.
 
-        .. Format Specs: http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html/>
+        .. _Format Specs: http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html/>
 
         Args:
             FileName (str) : The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
