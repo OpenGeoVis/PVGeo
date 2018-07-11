@@ -26,7 +26,7 @@ def GetInstallationPaths():
 
 
 if __name__ == '__main__':
-    from .__tester__ import test
+    from .tester import test
     arg = sys.argv[1]
     if arg.lower() == 'test':
         test(True)

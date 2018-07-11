@@ -4,14 +4,15 @@ __all__ = [
 
 import vtk
 # Import Helpers:
-from ..base import PVGeoAlgorithmBase
+from ..base import AlgorithmBase
 from .. import _helpers
 
 
-class EarthSource(PVGeoAlgorithmBase):
-    """@desc: a simple data source to produce a `vtkEarthSource`"""
+class EarthSource(AlgorithmBase):
+    """A simple data source to produce a ``vtkEarthSource``
+    """
     def __init__(self):
-        PVGeoAlgorithmBase.__init__(self,
+        AlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkPolyData')
         self.__radius = 6371.0

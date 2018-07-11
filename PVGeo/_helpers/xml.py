@@ -3,7 +3,8 @@
 
 
 def getPythonPathProperty():
-    """@desc: a helper to get the XML content for setting the Python path when making a ParaView plugin."""
+    """Get the XML content for setting the Python path when making a ParaView plugin.
+    """
     return '''
       <StringVectorProperty
         command="SetPythonPath"
@@ -16,7 +17,8 @@ def getPythonPathProperty():
 
 
 def getReaderTimeStepValues(extensions, readerDescription):
-    """@desc: a helper to get the XML content for reader time step values the Python path when making a ParaView plugin."""
+    """Get the XML content for reader time step values the Python path when making a ParaView plugin.
+    """
     return '''<DoubleVectorProperty
       name="TimestepValues"
       repeatable="1"
@@ -35,7 +37,8 @@ def getReaderTimeStepValues(extensions, readerDescription):
 
 
 def getVTKTypeMap():
-    """@desc: a helper to get the the VTK Type Map as specified in vtkType.h"""
+    """Get the the VTK Type Map as specified in ``vtkType.h``
+    """
     return {
         '': 8, # same as input
         'vtkPolyData': 0,
@@ -64,7 +67,8 @@ def getVTKTypeMap():
 
 
 def getPropertyXml(name, command, default_values, visibility='default', help=''):
-    """@desc: a helper to get the XML content for a property of a parameter for a python data object when making a ParaView plugin."""
+    """Get the XML content for a property of a parameter for a python data object when making a ParaView plugin.
+    """
     # A helper to build XML for any data type/method
     value = default_values
 
@@ -109,11 +113,15 @@ def getPropertyXml(name, command, default_values, visibility='default', help='')
 
 
 def getFileReaderXml(extensions, readerDescription='', command="AddFileName"):
-    """@desc: Gets the XML for a selectectable file for a reader when building a ParaView plugin
+    """Get the XML for a selectectable file for a reader when building a ParaView plugin
 
-    @notes:
-    Thanks: Daan van Vugt <daanvanvugt@gmail.com> https://github.com/Exteris/paraview-python-file-reader
-    Modified by Bane Sullivan: <info@pvgeo.org>
+    Note:
+        * Thanks: `Daan van Vugt`_ and for `his work here`_
+        * Modified by `Bane Sullivan`_
+
+    .. _Daan van Vugt: daanvanvugt@gmail.com
+    .. _his work here: https://github.com/Exteris/paraview-python-file-reader
+    .. _Bane Sullivan: info@pvgeo.org
     """
     return '''
       <StringVectorProperty
@@ -137,7 +145,8 @@ def getFileReaderXml(extensions, readerDescription='', command="AddFileName"):
 
 
 def getDropDownXml(name, command, labels, help='', values=None):
-    """@desc: a helper to get the XML content for a drop down menu when making a ParaView plugin."""
+    """Get the XML content for a drop down menu when making a ParaView plugin.
+    """
 
     def _enum(labels, values=None):
         if values is None:
@@ -174,7 +183,8 @@ def getDropDownXml(name, command, labels, help='', values=None):
 
 
 def _helpArraysXml(idx, inputName=None, label=None):
-    """@desc: internal helper"""
+    """Internal helper
+    """
     if inputName is None:
         inputName = 'Input'
     if label is None:
@@ -212,7 +222,8 @@ def _helpArraysXml(idx, inputName=None, label=None):
 
 
 def getInputArrayXml(labels=None, nInputPorts=1, numArrays=1, inputNames='Input'):
-    """@desc: a helper to get the XML content for an array selection drop down menu when making a ParaView plugin."""
+    """Get the XML content for an array selection drop down menu when making a ParaView plugin.
+    """
     def getLabels(labels):
         if labels is None and nInputPorts > 1:
             labels = [None]*nInputPorts

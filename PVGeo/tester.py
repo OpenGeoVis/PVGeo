@@ -1,7 +1,7 @@
 __all__ = [
     'test',
 ]
-__name__ = 'Test Runner'
+__displayname__ = 'Test Runner'
 
 import unittest
 import fnmatch
@@ -14,21 +14,18 @@ except ImportError:
 
 
 def test(close=False):
-    """
-    @desc: This is a convienance method to run all of the tests in `PVGeo`.
+    """This is a convienance method to run all of the tests in ``PVGeo`` while
+    in an active python environment.
 
-    @notes:
-    This can be executed from either the command line of within a standard Python environment.
+    Note:
+        This can be executed from either the command line of within a standard Python environment.
 
-    @example:
-    ```bash
-    $ python -m PVGeo test
-    ```
+    Example:
+        $ python -m PVGeo test
 
-    ```py
-    >>> import PVGeo
-    >>> PVGeo.test()
-    ```
+        >>> import PVGeo
+        >>> PVGeo.test()
+
     """
     test_file_strings = []
     for root, dirnames, filenames in os.walk(os.path.dirname(__file__)):

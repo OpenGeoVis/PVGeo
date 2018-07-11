@@ -1,9 +1,15 @@
 __all__ = [
     'checkNumpy',
 ]
-__name__ = 'Version Verifier'
+__displayname__ = 'Version Verifier'
 
 def checkNumpy(warn=True):
+    """A method to check the active environments version of NumPy for
+    compatibility with PVGeo.
+
+    Args:
+        war (bool): raise a RuntimeWarning if NumPy is not at satisfactory version.
+    """
     import numpy as np
     v = np.array(np.__version__.split('.')[0:2], dtype=int)
     if v[0] >= 1 and v[1] >= 10:

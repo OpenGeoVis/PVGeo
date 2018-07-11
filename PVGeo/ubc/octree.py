@@ -9,15 +9,16 @@ from vtk.util import numpy_support as nps
 import vtk
 import os
 
-from ..base import PVGeoAlgorithmBase
+from ..base import AlgorithmBase
 from .two_file_base import ubcMeshReaderBase, ModelAppenderBase
 from .. import _helpers
 
 
 
 class OcTreeReader(ubcMeshReaderBase):
-    """@desc: This class reads a UBC OcTree Mesh file and builds a `vtkUnstructuredGrid` of the data in the file.
-    Model File is optional. Reader will still construct `vtkUnstructuredGrid` safely."""
+    """This class reads a UBC OcTree Mesh file and builds a ``vtkUnstructuredGrid`` of the data in the file.
+    Model File is optional. Reader will still construct ``vtkUnstructuredGrid`` safely.
+    """
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -28,17 +29,14 @@ class OcTreeReader(ubcMeshReaderBase):
 
     @staticmethod
     def ubcOcTreeMesh(FileName, pdo=None):
-        """
-        @desc:
-        This method reads a UBC OcTree Mesh file and builds a vtkUnstructuredGrid of the data in the file. This method generates the vtkUnstructuredGrid without any data attributes.
+        """This method reads a UBC OcTree Mesh file and builds a ``vtkUnstructuredGrid`` of the data in the file. This method generates the ``vtkUnstructuredGrid`` without any data attributes.
 
-        @params:
-        FileName : str : The mesh filename as an absolute path for the input mesh file in UBC OcTree format.
-        pdo : vtk.vtkUnstructuredGrid : opt : A pointer to the output data object.
+        Args:
+            FileName (str): The mesh filename as an absolute path for the input mesh file in UBC OcTree format.
+            pdo (vtkUnstructuredGrid): A pointer to the output data object.
 
-        @returns:
-        vtkUnstructuredGrid : Returns a vtkUnstructuredGrid generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the `PlaceModelOnOcTreeMesh()` method to associate with model data.
-
+        Returns:
+            vtkUnstructuredGrid: Returns a ``vtkUnstructuredGrid`` generated from the UBCMesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the ``PlaceModelOnOcTreeMesh()`` method to associate with model data.
         """
         if pdo is None:
             pdo = vtk.vtkUnstructuredGrid() # vtkUnstructuredGrid
@@ -187,18 +185,15 @@ class OcTreeReader(ubcMeshReaderBase):
 
     @staticmethod
     def PlaceModelOnOcTreeMesh(mesh, model, dataNm='Data'):
-        """
-        @desc:
-        Places model data onto a mesh. This is for the UBC Grid data reaers to associate model data with the mesh grid.
+        """Places model data onto a mesh. This is for the UBC Grid data reaers to associate model data with the mesh grid.
 
-        @params:
-        mesh : vtkUnstructuredGrid : The vtkUnstructuredGrid that is the mesh to place the model data upon. Needs to have been read in by ubcOcTree
-        model : np.ndarray : A NumPy float array that holds all of the data to place inside of the mesh's cells.
-        dataNm : str : optional : The name of the model data array once placed on the vtkUnstructuredGrid.
+        Args:
+            mesh (vtkUnstructuredGrid): The ``vtkUnstructuredGrid`` that is the mesh to place the model data upon. Needs to have been read in by ubcOcTree
+            model (np.ndarray): A NumPy float array that holds all of the data to place inside of the mesh's cells.
+            dataNm (str): The name of the model data array once placed on the ``vtkUnstructuredGrid``.
 
-        @returns:
-        vtkUnstructuredGrid : Returns the input vtkUnstructuredGrid with model data appended.
-
+        Returns:
+            vtkUnstructuredGrid: Returns the input ``vtkUnstructuredGrid`` with model data appended.
         """
         if type(model) is dict:
             for key in model.keys():
@@ -228,17 +223,15 @@ class OcTreeReader(ubcMeshReaderBase):
 
 
     def __ubcOcTree(self, FileName_Mesh, FileName_Models, output):
-        """
-        @desc:
-        Wrapper to Read UBC GIF OcTree mesh and model file pairs. UBC OcTree models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. This only handles OcTree formats
+        """Wrapper to Read UBC GIF OcTree mesh and model file pairs. UBC OcTree models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. This only handles OcTree formats
 
-        @params:
-        FileName_Mesh : str : The OcTree Mesh filename as an absolute path for the input mesh file in UBC OcTree Mesh Format
-        FileName_Models : list of str : The model filenames as absolute paths for the input model timesteps in UBC OcTree Model Format.
-        output : vtk.vtkUnstructuredGrid : optional : The output data object
+        Args:
+            FileName_Mesh (str): The OcTree Mesh filename as an absolute path for the input mesh file in UBC OcTree Mesh Format
+        FileName_Models (list(str)): The model filenames as absolute paths for the input model timesteps in UBC OcTree Model Format.
+            output (vtkUnstructuredGrid): The output data object
 
-        @returns:
-        vtkUnstructuredGrid : Returns a `vtkUnstructuredGrid` generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
+        Returns:
+            vtkUnstructuredGrid: Returns a ``vtkUnstructuredGrid`` generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
         """
         if self.NeedToReadMesh():
             # Construct/read the mesh
@@ -273,6 +266,9 @@ class OcTreeReader(ubcMeshReaderBase):
 
 
     def RequestInformation(self, request, inInfo, outInfo):
+        """Pipeline method for handling requests about the grid extents and time
+        step values
+        """
         # Call parent to handle time stuff
         ubcMeshReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
@@ -284,12 +280,14 @@ class OcTreeReader(ubcMeshReaderBase):
         return 1
 
     def ClearMesh(self):
-        """@desc: use to clean/rebuild the mesh"""
+        """Use to clean/rebuild the mesh.
+        """
         self.__mesh = vtk.vtkUnstructuredGrid()
         ubcMeshReaderBase.ClearModels(self)
 
     def ClearModels(self):
-        """@desc: use to clean the models and reread"""
+        """Use to clean the models and reread the data
+        """
         self.__models = []
         ubcMeshReaderBase.ClearModels(self)
 
@@ -300,7 +298,9 @@ class OcTreeReader(ubcMeshReaderBase):
 ################################################################################
 
 class OcTreeAppender(ModelAppenderBase):
-    """@desc: This filter reads a timeseries of models and appends it to an input `vtkUnstructuredGrid`"""
+    """This filter reads a timeseries of models and appends it to an input
+    ``vtkUnstructuredGrid``
+    """
     def __init__(self):
         ModelAppenderBase.__init__(self,
             inputType='vtkUnstructuredGrid',

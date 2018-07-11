@@ -5,4 +5,4 @@ from .xml import *
 from .errors import *
 
 
-__name__ = 'Internal Helpers'
+__displayname__ = 'Internal Helpers'

@@ -6,16 +6,17 @@ import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
 # Import Helpers:
-from ..base import PVGeoAlgorithmBase
+from ..base import AlgorithmBase
 from .. import _helpers
 
 
 #---- Translate Grid Origin ----#
 
-class TranslateGridOrigin(PVGeoAlgorithmBase):
-    """@desc: This filter will translate the origin of `vtkImageData` to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior)."""
+class TranslateGridOrigin(AlgorithmBase):
+    """This filter will translate the origin of `vtkImageData` to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior).
+    """
     def __init__(self, corner=1):
-        PVGeoAlgorithmBase.__init__(self,
+        AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
             nOutputPorts=1, outputType='vtkImageData')
         self.__corner = corner
@@ -74,6 +75,8 @@ class TranslateGridOrigin(PVGeoAlgorithmBase):
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output.
+        """
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -86,18 +89,19 @@ class TranslateGridOrigin(PVGeoAlgorithmBase):
 
 
     def SetCorner(self, corner):
-        """@desc: Set the corner to use
-        @param:
-        corner : int : corner location
+        """Set the corner to use
 
-        @notes:
-        - 1: South East Bottom
-        - 2: North West Bottom
-        - 3: North East Bottom
-        - 4: South West Top
-        - 5: South East Top
-        - 6: North West Top
-        - 7: North East Top
+        Args:
+            corner (int) : corner location; see note.
+
+        Note:
+            * 1: South East Bottom
+            * 2: North West Bottom
+            * 3: North East Bottom
+            * 4: South West Top
+            * 5: South East Top
+            * 6: North West Top
+            * 7: North East Top
         """
         if self.__corner != corner:
             self.__corner = corner

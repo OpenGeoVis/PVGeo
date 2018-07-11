@@ -8,7 +8,7 @@ from vtk.util import keys
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
-from ..base import PVGeoAlgorithmBase
+from ..base import AlgorithmBase
 from .. import _helpers
 from ..version import checkNumpy
 from .xyz import RotationTool
@@ -16,11 +16,12 @@ from .xyz import RotationTool
 ###############################################################################
 
 
-class VoxelizePoints(PVGeoAlgorithmBase):
-    """@desc: This makes a `vtkUnstructuredGrid` of scattered points given voxel sizes as input arrays.
-    This assumes that the data is at least 2-Dimensional on the XY Plane."""
+class VoxelizePoints(AlgorithmBase):
+    """This makes a ``vtkUnstructuredGrid`` of scattered points given voxel sizes as input arrays.
+    This assumes that the data is at least 2-Dimensional on the XY Plane.
+    """
     def __init__(self):
-        PVGeoAlgorithmBase.__init__(self,
+        AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkUnstructuredGrid')
         self.__dx = None
@@ -35,7 +36,8 @@ class VoxelizePoints(PVGeoAlgorithmBase):
 
 
     def AddFieldData(self, grid):
-        """@desc: an internal helper to add the recovered information as field data"""
+        """An internal helper to add the recovered information as field data
+        """
         # Add angle
         a = vtk.vtkDoubleArray()
         a.SetName('Recovered Angle (Deg.)')
@@ -52,7 +54,8 @@ class VoxelizePoints(PVGeoAlgorithmBase):
 
     @staticmethod
     def AddCellData(grid, arr, name):
-        """@desc: Add a NumPy array as cell data to the given grid input"""
+        """Add a NumPy array as cell data to the given grid input
+        """
         c = nps.numpy_to_vtk(num_array=arr, deep=True)
         c.SetName(name)
         grid.GetCellData().AddArray(c)
@@ -60,7 +63,7 @@ class VoxelizePoints(PVGeoAlgorithmBase):
 
 
     def EstimateUniformSpacing(self, x, y, z):
-        """@desc: This assumes that the input points make up some sort of uniformly spaced
+        """This assumes that the input points make up some sort of uniformly spaced
         grid on at least an XY Plane
         """
         # TODO: implement ability to rotate around Z axis (think PoroTomo vs UTM)
@@ -84,6 +87,8 @@ class VoxelizePoints(PVGeoAlgorithmBase):
 
 
     def PointsToGrid(self, xo,yo,zo, dx,dy,dz, grid=None):
+        """Convert XYZ points to a ``vtkUnstructuredGrid``.
+        """
         if not checkNumpy():
             raise _helpers.PVGeoError("`VoxelizePoints` cannot work with versions of NumPy below 1.10.x . You must update NumPy.")
             return None
@@ -170,12 +175,16 @@ class VoxelizePoints(PVGeoAlgorithmBase):
         return grid
 
     def _CopyArrays(self, pdi, pdo):
+        """internal helper to copy arrays from point data to cell data in the voxels.
+        """
         for i in range(pdi.GetPointData().GetNumberOfArrays()):
             arr = pdi.GetPointData().GetArray(i)
             _helpers.addArray(pdo, 1, arr) # adds to CELL data
         return pdo
 
     def RequestData(self, request, inInfoVec, outInfoVec):
+        """Used by pipeline to generate output
+        """
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfoVec, 0, 0)
         pdo = self.GetOutputData(outInfoVec, 0)
@@ -194,46 +203,55 @@ class VoxelizePoints(PVGeoAlgorithmBase):
 
 
     def SetSafeSize(self, safe):
-        """@desc: A voxel size to use if a spacing cannot be determined for an axis"""
+        """A voxel size to use if a spacing cannot be determined for an axis
+        """
         if self.__safe != safe:
             self.__safe = safe
             self.Modified()
 
     def SetDeltaX(self, dx):
-        """@desc: Set the X cells spacing
-        @params:
-        dx : float or array of floats : the spacing(s) for the cells in the X-direction"""
+        """Set the X cells spacing
+
+        Args:
+            dx (float or np.array(floats)): the spacing(s) for the cells in the X-direction
+        """
         self.__dx = dx
         self.Modified()
 
     def SetDeltaY(self, dy):
-        """@desc: Set the Y cells spacing
-        @params:
-        dy : float or array of floats : the spacing(s) for the cells in the Y-direction"""
+        """Set the Y cells spacing
+
+        Args:
+            dy (float or np.array(floats)): the spacing(s) for the cells in the Y-direction
+        """
         self.__dy = dy
         self.Modified()
 
     def SetDeltaZ(self, dz):
-        """@desc: Set the Z cells spacing
-        @params:
-        dz : float or array of floats : the spacing(s) for the cells in the Z-direction"""
+        """Set the Z cells spacing
+
+        Args:
+            dz (float or np.array(floats)): the spacing(s) for the cells in the Z-direction
+        """
         self.__dz = dz
         self.SetSafeSize(np.min(dz))
         self.Modified()
 
     def SetDeltas(self, dx, dy, dz):
-        """@desc: Set the cell spacings for each axial direction
-        @params:
-        dx : float or array of floats : the spacing(s) for the cells in the X-direction
-        dy : float or array of floats : the spacing(s) for the cells in the Y-direction
-        dz : float or array of floats : the spacing(s) for the cells in the Z-direction
+        """Set the cell spacings for each axial direction
+
+        Args:
+            dx (float or np.array(floats)): the spacing(s) for the cells in the X-direction
+            dy (float or np.array(floats)): the spacing(s) for the cells in the Y-direction
+            dz (float or np.array(floats)): the spacing(s) for the cells in the Z-direction
         """
         self.SetDeltaX(dx)
         self.SetDeltaY(dy)
         self.SetDeltaZ(dz)
 
     def SetEstimateGrid(self, flag):
-        """@desc: Set a flag on whether or not to estimate the grid spacing/rotation"""
+        """Set a flag on whether or not to estimate the grid spacing/rotation
+        """
         if self.__estimateGrid != flag:
             self.__estimateGrid = flag
             self.Modified()

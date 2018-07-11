@@ -7,7 +7,7 @@ import re
 
 
 class PVGeoError(Exception):
-    """@desc: This is a custom error class for handling errors when proccessing on the VTK pipeline. It makes the error messages easy to decipher in ParaView and cleans the messages when used in Python outside of ParaView. When on the VTK pipeline, errors aren't really raised but passed over and printed to the console. This class makes decipher the error streams a whole lot easier for human eyes.
+    """This is a custom error class for handling errors when proccessing on the VTK pipeline. It makes the error messages easy to decipher in ParaView and cleans the messages when used in Python outside of ParaView. When on the VTK pipeline, errors aren't really raised but passed over and printed to the console. This class makes decipher the error streams a whole lot easier for human eyes.
     """
     QUALIFIER_L = '@@@@PVGeoError ---> '
     QUALIFIER_R = ' <--- PVGeoError@@@@'
@@ -29,18 +29,17 @@ class PVGeoError(Exception):
 
 
 class ErrorObserver:
-    """@desc: A class for catching errors when processing on a VTK pipeline. The `PVGeoAlgorithmBase` class handles setting up this observer on initialization.
+    """A class for catching errors when processing on a VTK pipeline. The ``AlgorithmBase`` class handles setting up this observer on initialization.
 
-    Usage:
-    ```py
-    # Only use this observer on sub classes of the PVGeoAlgorithmBase:
-    f = PVGeoAlgorithmBase()
+    Example:
+        >>> import PVGeo
+        >>> # Only use this observer on sub classes of the AlgorithmBase:
+        >>> f = PVGeo.AlgorithmBase()
+        >>> f.Update()
+        >>> if f.ErrorOccurred():
+        >>>    print(f.ErrorMessage())
+        ERROR: ...
 
-    f.Update()
-    if f.ErrorOccurred():
-        print(f.ErrorMessage())
-
-    ```
     """
     def __init__(self):
         self.__ErrorOccurred = False
@@ -64,16 +63,25 @@ class ErrorObserver:
         self.__ErrorMessage = message
 
     def ErrorOccurred(self):
+        """Ask self if an error has occured
+        """
         occ = self.__ErrorOccurred
         self.__ErrorOccurred = False
         return occ
 
     def ErrorMessage(self, etc=False):
+        """Get the last set error message
+
+        Return:
+            str: the last set error message
+        """
         if etc:
             return self.__ErrorMessageEtc
         return self.__ErrorMessage
 
     def MakeObserver(self, algorithm):
+        """Make this an observer of an algorithm
+        """
         if self.__observing:
             raise RuntimeError('This error observer is already observing an algorithm.')
         algorithm.GetExecutive().AddObserver('ErrorEvent', self)

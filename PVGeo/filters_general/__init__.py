@@ -4,4 +4,4 @@ from .poly import *
 from .voxelize import *
 from .slicing import *
 
-__name__ = 'General Filters'
+__displayname__ = 'General Filters'

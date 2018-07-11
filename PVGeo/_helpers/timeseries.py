@@ -10,23 +10,22 @@ import numpy as np
 
 
 def _calculateTimeRange(nt, dt=1.0):
-    """
-    desc: Discretizes time range accoridng to step size `dt` in seconds
+    """Discretizes time range accoridng to step size ``dt`` in seconds
     """
     return np.arange(0,nt*dt,dt, dtype=float)
 
 
 
 def UpdateTimeSteps(algorithm, nt, dt):
-    """@desc: Handles setting up the timesteps on on the pipeline for a file series reader.
+    """Handles setting up the timesteps on on the pipeline for a file series reader.
 
-    @params:
-    algorithm : vtkDataObject : req : The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
-    nt : int or list : req : Number of timesteps (Pass a list to use length of that list)
-    dt : float : optional : The discrete value in seconds for the time step.
+    Args:
+        algorithm (vtkDataObject): The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
+        nt (int or list): Number of timesteps (Pass a list to use length of that list)
+        dt (float): The discrete value in seconds for the time step.
 
-    @return:
-    np.array : Returns the timesteps
+    Return:
+        numpy.array : Returns the timesteps as an array
     """
     if isinstance(nt, list):
         nt = len(nt)
@@ -43,21 +42,19 @@ def UpdateTimeSteps(algorithm, nt, dt):
     return timesteps
 
 def GetRequestedTime(algorithm, outInfoVec, idx=0):
-    """@desc: Handles setting up the timesteps on on the pipeline for a file series reader.
+    """Handles setting up the timesteps on on the pipeline for a file series reader.
 
-    @params:
-    algorithm : vtkDataObject : req : The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
-    outInfoVec : vtkInformationVector : The output information for the algorithm
-    idx : int : optional : the index for the output port
+    Args:
+        algorithm (vtkDataObject) : The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
+        outInfoVec (vtkInformationVector) : The output information for the algorithm
+        idx (int) : the index for the output port
 
-    @return:
-    int : the index of the requested time
+    Return:
+        int : the index of the requested time
 
-    @notes:
-    ```py
-    # Get requested time index
-    i = _helpers.GetRequestedTime(self, outInfoVec)
-    ```
+    Example:
+        >>> # Get requested time index
+        >>> i = _helpers.GetRequestedTime(self, outInfoVec)
     """
     executive = algorithm.GetExecutive()
     timesteps = algorithm.GetTimestepValues()
@@ -73,15 +70,15 @@ def GetRequestedTime(algorithm, outInfoVec, idx=0):
         return 0
 
 def GetInputTimeSteps(algorithm, port=0, idx=0):
-    """@desc: Get the timestep values for the algorithm's input
+    """Get the timestep values for the algorithm's input
 
-    @params:
-    algorithm : vtkDataObject : req : The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
-    port : int : optional : the input port
-    idx : int : optional : the connection index on the input port
+    Args:
+        algorithm (vtkDataObject) : The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
+        port (int)  : the input port
+        idx (int) : optional : the connection index on the input port
 
-    @return:
-    list : the time step values of the input
+    Return:
+        list : the time step values of the input
     """
     executive = algorithm.GetExecutive()
     ii = executive.GetInputInformation(port, idx)

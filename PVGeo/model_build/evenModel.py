@@ -8,12 +8,13 @@ from vtk.util import numpy_support as nps
 import numpy as np
 #from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
-from ..base import PVGeoAlgorithmBase
+from ..base import AlgorithmBase
 from .. import _helpers
 
 
 def _makeSpatialCellData(nx, ny, nz):
-    """Used for testing"""
+    """Used for testing
+    """
     arr = np.zeros((nz, ny, nx))
     for k in range(nz):
         for j in range(ny):
@@ -22,10 +23,11 @@ def _makeSpatialCellData(nx, ny, nz):
     return arr.flatten()
 
 
-class CreateUniformGrid(PVGeoAlgorithmBase):
-    """@desc: Create uniform grid (`vtkImageData`)"""
+class CreateUniformGrid(AlgorithmBase):
+    """Create uniform grid (``vtkImageData``)
+    """
     def __init__(self):
-        PVGeoAlgorithmBase.__init__(self,
+        AlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkImageData')
         self.__extent = [10, 10, 10]
@@ -71,19 +73,22 @@ class CreateUniformGrid(PVGeoAlgorithmBase):
 
 
     def SetExtent(self, nx, ny, nz):
-        """@desc: Set the extent of the output grid"""
+        """Set the extent of the output grid.
+        """
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
     def SetSpacing(self, dx, dy, dz):
-        """@desc: Set the spacing for the points along each axial direction"""
+        """Set the spacing for the points along each axial direction.
+        """
         if self.__spacing != [dx, dy, dz]:
             self.__spacing = [dx, dy, dz]
             self.Modified()
 
     def SetOrigin(self, x0, y0, z0):
-        """@desc: Set the origin of the output grid"""
+        """Set the origin of the output grid.
+        """
         if self.__origin != [x0, y0, z0]:
             self.__origin = [x0, y0, z0]
             self.Modified()
@@ -92,10 +97,11 @@ class CreateUniformGrid(PVGeoAlgorithmBase):
 
 
 
-class CreateEvenRectilinearGrid(PVGeoAlgorithmBase):
-    """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed."""
+class CreateEvenRectilinearGrid(AlgorithmBase):
+    """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.
+    """
     def __init__(self):
-        PVGeoAlgorithmBase.__init__(self,
+        AlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')
         self.__extent = [10, 10, 10]
@@ -145,25 +151,29 @@ class CreateEvenRectilinearGrid(PVGeoAlgorithmBase):
 
 
     def SetExtent(self, nx, ny, nz):
-        """@desc: Set the extent of the output grid"""
+        """Set the extent of the output grid.
+        """
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
     def SetXRange(self, start, stop):
-        """@desc: Set range (min, max) for the grid in the X-direction"""
+        """Set range (min, max) for the grid in the X-direction.
+        """
         if self.__xrange != [start, stop]:
             self.__xrange = [start, stop]
             self.Modified()
 
     def SetYRange(self, start, stop):
-        """@desc: Set range (min, max) for the grid in the Y-direction"""
+        """Set range (min, max) for the grid in the Y-direction
+        """
         if self.__yrange != [start, stop]:
             self.__yrange = [start, stop]
             self.Modified()
 
     def SetZRange(self, start, stop):
-        """@desc: Set range (min, max) for the grid in the Z-direction"""
+        """Set range (min, max) for the grid in the Z-direction
+        """
         if self.__zrange != [start, stop]:
             self.__zrange = [start, stop]
             self.Modified()

@@ -6,7 +6,7 @@ import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
 # Import Helpers:
-from ..base import PVGeoAlgorithmBase
+from ..base import AlgorithmBase
 from .. import _helpers
 
 
@@ -14,14 +14,14 @@ from .. import _helpers
 
 
 
-class TableToGrid(PVGeoAlgorithmBase):
-    """@desc: This filter takes a `vtkTable` object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a `n1` by `n2` by `n3` `vtkImageData` structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the `vtkTable` will represent a data attribute of the `vtkImageData` formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (`d1=z`, `d2=y`, `d3=x`). When using SEPlib, specify `n1` as the number of elements in the Z-direction, `n2` as the number of elements in the X-direction, and `n3` as the number of elements in the Y-direction (and so on for other parameters).
+class TableToGrid(AlgorithmBase):
+    """This filter takes a ``vtkTable`` object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a ``n1`` by ``n2`` by ``n3`` ``vtkImageData`` structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the ``vtkTable`` will represent a data attribute of the ``vtkImageData`` formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (``d1=z``, ``d2=y``, ``d3=x``). When using SEPlib, specify ``n1`` as the number of elements in the Z-direction, ``n2`` as the number of elements in the X-direction, and ``n3`` as the number of elements in the Y-direction (and so on for other parameters).
 
-    @notes:
-    **Work in progress**
+    Warning:
+        **Work in progress**
     """
     def __init__(self, extent=[10, 10, 10]):
-        PVGeoAlgorithmBase.__init__(self,
+        AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkImageData')
         self.__extent = extent # MUST BE GIVEN
@@ -34,7 +34,7 @@ class TableToGrid(PVGeoAlgorithmBase):
 
     @staticmethod
     def _unpack(arr, extent, order='C'):
-        """@desc: This is a helper method that handles the initial unpacking of a data array.
+        """This is a helper method that handles the initial unpacking of a data array.
         ParaView and VTK use Fortran packing so this is convert data saved in
         C packing to Fortran packing.
         """
@@ -51,7 +51,8 @@ class TableToGrid(PVGeoAlgorithmBase):
 
     @staticmethod
     def _rearangeSEPlib(arr, extent):
-        """@desc: This is a helper method to swap axes when using SEPlib axial conventions."""
+        """This is a helper method to swap axes when using SEPlib axial conventions.
+        """
         n1,n2,n3 = extent[0],extent[1],extent[2]
         arr = np.reshape(arr, (n3,n2,n1))
         arr = np.swapaxes(arr,0,2)
@@ -59,7 +60,8 @@ class TableToGrid(PVGeoAlgorithmBase):
 
     @staticmethod
     def _transposeXY(arr, extent, SEPlib=False):
-        """@desc: Transposes X and Y axes. Needed for PoroTomo project."""
+        """Transposes X and Y axes. Needed for PoroTomo project.
+        """
         n1,n2,n3 = extent[0],extent[1],extent[2]
         arr = np.reshape(arr, (n1,n2,n3))
         if SEPlib:
@@ -74,7 +76,8 @@ class TableToGrid(PVGeoAlgorithmBase):
 
     @staticmethod
     def _refold(arr, extent, SEPlib=True, order='F', swapXY=False):
-        """@desc: This is a helper method to handle grabbing a data array and make sure it is ready for VTK/Fortran ordering in `vtkImageData`."""
+        """This is a helper method to handle grabbing a data array and make sure it is ready for VTK/Fortran ordering in ``vtkImageData``.
+        """
         # Fold into 3D using extents. Packing dimensions should be in order extent
         arr, extent = TableToGrid._unpack(arr, extent, order=order)
         if SEPlib:
@@ -85,7 +88,8 @@ class TableToGrid(PVGeoAlgorithmBase):
 
     @staticmethod
     def RefoldIdx(SEPlib=True, swapXY=False):
-        """@desc: Theses are indexing corrections to set the spacings and origin witht the correct axes after refolding."""
+        """Theses are indexing corrections to set the spacings and origin witht the correct axes after refolding.
+        """
         if SEPlib:
             idx = (2,1,0)
             if swapXY:
@@ -97,8 +101,9 @@ class TableToGrid(PVGeoAlgorithmBase):
         return idx
 
     def _TableToGrid(self, pdi, ido):
-        """@desc: Converts a table of data arrays to vtkImageData given an extent to reshape that table.
-        Each column in the table will be treated as seperate data arrays for the described data space"""
+        """Converts a table of data arrays to vtkImageData given an extent to reshape that table.
+        Each column in the table will be treated as seperate data arrays for the described data space.
+        """
         cols = pdi.GetNumberOfColumns()
         rows = pdi.GetColumn(0).GetNumberOfTuples()
 
@@ -131,6 +136,7 @@ class TableToGrid(PVGeoAlgorithmBase):
         return ido
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         ido = self.GetOutputData(outInfo, 0)
@@ -140,6 +146,8 @@ class TableToGrid(PVGeoAlgorithmBase):
 
 
     def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to set whole output extent.
+        """
         # Setup the ImageData
         idx = TableToGrid.RefoldIdx(SEPlib=self.__SEPlib, swapXY=self.__swapXY)
         ext = [0, self.__extent[idx[0]]-1, 0,self.__extent[idx[1]]-1, 0,self.__extent[idx[2]]-1]
@@ -153,37 +161,41 @@ class TableToGrid(PVGeoAlgorithmBase):
 
 
     def SetExtent(self, nx, ny, nz):
-        """@desc: Set the extent of the output grid"""
+        """Set the extent of the output grid"""
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
     def SetSpacing(self, dx, dy, dz):
-        """@desc: Set the spacing for the points along each axial direction"""
+        """Set the spacing for the points along each axial direction
+        """
         if self.__spacing != [dx, dy, dz]:
             self.__spacing = [dx, dy, dz]
             self.Modified()
 
     def SetOrigin(self, x0, y0, z0):
-        """@desc: Set the origin of the output `vtkImageData`"""
+        """Set the origin of the output `vtkImageData`
+        """
         if self.__origin != [x0, y0, z0]:
             self.__origin = [x0, y0, z0]
             self.Modified()
 
     def SetSEPlib(self, flag):
-        """@desc: Set a flag to swap the axial order for the refold of the table"""
+        """Set a flag to swap the axial order for the refold of the table
+        """
         if self.__SEPlib != flag:
             self.__SEPlib = flag
             self.Modified()
 
     def SetOrder(self, order):
-        """@desc: Set the reshape order (`'C'` or `'F'`)"""
+        """Set the reshape order (`'C'` or `'F'`)"""
         if self.__order != order:
             self.__order = order
             self.Modified()
 
     def SetSwapXY(self, flag):
-        """@desc: Set a flag to swap the X and Y axii"""
+        """Set a flag to swap the X and Y axii
+        """
         if self.__swapXY != flag:
             self.__swapXY = flag
             self.Modified()

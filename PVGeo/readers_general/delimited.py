@@ -6,16 +6,15 @@ __all__ = [
 import numpy as np
 
 # Import Helpers:
-from ..base import PVGeoReaderBase
+from ..base import ReaderBase
 from .. import _helpers
 
 
-class DelimitedTextReader(PVGeoReaderBase):
-    """@desc: This reader will take in any delimited text file and make a `vtkTable` from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
-
+class DelimitedTextReader(ReaderBase):
+    """This reader will take in any delimited text file and make a ``vtkTable`` from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
     """
     def __init__(self, nOutputPorts=1, outputType='vtkTable'):
-        PVGeoReaderBase.__init__(self,
+        ReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
 
         # Parameters to control the file read:
@@ -30,7 +29,8 @@ class DelimitedTextReader(PVGeoReaderBase):
         self.__titles = []
 
     def _GetDeli(self):
-        """For itenral use"""
+        """For itenral use
+        """
         if self.__useTab:
             return '\t'
         return self.__delimiter
@@ -49,7 +49,8 @@ class DelimitedTextReader(PVGeoReaderBase):
         return contents
 
     def _ExtractHeader(self, content):
-        """Override this. Remove header from single file's content"""
+        """Override this. Removes header from single file's content.
+        """
         if len(np.shape(content)) > 2:
             raise _helpers.PVGeoError("`_ExtractHeader()` can only handle a sigle file's content")
         idx = 0
@@ -64,7 +65,8 @@ class DelimitedTextReader(PVGeoReaderBase):
         return titles, content[idx::]
 
     def __ExtractHeaders(self, contents):
-        """Should NOT be overriden"""
+        """Should NOT be overriden.
+        """
         ts = []
         for i in range(len(contents)):
             titles, newcontent = self._ExtractHeader(contents[i])
@@ -78,14 +80,16 @@ class DelimitedTextReader(PVGeoReaderBase):
 
 
     def __FileContentsToDataArray(self, contents):
-        """Should not need to be overriden"""
+        """Should NOT need to be overriden
+        """
         data = []
         for content in contents:
             data.append(np.genfromtxt((line.encode('utf8') for line in content), delimiter=self._GetDeli(), dtype=None))
         return data
 
     def _ReadUpFront(self):
-        """Should not need to be overridden"""
+        """Should not need to be overridden.
+        """
         # Perform Read
         contents = self._GetFileContents()
         self.__titles, contents = self.__ExtractHeaders(contents)
@@ -96,13 +100,16 @@ class DelimitedTextReader(PVGeoReaderBase):
     #### Methods for accessing the data read in #####
 
     def _GetRawData(self, idx=0):
-        """This will return the proper data for the given timestep"""
+        """This will return the proper data for the given timestep.
+        """
         return self.__data[idx]
 
 
     #### Algorithm Methods ####
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used b pipeline to get data for current timestep and populate the output data object.
+        """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
@@ -118,19 +125,25 @@ class DelimitedTextReader(PVGeoReaderBase):
 
 
     def SetDelimiter(self, deli):
-        """@desc: The input file's delimiter. To use a tab delimiter please use `SetUseTab()`"""
+        """The input file's delimiter. To use a tab delimiter please use ``SetUseTab()``
+
+        Args:
+            deli (str): a string delimiter/seperator
+        """
         if deli != self.__delimiter:
             self.__delimiter = deli
             self.Modified()
 
     def SetUseTab(self, flag):
-        """@desc: Set a boolean flag to override the `SetDelimiter()` and use a Tab delimiter."""
+        """Set a boolean flag to override the ``SetDelimiter()`` and use a Tab delimiter.
+        """
         if flag != self.__useTab:
             self.__useTab = flag
             self.Modified()
 
     def SetSkipRows(self, skip):
-        """@desc: The integer number of rows to skip at the top of the file"""
+        """The integer number of rows to skip at the top of the file.
+        """
         if skip != self.__skipRows:
             self.__skipRows = skip
             self.Modified()
@@ -139,13 +152,15 @@ class DelimitedTextReader(PVGeoReaderBase):
         return self.__skipRows
 
     def SetComments(self, identifier):
-        """@desc: The character identifier for comments within the file."""
+        """The character identifier for comments within the file.
+        """
         if identifier != self.__comments:
             self.__comments = identifier
             self.Modified()
 
     def SetHasTitles(self, flag):
-        """@ddesc: A boolean for if the delimited file has header titles for the data arrays."""
+        """A boolean for if the delimited file has header titles for the data arrays.
+        """
         if self.__hasTitles != flag:
             self.__hasTitles = flag
             self.Modified()
@@ -160,7 +175,8 @@ class DelimitedTextReader(PVGeoReaderBase):
 
 
 class XYZTextReader(DelimitedTextReader):
-    """@desc: A makeshift reader for XYZ files where titles have comma delimiter and data has space delimiter"""
+    """A makeshift reader for XYZ files where titles have comma delimiter and data has space delimiter.
+    """
     def __init__(self):
         DelimitedTextReader.__init__(self)
 

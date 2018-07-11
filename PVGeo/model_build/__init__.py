@@ -2,4 +2,4 @@ from .oddModel import *
 from .evenModel import *
 from .earth import *
 
-__name__ = 'Model Builder'
+__displayname__ = 'Model Builder'

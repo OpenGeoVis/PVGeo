@@ -14,14 +14,14 @@ import numpy as np
 from vtk.util import numpy_support as nps
 
 def numToVTK(arr, name):
-    """@desc: Converts a 1D numpy array to a VTK data array given a nameself.
+    """Converts a 1D numpy array to a VTK data array given a nameself.
 
-    @params:
-    arr : numpy array : A 1D numpy array
-    name : string : the name of the data array for VTK
+    Args:
+        arr (np.array) : A 1D numpy array
+        name (str): the name of the data array for VTK
 
-    @returns:
-    vtkDataArray : a converted data array
+    Return:
+        vtkDataArray : a converted data array
     """
     c = nps.numpy_to_vtk(num_array=arr, deep=True)
     c.SetName(name)
@@ -29,43 +29,43 @@ def numToVTK(arr, name):
 
 
 def getSelectedArrayName(algorithm, idx):
-    """@desc: Gets the name of the input array for a given index on a VTK algorithm
+    """Gets the name of the input array for a given index on a VTK algorithm
 
-    @params:
-    algorithm : vtkAlgorithm : A vtkAlgorithm class instantiation
-    idx : int : the input array index
+    Args:
+        algorithm (vtkAlgorithm): A vtkAlgorithm class instantiation
+        idx (int): the input array index
 
-    @returns:
-    string : the name of the input array for the given index
+    Return:
+        str : the name of the input array for the given index
     """
     info = algorithm.GetInputArrayInformation(idx)
     return info.Get(vtk.vtkDataObject.FIELD_NAME())
 
 
 def getSelectedArrayField(algorithm, idx):
-    """@desc: Gets the field of the input array for a given index on a VTK algorithm
+    """Gets the field of the input array for a given index on a VTK algorithm
 
-    @params:
-    algorithm : vtkAlgorithm : A vtkAlgorithm class instantiation
-    idx : int : the input array index
+    Args:
+        algorithm (vtkAlgorithm) : A vtkAlgorithm class instantiation
+        idx (int) : the input array index
 
-    @returns:
-    int : the field type of the input array for the given index
+    Return:
+        int : the field type of the input array for the given index
     """
     info = algorithm.GetInputArrayInformation(idx)
     return info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
 
 
 def copyArraysToPointData(pdi, pdo, field):
-    """@desc: Copys arrays from an input to an ouput's point data.
+    """Copys arrays from an input to an ouput's point data.
 
-    @params:
-    ido : vtkDataObject : The input data object to copy from
-    odo : vtkDataObject : The output data object to copy over to
-    field : int : the field type id
+    Args:
+        pdi (vtkDataObject) : The input data object to copy from
+        pdo (vtkDataObject) : The output data object to copy over to
+        field (int) : the field type id
 
-    @return:
-    vtkDataObject : returns the output data object parameter
+    Return:
+        vtkDataObject : returns the output data object parameter
     """
     # Point Data
     if field == 0:
@@ -95,16 +95,15 @@ def copyArraysToPointData(pdi, pdo, field):
 
 
 def getArray(wpdi, field, name):
-    """
-    @desc: Grabs an array from vtkDataObject given its name and field association.
+    """Grabs an array from vtkDataObject given its name and field association.
 
-    @params:
-    wpdi : wrapped vtkDataObject : the input data object wrapped using vtk dataset adapter
-    field : int : the field type id
-    name: string : the name of the input array for the given index
+    Args:
+        wpdi  (wrapped vtkDataObject) : the input data object wrapped using vtk dataset adapter
+        field (int) : the field type id
+        name (str) : the name of the input array for the given index
 
-    @return:
-    numpy array : a wrapped vtkDataArray for NumPy
+    Return:
+        numpy.array : a wrapped ``vtkDataArray`` for NumPy
     """
     # Point Data
     if field == 0:
@@ -124,30 +123,30 @@ def getArray(wpdi, field, name):
 
 
 def getSelectedArray(algorithm, wpdi, idx):
-    """@desc: gets selectected array at index idx wrapped for NumPy
+    """Gets selectected array at index idx wrapped for NumPy
 
-    @params:
-    algorithm : vtkAlgorithm : A vtkAlgorithm class instantiation
-    wpdi : wrapped vtkDataObject : the input data object wrapped using vtk dataset adapter
-    idx : int : the input array index
+    Args:
+        algorithm (vtkAlgorithm) : A vtkAlgorithm class instantiation
+        wpdi (wrapped vtkDataObject) : the input data object wrapped using vtk dataset adapter
+        idx (int) : the input array index
 
-    @return:
-    numpy array : a wrapped vtkDataArray for NumPy
+    Return:
+        numpy.array : a wrapped ``vtkDataArray`` for NumPy
     """
     name = getSelectedArrayName(algorithm, idx)
     field = getSelectedArrayField(algorithm, idx)
     return getArray(wpdi, field, name)
 
 def addArray(pdo, field, vtkArray):
-    """@desc: Adds an array to a vtkDataObject given its field association.
+    """Adds an array to a vtkDataObject given its field association.
 
-    @params:
-    pdo : vtkDataObject : the output data object
-    field : int : the field type id
-    vtkArray : vtkDataArray : the data array to add to the output
+    Args:
+        pdo (vtkDataObject) : the output data object
+        field (int) : the field type id
+        vtkArray (vtkDataArray) : the data array to add to the output
 
-    @return:
-    vtkDataObject : the output data object with the data array added
+    Return:
+        vtkDataObject : the output data object with the data array added
     """
     # Point Data
     if field == 0:
