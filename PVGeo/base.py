@@ -1,8 +1,11 @@
-all = [
+__all__ = [
     'PVGeoAlgorithmBase',
     'PVGeoReaderBase',
     'FilterPreserveTypeBase'
 ]
+
+
+__name__ = 'Base Classes'
 
 from . import _helpers
 

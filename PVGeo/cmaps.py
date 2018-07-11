@@ -1,3 +1,7 @@
+__all__ = [
+    'getParulaMap',
+]
+
 def getParulaMap():
     from matplotlib.colors import LinearSegmentedColormap
     # This is so we can use the Parula Colormap in matplotlib

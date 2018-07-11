@@ -1,3 +1,8 @@
+__all__ = [
+    'checkNumpy',
+]
+__name__ = 'Version Verifier'
+
 def checkNumpy(warn=True):
     import numpy as np
     v = np.array(np.__version__.split('.')[0:2], dtype=int)

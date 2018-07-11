@@ -1,6 +1,8 @@
 __all__ = [
     'test',
 ]
+__name__ = 'Test Runner'
+
 import unittest
 import fnmatch
 import os

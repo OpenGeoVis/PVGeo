@@ -1,4 +1,4 @@
-all = [
+__all__ = [
     'EarthSource',
 ]
 
