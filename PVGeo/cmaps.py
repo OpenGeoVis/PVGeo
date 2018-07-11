@@ -1,4 +1,11 @@
+__all__ = [
+    'getParulaMap',
+]
+
 def getParulaMap():
+    """A convienance method for getting a matplotlib friendly version of
+    MATLAB's parula colormap.
+    """
     from matplotlib.colors import LinearSegmentedColormap
     # This is so we can use the Parula Colormap in matplotlib
     cm_data = [[0.2081, 0.1663, 0.5292], [0.2116238095, 0.1897809524, 0.5776761905],

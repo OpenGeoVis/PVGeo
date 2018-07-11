@@ -6,17 +6,17 @@ from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np
 # Import Helpers:
-from ..base import PVGeoAlgorithmBase
+from ..base import AlgorithmBase
 from .. import _helpers
 
 
 #---- Reverse Grid Axii ----#
 
 
-class ReverseImageDataAxii(PVGeoAlgorithmBase):
-    """@desc: This filter will flip `vtkImageData` on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data."""
+class ReverseImageDataAxii(AlgorithmBase):
+    """This filter will flip ``vtkImageData`` on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data."""
     def __init__(self):
-        PVGeoAlgorithmBase.__init__(self,
+        AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
             nOutputPorts=1, outputType='vtkImageData')
         self.__axes = [True, True, True] # Z Y X (FORTRAN)
@@ -62,6 +62,8 @@ class ReverseImageDataAxii(PVGeoAlgorithmBase):
         return ido
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output.
+        """
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -74,19 +76,22 @@ class ReverseImageDataAxii(PVGeoAlgorithmBase):
 
 
     def SetFlipX(self, flag):
-        """@desc: Set the filter to flip th input data along the X-axis"""
+        """Set the filter to flip th input data along the X-axis
+        """
         if self.__axes[2] != flag:
             self.__axes[2] = flag
             self.Modified()
 
     def SetFlipY(self, flag):
-        """@desc: Set the filter to flip th input data along the Y-axis"""
+        """Set the filter to flip th input data along the Y-axis
+        """
         if self.__axes[1] != flag:
             self.__axes[1] = flag
             self.Modified()
 
     def SetFlipZ(self, flag):
-        """@desc: Set the filter to flip th input data along the Z-axis"""
+        """Set the filter to flip th input data along the Z-axis
+        """
         if self.__axes[0] != flag:
             self.__axes[0] = flag
             self.Modified()

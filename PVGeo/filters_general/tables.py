@@ -7,7 +7,7 @@ import numpy as np
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
-from ..base import PVGeoAlgorithmBase
+from ..base import AlgorithmBase
 from .. import _helpers
 
 
@@ -16,22 +16,27 @@ from .. import _helpers
 ###############################################################################
 
 
-class CombineTables(PVGeoAlgorithmBase):
-    """@desc: Takes two tables and combines them if they have the same number of rows."""
+class CombineTables(AlgorithmBase):
+    """Takes two tables and combines them if they have the same number of rows.
+    """
     def __init__(self):
-        PVGeoAlgorithmBase.__init__(self,
+        AlgorithmBase.__init__(self,
             nInputPorts=2, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkTable')
         # Parameters... none
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):
+        """Used by pipeline. Necessary when dealing with multiple input ports
+        """
         # all are tables so no need to check port
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), "vtkTable")
         return 1
 
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output
+        """
         # Inputs from different ports:
         pdi0 = self.GetInputData(inInfo, 0, 0)
         pdi1 = self.GetInputData(inInfo, 1, 0)
@@ -53,10 +58,11 @@ class CombineTables(PVGeoAlgorithmBase):
 ###############################################################################
 #---- Reshape Table ----#
 
-class ReshapeTable(PVGeoAlgorithmBase):
-    """@desc: This filter will take a `vtkTable` object and reshape it. This filter essentially treats `vtkTables` as 2D matrices and reshapes them using numpy.reshape in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name."""
+class ReshapeTable(AlgorithmBase):
+    """This filter will take a ``vtkTable`` object and reshape it. This filter essentially treats ``vtkTable``s as 2D matrices and reshapes them using ``numpy.reshape`` in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.
+    """
     def __init__(self):
-        PVGeoAlgorithmBase.__init__(self,
+        AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkTable')
         # Parameters
@@ -66,6 +72,8 @@ class ReshapeTable(PVGeoAlgorithmBase):
         self.__order = 'F'
 
     def _Reshape(self, pdi, pdo):
+        """Internal helper to perfrom the reshape
+        """
         # Get number of columns
         cols = pdi.GetNumberOfColumns()
         # Get number of rows
@@ -110,6 +118,8 @@ class ReshapeTable(PVGeoAlgorithmBase):
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline
+        """
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -121,9 +131,11 @@ class ReshapeTable(PVGeoAlgorithmBase):
     #### Seters and Geters ####
 
     def SetNames(self, names):
-        """@desc: Set names using a semicolon (;) seperated string or a list of strings
-        @params:
-        names: string : a string of data array names for the reshaped table using a semicolon (;) to spearate"""
+        """Set names using a semicolon (;) seperated string or a list of strings
+
+        Args:
+            names (string): a string of data array names for the reshaped table using a semicolon (;) to spearate
+        """
         # parse the names (a semicolon seperated list of names)
         if isinstance(names, str):
             names = names.split(';')
@@ -132,7 +144,8 @@ class ReshapeTable(PVGeoAlgorithmBase):
             self.Modified()
 
     def AddName(self, name):
-        """@desc: Use to append a name to the list of data array names for the output table"""
+        """Use to append a name to the list of data array names for the output table
+        """
         self.__names.append(name)
         self.Modified()
 
@@ -140,7 +153,8 @@ class ReshapeTable(PVGeoAlgorithmBase):
         return self.__names
 
     def SetNumberOfColumns(self, ncols):
-        """@desc: Set the number of columns for the output `vtkTable`"""
+        """Set the number of columns for the output ``vtkTable``
+        """
         if isinstance(ncols, float):
             ncols = int(ncols)
         if self.__ncols != ncols:
@@ -148,7 +162,8 @@ class ReshapeTable(PVGeoAlgorithmBase):
             self.Modified()
 
     def SetNumberOfRows(self, nrows):
-        """@desc: Set the number of rows for the output `vtkTable`"""
+        """Set the number of rows for the output ``vtkTable``
+        """
         if isinstance(nrows, float):
             nrows = int(nrows)
         if self.__nrows != nrows:
@@ -156,7 +171,8 @@ class ReshapeTable(PVGeoAlgorithmBase):
             self.Modified()
 
     def SetOrder(self, order):
-        """@desc: Set the reshape order (`'C'` of `'F'`)"""
+        """Set the reshape order (``'C'`` of ``'F'``)
+        """
         if self.__order != order:
             self.__order = order
             self.Modified()

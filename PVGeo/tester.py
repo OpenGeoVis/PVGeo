@@ -1,33 +1,31 @@
 __all__ = [
     'test',
 ]
+__displayname__ = 'Test Runner'
+
 import unittest
 import fnmatch
 import os
 
-try:
-    from colour_runner.runner import ColourTextTestRunner as TextTestRunner
-except ImportError:
-    from unittest import TextTestRunner
-
 
 def test(close=False):
+    """This is a convienance method to run all of the tests in ``PVGeo`` while
+    in an active python environment.
+
+    Note:
+        This can be executed from either the command line of within a standard Python environment.
+
+    Example:
+        $ python -m PVGeo test
+
+        >>> import PVGeo
+        >>> PVGeo.test()
+
     """
-    @desc: This is a convienance method to run all of the tests in `PVGeo`.
-
-    @notes:
-    This can be executed from either the command line of within a standard Python environment.
-
-    @example:
-    ```bash
-    $ python -m PVGeo test
-    ```
-
-    ```py
-    >>> import PVGeo
-    >>> PVGeo.test()
-    ```
-    """
+    try:
+        from colour_runner.runner import ColourTextTestRunner as TextTestRunner
+    except ImportError:
+        from unittest import TextTestRunner
     test_file_strings = []
     for root, dirnames, filenames in os.walk(os.path.dirname(__file__)):
         for filename in fnmatch.filter(filenames, '__test__.py'):
