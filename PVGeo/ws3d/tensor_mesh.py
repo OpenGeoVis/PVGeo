@@ -13,34 +13,19 @@ import vtk
 import os
 
 # Import Helpers:
-from ..base import PVGeoReaderBase
+from ..base import ReaderBase
 from .. import _helpers
 
-class wsMesh3DReader(PVGeoReaderBase):
-    """
-    @desc:
-    This method reads a ws3dinv Mesh file and builds a vtkRectilinearGrid with topology
+class wsMesh3DReader(ReaderBase):
+    """This reader handles a ws3dinv Mesh file and builds a ``vtkRectilinearGrid`` with topology
     and model data.
     Information about the files can be found
         Siripunvaraporn, W.; Egbert, G.; Lenbury, Y. & Uyeshima, M.
         Three-dimensional magnetotelluric inversion: data-space method
         Physics of The Earth and Planetary Interiors, 2005, 150, 3-14
-
-    @params:
-    FileName : str or list of str : The mesh filename(s) as an absolute path for the input mesh
-        file in ws3dinv Mesh/Model Format.
-    x0 : float : the globl x coordinate (Easting) of for the orgin point in the model (0,0,0)
-    y0 : float : the globl y coordinate (Northing) of for the orgin point in the model (0,0,0)
-    z0 : float : the globl z coordinate (Elevation) of for the orgin point in the model (0,0,0)
-    angle : float : angle rotation for the model (clockwise rotation)
-
-    @returns:
-    vtkRectilinearGrid : Returns a vtkRectilinearGrid generated from the ws3dinv Mesh/Model grid.
-    Mesh is defined by the input mesh file and does contain data attributes.
-
     """
     def __init__(self, filename=None, x0=0.0, y0=0.0, z0=0.0, angle=0.0):
-        PVGeoReaderBase.__init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid')
+        ReaderBase.__init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid')
 
         # Parameters:
         self.__x0 = x0
@@ -52,24 +37,21 @@ class wsMesh3DReader(PVGeoReaderBase):
 
 
     def _wsMesh3D(self, FileName, pdo):
-        """
-        @desc:
-        This method reads a ws3dinv Mesh file and builds a vtkRectilinearGrid with topology
+        """This method reads a ws3dinv Mesh file and builds a ``vtkRectilinearGrid`` with topology
         and model data.
-        Information about the files can be found
+
+        Information about the files can be found:
             Siripunvaraporn, W.; Egbert, G.; Lenbury, Y. & Uyeshima, M.
             Three-dimensional magnetotelluric inversion: data-space method
             Physics of The Earth and Planetary Interiors, 2005, 150, 3-14
 
-        @params:
-        FileName : str : The mesh filename as an absolute path for the input mesh
+        Args:
+            FileName (str) : The mesh filename as an absolute path for the input mesh
             file in ws3dinv Mesh/Model Format.
-        pdo : vtk.vtkRectilinearGrid : The output data object
+            pdo (vtkRectilinearGrid) : The output data object
 
-        @returns:
-        vtkRectilinearGrid : Returns a vtkRectilinearGrid generated from the ws3dinv Mesh/Model grid.
-        Mesh is defined by the input mesh file and does contain data attributes.
-
+        Return:
+            vtkRectilinearGrid : Returns a ``vtkRectilinearGrid`` generated from the ws3dinv Mesh/Model grid. Mesh is defined by the input mesh file and does contain data attributes.
         """
 
         # Simple file tests
@@ -159,6 +141,11 @@ class wsMesh3DReader(PVGeoReaderBase):
         return (self.__x0, self.__y0, self.__z0)
 
     def SetAngle(self, angle):
+        """Set the coordinate rotation angle
+
+        Args:
+            angle (float) : angle rotation for the model (clockwise rotation)
+        """
         if self.__angle != angle:
             self.__angle = angle
             self.Modified()
@@ -179,15 +166,20 @@ class wsMesh3DReader(PVGeoReaderBase):
             self.Modified()
 
     def SetOrigin(self, x0, y0, z0):
+        """Set the origin of the gird
+
+        Args:
+            x0 (float) : the globl x coordinate (Easting) of for the orgin point in the model (0,0,0)
+            y0 (float) : the globl y coordinate (Northing) of for the orgin point in the model (0,0,0)
+            z0 (float) : the globl z coordinate (Elevation) of for the orgin point in the model (0,0,0)
+        """
         self.SetX0(x0)
         self.SetY0(y0)
         self.SetZ0(z0)
 
 
 def _write_ws3d(file_name, mesh, model):
-    """
-    @desc:
-    Function that write a WS3D file from a SimPEG mesh object and model dict.
+    """Function that write a WS3D file from a SimPEG mesh object and model dict.
 
     :param string file_name: path of the WS3D model file to be written
     :param discretize.TensorMesh: mesh object
