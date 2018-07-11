@@ -16,13 +16,15 @@ import os
 import sys
 import shutil
 
+# Add PVGeo to the path
 path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print(path)
 sys.path.insert(0, path)
 
-if os.path.exists('./suites'):
-    shutil.rmtree('./suites')
-os.makedirs('./suites')
+# Mock the paraview module to build pvmacros docs
+autodoc_mock_imports = ['paraview']
+
+
 # Automattically generat source pages:
 os.system('python ./make_files.py')
 

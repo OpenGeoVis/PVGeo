@@ -1,6 +1,8 @@
 __all__ = ['customAxisTicks']
 
 def customAxisTicks(rng, axis=0, uniform=False):
+    """Use to set custm axis ticks in the render view
+    """
     from paraview.simple import GetActiveViewOrCreate, RenderAllViews
     # note that third parameter is the step size
     # get the active view
@@ -16,3 +18,6 @@ def customAxisTicks(rng, axis=0, uniform=False):
         rv.AxesGrid.ZAxisLabels = rng
     RenderAllViews()
     return None
+
+customAxisTicks.__displayname__ = 'Custom Axis Ticks'
+customAxisTicks.__type__ = 'macro'
