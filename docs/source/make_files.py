@@ -2,6 +2,9 @@ import PVGeo
 import inspect
 import re
 import numpy as np
+import sys
+
+sys.path.insert(0, os.dirname(os.dirname(os.path.abspath('.'))))
 
 
 ##########

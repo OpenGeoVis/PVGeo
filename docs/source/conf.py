@@ -15,7 +15,9 @@
 import os
 import sys
 import shutil
-# sys.path.insert(0, os.path.abspath('.'))
+
+sys.path.insert(0, os.dirname(os.dirname(os.path.abspath('.'))))
+
 if os.path.exists('./suites'):
     shutil.rmtree('./suites')
 os.makedirs('./suites')
