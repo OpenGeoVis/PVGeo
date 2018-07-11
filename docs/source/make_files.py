@@ -47,10 +47,10 @@ modnames = []
 for mod in mods:
     if mod[0][0:2] == '__':
         continue
-    name = mod[1].__name__
-    if hasattr(mod[1], mod[1].__displayname__):
+    try:
         name = mod[1].__displayname__
-    #print('On: ', name)
+    except AttributeError:
+        name = mod[1].__name__
     feats = inspect.getmembers(mod[1])
     fname = name.replace(' ', '-')+'.rst'
     index += '\n   suites/%s' % fname
