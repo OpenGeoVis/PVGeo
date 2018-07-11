@@ -4,7 +4,9 @@ import re
 import numpy as np
 import sys
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print(path)
+sys.path.insert(0, path)
 
 
 ##########
