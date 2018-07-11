@@ -45,6 +45,7 @@ classdoccer = r'''
     :show-inheritance:
     :members:
     :undoc-members:
+    :private-members:
 
 '''
 global defdoccer
