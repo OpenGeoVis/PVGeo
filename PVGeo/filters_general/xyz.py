@@ -1,7 +1,7 @@
 __all__ = [
     'PointsToPolyData',
     'latLonTableToCartesian',
-    'RotateCoordinates',
+    'RotatePoints',
     'ExtractPoints',
     'RotationTool',
 ]
@@ -253,9 +253,10 @@ class RotationTool(PVGeoAlgorithmBase):
 
 #---- Coordinate Rotations ----#
 
-class RotateCoordinates(PVGeoAlgorithmBase):
-    """@desc: Rotates XYZ coordinates in `vtkPolyData` around an origin at a given angle on the XY plane.
-    @type: filter"""
+class RotatePoints(PVGeoAlgorithmBase):
+    """@desc: Rotates XYZ coordinates in `vtkPolyData` around an origin at a given angle on the XY plane
+    @type: filter
+    """
     def __init__(self, angle=45.0, origin=[0.0, 0.0]):
         PVGeoAlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',

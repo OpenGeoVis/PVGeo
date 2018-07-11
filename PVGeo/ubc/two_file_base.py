@@ -1,7 +1,7 @@
 all = [
     'TwoFileReaderBase',
     'ubcMeshReaderBase',
-    'ubcModelAppenderBase',
+    'ModelAppenderBase',
 ]
 
 from .. import _helpers
@@ -221,7 +221,7 @@ class ubcMeshReaderBase(TwoFileReaderBase):
         if type(FileName) is list:
             out = {}
             for f in FileName:
-                out[os.path.basename(f)] = ubcTensorMeshReader.ubcModel3D(f)
+                out[os.path.basename(f)] = TensorMeshReader.ubcModel3D(f)
             return out
 
         fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
@@ -245,7 +245,7 @@ class ubcMeshReaderBase(TwoFileReaderBase):
 
 
 # UBC Model Appender Base
-class ubcModelAppenderBase(PVGeoAlgorithmBase):
+class ModelAppenderBase(PVGeoAlgorithmBase):
     """@type: base"""
     def __init__(self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid'):
         PVGeoAlgorithmBase.__init__(self,

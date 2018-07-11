@@ -244,9 +244,9 @@ class TestRotationTool(unittest.TestCase):
 
 
 
-class TestRotateCoordinates(unittest.TestCase):
+class TestRotatePoints(unittest.TestCase):
     """
-    Test the `RotateCoordinates` filter
+    Test the `RotatePoints` filter
     """
     def setUp(self):
         self.RTOL = 0.00001 # As higi as rotation precision can get
@@ -261,7 +261,7 @@ class TestRotateCoordinates(unittest.TestCase):
         return
 
     def test_rotation(self):
-        f = RotateCoordinates()
+        f = RotatePoints()
         f.SetInputDataObject(self.vtkpoints)
         f.SetRotationDegrees(33.3)
         f.Update()

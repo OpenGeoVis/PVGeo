@@ -1,7 +1,7 @@
 __all__ = [
     # OcTree
-    'ubcOcTreeReader',
-    'ubcOcTreeAppender',
+    'OcTreeReader',
+    'OcTreeAppender',
 ]
 
 import numpy as np
@@ -10,12 +10,12 @@ import vtk
 import os
 
 from ..base import PVGeoAlgorithmBase
-from .two_file_base import ubcMeshReaderBase, ubcModelAppenderBase
+from .two_file_base import ubcMeshReaderBase, ModelAppenderBase
 from .. import _helpers
 
 
 
-class ubcOcTreeReader(ubcMeshReaderBase):
+class OcTreeReader(ubcMeshReaderBase):
     """@desc: This class reads a UBC OcTree Mesh file and builds a `vtkUnstructuredGrid` of the data in the file.
     Model File is optional. Reader will still construct `vtkUnstructuredGrid` safely.
     @type: reader"""
@@ -203,7 +203,7 @@ class ubcOcTreeReader(ubcMeshReaderBase):
         """
         if type(model) is dict:
             for key in model.keys():
-                mesh = ubcOcTreeReader.PlaceModelOnOcTreeMesh(mesh, model[key], dataNm=key)
+                mesh = OcTreeReader.PlaceModelOnOcTreeMesh(mesh, model[key], dataNm=key)
             return mesh
         # Make sure this model file fits the dimensions of the mesh
         numCells = mesh.GetNumberOfCells()
@@ -243,7 +243,7 @@ class ubcOcTreeReader(ubcMeshReaderBase):
         """
         if self.NeedToReadMesh():
             # Construct/read the mesh
-            ubcOcTreeReader.ubcOcTreeMesh(FileName_Mesh, pdo=self.__mesh)
+            OcTreeReader.ubcOcTreeMesh(FileName_Mesh, pdo=self.__mesh)
             self.NeedToReadMesh(flag=False)
         output.DeepCopy(self.__mesh)
         if self.NeedToReadModels() and self.ThisHasModels():
@@ -268,7 +268,7 @@ class ubcOcTreeReader(ubcMeshReaderBase):
 
         # Place the model data for given timestep onto the mesh
         if len(self.__models) > i:
-            ubcOcTreeReader.PlaceModelOnOcTreeMesh(output, self.__models[i], self.GetDataName())
+            OcTreeReader.PlaceModelOnOcTreeMesh(output, self.__models[i], self.GetDataName())
 
         return 1
 
@@ -300,11 +300,11 @@ class ubcOcTreeReader(ubcMeshReaderBase):
 
 ################################################################################
 
-class ubcOcTreeAppender(ubcModelAppenderBase):
+class OcTreeAppender(ModelAppenderBase):
     """@desc: This filter reads a timeseries of models and appends it to an input `vtkUnstructuredGrid`
     @type: filter"""
     def __init__(self):
-        ubcModelAppenderBase.__init__(self,
+        ModelAppenderBase.__init__(self,
             inputType='vtkUnstructuredGrid',
             outputType='vtkUnstructuredGrid')
 
@@ -319,5 +319,5 @@ class ubcOcTreeAppender(ubcModelAppenderBase):
         return
 
     def _PlaceOnMesh(self, output, idx=0):
-        ubcOcTreeReader.PlaceModelOnOcTreeMesh(output, self._models[idx], self._dataname)
+        OcTreeReader.PlaceModelOnOcTreeMesh(output, self._models[idx], self._dataname)
         return
