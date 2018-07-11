@@ -211,7 +211,7 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         elif idx == 2:
             self.__dz_id = [field, name]
         else:
-            raise RuntimeError('Bad input array inex.')
+            raise RuntimeError('Bad input array index.')
         return 1
 
 
@@ -368,32 +368,32 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoRotateCoordinates', label='Rotate Coordinates')
+@smproxy.filter(name='PVGeoRotatePoints', label='Rotate Coordinates')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
 @smhint.xml('''<View type="RenderView" />''')
 @smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
-class PVGeoRotateCoordinates(RotateCoordinates):
+class PVGeoRotatePoints(RotatePoints):
     def __init__(self):
-        RotateCoordinates.__init__(self)
+        RotatePoints.__init__(self)
 
     #### Seters and Geters ####
 
     @smproperty.doublevector(name="Rotation Angle", default_values=45.0)
     @smdomain.doublerange(min=-90.0, max=90.0)
     def SetRotationDegrees(self, theta):
-        RotateCoordinates.SetRotationDegrees(self, theta)
+        RotatePoints.SetRotationDegrees(self, theta)
 
     @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0], visibility='advanced')
     def SetOrigin(self, xo, yo):
-        RotateCoordinates.SetOrigin(self, xo, yo)
+        RotatePoints.SetOrigin(self, xo, yo)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Use Corner',
         command='SetUseCorner', default_values=True,
         help='Use the corner as the rotation origin.', visibility='advanced'))
     def SetUseCorner(self, flag):
-        RotateCoordinates.SetUseCorner(self, flag)
+        RotatePoints.SetUseCorner(self, flag)
 
 
 ###############################################################################

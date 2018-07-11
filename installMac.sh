@@ -2,10 +2,6 @@
 # FOR MAC OS X OPERATING SYSTEM
 # ONLY RUN THIS SCRIPT ONCE (at time of installation)
 
-
-# The PVGeo Path from the argument
-PVGeo="$1"
-
 # Use colors if connected to a terminal, and that terminal supports them.
 if which tput >/dev/null 2>&1; then
     ncolors=$(tput colors)
@@ -26,6 +22,15 @@ else
     BOLD=""
     NORMAL=""
 fi
+
+#### CHECK ARGS ####
+if [ "$#" -ne 1 ]; then
+    printf "${RED}%s${NORMAL}\n" "Incorrect usage."
+    exit -1
+fi
+
+# The PVGeo Path from the argument
+PVGeo="$1"
 
 #### BEGIN INSTALLATION
 

@@ -162,7 +162,7 @@ class ArrayMath(FilterPreserveTypeBase):
         elif idx == 1:
             self._SetInputArray2(field, name)
         else:
-            raise RuntimeError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
+            raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
         return 1
 
     def SetMultiplier(self, val):
@@ -432,7 +432,7 @@ class AddCellConnToPoints(PVGeoAlgorithmBase):
 
         def _makeLineCell(pts):
             if len(ptsi) != 2:
-                raise RuntimeError('_makeLineCell() only handles two points')
+                raise _helpers.PVGeoError('_makeLineCell() only handles two points')
             aLine = vtk.vtkLine()
             aLine.GetPointIds().SetId(0, ptsi[0])
             aLine.GetPointIds().SetId(1, ptsi[1])

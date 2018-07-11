@@ -37,7 +37,7 @@ class ubcMeshTesterBase(unittest.TestCase):
 
 class Test3DTensorMeshReader(ubcMeshTesterBase):
     """
-    Test the `ubcTensorMeshReader` and `ubcTensorMeshAppender` for 3D data
+    Test the `TensorMeshReader` and `TensorMeshAppender` for 3D data
     """
     def _write_mesh(self):
         fname = os.path.join(self.test_dir, 'test.msh')
@@ -77,7 +77,7 @@ class Test3DTensorMeshReader(ubcMeshTesterBase):
         meshname = self._write_mesh()
         modname, self.data = self._write_model()
         # Set up the reader:
-        reader = ubcTensorMeshReader()
+        reader = TensorMeshReader()
         reader.SetMeshFileName(meshname)
         # Get and test output:
         reader.Update() # Read only mesh upfront
@@ -93,25 +93,25 @@ class Test3DTensorMeshReader(ubcMeshTesterBase):
     ###########################################
 
     def test_grid_spatial_reference(self):
-        """`ubcTensorMeshReader` 3D: Spatial reference"""
+        """`TensorMeshReader` 3D: Spatial reference"""
         self._check_spatial_reference(self.GRID)
 
     def test_grid_shape(self):
-        """`ubcTensorMeshReader` 3D: Shape of output grid"""
+        """`TensorMeshReader` 3D: Shape of output grid"""
         self._check_shape(self.GRID)
 
     def test_grid_data(self):
-        """`ubcTensorMeshReader` 3D: Data fidelity"""
+        """`TensorMeshReader` 3D: Data fidelity"""
         self._check_data(self.GRID, self.data)
 
     def test_grid_data_name(self):
-        """`ubcTensorMeshReader` 3D: Data array name"""
+        """`TensorMeshReader` 3D: Data array name"""
         self.assertEqual(self.GRID.GetCellData().GetArrayName(0), self.dataName)
 
     def test_model_appender(self):
-        """`ubcTensorMeshAppender` 3D: Data array name"""
+        """`TensorMeshAppender` 3D: Data array name"""
         modname, appdata = self._write_model('testApp.mod')
-        f = ubcTensorMeshAppender()
+        f = TensorMeshAppender()
         f.SetInputDataObject(self.GRID)
         f.AddModelFileName(modname)
         f.SetDataName('appended')
@@ -124,7 +124,7 @@ class Test3DTensorMeshReader(ubcMeshTesterBase):
 
 class Test2DTensorMeshReader(ubcMeshTesterBase):
     """
-    Test the `ubcTensorMeshReader` and `ubcTensorMeshAppender` for 2D data
+    Test the `TensorMeshReader` and `TensorMeshAppender` for 2D data
     """
 
     def _write_mesh(self):
@@ -191,7 +191,7 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
         meshname = self._write_mesh()
         modname, self.data = self._write_model()
         # Set up the reader:
-        reader = ubcTensorMeshReader()
+        reader = TensorMeshReader()
         reader.SetMeshFileName(meshname)
         # Get and test output:
         reader.Update() # Test the read up front for the mesh
@@ -208,25 +208,25 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
     ###########################################
 
     def test_grid_spatial_reference(self):
-        """`ubcTensorMeshReader` 2D: Spatial reference"""
+        """`TensorMeshReader` 2D: Spatial reference"""
         self._check_spatial_reference(self.GRID)
 
     def test_grid_shape(self):
-        """`ubcTensorMeshReader` 2D: Shape of output grid"""
+        """`TensorMeshReader` 2D: Shape of output grid"""
         self._check_shape(self.GRID)
 
     def test_grid_data(self):
-        """`ubcTensorMeshReader` 2D: Data fidelity"""
+        """`TensorMeshReader` 2D: Data fidelity"""
         self._check_data(self.GRID, self.data)
 
     def test_grid_data_name(self):
-        """`ubcTensorMeshReader` 2D: Data array name"""
+        """`TensorMeshReader` 2D: Data array name"""
         self.assertEqual(self.GRID.GetCellData().GetArrayName(0), self.dataName)
 
     def test_model_appender(self):
-        """`ubcTensorMeshAppender` 2D: Data array name"""
+        """`TensorMeshAppender` 2D: Data array name"""
         modname, appdata = self._write_model('testApp.mod')
-        f = ubcTensorMeshAppender()
+        f = TensorMeshAppender()
         f.SetInputDataObject(self.GRID)
         f.AddModelFileName(modname)
         f.SetDataName('appended')
@@ -240,7 +240,7 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
 #
 # class TestOcTreeMeshReader(ubcMeshTesterBase):
 #     """
-#     Test the `ubcOcTreeReader` for 2D data
+#     Test the `OcTreeReader` for 2D data
 #     """
 #
 #     def test_(self):
@@ -251,7 +251,7 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
 #
 # class TestOcTreeAppender(ubcMeshTesterBase):
 #     """
-#     Test the `ubcOcTreeAppender` for 2D data
+#     Test the `OcTreeAppender` for 2D data
 #     """
 #
 #     def test_(self):

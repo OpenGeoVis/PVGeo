@@ -85,7 +85,7 @@ class VoxelizePoints(PVGeoAlgorithmBase):
 
     def PointsToGrid(self, xo,yo,zo, dx,dy,dz, grid=None):
         if not checkNumpy():
-            raise RuntimeError("`VoxelizePoints` cannot work with versions of NumPy below 1.10.x . You must update NumPy.")
+            raise _helpers.PVGeoError("`VoxelizePoints` cannot work with versions of NumPy below 1.10.x . You must update NumPy.")
             return None
         if grid is None:
             grid = vtk.vtkUnstructuredGrid()
@@ -97,6 +97,12 @@ class VoxelizePoints(PVGeoAlgorithmBase):
             x,y,z = xo, yo, zo
 
         dx,dy,dz = self.__dx, self.__dy, self.__dz
+        if isinstance(dx, np.ndarray) and len(dx) != len(x):
+            raise _helpers.PVGeoError('X-Cell spacings are not properly defined for all points.')
+        if isinstance(dy, np.ndarray) and len(dy) != len(y):
+            raise _helpers.PVGeoError('X-Cell spacings are not properly defined for all points.')
+        if isinstance(dz, np.ndarray) and len(dz) != len(z):
+            raise _helpers.PVGeoError('X-Cell spacings are not properly defined for all points.')
 
         numCells = len(x)
 
@@ -212,7 +218,7 @@ class VoxelizePoints(PVGeoAlgorithmBase):
         @params:
         dz : float or array of floats : the spacing(s) for the cells in the Z-direction"""
         self.__dz = dz
-        self.SetSafeSize(dz)
+        self.SetSafeSize(np.min(dz))
         self.Modified()
 
     def SetDeltas(self, dx, dy, dz):
