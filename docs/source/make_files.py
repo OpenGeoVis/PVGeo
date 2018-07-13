@@ -83,7 +83,7 @@ counts = [0]*len(choices)
 table = r'''
 
 Current Statistics
-==================
+------------------
 
 .. csv-table::
    :header: "Bases", "Readers", "Filters", "Writers", "Sources", "Macros"
@@ -112,7 +112,7 @@ def MakeFiles(mods, path, modname):
         appIndex += '\n   %s/%s' % (path, fname)
 
         with open('./%s/%s' % (path, fname), 'w') as fid:
-            fid.write(moddoccer % (name, '='*len(name), mod[1].__name__)) # Page header is module name
+            fid.write(moddoccer % (name, '-'*len(name), mod[1].__name__)) # Page header is module name
             for f in feats:
                 # Check for a __displayname__
                 if inspect.isclass(f[1]) or inspect.isfunction(f[1]):
@@ -122,9 +122,9 @@ def MakeFiles(mods, path, modname):
                         featname = f[1].__name__
                     # Make the auto doc rst
                     if inspect.isclass(f[1]):
-                        fid.write(classdoccer % (featname, '-'*len(featname), 'class', '%s.%s' % (mod[1].__name__, f[1].__name__) ))
+                        fid.write(classdoccer % (featname, '^'*len(featname), 'class', '%s.%s' % (mod[1].__name__, f[1].__name__) ))
                     elif inspect.isfunction(f[1]):
-                         fid.write(defdoccer % (featname, '-'*len(featname), 'function', '%s.%s' % (mod[1].__name__, f[1].__name__) ))
+                         fid.write(defdoccer % (featname, '^'*len(featname), 'function', '%s.%s' % (mod[1].__name__, f[1].__name__) ))
                     # Check for stats report
                     try:
                         featType = f[1].__type__

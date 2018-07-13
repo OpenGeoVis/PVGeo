@@ -104,7 +104,7 @@ html_theme = "sphinx_rtd_theme"
 html_theme_options = {
     'canonical_url': 'http://docs.pvgeo.org/',
     'analytics_id': 'UA-115959679-6',
-    'display_version': True,
+    'display_version': False,
 
 }
 
