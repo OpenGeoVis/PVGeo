@@ -8,6 +8,7 @@ from .. import base
 # Outside Imports:
 import numpy as np
 import vtk
+import os
 
 ###############################################################################
 
@@ -35,7 +36,10 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
     @staticmethod
     def _ubcMesh2D_part(FileName):
         # This is a helper method to read file contents of mesh
-        fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+        try:
+            fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+        except FileNotFoundError as fe:
+            raise _helpers.PVGeoError(str(fe))
 
         def _genTup(sft, n):
             # This reads in the data for a dimension
@@ -71,6 +75,8 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         # Read the mesh file as line strings, remove lines with comment = !
         v = np.array(np.__version__.split('.')[0:2], dtype=int)
         FileName = self.GetMeshFileName()
+        if not os.path.isfile(FileName):
+            raise _helpers.PVGeoError(str(fe))
         if v[0] >= 1 and v[1] >= 10:
             # max_rows in numpy versions >= 1.10
             msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str,comments='!', max_rows=1)
@@ -111,7 +117,8 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             for f in FileName:
                 out[os.path.basename(f)] = TensorMeshReader.ubcModel3D(f)
             return out
-
+        if not os.path.isfile(FileName):
+            raise _helpers.PVGeoError(str(fe))
         fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
         data = np.genfromtxt((line.encode('utf8') for line in fileLines), dtype=np.float)
         return data

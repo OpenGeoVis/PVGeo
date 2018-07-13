@@ -34,7 +34,10 @@ class PackedBinariesReader(ReaderBase):
         if dtype == np.dtype('>f'):
             # Checks if big-endian and fixes read
             dtype = np.dtype('f')
-        arr = np.fromfile(fileName, dtype=dtype)
+        try:
+            arr = np.fromfile(fileName, dtype=dtype)
+        except FileNotFoundError as fe:
+            raise _helpers.PVGeoError(str(fe))
         return np.asarray(arr, dtype=self.__dtype)
 
     def _GetFileContents(self, idx=None):

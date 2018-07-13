@@ -25,10 +25,7 @@ class GSLibReader(DelimitedTextReader):
             num = int(content[1]) # number of data columns
         except ValueError:
             raise _helpers.PVGeoError('This file is not in proper GSLIB format.')
-
-        titles = []
-        for i in range(2, 2 + num):
-            titles.append(content[i].rstrip('\r\n'))
+        titles = [ln.rstrip('\r\n') for ln in content[2:2+num]]
         return titles, content[2 + num::]
 
 

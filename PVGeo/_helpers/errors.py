@@ -61,6 +61,7 @@ class ErrorObserver:
             return
         # if no qualifier is present and message has not already been set, entire message stream gets set
         self.__ErrorMessage = message
+        raise RuntimeError(message)
 
     def ErrorOccurred(self):
         """Ask self if an error has occured
