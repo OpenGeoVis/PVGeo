@@ -6,7 +6,7 @@ from paraview.util.vtkAlgorithm import *
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.grids import ReverseImageDataAxii, TranslateGridOrigin, TableToGrid
+from PVGeo.grids import ReverseImageDataAxii, TranslateGridOrigin, TableToGrid, ExtractTopography
 
 
 #### GLOBAL VARIABLES ####
@@ -102,3 +102,20 @@ class PVGeoTableToGrid(TableToGrid):
     @smproperty.xml(_helpers.getPropertyXml(name='Swap XY', command='SetSwapXY', default_values=False))
     def SetSwapXY(self, flag):
         TableToGrid.SetSwapXY(self, flag)
+
+
+
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoExtractTopography', label='Extract Topography')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Topography", port_index=1)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smproperty.input(name="Data Set", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+class PVGeoExtractTopography(ExtractTopography):
+    def __init__(self):
+        ExtractTopography.__init__(self)
+
+    #### Seters and Geters ####
