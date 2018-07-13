@@ -1,3 +1,15 @@
+"""The ``export`` module privides a few macros for exporting data scenes within
+ParaView's rendering environment to the VTKjs format.
+
+"""
+
+__all__ = [
+    'exportVTKjs',
+    'getVTKjsURL',
+]
+
+import sys
+
 def exportVTKjs(FileName='', compress=False):
     """This function will execute a script to export the current scene from your rendering into the VTKjs shareable file format.
 
@@ -25,3 +37,56 @@ def exportVTKjs(FileName='', compress=False):
 
 exportVTKjs.__displayname__ = 'Export VTKjs'
 exportVTKjs.__type__ = 'macro'
+
+################################################################################
+
+
+def convertDropboxURL(url):
+    return url.replace("https://www.dropbox.com", "https://dl.dropbox.com")
+
+def convertGitHubURL(url):
+    url = url.replace("https://github.com", "https://rawgit.com")
+    url = url.replace("raw/", "")
+    return url
+
+def generateViewerURL(dataURL):
+    viewerURL = "http://viewer.pvgeo.org/"
+    return viewerURL + '%s%s' % ("?fileURL=", dataURL)
+
+def getVTKjsURL(host, inURL):
+    """After using ``exportVTKjs()`` to create a ``.vtkjs`` file from a ParaView
+    data scene which is uploaded to an online file hosting service like Dropbix,
+    use this method to get a shareable link to that scene on the
+    `PVGeo VTKjs viewer`_.
+
+    .. _PVGeo VTKjs viewer: http://viewer.pvgeo.org
+
+    **Current file hosts supported:**
+    - Dropbox
+    - GitHub
+
+    Args:
+        host (str): the name of the file hosting service.
+        inURL (str): the web URL to the ``.vtkjs`` file.
+
+    Example:
+        >>> import pvmacros as pvm
+        >>> # A Dropbox hosted file:
+        >>> pvm.export.getVTKjsURL('dropbox', 'https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs\?dl\=0')
+
+        >>> # A GitHib hosted file:
+        >>> pvm.export.getVTKjsURL('github', 'https://github.com/OpenGeoVis/PVGeo/raw/docs/ripple.vtkjs')
+
+    """
+    if host.lower() == "dropbox":
+        convertURL = convertDropboxURL(inURL)
+    elif host.lower() == "github":
+        convertURL = convertGitHubURL(inURL)
+    else:
+        print("--> Warning: Web host not specified or supported. URL is simply appended to standalone scene loader link.")
+        convertURL = inURL
+    #print("--> Your link: %s" % generateViewerURL(convertURL))
+    return generateViewerURL(convertURL)
+
+getVTKjsURL.__displayname__ = 'Get VTKjs URL'
+getVTKjsURL.__type__ = 'macro'
