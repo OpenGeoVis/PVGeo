@@ -332,7 +332,7 @@ class TensorMeshAppender(ModelAppenderBase):
     """This filter reads a timeseries of models and appends it to an input
     ``vtkRectilinearGrid``
     """
-    __displayname__ = 'UBC Tensor Mesh Reader'
+    __displayname__ = 'UBC Tensor Mesh Appender'
     __type__ = 'filter'
     def __init__(self):
         ModelAppenderBase.__init__(self,
