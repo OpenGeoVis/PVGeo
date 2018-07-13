@@ -59,9 +59,9 @@ class TensorMeshReader(ubcMeshReaderBase):
         ext = mesh.GetExtent()
         n1,n2,n3 = ext[1],ext[3],ext[5]
         if (n1*n2*n3 < len(model)):
-            raise Exception('Model `%s` has more data than the given mesh has cells to hold.' % dataNm)
+            raise _helpers.PVGeoError('Model `%s` has more data than the given mesh has cells to hold.' % dataNm)
         elif (n1*n2*n3 > len(model)):
-            raise Exception('Model `%s` does not have enough data to fill the given mesh\'s cells.' % dataNm)
+            raise _helpers.PVGeoError('Model `%s` does not have enough data to fill the given mesh\'s cells.' % dataNm)
 
         # Swap axes because VTK structures the coordinates a bit differently
         #-  This is absolutely crucial!
@@ -152,7 +152,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         dim = np.array(fileLines[0].split(), dtype=int)
         data = np.genfromtxt((line.encode('utf8') for line in fileLines[1::]), dtype=np.float)
         if np.shape(data)[0] != dim[1] and np.shape(data)[1] != dim[0]:
-            raise Exception('Mode file `%s` improperly formatted.' % FileName)
+            raise _helpers.PVGeoError('Mode file `%s` improperly formatted.' % FileName)
         return data.flatten(order='F')
 
 
@@ -281,7 +281,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         elif self.Is3D():
             self.__ubcMeshData3D(FileName_Mesh, FileName_Models, output)
         else:
-            raise Exception('File format not recognized')
+            raise _helpers.PVGeoError('File format not recognized')
         return output
 
     def RequestData(self, request, inInfo, outInfo):

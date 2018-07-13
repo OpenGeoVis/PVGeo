@@ -56,7 +56,7 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
     # TODO: This is very poorly done
     # TODO: filter works but assumes a spherical earth wich is VERY wrong
     # NOTE: Mismatches the vtkEarth Source however so we gonna keep it this way
-    raise Exception('latLonTableToCartesian() not currently implemented.')
+    raise _helpers.PVGeoError('latLonTableToCartesian() not currently implemented.')
     if pdo is None:
         pdo = vtk.vtkPolyData()
     #pdo.DeepCopy(pdi)
@@ -74,7 +74,7 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
     lon = _helpers.getArray(wpdi, fieldlon, namelon)
     alt = _helpers.getArray(wpdi, fieldalt, namealt)
     if len(lat) != len(lon) or len(lat) != len(alt):
-        raise Exception('Latitude, Longitude, and Altitude arrays must be same length.')
+        raise _helpers.PVGeoError('Latitude, Longitude, and Altitude arrays must be same length.')
 
     coords = np.empty((len(lat),3))
 

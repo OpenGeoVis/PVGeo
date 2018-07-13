@@ -250,7 +250,7 @@ class ManySlicesAlongAxis(_SliceBase):
             axis (int): the axial index (0, 1, 2) = (x, y, z)
         """
         if axis not in (0,1,2):
-            raise Exception('Axis choice must be 0, 1, or 2 (x, y, or z)')
+            raise _helpers.PVGeoError('Axis choice must be 0, 1, or 2 (x, y, or z)')
         if self.__axis != axis:
             self.__axis = axis
             self.Modified()

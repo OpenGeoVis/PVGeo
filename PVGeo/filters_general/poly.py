@@ -501,7 +501,7 @@ class AddCellConnToPoints(AlgorithmBase):
                 cell = _makePolyCell(ptsi)
                 cells.InsertNextCell(cell)
             else:
-                raise Exception('Cell Type %d not ye implemented.' % cellType)
+                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
         else:
             # VTK_PolyLine
             if cellType == vtk.VTK_POLY_LINE:
@@ -515,7 +515,7 @@ class AddCellConnToPoints(AlgorithmBase):
                     cell = _makeLineCell(ptsi)
                     cells.InsertNextCell(cell)
             else:
-                raise Exception('Cell Type %d not ye implemented.' % cellType)
+                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
 
         if logTime:
             print((datetime.now() - startTime))

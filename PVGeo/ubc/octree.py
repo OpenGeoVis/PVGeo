@@ -204,9 +204,9 @@ class OcTreeReader(ubcMeshReaderBase):
         # Make sure this model file fits the dimensions of the mesh
         numCells = mesh.GetNumberOfCells()
         if (numCells < len(model)):
-            raise Exception('This model file has more data than the given mesh has cells to hold.')
+            raise _helpers.PVGeoError('This model file has more data than the given mesh has cells to hold.')
         elif (numCells > len(model)):
-            raise Exception('This model file does not have enough data to fill the given mesh\'s cells.')
+            raise _helpers.PVGeoError('This model file does not have enough data to fill the given mesh\'s cells.')
 
         # This is absolutely crucial!
         # Do not play with unless you know what you are doing!

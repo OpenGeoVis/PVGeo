@@ -8,7 +8,6 @@ from .. import base
 # Outside Imports:
 import numpy as np
 import vtk
-import os
 
 ###############################################################################
 
@@ -38,7 +37,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         # This is a helper method to read file contents of mesh
         try:
             fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
-        except FileNotFoundError as fe:
+        except (FileNotFoundError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
 
         def _genTup(sft, n):
@@ -75,14 +74,15 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         # Read the mesh file as line strings, remove lines with comment = !
         v = np.array(np.__version__.split('.')[0:2], dtype=int)
         FileName = self.GetMeshFileName()
-        if not os.path.isfile(FileName):
+        try:
+            if v[0] >= 1 and v[1] >= 10:
+                # max_rows in numpy versions >= 1.10
+                msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str,comments='!', max_rows=1)
+            else:
+                # This reads whole file :(
+                msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str, comments='!')[0]
+        except (FileNotFoundError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
-        if v[0] >= 1 and v[1] >= 10:
-            # max_rows in numpy versions >= 1.10
-            msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str,comments='!', max_rows=1)
-        else:
-            # This reads whole file :(
-            msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str, comments='!')[0]
         # Fist line is the size of the model
         self.__sizeM = np.array(msh.ravel()[0].split(), dtype=int)
         # Check if the mesh is a UBC 2D mesh
@@ -99,7 +99,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             ne,nn,nz = dim[0], dim[1], dim[2]
             return (0,ne, 0,nn, 0,nz)
         else:
-            raise Exception('File format not recognized')
+            raise _helpers.PVGeoError('File format not recognized')
 
 
     @staticmethod
@@ -117,9 +117,10 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             for f in FileName:
                 out[os.path.basename(f)] = TensorMeshReader.ubcModel3D(f)
             return out
-        if not os.path.isfile(FileName):
+        try:
+            fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+        except (FileNotFoundError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
-        fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
         data = np.genfromtxt((line.encode('utf8') for line in fileLines), dtype=np.float)
         return data
 

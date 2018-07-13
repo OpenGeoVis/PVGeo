@@ -13,7 +13,7 @@ import numpy as np
 from vtk.util import numpy_support as nps
 import vtk
 import os
-
+from . import errors as _helpers
 
 def getVTKtype(typ):
     """This looks up the VTK type for a give python data type.
@@ -67,7 +67,7 @@ def placeArrInTable(ndarr, titles, pdo):
     """
     # Put columns into table
     if len(np.shape(ndarr)) > 2:
-        raise Exception('Input np.ndarray must be 1D or 2D to be converted to vtkTable.')
+        raise _helpers.PVGeoError('Input np.ndarray must be 1D or 2D to be converted to vtkTable.')
     if len(np.shape(ndarr)) == 1:
         # First check if it is an array full of tuples (varying type)
         if isinstance(ndarr[0], (tuple, np.void)):
@@ -108,7 +108,7 @@ def getdTypes(dtype='', endian=None):
     elif dtype is 'i':
         vtktype = vtk.VTK_INT
     else:
-        raise Exception('dtype \'%s\' unknown:' % dtype)
+        raise _helpers.PVGeoError('dtype \'%s\' unknown:' % dtype)
     # Return data types
     dtype = np.dtype('%s%s' % (endian, dtype))
     return dtype, vtktype

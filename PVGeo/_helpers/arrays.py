@@ -12,6 +12,7 @@ __all__ = [
 import vtk
 import numpy as np
 from vtk.util import numpy_support as nps
+from . import errors as _helpers
 
 def numToVTK(arr, name):
     """Converts a 1D numpy array to a VTK data array given a nameself.
@@ -88,7 +89,7 @@ def copyArraysToPointData(pdi, pdo, field):
             arr = pdi.GetRowData().GetArray(i)
             pdo.GetPointData().AddArray(arr)
     else:
-        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+        raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
 
     # Field Data
     return pdo
@@ -118,7 +119,7 @@ def getArray(wpdi, field, name):
     elif field == 6:
         arr = wpdi.RowData[name]
     else:
-        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+        raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
     return arr
 
 
@@ -161,7 +162,7 @@ def addArray(pdo, field, vtkArray):
     elif field == 6:
         pdo.GetRowData().AddArray(vtkArray)
     else:
-        raise Exception('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+        raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
     return pdo
 
 

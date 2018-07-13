@@ -48,7 +48,7 @@ class DelimitedTextReader(ReaderBase):
         for f in fileNames:
             try:
                 contents.append(np.genfromtxt(f, dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::])
-            except FileNotFoundError as fe:
+            except (FileNotFoundError, OSError) as fe:
                 raise _helpers.PVGeoError(str(fe))
         if idx is not None: return contents[0]
         return contents
