@@ -34,7 +34,7 @@ class DelimitedTextReader(ReaderBase):
         """For itenral use
         """
         if self.__useTab:
-            return '\t'
+            return None
         return self.__delimiter
 
     #### Methods for performing the read ####
@@ -139,12 +139,17 @@ class DelimitedTextReader(ReaderBase):
             self.__delimiter = deli
             self.Modified()
 
-    def SetUseTab(self, flag):
-        """Set a boolean flag to override the ``SetDelimiter()`` and use a Tab delimiter.
+    def SetSplitOnWhiteSpace(self, flag):
+        """Set a boolean flag to override the ``SetDelimiter()`` and use any white space as a delimiter.
         """
         if flag != self.__useTab:
             self.__useTab = flag
             self.Modified()
+
+    def SetUseTab(self, flag):
+        """Deprecated"""
+        self.SetSplitOnWhiteSpace(flag)
+
 
     def SetSkipRows(self, skip):
         """The integer number of rows to skip at the top of the file.
