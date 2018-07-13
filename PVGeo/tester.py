@@ -16,8 +16,12 @@ def test(close=False):
         This can be executed from either the command line of within a standard Python environment.
 
     Example:
-        $ python -m PVGeo test
+        .. code-block:: bash
 
+           # From the command line
+           $ python -m PVGeo test
+
+        >>> # From an active Python environment
         >>> import PVGeo
         >>> PVGeo.test()
 
