@@ -1,6 +1,4 @@
 import inspect
-import re
-import numpy as np
 import os
 import sys
 import shutil
@@ -139,7 +137,12 @@ def MakeFiles(mods, path, modname):
     return appIndex
 
 mods = inspect.getmembers(PVGeo, inspect.ismodule)
-appIndex = MakeFiles(mods, 'suites', 'PVGeo')
+nmods, pvt = [], []
+for mod in mods:
+    if mod[0][0] == '_': pvt.append(mod)
+    else: nmods.append(mod)
+nmods += pvt
+appIndex = MakeFiles(nmods, 'suites', 'PVGeo')
 
 
 import pvmacros
