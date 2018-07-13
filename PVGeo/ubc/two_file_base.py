@@ -5,21 +5,21 @@ all = [
 ]
 
 from .. import _helpers
-from ..base import AlgorithmBase
+from .. import base
 # Outside Imports:
 import numpy as np
 import vtk
 
 
 # Two File Reader Base
-class TwoFileReaderBase(AlgorithmBase):
+class TwoFileReaderBase(base.AlgorithmBase):
     """A base clase for readers that need to handle two input files.
     One meta-data file and a series of data files.
     """
     __displayname__ = 'Two File Reader Base'
     __type__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
-        AlgorithmBase.__init__(self,
+        base.AlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=nOutputPorts, outputType=outputType)
         self.__dt = 1.0
@@ -66,7 +66,7 @@ class TwoFileReaderBase(AlgorithmBase):
         """
         if readAgainMesh: self.NeedToReadMesh(flag=readAgainMesh)
         if readAgainModels: self.NeedToReadModels(flag=readAgainModels)
-        return AlgorithmBase.Modified(self)
+        return base.AlgorithmBase.Modified(self)
 
     def RequestInformation(self, request, inInfo, outInfo):
         self.__UpdateTimeSteps()
@@ -274,13 +274,13 @@ class ubcMeshReaderBase(TwoFileReaderBase):
 
 
 # UBC Model Appender Base
-class ModelAppenderBase(AlgorithmBase):
+class ModelAppenderBase(base.AlgorithmBase):
     """A base class for create mesh-model appenders on the UBC Mesh formats
     """
     __displayname__ = 'Model Appender Base'
     __type__ = 'base'
     def __init__(self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid'):
-        AlgorithmBase.__init__(self,
+        base.AlgorithmBase.__init__(self,
             nInputPorts=1, inputType=inputType,
             nOutputPorts=1, outputType=outputType)
         self._modelFileNames = []
@@ -316,7 +316,7 @@ class ModelAppenderBase(AlgorithmBase):
         """Call modified if the files needs to be read again again.
         """
         if readAgain: self.__needToRead = readAgain
-        AlgorithmBase.Modified(self)
+        base.AlgorithmBase.Modified(self)
 
     def __UpdateTimeSteps(self):
         """For internal use only: appropriately sets the timesteps.
