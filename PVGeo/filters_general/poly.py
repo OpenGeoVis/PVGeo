@@ -249,7 +249,7 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     @staticmethod
     def _passArray(arr):
-        return arr
+        return np.array(arr)
 
     @staticmethod
     def _featureScale(arr):
@@ -330,7 +330,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getArray(wpdi, field, name)
-        arr = np.array(arr)
+        arr = np.array(arr, dtype=float)
         # Take absolute value?
         if self.__absolute:
             arr = np.abs(arr)
