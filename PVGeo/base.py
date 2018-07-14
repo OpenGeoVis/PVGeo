@@ -19,6 +19,16 @@ import numpy as np
 class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     """This is a base class to add convienace methods to the
     ``VTKPythonAlgorithmBase`` for all algorithms implemented in ``PVGeo``.
+    We implement our algorithms in this manner to harness all of the backend support that the ``VTKPythonAlgorithmBase`` class provides for integrating custom algorithms on a VTK pipeline. All of the pipeline methods for setting inputs, getting outputs, making requests are handled by the super classes. For more information on what functionality is available, check out the VTK Docs for the `vtkAlgorithm`_ and then check out the following blog posts:
+
+    * `vtkPythonAlgorithm is great`_
+    * A VTK pipeline primer `(part 1)`_, `(part 2)`_, and `(part 3)`_
+
+    .. _vtkAlgorithm: https://www.vtk.org/doc/nightly/html/classvtkAlgorithm.html
+    .. _vtkPythonAlgorithm is great: https://blog.kitware.com/vtkpythonalgorithm-is-great/
+    .. _(part 1): https://blog.kitware.com/a-vtk-pipeline-primer-part-1/
+    .. _(part 2): https://blog.kitware.com/a-vtk-pipeline-primer-part-2/
+    .. _(part 3): https://blog.kitware.com/a-vtk-pipeline-primer-part-3/
     """
     __displayname__ = 'Algorithm Base'
     __type__ = 'base'
@@ -170,7 +180,7 @@ class ReaderBase(AlgorithmBase):
 # Base filter to preserve input data type
 class FilterPreserveTypeBase(AlgorithmBase):
     """A Base class for implementing filters that preserve the data type of
-    their arbitray input.
+    their arbitrary input.
     """
     __displayname__ = 'Filter Preserve Type Base'
     __type__ = 'base'
@@ -182,7 +192,7 @@ class FilterPreserveTypeBase(AlgorithmBase):
     # THIS IS CRUCIAL to preserve data type through filter
     def RequestDataObject(self, request, inInfo, outInfo):
         """There is no need to overwrite this. This method lets the pipeline
-        know that the algorithm will dynamically decide the output dat type
+        know that the algorithm will dynamically decide the output data type
         based in the input data type.
         """
         self.OutputType = self.GetInputData(inInfo, 0, 0).GetClassName()
