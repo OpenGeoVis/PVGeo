@@ -471,7 +471,7 @@ class AddCellConnToPoints(AlgorithmBase):
                 cell.GetPointIds().SetId(i, ptsi[i])
             return cell
 
-        def _makeLineCell(pts):
+        def _makeLineCell(ptsi):
             if len(ptsi) != 2:
                 raise _helpers.PVGeoError('_makeLineCell() only handles two points')
             aLine = vtk.vtkLine()
