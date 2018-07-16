@@ -1,6 +1,6 @@
 # This file has a ton of convienance methods for generating extra XML for
 # the pvpluginss
-
+from . import errors as _helpers
 
 def getPythonPathProperty():
     """Get the XML content for setting the Python path when making a ParaView plugin.
@@ -231,7 +231,7 @@ def getInputArrayXml(labels=None, nInputPorts=1, numArrays=1, inputNames='Input'
         if nInputPorts > 1:
             for l in labels:
                 if type(l) is not list:
-                    raise Exception('`InputArrayLabels` is improperly structured. Must be a list of lists.')
+                    raise _helpers.PVGeoError('`InputArrayLabels` is improperly structured. Must be a list of lists.')
         return labels
 
     labels = getLabels(labels)
@@ -251,9 +251,9 @@ def getInputArrayXml(labels=None, nInputPorts=1, numArrays=1, inputNames='Input'
     # Recursively call for each input
     if nInputPorts > 1:
         if type(numArrays) is not list:
-            raise Exception('When multiple inputs, the `NumberOfInputArrayChoices` must be a list of ints for the number of arrays from each input.')
+            raise _helpers.PVGeoError('When multiple inputs, the `NumberOfInputArrayChoices` must be a list of ints for the number of arrays from each input.')
         if len(numArrays) != nInputPorts:
-            raise Exception('You must spectify how many arrays come from each input. `len(NumberOfInputArrayChoices) != nInputPorts`.')
+            raise _helpers.PVGeoError('You must spectify how many arrays come from each input. `len(NumberOfInputArrayChoices) != nInputPorts`.')
 
         # Now perfrom recursion
         out = []
@@ -305,15 +305,15 @@ def getInputArrayXml(labels=None, nInputPorts=1, numArrays=1, inputNames='Input'
 #             namespace[functionName] = ''
 #             return
 #         else:
-#             raise Exception('Function not found.')
+#             raise _helpers.PVGeoError('Function not found.')
 #
 #     # if not inspect.isfunction(func):
-#     #     raise Exception('Object is not a function object.')
+#     #     raise _helpers.PVGeoError('Object is not a function object.')
 #
 #     lines = inspect.getsourcelines(func)[0]
 #
 #     if len(lines) <= 1:
-#         raise Exception('Function %s must not be a single line of code.' % functionName)
+#         raise _helpers.PVGeoError('Function %s must not be a single line of code.' % functionName)
 #
 #     # skip first line (the declaration) and then dedent the source code
 #     sourceCode = textwrap.dedent(''.join(lines[1:]))

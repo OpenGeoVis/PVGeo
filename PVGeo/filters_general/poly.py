@@ -30,8 +30,9 @@ class ArrayMath(FilterPreserveTypeBase):
     - `multiply`: Multiplies the two data arrays together
     - `divide`: Divide input array 1 by input array 2 (arr1/arr2)
     - `correlate`: Use `np.correlate(arr1, arr2, mode='same')`
-
     """
+    __displayname__ = 'Array Math'
+    __type__ = 'filter'
     def __init__(self):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -230,6 +231,8 @@ class NormalizeArray(FilterPreserveTypeBase):
     - `natural_log`: Log Base 10
     - `just_multiply`: Only Multiply by Multiplier
     """
+    __displayname__ = 'Normalize Array'
+    __type__ = 'filter'
     def __init__(self):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -246,7 +249,7 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     @staticmethod
     def _passArray(arr):
-        return arr
+        return np.array(arr)
 
     @staticmethod
     def _featureScale(arr):
@@ -327,7 +330,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getArray(wpdi, field, name)
-        arr = np.array(arr)
+        arr = np.array(arr, dtype=float)
         # Take absolute value?
         if self.__absolute:
             arr = np.abs(arr)
@@ -435,8 +438,9 @@ class AddCellConnToPoints(AlgorithmBase):
 
     - 4: Poly Line
     - 3: Line
-
     """
+    __displayname__ = 'Add Cell Connectivity to Points'
+    __type__ = 'filter'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -467,7 +471,7 @@ class AddCellConnToPoints(AlgorithmBase):
                 cell.GetPointIds().SetId(i, ptsi[i])
             return cell
 
-        def _makeLineCell(pts):
+        def _makeLineCell(ptsi):
             if len(ptsi) != 2:
                 raise _helpers.PVGeoError('_makeLineCell() only handles two points')
             aLine = vtk.vtkLine()
@@ -497,7 +501,7 @@ class AddCellConnToPoints(AlgorithmBase):
                 cell = _makePolyCell(ptsi)
                 cells.InsertNextCell(cell)
             else:
-                raise Exception('Cell Type %d not ye implemented.' % cellType)
+                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
         else:
             # VTK_PolyLine
             if cellType == vtk.VTK_POLY_LINE:
@@ -511,7 +515,7 @@ class AddCellConnToPoints(AlgorithmBase):
                     cell = _makeLineCell(ptsi)
                     cells.InsertNextCell(cell)
             else:
-                raise Exception('Cell Type %d not ye implemented.' % cellType)
+                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
 
         if logTime:
             print((datetime.now() - startTime))
@@ -559,6 +563,8 @@ class AddCellConnToPoints(AlgorithmBase):
 class PointsToTube(AddCellConnToPoints):
     """Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.
     """
+    __displayname__ = 'Points to Tube'
+    __type__ = 'filter'
     def __init__(self):
         AddCellConnToPoints.__init__(self)
         # Additional Parameters

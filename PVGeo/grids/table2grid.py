@@ -20,6 +20,8 @@ class TableToGrid(AlgorithmBase):
     Warning:
         **Work in progress**
     """
+    __displayname__ = 'Table To Grid'
+    __type__ = 'filter'
     def __init__(self, extent=[10, 10, 10]):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',

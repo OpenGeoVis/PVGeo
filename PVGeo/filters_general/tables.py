@@ -19,6 +19,8 @@ from .. import _helpers
 class CombineTables(AlgorithmBase):
     """Takes two tables and combines them if they have the same number of rows.
     """
+    __displayname__ = 'Combine Tables'
+    __type__ = 'filter'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=2, inputType='vtkTable',
@@ -61,6 +63,8 @@ class CombineTables(AlgorithmBase):
 class ReshapeTable(AlgorithmBase):
     """This filter will take a ``vtkTable`` object and reshape it. This filter essentially treats ``vtkTable``s as 2D matrices and reshapes them using ``numpy.reshape`` in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.
     """
+    __displayname__ = 'Reshape Table'
+    __type__ = 'filter'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',
@@ -85,7 +89,7 @@ class ReshapeTable(AlgorithmBase):
                 for i in range(num, self.__ncols):
                     self.__names.append('Field %d' % i)
             elif num > self.__ncols:
-                raise Exception('Too many array names. `ncols` specified as %d and %d names given.' % (self.__ncols, num))
+                raise _helpers.PVGeoError('Too many array names. `ncols` specified as %d and %d names given.' % (self.__ncols, num))
         else:
             self.__names = ['Field %d' % i for i in range(self.__ncols)]
 
@@ -96,7 +100,7 @@ class ReshapeTable(AlgorithmBase):
             data[:,i] = nps.vtk_to_numpy(c)
 
         if ((self.__ncols*self.__nrows) != (cols*rows)):
-            raise Exception('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
+            raise _helpers.PVGeoError('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
 
         # Use numpy.reshape() to reshape data NOTE: only 2D because its a table
         # NOTE: column access of this reshape is not contigous

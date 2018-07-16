@@ -20,6 +20,8 @@ class VoxelizePoints(AlgorithmBase):
     """This makes a ``vtkUnstructuredGrid`` of scattered points given voxel sizes as input arrays.
     This assumes that the data is at least 2-Dimensional on the XY Plane.
     """
+    __displayname__ = 'Voxelize Points'
+    __type__ = 'filter'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',

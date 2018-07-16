@@ -13,6 +13,8 @@ from .. import _helpers
 class DelimitedTextReader(ReaderBase):
     """This reader will take in any delimited text file and make a ``vtkTable`` from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
     """
+    __displayname__ = 'Delimited Text Reader'
+    __type__ = 'reader'
     def __init__(self, nOutputPorts=1, outputType='vtkTable'):
         ReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -32,7 +34,7 @@ class DelimitedTextReader(ReaderBase):
         """For itenral use
         """
         if self.__useTab:
-            return '\t'
+            return None
         return self.__delimiter
 
     #### Methods for performing the read ####
@@ -44,7 +46,10 @@ class DelimitedTextReader(ReaderBase):
             fileNames = self.GetFileNames()
         contents = []
         for f in fileNames:
-            contents.append(np.genfromtxt(f, dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::])
+            try:
+                contents.append(np.genfromtxt(f, dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::])
+            except (FileNotFoundError, OSError) as fe:
+                raise _helpers.PVGeoError(str(fe))
         if idx is not None: return contents[0]
         return contents
 
@@ -134,12 +139,17 @@ class DelimitedTextReader(ReaderBase):
             self.__delimiter = deli
             self.Modified()
 
-    def SetUseTab(self, flag):
-        """Set a boolean flag to override the ``SetDelimiter()`` and use a Tab delimiter.
+    def SetSplitOnWhiteSpace(self, flag):
+        """Set a boolean flag to override the ``SetDelimiter()`` and use any white space as a delimiter.
         """
         if flag != self.__useTab:
             self.__useTab = flag
             self.Modified()
+
+    def SetUseTab(self, flag):
+        """Deprecated"""
+        self.SetSplitOnWhiteSpace(flag)
+
 
     def SetSkipRows(self, skip):
         """The integer number of rows to skip at the top of the file.
@@ -177,6 +187,8 @@ class DelimitedTextReader(ReaderBase):
 class XYZTextReader(DelimitedTextReader):
     """A makeshift reader for XYZ files where titles have comma delimiter and data has space delimiter.
     """
+    __displayname__ = 'XYZ Text Reader'
+    __type__ = 'reader'
     def __init__(self):
         DelimitedTextReader.__init__(self)
 

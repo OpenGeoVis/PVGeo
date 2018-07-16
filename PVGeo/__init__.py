@@ -17,5 +17,5 @@ from .tester import test
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
-__version__ = '1.0.12'
+__version__ = '1.1.3'
 __displayname__ = 'PVGeo'

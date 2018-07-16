@@ -16,13 +16,15 @@ import os
 import sys
 import shutil
 
+# Add PVGeo to the path
 path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print(path)
 sys.path.insert(0, path)
 
-if os.path.exists('./suites'):
-    shutil.rmtree('./suites')
-os.makedirs('./suites')
+# Mock the paraview module to build pvmacros docs
+autodoc_mock_imports = ['paraview']
+
+
 # Automattically generat source pages:
 os.system('python ./make_files.py')
 
@@ -99,7 +101,16 @@ html_theme = "sphinx_rtd_theme"
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    'canonical_url': 'http://docs.pvgeo.org/',
+    'analytics_id': 'UA-115959679-6',
+    'display_version': False,
+
+}
+
+html_context = {
+    "display_github": False,
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

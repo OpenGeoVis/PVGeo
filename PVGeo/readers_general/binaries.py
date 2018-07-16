@@ -15,6 +15,8 @@ from ..base import ReaderBase
 class PackedBinariesReader(ReaderBase):
     """This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a ``vtkTable`` with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a ``vtkTable`` object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
     """
+    __displayname__ = 'Packed Binaries Reader'
+    __type__ = 'reader'
     def __init__(self):
         ReaderBase.__init__(self,
             nOutputPorts=1, outputType='vtkTable')
@@ -32,7 +34,10 @@ class PackedBinariesReader(ReaderBase):
         if dtype == np.dtype('>f'):
             # Checks if big-endian and fixes read
             dtype = np.dtype('f')
-        arr = np.fromfile(fileName, dtype=dtype)
+        try:
+            arr = np.fromfile(fileName, dtype=dtype)
+        except (FileNotFoundError, OSError) as fe:
+            raise _helpers.PVGeoError(str(fe))
         return np.asarray(arr, dtype=self.__dtype)
 
     def _GetFileContents(self, idx=None):
@@ -138,6 +143,8 @@ class MadagascarReader(PackedBinariesReader):
 
     .. _Details Here: http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF
     """
+    __displayname__ = 'Madagascar SSRSF Reader'
+    __type__ = 'reader'
     def __init__(self):
         PackedBinariesReader.__init__(self)
 

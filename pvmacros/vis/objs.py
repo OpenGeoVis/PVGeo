@@ -6,9 +6,10 @@ import pickle
 from paraview.simple import RenderAllViews, GetActiveCamera, WriteImage
 
 class camera:
+    """An object to store a single camera location/view. You can make a list/dict of these objects to save interesting views for your project. This object saves just a few parameters about the camera so that it can easily be reconstructed.
     """
-    An object to store a single camera location/view. You can make a list/dict of these objects to save interesting views for your project. This object saves just a few parameters about the camera so that it can easily be reconstructed.
-    """
+    __displayname__ = 'Camera'
+    __type__ = 'macro'
     def __init__(self,cam=None):
         """
         @params:
@@ -37,13 +38,10 @@ class camera:
 
     # Use new location
     def update(self, cam=None):
-        """
-        @desc:
-        Updates the camera location to that which is in the currently activated view unless a vtkOpenGLCamera is specified.
+        """Updates the camera location to that which is in the currently activated view unless a vtkOpenGLCamera is specified.
 
-        @params:
-        cam : vtkRenderingOpenGL2Python.vtkOpenGLCamera : optional : The camera you wish to update this object to. Totally optional
-
+        Args:
+            cam (vtkRenderingOpenGL2Python.vtkOpenGLCamera) : The camera you wish to update this object to. Totally optional
         """
         if cam is None:
             # This allows use to dynamicly select cameras
@@ -55,13 +53,10 @@ class camera:
 
     # Change the camera view
     def view(self, cam=None):
-        """
-        @desc:
-        Use this method to update the camera to the saved location
+        """Use this method to update the camera to the saved location
 
-        @params:
-        cam : vtkRenderingOpenGL2Python.vtkOpenGLCamera : optional : The camera you wish to view/update in the current render view
-
+        Args:
+            cam (vtkRenderingOpenGL2Python.vtkOpenGLCamera) : The camera you wish to view/update in the current render view
         """
         if cam is None:
             # This allows use to dynamicly select cameras
@@ -79,15 +74,12 @@ class camera:
 
     # Save Screenshot of single view
     def screenShot(self, cam=None, path=os.path.expanduser('~'), basenm='view'):
-        """
-        @desc:
-        Save a screenshot of a single camera view
+        """Save a screenshot of a single camera view
 
-        @params:
-        cam : vtkRenderingOpenGL2Python.vtkOpenGLCamera : optional : The camera you wish to view then save a screenshot
-        path : string : optional : The directory you wish to save the screenshot. Defaults to user home directory
-        basenm : string : optional : The file basename for the screenshot
-
+        Args:
+            cam (vtkRenderingOpenGL2Python.vtkOpenGLCamera) : The camera you wish to view then save a screenshot
+            path (str) : The directory you wish to save the screenshot. Defaults to user home directory
+            basenm (str) : The file basename for the screenshot
         """
         if cam is None:
             # This allows use to dynamicly select cameras
@@ -101,14 +93,12 @@ class camera:
 
     @staticmethod
     def saveViews(lib, filename='views', path=os.path.expanduser('~')):
-        """
-        @desc:
-        Save a serialized dictionaty/list/whatever of views out to a file. Dafault saves to user's home directory
+        """Save a serialized dictionaty/list/whatever of views out to a file. Dafault saves to user's home directory
 
-        @params:
-        lib : dict or list : some iterable object containg multiple `camera` objects
-        filename : string : optional : The file basename for the serialized file
-        path : string : optional : The directory you wish to save the views. Defaults to user home directory
+        Args:
+            lib (dict or list) : some iterable object containg multiple `camera` objects
+            filename (str) : The file basename for the serialized file
+            path (str) : The directory you wish to save the views. Defaults to user home directory
         """
         ext = '.camera'
         os.chdir(path)
@@ -118,13 +108,11 @@ class camera:
 
     @staticmethod
     def loadViews(filename='views.camera', path=os.path.expanduser('~')):
-        """
-        @desc:
-        Load a file containg a serialized camera objects. Dafault loads from home directory if relative path
+        """Load a file containg a serialized camera objects. Dafault loads from home directory if relative path
 
-        @params:
-        filename : string : optional : The file basename for the serialized file (defualt is default for output def)
-        path : string : optional : The directory from which you wish to load the views. Defaults to user home directory for relative paths.
+        Args:
+            filename (str) : The file basename for the serialized file (defualt is default for output def)
+            path (str): The directory from which you wish to load the views. Defaults to user home directory for relative paths.
         """
         os.chdir(path)
         with open(filename, 'rb') as f:
@@ -132,15 +120,13 @@ class camera:
 
     @staticmethod
     def screenShotViews(views, cam=None, path=os.path.expanduser('~'), basenm='view'):
-        """
-        @desc:
-        Save screenshots of many views/cameras
+        """Save screenshots of many views/cameras
 
-        @params:
-        view : dict or list : some iterable object containg multiple `camera` objects
-        cam : vtkRenderingOpenGL2Python.vtkOpenGLCamera : optional : The camera you wish to view then save a screenshot
-        path : string : optional : The directory you wish to save the screenshot. Defaults to user home directory
-        basenm : string : optional : The file basename for the screenshot
+        Args:
+            view d(ict or list) : some iterable object containg multiple `camera` objects
+            cam (vtkRenderingOpenGL2Python.vtkOpenGLCamera) : The camera you wish to view then save a screenshot
+            path (str): The directory you wish to save the screenshot. Defaults to user home directory
+            basenm (str): The file basename for the screenshot
         """
         if cam is None:
             # This allows use to dynamicly select cameras

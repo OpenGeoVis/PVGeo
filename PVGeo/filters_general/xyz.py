@@ -22,6 +22,8 @@ def PointsToPolyData(points):
     Return:
         vtkPolyData : points with point-vertex cells
     """
+    __displayname__ = 'Points to PolyData'
+    __type__ = 'filter'
     if points.ndim != 2:
         points = points.reshape((-1, 3))
 
@@ -54,7 +56,7 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
     # TODO: This is very poorly done
     # TODO: filter works but assumes a spherical earth wich is VERY wrong
     # NOTE: Mismatches the vtkEarth Source however so we gonna keep it this way
-    raise Exception('latLonTableToCartesian() not currently implemented.')
+    raise _helpers.PVGeoError('latLonTableToCartesian() not currently implemented.')
     if pdo is None:
         pdo = vtk.vtkPolyData()
     #pdo.DeepCopy(pdi)
@@ -72,7 +74,7 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
     lon = _helpers.getArray(wpdi, fieldlon, namelon)
     alt = _helpers.getArray(wpdi, fieldalt, namealt)
     if len(lat) != len(lon) or len(lat) != len(alt):
-        raise Exception('Latitude, Longitude, and Altitude arrays must be same length.')
+        raise _helpers.PVGeoError('Latitude, Longitude, and Altitude arrays must be same length.')
 
     coords = np.empty((len(lat),3))
 
@@ -109,6 +111,8 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
 class RotationTool(AlgorithmBase):
     """A class that holds a set of methods/tools for performing and estimating coordinate rotations.
     """
+    __displayname__ = 'Rotation Tool'
+    __type__ = 'filter'
     def __init__(self, decimals=6):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -266,6 +270,8 @@ class RotationTool(AlgorithmBase):
 class RotatePoints(AlgorithmBase):
     """Rotates XYZ coordinates in `vtkPolyData` around an origin at a given angle on the XY plane.
     """
+    __displayname__ = 'Rotate Points'
+    __type__ = 'filter'
     def __init__(self, angle=45.0, origin=[0.0, 0.0]):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -325,6 +331,8 @@ class RotatePoints(AlgorithmBase):
 class ExtractPoints(AlgorithmBase):
     """Extracts XYZ coordinates and point/cell data from an input ``vtkDataSet``
     """
+    __displayname__ = 'Extract Points'
+    __type__ = 'filter'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkDataSet',

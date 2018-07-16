@@ -23,6 +23,8 @@ class _SliceBase(AlgorithmBase):
         * Make sure the input data source is slice-able.
         * The SciPy module is required for this filter.
     """
+    __displayname__ = 'Base Slicing Filter'
+    __type__ = 'filter'
     def __init__(self, numSlices=5,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid'):
@@ -76,6 +78,8 @@ class ManySlicesAlongPoints(_SliceBase):
         * Make sure the input data source is slice-able.
         * The SciPy module is required for this filter.
     """
+    __displayname__ = 'Many Slices Along Points'
+    __type__ = 'filter'
     def __init__(self, numSlices=5):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=2, inputType='vtkDataSet',
@@ -156,6 +160,8 @@ class ManySlicesAlongPoints(_SliceBase):
 class ManySlicesAlongAxis(_SliceBase):
     """Slices a ``vtkDataSet`` along a given axis many times
     """
+    __displayname__ = 'Many Slices Along Axis'
+    __type__ = 'filter'
     def __init__(self, numSlices=5, outputType='vtkUnstructuredGrid'):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=1, inputType='vtkDataSet',
@@ -244,7 +250,7 @@ class ManySlicesAlongAxis(_SliceBase):
             axis (int): the axial index (0, 1, 2) = (x, y, z)
         """
         if axis not in (0,1,2):
-            raise Exception('Axis choice must be 0, 1, or 2 (x, y, or z)')
+            raise _helpers.PVGeoError('Axis choice must be 0, 1, or 2 (x, y, or z)')
         if self.__axis != axis:
             self.__axis = axis
             self.Modified()
@@ -267,6 +273,8 @@ class ManySlicesAlongAxis(_SliceBase):
 class SliceThroughTime(ManySlicesAlongAxis):
     """Takes a sliceable ``vtkDataSet`` and progresses a slice of it along a given axis. The macro requires that the clip already exist in the pipeline. This is especially useful if you have many clips linked together as all will move through the seen as a result of this macro.
     """
+    __displayname__ = 'Slice Through Time'
+    __type__ = 'filter'
     def __init__(self, numSlices=5):
         ManySlicesAlongAxis.__init__(self, numSlices=numSlices, outputType='vtkPolyData')
         # Parameters

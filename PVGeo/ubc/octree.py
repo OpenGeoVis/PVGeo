@@ -19,6 +19,8 @@ class OcTreeReader(ubcMeshReaderBase):
     """This class reads a UBC OcTree Mesh file and builds a ``vtkUnstructuredGrid`` of the data in the file.
     Model File is optional. Reader will still construct ``vtkUnstructuredGrid`` safely.
     """
+    __displayname__ = 'UBC OcTree Mesh Reader'
+    __type__ = 'reader'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -202,9 +204,9 @@ class OcTreeReader(ubcMeshReaderBase):
         # Make sure this model file fits the dimensions of the mesh
         numCells = mesh.GetNumberOfCells()
         if (numCells < len(model)):
-            raise Exception('This model file has more data than the given mesh has cells to hold.')
+            raise _helpers.PVGeoError('This model file has more data than the given mesh has cells to hold.')
         elif (numCells > len(model)):
-            raise Exception('This model file does not have enough data to fill the given mesh\'s cells.')
+            raise _helpers.PVGeoError('This model file does not have enough data to fill the given mesh\'s cells.')
 
         # This is absolutely crucial!
         # Do not play with unless you know what you are doing!
@@ -301,6 +303,8 @@ class OcTreeAppender(ModelAppenderBase):
     """This filter reads a timeseries of models and appends it to an input
     ``vtkUnstructuredGrid``
     """
+    __displayname__ = 'UBC OcTree Mesh Appender'
+    __type__ = 'filter'
     def __init__(self):
         ModelAppenderBase.__init__(self,
             inputType='vtkUnstructuredGrid',

@@ -1,7 +1,8 @@
 __all__ = [
     'AlgorithmBase',
     'ReaderBase',
-    'FilterPreserveTypeBase'
+    'FilterPreserveTypeBase',
+    'TwoFileReaderBase',
 ]
 
 
@@ -19,6 +20,9 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     """This is a base class to add convienace methods to the
     ``VTKPythonAlgorithmBase`` for all algorithms implemented in ``PVGeo``.
     """
+    __displayname__ = 'Algorithm Base'
+    __type__ = 'base'
+
     def __init__(self,
                 nInputPorts=1, inputType='vtkDataSet',
                 nOutputPorts=1, outputType='vtkTable'):
@@ -52,6 +56,10 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
 
 # Base Reader
 class ReaderBase(AlgorithmBase):
+    """A base class for inherrited functionality common to all reader algorithms
+    """
+    __displayname__ = 'Reader Base'
+    __type__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkTable'):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -162,8 +170,10 @@ class ReaderBase(AlgorithmBase):
 # Base filter to preserve input data type
 class FilterPreserveTypeBase(AlgorithmBase):
     """A Base class for implementing filters that preserve the data type of
-    their input.
+    their arbitray input.
     """
+    __displayname__ = 'Filter Preserve Type Base'
+    __type__ = 'base'
     def __init__(self):
         AlgorithmBase.__init__(self,
             nInputPorts=1, inputType='vtkDataObject',
@@ -178,3 +188,142 @@ class FilterPreserveTypeBase(AlgorithmBase):
         self.OutputType = self.GetInputData(inInfo, 0, 0).GetClassName()
         self.FillOutputPortInformation(0, outInfo.GetInformationObject(0))
         return 1
+
+###############################################################################
+
+# Two File Reader Base
+class TwoFileReaderBase(AlgorithmBase):
+    """A base clase for readers that need to handle two input files.
+    One meta-data file and a series of data files.
+    """
+    __displayname__ = 'Two File Reader Base'
+    __type__ = 'base'
+    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
+        AlgorithmBase.__init__(self,
+            nInputPorts=0,
+            nOutputPorts=nOutputPorts, outputType=outputType)
+        self.__dt = 1.0
+        self.__timesteps = None
+        self.__meshFileName = None # Can only be one!
+        self.__modelFileNames = [] # Can be many (single attribute, manytimesteps)
+        self.__needToReadMesh = True
+        self.__needToReadModels = True
+
+
+    def __UpdateTimeSteps(self):
+        """For internal use only
+        """
+        if len(self.__modelFileNames) > 0:
+            self.__timesteps = _helpers.UpdateTimeSteps(self, self.__modelFileNames, self.__dt)
+        return 1
+
+    def NeedToReadMesh(self, flag=None):
+        """Ask self if the reader needs to read the mesh file again.
+
+        Args:
+            flag (bool): set the status of the reader for mesh files.
+        """
+        if flag is not None and isinstance(flag, (bool, int)):
+            self.__needToReadMesh = flag
+        return self.__needToReadMesh
+
+    def NeedToReadModels(self, flag=None):
+        """Ask self if the reader needs to read the model files again.
+
+        Args:
+            flag (bool): set the status of the reader for model files.
+        """
+        if flag is not None and isinstance(flag, (bool, int)):
+            self.__needToReadModels = flag
+        return self.__needToReadModels
+
+    def Modified(self, readAgainMesh=True, readAgainModels=True):
+        """Call modified if the files needs to be read again again
+
+        Args:
+            readAgainMesh (bool): set the status of the reader for mesh files.
+            readAgainModels (bool): set the status of the reader for model files.
+        """
+        if readAgainMesh: self.NeedToReadMesh(flag=readAgainMesh)
+        if readAgainModels: self.NeedToReadModels(flag=readAgainModels)
+        return AlgorithmBase.Modified(self)
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        self.__UpdateTimeSteps()
+        return 1
+
+
+    #### Seters and Geters ####
+
+
+    @staticmethod
+    def HasModels(modelfiles):
+        """A convienance method to see if a list contatins models filenames.
+        """
+        if isinstance(modelfiles, list):
+            return len(modelfiles) > 0
+        return modelfiles is not None
+
+    def ThisHasModels(self):
+        """Ask self if the reader has model filenames set.
+        """
+        return TwoFileReaderBase.HasModels(self.__modelFileNames)
+
+    def GetTimestepValues(self):
+        """Use this in ParaView decorator to register timesteps
+        """
+        return self.__timesteps.tolist() if self.__timesteps is not None else None
+
+    def SetTimeDelta(self, dt):
+        """An advanced property for the time step in seconds.
+        """
+        if dt != self.__dt:
+            self.__dt = dt
+            self.Modified(readAgainMesh=False, readAgainModels=False)
+
+    def ClearMesh(self):
+        """Use to clear mesh file name
+        """
+        self.__meshFileName = None
+        self.Modified(readAgainMesh=True, readAgainModels=False)
+
+    def ClearModels(self):
+        """Use to clear data file names
+        """
+        self.__modelFileNames = []
+        self.Modified(readAgainMesh=False, readAgainModels=True)
+
+    def SetMeshFileName(self, fname):
+        """Set the mesh file name.
+        """
+        if self.__meshFileName != fname:
+            self.__meshFileName = fname
+            self.Modified(readAgainMesh=True, readAgainModels=False)
+
+    def AddModelFileName(self, fname):
+        """Use to set the file names for the reader. Handles single string or list of strings.
+
+        Args:
+            fname (str or list(str)): the file name(s) to use for the model data.
+        """
+        if fname is None:
+            return # do nothing if None is passed by a constructor on accident
+        if isinstance(fname, list):
+            for f in fname:
+                self.AddModelFileName(f)
+            self.Modified(readAgainMesh=False, readAgainModels=True)
+        elif fname not in self.__modelFileNames:
+            self.__modelFileNames.append(fname)
+            self.Modified(readAgainMesh=False, readAgainModels=True)
+        return 1
+
+    def GetModelFileNames(self, idx=None):
+        """Returns the list of file names or given and index returns a specified
+        timestep's filename.
+        """
+        if idx is None or not self.ThisHasModels():
+            return self.__modelFileNames
+        return self.__modelFileNames[idx]
+
+    def GetMeshFileName(self):
+        return self.__meshFileName

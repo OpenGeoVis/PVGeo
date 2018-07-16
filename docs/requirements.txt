@@ -13,9 +13,11 @@ imagesize==1.0.0
 Jinja2==2.10
 livereload==2.5.2
 MarkupSafe==1.0
+mock==2.0.0
 numpy==1.14.5
 packaging==17.1
 pathtools==0.1.2
+pbr==4.1.0
 pkginfo==1.4.2
 pockets==0.6.2
 port-for==0.3.1

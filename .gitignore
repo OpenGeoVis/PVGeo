@@ -11,4 +11,5 @@ dist/
 PVGeo.egg-info/
 docs/build/
 docs/source/suites
+docs/source/pvmacros
 docs/source/index.rst

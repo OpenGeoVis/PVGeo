@@ -13,6 +13,8 @@ from .. import _helpers
 class SGeMSGridReader(GSLibReader):
     """Generates ``vtkImageData`` from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
     """
+    __displayname__ = 'SGeMS Grid Reader'
+    __type__ = 'reader'
     def __init__(self):
         GSLibReader.__init__(self, outputType='vtkImageData')
         self.__extent = None
