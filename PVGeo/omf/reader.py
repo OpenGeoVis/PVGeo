@@ -45,7 +45,6 @@ class OMFReader(ReaderBaseBase):
     #### Methods for performing the read ####
 
     def _ReadUpFront(self):
-        print('reading...')
         # Read all elements
         reader = omf.OMFReader(self.GetFileName())
         project = reader.get_project()
