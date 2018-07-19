@@ -29,6 +29,8 @@ class CreateTensorMesh(AlgorithmBase):
     def _ReadCellLine(line):
         """Read cell sizes for each line in the UBC mesh line strings
         """
+        # OPTIMIZE: work in progress
+        # TODO: when optimized, make sure to combine with UBC reader
         line_list = []
         for seg in line.split():
             if '*' in seg:

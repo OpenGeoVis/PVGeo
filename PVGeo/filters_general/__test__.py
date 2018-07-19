@@ -322,7 +322,7 @@ class TestVoxelizePoints(unittest.TestCase):
         """`VoxelizePoints`: uniform mesh grid with given spacings"""
         # make the mesh grid
         dd = 5
-        x = y = z = np.arange(0, 100, dd)
+        x = y = z = np.arange(0, 100, dd, dtype=float)
         g = np.meshgrid(x, y, z)
         # Convert to XYZ points
         points = np.vstack(map(np.ravel, g)).T

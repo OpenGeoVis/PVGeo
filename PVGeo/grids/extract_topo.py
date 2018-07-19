@@ -74,7 +74,7 @@ class ExtractTopography(FilterBase):
         topoPts = np.array(wtopo.Points) # New NumPy array of points so we dont destroy input
         tree = cKDTree(topoPts[:, 0:2]) # NOTE: only on the XY plane
 
-        # TODO: accelerate this to harness structured coords
+        # OPTIMIZE: accelerate this to harness structured coords
         for i in range(ncells):
             voxel = grid.GetCell(i)
             x,y,z = self.__GetVoxelCenter(voxel)

@@ -15,11 +15,7 @@ from .. import _helpers
 def _makeSpatialCellData(nx, ny, nz):
     """Used for testing
     """
-    arr = np.zeros((nz, ny, nx))
-    for k in range(nz):
-        for j in range(ny):
-            for i in range(nx):
-                arr[k,j,i] = k * j * i
+    arr = np.fromfunction(lambda k, j, i: k*j*i, (nz, ny, nz))
     return arr.flatten()
 
 

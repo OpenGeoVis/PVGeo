@@ -97,6 +97,7 @@ class VoxelizePoints(FilterBase):
         if grid is None:
             grid = vtk.vtkUnstructuredGrid()
 
+        # TODO: Check dtypes on all arrays. Need to be floats
 
         if self.__estimateGrid:
             x,y,z = self.EstimateUniformSpacing(xo, yo, zo)
@@ -154,15 +155,13 @@ class VoxelizePoints(FilterBase):
             unique_nodes[:,0:2] = RotationTool.Rotate(unique_nodes[:,0:2], -self.__angle)
             self.AddFieldData(grid)
 
-        for i in range(numPts):
-            # for each node
-            pts.InsertPoint(i,
-                unique_nodes[i,0], unique_nodes[i,1], unique_nodes[i,2]
-            )
+        # Add unique nodes as points in output
+        pts.SetData(nps.numpy_to_vtk(unique_nodes))
 
         cnt = 0
         arridx = np.zeros(numCells)
         for i in range(numCells):
+            # OPTIMIZE: may be complicated but can be speed up
             vox = vtk.vtkVoxel()
             for j in range(8):
                 vox.GetPointIds().SetId(j, ind_nodes[j*numCells + i])
