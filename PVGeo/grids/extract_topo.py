@@ -8,7 +8,7 @@ import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
-from ..base import AlgorithmBase
+from ..base import FilterBase
 from .. import _helpers
 # NOTE: internal import - from scipy.spatial import cKDTree
 
@@ -16,14 +16,14 @@ from .. import _helpers
 
 ###############################################################################
 
-class ExtractTopography(AlgorithmBase):
+class ExtractTopography(FilterBase):
     """This filter takes two inputs: a gridded data set and a set of points for a Topography source. This will add a boolean data array to the cell data of the input grid on whether that cell should be active (under topographic layer).
 
     """
     __displayname__ = 'Extract Topography'
     __type__ = 'filter'
     def __init__(self):
-        AlgorithmBase.__init__(self,
+        FilterBase.__init__(self,
             nInputPorts=2, inputType='vtkDataObject',
             nOutputPorts=1)
 

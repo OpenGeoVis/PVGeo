@@ -8,7 +8,7 @@ from vtk.util import keys
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
-from ..base import AlgorithmBase
+from ..base import FilterBase
 from .. import _helpers
 from ..version import checkNumpy
 from .xyz import RotationTool
@@ -16,14 +16,14 @@ from .xyz import RotationTool
 ###############################################################################
 
 
-class VoxelizePoints(AlgorithmBase):
+class VoxelizePoints(FilterBase):
     """This makes a ``vtkUnstructuredGrid`` of scattered points given voxel sizes as input arrays.
     This assumes that the data is at least 2-Dimensional on the XY Plane.
     """
     __displayname__ = 'Voxelize Points'
     __type__ = 'filter'
     def __init__(self):
-        AlgorithmBase.__init__(self,
+        FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkUnstructuredGrid')
         self.__dx = None

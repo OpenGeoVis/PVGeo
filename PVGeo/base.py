@@ -164,18 +164,38 @@ class ReaderBase(AlgorithmBase):
             return self.__fileNames
         return self.__fileNames[idx]
 
+###############################################################################
+
+# Base filter to preserve input data type
+class FilterBase(AlgorithmBase):
+    """A base class for implementing filters which holds several convienace methods"""
+    __displayname__ = 'Filter Preserve Type Base'
+    __type__ = 'base'
+    def __init__(self,
+        nInputPorts=1, inputType='vtkDataSet',
+        nOutputPorts=1, outputType='vtkPolyData'):
+        AlgorithmBase.__init__(self,
+            nInputPorts=nInputPorts, inputType=inputType,
+            nOutputPorts=nOutputPorts, outputType=outputType)
+
+    def Apply(self, inputDataObject):
+        self.SetInputDataObject(inputDataObject)
+        self.Update()
+        return self.GetOutput()
+
+
 
 ###############################################################################
 
 # Base filter to preserve input data type
-class FilterPreserveTypeBase(AlgorithmBase):
+class FilterPreserveTypeBase(FilterBase):
     """A Base class for implementing filters that preserve the data type of
     their arbitray input.
     """
     __displayname__ = 'Filter Preserve Type Base'
     __type__ = 'base'
     def __init__(self):
-        AlgorithmBase.__init__(self,
+        FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkDataObject',
             nOutputPorts=1)
 
