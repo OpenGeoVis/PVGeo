@@ -342,7 +342,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         c = nps.numpy_to_vtk(num_array=arr,deep=True)
         # If no name given for data by user, use operator name
         newName = self.__newName
-        if newName == '' or newName == 'Normalized':
+        if newName == '':
             newName = 'Normalized ' + name
         c.SetName(newName)
         # Build output
