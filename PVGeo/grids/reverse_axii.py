@@ -17,11 +17,11 @@ class ReverseImageDataAxii(FilterBase):
     """This filter will flip ``vtkImageData`` on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data."""
     __displayname__ = 'Reverse Image Data Axii'
     __type__ = 'filter'
-    def __init__(self):
+    def __init__(self, axes=[True, True, True]):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
             nOutputPorts=1, outputType='vtkImageData')
-        self.__axes = [True, True, True] # Z Y X (FORTRAN)
+        self.__axes = axes[::-1] # Z Y X (FORTRAN)
 
     def _ReverseGridAxii(self, idi, ido):
         # Copy over input to output to be flipped around
