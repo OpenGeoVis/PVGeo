@@ -6,7 +6,7 @@ import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
 # Import Helpers:
-from ..base import AlgorithmBase
+from ..base import FilterBase
 from .. import _helpers
 
 
@@ -14,7 +14,7 @@ from .. import _helpers
 
 
 
-class TableToGrid(AlgorithmBase):
+class TableToGrid(FilterBase):
     """This filter takes a ``vtkTable`` object with columns that represent data to be translated (reshaped) into a 3D grid (2D also works, just set the third dimensions extent to 1). The grid will be a ``n1`` by ``n2`` by ``n3`` ``vtkImageData`` structure and an origin (south-west bottom corner) can be set at any xyz point. Each column of the ``vtkTable`` will represent a data attribute of the ``vtkImageData`` formed (essentially a uniform mesh). The SEPlib option allows you to unfold data that was packed in the SEPlib format where the most important dimension is z and thus the z data is d1 (``d1=z``, ``d2=y``, ``d3=x``). When using SEPlib, specify ``n1`` as the number of elements in the Z-direction, ``n2`` as the number of elements in the X-direction, and ``n3`` as the number of elements in the Y-direction (and so on for other parameters).
 
     Warning:
@@ -23,7 +23,7 @@ class TableToGrid(AlgorithmBase):
     __displayname__ = 'Table To Grid'
     __type__ = 'filter'
     def __init__(self, extent=[10, 10, 10]):
-        AlgorithmBase.__init__(self,
+        FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkImageData')
         self.__extent = extent # MUST BE GIVEN

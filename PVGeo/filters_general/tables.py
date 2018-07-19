@@ -7,7 +7,7 @@ import numpy as np
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
-from ..base import AlgorithmBase
+from ..base import FilterBase
 from .. import _helpers
 
 
@@ -16,13 +16,13 @@ from .. import _helpers
 ###############################################################################
 
 
-class CombineTables(AlgorithmBase):
+class CombineTables(FilterBase):
     """Takes two tables and combines them if they have the same number of rows.
     """
     __displayname__ = 'Combine Tables'
     __type__ = 'filter'
     def __init__(self):
-        AlgorithmBase.__init__(self,
+        FilterBase.__init__(self,
             nInputPorts=2, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkTable')
         # Parameters... none
@@ -56,24 +56,30 @@ class CombineTables(AlgorithmBase):
             pdo.GetRowData().AddArray(arr)
         return 1
 
+    def Apply(self, table0, table1):
+        self.SetInputDataObject(0, table0)
+        self.SetInputDataObject(1, table1)
+        self.Update()
+        return self.GetOutput()
+
 
 ###############################################################################
 #---- Reshape Table ----#
 
-class ReshapeTable(AlgorithmBase):
+class ReshapeTable(FilterBase):
     """This filter will take a ``vtkTable`` object and reshape it. This filter essentially treats ``vtkTable``s as 2D matrices and reshapes them using ``numpy.reshape`` in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.
     """
     __displayname__ = 'Reshape Table'
     __type__ = 'filter'
-    def __init__(self):
-        AlgorithmBase.__init__(self,
+    def __init__(self, **kwargs):
+        FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkTable')
         # Parameters
-        self.__nrows = 4
-        self.__ncols = False
-        self.__names = []
-        self.__order = 'F'
+        self.__nrows = kwargs.get('nrows', 1)
+        self.__ncols = kwargs.get('ncols', 1)
+        self.__names = kwargs.get('names', [])
+        self.__order = kwargs.get('order', 'F')
 
     def _Reshape(self, pdi, pdo):
         """Internal helper to perfrom the reshape

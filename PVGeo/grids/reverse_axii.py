@@ -6,19 +6,19 @@ from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np
 # Import Helpers:
-from ..base import AlgorithmBase
+from ..base import FilterBase
 from .. import _helpers
 
 
 #---- Reverse Grid Axii ----#
 
 
-class ReverseImageDataAxii(AlgorithmBase):
+class ReverseImageDataAxii(FilterBase):
     """This filter will flip ``vtkImageData`` on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data."""
     __displayname__ = 'Reverse Image Data Axii'
     __type__ = 'filter'
     def __init__(self):
-        AlgorithmBase.__init__(self,
+        FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
             nOutputPorts=1, outputType='vtkImageData')
         self.__axes = [True, True, True] # Z Y X (FORTRAN)
