@@ -10,13 +10,13 @@ import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
-from ..base import AlgorithmBase
+from ..base import FilterBase
 from .. import _helpers
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
 
-class _SliceBase(AlgorithmBase):
+class _SliceBase(FilterBase):
     """A helper class for making slicing fileters
 
     Note:
@@ -28,7 +28,7 @@ class _SliceBase(AlgorithmBase):
     def __init__(self, numSlices=5,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid'):
-        AlgorithmBase.__init__(self,
+        FilterBase.__init__(self,
             nInputPorts=nInputPorts, inputType=inputType,
             nOutputPorts=nOutputPorts, outputType=outputType)
         # Parameters
@@ -80,11 +80,11 @@ class ManySlicesAlongPoints(_SliceBase):
     """
     __displayname__ = 'Many Slices Along Points'
     __type__ = 'filter'
-    def __init__(self, numSlices=5):
+    def __init__(self, numSlices=5, nearestNbr=True):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=2, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid')
-        self.__useNearestNbr = True
+        self.__useNearestNbr = nearestNbr
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):
@@ -152,6 +152,12 @@ class ManySlicesAlongPoints(_SliceBase):
             self.__useNearestNbr = flag
             self.Modified()
 
+    def Apply(self, points, data):
+        self.SetInputDataObject(0, points)
+        self.SetInputDataObject(1, data)
+        self.Update()
+        return self.GetOutput()
+
 
 ###############################################################################
 
@@ -162,13 +168,13 @@ class ManySlicesAlongAxis(_SliceBase):
     """
     __displayname__ = 'Many Slices Along Axis'
     __type__ = 'filter'
-    def __init__(self, numSlices=5, outputType='vtkUnstructuredGrid'):
+    def __init__(self, numSlices=5, axis=0, rng=None, outputType='vtkUnstructuredGrid'):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType=outputType)
         # Parameters
-        self.__axis = 0
-        self.__rng = None
+        self.__axis = axis
+        self.__rng = rng
 
 
     def _GetOrigin(self, pdi, idx):
@@ -275,10 +281,11 @@ class SliceThroughTime(ManySlicesAlongAxis):
     """
     __displayname__ = 'Slice Through Time'
     __type__ = 'filter'
-    def __init__(self, numSlices=5):
-        ManySlicesAlongAxis.__init__(self, numSlices=numSlices, outputType='vtkPolyData')
+    def __init__(self, numSlices=5, dt=1.0, axis=0, rng=None,):
+        ManySlicesAlongAxis.__init__(self, numSlices=numSlices,
+                axis=axis, rng=rng, outputType='vtkPolyData')
         # Parameters
-        self.__dt = 1.0
+        self.__dt = dt
         self.__timesteps = None
 
 

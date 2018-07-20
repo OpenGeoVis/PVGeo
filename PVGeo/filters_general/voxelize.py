@@ -8,7 +8,7 @@ from vtk.util import keys
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
-from ..base import AlgorithmBase
+from ..base import FilterBase
 from .. import _helpers
 from ..version import checkNumpy
 from .xyz import RotationTool
@@ -16,21 +16,21 @@ from .xyz import RotationTool
 ###############################################################################
 
 
-class VoxelizePoints(AlgorithmBase):
+class VoxelizePoints(FilterBase):
     """This makes a ``vtkUnstructuredGrid`` of scattered points given voxel sizes as input arrays.
     This assumes that the data is at least 2-Dimensional on the XY Plane.
     """
     __displayname__ = 'Voxelize Points'
     __type__ = 'filter'
-    def __init__(self):
-        AlgorithmBase.__init__(self,
+    def __init__(self, **kwargs):
+        FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkUnstructuredGrid')
-        self.__dx = None
-        self.__dy = None
-        self.__dz = None
-        self.__estimateGrid = True
-        self.__safe = 10.0
+        self.__dx = kwargs.get('dx', None)
+        self.__dy = kwargs.get('dy', None)
+        self.__dz = kwargs.get('dz', None)
+        self.__estimateGrid = kwargs.get('estimate', True)
+        self.__safe = kwargs.get('safe', 10.0)
 
         # Not controlled by user:
         self.__angle = 0.0
@@ -97,6 +97,7 @@ class VoxelizePoints(AlgorithmBase):
         if grid is None:
             grid = vtk.vtkUnstructuredGrid()
 
+        # TODO: Check dtypes on all arrays. Need to be floats
 
         if self.__estimateGrid:
             x,y,z = self.EstimateUniformSpacing(xo, yo, zo)
@@ -154,15 +155,13 @@ class VoxelizePoints(AlgorithmBase):
             unique_nodes[:,0:2] = RotationTool.Rotate(unique_nodes[:,0:2], -self.__angle)
             self.AddFieldData(grid)
 
-        for i in range(numPts):
-            # for each node
-            pts.InsertPoint(i,
-                unique_nodes[i,0], unique_nodes[i,1], unique_nodes[i,2]
-            )
+        # Add unique nodes as points in output
+        pts.SetData(nps.numpy_to_vtk(unique_nodes))
 
         cnt = 0
         arridx = np.zeros(numCells)
         for i in range(numCells):
+            # OPTIMIZE: may be complicated but can be speed up
             vox = vtk.vtkVoxel()
             for j in range(8):
                 vox.GetPointIds().SetId(j, ind_nodes[j*numCells + i])

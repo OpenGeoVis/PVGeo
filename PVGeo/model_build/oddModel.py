@@ -15,20 +15,22 @@ class CreateTensorMesh(AlgorithmBase):
     """
     __displayname__ = 'Create Tensor Mesh'
     __type__ = 'source'
-    def __init__(self):
+    def __init__(self, origin=[-350.0, -400.0, 0.0], dataname='Data'):
         AlgorithmBase.__init__(self, nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')
-        self.__origin = [-350.0, -400.0, 0.0]
+        self.__origin = origin
         self.__xcells = CreateTensorMesh._ReadCellLine('200 100 50 20*50.0 50 100 200')
         self.__ycells = CreateTensorMesh._ReadCellLine('200 100 50 21*50.0 50 100 200')
         self.__zcells = CreateTensorMesh._ReadCellLine('20*25.0 50 100 200')
-        self.__dataName = 'Data'
+        self.__dataName = dataname
 
 
     @staticmethod
     def _ReadCellLine(line):
         """Read cell sizes for each line in the UBC mesh line strings
         """
+        # OPTIMIZE: work in progress
+        # TODO: when optimized, make sure to combine with UBC reader
         line_list = []
         for seg in line.split():
             if '*' in seg:

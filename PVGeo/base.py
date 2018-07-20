@@ -70,13 +70,14 @@ class ReaderBaseBase(AlgorithmBase):
     """
     __displayname__ = 'Reader Base Base'
     __type__ = 'base'
-    def __init__(self, nOutputPorts=1, outputType='vtkTable'):
+    def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType,
+            **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the reader
-        self.__fileNames = []
+        self.__fileNames = kwargs.get('filenames', [])
         # To know whether or not the read needs to perform
         self.__needToRead = True
 
@@ -143,6 +144,32 @@ class ReaderBaseBase(AlgorithmBase):
             return self.__fileNames
         return self.__fileNames[idx]
 
+    def Apply(self, fname):
+        """Given a file name (or list of file names), perfrom the read"""
+        self.AddFileName(fname)
+        self.Update()
+        return self.GetOutput()
+
+###############################################################################
+
+# Base filter to preserve input data type
+class FilterBase(AlgorithmBase):
+    """A base class for implementing filters which holds several convienace methods"""
+    __displayname__ = 'Filter Preserve Type Base'
+    __type__ = 'base'
+    def __init__(self,
+        nInputPorts=1, inputType='vtkDataSet',
+        nOutputPorts=1, outputType='vtkPolyData'):
+        AlgorithmBase.__init__(self,
+            nInputPorts=nInputPorts, inputType=inputType,
+            nOutputPorts=nOutputPorts, outputType=outputType)
+
+    def Apply(self, inputDataObject):
+        self.SetInputDataObject(inputDataObject)
+        self.Update()
+        return self.GetOutput()
+
+
 
 ###############################################################################
 # Base Reader
@@ -152,12 +179,12 @@ class ReaderBase(ReaderBaseBase):
     """
     __displayname__ = 'Reader Base: Time Vatying'
     __type__ = 'base'
-    def __init__(self, nOutputPorts=1, outputType='vtkTable'):
+    def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBaseBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the VTK/ParaView pipeline
-        self.__dt = 1.0
+        self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
 
 
@@ -196,14 +223,14 @@ class ReaderBase(ReaderBaseBase):
 ###############################################################################
 
 # Base filter to preserve input data type
-class FilterPreserveTypeBase(AlgorithmBase):
+class FilterPreserveTypeBase(FilterBase):
     """A Base class for implementing filters that preserve the data type of
     their arbitrary input.
     """
     __displayname__ = 'Filter Preserve Type Base'
     __type__ = 'base'
     def __init__(self):
-        AlgorithmBase.__init__(self,
+        FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkDataObject',
             nOutputPorts=1)
 
@@ -226,14 +253,15 @@ class TwoFileReaderBase(AlgorithmBase):
     """
     __displayname__ = 'Two File Reader Base'
     __type__ = 'base'
-    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
+    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType)
-        self.__dt = 1.0
+            nOutputPorts=nOutputPorts, outputType=outputType,
+            **kwargs)
+        self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
-        self.__meshFileName = None # Can only be one!
-        self.__modelFileNames = [] # Can be many (single attribute, manytimesteps)
+        self.__meshFileName = kwargs.get('meshfile', None) # Can only be one!
+        self.__modelFileNames = kwargs.get('modelfiles', []) # Can be many (single attribute, manytimesteps)
         self.__needToReadMesh = True
         self.__needToReadModels = True
 
@@ -355,3 +383,8 @@ class TwoFileReaderBase(AlgorithmBase):
 
     def GetMeshFileName(self):
         return self.__meshFileName
+
+    def Apply(self):
+        """Perfrom the read with parameters/file names set during init or by setters"""
+        self.Update()
+        return self.GetOutput()

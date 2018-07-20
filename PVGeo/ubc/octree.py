@@ -21,9 +21,10 @@ class OcTreeReader(ubcMeshReaderBase):
     """
     __displayname__ = 'UBC OcTree Mesh Reader'
     __type__ = 'reader'
-    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
+    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         ubcMeshReaderBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType,
+            **kwargs)
 
         self.__mesh = vtk.vtkUnstructuredGrid()
         self.__models = []
@@ -305,10 +306,11 @@ class OcTreeAppender(ModelAppenderBase):
     """
     __displayname__ = 'UBC OcTree Mesh Appender'
     __type__ = 'filter'
-    def __init__(self):
+    def __init__(self, **kwargs):
         ModelAppenderBase.__init__(self,
             inputType='vtkUnstructuredGrid',
-            outputType='vtkUnstructuredGrid')
+            outputType='vtkUnstructuredGrid',
+            **kwargs)
 
 
     def _ReadUpFront(self):

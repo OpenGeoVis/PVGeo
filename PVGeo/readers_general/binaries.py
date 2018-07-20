@@ -17,15 +17,14 @@ class PackedBinariesReader(ReaderBase):
     """
     __displayname__ = 'Packed Binaries Reader'
     __type__ = 'reader'
-    def __init__(self):
+    def __init__(self, **kwargs):
         ReaderBase.__init__(self,
-            nOutputPorts=1, outputType='vtkTable')
+            nOutputPorts=1, outputType='vtkTable', **kwargs)
         # Other Parameters
-        self.__dataName = "Data"
-        self.__dtypechar = 'f'
-        self.__endian = ''
+        self.__dataName = kwargs.get('dataname', 'Data')
+        self.__dtypechar = kwargs.get('dtype', 'f')
+        self.__endian = kwargs.get('endian', '')
         self.__dtype, self.__vtktype = _helpers.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
-        self.__madagascar = False
         # Data objects to hold the read data for access by the pipeline methods
         self.__data = []
 
@@ -145,8 +144,8 @@ class MadagascarReader(PackedBinariesReader):
     """
     __displayname__ = 'Madagascar SSRSF Reader'
     __type__ = 'reader'
-    def __init__(self):
-        PackedBinariesReader.__init__(self)
+    def __init__(self, **kwargs):
+        PackedBinariesReader.__init__(self, **kwargs)
 
     def _ReadRawFile(self, fileName):
         dtype, vtktype = self.GetDataTypes()
