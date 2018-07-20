@@ -101,3 +101,11 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
     def GetTimestepValues(self):
         """This is critical for registering the timesteps"""
         return SGeMSGridReader.GetTimestepValues(self)
+
+    @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0],)
+    def SetSpacing(self, dx, dy, dz):
+        SGeMSGridReader.SetSpacing(self, dx, dy, dz)
+
+    @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0, 0.0],)
+    def SetOrigin(self, ox, oy, oz):
+        SGeMSGridReader.SetOrigin(self, ox, oy, oz)

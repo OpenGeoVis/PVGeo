@@ -15,9 +15,11 @@ class SGeMSGridReader(GSLibReader):
     """
     __displayname__ = 'SGeMS Grid Reader'
     __type__ = 'reader'
-    def __init__(self):
+    def __init__(self, origin=(0.0, 0.0, 0.0), spacing=(1.0, 1.0, 1.0)):
         GSLibReader.__init__(self, outputType='vtkImageData')
         self.__extent = None
+        self.__origin = origin
+        self.__spacing = spacing
 
     def _ReadExtent(self):
         """Reads the input file for the SGeMS format to get output extents. Computationally inexpensive method to discover whole output extent.
@@ -59,8 +61,12 @@ class SGeMSGridReader(GSLibReader):
             self._ReadUpFront()
         # Generate the data object
         n1, n2, n3 = self.__extent
+        dx, dy, dz = self.__spacing
+        ox, oy, oz = self.__origin
         output.SetDimensions(n1, n2, n3)
         output.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)
+        output.SetSpacing(dx, dy, dz)
+        output.SetOrigin(ox, oy, oz)
         # Use table generater and convert because its easy:
         table = vtk.vtkTable()
         _helpers.placeArrInTable(self._GetRawData(idx=i), self.GetTitles(), table)
@@ -83,3 +89,18 @@ class SGeMSGridReader(GSLibReader):
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
+
+
+    def SetSpacing(self, dx, dy, dz):
+        """Set the spacing for each axial direction"""
+        spac = (dx, dy, dz)
+        if self.__spacing != spac:
+            self.__spacing = spac
+            self.Modified(readAgain=False)
+
+    def SetOrigin(self, ox, oy, oz):
+        """Set the origin corner of the grid"""
+        origin = (ox, oy, oz)
+        if self.__origin != origin:
+            self.__origin = origin
+            self.Modified(readAgain=False)
