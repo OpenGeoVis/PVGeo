@@ -6,19 +6,19 @@ import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
 # Import Helpers:
-from ..base import AlgorithmBase
+from ..base import FilterBase
 from .. import _helpers
 
 
 #---- Translate Grid Origin ----#
 
-class TranslateGridOrigin(AlgorithmBase):
+class TranslateGridOrigin(FilterBase):
     """This filter will translate the origin of `vtkImageData` to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior).
     """
     __displayname__ = 'Translate Grid Origin'
     __type__ = 'filter'
     def __init__(self, corner=1):
-        AlgorithmBase.__init__(self,
+        FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
             nOutputPorts=1, outputType='vtkImageData')
         self.__corner = corner

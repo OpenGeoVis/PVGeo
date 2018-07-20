@@ -11,7 +11,7 @@ import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
 # Import Helpers:
-from ..base import AlgorithmBase, FilterPreserveTypeBase
+from ..base import FilterBase, FilterPreserveTypeBase
 from .. import _helpers
 # NOTE: internal import - from scipy.spatial import cKDTree
 
@@ -33,14 +33,18 @@ class ArrayMath(FilterPreserveTypeBase):
     """
     __displayname__ = 'Array Math'
     __type__ = 'filter'
-    def __init__(self):
+    def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
-        self.__multiplier = 1.0
-        self.__newName = 'Mathed Up'
+        self.__multiplier = kwargs.get('multiplier', 1.0)
+        self.__newName = kwargs.get('newName', 'Mathed Up')
         self.__inputArray1 = [None, None]
         self.__inputArray2 = [None, None]
-        self.__operation = ArrayMath._add
+        # Convert operation to callable method
+        op = kwargs.get('operation', 'add')
+        if isinstance(op, (str, int)):
+            op = self.GetOperation(op)
+        self.__operation = op
 
 
     @staticmethod
@@ -233,15 +237,18 @@ class NormalizeArray(FilterPreserveTypeBase):
     """
     __displayname__ = 'Normalize Array'
     __type__ = 'filter'
-    def __init__(self):
+    def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
-        self.__multiplier = 1.0
-        self.__newName = 'Normalized'
-        self.__absolute = False
+        self.__multiplier = kwargs.get('multiplier', 1.0)
+        self.__newName = kwargs.get('newName', 'Normalized')
+        self.__absolute = kwargs.get('absolute', False)
         self.__inputArray = [None, None]
-        self.__normalization = NormalizeArray._featureScale
-        #self.__range = None
+        # Convert operation to callable method
+        op = kwargs.get('normalization', 'feature_scale')
+        if isinstance(op, (str, int)):
+            op = self.GetNormalization(op)
+        self.__normalization = op
 
 
     #### Array normalization methods ####
@@ -342,7 +349,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         c = nps.numpy_to_vtk(num_array=arr,deep=True)
         # If no name given for data by user, use operator name
         newName = self.__newName
-        if newName == '' or newName == 'Normalized':
+        if newName == '':
             newName = 'Normalized ' + name
         c.SetName(newName)
         # Build output
@@ -431,7 +438,7 @@ class NormalizeArray(FilterPreserveTypeBase):
 ###############################################################################
 #---- Cell Connectivity ----#
 
-class AddCellConnToPoints(AlgorithmBase):
+class AddCellConnToPoints(FilterBase):
     """This filter will add linear cell connectivity between scattered points. You have the option to add ``VTK_Line`` or ``VTK_PolyLine`` connectivity. ``VTK_Line`` connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The ``VTK_PolyLine`` adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation). Type map is specified in `vtkCellType.h`.
 
     **Cell Connectivity Types:**
@@ -441,13 +448,13 @@ class AddCellConnToPoints(AlgorithmBase):
     """
     __displayname__ = 'Add Cell Connectivity to Points'
     __type__ = 'filter'
-    def __init__(self):
-        AlgorithmBase.__init__(self,
+    def __init__(self, **kwargs):
+        FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.__cellType = vtk.VTK_POLY_LINE
-        self.__usenbr = False
+        self.__usenbr = kwargs.get('nearestNbr', False)
 
 
     def _ConnectCells(self, pdi, pdo, logTime=False):
@@ -565,8 +572,8 @@ class PointsToTube(AddCellConnToPoints):
     """
     __displayname__ = 'Points to Tube'
     __type__ = 'filter'
-    def __init__(self):
-        AddCellConnToPoints.__init__(self)
+    def __init__(self, **kwargs):
+        AddCellConnToPoints.__init__(self, **kwargs)
         # Additional Parameters
         # NOTE: CellType should remain vtk.VTK_POLY_LINE (4) connection
         self.__numSides = 20

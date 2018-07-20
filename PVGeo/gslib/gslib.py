@@ -13,9 +13,9 @@ class GSLibReader(DelimitedTextReader):
     """
     __displayname__ = 'GSLib Table Reader'
     __type__ = 'reader'
-    def __init__(self, outputType='vtkTable'):
-        DelimitedTextReader.__init__(self, outputType=outputType)
-        self.SetDelimiter(" ")
+    def __init__(self, outputType='vtkTable', **kwargs):
+        DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
+        self.SetDelimiter(kwargs.get('delimiter', ' '))
         # These are attributes the derived from file contents:
         self.__header = None
 

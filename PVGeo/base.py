@@ -19,6 +19,16 @@ import numpy as np
 class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     """This is a base class to add convienace methods to the
     ``VTKPythonAlgorithmBase`` for all algorithms implemented in ``PVGeo``.
+    We implement our algorithms in this manner to harness all of the backend support that the ``VTKPythonAlgorithmBase`` class provides for integrating custom algorithms on a VTK pipeline. All of the pipeline methods for setting inputs, getting outputs, making requests are handled by the super classes. For more information on what functionality is available, check out the VTK Docs for the `vtkAlgorithm`_ and then check out the following blog posts:
+
+    * `vtkPythonAlgorithm is great`_
+    * A VTK pipeline primer `(part 1)`_, `(part 2)`_, and `(part 3)`_
+
+    .. _vtkAlgorithm: https://www.vtk.org/doc/nightly/html/classvtkAlgorithm.html
+    .. _vtkPythonAlgorithm is great: https://blog.kitware.com/vtkpythonalgorithm-is-great/
+    .. _(part 1): https://blog.kitware.com/a-vtk-pipeline-primer-part-1/
+    .. _(part 2): https://blog.kitware.com/a-vtk-pipeline-primer-part-2/
+    .. _(part 3): https://blog.kitware.com/a-vtk-pipeline-primer-part-3/
     """
     __displayname__ = 'Algorithm Base'
     __type__ = 'base'
@@ -60,16 +70,17 @@ class ReaderBase(AlgorithmBase):
     """
     __displayname__ = 'Reader Base'
     __type__ = 'base'
-    def __init__(self, nOutputPorts=1, outputType='vtkTable'):
+    def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType,
+            **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the VTK/ParaView pipeline
-        self.__dt = 1.0
+        self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
         # For the reader
-        self.__fileNames = []
+        self.__fileNames = kwargs.get('filenames', [])
         # To know whether or not the read needs to perform
         self.__needToRead = True
 
@@ -164,25 +175,51 @@ class ReaderBase(AlgorithmBase):
             return self.__fileNames
         return self.__fileNames[idx]
 
+    def Apply(self, fname):
+        """Given a file name (or list of file names), perfrom the read"""
+        self.AddFileName(fname)
+        self.Update()
+        return self.GetOutput()
 
 ###############################################################################
 
 # Base filter to preserve input data type
-class FilterPreserveTypeBase(AlgorithmBase):
+class FilterBase(AlgorithmBase):
+    """A base class for implementing filters which holds several convienace methods"""
+    __displayname__ = 'Filter Preserve Type Base'
+    __type__ = 'base'
+    def __init__(self,
+        nInputPorts=1, inputType='vtkDataSet',
+        nOutputPorts=1, outputType='vtkPolyData'):
+        AlgorithmBase.__init__(self,
+            nInputPorts=nInputPorts, inputType=inputType,
+            nOutputPorts=nOutputPorts, outputType=outputType)
+
+    def Apply(self, inputDataObject):
+        self.SetInputDataObject(inputDataObject)
+        self.Update()
+        return self.GetOutput()
+
+
+
+###############################################################################
+
+# Base filter to preserve input data type
+class FilterPreserveTypeBase(FilterBase):
     """A Base class for implementing filters that preserve the data type of
-    their arbitray input.
+    their arbitrary input.
     """
     __displayname__ = 'Filter Preserve Type Base'
     __type__ = 'base'
     def __init__(self):
-        AlgorithmBase.__init__(self,
+        FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkDataObject',
             nOutputPorts=1)
 
     # THIS IS CRUCIAL to preserve data type through filter
     def RequestDataObject(self, request, inInfo, outInfo):
         """There is no need to overwrite this. This method lets the pipeline
-        know that the algorithm will dynamically decide the output dat type
+        know that the algorithm will dynamically decide the output data type
         based in the input data type.
         """
         self.OutputType = self.GetInputData(inInfo, 0, 0).GetClassName()
@@ -198,14 +235,15 @@ class TwoFileReaderBase(AlgorithmBase):
     """
     __displayname__ = 'Two File Reader Base'
     __type__ = 'base'
-    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
+    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType)
-        self.__dt = 1.0
+            nOutputPorts=nOutputPorts, outputType=outputType,
+            **kwargs)
+        self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
-        self.__meshFileName = None # Can only be one!
-        self.__modelFileNames = [] # Can be many (single attribute, manytimesteps)
+        self.__meshFileName = kwargs.get('meshfile', None) # Can only be one!
+        self.__modelFileNames = kwargs.get('modelfiles', []) # Can be many (single attribute, manytimesteps)
         self.__needToReadMesh = True
         self.__needToReadModels = True
 
@@ -327,3 +365,8 @@ class TwoFileReaderBase(AlgorithmBase):
 
     def GetMeshFileName(self):
         return self.__meshFileName
+
+    def Apply(self):
+        """Perfrom the read with parameters/file names set during init or by setters"""
+        self.Update()
+        return self.GetOutput()
