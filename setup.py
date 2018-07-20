@@ -4,7 +4,7 @@ and ParaView.
 
 import setuptools
 
-__version__ = '1.1.4'
+__version__ = '1.1.5'
 
 with open("README.md", "r") as f:
     long_description = f.read()
