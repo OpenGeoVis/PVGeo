@@ -147,7 +147,7 @@ class OcTreeReader(ubcMeshReaderBase):
         unique_nodes, ind_nodes_vec = np.unique(all_nodes_rec, return_inverse=True)
 
         # Reshape the matrix
-        ind_nodes_mat = ind_nodes_vec.reshape(((8, ind_nodes_vec.size / 8))).T
+        ind_nodes_mat = ind_nodes_vec.reshape(((8, int(ind_nodes_vec.size / 8)))).T
         ind_nodes_full = np.concatenate((
             np.ones((
                 ind_nodes_mat.shape[0],
