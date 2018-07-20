@@ -24,16 +24,14 @@ class wsMesh3DReader(ReaderBase):
         Three-dimensional magnetotelluric inversion: data-space method
         Physics of The Earth and Planetary Interiors, 2005, 150, 3-14
     """
-    def __init__(self, filename=None, x0=0.0, y0=0.0, z0=0.0, angle=0.0):
-        ReaderBase.__init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid')
+    def __init__(self, x0=0.0, y0=0.0, z0=0.0, angle=0.0, **kwargs):
+        ReaderBase.__init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid', **kwargs)
 
         # Parameters:
         self.__x0 = x0
         self.__y0 = y0
         self.__z0 = z0
         self.__angle = angle
-        if filename is not None:
-            self.AddFileName(filename)
 
 
     def _wsMesh3D(self, FileName, pdo):
