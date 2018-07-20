@@ -28,9 +28,9 @@ class TensorMeshReader(ubcMeshReaderBase):
     """
     __displayname__ = 'UBC Tensor Mesh Reader'
     __type__ = 'reader'
-    def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid'):
+    def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid', **kwargs):
         ubcMeshReaderBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
         self.__mesh = vtk.vtkRectilinearGrid()
         self.__models = []
@@ -334,10 +334,11 @@ class TensorMeshAppender(ModelAppenderBase):
     """
     __displayname__ = 'UBC Tensor Mesh Appender'
     __type__ = 'filter'
-    def __init__(self):
+    def __init__(self, **kwargs):
         ModelAppenderBase.__init__(self,
             inputType='vtkRectilinearGrid',
-            outputType='vtkRectilinearGrid')
+            outputType='vtkRectilinearGrid',
+            **kwargs)
 
 
     def _ReadUpFront(self):

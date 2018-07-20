@@ -38,8 +38,7 @@ def PointsToPolyData(points):
 
     # Convert points to vtk object
     pts = vtk.vtkPoints()
-    for r in points:
-        pts.InsertNextPoint(r[0],r[1],r[2])
+    pts.SetData(nps.numpy_to_vtk(points))
 
     # Create polydata
     pdata = vtk.vtkPolyData()
@@ -84,22 +83,7 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
         coords[i,1] = n
     coords[:,2] = alt
 
-    #insert = nps.numpy_to_vtk(num_array=coords, deep=True)
-    #insert.SetName('Coordinates')
-    # Add coords to ouptut table
-    wpdo.Points = coords
-    pts = vtk.vtkPoints()
-    polys = vtk.vtkCellArray()
-    k = 1
-    # TODO: wee need point cells????
-    for r in coords:
-        pts.InsertNextPoint(r[0],r[1],r[2])
-        polys.InsertNextCell(1)
-        polys.InsertCellPoint(k)
-        k = k + 1
-    #polys.Allocate()
-    pdo.SetPoints(pts)
-    pdo.SetPolys(polys)
+    pdo.ShallowCopy(PointsToPolyData(coords))
     # Add other arrays to output appropriately
     pdo = _helpers.copyArraysToPointData(pdi, pdo, fieldlat)
 
@@ -108,15 +92,12 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
 ###############################################################################
 
 
-class RotationTool(FilterBase):
+class RotationTool(object):
     """A class that holds a set of methods/tools for performing and estimating coordinate rotations.
     """
     __displayname__ = 'Rotation Tool'
     __type__ = 'filter'
     def __init__(self, decimals=6):
-        FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkPolyData',
-            nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.RESOLUTION = np.pi / 3200.0
         self.DECIMALS = decimals

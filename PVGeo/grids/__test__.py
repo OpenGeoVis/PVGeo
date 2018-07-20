@@ -49,9 +49,8 @@ class TestTableToGrid(unittest.TestCase):
         """`TableToGrid`: check simple"""
         # Rearange data to check to match table
         for i in range(len(self.arrs)):
-            a = np.reshape(self.arrs[i], (10, 2, 20))
+            a = np.reshape(self.arrs[i], (20, 2, 10))
             a = np.swapaxes(a, 0, 2)
-            a = np.swapaxes(a, 1, 2)
             self.arrs[i] = a.flatten()
         # Use filter
         f = TableToGrid()
@@ -70,7 +69,6 @@ class TestTableToGrid(unittest.TestCase):
         for i in range(len(self.arrs)):
             a = np.reshape(self.arrs[i], (20, 2, 10))
             a = np.swapaxes(a, 0, 2)
-            a = np.swapaxes(a, 1, 2)
             self.arrs[i] = a.flatten(order='F')
         # Use filter
         f = TableToGrid()

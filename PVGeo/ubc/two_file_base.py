@@ -18,9 +18,10 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
     """
     __displayname__ = 'UBC Mesh Reader Base'
     __type__ = 'base'
-    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
+    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         base.TwoFileReaderBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType,
+            **kwargs)
         self.__dataname = 'Data'
         # For keeping track of type (2D vs 3D)
         self.__sizeM = None
@@ -147,17 +148,17 @@ class ModelAppenderBase(base.AlgorithmBase):
     """
     __displayname__ = 'Model Appender Base'
     __type__ = 'base'
-    def __init__(self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid'):
+    def __init__(self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid', **kwargs):
         base.AlgorithmBase.__init__(self,
             nInputPorts=1, inputType=inputType,
             nOutputPorts=1, outputType=outputType)
-        self._modelFileNames = []
-        self._dataname = 'Appended Data'
+        self._modelFileNames = kwargs.get('modelfiles', [])
+        self._dataname = kwargs.get('dataname', 'Appended Data')
         self._models = []
         self.__needToRead = True
         self._is3D = None
         # For the VTK/ParaView pipeline
-        self.__dt = 1.0
+        self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
         self.__inTimesteps = None
 

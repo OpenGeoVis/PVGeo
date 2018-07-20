@@ -22,16 +22,17 @@ class TableToGrid(FilterBase):
     """
     __displayname__ = 'Table To Grid'
     __type__ = 'filter'
-    def __init__(self, extent=[10, 10, 10]):
+    def __init__(self, extent=[10, 10, 10], order='C', spacing=[1.0, 1.0, 1.0],
+                 origin=[0.0, 0.0, 0.0], seplib=False, swapXY=False):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkImageData')
-        self.__extent = extent # MUST BE GIVEN
-        self.__spacing = [1.0, 1.0, 1.0]
-        self.__origin = [0.0, 0.0, 0.0]
-        self.__SEPlib = False
-        self.__order = 'C'
-        self.__swapXY = False,
+        self.__extent = extent # MUST BE SET
+        self.__spacing = spacing
+        self.__origin = origin
+        self.__SEPlib = seplib
+        self.__order = order
+        self.__swapXY = swapXY
 
 
     @staticmethod
