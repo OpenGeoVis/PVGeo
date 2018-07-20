@@ -22,15 +22,15 @@ class VoxelizePoints(FilterBase):
     """
     __displayname__ = 'Voxelize Points'
     __type__ = 'filter'
-    def __init__(self):
+    def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkUnstructuredGrid')
-        self.__dx = None
-        self.__dy = None
-        self.__dz = None
-        self.__estimateGrid = True
-        self.__safe = 10.0
+        self.__dx = kwargs.get('dx', None)
+        self.__dy = kwargs.get('dy', None)
+        self.__dz = kwargs.get('dz', None)
+        self.__estimateGrid = kwargs.get('estimate', True)
+        self.__safe = kwargs.get('safe', 10.0)
 
         # Not controlled by user:
         self.__angle = 0.0

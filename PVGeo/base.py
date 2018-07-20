@@ -60,16 +60,17 @@ class ReaderBase(AlgorithmBase):
     """
     __displayname__ = 'Reader Base'
     __type__ = 'base'
-    def __init__(self, nOutputPorts=1, outputType='vtkTable'):
+    def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType,
+            **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the VTK/ParaView pipeline
-        self.__dt = 1.0
+        self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
         # For the reader
-        self.__fileNames = []
+        self.__fileNames = kwargs.get('filenames', [])
         # To know whether or not the read needs to perform
         self.__needToRead = True
 
@@ -218,14 +219,15 @@ class TwoFileReaderBase(AlgorithmBase):
     """
     __displayname__ = 'Two File Reader Base'
     __type__ = 'base'
-    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid'):
+    def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType)
-        self.__dt = 1.0
+            nOutputPorts=nOutputPorts, outputType=outputType,
+            **kwargs)
+        self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
-        self.__meshFileName = None # Can only be one!
-        self.__modelFileNames = [] # Can be many (single attribute, manytimesteps)
+        self.__meshFileName = kwargs.get('meshfile', None) # Can only be one!
+        self.__modelFileNames = kwargs.get('modelfiles', []) # Can be many (single attribute, manytimesteps)
         self.__needToReadMesh = True
         self.__needToReadModels = True
 

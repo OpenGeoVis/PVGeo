@@ -13,11 +13,11 @@ class EarthSource(AlgorithmBase):
     """
     __displayname__ = 'GSLib Table Reader'
     __type__ = 'source'
-    def __init__(self):
+    def __init__(self, radius=6371.0):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkPolyData')
-        self.__radius = 6371.0
+        self.__radius = radius
 
     def RequestData(self, request, inInfo, outInfo):
         pdo = self.GetOutputData(outInfo, 0)

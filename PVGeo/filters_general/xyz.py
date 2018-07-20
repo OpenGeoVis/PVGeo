@@ -92,15 +92,12 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
 ###############################################################################
 
 
-class RotationTool(FilterBase):
+class RotationTool(object):
     """A class that holds a set of methods/tools for performing and estimating coordinate rotations.
     """
     __displayname__ = 'Rotation Tool'
     __type__ = 'filter'
     def __init__(self, decimals=6):
-        FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkPolyData',
-            nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.RESOLUTION = np.pi / 3200.0
         self.DECIMALS = decimals

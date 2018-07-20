@@ -24,13 +24,16 @@ class CreateUniformGrid(AlgorithmBase):
     """
     __displayname__ = 'Create Uniform Grid'
     __type__ = 'source'
-    def __init__(self):
+    def __init__(self,
+                 extent=[10, 10, 10],
+                 spacing=[1.0, 1.0, 1.0],
+                 origin=[0.0, 0.0, 0.0]):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkImageData')
-        self.__extent = [10, 10, 10]
-        self.__spacing = [1.0, 1.0, 1.0]
-        self.__origin = [0.0, 0.0, 0.0]
+        self.__extent = extent
+        self.__spacing = spacing
+        self.__origin = origin
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -100,14 +103,18 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
     """
     __displayname__ = 'Create Even Rectilinear Grid'
     __type__ = 'source'
-    def __init__(self):
+    def __init__(self,
+                 extent=[10, 10, 10],
+                 xrng=[-1.0, 1.0],
+                 yrng=[-1.0, 1.0],
+                 zrng=[-1.0, 1.0]):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')
-        self.__extent = [10, 10, 10]
-        self.__xrange = [-1.0, 1.0]
-        self.__yrange = [-1.0, 1.0]
-        self.__zrange = [-1.0, 1.0]
+        self.__extent = extent
+        self.__xrange = xrng
+        self.__yrange = yrng
+        self.__zrange = zrng
 
 
     def RequestData(self, request, inInfo, outInfo):

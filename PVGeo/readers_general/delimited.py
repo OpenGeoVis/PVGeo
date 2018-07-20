@@ -15,17 +15,18 @@ class DelimitedTextReader(ReaderBase):
     """
     __displayname__ = 'Delimited Text Reader'
     __type__ = 'reader'
-    def __init__(self, nOutputPorts=1, outputType='vtkTable'):
+    def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType,
+            **kwargs)
 
         # Parameters to control the file read:
         #- if these are set/changed, we must reperform the read
-        self.__delimiter = " "
-        self.__useTab = False
-        self.__skipRows = 0
-        self.__comments = "#"
-        self.__hasTitles = True
+        self.__delimiter = kwargs.get('delimiter', ' ')
+        self.__useTab = kwargs.get('useTab', False)
+        self.__skipRows = kwargs.get('skiprows', 0)
+        self.__comments = kwargs.get('comments', '!')
+        self.__hasTitles = kwargs.get('HasTitles', True)
         # Data objects to hold the read data for access by the pipeline methods
         self.__data = []
         self.__titles = []
@@ -189,8 +190,9 @@ class XYZTextReader(DelimitedTextReader):
     """
     __displayname__ = 'XYZ Text Reader'
     __type__ = 'reader'
-    def __init__(self):
-        DelimitedTextReader.__init__(self)
+    def __init__(self, **kwargs):
+        DelimitedTextReader.__init__(self, **kwargs)
+        self.SetComments(kwargs.get('comments', '#'))
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):

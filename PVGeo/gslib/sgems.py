@@ -15,8 +15,8 @@ class SGeMSGridReader(GSLibReader):
     """
     __displayname__ = 'SGeMS Grid Reader'
     __type__ = 'reader'
-    def __init__(self, origin=(0.0, 0.0, 0.0), spacing=(1.0, 1.0, 1.0)):
-        GSLibReader.__init__(self, outputType='vtkImageData')
+    def __init__(self, origin=(0.0, 0.0, 0.0), spacing=(1.0, 1.0, 1.0), **kwargs):
+        GSLibReader.__init__(self, outputType='vtkImageData', **kwargs)
         self.__extent = None
         self.__origin = origin
         self.__spacing = spacing
