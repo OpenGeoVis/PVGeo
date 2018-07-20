@@ -152,6 +152,12 @@ class ManySlicesAlongPoints(_SliceBase):
             self.__useNearestNbr = flag
             self.Modified()
 
+    def Apply(self, points, data):
+        self.SetInputDataObject(0, points)
+        self.SetInputDataObject(1, data)
+        self.Update()
+        return self.GetOutput()
+
 
 ###############################################################################
 

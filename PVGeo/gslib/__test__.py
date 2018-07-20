@@ -109,11 +109,7 @@ class TestSGeMSGridReader(unittest.TestCase):
         header = '\n'.join(header)
         np.savetxt(fname, self.data, delimiter=' ', header=header, comments='')
         # Set up the reader
-        reader = SGeMSGridReader()
-        reader.AddFileName(fname)
-        # Perform the read
-        reader.Update()
-        self.GRID = reader.GetOutput()
+        self.GRID = SGeMSGridReader().Apply(fname)
 
     def tearDown(self):
         # Remove the test data directory after the test

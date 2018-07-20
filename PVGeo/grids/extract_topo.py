@@ -91,3 +91,9 @@ class ExtractTopography(FilterBase):
         data.SetName('Active Topography')
         grid.GetCellData().AddArray(data)
         return 1
+
+    def Apply(self, data, points):
+        self.SetInputDataObject(0, data)
+        self.SetInputDataObject(1, points)
+        self.Update()
+        return self.GetOutput()

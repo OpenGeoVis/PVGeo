@@ -165,6 +165,12 @@ class ReaderBase(AlgorithmBase):
             return self.__fileNames
         return self.__fileNames[idx]
 
+    def Apply(self, fname):
+        """Given a file name (or list of file names), perfrom the read"""
+        self.AddFileName(fname)
+        self.Update()
+        return self.GetOutput()
+
 ###############################################################################
 
 # Base filter to preserve input data type
@@ -349,3 +355,8 @@ class TwoFileReaderBase(AlgorithmBase):
 
     def GetMeshFileName(self):
         return self.__meshFileName
+
+    def Apply(self):
+        """Perfrom the read with parameters/file names set during init or by setters"""
+        self.Update()
+        return self.GetOutput()
