@@ -186,7 +186,7 @@ class ReaderBase(AlgorithmBase):
 # Base filter to preserve input data type
 class FilterBase(AlgorithmBase):
     """A base class for implementing filters which holds several convienace methods"""
-    __displayname__ = 'Filter Preserve Type Base'
+    __displayname__ = 'Filter Base'
     __type__ = 'base'
     def __init__(self,
         nInputPorts=1, inputType='vtkDataSet',
