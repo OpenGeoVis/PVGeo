@@ -180,7 +180,7 @@ class ManySlicesAlongAxis(_SliceBase):
     def _GetOrigin(self, pdi, idx):
         """Internal helper to get plane origin
         """
-        og = self.GetInputCenter(pdi)
+        og = list(self.GetInputCenter(pdi))
         og[self.__axis] = self.__rng[idx]
         return og
 
