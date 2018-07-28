@@ -2,11 +2,11 @@
 from .base import *
 
 # Import Suites
-from . import filters_general
+from . import filters
 from . import grids
 from . import gslib
 from . import model_build
-from . import readers_general
+from . import readers
 #TODO: from . import tunneling
 from . import ubc
 

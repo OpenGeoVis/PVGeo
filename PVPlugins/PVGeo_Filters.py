@@ -8,7 +8,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.filters_general import *
+from PVGeo.filters import *
 
 #### GLOBAL VARIABLES ####
 MENU_CAT = 'PVGeo: General Filters'
