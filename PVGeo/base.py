@@ -3,6 +3,7 @@ __all__ = [
     'ReaderBase',
     'FilterPreserveTypeBase',
     'TwoFileReaderBase',
+    'WriterBase',
 ]
 
 
@@ -372,3 +373,33 @@ class TwoFileReaderBase(AlgorithmBase):
         """Perfrom the read with parameters/file names set during init or by setters"""
         self.Update()
         return self.GetOutput()
+
+
+
+
+class WriterBase(AlgorithmBase):
+    def __init__(self, nInputPorts=0, inputType='vtkPolyData'):
+        AlgorithmBase.__init__(self, nInputPorts=nInputPorts, inputType=inputType,
+                                     nOutputPorts=0)
+        self.__filename = None
+
+
+    def SetFileName(self, fname):
+        """Specify the filename for the output. Writer can only handle a single output data object/time step."""
+        if self.__filename != fname:
+            self.__filename = fname
+            self.Modified()
+
+    def GetFileName(self, fname):
+        """Get the set filename."""
+        return self.__filename
+
+    def RequestData(self, request, inInfoVec, outInfoVec):
+        """OVERWRITE: This is executed by the pipeline and handles the write out"""
+        raise NotImplementedError()
+        return 1
+
+    def Write(self):
+        """Perfrom the write out."""
+        self.Modified()
+        self.Update()
