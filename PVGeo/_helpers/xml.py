@@ -105,6 +105,8 @@ def getPropertyXml(name, command, default_values, visibility='default', help='')
         typ = 'Double'
     elif propertyType is str:
         typ = 'String'
+    elif propertyType is int:
+        typ = 'Int'
     else:
         raise RuntimeError('getPropertyXml(): Unknown property type: %r' % propertyType)
 

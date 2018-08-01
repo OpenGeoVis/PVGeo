@@ -186,7 +186,7 @@ class ReaderBase(AlgorithmBase):
 # Base filter to preserve input data type
 class FilterBase(AlgorithmBase):
     """A base class for implementing filters which holds several convienace methods"""
-    __displayname__ = 'Filter Preserve Type Base'
+    __displayname__ = 'Filter Base'
     __type__ = 'base'
     def __init__(self,
         nInputPorts=1, inputType='vtkDataSet',
@@ -238,12 +238,14 @@ class TwoFileReaderBase(AlgorithmBase):
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType,
-            **kwargs)
+            nOutputPorts=nOutputPorts, outputType=outputType)
         self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
         self.__meshFileName = kwargs.get('meshfile', None) # Can only be one!
-        self.__modelFileNames = kwargs.get('modelfiles', []) # Can be many (single attribute, manytimesteps)
+        modfiles = kwargs.get('modelfiles', []) # Can be many (single attribute, manytimesteps)
+        if isinstance(modfiles, str):
+            modfiles = [modfiles]
+        self.__modelFileNames = modfiles
         self.__needToReadMesh = True
         self.__needToReadModels = True
 

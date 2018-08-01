@@ -27,7 +27,7 @@ class AnimateTBM(AlgorithmBase):
         import numpy as np
         from vtk.numpy_interface import dataset_adapter as dsa
         import PVGeo._helpers as inputhelp
-        from PVGeo.filters_general import pointsToTube
+        from PVGeo.filters import pointsToTube
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
