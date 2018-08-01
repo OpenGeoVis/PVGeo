@@ -11,7 +11,7 @@ import omf
 
 from ..base import ReaderBaseBase
 from .. import _helpers
-from ..filters_general import PointsToPolyData
+from ..filters import PointsToPolyData
 
 
 
