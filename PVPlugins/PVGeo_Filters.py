@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.6'
+paraview_plugin_version = '1.1.11'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -8,7 +8,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.filters_general import *
+from PVGeo.filters import *
 
 #### GLOBAL VARIABLES ####
 MENU_CAT = 'PVGeo: General Filters'

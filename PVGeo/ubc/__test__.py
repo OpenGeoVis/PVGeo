@@ -10,6 +10,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 
 # Functionality to test:
 from .tensor_mesh import *
+from .octree import *
 
 RTOL = 0.000001
 
@@ -236,26 +237,135 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
         self.assertEqual(output.GetCellData().GetArrayName(1), 'appended')
 
 
-# ###############################################################################
-#
-# class TestOcTreeMeshReader(ubcMeshTesterBase):
-#     """
-#     Test the `OcTreeReader` for 2D data
-#     """
-#
-#     def test_(self):
-#         self.assertTrue(False)
-#
-#
-# ###############################################################################
-#
-# class TestOcTreeAppender(ubcMeshTesterBase):
-#     """
-#     Test the `OcTreeAppender` for 2D data
-#     """
-#
-#     def test_(self):
-#         self.assertTrue(False)
-#
-#
-# ###############################################################################
+###############################################################################
+
+class TestOcTreeMeshReader(ubcMeshTesterBase):
+    """
+    Test the `OcTreeReader`
+    """
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp()
+        treeMesh = """16 16 16
+0.0000 0.0000 48.0000
+1.000 2.000 3.000
+29
+1 1 1 8
+9 1 1 8
+1 9 1 8
+9 9 1 8
+1 1 9 4
+5 1 9 4
+9 1 9 8
+1 5 9 4
+5 5 9 4
+1 9 9 8
+9 9 9 8
+1 1 13 2
+3 1 13 2
+5 1 13 4
+1 3 13 2
+3 3 13 2
+1 5 13 4
+5 5 13 4
+1 1 15 1
+2 1 15 1
+3 1 15 2
+1 2 15 1
+2 2 15 1
+1 3 15 2
+3 3 15 2
+1 1 16 1
+2 1 16 1
+1 2 16 1
+2 2 16 1
+"""
+        # Write out mesh file
+        fname = os.path.join(self.test_dir, 'octree.msh')
+        self.meshFileName = fname
+        with open(fname, 'w') as f:
+            f.write(treeMesh)
+
+
+        # write out model file(s)
+        self.nt = 5
+        self.modelFileNames = ['model%d.mod' % i for i in range(self.nt)]
+        self.modelFileNames = [os.path.join(self.test_dir, self.modelFileNames[i]) for i in range(self.nt)]
+        self.arrs = [None] * self.nt
+        for i in range(self.nt):
+            self.arrs[i] = np.random.random(29)
+            np.savetxt(self.modelFileNames[i], self.arrs[i], delimiter=' ', comments='! ')
+        return
+
+    def tearDown(self):
+        # Remove the test data directory after the test
+        shutil.rmtree(self.test_dir)
+
+    def reshapeArrs(self, mesh):
+        for i in range(self.nt):
+            ind_reorder = nps.vtk_to_numpy(
+                mesh.GetCellData().GetArray('index_cell_corner'))
+            self.arrs[i] = self.arrs[i][ind_reorder]
+
+    def test_simple_octree(self):
+        """`OcTreeReader`: simple octree mesh file"""
+        reader = OcTreeReader()
+        reader.SetMeshFileName(self.meshFileName)
+
+        reader.Update()
+
+        tree = reader.GetOutput()
+        self.assertIsNotNone(tree)
+        self.assertEqual(tree.GetNumberOfCells(), 29)
+        self.assertEqual(tree.GetNumberOfPoints(), 84)
+
+    def test_simple_octree(self):
+        """`OcTreeReader`: simple octree mesh with models"""
+        reader = OcTreeReader()
+        reader.SetMeshFileName(self.meshFileName)
+        reader.AddModelFileName(self.modelFileNames)
+        reader.SetDataName('foo')
+
+        reader.Update() # Check that normal update works
+
+        tree = reader.GetOutput()
+        self.assertIsNotNone(tree)
+        self.assertEqual(tree.GetNumberOfCells(), 29)
+        self.assertEqual(tree.GetNumberOfPoints(), 84)
+
+        self.reshapeArrs(tree)
+
+        wtree = dsa.WrapDataObject(tree)
+        # Now check time series
+        for i in range(self.nt):
+            reader.UpdateTimeStep(i)
+            arr = wtree.CellData['foo']
+            self.assertTrue(np.allclose(arr, self.arrs[i], rtol=RTOL))
+
+        return
+
+    def test_model_appender(self):
+        """`OcTreeAppender` 2D: Data array name"""
+        # Creat a tree mesh to append
+        reader = OcTreeReader()
+        reader.SetMeshFileName(self.meshFileName)
+        reader.AddModelFileName(self.modelFileNames[0])
+        reader.SetDataName('Initial Data')
+        reader.Update()
+        tree = reader.GetOutput()
+        self.assertIsNotNone(tree)
+        self.assertEqual(tree.GetNumberOfCells(), 29)
+        self.assertEqual(tree.GetNumberOfPoints(), 84)
+
+        # Now use the model appender
+        f = OcTreeAppender()
+        f.SetInputDataObject(tree)
+        f.AddModelFileName(self.modelFileNames[1::])
+        f.SetDataName('Appended Data')
+        f.Update()
+
+        output = f.GetOutput()
+        self.assertEqual(output.GetCellData().GetNumberOfArrays(), 3) # remember that the index corner array is added by the reader
+        self.assertEqual(output.GetCellData().GetArrayName(2), 'Appended Data')
+        self.assertEqual(len(f.GetTimestepValues()), self.nt-1)
+        return

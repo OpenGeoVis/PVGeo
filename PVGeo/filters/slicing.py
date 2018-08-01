@@ -164,7 +164,10 @@ class ManySlicesAlongPoints(_SliceBase):
 
 
 class ManySlicesAlongAxis(_SliceBase):
-    """Slices a ``vtkDataSet`` along a given axis many times
+    """Slices a ``vtkDataSet`` along a given axis many times.
+    This produces a specified number of slices at once each with a normal vector
+    oriented along the axis of choice and spaced uniformly through the range of
+    the dataset on the chosen axis.
     """
     __displayname__ = 'Many Slices Along Axis'
     __type__ = 'filter'
@@ -180,7 +183,7 @@ class ManySlicesAlongAxis(_SliceBase):
     def _GetOrigin(self, pdi, idx):
         """Internal helper to get plane origin
         """
-        og = self.GetInputCenter(pdi)
+        og = list(self.GetInputCenter(pdi))
         og[self.__axis] = self.__rng[idx]
         return og
 

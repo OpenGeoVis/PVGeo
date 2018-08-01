@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.6'
+paraview_plugin_version = '1.1.11'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -7,8 +7,8 @@ from paraview.util.vtkAlgorithm import *
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.readers_general import PackedBinariesReader, MadagascarReader
-from PVGeo.readers_general import DelimitedTextReader, XYZTextReader
+from PVGeo.readers import PackedBinariesReader, MadagascarReader
+from PVGeo.readers import DelimitedTextReader, XYZTextReader
 
 
 ###############################################################################
