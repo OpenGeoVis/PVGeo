@@ -62,6 +62,11 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         """
         return self.__errorObserver.ErrorMessage()
 
+    def Apply(self):
+        """Update the algorithm and get the output data object"""
+        self.Update()
+        return self.GetOutput()
+
 
 ###############################################################################
 
@@ -378,19 +383,21 @@ class TwoFileReaderBase(AlgorithmBase):
 
 
 class WriterBase(AlgorithmBase):
-    def __init__(self, nInputPorts=0, inputType='vtkPolyData'):
+    def __init__(self, nInputPorts=1, inputType='vtkPolyData', **kwargs):
         AlgorithmBase.__init__(self, nInputPorts=nInputPorts, inputType=inputType,
                                      nOutputPorts=0)
-        self.__filename = None
+        self.__filename = kwargs.get('filename', None)
 
 
     def SetFileName(self, fname):
         """Specify the filename for the output. Writer can only handle a single output data object/time step."""
+        if not isinstance(fname, str):
+            raise RuntimeError('File name must be string. Only single file is supported.')
         if self.__filename != fname:
             self.__filename = fname
             self.Modified()
 
-    def GetFileName(self, fname):
+    def GetFileName(self):
         """Get the set filename."""
         return self.__filename
 
@@ -399,7 +406,14 @@ class WriterBase(AlgorithmBase):
         raise NotImplementedError()
         return 1
 
-    def Write(self):
+    def Write(self, inputDataObject=None):
         """Perfrom the write out."""
+        if inputDataObject:
+            self.SetInputDataObject(inputDataObject)
+        self.Modified()
+        self.Update()
+
+    def Apply(self, inputDataObject):
+        self.SetInputDataObject(inputDataObject)
         self.Modified()
         self.Update()
