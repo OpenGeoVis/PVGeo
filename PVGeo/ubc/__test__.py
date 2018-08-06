@@ -11,6 +11,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 # Functionality to test:
 from .tensor_mesh import *
 from .octree import *
+from .write import *
 
 RTOL = 0.000001
 
@@ -36,9 +37,9 @@ class ubcMeshTesterBase(unittest.TestCase):
 
 ###############################################################################
 
-class Test3DTensorMeshReader(ubcMeshTesterBase):
+class Test3DTensorMesh(ubcMeshTesterBase):
     """
-    Test the `TensorMeshReader` and `TensorMeshAppender` for 3D data
+    Test the `TensorMeshReader`, `TensorMeshAppender`, and `WriteRectilinearGridToUBC` for 3D data
     """
     def _write_mesh(self):
         fname = os.path.join(self.test_dir, 'test.msh')
@@ -120,6 +121,28 @@ class Test3DTensorMeshReader(ubcMeshTesterBase):
         output = f.GetOutput()
         self.assertEqual(output.GetCellData().GetNumberOfArrays(), 2)
         self.assertEqual(output.GetCellData().GetArrayName(1), 'appended')
+
+    def test_writer(self):
+        """`WriteRectilinearGridToUBC`: Test data integretiy across I/O"""
+        # Write known data back out using the writer:
+        writer = WriteRectilinearGridToUBC()
+        fname = os.path.join(self.test_dir, 'test-writer.msh')
+        writer.SetFileName(fname)
+        writer.Write(self.GRID)
+        # Now read in the data again and compare!
+        reader = TensorMeshReader()
+        reader.SetMeshFileName(fname)
+        modname = os.path.join(self.test_dir, '%s.mod' % self.dataName)
+        reader.AddModelFileName(modname)
+        reader.SetDataName(self.dataName)
+        reader.Update()
+        test = reader.GetOutput()
+        # Compare the data
+        self._check_shape(test)
+        self._check_spatial_reference(test)
+        self._check_data(test, self.data)
+        self.assertEqual(test.GetCellData().GetArrayName(0), self.dataName)
+        return
 
 ###############################################################################
 

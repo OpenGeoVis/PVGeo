@@ -28,7 +28,7 @@ class DelimitedTextReader(ReaderBase):
         self.__comments = kwargs.get('comments', '!')
         self.__hasTitles = kwargs.get('HasTitles', True)
         # Data objects to hold the read data for access by the pipeline methods
-        self.__data = []
+        self._data = []
         self.__titles = []
 
     def _GetDeli(self):
@@ -70,7 +70,7 @@ class DelimitedTextReader(ReaderBase):
                 titles.append('Field %d' % i)
         return titles, content[idx::]
 
-    def __ExtractHeaders(self, contents):
+    def _ExtractHeaders(self, contents):
         """Should NOT be overriden.
         """
         ts = []
@@ -85,7 +85,7 @@ class DelimitedTextReader(ReaderBase):
         return ts[0], contents
 
 
-    def __FileContentsToDataArray(self, contents):
+    def _FileContentsToDataArray(self, contents):
         """Should NOT need to be overriden
         """
         data = []
@@ -98,8 +98,8 @@ class DelimitedTextReader(ReaderBase):
         """
         # Perform Read
         contents = self._GetFileContents()
-        self.__titles, contents = self.__ExtractHeaders(contents)
-        self.__data = self.__FileContentsToDataArray(contents)
+        self.__titles, contents = self._ExtractHeaders(contents)
+        self._data = self._FileContentsToDataArray(contents)
         self.NeedToRead(flag=False)
         return 1
 
@@ -108,7 +108,7 @@ class DelimitedTextReader(ReaderBase):
     def _GetRawData(self, idx=0):
         """This will return the proper data for the given timestep.
         """
-        return self.__data[idx]
+        return self._data[idx]
 
 
     #### Algorithm Methods ####

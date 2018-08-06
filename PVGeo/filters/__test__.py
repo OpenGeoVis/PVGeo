@@ -261,12 +261,15 @@ class TestRotatePoints(unittest.TestCase):
         return
 
     def test_rotation(self):
+        """`RotatePoints`: Assert produces and output"""
         f = RotatePoints()
         f.SetInputDataObject(self.vtkpoints)
         f.SetRotationDegrees(33.3)
         f.Update()
         output = f.GetOutput()
         self.assertIsNotNone(output)
+        # TODO: needs further testing
+        return
 
 
 ###############################################################################
@@ -662,6 +665,7 @@ class TestPointsToTube(unittest.TestCase):
         self.vtkpoints = PointsToPolyData(self.pts)
 
     def test_(self):
+        """`PointsToTube`: Test generation of tube from shuffled points"""
         self.makeComplicatedInput()
         f = PointsToTube()
         f.SetInputDataObject(self.vtkpoints)
