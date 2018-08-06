@@ -291,7 +291,7 @@ class TestSurferGridReader(unittest.TestCase):
 
 
     def test(self):
-        """Test reader and writer for Surfer format"""
+        """`SurferGridReader` and `WriteImageDataToSurfer`: Test reader and writer for Surfer format"""
         reader = SurferGridReader()
         reader.AddFileName(self.fname)
         reader.SetDataName('foo')
