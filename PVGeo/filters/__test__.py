@@ -725,3 +725,18 @@ class TestPointsToTube(unittest.TestCase):
 #
 #
 # ###############################################################################
+
+
+# class TestPercentThreshold(unittest.TestCase):
+#     """
+#     Test the `PercentThreshold` filter
+#     """
+#
+#     def test(self):
+#         """`PercentThreshold`: make sure no errors arise"""
+#         filt = PercentThreshold()
+#
+#         return
+#
+
+###############################################################################

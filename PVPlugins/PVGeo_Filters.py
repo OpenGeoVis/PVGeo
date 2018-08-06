@@ -410,3 +410,40 @@ class PVGeoExtractPoints(ExtractPoints):
 
 
 ###############################################################################
+
+
+@smproxy.filter(name='PVGeoPercentThreshold', label='Percent Threshold')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+@smhint.xml('''<View type="RenderView" />''')
+@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
+class PVGeoPercentThreshold(PercentThreshold):
+    def __init__(self):
+        PercentThreshold.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.doublevector(name="Percent", default_values=50.0)
+    @smdomain.doublerange(min=0.0, max=100.0)
+    def SetPercent(self, percent):
+        PercentThreshold.SetPercent(self, percent)
+
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Continuous Cell Range',
+        command='SetUseContinuousCellRange', default_values=False))
+    def SetUseContinuousCellRange(self, flag):
+        PercentThreshold.SetUseContinuousCellRange(self, flag)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Invert',
+        command='SetInvert', default_values=False,
+        help='Use to invert the threshold filter.'))
+    def SetInvert(self, flag):
+        PercentThreshold.SetInvert(self, flag)
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return PercentThreshold.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+
+###############################################################################

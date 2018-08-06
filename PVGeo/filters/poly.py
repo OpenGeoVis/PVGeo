@@ -3,6 +3,7 @@ __all__ = [
     'NormalizeArray',
     'AddCellConnToPoints',
     'PointsToTube',
+    'PercentThreshold',
 ]
 
 import vtk
@@ -612,3 +613,78 @@ class PointsToTube(AddCellConnToPoints):
 
 
 ###############################################################################
+
+
+class PercentThreshold(FilterBase):
+    """Allows user to select a percent of the data range to threshold.
+    This will find the data range of the selected input array and remove the
+    bottom percent. This can be reversed using the invert property.
+    """
+    __displayname__ = 'Percent Threshold'
+    __type__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterBase.__init__(self, inputType='vtkDataSet',
+                            outputType='vtkUnstructuredGrid', **kwargs)
+        self.__invert = False
+        self.__percent = 50 # NOTE: not decimal percent
+        self.__filter = vtk.vtkThreshold()
+        self.__inputArray = [None, None]
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline for execution"""
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        self.__filter.SetInputDataObject(pdi)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Get Input Array
+        field, name = self.__inputArray[0], self.__inputArray[1]
+        wpdi = dsa.WrapDataObject(pdi)
+        arr = _helpers.getNumPyArray(wpdi, field, name)
+
+        dmin, dmax = np.min(arr), np.max(arr)
+        val = dmin + (self.__percent / 100.0) * (dmax - dmin)
+
+        if self.__invert:
+            self.__filter.ThresholdByLower(val)
+        else:
+            self.__filter.ThresholdByUpper(val)
+
+        self.__filter.Update()
+
+        filt = self.__filter.GetOutputDataObject(0)
+
+        pdo.ShallowCopy(filt)
+        return 1
+
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        """Used by pipeline/paraview GUI wrappings to set the input array to threshold
+        """
+        if self.__inputArray[0] != field or self.__inputArray[1] != name:
+            self.__inputArray[0] = field
+            self.__inputArray[1] = name
+            self.__filter.SetInputArrayToProcess(idx, port, connection, field, name)
+            self.Modified()
+        return 1
+
+    def SetPercent(self, percent):
+        """Set the percent for the threshold in range (0, 100).
+        Any values falling beneath the set percent of the total data range
+        will be removed."""
+        if self.__percent != percent:
+            self.__percent = percent
+            self.Modified()
+
+    def SetUseContinuousCellRange(self, flag):
+        """If this is on (default is off), we will use the continuous
+        interval [minimum cell scalar, maxmimum cell scalar] to intersect
+        the threshold bound , rather than the set of discrete scalar
+        values from the vertices"""
+        return self.__filter.SetUseContinuousCellRange(flag)
+
+    def SetInvert(self, flag):
+        """Use to invert the threshold filter"""
+        if self.__invert != flag:
+            self.__invert = flag
+            self.Modified()
