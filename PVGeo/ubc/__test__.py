@@ -11,6 +11,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 # Functionality to test:
 from .tensor_mesh import *
 from .octree import *
+from .write import *
 
 RTOL = 0.000001
 
@@ -36,9 +37,9 @@ class ubcMeshTesterBase(unittest.TestCase):
 
 ###############################################################################
 
-class Test3DTensorMeshReader(ubcMeshTesterBase):
+class Test3DTensorMesh(ubcMeshTesterBase):
     """
-    Test the `TensorMeshReader` and `TensorMeshAppender` for 3D data
+    Test the `TensorMeshReader`, `TensorMeshAppender`, and `WriteRectilinearGridToUBC` for 3D data
     """
     def _write_mesh(self):
         fname = os.path.join(self.test_dir, 'test.msh')
@@ -120,6 +121,13 @@ class Test3DTensorMeshReader(ubcMeshTesterBase):
         output = f.GetOutput()
         self.assertEqual(output.GetCellData().GetNumberOfArrays(), 2)
         self.assertEqual(output.GetCellData().GetArrayName(1), 'appended')
+
+    def test_writer(self):
+        writer = WriteRectilinearGridToUBC()
+        # TODO: implement an actual test case
+        writer.SetFileName('/Users/bane/Desktop/test_ubc_write.msh')
+        writer.Write(self.GRID)
+        return
 
 ###############################################################################
 

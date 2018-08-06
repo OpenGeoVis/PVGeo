@@ -116,8 +116,8 @@ class ArrayMath(FilterPreserveTypeBase):
         field1, name1 = self.__inputArray1[0], self.__inputArray1[1]
         field2, name2 = self.__inputArray2[0], self.__inputArray2[1]
         wpdi = dsa.WrapDataObject(pdi)
-        arr1 = _helpers.getArray(wpdi, field1, name1)
-        arr2 = _helpers.getArray(wpdi, field2, name2)
+        arr1 = _helpers.getNumPyArray(wpdi, field1, name1)
+        arr2 = _helpers.getNumPyArray(wpdi, field2, name2)
         # Perform Math Operation
         carr = self.__operation(arr1, arr2)
         # Apply the multiplier
@@ -324,7 +324,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         """Returns a tuple of the range for a ``vtkDataArray`` on a ``vtkDataObject``
         """
         wpdi = dsa.WrapDataObject(pdi)
-        arr = _helpers.getArray(wpdi, field, name)
+        arr = _helpers.getNumPyArray(wpdi, field, name)
         arr = np.array(arr)
         return (np.min(arr), np.max(arr))
 
@@ -336,7 +336,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         field, name = self.__inputArray[0], self.__inputArray[1]
         #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
-        arr = _helpers.getArray(wpdi, field, name)
+        arr = _helpers.getNumPyArray(wpdi, field, name)
         arr = np.array(arr, dtype=float)
         # Take absolute value?
         if self.__absolute:
