@@ -164,7 +164,7 @@ class ModelAppenderBase(base.AlgorithmBase):
 
     def __SetInputTimesteps(self):
         ints = _helpers.GetInputTimeSteps(self)
-        self.__inTimesteps = ints if ints is not None else []
+        self.__inTimesteps = list(ints) if ints is not None else []
         return self.__inTimesteps
 
     def NeedToRead(self, flag=None):
@@ -241,7 +241,8 @@ class ModelAppenderBase(base.AlgorithmBase):
         """Use this in ParaView decorator to register timesteps.
         """
         if self.__timesteps is None: self.__timesteps = self.__SetInputTimesteps()
-        return self.__timesteps.tolist() if self.__timesteps is not None else None
+        # self.__timesteps should already be of type list
+        return self.__timesteps if self.__timesteps is not None else None
 
     def ClearModels(self):
         """Use to clear data file names.
