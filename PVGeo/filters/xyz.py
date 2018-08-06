@@ -164,7 +164,7 @@ class RotationTool(object):
         Note:
             This code was adopted from `printipi`_ under the MIT license.
 
-        .. _printpi: https://github.com/Wallacoloo/printipi/blob/master/util/rotation_matrix.py
+        .. _printipi: https://github.com/Wallacoloo/printipi/blob/master/util/rotation_matrix.py
         """
         from math import acos, atan2, cos, pi, sin
         from numpy import array, cross, dot, float64, hypot, zeros
