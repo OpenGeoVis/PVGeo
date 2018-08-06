@@ -166,8 +166,7 @@ class WriteImageDataToSurfer(WriterBase):
 
         # Note user has to select a single array to save out
         field, name = self.__inputArray[0], self.__inputArray[1]
-        arr = _helpers.getVTKArray(img, field, name)
-        vtkarr = img.GetPointData().GetArray(0)
+        vtkarr = _helpers.getVTKArray(img, field, name)
         arr = nps.vtk_to_numpy(vtkarr)
         dmin, dmax = arr.min(), arr.max()
 

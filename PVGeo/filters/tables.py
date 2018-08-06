@@ -1,6 +1,7 @@
 __all__ = [
     'CombineTables',
     'ReshapeTable',
+    'ExtractArray',
 ]
 
 import numpy as np
@@ -186,3 +187,44 @@ class ReshapeTable(FilterBase):
         if self.__order != order:
             self.__order = order
             self.Modified()
+
+
+
+class ExtractArray(FilterBase):
+    """Extract an array from a ``vtkDataSet`` and make a ``vtkTable`` of it.
+    """
+    __displayname__ = 'Extract Array'
+    __type__ = 'filter'
+    def __init__(self):
+        FilterBase.__init__(self,
+            nInputPorts=1, inputType='vtkDataSet',
+            nOutputPorts=1, outputType='vtkTable')
+        self.__inputArray = [None, None]
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output
+        """
+        # Inputs from different ports:
+        pdi = self.GetInputData(inInfo, 0, 0)
+        table = self.GetOutputData(outInfo, 0)
+
+
+        # Note user has to select a single array to save out
+        field, name = self.__inputArray[0], self.__inputArray[1]
+        vtkarr = _helpers.getVTKArray(pdi, field, name)
+
+        table.GetRowData().AddArray(vtkarr)
+
+        return 1
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        """Used by pipeline/paraview GUI wrappings to set the input arrays
+        """
+        if self.__inputArray[0] != field:
+            self.__inputArray[0] = field
+            self.Modified()
+        if self.__inputArray[1] != name:
+            self.__inputArray[1] = name
+            self.Modified()
+        return 1

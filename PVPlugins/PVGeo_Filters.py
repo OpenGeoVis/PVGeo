@@ -447,3 +447,20 @@ class PVGeoPercentThreshold(PercentThreshold):
 
 
 ###############################################################################
+
+
+# Combine Tables
+@smproxy.filter(name='PVGeoExtractArray', label='Extract Array')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+class PVGeoExtractArray(ExtractArray):
+    def __init__(self):
+        ExtractArray.__init__(self)
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return ExtractArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+
+###############################################################################
