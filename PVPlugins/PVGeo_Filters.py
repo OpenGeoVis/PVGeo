@@ -193,9 +193,9 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         # Handle input arrays
         pdi = self.GetInputData(inInfoVec, 0, 0)
         wpdi = dsa.WrapDataObject(pdi)
-        dx = _helpers.getArray(wpdi, self.__dx_id[0], self.__dx_id[1])
-        dy = _helpers.getArray(wpdi, self.__dy_id[0], self.__dy_id[1])
-        dz = _helpers.getArray(wpdi, self.__dz_id[0], self.__dz_id[1])
+        dx = _helpers.getNumPyArray(wpdi, self.__dx_id[0], self.__dx_id[1])
+        dy = _helpers.getNumPyArray(wpdi, self.__dy_id[0], self.__dy_id[1])
+        dz = _helpers.getNumPyArray(wpdi, self.__dz_id[0], self.__dz_id[1])
         VoxelizePoints.SetDeltas(self, dx, dy, dz)
         # call parent and make sure EstimateGrid is set to False
         return VoxelizePoints.RequestData(self, request, inInfoVec, outInfoVec)

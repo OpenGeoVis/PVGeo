@@ -69,9 +69,9 @@ def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None)
     (namelon, fieldlon) = arrlon[0], arrlon[1]
     (namealt, fieldalt) = arralt[0], arralt[1]
     wpdi = dsa.WrapDataObject(pdi)
-    lat = _helpers.getArray(wpdi, fieldlat, namelat)
-    lon = _helpers.getArray(wpdi, fieldlon, namelon)
-    alt = _helpers.getArray(wpdi, fieldalt, namealt)
+    lat = _helpers.getNumPyArray(wpdi, fieldlat, namelat)
+    lon = _helpers.getNumPyArray(wpdi, fieldlon, namelon)
+    alt = _helpers.getNumPyArray(wpdi, fieldalt, namealt)
     if len(lat) != len(lon) or len(lat) != len(alt):
         raise _helpers.PVGeoError('Latitude, Longitude, and Altitude arrays must be same length.')
 
@@ -142,6 +142,69 @@ class RotationTool(object):
         ydiff = abs(pts[0,1] - pts[1,1])
         dist = RotationTool.DistanceBetween(pts)
         return np.arcsin(ydiff/dist)
+
+    @staticmethod
+    def RotationMatrix(vector_orig, vector_fin):
+        """Calculate the rotation matrix required to rotate from one vector to another.
+        For the rotation of one vector to another, there are an infinit series of rotation matrices
+        possible.  Due to axially symmetry, the rotation axis can be any vector lying in the symmetry
+        plane between the two vectors.  Hence the axis-angle convention will be used to construct the
+        matrix with the rotation axis defined as the cross product of the two vectors.  The rotation
+        angle is the arccosine of the dot product of the two unit vectors.
+        Given a unit vector parallel to the rotation axis, w = [x, y, z] and the rotation angle a,
+        the rotation matrix R is::
+                  |  1 + (1-cos(a))*(x*x-1)   -z*sin(a)+(1-cos(a))*x*y   y*sin(a)+(1-cos(a))*x*z |
+            R  =  |  z*sin(a)+(1-cos(a))*x*y   1 + (1-cos(a))*(y*y-1)   -x*sin(a)+(1-cos(a))*y*z |
+                  | -y*sin(a)+(1-cos(a))*x*z   x*sin(a)+(1-cos(a))*y*z   1 + (1-cos(a))*(z*z-1)  |
+
+        Args:
+            vector_orig (umpy array, len 3): The unrotated vector defined in the reference frame.
+            vector_fin (numpy array, len 3): The rotated vector defined in the reference frame.
+
+        Note:
+            This code was adopted from `printipi`_ under the MIT license.
+
+        .. _printipi: https://github.com/Wallacoloo/printipi/blob/master/util/rotation_matrix.py
+        """
+        from math import acos, atan2, cos, pi, sin
+        from numpy import array, cross, dot, float64, hypot, zeros
+        from numpy.linalg import norm
+
+        R = np.zeros((3,3))
+
+        # Convert the vectors to unit vectors.
+        vector_orig = vector_orig / norm(vector_orig)
+        vector_fin = vector_fin / norm(vector_fin)
+
+        # The rotation axis (normalised).
+        axis = cross(vector_orig, vector_fin)
+        axis_len = norm(axis)
+        if axis_len != 0.0:
+            axis = axis / axis_len
+
+        # Alias the axis coordinates.
+        x = axis[0]
+        y = axis[1]
+        z = axis[2]
+
+        # The rotation angle.
+        angle = acos(dot(vector_orig, vector_fin))
+
+        # Trig functions (only need to do this maths once!).
+        ca = cos(angle)
+        sa = sin(angle)
+
+        # Calculate the rotation matrix elements.
+        R[0,0] = 1.0 + (1.0 - ca)*(x**2 - 1.0)
+        R[0,1] = -z*sa + (1.0 - ca)*x*y
+        R[0,2] = y*sa + (1.0 - ca)*x*z
+        R[1,0] = z*sa+(1.0 - ca)*x*y
+        R[1,1] = 1.0 + (1.0 - ca)*(y**2 - 1.0)
+        R[1,2] = -x*sa+(1.0 - ca)*y*z
+        R[2,0] = -y*sa+(1.0 - ca)*x*z
+        R[2,1] = x*sa+(1.0 - ca)*y*z
+        R[2,2] = 1.0 + (1.0 - ca)*(z**2 - 1.0)
+        return R
 
 
     # def _ConvergeAngle2(self, pt1, pt2):

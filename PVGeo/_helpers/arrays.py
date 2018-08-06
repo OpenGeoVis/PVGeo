@@ -3,7 +3,8 @@ __all__ = [
     'getSelectedArrayName',
     'getSelectedArrayField',
     'copyArraysToPointData',
-    'getArray',
+    'getNumPyArray',
+    'getVTKArray',
     'addArray',
     'getSelectedArray',
     #'GetDecimalPlaces',
@@ -95,7 +96,7 @@ def copyArraysToPointData(pdi, pdo, field):
     return pdo
 
 
-def getArray(wpdi, field, name):
+def getNumPyArray(wpdi, field, name):
     """Grabs an array from vtkDataObject given its name and field association.
 
     Args:
@@ -118,6 +119,33 @@ def getArray(wpdi, field, name):
     # Row Data:
     elif field == 6:
         arr = wpdi.RowData[name]
+    else:
+        raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+    return arr
+
+def getVTKArray(pdi, field, name):
+    """Grabs an array from vtkDataObject given its name and field association.
+
+    Args:
+        pdi  (vtkDataObject) : the input data object
+        field (int) : the field type id
+        name (str) : the name of the input array for the given index
+
+    Return:
+        vtkDataArray : the array from input field and name
+    """
+    # Point Data
+    if field == 0:
+        arr = pdi.GetPointData().GetArray(name)
+    # Cell Data:
+    elif field == 1:
+        arr = pdi.GetCellData().GetArray(name)
+    # Field Data:
+    elif field == 2:
+        arr = pdi.GetFieldData().GetArray(name)
+    # Row Data:
+    elif field == 6:
+        arr = pdi.GetRowData().GetArray(name)
     else:
         raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
     return arr
