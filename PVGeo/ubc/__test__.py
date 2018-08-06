@@ -123,10 +123,25 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         self.assertEqual(output.GetCellData().GetArrayName(1), 'appended')
 
     def test_writer(self):
+        """`WriteRectilinearGridToUBC`: Test data integretiy across I/O"""
+        # Write known data back out using the writer:
         writer = WriteRectilinearGridToUBC()
-        # TODO: implement an actual test case
-        writer.SetFileName('/Users/bane/Desktop/test_ubc_write.msh')
+        fname = os.path.join(self.test_dir, 'test-writer.msh')
+        writer.SetFileName(fname)
         writer.Write(self.GRID)
+        # Now read in the data again and compare!
+        reader = TensorMeshReader()
+        reader.SetMeshFileName(fname)
+        modname = os.path.join(self.test_dir, '%s.mod' % self.dataName)
+        reader.AddModelFileName(modname)
+        reader.SetDataName(self.dataName)
+        reader.Update()
+        test = reader.GetOutput()
+        # Compare the data
+        self._check_shape(test)
+        self._check_spatial_reference(test)
+        self._check_data(test, self.data)
+        self.assertEqual(test.GetCellData().GetArrayName(0), self.dataName)
         return
 
 ###############################################################################
