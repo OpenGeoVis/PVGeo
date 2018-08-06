@@ -9,6 +9,7 @@ from . import model_build
 from . import readers
 #TODO: from . import tunneling
 from . import ubc
+from . import gis
 
 from . import _helpers
 from .tester import test
