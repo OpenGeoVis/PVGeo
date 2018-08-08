@@ -383,6 +383,8 @@ class TwoFileReaderBase(AlgorithmBase):
 
 
 class WriterBase(AlgorithmBase):
+    __displayname__ = 'Writer Base'
+    __type__ = 'base'
     def __init__(self, nInputPorts=1, inputType='vtkPolyData', **kwargs):
         AlgorithmBase.__init__(self, nInputPorts=nInputPorts, inputType=inputType,
                                      nOutputPorts=0)
