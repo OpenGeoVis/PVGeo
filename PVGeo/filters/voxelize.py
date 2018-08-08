@@ -21,7 +21,7 @@ class VoxelizePoints(FilterBase):
     This assumes that the data is at least 2-Dimensional on the XY Plane.
     """
     __displayname__ = 'Voxelize Points'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',

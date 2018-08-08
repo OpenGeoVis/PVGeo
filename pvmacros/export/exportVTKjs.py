@@ -36,7 +36,7 @@ def exportVTKjs(FileName='', compress=False):
     return
 
 exportVTKjs.__displayname__ = 'Export VTKjs'
-exportVTKjs.__type__ = 'macro'
+exportVTKjs.__category__ = 'macro'
 
 ################################################################################
 
@@ -89,4 +89,4 @@ def getVTKjsURL(host, inURL):
     return generateViewerURL(convertURL)
 
 getVTKjsURL.__displayname__ = 'Get VTKjs URL'
-getVTKjsURL.__type__ = 'macro'
+getVTKjsURL.__category__ = 'macro'

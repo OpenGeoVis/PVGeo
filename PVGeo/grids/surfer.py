@@ -26,7 +26,7 @@ class SurferGridReader(DelimitedTextReader):
     """Read 2D ASCII Surfer grid files
     """
     __displayname__ = 'Surfer Grid Reader'
-    __type__ = 'reader'
+    __category__ = 'reader'
     def __init__(self, outputType='vtkImageData', **kwargs):
         DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
         self.SetDelimiter(' ')
@@ -142,7 +142,7 @@ class SurferGridReader(DelimitedTextReader):
 class WriteImageDataToSurfer(WriterBase):
     """Write a 2D ``vtkImageData`` object to the Surfer grid format"""
     __displayname__ = 'Write ``vtkImageData`` to Surfer Format'
-    __type__ = 'writer'
+    __category__ = 'writer'
     def __init__(self):
         WriterBase.__init__(self, inputType='vtkImageData', ext='grd')
         self.__inputArray = [None, None]

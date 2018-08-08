@@ -24,7 +24,7 @@ class _SliceBase(FilterBase):
         * The SciPy module is required for this filter.
     """
     __displayname__ = 'Base Slicing Filter'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, numSlices=5,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid'):
@@ -79,7 +79,7 @@ class ManySlicesAlongPoints(_SliceBase):
         * The SciPy module is required for this filter.
     """
     __displayname__ = 'Many Slices Along Points'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, numSlices=5, nearestNbr=True):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=2, inputType='vtkDataSet',
@@ -170,7 +170,7 @@ class ManySlicesAlongAxis(_SliceBase):
     the dataset on the chosen axis.
     """
     __displayname__ = 'Many Slices Along Axis'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, numSlices=5, axis=0, rng=None, outputType='vtkUnstructuredGrid'):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=1, inputType='vtkDataSet',
@@ -283,7 +283,7 @@ class SliceThroughTime(ManySlicesAlongAxis):
     """Takes a sliceable ``vtkDataSet`` and progresses a slice of it along a given axis. The macro requires that the clip already exist in the pipeline. This is especially useful if you have many clips linked together as all will move through the seen as a result of this macro.
     """
     __displayname__ = 'Slice Through Time'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, numSlices=5, dt=1.0, axis=0, rng=None,):
         ManySlicesAlongAxis.__init__(self, numSlices=numSlices,
                 axis=axis, rng=rng, outputType='vtkPolyData')

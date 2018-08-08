@@ -21,7 +21,7 @@ class CombineTables(FilterBase):
     """Takes two tables and combines them if they have the same number of rows.
     """
     __displayname__ = 'Combine Tables'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self):
         FilterBase.__init__(self,
             nInputPorts=2, inputType='vtkTable',
@@ -71,7 +71,7 @@ class ReshapeTable(FilterBase):
     """This filter will take a ``vtkTable`` object and reshape it. This filter essentially treats ``vtkTable``s as 2D matrices and reshapes them using ``numpy.reshape`` in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.
     """
     __displayname__ = 'Reshape Table'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',
@@ -194,7 +194,7 @@ class ExtractArray(FilterBase):
     """Extract an array from a ``vtkDataSet`` and make a ``vtkTable`` of it.
     """
     __displayname__ = 'Extract Array'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkDataSet',

@@ -92,11 +92,3 @@ Now ``PVGeo`` is ready for use in your standard python environment. To use the *
 
 .. _ParaView: https://paraview.org
 .. _detailed explanation here: http://pvgeo.org/overview/getting-started/
-
-
-
-
-.. toctree::
-   :hidden:
-
-   self

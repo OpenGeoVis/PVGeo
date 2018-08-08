@@ -5,7 +5,7 @@ __all__ = []
 
 # class WriteTemplate(WriterBase):
 #     __displayname__ = 'Write XXX to XXX Format'
-#     __type__ = 'writer'
+#     __category__ = 'writer'
 #     def __init__(self):
 #         WriterBase.__init__(self, inputType='vtkPolyData')
 #

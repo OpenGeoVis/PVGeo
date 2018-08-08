@@ -20,4 +20,4 @@ def customAxisTicks(rng, axis=0, uniform=False):
     return None
 
 customAxisTicks.__displayname__ = 'Custom Axis Ticks'
-customAxisTicks.__type__ = 'macro'
+customAxisTicks.__category__ = 'macro'

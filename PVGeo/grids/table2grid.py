@@ -21,7 +21,7 @@ class TableToGrid(FilterBase):
         **Work in progress**
     """
     __displayname__ = 'Table To Grid'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, extent=[10, 10, 10], order='C', spacing=[1.0, 1.0, 1.0],
                  origin=[0.0, 0.0, 0.0], seplib=False, swapXY=False):
         FilterBase.__init__(self,

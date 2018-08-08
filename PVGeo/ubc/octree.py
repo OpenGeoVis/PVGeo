@@ -20,7 +20,7 @@ class OcTreeReader(ubcMeshReaderBase):
     Model File is optional. Reader will still construct ``vtkUnstructuredGrid`` safely.
     """
     __displayname__ = 'UBC OcTree Mesh Reader'
-    __type__ = 'reader'
+    __category__ = 'reader'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType,
@@ -305,7 +305,7 @@ class OcTreeAppender(ModelAppenderBase):
     ``vtkUnstructuredGrid``
     """
     __displayname__ = 'UBC OcTree Mesh Appender'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         ModelAppenderBase.__init__(self,
             inputType='vtkUnstructuredGrid',

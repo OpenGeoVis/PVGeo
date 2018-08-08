@@ -16,7 +16,7 @@ from .. import _helpers
 class ubcTensorMeshWriterBase(WriterBase):
     """A base class to assist in writing data bjects to the UBC Tensor Mesh format"""
     __displayname__ = 'UBC Format Writer Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self, inputType='vtkRectilinearGrid'):
         WriterBase.__init__(self, inputType=inputType, ext='msh')
 
@@ -69,7 +69,7 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
     This file reader currently only handles 3D data.
     """
     __displayname__ = 'Write ``vtkRectilinearGrid`` to UBC Tensor Mesh'
-    __type__ = 'writer'
+    __category__ = 'writer'
     def __init__(self):
         ubcTensorMeshWriterBase.__init__(self, inputType='vtkRectilinearGrid')
 
@@ -120,7 +120,7 @@ class WriteImageDataToUBC(ubcTensorMeshWriterBase):
     This file reader currently only handles 3D data.
     """
     __displayname__ = 'Write ``vtkImageData`` to UBC Tensor Mesh'
-    __type__ = 'writer'
+    __category__ = 'writer'
     def __init__(self):
         ubcTensorMeshWriterBase.__init__(self, inputType='vtkImageData')
 

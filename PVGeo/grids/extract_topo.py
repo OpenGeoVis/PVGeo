@@ -21,7 +21,7 @@ class ExtractTopography(FilterBase):
 
     """
     __displayname__ = 'Extract Topography'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self):
         FilterBase.__init__(self,
             nInputPorts=2, inputType='vtkDataObject',

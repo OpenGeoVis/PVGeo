@@ -35,4 +35,4 @@ def deleteDownstream(input=None):
     return None
 
 deleteDownstream.__displayname__ = 'Delete Downstream Filters'
-deleteDownstream.__type__ = 'macro'
+deleteDownstream.__category__ = 'macro'

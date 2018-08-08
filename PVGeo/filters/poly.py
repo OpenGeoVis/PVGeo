@@ -33,7 +33,7 @@ class ArrayMath(FilterPreserveTypeBase):
     - `correlate`: Use `np.correlate(arr1, arr2, mode='same')`
     """
     __displayname__ = 'Array Math'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -237,7 +237,7 @@ class NormalizeArray(FilterPreserveTypeBase):
     - `just_multiply`: Only Multiply by Multiplier
     """
     __displayname__ = 'Normalize Array'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -448,7 +448,7 @@ class AddCellConnToPoints(FilterBase):
     - 3: Line
     """
     __displayname__ = 'Add Cell Connectivity to Points'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -572,7 +572,7 @@ class PointsToTube(AddCellConnToPoints):
     """Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.
     """
     __displayname__ = 'Points to Tube'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         AddCellConnToPoints.__init__(self, **kwargs)
         # Additional Parameters
@@ -621,7 +621,7 @@ class PercentThreshold(FilterBase):
     bottom percent. This can be reversed using the invert property.
     """
     __displayname__ = 'Percent Threshold'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self, inputType='vtkDataSet',
                             outputType='vtkUnstructuredGrid', **kwargs)

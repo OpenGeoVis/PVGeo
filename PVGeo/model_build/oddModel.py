@@ -14,7 +14,7 @@ class CreateTensorMesh(AlgorithmBase):
     """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.
     """
     __displayname__ = 'Create Tensor Mesh'
-    __type__ = 'source'
+    __category__ = 'source'
     def __init__(self, origin=[-350.0, -400.0, 0.0], dataname='Data'):
         AlgorithmBase.__init__(self, nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')
