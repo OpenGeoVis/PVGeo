@@ -22,11 +22,26 @@ print(path)
 sys.path.insert(0, path)
 
 # Mock the paraview module to build pvmacros docs
+# Mock the paraview module to build pvmacros docs
+import mock
+
+MOCK_MODULES = ['paraview', 'paraview.simple']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = mock.Mock()
 autodoc_mock_imports = ['paraview']
 
 
-# Automattically generat source pages:
-os.system('python ./make_files.py')
+# # Automattically generat source pages:
+# os.system('python ./make_files.py')
+
+import PVGeo, pvmacros # for documenting
+from gendocs import Generator
+
+# Automatically generate documentaion pages
+Generator().DocumentPackages([PVGeo, pvmacros],
+            index_base='../index_base.rst',
+            showprivate=True,
+            )
 
 
 # -- Project information -----------------------------------------------------
