@@ -24,12 +24,14 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
 
     * `vtkPythonAlgorithm is great`_
     * A VTK pipeline primer `(part 1)`_, `(part 2)`_, and `(part 3)`_
+    * `ParaView Python Docs`_
 
     .. _vtkAlgorithm: https://www.vtk.org/doc/nightly/html/classvtkAlgorithm.html
     .. _vtkPythonAlgorithm is great: https://blog.kitware.com/vtkpythonalgorithm-is-great/
     .. _(part 1): https://blog.kitware.com/a-vtk-pipeline-primer-part-1/
     .. _(part 2): https://blog.kitware.com/a-vtk-pipeline-primer-part-2/
     .. _(part 3): https://blog.kitware.com/a-vtk-pipeline-primer-part-3/
+    .. _ParaView Python Docs: https://www.paraview.org/ParaView/Doc/Nightly/www/py-doc/paraview.util.vtkAlgorithm.html
     """
     __displayname__ = 'Algorithm Base'
     __category__ = 'base'
