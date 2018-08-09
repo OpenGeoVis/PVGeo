@@ -125,8 +125,12 @@ html_theme_options = {
 
 }
 
+html_show_sourcelink = True
+
 html_context = {
     "display_github": False,
+    "last_updated": True,
+    "commit": False,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
