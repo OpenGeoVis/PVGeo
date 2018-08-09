@@ -1,6 +1,7 @@
 __all__ = [
     'AlgorithmBase',
     'ReaderBase',
+    'FilterBase',
     'FilterPreserveTypeBase',
     'TwoFileReaderBase',
     'WriterBase',
