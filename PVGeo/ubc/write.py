@@ -19,13 +19,17 @@ class ubcTensorMeshWriterBase(WriterBase):
     __category__ = 'base'
     def __init__(self, inputType='vtkRectilinearGrid'):
         WriterBase.__init__(self, inputType=inputType, ext='msh')
+        # These MUST be set by children
+        self.xcells = None
+        self.ycells = None
+        self.zcells = None
+        self.origin= None
 
 
-    def WriteMesh3D(self):
+    def WriteMesh3D(self, nx, ny, nz):
         def arr2str(arr):
             return ' '.join(map(str, arr))
 
-        nx, ny, nz = self.dim
         ox, oy, oz = self.origin
 
         # Write out grid / mesh
@@ -39,7 +43,10 @@ class ubcTensorMeshWriterBase(WriterBase):
 
     def WriteModels(self, grd):
         """Write cell data attributes to model files"""
-        nx, ny, nz = self.dim
+        nx, ny, nz = grd.GetDimensions()
+        nx -= 1
+        ny -= 1
+        nz -= 1
 
         def reshapeModel(model):
             # Swap axes because VTK structures the coordinates a bit differently
@@ -80,15 +87,14 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
 
         # Get grid dimensions
         nx, ny, nz = grd.GetDimensions()
-        nx -= 1
-        ny -= 1
-        nz -= 1
-        self.dim = (nx, ny, nz)
+
 
         # get the points and convert to spacings
         xcoords = nps.vtk_to_numpy(grd.GetXCoordinates())
         ycoords = nps.vtk_to_numpy(grd.GetYCoordinates())
         zcoords = nps.vtk_to_numpy(grd.GetZCoordinates())
+
+        # TODO: decide if 2D or 3D
 
         # Now get the cell sizes
         self.xcells = np.diff(xcoords)
@@ -101,10 +107,8 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
         # flip z
         self.zcells = self.zcells[::-1]
 
-        # TODO: decide if 2D or 3D
-
         # Write mesh
-        self.WriteMesh3D()
+        self.WriteMesh3D(nx-1, ny-1, nz-1)
 
         # Now write out model data
         self.WriteModels(grd)
@@ -134,7 +138,6 @@ class WriteImageDataToUBC(ubcTensorMeshWriterBase):
         nx -= 1
         ny -= 1
         nz -= 1
-        self.dim = (nx, ny, nz)
 
         # get the points and convert to spacings
         dx, dy, dz = grd.GetSpacing()
@@ -152,7 +155,7 @@ class WriteImageDataToUBC(ubcTensorMeshWriterBase):
         # TODO: decide if 2D or 3D
 
         # Write mesh
-        self.WriteMesh3D()
+        self.WriteMesh3D(nx, ny, nz)
 
         # Now write out model data
         self.WriteModels(grd)

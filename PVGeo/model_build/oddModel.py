@@ -82,8 +82,8 @@ class CreateTensorMesh(AlgorithmBase):
 
 
     def _AddModelData(self, pdo, data):
-        ext = self.GetExtent()
-        nx,ny,nz = ext[1]+1,ext[3]+1,ext[5]+1
+        nx, ny, nz = pdo.GetDimensions()
+        nx, ny, nz = nx-1, ny-1, nz-1
         # ADD DATA to cells
         if data is None:
             data = np.random.rand(nx*ny*nz)
@@ -111,8 +111,7 @@ class CreateTensorMesh(AlgorithmBase):
         """Used by pipeline to set output whole extent
         """
         # Now set whole output extent
-        extent = self.GetExtent()
-        ext = [0, extent[0]-2, 0,extent[1]-2, 0,extent[2]-2]
+        ext = self.GetExtent()
         info = outInfo.GetInformationObject(0)
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
