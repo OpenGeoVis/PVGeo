@@ -219,7 +219,14 @@ class ExtractArray(FilterBase):
         return 1
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
-        """Used by pipeline/paraview GUI wrappings to set the input arrays
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
         """
         if self.__inputArray[0] != field:
             self.__inputArray[0] = field
