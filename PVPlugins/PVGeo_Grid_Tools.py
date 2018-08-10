@@ -65,10 +65,10 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 
 
 @smproxy.filter(name='PVGeoTableToGrid', label='Table To Grid')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoTableToGrid(TableToGrid):
     def __init__(self):
         TableToGrid.__init__(self)
@@ -110,7 +110,8 @@ class PVGeoTableToGrid(TableToGrid):
 
 
 @smproxy.filter(name='PVGeoExtractTopography', label='Extract Topography')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Topography", port_index=1)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
 @smproperty.input(name="Data Set", port_index=0)

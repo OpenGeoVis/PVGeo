@@ -76,8 +76,8 @@ class PVGeoTensorMeshReader(TensorMeshReader):
 
 @smproxy.filter(name="PVGeoTensorMeshAppender",
        label="Append Model To UBC Tensor Mesh")
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
 class PVGeoTensorMeshAppender(TensorMeshAppender):
@@ -180,8 +180,8 @@ class PVGeoUBCOcTreeMeshReader(OcTreeReader):
 
 @smproxy.filter(name="PVGeoOcTreeAppender",
        label="Append Model To UBC OcTree Mesh")
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkUnstructuredGrid"], composite_data_supported=False)
 class PVGeoOcTreeAppender(OcTreeAppender):
