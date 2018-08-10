@@ -4,7 +4,11 @@
 
 The *PVGeo* python package contains VTK powered tools for data visualization in geophysics which are wrapped for direct use within the application [ParaView by Kitware](https://www.paraview.org). These tools are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D time-varying grids.
 
-Check out the [**demo page**](http://demo.pvgeo.org/) for a synopsis of the project and some visualization examples. Then check out the [**website**](http://pvgeo.org/) to explore the technical aspects of the project and to find use examples.
+## Demonstrations of *PVGeo*
+
+For a quick overview of how  *PVGeo* can be used in a Python environment or directly within ParaView, please checkout the code snippets and videos on the  [**About Examples Page**](http://pvgeo.org/examples/about-examples/)
+
+Also, check out the [**demo page**](http://demo.pvgeo.org/) for a synopsis of the project and some visualization examples. Then check out the rest of the [**full website**](http://pvgeo.org/) to explore the technical aspects of the project and to find use examples.
 
 
 ## Requesting Features, Reporting Issues, and Contributing
@@ -32,4 +36,4 @@ $ source activate PVGeoEnv
 (PVGeoEnv) $ python -m PVGeo test
 ```
 
-Now *PVGeo* is ready for use in your standard python environment. To use the *PVGeo* library as plugins in ParaView, please see the detailed explanation [here](http://pvgeo.org/overview/getting-started/).
+Now *PVGeo* is ready for use in your standard python environment. To use the *PVGeo* library as plugins in ParaView, please see the detailed explanation [**here**](http://pvgeo.org/overview/getting-started/).

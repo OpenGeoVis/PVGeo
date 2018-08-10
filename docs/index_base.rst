@@ -42,11 +42,14 @@ This website hosts the code documentation for the ``PVGeo`` python package found
 on `GitHub`_ and `PyPI`_. This website strictly documents the code so that users have a convenient and familiar means of searching through the library to understand the backend of the features they are using.
 If you are searching for examples and demonstrations on how to use the ``PVGeo`` library, then head over to the `full website`_ where you can find tutorials with sample data sets and links to many other helpful resources.
 
+For a quick overview of how ``PVGeo`` can be used in a Python environment or directly within ParaView, please checkout the code snippets and videos on the `About Examples Page`_.
+
 
 .. _ParaView by Kitware: https://www.paraview.org
 .. _GitHub: https://github.com/OpenGeoVis/PVGeo\
 .. _PyPI: https://pypi.org/project/PVGeo/
 .. _full website: http://pvgeo.org
+.. _About Examples: http://pvgeo.org/examples/about-examples/
 
 
 
