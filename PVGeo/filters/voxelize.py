@@ -91,9 +91,8 @@ class VoxelizePoints(FilterBase):
     def PointsToGrid(self, xo,yo,zo, dx,dy,dz, grid=None):
         """Convert XYZ points to a ``vtkUnstructuredGrid``.
         """
-        if not checkNumpy():
-            raise _helpers.PVGeoError("`VoxelizePoints` cannot work with versions of NumPy below 1.10.x . You must update NumPy.")
-            return None
+        if not checkNumpy(alert='warn'):
+            return grid
         if grid is None:
             grid = vtk.vtkUnstructuredGrid()
 

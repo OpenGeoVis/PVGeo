@@ -12,9 +12,14 @@ from . import ubc
 
 from . import _helpers
 from .tester import test
+from . import version
 
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
 __version__ = '1.1.15'
 __displayname__ = 'PVGeo'
+
+
+# Now check that NumPy is at a satisfactory version
+version.checkNumpy()
