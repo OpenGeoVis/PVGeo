@@ -17,7 +17,7 @@ from . import version
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
-__version__ = '1.1.15'
+__version__ = '1.1.16'
 __displayname__ = 'PVGeo'
 
 
