@@ -27,7 +27,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         Model File is optional. Reader will still construct ``vtkRectilinearGrid`` safely.
     """
     __displayname__ = 'UBC Tensor Mesh Reader'
-    __type__ = 'reader'
+    __category__ = 'reader'
     def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid', **kwargs):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
@@ -89,7 +89,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         """This method reads a UBC 2D Mesh file and builds an empty ``vtkRectilinearGrid``
         for data to be inserted into. `Format Specs`_.
 
-        .. _Format Specs: http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html/>
+        .. _Format Specs: http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html
 
         Args:
             FileName (str) : The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
@@ -333,7 +333,7 @@ class TensorMeshAppender(ModelAppenderBase):
     ``vtkRectilinearGrid``
     """
     __displayname__ = 'UBC Tensor Mesh Appender'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         ModelAppenderBase.__init__(self,
             inputType='vtkRectilinearGrid',

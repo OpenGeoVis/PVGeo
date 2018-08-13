@@ -23,7 +23,7 @@ class CreateUniformGrid(AlgorithmBase):
     """Create uniform grid (``vtkImageData``)
     """
     __displayname__ = 'Create Uniform Grid'
-    __type__ = 'source'
+    __category__ = 'source'
     def __init__(self,
                  extent=[10, 10, 10],
                  spacing=[1.0, 1.0, 1.0],
@@ -102,7 +102,7 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
     """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.
     """
     __displayname__ = 'Create Even Rectilinear Grid'
-    __type__ = 'source'
+    __category__ = 'source'
     def __init__(self,
                  extent=[10, 10, 10],
                  xrng=[-1.0, 1.0],

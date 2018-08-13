@@ -9,7 +9,7 @@ class camera:
     """An object to store a single camera location/view. You can make a list/dict of these objects to save interesting views for your project. This object saves just a few parameters about the camera so that it can easily be reconstructed.
     """
     __displayname__ = 'Camera'
-    __type__ = 'macro'
+    __category__ = 'macro'
     def __init__(self,cam=None):
         """
         @params:

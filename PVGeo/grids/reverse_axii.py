@@ -16,7 +16,7 @@ from .. import _helpers
 class ReverseImageDataAxii(FilterBase):
     """This filter will flip ``vtkImageData`` on any of the three cartesian axii. A checkbox is provided for each axis on which you may desire to flip the data."""
     __displayname__ = 'Reverse Image Data Axii'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, axes=[True, True, True]):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',

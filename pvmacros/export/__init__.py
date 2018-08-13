@@ -1,3 +1,3 @@
-from .exportVTKjs import *
+from .vtkjs import *
 
 __displayname__ = 'Export'

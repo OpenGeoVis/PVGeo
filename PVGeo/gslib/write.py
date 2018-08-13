@@ -16,7 +16,7 @@ from .. import _helpers
 class WriteTableToGSLib(WriterBase):
     """Write the row data in a ``vtkTable`` to the GSLib Format"""
     __displayname__ = 'Write ``vtkTable`` To GSLib Format'
-    __type__ = 'writer'
+    __category__ = 'writer'
     def __init__(self, inputType='vtkTable'):
         WriterBase.__init__(self, inputType=inputType, ext='gslib')
         self.__header = 'Data saved by PVGeo'
@@ -62,8 +62,8 @@ class WriteImageDataToSGeMS(WriterBase):
     """Writes a ``vtkImageData`` object to the SGeMS uniform grid format.
     This writer can only handle point data.
     """
-    __displayname__ = 'Write ``vtkImageData`` To GSLib Format'
-    __type__ = 'writer'
+    __displayname__ = 'Write ``vtkImageData`` To SGeMS Grid Format'
+    __category__ = 'writer'
     def __init__(self, inputType='vtkImageData'):
         WriterBase.__init__(self, inputType=inputType, ext='SGeMS')
 

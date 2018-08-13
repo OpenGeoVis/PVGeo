@@ -3,6 +3,7 @@ __all__ = [
     'NormalizeArray',
     'AddCellConnToPoints',
     'PointsToTube',
+    'PercentThreshold',
 ]
 
 import vtk
@@ -32,7 +33,7 @@ class ArrayMath(FilterPreserveTypeBase):
     - `correlate`: Use `np.correlate(arr1, arr2, mode='same')`
     """
     __displayname__ = 'Array Math'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -169,7 +170,14 @@ class ArrayMath(FilterPreserveTypeBase):
             self.Modified()
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
-        """Used by pipeline/paraview GUI wrappings to set the input arrays
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
         """
         if idx == 0:
             self._SetInputArray1(field, name)
@@ -236,7 +244,7 @@ class NormalizeArray(FilterPreserveTypeBase):
     - `just_multiply`: Only Multiply by Multiplier
     """
     __displayname__ = 'Normalize Array'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -374,7 +382,14 @@ class NormalizeArray(FilterPreserveTypeBase):
 
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
-        """Used by pipeline/paraview GUI wrappings to set the input arrays
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
         """
         if self.__inputArray[0] != field:
             self.__inputArray[0] = field
@@ -447,7 +462,7 @@ class AddCellConnToPoints(FilterBase):
     - 3: Line
     """
     __displayname__ = 'Add Cell Connectivity to Points'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -571,7 +586,7 @@ class PointsToTube(AddCellConnToPoints):
     """Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.
     """
     __displayname__ = 'Points to Tube'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         AddCellConnToPoints.__init__(self, **kwargs)
         # Additional Parameters
@@ -612,3 +627,85 @@ class PointsToTube(AddCellConnToPoints):
 
 
 ###############################################################################
+
+
+class PercentThreshold(FilterBase):
+    """Allows user to select a percent of the data range to threshold.
+    This will find the data range of the selected input array and remove the
+    bottom percent. This can be reversed using the invert property.
+    """
+    __displayname__ = 'Percent Threshold'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterBase.__init__(self, inputType='vtkDataSet',
+                            outputType='vtkUnstructuredGrid', **kwargs)
+        self.__invert = False
+        self.__percent = 50 # NOTE: not decimal percent
+        self.__filter = vtk.vtkThreshold()
+        self.__inputArray = [None, None]
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline for execution"""
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        self.__filter.SetInputDataObject(pdi)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Get Input Array
+        field, name = self.__inputArray[0], self.__inputArray[1]
+        wpdi = dsa.WrapDataObject(pdi)
+        arr = _helpers.getNumPyArray(wpdi, field, name)
+
+        dmin, dmax = np.min(arr), np.max(arr)
+        val = dmin + (self.__percent / 100.0) * (dmax - dmin)
+
+        if self.__invert:
+            self.__filter.ThresholdByLower(val)
+        else:
+            self.__filter.ThresholdByUpper(val)
+
+        self.__filter.Update()
+
+        filt = self.__filter.GetOutputDataObject(0)
+
+        pdo.ShallowCopy(filt)
+        return 1
+
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
+        """
+        if self.__inputArray[0] != field or self.__inputArray[1] != name:
+            self.__inputArray[0] = field
+            self.__inputArray[1] = name
+            self.__filter.SetInputArrayToProcess(idx, port, connection, field, name)
+            self.Modified()
+        return 1
+
+    def SetPercent(self, percent):
+        """Set the percent for the threshold in range (0, 100).
+        Any values falling beneath the set percent of the total data range
+        will be removed."""
+        if self.__percent != percent:
+            self.__percent = percent
+            self.Modified()
+
+    def SetUseContinuousCellRange(self, flag):
+        """If this is on (default is off), we will use the continuous
+        interval [minimum cell scalar, maxmimum cell scalar] to intersect
+        the threshold bound , rather than the set of discrete scalar
+        values from the vertices"""
+        return self.__filter.SetUseContinuousCellRange(flag)
+
+    def SetInvert(self, flag):
+        """Use to invert the threshold filter"""
+        if self.__invert != flag:
+            self.__invert = flag
+            self.Modified()
