@@ -49,7 +49,7 @@ For a quick overview of how ``PVGeo`` can be used in a Python environment or dir
 .. _GitHub: https://github.com/OpenGeoVis/PVGeo\
 .. _PyPI: https://pypi.org/project/PVGeo/
 .. _full website: http://pvgeo.org
-.. _About Examples: http://pvgeo.org/examples/about-examples/
+.. _About Examples Page: http://pvgeo.org/examples/about-examples/
 
 
 
