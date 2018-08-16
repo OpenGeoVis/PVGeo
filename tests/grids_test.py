@@ -4,8 +4,6 @@ import shutil
 import tempfile
 import os
 
-import urllib
-
 # VTK imports:
 import vtk
 from vtk.util import numpy_support as nps
@@ -272,18 +270,8 @@ class TestSurferGridReader(unittest.TestCase):
     """
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
-        self.fname = os.path.join(self.test_dir, 'bouguer_alps_egm08.grd')
+        self.fname = os.path.join(os.path.dirname(__file__), 'data/surfer-grid.grd')
 
-        import sys
-
-        if sys.version_info[0] >= 3:
-            from urllib.request import urlretrieve
-        else:
-            from urllib import urlretrieve
-
-        urlretrieve('https://gist.github.com/leouieda/6023922/raw/' \
-                        '948b0acbadb18e6ad49efe2092d9d9518b247780/' \
-                        'bouguer_alps_egm08.grd', filename=self.fname)
 
     def tearDown(self):
         # Remove the test data directory after the test
