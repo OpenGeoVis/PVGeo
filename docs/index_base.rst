@@ -89,8 +89,6 @@ To begin using the ``PVGeo`` python package, create a new virtual environment an
     $ source activate PVGeoEnv
     (PVGeoEnv) $ pip install PVGeo
 
-    # Test the install on non-Windows OS
-    (PVGeoEnv) $ python -m PVGeo test
 
 Now ``PVGeo`` is ready for use in your standard python environment. To use the *PVGeo* library as plugins in `ParaView`_, please see the `detailed explanation here`_.
 
