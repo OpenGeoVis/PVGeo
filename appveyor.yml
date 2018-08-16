@@ -13,7 +13,6 @@ environment:
 image: Visual Studio 2015
 
 platform:
-- x86
 - x64
 
 init:
