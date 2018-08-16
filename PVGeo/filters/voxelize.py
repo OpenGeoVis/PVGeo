@@ -58,7 +58,7 @@ class VoxelizePoints(FilterBase):
     def AddCellData(grid, arr, name):
         """Add a NumPy array as cell data to the given grid input
         """
-        c = nps.numpy_to_vtk(num_array=arr, deep=True)
+        c = _helpers.numToVTK(arr)
         c.SetName(name)
         grid.GetCellData().AddArray(c)
         return grid
@@ -155,7 +155,7 @@ class VoxelizePoints(FilterBase):
             self.AddFieldData(grid)
 
         # Add unique nodes as points in output
-        pts.SetData(nps.numpy_to_vtk(unique_nodes))
+        pts.SetData(_helpers.numToVTK(unique_nodes))
 
         cnt = 0
         arridx = np.zeros(numCells)

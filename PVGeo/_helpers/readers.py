@@ -14,6 +14,7 @@ from vtk.util import numpy_support as nps
 import vtk
 import os
 from . import errors as _helpers
+from .arrays import numToVTK
 
 def getVTKtype(typ):
     """This looks up the VTK type for a give python data type.
@@ -51,7 +52,7 @@ def ConvertArray(arr):
     if typ is 13:
         VTK_data = converStringArray(arr)
     else:
-        VTK_data = nps.numpy_to_vtk(num_array=arr, deep=True, array_type=typ)
+        VTK_data = numToVTK(arr, array_type=typ)
     return VTK_data
 
 

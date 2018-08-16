@@ -44,7 +44,7 @@ class ReverseImageDataAxii(FilterBase):
                 if self.__axes[i]:
                     arr = np.flip(arr, axis=i)
             # Now add that data array to the output
-            data = nps.numpy_to_vtk(num_array=arr.flatten(), deep=True)
+            data = _helpers.numToVTK(arr.flatten())
             data.SetName(idi.GetPointData().GetArrayName(j))
             ido.GetPointData().AddArray(data)
 
@@ -57,7 +57,7 @@ class ReverseImageDataAxii(FilterBase):
                 if self.__axes[i]:
                     arr = np.flip(arr, axis=i)
             # Now add that data array to the output
-            data = nps.numpy_to_vtk(num_array=arr.flatten(), deep=True)
+            data = _helpers.numToVTK(arr.flatten())
             data.SetName(idi.GetCellData().GetArrayName(j))
             ido.GetCellData().AddArray(data)
 

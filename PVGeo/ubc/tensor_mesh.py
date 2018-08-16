@@ -74,7 +74,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         model = model.flatten()
 
         # Convert data to VTK data structure and append to output
-        c = nps.numpy_to_vtk(num_array=model,deep=True)
+        c = _helpers.numToVTK(model,deep=True)
         c.SetName(dataNm)
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)
@@ -119,11 +119,11 @@ class TensorMeshReader(ubcMeshReaderBase):
             c = np.array(c,dtype=float)
             if z:
                 c = -c[::-1]
-            return nps.numpy_to_vtk(num_array=c,deep=True)
+            return _helpers.numToVTK(c,deep=True)
 
         xcoords = _genCoords(xpts, xdisc)
         zcoords = _genCoords(zpts, zdisc, z=True)
-        ycoords = nps.numpy_to_vtk(num_array=np.zeros(1),deep=True)
+        ycoords = _helpers.numToVTK(np.zeros(1),deep=True)
 
         output.SetDimensions(nx,2,nz) # note this subtracts 1
         output.SetXCoordinates(xcoords)
@@ -239,9 +239,9 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Set the dims and coordinates for the output
         output.SetDimensions(dim[0],dim[1],dim[2])
         # Convert to VTK array for setting coordinates
-        output.SetXCoordinates(nps.numpy_to_vtk(num_array=cox,deep=True))
-        output.SetYCoordinates(nps.numpy_to_vtk(num_array=coy,deep=True))
-        output.SetZCoordinates(nps.numpy_to_vtk(num_array=coz,deep=True))
+        output.SetXCoordinates(_helpers.numToVTK(cox,deep=True))
+        output.SetYCoordinates(_helpers.numToVTK(coy,deep=True))
+        output.SetZCoordinates(_helpers.numToVTK(coz,deep=True))
 
         return output
 

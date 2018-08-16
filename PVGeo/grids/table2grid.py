@@ -129,7 +129,7 @@ class TableToGrid(FilterBase):
             name = c.GetName()
             arr = nps.vtk_to_numpy(c)
             arr = TableToGrid._refold(arr, self.__extent, SEPlib=self.__SEPlib, order=self.__order, swapXY=self.__swapXY)
-            c = nps.numpy_to_vtk(num_array=arr, deep=True)
+            c = _helpers.numToVTK(arr)
             c.SetName(name)
             #ido.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
             # Also, image data is built by points from numrows in table

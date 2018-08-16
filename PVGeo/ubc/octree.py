@@ -217,7 +217,7 @@ class OcTreeReader(ubcMeshReaderBase):
         model = model[ind_reorder]
 
         # Convert data to VTK data structure and append to output
-        c = nps.numpy_to_vtk(num_array=model, deep=True)
+        c = _helpers.numToVTK(model, deep=True)
         c.SetName(dataNm)
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)
