@@ -9,9 +9,10 @@ install:
     - pip install -r requirements.txt
     - pip install vtk>=8.1.0
 script:
+    - python setup.py install
     - coverage run tests/__main__.py
     - codecov --token=8da9d332-1618-450d-8654-09a8ecf3c2dc
-    - python -m tests close # exit with error code if problem occurs
+    - python tests/__main__.py close # exit with error code if problem occurs
 notifications:
     slack:
         on_success: change
