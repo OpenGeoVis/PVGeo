@@ -46,6 +46,7 @@ def ConvertArray(arr):
     Note:
         this converts the data array but does not set a name. The name must be set for this data array to be added to a vtkDataSet ``array.SetName('Data')``
     """
+    arr = np.ascontiguousarray(arr)
     typ = getVTKtype(arr.dtype)
     if typ is 13:
         VTK_data = converStringArray(arr)
