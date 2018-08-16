@@ -9,7 +9,6 @@ import numpy as np
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
-from PVGeo import _helpers
 # Functionality to test:
 from PVGeo.gslib import *
 

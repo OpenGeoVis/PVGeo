@@ -3,7 +3,6 @@ __all__ = [
     'MadagascarReader']
 
 import numpy as np
-from vtk.util import numpy_support as nps
 import vtk
 import warnings
 # Import Helpers:

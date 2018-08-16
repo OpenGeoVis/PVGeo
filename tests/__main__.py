@@ -1,9 +1,13 @@
+"""This module provideas a convienance method to run all of the tests for PVGeo.
+Each suite within PVGeo has its own ``*_test.py`` file for all unittest
+implemenations to live and each file is executable on its own.
+"""
+
 __all__ = [
     'test',
 ]
 
 import unittest
-import fnmatch
 import glob
 import os
 import sys

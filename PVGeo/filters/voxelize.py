@@ -5,7 +5,6 @@ __all__ = [
 import numpy as np
 import vtk
 from vtk.util import keys
-from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
 from ..base import FilterBase
