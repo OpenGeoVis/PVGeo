@@ -11,7 +11,6 @@ from . import readers
 from . import ubc
 
 from . import _helpers
-from .tester import test
 from . import version
 
 __author__ = 'Bane Sullivan'

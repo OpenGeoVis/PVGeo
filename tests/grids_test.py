@@ -11,11 +11,10 @@ import vtk
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
-from .. import _helpers
-
+from PVGeo import _helpers
+from PVGeo.filters import PointsToPolyData
 # Functionality to test:
-from .__init__ import *
-from ..filters import PointsToPolyData
+from PVGeo.grids import *
 
 RTOL = 0.000001
 
@@ -378,3 +377,12 @@ class TestExtractTopography(unittest.TestCase):
                 self.fail(msg='Non-testable cell encountered')
 
         return
+
+###############################################################################
+###############################################################################
+###############################################################################
+if __name__ == '__main__':
+    unittest.main()
+###############################################################################
+###############################################################################
+###############################################################################

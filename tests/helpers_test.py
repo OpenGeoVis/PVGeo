@@ -5,10 +5,9 @@ import numpy as np
 import vtk
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
-from .. import _helpers
 
 # Functionality to test:
-from . import xml
+from PVGeo._helpers import xml
 
 class TestTableToGrid(unittest.TestCase):
     """
@@ -28,3 +27,13 @@ class TestTableToGrid(unittest.TestCase):
         x = xml.getInputArrayXml(labels=['foo'], nInputPorts=1, numArrays=1, inputNames='Input')
 
         return
+
+
+###############################################################################
+###############################################################################
+###############################################################################
+if __name__ == '__main__':
+    unittest.main()
+###############################################################################
+###############################################################################
+###############################################################################

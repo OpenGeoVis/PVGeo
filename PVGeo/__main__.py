@@ -26,11 +26,8 @@ def GetInstallationPaths():
 
 
 if __name__ == '__main__':
-    from .tester import test
     arg = sys.argv[1]
-    if arg.lower() == 'test':
-        test(True)
-    elif arg.lower() == 'install':
+    if arg.lower() == 'install':
         GetInstallationPaths()
     else:
         raise RuntimeError('Unknown argument: %s' % arg)

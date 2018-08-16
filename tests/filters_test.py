@@ -5,14 +5,10 @@ import numpy as np
 import vtk
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
-from .. import _helpers
+from PVGeo import _helpers
 
 # Functionality to test:
-from .poly import *
-from .slicing import *
-from .tables import *
-from .voxelize import *
-from .xyz import *
+from PVGeo.filters import *
 
 RTOL = 0.000001
 
@@ -739,4 +735,11 @@ class TestPointsToTube(unittest.TestCase):
 #         return
 #
 
+###############################################################################
+###############################################################################
+###############################################################################
+if __name__ == '__main__':
+    unittest.main()
+###############################################################################
+###############################################################################
 ###############################################################################

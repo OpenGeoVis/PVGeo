@@ -34,4 +34,4 @@ install:
 
 test_script:
   - python -c "import PVGeo; print('PVGeo Version ', PVGeo.__version__)"
-  - python -m PVGeo test
+  - python -m tests close

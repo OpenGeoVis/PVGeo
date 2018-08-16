@@ -9,11 +9,9 @@ import numpy as np
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
-from .. import _helpers
+from PVGeo import _helpers
 # Functionality to test:
-from .gslib import *
-from .sgems import *
-from .write import *
+from PVGeo.gslib import *
 
 
 RTOL = 0.000001
@@ -199,3 +197,13 @@ class TestSGeMSGridReader(unittest.TestCase):
             self.assertIsNotNone(wtbl.CellData[i])
             self.assertIsNotNone(wrd.CellData[i])
             self.assertTrue(np.allclose(wtbl.CellData[i], wrd.CellData[i]))
+
+
+###############################################################################
+###############################################################################
+###############################################################################
+if __name__ == '__main__':
+    unittest.main()
+###############################################################################
+###############################################################################
+###############################################################################
