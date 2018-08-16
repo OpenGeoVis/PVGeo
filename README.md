@@ -27,7 +27,8 @@ To begin using the *PVGeo* python package, create a new virtual environment and 
 $ conda create -n PVGeoEnv python=2.7
 
 # Install VTK through conda as this is OS-independent
-$ conda install -n PVGeoEnv vtk
+$ conda install -n PVGeoEnv -c menpo vtk
+# If on Mac or Linux: pip install vtk
 
 $ source activate PVGeoEnv
 (PVGeoEnv) $ pip install PVGeo
