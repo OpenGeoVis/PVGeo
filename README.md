@@ -24,18 +24,46 @@ It is important to note the project is open source and that many features in thi
 
 
 # Getting Started
-To begin using the *PVGeo* python package, create a new virtual environment and install *PVGeo* through pip.
+
+To begin using the *PVGeo* python package, create a new Python virtual environment and install *PVGeo* through pip.
 
 ```bash
-$ conda create -n PVGeoEnv python=2.7
+# Highly recommend using Python 2.7
+$ conda create -n PVGeoEnv27 python=2.7
 
-# Install VTK through conda as this is OS-independent
-$ conda install -n PVGeoEnv -c menpo vtk
-# If on Mac or Linux: pip install vtk
-
-$ source activate PVGeoEnv
-(PVGeoEnv) $ pip install PVGeo
+$ conda activate PVGeoEnv27
+(PVGeoEnv27) $ pip install PVGeo
 
 ```
 
-Now *PVGeo* is ready for use in your standard python environment. To use the *PVGeo* library as plugins in ParaView, please see the detailed explanation [**here**](http://pvgeo.org/overview/getting-started/).
+Now you must install VTK to your virtual environment. For Linux and Mac users, simply install VTK through `pip`:
+
+```py
+
+# Now install VTK
+(PVGeoEnv27) $ pip install vtk
+
+```
+
+## Windows Users
+
+PVGeo on Windows can be quite (*VERY*) tricky to setup, so please reference previous issues with the installation label and join the **[PVGeo community on Slack**](http://slack.pvgeo.org) for guidance.
+
+Unfortunately, Windows users cannot run PVGeo in a standalone Python 2.x environment but are required to make another Python 3.6 environment to perform processing routines. The Windows Python 2.7 environment is required to properly link PVGeo to ParaView but cannot handle PVGeo without ParaView's build of VTK.
+
+If you'd like to use PVGeo in your Python scripts, jupyter notebooks, etc., please create a Python 3.6 virtual environment:
+
+```bash
+$ conda create -n PVGeoEnv36 python=3.6
+
+$ conda activate PVGeoEnv36
+(PVGeoEnv36) $ pip install PVGeo
+
+# Now install VTK>=8.1.0
+(PVGeoEnv36) $ pip install vtk
+
+```
+
+## Linking PVGeo to ParaView
+
+Now *PVGeo* is ready for use in your standard Python environment. To use the *PVGeo* library as plugins in ParaView, please see the detailed explanation [**here**](http://pvgeo.org/overview/getting-started/).

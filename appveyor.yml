@@ -4,8 +4,10 @@ build: off
 
 environment:
   matrix:
-    - PYTHON_VERSION: 2.7
-      CONDA: C:\Miniconda
+    # PVGeo is incompatible with windows python 2.7
+    # this is because vtk-v8.x.x requres c++11 which is incompatible
+    # - PYTHON_VERSION: 2.7
+    #   CONDA: C:\Miniconda
 
     - PYTHON_VERSION: 3.6
       CONDA: C:\Miniconda36
@@ -27,7 +29,7 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - conda install -c menpo vtk
+  #- conda install -c menpo vtk
   - pip install -r requirements.txt
   - python setup.py install
 
