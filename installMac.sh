@@ -66,7 +66,7 @@ cat << EOF | sudo tee ${pvplist}
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
   <plist version="1.0">
   <dict>
-  <key>Label</key>
+  <key>PVGeoPV_PLUGIN_PATH</key>
   <string>setenv.PV_PLUGIN_PATH</string>
   <key>ProgramArguments</key>
   <array>
@@ -88,7 +88,7 @@ cat << EOF | sudo tee ${pyplist}
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
   <plist version="1.0">
   <dict>
-  <key>Label</key>
+  <key>PVGeoPYTHONPATH</key>
   <string>setenv.PYTHONPATH</string>
   <key>ProgramArguments</key>
   <array>
