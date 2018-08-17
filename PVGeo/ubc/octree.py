@@ -160,7 +160,7 @@ class OcTreeReader(ubcMeshReaderBase):
             vec_full_nx[unique_nodes['f0']].reshape(-1, 1),
             vec_full_ny[unique_nodes['f1']].reshape(-1, 1),
             vec_full_nz[unique_nodes['f2']].reshape(-1, 1)), axis=1)
-        vtkPtsData = nps.numpy_to_vtk(ptsArr, deep=1)
+        vtkPtsData = _helpers.numToVTK(ptsArr, deep=1)
         vtkPts = vtk.vtkPoints()
         vtkPts.SetData(vtkPtsData)
 
@@ -179,8 +179,7 @@ class OcTreeReader(ubcMeshReaderBase):
         pdo.SetCells(vtk.VTK_VOXEL, CellArr)
 
         # Add the indexing of the cell's
-        vtkIndexArr = nps.numpy_to_vtk(
-            np.ascontiguousarray(ind_cell_corner.ravel()), deep=1)
+        vtkIndexArr = _helpers.numToVTK(ind_cell_corner.ravel(), deep=1)
         vtkIndexArr.SetName('index_cell_corner')
         pdo.GetCellData().AddArray(vtkIndexArr)
 
@@ -217,7 +216,7 @@ class OcTreeReader(ubcMeshReaderBase):
         model = model[ind_reorder]
 
         # Convert data to VTK data structure and append to output
-        c = nps.numpy_to_vtk(num_array=model, deep=True)
+        c = _helpers.numToVTK(model, deep=True)
         c.SetName(dataNm)
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)

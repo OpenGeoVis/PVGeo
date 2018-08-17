@@ -119,7 +119,7 @@ class ReshapeTable(FilterBase):
             # Make a contigous array from the column we want
             col = np.array(data[:,i])
             # allow type to be determined by input
-            insert = nps.numpy_to_vtk(num_array=col, deep=True) # array_type=vtk.VTK_FLOAT
+            insert = _helpers.numToVTK(col) # array_type=vtk.VTK_FLOAT
             # VTK arrays need a name. Set arbitrarily
             insert.SetName(self.__names[i])
             #pdo.AddColumn(insert) # these are not getting added to the output table

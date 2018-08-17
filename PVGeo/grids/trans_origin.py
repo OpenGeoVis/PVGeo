@@ -3,7 +3,6 @@ __all__ = [
 ]
 
 import vtk
-from vtk.util import numpy_support as nps
 import numpy as np
 # Import Helpers:
 from ..base import FilterBase

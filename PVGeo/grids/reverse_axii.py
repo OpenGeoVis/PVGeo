@@ -2,7 +2,6 @@ __all__ = [
     'ReverseImageDataAxii',
 ]
 
-from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np
 # Import Helpers:
@@ -44,7 +43,7 @@ class ReverseImageDataAxii(FilterBase):
                 if self.__axes[i]:
                     arr = np.flip(arr, axis=i)
             # Now add that data array to the output
-            data = nps.numpy_to_vtk(num_array=arr.flatten(), deep=True)
+            data = _helpers.numToVTK(arr.flatten())
             data.SetName(idi.GetPointData().GetArrayName(j))
             ido.GetPointData().AddArray(data)
 
@@ -57,7 +56,7 @@ class ReverseImageDataAxii(FilterBase):
                 if self.__axes[i]:
                     arr = np.flip(arr, axis=i)
             # Now add that data array to the output
-            data = nps.numpy_to_vtk(num_array=arr.flatten(), deep=True)
+            data = _helpers.numToVTK(arr.flatten())
             data.SetName(idi.GetCellData().GetArrayName(j))
             ido.GetCellData().AddArray(data)
 

@@ -7,7 +7,6 @@ __all__ = [
 ]
 
 import vtk
-from vtk.util import numpy_support as nps
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
@@ -124,7 +123,7 @@ class ArrayMath(FilterPreserveTypeBase):
         # Apply the multiplier
         carr *= self.__multiplier
         # Convert to a VTK array
-        c = nps.numpy_to_vtk(num_array=carr,deep=True)
+        c = _helpers.numToVTK(carr)
         # If no name given for data by user, use operator name
         newName = self.__newName
         if newName == '':
@@ -354,7 +353,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         # Apply the multiplier
         arr *= self.__multiplier
         # Convert to VTK array
-        c = nps.numpy_to_vtk(num_array=arr,deep=True)
+        c = _helpers.numToVTK(arr)
         # If no name given for data by user, use operator name
         newName = self.__newName
         if newName == '':

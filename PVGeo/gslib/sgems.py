@@ -3,7 +3,6 @@ __all__ = [
 ]
 
 import numpy as np
-from vtk.util import numpy_support as nps
 import vtk
 
 from .gslib import GSLibReader

@@ -7,7 +7,7 @@ def GetInstallationPaths():
     PYTHONPATH = path
     PV_PLUGIN_PATH = '%s/%s' % (path, 'PVPlugins')
 
-    script = 'curl -s  https://cdn.rawgit.com/OpenGeoVis/PVGeo/be9e9a95/installMac.sh | sh -s'
+    script = 'curl -s  https://cdn.rawgit.com/OpenGeoVis/PVGeo/master/installMac.sh | sh -s'
 
     if 'darwin' in platform.system().lower():
         # Install launch agents
@@ -26,11 +26,8 @@ def GetInstallationPaths():
 
 
 if __name__ == '__main__':
-    from .tester import test
     arg = sys.argv[1]
-    if arg.lower() == 'test':
-        test(True)
-    elif arg.lower() == 'install':
+    if arg.lower() == 'install':
         GetInstallationPaths()
     else:
         raise RuntimeError('Unknown argument: %s' % arg)

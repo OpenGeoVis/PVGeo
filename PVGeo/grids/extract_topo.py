@@ -3,7 +3,6 @@ __all__ = [
 ]
 
 import vtk
-from vtk.util import numpy_support as nps
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
@@ -85,7 +84,7 @@ class ExtractTopography(FilterBase):
         active = np.array(datapts[:,2] < comp[:,2], dtype=int)
 
         # Now add cell data to output
-        active = nps.numpy_to_vtk(num_array=active, deep=True)
+        active = _helpers.numToVTK(active)
         active.SetName('Active Topography')
         grid.GetCellData().AddArray(active)
         return 1

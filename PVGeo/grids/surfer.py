@@ -11,8 +11,6 @@ import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
-import functools
-import scipy.optimize
 
 # Import Helpers:
 from ..base import WriterBase
@@ -107,7 +105,7 @@ class SurferGridReader(DelimitedTextReader):
 
         # Now add data values as point data
         data = self._GetRawData(idx=i).reshape((self.__nx, self.__ny)).flatten(order='F')
-        vtkarr = nps.numpy_to_vtk(data)
+        vtkarr = _helpers.numToVTK(data)
         vtkarr.SetName(self.__dataName)
         output.GetPointData().AddArray(vtkarr)
 
