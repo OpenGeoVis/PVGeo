@@ -95,7 +95,7 @@ class wsMesh3DReader(ReaderBase):
         )
         # Model Array - switch between S/m and Ohm*m
         VTKArrName = 'Ohm*m'
-        modVTKArr = nps.numpy_to_vtk(mod, deep=1)
+        modVTKArr = _helpers.numToVTK(mod, deep=1)
         modVTKArr.SetName(VTKArrName)
 
         ## Calculate the global nodal coordintes
@@ -113,9 +113,9 @@ class wsMesh3DReader(ReaderBase):
         # Set the dims and coordinates for the output
         pdo.SetDimensions(dim[0],dim[1],dim[2])
         # Convert to VTK array for setting coordinates
-        pdo.SetXCoordinates(nps.numpy_to_vtk(num_array=cox,deep=True))
-        pdo.SetYCoordinates(nps.numpy_to_vtk(num_array=coy,deep=True))
-        pdo.SetZCoordinates(nps.numpy_to_vtk(num_array=coz,deep=True))
+        pdo.SetXCoordinates(_helpers.numToVTK(cox, deep=True))
+        pdo.SetYCoordinates(_helpers.numToVTK(coy, deep=True))
+        pdo.SetZCoordinates(_helpers.numToVTK(coz, deep=True))
 
         # Return the object
         return pdo

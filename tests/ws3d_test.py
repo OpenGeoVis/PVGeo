@@ -10,7 +10,7 @@ from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
 # Functionality to test:
-from .tensor_mesh import *
+from PVGeo.ws3d import *
 
 
 RTOL = 0.000001
