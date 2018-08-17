@@ -38,7 +38,7 @@ $ conda activate PVGeoEnv27
 
 Now you must install VTK to your virtual environment. For Linux and Mac users, simply install VTK through `pip`:
 
-```py
+```bash
 
 # Now install VTK
 (PVGeoEnv27) $ pip install vtk
