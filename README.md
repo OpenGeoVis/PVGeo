@@ -47,7 +47,7 @@ Now you must install VTK to your virtual environment. For Linux and Mac users, s
 
 ## Windows Users
 
-PVGeo on Windows can be quite (*VERY*) tricky to setup, so please reference previous issues with the installation label and join the **[PVGeo community on Slack**](http://slack.pvgeo.org) for guidance.
+PVGeo on Windows can be quite (*VERY*) tricky to setup, so please reference previous issues with the installation label and join the [**PVGeo community on Slack**](http://slack.pvgeo.org) for guidance.
 
 Unfortunately, Windows users cannot run PVGeo in a standalone Python 2.x environment but are required to make another Python 3.6 environment to perform processing routines. The Windows Python 2.7 environment is required to properly link PVGeo to ParaView but cannot handle PVGeo without ParaView's build of VTK.
 
