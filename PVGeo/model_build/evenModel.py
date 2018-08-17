@@ -4,7 +4,6 @@ __all__ = [
 ]
 
 import vtk
-from vtk.util import numpy_support as nps
 import numpy as np
 #from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
@@ -48,13 +47,13 @@ class CreateUniformGrid(AlgorithmBase):
         #pdo.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
         # Add CELL data
         data = _makeSpatialCellData(nx-1, ny-1, nz-1) # minus 1 b/c cell data not point data
-        data = nps.numpy_to_vtk(num_array=data, deep=True)
+        data = _helpers.numToVTK(data, deep=True)
         data.SetName('Spatial Cell Data')
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetCellData().AddArray(data)
         # Add Point data
         data = _makeSpatialCellData(nx, ny, nz)
-        data = nps.numpy_to_vtk(num_array=data, deep=True)
+        data = _helpers.numToVTK(data, deep=True)
         data.SetName('Spatial Point Data')
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetPointData().AddArray(data)
@@ -128,9 +127,9 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
         zcoords = np.linspace(self.__zrange[0], self.__zrange[1], num=nz)
 
         # CONVERT TO VTK #
-        xcoords = nps.numpy_to_vtk(num_array=xcoords,deep=True)
-        ycoords = nps.numpy_to_vtk(num_array=ycoords,deep=True)
-        zcoords = nps.numpy_to_vtk(num_array=zcoords,deep=True)
+        xcoords = _helpers.numToVTK(xcoords,deep=True)
+        ycoords = _helpers.numToVTK(ycoords,deep=True)
+        zcoords = _helpers.numToVTK(zcoords,deep=True)
 
         pdo.SetDimensions(nx,ny,nz)
         pdo.SetXCoordinates(xcoords)
@@ -138,7 +137,7 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
         pdo.SetZCoordinates(zcoords)
 
         data = _makeSpatialCellData(nx-1, ny-1, nz-1)
-        data = nps.numpy_to_vtk(num_array=data, deep=True)
+        data = _helpers.numToVTK(data, deep=True)
         data.SetName('Spatial Data')
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetCellData().AddArray(data)

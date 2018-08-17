@@ -9,9 +9,7 @@ from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
 # Functionality to test:
-from .tensor_mesh import *
-from .octree import *
-from .write import *
+from PVGeo.ubc import *
 
 RTOL = 0.000001
 
@@ -392,3 +390,13 @@ class TestOcTreeMeshReader(ubcMeshTesterBase):
         self.assertEqual(output.GetCellData().GetArrayName(2), 'Appended Data')
         self.assertEqual(len(f.GetTimestepValues()), self.nt-1)
         return
+
+
+###############################################################################
+###############################################################################
+###############################################################################
+if __name__ == '__main__':
+    unittest.main()
+###############################################################################
+###############################################################################
+###############################################################################

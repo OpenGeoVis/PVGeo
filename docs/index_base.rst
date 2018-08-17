@@ -80,16 +80,23 @@ To begin using the ``PVGeo`` python package, create a new virtual environment an
 
 .. code-block:: bash
 
-    $ conda create -n PVGeoEnv python=2.7
+    $ conda create -n PVGeoEnv27 python=2.7
 
-    # Install VTK through conda as this is OS-independent
-    $ conda install -n PVGeoEnv vtk
+    # Activate the virtual environment
+    $ conda activate PVGeoEnv27
 
-    $ source activate PVGeoEnv
-    (PVGeoEnv) $ pip install PVGeo
+    # Install PVGeo
+    (PVGeoEnv27) $ pip install PVGeo
 
-    # Test the install on non-Windows OS
-    (PVGeoEnv) $ python -m PVGeo test
+    # Now install VTK>=8.1.0
+    (PVGeoEnv27) $ pip install vtk
+
+.. warning::
+
+    Windows users: Please see installation instructions on `GitHub README`_.
+
+.. _GitHub README: https://github.com/OpenGeoVis/PVGeo/
+
 
 Now ``PVGeo`` is ready for use in your standard python environment. To use the *PVGeo* library as plugins in `ParaView`_, please see the `detailed explanation here`_.
 

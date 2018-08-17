@@ -3,7 +3,6 @@ __all__ = [
     'MadagascarReader']
 
 import numpy as np
-from vtk.util import numpy_support as nps
 import vtk
 import warnings
 # Import Helpers:
@@ -68,7 +67,7 @@ class PackedBinariesReader(ReaderBase):
         """Converts the numpy array to a vtkDataArray
         """
         # Put raw data into vtk array
-        data = nps.numpy_to_vtk(num_array=arr, deep=True, array_type=self.__vtktype)
+        data = _helpers.numToVTK(arr, deep=True, array_type=self.__vtktype)
         data.SetName(self.__dataName)
         return data
 

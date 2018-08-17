@@ -38,7 +38,7 @@ def PointsToPolyData(points):
 
     # Convert points to vtk object
     pts = vtk.vtkPoints()
-    pts.SetData(nps.numpy_to_vtk(points))
+    pts.SetData(_helpers.numToVTK(points))
 
     # Create polydata
     pdata = vtk.vtkPolyData()
