@@ -95,7 +95,7 @@ To begin using the ``PVGeo`` python package, create a new virtual environment an
 
     Windows users: Please see installation instructions on `GitHub README`_.
 
-.. _GitHub README: https://github.com/OpenGeoVis/PVGeo/
+.. _GitHub README: https://github.com/OpenGeoVis/PVGeo/#getting-started
 
 
 Now ``PVGeo`` is ready for use in your standard python environment. To use the *PVGeo* library as plugins in `ParaView`_, please see the `detailed explanation here`_.
