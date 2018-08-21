@@ -1,4 +1,5 @@
-# *PVGeo*
+<img src="PVGeo_icon_horiz.png" href="http://pvgeo.org" width="500" />
+
 
 [![Documentation Status](https://readthedocs.org/projects/pvgeo/badge/?version=latest)](http://docs.pvgeo.org/en/latest/?badge=latest) [![Open Source](https://img.shields.io/badge/open--source-yes-brightgreen.svg)](https://opensource.com/resources/what-open-source) [![PyPI](https://img.shields.io/pypi/v/PVGeo.svg)](https://pypi.org/project/PVGeo/)  [![Slack Bage](http://slack.pvgeo.org/badge.svg)](http://slack.pvgeo.org) [![Documentation Built by gendocs](https://img.shields.io/badge/docs%20by-gendocs-blue.svg)](https://gendocs.readthedocs.io/en/latest/?badge=latest)
 
