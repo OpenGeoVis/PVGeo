@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.11'
+paraview_plugin_version = '1.1.18'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -15,8 +15,8 @@ MENU_CAT = 'PVGeo: Model Building'
 
 
 @smproxy.source(name='PVGeoCreateEvenRectilinearGrid', label='Create Even Rectilinear Grid')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 class PVGeoCreateEvenRectilinearGrid(CreateEvenRectilinearGrid):
     def __init__(self):
         CreateEvenRectilinearGrid.__init__(self)
@@ -44,8 +44,8 @@ class PVGeoCreateEvenRectilinearGrid(CreateEvenRectilinearGrid):
 
 
 @smproxy.source(name='PVGeoCreateTensorMesh', label='Create Tensor Mesh')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 class PVGeoCreateTensorMesh(CreateTensorMesh):
     def __init__(self):
         CreateTensorMesh.__init__(self)
@@ -71,8 +71,8 @@ class PVGeoCreateTensorMesh(CreateTensorMesh):
 
 
 @smproxy.source(name='PVGeoCreateUniformGrid', label='Create Uniform Grid')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 class PVGeoCreateUniformGrid(CreateUniformGrid):
     def __init__(self):
         CreateUniformGrid.__init__(self)

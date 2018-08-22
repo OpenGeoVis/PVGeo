@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.11'
+paraview_plugin_version = '1.1.18'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -76,8 +76,8 @@ class PVGeoTensorMeshReader(TensorMeshReader):
 
 @smproxy.filter(name="PVGeoTensorMeshAppender",
        label="Append Model To UBC Tensor Mesh")
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
 class PVGeoTensorMeshAppender(TensorMeshAppender):
@@ -180,8 +180,8 @@ class PVGeoUBCOcTreeMeshReader(OcTreeReader):
 
 @smproxy.filter(name="PVGeoOcTreeAppender",
        label="Append Model To UBC OcTree Mesh")
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkUnstructuredGrid"], composite_data_supported=False)
 class PVGeoOcTreeAppender(OcTreeAppender):
@@ -214,87 +214,31 @@ class PVGeoOcTreeAppender(OcTreeAppender):
 #------------------------------------------------------------------------------
 # Write Tensor Mesh
 #------------------------------------------------------------------------------
-# @smproxy.writer(extensions="mesh", file_description="UBC Tensor Mesh", support_reload=False)
-# @smproperty.input(name="Input", port_index=0)
-# @smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
-# class vtkUBCTensorMeshWriter(VTKPythonAlgorithmBase):
-#     def __init__(self):
-#         VTKPythonAlgorithmBase.__init__(self, nInputPorts=1, nOutputPorts=0, inputType='vtkRectilinearGrid')
-#         self._filename = None
-#
-#     @smproperty.stringvector(name="FileName", panel_visibility="never")
-#     @smdomain.filelist()
-#     def SetFileName(self, fname):
-#         """Specify filename for the file to write."""
-#         if self._filename != fname:
-#             self._filename = fname
-#             self.Modified()
-#
-#     def RequestData(self, request, inInfoVec, outInfoVec):
-#         from vtkmodules.vtkCommonDataModel import vtkRectilinearGrid
-#         from vtkmodules.numpy_interface import dataset_adapter as dsa
-#
-#         grid = dsa.WrapDataObject(vtkRectilinearGrid.GetData(inInfoVec[0], 0))
-#         print('saving grid not impleneted')
-#         return 1
-#
-#     def Write(self):
-#         self.Modified()
-#         self.Update()
-#
-# @smproxy.writer(extensions="gslib", file_description="GSLib Format", support_reload=False)
-# @smproperty.input(name="Input", port_index=0)
-# @smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
-# class vtkGSLIBMeshWriter(VTKPythonAlgorithmBase):
-#     def __init__(self):
-#         VTKPythonAlgorithmBase.__init__(self, nInputPorts=1, nOutputPorts=0, inputType='vtkRectilinearGrid')
-#         self._filename = None
-#
-#     @smproperty.stringvector(name="FileName", panel_visibility="never")
-#     @smdomain.filelist()
-#     def SetFileName(self, fname):
-#         """Specify filename for the file to write."""
-#         if self._filename != fname:
-#             self._filename = fname
-#             self.Modified()
-#
-#     def RequestData(self, request, inInfoVec, outInfoVec):
-#         #from vtkmodules.vtkCommonDataModel import vtkTable
-#         #from vtkmodules.numpy_interface import dataset_adapter as dsa
-#
-#         table = dsa.WrapDataObject(vtkTable.GetData(inInfoVec[0], 0))
-#         print('saving grid not impleneted')
-#         return 1
-#
-#     def Write(self):
-#         self.Modified()
-#         self.Update()
-#
-#
-# @smproxy.writer(extensions="bin", file_description="Binary Array (SEPLib/Madagascr)", support_reload=False)
-# @smproperty.input(name="Input", port_index=0)
-# @smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
-# class vtkBinaryWriter(VTKPythonAlgorithmBase):
-#     def __init__(self):
-#         VTKPythonAlgorithmBase.__init__(self, nInputPorts=1, nOutputPorts=0, inputType='vtkRectilinearGrid')
-#         self._filename = None
-#
-#     @smproperty.stringvector(name="FileName", panel_visibility="never")
-#     @smdomain.filelist()
-#     def SetFileName(self, fname):
-#         """Specify filename for the file to write."""
-#         if self._filename != fname:
-#             self._filename = fname
-#             self.Modified()
-#
-#     def RequestData(self, request, inInfoVec, outInfoVec):
-#         from vtkmodules.vtkCommonDataModel import vtkImageData
-#         from vtkmodules.numpy_interface import dataset_adapter as dsa
-#
-#         grid = dsa.WrapDataObject(vtkImageData.GetData(inInfoVec[0], 0))
-#         print('saving grid not impleneted')
-#         return 1
-#
-#     def Write(self):
-#         self.Modified()
-#         self.Update()
+
+
+@smproxy.writer(extensions="msh", file_description="UBC Tensor Mesh", support_reload=False)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
+class PVGeoWriteRectilinearGridToUBC(WriteRectilinearGridToUBC):
+    def __init__(self):
+        WriteRectilinearGridToUBC.__init__(self)
+
+    @smproperty.stringvector(name="FileName", panel_visibility="never")
+    @smdomain.filelist()
+    def SetFileName(self, fname):
+        """Specify filename for the file to write."""
+        WriteRectilinearGridToUBC.SetFileName(self, fname)
+
+
+@smproxy.writer(extensions="msh", file_description="UBC Tensor Mesh", support_reload=False)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
+    def __init__(self):
+        WriteImageDataToUBC.__init__(self)
+
+    @smproperty.stringvector(name="FileName", panel_visibility="never")
+    @smdomain.filelist()
+    def SetFileName(self, fname):
+        """Specify filename for the file to write."""
+        WriteImageDataToUBC.SetFileName(self, fname)

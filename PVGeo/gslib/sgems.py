@@ -3,7 +3,6 @@ __all__ = [
 ]
 
 import numpy as np
-from vtk.util import numpy_support as nps
 import vtk
 
 from .gslib import GSLibReader
@@ -14,7 +13,7 @@ class SGeMSGridReader(GSLibReader):
     """Generates ``vtkImageData`` from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
     """
     __displayname__ = 'SGeMS Grid Reader'
-    __type__ = 'reader'
+    __category__ = 'reader'
     def __init__(self, origin=(0.0, 0.0, 0.0), spacing=(1.0, 1.0, 1.0), **kwargs):
         GSLibReader.__init__(self, outputType='vtkImageData', **kwargs)
         self.__extent = None

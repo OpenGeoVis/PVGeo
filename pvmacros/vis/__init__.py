@@ -13,4 +13,4 @@ def hideAll():
     return None
 
 hideAll.__displayname__ = 'Hide All'
-hideAll.__type__ = 'macro'
+hideAll.__category__ = 'macro'

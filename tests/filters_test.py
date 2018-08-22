@@ -3,16 +3,11 @@ import numpy as np
 
 # VTK imports:
 import vtk
-from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
-from .. import _helpers
+from PVGeo import _helpers
 
 # Functionality to test:
-from .poly import *
-from .slicing import *
-from .tables import *
-from .voxelize import *
-from .xyz import *
+from PVGeo.filters import *
 
 RTOL = 0.000001
 
@@ -261,12 +256,15 @@ class TestRotatePoints(unittest.TestCase):
         return
 
     def test_rotation(self):
+        """`RotatePoints`: Assert produces and output"""
         f = RotatePoints()
         f.SetInputDataObject(self.vtkpoints)
         f.SetRotationDegrees(33.3)
         f.Update()
         output = f.GetOutput()
         self.assertIsNotNone(output)
+        # TODO: needs further testing
+        return
 
 
 ###############################################################################
@@ -662,6 +660,7 @@ class TestPointsToTube(unittest.TestCase):
         self.vtkpoints = PointsToPolyData(self.pts)
 
     def test_(self):
+        """`PointsToTube`: Test generation of tube from shuffled points"""
         self.makeComplicatedInput()
         f = PointsToTube()
         f.SetInputDataObject(self.vtkpoints)
@@ -721,3 +720,25 @@ class TestPointsToTube(unittest.TestCase):
 #
 #
 # ###############################################################################
+
+
+# class TestPercentThreshold(unittest.TestCase):
+#     """
+#     Test the `PercentThreshold` filter
+#     """
+#
+#     def test(self):
+#         """`PercentThreshold`: make sure no errors arise"""
+#         filt = PercentThreshold()
+#
+#         return
+#
+
+###############################################################################
+###############################################################################
+###############################################################################
+if __name__ == '__main__':
+    unittest.main()
+###############################################################################
+###############################################################################
+###############################################################################

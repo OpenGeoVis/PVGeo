@@ -4,7 +4,6 @@ __all__ = [
 ]
 
 import numpy as np
-from vtk.util import numpy_support as nps
 import vtk
 import os
 
@@ -27,7 +26,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         Model File is optional. Reader will still construct ``vtkRectilinearGrid`` safely.
     """
     __displayname__ = 'UBC Tensor Mesh Reader'
-    __type__ = 'reader'
+    __category__ = 'reader'
     def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid', **kwargs):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
@@ -74,7 +73,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         model = model.flatten()
 
         # Convert data to VTK data structure and append to output
-        c = nps.numpy_to_vtk(num_array=model,deep=True)
+        c = _helpers.numToVTK(model,deep=True)
         c.SetName(dataNm)
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)
@@ -89,7 +88,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         """This method reads a UBC 2D Mesh file and builds an empty ``vtkRectilinearGrid``
         for data to be inserted into. `Format Specs`_.
 
-        .. _Format Specs: http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html/>
+        .. _Format Specs: http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html
 
         Args:
             FileName (str) : The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
@@ -119,11 +118,11 @@ class TensorMeshReader(ubcMeshReaderBase):
             c = np.array(c,dtype=float)
             if z:
                 c = -c[::-1]
-            return nps.numpy_to_vtk(num_array=c,deep=True)
+            return _helpers.numToVTK(c,deep=True)
 
         xcoords = _genCoords(xpts, xdisc)
         zcoords = _genCoords(zpts, zdisc, z=True)
-        ycoords = nps.numpy_to_vtk(num_array=np.zeros(1),deep=True)
+        ycoords = _helpers.numToVTK(np.zeros(1),deep=True)
 
         output.SetDimensions(nx,2,nz) # note this subtracts 1
         output.SetXCoordinates(xcoords)
@@ -239,9 +238,9 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Set the dims and coordinates for the output
         output.SetDimensions(dim[0],dim[1],dim[2])
         # Convert to VTK array for setting coordinates
-        output.SetXCoordinates(nps.numpy_to_vtk(num_array=cox,deep=True))
-        output.SetYCoordinates(nps.numpy_to_vtk(num_array=coy,deep=True))
-        output.SetZCoordinates(nps.numpy_to_vtk(num_array=coz,deep=True))
+        output.SetXCoordinates(_helpers.numToVTK(cox,deep=True))
+        output.SetYCoordinates(_helpers.numToVTK(coy,deep=True))
+        output.SetZCoordinates(_helpers.numToVTK(coz,deep=True))
 
         return output
 
@@ -333,7 +332,7 @@ class TensorMeshAppender(ModelAppenderBase):
     ``vtkRectilinearGrid``
     """
     __displayname__ = 'UBC Tensor Mesh Appender'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         ModelAppenderBase.__init__(self,
             inputType='vtkRectilinearGrid',

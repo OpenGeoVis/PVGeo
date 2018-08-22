@@ -106,5 +106,3 @@ cat << EOF | sudo tee ${pyplist}
 EOF
 
 printf "${GREEN}%s${NORMAL}\n" "All Finished! Any version of ParaView will launch with the PVGeo plugins and Python Module."
-
-printf "${YELLOW}%s${NORMAL}\n" "Virtual Reality Users: Beware that your version of ParaView has Python included as errors/crashes will occur if you use these plugins without Python."

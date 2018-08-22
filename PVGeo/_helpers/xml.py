@@ -1,5 +1,16 @@
 # This file has a ton of convienance methods for generating extra XML for
 # the pvpluginss
+__all__ = [
+    'getPythonPathProperty',
+    'getReaderTimeStepValues',
+    'getVTKTypeMap',
+    'getPropertyXml',
+    'getFileReaderXml',
+    'getDropDownXml',
+    '_helpArraysXml',
+    'getInputArrayXml'
+]
+
 from . import errors as _helpers
 
 def getPythonPathProperty():

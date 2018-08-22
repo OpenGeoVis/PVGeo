@@ -5,7 +5,6 @@ __all__ = [
 import numpy as np
 import vtk
 from vtk.util import keys
-from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
 from ..base import FilterBase
@@ -21,7 +20,7 @@ class VoxelizePoints(FilterBase):
     This assumes that the data is at least 2-Dimensional on the XY Plane.
     """
     __displayname__ = 'Voxelize Points'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -58,7 +57,7 @@ class VoxelizePoints(FilterBase):
     def AddCellData(grid, arr, name):
         """Add a NumPy array as cell data to the given grid input
         """
-        c = nps.numpy_to_vtk(num_array=arr, deep=True)
+        c = _helpers.numToVTK(arr)
         c.SetName(name)
         grid.GetCellData().AddArray(c)
         return grid
@@ -91,9 +90,8 @@ class VoxelizePoints(FilterBase):
     def PointsToGrid(self, xo,yo,zo, dx,dy,dz, grid=None):
         """Convert XYZ points to a ``vtkUnstructuredGrid``.
         """
-        if not checkNumpy():
-            raise _helpers.PVGeoError("`VoxelizePoints` cannot work with versions of NumPy below 1.10.x . You must update NumPy.")
-            return None
+        if not checkNumpy(alert='warn'):
+            return grid
         if grid is None:
             grid = vtk.vtkUnstructuredGrid()
 
@@ -156,7 +154,7 @@ class VoxelizePoints(FilterBase):
             self.AddFieldData(grid)
 
         # Add unique nodes as points in output
-        pts.SetData(nps.numpy_to_vtk(unique_nodes))
+        pts.SetData(_helpers.numToVTK(unique_nodes))
 
         cnt = 0
         arridx = np.zeros(numCells)

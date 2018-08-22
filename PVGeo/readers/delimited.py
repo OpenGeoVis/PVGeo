@@ -14,7 +14,7 @@ class DelimitedTextReader(ReaderBase):
     """This reader will take in any delimited text file and make a ``vtkTable`` from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
     """
     __displayname__ = 'Delimited Text Reader'
-    __type__ = 'reader'
+    __category__ = 'reader'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType,
@@ -28,7 +28,7 @@ class DelimitedTextReader(ReaderBase):
         self.__comments = kwargs.get('comments', '!')
         self.__hasTitles = kwargs.get('HasTitles', True)
         # Data objects to hold the read data for access by the pipeline methods
-        self.__data = []
+        self._data = []
         self.__titles = []
 
     def _GetDeli(self):
@@ -70,7 +70,7 @@ class DelimitedTextReader(ReaderBase):
                 titles.append('Field %d' % i)
         return titles, content[idx::]
 
-    def __ExtractHeaders(self, contents):
+    def _ExtractHeaders(self, contents):
         """Should NOT be overriden.
         """
         ts = []
@@ -85,7 +85,7 @@ class DelimitedTextReader(ReaderBase):
         return ts[0], contents
 
 
-    def __FileContentsToDataArray(self, contents):
+    def _FileContentsToDataArray(self, contents):
         """Should NOT need to be overriden
         """
         data = []
@@ -98,8 +98,8 @@ class DelimitedTextReader(ReaderBase):
         """
         # Perform Read
         contents = self._GetFileContents()
-        self.__titles, contents = self.__ExtractHeaders(contents)
-        self.__data = self.__FileContentsToDataArray(contents)
+        self.__titles, contents = self._ExtractHeaders(contents)
+        self._data = self._FileContentsToDataArray(contents)
         self.NeedToRead(flag=False)
         return 1
 
@@ -108,7 +108,7 @@ class DelimitedTextReader(ReaderBase):
     def _GetRawData(self, idx=0):
         """This will return the proper data for the given timestep.
         """
-        return self.__data[idx]
+        return self._data[idx]
 
 
     #### Algorithm Methods ####
@@ -189,7 +189,7 @@ class XYZTextReader(DelimitedTextReader):
     """A makeshift reader for XYZ files where titles have comma delimiter and data has space delimiter.
     """
     __displayname__ = 'XYZ Text Reader'
-    __type__ = 'reader'
+    __category__ = 'reader'
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, **kwargs)
         self.SetComments(kwargs.get('comments', '#'))

@@ -3,7 +3,6 @@ __all__ = [
 ]
 
 import vtk
-from vtk.util import numpy_support as nps
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
@@ -21,7 +20,7 @@ class ExtractTopography(FilterBase):
 
     """
     __displayname__ = 'Extract Topography'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self):
         FilterBase.__init__(self,
             nInputPorts=2, inputType='vtkDataObject',
@@ -65,31 +64,29 @@ class ExtractTopography(FilterBase):
         igrid = self.GetInputData(inInfo, 0, 0) # Port 0: grid
         topo = self.GetInputData(inInfo, 1, 0) # Port 1: topography
         grid = self.GetOutputData(outInfo, 0)
+
         # Perfrom task
         grid.DeepCopy(igrid)
         ncells = grid.GetNumberOfCells()
         active = np.zeros((ncells), dtype=int)
         # Now iterate through the cells in the grid and test if they are beneath the topography
-        wtopo = dsa.WrapDataObject(topo) # NumPy wrapped points
-        topoPts = np.array(wtopo.Points) # New NumPy array of points so we dont destroy input
-        tree = cKDTree(topoPts[:, 0:2]) # NOTE: only on the XY plane
+        wtopo = dsa.WrapDataObject(topo)
+        topoPts = wtopo.Points
 
-        # OPTIMIZE: accelerate this to harness structured coords
-        for i in range(ncells):
-            voxel = grid.GetCell(i)
-            x,y,z = self.__GetVoxelCenter(voxel)
-            # Search for same XY point in topoPts
-            ptsi = tree.query([[x, y]], k=1)[1]
-            if z > topoPts[ptsi[0]][2]:
-                active[i] = 0
-            else:
-                active[i] = 1
+        filt = vtk.vtkCellCenters()
+        filt.SetInputDataObject(igrid)
+        filt.Update()
+        datapts = dsa.WrapDataObject(filt.GetOutput(0)).Points
 
+        tree = cKDTree(topoPts)
+        i = tree.query(datapts)[1]
+        comp = topoPts[i]
+        active = np.array(datapts[:,2] < comp[:,2], dtype=int)
 
         # Now add cell data to output
-        data = nps.numpy_to_vtk(num_array=active, deep=True)
-        data.SetName('Active Topography')
-        grid.GetCellData().AddArray(data)
+        active = _helpers.numToVTK(active)
+        active.SetName('Active Topography')
+        grid.GetCellData().AddArray(active)
         return 1
 
     def Apply(self, data, points):

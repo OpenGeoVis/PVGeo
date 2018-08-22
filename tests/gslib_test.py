@@ -7,11 +7,10 @@ import numpy as np
 
 # VTK imports:
 from vtk.util import numpy_support as nps
+from vtk.numpy_interface import dataset_adapter as dsa
 
-from .. import _helpers
 # Functionality to test:
-from .gslib import *
-from .sgems import *
+from PVGeo.gslib import *
 
 
 RTOL = 0.000001
@@ -20,7 +19,7 @@ RTOL = 0.000001
 
 class TestGSLibReader(unittest.TestCase):
     """
-    Test the `GSLibReader`
+    Test the `GSLibReader` and `WriteTableToGSLib`
     """
     def setUp(self):
         # Create a temporary directory
@@ -83,6 +82,28 @@ class TestGSLibReader(unittest.TestCase):
         reader.Update()
         self.assertTrue(reader.ErrorOccurred())
 
+    def test_writer(self):
+        """`WriteTableToGSLib`: check data integrity across I/O"""
+        writer = WriteTableToGSLib()
+        fname = os.path.join(self.test_dir, 'test-writer.dat')
+        writer.SetFileName(fname)
+        writer.Write(self.TABLE)
+        # Now read that data and compare
+        reader = GSLibReader()
+        read = reader.Apply(fname)
+        # Compare data
+        truedata = self.TABLE.GetRowData()
+        testdata = read.GetRowData()
+        self.assertEqual(truedata.GetNumberOfArrays(), testdata.GetNumberOfArrays())
+        #self.assertEqual(truedata.GetNumberOfRows(), testdata.GetNumberOfRows())
+        #self.assertEqual(truedata.GetNumberOfColumns(), testdata.GetNumberOfColumns())
+        wtbl = dsa.WrapDataObject(self.TABLE)
+        wrd = dsa.WrapDataObject(read)
+        for i in range(truedata.GetNumberOfArrays()):
+            self.assertIsNotNone(wtbl.RowData[i])
+            self.assertIsNotNone(wrd.RowData[i])
+            self.assertTrue(np.allclose(wtbl.RowData[i], wrd.RowData[i]))
+
 
 
 
@@ -91,7 +112,7 @@ class TestGSLibReader(unittest.TestCase):
 
 class TestSGeMSGridReader(unittest.TestCase):
     """
-    Test the `SGeMSGridReader`
+    Test the `SGeMSGridReader` and `WriteImageDataToSGeMS`
     """
     def setUp(self):
         # Create a temporary directory
@@ -150,3 +171,38 @@ class TestSGeMSGridReader(unittest.TestCase):
         # Perform the read
         reader.Update()
         self.assertTrue(reader.ErrorOccurred())
+
+
+    def test_writer(self):
+        """`WriteImageDataToSGeMS`: check data integrity across I/O"""
+        writer = WriteImageDataToSGeMS()
+        fname = os.path.join(self.test_dir, 'test-writer.dat')
+        writer.SetFileName(fname)
+        writer.Write(self.GRID)
+        # Now read that data and compare
+        reader = SGeMSGridReader()
+        read = reader.Apply(fname)
+        # Compare data
+        truedata = self.GRID.GetPointData()
+        testdata = read.GetPointData()
+        self.assertEqual(truedata.GetNumberOfArrays(), testdata.GetNumberOfArrays())
+        wtbl = dsa.WrapDataObject(self.GRID)
+        wrd = dsa.WrapDataObject(read)
+        for i in range(truedata.GetNumberOfArrays()):
+            self.assertIsNotNone(wtbl.PointData[i])
+            self.assertIsNotNone(wrd.PointData[i])
+            self.assertTrue(np.allclose(wtbl.PointData[i], wrd.PointData[i]))
+        for i in range(self.GRID.GetCellData().GetNumberOfArrays()):
+            self.assertIsNotNone(wtbl.CellData[i])
+            self.assertIsNotNone(wrd.CellData[i])
+            self.assertTrue(np.allclose(wtbl.CellData[i], wrd.CellData[i]))
+
+
+###############################################################################
+###############################################################################
+###############################################################################
+if __name__ == '__main__':
+    unittest.main()
+###############################################################################
+###############################################################################
+###############################################################################

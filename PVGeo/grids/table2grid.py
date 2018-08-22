@@ -21,7 +21,7 @@ class TableToGrid(FilterBase):
         **Work in progress**
     """
     __displayname__ = 'Table To Grid'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, extent=[10, 10, 10], order='C', spacing=[1.0, 1.0, 1.0],
                  origin=[0.0, 0.0, 0.0], seplib=False, swapXY=False):
         FilterBase.__init__(self,
@@ -129,7 +129,7 @@ class TableToGrid(FilterBase):
             name = c.GetName()
             arr = nps.vtk_to_numpy(c)
             arr = TableToGrid._refold(arr, self.__extent, SEPlib=self.__SEPlib, order=self.__order, swapXY=self.__swapXY)
-            c = nps.numpy_to_vtk(num_array=arr, deep=True)
+            c = _helpers.numToVTK(arr)
             c.SetName(name)
             #ido.GetCellData().AddArray(c) # Should we add here? flipper won't flip these...
             # Also, image data is built by points from numrows in table

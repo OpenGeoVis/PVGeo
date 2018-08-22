@@ -20,13 +20,30 @@ import shutil
 path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print(path)
 sys.path.insert(0, path)
+sys.path.insert(0, '/Users/bane/Documents/OpenGeoVis/Projects/gendocs/')
+
 
 # Mock the paraview module to build pvmacros docs
+# Mock the paraview module to build pvmacros docs
+import mock
+
+MOCK_MODULES = ['paraview', 'paraview.simple']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = mock.Mock()
 autodoc_mock_imports = ['paraview']
 
 
-# Automattically generat source pages:
-os.system('python ./make_files.py')
+# # Automattically generat source pages:
+# os.system('python ./make_files.py')
+
+import PVGeo, pvmacros # for documenting
+from gendocs import Generator
+
+# Automatically generate documentaion pages
+Generator().DocumentPackages([PVGeo, pvmacros],
+            index_base='../index_base.rst',
+            showprivate=True,
+            )
 
 
 # -- Project information -----------------------------------------------------
@@ -108,9 +125,6 @@ html_theme_options = {
 
 }
 
-html_context = {
-    "display_github": False,
-}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

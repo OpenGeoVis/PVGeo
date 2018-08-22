@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.11'
+paraview_plugin_version = '1.1.18'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -7,7 +7,7 @@ from paraview.util.vtkAlgorithm import *
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.grids import ReverseImageDataAxii, TranslateGridOrigin, TableToGrid, ExtractTopography
+from PVGeo.grids import *
 
 
 #### GLOBAL VARIABLES ####
@@ -65,10 +65,10 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 
 
 @smproxy.filter(name='PVGeoTableToGrid', label='Table To Grid')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoTableToGrid(TableToGrid):
     def __init__(self):
         TableToGrid.__init__(self)
@@ -110,7 +110,8 @@ class PVGeoTableToGrid(TableToGrid):
 
 
 @smproxy.filter(name='PVGeoExtractTopography', label='Extract Topography')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Topography", port_index=1)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
 @smproperty.input(name="Data Set", port_index=0)
@@ -120,3 +121,48 @@ class PVGeoExtractTopography(ExtractTopography):
         ExtractTopography.__init__(self)
 
     #### Seters and Geters ####
+
+###############################################################################
+
+@smproxy.reader(name="PVGeoSurferGridReader",
+       label="PVGeo: Surfer Grid File Format",
+       extensions="grd GRD",
+       file_description="Surfer Grid")
+class PVGeoSurferGridReader(SurferGridReader):
+    def __init__(self):
+        SurferGridReader.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+    def AddFileName(self, fname):
+        SurferGridReader.AddFileName(self, fname)
+
+    @smproperty.stringvector(name='DataName', default_values='Data')
+    def SetDataName(self, dataName):
+        SurferGridReader.SetDataName(self, dataName)
+
+
+###############################################################################
+
+
+@smproxy.writer(extensions="grd", file_description="Surfer Grid (ASCII)", support_reload=False)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
+    def __init__(self):
+        WriteImageDataToSurfer.__init__(self)
+
+    @smproperty.stringvector(name="FileName", panel_visibility="never")
+    @smdomain.filelist()
+    def SetFileName(self, fname):
+        """Specify filename for the file to write."""
+        WriteImageDataToSurfer.SetFileName(self, fname)
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return WriteImageDataToSurfer.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+
+
+###############################################################################

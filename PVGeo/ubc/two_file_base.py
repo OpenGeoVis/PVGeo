@@ -1,4 +1,4 @@
-all = [
+__all__ = [
     'ubcMeshReaderBase',
     'ModelAppenderBase',
 ]
@@ -17,7 +17,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
     """A base class for the UBC mesh readers
     """
     __displayname__ = 'UBC Mesh Reader Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         base.TwoFileReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType,
@@ -147,7 +147,7 @@ class ModelAppenderBase(base.AlgorithmBase):
     """A base class for create mesh-model appenders on the UBC Mesh formats
     """
     __displayname__ = 'Model Appender Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid', **kwargs):
         base.AlgorithmBase.__init__(self,
             nInputPorts=1, inputType=inputType,

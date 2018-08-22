@@ -2,8 +2,10 @@ __all__ = [
     'AlgorithmBase',
     'ReaderBaseBase',
     'ReaderBase',
+    'FilterBase',
     'FilterPreserveTypeBase',
     'TwoFileReaderBase',
+    'WriterBase',
 ]
 
 
@@ -24,15 +26,17 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
 
     * `vtkPythonAlgorithm is great`_
     * A VTK pipeline primer `(part 1)`_, `(part 2)`_, and `(part 3)`_
+    * `ParaView Python Docs`_
 
     .. _vtkAlgorithm: https://www.vtk.org/doc/nightly/html/classvtkAlgorithm.html
     .. _vtkPythonAlgorithm is great: https://blog.kitware.com/vtkpythonalgorithm-is-great/
     .. _(part 1): https://blog.kitware.com/a-vtk-pipeline-primer-part-1/
     .. _(part 2): https://blog.kitware.com/a-vtk-pipeline-primer-part-2/
     .. _(part 3): https://blog.kitware.com/a-vtk-pipeline-primer-part-3/
+    .. _ParaView Python Docs: https://www.paraview.org/ParaView/Doc/Nightly/www/py-doc/paraview.util.vtkAlgorithm.html
     """
     __displayname__ = 'Algorithm Base'
-    __type__ = 'base'
+    __category__ = 'base'
 
     def __init__(self,
                 nInputPorts=1, inputType='vtkDataSet',
@@ -61,6 +65,11 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         """A conveience method to print the error message.
         """
         return self.__errorObserver.ErrorMessage()
+
+    def Apply(self):
+        """Update the algorithm and get the output data object"""
+        self.Update()
+        return self.GetOutput()
 
 
 ###############################################################################
@@ -156,7 +165,7 @@ class ReaderBaseBase(AlgorithmBase):
 class FilterBase(AlgorithmBase):
     """A base class for implementing filters which holds several convienace methods"""
     __displayname__ = 'Filter Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self,
         nInputPorts=1, inputType='vtkDataSet',
         nOutputPorts=1, outputType='vtkPolyData'):
@@ -228,7 +237,7 @@ class FilterPreserveTypeBase(FilterBase):
     their arbitrary input.
     """
     __displayname__ = 'Filter Preserve Type Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkDataObject',
@@ -252,7 +261,7 @@ class TwoFileReaderBase(AlgorithmBase):
     One meta-data file and a series of data files.
     """
     __displayname__ = 'Two File Reader Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -390,3 +399,44 @@ class TwoFileReaderBase(AlgorithmBase):
         """Perfrom the read with parameters/file names set during init or by setters"""
         self.Update()
         return self.GetOutput()
+
+
+
+
+class WriterBase(AlgorithmBase):
+    __displayname__ = 'Writer Base'
+    __category__ = 'base'
+    def __init__(self, nInputPorts=1, inputType='vtkPolyData', **kwargs):
+        AlgorithmBase.__init__(self, nInputPorts=nInputPorts, inputType=inputType,
+                                     nOutputPorts=0)
+        self.__filename = kwargs.get('filename', None)
+
+
+    def SetFileName(self, fname):
+        """Specify the filename for the output. Writer can only handle a single output data object/time step."""
+        if not isinstance(fname, str):
+            raise RuntimeError('File name must be string. Only single file is supported.')
+        if self.__filename != fname:
+            self.__filename = fname
+            self.Modified()
+
+    def GetFileName(self):
+        """Get the set filename."""
+        return self.__filename
+
+    def RequestData(self, request, inInfoVec, outInfoVec):
+        """OVERWRITE: This is executed by the pipeline and handles the write out"""
+        raise NotImplementedError()
+        return 1
+
+    def Write(self, inputDataObject=None):
+        """Perfrom the write out."""
+        if inputDataObject:
+            self.SetInputDataObject(inputDataObject)
+        self.Modified()
+        self.Update()
+
+    def Apply(self, inputDataObject):
+        self.SetInputDataObject(inputDataObject)
+        self.Modified()
+        self.Update()
