@@ -1,4 +1,4 @@
-<img src="PVGeo_icon_horiz.png" href="http://pvgeo.org" width="75%" />
+<a href="http://pvgeo.org"><img src="PVGeo_icon_horiz.png" width="75%" /></a>
 
 
 [![Documentation Status](https://readthedocs.org/projects/pvgeo/badge/?version=latest)](http://docs.pvgeo.org/en/latest/?badge=latest)
