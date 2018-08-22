@@ -8,7 +8,11 @@ __version__ = '1.1.18'
 
 with open("README.md", "r") as f:
     long_description = f.read()
+    # Remove the icon from the README (assumes it is on the first line)
+    idx = long_description.find('\n')
+    long_description = '# *PVGeo*\n\n' + long_description[idx::]
 
+long_description
 setuptools.setup(
     name="PVGeo",
     version=__version__,
