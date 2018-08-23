@@ -43,7 +43,7 @@ class WriteTableToGSLib(WriterBase):
         header += datanames
 
         arrs = np.array(arrs).T
-        np.savetxt(self.GetFileName(), arrs, comments='', header=header)
+        np.savetxt(self.GetFileName(), arrs, comments='', header=header, fmt=self.GetFormat())
 
         return 1
 
@@ -92,6 +92,6 @@ class WriteImageDataToSGeMS(WriterBase):
         header += datanames
 
         arrs = np.array(arrs).T
-        np.savetxt(self.GetFileName(), arrs, comments='', header=header)
+        np.savetxt(self.GetFileName(), arrs, comments='', header=header, fmt=self.GetFormat())
 
         return 1

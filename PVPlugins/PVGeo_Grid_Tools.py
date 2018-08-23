@@ -20,7 +20,7 @@ MENU_CAT = 'PVGeo: General Grids'
 @smproxy.filter(name='PVGeoReverseImageDataAxii', label='Reverse Image Data Axii')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
 class PVGeoReverseImageDataAxii(ReverseImageDataAxii):
     def __init__(self):
         ReverseImageDataAxii.__init__(self)
@@ -46,7 +46,7 @@ class PVGeoReverseImageDataAxii(ReverseImageDataAxii):
 @smproxy.filter(name='PVGeoTranslateGridOrigin', label='Translate Grid Origin')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
 class PVGeoTranslateGridOrigin(TranslateGridOrigin):
     def __init__(self):
         TranslateGridOrigin.__init__(self)
@@ -68,7 +68,7 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoTableToGrid(TableToGrid):
     def __init__(self):
         TableToGrid.__init__(self)
@@ -162,6 +162,11 @@ class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
     @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return WriteImageDataToSurfer.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+    @smproperty.stringvector(name="Format", default_values='%18e')
+    def SetFormat(self, fmt):
+        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        WriteImageDataToSurfer.SetFormat(self, fmt)
 
 
 
