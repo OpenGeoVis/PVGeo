@@ -173,7 +173,7 @@ class WriteImageDataToSurfer(WriterBase):
         meta = 'DSAA\n%d %d\n%f %f\n%f %f\n%f %f' % (ny, nx, xmin, xmax,
                                                      ymin, ymax, dmin, dmax)
         # Now write out the data!
-        np.savetxt(self.GetFileName(), arr, header=meta, comments='')
+        np.savetxt(self.GetFileName(), arr, header=meta, comments='', fmt=self.GetFormat())
 
 
         return 1

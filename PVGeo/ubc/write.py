@@ -66,7 +66,7 @@ class ubcTensorMeshWriterBase(WriterBase):
             arr = reshapeModel(arr)
             path = os.path.dirname(self.GetFileName())
             fname = '%s/%s.mod' % (path, vtkarr.GetName().replace(' ', '_'))
-            np.savetxt(fname, arr, comments='! ', header='Mesh File: %s' % os.path.basename(self.GetFileName()))
+            np.savetxt(fname, arr, comments='! ', header='Mesh File: %s' % os.path.basename(self.GetFileName()), fmt=self.GetFormat())
 
         return
 

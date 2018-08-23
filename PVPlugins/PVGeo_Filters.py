@@ -22,7 +22,7 @@ MENU_CAT = 'PVGeo: General Filters'
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoAddCellConnToPoints(AddCellConnToPoints):
     def __init__(self):
         AddCellConnToPoints.__init__(self)
@@ -67,7 +67,7 @@ class PVGeoCombineTables(CombineTables):
 @smhint.xml('''<ShowInMenu category="%s"/>
    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoPointsToTube(PointsToTube):
     def __init__(self):
         PointsToTube.__init__(self)
@@ -98,7 +98,7 @@ class PVGeoPointsToTube(PointsToTube):
 @smproxy.filter(name='PVGeoReshapeTable', label='Reshape Table')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoReshapeTable(ReshapeTable):
     def __init__(self):
         ReshapeTable.__init__(self)
@@ -367,7 +367,7 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoRotatePoints(RotatePoints):
     def __init__(self):
         RotatePoints.__init__(self)
@@ -452,6 +452,20 @@ class PVGeoExtractArray(ExtractArray):
     @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return ExtractArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+
+###############################################################################
+
+
+# Extract Cell Centers
+@smproxy.filter(name='PVGeoExtractCellCenters', label='Extract Cell Centers')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=True)
+class PVGeoExtractCellCenters(ExtractCellCenters):
+    def __init__(self):
+        ExtractCellCenters.__init__(self)
 
 
 ###############################################################################
