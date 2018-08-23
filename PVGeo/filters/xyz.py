@@ -4,6 +4,7 @@ __all__ = [
     'RotatePoints',
     'ExtractPoints',
     'RotationTool',
+    'ExtractCellCenters',
 ]
 
 import vtk
@@ -399,4 +400,31 @@ class ExtractPoints(FilterBase):
         d = f.GetOutput()
         pdo.ShallowCopy(PointsToPolyData(points))
         _helpers.copyArraysToPointData(d, pdo, 0) # 0 is point data
+        return 1
+
+
+
+class ExtractCellCenters(FilterBase):
+    def __init__(self, **kwargs):
+        FilterBase.__init__(self, nInputPorts=1, inputType='vtkDataSet',
+                    nOutputPorts=1, outputType='vtkPolyData', **kwargs)
+
+    def RequestData(self, request, inInfoVec, outInfoVec):
+        pdi = self.GetInputData(inInfoVec, 0, 0)
+        pdo = self.GetOutputData(outInfoVec, 0)
+        # Find cell centers
+        filt = vtk.vtkCellCenters()
+        filt.SetInputDataObject(pdi)
+        filt.Update()
+
+        centers = dsa.WrapDataObject(filt.GetOutput()).Points
+        # Get CellData
+        wpdi = dsa.WrapDataObject(pdi)
+        celldata = wpdi.CellData
+        keys = celldata.keys()
+
+        # Make poly data of Cell centers:
+        pdo.DeepCopy(PointsToPolyData(centers))
+        for i, name in enumerate(keys):
+            pdo.GetPointData().AddArray(pdi.GetCellData().GetArray(name))
         return 1

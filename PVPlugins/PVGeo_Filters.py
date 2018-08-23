@@ -455,3 +455,17 @@ class PVGeoExtractArray(ExtractArray):
 
 
 ###############################################################################
+
+
+# Extract Cell Centers
+@smproxy.filter(name='PVGeoExtractCellCenters', label='Extract Cell Centers')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=True)
+class PVGeoExtractCellCenters(ExtractCellCenters):
+    def __init__(self):
+        ExtractCellCenters.__init__(self)
+
+
+###############################################################################
