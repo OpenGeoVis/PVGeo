@@ -71,7 +71,7 @@ class _SliceBase(FilterBase):
 
 
 class ManySlicesAlongPoints(_SliceBase):
-    """Takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at intervals of that path along the vector of that path at that point. This constructs many slices through the input dataset as an appended output ``vtkUnstructuredGrid``.
+    """Takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at intervals of that path along the vector of that path at that point. This constructs many slices through the input dataset as a merged ``vtkMultiBlockDataSet``.
 
     Note:
         * Make sure the input data source is slice-able.
@@ -82,7 +82,7 @@ class ManySlicesAlongPoints(_SliceBase):
     def __init__(self, numSlices=5, nearestNbr=True):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=2, inputType='vtkDataSet',
-            nOutputPorts=1, outputType='vtkUnstructuredGrid')
+            nOutputPorts=1, outputType='vtkMultiBlockDataSet')
         self.__useNearestNbr = nearestNbr
 
     # CRITICAL for multiple input ports
@@ -95,7 +95,7 @@ class ManySlicesAlongPoints(_SliceBase):
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), typ)
         return 1
 
-    def _ManySlicesAlongPoints(self, pdipts, pdidata, pdo):
+    def _ManySlicesAlongPoints(self, pdipts, pdidata, output):
         """Internal helper to perfrom the filter
         """
         # Get the Points over the NumPy interface
@@ -109,8 +109,10 @@ class ManySlicesAlongPoints(_SliceBase):
         else:
             ptsi = [i for i in range(numPoints)]
 
-        # iterate of points in order (skips last point):
-        app = vtk.vtkAppendFilter()
+        # Iterate of points in order (skips last point):
+        # Set number of blocks based on user choice in the selction
+        output.SetNumberOfBlocks(self.GetNumberOfSlices())
+        blk = 0
         for i in range(0, numPoints - 1, numPoints/self.GetNumberOfSlices()):
             # get normal
             pts1 = points[ptsi[i]]
@@ -123,11 +125,10 @@ class ManySlicesAlongPoints(_SliceBase):
             plane = self._GeneratePlane([x1,y1,z1], normal)
             temp = vtk.vtkPolyData()
             self._Slice(pdidata, temp, plane)
-            app.AddInputData(temp)
-        app.Update()
-        pdo.ShallowCopy(app.GetOutput())
-        return pdo
-
+            output.SetBlock(blk, temp)
+            output.GetMetaData(blk).Set(vtk.vtkCompositeDataSet.NAME(), 'Slice%.2d' % blk)
+            blk += 1
+        return output
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -135,9 +136,9 @@ class ManySlicesAlongPoints(_SliceBase):
         # Get input/output of Proxy
         pdipts = self.GetInputData(inInfo, 0, 0) # Port 0: points
         pdidata = self.GetInputData(inInfo, 1, 0) # Port 1: sliceable data
-        pdo = self.GetOutputData(outInfo, 0)
+        output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
         # Perfrom task
-        self._ManySlicesAlongPoints(pdipts, pdidata, pdo)
+        self._ManySlicesAlongPoints(pdipts, pdidata, output)
         return 1
 
 
@@ -170,7 +171,7 @@ class ManySlicesAlongAxis(_SliceBase):
     """
     __displayname__ = 'Many Slices Along Axis'
     __category__ = 'filter'
-    def __init__(self, numSlices=5, axis=0, rng=None, outputType='vtkUnstructuredGrid'):
+    def __init__(self, numSlices=5, axis=0, rng=None, outputType='vtkMultiBlockDataSet'):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType=outputType)
@@ -229,20 +230,24 @@ class ManySlicesAlongAxis(_SliceBase):
         """
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
-        pdo = self.GetOutputData(outInfo, 0)
+        # Get output:
+        #output = self.GetOutputData(outInfo, 0)
+        output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
         self._SetAxialRange(pdi)
         normal = self.GetNormal()
         # Perfrom task
-        app = vtk.vtkAppendFilter()
+        # Set number of blocks based on user choice in the selction
+        output.SetNumberOfBlocks(self.GetNumberOfSlices())
+        blk = 0
         for i in range(self.GetNumberOfSlices()):
             temp = vtk.vtkPolyData()
             origin = self._GetOrigin(pdi, i)
             plane = self._GeneratePlane(origin, normal)
             # Perfrom slice for that index
             self._Slice(pdi, temp, plane)
-            app.AddInputData(temp)
-        app.Update()
-        pdo.ShallowCopy(app.GetOutput())
+            output.SetBlock(blk, temp)
+            output.GetMetaData(blk).Set(vtk.vtkCompositeDataSet.NAME(), 'Slice%.2d' % i)
+            blk += 1
 
         return 1
 
