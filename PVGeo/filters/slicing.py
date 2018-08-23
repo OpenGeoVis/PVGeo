@@ -200,9 +200,9 @@ class ManySlicesAlongAxis(_SliceBase):
             tuple: the XYZ coordinates of the center of the data set.
         """
         bounds = pdi.GetBounds()
-        x = bounds[1] - bounds[0]
-        y = bounds[3] - bounds[2]
-        z = bounds[5] - bounds[4]
+        x = (bounds[1] - bounds[0])/2
+        y = (bounds[3] - bounds[2])/2
+        z = (bounds[5] - bounds[4])/2
         return (x, y, z)
 
     def GetNormal(self):
