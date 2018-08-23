@@ -171,3 +171,29 @@ class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
 
 
 ###############################################################################
+
+@smproxy.writer(extensions="dat", file_description="Cell Centers and Cell Data", support_reload=False)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+class PVGeoWriteCellCenterData(WriteCellCenterData):
+    def __init__(self):
+        WriteCellCenterData.__init__(self)
+
+
+    @smproperty.stringvector(name="FileName", panel_visibility="never")
+    @smdomain.filelist()
+    def SetFileName(self, fname):
+        """Specify filename for the file to write."""
+        WriteCellCenterData.SetFileName(self, fname)
+
+    @smproperty.stringvector(name="Format", default_values='%18e')
+    def SetFormat(self, fmt):
+        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        WriteCellCenterData.SetFormat(self, fmt)
+
+    @smproperty.stringvector(name="Delimiter", default_values=',')
+    def SetDelimiter(self, delimiter):
+        """The string delimiter to use"""
+        WriteCellCenterData.SetDelimiter(self, delimiter)
+
+###############################################################################
