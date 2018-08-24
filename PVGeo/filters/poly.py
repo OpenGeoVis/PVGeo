@@ -9,6 +9,7 @@ __all__ = [
 import vtk
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
+from vtk.util import numpy_support as nps
 from datetime import datetime
 # Import Helpers:
 from ..base import FilterBase, FilterPreserveTypeBase
@@ -469,6 +470,7 @@ class AddCellConnToPoints(FilterBase):
         # Parameters
         self.__cellType = vtk.VTK_POLY_LINE
         self.__usenbr = kwargs.get('nearestNbr', False)
+        self.__unique = True
 
 
     def _ConnectCells(self, pdi, pdo, logTime=False):
@@ -484,6 +486,10 @@ class AddCellConnToPoints(FilterBase):
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+        if self.__unique:
+            # Remove repeated points
+            print('uniwu')
+            points = np.unique(points, axis=0)
 
         def _makePolyCell(ptsi):
             cell = vtk.vtkPolyLine()
@@ -545,6 +551,17 @@ class AddCellConnToPoints(FilterBase):
         pdo.SetLines(cells)
         # copy point data
         _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        # Copy cell data if type is LINE
+        if cellType == vtk.VTK_LINE:
+            # Be sure to rearange for Nearest neighbor approxiamtion
+            for i in range(pdi.GetCellData().GetNumberOfArrays()):
+                vtkarr = pdi.GetCellData().GetArray(i)
+                name = vtkarr.GetName()
+                if nrNbr:
+                    arr = nps.vtk_to_numpy(vtkarr)
+                    arr = arr[ind]
+                    vtkarr = _helpers.numToVTK(arr, name=name)
+                pdo.GetCellData().AddArray(vtkarr)
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):
@@ -575,7 +592,11 @@ class AddCellConnToPoints(FilterBase):
             self.__usenbr = flag
             self.Modified()
 
-
+    def SetUseUniquePoints(self, flag):
+        """Set a flag on whether to only use unique points"""
+        if flag != self.__unique:
+            self.__unique = flag
+            self.Modified()
 
 
 ###############################################################################
@@ -592,6 +613,7 @@ class PointsToTube(AddCellConnToPoints):
         # NOTE: CellType should remain vtk.VTK_POLY_LINE (4) connection
         self.__numSides = 20
         self.__radius = 10.0
+        self.__capping = False
 
 
     def _ConnectCells(self, pdi, pdo, logTime=False):
@@ -600,8 +622,11 @@ class PointsToTube(AddCellConnToPoints):
         AddCellConnToPoints._ConnectCells(self, pdi, pdo, logTime=logTime)
         tube = vtk.vtkTubeFilter()
         tube.SetInputData(pdo)
+        # User Defined Parameters
+        tube.SetCapping(self.__capping)
         tube.SetRadius(self.__radius)
         tube.SetNumberOfSides(self.__numSides)
+        # Apply the filter
         tube.Update()
         pdo.ShallowCopy(tube.GetOutput())
         return pdo
@@ -621,6 +646,11 @@ class PointsToTube(AddCellConnToPoints):
         """
         if self.__numSides != num:
             self.__numSides = num
+            self.Modified()
+
+    def SetCapping(self, flag):
+        if self.__capping != flag:
+            self.__capping = flag
             self.Modified()
 
 

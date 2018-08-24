@@ -4,9 +4,11 @@ These are helpers specifically for the file readers for private use only.
 """
 __all__ = [
     'getVTKtype',
+    'converStringArray',
+    'ConvertArray',
     'placeArrInTable',
     'getdTypes',
-    'cleanDataNm'
+    'cleanDataNm',
 ]
 
 import numpy as np

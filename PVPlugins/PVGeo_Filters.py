@@ -30,7 +30,7 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
     #### Seters and Geters ####
 
     @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
-        labels=['Poly Line', 'Line'], values=[4, 3]))
+        labels=['Line', 'Poly Line'], values=[3, 4]))
     def SetCellType(self, cellType):
         AddCellConnToPoints.SetCellType(self, cellType)
 
@@ -39,6 +39,12 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
         help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
     def SetUseNearestNbr(self, flag):
         AddCellConnToPoints.SetUseNearestNbr(self, flag)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
+        command='SetUseUniquePoints', default_values=True,
+        help='Set a flag on whether to only use unique points'))
+    def SetUseUniquePoints(self, flag):
+        AddCellConnToPoints.SetUseUniquePoints(self, flag)
 
 
 
@@ -90,6 +96,24 @@ class PVGeoPointsToTube(PointsToTube):
         help='A boolean to set whether to use a nearest neighbor approxiamtion when building path from input points.'))
     def SetUseNearestNbr(self, flag):
         PointsToTube.SetUseNearestNbr(self, flag)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Capping',
+        command='SetCapping', default_values=False,
+        help='A boolean to set whether to cap the ends of the tube.'))
+    def SetCapping(self, flag):
+        PointsToTube.SetCapping(self, flag)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
+        labels=['Line', 'Poly Line'], values=[3, 4]))
+    def SetCellType(self, cellType):
+        PointsToTube.SetCellType(self, cellType)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
+        command='SetUseUniquePoints', default_values=True,
+        help='Set a flag on whether to only use unique points'))
+    def SetUseUniquePoints(self, flag):
+        PointsToTube.SetUseUniquePoints(self, flag)
+
 
 
 ###############################################################################
