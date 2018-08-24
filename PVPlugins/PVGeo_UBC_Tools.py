@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.18'
+paraview_plugin_version = '1.1.19'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -229,6 +229,11 @@ class PVGeoWriteRectilinearGridToUBC(WriteRectilinearGridToUBC):
         """Specify filename for the file to write."""
         WriteRectilinearGridToUBC.SetFileName(self, fname)
 
+    @smproperty.stringvector(name="Format", default_values='%18e')
+    def SetFormat(self, fmt):
+        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        WriteRectilinearGridToUBC.SetFormat(self, fmt)
+
 
 @smproxy.writer(extensions="msh", file_description="UBC Tensor Mesh", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
@@ -242,3 +247,8 @@ class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
     def SetFileName(self, fname):
         """Specify filename for the file to write."""
         WriteImageDataToUBC.SetFileName(self, fname)
+
+    @smproperty.stringvector(name="Format", default_values='%18e')
+    def SetFormat(self, fmt):
+        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        WriteImageDataToUBC.SetFormat(self, fmt)
