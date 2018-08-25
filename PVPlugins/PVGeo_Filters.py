@@ -41,7 +41,7 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
         AddCellConnToPoints.SetUseNearestNbr(self, flag)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
-        command='SetUseUniquePoints', default_values=True,
+        command='SetUseUniquePoints', default_values=False,
         help='Set a flag on whether to only use unique points'))
     def SetUseUniquePoints(self, flag):
         AddCellConnToPoints.SetUseUniquePoints(self, flag)
@@ -109,7 +109,7 @@ class PVGeoPointsToTube(PointsToTube):
         PointsToTube.SetCellType(self, cellType)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
-        command='SetUseUniquePoints', default_values=True,
+        command='SetUseUniquePoints', default_values=False,
         help='Set a flag on whether to only use unique points'))
     def SetUseUniquePoints(self, flag):
         PointsToTube.SetUseUniquePoints(self, flag)
@@ -490,6 +490,38 @@ class PVGeoExtractArray(ExtractArray):
 class PVGeoExtractCellCenters(ExtractCellCenters):
     def __init__(self):
         ExtractCellCenters.__init__(self)
+
+
+###############################################################################
+
+
+# IterateOverPoints
+@smproxy.filter(name='PVGeoIterateOverPoints', label='Iterate Over Points')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
+class PVGeoIterateOverPoints(IterateOverPoints):
+    def __init__(self):
+        IterateOverPoints.__init__(self)
+
+
+    #### Seters and Geters ####
+
+    @smproperty.intvector(name="Decimate", default_values=75)
+    @smdomain.intrange(min=1, max=99)
+    def SetDecimate(self, percent):
+        IterateOverPoints.SetDecimate(self, percent)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        IterateOverPoints.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return IterateOverPoints.GetTimestepValues(self)
+
 
 
 ###############################################################################

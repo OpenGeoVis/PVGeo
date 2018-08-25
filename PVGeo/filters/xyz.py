@@ -5,6 +5,7 @@ __all__ = [
     'ExtractPoints',
     'RotationTool',
     'ExtractCellCenters',
+    'IterateOverPoints',
 ]
 
 import vtk
@@ -428,3 +429,84 @@ class ExtractCellCenters(FilterBase):
         for i, name in enumerate(keys):
             pdo.GetPointData().AddArray(pdi.GetCellData().GetArray(name))
         return 1
+
+
+
+
+class IterateOverPoints(FilterBase):
+    """Iterate over points in a time varying manner.
+    """
+    __displayname__ = 'Iterate Over Points'
+    __category__ = 'filter'
+    def __init__(self, dt=1.0):
+        FilterBase.__init__(self, nInputPorts=1, inputType='vtkPolyData', nOutputPorts=1, outputType='vtkPolyData')
+        # Parameters
+        self.__dt = dt
+        self.__timesteps = None
+        self.__original = 2
+        self.__tindex = None
+        self.__n = 2
+        self.__decimate = 100
+
+
+    def _UpdateTimeSteps(self):
+        """For internal use only
+        """
+        self.__timesteps = _helpers.UpdateTimeSteps(self, self.__n, self.__dt)
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        # Get number of points
+        pdo = self.GetOutputData(outInfo, 0)
+        #### Perfrom task ####
+        # Get the Points over the NumPy interface
+        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
+        # Get requested time index
+        i = _helpers.GetRequestedTime(self, outInfo)
+        # Now grab point at this timestep
+        pt = pdi.GetPoints().GetPoint(self.__tindex[i])
+        poly = PointsToPolyData(np.array(pt))
+        pdo.ShallowCopy(poly)
+        return 1
+
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to set the time information
+        """
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        # Get number of points
+        self.__original = pdi.GetNumberOfPoints()
+        self.SetDecimate(self.__decimate)
+        # register time:
+        self._UpdateTimeSteps()
+        return 1
+
+    #### Public Getters / Setters ####
+
+    def SetDecimate(self, percent):
+        """Set the percent (1 to 100) to decimate
+        """
+        if percent > 100 or percent < 1:
+            return
+        self.__decimate = percent
+        self.__n = int(self.__original * (percent/100.0))
+        self.__tindex = np.linspace(0, self.__original-1, self.__n, dtype=int)
+        self._UpdateTimeSteps()
+        self.Modified()
+
+    def SetTimeDelta(self, dt):
+        """
+        Set the time step interval in seconds
+        """
+        if self.__dt != dt:
+            self.__dt = dt
+            self._UpdateTimeSteps()
+            self.Modified()
+
+    def GetTimestepValues(self):
+        """Use this in ParaView decorator to register timesteps
+        """
+        return self.__timesteps.tolist() if self.__timesteps is not None else None
