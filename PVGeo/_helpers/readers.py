@@ -9,6 +9,7 @@ __all__ = [
     'placeArrInTable',
     'getdTypes',
     'cleanDataNm',
+    'createModifiedCallback',
 ]
 
 import numpy as np
@@ -123,3 +124,14 @@ def cleanDataNm(dataNm, FileName):
     if dataNm is None or dataNm == '':
         dataNm = os.path.splitext(os.path.basename(FileName))[0]
     return dataNm
+
+
+def createModifiedCallback(anobject):
+    import weakref
+    weakref_obj = weakref.ref(anobject)
+    anobject = None
+    def _markmodified(*args, **kwars):
+        o = weakref_obj()
+        if o is not None:
+            o.Modified()
+    return _markmodified

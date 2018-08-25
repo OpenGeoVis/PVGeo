@@ -1,5 +1,6 @@
 __all__ = [
     'AlgorithmBase',
+    'ReaderBaseBase',
     'ReaderBase',
     'FilterBase',
     'FilterPreserveTypeBase',
@@ -72,22 +73,18 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
 
 
 ###############################################################################
-
-# Base Reader
-class ReaderBase(AlgorithmBase):
+# Base Base Reader
+class ReaderBaseBase(AlgorithmBase):
     """A base class for inherrited functionality common to all reader algorithms
     """
-    __displayname__ = 'Reader Base'
-    __category__ = 'base'
+    __displayname__ = 'Reader Base Base'
+    __type__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=nOutputPorts, outputType=outputType,
             **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
-        # For the VTK/ParaView pipeline
-        self.__dt = kwargs.get('dt', 1.0)
-        self.__timesteps = None
         # For the reader
         self.__fileNames = kwargs.get('filenames', [])
         # To know whether or not the read needs to perform
@@ -112,22 +109,6 @@ class ReaderBase(AlgorithmBase):
         if readAgain: self.__needToRead = readAgain
         AlgorithmBase.Modified(self)
 
-    def _UpdateTimeSteps(self):
-        """For internal use only: appropriately sets the timesteps.
-        """
-        self.__timesteps = _helpers.UpdateTimeSteps(self, self.__fileNames, self.__dt)
-        return 1
-
-    #### Algorithm Methods ####
-
-    def RequestInformation(self, request, inInfo, outInfo):
-        """This is a conveience method that should be overwritten when needed.
-        This will handle setting the timesteps appropriately based on the number
-        of file names when the pipeline needs to know the time information.
-        """
-        self._UpdateTimeSteps()
-        return 1
-
     #### Methods for performing the read ####
     # These are meant to be overwritten by child classes
 
@@ -141,18 +122,6 @@ class ReaderBase(AlgorithmBase):
         raise NotImplementedError()
 
     #### Seters and Geters ####
-
-    def GetTimestepValues(self):
-        """Use this in ParaView decorator to register timesteps on the pipeline.
-        """
-        return self.__timesteps.tolist() if self.__timesteps is not None else None
-
-    def SetTimeDelta(self, dt):
-        """An advanced property to set the time step in seconds.
-        """
-        if dt != self.__dt:
-            self.__dt = dt
-            self.Modified()
 
     def ClearFileNames(self):
         """Use to clear file names of the reader.
@@ -209,6 +178,55 @@ class FilterBase(AlgorithmBase):
         self.Update()
         return self.GetOutput()
 
+
+
+###############################################################################
+# Base Reader
+class ReaderBase(ReaderBaseBase):
+    """A base class for inherrited functionality common to all reader algorithms
+    that need to handle a time series.
+    """
+    __displayname__ = 'Reader Base: Time Vatying'
+    __type__ = 'base'
+    def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
+        ReaderBaseBase.__init__(self,
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+        # Attributes are namemangled to ensure proper setters/getters are used
+        # For the VTK/ParaView pipeline
+        self.__dt = kwargs.get('dt', 1.0)
+        self.__timesteps = None
+
+
+    def _UpdateTimeSteps(self):
+        """For internal use only: appropriately sets the timesteps.
+        """
+        self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetFileNames(), self.__dt)
+        return 1
+
+    #### Algorithm Methods ####
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        """This is a conveience method that should be overwritten when needed.
+        This will handle setting the timesteps appropriately based on the number
+        of file names when the pipeline needs to know the time information.
+        """
+        self._UpdateTimeSteps()
+        return 1
+
+
+    #### Seters and Geters ####
+
+    def GetTimestepValues(self):
+        """Use this in ParaView decorator to register timesteps on the pipeline.
+        """
+        return self.__timesteps.tolist() if self.__timesteps is not None else None
+
+    def SetTimeDelta(self, dt):
+        """An advanced property to set the time step in seconds.
+        """
+        if dt != self.__dt:
+            self.__dt = dt
+            self.Modified()
 
 
 ###############################################################################
