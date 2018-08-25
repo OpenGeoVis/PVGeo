@@ -488,7 +488,6 @@ class AddCellConnToPoints(FilterBase):
         points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
         if self.__unique:
             # Remove repeated points
-            print('uniwu')
             points = np.unique(points, axis=0)
 
         def _makePolyCell(ptsi):
