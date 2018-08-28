@@ -78,7 +78,7 @@ class ReaderBaseBase(AlgorithmBase):
     """A base class for inherrited functionality common to all reader algorithms
     """
     __displayname__ = 'Reader Base Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
