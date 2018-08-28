@@ -187,7 +187,7 @@ class ReaderBase(ReaderBaseBase):
     that need to handle a time series.
     """
     __displayname__ = 'Reader Base: Time Vatying'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBaseBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
