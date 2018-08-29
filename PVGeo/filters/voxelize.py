@@ -256,6 +256,21 @@ class VoxelizePoints(FilterBase):
             self.Modified()
 
 
+    def GetRecoveredAngle(self, degrees=True):
+        """Returns the recovered angle if set to recover the input grid. If the
+        input points are rotated, then this angle will reflect a close
+        approximation of that rotation.
+
+        Args:
+            degrees (bool): A flag on to return decimal degrees or radians.
+        """
+        if degrees: return np.rad2deg(self.__angle)
+        return self.__angle
+
+    def GetSpacing(self):
+        """Get the cell spacings"""
+        return (self.__dx, self.__dy, self.__dz)
+
 
 
 
