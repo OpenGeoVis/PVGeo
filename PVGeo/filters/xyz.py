@@ -261,8 +261,11 @@ class RotationTool(object):
 
         pts = np.vstack((pt1, pt2))
 
+        #######################################################################
+        #######################################################################
+        #######################################################################
         for i in range(nang):
-            # TODO: eliminate this for loop
+            # OPTIMIZE: eliminate this for loop
             temp = self.Rotate(pts, angles[i])
             # Check the angles between the points
             c = self.CosBetween(temp)
@@ -277,6 +280,9 @@ class RotationTool(object):
         if self.DECIMALS < 0:
             self.DECIMALS = 0
             raise _helpers.PVGeoError('No angle found. Precision too low/high.')
+        #######################################################################
+        #######################################################################
+        #######################################################################
         return self._ConvergeAngle(pt1, pt2)
 
 
@@ -293,9 +299,13 @@ class RotationTool(object):
         tree = cKDTree(pts)
         distances = [[],[]]
 
+        #######################################################################
+        #######################################################################
+        #######################################################################
         # Get angles
         idx = 0
         for i in rng:
+            # OPTIMIZE
             # Find nearest point
             dist, ptsi = tree.query(pts[i], k=2)
             pt1 = pts[ptsi[0]]
@@ -303,6 +313,9 @@ class RotationTool(object):
             ax, angles[idx], dist = self._ConvergeAngle(pt1, pt2)
             distances[ax].append(dist)
             idx += 1
+        #######################################################################
+        #######################################################################
+        #######################################################################
 
         angle = np.average(np.unique(angles))
         dx = np.unique(distances[0])
