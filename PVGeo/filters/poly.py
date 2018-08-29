@@ -680,11 +680,12 @@ class PercentThreshold(FilterBase):
     """
     __displayname__ = 'Percent Threshold'
     __category__ = 'filter'
-    def __init__(self, **kwargs):
+    def __init__(self, percent=50, invert=False, **kwargs):
         FilterBase.__init__(self, inputType='vtkDataSet',
                             outputType='vtkUnstructuredGrid', **kwargs)
-        self.__invert = False
-        self.__percent = 50 # NOTE: not decimal percent
+        self.__invert = invert
+        if percent < 1.0: percent *= 100
+        self.__percent = percent # NOTE: not decimal percent
         self.__filter = vtk.vtkThreshold()
         self.__inputArray = [None, None]
 
