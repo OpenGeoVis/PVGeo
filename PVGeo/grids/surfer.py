@@ -196,3 +196,20 @@ class WriteImageDataToSurfer(WriterBase):
             self.__inputArray[1] = name
             self.Modified()
         return 1
+
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()
+
+    def Write(self, inputDataObject=None, arrayName=None):
+        """Perfrom the write out."""
+        if inputDataObject:
+            self.SetInputDataObject(inputDataObject)
+            if arrayName:
+                arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+                self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Modified()
+        self.Update()

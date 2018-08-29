@@ -187,6 +187,15 @@ class ArrayMath(FilterPreserveTypeBase):
             raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
         return 1
 
+    def Apply(self, inputDataObject, arrayName0, arrayName1):
+        self.SetInputDataObject(inputDataObject)
+        arr0, field0 = _helpers.SearchForArray(inputDataObject, arrayName0)
+        arr1, field1 = _helpers.SearchForArray(inputDataObject, arrayName1)
+        self.SetInputArrayToProcess(0, 0, 0, field0, arrayName0)
+        self.SetInputArrayToProcess(1, 0, 0, field1, arrayName1)
+        self.Update()
+        return self.GetOutput()
+
     def SetMultiplier(self, val):
         """This is a static shifter/scale factor across the array after normalization.
         """
@@ -398,6 +407,13 @@ class NormalizeArray(FilterPreserveTypeBase):
             self.__inputArray[1] = name
             self.Modified()
         return 1
+
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()
 
     def SetMultiplier(self, val):
         """This is a static shifter/scale factor across the array after normalization.
@@ -737,3 +753,11 @@ class PercentThreshold(FilterBase):
         if self.__invert != flag:
             self.__invert = flag
             self.Modified()
+
+
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()

@@ -235,3 +235,10 @@ class ExtractArray(FilterBase):
             self.__inputArray[1] = name
             self.Modified()
         return 1
+
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()
