@@ -6,6 +6,7 @@ import numpy as np
 import vtk
 from vtk.util import keys
 from vtk.numpy_interface import dataset_adapter as dsa
+from vtk.util import numpy_support as nps
 
 from ..base import FilterBase
 from .. import _helpers
@@ -156,21 +157,20 @@ class VoxelizePoints(FilterBase):
         # Add unique nodes as points in output
         pts.SetData(_helpers.numToVTK(unique_nodes))
 
-        cnt = 0
-        arridx = np.zeros(numCells)
-        for i in range(numCells):
-            # OPTIMIZE: may be complicated but can be speed up
-            vox = vtk.vtkVoxel()
-            for j in range(8):
-                vox.GetPointIds().SetId(j, ind_nodes[j*numCells + i])
-            cells.InsertNextCell(vox)
+        # Add cell vertices
+        j = np.multiply(np.tile(np.arange(0, 8, 1), numCells), numCells)
+        arridx = np.add(j, np.repeat(np.arange(0, numCells, 1, dtype=int), 8))
 
-            arridx[i] = i
-            cnt += 8
+        ids = ind_nodes[arridx].reshape((numCells, 8))
+        cellsMat = np.concatenate((np.ones((ids.shape[0], 1), dtype=np.int64)*ids.shape[1], ids), axis=1).ravel()
 
+        cells = vtk.vtkCellArray()
+        cells.SetNumberOfCells(numCells)
+        cells.SetCells(numCells, nps.numpy_to_vtkIdTypeArray(cellsMat, deep=True))
+
+        # Set the output
         grid.SetPoints(pts)
         grid.SetCells(vtk.VTK_VOXEL, cells)
-        #VoxelizePoints.AddCellData(grid, arridx, 'Voxel ID') # For testing
         return grid
 
     def _CopyArrays(self, pdi, pdo):
@@ -255,6 +255,21 @@ class VoxelizePoints(FilterBase):
             self.__estimateGrid = flag
             self.Modified()
 
+
+    def GetRecoveredAngle(self, degrees=True):
+        """Returns the recovered angle if set to recover the input grid. If the
+        input points are rotated, then this angle will reflect a close
+        approximation of that rotation.
+
+        Args:
+            degrees (bool): A flag on to return decimal degrees or radians.
+        """
+        if degrees: return np.rad2deg(self.__angle)
+        return self.__angle
+
+    def GetSpacing(self):
+        """Get the cell spacings"""
+        return (self.__dx, self.__dy, self.__dz)
 
 
 

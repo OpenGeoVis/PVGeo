@@ -7,23 +7,23 @@ Welcome to PVGeo's code docs!
 =============================
 
 
-.. image :: https://img.shields.io/pypi/v/PVGeo.svg
+.. image:: https://badge.fury.io/py/PVGeo.svg
    :target: https://pypi.org/project/PVGeo/
    :alt: PyPI
 
-.. image :: https://api.codacy.com/project/badge/Grade/4b9e8d0ef37a4f70a2d02c0d53ed096f
+.. image:: https://api.codacy.com/project/badge/Grade/4b9e8d0ef37a4f70a2d02c0d53ed096f
    :target: https://www.codacy.com/app/banesullivan/PVGeo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenGeoVis/PVGeo&amp;utm_campaign=Badge_Grade
    :alt: Codacy Badge
 
-.. image :: http://slack.pvgeo.org/badge.svg
+.. image:: http://slack.pvgeo.org/badge.svg
    :target: http://slack.pvgeo.org
    :alt: Slack
 
-.. image :: https://travis-ci.org/OpenGeoVis/PVGeo.svg?branch=master
+.. image:: https://travis-ci.org/OpenGeoVis/PVGeo.svg?branch=master
    :target: https://travis-ci.org/OpenGeoVis/PVGeo
    :alt: Build Status
 
-.. image :: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master/graph/badge.svg
+.. image:: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master
    :alt: Code Coverage
 

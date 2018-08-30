@@ -17,8 +17,7 @@ class DelimitedTextReader(ReaderBase):
     __category__ = 'reader'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType,
-            **kwargs)
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
         # Parameters to control the file read:
         #- if these are set/changed, we must reperform the read

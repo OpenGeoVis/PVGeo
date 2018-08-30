@@ -10,6 +10,7 @@ __all__ = [
 
 import vtk
 import numpy as np
+import pandas as pd
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
@@ -19,15 +20,29 @@ from .. import _helpers
 
 
 def PointsToPolyData(points):
-    """Create ``vtkPolyData`` from a numpy array of XYZ points
+    """Create ``vtkPolyData`` from a numpy array of XYZ points. If the points have
+    more than 3 dimensions, then all dimensions after the third will be added as attributes.
+    Assume the first three dimensions are the XYZ coordinates.
 
     Return:
         vtkPolyData : points with point-vertex cells
     """
     __displayname__ = 'Points to PolyData'
     __category__ = 'filter'
-    if points.ndim != 2:
-        points = points.reshape((-1, 3))
+    # Check if input is anything other than a NumPy array and cast it
+    # e.g. you could send a Pandas dataframe
+    keys = ['Field %d' % i for i in range(points.shape[1] - 3)]
+    if not isinstance(points, np.ndarray):
+        if isinstance(points, pd.DataFrame):
+            # If a pandas data frame, lets grab the keys
+            keys = points.keys()[3::]
+        points = np.array(points)
+    # If points are not 3D
+    if points.shape[1] < 2:
+        raise RuntimeError('Points must be 3D. Try adding a third dimension of zeros.')
+
+    atts = points[:, 3::]
+    points = points[:, 0:3]
 
     npoints = points.shape[0]
 
@@ -46,6 +61,11 @@ def PointsToPolyData(points):
     pdata = vtk.vtkPolyData()
     pdata.SetPoints(pts)
     pdata.SetVerts(vtkcells)
+
+    # Add attributes if given
+    for i, key in enumerate(keys):
+        data = _helpers.numToVTK(atts[:, i], name=key)
+        pdata.GetPointData().AddArray(data)
     return pdata
 
 
@@ -241,8 +261,11 @@ class RotationTool(object):
 
         pts = np.vstack((pt1, pt2))
 
+        #######################################################################
+        #######################################################################
+        #######################################################################
         for i in range(nang):
-            # TODO: eliminate this for loop
+            # OPTIMIZE: eliminate this for loop
             temp = self.Rotate(pts, angles[i])
             # Check the angles between the points
             c = self.CosBetween(temp)
@@ -257,6 +280,9 @@ class RotationTool(object):
         if self.DECIMALS < 0:
             self.DECIMALS = 0
             raise _helpers.PVGeoError('No angle found. Precision too low/high.')
+        #######################################################################
+        #######################################################################
+        #######################################################################
         return self._ConvergeAngle(pt1, pt2)
 
 
@@ -273,9 +299,13 @@ class RotationTool(object):
         tree = cKDTree(pts)
         distances = [[],[]]
 
+        #######################################################################
+        #######################################################################
+        #######################################################################
         # Get angles
         idx = 0
         for i in rng:
+            # OPTIMIZE
             # Find nearest point
             dist, ptsi = tree.query(pts[i], k=2)
             pt1 = pts[ptsi[0]]
@@ -283,6 +313,9 @@ class RotationTool(object):
             ax, angles[idx], dist = self._ConvergeAngle(pt1, pt2)
             distances[ax].append(dist)
             idx += 1
+        #######################################################################
+        #######################################################################
+        #######################################################################
 
         angle = np.average(np.unique(angles))
         dx = np.unique(distances[0])

@@ -294,8 +294,7 @@ class TestSurferGridReader(unittest.TestCase):
         writer = WriteImageDataToSurfer()
         fname = os.path.join(self.test_dir, 'test-writer.grd')
         writer.SetFileName(fname)
-        writer.SetInputArrayToProcess(0, 0, 0, 0, 'foo')
-        writer.Write(img)
+        writer.Write(img, 'foo')
         # Read again and compare
         reader = SurferGridReader()
         reader.AddFileName(fname)

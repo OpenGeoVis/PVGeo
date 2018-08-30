@@ -413,18 +413,12 @@ class TestArrayMath(unittest.TestCase):
     def _gen_and_check(self, op, check, flip=False):
         # Perform filter
         f = ArrayMath()
-        f.SetInputDataObject(self.t0)
-        if flip:
-            f.SetInputArrayToProcess(1, 0, 0, 6, self.titles[0]) # field 6 is row data
-            f.SetInputArrayToProcess(0, 0, 0, 6, self.titles[1]) # field 6 is row data
-        else:
-            f.SetInputArrayToProcess(0, 0, 0, 6, self.titles[0]) # field 6 is row data
-            f.SetInputArrayToProcess(1, 0, 0, 6, self.titles[1]) # field 6 is row data
         f.SetOperation(op)
         f.SetNewArrayName('test')
-        f.Update()
-        # Now test the result
-        output = f.GetOutput()
+        if flip:
+            output = f.Apply(self.t0, self.titles[1], self.titles[0])
+        else:
+            output = f.Apply(self.t0, self.titles[0], self.titles[1])
         wout = dsa.WrapDataObject(output)
         arr = wout.RowData['test']
         self.assertTrue(np.allclose(arr, check, rtol=RTOL))
@@ -505,13 +499,10 @@ class TestNormalizeArray(unittest.TestCase):
     def _gen_and_check(self, op, check, flip=False):
         # Perform filter
         f = NormalizeArray()
-        f.SetInputDataObject(self.t0)
-        f.SetInputArrayToProcess(0, 0, 0, 6, self.title) # field 6 is row data
         f.SetNormalization(op)
         f.SetNewArrayName('test')
-        f.Update()
         # Now test the result
-        output = f.GetOutput()
+        output = f.Apply(self.t0, self.title)
         wout = dsa.WrapDataObject(output)
         arr = wout.RowData['test']
         self.assertTrue(np.allclose(arr, check, rtol=RTOL))

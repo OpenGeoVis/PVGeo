@@ -40,7 +40,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
 
     def __init__(self,
                 nInputPorts=1, inputType='vtkDataSet',
-                nOutputPorts=1, outputType='vtkTable'):
+                nOutputPorts=1, outputType='vtkTable', **kwargs):
         valg.VTKPythonAlgorithmBase.__init__(self,
             nInputPorts=nInputPorts, inputType=inputType,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -82,8 +82,7 @@ class ReaderBaseBase(AlgorithmBase):
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType,
-            **kwargs)
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the reader
         self.__fileNames = kwargs.get('filenames', [])
