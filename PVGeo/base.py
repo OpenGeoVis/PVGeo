@@ -78,7 +78,7 @@ class ReaderBaseBase(AlgorithmBase):
     """A base class for inherrited functionality common to all reader algorithms
     """
     __displayname__ = 'Reader Base Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -185,8 +185,8 @@ class ReaderBase(ReaderBaseBase):
     """A base class for inherrited functionality common to all reader algorithms
     that need to handle a time series.
     """
-    __displayname__ = 'Reader Base: Time Vatying'
-    __type__ = 'base'
+    __displayname__ = 'Reader Base: Time Varying'
+    __category__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBaseBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
