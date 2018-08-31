@@ -2,7 +2,7 @@
 
 
 [![Documentation Status](https://readthedocs.org/projects/pvgeo/badge/?version=latest)](http://docs.pvgeo.org/en/latest/?badge=latest)
-[![PyPI](https://badge.fury.io/py/PVGeo.svg)](https://pypi.org/project/PVGeo/)
+[![PyPI](https://img.shields.io/pypi/v/PVGeo.svg)](https://pypi.org/project/PVGeo/)
 [![Slack Bage](http://slack.pvgeo.org/badge.svg)](http://slack.pvgeo.org)
 [![Build Status](https://travis-ci.org/OpenGeoVis/PVGeo.svg?branch=master)](https://travis-ci.org/OpenGeoVis/PVGeo)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/it085qovtnb0mcgr/branch/master?svg=true)](https://ci.appveyor.com/project/banesullivan/pvgeo/branch/master)
