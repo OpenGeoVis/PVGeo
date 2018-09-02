@@ -422,7 +422,7 @@ class WriterBase(AlgorithmBase):
         NOTE: I only care about ``vtkMultiBlockDataSet``s
         """
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), self.InputType)
-        info.Append(self.INPUT_REQUIRED_DATA_TYPE(), 'vtkCompositeDataSet')
+        info.Append(self.INPUT_REQUIRED_DATA_TYPE(), 'vtkMultiBlockDataSet') # vtkCompositeDataSet
         return 1
 
 
@@ -506,7 +506,7 @@ class WriterBase(AlgorithmBase):
         inp = self.GetInputData(inInfoVec, 0, 0)
         if isinstance(inp, vtk.vtkCompositeDataSet):
             self.__composite = True
-        # Handle composite datasets
+        # Handle composite datasets. NOTE: This only handles vtkMultiBlockDataSet
         if self.__composite:
             num = inp.GetNumberOfBlocks()
             self.SetBlockFileNames(num)
