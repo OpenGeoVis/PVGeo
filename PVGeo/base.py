@@ -16,6 +16,8 @@ from . import _helpers
 # Outside Imports:
 import vtk.util.vtkAlgorithm as valg #import VTKPythonAlgorithmBase
 import numpy as np
+import vtk
+import warnings
 
 ###############################################################################
 
@@ -410,6 +412,18 @@ class WriterBase(AlgorithmBase):
                                      nOutputPorts=0)
         self.__filename = kwargs.get('filename', None)
         self.__fmt = '%.18e'
+        # For composite datasets: not always used
+        self.__blockfilenames = None
+        self.__composite = False
+
+
+    def FillInputPortInformation(self, port, info):
+        """Allows us to save composite datasets as well.
+        NOTE: I only care about ``vtkMultiBlockDataSet``s
+        """
+        info.Set(self.INPUT_REQUIRED_DATA_TYPE(), self.InputType)
+        info.Append(self.INPUT_REQUIRED_DATA_TYPE(), 'vtkMultiBlockDataSet') # vtkCompositeDataSet
+        return 1
 
 
     def SetFileName(self, fname):
@@ -436,6 +450,11 @@ class WriterBase(AlgorithmBase):
         self.Modified()
         self.Update()
 
+    def PerformWriteOut(self, inputDataObject, filename):
+        """This method must be implemented. This is automatically called by
+        ``RequestData`` for single inputs or composite inputs."""
+        raise NotImplementedError('PerformWriteOut must be implemented!')
+
     def Apply(self, inputDataObject):
         self.SetInputDataObject(inputDataObject)
         self.Modified()
@@ -449,3 +468,55 @@ class WriterBase(AlgorithmBase):
 
     def GetFormat(self):
         return self.__fmt
+
+    #### Following methods are for composite datasets ####
+
+    def UseComposite(self):
+        """True if input dataset is a composite dataset"""
+        return self.__composite
+
+    def SetBlockFileNames(self, n):
+        """Gets a list of filenames based on user input filename and creates a
+        numbered list of filenames for the reader to save out. Assumes the
+        filename has an extension set already.
+        """
+        number = n
+        count = 0
+        while (number > 0):
+            number = number // 10
+            count = count + 1
+        count = '%d' % count
+        identifier = '_%.' + count + 'd'
+        blocknum = [identifier % i for i in range(n)]
+        # Check the file extension:
+        ext = self.GetFileName().split('.')[-1]
+        basename = self.GetFileName().replace('.%s' % ext, '')
+        self.__blockfilenames = [basename + '%s.%s' % (blocknum[i], ext) for i in range(n)]
+        return self.__blockfilenames
+
+    def GetBlockFileName(self, idx):
+        return self.__blockfilenames[idx]
+
+
+    def RequestData(self, request, inInfoVec, outInfoVec):
+        """Subclasses must implement a ``PerformWriteOut`` method that takes an
+        input data object and a filename. This method will automatically handle
+        composite data sets.
+        """
+        inp = self.GetInputData(inInfoVec, 0, 0)
+        if isinstance(inp, vtk.vtkCompositeDataSet):
+            self.__composite = True
+        # Handle composite datasets. NOTE: This only handles vtkMultiBlockDataSet
+        if self.__composite:
+            num = inp.GetNumberOfBlocks()
+            self.SetBlockFileNames(num)
+            for i in range(num):
+                data = inp.GetBlock(i)
+                if data.IsTypeOf(self.InputType):
+                    self.PerformWriteOut(data, self.GetBlockFileName(i))
+                else:
+                    warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
+        # Handle single input dataset
+        else:
+            self.PerformWriteOut(inp, self.GetFileName())
+        return 1

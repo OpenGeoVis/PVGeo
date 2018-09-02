@@ -117,7 +117,7 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
 
 @smproxy.writer(extensions="SGeMS", file_description="SGeMS Uniform Grid", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
 class PVGeoWriteImageDataToSGeMS(WriteImageDataToSGeMS):
     def __init__(self):
         WriteImageDataToSGeMS.__init__(self)
@@ -137,7 +137,7 @@ class PVGeoWriteImageDataToSGeMS(WriteImageDataToSGeMS):
 
 @smproxy.writer(extensions="gslib", file_description="GSLib Table", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoWriteTableToGSLib(WriteTableToGSLib):
     def __init__(self):
         WriteTableToGSLib.__init__(self)

@@ -148,7 +148,7 @@ class PVGeoSurferGridReader(SurferGridReader):
 
 @smproxy.writer(extensions="grd", file_description="Surfer Grid (ASCII)", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkImageData", "vtkMultiBlockDataSet"], composite_data_supported=True)
 class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
     def __init__(self):
         WriteImageDataToSurfer.__init__(self)
@@ -174,7 +174,7 @@ class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
 
 @smproxy.writer(extensions="dat", file_description="Cell Centers and Cell Data", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=True)
 class PVGeoWriteCellCenterData(WriteCellCenterData):
     def __init__(self):
         WriteCellCenterData.__init__(self)
