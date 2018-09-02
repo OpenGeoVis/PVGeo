@@ -218,7 +218,7 @@ class PVGeoOcTreeAppender(OcTreeAppender):
 
 @smproxy.writer(extensions="msh", file_description="UBC Tensor Mesh", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=True)
 class PVGeoWriteRectilinearGridToUBC(WriteRectilinearGridToUBC):
     def __init__(self):
         WriteRectilinearGridToUBC.__init__(self)
@@ -237,7 +237,7 @@ class PVGeoWriteRectilinearGridToUBC(WriteRectilinearGridToUBC):
 
 @smproxy.writer(extensions="msh", file_description="UBC Tensor Mesh", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
 class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
     def __init__(self):
         WriteImageDataToUBC.__init__(self)
