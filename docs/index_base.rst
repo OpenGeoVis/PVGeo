@@ -7,7 +7,7 @@ Welcome to PVGeo's code docs!
 =============================
 
 
-.. image:: https://badge.fury.io/py/PVGeo.svg
+.. image:: https://img.shields.io/pypi/v/PVGeo.svg
    :target: https://pypi.org/project/PVGeo/
    :alt: PyPI
 
