@@ -8,6 +8,7 @@ import os
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
+import PVGeo
 from PVGeo import _helpers
 from PVGeo.filters import PointsToPolyData
 # Functionality to test:
@@ -294,8 +295,7 @@ class TestSurferGridReader(unittest.TestCase):
         writer = WriteImageDataToSurfer()
         fname = os.path.join(self.test_dir, 'test-writer.grd')
         writer.SetFileName(fname)
-        writer.SetInputArrayToProcess(0, 0, 0, 0, 'foo')
-        writer.Write(img)
+        writer.Write(img, 'foo')
         # Read again and compare
         reader = SurferGridReader()
         reader.AddFileName(fname)
@@ -364,6 +364,41 @@ class TestExtractTopography(unittest.TestCase):
                 self.fail(msg='Non-testable cell encountered')
 
         return
+
+
+
+class TestCellCenterWriter(unittest.TestCase):
+    """
+    Test the `WriteCellCenterData`
+    """
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp()
+        self.fname = os.path.join(self.test_dir, 'test.txt')
+
+
+    def tearDown(self):
+        # Remove the test data directory after the test
+        shutil.rmtree(self.test_dir)
+        return
+
+
+    def test(self):
+        """`SurferGridReader` and `WriteImageDataToSurfer`: Test reader and writer for Surfer format"""
+        # create some input datasets
+        grid0 = PVGeo.model_build.CreateTensorMesh().Apply()
+        grid1 = PVGeo.model_build.CreateEvenRectilinearGrid().Apply()
+
+        # make a composite dataset
+        comp = vtk.vtkMultiBlockDataSet()
+        comp.SetBlock(0, grid0)
+        comp.SetBlock(1, grid1)
+
+
+        # test the wirter
+        writer = WriteCellCenterData()
+        fname = os.path.join(self.fname)
+        writer.SetFileName(fname)
+        writer.Write(comp)
 
 ###############################################################################
 ###############################################################################

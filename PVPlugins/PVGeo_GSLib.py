@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.16'
+paraview_plugin_version = '1.1.21'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -117,7 +117,7 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
 
 @smproxy.writer(extensions="SGeMS", file_description="SGeMS Uniform Grid", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
 class PVGeoWriteImageDataToSGeMS(WriteImageDataToSGeMS):
     def __init__(self):
         WriteImageDataToSGeMS.__init__(self)
@@ -128,11 +128,16 @@ class PVGeoWriteImageDataToSGeMS(WriteImageDataToSGeMS):
         """Specify filename for the file to write."""
         WriteImageDataToSGeMS.SetFileName(self, fname)
 
+    @smproperty.stringvector(name="Format", default_values='%18e')
+    def SetFormat(self, fmt):
+        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        WriteImageDataToSGeMS.SetFormat(self, fmt)
+
 ###############################################################################
 
 @smproxy.writer(extensions="gslib", file_description="GSLib Table", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoWriteTableToGSLib(WriteTableToGSLib):
     def __init__(self):
         WriteTableToGSLib.__init__(self)
@@ -146,5 +151,10 @@ class PVGeoWriteTableToGSLib(WriteTableToGSLib):
     @smproperty.stringvector(name="Header", default_values='Saved by PVGeo')
     def SetHeader(self, header):
         WriteTableToGSLib.SetHeader(self, header)
+
+    @smproperty.stringvector(name="Format", default_values='%18e')
+    def SetFormat(self, fmt):
+        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        WriteTableToGSLib.SetFormat(self, fmt)
 
 ###############################################################################

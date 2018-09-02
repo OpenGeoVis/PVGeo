@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.16'
+paraview_plugin_version = '1.1.21'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -22,7 +22,7 @@ MENU_CAT = 'PVGeo: General Filters'
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoAddCellConnToPoints(AddCellConnToPoints):
     def __init__(self):
         AddCellConnToPoints.__init__(self)
@@ -30,7 +30,7 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
     #### Seters and Geters ####
 
     @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
-        labels=['Poly Line', 'Line'], values=[4, 3]))
+        labels=['Line', 'Poly Line'], values=[3, 4]))
     def SetCellType(self, cellType):
         AddCellConnToPoints.SetCellType(self, cellType)
 
@@ -39,6 +39,12 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
         help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
     def SetUseNearestNbr(self, flag):
         AddCellConnToPoints.SetUseNearestNbr(self, flag)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
+        command='SetUseUniquePoints', default_values=False,
+        help='Set a flag on whether to only use unique points'))
+    def SetUseUniquePoints(self, flag):
+        AddCellConnToPoints.SetUseUniquePoints(self, flag)
 
 
 
@@ -67,7 +73,7 @@ class PVGeoCombineTables(CombineTables):
 @smhint.xml('''<ShowInMenu category="%s"/>
    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoPointsToTube(PointsToTube):
     def __init__(self):
         PointsToTube.__init__(self)
@@ -91,6 +97,24 @@ class PVGeoPointsToTube(PointsToTube):
     def SetUseNearestNbr(self, flag):
         PointsToTube.SetUseNearestNbr(self, flag)
 
+    @smproperty.xml(_helpers.getPropertyXml(name='Capping',
+        command='SetCapping', default_values=False,
+        help='A boolean to set whether to cap the ends of the tube.'))
+    def SetCapping(self, flag):
+        PointsToTube.SetCapping(self, flag)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
+        labels=['Line', 'Poly Line'], values=[3, 4]))
+    def SetCellType(self, cellType):
+        PointsToTube.SetCellType(self, cellType)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
+        command='SetUseUniquePoints', default_values=False,
+        help='Set a flag on whether to only use unique points'))
+    def SetUseUniquePoints(self, flag):
+        PointsToTube.SetUseUniquePoints(self, flag)
+
+
 
 ###############################################################################
 
@@ -98,7 +122,7 @@ class PVGeoPointsToTube(PointsToTube):
 @smproxy.filter(name='PVGeoReshapeTable', label='Reshape Table')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoReshapeTable(ReshapeTable):
     def __init__(self):
         ReshapeTable.__init__(self)
@@ -367,7 +391,7 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoRotatePoints(RotatePoints):
     def __init__(self):
         RotatePoints.__init__(self)
@@ -452,6 +476,52 @@ class PVGeoExtractArray(ExtractArray):
     @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return ExtractArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+
+###############################################################################
+
+
+# Extract Cell Centers
+@smproxy.filter(name='PVGeoExtractCellCenters', label='Extract Cell Centers')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=True)
+class PVGeoExtractCellCenters(ExtractCellCenters):
+    def __init__(self):
+        ExtractCellCenters.__init__(self)
+
+
+###############################################################################
+
+
+# IterateOverPoints
+@smproxy.filter(name='PVGeoIterateOverPoints', label='Iterate Over Points')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
+class PVGeoIterateOverPoints(IterateOverPoints):
+    def __init__(self):
+        IterateOverPoints.__init__(self)
+
+
+    #### Seters and Geters ####
+
+    @smproperty.intvector(name="Decimate", default_values=75)
+    @smdomain.intrange(min=1, max=99)
+    def SetDecimate(self, percent):
+        IterateOverPoints.SetDecimate(self, percent)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        IterateOverPoints.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return IterateOverPoints.GetTimestepValues(self)
+
 
 
 ###############################################################################

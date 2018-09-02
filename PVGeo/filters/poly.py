@@ -9,6 +9,7 @@ __all__ = [
 import vtk
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
+from vtk.util import numpy_support as nps
 from datetime import datetime
 # Import Helpers:
 from ..base import FilterBase, FilterPreserveTypeBase
@@ -185,6 +186,15 @@ class ArrayMath(FilterPreserveTypeBase):
         else:
             raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
         return 1
+
+    def Apply(self, inputDataObject, arrayName0, arrayName1):
+        self.SetInputDataObject(inputDataObject)
+        arr0, field0 = _helpers.SearchForArray(inputDataObject, arrayName0)
+        arr1, field1 = _helpers.SearchForArray(inputDataObject, arrayName1)
+        self.SetInputArrayToProcess(0, 0, 0, field0, arrayName0)
+        self.SetInputArrayToProcess(1, 0, 0, field1, arrayName1)
+        self.Update()
+        return self.GetOutput()
 
     def SetMultiplier(self, val):
         """This is a static shifter/scale factor across the array after normalization.
@@ -398,6 +408,13 @@ class NormalizeArray(FilterPreserveTypeBase):
             self.Modified()
         return 1
 
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()
+
     def SetMultiplier(self, val):
         """This is a static shifter/scale factor across the array after normalization.
         """
@@ -469,6 +486,7 @@ class AddCellConnToPoints(FilterBase):
         # Parameters
         self.__cellType = vtk.VTK_POLY_LINE
         self.__usenbr = kwargs.get('nearestNbr', False)
+        self.__unique = True
 
 
     def _ConnectCells(self, pdi, pdo, logTime=False):
@@ -484,6 +502,9 @@ class AddCellConnToPoints(FilterBase):
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+        if self.__unique:
+            # Remove repeated points
+            points = np.unique(points, axis=0)
 
         def _makePolyCell(ptsi):
             cell = vtk.vtkPolyLine()
@@ -545,6 +566,17 @@ class AddCellConnToPoints(FilterBase):
         pdo.SetLines(cells)
         # copy point data
         _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        # Copy cell data if type is LINE
+        if cellType == vtk.VTK_LINE:
+            # Be sure to rearange for Nearest neighbor approxiamtion
+            for i in range(pdi.GetCellData().GetNumberOfArrays()):
+                vtkarr = pdi.GetCellData().GetArray(i)
+                name = vtkarr.GetName()
+                if nrNbr:
+                    arr = nps.vtk_to_numpy(vtkarr)
+                    arr = arr[ind]
+                    vtkarr = _helpers.numToVTK(arr, name=name)
+                pdo.GetCellData().AddArray(vtkarr)
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):
@@ -575,7 +607,11 @@ class AddCellConnToPoints(FilterBase):
             self.__usenbr = flag
             self.Modified()
 
-
+    def SetUseUniquePoints(self, flag):
+        """Set a flag on whether to only use unique points"""
+        if flag != self.__unique:
+            self.__unique = flag
+            self.Modified()
 
 
 ###############################################################################
@@ -592,6 +628,7 @@ class PointsToTube(AddCellConnToPoints):
         # NOTE: CellType should remain vtk.VTK_POLY_LINE (4) connection
         self.__numSides = 20
         self.__radius = 10.0
+        self.__capping = False
 
 
     def _ConnectCells(self, pdi, pdo, logTime=False):
@@ -600,8 +637,11 @@ class PointsToTube(AddCellConnToPoints):
         AddCellConnToPoints._ConnectCells(self, pdi, pdo, logTime=logTime)
         tube = vtk.vtkTubeFilter()
         tube.SetInputData(pdo)
+        # User Defined Parameters
+        tube.SetCapping(self.__capping)
         tube.SetRadius(self.__radius)
         tube.SetNumberOfSides(self.__numSides)
+        # Apply the filter
         tube.Update()
         pdo.ShallowCopy(tube.GetOutput())
         return pdo
@@ -623,6 +663,11 @@ class PointsToTube(AddCellConnToPoints):
             self.__numSides = num
             self.Modified()
 
+    def SetCapping(self, flag):
+        if self.__capping != flag:
+            self.__capping = flag
+            self.Modified()
+
 
 
 ###############################################################################
@@ -635,11 +680,12 @@ class PercentThreshold(FilterBase):
     """
     __displayname__ = 'Percent Threshold'
     __category__ = 'filter'
-    def __init__(self, **kwargs):
+    def __init__(self, percent=50, invert=False, **kwargs):
         FilterBase.__init__(self, inputType='vtkDataSet',
                             outputType='vtkUnstructuredGrid', **kwargs)
-        self.__invert = False
-        self.__percent = 50 # NOTE: not decimal percent
+        self.__invert = invert
+        if percent < 1.0: percent *= 100
+        self.__percent = percent # NOTE: not decimal percent
         self.__filter = vtk.vtkThreshold()
         self.__inputArray = [None, None]
 
@@ -708,3 +754,11 @@ class PercentThreshold(FilterBase):
         if self.__invert != flag:
             self.__invert = flag
             self.Modified()
+
+
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()

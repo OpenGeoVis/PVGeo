@@ -233,8 +233,8 @@ class TestRotationTool(unittest.TestCase):
         pts = ROTATED_POINTS
         dx, dy, angle = r.EstimateAndRotate(pts[:,0], pts[:,1], pts[:,2])[3::]
         self.assertTrue(np.allclose(angle, np.deg2rad(53.55), rtol=self.RTOL), msg='Recovered angle is incorrect.')
-        self.assertTrue(np.allclose(dx, 25.0, rtol=self.RTOL), msg='Recovered x-spacing is incorrect.')
-        self.assertTrue(np.allclose(dy, 25.0, rtol=self.RTOL), msg='Recovered y-spacing is incorrect.')
+        self.assertTrue(np.allclose(dx, 25.0, rtol=0.1), msg='Recovered x-spacing is incorrect.')
+        self.assertTrue(np.allclose(dy, 25.0, rtol=0.1), msg='Recovered y-spacing is incorrect.')
         return
 
 
@@ -413,18 +413,12 @@ class TestArrayMath(unittest.TestCase):
     def _gen_and_check(self, op, check, flip=False):
         # Perform filter
         f = ArrayMath()
-        f.SetInputDataObject(self.t0)
-        if flip:
-            f.SetInputArrayToProcess(1, 0, 0, 6, self.titles[0]) # field 6 is row data
-            f.SetInputArrayToProcess(0, 0, 0, 6, self.titles[1]) # field 6 is row data
-        else:
-            f.SetInputArrayToProcess(0, 0, 0, 6, self.titles[0]) # field 6 is row data
-            f.SetInputArrayToProcess(1, 0, 0, 6, self.titles[1]) # field 6 is row data
         f.SetOperation(op)
         f.SetNewArrayName('test')
-        f.Update()
-        # Now test the result
-        output = f.GetOutput()
+        if flip:
+            output = f.Apply(self.t0, self.titles[1], self.titles[0])
+        else:
+            output = f.Apply(self.t0, self.titles[0], self.titles[1])
         wout = dsa.WrapDataObject(output)
         arr = wout.RowData['test']
         self.assertTrue(np.allclose(arr, check, rtol=RTOL))
@@ -505,13 +499,10 @@ class TestNormalizeArray(unittest.TestCase):
     def _gen_and_check(self, op, check, flip=False):
         # Perform filter
         f = NormalizeArray()
-        f.SetInputDataObject(self.t0)
-        f.SetInputArrayToProcess(0, 0, 0, 6, self.title) # field 6 is row data
         f.SetNormalization(op)
         f.SetNewArrayName('test')
-        f.Update()
         # Now test the result
-        output = f.GetOutput()
+        output = f.Apply(self.t0, self.title)
         wout = dsa.WrapDataObject(output)
         arr = wout.RowData['test']
         self.assertTrue(np.allclose(arr, check, rtol=RTOL))

@@ -4,11 +4,15 @@ and ParaView.
 
 import setuptools
 
-__version__ = '1.1.16'
+__version__ = '1.1.21'
 
 with open("README.md", "r") as f:
     long_description = f.read()
+    # Remove the icon from the README (assumes it is on the first line)
+    idx = long_description.find('\n')
+    long_description = '# *PVGeo*\n\n' + long_description[idx::]
 
+long_description
 setuptools.setup(
     name="PVGeo",
     version=__version__,
@@ -25,6 +29,7 @@ setuptools.setup(
         #'vtk>=8.1',
         'colour-runner==0.0.5',
         'codecov==2.0.15',
+        'pandas>=0.23.4',
     ],
     classifiers=(
         "Programming Language :: Python",

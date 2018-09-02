@@ -7,23 +7,23 @@ Welcome to PVGeo's code docs!
 =============================
 
 
-.. image :: https://img.shields.io/pypi/v/PVGeo.svg
+.. image:: https://img.shields.io/pypi/v/PVGeo.svg
    :target: https://pypi.org/project/PVGeo/
    :alt: PyPI
 
-.. image :: https://api.codacy.com/project/badge/Grade/4b9e8d0ef37a4f70a2d02c0d53ed096f
+.. image:: https://api.codacy.com/project/badge/Grade/4b9e8d0ef37a4f70a2d02c0d53ed096f
    :target: https://www.codacy.com/app/banesullivan/PVGeo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenGeoVis/PVGeo&amp;utm_campaign=Badge_Grade
    :alt: Codacy Badge
 
-.. image :: http://slack.pvgeo.org/badge.svg
+.. image:: http://slack.pvgeo.org/badge.svg
    :target: http://slack.pvgeo.org
    :alt: Slack
 
-.. image :: https://travis-ci.org/OpenGeoVis/PVGeo.svg?branch=master
+.. image:: https://travis-ci.org/OpenGeoVis/PVGeo.svg?branch=master
    :target: https://travis-ci.org/OpenGeoVis/PVGeo
    :alt: Build Status
 
-.. image :: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master/graph/badge.svg
+.. image:: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master
    :alt: Code Coverage
 
@@ -95,7 +95,7 @@ To begin using the ``PVGeo`` python package, create a new virtual environment an
 
     Windows users: Please see installation instructions on `GitHub README`_.
 
-.. _GitHub README: https://github.com/OpenGeoVis/PVGeo/
+.. _GitHub README: https://github.com/OpenGeoVis/PVGeo/#getting-started
 
 
 Now ``PVGeo`` is ready for use in your standard python environment. To use the *PVGeo* library as plugins in `ParaView`_, please see the `detailed explanation here`_.

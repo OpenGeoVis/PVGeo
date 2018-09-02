@@ -66,7 +66,7 @@ cat << EOF | sudo tee ${pvplist}
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
   <plist version="1.0">
   <dict>
-  <key>PVGeoPV_PLUGIN_PATH</key>
+  <key>Label</key>
   <string>setenv.PV_PLUGIN_PATH</string>
   <key>ProgramArguments</key>
   <array>
@@ -88,7 +88,7 @@ cat << EOF | sudo tee ${pyplist}
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
   <plist version="1.0">
   <dict>
-  <key>PVGeoPYTHONPATH</key>
+  <key>Label</key>
   <string>setenv.PYTHONPATH</string>
   <key>ProgramArguments</key>
   <array>
@@ -106,5 +106,3 @@ cat << EOF | sudo tee ${pyplist}
 EOF
 
 printf "${GREEN}%s${NORMAL}\n" "All Finished! Any version of ParaView will launch with the PVGeo plugins and Python Module."
-
-printf "${YELLOW}%s${NORMAL}\n" "Virtual Reality Users: Beware that your version of ParaView has Python included as errors/crashes will occur if you use these plugins without Python."

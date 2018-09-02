@@ -146,8 +146,8 @@ class WriteImageDataToSurfer(WriterBase):
         self.__inputArray = [None, None]
 
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
-        img = self.GetInputData(inInfoVec, 0, 0)
+    def PerformWriteOut(self, inputDataObject, filename):
+        img = inputDataObject
 
         # Check dims: make sure 2D
         # TODO: handle any orientation
@@ -173,7 +173,7 @@ class WriteImageDataToSurfer(WriterBase):
         meta = 'DSAA\n%d %d\n%f %f\n%f %f\n%f %f' % (ny, nx, xmin, xmax,
                                                      ymin, ymax, dmin, dmax)
         # Now write out the data!
-        np.savetxt(self.GetFileName(), arr, header=meta, comments='')
+        np.savetxt(filename, arr, header=meta, comments='', fmt=self.GetFormat())
 
 
         return 1
@@ -196,3 +196,20 @@ class WriteImageDataToSurfer(WriterBase):
             self.__inputArray[1] = name
             self.Modified()
         return 1
+
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()
+
+    def Write(self, inputDataObject=None, arrayName=None):
+        """Perfrom the write out."""
+        if inputDataObject:
+            self.SetInputDataObject(inputDataObject)
+            if arrayName:
+                arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+                self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Modified()
+        self.Update()

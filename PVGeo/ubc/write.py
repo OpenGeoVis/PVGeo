@@ -26,14 +26,14 @@ class ubcTensorMeshWriterBase(WriterBase):
         self.origin= None
 
 
-    def WriteMesh3D(self, nx, ny, nz):
+    def WriteMesh3D(self, nx, ny, nz, filename):
         def arr2str(arr):
             return ' '.join(map(str, arr))
 
         ox, oy, oz = self.origin
 
         # Write out grid / mesh
-        with open(self.GetFileName(), 'w') as f:
+        with open(filename, 'w') as f:
             f.write('%d %d %d\n' % (nx, ny, nz))
             f.write('%d %d %d\n' % (ox, oy, oz))
             f.write('%s\n' % arr2str(self.xcells))
@@ -41,7 +41,7 @@ class ubcTensorMeshWriterBase(WriterBase):
             f.write('%s\n' % arr2str(self.zcells))
         return
 
-    def WriteModels(self, grd):
+    def WriteModels(self, grd, filename):
         """Write cell data attributes to model files"""
         nx, ny, nz = grd.GetDimensions()
         nx -= 1
@@ -64,9 +64,9 @@ class ubcTensorMeshWriterBase(WriterBase):
             vtkarr = grd.GetCellData().GetArray(i)
             arr = nps.vtk_to_numpy(vtkarr)
             arr = reshapeModel(arr)
-            path = os.path.dirname(self.GetFileName())
+            path = os.path.dirname(filename)
             fname = '%s/%s.mod' % (path, vtkarr.GetName().replace(' ', '_'))
-            np.savetxt(fname, arr, comments='! ', header='Mesh File: %s' % os.path.basename(self.GetFileName()))
+            np.savetxt(fname, arr, comments='! ', header='Mesh File: %s' % os.path.basename(filename), fmt=self.GetFormat())
 
         return
 
@@ -81,9 +81,9 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
         ubcTensorMeshWriterBase.__init__(self, inputType='vtkRectilinearGrid')
 
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
+    def PerformWriteOut(self, inputDataObject, filename):
         # Get the input data object
-        grd = self.GetInputData(inInfoVec, 0, 0)
+        grd = inputDataObject
 
         # Get grid dimensions
         nx, ny, nz = grd.GetDimensions()
@@ -108,10 +108,10 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
         self.zcells = self.zcells[::-1]
 
         # Write mesh
-        self.WriteMesh3D(nx-1, ny-1, nz-1)
+        self.WriteMesh3D(nx-1, ny-1, nz-1, filename)
 
         # Now write out model data
-        self.WriteModels(grd)
+        self.WriteModels(grd, filename)
 
         # Always return 1 from pipeline methods or seg-faults will occur
         return 1
@@ -129,9 +129,9 @@ class WriteImageDataToUBC(ubcTensorMeshWriterBase):
         ubcTensorMeshWriterBase.__init__(self, inputType='vtkImageData')
 
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
+    def PerformWriteOut(self, inputDataObject, filename):
         # Get the input data object
-        grd = self.GetInputData(inInfoVec, 0, 0)
+        grd = inputDataObject
 
         # Get grid dimensions
         nx, ny, nz = grd.GetDimensions()
@@ -155,10 +155,10 @@ class WriteImageDataToUBC(ubcTensorMeshWriterBase):
         # TODO: decide if 2D or 3D
 
         # Write mesh
-        self.WriteMesh3D(nx, ny, nz)
+        self.WriteMesh3D(nx, ny, nz, filename)
 
         # Now write out model data
-        self.WriteModels(grd)
+        self.WriteModels(grd, filename)
 
         # Always return 1 from pipeline methods or seg-faults will occur
         return 1

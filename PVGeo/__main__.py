@@ -7,7 +7,7 @@ def GetInstallationPaths():
     PYTHONPATH = path
     PV_PLUGIN_PATH = '%s/%s' % (path, 'PVPlugins')
 
-    script = 'curl -s  https://cdn.rawgit.com/OpenGeoVis/PVGeo/master/installMac.sh | sh -s'
+    script = 'curl -s  https://raw.githubusercontent.com/OpenGeoVis/PVGeo/master/installMac.sh | sh -s'
 
     if 'darwin' in platform.system().lower():
         # Install launch agents
