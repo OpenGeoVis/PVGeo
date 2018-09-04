@@ -49,7 +49,7 @@ class WriterBase(VTKPythonAlgorithmBase):
     def FillInputPortInformation(self, port, info):
         """Allows us to save composite datasets as well.
         NOTE: I only care about ``vtkMultiBlockDataSet``s but you could hack
-        this method and ``RequestData`` to handle ``vtkCompositeDataSet``s for
+        this method and ``RequestData`` to handle ``vtkMultiBlockDataSet``s for
         a general use case.
         """
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), self.InputType)
@@ -137,7 +137,7 @@ class WriterBase(VTKPythonAlgorithmBase):
         composite data sets. DO NOT OVERWRITE THIS.
         """
         inp = self.GetInputData(inInfoVec, 0, 0)
-        if isinstance(inp, vtk.vtkCompositeDataSet):
+        if isinstance(inp, vtk.vtkMultiBlockDataSet):
             self.__composite = True
         # Handle composite datasets. NOTE: This only handles vtkMultiBlockDataSet
         if self.__composite:

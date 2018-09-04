@@ -504,7 +504,7 @@ class WriterBase(AlgorithmBase):
         composite data sets.
         """
         inp = self.GetInputData(inInfoVec, 0, 0)
-        if isinstance(inp, vtk.vtkCompositeDataSet):
+        if isinstance(inp, vtk.vtkMultiBlockDataSet):
             self.__composite = True
         # Handle composite datasets. NOTE: This only handles vtkMultiBlockDataSet
         if self.__composite:
