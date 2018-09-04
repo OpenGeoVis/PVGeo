@@ -163,9 +163,9 @@ class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return WriteImageDataToSurfer.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
-    @smproperty.stringvector(name="Format", default_values='%18e')
+    @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteImageDataToSurfer.SetFormat(self, fmt)
 
 
@@ -186,9 +186,9 @@ class PVGeoWriteCellCenterData(WriteCellCenterData):
         """Specify filename for the file to write."""
         WriteCellCenterData.SetFileName(self, fname)
 
-    @smproperty.stringvector(name="Format", default_values='%18e')
+    @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteCellCenterData.SetFormat(self, fmt)
 
     @smproperty.stringvector(name="Delimiter", default_values=',')

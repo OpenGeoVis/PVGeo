@@ -128,9 +128,9 @@ class PVGeoWriteImageDataToSGeMS(WriteImageDataToSGeMS):
         """Specify filename for the file to write."""
         WriteImageDataToSGeMS.SetFileName(self, fname)
 
-    @smproperty.stringvector(name="Format", default_values='%18e')
+    @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteImageDataToSGeMS.SetFormat(self, fmt)
 
 ###############################################################################
@@ -152,9 +152,9 @@ class PVGeoWriteTableToGSLib(WriteTableToGSLib):
     def SetHeader(self, header):
         WriteTableToGSLib.SetHeader(self, header)
 
-    @smproperty.stringvector(name="Format", default_values='%18e')
+    @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteTableToGSLib.SetFormat(self, fmt)
 
 ###############################################################################

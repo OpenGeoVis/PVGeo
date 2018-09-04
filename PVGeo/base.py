@@ -411,7 +411,7 @@ class WriterBase(AlgorithmBase):
         AlgorithmBase.__init__(self, nInputPorts=nInputPorts, inputType=inputType,
                                      nOutputPorts=0)
         self.__filename = kwargs.get('filename', None)
-        self.__fmt = '%.18e'
+        self.__fmt = '%.9e'
         # For composite datasets: not always used
         self.__blockfilenames = None
         self.__composite = False
@@ -461,7 +461,7 @@ class WriterBase(AlgorithmBase):
         self.Update()
 
     def SetFormat(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         if self.__fmt != fmt and isinstance(fmt, str):
             self.__fmt = fmt
             self.Modified()

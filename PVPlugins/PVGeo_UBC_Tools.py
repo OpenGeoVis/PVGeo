@@ -229,9 +229,9 @@ class PVGeoWriteRectilinearGridToUBC(WriteRectilinearGridToUBC):
         """Specify filename for the file to write."""
         WriteRectilinearGridToUBC.SetFileName(self, fname)
 
-    @smproperty.stringvector(name="Format", default_values='%18e')
+    @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteRectilinearGridToUBC.SetFormat(self, fmt)
 
 
@@ -248,7 +248,7 @@ class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
         """Specify filename for the file to write."""
         WriteImageDataToUBC.SetFileName(self, fname)
 
-    @smproperty.stringvector(name="Format", default_values='%18e')
+    @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteImageDataToUBC.SetFormat(self, fmt)
