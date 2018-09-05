@@ -14,6 +14,10 @@ def GetInstallationPaths(echo=False):
         print('Copy paste the following line(s) to execute in your bash terminal:\n')
         print('%s %s' % (script, PYTHONPATH))
         print('\n')
+        if echo:
+            print('PYTHONPATH=%s' % PYTHONPATH)
+            print('PV_PLUGIN_PATH=%s' % PV_PLUGIN_PATH)
+            print('\n')
     else:
         # WINDOWS INSTALL
         PV_PLUGIN_PATH = '%s\\%s' % (path, 'PVPlugins')
