@@ -15,7 +15,7 @@ Welcome to PVGeo's code docs!
    :target: https://www.codacy.com/app/banesullivan/PVGeo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenGeoVis/PVGeo&amp;utm_campaign=Badge_Grade
    :alt: Codacy Badge
 
-.. image:: http://slack.pvgeo.org/badge.svg
+.. image:: https://img.shields.io/badge/Slack-PVGeo-4B0082.svg?logo=slack
    :target: http://slack.pvgeo.org
    :alt: Slack
 
