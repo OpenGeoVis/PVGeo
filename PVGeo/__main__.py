@@ -31,15 +31,15 @@ SET PV_PLUGIN_PATH=%s
 CALL "bin/paraview.exe"
 ''' % (PYTHONPATH, PV_PLUGIN_PATH)
         launcher = launcher.replace(r'\n', '\r\n') # Windows Line-Endings
-
+        filename = '%s\\Desktop\\PVGeoLauncher.bat' % path
         if echo:
-            print('Contents of `%s\\Desktop\\PVGeoLauncher.bat`:' % path)
+            print('Contents of `%s`:' % filename)
             print(launcher)
             print('\n')
         else:
-            with open('%s\\PVGeoLauncher.bat' % path, 'w') as f:
+            with open(filename, 'w') as f:
                 f.write(launcher)
-            print('Please follow installation instructions to create a shortcut for the new file: %s' % ('%s\\Desktop\\PVGeoLauncher.bat' % path))
+            print('Please follow installation instructions to create a shortcut for the new file: `%s`' % filename)
     return
 
 
