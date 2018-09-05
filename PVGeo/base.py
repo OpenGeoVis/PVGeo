@@ -14,9 +14,9 @@ __displayname__ = 'Base Classes'
 from . import _helpers
 
 # Outside Imports:
+import vtk # NOTE: This is the first import executed in the package! Keep here!!
 import vtk.util.vtkAlgorithm as valg #import VTKPythonAlgorithmBase
 import numpy as np
-import vtk
 import warnings
 
 ###############################################################################

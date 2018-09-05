@@ -4,3 +4,4 @@ colour-runner==0.0.5
 codecov==2.0.15
 vtk>=8.1.0
 pandas>=0.23.4
+mock>=2.0.0

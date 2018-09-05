@@ -4,7 +4,10 @@ __all__ = [
 
 __displayname__ = 'Version Verifier'
 
-from ._helpers import PVGeoError
+try:
+    from ._helpers import PVGeoError
+except:
+    PVGeoError = RuntimeError
 
 def checkNumpy(alert='print'):
     """A method to check the active environment's version of NumPy for

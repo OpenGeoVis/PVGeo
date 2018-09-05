@@ -30,6 +30,7 @@ setuptools.setup(
         'colour-runner==0.0.5',
         'codecov==2.0.15',
         'pandas>=0.23.4',
+        'mock>=2.0.0',
     ],
     classifiers=(
         "Programming Language :: Python",
