@@ -7,7 +7,11 @@ Welcome to PVGeo's code docs!
 =============================
 
 
-.. image:: https://img.shields.io/pypi/v/PVGeo.svg
+.. image:: https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website
+   :target: http://pvgeo.org
+   :alt: Website
+
+.. image:: https://img.shields.io/pypi/v/PVGeo.svg?logo=python
    :target: https://pypi.org/project/PVGeo/
    :alt: PyPI
 
@@ -19,7 +23,7 @@ Welcome to PVGeo's code docs!
    :target: http://slack.pvgeo.org
    :alt: Slack
 
-.. image:: https://travis-ci.org/OpenGeoVis/PVGeo.svg?branch=master
+.. image:: https://img.shields.io/travis/OpenGeoVis/PVGeo/master.svg?label=build&logo=travis
    :target: https://travis-ci.org/OpenGeoVis/PVGeo
    :alt: Build Status
 
