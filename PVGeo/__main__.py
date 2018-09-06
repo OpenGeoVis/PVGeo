@@ -28,7 +28,7 @@ def GetInstallationPaths(echo=False):
         launcher = '''@ECHO OFF
 SET PYTHONPATH=%s
 SET PV_PLUGIN_PATH=%s
-CALL "bin/paraview.exe"
+CALL "bin\paraview.exe"
 ''' % (PYTHONPATH, PV_PLUGIN_PATH)
         launcher = launcher.replace(r'\n', '\r\n') # Windows Line-Endings
         filename = '%s\\Desktop\\PVGeoLauncher.bat' % path
