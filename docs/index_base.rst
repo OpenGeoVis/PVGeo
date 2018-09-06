@@ -7,6 +7,10 @@ Welcome to PVGeo's code docs!
 =============================
 
 
+.. image:: https://img.shields.io/badge/demos-grey.svg?logo=vimeo
+   :target: https://vimeo.com/user82050125)
+   :alt: Vimeo
+
 .. image:: https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website
    :target: http://pvgeo.org
    :alt: Website
