@@ -35,7 +35,7 @@ Welcome to PVGeo's code docs!
    :target: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master
    :alt: Code Coverage
 
-.. image:: https://img.shields.io/github/contributors/OpenGeoVis/PVGeo.svg
+.. image:: https://img.shields.io/github/contributors/OpenGeoVis/PVGeo.svg?logo=github&logoColor=white
    :target: https://GitHub.com/OpenGeoVis/PVGeo/graphs/contributors/
    :alt: GitHub Contributors
 
