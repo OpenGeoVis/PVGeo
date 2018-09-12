@@ -525,3 +525,20 @@ class PVGeoIterateOverPoints(IterateOverPoints):
 
 
 ###############################################################################
+
+
+@smproxy.filter(name='PVGeoConvertUnits', label='Convert XYZ Units')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataObject"], composite_data_supported=False)
+class PVGeoConvertUnits(ConvertUnits):
+    def __init__(self):
+        ConvertUnits.__init__(self)
+
+    #### SETTERS AND GETTERS ####
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Conversion', command='SetConversion', labels=ConvertUnits.LookupConversions(True), help='This will set the spatial conversion.'))
+    def SetConversion(self, key):
+        ConvertUnits.SetConversion(self, key)
+
+###############################################################################

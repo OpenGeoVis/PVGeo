@@ -6,6 +6,7 @@ __all__ = [
     'RotationTool',
     'ExtractCellCenters',
     'IterateOverPoints',
+    'ConvertUnits',
 ]
 
 import vtk
@@ -14,7 +15,7 @@ import pandas as pd
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
-from ..base import FilterBase
+from ..base import FilterBase, FilterPreserveTypeBase
 from .. import _helpers
 
 
@@ -577,3 +578,69 @@ class IterateOverPoints(FilterBase):
         """Use this in ParaView decorator to register timesteps
         """
         return self.__timesteps.tolist() if self.__timesteps is not None else None
+
+
+
+
+class ConvertUnits(FilterPreserveTypeBase):
+    """Convert points in an input data object to from meters to feet or vice versa.
+    This simply uses a ``vtkTransformFilter`` and scales input data object with
+    common conversions.
+    """
+    __displayname__ = 'Convert XYZ Units'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterPreserveTypeBase.__init__(self, **kwargs)
+        self.__conversion = 'meter_to_feet'
+
+    @staticmethod
+    def LookupConversions(getkeys=False):
+        """All Available conversions
+
+        Return:
+            dict: dictionary of conversion units
+        """
+        convs = dict(
+            meter_to_feet=3.2808399,
+            feet_to_meter=1/3.2808399,
+        )
+        if getkeys:
+            return convs.keys()
+        return convs
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Execute on pipeline"""
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        # Get number of points
+        pdo = self.GetOutputData(outInfo, 0)
+        #### Perfrom task ####
+        filt = vtk.vtkTransformFilter()
+        trans = vtk.vtkTransform()
+        trans.Scale(self.GetConversion(), self.GetConversion(), self.GetConversion())
+        filt.SetTransform(trans)
+        filt.SetInputDataObject(pdi)
+        filt.Update()
+        scaled = filt.GetOutputDataObject(0)
+        pdo.DeepCopy(scaled)
+        return 1
+
+
+
+    def SetConversion(self, key):
+        """Set the conversion via a lookup table"""
+        convs = self.LookupConversions()
+        if isinstance(key, str):
+            if key.lower() not in convs.keys():
+                raise _helpers.PVGeoError('Converion `%s` not available.' % key)
+        elif isinstance(key, int):
+            key = convs.keys()[key]
+        if self.__conversion != key:
+            self.__conversion = key
+            self.Modified()
+        return 1
+
+    def GetConversion(self):
+        """Get the conversion value"""
+        convs = self.LookupConversions()
+        return convs[self.__conversion]
