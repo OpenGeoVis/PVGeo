@@ -169,10 +169,10 @@ class FilterBase(AlgorithmBase):
     __category__ = 'base'
     def __init__(self,
         nInputPorts=1, inputType='vtkDataSet',
-        nOutputPorts=1, outputType='vtkPolyData'):
+        nOutputPorts=1, outputType='vtkPolyData', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=nInputPorts, inputType=inputType,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
     def Apply(self, inputDataObject):
         self.SetInputDataObject(inputDataObject)
@@ -239,10 +239,10 @@ class FilterPreserveTypeBase(FilterBase):
     """
     __displayname__ = 'Filter Preserve Type Base'
     __category__ = 'base'
-    def __init__(self):
+    def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkDataObject',
-            nOutputPorts=1)
+            nOutputPorts=1, **kwargs)
 
     # THIS IS CRUCIAL to preserve data type through filter
     def RequestDataObject(self, request, inInfo, outInfo):
