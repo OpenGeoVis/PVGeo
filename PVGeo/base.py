@@ -201,7 +201,8 @@ class ReaderBase(ReaderBaseBase):
     def _UpdateTimeSteps(self):
         """For internal use only: appropriately sets the timesteps.
         """
-        self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetFileNames(), self.__dt)
+        if len(self.GetFileNames()) > 1:
+            self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetFileNames(), self.__dt)
         return 1
 
     #### Algorithm Methods ####
