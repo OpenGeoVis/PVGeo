@@ -3,18 +3,17 @@ __all__ = [
 ]
 
 import vtk
-from vtk.util import numpy_support as nps
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
 from ..base import AlgorithmBase
-#from .. import _helpers
+from .. import _helpers
 
 class CreateTensorMesh(AlgorithmBase):
     """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.
     """
     __displayname__ = 'Create Tensor Mesh'
-    __type__ = 'source'
+    __category__ = 'source'
     def __init__(self, origin=[-350.0, -400.0, 0.0], dataname='Data'):
         AlgorithmBase.__init__(self, nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')
@@ -74,23 +73,23 @@ class CreateTensorMesh(AlgorithmBase):
         nx,ny,nz = ext[1]+1,ext[3]+1,ext[5]+1
         pdo.SetDimensions(nx,ny,nz)
         # Convert to VTK array for setting coordinates
-        pdo.SetXCoordinates(nps.numpy_to_vtk(num_array=cox, deep=True))
-        pdo.SetYCoordinates(nps.numpy_to_vtk(num_array=coy, deep=True))
-        pdo.SetZCoordinates(nps.numpy_to_vtk(num_array=coz, deep=True))
+        pdo.SetXCoordinates(_helpers.numToVTK(cox, deep=True))
+        pdo.SetYCoordinates(_helpers.numToVTK(coy, deep=True))
+        pdo.SetZCoordinates(_helpers.numToVTK(coz, deep=True))
 
         return pdo
 
 
     def _AddModelData(self, pdo, data):
-        ext = self.GetExtent()
-        nx,ny,nz = ext[1]+1,ext[3]+1,ext[5]+1
+        nx, ny, nz = pdo.GetDimensions()
+        nx, ny, nz = nx-1, ny-1, nz-1
         # ADD DATA to cells
         if data is None:
             data = np.random.rand(nx*ny*nz)
-            data = nps.numpy_to_vtk(num_array=data, deep=True)
+            data = _helpers.numToVTK(data, deep=True)
             data.SetName('Random Data')
         else:
-            data = nps.numpy_to_vtk(num_array=data, deep=True)
+            data = _helpers.numToVTK(data, deep=True)
             data.SetName(dataNm)
         pdo.GetCellData().AddArray(data)
         return pdo
@@ -111,8 +110,7 @@ class CreateTensorMesh(AlgorithmBase):
         """Used by pipeline to set output whole extent
         """
         # Now set whole output extent
-        extent = self.GetExtent()
-        ext = [0, extent[0]-2, 0,extent[1]-2, 0,extent[2]-2]
+        ext = self.GetExtent()
         info = outInfo.GetInformationObject(0)
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)

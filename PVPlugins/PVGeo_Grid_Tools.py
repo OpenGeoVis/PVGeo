@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.12'
+paraview_plugin_version = '1.1.25'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -20,7 +20,7 @@ MENU_CAT = 'PVGeo: General Grids'
 @smproxy.filter(name='PVGeoReverseImageDataAxii', label='Reverse Image Data Axii')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
 class PVGeoReverseImageDataAxii(ReverseImageDataAxii):
     def __init__(self):
         ReverseImageDataAxii.__init__(self)
@@ -46,7 +46,7 @@ class PVGeoReverseImageDataAxii(ReverseImageDataAxii):
 @smproxy.filter(name='PVGeoTranslateGridOrigin', label='Translate Grid Origin')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
 class PVGeoTranslateGridOrigin(TranslateGridOrigin):
     def __init__(self):
         TranslateGridOrigin.__init__(self)
@@ -65,10 +65,10 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 
 
 @smproxy.filter(name='PVGeoTableToGrid', label='Table To Grid')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoTableToGrid(TableToGrid):
     def __init__(self):
         TableToGrid.__init__(self)
@@ -110,7 +110,8 @@ class PVGeoTableToGrid(TableToGrid):
 
 
 @smproxy.filter(name='PVGeoExtractTopography', label='Extract Topography')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Topography", port_index=1)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
 @smproperty.input(name="Data Set", port_index=0)
@@ -147,7 +148,7 @@ class PVGeoSurferGridReader(SurferGridReader):
 
 @smproxy.writer(extensions="grd", file_description="Surfer Grid (ASCII)", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkImageData", "vtkMultiBlockDataSet"], composite_data_supported=True)
 class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
     def __init__(self):
         WriteImageDataToSurfer.__init__(self)
@@ -162,6 +163,37 @@ class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return WriteImageDataToSurfer.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
+    @smproperty.stringvector(name="Format", default_values='%.9e')
+    def SetFormat(self, fmt):
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
+        WriteImageDataToSurfer.SetFormat(self, fmt)
 
+
+
+###############################################################################
+
+@smproxy.writer(extensions="dat", file_description="Cell Centers and Cell Data", support_reload=False)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=True)
+class PVGeoWriteCellCenterData(WriteCellCenterData):
+    def __init__(self):
+        WriteCellCenterData.__init__(self)
+
+
+    @smproperty.stringvector(name="FileName", panel_visibility="never")
+    @smdomain.filelist()
+    def SetFileName(self, fname):
+        """Specify filename for the file to write."""
+        WriteCellCenterData.SetFileName(self, fname)
+
+    @smproperty.stringvector(name="Format", default_values='%.9e')
+    def SetFormat(self, fmt):
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
+        WriteCellCenterData.SetFormat(self, fmt)
+
+    @smproperty.stringvector(name="Delimiter", default_values=',')
+    def SetDelimiter(self, delimiter):
+        """The string delimiter to use"""
+        WriteCellCenterData.SetDelimiter(self, delimiter)
 
 ###############################################################################

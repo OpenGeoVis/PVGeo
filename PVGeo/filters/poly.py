@@ -3,12 +3,13 @@ __all__ = [
     'NormalizeArray',
     'AddCellConnToPoints',
     'PointsToTube',
+    'PercentThreshold',
 ]
 
 import vtk
-from vtk.util import numpy_support as nps
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
+from vtk.util import numpy_support as nps
 from datetime import datetime
 # Import Helpers:
 from ..base import FilterBase, FilterPreserveTypeBase
@@ -32,7 +33,7 @@ class ArrayMath(FilterPreserveTypeBase):
     - `correlate`: Use `np.correlate(arr1, arr2, mode='same')`
     """
     __displayname__ = 'Array Math'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -123,7 +124,7 @@ class ArrayMath(FilterPreserveTypeBase):
         # Apply the multiplier
         carr *= self.__multiplier
         # Convert to a VTK array
-        c = nps.numpy_to_vtk(num_array=carr,deep=True)
+        c = _helpers.numToVTK(carr)
         # If no name given for data by user, use operator name
         newName = self.__newName
         if newName == '':
@@ -169,7 +170,14 @@ class ArrayMath(FilterPreserveTypeBase):
             self.Modified()
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
-        """Used by pipeline/paraview GUI wrappings to set the input arrays
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
         """
         if idx == 0:
             self._SetInputArray1(field, name)
@@ -178,6 +186,15 @@ class ArrayMath(FilterPreserveTypeBase):
         else:
             raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
         return 1
+
+    def Apply(self, inputDataObject, arrayName0, arrayName1):
+        self.SetInputDataObject(inputDataObject)
+        arr0, field0 = _helpers.SearchForArray(inputDataObject, arrayName0)
+        arr1, field1 = _helpers.SearchForArray(inputDataObject, arrayName1)
+        self.SetInputArrayToProcess(0, 0, 0, field0, arrayName0)
+        self.SetInputArrayToProcess(1, 0, 0, field1, arrayName1)
+        self.Update()
+        return self.GetOutput()
 
     def SetMultiplier(self, val):
         """This is a static shifter/scale factor across the array after normalization.
@@ -236,7 +253,7 @@ class NormalizeArray(FilterPreserveTypeBase):
     - `just_multiply`: Only Multiply by Multiplier
     """
     __displayname__ = 'Normalize Array'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -346,7 +363,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         # Apply the multiplier
         arr *= self.__multiplier
         # Convert to VTK array
-        c = nps.numpy_to_vtk(num_array=arr,deep=True)
+        c = _helpers.numToVTK(arr)
         # If no name given for data by user, use operator name
         newName = self.__newName
         if newName == '':
@@ -374,7 +391,14 @@ class NormalizeArray(FilterPreserveTypeBase):
 
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
-        """Used by pipeline/paraview GUI wrappings to set the input arrays
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
         """
         if self.__inputArray[0] != field:
             self.__inputArray[0] = field
@@ -383,6 +407,13 @@ class NormalizeArray(FilterPreserveTypeBase):
             self.__inputArray[1] = name
             self.Modified()
         return 1
+
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()
 
     def SetMultiplier(self, val):
         """This is a static shifter/scale factor across the array after normalization.
@@ -447,7 +478,7 @@ class AddCellConnToPoints(FilterBase):
     - 3: Line
     """
     __displayname__ = 'Add Cell Connectivity to Points'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -455,6 +486,7 @@ class AddCellConnToPoints(FilterBase):
         # Parameters
         self.__cellType = vtk.VTK_POLY_LINE
         self.__usenbr = kwargs.get('nearestNbr', False)
+        self.__unique = True
 
 
     def _ConnectCells(self, pdi, pdo, logTime=False):
@@ -470,6 +502,9 @@ class AddCellConnToPoints(FilterBase):
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+        if self.__unique:
+            # Remove repeated points
+            points = np.unique(points, axis=0)
 
         def _makePolyCell(ptsi):
             cell = vtk.vtkPolyLine()
@@ -531,6 +566,17 @@ class AddCellConnToPoints(FilterBase):
         pdo.SetLines(cells)
         # copy point data
         _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        # Copy cell data if type is LINE
+        if cellType == vtk.VTK_LINE:
+            # Be sure to rearange for Nearest neighbor approxiamtion
+            for i in range(pdi.GetCellData().GetNumberOfArrays()):
+                vtkarr = pdi.GetCellData().GetArray(i)
+                name = vtkarr.GetName()
+                if nrNbr:
+                    arr = nps.vtk_to_numpy(vtkarr)
+                    arr = arr[ind]
+                    vtkarr = _helpers.numToVTK(arr, name=name)
+                pdo.GetCellData().AddArray(vtkarr)
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):
@@ -561,7 +607,11 @@ class AddCellConnToPoints(FilterBase):
             self.__usenbr = flag
             self.Modified()
 
-
+    def SetUseUniquePoints(self, flag):
+        """Set a flag on whether to only use unique points"""
+        if flag != self.__unique:
+            self.__unique = flag
+            self.Modified()
 
 
 ###############################################################################
@@ -571,13 +621,14 @@ class PointsToTube(AddCellConnToPoints):
     """Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.
     """
     __displayname__ = 'Points to Tube'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         AddCellConnToPoints.__init__(self, **kwargs)
         # Additional Parameters
         # NOTE: CellType should remain vtk.VTK_POLY_LINE (4) connection
         self.__numSides = 20
         self.__radius = 10.0
+        self.__capping = False
 
 
     def _ConnectCells(self, pdi, pdo, logTime=False):
@@ -586,8 +637,11 @@ class PointsToTube(AddCellConnToPoints):
         AddCellConnToPoints._ConnectCells(self, pdi, pdo, logTime=logTime)
         tube = vtk.vtkTubeFilter()
         tube.SetInputData(pdo)
+        # User Defined Parameters
+        tube.SetCapping(self.__capping)
         tube.SetRadius(self.__radius)
         tube.SetNumberOfSides(self.__numSides)
+        # Apply the filter
         tube.Update()
         pdo.ShallowCopy(tube.GetOutput())
         return pdo
@@ -609,6 +663,102 @@ class PointsToTube(AddCellConnToPoints):
             self.__numSides = num
             self.Modified()
 
+    def SetCapping(self, flag):
+        if self.__capping != flag:
+            self.__capping = flag
+            self.Modified()
+
 
 
 ###############################################################################
+
+
+class PercentThreshold(FilterBase):
+    """Allows user to select a percent of the data range to threshold.
+    This will find the data range of the selected input array and remove the
+    bottom percent. This can be reversed using the invert property.
+    """
+    __displayname__ = 'Percent Threshold'
+    __category__ = 'filter'
+    def __init__(self, percent=50, invert=False, **kwargs):
+        FilterBase.__init__(self, inputType='vtkDataSet',
+                            outputType='vtkUnstructuredGrid', **kwargs)
+        self.__invert = invert
+        if percent < 1.0: percent *= 100
+        self.__percent = percent # NOTE: not decimal percent
+        self.__filter = vtk.vtkThreshold()
+        self.__inputArray = [None, None]
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline for execution"""
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        self.__filter.SetInputDataObject(pdi)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Get Input Array
+        field, name = self.__inputArray[0], self.__inputArray[1]
+        wpdi = dsa.WrapDataObject(pdi)
+        arr = _helpers.getNumPyArray(wpdi, field, name)
+
+        dmin, dmax = np.min(arr), np.max(arr)
+        val = dmin + (self.__percent / 100.0) * (dmax - dmin)
+
+        if self.__invert:
+            self.__filter.ThresholdByLower(val)
+        else:
+            self.__filter.ThresholdByUpper(val)
+
+        self.__filter.Update()
+
+        filt = self.__filter.GetOutputDataObject(0)
+
+        pdo.ShallowCopy(filt)
+        return 1
+
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
+        """
+        if self.__inputArray[0] != field or self.__inputArray[1] != name:
+            self.__inputArray[0] = field
+            self.__inputArray[1] = name
+            self.__filter.SetInputArrayToProcess(idx, port, connection, field, name)
+            self.Modified()
+        return 1
+
+    def SetPercent(self, percent):
+        """Set the percent for the threshold in range (0, 100).
+        Any values falling beneath the set percent of the total data range
+        will be removed."""
+        if self.__percent != percent:
+            self.__percent = percent
+            self.Modified()
+
+    def SetUseContinuousCellRange(self, flag):
+        """If this is on (default is off), we will use the continuous
+        interval [minimum cell scalar, maxmimum cell scalar] to intersect
+        the threshold bound , rather than the set of discrete scalar
+        values from the vertices"""
+        return self.__filter.SetUseContinuousCellRange(flag)
+
+    def SetInvert(self, flag):
+        """Use to invert the threshold filter"""
+        if self.__invert != flag:
+            self.__invert = flag
+            self.Modified()
+
+
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()

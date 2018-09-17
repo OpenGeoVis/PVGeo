@@ -1,0 +1,39 @@
+# AppVeyor.com is a Continuous Integration service to build and run tests under Windows
+
+build: off
+
+environment:
+  matrix:
+    # PVGeo is incompatible with windows python 2.7
+    # this is because vtk-v8.x.x requres c++11 which is incompatible
+    # - PYTHON_VERSION: 2.7
+    #   CONDA: C:\Miniconda
+
+    - PYTHON_VERSION: 3.6
+      CONDA: C:\Miniconda36
+
+image: Visual Studio 2015
+
+platform:
+- x64
+
+init:
+  - ps: if ($Env:PLATFORM -eq "x64") { $Env:CONDA = "${Env:CONDA}-x64" }
+  - ps: Write-Host $Env:PYTHON_VERSION
+  - ps: Write-Host $Env:CONDA
+  - ps: Write-Host $Env:PLATFORM
+
+install:
+  # Load the conda root environment, configure and install some packages
+  - '"%CONDA%\Scripts\activate.bat"'
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+  - python setup.py install
+  - python -m PVGeo install echo
+  - pip install -r requirements.txt
+
+
+test_script:
+  - python -c "import PVGeo; print('PVGeo Version ', PVGeo.__version__)"
+  - python tests/__main__.py close # exit with error code if problem occurs

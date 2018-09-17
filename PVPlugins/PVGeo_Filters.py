@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.12'
+paraview_plugin_version = '1.1.25'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -19,11 +19,10 @@ MENU_CAT = 'PVGeo: General Filters'
 
 # Add Cell Connectivity To Points
 @smproxy.filter(name='PVGeoAddCellConnToPoints', label='Add Cell Connectivity To Points')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
-@smhint.xml('''<View type="RenderView" />''')
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoAddCellConnToPoints(AddCellConnToPoints):
     def __init__(self):
         AddCellConnToPoints.__init__(self)
@@ -31,7 +30,7 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
     #### Seters and Geters ####
 
     @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
-        labels=['Poly Line', 'Line'], values=[4, 3]))
+        labels=['Line', 'Poly Line'], values=[3, 4]))
     def SetCellType(self, cellType):
         AddCellConnToPoints.SetCellType(self, cellType)
 
@@ -40,6 +39,12 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
         help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
     def SetUseNearestNbr(self, flag):
         AddCellConnToPoints.SetUseNearestNbr(self, flag)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
+        command='SetUseUniquePoints', default_values=False,
+        help='Set a flag on whether to only use unique points'))
+    def SetUseUniquePoints(self, flag):
+        AddCellConnToPoints.SetUseUniquePoints(self, flag)
 
 
 
@@ -65,11 +70,10 @@ class PVGeoCombineTables(CombineTables):
 
 # PointsToTube
 @smproxy.filter(name='PVGeoPointsToTube', label='Points To Tube')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+   <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
-@smhint.xml('''<View type="RenderView" />''')
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoPointsToTube(PointsToTube):
     def __init__(self):
         PointsToTube.__init__(self)
@@ -93,6 +97,24 @@ class PVGeoPointsToTube(PointsToTube):
     def SetUseNearestNbr(self, flag):
         PointsToTube.SetUseNearestNbr(self, flag)
 
+    @smproperty.xml(_helpers.getPropertyXml(name='Capping',
+        command='SetCapping', default_values=False,
+        help='A boolean to set whether to cap the ends of the tube.'))
+    def SetCapping(self, flag):
+        PointsToTube.SetCapping(self, flag)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
+        labels=['Line', 'Poly Line'], values=[3, 4]))
+    def SetCellType(self, cellType):
+        PointsToTube.SetCellType(self, cellType)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
+        command='SetUseUniquePoints', default_values=False,
+        help='Set a flag on whether to only use unique points'))
+    def SetUseUniquePoints(self, flag):
+        PointsToTube.SetUseUniquePoints(self, flag)
+
+
 
 ###############################################################################
 
@@ -100,7 +122,7 @@ class PVGeoPointsToTube(PointsToTube):
 @smproxy.filter(name='PVGeoReshapeTable', label='Reshape Table')
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoReshapeTable(ReshapeTable):
     def __init__(self):
         ReshapeTable.__init__(self)
@@ -134,14 +156,14 @@ class PVGeoReshapeTable(ReshapeTable):
 
 
 @smproxy.filter(name='PVGeoVoxelizePoints', label='Voxelize Points')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Wireframe" />
+    <WarnOnCreate title="Axial Assumptions">
+      **Voxelize Points** filter assumes the input points to be sampled on a regular XYZ coordinate system at an even spacing.
+      Do you want to continue?
+        </WarnOnCreate>''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
-@smhint.xml('''<RepresentationType view="RenderView" type="Wireframe" />''')
-@smhint.xml('''<WarnOnCreate title="Axial Assumptions">
-  **Voxelize Points** filter assumes the input points to be sampled on a regular XYZ coordinate system at an even spacing.
-  Do you want to continue?
-    </WarnOnCreate>''')
 class PVGeoVoxelizePoints(VoxelizePoints):
     def __init__(self):
         VoxelizePoints.__init__(self)
@@ -163,15 +185,14 @@ class PVGeoVoxelizePoints(VoxelizePoints):
 
 
 @smproxy.filter(name='PVGeoVoxelizePointsFromArrays', label='Voxelize Points From Arrays')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    RepresentationType view="RenderView" type="Wireframe" />
+    <WarnOnCreate title="Axial Assumptions">
+      **Voxelize Points From Arrays** filter assumes the input points to be sampled on a regular XYZ coordinate system.
+      Do you want to continue?
+    </WarnOnCreate>''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
-@smhint.xml('''<View type="RenderView" />''')
-@smhint.xml('''<RepresentationType view="RenderView" type="Wireframe" />''')
-@smhint.xml('''<WarnOnCreate title="Axial Assumptions">
-  **Voxelize Points From Arrays** filter assumes the input points to be sampled on a regular XYZ coordinate system.
-  Do you want to continue?
-</WarnOnCreate>''')
 class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
     def __init__(self):
         VoxelizePoints.__init__(self)
@@ -283,11 +304,10 @@ class PVGeoArrayMath(ArrayMath):
 ###############################################################################
 
 @smproxy.filter(name='PVGeoManySlicesAlongAxis', label='Many Slices Along Axis')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
-@smhint.xml('''<View type="RenderView" />''')
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoManySlicesAlongAxis(ManySlicesAlongAxis):
     def __init__(self):
         ManySlicesAlongAxis.__init__(self)
@@ -308,11 +328,10 @@ class PVGeoManySlicesAlongAxis(ManySlicesAlongAxis):
 ###############################################################################
 
 @smproxy.filter(name='PVGeoSliceThroughTime', label='Slice Through Time')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
-@smhint.xml('''<View type="RenderView" />''')
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoSliceThroughTime(SliceThroughTime):
     def __init__(self):
         SliceThroughTime.__init__(self)
@@ -342,13 +361,12 @@ class PVGeoSliceThroughTime(SliceThroughTime):
 
 
 @smproxy.filter(name='PVGeoManySlicesAlongPoints', label='Many Slices Along Points')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Data Set", port_index=1)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
 @smproperty.input(name="Points", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
-@smhint.xml('''<View type="RenderView" />''')
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
     def __init__(self):
         ManySlicesAlongPoints.__init__(self)
@@ -370,11 +388,10 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
 
 
 @smproxy.filter(name='PVGeoRotatePoints', label='Rotate Coordinates')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
-@smhint.xml('''<View type="RenderView" />''')
-@smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoRotatePoints(RotatePoints):
     def __init__(self):
         RotatePoints.__init__(self)
@@ -399,14 +416,129 @@ class PVGeoRotatePoints(RotatePoints):
 
 ###############################################################################
 @smproxy.filter(name='PVGeoExtractPoints', label='Extract Points')
-@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
-@smhint.xml('''<View type="RenderView" />''')
-@smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
 class PVGeoExtractPoints(ExtractPoints):
     def __init__(self):
         ExtractPoints.__init__(self)
 
+
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoPercentThreshold', label='Percent Threshold')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+class PVGeoPercentThreshold(PercentThreshold):
+    def __init__(self):
+        PercentThreshold.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.doublevector(name="Percent", default_values=50.0)
+    @smdomain.doublerange(min=0.0, max=100.0)
+    def SetPercent(self, percent):
+        PercentThreshold.SetPercent(self, percent)
+
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Continuous Cell Range',
+        command='SetUseContinuousCellRange', default_values=False))
+    def SetUseContinuousCellRange(self, flag):
+        PercentThreshold.SetUseContinuousCellRange(self, flag)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Invert',
+        command='SetInvert', default_values=False,
+        help='Use to invert the threshold filter.'))
+    def SetInvert(self, flag):
+        PercentThreshold.SetInvert(self, flag)
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return PercentThreshold.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+
+###############################################################################
+
+
+# Combine Tables
+@smproxy.filter(name='PVGeoExtractArray', label='Extract Array')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+class PVGeoExtractArray(ExtractArray):
+    def __init__(self):
+        ExtractArray.__init__(self)
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return ExtractArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+
+###############################################################################
+
+
+# Extract Cell Centers
+@smproxy.filter(name='PVGeoExtractCellCenters', label='Extract Cell Centers')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=True)
+class PVGeoExtractCellCenters(ExtractCellCenters):
+    def __init__(self):
+        ExtractCellCenters.__init__(self)
+
+
+###############################################################################
+
+
+# IterateOverPoints
+@smproxy.filter(name='PVGeoIterateOverPoints', label='Iterate Over Points')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
+class PVGeoIterateOverPoints(IterateOverPoints):
+    def __init__(self):
+        IterateOverPoints.__init__(self)
+
+
+    #### Seters and Geters ####
+
+    @smproperty.intvector(name="Decimate", default_values=75)
+    @smdomain.intrange(min=1, max=99)
+    def SetDecimate(self, percent):
+        IterateOverPoints.SetDecimate(self, percent)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        IterateOverPoints.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return IterateOverPoints.GetTimestepValues(self)
+
+
+
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoConvertUnits', label='Convert XYZ Units')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataObject"], composite_data_supported=False)
+class PVGeoConvertUnits(ConvertUnits):
+    def __init__(self):
+        ConvertUnits.__init__(self)
+
+    #### SETTERS AND GETTERS ####
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Conversion', command='SetConversion', labels=ConvertUnits.LookupConversions(True), help='This will set the spatial conversion.'))
+    def SetConversion(self, key):
+        ConvertUnits.SetConversion(self, key)
 
 ###############################################################################

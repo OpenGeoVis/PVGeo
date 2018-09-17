@@ -11,8 +11,6 @@ import vtk
 from vtk.util import numpy_support as nps
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
-import functools
-import scipy.optimize
 
 # Import Helpers:
 from ..base import WriterBase
@@ -26,7 +24,7 @@ class SurferGridReader(DelimitedTextReader):
     """Read 2D ASCII Surfer grid files
     """
     __displayname__ = 'Surfer Grid Reader'
-    __type__ = 'reader'
+    __category__ = 'reader'
     def __init__(self, outputType='vtkImageData', **kwargs):
         DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
         self.SetDelimiter(' ')
@@ -107,7 +105,7 @@ class SurferGridReader(DelimitedTextReader):
 
         # Now add data values as point data
         data = self._GetRawData(idx=i).reshape((self.__nx, self.__ny)).flatten(order='F')
-        vtkarr = nps.numpy_to_vtk(data)
+        vtkarr = _helpers.numToVTK(data)
         vtkarr.SetName(self.__dataName)
         output.GetPointData().AddArray(vtkarr)
 
@@ -142,14 +140,14 @@ class SurferGridReader(DelimitedTextReader):
 class WriteImageDataToSurfer(WriterBase):
     """Write a 2D ``vtkImageData`` object to the Surfer grid format"""
     __displayname__ = 'Write ``vtkImageData`` to Surfer Format'
-    __type__ = 'writer'
+    __category__ = 'writer'
     def __init__(self):
         WriterBase.__init__(self, inputType='vtkImageData', ext='grd')
         self.__inputArray = [None, None]
 
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
-        img = self.GetInputData(inInfoVec, 0, 0)
+    def PerformWriteOut(self, inputDataObject, filename):
+        img = inputDataObject
 
         # Check dims: make sure 2D
         # TODO: handle any orientation
@@ -166,8 +164,7 @@ class WriteImageDataToSurfer(WriterBase):
 
         # Note user has to select a single array to save out
         field, name = self.__inputArray[0], self.__inputArray[1]
-        arr = _helpers.getVTKArray(img, field, name)
-        vtkarr = img.GetPointData().GetArray(0)
+        vtkarr = _helpers.getVTKArray(img, field, name)
         arr = nps.vtk_to_numpy(vtkarr)
         dmin, dmax = arr.min(), arr.max()
 
@@ -176,15 +173,21 @@ class WriteImageDataToSurfer(WriterBase):
         meta = 'DSAA\n%d %d\n%f %f\n%f %f\n%f %f' % (ny, nx, xmin, xmax,
                                                      ymin, ymax, dmin, dmax)
         # Now write out the data!
-        np.savetxt(self.GetFileName(), arr, header=meta, comments='')
+        np.savetxt(filename, arr, header=meta, comments='', fmt=self.GetFormat())
 
 
         return 1
 
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
-        """Used by pipeline/paraview GUI wrappings to set the input arrays.
-        The inpput array is the data value (z-value) to write for the Surfer format
+        """Used to the inpput array / the data value (z-value) to write for the Surfer format
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
         """
         if self.__inputArray[0] != field:
             self.__inputArray[0] = field
@@ -193,3 +196,20 @@ class WriteImageDataToSurfer(WriterBase):
             self.__inputArray[1] = name
             self.Modified()
         return 1
+
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()
+
+    def Write(self, inputDataObject=None, arrayName=None):
+        """Perfrom the write out."""
+        if inputDataObject:
+            self.SetInputDataObject(inputDataObject)
+            if arrayName:
+                arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+                self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Modified()
+        self.Update()

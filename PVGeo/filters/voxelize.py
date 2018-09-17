@@ -5,8 +5,8 @@ __all__ = [
 import numpy as np
 import vtk
 from vtk.util import keys
-from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
+from vtk.util import numpy_support as nps
 
 from ..base import FilterBase
 from .. import _helpers
@@ -21,7 +21,7 @@ class VoxelizePoints(FilterBase):
     This assumes that the data is at least 2-Dimensional on the XY Plane.
     """
     __displayname__ = 'Voxelize Points'
-    __type__ = 'filter'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
@@ -58,7 +58,7 @@ class VoxelizePoints(FilterBase):
     def AddCellData(grid, arr, name):
         """Add a NumPy array as cell data to the given grid input
         """
-        c = nps.numpy_to_vtk(num_array=arr, deep=True)
+        c = _helpers.numToVTK(arr)
         c.SetName(name)
         grid.GetCellData().AddArray(c)
         return grid
@@ -91,9 +91,8 @@ class VoxelizePoints(FilterBase):
     def PointsToGrid(self, xo,yo,zo, dx,dy,dz, grid=None):
         """Convert XYZ points to a ``vtkUnstructuredGrid``.
         """
-        if not checkNumpy():
-            raise _helpers.PVGeoError("`VoxelizePoints` cannot work with versions of NumPy below 1.10.x . You must update NumPy.")
-            return None
+        if not checkNumpy(alert='warn'):
+            return grid
         if grid is None:
             grid = vtk.vtkUnstructuredGrid()
 
@@ -156,23 +155,22 @@ class VoxelizePoints(FilterBase):
             self.AddFieldData(grid)
 
         # Add unique nodes as points in output
-        pts.SetData(nps.numpy_to_vtk(unique_nodes))
+        pts.SetData(_helpers.numToVTK(unique_nodes))
 
-        cnt = 0
-        arridx = np.zeros(numCells)
-        for i in range(numCells):
-            # OPTIMIZE: may be complicated but can be speed up
-            vox = vtk.vtkVoxel()
-            for j in range(8):
-                vox.GetPointIds().SetId(j, ind_nodes[j*numCells + i])
-            cells.InsertNextCell(vox)
+        # Add cell vertices
+        j = np.multiply(np.tile(np.arange(0, 8, 1), numCells), numCells)
+        arridx = np.add(j, np.repeat(np.arange(0, numCells, 1, dtype=int), 8))
 
-            arridx[i] = i
-            cnt += 8
+        ids = ind_nodes[arridx].reshape((numCells, 8))
+        cellsMat = np.concatenate((np.ones((ids.shape[0], 1), dtype=np.int64)*ids.shape[1], ids), axis=1).ravel()
 
+        cells = vtk.vtkCellArray()
+        cells.SetNumberOfCells(numCells)
+        cells.SetCells(numCells, nps.numpy_to_vtkIdTypeArray(cellsMat, deep=True))
+
+        # Set the output
         grid.SetPoints(pts)
         grid.SetCells(vtk.VTK_VOXEL, cells)
-        #VoxelizePoints.AddCellData(grid, arridx, 'Voxel ID') # For testing
         return grid
 
     def _CopyArrays(self, pdi, pdo):
@@ -257,6 +255,21 @@ class VoxelizePoints(FilterBase):
             self.__estimateGrid = flag
             self.Modified()
 
+
+    def GetRecoveredAngle(self, degrees=True):
+        """Returns the recovered angle if set to recover the input grid. If the
+        input points are rotated, then this angle will reflect a close
+        approximation of that rotation.
+
+        Args:
+            degrees (bool): A flag on to return decimal degrees or radians.
+        """
+        if degrees: return np.rad2deg(self.__angle)
+        return self.__angle
+
+    def GetSpacing(self):
+        """Get the cell spacings"""
+        return (self.__dx, self.__dy, self.__dz)
 
 
 

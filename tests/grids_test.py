@@ -4,18 +4,15 @@ import shutil
 import tempfile
 import os
 
-import urllib
-
 # VTK imports:
 import vtk
-from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 
-from .. import _helpers
-
+import PVGeo
+from PVGeo import _helpers
+from PVGeo.filters import PointsToPolyData
 # Functionality to test:
-from .__init__ import *
-from ..filters import PointsToPolyData
+from PVGeo.grids import *
 
 RTOL = 0.000001
 
@@ -146,9 +143,9 @@ class TestReverseImageDataAxii(unittest.TestCase):
         image.SetDimensions(nx, ny, nz)
         image.SetSpacing(2, 2, 2)
         image.SetOrigin(0, 0, 0)
-        data = nps.numpy_to_vtk(num_array=arr.flatten(), deep=True)
+        data = _helpers.numToVTK(arr.flatten(), deep=True)
         data.SetName('Data')
-        cellData = nps.numpy_to_vtk(num_array=arrCells.flatten(), deep=True)
+        cellData = _helpers.numToVTK(arrCells.flatten(), deep=True)
         cellData.SetName('CellData')
         image.GetPointData().AddArray(data)
         image.GetCellData().AddArray(cellData)
@@ -273,18 +270,8 @@ class TestSurferGridReader(unittest.TestCase):
     """
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
-        self.fname = os.path.join(self.test_dir, 'bouguer_alps_egm08.grd')
+        self.fname = os.path.join(os.path.dirname(__file__), 'data/surfer-grid.grd')
 
-        import sys
-
-        if sys.version_info[0] >= 3:
-            from urllib.request import urlretrieve
-        else:
-            from urllib import urlretrieve
-
-        urlretrieve('https://gist.github.com/leouieda/6023922/raw/' \
-                        '948b0acbadb18e6ad49efe2092d9d9518b247780/' \
-                        'bouguer_alps_egm08.grd', filename=self.fname)
 
     def tearDown(self):
         # Remove the test data directory after the test
@@ -308,8 +295,7 @@ class TestSurferGridReader(unittest.TestCase):
         writer = WriteImageDataToSurfer()
         fname = os.path.join(self.test_dir, 'test-writer.grd')
         writer.SetFileName(fname)
-        writer.SetInputArrayToProcess(0, 0, 0, 0, 'foo')
-        writer.Write(img)
+        writer.Write(img, 'foo')
         # Read again and compare
         reader = SurferGridReader()
         reader.AddFileName(fname)
@@ -378,3 +364,47 @@ class TestExtractTopography(unittest.TestCase):
                 self.fail(msg='Non-testable cell encountered')
 
         return
+
+
+
+class TestCellCenterWriter(unittest.TestCase):
+    """
+    Test the `WriteCellCenterData`
+    """
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp()
+        self.fname = os.path.join(self.test_dir, 'test.txt')
+
+
+    def tearDown(self):
+        # Remove the test data directory after the test
+        shutil.rmtree(self.test_dir)
+        return
+
+
+    def test(self):
+        """`SurferGridReader` and `WriteImageDataToSurfer`: Test reader and writer for Surfer format"""
+        # create some input datasets
+        grid0 = PVGeo.model_build.CreateTensorMesh().Apply()
+        grid1 = PVGeo.model_build.CreateEvenRectilinearGrid().Apply()
+
+        # make a composite dataset
+        comp = vtk.vtkMultiBlockDataSet()
+        comp.SetBlock(0, grid0)
+        comp.SetBlock(1, grid1)
+
+
+        # test the wirter
+        writer = WriteCellCenterData()
+        fname = os.path.join(self.fname)
+        writer.SetFileName(fname)
+        writer.Write(comp)
+
+###############################################################################
+###############################################################################
+###############################################################################
+if __name__ == '__main__':
+    unittest.main()
+###############################################################################
+###############################################################################
+###############################################################################

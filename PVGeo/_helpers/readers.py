@@ -4,9 +4,12 @@ These are helpers specifically for the file readers for private use only.
 """
 __all__ = [
     'getVTKtype',
+    'converStringArray',
+    'ConvertArray',
     'placeArrInTable',
     'getdTypes',
-    'cleanDataNm'
+    'cleanDataNm',
+    'createModifiedCallback',
 ]
 
 import numpy as np
@@ -14,6 +17,7 @@ from vtk.util import numpy_support as nps
 import vtk
 import os
 from . import errors as _helpers
+from .arrays import numToVTK
 
 def getVTKtype(typ):
     """This looks up the VTK type for a give python data type.
@@ -46,11 +50,12 @@ def ConvertArray(arr):
     Note:
         this converts the data array but does not set a name. The name must be set for this data array to be added to a vtkDataSet ``array.SetName('Data')``
     """
+    arr = np.ascontiguousarray(arr)
     typ = getVTKtype(arr.dtype)
     if typ is 13:
         VTK_data = converStringArray(arr)
     else:
-        VTK_data = nps.numpy_to_vtk(num_array=arr, deep=True, array_type=typ)
+        VTK_data = numToVTK(arr, array_type=typ)
     return VTK_data
 
 
@@ -119,3 +124,14 @@ def cleanDataNm(dataNm, FileName):
     if dataNm is None or dataNm == '':
         dataNm = os.path.splitext(os.path.basename(FileName))[0]
     return dataNm
+
+
+def createModifiedCallback(anobject):
+    import weakref
+    weakref_obj = weakref.ref(anobject)
+    anobject = None
+    def _markmodified(*args, **kwars):
+        o = weakref_obj()
+        if o is not None:
+            o.Modified()
+    return _markmodified

@@ -1,6 +1,8 @@
 __all__ = [
     'AlgorithmBase',
+    'ReaderBaseBase',
     'ReaderBase',
+    'FilterBase',
     'FilterPreserveTypeBase',
     'TwoFileReaderBase',
     'WriterBase',
@@ -12,8 +14,10 @@ __displayname__ = 'Base Classes'
 from . import _helpers
 
 # Outside Imports:
+import vtk # NOTE: This is the first import executed in the package! Keep here!!
 import vtk.util.vtkAlgorithm as valg #import VTKPythonAlgorithmBase
 import numpy as np
+import warnings
 
 ###############################################################################
 
@@ -24,19 +28,21 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
 
     * `vtkPythonAlgorithm is great`_
     * A VTK pipeline primer `(part 1)`_, `(part 2)`_, and `(part 3)`_
+    * `ParaView Python Docs`_
 
     .. _vtkAlgorithm: https://www.vtk.org/doc/nightly/html/classvtkAlgorithm.html
     .. _vtkPythonAlgorithm is great: https://blog.kitware.com/vtkpythonalgorithm-is-great/
     .. _(part 1): https://blog.kitware.com/a-vtk-pipeline-primer-part-1/
     .. _(part 2): https://blog.kitware.com/a-vtk-pipeline-primer-part-2/
     .. _(part 3): https://blog.kitware.com/a-vtk-pipeline-primer-part-3/
+    .. _ParaView Python Docs: https://www.paraview.org/ParaView/Doc/Nightly/www/py-doc/paraview.util.vtkAlgorithm.html
     """
     __displayname__ = 'Algorithm Base'
-    __type__ = 'base'
+    __category__ = 'base'
 
     def __init__(self,
                 nInputPorts=1, inputType='vtkDataSet',
-                nOutputPorts=1, outputType='vtkTable'):
+                nOutputPorts=1, outputType='vtkTable', **kwargs):
         valg.VTKPythonAlgorithmBase.__init__(self,
             nInputPorts=nInputPorts, inputType=inputType,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -69,22 +75,17 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
 
 
 ###############################################################################
-
-# Base Reader
-class ReaderBase(AlgorithmBase):
+# Base Base Reader
+class ReaderBaseBase(AlgorithmBase):
     """A base class for inherrited functionality common to all reader algorithms
     """
-    __displayname__ = 'Reader Base'
-    __type__ = 'base'
+    __displayname__ = 'Reader Base Base'
+    __category__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType,
-            **kwargs)
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
-        # For the VTK/ParaView pipeline
-        self.__dt = kwargs.get('dt', 1.0)
-        self.__timesteps = None
         # For the reader
         self.__fileNames = kwargs.get('filenames', [])
         # To know whether or not the read needs to perform
@@ -109,22 +110,6 @@ class ReaderBase(AlgorithmBase):
         if readAgain: self.__needToRead = readAgain
         AlgorithmBase.Modified(self)
 
-    def _UpdateTimeSteps(self):
-        """For internal use only: appropriately sets the timesteps.
-        """
-        self.__timesteps = _helpers.UpdateTimeSteps(self, self.__fileNames, self.__dt)
-        return 1
-
-    #### Algorithm Methods ####
-
-    def RequestInformation(self, request, inInfo, outInfo):
-        """This is a conveience method that should be overwritten when needed.
-        This will handle setting the timesteps appropriately based on the number
-        of file names when the pipeline needs to know the time information.
-        """
-        self._UpdateTimeSteps()
-        return 1
-
     #### Methods for performing the read ####
     # These are meant to be overwritten by child classes
 
@@ -138,18 +123,6 @@ class ReaderBase(AlgorithmBase):
         raise NotImplementedError()
 
     #### Seters and Geters ####
-
-    def GetTimestepValues(self):
-        """Use this in ParaView decorator to register timesteps on the pipeline.
-        """
-        return self.__timesteps.tolist() if self.__timesteps is not None else None
-
-    def SetTimeDelta(self, dt):
-        """An advanced property to set the time step in seconds.
-        """
-        if dt != self.__dt:
-            self.__dt = dt
-            self.Modified()
 
     def ClearFileNames(self):
         """Use to clear file names of the reader.
@@ -193,19 +166,69 @@ class ReaderBase(AlgorithmBase):
 class FilterBase(AlgorithmBase):
     """A base class for implementing filters which holds several convienace methods"""
     __displayname__ = 'Filter Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self,
         nInputPorts=1, inputType='vtkDataSet',
-        nOutputPorts=1, outputType='vtkPolyData'):
+        nOutputPorts=1, outputType='vtkPolyData', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=nInputPorts, inputType=inputType,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
     def Apply(self, inputDataObject):
         self.SetInputDataObject(inputDataObject)
         self.Update()
         return self.GetOutput()
 
+
+
+###############################################################################
+# Base Reader
+class ReaderBase(ReaderBaseBase):
+    """A base class for inherrited functionality common to all reader algorithms
+    that need to handle a time series.
+    """
+    __displayname__ = 'Reader Base: Time Varying'
+    __category__ = 'base'
+    def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
+        ReaderBaseBase.__init__(self,
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+        # Attributes are namemangled to ensure proper setters/getters are used
+        # For the VTK/ParaView pipeline
+        self.__dt = kwargs.get('dt', 1.0)
+        self.__timesteps = None
+
+
+    def _UpdateTimeSteps(self):
+        """For internal use only: appropriately sets the timesteps.
+        """
+        if len(self.GetFileNames()) > 1:
+            self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetFileNames(), self.__dt)
+        return 1
+
+    #### Algorithm Methods ####
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        """This is a conveience method that should be overwritten when needed.
+        This will handle setting the timesteps appropriately based on the number
+        of file names when the pipeline needs to know the time information.
+        """
+        self._UpdateTimeSteps()
+        return 1
+
+
+    #### Seters and Geters ####
+
+    def GetTimestepValues(self):
+        """Use this in ParaView decorator to register timesteps on the pipeline.
+        """
+        return self.__timesteps.tolist() if self.__timesteps is not None else None
+
+    def SetTimeDelta(self, dt):
+        """An advanced property to set the time step in seconds.
+        """
+        if dt != self.__dt:
+            self.__dt = dt
+            self.Modified()
 
 
 ###############################################################################
@@ -216,11 +239,11 @@ class FilterPreserveTypeBase(FilterBase):
     their arbitrary input.
     """
     __displayname__ = 'Filter Preserve Type Base'
-    __type__ = 'base'
-    def __init__(self):
+    __category__ = 'base'
+    def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkDataObject',
-            nOutputPorts=1)
+            nOutputPorts=1, **kwargs)
 
     # THIS IS CRUCIAL to preserve data type through filter
     def RequestDataObject(self, request, inInfo, outInfo):
@@ -240,7 +263,7 @@ class TwoFileReaderBase(AlgorithmBase):
     One meta-data file and a series of data files.
     """
     __displayname__ = 'Two File Reader Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
@@ -383,10 +406,25 @@ class TwoFileReaderBase(AlgorithmBase):
 
 
 class WriterBase(AlgorithmBase):
+    __displayname__ = 'Writer Base'
+    __category__ = 'base'
     def __init__(self, nInputPorts=1, inputType='vtkPolyData', **kwargs):
         AlgorithmBase.__init__(self, nInputPorts=nInputPorts, inputType=inputType,
                                      nOutputPorts=0)
         self.__filename = kwargs.get('filename', None)
+        self.__fmt = '%.9e'
+        # For composite datasets: not always used
+        self.__blockfilenames = None
+        self.__composite = False
+
+
+    def FillInputPortInformation(self, port, info):
+        """Allows us to save composite datasets as well.
+        NOTE: I only care about ``vtkMultiBlockDataSet``s
+        """
+        info.Set(self.INPUT_REQUIRED_DATA_TYPE(), self.InputType)
+        info.Append(self.INPUT_REQUIRED_DATA_TYPE(), 'vtkMultiBlockDataSet') # vtkCompositeDataSet
+        return 1
 
 
     def SetFileName(self, fname):
@@ -413,7 +451,73 @@ class WriterBase(AlgorithmBase):
         self.Modified()
         self.Update()
 
+    def PerformWriteOut(self, inputDataObject, filename):
+        """This method must be implemented. This is automatically called by
+        ``RequestData`` for single inputs or composite inputs."""
+        raise NotImplementedError('PerformWriteOut must be implemented!')
+
     def Apply(self, inputDataObject):
         self.SetInputDataObject(inputDataObject)
         self.Modified()
         self.Update()
+
+    def SetFormat(self, fmt):
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
+        if self.__fmt != fmt and isinstance(fmt, str):
+            self.__fmt = fmt
+            self.Modified()
+
+    def GetFormat(self):
+        return self.__fmt
+
+    #### Following methods are for composite datasets ####
+
+    def UseComposite(self):
+        """True if input dataset is a composite dataset"""
+        return self.__composite
+
+    def SetBlockFileNames(self, n):
+        """Gets a list of filenames based on user input filename and creates a
+        numbered list of filenames for the reader to save out. Assumes the
+        filename has an extension set already.
+        """
+        number = n
+        count = 0
+        while (number > 0):
+            number = number // 10
+            count = count + 1
+        count = '%d' % count
+        identifier = '_%.' + count + 'd'
+        blocknum = [identifier % i for i in range(n)]
+        # Check the file extension:
+        ext = self.GetFileName().split('.')[-1]
+        basename = self.GetFileName().replace('.%s' % ext, '')
+        self.__blockfilenames = [basename + '%s.%s' % (blocknum[i], ext) for i in range(n)]
+        return self.__blockfilenames
+
+    def GetBlockFileName(self, idx):
+        return self.__blockfilenames[idx]
+
+
+    def RequestData(self, request, inInfoVec, outInfoVec):
+        """Subclasses must implement a ``PerformWriteOut`` method that takes an
+        input data object and a filename. This method will automatically handle
+        composite data sets.
+        """
+        inp = self.GetInputData(inInfoVec, 0, 0)
+        if isinstance(inp, vtk.vtkMultiBlockDataSet):
+            self.__composite = True
+        # Handle composite datasets. NOTE: This only handles vtkMultiBlockDataSet
+        if self.__composite:
+            num = inp.GetNumberOfBlocks()
+            self.SetBlockFileNames(num)
+            for i in range(num):
+                data = inp.GetBlock(i)
+                if data.IsTypeOf(self.InputType):
+                    self.PerformWriteOut(data, self.GetBlockFileName(i))
+                else:
+                    warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
+        # Handle single input dataset
+        else:
+            self.PerformWriteOut(inp, self.GetFileName())
+        return 1

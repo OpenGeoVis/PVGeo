@@ -8,6 +8,7 @@ __all__ = [
     'addArray',
     'getSelectedArray',
     #'GetDecimalPlaces',
+    'SearchForArray',
 ]
 
 import vtk
@@ -15,7 +16,7 @@ import numpy as np
 from vtk.util import numpy_support as nps
 from . import errors as _helpers
 
-def numToVTK(arr, name):
+def numToVTK(arr, name=None, deep=0, array_type=None):
     """Converts a 1D numpy array to a VTK data array given a nameself.
 
     Args:
@@ -25,8 +26,10 @@ def numToVTK(arr, name):
     Return:
         vtkDataArray : a converted data array
     """
-    c = nps.numpy_to_vtk(num_array=arr, deep=True)
-    c.SetName(name)
+    arr = np.ascontiguousarray(arr)
+    c = nps.numpy_to_vtk(num_array=arr, deep=deep, array_type=array_type)
+    if name:
+        c.SetName(name)
     return c
 
 
@@ -193,6 +196,48 @@ def addArray(pdo, field, vtkArray):
         raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
     return pdo
 
+def _getData(pdi, field):
+    """Gets data field from input vtkDataObject"""
+    data = None
+    try:
+        # Point Data
+        if field == 0:
+            data = pdi.GetPointData()
+        # Cell Data:
+        elif field == 1:
+            data = pdi.GetCellData()
+        # Field Data:
+        elif field == 2:
+            data = pdi.GetFieldData()
+        # Row Data:
+        elif field == 6:
+            data = pdi.GetRowData()
+        else:
+            raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+    except AttributeError:
+        raise _helpers.PVGeoError('Input data does not have field type `%d`.' % field)
+    return data
+
+
+def getArray(pdi, field, name):
+    """Gets an array from a vtkDataObject given its field association and name.
+
+    Notes:
+        - Point Data: 0
+        - Cell Data: 1
+        - Field Data: 2
+        - Row Data: 6
+
+    Args:
+        pdi (vtkDataObject) : the input data object
+        field (int) : the field type id
+        name (str) : the data array name
+
+    Return:
+        vtkDataObject: the output data object
+    """
+    data = _getData(pdi, field)
+    return data.GetArray(name)
 
 # def GetDecimalPlaces(arr, barrier=6):
 #     arr = np.array(arr.flatten(), dtype=str)
@@ -204,3 +249,26 @@ def addArray(pdo, field, vtkArray):
 #     # Now do not let exceed barrier
 #     if num > barrier: return barrier
 #     return num
+
+
+def SearchForArray(pdi, name):
+
+    def _SearchField(field):
+        data = _getData(pdi, field)
+        for i in range(data.GetNumberOfArrays()):
+            if data.GetArrayName(i) == name:
+                return data.GetArray(i)
+        return None
+
+    fields = [0, 1, 2, 6]
+    for field in fields:
+        try:
+            arr = _SearchField(field)
+        except _helpers.PVGeoError:
+            continue
+        if arr is not None:
+            # We found it!
+            return arr, field
+
+    raise _helpers.PVGeoError('Array `%s` not found in input data.' % name)
+    return None
