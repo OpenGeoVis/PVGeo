@@ -3,14 +3,17 @@
 __all__ = [
     'SurferGridReader',
     'WriteImageDataToSurfer',
+    'EsriGridReader'
 ]
 
 # NOTE: Surfer no data value: 1.70141E+38
 
 import vtk
 from vtk.util import numpy_support as nps
-import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
+import numpy as np
+import pandas as pd
+from io import StringIO
 
 # Import Helpers:
 from ..base import WriterBase
@@ -58,12 +61,14 @@ class SurferGridReader(DelimitedTextReader):
         return [self.__dataName], content[5::]
 
 
-    def _FileContentsToDataArray(self, contents):
-        """Puts Surfer file contents (Z-values) into a 1D array
+    def _FileContentsToDataFrame(self, contents):
+        """Creates a dataframe with a sinlge array for the file data.
         """
         data = []
         for content in contents:
-            data.append(np.fromiter((float(s) for line in content for s in line.split()), dtype=float))
+            arr = np.fromiter((float(s) for line in content for s in line.split()), dtype=float)
+            df = pd.DataFrame(data=arr, columns=[self.GetDataName()])
+            data.append(df)
         return data
 
     def _GetRawData(self, idx=0):
@@ -104,7 +109,7 @@ class SurferGridReader(DelimitedTextReader):
         output.SetDimensions(self.__nx, self.__ny, 1)
 
         # Now add data values as point data
-        data = self._GetRawData(idx=i).reshape((self.__nx, self.__ny)).flatten(order='F')
+        data = self._GetRawData(idx=i).values.reshape((self.__nx, self.__ny)).flatten(order='F')
         vtkarr = _helpers.numToVTK(data)
         vtkarr.SetName(self.__dataName)
         output.GetPointData().AddArray(vtkarr)
@@ -213,3 +218,106 @@ class WriteImageDataToSurfer(WriterBase):
                 self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Modified()
         self.Update()
+
+###############################################################################
+
+
+class EsriGridReader(DelimitedTextReader):
+    """See details: https://en.wikipedia.org/wiki/Esri_grid
+    """
+    __displayname__ = 'Esri Grid Reader'
+    __type__ = 'reader'
+    def __init__(self, outputType='vtkImageData', **kwargs):
+        DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
+        # These are attributes the derived from file contents:
+        self.SetDelimiter(' ')
+        self.__nx = None
+        self.__ny = None
+        self.__xo = None
+        self.__yo = None
+        self.__cellsize = None
+        self.__dataName = 'Data'
+        self.NODATA_VALUE = -9999
+
+    def _ExtractHeader(self, content):
+        try:
+            self.__nx = int(content[0].split()[1])
+            self.__ny = int(content[1].split()[1])
+            self.__xo = float(content[2].split()[1])
+            self.__yo = float(content[3].split()[1])
+            self.__cellsize = float(content[4].split()[1])
+            self.NODATA_VALUE = float(content[5].split()[1])
+        except ValueError:
+            raise _helpers.PVGeoError('This file is not in proper Esri ASCII Grid format.')
+        return [self.__dataName], content[6::]
+
+    def _FileContentsToDataFrame(self, contents):
+        """Creates a dataframe with a sinlge array for the file data.
+        """
+        data = []
+        for content in contents:
+            arr = np.fromiter((float(s) for line in content for s in line.split()), dtype=float)
+            df = pd.DataFrame(data=arr, columns=[self.GetDataName()])
+            data.append(df)
+        return data
+
+
+    def _GetRawData(self, idx=0):
+        """This will return the proper data for the given timestep.
+        This method handles Surfer's NaN data values and checkes the value range
+        """
+        data =  self._data[idx].values.astype(np.float)
+        nans = np.argwhere(data == self.NODATA_VALUE)
+        # if np.any(nans):
+        #     data = np.ma.masked_where(nans, data)
+        data[nans] = np.nan
+        return data.flatten()
+
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to get data for current timestep and populate the output data object.
+        """
+        # Get output:
+        output = self.GetOutputData(outInfo, 0)
+
+        if self.NeedToRead():
+            self._ReadUpFront()
+
+        # Get requested time index
+        i = _helpers.GetRequestedTime(self, outInfo)
+
+        # Build the data object
+        output.SetOrigin(self.__xo, self.__yo, 0.0)
+        output.SetSpacing(self.__cellsize, self.__cellsize, self.__cellsize)
+        output.SetDimensions(self.__nx, self.__ny, 1)
+
+        # Now add data values as point data
+        data = self._GetRawData(idx=i).reshape((self.__nx, self.__ny)).flatten(order='F')
+        vtkarr = nps.numpy_to_vtk(data)
+        vtkarr.SetName(self.__dataName)
+        output.GetPointData().AddArray(vtkarr)
+
+        return 1
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to set grid extents.
+        """
+        if self.NeedToRead():
+            self._ReadUpFront()
+        # Call parent to handle time stuff
+        DelimitedTextReader.RequestInformation(self, request, inInfo, outInfo)
+        # Now set whole output extent
+        info = outInfo.GetInformationObject(0)
+        # Set WHOLE_EXTENT: This is absolutely necessary
+        ext = (0,self.__nx-1, 0,self.__ny-1, 0,1-1)
+        info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
+        return 1
+
+    def SetDataName(self, dataName):
+        if self.__dataName != dataName:
+            self.__dataName = dataName
+            self.Modified(readAgain=False)
+
+    def GetDataName(self):
+        return self.__dataName

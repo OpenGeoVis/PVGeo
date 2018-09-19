@@ -197,3 +197,25 @@ class PVGeoWriteCellCenterData(WriteCellCenterData):
         WriteCellCenterData.SetDelimiter(self, delimiter)
 
 ###############################################################################
+
+
+@smproxy.reader(name="PVGeoEsriGridReader",
+       label="PVGeo: Esri ASCII Grid Reader",
+       extensions="asc dem txt",
+       file_description="Surfer Grid")
+class PVGeoSurferGridReader(EsriGridReader):
+    def __init__(self):
+        EsriGridReader.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+    def AddFileName(self, fname):
+        EsriGridReader.AddFileName(self, fname)
+
+    @smproperty.stringvector(name='DataName', default_values='Data')
+    def SetDataName(self, dataName):
+        EsriGridReader.SetDataName(self, dataName)
+
+
+###############################################################################
