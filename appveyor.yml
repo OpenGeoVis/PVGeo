@@ -31,7 +31,8 @@ install:
   - conda info -a
   - python setup.py install
   - python -m PVGeo install echo
-  - pip install -r requirements.txt
+  - pip install -r requirements_win.txt
+  - conda install vtk=8.1.0
 
 
 test_script:

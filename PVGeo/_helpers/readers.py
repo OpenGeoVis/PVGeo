@@ -6,6 +6,7 @@ __all__ = [
     'getVTKtype',
     'converStringArray',
     'ConvertArray',
+    'DataFrameToTable',
     'placeArrInTable',
     'getdTypes',
     'cleanDataNm',
@@ -13,6 +14,7 @@ __all__ = [
 ]
 
 import numpy as np
+import pandas as pd
 from vtk.util import numpy_support as nps
 import vtk
 import os
@@ -50,6 +52,8 @@ def ConvertArray(arr):
     Note:
         this converts the data array but does not set a name. The name must be set for this data array to be added to a vtkDataSet ``array.SetName('Data')``
     """
+    if arr.dtype is np.dtype('O'):
+        arr = arr.astype('|S')
     arr = np.ascontiguousarray(arr)
     typ = getVTKtype(arr.dtype)
     if typ is 13:
@@ -57,6 +61,17 @@ def ConvertArray(arr):
     else:
         VTK_data = numToVTK(arr, array_type=typ)
     return VTK_data
+
+
+def DataFrameToTable(df, pdo):
+    """Converts a pandas DataFrame to a vtkTable"""
+    if not isinstance(df, pd.DataFrame):
+        raise PVGeoError('Input is not a pandas DataFrame')
+    for key in df.keys():
+        VTK_data = ConvertArray(df[key].values)
+        VTK_data.SetName(key)
+        pdo.AddColumn(VTK_data)
+    return pdo
 
 
 def placeArrInTable(ndarr, titles, pdo):

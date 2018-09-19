@@ -4,6 +4,13 @@ __all__ = [
 ]
 
 import numpy as np
+import pandas as pd
+
+import sys
+if sys.version_info < (3,):
+    from StringIO import StringIO
+else:
+    from io import StringIO
 
 # Import Helpers:
 from ..base import ReaderBase
@@ -37,9 +44,15 @@ class DelimitedTextReader(ReaderBase):
             return None
         return self.__delimiter
 
+    def GetSplitOnWhiteSpace(self):
+        return self.__useTab
+
     #### Methods for performing the read ####
 
     def _GetFileContents(self, idx=None):
+        """This grabs the lines of the input data file as a string array. This
+        allows us to load the file contents, parse the header then use numpy or
+        pandas to parse the data."""
         if idx is not None:
             fileNames = [self.GetFileNames(idx=idx)]
         else:
@@ -70,7 +83,8 @@ class DelimitedTextReader(ReaderBase):
         return titles, content[idx::]
 
     def _ExtractHeaders(self, contents):
-        """Should NOT be overriden.
+        """Should NOT be overriden. This is a convienance methods to iteratively
+        get all file contents. Your should override ``_ExtractHeader``.
         """
         ts = []
         for i in range(len(contents)):
@@ -84,12 +98,19 @@ class DelimitedTextReader(ReaderBase):
         return ts[0], contents
 
 
-    def _FileContentsToDataArray(self, contents):
-        """Should NOT need to be overriden
+    def _FileContentsToDataFrame(self, contents):
+        """Should NOT need to be overriden. After ``_ExtractHeaders`` handles
+        removing the file header from the file contents, this method will parse
+        the remainder of the contents into a pandas DataFrame with column names
+        generated from the titles resulting from in ``_ExtractHeaders``.
         """
         data = []
         for content in contents:
-            data.append(np.genfromtxt((line.encode('utf8') for line in content), delimiter=self._GetDeli(), dtype=None))
+            if self.GetSplitOnWhiteSpace():
+                df = pd.read_csv(StringIO("\n".join(content)), names=self.GetTitles(), delim_whitespace=self.GetSplitOnWhiteSpace())
+            else:
+                df = pd.read_csv(StringIO("\n".join(content)), names=self.GetTitles(), sep=self._GetDeli())
+            data.append(df)
         return data
 
     def _ReadUpFront(self):
@@ -98,14 +119,14 @@ class DelimitedTextReader(ReaderBase):
         # Perform Read
         contents = self._GetFileContents()
         self.__titles, contents = self._ExtractHeaders(contents)
-        self._data = self._FileContentsToDataArray(contents)
+        self._data = self._FileContentsToDataFrame(contents)
         self.NeedToRead(flag=False)
         return 1
 
     #### Methods for accessing the data read in #####
 
     def _GetRawData(self, idx=0):
-        """This will return the proper data for the given timestep.
+        """This will return the proper data for the given timestep as a dataframe
         """
         return self._data[idx]
 
@@ -113,7 +134,7 @@ class DelimitedTextReader(ReaderBase):
     #### Algorithm Methods ####
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used b pipeline to get data for current timestep and populate the output data object.
+        """Used by pipeline to get data for current timestep and populate the output data object.
         """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
@@ -122,7 +143,7 @@ class DelimitedTextReader(ReaderBase):
         if self.NeedToRead():
             self._ReadUpFront()
         # Generate the data object
-        _helpers.placeArrInTable(self._GetRawData(idx=i), self.__titles, output)
+        _helpers.DataFrameToTable(self._GetRawData(idx=i), output)
         return 1
 
 
