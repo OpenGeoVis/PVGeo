@@ -13,7 +13,13 @@ from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np
 import pandas as pd
-from io import StringIO
+
+import sys
+if sys.version_info < (3,):
+    from StringIO import StringIO
+else:
+    from io import StringIO
+
 
 # Import Helpers:
 from ..base import WriterBase
@@ -293,7 +299,7 @@ class EsriGridReader(DelimitedTextReader):
         output.SetDimensions(self.__nx, self.__ny, 1)
 
         # Now add data values as point data
-        data = self._GetRawData(idx=i).reshape((self.__nx, self.__ny)).flatten(order='F')
+        data = self._GetRawData(idx=i).flatten(order='F')
         vtkarr = nps.numpy_to_vtk(data)
         vtkarr.SetName(self.__dataName)
         output.GetPointData().AddArray(vtkarr)
