@@ -63,6 +63,23 @@ class PVGeoCombineTables(CombineTables):
         CombineTables.__init__(self)
 
 
+###############################################################################
+
+
+# Split Table on Array
+@smproxy.filter(name='PVGeoSplitTableOnArray', label='Split Table On Array')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
+class PVGeoSplitTableOnArray(SplitTableOnArray):
+    def __init__(self):
+        SplitTableOnArray.__init__(self)
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return SplitTableOnArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+
 
 
 
@@ -387,6 +404,32 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
 ###############################################################################
 
 
+@smproxy.filter(name='PVGeoSlideSliceAlongPoints', label='Slide Slice Along Points')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Data Set", port_index=1)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+@smproperty.input(name="Points", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=False)
+class PVGeoSlideSliceAlongPoints(SlideSliceAlongPoints):
+    def __init__(self):
+        SlideSliceAlongPoints.__init__(self)
+
+    @smproperty.intvector(name="Location", default_values=50)
+    @smdomain.intrange(min=0, max=99)
+    def SetLocation(self, loc):
+        SlideSliceAlongPoints.SetLocation(self, loc)
+
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Neareast Nbr Approx',
+        command='SetUseNearestNbr', default_values=False,
+        help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
+    def SetUseNearestNbr(self, flag):
+        SlideSliceAlongPoints.SetUseNearestNbr(self, flag)
+
+###############################################################################
+
+
 @smproxy.filter(name='PVGeoRotatePoints', label='Rotate Coordinates')
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
@@ -495,6 +538,20 @@ class PVGeoExtractCellCenters(ExtractCellCenters):
 ###############################################################################
 
 
+# Extract Cell Centers
+@smproxy.filter(name='PVGeoAppendCellCenters', label='Append Cell Centers')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=True)
+class PVGeoAppendCellCenters(AppendCellCenters):
+    def __init__(self):
+        AppendCellCenters.__init__(self)
+
+
+###############################################################################
+
+
 # IterateOverPoints
 @smproxy.filter(name='PVGeoIterateOverPoints', label='Iterate Over Points')
 @smhint.xml('''<ShowInMenu category="%s"/>
@@ -542,3 +599,22 @@ class PVGeoConvertUnits(ConvertUnits):
         ConvertUnits.SetConversion(self, key)
 
 ###############################################################################
+
+
+@smproxy.filter(name='PVGeoLonLatToUTM', label='LonLat To UTM')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
+class PVGeoLonLatToUTM(LonLatToUTM):
+    def __init__(self):
+        LonLatToUTM.__init__(self)
+
+    @smproperty.intvector(name="Zone", default_values=11)
+    @smdomain.intrange(min=1, max=60)
+    def SetZone(self, zone):
+        LonLatToUTM.SetZone(self, zone)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Ellps', command='SetEllps', labels=LonLatToUTM.GetAvailableEllps(), help='This will set the ellps.'))
+    def SetEllps(self, ellps):
+        LonLatToUTM.SetEllps(self, ellps)

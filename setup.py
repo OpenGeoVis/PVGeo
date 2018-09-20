@@ -31,6 +31,7 @@ setuptools.setup(
         'codecov==2.0.15',
         'pandas>=0.23.4',
         'mock>=2.0.0',
+        'pyproj>=1.9',
     ],
     classifiers=(
         "Programming Language :: Python",

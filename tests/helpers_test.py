@@ -53,6 +53,11 @@ class TestDataFrameConversions(unittest.TestCase):
             arr = wtbl.RowData[name]
             self.assertTrue(np.allclose(arr, df[name].values, rtol=RTOL))
 
+        # Now test backwards compatability
+        dfo = _helpers.TableToDataFrame(table)
+        self.assertTrue(df.equals(dfo))
+        return
+
 
 
 

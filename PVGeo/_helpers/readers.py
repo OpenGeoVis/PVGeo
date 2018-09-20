@@ -7,6 +7,7 @@ __all__ = [
     'converStringArray',
     'ConvertArray',
     'DataFrameToTable',
+    'TableToDataFrame',
     'placeArrInTable',
     'getdTypes',
     'cleanDataNm',
@@ -16,6 +17,7 @@ __all__ = [
 import numpy as np
 import pandas as pd
 from vtk.util import numpy_support as nps
+from vtk.numpy_interface import dataset_adapter as dsa
 import vtk
 import os
 from . import errors as _helpers
@@ -63,15 +65,30 @@ def ConvertArray(arr):
     return VTK_data
 
 
-def DataFrameToTable(df, pdo):
+def DataFrameToTable(df, pdo=None):
     """Converts a pandas DataFrame to a vtkTable"""
     if not isinstance(df, pd.DataFrame):
         raise PVGeoError('Input is not a pandas DataFrame')
+    if pdo is None:
+        pdo = vtk.vtkTable()
     for key in df.keys():
         VTK_data = ConvertArray(df[key].values)
         VTK_data.SetName(key)
         pdo.AddColumn(VTK_data)
     return pdo
+
+
+def TableToDataFrame(table):
+    """Converts a vtkTable to a pandas DataFrame"""
+    if not isinstance(table, vtk.vtkTable):
+        raise PVGeoError('Input is not a vtkTable')
+    num = table.GetNumberOfColumns()
+    names = [table.GetColumnName(i) for i in range(num)]
+    data = dsa.WrapDataObject(table).RowData
+    df = pd.DataFrame()
+    for i, n in enumerate(names):
+        df[n] = np.array(data[n])
+    return df
 
 
 def placeArrInTable(ndarr, titles, pdo):

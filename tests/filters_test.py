@@ -663,7 +663,22 @@ class TestPointsToTube(unittest.TestCase):
         self.assertEqual(10, output.GetNumberOfCells())
         self.assertEqual(10*len(self.pts), output.GetNumberOfPoints())
 
-
+###############################################################################
+#
+# class TestLonLatToUTM(unittest.TestCase):
+#     """
+#     Test the `LonLatToUTM` filter
+#     """
+#
+#     def test_conversion(self):
+#         fname = '/Users/bane/Documents/OpenGeoVis/Data/data_open/NGDC/zone11.csv'
+#         import pandas as pd
+#         data = pd.read_csv(fname)
+#         points = PointsToPolyData(data[['lon', 'lat', 'idx', 'val']])
+#         good = LonLatToUTM(zone=11).Apply(points)
+#         return
+#
+#
 # ###############################################################################
 #
 #

@@ -2,9 +2,12 @@ __all__ = [
     'CombineTables',
     'ReshapeTable',
     'ExtractArray',
+    'SplitTableOnArray',
 ]
 
 import numpy as np
+import pandas as pd
+import vtk
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
@@ -242,3 +245,73 @@ class ExtractArray(FilterBase):
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
         return self.GetOutput()
+
+
+
+###############################################################################
+
+
+
+class SplitTableOnArray(FilterBase):
+    """A filter to seperate table data based on the unique values of a given data
+    array into a ``vtkMultiBlockDataSet``.
+    """
+    __displayname__ = 'Split Table On Array'
+    __category__ = 'filter'
+    def __init__(self):
+        FilterBase.__init__(self, nInputPorts=1, inputType='vtkTable',
+                            nOutputPorts=1, outputType='vtkMultiBlockDataSet')
+        self.__inputArray = [None, None]
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        table = self.GetInputData(inInfo, 0, 0)
+        # Get number of points
+        output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
+        #### Perfrom task ####
+        # Get input array
+        field, name = self.__inputArray[0], self.__inputArray[1]
+        wtbl = dsa.WrapDataObject(table)
+        spliton = _helpers.getNumPyArray(wtbl, field, name)
+        uniq = np.unique(spliton)
+        # Split the input data based on indices
+        df = _helpers.TableToDataFrame(table)
+        blk = 0
+        output.SetNumberOfBlocks(len(uniq))
+        for val in uniq:
+            temp = _helpers.DataFrameToTable(df[df[name] == val])
+            output.SetBlock(blk, temp)
+            output.GetMetaData(blk).Set(vtk.vtkCompositeDataSet.NAME(), '{}{}'.format(name, val))
+            blk += 1
+
+        return 1
+
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
+        """
+        if self.__inputArray[0] != field:
+            self.__inputArray[0] = field
+            self.Modified()
+        if self.__inputArray[1] != name:
+            self.__inputArray[1] = name
+            self.Modified()
+        return 1
+
+
+    def Apply(self, inputDataObject, arrayName):
+        self.SetInputDataObject(inputDataObject)
+        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        self.Update()
+        return self.GetOutput()
+
+###############################################################################
