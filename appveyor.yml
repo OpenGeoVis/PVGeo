@@ -29,9 +29,11 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  #- conda install -c menpo vtk
-  - pip install -r requirements.txt
   - python setup.py install
+  - python -m PVGeo install echo
+  - pip install -r requirements_win.txt
+  - conda install vtk=8.1.0
+
 
 test_script:
   - python -c "import PVGeo; print('PVGeo Version ', PVGeo.__version__)"

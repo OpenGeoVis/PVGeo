@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.19'
+paraview_plugin_version = '1.1.26'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -218,7 +218,7 @@ class PVGeoOcTreeAppender(OcTreeAppender):
 
 @smproxy.writer(extensions="msh", file_description="UBC Tensor Mesh", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=True)
 class PVGeoWriteRectilinearGridToUBC(WriteRectilinearGridToUBC):
     def __init__(self):
         WriteRectilinearGridToUBC.__init__(self)
@@ -229,15 +229,15 @@ class PVGeoWriteRectilinearGridToUBC(WriteRectilinearGridToUBC):
         """Specify filename for the file to write."""
         WriteRectilinearGridToUBC.SetFileName(self, fname)
 
-    @smproperty.stringvector(name="Format", default_values='%18e')
+    @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteRectilinearGridToUBC.SetFormat(self, fmt)
 
 
 @smproxy.writer(extensions="msh", file_description="UBC Tensor Mesh", support_reload=False)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=False)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
 class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
     def __init__(self):
         WriteImageDataToUBC.__init__(self)
@@ -248,7 +248,7 @@ class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
         """Specify filename for the file to write."""
         WriteImageDataToUBC.SetFileName(self, fname)
 
-    @smproperty.stringvector(name="Format", default_values='%18e')
+    @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteImageDataToUBC.SetFormat(self, fmt)

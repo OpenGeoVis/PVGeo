@@ -113,7 +113,7 @@ class ManySlicesAlongPoints(_SliceBase):
         # Set number of blocks based on user choice in the selction
         output.SetNumberOfBlocks(self.GetNumberOfSlices())
         blk = 0
-        for i in range(0, numPoints - 1, numPoints/self.GetNumberOfSlices()):
+        for i in range(0, numPoints - 1, numPoints//self.GetNumberOfSlices()):
             # get normal
             pts1 = points[ptsi[i]]
             pts2 = points[ptsi[i+1]]

@@ -22,15 +22,14 @@ class WriteCellCenterData(WriterBase):
         self.__delimiter = ','
 
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
-        pdi = self.GetInputData(inInfoVec, 0, 0)
+    def PerformWriteOut(self, inputDataObject, filename):
         # Find cell centers
         filt = vtk.vtkCellCenters()
-        filt.SetInputDataObject(pdi)
+        filt.SetInputDataObject(inputDataObject)
         filt.Update()
         centers = dsa.WrapDataObject(filt.GetOutput(0)).Points
         # Get CellData
-        wpdi = dsa.WrapDataObject(pdi)
+        wpdi = dsa.WrapDataObject(inputDataObject)
         celldata = wpdi.CellData
         keys = celldata.keys()
         # Save out using numpy
@@ -44,7 +43,7 @@ class WriteCellCenterData(WriterBase):
         for i, name in enumerate(keys):
             keys[i] = name.replace(self.__delimiter, repl)
         header = ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys)
-        np.savetxt(self.GetFileName(), arr,
+        np.savetxt(filename, arr,
                    header=header,
                    delimiter=self.__delimiter,
                    fmt=self.GetFormat(),

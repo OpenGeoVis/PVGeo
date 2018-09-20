@@ -8,6 +8,7 @@ __all__ = [
     'addArray',
     'getSelectedArray',
     #'GetDecimalPlaces',
+    'SearchForArray',
 ]
 
 import vtk
@@ -195,6 +196,48 @@ def addArray(pdo, field, vtkArray):
         raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
     return pdo
 
+def _getData(pdi, field):
+    """Gets data field from input vtkDataObject"""
+    data = None
+    try:
+        # Point Data
+        if field == 0:
+            data = pdi.GetPointData()
+        # Cell Data:
+        elif field == 1:
+            data = pdi.GetCellData()
+        # Field Data:
+        elif field == 2:
+            data = pdi.GetFieldData()
+        # Row Data:
+        elif field == 6:
+            data = pdi.GetRowData()
+        else:
+            raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+    except AttributeError:
+        raise _helpers.PVGeoError('Input data does not have field type `%d`.' % field)
+    return data
+
+
+def getArray(pdi, field, name):
+    """Gets an array from a vtkDataObject given its field association and name.
+
+    Notes:
+        - Point Data: 0
+        - Cell Data: 1
+        - Field Data: 2
+        - Row Data: 6
+
+    Args:
+        pdi (vtkDataObject) : the input data object
+        field (int) : the field type id
+        name (str) : the data array name
+
+    Return:
+        vtkDataObject: the output data object
+    """
+    data = _getData(pdi, field)
+    return data.GetArray(name)
 
 # def GetDecimalPlaces(arr, barrier=6):
 #     arr = np.array(arr.flatten(), dtype=str)
@@ -206,3 +249,26 @@ def addArray(pdo, field, vtkArray):
 #     # Now do not let exceed barrier
 #     if num > barrier: return barrier
 #     return num
+
+
+def SearchForArray(pdi, name):
+
+    def _SearchField(field):
+        data = _getData(pdi, field)
+        for i in range(data.GetNumberOfArrays()):
+            if data.GetArrayName(i) == name:
+                return data.GetArray(i)
+        return None
+
+    fields = [0, 1, 2, 6]
+    for field in fields:
+        try:
+            arr = _SearchField(field)
+        except _helpers.PVGeoError:
+            continue
+        if arr is not None:
+            # We found it!
+            return arr, field
+
+    raise _helpers.PVGeoError('Array `%s` not found in input data.' % name)
+    return None

@@ -14,8 +14,10 @@ __displayname__ = 'Base Classes'
 from . import _helpers
 
 # Outside Imports:
+import vtk # NOTE: This is the first import executed in the package! Keep here!!
 import vtk.util.vtkAlgorithm as valg #import VTKPythonAlgorithmBase
 import numpy as np
+import warnings
 
 ###############################################################################
 
@@ -40,7 +42,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
 
     def __init__(self,
                 nInputPorts=1, inputType='vtkDataSet',
-                nOutputPorts=1, outputType='vtkTable'):
+                nOutputPorts=1, outputType='vtkTable', **kwargs):
         valg.VTKPythonAlgorithmBase.__init__(self,
             nInputPorts=nInputPorts, inputType=inputType,
             nOutputPorts=nOutputPorts, outputType=outputType)
@@ -78,12 +80,11 @@ class ReaderBaseBase(AlgorithmBase):
     """A base class for inherrited functionality common to all reader algorithms
     """
     __displayname__ = 'Reader Base Base'
-    __type__ = 'base'
+    __category__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType,
-            **kwargs)
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the reader
         self.__fileNames = kwargs.get('filenames', [])
@@ -168,10 +169,10 @@ class FilterBase(AlgorithmBase):
     __category__ = 'base'
     def __init__(self,
         nInputPorts=1, inputType='vtkDataSet',
-        nOutputPorts=1, outputType='vtkPolyData'):
+        nOutputPorts=1, outputType='vtkPolyData', **kwargs):
         AlgorithmBase.__init__(self,
             nInputPorts=nInputPorts, inputType=inputType,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
     def Apply(self, inputDataObject):
         self.SetInputDataObject(inputDataObject)
@@ -186,8 +187,8 @@ class ReaderBase(ReaderBaseBase):
     """A base class for inherrited functionality common to all reader algorithms
     that need to handle a time series.
     """
-    __displayname__ = 'Reader Base: Time Vatying'
-    __type__ = 'base'
+    __displayname__ = 'Reader Base: Time Varying'
+    __category__ = 'base'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBaseBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
@@ -200,7 +201,8 @@ class ReaderBase(ReaderBaseBase):
     def _UpdateTimeSteps(self):
         """For internal use only: appropriately sets the timesteps.
         """
-        self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetFileNames(), self.__dt)
+        if len(self.GetFileNames()) > 1:
+            self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetFileNames(), self.__dt)
         return 1
 
     #### Algorithm Methods ####
@@ -238,10 +240,10 @@ class FilterPreserveTypeBase(FilterBase):
     """
     __displayname__ = 'Filter Preserve Type Base'
     __category__ = 'base'
-    def __init__(self):
+    def __init__(self, **kwargs):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkDataObject',
-            nOutputPorts=1)
+            nOutputPorts=1, **kwargs)
 
     # THIS IS CRUCIAL to preserve data type through filter
     def RequestDataObject(self, request, inInfo, outInfo):
@@ -410,7 +412,19 @@ class WriterBase(AlgorithmBase):
         AlgorithmBase.__init__(self, nInputPorts=nInputPorts, inputType=inputType,
                                      nOutputPorts=0)
         self.__filename = kwargs.get('filename', None)
-        self.__fmt = '%.18e'
+        self.__fmt = '%.9e'
+        # For composite datasets: not always used
+        self.__blockfilenames = None
+        self.__composite = False
+
+
+    def FillInputPortInformation(self, port, info):
+        """Allows us to save composite datasets as well.
+        NOTE: I only care about ``vtkMultiBlockDataSet``s
+        """
+        info.Set(self.INPUT_REQUIRED_DATA_TYPE(), self.InputType)
+        info.Append(self.INPUT_REQUIRED_DATA_TYPE(), 'vtkMultiBlockDataSet') # vtkCompositeDataSet
+        return 1
 
 
     def SetFileName(self, fname):
@@ -437,16 +451,73 @@ class WriterBase(AlgorithmBase):
         self.Modified()
         self.Update()
 
+    def PerformWriteOut(self, inputDataObject, filename):
+        """This method must be implemented. This is automatically called by
+        ``RequestData`` for single inputs or composite inputs."""
+        raise NotImplementedError('PerformWriteOut must be implemented!')
+
     def Apply(self, inputDataObject):
         self.SetInputDataObject(inputDataObject)
         self.Modified()
         self.Update()
 
     def SetFormat(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.18e'``"""
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         if self.__fmt != fmt and isinstance(fmt, str):
             self.__fmt = fmt
             self.Modified()
 
     def GetFormat(self):
         return self.__fmt
+
+    #### Following methods are for composite datasets ####
+
+    def UseComposite(self):
+        """True if input dataset is a composite dataset"""
+        return self.__composite
+
+    def SetBlockFileNames(self, n):
+        """Gets a list of filenames based on user input filename and creates a
+        numbered list of filenames for the reader to save out. Assumes the
+        filename has an extension set already.
+        """
+        number = n
+        count = 0
+        while (number > 0):
+            number = number // 10
+            count = count + 1
+        count = '%d' % count
+        identifier = '_%.' + count + 'd'
+        blocknum = [identifier % i for i in range(n)]
+        # Check the file extension:
+        ext = self.GetFileName().split('.')[-1]
+        basename = self.GetFileName().replace('.%s' % ext, '')
+        self.__blockfilenames = [basename + '%s.%s' % (blocknum[i], ext) for i in range(n)]
+        return self.__blockfilenames
+
+    def GetBlockFileName(self, idx):
+        return self.__blockfilenames[idx]
+
+
+    def RequestData(self, request, inInfoVec, outInfoVec):
+        """Subclasses must implement a ``PerformWriteOut`` method that takes an
+        input data object and a filename. This method will automatically handle
+        composite data sets.
+        """
+        inp = self.GetInputData(inInfoVec, 0, 0)
+        if isinstance(inp, vtk.vtkMultiBlockDataSet):
+            self.__composite = True
+        # Handle composite datasets. NOTE: This only handles vtkMultiBlockDataSet
+        if self.__composite:
+            num = inp.GetNumberOfBlocks()
+            self.SetBlockFileNames(num)
+            for i in range(num):
+                data = inp.GetBlock(i)
+                if data.IsTypeOf(self.InputType):
+                    self.PerformWriteOut(data, self.GetBlockFileName(i))
+                else:
+                    warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
+        # Handle single input dataset
+        else:
+            self.PerformWriteOut(inp, self.GetFileName())
+        return 1

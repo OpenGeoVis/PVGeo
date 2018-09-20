@@ -7,27 +7,35 @@ Welcome to PVGeo's code docs!
 =============================
 
 
-.. image :: https://img.shields.io/pypi/v/PVGeo.svg
+.. image:: https://img.shields.io/badge/demos-grey.svg?logo=vimeo
+   :target: https://vimeo.com/user82050125)
+   :alt: Vimeo
+
+.. image:: https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website
+   :target: http://pvgeo.org
+   :alt: Website
+
+.. image:: https://img.shields.io/pypi/v/PVGeo.svg?logo=python
    :target: https://pypi.org/project/PVGeo/
    :alt: PyPI
 
-.. image :: https://api.codacy.com/project/badge/Grade/4b9e8d0ef37a4f70a2d02c0d53ed096f
+.. image:: https://api.codacy.com/project/badge/Grade/4b9e8d0ef37a4f70a2d02c0d53ed096f
    :target: https://www.codacy.com/app/banesullivan/PVGeo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenGeoVis/PVGeo&amp;utm_campaign=Badge_Grade
    :alt: Codacy Badge
 
-.. image :: http://slack.pvgeo.org/badge.svg
+.. image:: https://img.shields.io/badge/Slack-PVGeo-4B0082.svg?logo=slack
    :target: http://slack.pvgeo.org
    :alt: Slack
 
-.. image :: https://travis-ci.org/OpenGeoVis/PVGeo.svg?branch=master
+.. image:: https://img.shields.io/travis/OpenGeoVis/PVGeo/master.svg?label=build&logo=travis
    :target: https://travis-ci.org/OpenGeoVis/PVGeo
    :alt: Build Status
 
-.. image :: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master/graph/badge.svg
+.. image:: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master
    :alt: Code Coverage
 
-.. image:: https://img.shields.io/github/contributors/OpenGeoVis/PVGeo.svg
+.. image:: https://img.shields.io/github/contributors/OpenGeoVis/PVGeo.svg?logo=github&logoColor=white
    :target: https://GitHub.com/OpenGeoVis/PVGeo/graphs/contributors/
    :alt: GitHub Contributors
 

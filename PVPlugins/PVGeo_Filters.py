@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.19'
+paraview_plugin_version = '1.1.26'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -523,5 +523,22 @@ class PVGeoIterateOverPoints(IterateOverPoints):
         return IterateOverPoints.GetTimestepValues(self)
 
 
+
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoConvertUnits', label='Convert XYZ Units')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataObject"], composite_data_supported=True)
+class PVGeoConvertUnits(ConvertUnits):
+    def __init__(self):
+        ConvertUnits.__init__(self)
+
+    #### SETTERS AND GETTERS ####
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Conversion', command='SetConversion', labels=ConvertUnits.LookupConversions(True), help='This will set the spatial conversion.'))
+    def SetConversion(self, key):
+        ConvertUnits.SetConversion(self, key)
 
 ###############################################################################

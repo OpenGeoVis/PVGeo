@@ -68,7 +68,7 @@ class SGeMSGridReader(GSLibReader):
         output.SetOrigin(ox, oy, oz)
         # Use table generater and convert because its easy:
         table = vtk.vtkTable()
-        _helpers.placeArrInTable(self._GetRawData(idx=i), self.GetTitles(), table)
+        _helpers.DataFrameToTable(self._GetRawData(idx=i), table)
         # now get arrays from table and add to point data of pdo
         for i in range(table.GetNumberOfColumns()):
             output.GetPointData().AddArray(table.GetColumn(i))

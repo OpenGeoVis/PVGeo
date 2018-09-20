@@ -4,7 +4,7 @@ and ParaView.
 
 import setuptools
 
-__version__ = '1.1.19'
+__version__ = '1.1.26'
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -29,6 +29,8 @@ setuptools.setup(
         #'vtk>=8.1',
         'colour-runner==0.0.5',
         'codecov==2.0.15',
+        'pandas>=0.23.4',
+        'mock>=2.0.0',
     ],
     classifiers=(
         "Programming Language :: Python",

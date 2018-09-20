@@ -6,28 +6,44 @@ __all__ = [
     'RotationTool',
     'ExtractCellCenters',
     'IterateOverPoints',
+    'ConvertUnits',
 ]
 
 import vtk
 import numpy as np
+import pandas as pd
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
-from ..base import FilterBase
+from ..base import FilterBase, FilterPreserveTypeBase
 from .. import _helpers
 
 
 
 def PointsToPolyData(points):
-    """Create ``vtkPolyData`` from a numpy array of XYZ points
+    """Create ``vtkPolyData`` from a numpy array of XYZ points. If the points have
+    more than 3 dimensions, then all dimensions after the third will be added as attributes.
+    Assume the first three dimensions are the XYZ coordinates.
 
     Return:
         vtkPolyData : points with point-vertex cells
     """
     __displayname__ = 'Points to PolyData'
     __category__ = 'filter'
-    if points.ndim != 2:
-        points = points.reshape((-1, 3))
+    # Check if input is anything other than a NumPy array and cast it
+    # e.g. you could send a Pandas dataframe
+    keys = ['Field %d' % i for i in range(points.shape[1] - 3)]
+    if not isinstance(points, np.ndarray):
+        if isinstance(points, pd.DataFrame):
+            # If a pandas data frame, lets grab the keys
+            keys = points.keys()[3::]
+        points = np.array(points)
+    # If points are not 3D
+    if points.shape[1] < 2:
+        raise RuntimeError('Points must be 3D. Try adding a third dimension of zeros.')
+
+    atts = points[:, 3::]
+    points = points[:, 0:3]
 
     npoints = points.shape[0]
 
@@ -46,6 +62,11 @@ def PointsToPolyData(points):
     pdata = vtk.vtkPolyData()
     pdata.SetPoints(pts)
     pdata.SetVerts(vtkcells)
+
+    # Add attributes if given
+    for i, key in enumerate(keys):
+        data = _helpers.numToVTK(atts[:, i], name=key)
+        pdata.GetPointData().AddArray(data)
     return pdata
 
 
@@ -106,9 +127,20 @@ class RotationTool(object):
 
     @staticmethod
     def _GetRotationMatrix(theta):
-        return np.array([
-            [np.cos(theta), -np.sin(theta)],
-            [np.sin(theta), np.cos(theta)]])
+        xx = np.cos(theta)
+        xy = -np.sin(theta)
+        yx = np.sin(theta)
+        yy = np.cos(theta)
+        if not isinstance(theta, np.ndarray):
+            return np.array([[xx, xy],
+                             [yx, yy]])
+        # Otherwise populate arrat manually
+        mat = np.zeros((len(theta), 2, 2))
+        mat[:, 0, 0] = xx
+        mat[:, 0, 1] = xy
+        mat[:, 1, 0] = yx
+        mat[:, 1, 1] = yy
+        return mat
 
     @staticmethod
     def RotateAround(pts, theta, origin):
@@ -125,17 +157,29 @@ class RotationTool(object):
         """Rotate points around (0,0,0) given an anlge on the XY plane
         """
         rot = RotationTool._GetRotationMatrix(theta)
-        return pts.dot(rot)
+        rotated = pts.dot(rot)
+        if not isinstance(theta, np.ndarray):
+            return rotated
+        return np.swapaxes(rotated, 0, 1)
 
     @staticmethod
     def DistanceBetween(pts):
         """Gets the distance between two points
         """
-        return np.sqrt((pts[0,0] - pts[1,0])**2 + (pts[0,1] - pts[1,1])**2)
+        if pts.ndim < 3:
+            return np.sqrt((pts[0,0] - pts[1,0])**2 + (pts[0,1] - pts[1,1])**2)
+        return np.sqrt((pts[:, 0,0] - pts[:, 1,0])**2 + (pts[:, 0,1] - pts[:, 1,1])**2)
 
     @staticmethod
     def CosBetween(pts):
-        xdiff = abs(pts[0,0] - pts[1,0])
+        """Gets the cosine between two points
+        """
+        if pts.ndim < 3:
+            xdiff = abs(pts[0,0] - pts[1,0])
+            dist = RotationTool.DistanceBetween(pts)
+            return np.arccos(xdiff/dist)
+        # Otherwise we have a set of points
+        xdiff = abs(pts[:, 0,0] - pts[:, 1,0])
         dist = RotationTool.DistanceBetween(pts)
         return np.arccos(xdiff/dist)
 
@@ -239,63 +283,87 @@ class RotationTool(object):
         angles = np.arange(0.0, np.pi/2, self.RESOLUTION)
         nang = len(angles) # Number of rotations
 
+        # if pt1.ndim == pt2.ndim == 3:
+        #     # uh-oh
+        #     raise RuntimeError()
         pts = np.vstack((pt1, pt2))
 
-        for i in range(nang):
-            # TODO: eliminate this for loop
-            temp = self.Rotate(pts, angles[i])
-            # Check the angles between the points
-            c = self.CosBetween(temp)
-            dist = self.DistanceBetween(temp)
-            if abs(c - np.pi/2.0) < (1 * 10**-self.DECIMALS):
-                return 0, angles[i], dist
-            if abs(c - 0.0) < (1 * 10**-self.DECIMALS):
-                return 1, angles[i], dist
-        # Uh-oh... we reached here...
-        #- lets try again with lower precision
-        self.DECIMALS -= 1
-        if self.DECIMALS < 0:
-            self.DECIMALS = 0
-            raise _helpers.PVGeoError('No angle found. Precision too low/high.')
-        return self._ConvergeAngle(pt1, pt2)
+        rotated = self.Rotate(pts, angles) # Points rotated for all angles
+        cosbtw = self.CosBetween(rotated)
+        distbtw = self.DistanceBetween(rotated)
+        # Now find minimum
+
+        # X axis
+        xmin = np.argwhere(np.abs(cosbtw - np.pi/2.0) < (1 * 10**-self.DECIMALS)).flatten()
+        ymin = np.argwhere(np.abs(cosbtw - 0.0) < (1 * 10**-self.DECIMALS)).flatten()
+
+        # Protection to make sure we can converge
+        if len(xmin) == 0 and len(ymin) == 0:
+            # Uh-oh... lets decrease the precision
+            #- lets try again with lower precision
+            self.DECIMALS -= 1
+            if self.DECIMALS < 0:
+                self.DECIMALS = 0
+                raise _helpers.PVGeoError('No angle found.')
+            return self._ConvergeAngle(pt1, pt2)
+
+        # Figure out of the two points share the x axis or y axis and return
+        if len(xmin) > 0 and len(ymin) > 0:
+            raise RuntimeError('Invalid solution')
+        elif len(xmin) > 0:
+            xidx = np.mean(xmin, dtype=int)
+            return 0, angles[xidx], distbtw[xidx]
+        elif len(ymin) > 0:
+            yidx = np.mean(ymin, dtype=int)
+            return 1, angles[yidx], distbtw[yidx]
+        # No solution found.
+        raise _helpers.PVGeoError('No angle found. Precision too low/high.')
 
 
-    def _EstimateAngleAndSpacing(self, pts, sample=0.10):
+    def _EstimateAngleAndSpacing(self, pts, sample=.5):
         """internal use only
         """
         from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
         # Creat the indexing range for searching the points:
         num = len(pts)
         rng = np.linspace(0, num-1, num=num, dtype=int)
-        N = int(num*(1.0-sample))
-        rng = rng[0::N]
+        N = int(num*sample) + 1
+        rng = np.random.choice(rng, N)
         angles = np.zeros(len(rng))
         tree = cKDTree(pts)
         distances = [[],[]]
 
-        # Get angles
+        #######################################################################
+        #######################################################################
+        # Find nearest point
+        distall, ptsiall = tree.query(pts, k=2)
+        pt1all, pt2all = pts[ptsiall[:, 0]], pts[ptsiall[:, 1]]
+        #######################################################################
         idx = 0
         for i in rng:
-            # Find nearest point
-            dist, ptsi = tree.query(pts[i], k=2)
-            pt1 = pts[ptsi[0]]
-            pt2 = pts[ptsi[1]]
-            ax, angles[idx], dist = self._ConvergeAngle(pt1, pt2)
+            # OPTIMIZE
+            ax, angles[idx], dist = self._ConvergeAngle(pt1all[i], pt2all[i])
             distances[ax].append(dist)
             idx += 1
-
-        angle = np.average(np.unique(angles))
-        dx = np.unique(distances[0])
-        dy = np.unique(distances[1])
+        #######################################################################
+        #TODO??? angles, distances = self._ConvergeAngle(pt1all, pt2all)
+        #######################################################################
+        #######################################################################
+        dx, dy = distances[0], distances[1]
         if len(dx) == 0:
             dx = dy
         elif len(dy) == 0:
             dy = dx
-        # Now make sure only one angle was found
-        # if len(angles) > 1:
-        #     # This algorithm assumes the input data has uniform spacing throughout.
-        #     # If multiple angles were found then that assumption must be False making the input data invalid.
-        #     raise _helpers.PVGeoError('More than one angle recovered: Input data is invalid. Seek help with <info@pvgeo.org>.')
+        TOLERANCE = np.min(np.append(dx, dy)) / 2.0
+        angle = np.average(np.unique(angles))
+        dx = np.unique(np.around(dx / TOLERANCE)) * TOLERANCE
+        dy = np.unique(np.around(dy / TOLERANCE)) * TOLERANCE
+
+        # Now round to decimals
+        dx = np.around(dx, self.DECIMALS)
+        dy = np.around(dx, self.DECIMALS)
+
+        # print('Recovered: ', dx, dy)
         return angle, dx[0], dy[0]
 
 
@@ -510,3 +578,69 @@ class IterateOverPoints(FilterBase):
         """Use this in ParaView decorator to register timesteps
         """
         return self.__timesteps.tolist() if self.__timesteps is not None else None
+
+
+
+
+class ConvertUnits(FilterPreserveTypeBase):
+    """Convert points in an input data object to from meters to feet or vice versa.
+    This simply uses a ``vtkTransformFilter`` and scales input data object with
+    common conversions.
+    """
+    __displayname__ = 'Convert XYZ Units'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterPreserveTypeBase.__init__(self, **kwargs)
+        self.__conversion = 'meter_to_feet'
+
+    @staticmethod
+    def LookupConversions(getkeys=False):
+        """All Available conversions
+
+        Return:
+            dict: dictionary of conversion units
+        """
+        convs = dict(
+            meter_to_feet=3.2808399,
+            feet_to_meter=1/3.2808399,
+        )
+        if getkeys:
+            return convs.keys()
+        return convs
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Execute on pipeline"""
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        # Get number of points
+        pdo = self.GetOutputData(outInfo, 0)
+        #### Perfrom task ####
+        filt = vtk.vtkTransformFilter()
+        trans = vtk.vtkTransform()
+        trans.Scale(self.GetConversion(), self.GetConversion(), self.GetConversion())
+        filt.SetTransform(trans)
+        filt.SetInputDataObject(pdi)
+        filt.Update()
+        scaled = filt.GetOutputDataObject(0)
+        pdo.DeepCopy(scaled)
+        return 1
+
+
+
+    def SetConversion(self, key):
+        """Set the conversion via a lookup table"""
+        convs = self.LookupConversions()
+        if isinstance(key, str):
+            if key.lower() not in convs.keys():
+                raise _helpers.PVGeoError('Converion `%s` not available.' % key)
+        elif isinstance(key, int):
+            key = convs.keys()[key]
+        if self.__conversion != key:
+            self.__conversion = key
+            self.Modified()
+        return 1
+
+    def GetConversion(self):
+        """Get the conversion value"""
+        convs = self.LookupConversions()
+        return convs[self.__conversion]

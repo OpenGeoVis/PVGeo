@@ -1,5 +1,6 @@
 import unittest
 import numpy as np
+import pandas as pd
 
 # VTK imports:
 import vtk
@@ -7,6 +8,10 @@ from vtk.numpy_interface import dataset_adapter as dsa
 
 # Functionality to test:
 from PVGeo._helpers import xml
+from PVGeo import _helpers
+
+
+RTOL = 0.000001
 
 class TestTableToGrid(unittest.TestCase):
     """
@@ -26,6 +31,29 @@ class TestTableToGrid(unittest.TestCase):
         x = xml.getInputArrayXml(labels=['foo'], nInputPorts=1, numArrays=1, inputNames='Input')
 
         return
+
+
+class TestDataFrameConversions(unittest.TestCase):
+    """
+    Test the pandas DataFrames conversions to VTK data objects
+    """
+
+    def test_df_to_table(self):
+        names = ['x', 'y', 'z', 'a', 'b']
+        data = np.random.rand(100, len(names))
+        df = pd.DataFrame(data=data, columns=names)
+        table = vtk.vtkTable()
+        _helpers.DataFrameToTable(df, table)
+        wtbl = dsa.WrapDataObject(table)
+        # Now check the vtkTable
+        for i, name in enumerate(names):
+            # Check data aray names
+            self.assertEqual(table.GetColumnName(i), name)
+            # Check data contents
+            arr = wtbl.RowData[name]
+            self.assertTrue(np.allclose(arr, df[name].values, rtol=RTOL))
+
+
 
 
 ###############################################################################
