@@ -349,7 +349,7 @@ class NormalizeArray(FilterPreserveTypeBase):
     def _Normalize(self, pdi, pdo):
         """Perform normalize on a data array for any given VTK data object.
         """
-        # Get inout array
+        # Get input array
         field, name = self.__inputArray[0], self.__inputArray[1]
         #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
@@ -762,3 +762,5 @@ class PercentThreshold(FilterBase):
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
         return self.GetOutput()
+
+###############################################################################
