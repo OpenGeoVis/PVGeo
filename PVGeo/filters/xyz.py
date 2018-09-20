@@ -5,6 +5,7 @@ __all__ = [
     'ExtractPoints',
     'RotationTool',
     'ExtractCellCenters',
+    'AppendCellCenters',
     'IterateOverPoints',
     'ConvertUnits',
 ]
@@ -520,6 +521,30 @@ class ExtractCellCenters(FilterBase):
         pdo.DeepCopy(PointsToPolyData(centers))
         for i, name in enumerate(keys):
             pdo.GetPointData().AddArray(pdi.GetCellData().GetArray(name))
+        return 1
+
+
+class AppendCellCenters(FilterPreserveTypeBase):
+    def __init__(self, **kwargs):
+        FilterPreserveTypeBase.__init__(self, **kwargs)
+
+    def RequestData(self, request, inInfoVec, outInfoVec):
+        pdi = self.GetInputData(inInfoVec, 0, 0)
+        pdo = self.GetOutputData(outInfoVec, 0)
+        # Find cell centers
+        filt = vtk.vtkCellCenters()
+        filt.SetInputDataObject(pdi)
+        filt.Update()
+
+        # I use the dataset adapter/numpy interface because its easy
+        centers = dsa.WrapDataObject(filt.GetOutput()).Points
+        centers = nps.numpy_to_vtk(centers)
+        centers.SetName('Cell Centers')
+
+        # Copy input data and add cell centers as tuple array
+        pdo.DeepCopy(pdi)
+        pdo.GetCellData().AddArray(centers)
+
         return 1
 
 

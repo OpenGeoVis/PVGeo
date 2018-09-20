@@ -538,6 +538,20 @@ class PVGeoExtractCellCenters(ExtractCellCenters):
 ###############################################################################
 
 
+# Extract Cell Centers
+@smproxy.filter(name='PVGeoAppendCellCenters', label='Append Cell Centers')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=True)
+class PVGeoAppendCellCenters(AppendCellCenters):
+    def __init__(self):
+        AppendCellCenters.__init__(self)
+
+
+###############################################################################
+
+
 # IterateOverPoints
 @smproxy.filter(name='PVGeoIterateOverPoints', label='Iterate Over Points')
 @smhint.xml('''<ShowInMenu category="%s"/>
