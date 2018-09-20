@@ -22,10 +22,14 @@ from .. import _helpers
 
 
 
-def PointsToPolyData(points):
+def PointsToPolyData(points, copy_z=False):
     """Create ``vtkPolyData`` from a numpy array of XYZ points. If the points have
     more than 3 dimensions, then all dimensions after the third will be added as attributes.
     Assume the first three dimensions are the XYZ coordinates.
+
+    Args:
+        points (np.ndarray or pandas.DataFrame): The points and pointdata
+        copy_z (bool): A flag on whether to append the z values as a PointData array
 
     Return:
         vtkPolyData : points with point-vertex cells
@@ -69,6 +73,9 @@ def PointsToPolyData(points):
     for i, key in enumerate(keys):
         data = _helpers.numToVTK(atts[:, i], name=key)
         pdata.GetPointData().AddArray(data)
+    if copy_z:
+        z = _helpers.numToVTK(points[:, 2], name='Elevation')
+        pdata.GetPointData().AddArray(z)
     return pdata
 
 

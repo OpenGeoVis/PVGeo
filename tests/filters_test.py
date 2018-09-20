@@ -1,4 +1,4 @@
-import unittest
+from base import TestBase
 import numpy as np
 
 # VTK imports:
@@ -15,11 +15,12 @@ RTOL = 0.000001
 ###############################################################################
 ###############################################################################
 
-class TestCombineTables(unittest.TestCase):
+class TestCombineTables(TestBase):
     """
     Test the `CombineTables` filter
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create some input tables
         self.t0 = vtk.vtkTable()
         self.t1 = vtk.vtkTable()
@@ -64,11 +65,12 @@ class TestCombineTables(unittest.TestCase):
 ###############################################################################
 
 
-class TestReshapeTable(unittest.TestCase):
+class TestReshapeTable(TestBase):
     """
     Test the `ReshapeTable` filter
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create some input tables
         self.t0 = vtk.vtkTable()
         # Populate the tables
@@ -185,7 +187,7 @@ ROTATED_TEXT = """326819.497,4407450.636,1287.5
 
 ROTATED_POINTS = np.genfromtxt((line.encode('utf8') for line in ROTATED_TEXT.split('\n')), delimiter=',''', dtype=float)
 
-class TestRotationTool(unittest.TestCase):
+class TestRotationTool(TestBase):
     """
     Test the `RotationTool` filter
     """
@@ -201,7 +203,8 @@ class TestRotationTool(unittest.TestCase):
     # ])
 
     def setUp(self):
-        self.RTOL = 0.00001 # As higi as rotation precision can get
+        TestBase.setUp(self)
+        self.RTOL = 0.00001 # As high as rotation precision can get
         return
 
 
@@ -239,11 +242,12 @@ class TestRotationTool(unittest.TestCase):
 
 
 
-class TestRotatePoints(unittest.TestCase):
+class TestRotatePoints(TestBase):
     """
     Test the `RotatePoints` filter
     """
     def setUp(self):
+        TestBase.setUp(self)
         self.RTOL = 0.00001 # As higi as rotation precision can get
         x = np.array([0.0,1.0,0.0])
         y = np.array([0.0,0.0,1.0])
@@ -270,7 +274,7 @@ class TestRotatePoints(unittest.TestCase):
 ###############################################################################
 
 
-class TestVoxelizePoints(unittest.TestCase):
+class TestVoxelizePoints(TestBase):
     """
     Test the `VoxelizePoints` filter
     """
@@ -362,7 +366,7 @@ class TestVoxelizePoints(unittest.TestCase):
 ###############################################################################
 
 
-class TestExtractPoints(unittest.TestCase):
+class TestExtractPoints(TestBase):
     """
     Test the `ExtractPoints` filter
     """
@@ -380,12 +384,13 @@ class TestExtractPoints(unittest.TestCase):
 
 ###############################################################################
 
-class TestArrayMath(unittest.TestCase):
+class TestArrayMath(TestBase):
     """
     Test the `ArrayMath` filter
     """
 
     def setUp(self):
+        TestBase.setUp(self)
         # Create some input tables
         self.t0 = vtk.vtkTable()
         # Populate the tables
@@ -469,12 +474,13 @@ class TestArrayMath(unittest.TestCase):
 
 ###############################################################################
 
-class TestNormalizeArray(unittest.TestCase):
+class TestNormalizeArray(TestBase):
     """
     Test the `NormalizeArray` filter
     """
 
     def setUp(self):
+        TestBase.setUp(self)
         # Create some input tables
         self.t0 = vtk.vtkTable()
         # Populate the tables
@@ -536,7 +542,7 @@ class TestNormalizeArray(unittest.TestCase):
 
 ###############################################################################
 
-class TestAddCellConnToPoints(unittest.TestCase):
+class TestAddCellConnToPoints(TestBase):
     """
     Test the `AddCellConnToPoints` filter
     """
@@ -623,7 +629,7 @@ class TestAddCellConnToPoints(unittest.TestCase):
 
 ###############################################################################
 
-class TestPointsToTube(unittest.TestCase):
+class TestPointsToTube(TestBase):
     """
     Test the `PointsToTube` filter
     """
@@ -665,7 +671,7 @@ class TestPointsToTube(unittest.TestCase):
 
 ###############################################################################
 #
-# class TestLonLatToUTM(unittest.TestCase):
+# class TestLonLatToUTM(TestBase):
 #     """
 #     Test the `LonLatToUTM` filter
 #     """
@@ -682,7 +688,7 @@ class TestPointsToTube(unittest.TestCase):
 # ###############################################################################
 #
 #
-# class TestManySlicesAlongPoints(unittest.TestCase):
+# class TestManySlicesAlongPoints(TestBase):
 #     """
 #     Test the `ManySlicesAlongPoints` filter
 #     """
@@ -694,7 +700,7 @@ class TestPointsToTube(unittest.TestCase):
 #
 # ###############################################################################
 #
-# class TestManySlicesAlongAxis(unittest.TestCase):
+# class TestManySlicesAlongAxis(TestBase):
 #     """
 #     Test the `ManySlicesAlongAxis` filter
 #     """
@@ -705,7 +711,7 @@ class TestPointsToTube(unittest.TestCase):
 #
 # ###############################################################################
 #
-# class TestSliceThroughTime(unittest.TestCase):
+# class TestSliceThroughTime(TestBase):
 #     """
 #     Test the `SliceThroughTime` filter
 #     """
@@ -716,7 +722,7 @@ class TestPointsToTube(unittest.TestCase):
 #
 # ###############################################################################
 #
-# class TestExtractPoints(unittest.TestCase):
+# class TestExtractPoints(TestBase):
 #     """
 #     Test the `ExtractPoints` filter
 #     """
@@ -728,7 +734,7 @@ class TestPointsToTube(unittest.TestCase):
 # ###############################################################################
 
 
-# class TestPercentThreshold(unittest.TestCase):
+# class TestPercentThreshold(TestBase):
 #     """
 #     Test the `PercentThreshold` filter
 #     """

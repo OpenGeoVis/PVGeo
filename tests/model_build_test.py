@@ -1,4 +1,4 @@
-import unittest
+from base import TestBase
 import numpy as np
 
 # VTK imports:
@@ -10,7 +10,7 @@ from PVGeo.model_build import *
 
 ###############################################################################
 
-class TestEarthSource(unittest.TestCase):
+class TestEarthSource(TestBase):
     """
     Test the `EarthSource` source
     """
@@ -28,7 +28,7 @@ class TestEarthSource(unittest.TestCase):
 
 ###############################################################################
 
-class TestCreateUniformGrid(unittest.TestCase):
+class TestCreateUniformGrid(TestBase):
     """
     Test the `CreateUniformGrid` source
     """
@@ -52,7 +52,7 @@ class TestCreateUniformGrid(unittest.TestCase):
 
 ###############################################################################
 
-class TestCreateEvenRectilinearGrid(unittest.TestCase):
+class TestCreateEvenRectilinearGrid(TestBase):
     """
     Test the `CreateEvenRectilinearGrid` source
     """
@@ -76,7 +76,7 @@ class TestCreateEvenRectilinearGrid(unittest.TestCase):
 
 ###############################################################################
 
-class TestCreateTensorMesh(unittest.TestCase):
+class TestCreateTensorMesh(TestBase):
     """
     Test the `CreateTensorMesh` source
     """

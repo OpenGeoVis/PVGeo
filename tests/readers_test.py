@@ -1,4 +1,4 @@
-import unittest
+from base import TestBase
 import shutil
 import tempfile
 import os
@@ -13,11 +13,12 @@ from PVGeo.readers import *
 
 RTOL = 0.000001
 
-class TestDelimitedTextReader(unittest.TestCase):
+class TestDelimitedTextReader(TestBase):
     """
     Test the `DelimitedTextReader`: A widely used base class
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
         self.commafname = os.path.join(self.test_dir, 'comma.txt')
@@ -43,6 +44,7 @@ class TestDelimitedTextReader(unittest.TestCase):
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
     ###########################################
 
@@ -110,7 +112,7 @@ class TestDelimitedTextReader(unittest.TestCase):
         """`DelimitedTextReader`: tab delimited file"""
         reader = DelimitedTextReader()
         reader.AddFileName(self.tabfname)
-        reader.SetUseTab(True)
+        reader.SetSplitOnWhiteSpace(True)
         reader.SetSkipRows(1)
         reader.SetComments('!')
         reader.Update()
@@ -143,11 +145,12 @@ class TestDelimitedTextReader(unittest.TestCase):
 
 ###############################################################################
 
-class TestXYZTextReader(unittest.TestCase):
+class TestXYZTextReader(TestBase):
     """
     Test the `XYZTextReader`
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
         self.fname = os.path.join(self.test_dir, 'test.xyz')
@@ -170,6 +173,7 @@ class TestXYZTextReader(unittest.TestCase):
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
     ###########################################
 
@@ -197,11 +201,12 @@ class TestXYZTextReader(unittest.TestCase):
 ###############################################################################
 
 
-class TestPackedBinariesReader(unittest.TestCase):
+class TestPackedBinariesReader(TestBase):
     """
     Test the `PackedBinariesReader`
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
         self.n = 100
@@ -210,6 +215,7 @@ class TestPackedBinariesReader(unittest.TestCase):
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
     ###########################################
 
@@ -316,7 +322,7 @@ class TestPackedBinariesReader(unittest.TestCase):
 
 ###############################################################################
 
-class TestMadagascarReader(unittest.TestCase):
+class TestMadagascarReader(TestBase):
     """
     Test the `MadagascarReader`
     Does not test inherrited functionality
@@ -325,6 +331,7 @@ class TestMadagascarReader(unittest.TestCase):
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
     ###########################################
 

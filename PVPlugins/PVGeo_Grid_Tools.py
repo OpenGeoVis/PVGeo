@@ -122,6 +122,10 @@ class PVGeoExtractTopography(ExtractTopography):
 
     #### Seters and Geters ####
 
+    @smproperty.doublevector(name="Tolerance", default_values=1.0)
+    def SetTolerance(self, tol):
+        ExtractTopography.SetTolerance(self, tol)
+
 ###############################################################################
 
 @smproxy.reader(name="PVGeoSurferGridReader",

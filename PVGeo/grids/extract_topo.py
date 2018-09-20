@@ -25,6 +25,7 @@ class ExtractTopography(FilterBase):
         FilterBase.__init__(self,
             nInputPorts=2, inputType='vtkDataObject',
             nOutputPorts=1)
+        self.__tolerance = 0.001
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):
@@ -81,7 +82,7 @@ class ExtractTopography(FilterBase):
         tree = cKDTree(topoPts)
         i = tree.query(datapts)[1]
         comp = topoPts[i]
-        active = np.array(datapts[:,2] < comp[:,2], dtype=int)
+        active = np.array(datapts[:,2] < (comp[:,2] - self.__tolerance), dtype=int)
 
         # Now add cell data to output
         active = _helpers.numToVTK(active)
@@ -94,3 +95,11 @@ class ExtractTopography(FilterBase):
         self.SetInputDataObject(1, points)
         self.Update()
         return self.GetOutput()
+
+    def SetTolerance(self, tol):
+        if self.__tolerance != tol:
+            self.__tolerance = tol
+            self.Modified()
+
+    def GetTolerance(self):
+        return self.__tolerance

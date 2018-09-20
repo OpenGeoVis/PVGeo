@@ -1,4 +1,4 @@
-import unittest
+from base import TestBase
 import warnings
 import shutil
 import tempfile
@@ -17,11 +17,12 @@ RTOL = 0.000001
 
 ###############################################################################
 
-class TestGSLibReader(unittest.TestCase):
+class TestGSLibReader(TestBase):
     """
     Test the `GSLibReader` and `WriteTableToGSLib`
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
         self.n = 100
@@ -46,6 +47,7 @@ class TestGSLibReader(unittest.TestCase):
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
     ###########################################
 
@@ -110,11 +112,12 @@ class TestGSLibReader(unittest.TestCase):
 ###############################################################################
 
 
-class TestSGeMSGridReader(unittest.TestCase):
+class TestSGeMSGridReader(TestBase):
     """
     Test the `SGeMSGridReader` and `WriteImageDataToSGeMS`
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
         self.n = 100
@@ -135,6 +138,7 @@ class TestSGeMSGridReader(unittest.TestCase):
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
     ###########################################
 
