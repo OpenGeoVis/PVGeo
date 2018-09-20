@@ -499,6 +499,8 @@ class ExtractPoints(FilterBase):
 
 
 class ExtractCellCenters(FilterBase):
+    __displayname__ = 'Extract Cell Centers'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self, nInputPorts=1, inputType='vtkDataSet',
                     nOutputPorts=1, outputType='vtkPolyData', **kwargs)
@@ -525,6 +527,8 @@ class ExtractCellCenters(FilterBase):
 
 
 class AppendCellCenters(FilterPreserveTypeBase):
+    __displayname__ = 'Append Cell Centers'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self, **kwargs)
 
