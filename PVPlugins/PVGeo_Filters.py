@@ -542,3 +542,22 @@ class PVGeoConvertUnits(ConvertUnits):
         ConvertUnits.SetConversion(self, key)
 
 ###############################################################################
+
+
+@smproxy.filter(name='PVGeoLonLatToUTM', label='LonLat To UTM')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
+class PVGeoLonLatToUTM(LonLatToUTM):
+    def __init__(self):
+        LonLatToUTM.__init__(self)
+
+    @smproperty.intvector(name="Zone", default_values=11)
+    @smdomain.intrange(min=1, max=60)
+    def SetZone(self, zone):
+        LonLatToUTM.SetZone(self, zone)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Ellps', command='SetEllps', labels=LonLatToUTM.GetAvailableEllps(), help='This will set the ellps.'))
+    def SetEllps(self, ellps):
+        LonLatToUTM.SetEllps(self, ellps)

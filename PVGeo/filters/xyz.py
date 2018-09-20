@@ -1,6 +1,6 @@
 __all__ = [
     'PointsToPolyData',
-    'latLonTableToCartesian',
+    'LonLatToUTM',
     'RotatePoints',
     'ExtractPoints',
     'RotationTool',
@@ -12,6 +12,7 @@ __all__ = [
 import vtk
 import numpy as np
 import pandas as pd
+import pyproj
 from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
@@ -71,46 +72,69 @@ def PointsToPolyData(points):
 
 
 ###############################################################################
-#---- LatLon to Cartesian ----#
-def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None):
-    """**WORK IN PROGRESS**
+#---- LonLat to Cartesian ----#
+
+class LonLatToUTM(FilterBase):
+    """Converts Points from Lon Lat to UTM
     """
-    # TODO: This is very poorly done
-    # TODO: filter works but assumes a spherical earth wich is VERY wrong
-    # NOTE: Mismatches the vtkEarth Source however so we gonna keep it this way
-    raise _helpers.PVGeoError('latLonTableToCartesian() not currently implemented.')
-    if pdo is None:
-        pdo = vtk.vtkPolyData()
-    #pdo.DeepCopy(pdi)
-    wpdo = dsa.WrapDataObject(pdo)
-    import sys
-    sys.path.append('/Users/bane/miniconda3/lib/python3.6/site-packages/')
-    import utm
+    __displayname__ = 'Lat Lon To UTM'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterBase.__init__(self, inputType='vtkPolyData', outputType='vtkPolyData', **kwargs)
+        self.__zone = kwargs.get('zone', 11) # User defined
+        self.__ellps = kwargs.get('ellps', 'WGS84') # User defined
 
-    # Get the input arrays
-    (namelat, fieldlat) = arrlat[0], arrlat[1]
-    (namelon, fieldlon) = arrlon[0], arrlon[1]
-    (namealt, fieldalt) = arralt[0], arralt[1]
-    wpdi = dsa.WrapDataObject(pdi)
-    lat = _helpers.getNumPyArray(wpdi, fieldlat, namelat)
-    lon = _helpers.getNumPyArray(wpdi, fieldlon, namelon)
-    alt = _helpers.getNumPyArray(wpdi, fieldalt, namealt)
-    if len(lat) != len(lon) or len(lat) != len(alt):
-        raise _helpers.PVGeoError('Latitude, Longitude, and Altitude arrays must be same length.')
+    @staticmethod
+    def GetAvailableEllps(idx=None):
+        """Returns the available ellps
+        """
+        ellps = pyproj.pj_ellps.keys()
+        # Now migrate WGSXX to front so that 84 is always default
+        wgs = ['WGS60','WGS66','WGS72', 'WGS84']
+        for i, name in enumerate(wgs):
+            oldindex = ellps.index(name)
+            ellps.insert(0, ellps.pop(oldindex))
+        if idx is not None: return ellps[idx]
+        return ellps
 
-    coords = np.empty((len(lat),3))
+    def __Convert2D(self, lon, lat, elev):
+        """Converts 2D Lon Lat coords to 2D XY UTM points"""
+        p = pyproj.Proj(proj='utm', zone=self.__zone, ellps=self.__ellps)
+        utm_x, utm_y = p(lon, lat)
+        return np.c_[utm_x, utm_y, elev]
 
-    for i in range(len(lat)):
-        (e, n, zN, zL) = utm.from_latlon(lat[i], lon[i])
-        coords[i,0] = e
-        coords[i,1] = n
-    coords[:,2] = alt
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        #### Perfrom task ####
+        # Get the Points over the NumPy interface
+        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
+        if not hasattr(wpdi, 'Points'):
+            raise _helpers.PVGeoError('Input data object does not have points to convert.')
+        coords = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+        # Now Conver the points
+        points = self.__Convert2D(coords[:, 0], coords[:, 1], coords[:, 2])
+        pdo.DeepCopy(PointsToPolyData(points))
+        _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        return 1
 
-    pdo.ShallowCopy(PointsToPolyData(coords))
-    # Add other arrays to output appropriately
-    pdo = _helpers.copyArraysToPointData(pdi, pdo, fieldlat)
+    def SetZone(self, zone):
+        if zone < 1 or zone > 60:
+            raise _helpers.PVGeoError('Zone (%d) is invalid.' % zone)
+        if self.__zone != zone:
+            self.__zone = int(zone)
+            self.Modified()
 
-    return pdo
+    def SetEllps(self, ellps):
+        if isinstance(ellps, int):
+            ellps = self.GetAvailableEllps(idx=ellps)
+        if not isinstance(ellps, str):
+            raise _helpers.PVGeoError('Ellps must be a string.')
+        if self.__ellps != ellps:
+            self.__ellps = ellps
+            self.Modified()
+
 
 ###############################################################################
 
