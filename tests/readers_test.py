@@ -60,14 +60,14 @@ class TestDelimitedTextReader(unittest.TestCase):
         self.assertEqual(table.GetColumnName(2), titles[2])
         return
 
-    def _check_array_types(self, table, types=[int, float, float]):
+    def _check_array_types(self, table, types=[16, 13, 11]):
         # Check data array types:
         typ = table.GetColumn(0).GetDataType()
-        self.assertEqual(typ, nps.get_vtk_array_type(int))
+        self.assertEqual(typ, types[0])
         typ = table.GetColumn(1).GetDataType()
-        self.assertEqual(typ, 13)
+        self.assertEqual(typ, types[1])
         typ = table.GetColumn(2).GetDataType()
-        self.assertEqual(typ, nps.get_vtk_array_type(float))
+        self.assertEqual(typ, types[2])
         return
 
     def _check_array_values(self, table):
