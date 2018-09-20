@@ -7,6 +7,9 @@ notifications:
     auth_token:
       secure: 0jlmiJixbUm701Of/6ezbzIPLV53naj7gOqQEggTNyYXVaqJSyAc190o1LZGcF7hmQw/zkOA2GPn97MS6fU6c1zHZv0lRvkSk/6QJlgbSss=
     channel: '#development'
+    settings:
+        on_build_status_changed: true
+        on_build_failure: true
 
 environment:
   matrix:
