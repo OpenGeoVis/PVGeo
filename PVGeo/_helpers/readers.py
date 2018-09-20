@@ -65,10 +65,12 @@ def ConvertArray(arr):
     return VTK_data
 
 
-def DataFrameToTable(df, pdo):
+def DataFrameToTable(df, pdo=None):
     """Converts a pandas DataFrame to a vtkTable"""
     if not isinstance(df, pd.DataFrame):
         raise PVGeoError('Input is not a pandas DataFrame')
+    if pdo is None:
+        pdo = vtk.vtkTable()
     for key in df.keys():
         VTK_data = ConvertArray(df[key].values)
         VTK_data.SetName(key)

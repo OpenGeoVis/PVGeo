@@ -63,6 +63,23 @@ class PVGeoCombineTables(CombineTables):
         CombineTables.__init__(self)
 
 
+###############################################################################
+
+
+# Split Table on Array
+@smproxy.filter(name='PVGeoSplitTableOnArray', label='Split Table On Array')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
+class PVGeoSplitTableOnArray(SplitTableOnArray):
+    def __init__(self):
+        SplitTableOnArray.__init__(self)
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return SplitTableOnArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+
 
 
 
