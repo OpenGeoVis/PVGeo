@@ -252,3 +252,118 @@ class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
     def SetFormat(self, fmt):
         """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteImageDataToUBC.SetFormat(self, fmt)
+
+
+###############################################################################
+
+TOPO_EXTS = 'topo txt dat'
+TOPO_DESC = 'UBC 3D Topo Files'
+
+@smproxy.reader(name="PVGeoTopoReader",
+       label="PVGeo: UBC 3D Topo Files",
+       extensions=TOPO_EXTS,
+       file_description=TOPO_DESC)
+class PVGeoTopoReader(TopoReader):
+    def __init__(self):
+        TopoReader.__init__(self)
+
+    #### Seters and Geters ####
+    @smproperty.xml(_helpers.getFileReaderXml(TOPO_EXTS, readerDescription=TOPO_DESC))
+    def AddFileName(self, fname):
+        TopoReader.AddFileName(self, fname)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        TopoReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return TopoReader.GetTimestepValues(self)
+
+    @smproperty.intvector(name="SkipRows", default_values=0, panel_visibility="advanced")
+    def SetSkipRows(self, skip):
+        TopoReader.SetSkipRows(self, skip)
+
+    @smproperty.stringvector(name="Comments", default_values="!", panel_visibility="advanced")
+    def SetComments(self, identifier):
+        TopoReader.SetComments(self, identifier)
+
+
+
+###############################################################################
+
+GRV_EXTS = 'grv txt dat'
+GRV_DESC = 'GIF Gravity Observations'
+
+@smproxy.reader(name="PVGeoGravObsReader",
+       label="PVGeo: GIF Gravity Observations",
+       extensions=GRV_EXTS,
+       file_description=GRV_DESC)
+class PVGeoGravObsReader(GravObsReader):
+    def __init__(self):
+        GravObsReader.__init__(self)
+
+    #### Seters and Geters ####
+    @smproperty.xml(_helpers.getFileReaderXml(GRV_EXTS, readerDescription=GRV_DESC))
+    def AddFileName(self, fname):
+        GravObsReader.AddFileName(self, fname)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        GravObsReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return GravObsReader.GetTimestepValues(self)
+
+    @smproperty.intvector(name="SkipRows", default_values=0, panel_visibility="advanced")
+    def SetSkipRows(self, skip):
+        GravObsReader.SetSkipRows(self, skip)
+
+    @smproperty.stringvector(name="Comments", default_values="!", panel_visibility="advanced")
+    def SetComments(self, identifier):
+        GravObsReader.SetComments(self, identifier)
+
+
+
+###############################################################################
+
+
+MAG_EXTS = 'mag loc txt dat'
+MAG_DESC = 'GIF Magnetic Observations'
+
+@smproxy.reader(name="PVGeoMagObsReader",
+       label="PVGeo: GIF Magnetic Observations",
+       extensions=MAG_EXTS,
+       file_description=MAG_DESC)
+class PVGeoMagObsReader(MagObsReader):
+    def __init__(self):
+        MagObsReader.__init__(self)
+
+    #### Seters and Geters ####
+    @smproperty.xml(_helpers.getFileReaderXml(MAG_EXTS, readerDescription=MAG_DESC))
+    def AddFileName(self, fname):
+        MagObsReader.AddFileName(self, fname)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        MagObsReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return MagObsReader.GetTimestepValues(self)
+
+    @smproperty.intvector(name="SkipRows", default_values=0, panel_visibility="advanced")
+    def SetSkipRows(self, skip):
+        MagObsReader.SetSkipRows(self, skip)
+
+    @smproperty.stringvector(name="Comments", default_values="!", panel_visibility="advanced")
+    def SetComments(self, identifier):
+        MagObsReader.SetComments(self, identifier)
+
+
+
+###############################################################################

@@ -1,5 +1,6 @@
 __all__ = [
     'DelimitedTextReader',
+    'DelimitedPointsReaderBase',
     'XYZTextReader'
 ]
 
@@ -14,6 +15,7 @@ else:
 
 # Import Helpers:
 from ..base import ReaderBase
+from ..filters import PointsToPolyData
 from .. import _helpers
 
 
@@ -32,7 +34,7 @@ class DelimitedTextReader(ReaderBase):
         self.__useTab = kwargs.get('useTab', False)
         self.__skipRows = kwargs.get('skiprows', 0)
         self.__comments = kwargs.get('comments', '!')
-        self.__hasTitles = kwargs.get('HasTitles', True)
+        self.__hasTitles = kwargs.get('hasTitles', True)
         # Data objects to hold the read data for access by the pipeline methods
         self._data = []
         self.__titles = []
@@ -151,7 +153,7 @@ class DelimitedTextReader(ReaderBase):
 
 
     def SetDelimiter(self, deli):
-        """The input file's delimiter. To use a tab delimiter please use ``SetUseTab()``
+        """The input file's delimiter. To use a tab delimiter please use ``SetSplitOnWhiteSpace()``
 
         Args:
             deli (str): a string delimiter/seperator
@@ -166,10 +168,6 @@ class DelimitedTextReader(ReaderBase):
         if flag != self.__useTab:
             self.__useTab = flag
             self.Modified()
-
-    def SetUseTab(self, flag):
-        """Deprecated"""
-        self.SetSplitOnWhiteSpace(flag)
 
 
     def SetSkipRows(self, skip):
@@ -203,6 +201,43 @@ class DelimitedTextReader(ReaderBase):
         return self.__titles
 
 
+################################################################################
+
+
+class DelimitedPointsReaderBase(DelimitedTextReader):
+    """A base class for delimited text readers that produce ``vtkPolyData`` points."""
+    __displayname__ = 'Delimited Points Reader Base'
+    __category__ = 'base'
+    def __init__(self, **kwargs):
+        DelimitedTextReader.__init__(self, outputType='vtkPolyData', **kwargs)
+        self.__copy_z = kwargs.get('copy_z', False)
+
+    def SetCopyZ(self, flag):
+        if self.__copy_z != flag:
+            self.__copy_z = flag
+            self.Modified()
+
+    def GetCopyZ(self):
+        return self.__copy_z
+
+    #### Algorithm Methods ####
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to get data for current timestep and populate the output data object.
+        """
+        # Get output:
+        output = self.GetOutputData(outInfo, 0)
+        # Get requested time index
+        i = _helpers.GetRequestedTime(self, outInfo)
+        if self.NeedToRead():
+            self._ReadUpFront()
+        # Generate the PolyData output
+        data = self._GetRawData(idx=i)
+        output.DeepCopy(PointsToPolyData(data, copy_z=self.GetCopyZ()))
+        return 1
+
+
+################################################################################
 
 
 class XYZTextReader(DelimitedTextReader):

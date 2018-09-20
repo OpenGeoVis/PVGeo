@@ -144,15 +144,15 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
     def SetDelimiter(self, deli):
         DelimitedTextReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Tab Delimiter', command='SetUseTab', default_values=False, help='A boolean to override the Delimiter_Field and use a Tab delimiter.'))
-    def SetUseTab(self, flag):
-        DelimitedTextReader.SetUseTab(self, flag)
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def SetSplitOnWhiteSpace(self, flag):
+        DelimitedTextReader.SetSplitOnWhiteSpace(self, flag)
 
     @smproperty.intvector(name="SkipRows", default_values=0)
     def SetSkipRows(self, skip):
         DelimitedTextReader.SetSkipRows(self, skip)
 
-    @smproperty.stringvector(name="Comments", default_values="#")
+    @smproperty.stringvector(name="Comments", default_values="!")
     def SetComments(self, identifier):
         DelimitedTextReader.SetComments(self, identifier)
 
@@ -197,14 +197,14 @@ class PVGeoXYZTextReader(XYZTextReader):
     def SetDelimiter(self, deli):
         XYZTextReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Tab Delimiter', command='SetUseTab', default_values=False, help='A boolean to override the Delimiter_Field and use a Tab delimiter.'))
-    def SetUseTab(self, flag):
-        XYZTextReader.SetUseTab(self, flag)
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def SetSplitOnWhiteSpace(self, flag):
+        XYZTextReader.SetSplitOnWhiteSpace(self, flag)
 
     @smproperty.intvector(name="SkipRows", default_values=0)
     def SetSkipRows(self, skip):
         XYZTextReader.SetSkipRows(self, skip)
 
-    @smproperty.stringvector(name="Comments", default_values="#")
+    @smproperty.stringvector(name="Comments", default_values="!")
     def SetComments(self, identifier):
         XYZTextReader.SetComments(self, identifier)
