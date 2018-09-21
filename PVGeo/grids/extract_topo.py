@@ -23,7 +23,7 @@ class ExtractTopography(FilterBase):
     __category__ = 'filter'
     def __init__(self):
         FilterBase.__init__(self,
-            nInputPorts=2, inputType='vtkDataObject',
+            nInputPorts=2, inputType='vtkDataSet',
             nOutputPorts=1)
 
     # CRITICAL for multiple input ports
