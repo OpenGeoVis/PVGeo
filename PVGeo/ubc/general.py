@@ -17,9 +17,9 @@ from .. import _helpers
 
 
 class TopoReader(DelimitedPointsReaderBase):
-    """A reader to handle .topo files in UBC format to create a topography surface
+    """A reader to handle .topo files in GIF format to create a topography surface
     """
-    __displayname__ = 'UBC Topo Reader'
+    __displayname__ = 'GIF Topo Reader'
     __category__ = 'reader'
     def __init__(self, copy_z=True, **kwargs):
         DelimitedPointsReaderBase.__init__(self, copy_z=copy_z, **kwargs)
