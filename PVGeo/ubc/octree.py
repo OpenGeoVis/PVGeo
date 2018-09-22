@@ -8,6 +8,11 @@ import numpy as np
 from vtk.util import numpy_support as nps
 import vtk
 import os
+import sys
+if sys.version_info < (3,):
+    from StringIO import StringIO
+else:
+    from io import StringIO
 
 from ..base import AlgorithmBase
 from .two_file_base import ubcMeshReaderBase, ModelAppenderBase
@@ -79,8 +84,8 @@ class OcTreeReader(ubcMeshReaderBase):
         )
 
         # Read the remainder of the file containing the index arrays
-        indArr = np.genfromtxt(
-            (line.encode('utf8') for line in fileLines[4::]), dtype=np.int)
+        indArr = np.loadtxt(
+            StringIO("\n".join(fileLines[4::])), dtype=np.int)
 
         # Start processing the information
         # Make vectors of the base mesh node, starting in the wsb corner

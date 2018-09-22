@@ -7,6 +7,7 @@ from .. import _helpers
 from .. import base
 # Outside Imports:
 import numpy as np
+import pandas as pd
 import vtk
 
 ###############################################################################
@@ -113,16 +114,17 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         Return:
             np.array : Returns a NumPy float array that holds the model data read from the file. Use the ``PlaceModelOnMesh()`` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
         """
+        # Check if recurssion needed
         if type(FileName) is list:
             out = {}
             for f in FileName:
-                out[os.path.basename(f)] = TensorMeshReader.ubcModel3D(f)
+                out[os.path.basename(f)] = ubcMeshReaderBase.ubcModel3D(f)
             return out
+        # Perform IO
         try:
-            fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+            data = np.genfromtxt(FileName, dtype=np.float, comments='!')
         except (FileNotFoundError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
-        data = np.genfromtxt((line.encode('utf8') for line in fileLines), dtype=np.float)
         return data
 
 

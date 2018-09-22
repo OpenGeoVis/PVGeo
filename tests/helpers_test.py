@@ -1,4 +1,4 @@
-import unittest
+from base import TestBase
 import numpy as np
 import pandas as pd
 
@@ -13,7 +13,7 @@ from PVGeo import _helpers
 
 RTOL = 0.000001
 
-class TestTableToGrid(unittest.TestCase):
+class TestTableToGrid(TestBase):
     """
     Test the XML Helpers to make sure no errors are thrown
     """
@@ -33,7 +33,7 @@ class TestTableToGrid(unittest.TestCase):
         return
 
 
-class TestDataFrameConversions(unittest.TestCase):
+class TestDataFrameConversions(TestBase):
     """
     Test the pandas DataFrames conversions to VTK data objects
     """

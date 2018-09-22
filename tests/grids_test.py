@@ -1,4 +1,4 @@
-import unittest
+from base import TestBase
 import numpy as np
 import shutil
 import tempfile
@@ -20,12 +20,13 @@ RTOL = 0.000001
 
 ###############################################################################
 
-class TestTableToGrid(unittest.TestCase):
+class TestTableToGrid(TestBase):
     """
     Test the `TableToGrid` filter
     """
     # TODO: This is conceptually difficult to decipher whether or not it is working
     def setUp(self):
+        TestBase.setUp(self)
         # Create some input tables
         self.table = vtk.vtkTable()
         # Populate the tables
@@ -128,7 +129,7 @@ class TestTableToGrid(unittest.TestCase):
 
 ###############################################################################
 
-class TestReverseImageDataAxii(unittest.TestCase):
+class TestReverseImageDataAxii(TestBase):
     """
     Test the `ReverseImageDataAxii` filter
     """
@@ -189,11 +190,12 @@ class TestReverseImageDataAxii(unittest.TestCase):
 
 ###############################################################################
 
-class TestTranslateGridOrigin(unittest.TestCase):
+class TestTranslateGridOrigin(TestBase):
     """
     Test the `TranslateGridOrigin` filter
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create some input tables
         self.idi = vtk.vtkImageData()
         self.idi.SetDimensions(20, 2, 10)
@@ -264,11 +266,12 @@ class TestTranslateGridOrigin(unittest.TestCase):
 ###############################################################################
 
 
-class TestSurferGridReader(unittest.TestCase):
+class TestSurferGridReader(TestBase):
     """
     Test the `SurferGridReader` and `WriteImageDataToSurfer`
     """
     def setUp(self):
+        TestBase.setUp(self)
         self.test_dir = tempfile.mkdtemp()
         self.fname = os.path.join(os.path.dirname(__file__), 'data/surfer-grid.grd')
 
@@ -276,6 +279,7 @@ class TestSurferGridReader(unittest.TestCase):
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
 
     def test(self):
@@ -319,7 +323,7 @@ class TestSurferGridReader(unittest.TestCase):
 ###############################################################################
 
 
-class TestExtractTopography(unittest.TestCase):
+class TestExtractTopography(TestBase):
     """
     Test the `ExtractTopography` filter
     """
@@ -367,11 +371,12 @@ class TestExtractTopography(unittest.TestCase):
 
 
 
-class TestCellCenterWriter(unittest.TestCase):
+class TestCellCenterWriter(TestBase):
     """
     Test the `WriteCellCenterData`
     """
     def setUp(self):
+        TestBase.setUp(self)
         self.test_dir = tempfile.mkdtemp()
         self.fname = os.path.join(self.test_dir, 'test.txt')
 
@@ -379,7 +384,7 @@ class TestCellCenterWriter(unittest.TestCase):
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
-        return
+        TestBase.tearDown(self)
 
 
     def test(self):
@@ -403,11 +408,12 @@ class TestCellCenterWriter(unittest.TestCase):
 
 ###############################################################################
 
-class TestGSLibReader(unittest.TestCase):
+class TestGSLibReader(TestBase):
     """
     Test the `EsriGridReader`
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
         self.fname = os.path.join(self.test_dir, 'test.dat')
@@ -431,6 +437,7 @@ NODATA_value  -9999
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
     ###########################################
 
@@ -454,7 +461,7 @@ NODATA_value  -9999
         return
 
 
-# class TestGSLibReader(unittest.TestCase):
+# class TestGSLibReader(TestBase):
 #     """
 #     Test the `EsriGridReader` with big file
 #     """
