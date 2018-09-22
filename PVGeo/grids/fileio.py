@@ -340,7 +340,7 @@ class LandsatReader(ReaderBaseBase):
     uses the ``espatools`` package to read Landsat rasters (band sets) and creates
     vtkImageData with each band as point data
     """
-    __displayname__ = 'Landsat Raster Reader'
+    __displayname__ = 'Landsat XML Reader'
     __category__ = 'reader'
     def __init__(self, **kwargs):
         ReaderBaseBase.__init__(self, outputType='vtkImageData', **kwargs)
@@ -369,6 +369,7 @@ class LandsatReader(ReaderBaseBase):
     #### Methods for performing the read ####
 
     def _GetFileContents(self, idx=None):
+        """Reads XML meta data, no data read."""
         self.__reader.SetFileName(self.GetFileName())
         self.__raster = self.__reader.Read(meta_only=True)
         for n in self.__raster.bands.keys():
@@ -380,6 +381,7 @@ class LandsatReader(ReaderBaseBase):
         return self._GetFileContents()
 
     def _GetRawData(self, idx=0):
+        """Perfroms the read for the selected bands"""
         allowed = []
         for name in self.__raster.bands.keys():
             if self._dataselection.ArrayIsEnabled(name):
@@ -388,6 +390,7 @@ class LandsatReader(ReaderBaseBase):
         return self.__raster
 
     def _BuildImageData(self, output):
+        """Properly builds the output ``vtkImageData`` object"""
         if self.__raster is None:
             raise _helpers.PVGeoError('Raster invalid.')
         raster = self.__raster
@@ -416,8 +419,7 @@ class LandsatReader(ReaderBaseBase):
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
-        """Used by pipeline to set grid extents.
-        """
+        """Used by pipeline to set grid extents."""
         # Call parent to handle time stuff
         ReaderBaseBase.RequestInformation(self, request, inInfo, outInfo)
         if self.__raster is None:
@@ -436,6 +438,7 @@ class LandsatReader(ReaderBaseBase):
     #### Seters and Geters for the GUI ####
 
     def GetDataSelection(self):
+        """Used by ParaView GUI"""
         if self.NeedToRead():
             self._ReadUpFront()
         return self._dataselection
