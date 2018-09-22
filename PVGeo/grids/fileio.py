@@ -3,7 +3,8 @@
 __all__ = [
     'SurferGridReader',
     'WriteImageDataToSurfer',
-    'EsriGridReader'
+    'EsriGridReader',
+    'LandsatReader',
 ]
 
 # NOTE: Surfer no data value: 1.70141E+38
@@ -13,6 +14,10 @@ import numpy as np
 import pandas as pd
 
 import sys
+sys.path.append('/Users/bane/Documents/OpenGeoVis/Software/espatools')
+import espatools
+
+import sys
 if sys.version_info < (3,):
     from StringIO import StringIO
 else:
@@ -20,7 +25,7 @@ else:
 
 
 # Import Helpers:
-from ..base import WriterBase
+from ..base import WriterBase, ReaderBaseBase
 from ..readers import DelimitedTextReader
 from .. import _helpers
 from .. import interface
@@ -324,3 +329,113 @@ class EsriGridReader(DelimitedTextReader):
 
     def GetDataName(self):
         return self.__dataName
+
+
+
+################################################################################
+
+
+class LandsatReader(ReaderBaseBase):
+    """A reader that will handle ESPA XML files for Landsat Imagery. This reader
+    uses the ``espatools`` package to read Landsat rasters (band sets) and creates
+    vtkImageData with each band as point data
+    """
+    __displayname__ = 'Landsat Raster Reader'
+    __category__ = 'reader'
+    def __init__(self, **kwargs):
+        ReaderBaseBase.__init__(self, outputType='vtkImageData', **kwargs)
+        self.__reader = espatools.RasterSetReader()
+        self.__raster = None
+        # Properties:
+        self._dataselection = vtk.vtkDataArraySelection()
+        self._dataselection.AddObserver("ModifiedEvent", _helpers.createModifiedCallback(self))
+
+
+    def Modified(self, readAgain=False):
+        """Ensure default is overridden to be false so array selector can call.
+        """
+        ReaderBaseBase.Modified(self, readAgain=readAgain)
+
+
+    def GetFileName(self):
+        """Super class has file names as a list but we will only handle a single
+        project file. This provides a conveinant way of making sure we only
+        access that single file.
+        A user could still access the list of file names using ``GetFileNames()``.
+        """
+        return ReaderBaseBase.GetFileNames(self, idx=0)
+
+
+    #### Methods for performing the read ####
+
+    def _GetFileContents(self, idx=None):
+        self.__reader.SetFileName(self.GetFileName())
+        self.__raster = self.__reader.Read(meta_only=True)
+        for n in self.__raster.bands.keys():
+            self._dataselection.AddArray(n)
+        self.NeedToRead(flag=False) # Only meta data has been read
+        return
+
+    def _ReadUpFront(self):
+        return self._GetFileContents()
+
+    def _GetRawData(self, idx=0):
+        allowed = []
+        for name in self.__raster.bands.keys():
+            if self._dataselection.ArrayIsEnabled(name):
+                allowed.append(name)
+        self.__raster = self.__reader.Read(meta_only=False, allowed=allowed)
+        return self.__raster
+
+    def _BuildImageData(self, output):
+        if self.__raster is None:
+            raise _helpers.PVGeoError('Raster invalid.')
+        raster = self.__raster
+        output.SetDimensions(raster.nsamps, raster.nlines, 1)
+        output.SetSpacing(raster.pixel_size.x, raster.pixel_size.y, 1)
+        corner = raster.global_metadata.projection_information.corner_point[0]
+        output.SetOrigin(corner.x, corner.y, 0)
+        return output
+
+
+    #### Pipeline Methods ####
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
+        # Get output:
+        output = vtk.vtkImageData.GetData(outInfo, 0)
+        # Perform Read if needed
+        if self.__raster is None:
+            self._ReadUpFront()
+        self._GetRawData()
+        self._BuildImageData(output)
+        # Now add the data based on what the user has selected
+        for name, band in self.__raster.bands.items():
+            output.GetPointData().AddArray(interface.convertArray(band.data.flatten(), name=name))
+        # TODO: add RGB channel
+        return 1
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to set grid extents.
+        """
+        # Call parent to handle time stuff
+        ReaderBaseBase.RequestInformation(self, request, inInfo, outInfo)
+        if self.__raster is None:
+            self._ReadUpFront()
+        # Now set whole output extent
+        b = self.__raster.bands.get(list(self.__raster.bands.keys())[0])
+        nx, ny, nz = b.nsamps, b.nlines, 1
+        ext = (0,nx-1, 0,ny-1, 0,nz-1)
+        info = outInfo.GetInformationObject(0)
+        # Set WHOLE_EXTENT: This is absolutely necessary
+        info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
+        return 1
+
+
+
+    #### Seters and Geters for the GUI ####
+
+    def GetDataSelection(self):
+        if self.NeedToRead():
+            self._ReadUpFront()
+        return self._dataselection
