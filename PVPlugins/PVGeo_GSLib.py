@@ -11,19 +11,21 @@ from PVGeo.gslib import *
 
 ###############################################################################
 
+
+GSLIB_EXTS = "sgems dat geoeas gslib GSLIB txt SGEMS SGeMS"
+GSLIB_DESC = "GSLib Table"
+
 @smproxy.reader(name="PVGeoGSLibReader",
        label="PVGeo: GSLib File Format",
-       extensions="sgems dat geoeas gslib GSLIB txt SGEMS",
-       file_description="GSLib Table")
+       extensions=GSLIB_EXTS,
+       file_description=GSLIB_DESC)
 class PVGeoGSLibReader(GSLibReader):
     def __init__(self):
         GSLibReader.__init__(self)
 
     #### Seters and Geters ####
-    # @smproperty.stringvector(name="FileNames", panel_visibility="advanced")
-    # @smdomain.filelist()
-    # @smhint.filechooser(extensions="sgems dat geoeas gslib GSLIB txt SGEMS", file_description="GSLib Tables")
-    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+
+    @smproperty.xml(_helpers.getFileReaderXml(GSLIB_EXTS, readerDescription=GSLIB_DESC))
     def AddFileName(self, fname):
         GSLibReader.AddFileName(self, fname)
 
@@ -62,11 +64,12 @@ class PVGeoGSLibReader(GSLibReader):
 
 ###############################################################################
 
+SGEMS_DESC = "SGeMS Uniform Grid"
 
 @smproxy.reader(name="PVGeoSGeMSGridReader",
        label="PVGeo: SGeMS Grid Reader",
-       extensions="dat gslib sgems SGEMS SGeMS",
-       file_description="SGeMS Uniform Grid")
+       extensions=GSLIB_EXTS,
+       file_description=SGEMS_DESC)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoSGeMSGridReader(SGeMSGridReader):
     def __init__(self):
@@ -74,7 +77,7 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+    @smproperty.xml(_helpers.getFileReaderXml(GSLIB_EXTS, readerDescription=SGEMS_DESC))
     def AddFileName(self, fname):
         SGeMSGridReader.AddFileName(self, fname)
 
