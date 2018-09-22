@@ -1,10 +1,10 @@
 __all__ = [
-    'PointsToPolyData',
-    'latLonTableToCartesian',
+    'LonLatToUTM',
     'RotatePoints',
     'ExtractPoints',
     'RotationTool',
     'ExtractCellCenters',
+    'AppendCellCenters',
     'IterateOverPoints',
     'ConvertUnits',
 ]
@@ -12,105 +12,79 @@ __all__ = [
 import vtk
 import numpy as np
 import pandas as pd
-from vtk.util import numpy_support as nps
+import pyproj
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
 from ..base import FilterBase, FilterPreserveTypeBase
 from .. import _helpers
+from .. import interface
 
-
-
-def PointsToPolyData(points):
-    """Create ``vtkPolyData`` from a numpy array of XYZ points. If the points have
-    more than 3 dimensions, then all dimensions after the third will be added as attributes.
-    Assume the first three dimensions are the XYZ coordinates.
-
-    Return:
-        vtkPolyData : points with point-vertex cells
-    """
-    __displayname__ = 'Points to PolyData'
-    __category__ = 'filter'
-    # Check if input is anything other than a NumPy array and cast it
-    # e.g. you could send a Pandas dataframe
-    keys = ['Field %d' % i for i in range(points.shape[1] - 3)]
-    if not isinstance(points, np.ndarray):
-        if isinstance(points, pd.DataFrame):
-            # If a pandas data frame, lets grab the keys
-            keys = points.keys()[3::]
-        points = np.array(points)
-    # If points are not 3D
-    if points.shape[1] < 2:
-        raise RuntimeError('Points must be 3D. Try adding a third dimension of zeros.')
-
-    atts = points[:, 3::]
-    points = points[:, 0:3]
-
-    npoints = points.shape[0]
-
-    # Make VTK cells array
-    cells = np.hstack((np.ones((npoints, 1)),
-                       np.arange(npoints).reshape(-1, 1)))
-    cells = np.ascontiguousarray(cells, dtype=np.int64)
-    vtkcells = vtk.vtkCellArray()
-    vtkcells.SetCells(npoints, nps.numpy_to_vtkIdTypeArray(cells, deep=True))
-
-    # Convert points to vtk object
-    pts = vtk.vtkPoints()
-    pts.SetData(_helpers.numToVTK(points))
-
-    # Create polydata
-    pdata = vtk.vtkPolyData()
-    pdata.SetPoints(pts)
-    pdata.SetVerts(vtkcells)
-
-    # Add attributes if given
-    for i, key in enumerate(keys):
-        data = _helpers.numToVTK(atts[:, i], name=key)
-        pdata.GetPointData().AddArray(data)
-    return pdata
 
 
 ###############################################################################
-#---- LatLon to Cartesian ----#
-def latLonTableToCartesian(pdi, arrlat, arrlon, arralt, radius=6371.0, pdo=None):
-    """**WORK IN PROGRESS**
+#---- LonLat to Cartesian ----#
+
+class LonLatToUTM(FilterBase):
+    """Converts Points from Lon Lat to UTM
     """
-    # TODO: This is very poorly done
-    # TODO: filter works but assumes a spherical earth wich is VERY wrong
-    # NOTE: Mismatches the vtkEarth Source however so we gonna keep it this way
-    raise _helpers.PVGeoError('latLonTableToCartesian() not currently implemented.')
-    if pdo is None:
-        pdo = vtk.vtkPolyData()
-    #pdo.DeepCopy(pdi)
-    wpdo = dsa.WrapDataObject(pdo)
-    import sys
-    sys.path.append('/Users/bane/miniconda3/lib/python3.6/site-packages/')
-    import utm
+    __displayname__ = 'Lat Lon To UTM'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterBase.__init__(self, inputType='vtkPolyData', outputType='vtkPolyData', **kwargs)
+        self.__zone = kwargs.get('zone', 11) # User defined
+        self.__ellps = kwargs.get('ellps', 'WGS84') # User defined
 
-    # Get the input arrays
-    (namelat, fieldlat) = arrlat[0], arrlat[1]
-    (namelon, fieldlon) = arrlon[0], arrlon[1]
-    (namealt, fieldalt) = arralt[0], arralt[1]
-    wpdi = dsa.WrapDataObject(pdi)
-    lat = _helpers.getNumPyArray(wpdi, fieldlat, namelat)
-    lon = _helpers.getNumPyArray(wpdi, fieldlon, namelon)
-    alt = _helpers.getNumPyArray(wpdi, fieldalt, namealt)
-    if len(lat) != len(lon) or len(lat) != len(alt):
-        raise _helpers.PVGeoError('Latitude, Longitude, and Altitude arrays must be same length.')
+    @staticmethod
+    def GetAvailableEllps(idx=None):
+        """Returns the available ellps
+        """
+        ellps = pyproj.pj_ellps.keys()
+        # Now migrate WGSXX to front so that 84 is always default
+        wgs = ['WGS60','WGS66','WGS72', 'WGS84']
+        for i, name in enumerate(wgs):
+            oldindex = ellps.index(name)
+            ellps.insert(0, ellps.pop(oldindex))
+        if idx is not None: return ellps[idx]
+        return ellps
 
-    coords = np.empty((len(lat),3))
+    def __Convert2D(self, lon, lat, elev):
+        """Converts 2D Lon Lat coords to 2D XY UTM points"""
+        p = pyproj.Proj(proj='utm', zone=self.__zone, ellps=self.__ellps)
+        utm_x, utm_y = p(lon, lat)
+        return np.c_[utm_x, utm_y, elev]
 
-    for i in range(len(lat)):
-        (e, n, zN, zL) = utm.from_latlon(lat[i], lon[i])
-        coords[i,0] = e
-        coords[i,1] = n
-    coords[:,2] = alt
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        #### Perfrom task ####
+        # Get the Points over the NumPy interface
+        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
+        if not hasattr(wpdi, 'Points'):
+            raise _helpers.PVGeoError('Input data object does not have points to convert.')
+        coords = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+        # Now Conver the points
+        points = self.__Convert2D(coords[:, 0], coords[:, 1], coords[:, 2])
+        pdo.DeepCopy(interface.pointsToPolyData(points))
+        _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        return 1
 
-    pdo.ShallowCopy(PointsToPolyData(coords))
-    # Add other arrays to output appropriately
-    pdo = _helpers.copyArraysToPointData(pdi, pdo, fieldlat)
+    def SetZone(self, zone):
+        if zone < 1 or zone > 60:
+            raise _helpers.PVGeoError('Zone (%d) is invalid.' % zone)
+        if self.__zone != zone:
+            self.__zone = int(zone)
+            self.Modified()
 
-    return pdo
+    def SetEllps(self, ellps):
+        if isinstance(ellps, int):
+            ellps = self.GetAvailableEllps(idx=ellps)
+        if not isinstance(ellps, str):
+            raise _helpers.PVGeoError('Ellps must be a string.')
+        if self.__ellps != ellps:
+            self.__ellps = ellps
+            self.Modified()
+
 
 ###############################################################################
 
@@ -467,13 +441,15 @@ class ExtractPoints(FilterBase):
         f.SetInputData(pdi)
         f.Update()
         d = f.GetOutput()
-        pdo.ShallowCopy(PointsToPolyData(points))
+        pdo.ShallowCopy(interface.pointsToPolyData(points))
         _helpers.copyArraysToPointData(d, pdo, 0) # 0 is point data
         return 1
 
 
 
 class ExtractCellCenters(FilterBase):
+    __displayname__ = 'Extract Cell Centers'
+    __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self, nInputPorts=1, inputType='vtkDataSet',
                     nOutputPorts=1, outputType='vtkPolyData', **kwargs)
@@ -493,9 +469,35 @@ class ExtractCellCenters(FilterBase):
         keys = celldata.keys()
 
         # Make poly data of Cell centers:
-        pdo.DeepCopy(PointsToPolyData(centers))
+        pdo.DeepCopy(interface.pointsToPolyData(centers))
         for i, name in enumerate(keys):
             pdo.GetPointData().AddArray(pdi.GetCellData().GetArray(name))
+        return 1
+
+
+class AppendCellCenters(FilterPreserveTypeBase):
+    __displayname__ = 'Append Cell Centers'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterPreserveTypeBase.__init__(self, **kwargs)
+
+    def RequestData(self, request, inInfoVec, outInfoVec):
+        pdi = self.GetInputData(inInfoVec, 0, 0)
+        pdo = self.GetOutputData(outInfoVec, 0)
+        # Find cell centers
+        filt = vtk.vtkCellCenters()
+        filt.SetInputDataObject(pdi)
+        filt.Update()
+
+        # I use the dataset adapter/numpy interface because its easy
+        centers = dsa.WrapDataObject(filt.GetOutput()).Points
+        centers = interface.convertArray(centers)
+        centers.SetName('Cell Centers')
+
+        # Copy input data and add cell centers as tuple array
+        pdo.DeepCopy(pdi)
+        pdo.GetCellData().AddArray(centers)
+
         return 1
 
 
@@ -520,7 +522,7 @@ class IterateOverPoints(FilterBase):
     def _UpdateTimeSteps(self):
         """For internal use only
         """
-        self.__timesteps = _helpers.UpdateTimeSteps(self, self.__n, self.__dt)
+        self.__timesteps = _helpers.updateTimeSteps(self, self.__n, self.__dt)
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -532,10 +534,10 @@ class IterateOverPoints(FilterBase):
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         # Now grab point at this timestep
         pt = pdi.GetPoints().GetPoint(self.__tindex[i])
-        poly = PointsToPolyData(np.array(pt))
+        poly = interface.pointsToPolyData(np.array(pt))
         pdo.ShallowCopy(poly)
         return 1
 

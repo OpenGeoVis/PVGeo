@@ -4,13 +4,13 @@ __all__ = [
 ]
 
 import numpy as np
-from vtk.util import numpy_support as nps
 import vtk
 import os
 
 
 from ..base import WriterBase
 from .. import _helpers
+from .. import interface
 
 
 class ubcTensorMeshWriterBase(WriterBase):
@@ -62,7 +62,7 @@ class ubcTensorMeshWriterBase(WriterBase):
         # make up file names for models
         for i in range(grd.GetCellData().GetNumberOfArrays()):
             vtkarr = grd.GetCellData().GetArray(i)
-            arr = nps.vtk_to_numpy(vtkarr)
+            arr = interface.convertArray(vtkarr)
             arr = reshapeModel(arr)
             path = os.path.dirname(filename)
             fname = '%s/%s.mod' % (path, vtkarr.GetName().replace(' ', '_'))
@@ -90,9 +90,9 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
 
 
         # get the points and convert to spacings
-        xcoords = nps.vtk_to_numpy(grd.GetXCoordinates())
-        ycoords = nps.vtk_to_numpy(grd.GetYCoordinates())
-        zcoords = nps.vtk_to_numpy(grd.GetZCoordinates())
+        xcoords = interface.convertArray(grd.GetXCoordinates())
+        ycoords = interface.convertArray(grd.GetYCoordinates())
+        zcoords = interface.convertArray(grd.GetZCoordinates())
 
         # TODO: decide if 2D or 3D
 

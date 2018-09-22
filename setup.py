@@ -4,7 +4,7 @@ and ParaView.
 
 import setuptools
 
-__version__ = '1.1.26'
+__version__ = '1.1.28'
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -12,7 +12,7 @@ with open("README.md", "r") as f:
     idx = long_description.find('\n')
     long_description = '# *PVGeo*\n\n' + long_description[idx::]
 
-long_description
+
 setuptools.setup(
     name="PVGeo",
     version=__version__,
@@ -24,13 +24,14 @@ setuptools.setup(
     url="https://github.com/OpenGeoVis/PVGeo",
     packages=setuptools.find_packages(),
     install_requires=[
-        'numpy>=1.10',
+        'numpy>=1.13',
         'scipy>=1.1',
         #'vtk>=8.1',
         'colour-runner==0.0.5',
         'codecov==2.0.15',
         'pandas>=0.23.4',
         'mock>=2.0.0',
+        'pyproj>=1.9',
     ],
     classifiers=(
         "Programming Language :: Python",

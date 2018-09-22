@@ -9,6 +9,7 @@ import numpy as np
 # Import Helpers:
 from ..base import AlgorithmBase
 from .. import _helpers
+from .. import interface
 
 
 def _makeSpatialCellData(nx, ny, nz):
@@ -47,14 +48,12 @@ class CreateUniformGrid(AlgorithmBase):
         #pdo.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
         # Add CELL data
         data = _makeSpatialCellData(nx-1, ny-1, nz-1) # minus 1 b/c cell data not point data
-        data = _helpers.numToVTK(data, deep=True)
-        data.SetName('Spatial Cell Data')
+        data = interface.convertArray(data, name='Spatial Cell Data', deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetCellData().AddArray(data)
         # Add Point data
         data = _makeSpatialCellData(nx, ny, nz)
-        data = _helpers.numToVTK(data, deep=True)
-        data.SetName('Spatial Point Data')
+        data = interface.convertArray(data, name='Spatial Point Data', deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetPointData().AddArray(data)
         return 1
@@ -127,9 +126,9 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
         zcoords = np.linspace(self.__zrange[0], self.__zrange[1], num=nz)
 
         # CONVERT TO VTK #
-        xcoords = _helpers.numToVTK(xcoords,deep=True)
-        ycoords = _helpers.numToVTK(ycoords,deep=True)
-        zcoords = _helpers.numToVTK(zcoords,deep=True)
+        xcoords = interface.convertArray(xcoords,deep=True)
+        ycoords = interface.convertArray(ycoords,deep=True)
+        zcoords = interface.convertArray(zcoords,deep=True)
 
         pdo.SetDimensions(nx,ny,nz)
         pdo.SetXCoordinates(xcoords)
@@ -137,8 +136,7 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
         pdo.SetZCoordinates(zcoords)
 
         data = _makeSpatialCellData(nx-1, ny-1, nz-1)
-        data = _helpers.numToVTK(data, deep=True)
-        data.SetName('Spatial Data')
+        data = interface.convertArray(data, name='Spatial Data', deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetCellData().AddArray(data)
         return 1

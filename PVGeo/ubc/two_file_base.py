@@ -3,11 +3,13 @@ __all__ = [
     'ModelAppenderBase',
 ]
 
-from .. import _helpers
-from .. import base
 # Outside Imports:
 import numpy as np
+import pandas as pd
 import vtk
+# Import helpers
+from .. import base
+from .. import _helpers
 
 ###############################################################################
 
@@ -113,16 +115,17 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         Return:
             np.array : Returns a NumPy float array that holds the model data read from the file. Use the ``PlaceModelOnMesh()`` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
         """
+        # Check if recurssion needed
         if type(FileName) is list:
             out = {}
             for f in FileName:
-                out[os.path.basename(f)] = TensorMeshReader.ubcModel3D(f)
+                out[os.path.basename(f)] = ubcMeshReaderBase.ubcModel3D(f)
             return out
+        # Perform IO
         try:
-            fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
+            data = np.genfromtxt(FileName, dtype=np.float, comments='!')
         except (FileNotFoundError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
-        data = np.genfromtxt((line.encode('utf8') for line in fileLines), dtype=np.float)
         return data
 
 
@@ -163,7 +166,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         self.__inTimesteps = None
 
     def __SetInputTimesteps(self):
-        ints = _helpers.GetInputTimeSteps(self)
+        ints = _helpers.getInputTimeSteps(self)
         self.__inTimesteps = list(ints) if ints is not None else []
         return self.__inTimesteps
 
@@ -191,7 +194,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         """For internal use only: appropriately sets the timesteps.
         """
         if len(self._modelFileNames) > 0 and len(self._modelFileNames) > len(self.__inTimesteps):
-            self.__timesteps = _helpers.UpdateTimeSteps(self, self._modelFileNames, self.__dt)
+            self.__timesteps = _helpers.updateTimeSteps(self, self._modelFileNames, self.__dt)
         # Just use input's time steps which is set by pipeline
         return 1
 
@@ -210,7 +213,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         output = self.GetOutputData(outInfo, 0)
         output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         # Perfrom task:
         if self.__needToRead:
             self._ReadUpFront()

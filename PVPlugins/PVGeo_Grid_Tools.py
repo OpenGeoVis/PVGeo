@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.26'
+paraview_plugin_version = '1.1.28'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -121,6 +121,10 @@ class PVGeoExtractTopography(ExtractTopography):
         ExtractTopography.__init__(self)
 
     #### Seters and Geters ####
+
+    @smproperty.doublevector(name="Tolerance", default_values=1.0)
+    def SetTolerance(self, tol):
+        ExtractTopography.SetTolerance(self, tol)
 
 ###############################################################################
 

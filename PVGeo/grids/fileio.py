@@ -9,8 +9,6 @@ __all__ = [
 # NOTE: Surfer no data value: 1.70141E+38
 
 import vtk
-from vtk.util import numpy_support as nps
-from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np
 import pandas as pd
 
@@ -25,6 +23,7 @@ else:
 from ..base import WriterBase
 from ..readers import DelimitedTextReader
 from .. import _helpers
+from .. import interface
 
 
 #------------------------------------------------------------------------------
@@ -105,7 +104,7 @@ class SurferGridReader(DelimitedTextReader):
             self._ReadUpFront()
 
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
 
         # Build the data object
         output.SetOrigin(self.__xrng[0], self.__yrng[0], 0.0)
@@ -116,8 +115,7 @@ class SurferGridReader(DelimitedTextReader):
 
         # Now add data values as point data
         data = self._GetRawData(idx=i).values.reshape((self.__nx, self.__ny)).flatten(order='F')
-        vtkarr = _helpers.numToVTK(data)
-        vtkarr.SetName(self.__dataName)
+        vtkarr = interface.convertArray(data, name=self.__dataName)
         output.GetPointData().AddArray(vtkarr)
 
         return 1
@@ -176,7 +174,7 @@ class WriteImageDataToSurfer(WriterBase):
         # Note user has to select a single array to save out
         field, name = self.__inputArray[0], self.__inputArray[1]
         vtkarr = _helpers.getVTKArray(img, field, name)
-        arr = nps.vtk_to_numpy(vtkarr)
+        arr = interface.convertArray(vtkarr)
         dmin, dmax = arr.min(), arr.max()
 
         arr = arr.reshape((nx, ny), order='F')
@@ -210,7 +208,7 @@ class WriteImageDataToSurfer(WriterBase):
 
     def Apply(self, inputDataObject, arrayName):
         self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
         return self.GetOutput()
@@ -220,7 +218,7 @@ class WriteImageDataToSurfer(WriterBase):
         if inputDataObject:
             self.SetInputDataObject(inputDataObject)
             if arrayName:
-                arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+                arr, field = _helpers.searchForArray(inputDataObject, arrayName)
                 self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Modified()
         self.Update()
@@ -291,7 +289,7 @@ class EsriGridReader(DelimitedTextReader):
             self._ReadUpFront()
 
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
 
         # Build the data object
         output.SetOrigin(self.__xo, self.__yo, 0.0)
@@ -300,8 +298,7 @@ class EsriGridReader(DelimitedTextReader):
 
         # Now add data values as point data
         data = self._GetRawData(idx=i).flatten(order='F')
-        vtkarr = nps.numpy_to_vtk(data)
-        vtkarr.SetName(self.__dataName)
+        vtkarr = interface.convertArray(data, name=self.__dataName)
         output.GetPointData().AddArray(vtkarr)
 
         return 1

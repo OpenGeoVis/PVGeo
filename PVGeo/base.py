@@ -202,7 +202,7 @@ class ReaderBase(ReaderBaseBase):
         """For internal use only: appropriately sets the timesteps.
         """
         if len(self.GetFileNames()) > 1:
-            self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetFileNames(), self.__dt)
+            self.__timesteps = _helpers.updateTimeSteps(self, self.GetFileNames(), self.__dt)
         return 1
 
     #### Algorithm Methods ####
@@ -283,7 +283,7 @@ class TwoFileReaderBase(AlgorithmBase):
         """For internal use only
         """
         if len(self.__modelFileNames) > 0:
-            self.__timesteps = _helpers.UpdateTimeSteps(self, self.__modelFileNames, self.__dt)
+            self.__timesteps = _helpers.updateTimeSteps(self, self.__modelFileNames, self.__dt)
         return 1
 
     def NeedToReadMesh(self, flag=None):

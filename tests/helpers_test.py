@@ -1,4 +1,4 @@
-import unittest
+from base import TestBase
 import numpy as np
 import pandas as pd
 
@@ -9,11 +9,12 @@ from vtk.numpy_interface import dataset_adapter as dsa
 # Functionality to test:
 from PVGeo._helpers import xml
 from PVGeo import _helpers
+from PVGeo import interface
 
 
 RTOL = 0.000001
 
-class TestTableToGrid(unittest.TestCase):
+class TestTableToGrid(TestBase):
     """
     Test the XML Helpers to make sure no errors are thrown
     """
@@ -33,7 +34,7 @@ class TestTableToGrid(unittest.TestCase):
         return
 
 
-class TestDataFrameConversions(unittest.TestCase):
+class TestDataFrameConversions(TestBase):
     """
     Test the pandas DataFrames conversions to VTK data objects
     """
@@ -43,7 +44,7 @@ class TestDataFrameConversions(unittest.TestCase):
         data = np.random.rand(100, len(names))
         df = pd.DataFrame(data=data, columns=names)
         table = vtk.vtkTable()
-        _helpers.DataFrameToTable(df, table)
+        interface.dataFrameToTable(df, table)
         wtbl = dsa.WrapDataObject(table)
         # Now check the vtkTable
         for i, name in enumerate(names):
@@ -52,6 +53,11 @@ class TestDataFrameConversions(unittest.TestCase):
             # Check data contents
             arr = wtbl.RowData[name]
             self.assertTrue(np.allclose(arr, df[name].values, rtol=RTOL))
+
+        # Now test backwards compatability
+        dfo = interface.tableToDataFrame(table)
+        self.assertTrue(df.equals(dfo))
+        return
 
 
 

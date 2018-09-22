@@ -11,7 +11,7 @@ from .. import _helpers
 class EarthSource(AlgorithmBase):
     """A simple data source to produce a ``vtkEarthSource``
     """
-    __displayname__ = 'GSLib Table Reader'
+    __displayname__ = 'Earth Source'
     __category__ = 'source'
     def __init__(self, radius=6371.0):
         AlgorithmBase.__init__(self,

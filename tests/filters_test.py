@@ -1,10 +1,11 @@
-import unittest
+from base import TestBase
 import numpy as np
 
 # VTK imports:
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 from PVGeo import _helpers
+from PVGeo import interface
 
 # Functionality to test:
 from PVGeo.filters import *
@@ -15,11 +16,12 @@ RTOL = 0.000001
 ###############################################################################
 ###############################################################################
 
-class TestCombineTables(unittest.TestCase):
+class TestCombineTables(TestBase):
     """
     Test the `CombineTables` filter
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create some input tables
         self.t0 = vtk.vtkTable()
         self.t1 = vtk.vtkTable()
@@ -30,9 +32,9 @@ class TestCombineTables(unittest.TestCase):
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
         self.arrs[2] = np.random.random(self.n) # Table 1
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[1], self.titles[1]))
-        self.t1.AddColumn(_helpers.numToVTK(self.arrs[2], self.titles[2]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
+        self.t1.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
         # Now use the `CombineTables` filter:
         f = CombineTables()
         f.SetInputDataObject(0, self.t0)
@@ -64,11 +66,12 @@ class TestCombineTables(unittest.TestCase):
 ###############################################################################
 
 
-class TestReshapeTable(unittest.TestCase):
+class TestReshapeTable(TestBase):
     """
     Test the `ReshapeTable` filter
     """
     def setUp(self):
+        TestBase.setUp(self)
         # Create some input tables
         self.t0 = vtk.vtkTable()
         # Populate the tables
@@ -80,9 +83,9 @@ class TestReshapeTable(unittest.TestCase):
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
         self.arrs[2] = np.random.random(self.n) # Table 1
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[1], self.titles[1]))
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[2], self.titles[2]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
         return
 
 
@@ -185,7 +188,7 @@ ROTATED_TEXT = """326819.497,4407450.636,1287.5
 
 ROTATED_POINTS = np.genfromtxt((line.encode('utf8') for line in ROTATED_TEXT.split('\n')), delimiter=',''', dtype=float)
 
-class TestRotationTool(unittest.TestCase):
+class TestRotationTool(TestBase):
     """
     Test the `RotationTool` filter
     """
@@ -201,7 +204,8 @@ class TestRotationTool(unittest.TestCase):
     # ])
 
     def setUp(self):
-        self.RTOL = 0.00001 # As higi as rotation precision can get
+        TestBase.setUp(self)
+        self.RTOL = 0.00001 # As high as rotation precision can get
         return
 
 
@@ -239,11 +243,12 @@ class TestRotationTool(unittest.TestCase):
 
 
 
-class TestRotatePoints(unittest.TestCase):
+class TestRotatePoints(TestBase):
     """
     Test the `RotatePoints` filter
     """
     def setUp(self):
+        TestBase.setUp(self)
         self.RTOL = 0.00001 # As higi as rotation precision can get
         x = np.array([0.0,1.0,0.0])
         y = np.array([0.0,0.0,1.0])
@@ -252,7 +257,7 @@ class TestRotatePoints(unittest.TestCase):
         y = np.reshape(y, (len(y), -1))
         z = np.reshape(z, (len(z), -1))
         self.pts = np.concatenate((x,y,z), axis=1)
-        self.vtkpoints = PointsToPolyData(self.pts)
+        self.vtkpoints = interface.pointsToPolyData(self.pts)
         return
 
     def test_rotation(self):
@@ -270,7 +275,7 @@ class TestRotatePoints(unittest.TestCase):
 ###############################################################################
 
 
-class TestVoxelizePoints(unittest.TestCase):
+class TestVoxelizePoints(TestBase):
     """
     Test the `VoxelizePoints` filter
     """
@@ -284,7 +289,7 @@ class TestVoxelizePoints(unittest.TestCase):
         y = np.reshape(y, (len(y), -1))
         z = np.reshape(z, (len(z), -1))
         pts = np.concatenate((x,y,z), axis=1)
-        vtkpoints = PointsToPolyData(pts)
+        vtkpoints = interface.pointsToPolyData(pts)
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
@@ -302,7 +307,7 @@ class TestVoxelizePoints(unittest.TestCase):
     def test_simple_rotated_case(self):
         """`VoxelizePoints`: simple rotated case"""
         pts = ROTATED_POINTS
-        vtkpoints = PointsToPolyData(ROTATED_POINTS)
+        vtkpoints = interface.pointsToPolyData(ROTATED_POINTS)
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
@@ -325,8 +330,8 @@ class TestVoxelizePoints(unittest.TestCase):
         # Convert to XYZ points
         points = np.vstack(map(np.ravel, g)).T
         rand = np.random.random(len(points))
-        vtkpoints = PointsToPolyData(points)
-        vtkpoints.GetPointData().AddArray(_helpers.numToVTK(rand, 'Random'))
+        vtkpoints = interface.pointsToPolyData(points)
+        vtkpoints.GetPointData().AddArray(interface.convertArray(rand, 'Random'))
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
@@ -362,7 +367,7 @@ class TestVoxelizePoints(unittest.TestCase):
 ###############################################################################
 
 
-class TestExtractPoints(unittest.TestCase):
+class TestExtractPoints(TestBase):
     """
     Test the `ExtractPoints` filter
     """
@@ -380,12 +385,13 @@ class TestExtractPoints(unittest.TestCase):
 
 ###############################################################################
 
-class TestArrayMath(unittest.TestCase):
+class TestArrayMath(TestBase):
     """
     Test the `ArrayMath` filter
     """
 
     def setUp(self):
+        TestBase.setUp(self)
         # Create some input tables
         self.t0 = vtk.vtkTable()
         # Populate the tables
@@ -394,8 +400,8 @@ class TestArrayMath(unittest.TestCase):
         self.titles = ('Array 0', 'Array 1')
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[1], self.titles[1]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
         return
 
     def test_get_operations(self):
@@ -469,19 +475,20 @@ class TestArrayMath(unittest.TestCase):
 
 ###############################################################################
 
-class TestNormalizeArray(unittest.TestCase):
+class TestNormalizeArray(TestBase):
     """
     Test the `NormalizeArray` filter
     """
 
     def setUp(self):
+        TestBase.setUp(self)
         # Create some input tables
         self.t0 = vtk.vtkTable()
         # Populate the tables
         self.n = 400
         self.title = 'Array 0'
         self.arr = np.random.random(self.n) # Table 0
-        self.t0.AddColumn(_helpers.numToVTK(self.arr, self.title))
+        self.t0.AddColumn(interface.convertArray(self.arr, self.title))
         return
 
     def test_get_operations(self):
@@ -536,7 +543,7 @@ class TestNormalizeArray(unittest.TestCase):
 
 ###############################################################################
 
-class TestAddCellConnToPoints(unittest.TestCase):
+class TestAddCellConnToPoints(TestBase):
     """
     Test the `AddCellConnToPoints` filter
     """
@@ -549,7 +556,7 @@ class TestAddCellConnToPoints(unittest.TestCase):
         y = np.reshape(y, (len(y), -1))
         z = np.reshape(z, (len(z), -1))
         self.pts = np.concatenate((x,y,z), axis=1)
-        self.vtkpoints = PointsToPolyData(self.pts)
+        self.vtkpoints = interface.pointsToPolyData(self.pts)
 
     def makeComplicatedInput(self, shuffle=True):
         def path1(y):
@@ -572,7 +579,7 @@ class TestAddCellConnToPoints(unittest.TestCase):
 
         np.random.shuffle(coords)
         self.pts = coords
-        self.vtkpoints = PointsToPolyData(self.pts)
+        self.vtkpoints = interface.pointsToPolyData(self.pts)
 
     def test_poly_line(self):
         self.makeSimpleInput()
@@ -623,7 +630,7 @@ class TestAddCellConnToPoints(unittest.TestCase):
 
 ###############################################################################
 
-class TestPointsToTube(unittest.TestCase):
+class TestPointsToTube(TestBase):
     """
     Test the `PointsToTube` filter
     """
@@ -648,7 +655,7 @@ class TestPointsToTube(unittest.TestCase):
 
         np.random.shuffle(coords)
         self.pts = coords
-        self.vtkpoints = PointsToPolyData(self.pts)
+        self.vtkpoints = interface.pointsToPolyData(self.pts)
 
     def test_(self):
         """`PointsToTube`: Test generation of tube from shuffled points"""
@@ -663,11 +670,26 @@ class TestPointsToTube(unittest.TestCase):
         self.assertEqual(10, output.GetNumberOfCells())
         self.assertEqual(10*len(self.pts), output.GetNumberOfPoints())
 
-
+###############################################################################
+#
+# class TestLonLatToUTM(TestBase):
+#     """
+#     Test the `LonLatToUTM` filter
+#     """
+#
+#     def test_conversion(self):
+#         fname = '/Users/bane/Documents/OpenGeoVis/Data/data_open/NGDC/zone11.csv'
+#         import pandas as pd
+#         data = pd.read_csv(fname)
+#         points = interface.pointsToPolyData(data[['lon', 'lat', 'idx', 'val']])
+#         good = LonLatToUTM(zone=11).Apply(points)
+#         return
+#
+#
 # ###############################################################################
 #
 #
-# class TestManySlicesAlongPoints(unittest.TestCase):
+# class TestManySlicesAlongPoints(TestBase):
 #     """
 #     Test the `ManySlicesAlongPoints` filter
 #     """
@@ -679,7 +701,7 @@ class TestPointsToTube(unittest.TestCase):
 #
 # ###############################################################################
 #
-# class TestManySlicesAlongAxis(unittest.TestCase):
+# class TestManySlicesAlongAxis(TestBase):
 #     """
 #     Test the `ManySlicesAlongAxis` filter
 #     """
@@ -690,7 +712,7 @@ class TestPointsToTube(unittest.TestCase):
 #
 # ###############################################################################
 #
-# class TestSliceThroughTime(unittest.TestCase):
+# class TestSliceThroughTime(TestBase):
 #     """
 #     Test the `SliceThroughTime` filter
 #     """
@@ -701,7 +723,7 @@ class TestPointsToTube(unittest.TestCase):
 #
 # ###############################################################################
 #
-# class TestExtractPoints(unittest.TestCase):
+# class TestExtractPoints(TestBase):
 #     """
 #     Test the `ExtractPoints` filter
 #     """
@@ -713,7 +735,7 @@ class TestPointsToTube(unittest.TestCase):
 # ###############################################################################
 
 
-# class TestPercentThreshold(unittest.TestCase):
+# class TestPercentThreshold(TestBase):
 #     """
 #     Test the `PercentThreshold` filter
 #     """

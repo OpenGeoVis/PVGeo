@@ -1,6 +1,7 @@
 __all__ = [
     'ManySlicesAlongPoints',
     'ManySlicesAlongAxis',
+    'SlideSliceAlongPoints',
     'SliceThroughTime'
 ]
 
@@ -11,6 +12,7 @@ from datetime import datetime
 # Import Helpers:
 from ..base import FilterBase
 from .. import _helpers
+from .. import interface
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
@@ -79,10 +81,10 @@ class ManySlicesAlongPoints(_SliceBase):
     """
     __displayname__ = 'Many Slices Along Points'
     __category__ = 'filter'
-    def __init__(self, numSlices=5, nearestNbr=True):
+    def __init__(self, numSlices=5, nearestNbr=True, outputType='vtkMultiBlockDataSet'):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=2, inputType='vtkDataSet',
-            nOutputPorts=1, outputType='vtkMultiBlockDataSet')
+            nOutputPorts=1, outputType=outputType)
         self.__useNearestNbr = nearestNbr
 
     # CRITICAL for multiple input ports
@@ -95,9 +97,9 @@ class ManySlicesAlongPoints(_SliceBase):
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), typ)
         return 1
 
-    def _ManySlicesAlongPoints(self, pdipts, pdidata, output):
-        """Internal helper to perfrom the filter
-        """
+    def _GetPlanes(self, pdipts):
+        if self.GetNumberOfSlices() == 0:
+            return []
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdipts) # NumPy wrapped points
         points = np.array(wpdi.Points) # New NumPy array of points so we dont destroy input
@@ -110,9 +112,7 @@ class ManySlicesAlongPoints(_SliceBase):
             ptsi = [i for i in range(numPoints)]
 
         # Iterate of points in order (skips last point):
-        # Set number of blocks based on user choice in the selction
-        output.SetNumberOfBlocks(self.GetNumberOfSlices())
-        blk = 0
+        planes = []
         for i in range(0, numPoints - 1, numPoints//self.GetNumberOfSlices()):
             # get normal
             pts1 = points[ptsi[i]]
@@ -120,9 +120,20 @@ class ManySlicesAlongPoints(_SliceBase):
             x1, y1, z1 = pts1[0], pts1[1], pts1[2]
             x2, y2, z2 = pts2[0], pts2[1], pts2[2]
             normal = [x2-x1,y2-y1,z2-z1]
-
-            # create slice
+            # create plane
             plane = self._GeneratePlane([x1,y1,z1], normal)
+            planes.append(plane)
+
+        return planes
+
+    def _GetSlice(self, pdipts, pdidata, planes, output):
+        """Internal helper to perfrom the filter
+        """
+        numPoints = pdipts.GetNumberOfPoints()
+        # Set number of blocks based on user choice in the selction
+        output.SetNumberOfBlocks(self.GetNumberOfSlices())
+        blk = 0
+        for i, plane in enumerate(planes):
             temp = vtk.vtkPolyData()
             self._Slice(pdidata, temp, plane)
             output.SetBlock(blk, temp)
@@ -138,7 +149,8 @@ class ManySlicesAlongPoints(_SliceBase):
         pdidata = self.GetInputData(inInfo, 1, 0) # Port 1: sliceable data
         output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
         # Perfrom task
-        self._ManySlicesAlongPoints(pdipts, pdidata, output)
+        planes = self._GetPlanes(pdipts)
+        self._GetSlice(pdipts, pdidata, planes, output)
         return 1
 
 
@@ -157,6 +169,66 @@ class ManySlicesAlongPoints(_SliceBase):
         self.SetInputDataObject(1, data)
         self.Update()
         return self.GetOutput()
+
+
+###############################################################################
+
+class SlideSliceAlongPoints(ManySlicesAlongPoints):
+    """Takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at specified locations along that path along the vector of that path at that point. This constructs one slice through the input dataset which the user can translate via a slider bar in ParaView.
+
+    Note:
+        * Make sure the input data source is slice-able.
+        * The SciPy module is required for this filter.
+    """
+    __displayname__ = 'Slide Slice Along Points'
+    __category__ = 'filter'
+    def __init__(self, numSlices=5, nearestNbr=True):
+        ManySlicesAlongPoints.__init__(self, outputType='vtkPolyData')
+        self.__planes = None
+        self.__loc = 50 # Percent (halfway)
+
+
+    def _GetSlice(self, pdipts, pdidata, planes, output):
+        """Internal helper to perfrom the filter
+        """
+        if not isinstance(planes, vtk.vtkPlane):
+            raise _helpers.PVGeoError('``_GetSlice`` can only handle one plane.')
+        numPoints = pdipts.GetNumberOfPoints()
+        # Set number of blocks based on user choice in the selction
+        self._Slice(pdidata, output, planes)
+        return output
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
+        # Get input/output of Proxy
+        pdipts = self.GetInputData(inInfo, 0, 0) # Port 0: points
+        pdidata = self.GetInputData(inInfo, 1, 0) # Port 1: sliceable data
+        output = vtk.vtkPolyData.GetData(outInfo, 0)
+        # Perfrom task
+        if self.__planes is None or len(self.__planes) < 1:
+            self.SetNumberOfSlices(pdipts.GetNumberOfPoints())
+            self.__planes = self._GetPlanes(pdipts)
+        idx = int(np.floor(pdipts.GetNumberOfPoints() * float(self.__loc / 100.0)))
+        self._GetSlice(pdipts, pdidata, self.__planes[idx], output)
+        return 1
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        pdipts = self.GetInputData(inInfo, 0, 0) # Port 0: points
+        self.SetNumberOfSlices(pdipts.GetNumberOfPoints())
+        self.__planes = self._GetPlanes(pdipts)
+        return 1
+
+    def SetLocation(self, loc):
+        """Set the location along the input line for the slice location as a percent (0, 99)."""
+        if (loc > 99 or loc < 0):
+            raise _helpers.PVGeoError('Location must be given as a percentage along input path.')
+        if self.__loc != loc:
+            self.__loc = loc
+            self.Modified()
+
+    def GetLocation(self):
+        return self.__loc
 
 
 ###############################################################################
@@ -299,7 +371,7 @@ class SliceThroughTime(ManySlicesAlongAxis):
     def _UpdateTimeSteps(self):
         """For internal use only
         """
-        self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetNumberOfSlices(), self.__dt)
+        self.__timesteps = _helpers.updateTimeSteps(self, self.GetNumberOfSlices(), self.__dt)
 
 
 
@@ -312,7 +384,7 @@ class SliceThroughTime(ManySlicesAlongAxis):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         self._SetAxialRange(pdi)
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         # Perfrom task
         normal = self.GetNormal()
         origin = self._GetOrigin(pdi, i)

@@ -9,11 +9,11 @@ __all__ = [
 import vtk
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
-from vtk.util import numpy_support as nps
 from datetime import datetime
 # Import Helpers:
 from ..base import FilterBase, FilterPreserveTypeBase
 from .. import _helpers
+from .. import interface
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
@@ -123,13 +123,12 @@ class ArrayMath(FilterPreserveTypeBase):
         carr = self.__operation(arr1, arr2)
         # Apply the multiplier
         carr *= self.__multiplier
-        # Convert to a VTK array
-        c = _helpers.numToVTK(carr)
         # If no name given for data by user, use operator name
         newName = self.__newName
         if newName == '':
             newName = 'Mathed Up'
-        c.SetName(newName)
+        # Convert to a VTK array
+        c = interface.convertArray(carr, name=newName)
         # Build output
         pdo.DeepCopy(pdi)
         pdo = _helpers.addArray(pdo, field1, c)
@@ -189,8 +188,8 @@ class ArrayMath(FilterPreserveTypeBase):
 
     def Apply(self, inputDataObject, arrayName0, arrayName1):
         self.SetInputDataObject(inputDataObject)
-        arr0, field0 = _helpers.SearchForArray(inputDataObject, arrayName0)
-        arr1, field1 = _helpers.SearchForArray(inputDataObject, arrayName1)
+        arr0, field0 = _helpers.searchForArray(inputDataObject, arrayName0)
+        arr1, field1 = _helpers.searchForArray(inputDataObject, arrayName1)
         self.SetInputArrayToProcess(0, 0, 0, field0, arrayName0)
         self.SetInputArrayToProcess(1, 0, 0, field1, arrayName1)
         self.Update()
@@ -349,7 +348,7 @@ class NormalizeArray(FilterPreserveTypeBase):
     def _Normalize(self, pdi, pdo):
         """Perform normalize on a data array for any given VTK data object.
         """
-        # Get inout array
+        # Get input array
         field, name = self.__inputArray[0], self.__inputArray[1]
         #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
@@ -362,13 +361,12 @@ class NormalizeArray(FilterPreserveTypeBase):
         arr = self.__normalization(arr)
         # Apply the multiplier
         arr *= self.__multiplier
-        # Convert to VTK array
-        c = _helpers.numToVTK(arr)
         # If no name given for data by user, use operator name
         newName = self.__newName
         if newName == '':
             newName = 'Normalized ' + name
-        c.SetName(newName)
+        # Convert to VTK array
+        c = interface.convertArray(arr, name=newName)
         # Build output
         pdo.DeepCopy(pdi)
         pdo = _helpers.addArray(pdo, field, c)
@@ -410,7 +408,7 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     def Apply(self, inputDataObject, arrayName):
         self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
         return self.GetOutput()
@@ -573,9 +571,9 @@ class AddCellConnToPoints(FilterBase):
                 vtkarr = pdi.GetCellData().GetArray(i)
                 name = vtkarr.GetName()
                 if nrNbr:
-                    arr = nps.vtk_to_numpy(vtkarr)
+                    arr = interface.convertArray(vtkarr)
                     arr = arr[ind]
-                    vtkarr = _helpers.numToVTK(arr, name=name)
+                    vtkarr = interface.convertArray(arr, name=name)
                 pdo.GetCellData().AddArray(vtkarr)
         return pdo
 
@@ -758,7 +756,9 @@ class PercentThreshold(FilterBase):
 
     def Apply(self, inputDataObject, arrayName):
         self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
         return self.GetOutput()
+
+###############################################################################

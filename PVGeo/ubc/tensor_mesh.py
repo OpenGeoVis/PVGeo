@@ -6,10 +6,17 @@ __all__ = [
 import numpy as np
 import vtk
 import os
+import pandas as pd
+import sys
+if sys.version_info < (3,):
+    from StringIO import StringIO
+else:
+    from io import StringIO
 
 from ..base import AlgorithmBase
 from .two_file_base import ubcMeshReaderBase, ModelAppenderBase
 from .. import _helpers
+from .. import interface
 
 
 
@@ -65,16 +72,24 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Swap axes because VTK structures the coordinates a bit differently
         #-  This is absolutely crucial!
         #-  Do not play with unless you know what you are doing!
-        model = np.reshape(model, (n1,n2,n3))
-        model = np.swapaxes(model,0,1)
-        model = np.swapaxes(model,0,2)
-        # Now reverse Z axis
-        model = model[::-1,:,:] # Note it is in Fortran ordering
-        model = model.flatten()
+        if model.ndim > 1 and model.ndim < 3:
+            ncomp = model.shape[1]
+            model = np.reshape(model, (n1, n2, n3, ncomp))
+            model = np.swapaxes(model,0,1)
+            model = np.swapaxes(model,0,2)
+            # Now reverse Z axis
+            model = model[::-1,:,:,:] # Note it is in Fortran ordering
+            model = np.reshape(model, (n1*n2*n3, ncomp))
+        else:
+            model = np.reshape(model, (n1,n2,n3))
+            model = np.swapaxes(model,0,1)
+            model = np.swapaxes(model,0,2)
+            # Now reverse Z axis
+            model = model[::-1,:,:] # Note it is in Fortran ordering
+            model = model.flatten()
 
         # Convert data to VTK data structure and append to output
-        c = _helpers.numToVTK(model,deep=True)
-        c.SetName(dataNm)
+        c = interface.convertArray(model, name=dataNm, deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)
         return mesh
@@ -118,11 +133,11 @@ class TensorMeshReader(ubcMeshReaderBase):
             c = np.array(c,dtype=float)
             if z:
                 c = -c[::-1]
-            return _helpers.numToVTK(c,deep=True)
+            return interface.convertArray(c,deep=True)
 
         xcoords = _genCoords(xpts, xdisc)
         zcoords = _genCoords(zpts, zdisc, z=True)
-        ycoords = _helpers.numToVTK(np.zeros(1),deep=True)
+        ycoords = interface.convertArray(np.zeros(1),deep=True)
 
         output.SetDimensions(nx,2,nz) # note this subtracts 1
         output.SetXCoordinates(xcoords)
@@ -140,6 +155,9 @@ class TensorMeshReader(ubcMeshReaderBase):
 
         Return:
             np.array : a NumPy float array that holds the model data read from the file. Use the ``PlaceModelOnMesh()`` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
+
+        Note:
+            Only supports single component data
         """
         if type(FileName) is list:
             out = {}
@@ -147,9 +165,10 @@ class TensorMeshReader(ubcMeshReaderBase):
                 out[os.path.basename(f)] = TensorMeshReader.ubcModel2D(f)
             return out
 
-        fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
-        dim = np.array(fileLines[0].split(), dtype=int)
-        data = np.genfromtxt((line.encode('utf8') for line in fileLines[1::]), dtype=np.float)
+        dim = np.genfromtxt(FileName, dtype=int, delimiter=None, comments='!', max_rows=1)
+        names = ['col%d' % i for i in range(dim[0])]
+        df = pd.read_csv(FileName, names=names, delim_whitespace=True, skiprows=1, comment='!')
+        data = df.values
         if np.shape(data)[0] != dim[1] and np.shape(data)[1] != dim[0]:
             raise _helpers.PVGeoError('Mode file `%s` improperly formatted.' % FileName)
         return data.flatten(order='F')
@@ -238,9 +257,9 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Set the dims and coordinates for the output
         output.SetDimensions(dim[0],dim[1],dim[2])
         # Convert to VTK array for setting coordinates
-        output.SetXCoordinates(_helpers.numToVTK(cox,deep=True))
-        output.SetYCoordinates(_helpers.numToVTK(coy,deep=True))
-        output.SetZCoordinates(_helpers.numToVTK(coz,deep=True))
+        output.SetXCoordinates(interface.convertArray(cox,deep=True))
+        output.SetYCoordinates(interface.convertArray(coy,deep=True))
+        output.SetZCoordinates(interface.convertArray(coz,deep=True))
 
         return output
 
@@ -289,7 +308,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         self.__ubcTensorMesh(
             self.GetMeshFileName(),
             self.GetModelFileNames(),

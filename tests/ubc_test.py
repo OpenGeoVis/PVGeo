@@ -1,4 +1,4 @@
-import unittest
+from base import TestBase
 import shutil
 import tempfile
 import os
@@ -15,7 +15,7 @@ RTOL = 0.000001
 
 ###############################################################################
 
-class ubcMeshTesterBase(unittest.TestCase):
+class ubcMeshTesterBase(TestBase):
 
     def _check_shape(self, grid):
         self.assertEqual(grid.GetExtent(), self.extent)
@@ -61,7 +61,22 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         model = model.flatten()
         return fname, model
 
+    def _write_model_multi(self, fname='test.fld'):
+        """writes a multi component model"""
+        fname = os.path.join(self.test_dir, fname)
+        model = np.random.random((self.n, 3))
+        np.savetxt(fname, model, delimiter=' ', comments='! ')
+        shp = self.shape
+        model = np.reshape(model, (shp[0], shp[1], shp[2], 3) )
+        model = np.swapaxes(model,0,1)
+        model = np.swapaxes(model,0,2)
+        # Now reverse Z axis
+        model = model[::-1,:,:,:] # Note it is in Fortran ordering
+        model = np.reshape(model, (shp[0]*shp[1]*shp[2], 3))
+        return fname, model
+
     def setUp(self):
+        TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
         self.origin = (-350, -400, 0)
@@ -74,39 +89,55 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         self.dataName = 'foo'
         ##### Now generate output for testing ####
         # Produce data and write out files:
-        meshname = self._write_mesh()
-        modname, self.data = self._write_model()
+        self.meshname = self._write_mesh()
+        self.modname, self.data = self._write_model()
+        self.modname_multi, self.data_multi = self._write_model_multi()
         # Set up the reader:
         reader = TensorMeshReader()
-        reader.SetMeshFileName(meshname)
+        reader.SetMeshFileName(self.meshname)
         # Get and test output:
         reader.Update() # Read only mesh upfront
-        reader.AddModelFileName(modname)
+        reader.AddModelFileName(self.modname)
         reader.SetDataName(self.dataName)
         reader.Update() # Read models upfront
         self.GRID = reader.GetOutput()
+        #### Now read mesh with multi component data
+        # Set up the reader:
+        reader = TensorMeshReader()
+        reader.SetMeshFileName(self.meshname)
+        # Get and test output:
+        reader.Update() # Read only mesh upfront
+        reader.AddModelFileName(self.modname_multi)
+        reader.SetDataName(self.dataName)
+        reader.Update() # Read models upfront
+        self.GRID_MULTI = reader.GetOutput()
 
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
     ###########################################
 
     def test_grid_spatial_reference(self):
         """`TensorMeshReader` 3D: Spatial reference"""
         self._check_spatial_reference(self.GRID)
+        self._check_spatial_reference(self.GRID_MULTI)
 
     def test_grid_shape(self):
         """`TensorMeshReader` 3D: Shape of output grid"""
         self._check_shape(self.GRID)
+        self._check_shape(self.GRID_MULTI)
 
     def test_grid_data(self):
         """`TensorMeshReader` 3D: Data fidelity"""
         self._check_data(self.GRID, self.data)
+        self._check_data(self.GRID_MULTI, self.data_multi)
 
     def test_grid_data_name(self):
         """`TensorMeshReader` 3D: Data array name"""
         self.assertEqual(self.GRID.GetCellData().GetArrayName(0), self.dataName)
+        self.assertEqual(self.GRID_MULTI.GetCellData().GetArrayName(0), self.dataName)
 
     def test_model_appender(self):
         """`TensorMeshAppender` 3D: Data array name"""
@@ -174,6 +205,7 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
         return fname, model
 
     def setUp(self):
+        TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
         self.mesh = """9
@@ -226,6 +258,7 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
     ###########################################
 
@@ -266,6 +299,7 @@ class TestOcTreeMeshReader(ubcMeshTesterBase):
     """
 
     def setUp(self):
+        TestBase.setUp(self)
         self.test_dir = tempfile.mkdtemp()
         treeMesh = """16 16 16
 0.0000 0.0000 48.0000
@@ -321,6 +355,7 @@ class TestOcTreeMeshReader(ubcMeshTesterBase):
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
+        TestBase.tearDown(self)
 
     def reshapeArrs(self, mesh):
         for i in range(self.nt):
