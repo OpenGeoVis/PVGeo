@@ -5,6 +5,7 @@ import numpy as np
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 from PVGeo import _helpers
+from PVGeo import interface
 
 # Functionality to test:
 from PVGeo.filters import *
@@ -31,9 +32,9 @@ class TestCombineTables(TestBase):
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
         self.arrs[2] = np.random.random(self.n) # Table 1
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[1], self.titles[1]))
-        self.t1.AddColumn(_helpers.numToVTK(self.arrs[2], self.titles[2]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
+        self.t1.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
         # Now use the `CombineTables` filter:
         f = CombineTables()
         f.SetInputDataObject(0, self.t0)
@@ -82,9 +83,9 @@ class TestReshapeTable(TestBase):
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
         self.arrs[2] = np.random.random(self.n) # Table 1
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[1], self.titles[1]))
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[2], self.titles[2]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
         return
 
 
@@ -256,7 +257,7 @@ class TestRotatePoints(TestBase):
         y = np.reshape(y, (len(y), -1))
         z = np.reshape(z, (len(z), -1))
         self.pts = np.concatenate((x,y,z), axis=1)
-        self.vtkpoints = PointsToPolyData(self.pts)
+        self.vtkpoints = interface.pointsToPolyData(self.pts)
         return
 
     def test_rotation(self):
@@ -288,7 +289,7 @@ class TestVoxelizePoints(TestBase):
         y = np.reshape(y, (len(y), -1))
         z = np.reshape(z, (len(z), -1))
         pts = np.concatenate((x,y,z), axis=1)
-        vtkpoints = PointsToPolyData(pts)
+        vtkpoints = interface.pointsToPolyData(pts)
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
@@ -306,7 +307,7 @@ class TestVoxelizePoints(TestBase):
     def test_simple_rotated_case(self):
         """`VoxelizePoints`: simple rotated case"""
         pts = ROTATED_POINTS
-        vtkpoints = PointsToPolyData(ROTATED_POINTS)
+        vtkpoints = interface.pointsToPolyData(ROTATED_POINTS)
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
@@ -329,8 +330,8 @@ class TestVoxelizePoints(TestBase):
         # Convert to XYZ points
         points = np.vstack(map(np.ravel, g)).T
         rand = np.random.random(len(points))
-        vtkpoints = PointsToPolyData(points)
-        vtkpoints.GetPointData().AddArray(_helpers.numToVTK(rand, 'Random'))
+        vtkpoints = interface.pointsToPolyData(points)
+        vtkpoints.GetPointData().AddArray(interface.convertArray(rand, 'Random'))
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
@@ -399,8 +400,8 @@ class TestArrayMath(TestBase):
         self.titles = ('Array 0', 'Array 1')
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(_helpers.numToVTK(self.arrs[1], self.titles[1]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
         return
 
     def test_get_operations(self):
@@ -487,7 +488,7 @@ class TestNormalizeArray(TestBase):
         self.n = 400
         self.title = 'Array 0'
         self.arr = np.random.random(self.n) # Table 0
-        self.t0.AddColumn(_helpers.numToVTK(self.arr, self.title))
+        self.t0.AddColumn(interface.convertArray(self.arr, self.title))
         return
 
     def test_get_operations(self):
@@ -555,7 +556,7 @@ class TestAddCellConnToPoints(TestBase):
         y = np.reshape(y, (len(y), -1))
         z = np.reshape(z, (len(z), -1))
         self.pts = np.concatenate((x,y,z), axis=1)
-        self.vtkpoints = PointsToPolyData(self.pts)
+        self.vtkpoints = interface.pointsToPolyData(self.pts)
 
     def makeComplicatedInput(self, shuffle=True):
         def path1(y):
@@ -578,7 +579,7 @@ class TestAddCellConnToPoints(TestBase):
 
         np.random.shuffle(coords)
         self.pts = coords
-        self.vtkpoints = PointsToPolyData(self.pts)
+        self.vtkpoints = interface.pointsToPolyData(self.pts)
 
     def test_poly_line(self):
         self.makeSimpleInput()
@@ -654,7 +655,7 @@ class TestPointsToTube(TestBase):
 
         np.random.shuffle(coords)
         self.pts = coords
-        self.vtkpoints = PointsToPolyData(self.pts)
+        self.vtkpoints = interface.pointsToPolyData(self.pts)
 
     def test_(self):
         """`PointsToTube`: Test generation of tube from shuffled points"""
@@ -680,7 +681,7 @@ class TestPointsToTube(TestBase):
 #         fname = '/Users/bane/Documents/OpenGeoVis/Data/data_open/NGDC/zone11.csv'
 #         import pandas as pd
 #         data = pd.read_csv(fname)
-#         points = PointsToPolyData(data[['lon', 'lat', 'idx', 'val']])
+#         points = interface.pointsToPolyData(data[['lon', 'lat', 'idx', 'val']])
 #         good = LonLatToUTM(zone=11).Apply(points)
 #         return
 #

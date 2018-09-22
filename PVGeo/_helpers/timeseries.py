@@ -1,8 +1,8 @@
 __all__ = [
     # new:
-    'UpdateTimeSteps',
-    'GetRequestedTime',
-    'GetInputTimeSteps',
+    'updateTimeSteps',
+    'getRequestedTime',
+    'getInputTimeSteps',
 ]
 
 import numpy as np
@@ -16,7 +16,7 @@ def _calculateTimeRange(nt, dt=1.0):
 
 
 
-def UpdateTimeSteps(algorithm, nt, dt):
+def updateTimeSteps(algorithm, nt, dt):
     """Handles setting up the timesteps on on the pipeline for a file series reader.
 
     Args:
@@ -41,7 +41,7 @@ def UpdateTimeSteps(algorithm, nt, dt):
     oi.Append(executive.TIME_RANGE(), timesteps[-1])
     return timesteps
 
-def GetRequestedTime(algorithm, outInfoVec, idx=0):
+def getRequestedTime(algorithm, outInfoVec, idx=0):
     """Handles setting up the timesteps on on the pipeline for a file series reader.
 
     Args:
@@ -54,7 +54,7 @@ def GetRequestedTime(algorithm, outInfoVec, idx=0):
 
     Example:
         >>> # Get requested time index
-        >>> i = _helpers.GetRequestedTime(self, outInfoVec)
+        >>> i = _helpers.getRequestedTime(self, outInfoVec)
     """
     executive = algorithm.GetExecutive()
     timesteps = algorithm.GetTimestepValues()
@@ -69,7 +69,7 @@ def GetRequestedTime(algorithm, outInfoVec, idx=0):
         assert(len(timesteps) > 0)
         return 0
 
-def GetInputTimeSteps(algorithm, port=0, idx=0):
+def getInputTimeSteps(algorithm, port=0, idx=0):
     """Get the timestep values for the algorithm's input
 
     Args:

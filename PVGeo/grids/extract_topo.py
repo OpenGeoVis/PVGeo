@@ -9,6 +9,7 @@ from datetime import datetime
 # Import Helpers:
 from ..base import FilterBase
 from .. import _helpers
+from .. import interface
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
@@ -23,7 +24,7 @@ class ExtractTopography(FilterBase):
     __category__ = 'filter'
     def __init__(self):
         FilterBase.__init__(self,
-            nInputPorts=2, inputType='vtkDataObject',
+            nInputPorts=2, inputType='vtkDataSet',
             nOutputPorts=1)
         self.__tolerance = 0.001
 
@@ -85,8 +86,7 @@ class ExtractTopography(FilterBase):
         active = np.array(datapts[:,2] < (comp[:,2] - self.__tolerance), dtype=int)
 
         # Now add cell data to output
-        active = _helpers.numToVTK(active)
-        active.SetName('Active Topography')
+        active = interface.convertArray(active, name='Active Topography')
         grid.GetCellData().AddArray(active)
         return 1
 

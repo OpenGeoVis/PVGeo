@@ -15,8 +15,8 @@ else:
 
 # Import Helpers:
 from ..base import ReaderBase
-from ..filters import PointsToPolyData
 from .. import _helpers
+from .. import interface
 
 
 class DelimitedTextReader(ReaderBase):
@@ -141,11 +141,11 @@ class DelimitedTextReader(ReaderBase):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         if self.NeedToRead():
             self._ReadUpFront()
         # Generate the data object
-        _helpers.DataFrameToTable(self._GetRawData(idx=i), output)
+        interface.dataFrameToTable(self._GetRawData(idx=i), output)
         return 1
 
 
@@ -228,12 +228,12 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         if self.NeedToRead():
             self._ReadUpFront()
         # Generate the PolyData output
         data = self._GetRawData(idx=i)
-        output.DeepCopy(PointsToPolyData(data, copy_z=self.GetCopyZ()))
+        output.DeepCopy(interface.pointsToPolyData(data, copy_z=self.GetCopyZ()))
         return 1
 
 
