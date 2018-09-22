@@ -86,8 +86,7 @@ class ExtractTopography(FilterBase):
         active = np.array(datapts[:,2] < (comp[:,2] - self.__tolerance), dtype=int)
 
         # Now add cell data to output
-        active = interface.numToVTK(active)
-        active.SetName('Active Topography')
+        active = interface.convertArray(active, name='Active Topography')
         grid.GetCellData().AddArray(active)
         return 1
 

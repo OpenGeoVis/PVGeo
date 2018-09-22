@@ -13,7 +13,6 @@ import vtk
 import numpy as np
 import pandas as pd
 import pyproj
-from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
 from ..base import FilterBase, FilterPreserveTypeBase
@@ -492,7 +491,7 @@ class AppendCellCenters(FilterPreserveTypeBase):
 
         # I use the dataset adapter/numpy interface because its easy
         centers = dsa.WrapDataObject(filt.GetOutput()).Points
-        centers = nps.numpy_to_vtk(centers)
+        centers = interface.convertArray(centers)
         centers.SetName('Cell Centers')
 
         # Copy input data and add cell centers as tuple array

@@ -1,5 +1,12 @@
+"""The ``interface`` module provides functions to convert/cast between common
+VTK and NumPy/Pandas data types. These methods provide a simple to use interface
+for VTK data types so that users can make changes to VTK data strucutres via
+Python data structures that are a bit easier to perform numerical operations
+upon.
+"""
+
+
 __all__ = [
-    'numToVTK',
     'getVTKtype',
     'convertStringArray',
     'convertArray',
@@ -21,23 +28,6 @@ from vtk.util import numpy_support as nps
 from . import _helpers
 
 __displayname__ = 'Interface'
-
-
-def numToVTK(arr, name=None, deep=0, array_type=None):
-    """Converts a 1D numpy array to a VTK data array given a nameself.
-
-    Args:
-        arr (np.array) : A 1D numpy array
-        name (str): the name of the data array for VTK
-
-    Return:
-        vtkDataArray : a converted data array
-    """
-    arr = np.ascontiguousarray(arr)
-    c = nps.numpy_to_vtk(num_array=arr, deep=deep, array_type=array_type)
-    if name:
-        c.SetName(name)
-    return c
 
 
 def getVTKtype(typ):
@@ -62,24 +52,42 @@ def convertStringArray(arr):
         vtkarr.InsertNextValue(val)
     return vtkarr
 
-def convertArray(arr):
-    """A helper to convert a numpy array to a vtkDataArray
+def convertArray(arr, name='Data', deep=0, array_type=None, pdf=False):
+    """A helper to convert a NumPy array to a vtkDataArray or vice versa
+
+    Args:
+        arr (ndarray or vtkDataArry) : A numpy array or vtkDataArry to convert
+        name (str): the name of the data array for VTK
+        deep (bool, int): if input is numpy array then deep copy values
+        pdf (bool): if input is vtkDataArry, make a pandas DataFrame of the array
 
     Return:
-        vtkDataArray : the converted array
+        vtkDataArray : the converted array if input is a NumPy ndaray
+        ndarray : the converted array if input is a vtkDataArray
+        DataFrame : if pdf==True, the vtkDataArry input will be converted to a pandas DataFrame.
 
-    Note:
-        this converts the data array but does not set a name. The name must be set for this data array to be added to a vtkDataSet ``array.SetName('Data')``
     """
-    if arr.dtype is np.dtype('O'):
-        arr = arr.astype('|S')
-    arr = np.ascontiguousarray(arr)
-    typ = getVTKtype(arr.dtype)
-    if typ is 13:
-        VTK_data = convertStringArray(arr)
-    else:
-        VTK_data = numToVTK(arr, array_type=typ)
-    return VTK_data
+    if isinstance(arr, np.ndarray):
+        if arr.dtype is np.dtype('O'):
+            arr = arr.astype('|S')
+        arr = np.ascontiguousarray(arr)
+        typ = getVTKtype(arr.dtype)
+        if typ is 13:
+            VTK_data = convertStringArray(arr)
+            return VTK_data
+        arr = np.ascontiguousarray(arr)
+        VTK_data = nps.numpy_to_vtk(num_array=arr, deep=deep, array_type=array_type)
+        VTK_data.SetName(name)
+        return VTK_data
+    # Otherwise input must be a vtkDataArray
+    if not isinstance(arr, vtk.vtkDataArray):
+        raise _helpers.PVGeoError('Invalid input array.')
+    # Convert from vtkDataArry to NumPy
+    num_data = nps.vtk_to_numpy(arr)
+    if not pdf:
+        return num_data
+    return pd.DataFrame(data=num_data, columns=[arr.GetName()])
+
 
 
 def dataFrameToTable(df, pdo=None):
@@ -209,7 +217,7 @@ def pointsToPolyData(points, copy_z=False):
 
     # Convert points to vtk object
     pts = vtk.vtkPoints()
-    pts.SetData(numToVTK(points))
+    pts.SetData(convertArray(points))
 
     # Create polydata
     pdata = vtk.vtkPolyData()
@@ -218,9 +226,9 @@ def pointsToPolyData(points, copy_z=False):
 
     # Add attributes if given
     for i, key in enumerate(keys):
-        data = numToVTK(atts[:, i], name=key)
+        data = convertArray(atts[:, i], name=key)
         pdata.GetPointData().AddArray(data)
     if copy_z:
-        z = numToVTK(points[:, 2], name='Elevation')
+        z = convertArray(points[:, 2], name='Elevation')
         pdata.GetPointData().AddArray(z)
     return pdata

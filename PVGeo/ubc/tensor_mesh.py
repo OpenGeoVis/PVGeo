@@ -89,8 +89,7 @@ class TensorMeshReader(ubcMeshReaderBase):
             model = model.flatten()
 
         # Convert data to VTK data structure and append to output
-        c = interface.numToVTK(model,deep=True)
-        c.SetName(dataNm)
+        c = interface.convertArray(model, name=dataNm, deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)
         return mesh
@@ -134,11 +133,11 @@ class TensorMeshReader(ubcMeshReaderBase):
             c = np.array(c,dtype=float)
             if z:
                 c = -c[::-1]
-            return interface.numToVTK(c,deep=True)
+            return interface.convertArray(c,deep=True)
 
         xcoords = _genCoords(xpts, xdisc)
         zcoords = _genCoords(zpts, zdisc, z=True)
-        ycoords = interface.numToVTK(np.zeros(1),deep=True)
+        ycoords = interface.convertArray(np.zeros(1),deep=True)
 
         output.SetDimensions(nx,2,nz) # note this subtracts 1
         output.SetXCoordinates(xcoords)
@@ -258,9 +257,9 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Set the dims and coordinates for the output
         output.SetDimensions(dim[0],dim[1],dim[2])
         # Convert to VTK array for setting coordinates
-        output.SetXCoordinates(interface.numToVTK(cox,deep=True))
-        output.SetYCoordinates(interface.numToVTK(coy,deep=True))
-        output.SetZCoordinates(interface.numToVTK(coz,deep=True))
+        output.SetXCoordinates(interface.convertArray(cox,deep=True))
+        output.SetYCoordinates(interface.convertArray(coy,deep=True))
+        output.SetZCoordinates(interface.convertArray(coz,deep=True))
 
         return output
 

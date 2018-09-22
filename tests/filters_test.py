@@ -32,9 +32,9 @@ class TestCombineTables(TestBase):
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
         self.arrs[2] = np.random.random(self.n) # Table 1
-        self.t0.AddColumn(interface.numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(interface.numToVTK(self.arrs[1], self.titles[1]))
-        self.t1.AddColumn(interface.numToVTK(self.arrs[2], self.titles[2]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
+        self.t1.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
         # Now use the `CombineTables` filter:
         f = CombineTables()
         f.SetInputDataObject(0, self.t0)
@@ -83,9 +83,9 @@ class TestReshapeTable(TestBase):
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
         self.arrs[2] = np.random.random(self.n) # Table 1
-        self.t0.AddColumn(interface.numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(interface.numToVTK(self.arrs[1], self.titles[1]))
-        self.t0.AddColumn(interface.numToVTK(self.arrs[2], self.titles[2]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
         return
 
 
@@ -331,7 +331,7 @@ class TestVoxelizePoints(TestBase):
         points = np.vstack(map(np.ravel, g)).T
         rand = np.random.random(len(points))
         vtkpoints = interface.pointsToPolyData(points)
-        vtkpoints.GetPointData().AddArray(interface.numToVTK(rand, 'Random'))
+        vtkpoints.GetPointData().AddArray(interface.convertArray(rand, 'Random'))
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
@@ -400,8 +400,8 @@ class TestArrayMath(TestBase):
         self.titles = ('Array 0', 'Array 1')
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
-        self.t0.AddColumn(interface.numToVTK(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(interface.numToVTK(self.arrs[1], self.titles[1]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
         return
 
     def test_get_operations(self):
@@ -488,7 +488,7 @@ class TestNormalizeArray(TestBase):
         self.n = 400
         self.title = 'Array 0'
         self.arr = np.random.random(self.n) # Table 0
-        self.t0.AddColumn(interface.numToVTK(self.arr, self.title))
+        self.t0.AddColumn(interface.convertArray(self.arr, self.title))
         return
 
     def test_get_operations(self):

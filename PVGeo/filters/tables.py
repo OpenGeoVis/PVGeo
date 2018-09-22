@@ -108,7 +108,7 @@ class ReshapeTable(FilterBase):
         data = np.empty((rows,cols))
         for i in range(cols):
             c = pdi.GetColumn(i)
-            data[:,i] = nps.vtk_to_numpy(c)
+            data[:,i] = interface.convertArray(c)
 
         if ((self.__ncols*self.__nrows) != (cols*rows)):
             raise _helpers.PVGeoError('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
@@ -123,9 +123,8 @@ class ReshapeTable(FilterBase):
             # Make a contigous array from the column we want
             col = np.array(data[:,i])
             # allow type to be determined by input
-            insert = interface.numToVTK(col) # array_type=vtk.VTK_FLOAT
             # VTK arrays need a name. Set arbitrarily
-            insert.SetName(self.__names[i])
+            insert = interface.convertArray(col, name=self.__names[i]) # array_type=vtk.VTK_FLOAT
             #pdo.AddColumn(insert) # these are not getting added to the output table
             # ... work around:
             pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData

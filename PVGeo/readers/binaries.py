@@ -68,8 +68,7 @@ class PackedBinariesReader(ReaderBase):
         """Converts the numpy array to a vtkDataArray
         """
         # Put raw data into vtk array
-        data = interface.numToVTK(arr, deep=True, array_type=self.__vtktype)
-        data.SetName(self.__dataName)
+        data = interface.convertArray(arr, name=self.__dataName, deep=True, array_type=self.__vtktype)
         return data
 
 

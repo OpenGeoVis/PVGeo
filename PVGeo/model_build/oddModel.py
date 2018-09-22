@@ -76,9 +76,9 @@ class CreateTensorMesh(AlgorithmBase):
         nx,ny,nz = ext[1]+1,ext[3]+1,ext[5]+1
         pdo.SetDimensions(nx,ny,nz)
         # Convert to VTK array for setting coordinates
-        pdo.SetXCoordinates(interface.numToVTK(cox, deep=True))
-        pdo.SetYCoordinates(interface.numToVTK(coy, deep=True))
-        pdo.SetZCoordinates(interface.numToVTK(coz, deep=True))
+        pdo.SetXCoordinates(interface.convertArray(cox, deep=True))
+        pdo.SetYCoordinates(interface.convertArray(coy, deep=True))
+        pdo.SetZCoordinates(interface.convertArray(coz, deep=True))
 
         return pdo
 
@@ -89,11 +89,9 @@ class CreateTensorMesh(AlgorithmBase):
         # ADD DATA to cells
         if data is None:
             data = np.random.rand(nx*ny*nz)
-            data = interface.numToVTK(data, deep=True)
-            data.SetName('Random Data')
+            data = interface.convertArray(data, name='Random Data', deep=True)
         else:
-            data = interface.numToVTK(data, deep=True)
-            data.SetName(dataNm)
+            data = interface.convertArray(data, name=dataNm, deep=True)
         pdo.GetCellData().AddArray(data)
         return pdo
 

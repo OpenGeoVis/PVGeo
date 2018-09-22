@@ -9,7 +9,6 @@ __all__ = [
 import vtk
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
-from vtk.util import numpy_support as nps
 from datetime import datetime
 # Import Helpers:
 from ..base import FilterBase, FilterPreserveTypeBase
@@ -124,13 +123,12 @@ class ArrayMath(FilterPreserveTypeBase):
         carr = self.__operation(arr1, arr2)
         # Apply the multiplier
         carr *= self.__multiplier
-        # Convert to a VTK array
-        c = interface.numToVTK(carr)
         # If no name given for data by user, use operator name
         newName = self.__newName
         if newName == '':
             newName = 'Mathed Up'
-        c.SetName(newName)
+        # Convert to a VTK array
+        c = interface.convertArray(carr, name=newName)
         # Build output
         pdo.DeepCopy(pdi)
         pdo = _helpers.addArray(pdo, field1, c)
@@ -363,13 +361,12 @@ class NormalizeArray(FilterPreserveTypeBase):
         arr = self.__normalization(arr)
         # Apply the multiplier
         arr *= self.__multiplier
-        # Convert to VTK array
-        c = interface.numToVTK(arr)
         # If no name given for data by user, use operator name
         newName = self.__newName
         if newName == '':
             newName = 'Normalized ' + name
-        c.SetName(newName)
+        # Convert to VTK array
+        c = interface.convertArray(arr, name=newName)
         # Build output
         pdo.DeepCopy(pdi)
         pdo = _helpers.addArray(pdo, field, c)
@@ -574,9 +571,9 @@ class AddCellConnToPoints(FilterBase):
                 vtkarr = pdi.GetCellData().GetArray(i)
                 name = vtkarr.GetName()
                 if nrNbr:
-                    arr = nps.vtk_to_numpy(vtkarr)
+                    arr = interface.convertArray(vtkarr)
                     arr = arr[ind]
-                    vtkarr = interface.numToVTK(arr, name=name)
+                    vtkarr = interface.convertArray(arr, name=name)
                 pdo.GetCellData().AddArray(vtkarr)
         return pdo
 

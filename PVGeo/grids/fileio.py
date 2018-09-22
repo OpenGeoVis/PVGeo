@@ -9,8 +9,6 @@ __all__ = [
 # NOTE: Surfer no data value: 1.70141E+38
 
 import vtk
-from vtk.util import numpy_support as nps
-from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np
 import pandas as pd
 
@@ -117,8 +115,7 @@ class SurferGridReader(DelimitedTextReader):
 
         # Now add data values as point data
         data = self._GetRawData(idx=i).values.reshape((self.__nx, self.__ny)).flatten(order='F')
-        vtkarr = interface.numToVTK(data)
-        vtkarr.SetName(self.__dataName)
+        vtkarr = interface.convertArray(data, name=self.__dataName)
         output.GetPointData().AddArray(vtkarr)
 
         return 1
@@ -177,7 +174,7 @@ class WriteImageDataToSurfer(WriterBase):
         # Note user has to select a single array to save out
         field, name = self.__inputArray[0], self.__inputArray[1]
         vtkarr = _helpers.getVTKArray(img, field, name)
-        arr = nps.vtk_to_numpy(vtkarr)
+        arr = interface.convertArray(vtkarr)
         dmin, dmax = arr.min(), arr.max()
 
         arr = arr.reshape((nx, ny), order='F')
@@ -301,8 +298,7 @@ class EsriGridReader(DelimitedTextReader):
 
         # Now add data values as point data
         data = self._GetRawData(idx=i).flatten(order='F')
-        vtkarr = nps.numpy_to_vtk(data)
-        vtkarr.SetName(self.__dataName)
+        vtkarr = interface.convertArray(data, name=self.__dataName)
         output.GetPointData().AddArray(vtkarr)
 
         return 1
