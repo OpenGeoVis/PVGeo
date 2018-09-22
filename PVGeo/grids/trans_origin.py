@@ -6,7 +6,6 @@ import vtk
 import numpy as np
 # Import Helpers:
 from ..base import FilterBase
-from .. import _helpers
 
 
 #---- Translate Grid Origin ----#

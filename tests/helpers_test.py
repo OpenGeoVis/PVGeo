@@ -9,6 +9,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 # Functionality to test:
 from PVGeo._helpers import xml
 from PVGeo import _helpers
+from PVGeo import interface
 
 
 RTOL = 0.000001
@@ -43,7 +44,7 @@ class TestDataFrameConversions(TestBase):
         data = np.random.rand(100, len(names))
         df = pd.DataFrame(data=data, columns=names)
         table = vtk.vtkTable()
-        _helpers.DataFrameToTable(df, table)
+        interface.dataFrameToTable(df, table)
         wtbl = dsa.WrapDataObject(table)
         # Now check the vtkTable
         for i, name in enumerate(names):
@@ -54,7 +55,7 @@ class TestDataFrameConversions(TestBase):
             self.assertTrue(np.allclose(arr, df[name].values, rtol=RTOL))
 
         # Now test backwards compatability
-        dfo = _helpers.TableToDataFrame(table)
+        dfo = interface.tableToDataFrame(table)
         self.assertTrue(df.equals(dfo))
         return
 

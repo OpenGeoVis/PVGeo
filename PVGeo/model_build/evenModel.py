@@ -9,6 +9,7 @@ import numpy as np
 # Import Helpers:
 from ..base import AlgorithmBase
 from .. import _helpers
+from .. import interface
 
 
 def _makeSpatialCellData(nx, ny, nz):
@@ -47,13 +48,13 @@ class CreateUniformGrid(AlgorithmBase):
         #pdo.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
         # Add CELL data
         data = _makeSpatialCellData(nx-1, ny-1, nz-1) # minus 1 b/c cell data not point data
-        data = _helpers.numToVTK(data, deep=True)
+        data = interface.numToVTK(data, deep=True)
         data.SetName('Spatial Cell Data')
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetCellData().AddArray(data)
         # Add Point data
         data = _makeSpatialCellData(nx, ny, nz)
-        data = _helpers.numToVTK(data, deep=True)
+        data = interface.numToVTK(data, deep=True)
         data.SetName('Spatial Point Data')
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetPointData().AddArray(data)
@@ -127,9 +128,9 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
         zcoords = np.linspace(self.__zrange[0], self.__zrange[1], num=nz)
 
         # CONVERT TO VTK #
-        xcoords = _helpers.numToVTK(xcoords,deep=True)
-        ycoords = _helpers.numToVTK(ycoords,deep=True)
-        zcoords = _helpers.numToVTK(zcoords,deep=True)
+        xcoords = interface.numToVTK(xcoords,deep=True)
+        ycoords = interface.numToVTK(ycoords,deep=True)
+        zcoords = interface.numToVTK(zcoords,deep=True)
 
         pdo.SetDimensions(nx,ny,nz)
         pdo.SetXCoordinates(xcoords)
@@ -137,7 +138,7 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
         pdo.SetZCoordinates(zcoords)
 
         data = _makeSpatialCellData(nx-1, ny-1, nz-1)
-        data = _helpers.numToVTK(data, deep=True)
+        data = interface.numToVTK(data, deep=True)
         data.SetName('Spatial Data')
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetCellData().AddArray(data)

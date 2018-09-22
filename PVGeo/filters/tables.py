@@ -13,6 +13,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
 from ..base import FilterBase
 from .. import _helpers
+from .. import interface
 
 
 ###############################################################################
@@ -122,7 +123,7 @@ class ReshapeTable(FilterBase):
             # Make a contigous array from the column we want
             col = np.array(data[:,i])
             # allow type to be determined by input
-            insert = _helpers.numToVTK(col) # array_type=vtk.VTK_FLOAT
+            insert = interface.numToVTK(col) # array_type=vtk.VTK_FLOAT
             # VTK arrays need a name. Set arbitrarily
             insert.SetName(self.__names[i])
             #pdo.AddColumn(insert) # these are not getting added to the output table
@@ -241,7 +242,7 @@ class ExtractArray(FilterBase):
 
     def Apply(self, inputDataObject, arrayName):
         self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
         return self.GetOutput()
@@ -276,11 +277,11 @@ class SplitTableOnArray(FilterBase):
         spliton = _helpers.getNumPyArray(wtbl, field, name)
         uniq = np.unique(spliton)
         # Split the input data based on indices
-        df = _helpers.TableToDataFrame(table)
+        df = interface.tableToDataFrame(table)
         blk = 0
         output.SetNumberOfBlocks(len(uniq))
         for val in uniq:
-            temp = _helpers.DataFrameToTable(df[df[name] == val])
+            temp = interface.dataFrameToTable(df[df[name] == val])
             output.SetBlock(blk, temp)
             output.GetMetaData(blk).Set(vtk.vtkCompositeDataSet.NAME(), '{}{}'.format(name, val))
             blk += 1
@@ -309,7 +310,7 @@ class SplitTableOnArray(FilterBase):
 
     def Apply(self, inputDataObject, arrayName):
         self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
         return self.GetOutput()

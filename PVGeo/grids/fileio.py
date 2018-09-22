@@ -25,6 +25,7 @@ else:
 from ..base import WriterBase
 from ..readers import DelimitedTextReader
 from .. import _helpers
+from .. import interface
 
 
 #------------------------------------------------------------------------------
@@ -105,7 +106,7 @@ class SurferGridReader(DelimitedTextReader):
             self._ReadUpFront()
 
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
 
         # Build the data object
         output.SetOrigin(self.__xrng[0], self.__yrng[0], 0.0)
@@ -116,7 +117,7 @@ class SurferGridReader(DelimitedTextReader):
 
         # Now add data values as point data
         data = self._GetRawData(idx=i).values.reshape((self.__nx, self.__ny)).flatten(order='F')
-        vtkarr = _helpers.numToVTK(data)
+        vtkarr = interface.numToVTK(data)
         vtkarr.SetName(self.__dataName)
         output.GetPointData().AddArray(vtkarr)
 
@@ -210,7 +211,7 @@ class WriteImageDataToSurfer(WriterBase):
 
     def Apply(self, inputDataObject, arrayName):
         self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
         return self.GetOutput()
@@ -220,7 +221,7 @@ class WriteImageDataToSurfer(WriterBase):
         if inputDataObject:
             self.SetInputDataObject(inputDataObject)
             if arrayName:
-                arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+                arr, field = _helpers.searchForArray(inputDataObject, arrayName)
                 self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Modified()
         self.Update()
@@ -291,7 +292,7 @@ class EsriGridReader(DelimitedTextReader):
             self._ReadUpFront()
 
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
 
         # Build the data object
         output.SetOrigin(self.__xo, self.__yo, 0.0)

@@ -8,6 +8,9 @@ from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
 from ..base import AlgorithmBase
 from .. import _helpers
+from .. import interface
+
+
 
 class CreateTensorMesh(AlgorithmBase):
     """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.
@@ -73,9 +76,9 @@ class CreateTensorMesh(AlgorithmBase):
         nx,ny,nz = ext[1]+1,ext[3]+1,ext[5]+1
         pdo.SetDimensions(nx,ny,nz)
         # Convert to VTK array for setting coordinates
-        pdo.SetXCoordinates(_helpers.numToVTK(cox, deep=True))
-        pdo.SetYCoordinates(_helpers.numToVTK(coy, deep=True))
-        pdo.SetZCoordinates(_helpers.numToVTK(coz, deep=True))
+        pdo.SetXCoordinates(interface.numToVTK(cox, deep=True))
+        pdo.SetYCoordinates(interface.numToVTK(coy, deep=True))
+        pdo.SetZCoordinates(interface.numToVTK(coz, deep=True))
 
         return pdo
 
@@ -86,10 +89,10 @@ class CreateTensorMesh(AlgorithmBase):
         # ADD DATA to cells
         if data is None:
             data = np.random.rand(nx*ny*nz)
-            data = _helpers.numToVTK(data, deep=True)
+            data = interface.numToVTK(data, deep=True)
             data.SetName('Random Data')
         else:
-            data = _helpers.numToVTK(data, deep=True)
+            data = interface.numToVTK(data, deep=True)
             data.SetName(dataNm)
         pdo.GetCellData().AddArray(data)
         return pdo

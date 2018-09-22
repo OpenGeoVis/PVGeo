@@ -16,6 +16,7 @@ else:
 from ..base import AlgorithmBase
 from .two_file_base import ubcMeshReaderBase, ModelAppenderBase
 from .. import _helpers
+from .. import interface
 
 
 
@@ -88,7 +89,7 @@ class TensorMeshReader(ubcMeshReaderBase):
             model = model.flatten()
 
         # Convert data to VTK data structure and append to output
-        c = _helpers.numToVTK(model,deep=True)
+        c = interface.numToVTK(model,deep=True)
         c.SetName(dataNm)
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)
@@ -133,11 +134,11 @@ class TensorMeshReader(ubcMeshReaderBase):
             c = np.array(c,dtype=float)
             if z:
                 c = -c[::-1]
-            return _helpers.numToVTK(c,deep=True)
+            return interface.numToVTK(c,deep=True)
 
         xcoords = _genCoords(xpts, xdisc)
         zcoords = _genCoords(zpts, zdisc, z=True)
-        ycoords = _helpers.numToVTK(np.zeros(1),deep=True)
+        ycoords = interface.numToVTK(np.zeros(1),deep=True)
 
         output.SetDimensions(nx,2,nz) # note this subtracts 1
         output.SetXCoordinates(xcoords)
@@ -257,9 +258,9 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Set the dims and coordinates for the output
         output.SetDimensions(dim[0],dim[1],dim[2])
         # Convert to VTK array for setting coordinates
-        output.SetXCoordinates(_helpers.numToVTK(cox,deep=True))
-        output.SetYCoordinates(_helpers.numToVTK(coy,deep=True))
-        output.SetZCoordinates(_helpers.numToVTK(coz,deep=True))
+        output.SetXCoordinates(interface.numToVTK(cox,deep=True))
+        output.SetYCoordinates(interface.numToVTK(coy,deep=True))
+        output.SetZCoordinates(interface.numToVTK(coz,deep=True))
 
         return output
 
@@ -308,7 +309,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         self.__ubcTensorMesh(
             self.GetMeshFileName(),
             self.GetModelFileNames(),

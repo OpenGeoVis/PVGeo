@@ -1,5 +1,4 @@
 __all__ = [
-    'PointsToPolyData',
     'LonLatToUTM',
     'RotatePoints',
     'ExtractPoints',
@@ -19,64 +18,8 @@ from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
 from ..base import FilterBase, FilterPreserveTypeBase
 from .. import _helpers
+from .. import interface
 
-
-
-def PointsToPolyData(points, copy_z=False):
-    """Create ``vtkPolyData`` from a numpy array of XYZ points. If the points have
-    more than 3 dimensions, then all dimensions after the third will be added as attributes.
-    Assume the first three dimensions are the XYZ coordinates.
-
-    Args:
-        points (np.ndarray or pandas.DataFrame): The points and pointdata
-        copy_z (bool): A flag on whether to append the z values as a PointData array
-
-    Return:
-        vtkPolyData : points with point-vertex cells
-    """
-    __displayname__ = 'Points to PolyData'
-    __category__ = 'filter'
-    # Check if input is anything other than a NumPy array and cast it
-    # e.g. you could send a Pandas dataframe
-    keys = ['Field %d' % i for i in range(points.shape[1] - 3)]
-    if not isinstance(points, np.ndarray):
-        if isinstance(points, pd.DataFrame):
-            # If a pandas data frame, lets grab the keys
-            keys = points.keys()[3::]
-        points = np.array(points)
-    # If points are not 3D
-    if points.shape[1] < 2:
-        raise RuntimeError('Points must be 3D. Try adding a third dimension of zeros.')
-
-    atts = points[:, 3::]
-    points = points[:, 0:3]
-
-    npoints = points.shape[0]
-
-    # Make VTK cells array
-    cells = np.hstack((np.ones((npoints, 1)),
-                       np.arange(npoints).reshape(-1, 1)))
-    cells = np.ascontiguousarray(cells, dtype=np.int64)
-    vtkcells = vtk.vtkCellArray()
-    vtkcells.SetCells(npoints, nps.numpy_to_vtkIdTypeArray(cells, deep=True))
-
-    # Convert points to vtk object
-    pts = vtk.vtkPoints()
-    pts.SetData(_helpers.numToVTK(points))
-
-    # Create polydata
-    pdata = vtk.vtkPolyData()
-    pdata.SetPoints(pts)
-    pdata.SetVerts(vtkcells)
-
-    # Add attributes if given
-    for i, key in enumerate(keys):
-        data = _helpers.numToVTK(atts[:, i], name=key)
-        pdata.GetPointData().AddArray(data)
-    if copy_z:
-        z = _helpers.numToVTK(points[:, 2], name='Elevation')
-        pdata.GetPointData().AddArray(z)
-    return pdata
 
 
 ###############################################################################
@@ -123,7 +66,7 @@ class LonLatToUTM(FilterBase):
         coords = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
         # Now Conver the points
         points = self.__Convert2D(coords[:, 0], coords[:, 1], coords[:, 2])
-        pdo.DeepCopy(PointsToPolyData(points))
+        pdo.DeepCopy(interface.pointsToPolyData(points))
         _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
         return 1
 
@@ -499,7 +442,7 @@ class ExtractPoints(FilterBase):
         f.SetInputData(pdi)
         f.Update()
         d = f.GetOutput()
-        pdo.ShallowCopy(PointsToPolyData(points))
+        pdo.ShallowCopy(interface.pointsToPolyData(points))
         _helpers.copyArraysToPointData(d, pdo, 0) # 0 is point data
         return 1
 
@@ -527,7 +470,7 @@ class ExtractCellCenters(FilterBase):
         keys = celldata.keys()
 
         # Make poly data of Cell centers:
-        pdo.DeepCopy(PointsToPolyData(centers))
+        pdo.DeepCopy(interface.pointsToPolyData(centers))
         for i, name in enumerate(keys):
             pdo.GetPointData().AddArray(pdi.GetCellData().GetArray(name))
         return 1
@@ -580,7 +523,7 @@ class IterateOverPoints(FilterBase):
     def _UpdateTimeSteps(self):
         """For internal use only
         """
-        self.__timesteps = _helpers.UpdateTimeSteps(self, self.__n, self.__dt)
+        self.__timesteps = _helpers.updateTimeSteps(self, self.__n, self.__dt)
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -592,10 +535,10 @@ class IterateOverPoints(FilterBase):
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         # Now grab point at this timestep
         pt = pdi.GetPoints().GetPoint(self.__tindex[i])
-        poly = PointsToPolyData(np.array(pt))
+        poly = interface.pointsToPolyData(np.array(pt))
         pdo.ShallowCopy(poly)
         return 1
 

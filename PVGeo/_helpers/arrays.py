@@ -1,5 +1,4 @@
 __all__ = [
-    'numToVTK',
     'getSelectedArrayName',
     'getSelectedArrayField',
     'copyArraysToPointData',
@@ -8,29 +7,13 @@ __all__ = [
     'addArray',
     'getSelectedArray',
     #'GetDecimalPlaces',
-    'SearchForArray',
+    'searchForArray',
 ]
 
 import vtk
 import numpy as np
 from vtk.util import numpy_support as nps
 from . import errors as _helpers
-
-def numToVTK(arr, name=None, deep=0, array_type=None):
-    """Converts a 1D numpy array to a VTK data array given a nameself.
-
-    Args:
-        arr (np.array) : A 1D numpy array
-        name (str): the name of the data array for VTK
-
-    Return:
-        vtkDataArray : a converted data array
-    """
-    arr = np.ascontiguousarray(arr)
-    c = nps.numpy_to_vtk(num_array=arr, deep=deep, array_type=array_type)
-    if name:
-        c.SetName(name)
-    return c
 
 
 def getSelectedArrayName(algorithm, idx):
@@ -251,7 +234,7 @@ def getArray(pdi, field, name):
 #     return num
 
 
-def SearchForArray(pdi, name):
+def searchForArray(pdi, name):
 
     def _SearchField(field):
         data = _getData(pdi, field)

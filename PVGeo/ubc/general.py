@@ -9,7 +9,6 @@ import vtk
 
 # Import Helpers:
 from ..readers import DelimitedPointsReaderBase
-from ..filters import PointsToPolyData
 from .. import _helpers
 
 

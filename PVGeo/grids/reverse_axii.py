@@ -7,6 +7,7 @@ import numpy as np
 # Import Helpers:
 from ..base import FilterBase
 from .. import _helpers
+from .. import interface
 
 
 #---- Reverse Grid Axii ----#
@@ -43,7 +44,7 @@ class ReverseImageDataAxii(FilterBase):
                 if self.__axes[i]:
                     arr = np.flip(arr, axis=i)
             # Now add that data array to the output
-            data = _helpers.numToVTK(arr.flatten())
+            data = interface.numToVTK(arr.flatten())
             data.SetName(idi.GetPointData().GetArrayName(j))
             ido.GetPointData().AddArray(data)
 
@@ -56,7 +57,7 @@ class ReverseImageDataAxii(FilterBase):
                 if self.__axes[i]:
                     arr = np.flip(arr, axis=i)
             # Now add that data array to the output
-            data = _helpers.numToVTK(arr.flatten())
+            data = interface.numToVTK(arr.flatten())
             data.SetName(idi.GetCellData().GetArrayName(j))
             ido.GetCellData().AddArray(data)
 

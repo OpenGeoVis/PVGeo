@@ -14,6 +14,7 @@ from datetime import datetime
 # Import Helpers:
 from ..base import FilterBase, FilterPreserveTypeBase
 from .. import _helpers
+from .. import interface
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
@@ -124,7 +125,7 @@ class ArrayMath(FilterPreserveTypeBase):
         # Apply the multiplier
         carr *= self.__multiplier
         # Convert to a VTK array
-        c = _helpers.numToVTK(carr)
+        c = interface.numToVTK(carr)
         # If no name given for data by user, use operator name
         newName = self.__newName
         if newName == '':
@@ -189,8 +190,8 @@ class ArrayMath(FilterPreserveTypeBase):
 
     def Apply(self, inputDataObject, arrayName0, arrayName1):
         self.SetInputDataObject(inputDataObject)
-        arr0, field0 = _helpers.SearchForArray(inputDataObject, arrayName0)
-        arr1, field1 = _helpers.SearchForArray(inputDataObject, arrayName1)
+        arr0, field0 = _helpers.searchForArray(inputDataObject, arrayName0)
+        arr1, field1 = _helpers.searchForArray(inputDataObject, arrayName1)
         self.SetInputArrayToProcess(0, 0, 0, field0, arrayName0)
         self.SetInputArrayToProcess(1, 0, 0, field1, arrayName1)
         self.Update()
@@ -363,7 +364,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         # Apply the multiplier
         arr *= self.__multiplier
         # Convert to VTK array
-        c = _helpers.numToVTK(arr)
+        c = interface.numToVTK(arr)
         # If no name given for data by user, use operator name
         newName = self.__newName
         if newName == '':
@@ -410,7 +411,7 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     def Apply(self, inputDataObject, arrayName):
         self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
         return self.GetOutput()
@@ -575,7 +576,7 @@ class AddCellConnToPoints(FilterBase):
                 if nrNbr:
                     arr = nps.vtk_to_numpy(vtkarr)
                     arr = arr[ind]
-                    vtkarr = _helpers.numToVTK(arr, name=name)
+                    vtkarr = interface.numToVTK(arr, name=name)
                 pdo.GetCellData().AddArray(vtkarr)
         return pdo
 
@@ -758,7 +759,7 @@ class PercentThreshold(FilterBase):
 
     def Apply(self, inputDataObject, arrayName):
         self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.SearchForArray(inputDataObject, arrayName)
+        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
         return self.GetOutput()

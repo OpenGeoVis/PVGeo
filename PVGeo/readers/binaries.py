@@ -8,6 +8,7 @@ import warnings
 # Import Helpers:
 from .. import _helpers
 from ..base import ReaderBase
+from .. import interface
 
 
 
@@ -23,7 +24,7 @@ class PackedBinariesReader(ReaderBase):
         self.__dataName = kwargs.get('dataname', 'Data')
         self.__dtypechar = kwargs.get('dtype', 'f')
         self.__endian = kwargs.get('endian', '')
-        self.__dtype, self.__vtktype = _helpers.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
+        self.__dtype, self.__vtktype = interface.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
         # Data objects to hold the read data for access by the pipeline methods
         self.__data = []
 
@@ -67,7 +68,7 @@ class PackedBinariesReader(ReaderBase):
         """Converts the numpy array to a vtkDataArray
         """
         # Put raw data into vtk array
-        data = _helpers.numToVTK(arr, deep=True, array_type=self.__vtktype)
+        data = interface.numToVTK(arr, deep=True, array_type=self.__vtktype)
         data.SetName(self.__dataName)
         return data
 
@@ -80,7 +81,7 @@ class PackedBinariesReader(ReaderBase):
         if self.NeedToRead():
             self._ReadUpFront()
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         # Generate the data object
         arr = self._GetRawData(idx=i)
         data = self.ConvertArray(arr)
@@ -102,7 +103,7 @@ class PackedBinariesReader(ReaderBase):
             endian = pos[endian]
         if endian != self.__endian:
             self.__endian = endian
-            self.__dtype, self.__vtktype = _helpers.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
+            self.__dtype, self.__vtktype = interface.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
             self.Modified()
 
     def GetEndian(self):
@@ -116,7 +117,7 @@ class PackedBinariesReader(ReaderBase):
             dtype = pos[dtype]
         if dtype != self.__dtype:
             self.__dtypechar = dtype
-            self.__dtype, self.__vtktype = _helpers.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
+            self.__dtype, self.__vtktype = interface.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
             self.Modified()
 
     def GetDataTypes(self):
