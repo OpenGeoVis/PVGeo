@@ -44,17 +44,35 @@ def getSelectedArrayField(algorithm, idx):
     return info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
 
 
+def getFieldIdByName(field):
+    """Get the field ID by name."""
+    fields = dict(
+        point=0,
+        cell=1,
+        field=2,
+        row=6,
+    )
+    field = field.lower()
+    for k in fields.keys():
+        if k in field:
+            return fields[k]
+    raise _helpers.PVGeoError('Field association not defined. Try inputing `point`, `cell`, `field`, or `row`.')
+
+
+
 def copyArraysToPointData(pdi, pdo, field):
     """Copys arrays from an input to an ouput's point data.
 
     Args:
         pdi (vtkDataObject) : The input data object to copy from
         pdo (vtkDataObject) : The output data object to copy over to
-        field (int) : the field type id
+        field (int or str) : the field type id or name
 
     Return:
         vtkDataObject : returns the output data object parameter
     """
+    if isinstance(field, str):
+        field = getFieldIdByName(field)
     # Point Data
     if field == 0:
         for i in range(pdi.GetPointData().GetNumberOfArrays()):
@@ -87,12 +105,14 @@ def getNumPyArray(wpdi, field, name):
 
     Args:
         wpdi  (wrapped vtkDataObject) : the input data object wrapped using vtk dataset adapter
-        field (int) : the field type id
+        field (int or str) : the field type id or name
         name (str) : the name of the input array for the given index
 
     Return:
         numpy.array : a wrapped ``vtkDataArray`` for NumPy
     """
+    if isinstance(field, str):
+        field = getFieldIdByName(field)
     # Point Data
     if field == 0:
         arr = wpdi.PointData[name]
@@ -114,12 +134,14 @@ def getVTKArray(pdi, field, name):
 
     Args:
         pdi  (vtkDataObject) : the input data object
-        field (int) : the field type id
+        field (int or str) : the field type id or name
         name (str) : the name of the input array for the given index
 
     Return:
         vtkDataArray : the array from input field and name
     """
+    if isinstance(field, str):
+        field = getFieldIdByName(field)
     # Point Data
     if field == 0:
         arr = pdi.GetPointData().GetArray(name)
@@ -157,12 +179,14 @@ def addArray(pdo, field, vtkArray):
 
     Args:
         pdo (vtkDataObject) : the output data object
-        field (int) : the field type id
+        field (int or str) : the field type id or name
         vtkArray (vtkDataArray) : the data array to add to the output
 
     Return:
         vtkDataObject : the output data object with the data array added
     """
+    if isinstance(field, str):
+        field = getFieldIdByName(field)
     # Point Data
     if field == 0:
         pdo.GetPointData().AddArray(vtkArray)
@@ -182,6 +206,8 @@ def addArray(pdo, field, vtkArray):
 def _getData(pdi, field):
     """Gets data field from input vtkDataObject"""
     data = None
+    if isinstance(field, str):
+        field = getFieldIdByName(field)
     try:
         # Point Data
         if field == 0:
@@ -213,12 +239,14 @@ def getArray(pdi, field, name):
 
     Args:
         pdi (vtkDataObject) : the input data object
-        field (int) : the field type id
+        field (int or str) : the field type id or name
         name (str) : the data array name
 
     Return:
         vtkDataObject: the output data object
     """
+    if isinstance(field, str):
+        field = getFieldIdByName(field)
     data = _getData(pdi, field)
     return data.GetArray(name)
 
