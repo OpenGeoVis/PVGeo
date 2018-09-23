@@ -145,7 +145,7 @@ def getFileReaderXml(extensions, readerDescription='', command="AddFileName"):
         command="%s"
         clean_command="ClearFileNames"
         repeat_command="1"
-        panel_visibility="advanced">
+        panel_visibility="never">
         <FileListDomain name="files"/>
             <Documentation>
             The list of files to be read by the reader.
