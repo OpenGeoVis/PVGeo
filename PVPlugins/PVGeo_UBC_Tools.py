@@ -327,11 +327,47 @@ class PVGeoGravObsReader(GravObsReader):
         GravObsReader.SetComments(self, identifier)
 
 
+###############################################################################
+
+GG_EXTS = 'grv gg txt dat'
+GG_DESC = 'GIF Gravity Gradiometry Observations'
+
+@smproxy.reader(name="PVGeoGravGradReader",
+       label="PVGeo: GIF Gravity Gradiometry Observations",
+       extensions=GG_EXTS,
+       file_description=GG_DESC)
+class PVGeoGravGradReader(GravGradReader):
+    def __init__(self):
+        GravGradReader.__init__(self)
+
+    #### Seters and Geters ####
+    @smproperty.xml(_helpers.getFileReaderXml(GG_EXTS, readerDescription=GG_DESC))
+    def AddFileName(self, fname):
+        GravGradReader.AddFileName(self, fname)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        GravGradReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return GravGradReader.GetTimestepValues(self)
+
+    @smproperty.intvector(name="SkipRows", default_values=0, panel_visibility="advanced")
+    def SetSkipRows(self, skip):
+        GravGradReader.SetSkipRows(self, skip)
+
+    @smproperty.stringvector(name="Comments", default_values="!", panel_visibility="advanced")
+    def SetComments(self, identifier):
+        GravGradReader.SetComments(self, identifier)
+
+
 
 ###############################################################################
 
 
-MAG_EXTS = 'mag loc txt dat'
+MAG_EXTS = 'mag loc txt dat pre'
 MAG_DESC = 'GIF Magnetic Observations'
 
 @smproxy.reader(name="PVGeoMagObsReader",
@@ -364,6 +400,42 @@ class PVGeoMagObsReader(MagObsReader):
     def SetComments(self, identifier):
         MagObsReader.SetComments(self, identifier)
 
+
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoGeologyMapper', label='Geology Mapper')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataObject"], composite_data_supported=False)
+class PVGeoGeologyMapper(GeologyMapper):
+    def __init__(self):
+        GeologyMapper.__init__(self)
+
+    #### SETTERS AND GETTERS ####
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return GeologyMapper.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+    @smproperty.xml('''
+        <StringVectorProperty
+            panel_visibility="default"
+            name="FileName"
+            label="File Name"
+            command="SetFileName"
+            animateable="1"
+            number_of_elements="1">
+            <FileListDomain name="filename"/>
+            <Documentation>This is the file contating the mapping definitions.</Documentation>
+        </StringVectorProperty>''')
+    def SetFileName(self, fname):
+        GeologyMapper.SetFileName(self, fname)
+
+    @smproperty.stringvector(name="Delimiter", default_values=",", panel_visibility="advanced")
+    def SetDelimiter(self, identifier):
+        GeologyMapper.SetDelimiter(self, identifier)
 
 
 ###############################################################################

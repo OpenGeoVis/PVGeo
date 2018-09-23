@@ -1,15 +1,21 @@
 __all__ = [
     'TopoReader',
     'GravObsReader',
+    'GravGradReader',
     'MagObsReader',
+    'GeologyMapper',
 ]
 
 import numpy as np
+import pandas as pd
 import vtk
+from vtk.numpy_interface import dataset_adapter as dsa
 
 # Import Helpers:
 from ..readers import DelimitedPointsReaderBase
 from .. import _helpers
+from ..base import FilterPreserveTypeBase
+from .. import interface
 
 
 ################################################################################
@@ -63,6 +69,41 @@ class GravObsReader(DelimitedPointsReaderBase):
         if len(content[1].split(self._GetDeli())) != 5:
             raise _helpers.PVGeoError('Data improperly formatted')
         return ['X', 'Y', 'Z', 'Grav', 'Err'], content[1::]
+
+
+################################################################################
+
+
+class GravGradReader(DelimitedPointsReaderBase):
+    """Read _`GIF Gravity Gradiometry Observations` file.
+
+    .. _GIF Gravity Gradiometry Observations: https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/ggfile.html
+    """
+    __displayname__ = 'GIF Gravity Gradiometry Observations'
+    __category__ = 'reader'
+    def __init__(self, **kwargs):
+        DelimitedPointsReaderBase.__init__(self, **kwargs)
+        self.SetHasTitles(False)
+        self.SetSplitOnWhiteSpace(True)
+        self.__npts = None
+
+    # Simply override the extract titles functionality
+    def _ExtractHeader(self, content):
+        # Get components
+        comps = content[0].split('=')[1].split(',')
+        # Get number of points
+        self.__npts = int(content[1].strip())
+        titles = ['X', 'Y', 'Z']
+        for c in comps:
+            titles.append(c)
+        # Now decipher if it has stddevs
+        num = len(content[2].split(self._GetDeli()))
+        if num != len(titles):
+            if num != (len(titles) + len(comps)):
+                raise _helpers.PVGeoError('Data improperly formatted')
+            for c in comps:
+                titles.append('Stn_%s' % c )
+        return titles, content[2::]
 
 
 ################################################################################
@@ -142,3 +183,86 @@ class MagObsReader(DelimitedPointsReaderBase):
         output.GetFieldData().AddArray(anom)
 
         return 1
+
+
+
+################################################################################
+
+
+
+class GeologyMapper(FilterPreserveTypeBase):
+    """A filter to load a GIF geology definity file and map its values to a given
+    data array in an input data object.
+    """
+    def __init__(self, filename=None, delimiter=',', **kwargs):
+        FilterPreserveTypeBase.__init__(self, **kwargs)
+        self.__filename = filename
+        self.__deli = delimiter
+        self.__inputArray = [None, None]
+
+    @staticmethod
+    def _ReadDefinitions(filename, delimiter):
+        """Reades the geology definition file as a pandas DataFrame"""
+        return pd.read_csv(filename, sep=delimiter)
+
+    @staticmethod
+    def _MapValues(geol, arr):
+        """Map the values defined by ``geol`` dataframe to the values in ``arr``.
+        The first column (name should be ``Index``) will be used for the mapping.
+        """
+        # TODO: check that geol table contains all indexs found in arr
+        # Return the mapped table
+        geol.set_index(geol.keys()[0])
+        return geol[geol.keys()[1::]].iloc[arr]
+
+    def RequestData(self, request, inInfo, outInfo):
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Get input array
+        field, name = self.__inputArray[0], self.__inputArray[1]
+        #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
+        wpdi = dsa.WrapDataObject(pdi)
+        arr = _helpers.getNumPyArray(wpdi, field, name)
+
+        #### Perfrom task ####
+        geol = self._ReadDefinitions(self.__filename, self.__deli)
+        data = self._MapValues(geol, arr)
+
+        pdo.DeepCopy(pdi)
+        interface.addArraysFromDataFrame(pdo, field, data)
+
+        return 1
+
+
+    #### Seters and Geters ####
+
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
+        """
+        if self.__inputArray[0] != field:
+            self.__inputArray[0] = field
+            self.Modified()
+        if self.__inputArray[1] != name:
+            self.__inputArray[1] = name
+            self.Modified()
+        return 1
+
+
+    def SetFileName(self, filename):
+        if self.__filename != filename:
+            self.__filename = filename
+            self.Modified()
+
+    def SetDelimiter(self, deli):
+        if self.__deli != deli:
+            self.__deli = deli
+            self.Modified()
