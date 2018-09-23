@@ -4,13 +4,13 @@ __all__ = [
 ]
 
 import numpy as np
-from vtk.util import numpy_support as nps
 import vtk
 import os
 
 
 from ..base import WriterBase
 from .. import _helpers
+from .. import interface
 
 
 class WriteTableToGSLib(WriterBase):
@@ -33,7 +33,7 @@ class WriteTableToGSLib(WriterBase):
         # Get data arrays
         for i in range(numArrs):
             vtkarr = table.GetRowData().GetArray(i)
-            arrs.append(nps.vtk_to_numpy(vtkarr))
+            arrs.append(interface.convertArray(vtkarr))
             titles.append(vtkarr.GetName())
 
         header = '%s\n' % self.__header
@@ -81,7 +81,7 @@ class WriteImageDataToSGeMS(WriterBase):
         # Get data arrays
         for i in range(numArrs):
             vtkarr = grd.GetPointData().GetArray(i)
-            arrs.append(nps.vtk_to_numpy(vtkarr))
+            arrs.append(interface.convertArray(vtkarr))
             titles.append(vtkarr.GetName())
 
         header = '%d %d %d\n' % (nx, ny, nz)

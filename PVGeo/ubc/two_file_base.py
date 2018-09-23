@@ -3,12 +3,13 @@ __all__ = [
     'ModelAppenderBase',
 ]
 
-from .. import _helpers
-from .. import base
 # Outside Imports:
 import numpy as np
 import pandas as pd
 import vtk
+# Import helpers
+from .. import base
+from .. import _helpers
 
 ###############################################################################
 
@@ -165,7 +166,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         self.__inTimesteps = None
 
     def __SetInputTimesteps(self):
-        ints = _helpers.GetInputTimeSteps(self)
+        ints = _helpers.getInputTimeSteps(self)
         self.__inTimesteps = list(ints) if ints is not None else []
         return self.__inTimesteps
 
@@ -193,7 +194,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         """For internal use only: appropriately sets the timesteps.
         """
         if len(self._modelFileNames) > 0 and len(self._modelFileNames) > len(self.__inTimesteps):
-            self.__timesteps = _helpers.UpdateTimeSteps(self, self._modelFileNames, self.__dt)
+            self.__timesteps = _helpers.updateTimeSteps(self, self._modelFileNames, self.__dt)
         # Just use input's time steps which is set by pipeline
         return 1
 
@@ -212,7 +213,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         output = self.GetOutputData(outInfo, 0)
         output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         # Perfrom task:
         if self.__needToRead:
             self._ReadUpFront()

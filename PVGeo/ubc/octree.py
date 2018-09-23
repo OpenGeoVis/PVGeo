@@ -17,6 +17,7 @@ else:
 from ..base import AlgorithmBase
 from .two_file_base import ubcMeshReaderBase, ModelAppenderBase
 from .. import _helpers
+from .. import interface
 
 
 
@@ -165,7 +166,7 @@ class OcTreeReader(ubcMeshReaderBase):
             vec_full_nx[unique_nodes['f0']].reshape(-1, 1),
             vec_full_ny[unique_nodes['f1']].reshape(-1, 1),
             vec_full_nz[unique_nodes['f2']].reshape(-1, 1)), axis=1)
-        vtkPtsData = _helpers.numToVTK(ptsArr, deep=1)
+        vtkPtsData = interface.convertArray(ptsArr, deep=1)
         vtkPts = vtk.vtkPoints()
         vtkPts.SetData(vtkPtsData)
 
@@ -184,8 +185,7 @@ class OcTreeReader(ubcMeshReaderBase):
         pdo.SetCells(vtk.VTK_VOXEL, CellArr)
 
         # Add the indexing of the cell's
-        vtkIndexArr = _helpers.numToVTK(ind_cell_corner.ravel(), deep=1)
-        vtkIndexArr.SetName('index_cell_corner')
+        vtkIndexArr = interface.convertArray(ind_cell_corner.ravel(), name='index_cell_corner', deep=1)
         pdo.GetCellData().AddArray(vtkIndexArr)
 
         return pdo
@@ -221,8 +221,7 @@ class OcTreeReader(ubcMeshReaderBase):
         model = model[ind_reorder]
 
         # Convert data to VTK data structure and append to output
-        c = _helpers.numToVTK(model, deep=True)
-        c.SetName(dataNm)
+        c = interface.convertArray(model, name=dataNm, deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)
         return mesh
@@ -259,7 +258,7 @@ class OcTreeReader(ubcMeshReaderBase):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         self.__ubcOcTree(
             self.GetMeshFileName(),
             self.GetModelFileNames(),

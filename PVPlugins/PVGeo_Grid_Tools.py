@@ -128,17 +128,20 @@ class PVGeoExtractTopography(ExtractTopography):
 
 ###############################################################################
 
+SURF_DESC = "Surfer Grid"
+SURF_EXTS = "grd GRD"
+
 @smproxy.reader(name="PVGeoSurferGridReader",
        label="PVGeo: Surfer Grid File Format",
-       extensions="grd GRD",
-       file_description="Surfer Grid")
+       extensions=SURF_EXTS,
+       file_description=SURF_DESC)
 class PVGeoSurferGridReader(SurferGridReader):
     def __init__(self):
         SurferGridReader.__init__(self)
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+    @smproperty.xml(_helpers.getFileReaderXml(SURF_EXTS, readerDescription=SURF_DESC))
     def AddFileName(self, fname):
         SurferGridReader.AddFileName(self, fname)
 
@@ -202,18 +205,20 @@ class PVGeoWriteCellCenterData(WriteCellCenterData):
 
 ###############################################################################
 
+ESRI_DESC = "Esri Grid"
+ESRI_EXTS = "asc dem txt"
 
 @smproxy.reader(name="PVGeoEsriGridReader",
        label="PVGeo: Esri ASCII Grid Reader",
-       extensions="asc dem txt",
-       file_description="Surfer Grid")
-class PVGeoSurferGridReader(EsriGridReader):
+       extensions=ESRI_EXTS,
+       file_description=ESRI_DESC)
+class PVGeoEsriGridReader(EsriGridReader):
     def __init__(self):
         EsriGridReader.__init__(self)
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+    @smproperty.xml(_helpers.getFileReaderXml(ESRI_EXTS, readerDescription=ESRI_DESC))
     def AddFileName(self, fname):
         EsriGridReader.AddFileName(self, fname)
 

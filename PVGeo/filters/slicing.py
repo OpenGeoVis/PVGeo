@@ -12,6 +12,7 @@ from datetime import datetime
 # Import Helpers:
 from ..base import FilterBase
 from .. import _helpers
+from .. import interface
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
@@ -370,7 +371,7 @@ class SliceThroughTime(ManySlicesAlongAxis):
     def _UpdateTimeSteps(self):
         """For internal use only
         """
-        self.__timesteps = _helpers.UpdateTimeSteps(self, self.GetNumberOfSlices(), self.__dt)
+        self.__timesteps = _helpers.updateTimeSteps(self, self.GetNumberOfSlices(), self.__dt)
 
 
 
@@ -383,7 +384,7 @@ class SliceThroughTime(ManySlicesAlongAxis):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         self._SetAxialRange(pdi)
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         # Perfrom task
         normal = self.GetNormal()
         origin = self._GetOrigin(pdi, i)

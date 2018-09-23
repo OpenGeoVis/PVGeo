@@ -7,6 +7,7 @@ import vtk
 
 from .gslib import GSLibReader
 from .. import _helpers
+from .. import interface
 
 
 class SGeMSGridReader(GSLibReader):
@@ -55,7 +56,7 @@ class SGeMSGridReader(GSLibReader):
         # Get output:
         output = vtk.vtkImageData.GetData(outInfo)
         # Get requested time index
-        i = _helpers.GetRequestedTime(self, outInfo)
+        i = _helpers.getRequestedTime(self, outInfo)
         if self.NeedToRead():
             self._ReadUpFront()
         # Generate the data object
@@ -68,7 +69,7 @@ class SGeMSGridReader(GSLibReader):
         output.SetOrigin(ox, oy, oz)
         # Use table generater and convert because its easy:
         table = vtk.vtkTable()
-        _helpers.DataFrameToTable(self._GetRawData(idx=i), table)
+        interface.dataFrameToTable(self._GetRawData(idx=i), table)
         # now get arrays from table and add to point data of pdo
         for i in range(table.GetNumberOfColumns()):
             output.GetPointData().AddArray(table.GetColumn(i))

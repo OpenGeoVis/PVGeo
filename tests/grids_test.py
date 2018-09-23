@@ -10,7 +10,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 
 import PVGeo
 from PVGeo import _helpers
-from PVGeo.filters import PointsToPolyData
+from PVGeo import interface
 # Functionality to test:
 from PVGeo.grids import *
 
@@ -36,9 +36,9 @@ class TestTableToGrid(TestBase):
         self.arrs[0] = np.random.random(self.n)
         self.arrs[1] = np.random.random(self.n)
         self.arrs[2] = np.random.random(self.n)
-        self.table.AddColumn(_helpers.numToVTK(self.arrs[0], self.titles[0]))
-        self.table.AddColumn(_helpers.numToVTK(self.arrs[1], self.titles[1]))
-        self.table.AddColumn(_helpers.numToVTK(self.arrs[2], self.titles[2]))
+        self.table.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.table.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
+        self.table.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
         return
 
     def check_data_fidelity(self, ido):
@@ -144,10 +144,8 @@ class TestReverseImageDataAxii(TestBase):
         image.SetDimensions(nx, ny, nz)
         image.SetSpacing(2, 2, 2)
         image.SetOrigin(0, 0, 0)
-        data = _helpers.numToVTK(arr.flatten(), deep=True)
-        data.SetName('Data')
-        cellData = _helpers.numToVTK(arrCells.flatten(), deep=True)
-        cellData.SetName('CellData')
+        data = interface.convertArray(arr.flatten(), name='Data', deep=True)
+        cellData = interface.convertArray(arrCells.flatten(), name='CellData', deep=True)
         image.GetPointData().AddArray(data)
         image.GetCellData().AddArray(cellData)
         # Now perfrom the reverse for only X:
@@ -205,7 +203,7 @@ class TestTranslateGridOrigin(TestBase):
         self.n = 400
         self.title = 'Array 0'
         self.arr = np.random.random(self.n)
-        self.idi.GetPointData().AddArray(_helpers.numToVTK(self.arr, self.title))
+        self.idi.GetPointData().AddArray(interface.convertArray(self.arr, self.title))
         return
 
     def test_all(self):
@@ -341,7 +339,7 @@ class TestExtractTopography(TestBase):
         z = np.reshape(np.full(len(points), 55.0), (len(points), -1))
         #z = np.reshape(np.random.uniform(low=55.0, high=65.0, size=(len(points),)), (len(points), -1))
         points = np.concatenate((points, z), axis=1)
-        topo = PointsToPolyData(points)
+        topo = interface.pointsToPolyData(points)
 
 
         # # Apply filter
