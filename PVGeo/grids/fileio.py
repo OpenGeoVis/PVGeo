@@ -31,7 +31,7 @@ from .. import _helpers
 from .. import interface
 
 
-#------------------------------------------------------------------------------
+################################################################################
 
 class SurferGridReader(DelimitedTextReader):
     """Read 2D ASCII Surfer grid files
@@ -149,7 +149,7 @@ class SurferGridReader(DelimitedTextReader):
 
 
 
-#------------------------------------------------------------------------------
+################################################################################
 
 class WriteImageDataToSurfer(WriterBase):
     """Write a 2D ``vtkImageData`` object to the Surfer grid format"""
@@ -415,7 +415,12 @@ class LandsatReader(ReaderBaseBase):
         # Now add the data based on what the user has selected
         for name, band in self.__raster.bands.items():
             output.GetPointData().AddArray(interface.convertArray(band.data.flatten(), name=name))
-        # TODO: add RGB channel
+        try:
+            colors = self.__raster.GetRGB().reshape((-1,3))
+            output.GetPointData().SetScalars(interface.convertArray(colors, name='Colors'))
+            output.GetPointData().SetActiveScalars("Colors")
+        except RuntimeError:
+            pass
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
