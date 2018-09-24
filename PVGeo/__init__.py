@@ -28,7 +28,7 @@ else:
 
     # Import Helpers
     from . import _helpers
-    from . import interface
+    from .interface import *
 # VTK-dependent imports complete
 
 from . import version
