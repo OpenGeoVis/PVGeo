@@ -129,11 +129,10 @@ class PVGeoExtractTopography(ExtractTopography):
 ###############################################################################
 
 SURF_DESC = "Surfer Grid"
-SURF_EXTS = "grd GRD"
 
 @smproxy.reader(name="PVGeoSurferGridReader",
        label="PVGeo: Surfer Grid File Format",
-       extensions=SURF_EXTS,
+       extensions=SurferGridReader.extensions,
        file_description=SURF_DESC)
 class PVGeoSurferGridReader(SurferGridReader):
     def __init__(self):
@@ -141,7 +140,7 @@ class PVGeoSurferGridReader(SurferGridReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(SURF_EXTS, readerDescription=SURF_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(SurferGridReader.extensions, readerDescription=SURF_DESC))
     def AddFileName(self, fname):
         SurferGridReader.AddFileName(self, fname)
 

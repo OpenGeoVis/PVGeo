@@ -13,6 +13,9 @@ import numpy as np
 import pandas as pd
 
 import sys
+import struct
+import properties
+
 if sys.version_info < (3,):
     from StringIO import StringIO
 else:
@@ -20,7 +23,7 @@ else:
 
 
 # Import Helpers:
-from ..base import WriterBase
+from ..base import WriterBase, ReaderBase
 from ..readers import DelimitedTextReader
 from .. import _helpers
 from .. import interface
@@ -28,96 +31,283 @@ from .. import interface
 
 #------------------------------------------------------------------------------
 
-class SurferGridReader(DelimitedTextReader):
-    """Read 2D ASCII Surfer grid files
-    """
-    __displayname__ = 'Surfer Grid Reader'
-    __category__ = 'reader'
-    def __init__(self, outputType='vtkImageData', **kwargs):
-        DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
-        self.SetDelimiter(' ')
-        self.__nx = None
-        self.__ny = None
-        self.__xrng = None
-        self.__yrng = None
-        self.__drng = None
-        self.__dataName = 'Data'
 
+class GridInfo(properties.HasProperties):
+    ny = properties.Integer('number of columns', min=2)
+    nx = properties.Integer('number of rows', min=2)
+    xll = properties.Float('x-value of lower-left corner')
+    yll = properties.Float('y-value of lower-left corner')
+    dx = properties.Float('x-axis spacing')
+    dy = properties.Float('y-axis spacing')
+    dmin = properties.Float('minimum data value', required=False)
+    dmax = properties.Float('maximum data value', required=False)
+    data = properties.Array('grid of data values', shape=('*',))
 
-    def _ExtractHeader(self, content):
-        self.__header = content[0] # this is grid type? DSAA
-        try:
-            dims = content[1].split()
-            ny, nx = int(dims[0]), int(dims[1]) # number of data columns
-            # Next three lines are min/max of XYZ
-            x = content[2].split()
-            xmin, xmax = float(x[0]), float(x[1])
-            y = content[3].split()
-            ymin, ymax = float(y[0]), float(y[1])
-            d = content[4].split()
-            dmin, dmax = float(d[0]), float(d[1])
-            self.__nx = nx
-            self.__ny = ny
-            self.__xrng = (xmin, xmax)
-            self.__yrng = (ymin, ymax)
-            self.__drng = (dmin, dmax)
-        except ValueError:
-            raise _helpers.PVGeoError('This file is not in proper Surfer format.')
-        return [self.__dataName], content[5::]
-
-
-    def _FileContentsToDataFrame(self, contents):
-        """Creates a dataframe with a sinlge array for the file data.
-        """
-        data = []
-        for content in contents:
-            arr = np.fromiter((float(s) for line in content for s in line.split()), dtype=float)
-            df = pd.DataFrame(data=arr, columns=[self.GetDataName()])
-            data.append(df)
-        return data
-
-    def _GetRawData(self, idx=0):
-        """This will return the proper data for the given timestep.
-        This method handles Surfer's NaN data values and checkes the value range
-        """
-        data =  self._data[idx]
-        nans = data >= 1.70141e+38
+    def mask(self):
+        data = self.data
+        nans = data >= 1.701410009187828e+38
         if np.any(nans):
             data = np.ma.masked_where(nans, data)
         err_msg = "{} of data ({}) doesn't match that set by file ({})."
-        dmin, dmax = self.__drng
-        if not np.allclose(dmin, data.min()):
-            raise RuntimeError(err_msg.format('Min', data.min(), dmin))
-        if not np.allclose(dmax, data.max()):
-            raise RuntimeError(err_msg.format('Max', data.max(), dmax))
-        return data
+        if not np.allclose(self.dmin, np.nanmin(data)):
+            raise _helpers.PVGeoError(err_msg.format('Min', np.nanmin(data), self.dmin))
+        if not np.allclose(self.dmax, np.nanmax(data)):
+            raise _helpers.PVGeoError(err_msg.format('Max', np.nanmax(data), self.dmax))
+        self.data = data
+        return
+
+    def toVTK(self, output=None, z=0.0, dz=1.0, dataName='Data'):
+        self.mask()
+        self.validate()
+        if output is None:
+            output = vtk.vtkImageData()
+        # Build the data object
+        output.SetOrigin(self.xll, self.yll, z)
+        output.SetSpacing(self.dx, self.dy, dz)
+        output.SetDimensions(self.nx, self.ny, 1)
+        vtkarr = interface.convertArray(self.data, name=dataName)
+        output.GetPointData().AddArray(vtkarr)
+        return output
 
 
+
+class SurferGridReader(ReaderBase):
+    """Read 2D ASCII/Binary Surfer grid files. The IO code was adopted from
+    `Seequent's steno3d_surfer`_
+
+    .. _Seequent's steno3d_surfer: https://github.com/seequent/steno3d-surfer/blob/master/steno3d_surfer/parser.py
+
+    Note:
+        MIT License
+
+        Copyright (c) 2018 Seequent
+
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+    """
+    __displayname__ = 'Surfer Grid Reader'
+    __category__ = 'reader'
+    extensions = "grd GRD"
+    def __init__(self, outputType='vtkImageData', **kwargs):
+        ReaderBase.__init__(self, outputType=outputType, **kwargs)
+        self.__grids = None
+        self.__dataName = 'Data'
+
+    @staticmethod
+    def _surfer7bin(filename):
+        """See class notes.
+        """
+        with open(filename, 'rb') as f:
+            if unpack('4s', f.read(4))[0] != b'DSRB':
+                raise _helpers.PVGeoError(
+                '''Invalid file identifier for Surfer 7 binary .grd
+                    file. First 4 characters must be DSRB.'''
+                )
+            f.read(8)  #Size & Version
+
+            section = unpack('4s', f.read(4))[0]
+            if section != b'GRID':
+                raise _helpers.PVGeoError(
+                    '''Unsupported Surfer 7 file structure. GRID keyword
+                    must follow immediately after header but {}
+                    encountered.'''.format(section)
+                )
+            size = unpack('<i', f.read(4))[0]
+            if size != 72:
+                raise _helpers.PVGeoError(
+                    '''Surfer 7 GRID section is unrecognized size. Expected
+                    72 but encountered {}'''.format(size)
+                )
+            nrow = unpack('<i', f.read(4))[0]
+            ncol = unpack('<i', f.read(4))[0]
+            x0 = unpack('<d', f.read(8))[0]
+            y0 = unpack('<d', f.read(8))[0]
+            deltax = unpack('<d', f.read(8))[0]
+            deltay = unpack('<d', f.read(8))[0]
+            zmin = unpack('<d', f.read(8))[0]
+            zmax = unpack('<d', f.read(8))[0]
+            rot = unpack('<d', f.read(8))[0]
+            if rot != 0:
+                print('Unsupported feature: Rotation != 0')
+            blankval = unpack('<d', f.read(8))[0]
+
+            section = unpack('4s', f.read(4))[0]
+            if section != b'DATA':
+                raise _helpers.PVGeoError(
+                    '''Unsupported Surfer 7 file structure. DATA keyword
+                    must follow immediately after GRID section but {}
+                    encountered.'''.format(section)
+                )
+            datalen = unpack('<i', f.read(4))[0]
+            if datalen != ncol*nrow*8:
+                raise _helpers.PVGeoError(
+                    '''Surfer 7 DATA size does not match expected size from
+                    columns and rows. Expected {} but encountered
+                    {}'''.format(ncol*nrow*8, datalen)
+                )
+            data = np.zeros(ncol*nrow)
+            for i in range(ncol*nrow):
+                data[i] = unpack('<d', f.read(8))[0]
+            data = np.where(data >= blankval, np.nan, data)
+
+            try:
+                section = unpack('4s', f.read(4))[0]
+                if section == b'FLTI':
+                    print('Unsupported feature: Fault Info')
+                else:
+                    print('Unrecognized keyword: {}'.format(section))
+                print('Remainder of file ignored')
+            except:
+                pass
+
+        grd = GridInfo(
+            nx=ncol,
+            ny=nrow,
+            xll=x0,
+            yll=y0,
+            dx=deltax,
+            dy=deltay,
+            dmin=zmin,
+            dmax=zmax,
+            data=data
+        )
+        return grd
+
+    @staticmethod
+    def _surfer6bin(filename):
+        """See class notes.
+        """
+        with open(filename, 'rb') as f:
+            if unpack('4s', f.read(4))[0] != b'DSBB':
+                raise _helpers.PVGeoError(
+                    '''Invalid file identifier for Surfer 6 binary .grd
+                    file. First 4 characters must be DSBB.'''
+                )
+            nx = unpack('<h', f.read(2))[0]
+            ny = unpack('<h', f.read(2))[0]
+            xlo = unpack('<d', f.read(8))[0]
+            xhi = unpack('<d', f.read(8))[0]
+            ylo = unpack('<d', f.read(8))[0]
+            yhi = unpack('<d', f.read(8))[0]
+            dmin = unpack('<d', f.read(8))[0]
+            dmax = unpack('<d', f.read(8))[0]
+            data = np.ones(nx * ny)
+            for i in range(nx * ny):
+                zdata = unpack('<f', f.read(4))[0]
+                if zdata >= 1.701410009187828e+38:
+                    data[i] = np.nan
+                else:
+                    data[i] = zdata
+
+        grd = GridInfo(
+            nx=nx,
+            ny=ny,
+            xll=xlo,
+            yll=ylo,
+            dx=(xhi-xlo)/(nx-1),
+            dy=(yhi-ylo)/(ny-1),
+            dmin=dmin,
+            dmax=dmax,
+            data=data
+        )
+        return grd
+
+    @staticmethod
+    def _surfer6ascii(filename):
+        """See class notes.
+        """
+        with open(filename, 'r') as f:
+            if f.readline().strip() != 'DSAA':
+                raise _helpers.PVGeoError('''Invalid file identifier for Surfer 6 ASCII .grd file. First line must be DSAA''')
+            [ncol, nrow] = [int(n) for n in f.readline().split()]
+            [xmin, xmax] = [float(n) for n in f.readline().split()]
+            [ymin, ymax] = [float(n) for n in f.readline().split()]
+            [dmin, dmax] = [float(n) for n in f.readline().split()]
+            # Read in the rest of the file as a 1D array
+            data = np.fromiter((np.float(s) for line in f for s in line.split()), dtype=float)
+
+        grd = GridInfo(
+            nx=ncol,
+            ny=nrow,
+            xll=xmin,
+            yll=ymin,
+            dx=(xmax-xmin)/(ncol-1),
+            dy=(ymax-ymin)/(nrow-1),
+            dmin=dmin,
+            dmax=dmax,
+            data=data
+        )
+        return grd
+
+
+    def _ReadGrids(self, idx=None):
+        """This parses the first file to determine grid file type then reads
+        all files set."""
+        if idx is not None:
+            fileNames = [self.GetFileNames(idx=idx)]
+        else:
+            fileNames = self.GetFileNames()
+        contents = []
+        f = open(fileNames[0], 'rb')
+        key = struct.unpack('4s', f.read(4))[0]
+        f.close()
+        if key == b'DSRB':
+            reader = self._surfer7bin
+        elif key == b'DSBB':
+            reader = self._surfer6bin
+        elif key == b'DSAA':
+            reader = self._surfer6ascii
+        else:
+            raise _helpers.PVGeoError('''Invalid file identifier for Surfer .grd file.
+            First 4 characters must be DSRB, DSBB, or DSAA. This file contains: %s''' % key)
+
+        for f in fileNames:
+            try:
+                contents.append(reader(f))
+            except (FileNotFoundError, OSError) as fe:
+                raise _helpers.PVGeoError(str(fe))
+        if idx is not None: return contents[0]
+        return contents
+
+
+    def _ReadUpFront(self):
+        """Should not need to be overridden.
+        """
+        # Perform Read
+        self.__grids = self._ReadGrids()
+        self.NeedToRead(flag=False)
+        return 1
+
+
+    ########################
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to get data for current timestep and populate the output data object.
         """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
-
         if self.NeedToRead():
             self._ReadUpFront()
-
         # Get requested time index
         i = _helpers.getRequestedTime(self, outInfo)
-
-        # Build the data object
-        output.SetOrigin(self.__xrng[0], self.__yrng[0], 0.0)
-        xspac = (self.__xrng[1]-self.__xrng[0])/self.__nx
-        yspac = (self.__yrng[1]-self.__yrng[0])/self.__ny
-        output.SetSpacing(xspac, yspac, 100.0)
-        output.SetDimensions(self.__nx, self.__ny, 1)
-
-        # Now add data values as point data
-        data = self._GetRawData(idx=i).values.reshape((self.__nx, self.__ny)).flatten(order='F')
-        vtkarr = interface.convertArray(data, name=self.__dataName)
-        output.GetPointData().AddArray(vtkarr)
-
+        # Build the output
+        grid = self.__grids[i]
+        grid.toVTK(output=output, dataName=self.__dataName)
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
@@ -126,11 +316,12 @@ class SurferGridReader(DelimitedTextReader):
         if self.NeedToRead():
             self._ReadUpFront()
         # Call parent to handle time stuff
-        DelimitedTextReader.RequestInformation(self, request, inInfo, outInfo)
+        ReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
         info = outInfo.GetInformationObject(0)
+        grid = self.__grids[0] # Get first grid to set output extents
         # Set WHOLE_EXTENT: This is absolutely necessary
-        ext = (0,self.__nx-1, 0,self.__ny-1, 0,1-1)
+        ext = (0,grid.nx-1, 0,grid.ny-1, 0,1-1)
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
@@ -168,8 +359,7 @@ class WriteImageDataToSurfer(WriterBase):
         dx, dy, dz = img.GetSpacing()
 
         # Get data ranges
-        xmin, xmax = ox, ox + dx*nx
-        ymin, ymax = oy, oy + dy*ny
+        xmin, xmax, ymin, ymax, zmin, zmax = img.GetBounds()
 
         # Note user has to select a single array to save out
         field, name = self.__inputArray[0], self.__inputArray[1]
@@ -177,9 +367,9 @@ class WriteImageDataToSurfer(WriterBase):
         arr = interface.convertArray(vtkarr)
         dmin, dmax = arr.min(), arr.max()
 
-        arr = arr.reshape((nx, ny), order='F')
+        # arr = arr.reshape((nx, ny), order='F')
 
-        meta = 'DSAA\n%d %d\n%f %f\n%f %f\n%f %f' % (ny, nx, xmin, xmax,
+        meta = 'DSAA\n%d %d\n%f %f\n%f %f\n%f %f' % (nx, ny, xmin, xmax,
                                                      ymin, ymax, dmin, dmax)
         # Now write out the data!
         np.savetxt(filename, arr, header=meta, comments='', fmt=self.GetFormat())

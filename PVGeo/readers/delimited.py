@@ -20,7 +20,10 @@ from .. import interface
 
 
 class DelimitedTextReader(ReaderBase):
-    """This reader will take in any delimited text file and make a ``vtkTable`` from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
+    """This reader will take in any delimited text file and make a ``vtkTable``
+    from it. This is not much different than the default .txt or .csv reader in
+    ParaView, however it gives us room to use our own extensions and a little
+    more flexibility in the structure of the files we import.
     """
     __displayname__ = 'Delimited Text Reader'
     __category__ = 'reader'

@@ -290,14 +290,16 @@ class TestSurferGridReader(TestBase):
         self.assertIsNotNone(img)
         # Check shapes of the surfer grid
         nx, ny, nz = img.GetDimensions()
-        self.assertEqual(nx, 182)
-        self.assertEqual(ny, 222)
+        self.assertEqual(nx, 222)
+        self.assertEqual(ny, 182)
         self.assertEqual(nz, 1)
+
         # Now test writer
         writer = WriteImageDataToSurfer()
         fname = os.path.join(self.test_dir, 'test-writer.grd')
         writer.SetFileName(fname)
         writer.Write(img, 'foo')
+
         # Read again and compare
         reader = SurferGridReader()
         reader.AddFileName(fname)
@@ -306,8 +308,8 @@ class TestSurferGridReader(TestBase):
         read = reader.GetOutput()
         self.assertIsNotNone(read)
         nx, ny, nz = read.GetDimensions()
-        self.assertEqual(nx, 182)
-        self.assertEqual(ny, 222)
+        self.assertEqual(nx, 222)
+        self.assertEqual(ny, 182)
         self.assertEqual(nz, 1)
         self.assertEqual(img.GetBounds(), read.GetBounds())
         # Check the data arrays
@@ -492,6 +494,7 @@ NODATA_value  -9999
 ###############################################################################
 ###############################################################################
 if __name__ == '__main__':
+    import unittest
     unittest.main()
 ###############################################################################
 ###############################################################################
