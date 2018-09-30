@@ -24,6 +24,7 @@ class PackedBinariesReader(ReaderBase):
     """
     __displayname__ = 'Packed Binaries Reader'
     __category__ = 'reader'
+    extensions = "H@ bin rsf rsf@ HH npz"
     def __init__(self, **kwargs):
         ReaderBase.__init__(self,
             nOutputPorts=1, outputType='vtkTable', **kwargs)

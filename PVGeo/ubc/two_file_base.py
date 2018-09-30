@@ -20,6 +20,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
     """
     __displayname__ = 'UBC Mesh Reader Base'
     __category__ = 'base'
+    extensions = 'mesh msh dat txt text'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         base.TwoFileReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType,

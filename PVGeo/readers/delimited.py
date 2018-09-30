@@ -27,6 +27,7 @@ class DelimitedTextReader(ReaderBase):
     """
     __displayname__ = 'Delimited Text Reader'
     __category__ = 'reader'
+    extensions = "dat csv txt text ascii xyz tsv"
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
