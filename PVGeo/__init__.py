@@ -28,7 +28,7 @@ else:
 
     # Import Helpers
     from . import _helpers
-    from . import interface
+    from .interface import *
 # VTK-dependent imports complete
 
 from . import version
@@ -37,7 +37,7 @@ from . import version
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
-__version__ = '1.1.28'
+__version__ = '1.1.30'
 __displayname__ = 'PVGeo'
 
 
