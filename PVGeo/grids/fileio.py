@@ -13,8 +13,8 @@ import vtk
 import numpy as np
 import pandas as pd
 
-import sys
-sys.path.append('/Users/bane/Documents/OpenGeoVis/Software/espatools')
+# import sys
+# sys.path.append('/Users/bane/Documents/OpenGeoVis/Software/espatools')
 import espatools
 
 import sys
