@@ -4,6 +4,7 @@ __all__ = [
     'AddCellConnToPoints',
     'PointsToTube',
     'PercentThreshold',
+    'ArraysToRGBA',
 ]
 
 import vtk
@@ -275,14 +276,14 @@ class NormalizeArray(FilterPreserveTypeBase):
         return np.array(arr)
 
     @staticmethod
-    def _featureScale(arr):
+    def _featureScale(arr, rng=None):
         # TODO: implement ability to use custom range
-        # if rng is not None:
-        #     mi = rng[0]
-        #     ma = rng[1]
-        # else:
-        mi = np.min(arr)
-        ma = np.max(arr)
+        if rng is not None:
+            mi = rng[0]
+            ma = rng[1]
+        else:
+            mi = np.min(arr)
+            ma = np.max(arr)
         return (arr - mi) / (ma - mi)
 
     @staticmethod
@@ -761,4 +762,165 @@ class PercentThreshold(FilterBase):
         self.Update()
         return self.GetOutput()
 
-###############################################################################
+################################################################################
+
+class ArraysToRGBA(FilterPreserveTypeBase):
+    """Use arrays from input data object to set an RGBA array. Sets colors and
+    transparencies.
+    """
+    __displayname__ = 'Arrays To RGBA'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterPreserveTypeBase.__init__(self, **kwargs)
+        self.__use_trans = False
+        self.__r_array = [None, None]
+        self.__g_array = [None, None]
+        self.__b_array = [None, None]
+        self.__a_array = [None, None]
+        self.__field = None
+        self.__mask = -9999
+
+
+    def _GetArrays(self, wpdi):
+        # Get Red
+        fieldr, name = self.__r_array[0], self.__r_array[1]
+        rArr = _helpers.getNumPyArray(wpdi, fieldr, name)
+        # Get Green
+        fieldg, name = self.__g_array[0], self.__g_array[1]
+        gArr = _helpers.getNumPyArray(wpdi, fieldg, name)
+        # Get Blue
+        fieldb, name = self.__b_array[0], self.__b_array[1]
+        bArr = _helpers.getNumPyArray(wpdi, fieldb, name)
+        # Get Trans
+        fielda, name = self.__a_array[0], self.__a_array[1]
+        aArr = _helpers.getNumPyArray(wpdi, fielda, name)
+        if fieldr != fieldg != fieldb: # != fielda
+            raise _helpers.PVGeoError('Data arrays must be of the same field.')
+        self.__field = fieldr
+        return rArr, gArr, bArr, aArr
+
+
+    def _MaskArrays(self, rArr, gArr, bArr, aArr):
+        rArr = np.ma.masked_where(rArr==self.__mask, rArr)
+        gArr = np.ma.masked_where(gArr==self.__mask, gArr)
+        bArr = np.ma.masked_where(bArr==self.__mask, bArr)
+        aArr = np.ma.masked_where(aArr==self.__mask, aArr)
+        return rArr, gArr, bArr, aArr
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Execute on pipeline"""
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        wpdi = dsa.WrapDataObject(pdi)
+        # Get number of points
+        pdo = self.GetOutputData(outInfo, 0)
+
+        # Get the arrays for the RGB values
+        rArr, gArr, bArr, aArr = self._GetArrays(wpdi)
+        rArr, gArr, bArr, aArr = self._MaskArrays(rArr, gArr, bArr, aArr)
+
+        # normalize each color array bewteen 0 and 255
+        rArr = NormalizeArray._featureScale(rArr, [0, 255])
+        gArr = NormalizeArray._featureScale(gArr, [0, 255])
+        bArr = NormalizeArray._featureScale(bArr, [0, 255])
+
+        # Now concatenate the arrays
+        if self.__use_trans:
+            aArr = NormalizeArray._featureScale(aArr, [0, 255])
+            col = np.array(np.c_[rArr, gArr, bArr, aArr], dtype=np.uint8)
+        else:
+            col = np.array(np.c_[rArr, gArr, bArr], dtype=np.uint8)
+        colors = interface.convertArray(col, name='Colors')
+
+        # Set the output
+        pdo.DeepCopy(pdi)
+        # Add new color array
+        _helpers.addArray(pdo, self.__field, colors)
+        return 1
+
+
+
+    #### Seters and Geters ####
+
+    def SetUseTransparency(self, flag):
+        if self.__use_trans != flag:
+            self.__use_trans = flag
+            self.Modified()
+
+    def SetMaskValue(self, val):
+        if self.__mask != val:
+            self.__mask = val
+            self.Modified()
+
+    def _SetInputArrayRed(self, field, name):
+        if self.__r_array[0] != field:
+            self.__r_array[0] = field
+            self.Modified()
+        if self.__r_array[1] != name:
+            self.__r_array[1] = name
+            self.Modified()
+
+    def _SetInputArrayGreen(self, field, name):
+        if self.__g_array[0] != field:
+            self.__g_array[0] = field
+            self.Modified()
+        if self.__g_array[1] != name:
+            self.__g_array[1] = name
+            self.Modified()
+
+    def _SetInputArrayBlue(self, field, name):
+        if self.__b_array[0] != field:
+            self.__b_array[0] = field
+            self.Modified()
+        if self.__b_array[1] != name:
+            self.__b_array[1] = name
+            self.Modified()
+
+    def _SetInputArrayTrans(self, field, name):
+        if self.__a_array[0] != field:
+            self.__a_array[0] = field
+            self.Modified()
+        if self.__a_array[1] != name:
+            self.__a_array[1] = name
+            self.Modified()
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
+        """
+        if idx == 0:
+            self._SetInputArrayRed(field, name)
+        elif idx == 1:
+            self._SetInputArrayGreen(field, name)
+        elif idx == 2:
+            self._SetInputArrayBlue(field, name)
+        elif idx == 3:
+            self._SetInputArrayTrans(field, name)
+        else:
+            raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
+        return 1
+
+    def Apply(self, inputDataObject, rArray, gAray, bArray, aArray=None):
+        self.SetInputDataObject(inputDataObject)
+        rArr, rField = _helpers.searchForArray(inputDataObject, rArray)
+        gArr, gField = _helpers.searchForArray(inputDataObject, gAray)
+        bArr, bField = _helpers.searchForArray(inputDataObject, bArray)
+        if aArray is not None:
+            aArr, aField = _helpers.searchForArray(inputDataObject, aArray)
+            self.SetInputArrayToProcess(3, 0, 0, aArr, aField)
+        self.SetInputArrayToProcess(0, 0, 0, rArr, rField)
+        self.SetInputArrayToProcess(1, 0, 0, gArr, gField)
+        self.SetInputArrayToProcess(2, 0, 0, bArr, bField)
+        self.Update()
+        return self.GetOutput()
+
+
+
+################################################################################

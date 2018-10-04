@@ -279,3 +279,29 @@ class PVGeoEsriGridReader(EsriGridReader):
 
 
 ###############################################################################
+
+ESPA_DESC = "Landsat ESPA XML Metadata"
+ESPA_EXTS = "xml"
+
+@smproxy.reader(name="PVGeoLandsatReader",
+       label="PVGeo: Landsat XML Reader",
+       extensions=ESPA_EXTS,
+       file_description=ESPA_DESC)
+class PVGeoLandsatReader(LandsatReader):
+    def __init__(self):
+        LandsatReader.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.xml(_helpers.getFileReaderXml(ESPA_EXTS, readerDescription=ESPA_DESC))
+    def AddFileName(self, fname):
+        LandsatReader.AddFileName(self, fname)
+
+    @smproperty.dataarrayselection(name="Available Bands")
+    def GetDataSelection(self):
+        return LandsatReader.GetDataSelection(self)
+
+
+
+
+###############################################################################
