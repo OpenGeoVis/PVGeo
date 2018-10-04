@@ -12,7 +12,7 @@ __all__ = [
 import vtk
 import numpy as np
 import pandas as pd
-import pyproj
+# TODO: internal: import pyproj
 from vtk.numpy_interface import dataset_adapter as dsa
 # Import Helpers:
 from ..base import FilterBase, FilterPreserveTypeBase
@@ -38,6 +38,7 @@ class LonLatToUTM(FilterBase):
     def GetAvailableEllps(idx=None):
         """Returns the available ellps
         """
+        import pyproj
         ellps = pyproj.pj_ellps.keys()
         # Now migrate WGSXX to front so that 84 is always default
         wgs = ['WGS60','WGS66','WGS72', 'WGS84']
@@ -49,6 +50,7 @@ class LonLatToUTM(FilterBase):
 
     def __Convert2D(self, lon, lat, elev):
         """Converts 2D Lon Lat coords to 2D XY UTM points"""
+        import pyproj
         p = pyproj.Proj(proj='utm', zone=self.__zone, ellps=self.__ellps)
         utm_x, utm_y = p(lon, lat)
         return np.c_[utm_x, utm_y, elev]

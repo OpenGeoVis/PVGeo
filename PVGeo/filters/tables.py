@@ -192,6 +192,7 @@ class ReshapeTable(FilterBase):
             self.Modified()
 
 
+###############################################################################
 
 class ExtractArray(FilterBase):
     """Extract an array from a ``vtkDataSet`` and make a ``vtkTable`` of it.
