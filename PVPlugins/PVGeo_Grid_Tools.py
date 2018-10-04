@@ -105,6 +105,57 @@ class PVGeoTableToGrid(TableToGrid):
         TableToGrid.SetSwapXY(self, flag)
 
 
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoTableToTimeGrid', label='Table To Time Grid')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
+class PVGeoTableToGrid(TableToTimeGrid):
+    def __init__(self):
+        TableToTimeGrid.__init__(self)
+
+
+    #### Setters / Getters ####
+
+
+    @smproperty.intvector(name="Extent", default_values=[10, 10, 10, 1])
+    def SetExtent(self, nx, ny, nz, nt):
+        TableToTimeGrid.SetExtent(self, nx, ny, nz, nt)
+
+    @smproperty.intvector(name="Dimensions", default_values=[0, 1, 2, 3])
+    def SetDimensions(self, x, y, z, t):
+        TableToTimeGrid.SetDimensions(self, x, y, z, t)
+
+    @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0])
+    def SetSpacing(self, dx, dy, dz):
+        TableToTimeGrid.SetSpacing(self, dx, dy, dz)
+
+    @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0, 0.0])
+    def SetOrigin(self, x0, y0, z0):
+        TableToTimeGrid.SetOrigin(self, x0, y0, z0)
+
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Order', command='SetOrder',
+        labels=['C-style: Row-major order', 'Fortran-style: column-major order'],
+        values=[0, 1]))
+    def SetOrder(self, order):
+        o = ['C', 'F']
+        TableToTimeGrid.SetOrder(self, o[order])
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        TableToTimeGrid.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return TableToTimeGrid.GetTimestepValues(self)
+
+
+
 
 ###############################################################################
 
