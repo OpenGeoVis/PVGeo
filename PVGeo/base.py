@@ -150,6 +150,8 @@ class ReaderBaseBase(AlgorithmBase):
         """Returns the list of file names or given and index returns a specified
         timestep's filename.
         """
+        if self.__fileNames is None or len(self.__fileNames) < 1:
+            raise _helpers.PVGeoError('File names are not set.')
         if idx is None:
             return self.__fileNames
         return self.__fileNames[idx]

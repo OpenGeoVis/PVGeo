@@ -341,7 +341,7 @@ class LandsatReader(ReaderBaseBase):
     __category__ = 'reader'
     def __init__(self, **kwargs):
         ReaderBaseBase.__init__(self, outputType='vtkImageData', **kwargs)
-        self.__reader = espatools.RasterSetReader()
+        self.__reader = espatools.RasterSetReader(yflip=True)
         self.__raster = None
         self.__cast = True
         self.__colors = False
@@ -382,7 +382,8 @@ class LandsatReader(ReaderBaseBase):
     def _GetRawData(self, idx=0):
         """Perfroms the read for the selected bands"""
         allowed = []
-        for name in self.__raster.bands.keys():
+        for i in range(self._dataselection.GetNumberOfArrays()):
+            name = self._dataselection.GetArrayName(i)
             if self._dataselection.ArrayIsEnabled(name):
                 allowed.append(name)
         self.__raster = self.__reader.Read(meta_only=False, allowed=allowed, cast=self.__cast)
@@ -413,7 +414,8 @@ class LandsatReader(ReaderBaseBase):
         self._BuildImageData(output)
         # Now add the data based on what the user has selected
         for name, band in self.__raster.bands.items():
-            output.GetPointData().AddArray(interface.convertArray(band.data.flatten(), name=name))
+            data = band.data
+            output.GetPointData().AddArray(interface.convertArray(data.flatten(), name=name))
         if self.__colors:
             try:
                 colors = self.__raster.GetRGB().reshape((-1,3))
@@ -445,7 +447,10 @@ class LandsatReader(ReaderBaseBase):
     def GetDataSelection(self):
         """Used by ParaView GUI"""
         if self.NeedToRead():
-            self._ReadUpFront()
+            try:
+                self._ReadUpFront()
+            except:
+                pass
         return self._dataselection
 
 
