@@ -302,6 +302,24 @@ class PVGeoLandsatReader(LandsatReader):
         return LandsatReader.GetDataSelection(self)
 
 
+    @smproperty.xml(_helpers.getPropertyXml(name='Cast Data Type',
+        command='CastDataType',
+        default_values=True,
+        help='A boolean to set whether to cast the data arrays so invalid points are filled nans.',
+        visibility='advanced'))
+    def CastDataType(self, flag):
+        LandsatReader.CastDataType(self, flag)
+
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Create Colors',
+        command='CreateColors',
+        default_values=True,
+        help='A boolean to set whether to creat a colors array with RGB values. Experimental feature.',
+        visibility='advanced'))
+    def CreateColors(self, flag):
+        LandsatReader.CreateColors(self, flag)
+
+
 
 
 ###############################################################################

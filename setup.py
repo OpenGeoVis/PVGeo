@@ -32,7 +32,7 @@ setuptools.setup(
         'pandas>=0.23.4',
         'mock>=2.0.0',
         #'pyproj>=1.9',
-        'espatools>=0.0.4',
+        'espatools>=0.0.5',
     ],
     classifiers=(
         "Programming Language :: Python",

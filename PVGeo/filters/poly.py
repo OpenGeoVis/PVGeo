@@ -282,8 +282,8 @@ class NormalizeArray(FilterPreserveTypeBase):
             mi = rng[0]
             ma = rng[1]
         else:
-            mi = np.min(arr)
-            ma = np.max(arr)
+            mi = np.nanmin(arr)
+            ma = np.nanmax(arr)
         return (arr - mi) / (ma - mi)
 
     @staticmethod
@@ -343,7 +343,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getNumPyArray(wpdi, field, name)
         arr = np.array(arr)
-        return (np.min(arr), np.max(arr))
+        return (np.nanmin(arr), np.nanmax(arr))
 
 
     def _Normalize(self, pdi, pdo):
@@ -700,7 +700,7 @@ class PercentThreshold(FilterBase):
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getNumPyArray(wpdi, field, name)
 
-        dmin, dmax = np.min(arr), np.max(arr)
+        dmin, dmax = np.nanmin(arr), np.nanmax(arr)
         val = dmin + (self.__percent / 100.0) * (dmax - dmin)
 
         if self.__invert:

@@ -346,6 +346,8 @@ class LandsatReader(ReaderBaseBase):
         ReaderBaseBase.__init__(self, outputType='vtkImageData', **kwargs)
         self.__reader = espatools.RasterSetReader()
         self.__raster = None
+        self.__cast = True
+        self.__colors = False
         # Properties:
         self._dataselection = vtk.vtkDataArraySelection()
         self._dataselection.AddObserver("ModifiedEvent", _helpers.createModifiedCallback(self))
@@ -386,7 +388,7 @@ class LandsatReader(ReaderBaseBase):
         for name in self.__raster.bands.keys():
             if self._dataselection.ArrayIsEnabled(name):
                 allowed.append(name)
-        self.__raster = self.__reader.Read(meta_only=False, allowed=allowed)
+        self.__raster = self.__reader.Read(meta_only=False, allowed=allowed, cast=self.__cast)
         return self.__raster
 
     def _BuildImageData(self, output):
@@ -415,12 +417,13 @@ class LandsatReader(ReaderBaseBase):
         # Now add the data based on what the user has selected
         for name, band in self.__raster.bands.items():
             output.GetPointData().AddArray(interface.convertArray(band.data.flatten(), name=name))
-        try:
-            colors = self.__raster.GetRGB().reshape((-1,3))
-            output.GetPointData().SetScalars(interface.convertArray(colors, name='Colors'))
-            output.GetPointData().SetActiveScalars("Colors")
-        except RuntimeError:
-            pass
+        if self.__colors:
+            try:
+                colors = self.__raster.GetRGB().reshape((-1,3))
+                output.GetPointData().SetScalars(interface.convertArray(colors, name='Colors'))
+                output.GetPointData().SetActiveScalars("Colors")
+            except RuntimeError:
+                pass
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
@@ -447,3 +450,18 @@ class LandsatReader(ReaderBaseBase):
         if self.NeedToRead():
             self._ReadUpFront()
         return self._dataselection
+
+
+    def CastDataType(self, flag):
+        """A flag to cast all data arrays as floats/doubles.
+        This will fill invalid values with nans instead of a fill value"""
+        if self.__cast != flag:
+            self.__cast = flag
+            self.Modified()
+
+
+    def CreateColors(self, flag):
+        """A flag to get the RGB colors (experimental)"""
+        if self.__colors != flag:
+            self.__colors = flag
+            self.Modified()
