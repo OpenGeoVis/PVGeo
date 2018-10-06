@@ -311,13 +311,9 @@ class PVGeoLandsatReader(LandsatReader):
         LandsatReader.CastDataType(self, flag)
 
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Create Colors',
-        command='CreateColors',
-        default_values=True,
-        help='A boolean to set whether to creat a colors array with RGB values. Experimental feature.',
-        visibility='advanced'))
-    def CreateColors(self, flag):
-        LandsatReader.CreateColors(self, flag)
+    @smproperty.xml(_helpers.getDropDownXml(name='Color Scheme', command='SetColorScheme', labels=LandsatReader.GetColorSchemeNames(), help='Set a color scheme to use.'))
+    def SetColorScheme(self, scheme):
+        LandsatReader.SetColorScheme(self, scheme)
 
 
 

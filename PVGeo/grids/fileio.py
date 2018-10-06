@@ -344,7 +344,7 @@ class LandsatReader(ReaderBaseBase):
         self.__reader = espatools.RasterSetReader(yflip=True)
         self.__raster = None
         self.__cast = True
-        self.__colors = False
+        self.__scheme = 'infrared'
         # Properties:
         self._dataselection = vtk.vtkDataArraySelection()
         self._dataselection.AddObserver("ModifiedEvent", _helpers.createModifiedCallback(self))
@@ -416,13 +416,10 @@ class LandsatReader(ReaderBaseBase):
         for name, band in self.__raster.bands.items():
             data = band.data
             output.GetPointData().AddArray(interface.convertArray(data.flatten(), name=name))
-        if self.__colors:
-            try:
-                colors = self.__raster.GetRGB().reshape((-1,3))
-                output.GetPointData().SetScalars(interface.convertArray(colors, name='Colors'))
-                output.GetPointData().SetActiveScalars("Colors")
-            except RuntimeError:
-                pass
+        if self.__scheme is not None:
+            colors = self.__raster.GetRGB(scheme=self.__scheme).reshape((-1,3))
+            output.GetPointData().SetScalars(interface.convertArray(colors, name=self.__scheme))
+            output.GetPointData().SetActiveScalars(self.__scheme)
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
@@ -439,7 +436,6 @@ class LandsatReader(ReaderBaseBase):
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
-
 
 
     #### Seters and Geters for the GUI ####
@@ -462,8 +458,21 @@ class LandsatReader(ReaderBaseBase):
             self.Modified()
 
 
-    def CreateColors(self, flag):
-        """A flag to get the RGB colors (experimental)"""
-        if self.__colors != flag:
-            self.__colors = flag
+    def SetColorScheme(self, scheme):
+        """Get an RGB scheme from the raster set. If no scheme is desired, pass
+        any string that is not a defined scheme as the scheme argument."""
+        if isinstance(scheme, int):
+            scheme = self.GetColorSchemeNames()[scheme]
+        if scheme in list(espatools.RasterSet.RGB_SCHEMES.keys()) and self.__scheme != scheme:
+            self.__scheme = scheme
             self.Modified()
+        elif self.__scheme is not None:
+            self.__scheme = None
+            self.Modified()
+
+
+    @staticmethod
+    def GetColorSchemeNames():
+        schemes = list(espatools.RasterSet.RGB_SCHEMES.keys())
+        schemes.insert(0, 'No Selection')
+        return schemes
