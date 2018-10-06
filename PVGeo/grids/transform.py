@@ -1,14 +1,23 @@
 __all__ = [
     'TableToGrid',
     'TableToTimeGrid',
+    'ReverseImageDataAxii',
+    'TranslateGridOrigin',
 ]
 
 import vtk
+from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np
+
 # Import Helpers:
 from ..base import FilterBase
 from .. import _helpers
 from .. import interface
+
+
+
+
+###############################################################################
 
 
 #---- Table To Grid Stuff ----#
@@ -369,6 +378,199 @@ class TableToTimeGrid(FilterBase):
         """
         if dt != self.__dt:
             self.__dt = dt
+            self.Modified()
+
+
+
+###############################################################################
+
+
+
+class ReverseImageDataAxii(FilterBase):
+    """This filter will flip ``vtkImageData`` on any of the three cartesian axii.
+    A checkbox is provided for each axis on which you may desire to flip the data.
+    """
+    __displayname__ = 'Reverse Image Data Axii'
+    __category__ = 'filter'
+    def __init__(self, axes=[True, True, True]):
+        FilterBase.__init__(self,
+            nInputPorts=1, inputType='vtkImageData',
+            nOutputPorts=1, outputType='vtkImageData')
+        self.__axes = axes[::-1] # Z Y X (FORTRAN)
+
+    def _ReverseGridAxii(self, idi, ido):
+        # Copy over input to output to be flipped around
+        # Deep copy keeps us from messing with the input data
+        ox, oy, oz = idi.GetOrigin()
+        ido.SetOrigin(ox, oy, oz)
+        sx, sy, sz = idi.GetSpacing()
+        ido.SetSpacing(sx, sy, sz)
+        ext = idi.GetExtent()
+        nx, ny, nz = ext[1]+1, ext[3]+1, ext[5]+1
+        ido.SetDimensions(nx, ny, nz)
+
+        widi = dsa.WrapDataObject(idi)
+        # Iterate over all array in the PointData
+        for j in range(idi.GetPointData().GetNumberOfArrays()):
+            # Go through each axis and rotate if needed
+            arr = widi.PointData[j]
+            arr = np.reshape(arr, (nz,ny,nx))
+            for i in range(3):
+                if self.__axes[i]:
+                    arr = np.flip(arr, axis=i)
+            # Now add that data array to the output
+            data = interface.convertArray(arr.flatten(), name=idi.GetPointData().GetArrayName(j))
+            ido.GetPointData().AddArray(data)
+
+        # Iterate over all array in the CellData
+        for j in range(idi.GetCellData().GetNumberOfArrays()):
+            # Go through each axis and rotate if needed
+            arr = widi.CellData[j]
+            arr = np.reshape(arr, (nz-1,ny-1,nx-1))
+            for i in range(3):
+                if self.__axes[i]:
+                    arr = np.flip(arr, axis=i)
+            # Now add that data array to the output
+            data = interface.convertArray(arr.flatten(), name=idi.GetCellData().GetArrayName(j))
+            ido.GetCellData().AddArray(data)
+
+        return ido
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output.
+        """
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Perfrom task
+        self._ReverseGridAxii(pdi, pdo)
+        return 1
+
+
+    #### Seters and Geters ####
+
+
+    def SetFlipX(self, flag):
+        """Set the filter to flip th input data along the X-axis
+        """
+        if self.__axes[2] != flag:
+            self.__axes[2] = flag
+            self.Modified()
+
+    def SetFlipY(self, flag):
+        """Set the filter to flip th input data along the Y-axis
+        """
+        if self.__axes[1] != flag:
+            self.__axes[1] = flag
+            self.Modified()
+
+    def SetFlipZ(self, flag):
+        """Set the filter to flip th input data along the Z-axis
+        """
+        if self.__axes[0] != flag:
+            self.__axes[0] = flag
+            self.Modified()
+
+
+###############################################################################
+
+#---- Translate Grid Origin ----#
+
+class TranslateGridOrigin(FilterBase):
+    """This filter will translate the origin of `vtkImageData` to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior).
+    """
+    __displayname__ = 'Translate Grid Origin'
+    __category__ = 'filter'
+    def __init__(self, corner=1):
+        FilterBase.__init__(self,
+            nInputPorts=1, inputType='vtkImageData',
+            nOutputPorts=1, outputType='vtkImageData')
+        self.__corner = corner
+
+
+    def _Translate(self, pdi, pdo):
+        if pdo is None:
+            pdo = vtk.vtkImageData()
+
+        [nx, ny, nz] = pdi.GetDimensions()
+        [sx, sy, sz] = pdi.GetSpacing()
+        [ox, oy, oz] = pdi.GetOrigin()
+
+        pdo.DeepCopy(pdi)
+
+        xx,yy,zz = 0.0,0.0,0.0
+
+        if self.__corner == 1:
+            # South East Bottom
+            xx = ox - (nx-1)*sx
+            yy = oy
+            zz = oz
+        elif self.__corner == 2:
+            # North West Bottom
+            xx = ox
+            yy = oy - (ny-1)*sy
+            zz = oz
+        elif self.__corner == 3:
+            # North East Bottom
+            xx = ox - (nx-1)*sx
+            yy = oy - (ny-1)*sy
+            zz = oz
+        elif self.__corner == 4:
+            # South West Top
+            xx = ox
+            yy = oy
+            zz = oz - (nz-1)*sz
+        elif self.__corner == 5:
+            # South East Top
+            xx = ox - (nx-1)*sx
+            yy = oy
+            zz = oz - (nz-1)*sz
+        elif self.__corner == 6:
+            # North West Top
+            xx = ox
+            yy = oy - (ny-1)*sy
+            zz = oz - (nz-1)*sz
+        elif self.__corner == 7:
+            # North East Top
+            xx = ox - (nx-1)*sx
+            yy = oy - (ny-1)*sy
+            zz = oz - (nz-1)*sz
+
+        pdo.SetOrigin(xx, yy, zz)
+
+        return pdo
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output.
+        """
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Perfrom task
+        self._Translate(pdi, pdo)
+        return 1
+
+
+    #### Seters and Geters ####
+
+
+    def SetCorner(self, corner):
+        """Set the corner to use
+
+        Args:
+            corner (int) : corner location; see note.
+
+        Note:
+            * 1: South East Bottom
+            * 2: North West Bottom
+            * 3: North East Bottom
+            * 4: South West Top
+            * 5: South East Top
+            * 6: North West Top
+            * 7: North East Top
+        """
+        if self.__corner != corner:
+            self.__corner = corner
             self.Modified()
 
 
