@@ -20,7 +20,7 @@ import shutil
 path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print(path)
 sys.path.insert(0, path)
-sys.path.insert(0, '/Users/bane/Documents/OpenGeoVis/Projects/gendocs/')
+sys.path.insert(0, '/Users/bane/Documents/OpenGeoVis/Software/gendocs/')
 
 
 # Mock the paraview module to build pvmacros docs
