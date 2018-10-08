@@ -3,6 +3,8 @@ __all__ = [
     'TensorMeshAppender',
 ]
 
+__displayname__ = 'Tensor Mesh'
+
 import numpy as np
 import vtk
 import os

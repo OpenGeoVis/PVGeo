@@ -4,6 +4,8 @@ __all__ = [
     'MagObsReader',
 ]
 
+__displayname__ = 'General Tools'
+
 import numpy as np
 import vtk
 
