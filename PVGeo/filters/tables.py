@@ -5,6 +5,8 @@ __all__ = [
     'SplitTableOnArray',
 ]
 
+__displayname__ = 'Table Operations'
+
 import numpy as np
 import pandas as pd
 import vtk
@@ -192,6 +194,7 @@ class ReshapeTable(FilterBase):
             self.Modified()
 
 
+###############################################################################
 
 class ExtractArray(FilterBase):
     """Extract an array from a ``vtkDataSet`` and make a ``vtkTable`` of it.

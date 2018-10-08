@@ -2,6 +2,8 @@ __all__ = [
     'ExtractTopography',
 ]
 
+__displayname__ = 'Subsetting'
+
 import vtk
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa

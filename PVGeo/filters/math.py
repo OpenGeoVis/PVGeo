@@ -1,10 +1,11 @@
 __all__ = [
     'ArrayMath',
     'NormalizeArray',
-    'AddCellConnToPoints',
-    'PointsToTube',
     'PercentThreshold',
+    'ArraysToRGBA',
 ]
+
+__displayname__ = 'Math Operations'
 
 import vtk
 import numpy as np
@@ -275,14 +276,14 @@ class NormalizeArray(FilterPreserveTypeBase):
         return np.array(arr)
 
     @staticmethod
-    def _featureScale(arr):
+    def _featureScale(arr, rng=None):
         # TODO: implement ability to use custom range
-        # if rng is not None:
-        #     mi = rng[0]
-        #     ma = rng[1]
-        # else:
-        mi = np.min(arr)
-        ma = np.max(arr)
+        if rng is not None:
+            mi = rng[0]
+            ma = rng[1]
+        else:
+            mi = np.nanmin(arr)
+            ma = np.nanmax(arr)
         return (arr - mi) / (ma - mi)
 
     @staticmethod
@@ -342,7 +343,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getNumPyArray(wpdi, field, name)
         arr = np.array(arr)
-        return (np.min(arr), np.max(arr))
+        return (np.nanmin(arr), np.nanmax(arr))
 
 
     def _Normalize(self, pdi, pdo):
@@ -463,211 +464,6 @@ class NormalizeArray(FilterPreserveTypeBase):
             self.Modified()
 
 
-
-###############################################################################
-#---- Cell Connectivity ----#
-
-class AddCellConnToPoints(FilterBase):
-    """This filter will add linear cell connectivity between scattered points. You have the option to add ``VTK_Line`` or ``VTK_PolyLine`` connectivity. ``VTK_Line`` connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The ``VTK_PolyLine`` adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation). Type map is specified in `vtkCellType.h`.
-
-    **Cell Connectivity Types:**
-
-    - 4: Poly Line
-    - 3: Line
-    """
-    __displayname__ = 'Add Cell Connectivity to Points'
-    __category__ = 'filter'
-    def __init__(self, **kwargs):
-        FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkPolyData',
-            nOutputPorts=1, outputType='vtkPolyData')
-        # Parameters
-        self.__cellType = vtk.VTK_POLY_LINE
-        self.__usenbr = kwargs.get('nearestNbr', False)
-        self.__unique = True
-
-
-    def _ConnectCells(self, pdi, pdo, logTime=False):
-        """Internal helper to perfrom the connection
-        """
-        # NOTE: Type map is specified in vtkCellType.h
-        cellType = self.__cellType
-        nrNbr = self.__usenbr
-
-        if logTime:
-            startTime = datetime.now()
-
-        # Get the Points over the NumPy interface
-        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
-        points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
-        if self.__unique:
-            # Remove repeated points
-            points = np.unique(points, axis=0)
-
-        def _makePolyCell(ptsi):
-            cell = vtk.vtkPolyLine()
-            cell.GetPointIds().SetNumberOfIds(len(ptsi))
-            for i in ptsi:
-                cell.GetPointIds().SetId(i, ptsi[i])
-            return cell
-
-        def _makeLineCell(ptsi):
-            if len(ptsi) != 2:
-                raise _helpers.PVGeoError('_makeLineCell() only handles two points')
-            aLine = vtk.vtkLine()
-            aLine.GetPointIds().SetId(0, ptsi[0])
-            aLine.GetPointIds().SetId(1, ptsi[1])
-            return aLine
-
-
-        cells = vtk.vtkCellArray()
-        numPoints = pdi.GetNumberOfPoints()
-        if nrNbr:
-            from scipy.spatial import cKDTree
-            # VTK_Line
-            if cellType == vtk.VTK_LINE:
-                tree = cKDTree(points)
-                ind = tree.query([0.0,0.0,0.0], k=numPoints)[1]
-                for i in range(len(ind)-1):
-                    # Get indices of k nearest points
-                    ptsi = [ind[i], ind[i+1]]
-                    cell = _makeLineCell(ptsi)
-                    cells.InsertNextCell(cell)
-                    points = np.delete(points, 0, 0) # Deletes first row
-            # VTK_PolyLine
-            elif cellType == vtk.VTK_POLY_LINE:
-                tree = cKDTree(points)
-                dist, ptsi = tree.query([0.0,0.0,0.0], k=numPoints)
-                cell = _makePolyCell(ptsi)
-                cells.InsertNextCell(cell)
-            else:
-                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
-        else:
-            # VTK_PolyLine
-            if cellType == vtk.VTK_POLY_LINE:
-                ptsi = [i for i in range(numPoints)]
-                cell = _makePolyCell(ptsi)
-                cells.InsertNextCell(cell)
-            # VTK_Line
-            elif cellType == vtk.VTK_LINE:
-                for i in range(0, numPoints-1):
-                    ptsi = [i, i+1]
-                    cell = _makeLineCell(ptsi)
-                    cells.InsertNextCell(cell)
-            else:
-                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
-
-        if logTime:
-            print((datetime.now() - startTime))
-        # Now add points and cells to output
-        pdo.SetPoints(pdi.GetPoints())
-        pdo.SetLines(cells)
-        # copy point data
-        _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
-        # Copy cell data if type is LINE
-        if cellType == vtk.VTK_LINE:
-            # Be sure to rearange for Nearest neighbor approxiamtion
-            for i in range(pdi.GetCellData().GetNumberOfArrays()):
-                vtkarr = pdi.GetCellData().GetArray(i)
-                name = vtkarr.GetName()
-                if nrNbr:
-                    arr = interface.convertArray(vtkarr)
-                    arr = arr[ind]
-                    vtkarr = interface.convertArray(arr, name=name)
-                pdo.GetCellData().AddArray(vtkarr)
-        return pdo
-
-    def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to generate output data object
-        """
-        # Get input/output of Proxy
-        pdi = self.GetInputData(inInfo, 0, 0)
-        pdo = self.GetOutputData(outInfo, 0)
-        # Perfrom task
-        self._ConnectCells(pdi, pdo)
-        return 1
-
-
-    #### Seters and Geters ####
-
-
-    def SetCellType(self, cellType):
-        """Set the cell typ by the integer id as specified in `vtkCellType.h`
-        """
-        if cellType != self.__cellType:
-            self.__cellType = cellType
-            self.Modified()
-
-    def SetUseNearestNbr(self, flag):
-        """Set a flag on whether to use SciPy's ``cKDTree`` nearest neighbor algorithms to sort the points to before adding linear connectivity.
-        """
-        if flag != self.__usenbr:
-            self.__usenbr = flag
-            self.Modified()
-
-    def SetUseUniquePoints(self, flag):
-        """Set a flag on whether to only use unique points"""
-        if flag != self.__unique:
-            self.__unique = flag
-            self.Modified()
-
-
-###############################################################################
-
-
-class PointsToTube(AddCellConnToPoints):
-    """Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.
-    """
-    __displayname__ = 'Points to Tube'
-    __category__ = 'filter'
-    def __init__(self, **kwargs):
-        AddCellConnToPoints.__init__(self, **kwargs)
-        # Additional Parameters
-        # NOTE: CellType should remain vtk.VTK_POLY_LINE (4) connection
-        self.__numSides = 20
-        self.__radius = 10.0
-        self.__capping = False
-
-
-    def _ConnectCells(self, pdi, pdo, logTime=False):
-        """This uses the parent's ``_ConnectCells()`` to build a tub around
-        """
-        AddCellConnToPoints._ConnectCells(self, pdi, pdo, logTime=logTime)
-        tube = vtk.vtkTubeFilter()
-        tube.SetInputData(pdo)
-        # User Defined Parameters
-        tube.SetCapping(self.__capping)
-        tube.SetRadius(self.__radius)
-        tube.SetNumberOfSides(self.__numSides)
-        # Apply the filter
-        tube.Update()
-        pdo.ShallowCopy(tube.GetOutput())
-        return pdo
-
-
-    #### Seters and Geters ####
-
-    def SetRadius(self, radius):
-        """Set the radius of the tube
-        """
-        if self.__radius != radius:
-            self.__radius = radius
-            self.Modified()
-
-    def SetNumberOfSides(self, num):
-        """Set the number of sides (resolution) for the tube
-        """
-        if self.__numSides != num:
-            self.__numSides = num
-            self.Modified()
-
-    def SetCapping(self, flag):
-        if self.__capping != flag:
-            self.__capping = flag
-            self.Modified()
-
-
-
 ###############################################################################
 
 
@@ -699,7 +495,7 @@ class PercentThreshold(FilterBase):
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getNumPyArray(wpdi, field, name)
 
-        dmin, dmax = np.min(arr), np.max(arr)
+        dmin, dmax = np.nanmin(arr), np.nanmax(arr)
         val = dmin + (self.__percent / 100.0) * (dmax - dmin)
 
         if self.__invert:
@@ -761,4 +557,165 @@ class PercentThreshold(FilterBase):
         self.Update()
         return self.GetOutput()
 
-###############################################################################
+################################################################################
+
+class ArraysToRGBA(FilterPreserveTypeBase):
+    """Use arrays from input data object to set an RGBA array. Sets colors and
+    transparencies.
+    """
+    __displayname__ = 'Arrays To RGBA'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterPreserveTypeBase.__init__(self, **kwargs)
+        self.__use_trans = False
+        self.__r_array = [None, None]
+        self.__g_array = [None, None]
+        self.__b_array = [None, None]
+        self.__a_array = [None, None]
+        self.__field = None
+        self.__mask = -9999
+
+
+    def _GetArrays(self, wpdi):
+        # Get Red
+        fieldr, name = self.__r_array[0], self.__r_array[1]
+        rArr = _helpers.getNumPyArray(wpdi, fieldr, name)
+        # Get Green
+        fieldg, name = self.__g_array[0], self.__g_array[1]
+        gArr = _helpers.getNumPyArray(wpdi, fieldg, name)
+        # Get Blue
+        fieldb, name = self.__b_array[0], self.__b_array[1]
+        bArr = _helpers.getNumPyArray(wpdi, fieldb, name)
+        # Get Trans
+        fielda, name = self.__a_array[0], self.__a_array[1]
+        aArr = _helpers.getNumPyArray(wpdi, fielda, name)
+        if fieldr != fieldg != fieldb: # != fielda
+            raise _helpers.PVGeoError('Data arrays must be of the same field.')
+        self.__field = fieldr
+        return rArr, gArr, bArr, aArr
+
+
+    def _MaskArrays(self, rArr, gArr, bArr, aArr):
+        rArr = np.ma.masked_where(rArr==self.__mask, rArr)
+        gArr = np.ma.masked_where(gArr==self.__mask, gArr)
+        bArr = np.ma.masked_where(bArr==self.__mask, bArr)
+        aArr = np.ma.masked_where(aArr==self.__mask, aArr)
+        return rArr, gArr, bArr, aArr
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Execute on pipeline"""
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        wpdi = dsa.WrapDataObject(pdi)
+        # Get number of points
+        pdo = self.GetOutputData(outInfo, 0)
+
+        # Get the arrays for the RGB values
+        rArr, gArr, bArr, aArr = self._GetArrays(wpdi)
+        rArr, gArr, bArr, aArr = self._MaskArrays(rArr, gArr, bArr, aArr)
+
+        # normalize each color array bewteen 0 and 255
+        rArr = NormalizeArray._featureScale(rArr, [0, 255])
+        gArr = NormalizeArray._featureScale(gArr, [0, 255])
+        bArr = NormalizeArray._featureScale(bArr, [0, 255])
+
+        # Now concatenate the arrays
+        if self.__use_trans:
+            aArr = NormalizeArray._featureScale(aArr, [0, 255])
+            col = np.array(np.c_[rArr, gArr, bArr, aArr], dtype=np.uint8)
+        else:
+            col = np.array(np.c_[rArr, gArr, bArr], dtype=np.uint8)
+        colors = interface.convertArray(col, name='Colors')
+
+        # Set the output
+        pdo.DeepCopy(pdi)
+        # Add new color array
+        _helpers.addArray(pdo, self.__field, colors)
+        return 1
+
+
+
+    #### Seters and Geters ####
+
+    def SetUseTransparency(self, flag):
+        if self.__use_trans != flag:
+            self.__use_trans = flag
+            self.Modified()
+
+    def SetMaskValue(self, val):
+        if self.__mask != val:
+            self.__mask = val
+            self.Modified()
+
+    def _SetInputArrayRed(self, field, name):
+        if self.__r_array[0] != field:
+            self.__r_array[0] = field
+            self.Modified()
+        if self.__r_array[1] != name:
+            self.__r_array[1] = name
+            self.Modified()
+
+    def _SetInputArrayGreen(self, field, name):
+        if self.__g_array[0] != field:
+            self.__g_array[0] = field
+            self.Modified()
+        if self.__g_array[1] != name:
+            self.__g_array[1] = name
+            self.Modified()
+
+    def _SetInputArrayBlue(self, field, name):
+        if self.__b_array[0] != field:
+            self.__b_array[0] = field
+            self.Modified()
+        if self.__b_array[1] != name:
+            self.__b_array[1] = name
+            self.Modified()
+
+    def _SetInputArrayTrans(self, field, name):
+        if self.__a_array[0] != field:
+            self.__a_array[0] = field
+            self.Modified()
+        if self.__a_array[1] != name:
+            self.__a_array[1] = name
+            self.Modified()
+
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        """Used to set the input array(s)
+
+        Args:
+            idx (int): the index of the array to process
+            port (int): input port (use 0 if unsure)
+            connection (int): the connection on the port (use 0 if unsure)
+            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            name (int): the name of the array
+        """
+        if idx == 0:
+            self._SetInputArrayRed(field, name)
+        elif idx == 1:
+            self._SetInputArrayGreen(field, name)
+        elif idx == 2:
+            self._SetInputArrayBlue(field, name)
+        elif idx == 3:
+            self._SetInputArrayTrans(field, name)
+        else:
+            raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
+        return 1
+
+    def Apply(self, inputDataObject, rArray, gAray, bArray, aArray=None):
+        self.SetInputDataObject(inputDataObject)
+        rArr, rField = _helpers.searchForArray(inputDataObject, rArray)
+        gArr, gField = _helpers.searchForArray(inputDataObject, gAray)
+        bArr, bField = _helpers.searchForArray(inputDataObject, bArray)
+        if aArray is not None:
+            aArr, aField = _helpers.searchForArray(inputDataObject, aArray)
+            self.SetInputArrayToProcess(3, 0, 0, aArr, aField)
+        self.SetInputArrayToProcess(0, 0, 0, rArr, rField)
+        self.SetInputArrayToProcess(1, 0, 0, gArr, gField)
+        self.SetInputArrayToProcess(2, 0, 0, bArr, bField)
+        self.Update()
+        return self.GetOutput()
+
+
+
+################################################################################

@@ -3,6 +3,8 @@ __all__ = [
     'ModelAppenderBase',
 ]
 
+__displayname__ = 'Base Classes'
+
 # Outside Imports:
 import numpy as np
 import pandas as pd

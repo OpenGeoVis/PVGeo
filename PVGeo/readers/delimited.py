@@ -4,6 +4,8 @@ __all__ = [
     'XYZTextReader'
 ]
 
+__displayname__ = 'Delimited File I/O'
+
 import numpy as np
 import pandas as pd
 

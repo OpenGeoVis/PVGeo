@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.29'
+paraview_plugin_version = '1.1.34'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -618,3 +618,33 @@ class PVGeoLonLatToUTM(LonLatToUTM):
     @smproperty.xml(_helpers.getDropDownXml(name='Ellps', command='SetEllps', labels=LonLatToUTM.GetAvailableEllps(), help='This will set the ellps.'))
     def SetEllps(self, ellps):
         LonLatToUTM.SetEllps(self, ellps)
+
+
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoArraysToRGBA', label='Arrays To RGBA')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+class PVGeoArraysToRGBA(ArraysToRGBA):
+    def __init__(self):
+        ArraysToRGBA.__init__(self)
+
+    #### Seters and Geters ####
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=4, labels=['Red', 'Green', 'Blue', 'Transparency']))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return ArraysToRGBA.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Transparency',
+        command='SetUseTransparency', default_values=False,
+        help='A boolean to control whether or not to use the Transparency array.'))
+    def SetUseTransparency(self, flag):
+        ArraysToRGBA.SetUseTransparency(self, flag)
+
+
+    @smproperty.doublevector(name="Mask", default_values=-9999.0)
+    def SetMaskValue(self, val):
+        ArraysToRGBA.SetMaskValue(self, val)
+
+###############################################################################

@@ -3,14 +3,20 @@
 __all__ = [
     'SurferGridReader',
     'WriteImageDataToSurfer',
-    'EsriGridReader'
+    'EsriGridReader',
+    'LandsatReader',
+    'WriteCellCenterData',
 ]
+
+__displayname__ = 'File I/O'
 
 # NOTE: Surfer no data value: 1.70141E+38
 
 import vtk
 import numpy as np
+from vtk.numpy_interface import dataset_adapter as dsa
 import pandas as pd
+import espatools
 
 import sys
 import struct
@@ -23,13 +29,13 @@ else:
 
 
 # Import Helpers:
-from ..base import WriterBase, ReaderBase
+from ..base import WriterBase, ReaderBase, ReaderBaseBase
 from ..readers import DelimitedTextReader
 from .. import _helpers
 from .. import interface
 
 
-#------------------------------------------------------------------------------
+################################################################################
 
 
 class GridInfo(properties.HasProperties):
@@ -335,7 +341,7 @@ class SurferGridReader(ReaderBase):
 
 
 
-#------------------------------------------------------------------------------
+################################################################################
 
 class WriteImageDataToSurfer(WriterBase):
     """Write a 2D ``vtkImageData`` object to the Surfer grid format"""
@@ -514,3 +520,205 @@ class EsriGridReader(DelimitedTextReader):
 
     def GetDataName(self):
         return self.__dataName
+
+
+
+################################################################################
+
+
+class LandsatReader(ReaderBaseBase):
+    """A reader that will handle ESPA XML files for Landsat Imagery. This reader
+    uses the ``espatools`` package to read Landsat rasters (band sets) and creates
+    vtkImageData with each band as point data
+    """
+    __displayname__ = 'Landsat XML Reader'
+    __category__ = 'reader'
+    def __init__(self, **kwargs):
+        ReaderBaseBase.__init__(self, outputType='vtkImageData', **kwargs)
+        self.__reader = espatools.RasterSetReader(yflip=True)
+        self.__raster = None
+        self.__cast = True
+        self.__scheme = 'infrared'
+        # Properties:
+        self._dataselection = vtk.vtkDataArraySelection()
+        self._dataselection.AddObserver("ModifiedEvent", _helpers.createModifiedCallback(self))
+
+
+    def Modified(self, readAgain=False):
+        """Ensure default is overridden to be false so array selector can call.
+        """
+        ReaderBaseBase.Modified(self, readAgain=readAgain)
+
+
+    def GetFileName(self):
+        """Super class has file names as a list but we will only handle a single
+        project file. This provides a conveinant way of making sure we only
+        access that single file.
+        A user could still access the list of file names using ``GetFileNames()``.
+        """
+        return ReaderBaseBase.GetFileNames(self, idx=0)
+
+
+    #### Methods for performing the read ####
+
+    def _GetFileContents(self, idx=None):
+        """Reads XML meta data, no data read."""
+        self.__reader.SetFileName(self.GetFileName())
+        self.__raster = self.__reader.Read(meta_only=True)
+        for n in self.__raster.bands.keys():
+            self._dataselection.AddArray(n)
+        self.NeedToRead(flag=False) # Only meta data has been read
+        return
+
+    def _ReadUpFront(self):
+        return self._GetFileContents()
+
+    def _GetRawData(self, idx=0):
+        """Perfroms the read for the selected bands"""
+        allowed = []
+        for i in range(self._dataselection.GetNumberOfArrays()):
+            name = self._dataselection.GetArrayName(i)
+            if self._dataselection.ArrayIsEnabled(name):
+                allowed.append(name)
+        self.__raster = self.__reader.Read(meta_only=False, allowed=allowed, cast=self.__cast)
+        return self.__raster
+
+    def _BuildImageData(self, output):
+        """Properly builds the output ``vtkImageData`` object"""
+        if self.__raster is None:
+            raise _helpers.PVGeoError('Raster invalid.')
+        raster = self.__raster
+        output.SetDimensions(raster.nsamps, raster.nlines, 1)
+        output.SetSpacing(raster.pixel_size.x, raster.pixel_size.y, 1)
+        corner = raster.global_metadata.projection_information.corner_point[0]
+        output.SetOrigin(corner.x, corner.y, 0)
+        return output
+
+
+    #### Pipeline Methods ####
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
+        # Get output:
+        output = vtk.vtkImageData.GetData(outInfo, 0)
+        # Perform Read if needed
+        if self.__raster is None:
+            self._ReadUpFront()
+        self._GetRawData()
+        self._BuildImageData(output)
+        # Now add the data based on what the user has selected
+        for name, band in self.__raster.bands.items():
+            data = band.data
+            output.GetPointData().AddArray(interface.convertArray(data.flatten(), name=name))
+        if self.__scheme is not None:
+            colors = self.__raster.GetRGB(scheme=self.__scheme).reshape((-1,3))
+            output.GetPointData().SetScalars(interface.convertArray(colors, name=self.__scheme))
+            output.GetPointData().SetActiveScalars(self.__scheme)
+        return 1
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to set grid extents."""
+        # Call parent to handle time stuff
+        ReaderBaseBase.RequestInformation(self, request, inInfo, outInfo)
+        if self.__raster is None:
+            self._ReadUpFront()
+        # Now set whole output extent
+        b = self.__raster.bands.get(list(self.__raster.bands.keys())[0])
+        nx, ny, nz = b.nsamps, b.nlines, 1
+        ext = (0,nx-1, 0,ny-1, 0,nz-1)
+        info = outInfo.GetInformationObject(0)
+        # Set WHOLE_EXTENT: This is absolutely necessary
+        info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
+        return 1
+
+
+    #### Seters and Geters for the GUI ####
+
+    def GetDataSelection(self):
+        """Used by ParaView GUI"""
+        if self.NeedToRead():
+            try:
+                self._ReadUpFront()
+            except:
+                pass
+        return self._dataselection
+
+
+    def CastDataType(self, flag):
+        """A flag to cast all data arrays as floats/doubles.
+        This will fill invalid values with nans instead of a fill value"""
+        if self.__cast != flag:
+            self.__cast = flag
+            self.Modified()
+
+
+    def SetColorScheme(self, scheme):
+        """Get an RGB scheme from the raster set. If no scheme is desired, pass
+        any string that is not a defined scheme as the scheme argument."""
+        if isinstance(scheme, int):
+            scheme = self.GetColorSchemeNames()[scheme]
+        if scheme in list(espatools.RasterSet.RGB_SCHEMES.keys()) and self.__scheme != scheme:
+            self.__scheme = scheme
+            self.Modified()
+        elif self.__scheme is not None:
+            self.__scheme = None
+            self.Modified()
+
+
+    @staticmethod
+    def GetColorSchemeNames():
+        schemes = list(espatools.RasterSet.RGB_SCHEMES.keys())
+        schemes.insert(0, 'No Selection')
+        return schemes
+
+
+
+################################################################################
+
+
+class WriteCellCenterData(WriterBase):
+    """This writer will save a file of the XYZ points for an input dataset's
+    cell centers and its cell data. Use in tandom with ParaView's native CSV
+    writer which saves the PointData.
+    """
+    __displayname__ = 'Write Cell Centers To CSV'
+    __category__ = 'writer'
+    def __init__(self):
+        WriterBase.__init__(self, inputType='vtkDataSet')
+        self.__delimiter = ','
+
+
+    def PerformWriteOut(self, inputDataObject, filename):
+        # Find cell centers
+        filt = vtk.vtkCellCenters()
+        filt.SetInputDataObject(inputDataObject)
+        filt.Update()
+        centers = dsa.WrapDataObject(filt.GetOutput(0)).Points
+        # Get CellData
+        wpdi = dsa.WrapDataObject(inputDataObject)
+        celldata = wpdi.CellData
+        keys = celldata.keys()
+        # Save out using numpy
+        arr = np.zeros((len(centers), 3 + len(keys)))
+        arr[:,0:3] = centers
+        for i, name in enumerate(keys):
+            arr[:,i+3] = celldata[name]
+        # Now write out the data
+        # Clean data titles to make sure they do not contain the delimiter
+        repl = '_' if self.__delimiter != '_' else '-'
+        for i, name in enumerate(keys):
+            keys[i] = name.replace(self.__delimiter, repl)
+        header = ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys)
+        np.savetxt(filename, arr,
+                   header=header,
+                   delimiter=self.__delimiter,
+                   fmt=self.GetFormat(),
+                   comments='')
+        # Success for pipeline
+        return 1
+
+    def SetDelimiter(self, delimiter):
+        """The string delimiter to use"""
+        if self.__delimiter != delimiter:
+            self.__delimiter = delimiter
+            self.Modified()

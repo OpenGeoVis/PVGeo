@@ -18,6 +18,9 @@ __all__ = [
 ]
 
 
+___displayname__ = 'Interface'
+
+
 import numpy as np
 import pandas as pd
 import vtk
@@ -71,12 +74,13 @@ def convertArray(arr, name='Data', deep=0, array_type=None, pdf=False):
         if arr.dtype is np.dtype('O'):
             arr = arr.astype('|S')
         arr = np.ascontiguousarray(arr)
-        typ = getVTKtype(arr.dtype)
-        if typ is 13:
-            VTK_data = convertStringArray(arr)
-            return VTK_data
-        arr = np.ascontiguousarray(arr)
-        VTK_data = nps.numpy_to_vtk(num_array=arr, deep=deep, array_type=array_type)
+        try:
+            arr = np.ascontiguousarray(arr)
+            VTK_data = nps.numpy_to_vtk(num_array=arr, deep=deep, array_type=array_type)
+        except ValueError:
+            typ = getVTKtype(arr.dtype)
+            if typ is 13:
+                VTK_data = convertStringArray(arr)
         VTK_data.SetName(name)
         return VTK_data
     # Otherwise input must be a vtkDataArray

@@ -4,6 +4,8 @@ __all__ = [
     'OcTreeAppender',
 ]
 
+__displayname__ = 'OcTree Mesh'
+
 import numpy as np
 from vtk.util import numpy_support as nps
 import vtk

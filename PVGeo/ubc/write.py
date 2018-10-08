@@ -3,6 +3,8 @@ __all__ = [
     'WriteImageDataToUBC',
 ]
 
+__displayname__ = 'Writers'
+
 import numpy as np
 import vtk
 import os

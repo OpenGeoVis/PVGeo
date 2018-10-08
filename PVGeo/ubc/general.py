@@ -4,6 +4,8 @@ __all__ = [
     'MagObsReader',
 ]
 
+__displayname__ = 'General Tools'
+
 import numpy as np
 import vtk
 
@@ -42,7 +44,7 @@ class TopoReader(DelimitedPointsReaderBase):
 
 
 class GravObsReader(DelimitedPointsReaderBase):
-    """Read _`GIF Gravity Observations` file.
+    """Read `GIF Gravity Observations`_ file.
 
     .. _GIF Gravity Observations: https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/gravfile.html
     """
@@ -69,7 +71,7 @@ class GravObsReader(DelimitedPointsReaderBase):
 
 
 class MagObsReader(DelimitedPointsReaderBase):
-    """Read _`GIF Magnetic Observations` file.
+    """Read `GIF Magnetic Observations`_ file.
 
     .. _GIF Magnetic Observations: https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/magfile.html
     """
