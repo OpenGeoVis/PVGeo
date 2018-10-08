@@ -76,7 +76,6 @@ class GridInfo(properties.HasProperties):
         return output
 
 
-
 class SurferGridReader(ReaderBase):
     """Read 2D ASCII/Binary Surfer grid files. The IO code was adopted from
     `Seequent's steno3d_surfer`_
@@ -340,8 +339,8 @@ class SurferGridReader(ReaderBase):
         return self.__dataName
 
 
-
 ################################################################################
+
 
 class WriteImageDataToSurfer(WriterBase):
     """Write a 2D ``vtkImageData`` object to the Surfer grid format"""
@@ -418,6 +417,7 @@ class WriteImageDataToSurfer(WriterBase):
                 self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Modified()
         self.Update()
+
 
 ###############################################################################
 
@@ -520,7 +520,6 @@ class EsriGridReader(DelimitedTextReader):
 
     def GetDataName(self):
         return self.__dataName
-
 
 
 ################################################################################
@@ -670,7 +669,6 @@ class LandsatReader(ReaderBaseBase):
         schemes = list(espatools.RasterSet.RGB_SCHEMES.keys())
         schemes.insert(0, 'No Selection')
         return schemes
-
 
 
 ################################################################################
