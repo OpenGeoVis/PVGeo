@@ -46,7 +46,7 @@ class PackedBinariesReader(ReaderBase):
             dtype = np.dtype('f')
         try:
             arr = np.fromfile(fileName, dtype=dtype)
-        except (FileNotFoundError, OSError) as fe:
+        except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         return np.asarray(arr, dtype=self.__dtype)
 

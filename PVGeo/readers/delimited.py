@@ -29,7 +29,7 @@ class DelimitedTextReader(ReaderBase):
     """
     __displayname__ = 'Delimited Text Reader'
     __category__ = 'reader'
-    extensions = "dat csv txt text ascii xyz tsv"
+    extensions = "dat csv txt text ascii xyz tsv ntab"
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
@@ -43,7 +43,7 @@ class DelimitedTextReader(ReaderBase):
         self.__hasTitles = kwargs.get('hasTitles', True)
         # Data objects to hold the read data for access by the pipeline methods
         self._data = []
-        self.__titles = []
+        self._titles = []
 
     def _GetDeli(self):
         """For itenral use
@@ -69,7 +69,7 @@ class DelimitedTextReader(ReaderBase):
         for f in fileNames:
             try:
                 contents.append(np.genfromtxt(f, dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::])
-            except (FileNotFoundError, OSError) as fe:
+            except (IOError, OSError) as fe:
                 raise _helpers.PVGeoError(str(fe))
         if idx is not None: return contents[0]
         return contents
@@ -126,7 +126,7 @@ class DelimitedTextReader(ReaderBase):
         """
         # Perform Read
         contents = self._GetFileContents()
-        self.__titles, contents = self._ExtractHeaders(contents)
+        self._titles, contents = self._ExtractHeaders(contents)
         self._data = self._FileContentsToDataFrame(contents)
         self.NeedToRead(flag=False)
         return 1
@@ -204,7 +204,7 @@ class DelimitedTextReader(ReaderBase):
         return self.__hasTitles
 
     def GetTitles(self):
-        return self.__titles
+        return self._titles
 
 
 ################################################################################

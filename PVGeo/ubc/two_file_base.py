@@ -43,7 +43,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         # This is a helper method to read file contents of mesh
         try:
             fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
-        except (FileNotFoundError, OSError) as fe:
+        except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
 
         def _genTup(sft, n):
@@ -87,7 +87,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             else:
                 # This reads whole file :(
                 msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str, comments='!')[0]
-        except (FileNotFoundError, OSError) as fe:
+        except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         # Fist line is the size of the model
         self.__sizeM = np.array(msh.ravel()[0].split(), dtype=int)
@@ -127,7 +127,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         # Perform IO
         try:
             data = np.genfromtxt(FileName, dtype=np.float, comments='!')
-        except (FileNotFoundError, OSError) as fe:
+        except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         return data
 

@@ -6,6 +6,7 @@ __all__ = [
     'EsriGridReader',
     'LandsatReader',
     'WriteCellCenterData',
+    'NTABReader',
 ]
 
 __displayname__ = 'File I/O'
@@ -16,11 +17,13 @@ import vtk
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 import pandas as pd
+import warnings
 import espatools
 
 import sys
 import struct
 import properties
+import re
 
 if sys.version_info < (3,):
     from StringIO import StringIO
@@ -148,7 +151,7 @@ class SurferGridReader(ReaderBase):
             zmax = unpack('<d', f.read(8))[0]
             rot = unpack('<d', f.read(8))[0]
             if rot != 0:
-                print('Unsupported feature: Rotation != 0')
+                warnings.warn('Unsupported feature: Rotation != 0')
             blankval = unpack('<d', f.read(8))[0]
 
             section = unpack('4s', f.read(4))[0]
@@ -173,10 +176,10 @@ class SurferGridReader(ReaderBase):
             try:
                 section = unpack('4s', f.read(4))[0]
                 if section == b'FLTI':
-                    print('Unsupported feature: Fault Info')
+                    warnings.warn('Unsupported feature: Fault Info')
                 else:
-                    print('Unrecognized keyword: {}'.format(section))
-                print('Remainder of file ignored')
+                    warnings.warn('Unrecognized keyword: {}'.format(section))
+                warnings.warn('Remainder of file ignored')
             except:
                 pass
 
@@ -284,7 +287,7 @@ class SurferGridReader(ReaderBase):
         for f in fileNames:
             try:
                 contents.append(reader(f))
-            except (FileNotFoundError, OSError) as fe:
+            except (IOError, OSError) as fe:
                 raise _helpers.PVGeoError(str(fe))
         if idx is not None: return contents[0]
         return contents
@@ -522,6 +525,7 @@ class EsriGridReader(DelimitedTextReader):
         return self.__dataName
 
 
+
 ################################################################################
 
 
@@ -720,3 +724,129 @@ class WriteCellCenterData(WriterBase):
         if self.__delimiter != delimiter:
             self.__delimiter = delimiter
             self.Modified()
+
+
+###############################################################################
+# NTABReader
+
+class NTABReader(DelimitedTextReader):
+    """Read NTAB data files. Makes the data arrays a time series."""
+    __displayname__ = 'NTAB Reader'
+    __category__ = 'reader'
+    extensions = 'ntab NTAB'
+    def __init__(self, **kwargs):
+        DelimitedTextReader.__init__(self, outputType='vtkPolyData', **kwargs)
+        self.SetSplitOnWhiteSpace(True)
+        self.__timeKeys = []
+        self.__timesteps = []
+        self.__metaKeys = []
+        self.__dataName = 'Data'
+
+
+    def _ReadUpFront(self):
+        """Override to handle making time series of the different data arrays
+        """
+        # Perform Read
+        contents = self._GetFileContents()
+        self._titles, contents = self._ExtractHeaders(contents)
+        data = self._FileContentsToDataFrame(contents)
+        if isinstance(data, list) and len(data) > 1:
+            raise _helpers.PVGeoError('NTAB reader cannot handle time series')
+        if isinstance(data, list):
+            self._data = data[0]
+        else:
+            self._data = data
+        # Now we set up the time keys
+        keys = self._data.keys().tolist()
+        r = re.compile(r'\d.+?y')
+        self.__timeKeys = [r.findall(k)[0] for k in keys if len(r.findall(k)) == 1]
+        self.__timesteps = [float(k.split('y')[0]) for k in self.__timeKeys]
+        # sort the timesteps/keys in increasing order
+        idxs = np.argsort(self.__timesteps)
+        self.__timesteps = [self.__timesteps[i] for i in idxs]
+        self.__timeKeys = [self.__timeKeys[i] for i in idxs]
+        # Now add all the meta keys that remain constant
+        self.__metaKeys = np.setdiff1d(keys, self.__timeKeys).tolist()
+        self.NeedToRead(flag=False)
+        return 1
+
+
+    def _GetRawData(self, idx=0):
+        """Since NTAB files have the time series in them inheritly, we need to
+        make sure we access the proper time step here
+        """
+        try: # If it has time varying data
+            tkey = self.__timeKeys[idx]
+            data = self._data[self.__metaKeys + [tkey]]
+            data.rename({tkey: self.__dataName}, axis='columns', inplace=True)
+        except: # No time variance
+            data = self._data[self.__metaKeys]
+        return data
+
+
+    #### Algorithm Methods ####
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to get data for current timestep and populate the output data object.
+        """
+        # Get output:
+        output = self.GetOutputData(outInfo, 0)
+        # Get requested time index
+        i = _helpers.getRequestedTime(self, outInfo)
+        if self.NeedToRead():
+            self._ReadUpFront()
+        # Generate the PolyData output
+        data = self._GetRawData(idx=i)
+        # Make sure to shift points to the front!
+        keys = data.keys().tolist()
+        zidx = keys.index('z')
+        keys.insert(0, keys.pop(zidx))
+        yidx = keys.index('y')
+        keys.insert(0, keys.pop(yidx))
+        xidx = keys.index('x')
+        keys.insert(0, keys.pop(xidx))
+        output.DeepCopy(interface.pointsToPolyData(data[keys]))
+        return 1
+
+
+
+    def GetTimestepValues(self):
+        """Use this in ParaView decorator to register timesteps on the pipeline.
+        """
+        if self.NeedToRead():
+            self._ReadUpFront()
+        return self.__timesteps if self.__timesteps is not None else None
+
+
+    def _UpdateTimeSteps(self):
+        """For internal use only: appropriately sets the timesteps.
+        """
+        if self.NeedToRead():
+            self._ReadUpFront()
+        if len(self.__timesteps) > 1:
+            executive = self.GetExecutive()
+            oi = executive.GetOutputInformation(0)
+            #oi = outInfo.GetInformationObject(0)
+            oi.Remove(executive.TIME_STEPS())
+            oi.Remove(executive.TIME_RANGE())
+            for t in self.__timesteps:
+                oi.Append(executive.TIME_STEPS(), t)
+            oi.Append(executive.TIME_RANGE(), self.__timesteps[0])
+            oi.Append(executive.TIME_RANGE(), self.__timesteps[-1])
+        return 1
+
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        """This is a conveience method that should be overwritten when needed.
+        This will handle setting the timesteps appropriately based on the number
+        of file names when the pipeline needs to know the time information.
+        """
+        if self.NeedToRead():
+            self._ReadUpFront()
+        self._UpdateTimeSteps()
+        return 1
+
+    def SetDataName(self, name):
+        if self.__dataName != name:
+            self.__dataName = name
+            self.Modified(readAgain=False)
