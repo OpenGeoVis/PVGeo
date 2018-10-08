@@ -1,6 +1,14 @@
+"""This module provides a complicated algorithm for making voxels out of regularly
+gridded points. Considering that this algorithm is rather complex, we are keeping
+it in its own module until we can simplify it, clean up the code, and make it
+capable of handling non-uniformly gridded points
+"""
+
 __all__ = [
     'VoxelizePoints',
 ]
+
+__displayname__ = 'Voxelize'
 
 import numpy as np
 import vtk

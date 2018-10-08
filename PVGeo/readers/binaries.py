@@ -1,6 +1,9 @@
 __all__ = [
     'PackedBinariesReader',
-    'MadagascarReader']
+    'MadagascarReader',
+]
+
+__displayname__ = 'Binary/Serialized File I/O'
 
 import numpy as np
 import vtk

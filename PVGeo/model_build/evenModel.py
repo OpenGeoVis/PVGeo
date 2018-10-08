@@ -3,6 +3,8 @@ __all__ = [
     'CreateUniformGrid',
 ]
 
+__displayname__ = 'Grids'
+
 import vtk
 import numpy as np
 #from vtk.numpy_interface import dataset_adapter as dsa

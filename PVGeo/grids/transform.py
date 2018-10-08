@@ -5,6 +5,8 @@ __all__ = [
     'TranslateGridOrigin',
 ]
 
+__displayname__ = 'Transform'
+
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np

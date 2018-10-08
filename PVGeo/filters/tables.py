@@ -5,6 +5,8 @@ __all__ = [
     'SplitTableOnArray',
 ]
 
+__displayname__ = 'Table Operations'
+
 import numpy as np
 import pandas as pd
 import vtk

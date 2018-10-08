@@ -8,6 +8,8 @@ __all__ = [
     'WriteCellCenterData',
 ]
 
+__displayname__ = 'File I/O'
+
 # NOTE: Surfer no data value: 1.70141E+38
 
 import vtk

@@ -1,11 +1,16 @@
 __all__ = [
     'SGeMSGridReader',
+    'WriteImageDataToSGeMS',
 ]
+
+__displayname__ = 'SGeMS File I/O'
 
 import numpy as np
 import vtk
+import os
 
 from .gslib import GSLibReader
+from ..base import WriterBase
 from .. import _helpers
 from .. import interface
 
@@ -104,3 +109,44 @@ class SGeMSGridReader(GSLibReader):
         if self.__origin != origin:
             self.__origin = origin
             self.Modified(readAgain=False)
+
+
+
+
+
+class WriteImageDataToSGeMS(WriterBase):
+    """Writes a ``vtkImageData`` object to the SGeMS uniform grid format.
+    This writer can only handle point data.
+    """
+    __displayname__ = 'Write ``vtkImageData`` To SGeMS Grid Format'
+    __category__ = 'writer'
+    def __init__(self, inputType='vtkImageData'):
+        WriterBase.__init__(self, inputType=inputType, ext='SGeMS')
+
+
+    def PerformWriteOut(self, inputDataObject, filename):
+        # Get the input data object
+        grd = inputDataObject
+
+        # Get grid dimensions
+        nx, ny, nz = grd.GetDimensions()
+
+        numArrs = grd.GetPointData().GetNumberOfArrays()
+        arrs = []
+
+        titles = []
+        # Get data arrays
+        for i in range(numArrs):
+            vtkarr = grd.GetPointData().GetArray(i)
+            arrs.append(interface.convertArray(vtkarr))
+            titles.append(vtkarr.GetName())
+
+        header = '%d %d %d\n' % (nx, ny, nz)
+        header += '%d\n' % len(titles)
+        datanames = '\n'.join(titles)
+        header += datanames
+
+        arrs = np.array(arrs).T
+        np.savetxt(filename, arrs, comments='', header=header, fmt=self.GetFormat())
+
+        return 1

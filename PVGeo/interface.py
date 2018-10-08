@@ -18,6 +18,9 @@ __all__ = [
 ]
 
 
+___displayname__ = 'Interface'
+
+
 import numpy as np
 import pandas as pd
 import vtk
