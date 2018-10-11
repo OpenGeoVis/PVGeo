@@ -1,7 +1,8 @@
 __all__ = [
     'customAxisTicks',
     'resetAxisTicks',
-    'ScaleAxis',
+    'scaleAxis',
+    'setAxisLabelsFromBounds',
 ]
 
 import vtk
@@ -61,7 +62,7 @@ resetAxisTicks.__category__ = 'macro'
 
 
 
-def ScaleAxis(axis, scale):
+def scaleAxis(axis, scale):
     """Use to scale an axis visually"""
     import paraview.simple as pvs
     sc = [1, 1, 1] # Default Scale
@@ -79,3 +80,51 @@ def ScaleAxis(axis, scale):
     pvs.RenderAllViews()
     pvs.ResetCamera()
     return None
+
+
+scaleAxis.__displayname__ = 'Scale Axis'
+scaleAxis.__category__ = 'macro'
+
+
+
+def setAxisLabelsFromBounds(name, num=(10, 10, 5)):
+    """Sets the axis labels from a given input data source. Use the num argument
+    to control the number of labels along each axis. If num is a scalar, then
+    a uniform number of labels is used on each axis.
+
+    Args:
+        name (str): The string name of the input source on the data pipeline
+        num (tuple(int) or int): the number of labels for each axis
+
+    Example:
+        >>> import pvmacros as pvm
+        >>> pvm.vis.setAxisLabelsFromBounds('TableToPoints1', num=(5, 10, 2))
+
+    """
+    import paraview.simple as pvs
+    import paraview.servermanager as sm
+    import numpy as np
+    # Get the input data
+    src = pvs.FindSource(name)
+    data = sm.Fetch(src)
+    xmin,xmax, ymin,ymax, zmin,zmax = data.GetBounds()
+    if not isinstance(num, (tuple, list)):
+        num = list(num)
+    # Cast as ints if needed
+    for i, val in enumerate(num):
+        if not isinstance(val, int):
+            num[i] = int(val)
+    # Calculate ranges for each axis
+    xrng = np.linspace(xmin, xmax, num=num[0])
+    yrng = np.linspace(ymin, ymax, num=num[1])
+    zrng = np.linspace(zmin, zmax, num=num[2])
+
+    # Set the axis labels
+    customAxisTicks(xrng, axis=0, uniform=False)
+    customAxisTicks(yrng, axis=1, uniform=False)
+    customAxisTicks(zrng, axis=2, uniform=False)
+    return
+
+
+setAxisLabelsFromBounds.___displayname__ = 'Set Axis Labels from Bounds'
+setAxisLabelsFromBounds.__category__ = 'macro'
