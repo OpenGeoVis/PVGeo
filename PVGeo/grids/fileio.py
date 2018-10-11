@@ -784,6 +784,16 @@ class NTABReader(DelimitedTextReader):
         return data
 
 
+    def _BuildGrid(self, grid):
+        """Internal helper to properly build the output ``vtkRectiliearGrid``
+        and set indexing arrays to easily set the data."""
+        if grid is None:
+            grid = vtk.vtkRectilinearGrid()
+        # Get the indexing arrays: should be labelled as (i,j,k) in self.__data
+        pass
+
+
+
     #### Algorithm Methods ####
 
     def RequestData(self, request, inInfo, outInfo):
