@@ -174,7 +174,7 @@ class PVGeoReshapeTable(ReshapeTable):
 
 @smproxy.filter(name='PVGeoVoxelizePoints', label='Voxelize Points')
 @smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Wireframe" />
+    <RepresentationType view="RenderView" type="Surface" />
     <WarnOnCreate title="Axial Assumptions">
       **Voxelize Points** filter assumes the input points to be sampled on a regular XYZ coordinate system at an even spacing.
       Do you want to continue?
@@ -203,7 +203,7 @@ class PVGeoVoxelizePoints(VoxelizePoints):
 
 @smproxy.filter(name='PVGeoVoxelizePointsFromArrays', label='Voxelize Points From Arrays')
 @smhint.xml('''<ShowInMenu category="%s"/>
-    RepresentationType view="RenderView" type="Wireframe" />
+    RepresentationType view="RenderView" type="Surface" />
     <WarnOnCreate title="Axial Assumptions">
       **Voxelize Points From Arrays** filter assumes the input points to be sampled on a regular XYZ coordinate system.
       Do you want to continue?
@@ -555,7 +555,8 @@ class PVGeoAppendCellCenters(AppendCellCenters):
 # IterateOverPoints
 @smproxy.filter(name='PVGeoIterateOverPoints', label='Iterate Over Points')
 @smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
+    <RepresentationType view="RenderView" type="Points" />
+    <Visibility replace_input="0" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoIterateOverPoints(IterateOverPoints):
