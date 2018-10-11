@@ -195,9 +195,12 @@ def pointsToPolyData(points, copy_z=False):
     """
     __displayname__ = 'Points to PolyData'
     __category__ = 'filter'
+    # This prevents an error that occurs when only one point is passed
+    if points.ndim < 2:
+        points = points.reshape((1,-1))
+    keys = ['Field %d' % i for i in range(points.shape[1] - 3)]
     # Check if input is anything other than a NumPy array and cast it
     # e.g. you could send a Pandas dataframe
-    keys = ['Field %d' % i for i in range(points.shape[1] - 3)]
     if not isinstance(points, np.ndarray):
         if isinstance(points, pd.DataFrame):
             # If a pandas data frame, lets grab the keys

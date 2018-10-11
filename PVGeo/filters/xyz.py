@@ -728,6 +728,9 @@ class IterateOverPoints(FilterBase):
         self.__tindex = None
         self.__n = 2
         self.__decimate = 100
+        # The point/normal that gets updated on every iteration
+        self.__point = (0.0, 0.0, 0.0)
+        self.__normal = (1.0, 0.0, 0.0)
 
 
     def _UpdateTimeSteps(self):
@@ -748,6 +751,14 @@ class IterateOverPoints(FilterBase):
         i = _helpers.getRequestedTime(self, outInfo)
         # Now grab point at this timestep
         pt = pdi.GetPoints().GetPoint(self.__tindex[i])
+        # Calculate normal
+        pts1 = self.__point
+        pts2 = pt
+        x1, y1, z1 = pts1[0], pts1[1], pts1[2]
+        x2, y2, z2 = pts2[0], pts2[1], pts2[2]
+        normal = [x2-x1, y2-y1, z2-z1]
+        self.__point = pt
+        self.__normal = normal
         poly = interface.pointsToPolyData(np.array(pt))
         pdo.ShallowCopy(poly)
         return 1
@@ -791,6 +802,12 @@ class IterateOverPoints(FilterBase):
         """Use this in ParaView decorator to register timesteps
         """
         return self.__timesteps.tolist() if self.__timesteps is not None else None
+
+    def GetPoint(self):
+        return list(self.__point)
+
+    def GetNormal(self):
+        return list(self.__normal)
 
 
 
