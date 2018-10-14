@@ -316,38 +316,3 @@ class PVGeoLandsatReader(LandsatReader):
 
 
 ###############################################################################
-
-NTAB_DESC = "NTAB Grid"
-
-@smproxy.reader(name="PVGeoNTABReader",
-       label="PVGeo: NTAB Reader",
-       extensions=NTABReader.extensions,
-       file_description=NTAB_DESC)
-class PVGeoNTABReader(NTABReader):
-    def __init__(self):
-        NTABReader.__init__(self)
-
-    #### Seters and Geters ####
-
-    @smproperty.xml(_helpers.getFileReaderXml(NTABReader.extensions, readerDescription=NTAB_DESC))
-    def AddFileName(self, fname):
-        NTABReader.AddFileName(self, fname)
-
-
-
-    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        NTABReader.SetTimeDelta(self, dt)
-
-    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
-        """This is critical for registering the timesteps"""
-        return NTABReader.GetTimestepValues(self)
-
-    @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, name):
-        NTABReader.SetDataName(self, name)
-
-
-
-###############################################################################
