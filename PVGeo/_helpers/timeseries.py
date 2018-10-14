@@ -20,8 +20,10 @@ def updateTimeSteps(algorithm, nt, dt):
     """Handles setting up the timesteps on on the pipeline for a file series reader.
 
     Args:
-        algorithm (vtkDataObject): The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
-        nt (int or list): Number of timesteps (Pass a list to use length of that list)
+        algorithm (vtkDataObject): The data object (Proxy) on the pipeline
+            (pass `self` from algorithm subclasses)
+        nt (int or list): Number of timesteps (Pass a list to use length of
+            that list)
         dt (float): The discrete value in seconds for the time step.
 
     Return:
@@ -42,11 +44,14 @@ def updateTimeSteps(algorithm, nt, dt):
     return timesteps
 
 def getRequestedTime(algorithm, outInfoVec, idx=0):
-    """Handles setting up the timesteps on on the pipeline for a file series reader.
+    """Handles setting up the timesteps on on the pipeline for a file series
+    reader.
 
     Args:
-        algorithm (vtkDataObject) : The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
-        outInfoVec (vtkInformationVector) : The output information for the algorithm
+        algorithm (vtkDataObject) : The data object (Proxy) on the pipeline
+            (pass `self` from algorithm subclasses)
+        outInfoVec (vtkInformationVector) : The output information for the
+            algorithm
         idx (int) : the index for the output port
 
     Return:
@@ -73,7 +78,8 @@ def getInputTimeSteps(algorithm, port=0, idx=0):
     """Get the timestep values for the algorithm's input
 
     Args:
-        algorithm (vtkDataObject) : The data object (Proxy) on the pipeline (pass `self` from algorithm subclasses)
+        algorithm (vtkDataObject) : The data object (Proxy) on the pipeline
+            (pass `self` from algorithm subclasses)
         port (int)  : the input port
         idx (int) : optional : the connection index on the input port
 

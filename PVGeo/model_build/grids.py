@@ -100,7 +100,8 @@ class CreateUniformGrid(AlgorithmBase):
 
 
 class CreateEvenRectilinearGrid(AlgorithmBase):
-    """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.
+    """This creates a vtkRectilinearGrid where the discretization along a
+    given axis is uniformly distributed.
     """
     __displayname__ = 'Create Even Rectilinear Grid'
     __category__ = 'source'
@@ -188,7 +189,8 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
 
 
 class CreateTensorMesh(AlgorithmBase):
-    """This creates a vtkRectilinearGrid where the discretization along a given axis is uniformly distributed.
+    """This creates a vtkRectilinearGrid where the discretization along a
+    given axis is uniformly distributed.
     """
     __displayname__ = 'Create Tensor Mesh'
     __category__ = 'source'

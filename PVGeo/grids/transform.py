@@ -10,6 +10,7 @@ __displayname__ = 'Transform'
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 import numpy as np
+import warnings
 
 # Import Helpers:
 from ..base import FilterBase
@@ -50,6 +51,7 @@ class TableToGrid(FilterBase):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkTable',
             nOutputPorts=1, outputType='vtkImageData')
+        warnings.warn('`TableToGrid` will be deprecated in v2.0. Please use `TableToTimeGrid`.')
         self.__extent = extent # MUST BE SET
         self.__spacing = spacing
         self.__origin = origin
@@ -479,7 +481,9 @@ class ReverseImageDataAxii(FilterBase):
 #---- Translate Grid Origin ----#
 
 class TranslateGridOrigin(FilterBase):
-    """This filter will translate the origin of `vtkImageData` to any specified Corner of the data set assuming it is currently in the South West Bottom Corner (will not work if Corner was moved prior).
+    """This filter will translate the origin of `vtkImageData` to any specified
+    Corner of the data set assuming it is currently in the South West Bottom
+    Corner (will not work if Corner was moved prior).
     """
     __displayname__ = 'Translate Grid Origin'
     __category__ = 'filter'

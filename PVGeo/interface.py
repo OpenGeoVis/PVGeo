@@ -65,9 +65,11 @@ def convertArray(arr, name='Data', deep=0, array_type=None, pdf=False):
         pdf (bool): if input is vtkDataArry, make a pandas DataFrame of the array
 
     Return:
-        vtkDataArray : the converted array if input is a NumPy ndaray
-        ndarray : the converted array if input is a vtkDataArray
-        DataFrame : if pdf==True, the vtkDataArry input will be converted to a pandas DataFrame.
+        vtkDataArray, ndarray, or DataFrame:
+            the converted array (if input is a NumPy ndaray then returns
+            ``vtkDataArray`` or is input is ``vtkDataArray`` then returns NumPy
+            ``ndarray``). If pdf==True and the input is ``vtkDataArry``,
+            return a pandas DataFrame.
 
     """
     if isinstance(arr, np.ndarray):
@@ -125,7 +127,8 @@ def placeArrInTable(ndarr, titles, pdo):
 
     Args:
         ndarr (numpy.ndarray) : The 1D/2D array to be converted to a table
-        titles (list or tuple): The titles for the arrays in the table. Must have same number of elements as columns in input ndarray
+        titles (list or tuple): The titles for the arrays in the table. Must
+            have same number of elements as columns in input ndarray
         pdo (vtkTable) : The output data object pointer
 
     Return:
@@ -157,7 +160,9 @@ def getdTypes(dtype='', endian=None):
     """This converts char dtypes and an endian to a numpy and VTK data type.
 
     Return:
-        tuple (numpy.dtype, int) : the numpy data type and the integer type id specified in vtkType.h for VTK data types
+        tuple (numpy.dtype, int):
+            the numpy data type and the integer type id specified in vtkType.h
+            for VTK data types
     """
     # If native `@` was chosen then do not pass an endian
     if endian is '@':
@@ -182,13 +187,15 @@ def getdTypes(dtype='', endian=None):
 
 
 def pointsToPolyData(points, copy_z=False):
-    """Create ``vtkPolyData`` from a numpy array of XYZ points. If the points have
-    more than 3 dimensions, then all dimensions after the third will be added as attributes.
-    Assume the first three dimensions are the XYZ coordinates.
+    """Create ``vtkPolyData`` from a numpy array of XYZ points. If the points
+    have more than 3 dimensions, then all dimensions after the third will be
+    added as attributes. Assume the first three dimensions are the XYZ
+    coordinates.
 
     Args:
         points (np.ndarray or pandas.DataFrame): The points and pointdata
-        copy_z (bool): A flag on whether to append the z values as a PointData array
+        copy_z (bool): A flag on whether to append the z values as a PointData
+            array
 
     Return:
         vtkPolyData : points with point-vertex cells

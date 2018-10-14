@@ -104,7 +104,8 @@ def getNumPyArray(wpdi, field, name):
     """Grabs an array from vtkDataObject given its name and field association.
 
     Args:
-        wpdi  (wrapped vtkDataObject) : the input data object wrapped using vtk dataset adapter
+        wpdi  (wrapped vtkDataObject) : the input data object wrapped using vtk
+            dataset adapter
         field (int or str) : the field type id or name
         name (str) : the name of the input array for the given index
 
@@ -164,7 +165,8 @@ def getSelectedArray(algorithm, wpdi, idx):
 
     Args:
         algorithm (vtkAlgorithm) : A vtkAlgorithm class instantiation
-        wpdi (wrapped vtkDataObject) : the input data object wrapped using vtk dataset adapter
+        wpdi (wrapped vtkDataObject) : the input data object wrapped using vtk
+            dataset adapter
         idx (int) : the input array index
 
     Return:

@@ -24,7 +24,12 @@ import warnings
 class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     """This is a base class to add convienace methods to the
     ``VTKPythonAlgorithmBase`` for all algorithms implemented in ``PVGeo``.
-    We implement our algorithms in this manner to harness all of the backend support that the ``VTKPythonAlgorithmBase`` class provides for integrating custom algorithms on a VTK pipeline. All of the pipeline methods for setting inputs, getting outputs, making requests are handled by the super classes. For more information on what functionality is available, check out the VTK Docs for the `vtkAlgorithm`_ and then check out the following blog posts:
+    We implement our algorithms in this manner to harness all of the backend
+    support that the ``VTKPythonAlgorithmBase`` class provides for integrating
+    custom algorithms on a VTK pipeline. All of the pipeline methods for setting
+    inputs, getting outputs, making requests are handled by the super classes.
+    For more information on what functionality is available, check out the VTK
+    Docs for the `vtkAlgorithm`_ and then check out the following blog posts:
 
     * `vtkPythonAlgorithm is great`_
     * A VTK pipeline primer `(part 1)`_, `(part 2)`_, and `(part 3)`_
@@ -51,7 +56,8 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         self.__errorObserver.MakeObserver(self)
 
     def GetOutput(self, port=0):
-        """A conveience method to get the output data object of this ``PVGeo`` algorithm.
+        """A conveience method to get the output data object of this ``PVGeo``
+        algorithm.
         """
         return self.GetOutputDataObject(port)
 
@@ -128,12 +134,15 @@ class ReaderBaseBase(AlgorithmBase):
         """Use to clear file names of the reader.
 
         Note:
-            * This does not set the reader to need to read again as there are no files to read.
+            This does not set the reader to need to read again as there are
+            no files to read.
         """
         self.__fileNames = []
 
     def AddFileName(self, fname):
-        """Use to set the file names for the reader. Handles singlt string or list of strings.
+        """Use to set the file names for the reader. Handles singlt string or
+        list of strings.
+
         Args:
             fname (str): The absolute file name with path to read.
         """
@@ -166,7 +175,8 @@ class ReaderBaseBase(AlgorithmBase):
 
 # Base filter to preserve input data type
 class FilterBase(AlgorithmBase):
-    """A base class for implementing filters which holds several convienace methods"""
+    """A base class for implementing filters which holds several convienace
+    methods"""
     __displayname__ = 'Filter Base'
     __category__ = 'base'
     def __init__(self,
@@ -372,7 +382,8 @@ class TwoFileReaderBase(AlgorithmBase):
             self.Modified(readAgainMesh=True, readAgainModels=False)
 
     def AddModelFileName(self, fname):
-        """Use to set the file names for the reader. Handles single string or list of strings.
+        """Use to set the file names for the reader. Handles single string or
+        list of strings.
 
         Args:
             fname (str or list(str)): the file name(s) to use for the model data.
@@ -400,7 +411,8 @@ class TwoFileReaderBase(AlgorithmBase):
         return self.__meshFileName
 
     def Apply(self):
-        """Perfrom the read with parameters/file names set during init or by setters"""
+        """Perfrom the read with parameters/file names set during init or by
+        setters"""
         self.Update()
         return self.GetOutput()
 
@@ -432,7 +444,8 @@ class WriterBase(AlgorithmBase):
 
 
     def SetFileName(self, fname):
-        """Specify the filename for the output. Writer can only handle a single output data object/time step."""
+        """Specify the filename for the output. Writer can only handle a single
+        output data object/time step."""
         if not isinstance(fname, str):
             raise RuntimeError('File name must be string. Only single file is supported.')
         if self.__filename != fname:
@@ -444,7 +457,8 @@ class WriterBase(AlgorithmBase):
         return self.__filename
 
     def RequestData(self, request, inInfoVec, outInfoVec):
-        """OVERWRITE: This is executed by the pipeline and handles the write out"""
+        """OVERWRITE: This is executed by the pipeline and handles the write
+        out"""
         raise NotImplementedError()
         return 1
 

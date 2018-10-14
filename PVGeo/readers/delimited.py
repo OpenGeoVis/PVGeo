@@ -142,7 +142,8 @@ class DelimitedTextReader(ReaderBase):
     #### Algorithm Methods ####
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get data for current timestep and populate the output data object.
+        """Used by pipeline to get data for current timestep and populate the
+        output data object.
         """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
@@ -159,7 +160,8 @@ class DelimitedTextReader(ReaderBase):
 
 
     def SetDelimiter(self, deli):
-        """The input file's delimiter. To use a tab delimiter please use ``SetSplitOnWhiteSpace()``
+        """The input file's delimiter. To use a tab delimiter please use
+        ``SetSplitOnWhiteSpace()``
 
         Args:
             deli (str): a string delimiter/seperator
@@ -169,7 +171,8 @@ class DelimitedTextReader(ReaderBase):
             self.Modified()
 
     def SetSplitOnWhiteSpace(self, flag):
-        """Set a boolean flag to override the ``SetDelimiter()`` and use any white space as a delimiter.
+        """Set a boolean flag to override the ``SetDelimiter()`` and use any
+        white space as a delimiter.
         """
         if flag != self.__useTab:
             self.__useTab = flag
@@ -194,7 +197,8 @@ class DelimitedTextReader(ReaderBase):
             self.Modified()
 
     def SetHasTitles(self, flag):
-        """A boolean for if the delimited file has header titles for the data arrays.
+        """A boolean for if the delimited file has header titles for the data
+        arrays.
         """
         if self.__hasTitles != flag:
             self.__hasTitles = flag
@@ -211,7 +215,9 @@ class DelimitedTextReader(ReaderBase):
 
 
 class DelimitedPointsReaderBase(DelimitedTextReader):
-    """A base class for delimited text readers that produce ``vtkPolyData`` points."""
+    """A base class for delimited text readers that produce ``vtkPolyData``
+    points.
+    """
     __displayname__ = 'Delimited Points Reader Base'
     __category__ = 'base'
     def __init__(self, **kwargs):
@@ -229,7 +235,8 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
     #### Algorithm Methods ####
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get data for current timestep and populate the output data object.
+        """Used by pipeline to get data for current timestep and populate the
+        output data object.
         """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
@@ -247,7 +254,8 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
 
 
 class XYZTextReader(DelimitedTextReader):
-    """A makeshift reader for XYZ files where titles have comma delimiter and data has space delimiter.
+    """A makeshift reader for XYZ files where titles have comma delimiter and
+    data has space delimiter.
     """
     __displayname__ = 'XYZ Text Reader'
     __category__ = 'reader'

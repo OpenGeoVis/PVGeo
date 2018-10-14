@@ -18,7 +18,8 @@ from .. import _helpers
 
 
 class TopoReader(DelimitedPointsReaderBase):
-    """A reader to handle .topo files in UBC format to create a topography surface
+    """A reader to handle .topo files in UBC format to create a topography
+    surface.
     """
     __displayname__ = 'UBC Topo Reader'
     __category__ = 'reader'
@@ -120,7 +121,8 @@ class MagObsReader(DelimitedPointsReaderBase):
         return (x, y, z)
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get data for current timestep and populate the output data object.
+        """Used by pipeline to get data for current timestep and populate the
+        output data object.
         """
         # Set points using parent
         DelimitedPointsReaderBase.RequestData(self, request, inInfo, outInfo)

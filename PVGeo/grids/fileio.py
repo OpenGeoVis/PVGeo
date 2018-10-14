@@ -386,13 +386,15 @@ class WriteImageDataToSurfer(WriterBase):
 
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
-        """Used to the inpput array / the data value (z-value) to write for the Surfer format
+        """Used to the inpput array / the data value (z-value) to write for the
+        Surfer format.
 
         Args:
             idx (int): the index of the array to process
             port (int): input port (use 0 if unsure)
             connection (int): the connection on the port (use 0 if unsure)
-            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            field (int): the array field (0 for points, 1 for cells, 2 for
+                field, and 6 for row)
             name (int): the name of the array
         """
         if self.__inputArray[0] != field:
@@ -478,7 +480,8 @@ class EsriGridReader(DelimitedTextReader):
 
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get data for current timestep and populate the output data object.
+        """Used by pipeline to get data for current timestep and populate the
+        output data object.
         """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
@@ -530,8 +533,8 @@ class EsriGridReader(DelimitedTextReader):
 
 class LandsatReader(ReaderBaseBase):
     """A reader that will handle ESPA XML files for Landsat Imagery. This reader
-    uses the ``espatools`` package to read Landsat rasters (band sets) and creates
-    vtkImageData with each band as point data
+    uses the ``espatools`` package to read Landsat rasters (band sets) and
+    creates vtkImageData with each band as point data
     """
     __displayname__ = 'Landsat XML Reader'
     __category__ = 'reader'

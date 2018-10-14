@@ -16,7 +16,9 @@ from .. import interface
 
 
 class SGeMSGridReader(GSLibReader):
-    """Generates ``vtkImageData`` from the uniform grid defined in the inout file in the SGeMS grid format. This format is simply the GSLIB format where the header line defines the dimensions of the uniform grid.
+    """Generates ``vtkImageData`` from the uniform grid defined in the inout
+    file in the SGeMS grid format. This format is simply the GSLIB format where
+    the header line defines the dimensions of the uniform grid.
     """
     __displayname__ = 'SGeMS Grid Reader'
     __category__ = 'reader'
@@ -27,10 +29,15 @@ class SGeMSGridReader(GSLibReader):
         self.__spacing = spacing
 
     def _ReadExtent(self):
-        """Reads the input file for the SGeMS format to get output extents. Computationally inexpensive method to discover whole output extent.
+        """Reads the input file for the SGeMS format to get output extents.
+        Computationally inexpensive method to discover whole output extent.
 
         Return:
-            tuple : This returns a tuple of the whole extent for the uniform grid to be made of the input file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to set the whole output extent.
+            tuple :
+                This returns a tuple of the whole extent for the uniform
+                grid to be made of the input file (0,n1-1, 0,n2-1, 0,n3-1).
+                This output should be directly passed to set the whole output
+                extent.
 
         """
         # Read first file... extent cannot vary with time
@@ -56,7 +63,8 @@ class SGeMSGridReader(GSLibReader):
         return titles, content
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get output data object for given time step. Constructs the ``vtkImageData``
+        """Used by pipeline to get output data object for given time step.
+        Constructs the ``vtkImageData``
         """
         # Get output:
         output = vtk.vtkImageData.GetData(outInfo)
