@@ -2,6 +2,8 @@ __all__ = [
     'ExtractTopography',
 ]
 
+__displayname__ = 'Subsetting'
+
 import vtk
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
@@ -17,7 +19,10 @@ from .. import interface
 ###############################################################################
 
 class ExtractTopography(FilterBase):
-    """This filter takes two inputs: a gridded data set and a set of points for a Topography source. This will add a boolean data array to the cell data of the input grid on whether that cell should be active (under topographic layer).
+    """This filter takes two inputs: a gridded data set and a set of points for
+    a Topography source. This will add a boolean data array to the cell data of
+    the input grid on whether that cell should be active (under topographic
+    layer).
 
     """
     __displayname__ = 'Extract Topography'

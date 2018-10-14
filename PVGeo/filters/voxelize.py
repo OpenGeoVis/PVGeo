@@ -1,6 +1,14 @@
+"""This module provides a complicated algorithm for making voxels out of regularly
+gridded points. Considering that this algorithm is rather complex, we are keeping
+it in its own module until we can simplify it, clean up the code, and make it
+capable of handling non-uniformly gridded points
+"""
+
 __all__ = [
     'VoxelizePoints',
 ]
+
+__displayname__ = 'Voxelize'
 
 import numpy as np
 import vtk
@@ -18,8 +26,9 @@ from .. import interface
 
 
 class VoxelizePoints(FilterBase):
-    """This makes a ``vtkUnstructuredGrid`` of scattered points given voxel sizes as input arrays.
-    This assumes that the data is at least 2-Dimensional on the XY Plane.
+    """This makes a ``vtkUnstructuredGrid`` of scattered points given voxel
+    sizes as input arrays. This assumes that the data is at least 2-Dimensional
+    on the XY Plane.
     """
     __displayname__ = 'Voxelize Points'
     __category__ = 'filter'
@@ -65,8 +74,8 @@ class VoxelizePoints(FilterBase):
 
 
     def EstimateUniformSpacing(self, x, y, z):
-        """This assumes that the input points make up some sort of uniformly spaced
-        grid on at least an XY Plane
+        """This assumes that the input points make up some sort of uniformly
+        spaced grid on at least an XY plane.
         """
         # TODO: implement ability to rotate around Z axis (think PoroTomo vs UTM)
         # TODO: implement way to estimate rotation
@@ -212,7 +221,8 @@ class VoxelizePoints(FilterBase):
         """Set the X cells spacing
 
         Args:
-            dx (float or np.array(floats)): the spacing(s) for the cells in the X-direction
+            dx (float or np.array(floats)): the spacing(s) for the cells in
+                the X-direction
         """
         self.__dx = dx
         self.Modified()
@@ -221,7 +231,8 @@ class VoxelizePoints(FilterBase):
         """Set the Y cells spacing
 
         Args:
-            dy (float or np.array(floats)): the spacing(s) for the cells in the Y-direction
+            dy (float or np.array(floats)): the spacing(s) for the cells in
+                the Y-direction
         """
         self.__dy = dy
         self.Modified()
@@ -230,7 +241,8 @@ class VoxelizePoints(FilterBase):
         """Set the Z cells spacing
 
         Args:
-            dz (float or np.array(floats)): the spacing(s) for the cells in the Z-direction
+            dz (float or np.array(floats)): the spacing(s) for the cells in
+                the Z-direction
         """
         self.__dz = dz
         self.SetSafeSize(np.min(dz))
@@ -240,9 +252,12 @@ class VoxelizePoints(FilterBase):
         """Set the cell spacings for each axial direction
 
         Args:
-            dx (float or np.array(floats)): the spacing(s) for the cells in the X-direction
-            dy (float or np.array(floats)): the spacing(s) for the cells in the Y-direction
-            dz (float or np.array(floats)): the spacing(s) for the cells in the Z-direction
+            dx (float or np.array(floats)): the spacing(s) for the cells in
+                the X-direction
+            dy (float or np.array(floats)): the spacing(s) for the cells in
+                the Y-direction
+            dz (float or np.array(floats)): the spacing(s) for the cells in
+                the Z-direction
         """
         self.SetDeltaX(dx)
         self.SetDeltaY(dy)

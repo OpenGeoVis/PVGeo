@@ -129,6 +129,58 @@ class TestTableToGrid(TestBase):
 
 ###############################################################################
 
+class TestTableToTimeGrid(TestBase):
+    """
+    Test the `TableToTimeGrid` filter
+    """
+    def setUp(self):
+        TestBase.setUp(self)
+        # Create some input tables
+        self.table = vtk.vtkTable()
+        # Populate the tables
+        self.arrs = [None, None, None]
+        self.n = 400
+        self.titles = ('Array 0', 'Array 1', 'Array 2')
+        self.arrs[0] = np.random.random(self.n)
+        self.arrs[1] = np.random.random(self.n)
+        self.arrs[2] = np.random.random(self.n)
+        self.table.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.table.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
+        self.table.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
+        return
+
+    def check_data_fidelity(self, ido, checkme):
+        """`TableToTimeGrid`: data fidelity"""
+        wido = dsa.WrapDataObject(ido)
+        for i in range(len(self.titles)):
+            arr = wido.PointData[self.titles[i]]
+            self.assertTrue(np.allclose(arr, checkme[i], rtol=RTOL))
+
+    def test_simple(self):
+        """`TableToTimeGrid`: check simple"""
+        # Use filter
+        f = TableToTimeGrid()
+        f.SetInputDataObject(self.table)
+        f.SetDimensions(0, 1, 2, 3)
+        f.SetExtent(20, 2, 5, 2)
+        f.SetSpacing(5, 5, 5)
+        f.SetOrigin(3.3, 6.0, 7)
+        for t in range(2):
+            f.UpdateTimeStep(t)
+            ido = f.GetOutput()
+            checkme = [None] * len(self.arrs)
+            for i in range(len(self.arrs)):
+                a = self.arrs[i].reshape((20, 2, 5, 2))[:,:,:,t]
+                checkme[i] = a.flatten(order='F')
+            self.check_data_fidelity(ido, checkme)
+        return
+
+
+
+
+
+###############################################################################
+
 class TestReverseImageDataAxii(TestBase):
     """
     Test the `ReverseImageDataAxii` filter
@@ -290,14 +342,16 @@ class TestSurferGridReader(TestBase):
         self.assertIsNotNone(img)
         # Check shapes of the surfer grid
         nx, ny, nz = img.GetDimensions()
-        self.assertEqual(nx, 182)
-        self.assertEqual(ny, 222)
+        self.assertEqual(nx, 222)
+        self.assertEqual(ny, 182)
         self.assertEqual(nz, 1)
+
         # Now test writer
         writer = WriteImageDataToSurfer()
         fname = os.path.join(self.test_dir, 'test-writer.grd')
         writer.SetFileName(fname)
         writer.Write(img, 'foo')
+
         # Read again and compare
         reader = SurferGridReader()
         reader.AddFileName(fname)
@@ -306,8 +360,8 @@ class TestSurferGridReader(TestBase):
         read = reader.GetOutput()
         self.assertIsNotNone(read)
         nx, ny, nz = read.GetDimensions()
-        self.assertEqual(nx, 182)
-        self.assertEqual(ny, 222)
+        self.assertEqual(nx, 222)
+        self.assertEqual(ny, 182)
         self.assertEqual(nz, 1)
         self.assertEqual(img.GetBounds(), read.GetBounds())
         # Check the data arrays
@@ -492,6 +546,7 @@ NODATA_value  -9999
 ###############################################################################
 ###############################################################################
 if __name__ == '__main__':
+    import unittest
     unittest.main()
 ###############################################################################
 ###############################################################################

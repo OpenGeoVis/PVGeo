@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.30'
+paraview_plugin_version = '1.1.35'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -105,6 +105,57 @@ class PVGeoTableToGrid(TableToGrid):
         TableToGrid.SetSwapXY(self, flag)
 
 
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoTableToTimeGrid', label='Table To Time Grid')
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
+class PVGeoTableToGrid(TableToTimeGrid):
+    def __init__(self):
+        TableToTimeGrid.__init__(self)
+
+
+    #### Setters / Getters ####
+
+
+    @smproperty.intvector(name="Extent", default_values=[10, 10, 10, 1])
+    def SetExtent(self, nx, ny, nz, nt):
+        TableToTimeGrid.SetExtent(self, nx, ny, nz, nt)
+
+    @smproperty.intvector(name="Dimensions", default_values=[0, 1, 2, 3])
+    def SetDimensions(self, x, y, z, t):
+        TableToTimeGrid.SetDimensions(self, x, y, z, t)
+
+    @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0])
+    def SetSpacing(self, dx, dy, dz):
+        TableToTimeGrid.SetSpacing(self, dx, dy, dz)
+
+    @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0, 0.0])
+    def SetOrigin(self, x0, y0, z0):
+        TableToTimeGrid.SetOrigin(self, x0, y0, z0)
+
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Order', command='SetOrder',
+        labels=['C-style: Row-major order', 'Fortran-style: column-major order'],
+        values=[0, 1]))
+    def SetOrder(self, order):
+        o = ['C', 'F']
+        TableToTimeGrid.SetOrder(self, o[order])
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        TableToTimeGrid.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return TableToTimeGrid.GetTimestepValues(self)
+
+
+
 
 ###############################################################################
 
@@ -129,11 +180,10 @@ class PVGeoExtractTopography(ExtractTopography):
 ###############################################################################
 
 SURF_DESC = "Surfer Grid"
-SURF_EXTS = "grd GRD"
 
 @smproxy.reader(name="PVGeoSurferGridReader",
        label="PVGeo: Surfer Grid File Format",
-       extensions=SURF_EXTS,
+       extensions=SurferGridReader.extensions,
        file_description=SURF_DESC)
 class PVGeoSurferGridReader(SurferGridReader):
     def __init__(self):
@@ -141,7 +191,7 @@ class PVGeoSurferGridReader(SurferGridReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(SURF_EXTS, readerDescription=SURF_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(SurferGridReader.extensions, readerDescription=SURF_DESC))
     def AddFileName(self, fname):
         SurferGridReader.AddFileName(self, fname)
 
@@ -225,6 +275,44 @@ class PVGeoEsriGridReader(EsriGridReader):
     @smproperty.stringvector(name='DataName', default_values='Data')
     def SetDataName(self, dataName):
         EsriGridReader.SetDataName(self, dataName)
+
+
+###############################################################################
+
+ESPA_DESC = "Landsat ESPA XML Metadata"
+ESPA_EXTS = "xml"
+
+@smproxy.reader(name="PVGeoLandsatReader",
+       label="PVGeo: Landsat XML Reader",
+       extensions=ESPA_EXTS,
+       file_description=ESPA_DESC)
+class PVGeoLandsatReader(LandsatReader):
+    def __init__(self):
+        LandsatReader.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.xml(_helpers.getFileReaderXml(ESPA_EXTS, readerDescription=ESPA_DESC))
+    def AddFileName(self, fname):
+        LandsatReader.AddFileName(self, fname)
+
+    @smproperty.dataarrayselection(name="Available Bands")
+    def GetDataSelection(self):
+        return LandsatReader.GetDataSelection(self)
+
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Cast Data Type',
+        command='CastDataType',
+        default_values=True,
+        help='A boolean to set whether to cast the data arrays so invalid points are filled nans.',
+        visibility='advanced'))
+    def CastDataType(self, flag):
+        LandsatReader.CastDataType(self, flag)
+
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Color Scheme', command='SetColorScheme', labels=LandsatReader.GetColorSchemeNames(), help='Set a color scheme to use.'))
+    def SetColorScheme(self, scheme):
+        LandsatReader.SetColorScheme(self, scheme)
 
 
 ###############################################################################

@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.30'
+paraview_plugin_version = '1.1.35'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -174,7 +174,7 @@ class PVGeoReshapeTable(ReshapeTable):
 
 @smproxy.filter(name='PVGeoVoxelizePoints', label='Voxelize Points')
 @smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Wireframe" />
+    <RepresentationType view="RenderView" type="Surface" />
     <WarnOnCreate title="Axial Assumptions">
       **Voxelize Points** filter assumes the input points to be sampled on a regular XYZ coordinate system at an even spacing.
       Do you want to continue?
@@ -203,7 +203,7 @@ class PVGeoVoxelizePoints(VoxelizePoints):
 
 @smproxy.filter(name='PVGeoVoxelizePointsFromArrays', label='Voxelize Points From Arrays')
 @smhint.xml('''<ShowInMenu category="%s"/>
-    RepresentationType view="RenderView" type="Wireframe" />
+    RepresentationType view="RenderView" type="Surface" />
     <WarnOnCreate title="Axial Assumptions">
       **Voxelize Points From Arrays** filter assumes the input points to be sampled on a regular XYZ coordinate system.
       Do you want to continue?
@@ -555,7 +555,8 @@ class PVGeoAppendCellCenters(AppendCellCenters):
 # IterateOverPoints
 @smproxy.filter(name='PVGeoIterateOverPoints', label='Iterate Over Points')
 @smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
+    <RepresentationType view="RenderView" type="Points" />
+    <Visibility replace_input="0" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
 class PVGeoIterateOverPoints(IterateOverPoints):
@@ -600,21 +601,56 @@ class PVGeoConvertUnits(ConvertUnits):
 
 ###############################################################################
 
+try:
+    # Coordinate system filters depend on pyproj
+    # pyproj may not be available on Windows
+    import pyproj
+    @smproxy.filter(name='PVGeoLonLatToUTM', label='LonLat To UTM')
+    @smhint.xml('''<ShowInMenu category="%s"/>
+        <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+    @smproperty.input(name="Input", port_index=0)
+    @smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
+    class PVGeoLonLatToUTM(LonLatToUTM):
+        def __init__(self):
+            LonLatToUTM.__init__(self)
 
-@smproxy.filter(name='PVGeoLonLatToUTM', label='LonLat To UTM')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+        @smproperty.intvector(name="Zone", default_values=11)
+        @smdomain.intrange(min=1, max=60)
+        def SetZone(self, zone):
+            LonLatToUTM.SetZone(self, zone)
+
+        @smproperty.xml(_helpers.getDropDownXml(name='Ellps', command='SetEllps', labels=LonLatToUTM.GetAvailableEllps(), help='This will set the ellps.'))
+        def SetEllps(self, ellps):
+            LonLatToUTM.SetEllps(self, ellps)
+except:
+    pass
+
+
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoArraysToRGBA', label='Arrays To RGBA')
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
-class PVGeoLonLatToUTM(LonLatToUTM):
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+class PVGeoArraysToRGBA(ArraysToRGBA):
     def __init__(self):
-        LonLatToUTM.__init__(self)
+        ArraysToRGBA.__init__(self)
 
-    @smproperty.intvector(name="Zone", default_values=11)
-    @smdomain.intrange(min=1, max=60)
-    def SetZone(self, zone):
-        LonLatToUTM.SetZone(self, zone)
+    #### Seters and Geters ####
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=4, labels=['Red', 'Green', 'Blue', 'Transparency']))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return ArraysToRGBA.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Ellps', command='SetEllps', labels=LonLatToUTM.GetAvailableEllps(), help='This will set the ellps.'))
-    def SetEllps(self, ellps):
-        LonLatToUTM.SetEllps(self, ellps)
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Transparency',
+        command='SetUseTransparency', default_values=False,
+        help='A boolean to control whether or not to use the Transparency array.'))
+    def SetUseTransparency(self, flag):
+        ArraysToRGBA.SetUseTransparency(self, flag)
+
+
+    @smproperty.doublevector(name="Mask", default_values=-9999.0)
+    def SetMaskValue(self, val):
+        ArraysToRGBA.SetMaskValue(self, val)
+
+###############################################################################

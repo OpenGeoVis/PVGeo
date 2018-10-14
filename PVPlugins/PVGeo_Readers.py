@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.30'
+paraview_plugin_version = '1.1.35'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -14,19 +14,18 @@ from PVGeo.readers import DelimitedTextReader, XYZTextReader
 ###############################################################################
 
 
-PACKED_EXTS = 'H@ bin rsf rsf@ HH npz'
 PACKED_DESC = 'Packed Binaries Reader'
 
 @smproxy.reader(name="PVGeoPackedBinariesReader",
        label="PVGeo: Packed Binaries Reader",
-       extensions=PACKED_EXTS,
+       extensions=PackedBinariesReader.extensions,
        file_description=PACKED_DESC)
 class PVGeoPackedBinariesReader(PackedBinariesReader):
     def __init__(self):
         PackedBinariesReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(PACKED_EXTS, readerDescription=PACKED_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(PackedBinariesReader.extensions, readerDescription=PACKED_DESC))
     def AddFileName(self, fname):
         PackedBinariesReader.AddFileName(self, fname)
 
@@ -62,12 +61,11 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
 ###############################################################################
 
 
-MADAGASCAR_EXTS = 'bin H@ rsf rsf@ HH'
 MADAGASCAR_DESC = 'Madagascar Single Stream RSF Files'
 
 @smproxy.reader(name="PVGeoMadagascarReader",
        label="PVGeo: Madagascar SSRSF  Reader",
-       extensions=MADAGASCAR_EXTS,
+       extensions=MadagascarReader.extensions,
        file_description=MADAGASCAR_DESC)
 class PVGeoMadagascarReader(MadagascarReader):
     def __init__(self):
@@ -76,7 +74,7 @@ class PVGeoMadagascarReader(MadagascarReader):
     #### Seters and Geters ####
 
 
-    @smproperty.xml(_helpers.getFileReaderXml(MADAGASCAR_EXTS, readerDescription=MADAGASCAR_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(MadagascarReader.extensions, readerDescription=MADAGASCAR_DESC))
     def AddFileName(self, fname):
         MadagascarReader.AddFileName(self, fname)
 
@@ -112,12 +110,11 @@ class PVGeoMadagascarReader(MadagascarReader):
 ###############################################################################
 
 
-DELIMITED_EXTS = 'dat csv txt text ascii xyz'
 DELIMITED_DESC = 'Delimited Text Files'
 
 @smproxy.reader(name="PVGeoDelimitedTextReader",
        label="PVGeo: Delimited Text Reader",
-       extensions=DELIMITED_EXTS,
+       extensions=DelimitedTextReader.extensions,
        file_description=DELIMITED_DESC)
 class PVGeoDelimitedTextReader(DelimitedTextReader):
     def __init__(self):
@@ -125,7 +122,7 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(DELIMITED_EXTS, readerDescription=DELIMITED_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(DelimitedTextReader.extensions, readerDescription=DELIMITED_DESC))
     def AddFileName(self, fname):
         DelimitedTextReader.AddFileName(self, fname)
 
@@ -165,12 +162,11 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 ###############################################################################
 
 
-XYZ_EXTS = 'xyz text txt dat csv tsv'
 XYZ_DESC = 'XYZ Delimited Text Files where header has comma delimiter.'
 
 @smproxy.reader(name="PVGeoXYZTextReader",
        label="PVGeo: XYZ File Reader",
-       extensions=XYZ_EXTS,
+       extensions=XYZTextReader.extensions,
        file_description=XYZ_DESC)
 class PVGeoXYZTextReader(XYZTextReader):
     def __init__(self):
@@ -178,7 +174,7 @@ class PVGeoXYZTextReader(XYZTextReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(XYZ_EXTS, readerDescription=XYZ_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(XYZTextReader.extensions, readerDescription=XYZ_DESC))
     def AddFileName(self, fname):
         XYZTextReader.AddFileName(self, fname)
 

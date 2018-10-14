@@ -14,7 +14,8 @@ __all__ = [
 from . import errors as _helpers
 
 def getPythonPathProperty():
-    """Get the XML content for setting the Python path when making a ParaView plugin.
+    """Get the XML content for setting the Python path when making a ParaView
+    plugin.
     """
     return '''
       <StringVectorProperty
@@ -28,7 +29,8 @@ def getPythonPathProperty():
 
 
 def getReaderTimeStepValues(extensions, readerDescription):
-    """Get the XML content for reader time step values the Python path when making a ParaView plugin.
+    """Get the XML content for reader time step values the Python path when
+    making a ParaView plugin.
     """
     return '''<DoubleVectorProperty
       name="TimestepValues"
@@ -78,7 +80,8 @@ def getVTKTypeMap():
 
 
 def getPropertyXml(name, command, default_values, visibility='default', help=''):
-    """Get the XML content for a property of a parameter for a python data object when making a ParaView plugin.
+    """Get the XML content for a property of a parameter for a python data
+    object when making a ParaView plugin.
     """
     # A helper to build XML for any data type/method
     value = default_values
@@ -94,7 +97,8 @@ def getPropertyXml(name, command, default_values, visibility='default', help='')
         number_of_elements="%s">
         %s
         <Documentation>%s</Documentation>
-      </%sVectorProperty>''' % (typ, visibility, command, name, command, defaultValues, num, extra, help, typ)
+      </%sVectorProperty>''' % (typ, visibility, command, name, command,
+                                defaultValues, num, extra, help, typ)
 
     if isinstance(value, list):
         num = len(value)
@@ -235,7 +239,8 @@ def _helpArraysXml(idx, inputName=None, label=None):
 
 
 def getInputArrayXml(labels=None, nInputPorts=1, numArrays=1, inputNames='Input'):
-    """Get the XML content for an array selection drop down menu when making a ParaView plugin.
+    """Get the XML content for an array selection drop down menu when making a
+    ParaView plugin.
     """
     def getLabels(labels):
         if labels is None and nInputPorts > 1:

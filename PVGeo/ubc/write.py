@@ -3,6 +3,8 @@ __all__ = [
     'WriteImageDataToUBC',
 ]
 
+__displayname__ = 'Writers'
+
 import numpy as np
 import vtk
 import os
@@ -14,7 +16,9 @@ from .. import interface
 
 
 class ubcTensorMeshWriterBase(WriterBase):
-    """A base class to assist in writing data bjects to the UBC Tensor Mesh format"""
+    """A base class to assist in writing data bjects to the UBC Tensor Mesh
+    format.
+    """
     __displayname__ = 'UBC Format Writer Base'
     __category__ = 'base'
     def __init__(self, inputType='vtkRectilinearGrid'):
@@ -120,8 +124,8 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
 
 
 class WriteImageDataToUBC(ubcTensorMeshWriterBase):
-    """Writes a ``vtkImageData`` (uniform grid) data object to the UBC Tensor Mesh format.
-    This file reader currently only handles 3D data.
+    """Writes a ``vtkImageData`` (uniform grid) data object to the UBC Tensor
+    Mesh format. This file reader currently only handles 3D data.
     """
     __displayname__ = 'Write ``vtkImageData`` to UBC Tensor Mesh'
     __category__ = 'writer'

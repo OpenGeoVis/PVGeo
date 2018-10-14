@@ -7,7 +7,12 @@ import re
 
 
 class PVGeoError(Exception):
-    """This is a custom error class for handling errors when proccessing on the VTK pipeline. It makes the error messages easy to decipher in ParaView and cleans the messages when used in Python outside of ParaView. When on the VTK pipeline, errors aren't really raised but passed over and printed to the console. This class makes decipher the error streams a whole lot easier for human eyes.
+    """This is a custom error class for handling errors when proccessing on the
+    VTK pipeline. It makes the error messages easy to decipher in ParaView and
+    cleans the messages when used in Python outside of ParaView. When on the VTK
+    pipeline, errors aren't really raised but passed over and printed to the
+    console. This class makes decipher the error streams a whole lot easier for
+    human eyes.
     """
     QUALIFIER_L = '@@@@PVGeoError ---> '
     QUALIFIER_R = ' <--- PVGeoError@@@@'
@@ -29,7 +34,8 @@ class PVGeoError(Exception):
 
 
 class ErrorObserver:
-    """A class for catching errors when processing on a VTK pipeline. The ``AlgorithmBase`` class handles setting up this observer on initialization.
+    """A class for catching errors when processing on a VTK pipeline. The
+    ``AlgorithmBase`` class handles setting up this observer on initialization.
 
     Example:
         >>> import PVGeo

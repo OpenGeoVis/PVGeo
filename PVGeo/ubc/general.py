@@ -6,6 +6,8 @@ __all__ = [
     'GeologyMapper',
 ]
 
+__displayname__ = 'General Tools'
+
 import numpy as np
 import pandas as pd
 import vtk
@@ -22,7 +24,8 @@ from .. import interface
 
 
 class TopoReader(DelimitedPointsReaderBase):
-    """A reader to handle .topo files in GIF format to create a topography surface
+    """A reader to handle .topo files in UBC format to create a topography
+    surface.
     """
     __displayname__ = 'GIF Topo Reader'
     __category__ = 'reader'
@@ -48,7 +51,7 @@ class TopoReader(DelimitedPointsReaderBase):
 
 
 class GravObsReader(DelimitedPointsReaderBase):
-    """Read _`GIF Gravity Observations` file.
+    """Read `GIF Gravity Observations`_ file.
 
     .. _GIF Gravity Observations: https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/gravfile.html
     """
@@ -110,7 +113,7 @@ class GravGradReader(DelimitedPointsReaderBase):
 
 
 class MagObsReader(DelimitedPointsReaderBase):
-    """Read _`GIF Magnetic Observations` file.
+    """Read `GIF Magnetic Observations`_ file.
 
     .. _GIF Magnetic Observations: https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/magfile.html
     """
@@ -159,7 +162,8 @@ class MagObsReader(DelimitedPointsReaderBase):
         return (x, y, z)
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get data for current timestep and populate the output data object.
+        """Used by pipeline to get data for current timestep and populate the
+        output data object.
         """
         # Set points using parent
         DelimitedPointsReaderBase.RequestData(self, request, inInfo, outInfo)

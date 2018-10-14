@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.30'
+paraview_plugin_version = '1.1.35'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -12,13 +12,12 @@ from PVGeo.ubc import *
 #### GLOBAL VARIABLES ####
 MENU_CAT = 'PVGeo: UBC Mesh Tools'
 
-MESH_EXTS = 'mesh msh dat txt text'
 TMESH_DESC = 'PVGeo: UBC Mesh 2D/3D Two-File Format'
 
 
 @smproxy.reader(name="PVGeoTensorMeshReader",
        label="PVGeo: UBC Tensor Mesh Reader",
-       extensions=MESH_EXTS,
+       extensions=TensorMeshReader.extensions,
        file_description=TMESH_DESC)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoTensorMeshReader(TensorMeshReader):
@@ -120,7 +119,7 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
 
 @smproxy.reader(name="PVGeoUBCOcTreeMeshReader",
        label="PVGeo: UBC OcTree Mesh Reader",
-       extensions=MESH_EXTS,
+       extensions=OcTreeReader.extensions,
        file_description='PVGeo: UBC OcTree Mesh')
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoUBCOcTreeMeshReader(OcTreeReader):
