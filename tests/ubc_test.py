@@ -10,6 +10,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 
 # Functionality to test:
 from PVGeo.ubc import *
+import PVGeo
 
 RTOL = 0.000001
 
@@ -37,7 +38,7 @@ class ubcMeshTesterBase(TestBase):
 
 class Test3DTensorMesh(ubcMeshTesterBase):
     """
-    Test the `TensorMeshReader`, `TensorMeshAppender`, and `WriteRectilinearGridToUBC` for 3D data
+    Test the `TensorMeshReader`, `TensorMeshAppender`, `TopoMeshAppender`, and  `WriteRectilinearGridToUBC` for 3D data
     """
     def _write_mesh(self):
         fname = os.path.join(self.test_dir, 'test.msh')
@@ -150,6 +151,25 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         output = f.GetOutput()
         self.assertEqual(output.GetCellData().GetNumberOfArrays(), 2)
         self.assertEqual(output.GetCellData().GetArrayName(1), 'appended')
+
+    def test_topo_appender(self):
+        """`TopoMeshAppender` 3D:Test topography appender"""
+        indices = np.array([[0,0,1], [0,1,1], [0,2,1], [1,0,1], [1,1,1],
+            [1,2,1], [2,0,1], [2,1,1], [2,2,2], ], dtype=int)
+        fname = os.path.join(self.test_dir, 'disc-topo.txt')
+        np.savetxt(fname, X=indices, fmt='%d', comments='', header='3 3')
+        # Create input grid
+        grid = PVGeo.model_build.CreateTensorMesh(xcellstr='1.0 1.0 1.0',
+                    ycellstr='1.0 1.0 1.0', zcellstr='1.0 1.0 1.0').Apply()
+        # run the filter
+        f = TopoMeshAppender()
+        f.SetInputDataObject(grid)
+        f.SetTopoFileName(fname)
+        f.Update()
+        output = f.GetOutput()
+        # TODO: check output
+        self.assertIsNotNone(output)
+
 
     def test_writer(self):
         """`WriteRectilinearGridToUBC`: Test data integretiy across I/O"""
@@ -422,7 +442,7 @@ class TestOcTreeMeshReader(ubcMeshTesterBase):
 
         output = f.GetOutput()
         self.assertEqual(output.GetCellData().GetNumberOfArrays(), 3) # remember that the index corner array is added by the reader
-        self.assertEqual(output.GetCellData().GetArrayName(2), 'Appended Data')
+        self.assertEqual(output.GetCellData().GetArrayName(2), 'mod') # use file extension as name
         self.assertEqual(len(f.GetTimestepValues()), self.nt-1)
         return
 

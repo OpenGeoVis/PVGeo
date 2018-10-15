@@ -1,6 +1,7 @@
 __all__ = [
     'TensorMeshReader',
     'TensorMeshAppender',
+    'TopoMeshAppender',
 ]
 
 __displayname__ = 'Tensor Mesh'
@@ -408,5 +409,138 @@ class TensorMeshAppender(ModelAppenderBase):
         return
 
     def _PlaceOnMesh(self, output, idx=0):
-        TensorMeshReader.PlaceModelOnMesh(output, self._models[idx], self._dataname)
+        TensorMeshReader.PlaceModelOnMesh(output, self._models[idx], self.GetDataName())
         return
+
+
+################################################################################
+
+class TopoMeshAppender(AlgorithmBase):
+    """This filter reads a single discrete topography file and appends it as a
+    boolean data array.
+    """
+    __displayname__ = 'Append UBC Discrete Topography'
+    __category__ = 'filter'
+    def __init__(self, inputType='vtkRectilinearGrid',
+                       outputType='vtkRectilinearGrid', **kwargs):
+        AlgorithmBase.__init__(self,
+            nInputPorts=1, inputType=inputType,
+            nOutputPorts=1, outputType=outputType)
+        self._topoFileName = kwargs.get('filename', None)
+        self.__indices = None
+        self.__needToRead = True
+        self.__ne, self.__nn = None, None
+
+    def NeedToRead(self, flag=None):
+        """Ask self if the reader needs to read the files again
+
+        Args:
+            flag (bool): if the flag is set then this method will set the read
+                status
+
+        Return:
+            bool:
+                The status of the reader aspect of the filter.
+        """
+        if flag is not None and isinstance(flag, (bool, int)):
+            self.__needToRead = flag
+        return self.__needToRead
+
+    def Modified(self, readAgain=True):
+        """Call modified if the files needs to be read again again.
+        """
+        if readAgain: self.__needToRead = readAgain
+        AlgorithmBase.Modified(self)
+
+
+    def _ReadUpFront(self):
+        # Read the file
+        content = np.genfromtxt(self._topoFileName, dtype=str, delimiter='\n',
+                                comments='!')
+        dim = content[0].split()
+        self.__ne, self.__nn = int(dim[0]), int(dim[1])
+        self.__indices = pd.read_csv(StringIO("\n".join(content[1::])),
+                            names=['i', 'j', 'k'], delim_whitespace=True)
+        # NOTE: K indices are inverted
+        self.NeedToRead(flag=False)
+        return
+
+    def _PlaceOnMesh(self, output):
+        # Check mesh extents to math topography
+        nx, ny, nz = output.GetDimensions()
+        nx, ny, nz = nx-1, ny-1, nz-1 # because GetDimensions counts the nodes
+        topz = np.max(self.__indices['k']) + 1
+        if nx != self.__nn or ny != self.__ne or topz > nz:
+            raise _helpers.PVGeoError('Dimension mismatch between input grid and topo file.')
+        # # Adjust the k indices to be in caarteian system
+        # self.__indices['k'] = nz - self.__indices['k']
+        # Fill out the topo and add it as model as it will be in UBC format
+        # Create a 3D array of 1s and zeros (1 means beneath topo or active)
+        topo = np.empty((ny, nx, nz), dtype=float)
+        topo[:] = np.nan
+        for row in self.__indices.values:
+            i, j, k = row
+            topo[i, j, k+1:] = 0
+            topo[i, j, :k+1] = 1
+        # Add as model... ``PlaceModelOnMesh`` handles the rest
+        TensorMeshReader.PlaceModelOnMesh(output, topo.flatten(), 'Active Topography')
+        return
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """DO NOT OVERRIDE
+        """
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        output = self.GetOutputData(outInfo, 0)
+        output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
+        # Perfrom task:
+        if self.__needToRead:
+            self._ReadUpFront()
+        # Place the model data for given timestep onto the mesh
+        self._PlaceOnMesh(output)
+        return 1
+
+
+    #### Setters and Getters ####
+
+    def ClearTopoFile(self):
+        """Use to clear data file name.
+        """
+        self._topoFileName = None
+        self.Modified(readAgain=True)
+
+    def SetTopoFileName(self, fname):
+        """Use to set the file names for the reader. Handles single strings only
+        """
+        if fname is None:
+            return # do nothing if None is passed by a constructor on accident
+        elif isinstance(fname, str) and self._topoFileName != fname:
+            self._topoFileName = fname
+            self.Modified()
+        return 1
+
+
+################################################################################
+
+#
+# import numpy as np
+# indices = np.array([[0,0,1],
+#                     [0,1,1],
+#                     [0,2,1],
+#                     [1,0,1],
+#                     [1,1,1],
+#                     [1,2,1],
+#                     [2,0,1],
+#                     [2,1,1],
+#                     [2,2,1],
+#                     ])
+#
+# topo = np.empty((3,3,3), dtype=float)
+# topo[:] = np.nan
+#
+# for row in indices:
+#     i, j, k = row
+#     topo[i, j, k:] = 0
+#     topo[i, j, :k] = 1
+# topo

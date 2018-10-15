@@ -350,5 +350,5 @@ class OcTreeAppender(ModelAppenderBase):
         return
 
     def _PlaceOnMesh(self, output, idx=0):
-        OcTreeReader.PlaceModelOnOcTreeMesh(output, self._models[idx], self._dataname)
+        OcTreeReader.PlaceModelOnOcTreeMesh(output, self._models[idx], self.GetDataName())
         return

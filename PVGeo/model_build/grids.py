@@ -194,13 +194,16 @@ class CreateTensorMesh(AlgorithmBase):
     """
     __displayname__ = 'Create Tensor Mesh'
     __category__ = 'source'
-    def __init__(self, origin=[-350.0, -400.0, 0.0], dataname='Data'):
+    def __init__(self, origin=[-350.0, -400.0, 0.0], dataname='Data',
+            xcellstr='200 100 50 20*50.0 50 100 200',
+            ycellstr='200 100 50 21*50.0 50 100 200',
+            zcellstr='20*25.0 50 100 200',):
         AlgorithmBase.__init__(self, nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')
         self.__origin = origin
-        self.__xcells = CreateTensorMesh._ReadCellLine('200 100 50 20*50.0 50 100 200')
-        self.__ycells = CreateTensorMesh._ReadCellLine('200 100 50 21*50.0 50 100 200')
-        self.__zcells = CreateTensorMesh._ReadCellLine('20*25.0 50 100 200')
+        self.__xcells = CreateTensorMesh._ReadCellLine(xcellstr)
+        self.__ycells = CreateTensorMesh._ReadCellLine(ycellstr)
+        self.__zcells = CreateTensorMesh._ReadCellLine(zcellstr)
         self.__dataName = dataname
 
 
