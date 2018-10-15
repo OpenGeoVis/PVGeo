@@ -81,7 +81,7 @@ class PVGeoTensorMeshReader(TensorMeshReader):
 @smproxy.filter(name="PVGeoTensorMeshAppender",
        label="Append Model To UBC Tensor Mesh")
 @smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
 class PVGeoTensorMeshAppender(TensorMeshAppender):
@@ -119,6 +119,35 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
     def GetTimestepValues(self):
         """This is critical for registering the timesteps"""
         return TensorMeshAppender.GetTimestepValues(self)
+
+
+
+@smproxy.filter(name="PVGeoTopoMeshAppender",
+       label="Append UBC Discrete Topography")
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
+class PVGeoTopoMeshAppender(TopoMeshAppender):
+    """This assumes the input vtkRectilinearGrid has already handled the timesteps"""
+    def __init__(self):
+        TopoMeshAppender.__init__(self)
+
+    @smproperty.xml('''
+        <StringVectorProperty
+            panel_visibility="advanced"
+            name="TopoFile"
+            label="File Name Topo"
+            command="SetTopoFileName"
+            animateable="1"
+            clean_command="ClearTopoFile"
+            number_of_elements="1">
+            <FileListDomain name="topofile"/>
+            <Documentation>This plugin only allows ONE topo file to be defined.</Documentation>
+        </StringVectorProperty>''')
+    def SetTopoFileName(self, fname):
+        TopoMeshAppender.SetTopoFileName(self, fname)
+
 
 
 
