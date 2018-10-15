@@ -422,7 +422,7 @@ class TestOcTreeMeshReader(ubcMeshTesterBase):
 
         output = f.GetOutput()
         self.assertEqual(output.GetCellData().GetNumberOfArrays(), 3) # remember that the index corner array is added by the reader
-        self.assertEqual(output.GetCellData().GetArrayName(2), 'Appended Data')
+        self.assertEqual(output.GetCellData().GetArrayName(2), 'mod') # use file extension as name
         self.assertEqual(len(f.GetTimestepValues()), self.nt-1)
         return
 

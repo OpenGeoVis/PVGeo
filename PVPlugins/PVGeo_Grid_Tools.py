@@ -305,7 +305,7 @@ class PVGeoLandsatReader(LandsatReader):
         command='CastDataType',
         default_values=True,
         help='A boolean to set whether to cast the data arrays so invalid points are filled nans.',
-        visibility='advanced'))
+        panel_visibility='advanced'))
     def CastDataType(self, flag):
         LandsatReader.CastDataType(self, flag)
 

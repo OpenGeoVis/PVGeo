@@ -28,6 +28,8 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             nOutputPorts=nOutputPorts, outputType=outputType,
             **kwargs)
         self.__dataname = 'Data'
+        self.__useExtName = True # flag on whether or not to use the model file
+                                 # extension as data name
         # For keeping track of type (2D vs 3D)
         self.__sizeM = None
 
@@ -144,15 +146,25 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             raise _helpers.PVGeoError(str(fe))
         return data
 
+    def SetUseExtensionAsName(self, flag):
+        if self.__useExtName != flag:
+            self.__useExtName = flag
+            self.Modified(readAgainMesh=False, readAgainModels=False)
 
     def SetDataName(self, name):
-        """Set te data array name for the model data on the output grid.
-        """
-        if self.__dataname != name:
+        if name == '':
+            self.__useExtName = True
+            self.Modified(readAgainMesh=False, readAgainModels=False)
+        elif self.__dataname != name:
             self.__dataname = name
+            self.__useExtName = False
             self.Modified(readAgainMesh=False, readAgainModels=False)
 
     def GetDataName(self):
+        if self.__useExtName:
+            mname = self.GetModelFileNames(idx=0)
+            ext = mname.split('.')[-1]
+            return ext
         return self.__dataname
 
 
@@ -172,7 +184,8 @@ class ModelAppenderBase(base.AlgorithmBase):
             nInputPorts=1, inputType=inputType,
             nOutputPorts=1, outputType=outputType)
         self._modelFileNames = kwargs.get('modelfiles', [])
-        self._dataname = kwargs.get('dataname', 'Appended Data')
+        self.__dataname = kwargs.get('dataname', 'Appended Data')
+        self.__useExtName = True
         self._models = []
         self.__needToRead = True
         self._is3D = None
@@ -295,7 +308,23 @@ class ModelAppenderBase(base.AlgorithmBase):
             return self._modelFileNames
         return self._modelFileNames[idx]
 
-    def SetDataName(self, name):
-        if self._dataname != name:
-            self._dataname = name
+    def SetUseExtensionAsName(self, flag):
+        if self.__useExtName != flag:
+            self.__useExtName = flag
             self.Modified(readAgain=False)
+
+    def SetDataName(self, name):
+        if name == '':
+            self.__useExtName = True
+            self.Modified(readAgain=False)
+        elif self.__dataname != name:
+            self.__dataname = name
+            self.__useExtName = False
+            self.Modified(readAgain=False)
+
+    def GetDataName(self):
+        if self.__useExtName:
+            mname = self.GetModelFileNames(idx=0)
+            ext = mname.split('.')[-1]
+            return ext
+        return self.__dataname

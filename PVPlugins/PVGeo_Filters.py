@@ -189,11 +189,11 @@ class PVGeoVoxelizePoints(VoxelizePoints):
 
     @smproperty.xml(_helpers.getPropertyXml(name='Estimate Grid Spacing',
         command='SetEstimateGrid', default_values=True,
-        help='A boolean to set whether to try to estimate the proper dx, dy, and dz spacings for a grid on a regular cartesian coordinate system.', visibility='advanced'))
+        help='A boolean to set whether to try to estimate the proper dx, dy, and dz spacings for a grid on a regular cartesian coordinate system.', panel_visibility='advanced'))
     def SetEstimateGrid(self, flag):
         VoxelizePoints.SetEstimateGrid(self, flag)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Cell Size', command='SetCellSize', default_values=[10.0, 10.0, 10.0], help='The cell size (dx, dy, dz) to use as a default for all generated voxels.', visibility='advanced'))
+    @smproperty.xml(_helpers.getPropertyXml(name='Cell Size', command='SetCellSize', default_values=[10.0, 10.0, 10.0], help='The cell size (dx, dy, dz) to use as a default for all generated voxels.', panel_visibility='advanced'))
     def SetCellSize(self, dx, dy, dz):
         VoxelizePoints.SetDeltas(self, dx, dy, dz)
 
@@ -446,13 +446,13 @@ class PVGeoRotatePoints(RotatePoints):
     def SetRotationDegrees(self, theta):
         RotatePoints.SetRotationDegrees(self, theta)
 
-    @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0], visibility='advanced')
+    @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0], panel_visibility='advanced')
     def SetOrigin(self, xo, yo):
         RotatePoints.SetOrigin(self, xo, yo)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Use Corner',
         command='SetUseCorner', default_values=True,
-        help='Use the corner as the rotation origin.', visibility='advanced'))
+        help='Use the corner as the rotation origin.', panel_visibility='advanced'))
     def SetUseCorner(self, flag):
         RotatePoints.SetUseCorner(self, flag)
 

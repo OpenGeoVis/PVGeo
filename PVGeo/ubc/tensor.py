@@ -408,5 +408,5 @@ class TensorMeshAppender(ModelAppenderBase):
         return
 
     def _PlaceOnMesh(self, output, idx=0):
-        TensorMeshReader.PlaceModelOnMesh(output, self._models[idx], self._dataname)
+        TensorMeshReader.PlaceModelOnMesh(output, self._models[idx], self.GetDataName())
         return

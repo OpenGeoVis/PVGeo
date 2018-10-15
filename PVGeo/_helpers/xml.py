@@ -79,14 +79,14 @@ def getVTKTypeMap():
 
 
 
-def getPropertyXml(name, command, default_values, visibility='default', help=''):
+def getPropertyXml(name, command, default_values, panel_visibility='default', help=''):
     """Get the XML content for a property of a parameter for a python data
     object when making a ParaView plugin.
     """
     # A helper to build XML for any data type/method
     value = default_values
 
-    def _propXML(typ, visibility, name, command, defaultValues, num, help, extra=''):
+    def _propXML(typ, panel_visibility, name, command, defaultValues, num, help, extra=''):
         return '''
       <%sVectorProperty
         panel_visibility="%s"
@@ -97,7 +97,7 @@ def getPropertyXml(name, command, default_values, visibility='default', help='')
         number_of_elements="%s">
         %s
         <Documentation>%s</Documentation>
-      </%sVectorProperty>''' % (typ, visibility, command, name, command,
+      </%sVectorProperty>''' % (typ, panel_visibility, command, name, command,
                                 defaultValues, num, extra, help, typ)
 
     if isinstance(value, list):
@@ -125,7 +125,7 @@ def getPropertyXml(name, command, default_values, visibility='default', help='')
     else:
         raise RuntimeError('getPropertyXml(): Unknown property type: %r' % propertyType)
 
-    return _propXML(typ, visibility, name, command, defaultValues, num, help, extra)
+    return _propXML(typ, panel_visibility, name, command, defaultValues, num, help, extra)
 
 
 

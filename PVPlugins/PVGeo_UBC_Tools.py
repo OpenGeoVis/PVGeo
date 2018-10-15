@@ -69,7 +69,12 @@ class PVGeoTensorMeshReader(TensorMeshReader):
         """This is critical for registering the timesteps"""
         return TensorMeshReader.GetTimestepValues(self)
 
-    @smproperty.stringvector(name='DataName', default_values='Data')
+    @smproperty.xml(_helpers.getPropertyXml(name='Use extension name', command='SetUseExtensionAsName', default_values=True, help='A boolean to override the DataName and use whitespace model file extension as data name.',
+    panel_visibility="advanced"))
+    def SetUseExtensionAsName(self, flag):
+        TensorMeshReader.SetUseExtensionAsName(self, flag)
+
+    @smproperty.stringvector(name='DataName', default_values='Data', panel_visibility="advanced")
     def SetDataName(self, name):
         TensorMeshReader.SetDataName(self, name)
 
@@ -101,7 +106,12 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
         """Use to set the file names for the reader. Handles single string or list of strings."""
         TensorMeshAppender.AddModelFileName(self, fname)
 
-    @smproperty.stringvector(name='DataName', default_values='Appended Data')
+    @smproperty.xml(_helpers.getPropertyXml(name='Use extension name', command='SetUseExtensionAsName', default_values=True, help='A boolean to override the DataName and use whitespace model file extension as data name.',
+    panel_visibility="advanced"))
+    def SetUseExtensionAsName(self, flag):
+        TensorMeshAppender.SetUseExtensionAsName(self, flag)
+
+    @smproperty.stringvector(name='DataName', default_values='Appended Data', panel_visibility="advanced")
     def SetDataName(self, name):
         TensorMeshAppender.SetDataName(self, name)
 
@@ -171,7 +181,12 @@ class PVGeoUBCOcTreeMeshReader(OcTreeReader):
         """This is critical for registering the timesteps"""
         return OcTreeReader.GetTimestepValues(self)
 
-    @smproperty.stringvector(name='DataName', default_values='Data')
+    @smproperty.xml(_helpers.getPropertyXml(name='Use extension name', command='SetUseExtensionAsName', default_values=True, help='A boolean to override the DataName and use whitespace model file extension as data name.',
+    panel_visibility="advanced"))
+    def SetUseExtensionAsName(self, flag):
+        OcTreeReader.SetUseExtensionAsName(self, flag)
+
+    @smproperty.stringvector(name='DataName', default_values='Data', panel_visibility="advanced")
     def SetDataName(self, name):
         OcTreeReader.SetDataName(self, name)
 
@@ -205,7 +220,12 @@ class PVGeoOcTreeAppender(OcTreeAppender):
         """Use to set the file names for the reader. Handles single string or list of strings."""
         OcTreeAppender.AddModelFileName(self, fname)
 
-    @smproperty.stringvector(name='DataName', default_values='Appended Data')
+    @smproperty.xml(_helpers.getPropertyXml(name='Use extension name', command='SetUseExtensionAsName', default_values=True, help='A boolean to override the DataName and use whitespace model file extension as data name.',
+    panel_visibility="advanced"))
+    def SetUseExtensionAsName(self, flag):
+        OcTreeAppender.SetUseExtensionAsName(self, flag)
+
+    @smproperty.stringvector(name='DataName', default_values='Appended Data', panel_visibility="advanced")
     def SetDataName(self, name):
         OcTreeAppender.SetDataName(self, name)
 
