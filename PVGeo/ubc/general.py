@@ -78,7 +78,7 @@ class GravObsReader(DelimitedPointsReaderBase):
 
 
 class GravGradReader(DelimitedPointsReaderBase):
-    """Read _`GIF Gravity Gradiometry Observations` file.
+    """Read `GIF Gravity Gradiometry Observations`_ file.
 
     .. _GIF Gravity Gradiometry Observations: https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/ggfile.html
     """
