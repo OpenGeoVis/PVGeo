@@ -113,7 +113,7 @@ class PVGeoEarthSource(EarthSource):
 
 @smproxy.source(name='PVGeoGlobeSource', label=GlobeSource.__displayname__)
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
-class PVGeoEarthSource(GlobeSource):
+class PVGeoGlobeSource(GlobeSource):
     def __init__(self):
         GlobeSource.__init__(self)
 
