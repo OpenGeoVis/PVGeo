@@ -122,7 +122,7 @@ class TestSGeMSGridReader(TestBase):
         self.test_dir = tempfile.mkdtemp()
         self.n = 100
         self.shape = (150, 200, 20)
-        self.extent = (0, self.shape[0]-1, 0, self.shape[1]-1, 0, self.shape[2]-1)
+        self.extent = (0, self.shape[0], 0, self.shape[1], 0, self.shape[2])
         self.titles = ['Array 1', 'Array 2', 'Array 3']
         ##### Now generate output for testing ####
         fname = os.path.join(self.test_dir, 'test.dat')
@@ -145,7 +145,7 @@ class TestSGeMSGridReader(TestBase):
     def test_data_array_titles(self):
         """`SGeMSGridReader`: data array titles"""
         for i in range(len(self.titles)):
-            self.assertEqual(self.GRID.GetPointData().GetArrayName(i), self.titles[i])
+            self.assertEqual(self.GRID.GetCellData().GetArrayName(i), self.titles[i])
         return
 
     def test_shape(self):
@@ -157,7 +157,7 @@ class TestSGeMSGridReader(TestBase):
     def test_data(self,):
         """`SGeMSGridReader`: data fidelity"""
         for i in range(len(self.titles)):
-            arr = nps.vtk_to_numpy(self.GRID.GetPointData().GetArray(i))
+            arr = nps.vtk_to_numpy(self.GRID.GetCellData().GetArray(i))
             self.assertTrue(np.allclose(self.data[:,i], arr, rtol=RTOL))
         return
 
@@ -187,15 +187,15 @@ class TestSGeMSGridReader(TestBase):
         reader = SGeMSGridReader()
         read = reader.Apply(fname)
         # Compare data
-        truedata = self.GRID.GetPointData()
-        testdata = read.GetPointData()
+        truedata = self.GRID.GetCellData()
+        testdata = read.GetCellData()
         self.assertEqual(truedata.GetNumberOfArrays(), testdata.GetNumberOfArrays())
         wtbl = dsa.WrapDataObject(self.GRID)
         wrd = dsa.WrapDataObject(read)
         for i in range(truedata.GetNumberOfArrays()):
-            self.assertIsNotNone(wtbl.PointData[i])
-            self.assertIsNotNone(wrd.PointData[i])
-            self.assertTrue(np.allclose(wtbl.PointData[i], wrd.PointData[i]))
+            self.assertIsNotNone(wtbl.CellData[i])
+            self.assertIsNotNone(wrd.CellData[i])
+            self.assertTrue(np.allclose(wtbl.CellData[i], wrd.CellData[i]))
         for i in range(self.GRID.GetCellData().GetNumberOfArrays()):
             self.assertIsNotNone(wtbl.CellData[i])
             self.assertIsNotNone(wrd.CellData[i])

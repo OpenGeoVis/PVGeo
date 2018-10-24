@@ -48,7 +48,7 @@ class SGeMSGridReader(GSLibReader):
             n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
         except ValueError:
             raise _helpers.PVGeoError('File not in proper SGeMS Grid fromat.')
-        return (0,n1-1, 0,n2-1, 0,n3-1)
+        return (0,n1, 0,n2, 0,n3)
 
     def _ExtractHeader(self, content):
         titles, content = GSLibReader._ExtractHeader(self, content)
@@ -76,8 +76,7 @@ class SGeMSGridReader(GSLibReader):
         n1, n2, n3 = self.__extent
         dx, dy, dz = self.__spacing
         ox, oy, oz = self.__origin
-        output.SetDimensions(n1, n2, n3)
-        output.SetExtent(0,n1-1, 0,n2-1, 0,n3-1)
+        output.SetDimensions(n1+1, n2+1, n3+1)
         output.SetSpacing(dx, dy, dz)
         output.SetOrigin(ox, oy, oz)
         # Use table generater and convert because its easy:
@@ -85,8 +84,7 @@ class SGeMSGridReader(GSLibReader):
         interface.dataFrameToTable(self._GetRawData(idx=i), table)
         # now get arrays from table and add to point data of pdo
         for i in range(table.GetNumberOfColumns()):
-            output.GetPointData().AddArray(table.GetColumn(i))
-            #TODO: maybe we ought to add the data as cell data
+            output.GetCellData().AddArray(table.GetColumn(i))
         del(table)
         return 1
 
@@ -124,7 +122,8 @@ class SGeMSGridReader(GSLibReader):
 
 class WriteImageDataToSGeMS(WriterBase):
     """Writes a ``vtkImageData`` object to the SGeMS uniform grid format.
-    This writer can only handle point data.
+    This writer can only handle point data. Note that this will only handle
+    CellData as that is convention with SGeMS.
     """
     __displayname__ = 'Write ``vtkImageData`` To SGeMS Grid Format'
     __category__ = 'writer'
@@ -139,13 +138,13 @@ class WriteImageDataToSGeMS(WriterBase):
         # Get grid dimensions
         nx, ny, nz = grd.GetDimensions()
 
-        numArrs = grd.GetPointData().GetNumberOfArrays()
+        numArrs = grd.GetCellData().GetNumberOfArrays()
         arrs = []
 
         titles = []
         # Get data arrays
         for i in range(numArrs):
-            vtkarr = grd.GetPointData().GetArray(i)
+            vtkarr = grd.GetCellData().GetArray(i)
             arrs.append(interface.convertArray(vtkarr))
             titles.append(vtkarr.GetName())
 
