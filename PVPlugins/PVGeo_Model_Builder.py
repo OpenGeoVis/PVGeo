@@ -97,7 +97,7 @@ class PVGeoCreateUniformGrid(CreateUniformGrid):
 ###############################################################################
 
 
-@smproxy.source(name='PVGeoEarthSource', label='Create Earth Source')
+@smproxy.source(name='PVGeoEarthSource', label=EarthSource.__displayname__)
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 class PVGeoEarthSource(EarthSource):
     def __init__(self):

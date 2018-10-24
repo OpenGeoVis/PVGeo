@@ -15,9 +15,10 @@ from .. import interface
 
 
 class EarthSource(AlgorithmBase):
-    """A simple data source to produce a ``vtkEarthSource``
+    """A simple data source to produce a ``vtkEarthSource`` outlining the Earth's
+    continents.
     """
-    __displayname__ = 'Earth Source'
+    __displayname__ = 'Outline Continents'
     __category__ = 'source'
     def __init__(self, radius=6371.0e6):
         AlgorithmBase.__init__(self,
@@ -45,7 +46,13 @@ class EarthSource(AlgorithmBase):
 
 class GlobeSource(AlgorithmBase):
     """Creates a globe/sphere the size of the Earth with texture coordinates
-    already mapped."""
+    already mapped. The globe's center is assumed to be (0,0,0).
+
+    Args:
+        radius (float): the radius to use
+        npar (int): the number of parallels (latitude)
+        nmer (int): the number of meridians (longitude)
+    """
     __displayname__ = 'Globe Source'
     __category__ = 'source'
     def __init__(self, radius=6371.0e6, npar=15, nmer=36, **kwargs):
