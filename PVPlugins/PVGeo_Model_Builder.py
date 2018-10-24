@@ -106,3 +106,30 @@ class PVGeoEarthSource(EarthSource):
     @smproperty.doublevector(name="Radius", default_values=6371.0)
     def SetRadius(self, radius):
         EarthSource.SetRadius(self, radius)
+
+
+###############################################################################
+
+
+@smproxy.source(name='PVGeoGlobeSource', label=GlobeSource.__displayname__)
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+class PVGeoEarthSource(GlobeSource):
+    def __init__(self):
+        GlobeSource.__init__(self)
+
+    @smproperty.doublevector(name="Radius", default_values=6371.0e6)
+    def SetRadius(self, radius):
+        GlobeSource.SetRadius(self, radius)
+
+    @smproperty.intvector(name="Meridians", default_values=36)
+    @smdomain.intrange(min=2, max=100)
+    def SetNumberOfMeridians(self, n):
+        GlobeSource.SetNumberOfMeridians(self, n)
+
+    @smproperty.intvector(name="Parallels", default_values=15)
+    @smdomain.intrange(min=2, max=100)
+    def SetNumberOfParallels(self, n):
+        GlobeSource.SetNumberOfParallels(self, n)
+
+
+###############################################################################
