@@ -29,7 +29,8 @@ class DelimitedTextReader(ReaderBase):
     """
     __displayname__ = 'Delimited Text Reader'
     __category__ = 'reader'
-    extensions = "dat csv txt text ascii xyz tsv ntab"
+    extensions = 'dat csv txt text ascii xyz tsv ntab'
+    description = 'PVGeo: Delimited Text Files'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
@@ -220,6 +221,8 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
     """
     __displayname__ = 'Delimited Points Reader Base'
     __category__ = 'base'
+    # extensions are inherrited from DelimitedTextReader
+    description = 'PVGeo: Delimited Points' # Should be overriden
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, outputType='vtkPolyData', **kwargs)
         self.__copy_z = kwargs.get('copy_z', False)
@@ -259,6 +262,8 @@ class XYZTextReader(DelimitedTextReader):
     """
     __displayname__ = 'XYZ Text Reader'
     __category__ = 'reader'
+    # extensions are inherrited from DelimitedTextReader
+    description = 'PVGeo: XYZ Delimited Text Files where header has comma delimiter.'
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, **kwargs)
         self.SetComments(kwargs.get('comments', '#'))

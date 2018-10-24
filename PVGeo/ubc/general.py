@@ -29,6 +29,8 @@ class TopoReader(DelimitedPointsReaderBase):
     """
     __displayname__ = 'GIF Topo Reader'
     __category__ = 'reader'
+    extensions = 'topo txt dat'
+    description = 'PVGeo: UBC 3D Topo Files'
     def __init__(self, copy_z=True, **kwargs):
         DelimitedPointsReaderBase.__init__(self, copy_z=copy_z, **kwargs)
         self.SetHasTitles(False)#kwargs.get('hasTitles', False))
@@ -57,6 +59,8 @@ class GravObsReader(DelimitedPointsReaderBase):
     """
     __displayname__ = 'UBC Gravity Observations'
     __category__ = 'reader'
+    extensions = 'grv txt dat'
+    description = 'PVGeo: GIF Gravity Observations'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
         self.SetHasTitles(False)
@@ -84,6 +88,8 @@ class GravGradReader(DelimitedPointsReaderBase):
     """
     __displayname__ = 'GIF Gravity Gradiometry Observations'
     __category__ = 'reader'
+    extensions = 'grv gg txt dat'
+    description = 'PVGeo: GIF Gravity Gradiometry Observations'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
         self.SetHasTitles(False)
@@ -119,6 +125,8 @@ class MagObsReader(DelimitedPointsReaderBase):
     """
     __displayname__ = 'UBC Magnetic Observations'
     __category__ = 'reader'
+    extensions = 'mag loc txt dat pre'
+    description = 'PVGeo: GIF Magnetic Observations'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
         self.SetHasTitles(False)

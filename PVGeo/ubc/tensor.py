@@ -38,6 +38,7 @@ class TensorMeshReader(ubcMeshReaderBase):
     """
     __displayname__ = 'UBC Tensor Mesh Reader'
     __category__ = 'reader'
+    description = 'PVGeo: UBC Mesh 2D/3D Two-File Format'
     def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid', **kwargs):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)

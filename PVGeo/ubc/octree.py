@@ -30,6 +30,7 @@ class OcTreeReader(ubcMeshReaderBase):
     """
     __displayname__ = 'UBC OcTree Mesh Reader'
     __category__ = 'reader'
+    description = 'PVGeo: UBC OcTree Mesh'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType,

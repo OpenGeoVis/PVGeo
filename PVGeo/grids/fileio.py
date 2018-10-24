@@ -109,7 +109,8 @@ class SurferGridReader(ReaderBase):
     """
     __displayname__ = 'Surfer Grid Reader'
     __category__ = 'reader'
-    extensions = "grd GRD"
+    extensions = 'grd GRD'
+    description = 'PVGeo: Surfer Grid'
     def __init__(self, outputType='vtkImageData', **kwargs):
         ReaderBase.__init__(self, outputType=outputType, **kwargs)
         self.__grids = None
@@ -431,6 +432,8 @@ class EsriGridReader(DelimitedTextReader):
     """
     __displayname__ = 'Esri Grid Reader'
     __type__ = 'reader'
+    description = 'PVGeo: Esri Grid'
+    extensions = 'asc dem txt'
     def __init__(self, outputType='vtkImageData', **kwargs):
         DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
         # These are attributes the derived from file contents:
@@ -538,6 +541,8 @@ class LandsatReader(ReaderBaseBase):
     """
     __displayname__ = 'Landsat XML Reader'
     __category__ = 'reader'
+    extensions = "xml"
+    description = 'PVGeo: Landsat ESPA XML Metadata'
     def __init__(self, **kwargs):
         ReaderBaseBase.__init__(self, outputType='vtkImageData', **kwargs)
         self.__reader = espatools.RasterSetReader(yflip=True)

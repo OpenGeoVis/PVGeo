@@ -12,13 +12,12 @@ from PVGeo.ubc import *
 #### GLOBAL VARIABLES ####
 MENU_CAT = 'PVGeo: UBC Mesh Tools'
 
-TMESH_DESC = 'PVGeo: UBC Mesh 2D/3D Two-File Format'
 
 
 @smproxy.reader(name="PVGeoTensorMeshReader",
-       label="PVGeo: UBC Tensor Mesh Reader",
+       label='PVGeo: %s'%TensorMeshReader.__displayname__,
        extensions=TensorMeshReader.extensions,
-       file_description=TMESH_DESC)
+       file_description=TensorMeshReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoTensorMeshReader(TensorMeshReader):
     def __init__(self):
@@ -79,7 +78,7 @@ class PVGeoTensorMeshReader(TensorMeshReader):
         TensorMeshReader.SetDataName(self, name)
 
 @smproxy.filter(name="PVGeoTensorMeshAppender",
-       label="Append Model To UBC Tensor Mesh")
+       label=TensorMeshAppender.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -123,7 +122,7 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
 
 
 @smproxy.filter(name="PVGeoTopoMeshAppender",
-       label="Append UBC Discrete Topography")
+       label=TopoMeshAppender.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -157,9 +156,9 @@ class PVGeoTopoMeshAppender(TopoMeshAppender):
 
 
 @smproxy.reader(name="PVGeoUBCOcTreeMeshReader",
-       label="PVGeo: UBC OcTree Mesh Reader",
+       label='PVGeo: %s'%OcTreeReader.__displayname__,
        extensions=OcTreeReader.extensions,
-       file_description='PVGeo: UBC OcTree Mesh')
+       file_description=OcTreeReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoUBCOcTreeMeshReader(OcTreeReader):
     def __init__(self):
@@ -222,7 +221,7 @@ class PVGeoUBCOcTreeMeshReader(OcTreeReader):
 
 
 @smproxy.filter(name="PVGeoOcTreeAppender",
-       label="Append Model To UBC OcTree Mesh")
+       label=OcTreeAppender.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -304,19 +303,17 @@ class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
 
 ###############################################################################
 
-TOPO_EXTS = 'topo txt dat'
-TOPO_DESC = 'UBC 3D Topo Files'
 
 @smproxy.reader(name="PVGeoTopoReader",
-       label="PVGeo: UBC 3D Topo Files",
-       extensions=TOPO_EXTS,
-       file_description=TOPO_DESC)
+       label='PVGeo: %s'%TopoReader.__displayname__,
+       extensions=TopoReader.extensions,
+       file_description=TopoReader.description)
 class PVGeoTopoReader(TopoReader):
     def __init__(self):
         TopoReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(TOPO_EXTS, readerDescription=TOPO_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(TopoReader.extensions, readerDescription=TopoReader.description))
     def AddFileName(self, fname):
         TopoReader.AddFileName(self, fname)
 
@@ -341,19 +338,17 @@ class PVGeoTopoReader(TopoReader):
 
 ###############################################################################
 
-GRV_EXTS = 'grv txt dat'
-GRV_DESC = 'GIF Gravity Observations'
 
 @smproxy.reader(name="PVGeoGravObsReader",
-       label="PVGeo: GIF Gravity Observations",
-       extensions=GRV_EXTS,
-       file_description=GRV_DESC)
+       label='PVGeo: %s'%GravObsReader.__displayname__,
+       extensions=GravObsReader.extensions,
+       file_description=GravObsReader.description)
 class PVGeoGravObsReader(GravObsReader):
     def __init__(self):
         GravObsReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(GRV_EXTS, readerDescription=GRV_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(GravObsReader.extensions, readerDescription=GravObsReader.description))
     def AddFileName(self, fname):
         GravObsReader.AddFileName(self, fname)
 
@@ -377,19 +372,17 @@ class PVGeoGravObsReader(GravObsReader):
 
 ###############################################################################
 
-GG_EXTS = 'grv gg txt dat'
-GG_DESC = 'GIF Gravity Gradiometry Observations'
 
 @smproxy.reader(name="PVGeoGravGradReader",
-       label="PVGeo: GIF Gravity Gradiometry Observations",
-       extensions=GG_EXTS,
-       file_description=GG_DESC)
+       label='PVGeo: %s'%GravGradReader.__displayname__,
+       extensions=GravGradReader.extensions,
+       file_description=GravGradReader.description)
 class PVGeoGravGradReader(GravGradReader):
     def __init__(self):
         GravGradReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(GG_EXTS, readerDescription=GG_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(GravGradReader.extensions, readerDescription=GravGradReader.description))
     def AddFileName(self, fname):
         GravGradReader.AddFileName(self, fname)
 
@@ -415,19 +408,16 @@ class PVGeoGravGradReader(GravGradReader):
 ###############################################################################
 
 
-MAG_EXTS = 'mag loc txt dat pre'
-MAG_DESC = 'GIF Magnetic Observations'
-
 @smproxy.reader(name="PVGeoMagObsReader",
-       label="PVGeo: GIF Magnetic Observations",
-       extensions=MAG_EXTS,
-       file_description=MAG_DESC)
+       label='PVGeo: %s'%MagObsReader.__displayname__,
+       extensions=MagObsReader.extensions,
+       file_description=MagObsReader.description)
 class PVGeoMagObsReader(MagObsReader):
     def __init__(self):
         MagObsReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(MAG_EXTS, readerDescription=MAG_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(MagObsReader.extensions, readerDescription=MagObsReader.description))
     def AddFileName(self, fname):
         MagObsReader.AddFileName(self, fname)
 
@@ -452,7 +442,7 @@ class PVGeoMagObsReader(MagObsReader):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoGeologyMapper', label='Geology Mapper')
+@smproxy.filter(name='PVGeoGeologyMapper', label=GeologyMapper.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)

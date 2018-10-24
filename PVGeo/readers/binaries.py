@@ -27,7 +27,8 @@ class PackedBinariesReader(ReaderBase):
     """
     __displayname__ = 'Packed Binaries Reader'
     __category__ = 'reader'
-    extensions = "H@ bin rsf rsf@ HH npz"
+    extensions = 'H@ bin rsf rsf@ HH npz'
+    description = 'PVGeo: Packed Binaries Reader'
     def __init__(self, **kwargs):
         ReaderBase.__init__(self,
             nOutputPorts=1, outputType='vtkTable', **kwargs)
@@ -165,6 +166,8 @@ class MadagascarReader(PackedBinariesReader):
     """
     __displayname__ = 'Madagascar SSRSF Reader'
     __category__ = 'reader'
+    # extensions are inherrited from PackedBinariesReader
+    description = 'PVGeo: Madagascar Single Stream RSF Files'
     def __init__(self, **kwargs):
         PackedBinariesReader.__init__(self, **kwargs)
 

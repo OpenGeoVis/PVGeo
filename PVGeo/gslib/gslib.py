@@ -28,7 +28,8 @@ class GSLibReader(DelimitedTextReader):
     """
     __displayname__ = 'GSLib Table Reader'
     __category__ = 'reader'
-    extensions = "sgems dat geoeas gslib GSLIB txt SGEMS SGeMS"
+    extensions = 'sgems dat geoeas gslib GSLIB txt SGEMS SGeMS'
+    description = 'PVGeo: GSLib Table'
     def __init__(self, outputType='vtkTable', **kwargs):
         DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
         self.SetDelimiter(kwargs.get('delimiter', ' '))

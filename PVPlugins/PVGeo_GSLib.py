@@ -12,19 +12,17 @@ from PVGeo.gslib import *
 ###############################################################################
 
 
-GSLIB_DESC = "GSLib Table"
-
 @smproxy.reader(name="PVGeoGSLibReader",
-       label="PVGeo: GSLib File Format",
+       label='PVGeo: %s'%GSLibReader.__displayname__,
        extensions=GSLibReader.extensions,
-       file_description=GSLIB_DESC)
+       file_description=GSLibReader.description)
 class PVGeoGSLibReader(GSLibReader):
     def __init__(self):
         GSLibReader.__init__(self)
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(GSLibReader.extensions, readerDescription=GSLIB_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(GSLibReader.extensions, readerDescription=GSLibReader.description))
     def AddFileName(self, fname):
         GSLibReader.AddFileName(self, fname)
 
@@ -63,12 +61,11 @@ class PVGeoGSLibReader(GSLibReader):
 
 ###############################################################################
 
-SGEMS_DESC = "SGeMS Uniform Grid"
 
 @smproxy.reader(name="PVGeoSGeMSGridReader",
-       label="PVGeo: SGeMS Grid Reader",
+       label='PVGeo: %s'%SGeMSGridReader.__displayname__,
        extensions=SGeMSGridReader.extensions,
-       file_description=SGEMS_DESC)
+       file_description=SGeMSGridReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoSGeMSGridReader(SGeMSGridReader):
     def __init__(self):
@@ -76,7 +73,7 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(SGeMSGridReader.extensions, readerDescription=SGEMS_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(SGeMSGridReader.extensions, readerDescription=SGeMSGridReader.description))
     def AddFileName(self, fname):
         SGeMSGridReader.AddFileName(self, fname)
 
