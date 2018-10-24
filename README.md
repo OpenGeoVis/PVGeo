@@ -1,7 +1,7 @@
 <a href="http://pvgeo.org"><img src="PVGeo_icon_horiz.png" width="35%" /></a>
 
 
-The *PVGeo* python package contains VTK powered tools for data visualization in geophysics which are wrapped for direct use within the application [ParaView by Kitware](https://www.paraview.org). These tools are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D time-varying grids.
+The *PVGeo* Python package contains VTK powered tools for data visualization in geophysics which are wrapped for direct use within the application [ParaView by Kitware](https://www.paraview.org). These tools are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D time-varying grids.
 
 
 **Learn More:**
@@ -42,7 +42,7 @@ It is important to note the project is open source and that many features in thi
 
 # Getting Started
 
-To begin using the *PVGeo* python package, create a new Python virtual environment and install *PVGeo* through pip.
+To begin using the *PVGeo* Python package, create a new Python virtual environment and install *PVGeo* through pip.
 
 ```bash
 # Use Python 2.7
