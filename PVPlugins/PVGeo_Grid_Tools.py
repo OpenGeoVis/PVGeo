@@ -199,6 +199,15 @@ class PVGeoSurferGridReader(SurferGridReader):
     def SetDataName(self, dataName):
         SurferGridReader.SetDataName(self, dataName)
 
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        SurferGridReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return SurferGridReader.GetTimestepValues(self)
+
 
 ###############################################################################
 
@@ -275,6 +284,16 @@ class PVGeoEsriGridReader(EsriGridReader):
     @smproperty.stringvector(name='DataName', default_values='Data')
     def SetDataName(self, dataName):
         EsriGridReader.SetDataName(self, dataName)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        EsriGridReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return EsriGridReader.GetTimestepValues(self)
+
 
 
 ###############################################################################
