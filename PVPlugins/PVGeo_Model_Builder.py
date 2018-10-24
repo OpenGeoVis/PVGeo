@@ -103,7 +103,7 @@ class PVGeoEarthSource(EarthSource):
     def __init__(self):
         EarthSource.__init__(self)
 
-    @smproperty.doublevector(name="Radius", default_values=6371.0)
+    @smproperty.doublevector(name="Radius", default_values=6371.0e6)
     def SetRadius(self, radius):
         EarthSource.SetRadius(self, radius)
 
