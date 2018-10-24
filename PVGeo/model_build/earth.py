@@ -15,8 +15,8 @@ from .. import interface
 
 
 class OutlineContinents(AlgorithmBase):
-    """A simple data source to produce a ``vtkOutlineContinents`` outlining the Earth's
-    continents.
+    """A simple data source to produce a ``vtkEarthSource`` outlining the
+    Earth's continents. This works well with our ``GlobeSource``.
     """
     __displayname__ = 'Outline Continents'
     __category__ = 'source'
