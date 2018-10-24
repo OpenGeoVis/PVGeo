@@ -237,12 +237,13 @@ class TableToGrid(FilterBase):
 class TableToTimeGrid(FilterBase):
     """A filter to convert a static (no time variance) table to a time varying
     grid. This effectively reashapes a table full of data arrays as a 4D array
-    that is place on to ``vtkImageData``.
+    that is placed onto the CellData of a ``vtkImageData`` object.
     """
     __displayname__ = 'Table To Time Grid'
     __category__ = 'filter'
-    def __init__(self, extent=[10, 10, 10, 1], order='C', spacing=[1.0, 1.0, 1.0],
-                 origin=[0.0, 0.0, 0.0], dims=[0, 1, 2, 3], dt=1.0, **kwargs):
+    def __init__(self, extent=[10, 10, 10, 1], order='C',
+                 spacing=[1.0, 1.0, 1.0], origin=[0.0, 0.0, 0.0],
+                 dims=[0, 1, 2, 3], dt=1.0, points=False, **kwargs):
         FilterBase.__init__(self, nInputPorts=1, nOutputPorts=1,
                 inputType='vtkTable', outputType='vtkImageData', **kwargs)
         if len(extent) != 4:
@@ -259,6 +260,9 @@ class TableToTimeGrid(FilterBase):
         self.__needToRun = True
         self.__timesteps = None
         self.__dt = dt
+        # Optional parameter to switch between cell and point data
+        self.__usePointData = points
+        self.__needToUpdateOutput = True
 
 
     def _SetData(self, table):
@@ -281,9 +285,17 @@ class TableToTimeGrid(FilterBase):
         return
 
     def _BuildImageData(self, img):
+        if self.__needToUpdateOutput:
+            # Clean out the output data object
+            img.DeepCopy(vtk.vtkImageData())
+            self.__needToUpdateOutput = False
         ext = self.__extent
         dims = self.__dims
         nx, ny, nz = ext[dims[0]], ext[dims[1]], ext[dims[2]]
+        if not self.__usePointData:
+            nx += 1
+            ny += 1
+            nz += 1
         sx, sy, sz = self.__spacing[0],self.__spacing[1],self.__spacing[2]
         ox, oy, oz = self.__origin[0],self.__origin[1],self.__origin[2]
         img.SetDimensions(nx, ny, nz)
@@ -306,7 +318,7 @@ class TableToTimeGrid(FilterBase):
         """Used by pipeline to generate output"""
         # Get input/output of Proxy
         table = self.GetInputData(inInfo, 0, 0)
-        img = vtk.vtkImageData.GetData(outInfo, 0)
+        img = self.GetOutputData(outInfo, 0)
         self._BuildImageData(img)
         # Perfrom task
         if self.__needToRun:
@@ -314,9 +326,13 @@ class TableToTimeGrid(FilterBase):
         # Get requested time index
         i = _helpers.getRequestedTime(self, outInfo)
         for k, arr in self.__data.items():
-            img.GetPointData().AddArray(
-                interface.convertArray(arr[:,:,:,i].flatten(order='F'), name=k)
-                )
+            # NOTE: Keep order='F' because of the way the grid is already reshaped
+            #       the 3D array has XYZ structure so VTK requires F ordering
+            narr = interface.convertArray(arr[:,:,:,i].flatten(order='F'), name=k)
+            if self.__usePointData:
+                img.GetPointData().AddArray(narr)
+            else:
+                img.GetCellData().AddArray(narr)
         return 1
 
 
@@ -326,7 +342,10 @@ class TableToTimeGrid(FilterBase):
         ext = self.__extent
         dims = self.__dims
         nx, ny, nz = ext[dims[0]], ext[dims[1]], ext[dims[2]]
-        ext = [0, nx-1, 0,ny-1, 0,nz-1]
+        if self.__usePointData:
+            ext = [0, nx-1, 0,ny-1, 0,nz-1]
+        else:
+            ext = [0, nx, 0,ny, 0,nz]
         info = outInfo.GetInformationObject(0)
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
@@ -340,7 +359,9 @@ class TableToTimeGrid(FilterBase):
 
     def Modified(self, runAgain=True):
         """Call modified if the filter needs to run again"""
-        if runAgain: self.__needToRun = runAgain
+        if runAgain:
+            self.__needToRun = runAgain
+            self.__needToUpdateOutput = True
         FilterBase.Modified(self)
 
     def SetExtent(self, nx, ny, nz, nt):
@@ -370,7 +391,7 @@ class TableToTimeGrid(FilterBase):
         """Set the reshape order (`'C'` or `'F'`)"""
         if self.__order != order:
             self.__order = order
-            self.Modified()
+            self.Modified(runAgain=True)
 
     def GetTimestepValues(self):
         """Use this in ParaView decorator to register timesteps on the pipeline.
@@ -384,6 +405,15 @@ class TableToTimeGrid(FilterBase):
             self.__dt = dt
             self.Modified()
 
+    def SetUsePoints(self, flag):
+        """Set whether or not to place the data on the nodes/cells of the grid.
+        True places data on nodes, false places data at cell centers (CellData).
+        In ParaView, switching can be a bit buggy: be sure to turn the visibility
+        of this data object OFF on the pipeline when changing between nodes/cells.
+        """
+        if self.__usePointData != flag:
+            self.__usePointData = flag
+            self.Modified(runAgain=True)
 
 
 ###############################################################################

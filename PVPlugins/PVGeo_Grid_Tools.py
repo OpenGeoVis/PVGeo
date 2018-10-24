@@ -66,7 +66,11 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 
 @smproxy.filter(name='PVGeoTableToGrid', label='Table To Grid')
 @smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
+    <RepresentationType view="RenderView" type="Surface With Edges" />
+    <WarnOnCreate title="Deprecation Warning">
+      This filter is deprecated and will be removed in PVGeo version 2.0, please use the `Table To Time Grid` filter instead.
+      Do you want to continue?
+    </WarnOnCreate>''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoTableToGrid(TableToGrid):
@@ -113,7 +117,7 @@ class PVGeoTableToGrid(TableToGrid):
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
-class PVGeoTableToGrid(TableToTimeGrid):
+class PVGeoTableToTimeGrid(TableToTimeGrid):
     def __init__(self):
         TableToTimeGrid.__init__(self)
 
@@ -153,6 +157,10 @@ class PVGeoTableToGrid(TableToTimeGrid):
     def GetTimestepValues(self):
         """This is critical for registering the timesteps"""
         return TableToTimeGrid.GetTimestepValues(self)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Point Data', command='SetUsePoints', default_values=False, panel_visibility='advanced', help='Set whether or not to place the data on the nodes/cells of the grid. In ParaView, switching can be a bit buggy: be sure to turn the visibility of this data object OFF on the pipeline when changing bewteen nodes/cells.'))
+    def SetUsePoints(self, flag):
+        TableToTimeGrid.SetUsePoints(self, flag)
 
 
 
