@@ -107,7 +107,7 @@ class GlobeSource(AlgorithmBase):
         return output
 
     def RequestData(self, request, inInfo, outInfo):
-        """The pipeline exectures this to generate output"""
+        """The pipeline executes this to generate output"""
         pdo = self.GetOutputData(outInfo, 0)
         globe = self.BuildGlobe()
         pdo.ShallowCopy(globe)
