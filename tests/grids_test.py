@@ -149,11 +149,15 @@ class TestTableToTimeGrid(TestBase):
         self.table.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
         return
 
-    def check_data_fidelity(self, ido, checkme):
+    def check_data_fidelity(self, ido, checkme, points=False):
         """`TableToTimeGrid`: data fidelity"""
         wido = dsa.WrapDataObject(ido)
         for i in range(len(self.titles)):
-            arr = wido.PointData[self.titles[i]]
+            if points:
+                arr = wido.PointData[self.titles[i]]
+            else:
+                arr = wido.CellData[self.titles[i]]
+            # print(arr, checkme[i])
             self.assertTrue(np.allclose(arr, checkme[i], rtol=RTOL))
 
     def test_simple(self):
@@ -165,14 +169,26 @@ class TestTableToTimeGrid(TestBase):
         f.SetExtent(20, 2, 5, 2)
         f.SetSpacing(5, 5, 5)
         f.SetOrigin(3.3, 6.0, 7)
+        f.SetUsePoints(False)
+        f.SetOrder('C')
         for t in range(2):
             f.UpdateTimeStep(t)
             ido = f.GetOutput()
             checkme = [None] * len(self.arrs)
             for i in range(len(self.arrs)):
                 a = self.arrs[i].reshape((20, 2, 5, 2))[:,:,:,t]
-                checkme[i] = a.flatten(order='F')
-            self.check_data_fidelity(ido, checkme)
+                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+            self.check_data_fidelity(ido, checkme, points=False)
+        f.SetUsePoints(True)
+        f.Update()
+        for t in range(2):
+            f.UpdateTimeStep(t)
+            ido = f.GetOutput()
+            checkme = [None] * len(self.arrs)
+            for i in range(len(self.arrs)):
+                a = self.arrs[i].reshape((20, 2, 5, 2))[:,:,:,t]
+                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+            self.check_data_fidelity(ido, checkme, points=True)
         return
 
 
@@ -342,14 +358,16 @@ class TestSurferGridReader(TestBase):
         self.assertIsNotNone(img)
         # Check shapes of the surfer grid
         nx, ny, nz = img.GetDimensions()
-        self.assertEqual(nx, 182)
-        self.assertEqual(ny, 222)
+        self.assertEqual(nx, 222)
+        self.assertEqual(ny, 182)
         self.assertEqual(nz, 1)
+
         # Now test writer
         writer = WriteImageDataToSurfer()
         fname = os.path.join(self.test_dir, 'test-writer.grd')
         writer.SetFileName(fname)
         writer.Write(img, 'foo')
+
         # Read again and compare
         reader = SurferGridReader()
         reader.AddFileName(fname)
@@ -358,8 +376,8 @@ class TestSurferGridReader(TestBase):
         read = reader.GetOutput()
         self.assertIsNotNone(read)
         nx, ny, nz = read.GetDimensions()
-        self.assertEqual(nx, 182)
-        self.assertEqual(ny, 222)
+        self.assertEqual(nx, 222)
+        self.assertEqual(ny, 182)
         self.assertEqual(nz, 1)
         self.assertEqual(img.GetBounds(), read.GetBounds())
         # Check the data arrays

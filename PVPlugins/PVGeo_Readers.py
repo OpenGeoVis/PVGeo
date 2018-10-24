@@ -14,19 +14,17 @@ from PVGeo.readers import DelimitedTextReader, XYZTextReader
 ###############################################################################
 
 
-PACKED_EXTS = 'H@ bin rsf rsf@ HH npz'
-PACKED_DESC = 'Packed Binaries Reader'
 
 @smproxy.reader(name="PVGeoPackedBinariesReader",
-       label="PVGeo: Packed Binaries Reader",
-       extensions=PACKED_EXTS,
-       file_description=PACKED_DESC)
+       label='PVGeo: %s'%PackedBinariesReader.__displayname__,
+       extensions=PackedBinariesReader.extensions,
+       file_description=PackedBinariesReader.description)
 class PVGeoPackedBinariesReader(PackedBinariesReader):
     def __init__(self):
         PackedBinariesReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(PACKED_EXTS, readerDescription=PACKED_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(PackedBinariesReader.extensions, readerDescription=PackedBinariesReader.description))
     def AddFileName(self, fname):
         PackedBinariesReader.AddFileName(self, fname)
 
@@ -62,13 +60,11 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
 ###############################################################################
 
 
-MADAGASCAR_EXTS = 'bin H@ rsf rsf@ HH'
-MADAGASCAR_DESC = 'Madagascar Single Stream RSF Files'
 
 @smproxy.reader(name="PVGeoMadagascarReader",
-       label="PVGeo: Madagascar SSRSF  Reader",
-       extensions=MADAGASCAR_EXTS,
-       file_description=MADAGASCAR_DESC)
+       label='PVGeo: %s'%MadagascarReader.__displayname__,
+       extensions=MadagascarReader.extensions,
+       file_description=MadagascarReader.description)
 class PVGeoMadagascarReader(MadagascarReader):
     def __init__(self):
         MadagascarReader.__init__(self)
@@ -76,7 +72,7 @@ class PVGeoMadagascarReader(MadagascarReader):
     #### Seters and Geters ####
 
 
-    @smproperty.xml(_helpers.getFileReaderXml(MADAGASCAR_EXTS, readerDescription=MADAGASCAR_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(MadagascarReader.extensions, readerDescription=MadagascarReader.description))
     def AddFileName(self, fname):
         MadagascarReader.AddFileName(self, fname)
 
@@ -112,20 +108,18 @@ class PVGeoMadagascarReader(MadagascarReader):
 ###############################################################################
 
 
-DELIMITED_EXTS = 'dat csv txt text ascii xyz'
-DELIMITED_DESC = 'Delimited Text Files'
 
 @smproxy.reader(name="PVGeoDelimitedTextReader",
-       label="PVGeo: Delimited Text Reader",
-       extensions=DELIMITED_EXTS,
-       file_description=DELIMITED_DESC)
+       label='PVGeo: %s'%DelimitedTextReader.__displayname__,
+       extensions=DelimitedTextReader.extensions,
+       file_description=DelimitedTextReader.description)
 class PVGeoDelimitedTextReader(DelimitedTextReader):
     def __init__(self):
         DelimitedTextReader.__init__(self)
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(DELIMITED_EXTS, readerDescription=DELIMITED_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(DelimitedTextReader.extensions, readerDescription=DelimitedTextReader.description))
     def AddFileName(self, fname):
         DelimitedTextReader.AddFileName(self, fname)
 
@@ -165,20 +159,18 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 ###############################################################################
 
 
-XYZ_EXTS = 'xyz text txt dat csv tsv'
-XYZ_DESC = 'XYZ Delimited Text Files where header has comma delimiter.'
 
 @smproxy.reader(name="PVGeoXYZTextReader",
-       label="PVGeo: XYZ File Reader",
-       extensions=XYZ_EXTS,
-       file_description=XYZ_DESC)
+       label='PVGeo: %s'%XYZTextReader.__displayname__,
+       extensions=XYZTextReader.extensions,
+       file_description=XYZTextReader.description)
 class PVGeoXYZTextReader(XYZTextReader):
     def __init__(self):
         XYZTextReader.__init__(self)
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(XYZ_EXTS, readerDescription=XYZ_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(XYZTextReader.extensions, readerDescription=XYZTextReader.description))
     def AddFileName(self, fname):
         XYZTextReader.AddFileName(self, fname)
 

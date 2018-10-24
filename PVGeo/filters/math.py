@@ -23,7 +23,9 @@ from .. import interface
 
 #---- ArrayMath ----#
 class ArrayMath(FilterPreserveTypeBase):
-    """This filter allows the user to select two input data arrays on which to perfrom math operations. The input arrays are used in their order of selection for the operations.
+    """This filter allows the user to select two input data arrays on which to
+    perfrom math operations. The input arrays are used in their order of
+    selection for the operations.
 
     **Available Math Operations:**
 
@@ -51,7 +53,8 @@ class ArrayMath(FilterPreserveTypeBase):
 
     @staticmethod
     def _correlate(arr1, arr2):
-        """Use ``np.correlate()`` on ``mode='same'`` on two selected arrays from one input.
+        """Use ``np.correlate()`` on ``mode='same'`` on two selected arrays
+        from one input.
         """
         return np.correlate(arr1, arr2, mode='same')
 
@@ -73,7 +76,8 @@ class ArrayMath(FilterPreserveTypeBase):
 
     @staticmethod
     def GetOperations():
-        """Returns the math operation methods as callable objects in a dictionary
+        """Returns the math operation methods as callable objects in a
+        dictionary
         """
         ops = dict(
             add=ArrayMath._add,
@@ -176,7 +180,8 @@ class ArrayMath(FilterPreserveTypeBase):
             idx (int): the index of the array to process
             port (int): input port (use 0 if unsure)
             connection (int): the connection on the port (use 0 if unsure)
-            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            field (int): the array field (0 for points, 1 for cells, 2 for
+                field, and 6 for row)
             name (int): the name of the array
         """
         if idx == 0:
@@ -197,7 +202,8 @@ class ArrayMath(FilterPreserveTypeBase):
         return self.GetOutput()
 
     def SetMultiplier(self, val):
-        """This is a static shifter/scale factor across the array after normalization.
+        """This is a static shifter/scale factor across the array after
+        normalization.
         """
         if self.__multiplier != val:
             self.__multiplier = val
@@ -222,10 +228,12 @@ class ArrayMath(FilterPreserveTypeBase):
         """Set the math operation to perform
 
         Args:
-            op (str, int, or callable): The operation as a string key, int index, or callable method
+            op (str, int, or callable): The operation as a string key, int
+            index, or callable method
 
         Note:
-            This can accept a callable method to set a custom operation as long as its signature is: ``<callable>(arr1, arr2)``
+            This can accept a callable method to set a custom operation as long
+            as its signature is: ``<callable>(arr1, arr2)``
         """
         if isinstance(op, str):
             op = ArrayMath.GetOperations()[op]
@@ -242,7 +250,11 @@ class ArrayMath(FilterPreserveTypeBase):
 #---- Normalizations ----#
 
 class NormalizeArray(FilterPreserveTypeBase):
-    """This filter allows the user to select an array from the input data set to be normalized. The filter will append another array to that data set for the output. The user can specify how they want to rename the array, can choose a multiplier, and can choose from several types of common normalizations (more functionality added as requested).
+    """This filter allows the user to select an array from the input data set
+    to be normalized. The filter will append another array to that data set for
+    the output. The user can specify how they want to rename the array, can
+    choose a multiplier, and can choose from several types of common
+    normalizations (more functionality added as requested).
 
     **Normalization Types:**
 
@@ -338,7 +350,8 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     @staticmethod
     def GetArrayRange(pdi, field, name):
-        """Returns a tuple of the range for a ``vtkDataArray`` on a ``vtkDataObject``
+        """Returns a tuple of the range for a ``vtkDataArray`` on a
+        ``vtkDataObject``.
         """
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getNumPyArray(wpdi, field, name)
@@ -396,7 +409,8 @@ class NormalizeArray(FilterPreserveTypeBase):
             idx (int): the index of the array to process
             port (int): input port (use 0 if unsure)
             connection (int): the connection on the port (use 0 if unsure)
-            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            field (int): the array field (0 for points, 1 for cells, 2 for
+                field, and 6 for row)
             name (int): the name of the array
         """
         if self.__inputArray[0] != field:
@@ -415,7 +429,8 @@ class NormalizeArray(FilterPreserveTypeBase):
         return self.GetOutput()
 
     def SetMultiplier(self, val):
-        """This is a static shifter/scale factor across the array after normalization.
+        """This is a static shifter/scale factor across the array after
+        normalization.
         """
         if self.__multiplier != val:
             self.__multiplier = val
@@ -450,10 +465,12 @@ class NormalizeArray(FilterPreserveTypeBase):
         """Set the normalization operation to perform
 
         Args:
-            norm (str, int, or callable): The operation as a string key, int index, or callable method
+            norm (str, int, or callable): The operation as a string key, int
+                index, or callable method
 
         Note:
-            This can accept a callable method to set a custom operation as long as its signature is: ``<callable>(arr)``
+            This can accept a callable method to set a custom operation as long
+            as its signature is: ``<callable>(arr)``
         """
         if isinstance(norm, str):
             norm = NormalizeArray.GetNormalizations()[norm]
@@ -518,7 +535,8 @@ class PercentThreshold(FilterBase):
             idx (int): the index of the array to process
             port (int): input port (use 0 if unsure)
             connection (int): the connection on the port (use 0 if unsure)
-            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            field (int): the array field (0 for points, 1 for cells, 2 for
+                field, and 6 for row)
             name (int): the name of the array
         """
         if self.__inputArray[0] != field or self.__inputArray[1] != name:
@@ -687,7 +705,8 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             idx (int): the index of the array to process
             port (int): input port (use 0 if unsure)
             connection (int): the connection on the port (use 0 if unsure)
-            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            field (int): the array field (0 for points, 1 for cells, 2 for
+                field, and 6 for row)
             name (int): the name of the array
         """
         if idx == 0:

@@ -1,6 +1,7 @@
 __all__ = [
     'TensorMeshReader',
     'TensorMeshAppender',
+    'TopoMeshAppender',
 ]
 
 __displayname__ = 'Tensor Mesh'
@@ -32,10 +33,12 @@ class TensorMeshReader(ubcMeshReaderBase):
     2D format (same for 3D).
 
     Note:
-        Model File is optional. Reader will still construct ``vtkRectilinearGrid`` safely.
+        Model File is optional. Reader will still construct
+        ``vtkRectilinearGrid`` safely.
     """
     __displayname__ = 'UBC Tensor Mesh Reader'
     __category__ = 'reader'
+    description = 'PVGeo: UBC Mesh 2D/3D Two-File Format'
     def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid', **kwargs):
         ubcMeshReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
@@ -50,12 +53,16 @@ class TensorMeshReader(ubcMeshReaderBase):
         to associate model data with the mesh grid.
 
         Args:
-            mesh (vtkRectilinearGrid): The ``vtkRectilinearGrid`` that is the mesh to place the model data upon.
-            model (np.array): A NumPy float array that holds all of the data to place inside of the mesh's cells.
-            dataNm (str) : The name of the model data array once placed on the ``vtkRectilinearGrid``.
+            mesh (vtkRectilinearGrid): The ``vtkRectilinearGrid`` that is the
+                mesh to place the model data upon.
+            model (np.array): A NumPy float array that holds all of the data to
+                place inside of the mesh's cells.
+            dataNm (str) : The name of the model data array once placed on the
+                ``vtkRectilinearGrid``.
 
         Return:
-            vtkRectilinearGrid : Returns the input ``vtkRectilinearGrid`` with model data appended.
+            vtkRectilinearGrid :
+                Returns the input ``vtkRectilinearGrid`` with model data appended.
         """
         if type(model) is dict:
             for key in model.keys():
@@ -102,17 +109,22 @@ class TensorMeshReader(ubcMeshReaderBase):
 
     @staticmethod
     def ubcMesh2D(FileName, output):
-        """This method reads a UBC 2D Mesh file and builds an empty ``vtkRectilinearGrid``
-        for data to be inserted into. `Format Specs`_.
+        """This method reads a UBC 2D Mesh file and builds an empty
+        ``vtkRectilinearGrid`` for data to be inserted into. `Format Specs`_.
 
         .. _Format Specs: http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html
 
         Args:
-            FileName (str) : The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
+            FileName (str) : The mesh filename as an absolute path for the input
+                mesh file in UBC 3D Mesh Format.
             output (vtkRectilinearGrid) : The output data object
 
         Return:
-            vtkRectilinearGrid : a ``vtkRectilinearGrid`` generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the ``PlaceModelOnMesh()`` method to associate with model data.
+            vtkRectilinearGrid :
+                a ``vtkRectilinearGrid`` generated from the UBC 3D Mesh grid.
+                Mesh is defined by the input mesh file.
+                No data attributes here, simply an empty mesh. Use the
+                ``PlaceModelOnMesh()`` method to associate with model data.
         """
         # Read in data from file
         xpts, xdisc, zpts, zdisc = ubcMeshReaderBase._ubcMesh2D_part(FileName)
@@ -150,16 +162,24 @@ class TensorMeshReader(ubcMeshReaderBase):
 
     @staticmethod
     def ubcModel2D(FileName):
-        """Reads a 2D model file and returns a 1D NumPy float array. Use the ``PlaceModelOnMesh()`` method to associate with a grid.
-
-        Args:
-            FileName (str) : The model filename as an absolute path for the input model file in UBCMesh Model Format. Also accepts a list of string file names.
-
-        Return:
-            np.array : a NumPy float array that holds the model data read from the file. Use the ``PlaceModelOnMesh()`` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
+        """Reads a 2D model file and returns a 1D NumPy float array. Use the
+        ``PlaceModelOnMesh()`` method to associate with a grid.
 
         Note:
             Only supports single component data
+
+        Args:
+            FileName (str) : The model filename as an absolute path for the
+                input model file in UBCMesh Model Format. Also accepts a list of
+                string file names.
+
+        Return:
+            np.array :
+                a NumPy float array that holds the model data read from
+                the file. Use the ``PlaceModelOnMesh()`` method to associate
+                with a grid. If a list of file names is given then it will
+                return a dictionary of NumPy float array with keys as the
+                basenames of the files.
         """
         if type(FileName) is list:
             out = {}
@@ -203,11 +223,16 @@ class TensorMeshReader(ubcMeshReaderBase):
         ``vtkRectilinearGrid`` for data to be inserted into.
 
         Args:
-            FileName (str) : The mesh filename as an absolute path for the input mesh file in UBC 3D Mesh Format.
+            FileName (str) : The mesh filename as an absolute path for the input
+                mesh file in UBC 3D Mesh Format.
             output (vtkRectilinearGrid) : The output data object
 
         Return:
-            vtkRectilinearGrid : a ``vtkRectilinearGrid`` generated from the UBC 3D Mesh grid. Mesh is defined by the input mesh file. No data attributes here, simply an empty mesh. Use the ``PlaceModelOnMesh()`` method to associate with model data.
+            vtkRectilinearGrid :
+                a ``vtkRectilinearGrid`` generated from the UBC 3D Mesh grid.
+                Mesh is defined by the input mesh file.
+                No data attributes here, simply an empty mesh. Use the
+                ``PlaceModelOnMesh()`` method to associate with model data.
         """
 
         #--- Read in the mesh ---#
@@ -283,15 +308,25 @@ class TensorMeshReader(ubcMeshReaderBase):
 
 
     def __ubcTensorMesh(self, FileName_Mesh, FileName_Models, output):
-        """Wrapper to Read UBC GIF 2D and 3D meshes. UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file describes how the data is descritized. The "model" file lists the physical property values for all cells in a mesh. A model file is meaningless without an associated mesh file. If the mesh file is 2D, then then model file must also be in the 2D format (same for 3D).
+        """Wrapper to Read UBC GIF 2D and 3D meshes. UBC Mesh 2D/3D models are
+        defined using a 2-file format. The "mesh" file describes how the data is
+        descritized. The "model" file lists the physical property values for all
+        cells in a mesh. A model file is meaningless without an associated mesh
+        file. If the mesh file is 2D, then then model file must also be in the
+        2D format (same for 3D).
 
         Args:
-            FileName_Mesh (str) : The mesh filename as an absolute path for the input mesh file in UBC 2D/3D Mesh Format
-            FileName_Models (str or list(str)) : The model filename(s) as an absolute path for the input model file in UBC 2D/3D Model Format.
+            FileName_Mesh (str) : The mesh filename as an absolute path for the
+                input mesh file in UBC 2D/3D Mesh Format
+            FileName_Models (str or list(str)) : The model filename(s) as an
+                absolute path for the input model file in UBC 2D/3D Model Format.
             output (vtkRectilinearGrid) : The output data object
 
         Return:
-            vtkRectilinearGrid : Returns a ``vtkRectilinearGrid`` generated from the UBC 2D/3D Mesh grid. Mesh is defined by the input mesh file. Cell data is defined by the input model file.
+            vtkRectilinearGrid :
+                a ``vtkRectilinearGrid`` generated from the UBC 2D/3D Mesh grid.
+                Mesh is defined by the input mesh file.
+                Cell data is defined by the input model file.
 
         """
         # Check if the mesh is a UBC 2D mesh
@@ -375,5 +410,138 @@ class TensorMeshAppender(ModelAppenderBase):
         return
 
     def _PlaceOnMesh(self, output, idx=0):
-        TensorMeshReader.PlaceModelOnMesh(output, self._models[idx], self._dataname)
+        TensorMeshReader.PlaceModelOnMesh(output, self._models[idx], self.GetDataName())
         return
+
+
+################################################################################
+
+class TopoMeshAppender(AlgorithmBase):
+    """This filter reads a single discrete topography file and appends it as a
+    boolean data array.
+    """
+    __displayname__ = 'Append UBC Discrete Topography'
+    __category__ = 'filter'
+    def __init__(self, inputType='vtkRectilinearGrid',
+                       outputType='vtkRectilinearGrid', **kwargs):
+        AlgorithmBase.__init__(self,
+            nInputPorts=1, inputType=inputType,
+            nOutputPorts=1, outputType=outputType)
+        self._topoFileName = kwargs.get('filename', None)
+        self.__indices = None
+        self.__needToRead = True
+        self.__ne, self.__nn = None, None
+
+    def NeedToRead(self, flag=None):
+        """Ask self if the reader needs to read the files again
+
+        Args:
+            flag (bool): if the flag is set then this method will set the read
+                status
+
+        Return:
+            bool:
+                The status of the reader aspect of the filter.
+        """
+        if flag is not None and isinstance(flag, (bool, int)):
+            self.__needToRead = flag
+        return self.__needToRead
+
+    def Modified(self, readAgain=True):
+        """Call modified if the files needs to be read again again.
+        """
+        if readAgain: self.__needToRead = readAgain
+        AlgorithmBase.Modified(self)
+
+
+    def _ReadUpFront(self):
+        # Read the file
+        content = np.genfromtxt(self._topoFileName, dtype=str, delimiter='\n',
+                                comments='!')
+        dim = content[0].split()
+        self.__ne, self.__nn = int(dim[0]), int(dim[1])
+        self.__indices = pd.read_csv(StringIO("\n".join(content[1::])),
+                            names=['i', 'j', 'k'], delim_whitespace=True)
+        # NOTE: K indices are inverted
+        self.NeedToRead(flag=False)
+        return
+
+    def _PlaceOnMesh(self, output):
+        # Check mesh extents to math topography
+        nx, ny, nz = output.GetDimensions()
+        nx, ny, nz = nx-1, ny-1, nz-1 # because GetDimensions counts the nodes
+        topz = np.max(self.__indices['k']) + 1
+        if nx != self.__nn or ny != self.__ne or topz > nz:
+            raise _helpers.PVGeoError('Dimension mismatch between input grid and topo file.')
+        # # Adjust the k indices to be in caarteian system
+        # self.__indices['k'] = nz - self.__indices['k']
+        # Fill out the topo and add it as model as it will be in UBC format
+        # Create a 3D array of 1s and zeros (1 means beneath topo or active)
+        topo = np.empty((ny, nx, nz), dtype=float)
+        topo[:] = np.nan
+        for row in self.__indices.values:
+            i, j, k = row
+            topo[i, j, k+1:] = 0
+            topo[i, j, :k+1] = 1
+        # Add as model... ``PlaceModelOnMesh`` handles the rest
+        TensorMeshReader.PlaceModelOnMesh(output, topo.flatten(), 'Active Topography')
+        return
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """DO NOT OVERRIDE
+        """
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        output = self.GetOutputData(outInfo, 0)
+        output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
+        # Perfrom task:
+        if self.__needToRead:
+            self._ReadUpFront()
+        # Place the model data for given timestep onto the mesh
+        self._PlaceOnMesh(output)
+        return 1
+
+
+    #### Setters and Getters ####
+
+    def ClearTopoFile(self):
+        """Use to clear data file name.
+        """
+        self._topoFileName = None
+        self.Modified(readAgain=True)
+
+    def SetTopoFileName(self, fname):
+        """Use to set the file names for the reader. Handles single strings only
+        """
+        if fname is None:
+            return # do nothing if None is passed by a constructor on accident
+        elif isinstance(fname, str) and self._topoFileName != fname:
+            self._topoFileName = fname
+            self.Modified()
+        return 1
+
+
+################################################################################
+
+#
+# import numpy as np
+# indices = np.array([[0,0,1],
+#                     [0,1,1],
+#                     [0,2,1],
+#                     [1,0,1],
+#                     [1,1,1],
+#                     [1,2,1],
+#                     [2,0,1],
+#                     [2,1,1],
+#                     [2,2,1],
+#                     ])
+#
+# topo = np.empty((3,3,3), dtype=float)
+# topo[:] = np.nan
+#
+# for row in indices:
+#     i, j, k = row
+#     topo[i, j, k:] = 0
+#     topo[i, j, :k] = 1
+# topo

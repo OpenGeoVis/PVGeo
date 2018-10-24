@@ -29,7 +29,13 @@ from .. import interface
 #---- Cell Connectivity ----#
 
 class AddCellConnToPoints(FilterBase):
-    """This filter will add linear cell connectivity between scattered points. You have the option to add ``VTK_Line`` or ``VTK_PolyLine`` connectivity. ``VTK_Line`` connectivity makes a straight line between the points in order (either in the order by index or using a nearest neighbor calculation). The ``VTK_PolyLine`` adds a poly line connectivity between all points as one spline (either in the order by index or using a nearest neighbor calculation). Type map is specified in `vtkCellType.h`.
+    """This filter will add linear cell connectivity between scattered points.
+    You have the option to add ``VTK_Line`` or ``VTK_PolyLine`` connectivity.
+    ``VTK_Line`` connectivity makes a straight line between the points in order
+    (either in the order by index or using a nearest neighbor calculation).
+    The ``VTK_PolyLine`` adds a poly line connectivity between all points as
+    one spline (either in the order by index or using a nearest neighbor
+    calculation). Type map is specified in `vtkCellType.h`.
 
     **Cell Connectivity Types:**
 
@@ -160,7 +166,8 @@ class AddCellConnToPoints(FilterBase):
             self.Modified()
 
     def SetUseNearestNbr(self, flag):
-        """Set a flag on whether to use SciPy's ``cKDTree`` nearest neighbor algorithms to sort the points to before adding linear connectivity.
+        """Set a flag on whether to use SciPy's ``cKDTree`` nearest neighbor
+        algorithms to sort the points to before adding linear connectivity.
         """
         if flag != self.__usenbr:
             self.__usenbr = flag
@@ -177,7 +184,9 @@ class AddCellConnToPoints(FilterBase):
 
 
 class PointsToTube(AddCellConnToPoints):
-    """Takes points from a vtkPolyData object and constructs a line of those points then builds a polygonal tube around that line with some specified radius and number of sides.
+    """Takes points from a vtkPolyData object and constructs a line of those
+    points then builds a polygonal tube around that line with some specified
+    radius and number of sides.
     """
     __displayname__ = 'Points to Tube'
     __category__ = 'filter'
@@ -301,7 +310,8 @@ class LonLatToUTM(FilterBase):
 
 
 class RotationTool(object):
-    """A class that holds a set of methods/tools for performing and estimating coordinate rotations.
+    """A class that holds a set of methods/tools for performing and estimating
+    coordinate rotations.
     """
     __displayname__ = 'Rotation Tool'
     __category__ = 'filter'
@@ -553,7 +563,8 @@ class RotationTool(object):
 
 
     def EstimateAndRotate(self, x, y, z):
-        """A method to estimate the rotation of a set of points and correct that rotation on the XY plane
+        """A method to estimate the rotation of a set of points and correct
+        that rotation on the XY plane
         """
         assert(len(x) == len(y) == len(z))
         idxs = np.argwhere(z == z[0])
@@ -567,7 +578,8 @@ class RotationTool(object):
 #---- Coordinate Rotations ----#
 
 class RotatePoints(FilterBase):
-    """Rotates XYZ coordinates in `vtkPolyData` around an origin at a given angle on the XY plane.
+    """Rotates XYZ coordinates in `vtkPolyData` around an origin at a given
+    angle on the XY plane.
     """
     __displayname__ = 'Rotate Points'
     __category__ = 'filter'
@@ -617,7 +629,8 @@ class RotatePoints(FilterBase):
             self.Modified()
 
     def SetUseCorner(self, flag):
-        """A flag to use a corner of the input data set as the rotational origin.
+        """A flag to use a corner of the input data set as the rotational
+        origin.
         """
         if self.__useCorner != flag:
             self.__useCorner = flag
@@ -720,7 +733,8 @@ class IterateOverPoints(FilterBase):
     __displayname__ = 'Iterate Over Points'
     __category__ = 'filter'
     def __init__(self, dt=1.0):
-        FilterBase.__init__(self, nInputPorts=1, inputType='vtkPolyData', nOutputPorts=1, outputType='vtkPolyData')
+        FilterBase.__init__(self, nInputPorts=1, inputType='vtkPolyData',
+                            nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.__dt = dt
         self.__timesteps = None

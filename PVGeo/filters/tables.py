@@ -74,7 +74,10 @@ class CombineTables(FilterBase):
 #---- Reshape Table ----#
 
 class ReshapeTable(FilterBase):
-    """This filter will take a ``vtkTable`` object and reshape it. This filter essentially treats ``vtkTable``s as 2D matrices and reshapes them using ``numpy.reshape`` in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.
+    """This filter will take a ``vtkTable`` object and reshape it. This filter
+    essentially treats ``vtkTable``s as 2D matrices and reshapes them using
+    ``numpy.reshape`` in a C contiguous manner. Unfortunately, data fields will
+    be renamed arbitrarily because VTK data arrays require a name.
     """
     __displayname__ = 'Reshape Table'
     __category__ = 'filter'
@@ -150,7 +153,8 @@ class ReshapeTable(FilterBase):
         """Set names using a semicolon (;) seperated string or a list of strings
 
         Args:
-            names (string): a string of data array names for the reshaped table using a semicolon (;) to spearate
+            names (string): a string of data array names for the reshaped table
+                using a semicolon (;) to spearate
         """
         # parse the names (a semicolon seperated list of names)
         if isinstance(names, str):
@@ -160,7 +164,8 @@ class ReshapeTable(FilterBase):
             self.Modified()
 
     def AddName(self, name):
-        """Use to append a name to the list of data array names for the output table
+        """Use to append a name to the list of data array names for the output
+        table.
         """
         self.__names.append(name)
         self.Modified()
@@ -231,7 +236,8 @@ class ExtractArray(FilterBase):
             idx (int): the index of the array to process
             port (int): input port (use 0 if unsure)
             connection (int): the connection on the port (use 0 if unsure)
-            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            field (int): the array field (0 for points, 1 for cells, 2 for
+                field, and 6 for row)
             name (int): the name of the array
         """
         if self.__inputArray[0] != field:
@@ -298,7 +304,8 @@ class SplitTableOnArray(FilterBase):
             idx (int): the index of the array to process
             port (int): input port (use 0 if unsure)
             connection (int): the connection on the port (use 0 if unsure)
-            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)
+            field (int): the array field (0 for points, 1 for cells, 2 for
+                field, and 6 for row)
             name (int): the name of the array
         """
         if self.__inputArray[0] != field:

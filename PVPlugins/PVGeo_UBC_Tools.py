@@ -12,14 +12,12 @@ from PVGeo.ubc import *
 #### GLOBAL VARIABLES ####
 MENU_CAT = 'PVGeo: UBC Mesh Tools'
 
-MESH_EXTS = 'mesh msh dat txt text'
-TMESH_DESC = 'PVGeo: UBC Mesh 2D/3D Two-File Format'
 
 
 @smproxy.reader(name="PVGeoTensorMeshReader",
-       label="PVGeo: UBC Tensor Mesh Reader",
-       extensions=MESH_EXTS,
-       file_description=TMESH_DESC)
+       label='PVGeo: %s'%TensorMeshReader.__displayname__,
+       extensions=TensorMeshReader.extensions,
+       file_description=TensorMeshReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoTensorMeshReader(TensorMeshReader):
     def __init__(self):
@@ -70,14 +68,19 @@ class PVGeoTensorMeshReader(TensorMeshReader):
         """This is critical for registering the timesteps"""
         return TensorMeshReader.GetTimestepValues(self)
 
-    @smproperty.stringvector(name='DataName', default_values='Data')
+    @smproperty.xml(_helpers.getPropertyXml(name='Use extension name', command='SetUseExtensionAsName', default_values=True, help='A boolean to override the DataName and use whitespace model file extension as data name.',
+    panel_visibility="advanced"))
+    def SetUseExtensionAsName(self, flag):
+        TensorMeshReader.SetUseExtensionAsName(self, flag)
+
+    @smproperty.stringvector(name='DataName', default_values='Data', panel_visibility="advanced")
     def SetDataName(self, name):
         TensorMeshReader.SetDataName(self, name)
 
 @smproxy.filter(name="PVGeoTensorMeshAppender",
-       label="Append Model To UBC Tensor Mesh")
+       label=TensorMeshAppender.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
 class PVGeoTensorMeshAppender(TensorMeshAppender):
@@ -102,7 +105,12 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
         """Use to set the file names for the reader. Handles single string or list of strings."""
         TensorMeshAppender.AddModelFileName(self, fname)
 
-    @smproperty.stringvector(name='DataName', default_values='Appended Data')
+    @smproperty.xml(_helpers.getPropertyXml(name='Use extension name', command='SetUseExtensionAsName', default_values=True, help='A boolean to override the DataName and use whitespace model file extension as data name.',
+    panel_visibility="advanced"))
+    def SetUseExtensionAsName(self, flag):
+        TensorMeshAppender.SetUseExtensionAsName(self, flag)
+
+    @smproperty.stringvector(name='DataName', default_values='Appended Data', panel_visibility="advanced")
     def SetDataName(self, name):
         TensorMeshAppender.SetDataName(self, name)
 
@@ -113,15 +121,44 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
 
 
 
+@smproxy.filter(name="PVGeoTopoMeshAppender",
+       label=TopoMeshAppender.__displayname__)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
+class PVGeoTopoMeshAppender(TopoMeshAppender):
+    """This assumes the input vtkRectilinearGrid has already handled the timesteps"""
+    def __init__(self):
+        TopoMeshAppender.__init__(self)
+
+    @smproperty.xml('''
+        <StringVectorProperty
+            panel_visibility="advanced"
+            name="TopoFile"
+            label="File Name Topo"
+            command="SetTopoFileName"
+            animateable="1"
+            clean_command="ClearTopoFile"
+            number_of_elements="1">
+            <FileListDomain name="topofile"/>
+            <Documentation>This plugin only allows ONE topo file to be defined.</Documentation>
+        </StringVectorProperty>''')
+    def SetTopoFileName(self, fname):
+        TopoMeshAppender.SetTopoFileName(self, fname)
+
+
+
+
 #------------------------------------------------------------------------------
 # Read OcTree Mesh
 #------------------------------------------------------------------------------
 
 
 @smproxy.reader(name="PVGeoUBCOcTreeMeshReader",
-       label="PVGeo: UBC OcTree Mesh Reader",
-       extensions=MESH_EXTS,
-       file_description='PVGeo: UBC OcTree Mesh')
+       label='PVGeo: %s'%OcTreeReader.__displayname__,
+       extensions=OcTreeReader.extensions,
+       file_description=OcTreeReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoUBCOcTreeMeshReader(OcTreeReader):
     def __init__(self):
@@ -172,14 +209,19 @@ class PVGeoUBCOcTreeMeshReader(OcTreeReader):
         """This is critical for registering the timesteps"""
         return OcTreeReader.GetTimestepValues(self)
 
-    @smproperty.stringvector(name='DataName', default_values='Data')
+    @smproperty.xml(_helpers.getPropertyXml(name='Use extension name', command='SetUseExtensionAsName', default_values=True, help='A boolean to override the DataName and use whitespace model file extension as data name.',
+    panel_visibility="advanced"))
+    def SetUseExtensionAsName(self, flag):
+        OcTreeReader.SetUseExtensionAsName(self, flag)
+
+    @smproperty.stringvector(name='DataName', default_values='Data', panel_visibility="advanced")
     def SetDataName(self, name):
         OcTreeReader.SetDataName(self, name)
 
 
 
 @smproxy.filter(name="PVGeoOcTreeAppender",
-       label="Append Model To UBC OcTree Mesh")
+       label=OcTreeAppender.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -206,7 +248,12 @@ class PVGeoOcTreeAppender(OcTreeAppender):
         """Use to set the file names for the reader. Handles single string or list of strings."""
         OcTreeAppender.AddModelFileName(self, fname)
 
-    @smproperty.stringvector(name='DataName', default_values='Appended Data')
+    @smproperty.xml(_helpers.getPropertyXml(name='Use extension name', command='SetUseExtensionAsName', default_values=True, help='A boolean to override the DataName and use whitespace model file extension as data name.',
+    panel_visibility="advanced"))
+    def SetUseExtensionAsName(self, flag):
+        OcTreeAppender.SetUseExtensionAsName(self, flag)
+
+    @smproperty.stringvector(name='DataName', default_values='Appended Data', panel_visibility="advanced")
     def SetDataName(self, name):
         OcTreeAppender.SetDataName(self, name)
 
@@ -256,19 +303,17 @@ class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
 
 ###############################################################################
 
-TOPO_EXTS = 'topo txt dat'
-TOPO_DESC = 'UBC 3D Topo Files'
 
 @smproxy.reader(name="PVGeoTopoReader",
-       label="PVGeo: UBC 3D Topo Files",
-       extensions=TOPO_EXTS,
-       file_description=TOPO_DESC)
+       label='PVGeo: %s'%TopoReader.__displayname__,
+       extensions=TopoReader.extensions,
+       file_description=TopoReader.description)
 class PVGeoTopoReader(TopoReader):
     def __init__(self):
         TopoReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(TOPO_EXTS, readerDescription=TOPO_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(TopoReader.extensions, readerDescription=TopoReader.description))
     def AddFileName(self, fname):
         TopoReader.AddFileName(self, fname)
 
@@ -293,19 +338,17 @@ class PVGeoTopoReader(TopoReader):
 
 ###############################################################################
 
-GRV_EXTS = 'grv txt dat'
-GRV_DESC = 'GIF Gravity Observations'
 
 @smproxy.reader(name="PVGeoGravObsReader",
-       label="PVGeo: GIF Gravity Observations",
-       extensions=GRV_EXTS,
-       file_description=GRV_DESC)
+       label='PVGeo: %s'%GravObsReader.__displayname__,
+       extensions=GravObsReader.extensions,
+       file_description=GravObsReader.description)
 class PVGeoGravObsReader(GravObsReader):
     def __init__(self):
         GravObsReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(GRV_EXTS, readerDescription=GRV_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(GravObsReader.extensions, readerDescription=GravObsReader.description))
     def AddFileName(self, fname):
         GravObsReader.AddFileName(self, fname)
 
@@ -327,23 +370,54 @@ class PVGeoGravObsReader(GravObsReader):
         GravObsReader.SetComments(self, identifier)
 
 
+###############################################################################
+
+
+@smproxy.reader(name="PVGeoGravGradReader",
+       label='PVGeo: %s'%GravGradReader.__displayname__,
+       extensions=GravGradReader.extensions,
+       file_description=GravGradReader.description)
+class PVGeoGravGradReader(GravGradReader):
+    def __init__(self):
+        GravGradReader.__init__(self)
+
+    #### Seters and Geters ####
+    @smproperty.xml(_helpers.getFileReaderXml(GravGradReader.extensions, readerDescription=GravGradReader.description))
+    def AddFileName(self, fname):
+        GravGradReader.AddFileName(self, fname)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        GravGradReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return GravGradReader.GetTimestepValues(self)
+
+    @smproperty.intvector(name="SkipRows", default_values=0, panel_visibility="advanced")
+    def SetSkipRows(self, skip):
+        GravGradReader.SetSkipRows(self, skip)
+
+    @smproperty.stringvector(name="Comments", default_values="!", panel_visibility="advanced")
+    def SetComments(self, identifier):
+        GravGradReader.SetComments(self, identifier)
+
+
 
 ###############################################################################
 
 
-MAG_EXTS = 'mag loc txt dat'
-MAG_DESC = 'GIF Magnetic Observations'
-
 @smproxy.reader(name="PVGeoMagObsReader",
-       label="PVGeo: GIF Magnetic Observations",
-       extensions=MAG_EXTS,
-       file_description=MAG_DESC)
+       label='PVGeo: %s'%MagObsReader.__displayname__,
+       extensions=MagObsReader.extensions,
+       file_description=MagObsReader.description)
 class PVGeoMagObsReader(MagObsReader):
     def __init__(self):
         MagObsReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(MAG_EXTS, readerDescription=MAG_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(MagObsReader.extensions, readerDescription=MagObsReader.description))
     def AddFileName(self, fname):
         MagObsReader.AddFileName(self, fname)
 
@@ -364,6 +438,42 @@ class PVGeoMagObsReader(MagObsReader):
     def SetComments(self, identifier):
         MagObsReader.SetComments(self, identifier)
 
+
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoGeologyMapper', label=GeologyMapper.__displayname__)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataObject"], composite_data_supported=False)
+class PVGeoGeologyMapper(GeologyMapper):
+    def __init__(self):
+        GeologyMapper.__init__(self)
+
+    #### SETTERS AND GETTERS ####
+
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    def SetInputArrayToProcess(self, idx, port, connection, field, name):
+        return GeologyMapper.SetInputArrayToProcess(self, idx, port, connection, field, name)
+
+    @smproperty.xml('''
+        <StringVectorProperty
+            panel_visibility="default"
+            name="FileName"
+            label="File Name"
+            command="SetFileName"
+            animateable="1"
+            number_of_elements="1">
+            <FileListDomain name="filename"/>
+            <Documentation>This is the file contating the mapping definitions.</Documentation>
+        </StringVectorProperty>''')
+    def SetFileName(self, fname):
+        GeologyMapper.SetFileName(self, fname)
+
+    @smproperty.stringvector(name="Delimiter", default_values=",", panel_visibility="advanced")
+    def SetDelimiter(self, identifier):
+        GeologyMapper.SetDelimiter(self, identifier)
 
 
 ###############################################################################

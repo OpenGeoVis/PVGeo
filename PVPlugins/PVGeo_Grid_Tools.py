@@ -17,7 +17,7 @@ MENU_CAT = 'PVGeo: General Grids'
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoReverseImageDataAxii', label='Reverse Image Data Axii')
+@smproxy.filter(name='PVGeoReverseImageDataAxii', label=ReverseImageDataAxii.__displayname__)
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
@@ -43,7 +43,7 @@ class PVGeoReverseImageDataAxii(ReverseImageDataAxii):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoTranslateGridOrigin', label='Translate Grid Origin')
+@smproxy.filter(name='PVGeoTranslateGridOrigin', label=TranslateGridOrigin.__displayname__)
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
@@ -64,9 +64,13 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoTableToGrid', label='Table To Grid')
+@smproxy.filter(name='PVGeoTableToGrid', label=TableToGrid.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
+    <RepresentationType view="RenderView" type="Surface With Edges" />
+    <WarnOnCreate title="Deprecation Warning">
+      This filter is deprecated and will be removed in PVGeo version 2.0, please use the `Table To Time Grid` filter instead.
+      Do you want to continue?
+    </WarnOnCreate>''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoTableToGrid(TableToGrid):
@@ -108,12 +112,12 @@ class PVGeoTableToGrid(TableToGrid):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoTableToTimeGrid', label='Table To Time Grid')
+@smproxy.filter(name='PVGeoTableToTimeGrid', label=TableToTimeGrid.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
-class PVGeoTableToGrid(TableToTimeGrid):
+class PVGeoTableToTimeGrid(TableToTimeGrid):
     def __init__(self):
         TableToTimeGrid.__init__(self)
 
@@ -154,13 +158,17 @@ class PVGeoTableToGrid(TableToTimeGrid):
         """This is critical for registering the timesteps"""
         return TableToTimeGrid.GetTimestepValues(self)
 
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Point Data', command='SetUsePoints', default_values=False, panel_visibility='advanced', help='Set whether or not to place the data on the nodes/cells of the grid. In ParaView, switching can be a bit buggy: be sure to turn the visibility of this data object OFF on the pipeline when changing bewteen nodes/cells.'))
+    def SetUsePoints(self, flag):
+        TableToTimeGrid.SetUsePoints(self, flag)
+
 
 
 
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoExtractTopography', label='Extract Topography')
+@smproxy.filter(name='PVGeoExtractTopography', label=ExtractTopography.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Topography", port_index=1)
@@ -179,26 +187,33 @@ class PVGeoExtractTopography(ExtractTopography):
 
 ###############################################################################
 
-SURF_DESC = "Surfer Grid"
-SURF_EXTS = "grd GRD"
 
 @smproxy.reader(name="PVGeoSurferGridReader",
-       label="PVGeo: Surfer Grid File Format",
-       extensions=SURF_EXTS,
-       file_description=SURF_DESC)
+       label='PVGeo: %s'%SurferGridReader.__displayname__,
+       extensions=SurferGridReader.extensions,
+       file_description=SurferGridReader.description)
 class PVGeoSurferGridReader(SurferGridReader):
     def __init__(self):
         SurferGridReader.__init__(self)
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(SURF_EXTS, readerDescription=SURF_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(SurferGridReader.extensions, readerDescription=SurferGridReader.description))
     def AddFileName(self, fname):
         SurferGridReader.AddFileName(self, fname)
 
     @smproperty.stringvector(name='DataName', default_values='Data')
     def SetDataName(self, dataName):
         SurferGridReader.SetDataName(self, dataName)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        SurferGridReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return SurferGridReader.GetTimestepValues(self)
 
 
 ###############################################################################
@@ -256,20 +271,18 @@ class PVGeoWriteCellCenterData(WriteCellCenterData):
 
 ###############################################################################
 
-ESRI_DESC = "Esri Grid"
-ESRI_EXTS = "asc dem txt"
 
 @smproxy.reader(name="PVGeoEsriGridReader",
-       label="PVGeo: Esri ASCII Grid Reader",
-       extensions=ESRI_EXTS,
-       file_description=ESRI_DESC)
+       label='PVGeo: %s'%EsriGridReader.__displayname__,
+       extensions=EsriGridReader.extensions,
+       file_description=EsriGridReader.description)
 class PVGeoEsriGridReader(EsriGridReader):
     def __init__(self):
         EsriGridReader.__init__(self)
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(ESRI_EXTS, readerDescription=ESRI_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(EsriGridReader.extensions, readerDescription=EsriGridReader.description))
     def AddFileName(self, fname):
         EsriGridReader.AddFileName(self, fname)
 
@@ -277,23 +290,31 @@ class PVGeoEsriGridReader(EsriGridReader):
     def SetDataName(self, dataName):
         EsriGridReader.SetDataName(self, dataName)
 
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        EsriGridReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return EsriGridReader.GetTimestepValues(self)
+
+
 
 ###############################################################################
 
-ESPA_DESC = "Landsat ESPA XML Metadata"
-ESPA_EXTS = "xml"
 
 @smproxy.reader(name="PVGeoLandsatReader",
-       label="PVGeo: Landsat XML Reader",
-       extensions=ESPA_EXTS,
-       file_description=ESPA_DESC)
+       label='PVGeo: %s'%LandsatReader.__displayname__,
+       extensions=LandsatReader.extensions,
+       file_description=LandsatReader.description)
 class PVGeoLandsatReader(LandsatReader):
     def __init__(self):
         LandsatReader.__init__(self)
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(ESPA_EXTS, readerDescription=ESPA_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(LandsatReader.extensions, readerDescription=LandsatReader.description))
     def AddFileName(self, fname):
         LandsatReader.AddFileName(self, fname)
 
@@ -306,7 +327,7 @@ class PVGeoLandsatReader(LandsatReader):
         command='CastDataType',
         default_values=True,
         help='A boolean to set whether to cast the data arrays so invalid points are filled nans.',
-        visibility='advanced'))
+        panel_visibility='advanced'))
     def CastDataType(self, flag):
         LandsatReader.CastDataType(self, flag)
 
@@ -314,8 +335,6 @@ class PVGeoLandsatReader(LandsatReader):
     @smproperty.xml(_helpers.getDropDownXml(name='Color Scheme', command='SetColorScheme', labels=LandsatReader.GetColorSchemeNames(), help='Set a color scheme to use.'))
     def SetColorScheme(self, scheme):
         LandsatReader.SetColorScheme(self, scheme)
-
-
 
 
 ###############################################################################

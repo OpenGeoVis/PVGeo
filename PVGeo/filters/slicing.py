@@ -75,7 +75,11 @@ class _SliceBase(FilterBase):
 
 
 class ManySlicesAlongPoints(_SliceBase):
-    """Takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at intervals of that path along the vector of that path at that point. This constructs many slices through the input dataset as a merged ``vtkMultiBlockDataSet``.
+    """Takes a series of points and a data source to be sliced. The points are
+    used to construct a path through the data source and a slice is added at
+    intervals of that path along the vector of that path at that point. This
+    constructs many slices through the input dataset as a merged
+    ``vtkMultiBlockDataSet``.
 
     Note:
         * Make sure the input data source is slice-able.
@@ -160,7 +164,8 @@ class ManySlicesAlongPoints(_SliceBase):
     #### Getters / Setters ####
 
     def SetUseNearestNbr(self, flag):
-        """Set a flag on whether to use SciPy's nearest neighbor approximation when generating the slicing path
+        """Set a flag on whether to use SciPy's nearest neighbor approximation
+        when generating the slicing path
         """
         if self.__useNearestNbr != flag:
             self.__useNearestNbr = flag
@@ -176,7 +181,11 @@ class ManySlicesAlongPoints(_SliceBase):
 ###############################################################################
 
 class SlideSliceAlongPoints(ManySlicesAlongPoints):
-    """Takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at specified locations along that path along the vector of that path at that point. This constructs one slice through the input dataset which the user can translate via a slider bar in ParaView.
+    """Takes a series of points and a data source to be sliced. The points are
+    used to construct a path through the data source and a slice is added at
+    specified locations along that path along the vector of that path at that
+    point. This constructs one slice through the input dataset which the user
+    can translate via a slider bar in ParaView.
 
     Note:
         * Make sure the input data source is slice-able.
@@ -222,7 +231,8 @@ class SlideSliceAlongPoints(ManySlicesAlongPoints):
         return 1
 
     def SetLocation(self, loc):
-        """Set the location along the input line for the slice location as a percent (0, 99)."""
+        """Set the location along the input line for the slice location as a
+        percent (0, 99)."""
         if (loc > 99 or loc < 0):
             raise _helpers.PVGeoError('Location must be given as a percentage along input path.')
         if self.__loc != loc:
@@ -358,7 +368,10 @@ class ManySlicesAlongAxis(_SliceBase):
 
 
 class SliceThroughTime(ManySlicesAlongAxis):
-    """Takes a sliceable ``vtkDataSet`` and progresses a slice of it along a given axis. The macro requires that the clip already exist in the pipeline. This is especially useful if you have many clips linked together as all will move through the seen as a result of this macro.
+    """Takes a sliceable ``vtkDataSet`` and progresses a slice of it along a
+    given axis. The macro requires that the clip already exist in the pipeline.
+    This is especially useful if you have many clips linked together as all will
+    move through the seen as a result of this macro.
     """
     __displayname__ = 'Slice Through Time'
     __category__ = 'filter'
