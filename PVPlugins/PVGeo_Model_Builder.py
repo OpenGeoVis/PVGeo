@@ -97,15 +97,15 @@ class PVGeoCreateUniformGrid(CreateUniformGrid):
 ###############################################################################
 
 
-@smproxy.source(name='PVGeoEarthSource', label=EarthSource.__displayname__)
+@smproxy.source(name='PVGeoOutlineContinents', label=OutlineContinents.__displayname__)
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
-class PVGeoEarthSource(EarthSource):
+class PVGeoOutlineContinents(OutlineContinents):
     def __init__(self):
-        EarthSource.__init__(self)
+        OutlineContinents.__init__(self)
 
     @smproperty.doublevector(name="Radius", default_values=6371.0e6)
     def SetRadius(self, radius):
-        EarthSource.SetRadius(self, radius)
+        OutlineContinents.SetRadius(self, radius)
 
 
 ###############################################################################

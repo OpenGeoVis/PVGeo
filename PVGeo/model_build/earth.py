@@ -1,5 +1,5 @@
 __all__ = [
-    'EarthSource',
+    'OutlineContinents',
     'GlobeSource',
 ]
 
@@ -14,8 +14,8 @@ from .. import _helpers
 from .. import interface
 
 
-class EarthSource(AlgorithmBase):
-    """A simple data source to produce a ``vtkEarthSource`` outlining the Earth's
+class OutlineContinents(AlgorithmBase):
+    """A simple data source to produce a ``vtkOutlineContinents`` outlining the Earth's
     continents.
     """
     __displayname__ = 'Outline Continents'
@@ -98,8 +98,7 @@ class GlobeSource(AlgorithmBase):
         cellConn = Delaunay(pos).simplices.astype(int)
         cells = vtk.vtkCellArray()
         cells.SetNumberOfCells(cellConn.shape[0])
-        cellsMat = np.concatenate((np.ones((cellConn.shape[0], 1), dtype=np.int64)*cellConn.shape[1], cellConn), axis=1).ravel()
-        cells.SetCells(cellConn.shape[0], nps.numpy_to_vtkIdTypeArray(cellsMat, deep=True))
+        cells.SetCells(cellConn.shape[0], interface.convertCellConn(cellConn))
         # Generate output
         output = vtk.vtkPolyData()
         output.SetPoints(points)

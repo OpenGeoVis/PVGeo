@@ -10,14 +10,33 @@ from PVGeo.model_build import *
 
 ###############################################################################
 
-class TestEarthSource(TestBase):
+class TestOutlineContinents(TestBase):
     """
-    Test the `EarthSource` source
+    Test the `OutlineContinents` source
     """
 
     def test_generation(self):
-        """`EarthSource`: make sure works."""
-        s = EarthSource()
+        """`OutlineContinents`: make sure works."""
+        s = OutlineContinents()
+        s.SetRadius(6000.0)
+        s.Update()
+        e = s.GetOutput()
+        self.assertIsNotNone(e)
+        self.assertTrue(isinstance(e, vtk.vtkPolyData))
+        return
+
+
+###############################################################################
+
+
+class TestGlobeSource(TestBase):
+    """
+    Test the `GlobeSource` source
+    """
+
+    def test_generation(self):
+        """`GlobeSource`: make sure works."""
+        s = GlobeSource()
         s.SetRadius(6000.0)
         s.Update()
         e = s.GetOutput()

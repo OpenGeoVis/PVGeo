@@ -16,6 +16,7 @@ __all__ = [
     'getdTypes',
     'pointsToPolyData',
     'addArraysFromDataFrame',
+    'convertCellConn',
 ]
 
 
@@ -255,3 +256,17 @@ def addArraysFromDataFrame(pdo, field, df):
         VTK_data = convertArray(df[key].values, name=key)
         _helpers.addArray(pdo, field, VTK_data)
     return pdo
+
+
+
+def convertCellConn(cellConn):
+    """Converts cell connectivity arrays to a cell matrix array that makes sense
+    for VTK cell arrays.
+    """
+    cellsMat = np.concatenate(
+            (
+                np.ones((cellConn.shape[0], 1), dtype=np.int64)*cellConn.shape[1],
+                cellConn
+            ),
+            axis=1).ravel()
+    return nps.numpy_to_vtkIdTypeArray(cellsMat, deep=True)
