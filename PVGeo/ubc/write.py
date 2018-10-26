@@ -85,7 +85,7 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
         ubcTensorMeshWriterBase.__init__(self, inputType='vtkRectilinearGrid')
 
 
-    def PerformWriteOut(self, inputDataObject, filename):
+    def PerformWriteOut(self, inputDataObject, filename, objectName):
         # Get the input data object
         grd = inputDataObject
 
@@ -133,7 +133,7 @@ class WriteImageDataToUBC(ubcTensorMeshWriterBase):
         ubcTensorMeshWriterBase.__init__(self, inputType='vtkImageData')
 
 
-    def PerformWriteOut(self, inputDataObject, filename):
+    def PerformWriteOut(self, inputDataObject, filename, objectName):
         # Get the input data object
         grd = inputDataObject
 

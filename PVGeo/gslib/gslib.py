@@ -63,7 +63,7 @@ class WriteTableToGSLib(WriterBase):
         self.__header = 'Data saved by PVGeo'
 
 
-    def PerformWriteOut(self, inputDataObject, filename):
+    def PerformWriteOut(self, inputDataObject, filename, objectName):
         # Get the input data object
         table = inputDataObject
 

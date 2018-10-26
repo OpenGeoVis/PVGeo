@@ -354,7 +354,7 @@ class WriteImageDataToSurfer(WriterBase):
         self.__inputArray = [None, None]
 
 
-    def PerformWriteOut(self, inputDataObject, filename):
+    def PerformWriteOut(self, inputDataObject, filename, objectName):
         img = inputDataObject
 
         # Check dims: make sure 2D
@@ -697,7 +697,7 @@ class WriteCellCenterData(WriterBase):
         self.__delimiter = ','
 
 
-    def PerformWriteOut(self, inputDataObject, filename):
+    def PerformWriteOut(self, inputDataObject, filename, objectName):
         # Find cell centers
         filt = vtk.vtkCellCenters()
         filt.SetInputDataObject(inputDataObject)
@@ -717,7 +717,7 @@ class WriteCellCenterData(WriterBase):
         repl = '_' if self.__delimiter != '_' else '-'
         for i, name in enumerate(keys):
             keys[i] = name.replace(self.__delimiter, repl)
-        header = ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys)
+        header = '! %s\n%s' % (objectName, ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys))
         np.savetxt(filename, arr,
                    header=header,
                    delimiter=self.__delimiter,
