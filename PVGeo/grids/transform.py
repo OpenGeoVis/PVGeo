@@ -267,18 +267,17 @@ class TableToTimeGrid(FilterBase):
 
     def _SetData(self, table):
         self.__data = dict()
-        dims = [d for d in self.__dims]
+        dims = np.array([d for d in self.__dims])
+        sd = dims.argsort()
         df = interface.tableToDataFrame(table)
         keys = df.keys().tolist()
         for k in keys:
-            # perfrom the reshape properly.
+            # perfrom the reshape properly. using the user given extent
             arr = np.reshape(df[k].values, self.__extent, order=self.__order)
             # Now order correctly for the image data spatial reference
-            for i in [0, 1, 2, 3]:
-                d = dims[i]
-                dims[d] = dims[i]
-                dims[i] = i
-                arr = arr.swapaxes(d, i)
+            #   this uses the user specified dimension definitions
+            for i in range(4):
+                arr = np.moveaxis(arr, sd[i], dims[i])
             # Now add to disctionary
             self.__data[k] = arr
         self.__needToRun = False
@@ -343,9 +342,9 @@ class TableToTimeGrid(FilterBase):
         dims = self.__dims
         nx, ny, nz = ext[dims[0]], ext[dims[1]], ext[dims[2]]
         if self.__usePointData:
-            ext = [0, nx-1, 0,ny-1, 0,nz-1]
+            ext = [0,nx-1, 0,ny-1, 0,nz-1]
         else:
-            ext = [0, nx, 0,ny, 0,nz]
+            ext = [0,nx, 0,ny, 0,nz]
         info = outInfo.GetInformationObject(0)
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
