@@ -157,7 +157,6 @@ class TestTableToTimeGrid(TestBase):
                 arr = wido.PointData[self.titles[i]]
             else:
                 arr = wido.CellData[self.titles[i]]
-            # print(arr, checkme[i])
             self.assertTrue(np.allclose(arr, checkme[i], rtol=RTOL))
 
     def test_simple(self):
@@ -187,6 +186,48 @@ class TestTableToTimeGrid(TestBase):
             checkme = [None] * len(self.arrs)
             for i in range(len(self.arrs)):
                 a = self.arrs[i].reshape((20, 2, 5, 2))[:,:,:,t]
+                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+            self.check_data_fidelity(ido, checkme, points=True)
+        return
+
+
+    def test_seplib(self):
+        """`TableToTimeGrid`: check a SEPLib ordered array"""
+        def sepit(a):
+            a = a.swapaxes(0, 2)
+            a = a.swapaxes(0, 1)
+            return a
+
+        # Use filter
+        f = TableToTimeGrid()
+        f.SetInputDataObject(self.table)
+        f.SetDimensions(1, 2, 0, 3)
+        f.SetExtent(20, 2, 5, 2)
+        f.SetSpacing(5, 5, 5)
+        f.SetOrigin(3.3, 6.0, 7)
+        f.SetUsePoints(False)
+        f.SetOrder('F')
+        for t in range(2):
+            f.UpdateTimeStep(t)
+            ido = f.GetOutput()
+            self.assertEqual(ido.GetDimensions(), (3, 6, 21))
+            checkme = [None] * len(self.arrs)
+            for i in range(len(self.arrs)):
+                a = self.arrs[i].reshape((20, 2, 5, 2), order='F')[:,:,:,t]
+                a = sepit(a)
+                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+
+            self.check_data_fidelity(ido, checkme, points=False)
+        f.SetUsePoints(True)
+        f.Update()
+        for t in range(2):
+            f.UpdateTimeStep(t)
+            ido = f.GetOutput()
+            self.assertEqual(ido.GetDimensions(), (2, 5, 20))
+            checkme = [None] * len(self.arrs)
+            for i in range(len(self.arrs)):
+                a = self.arrs[i].reshape((20, 2, 5, 2), order='F')[:,:,:,t]
+                a = sepit(a)
                 checkme[i] = a.flatten(order='F') # Order F because in XYZ format
             self.check_data_fidelity(ido, checkme, points=True)
         return
@@ -476,7 +517,7 @@ class TestCellCenterWriter(TestBase):
 
 ###############################################################################
 
-class TestGSLibReader(TestBase):
+class TestEsriGridReader(TestBase):
     """
     Test the `EsriGridReader`
     """
@@ -528,32 +569,24 @@ NODATA_value  -9999
         self.assertEqual(oz, 0.0)
         return
 
-
-# class TestGSLibReader(TestBase):
-#     """
-#     Test the `EsriGridReader` with big file
-#     """
-#
-#     ###########################################
-#
-#     def test_read(self):
-#         """`EsriGridReader`: Test the read"""
-#         reader = EsriGridReader()
-#         reader.AddFileName('/Users/bane/Documents/OpenGeoVis/Data/data-testing/Readers/ESRI/la1.dem')
-#         reader.Update()
-#         img = reader.GetOutput()
-#         # Test data object
-#         self.assertIsNotNone(img)
-#         nx, ny, nz = img.GetDimensions()
-#         self.assertEqual(nx, 7317)
-#         self.assertEqual(ny, 8160)
-#         dx, dy, dz = img.GetSpacing()
-#         self.assertTrue(3.0 == dx == dy == dz)
-#         ox, oy, oz = img.GetOrigin()
-#         self.assertTrue(abs(ox - 385440.22544667) < RTOL)
-#         self.assertTrue(abs(oy - 3729089.022415) < RTOL)
-#         self.assertEqual(oz, 0.0)
-#         return
+    # def test_read_big(self):
+    #     """`EsriGridReader`: Test the read"""
+    #     reader = EsriGridReader()
+    #     reader.AddFileName('/Users/bane/Documents/OpenGeoVis/Data/data-testing/Readers/ESRI/DEM/la1.dem')
+    #     reader.Update()
+    #     img = reader.GetOutput()
+    #     # Test data object
+    #     self.assertIsNotNone(img)
+    #     nx, ny, nz = img.GetDimensions()
+    #     self.assertEqual(nx, 7317)
+    #     self.assertEqual(ny, 8160)
+    #     dx, dy, dz = img.GetSpacing()
+    #     self.assertTrue(3.0 == dx == dy == dz)
+    #     ox, oy, oz = img.GetOrigin()
+    #     self.assertTrue(abs(ox - 385440.22544667) < RTOL)
+    #     self.assertTrue(abs(oy - 3729089.022415) < RTOL)
+    #     self.assertEqual(oz, 0.0)
+    #     return
 
 
 ###############################################################################
