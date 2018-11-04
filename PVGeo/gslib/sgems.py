@@ -6,6 +6,7 @@ __all__ = [
 __displayname__ = 'SGeMS File I/O'
 
 import numpy as np
+import pandas as pd
 import vtk
 import os
 
@@ -153,12 +154,15 @@ class WriteImageDataToSGeMS(WriterBase):
             arrs.append(interface.convertArray(vtkarr))
             titles.append(vtkarr.GetName())
 
-        header = '%d %d %d\n' % (nx, ny, nz)
-        header += '%d\n' % len(titles)
         datanames = '\n'.join(titles)
-        header += datanames
 
-        arrs = np.array(arrs).T
-        np.savetxt(filename, arrs, comments='', header=header, fmt=self.GetFormat())
+        df = pd.DataFrame(np.array(arrs).T)
+
+        with open(filename, 'w') as f:
+            f.write('%d %d %d\n' % (nx, ny, nz))
+            f.write('%d\n' % len(titles))
+            f.write(datanames)
+            f.write('\n')
+            df.to_csv(f, sep=' ', header=None, index=False, float_format=self.GetFormat())
 
         return 1
