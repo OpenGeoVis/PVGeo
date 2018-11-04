@@ -137,8 +137,11 @@ class WriteImageDataToSGeMS(WriterBase):
         # Get the input data object
         grd = inputDataObject
 
-        # Get grid dimensions
+        # Get grid dimensions and minus one becuase this defines nodes
         nx, ny, nz = grd.GetDimensions()
+        nx -= 1
+        ny -= 1
+        nz -= 1
 
         numArrs = grd.GetCellData().GetNumberOfArrays()
         arrs = []

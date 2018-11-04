@@ -192,6 +192,9 @@ class TestSGeMSGridReader(TestBase):
         self.assertEqual(truedata.GetNumberOfArrays(), testdata.GetNumberOfArrays())
         wtbl = dsa.WrapDataObject(self.GRID)
         wrd = dsa.WrapDataObject(read)
+        self.assertEqual(self.GRID.GetDimensions(), wrd.GetDimensions())
+        self.assertEqual(self.GRID.GetOrigin(), wrd.GetOrigin())
+        self.assertEqual(self.GRID.GetSpacing(), wrd.GetSpacing())
         for i in range(truedata.GetNumberOfArrays()):
             self.assertIsNotNone(wtbl.CellData[i])
             self.assertIsNotNone(wrd.CellData[i])
