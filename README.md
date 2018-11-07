@@ -1,6 +1,6 @@
 <a href="http://pvgeo.org"><img src="PVGeo_icon_horiz.png" width="35%" /></a> 
 
-Share this project: [![Tweet]( [https://img.shields.io/twitter/url/http/shields.io.svg?style=social](https://img.shields.io/twitter/url/http/shields.io.svg?style=social) )](https://twitter.com/intent/tweet?text=Check%20out%20this%20project%20for%20data%20and%20model%20visualization%20in%20ParaView&url=https://github.com/OpenGeoVis/PVGeo&hashtags=ParaView,PVGeo,visualization,geoscience)
+Share this project: [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20this%20project%20for%20data%20and%20model%20visualization%20in%20ParaView&url=https://github.com/OpenGeoVis/PVGeo&hashtags=ParaView,PVGeo,visualization,geoscience)
 
 
 The *PVGeo* Python package contains VTK powered tools for data visualization in geophysics which are wrapped for direct use within the application [ParaView by Kitware](https://www.paraview.org). These tools are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D time-varying grids.
