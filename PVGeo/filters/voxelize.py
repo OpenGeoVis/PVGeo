@@ -175,7 +175,7 @@ class VoxelizePoints(FilterBase):
 
         cells = vtk.vtkCellArray()
         cells.SetNumberOfCells(numCells)
-        cells.SetCells(numCells, nps.numpy_to_vtkIdTypeArray(cellsMat, deep=True))
+        cells.SetCells(numCells, nps.numpy_to_vtk(cellsMat, deep=True, array_type=vtk.VTK_ID_TYPE))
 
         # Set the output
         grid.SetPoints(pts)
