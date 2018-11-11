@@ -187,8 +187,10 @@ class OcTreeReader(ubcMeshReaderBase):
         CellArr.SetNumberOfCells(numCells)
         CellArr.SetCells(
             numCells,
-            nps.numpy_to_vtkIdTypeArray(
-                np.ascontiguousarray(ind_nodes_full), deep=1))
+            nps.numpy_to_vtk(np.ascontiguousarray(ind_nodes_full),
+                             deep=1,
+                             array_type=vtk.VTK_ID_TYPE)
+                        )
 
         # Construct the VTK object declared in `pdo`
         # Set the objects properties
