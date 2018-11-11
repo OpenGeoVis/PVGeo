@@ -6,6 +6,7 @@ __all__ = [
     'FilterPreserveTypeBase',
     'TwoFileReaderBase',
     'WriterBase',
+    'InterfacedBaseReader',
 ]
 
 
@@ -417,7 +418,7 @@ class TwoFileReaderBase(AlgorithmBase):
         return self.GetOutput()
 
 
-
+###############################################################################
 
 class WriterBase(AlgorithmBase):
     __displayname__ = 'Writer Base'
@@ -540,3 +541,84 @@ class WriterBase(AlgorithmBase):
         else:
             self.PerformWriteOut(inp, self.GetFileName(), None)
         return 1
+
+###############################################################################
+
+class InterfacedBaseReader(ReaderBase):
+    """A general base reader for all interfacing with librarues that already
+    have file I/O methods and VTK data object interfaces. This provides a
+    routine for using an external library to handle all I/O and produce the
+    VTK data objects."""
+    __displayname__ = 'Interfaced Base Reader'
+    def __init__(self, **kwargs):
+        ReaderBase.__init__(self, **kwargs)
+        self.__objects = []
+
+
+    # THIS IS CRUCIAL to dynamically decided output type
+    def RequestDataObject(self, request, inInfo, outInfo):
+        """Do not override. This method lets the us dynamically decide the
+        output data type based in the read meshes.
+        Note: they all have to be the same VTK type.
+        """
+        self._ReadUpFront()
+        self.FillOutputPortInformation(0, outInfo.GetInformationObject(0))
+        return 1
+
+
+    @staticmethod
+    def _readFile(filename):
+        """OVERRIDE: Reads from the the libraries format and returns an object
+        in the given library's format."""
+        raise NotImplementedError()
+
+    @staticmethod
+    def _getVTKObject(obj):
+        """OVERRIDE: Given an object in the interfaced library's type, return
+        a converted VTK data object."""
+        raise NotImplementedError()
+
+    def _ReadUpFront(self):
+        """Do not override. A predifiened routine for reading the files up front."""
+        fileNames = self.GetFileNames()
+        self.__objects = []
+        for f in fileNames:
+            mesh = self._readFile(f)
+            obj = self._getVTKObject(mesh)
+            self.__objects.append(obj)
+        # Now check that all objects in list are same type and set output type
+        typ = type(self.__objects[0])
+        if not all(isinstance(x, typ) for x in self.__objects):
+            raise _helpers.PVGeoError('Input VTK objects are not all of the same type.')
+        self.OutputType = self.__objects[0].GetClassName()
+
+    def _GetObjectAtIndex(self, idx=None):
+        if idx is not None:
+            return self.__objects[idx]
+        return self.__objects[0]
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Do not override. Used by pipeline to get data for current timestep
+        and populate the output data object.
+        """
+        # Get requested time index
+        i = _helpers.getRequestedTime(self, outInfo)
+        # Get output:
+        output = self.GetOutputData(outInfo, 0)
+        output.ShallowCopy(self._GetObjectAtIndex(idx=i))
+        return 1
+
+    def RequestInformation(self, request, inInfo, outInfo):
+        """Do not override. Used by pipeline to set extents and time info.
+        """
+        # Call parent to handle time stuff
+        ReaderBase.RequestInformation(self, request, inInfo, outInfo)
+        # Now set whole output extent
+        info = outInfo.GetInformationObject(0)
+        obj = self.__objects[0] # Get first grid to set output extents
+        # Set WHOLE_EXTENT: This is absolutely necessary
+        ext = obj.GetExtent()
+        info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
+        return 1
+
+###############################################################################

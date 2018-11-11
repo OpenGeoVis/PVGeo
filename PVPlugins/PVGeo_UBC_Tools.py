@@ -477,3 +477,27 @@ class PVGeoGeologyMapper(GeologyMapper):
 
 
 ###############################################################################
+
+
+@smproxy.reader(name="PVGeoDiscretizeMeshReader",
+       label='PVGeo: %s'%DiscretizeMeshReader.__displayname__,
+       extensions=DiscretizeMeshReader.extensions,
+       file_description=DiscretizeMeshReader.description)
+class PVGeoDiscretizeMeshReader(DiscretizeMeshReader):
+    def __init__(self):
+        DiscretizeMeshReader.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.xml(_helpers.getFileReaderXml(DiscretizeMeshReader.extensions, readerDescription=DiscretizeMeshReader.description))
+    def AddFileName(self, fname):
+        DiscretizeMeshReader.AddFileName(self, fname)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        DiscretizeMeshReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return DiscretizeMeshReader.GetTimestepValues(self)
