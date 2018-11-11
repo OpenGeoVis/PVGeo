@@ -206,6 +206,9 @@ class GeologyMapper(FilterPreserveTypeBase):
     """A filter to load a GIF geology definity file and map its values to a given
     data array in an input data object.
     """
+    __displayname__ = 'UBC Geology Mapper'
+    __category__ = 'filter'
+    description = 'PVGeo: UBC Geology Mapper'
     def __init__(self, filename=None, delimiter=',', **kwargs):
         FilterPreserveTypeBase.__init__(self, **kwargs)
         self.__filename = filename
