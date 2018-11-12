@@ -9,15 +9,16 @@ __displayname__ = 'OcTree Mesh'
 import numpy as np
 from vtk.util import numpy_support as nps
 import vtk
-import os
-import sys
-sys.path.append('/Users/bane/Documents/OpenGeoVis/Software/discretize')
-import discretize
 
 from ..base import AlgorithmBase
 from .two_file_base import ubcMeshReaderBase, ModelAppenderBase
 from .. import _helpers
 from .. import interface
+
+import sys
+sys.path.append('/Users/bane/Documents/OpenGeoVis/Software/discretize')
+with _helpers.HiddenPrints():
+    import discretize
 
 
 

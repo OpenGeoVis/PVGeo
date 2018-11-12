@@ -9,15 +9,16 @@ import pandas as pd
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
-import sys
-sys.path.append('/Users/bane/Documents/OpenGeoVis/Software/discretize')
-import discretize
-
 
 # Import Helpers:
 from .. import _helpers
 from ..base import InterfacedBaseReader
 from .. import interface
+
+import sys
+sys.path.append('/Users/bane/Documents/OpenGeoVis/Software/discretize')
+with _helpers.HiddenPrints():
+    import discretize
 
 
 class DiscretizeMeshReader(InterfacedBaseReader):

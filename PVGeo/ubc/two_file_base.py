@@ -6,6 +6,7 @@ __all__ = [
 __displayname__ = 'Base Classes'
 
 # Outside Imports:
+import os
 import numpy as np
 import pandas as pd
 import vtk
@@ -28,7 +29,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             nOutputPorts=nOutputPorts, outputType=outputType,
             **kwargs)
         self.__dataname = 'Data'
-        self.__useExtName = True # flag on whether or not to use the model file
+        self.__useFileName = True # flag on whether or not to use the model file
                                  # extension as data name
         # For keeping track of type (2D vs 3D)
         self.__sizeM = None
@@ -146,25 +147,24 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             raise _helpers.PVGeoError(str(fe))
         return data
 
-    def SetUseExtensionAsName(self, flag):
-        if self.__useExtName != flag:
-            self.__useExtName = flag
+    def SetUseFileName(self, flag):
+        if self.__useFileName != flag:
+            self.__useFileName = flag
             self.Modified(readAgainMesh=False, readAgainModels=False)
 
     def SetDataName(self, name):
         if name == '':
-            self.__useExtName = True
+            self.__useFileName = True
             self.Modified(readAgainMesh=False, readAgainModels=False)
         elif self.__dataname != name:
             self.__dataname = name
-            self.__useExtName = False
+            self.__useFileName = False
             self.Modified(readAgainMesh=False, readAgainModels=False)
 
     def GetDataName(self):
-        if self.__useExtName:
+        if self.__useFileName:
             mname = self.GetModelFileNames(idx=0)
-            ext = mname.split('.')[-1]
-            return ext
+            return os.path.basename(mname)
         return self.__dataname
 
 
@@ -185,7 +185,7 @@ class ModelAppenderBase(base.AlgorithmBase):
             nOutputPorts=1, outputType=outputType)
         self._modelFileNames = kwargs.get('modelfiles', [])
         self.__dataname = kwargs.get('dataname', 'Appended Data')
-        self.__useExtName = True
+        self.__useFileName = True
         self._models = []
         self.__needToRead = True
         self._is3D = None
@@ -308,23 +308,22 @@ class ModelAppenderBase(base.AlgorithmBase):
             return self._modelFileNames
         return self._modelFileNames[idx]
 
-    def SetUseExtensionAsName(self, flag):
-        if self.__useExtName != flag:
-            self.__useExtName = flag
+    def SetUseFileName(self, flag):
+        if self.__useFileName != flag:
+            self.__useFileName = flag
             self.Modified(readAgain=False)
 
     def SetDataName(self, name):
         if name == '':
-            self.__useExtName = True
+            self.__useFileName = True
             self.Modified(readAgain=False)
         elif self.__dataname != name:
             self.__dataname = name
-            self.__useExtName = False
+            self.__useFileName = False
             self.Modified(readAgain=False)
 
     def GetDataName(self):
-        if self.__useExtName:
+        if self.__useFileName:
             mname = self.GetModelFileNames(idx=0)
-            ext = mname.split('.')[-1]
-            return ext
+            return os.path.basename(mname)
         return self.__dataname

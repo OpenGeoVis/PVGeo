@@ -443,7 +443,7 @@ class TestOcTreeMeshReader(ubcMeshTesterBase):
         output = f.GetOutput()
         # remember that 2 arrays is added by the reader
         self.assertEqual(output.GetCellData().GetNumberOfArrays(), 4)
-        self.assertEqual(output.GetCellData().GetArrayName(3), 'mod') # use file extension as name
+        self.assertEqual(output.GetCellData().GetArrayName(3), os.path.basename(self.modelFileNames[1])) # use file as name
         self.assertEqual(len(f.GetTimestepValues()), self.nt-1)
         return
 
