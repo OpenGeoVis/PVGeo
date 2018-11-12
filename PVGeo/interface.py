@@ -18,6 +18,7 @@ __all__ = [
     'addArraysFromDataFrame',
     'convertCellConn',
     'getArray',
+    'getDataDict',
 ]
 
 
@@ -281,3 +282,13 @@ def getArray(dataset, name, vtkObj=False):
     if vtkObj:
         return arr
     return convertArray(arr)
+
+
+def getDataDict(dataset, field='cell'):
+    """Given an input dataset, this will return all the arrays in that object's
+    cell/point/field/row data as named NumPy arrays in a dictionary.
+    """
+    data = {}
+    for key in _helpers.getAllArrayNames(dataset, field):
+        data[key] = np.array(_helpers.getNumPyArray(dataset, field, key))
+    return data
