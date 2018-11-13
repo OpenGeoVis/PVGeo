@@ -252,10 +252,11 @@ class FilterPreserveTypeBase(FilterBase):
     """
     __displayname__ = 'Filter Preserve Type Base'
     __category__ = 'base'
-    def __init__(self, **kwargs):
+    def __init__(self, nInputPorts=1, **kwargs):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkDataObject',
+            nInputPorts=nInputPorts, inputType='vtkDataObject',
             nOutputPorts=1, **kwargs)
+        self._preserveTypeFromInputPort = 0
 
     # THIS IS CRUCIAL to preserve data type through filter
     def RequestDataObject(self, request, inInfo, outInfo):
@@ -263,7 +264,7 @@ class FilterPreserveTypeBase(FilterBase):
         know that the algorithm will dynamically decide the output data type
         based in the input data type.
         """
-        self.OutputType = self.GetInputData(inInfo, 0, 0).GetClassName()
+        self.OutputType = self.GetInputData(inInfo, self._preserveTypeFromInputPort, 0).GetClassName()
         self.FillOutputPortInformation(0, outInfo.GetInformationObject(0))
         return 1
 
