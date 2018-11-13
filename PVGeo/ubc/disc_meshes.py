@@ -2,21 +2,13 @@ __all__ = [
     'DiscretizeMeshReader',
 ]
 
-__displayname__ = 'General Tools'
-
-import numpy as np
-import pandas as pd
-import vtk
-from vtk.numpy_interface import dataset_adapter as dsa
-
+__displayname__ = 'Discretize'
 
 # Import Helpers:
 from .. import _helpers
 from ..base import InterfacedBaseReader
 from .. import interface
 
-import sys
-sys.path.append('/Users/bane/Documents/OpenGeoVis/Software/discretize')
 with _helpers.HiddenPrints():
     import discretize
 
@@ -28,7 +20,7 @@ class DiscretizeMeshReader(InterfacedBaseReader):
     __displayname__ = 'Discretize Mesh Reader'
     description = 'Serialized Discretize Meshes'
     def __init__(self, **kwargs):
-        InterfacedBaseReader.__init__(self, outputType='vtkStructuredGrid', **kwargs)
+        InterfacedBaseReader.__init__(self, **kwargs)
 
     @staticmethod
     def _readFile(filename):

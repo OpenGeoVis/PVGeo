@@ -15,8 +15,6 @@ from .two_file_base import ubcMeshReaderBase, ModelAppenderBase
 from .. import _helpers
 from .. import interface
 
-import sys
-sys.path.append('/Users/bane/Documents/OpenGeoVis/Software/discretize')
 with _helpers.HiddenPrints():
     import discretize
 
