@@ -287,6 +287,10 @@ class PVGeoNormalizeArray(NormalizeArray):
     def SetTakeAbsoluteValue(self, flag):
         NormalizeArray.SetTakeAbsoluteValue(self, flag)
 
+    @smproperty.doublevector(name="Shifter", default_values=0.0)
+    def SetShift(self, sft):
+        NormalizeArray.SetShift(self, sft)
+
 
 ###############################################################################
 
