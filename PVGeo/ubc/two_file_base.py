@@ -9,9 +9,8 @@ __displayname__ = 'Base Classes'
 import numpy as np
 import pandas as pd
 import vtk
-# Import helpers
-from .. import base
-from .. import _helpers
+
+from .. import _helpers, base
 
 ###############################################################################
 

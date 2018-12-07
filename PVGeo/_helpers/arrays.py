@@ -10,9 +10,10 @@ __all__ = [
     'searchForArray',
 ]
 
-import vtk
 import numpy as np
+import vtk
 from vtk.util import numpy_support as nps
+
 from . import errors as _helpers
 
 

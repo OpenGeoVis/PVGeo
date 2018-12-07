@@ -13,17 +13,13 @@ __all__ = [
 
 __displayname__ = 'Point/Line Sets'
 
-import vtk
 import numpy as np
 import pandas as pd
-# TODO: internal: import pyproj
+import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-# Import Helpers:
+
+from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase
-from .. import _helpers
-from .. import interface
-
-
 
 ###############################################################################
 #---- Cell Connectivity ----#

@@ -7,15 +7,14 @@ __all__ = [
 
 __displayname__ = 'Math Operations'
 
-import vtk
-import numpy as np
-from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
-# Import Helpers:
+
+import numpy as np
+import vtk
+from vtk.numpy_interface import dataset_adapter as dsa
+
+from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase
-from .. import _helpers
-from .. import interface
-# NOTE: internal import - from scipy.spatial import cKDTree
 
 
 

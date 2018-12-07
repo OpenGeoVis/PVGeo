@@ -8,7 +8,6 @@ __all__ = [
 import numpy as np
 
 
-
 def _calculateTimeRange(nt, dt=1.0):
     """Discretizes time range accoridng to step size ``dt`` in seconds
     """

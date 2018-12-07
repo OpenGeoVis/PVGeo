@@ -6,13 +6,12 @@ __all__ = [
 
 __displayname__ = 'Grids'
 
-import vtk
 import numpy as np
+import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-# Import Helpers:
+
+from .. import _helpers, interface
 from ..base import AlgorithmBase
-from .. import _helpers
-from .. import interface
 
 
 def _makeSpatialCellData(nx, ny, nz):

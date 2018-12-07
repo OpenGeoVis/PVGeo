@@ -6,20 +6,22 @@ __all__ = [
 
 __displayname__ = 'OcTree Mesh'
 
-import numpy as np
-from vtk.util import numpy_support as nps
-import vtk
 import os
 import sys
+
+import numpy as np
+import vtk
+from vtk.util import numpy_support as nps
+
+from .. import _helpers, interface
+from ..base import AlgorithmBase
+from .two_file_base import ModelAppenderBase, ubcMeshReaderBase
+
 if sys.version_info < (3,):
     from StringIO import StringIO
 else:
     from io import StringIO
 
-from ..base import AlgorithmBase
-from .two_file_base import ubcMeshReaderBase, ModelAppenderBase
-from .. import _helpers
-from .. import interface
 
 
 

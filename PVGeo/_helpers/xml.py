@@ -13,6 +13,7 @@ __all__ = [
 
 from . import errors as _helpers
 
+
 def getPythonPathProperty():
     """Get the XML content for setting the Python path when making a ParaView
     plugin.

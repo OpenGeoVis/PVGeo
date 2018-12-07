@@ -7,15 +7,15 @@ __all__ = [
 
 __displayname__ = 'Slicing'
 
-import vtk
-import numpy as np
-from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
-# Import Helpers:
+
+import numpy as np
+import vtk
+from scipy.spatial import cKDTree
+from vtk.numpy_interface import dataset_adapter as dsa
+
+from .. import _helpers, interface
 from ..base import FilterBase
-from .. import _helpers
-from .. import interface
-# NOTE: internal import - from scipy.spatial import cKDTree
 
 
 
@@ -111,7 +111,6 @@ class ManySlicesAlongPoints(_SliceBase):
         points = np.array(wpdi.Points) # New NumPy array of points so we dont destroy input
         numPoints = pdipts.GetNumberOfPoints()
         if self.__useNearestNbr:
-            from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
             tree = cKDTree(points)
             ptsi = tree.query(points[0], k=numPoints)[1]
         else:

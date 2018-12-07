@@ -10,13 +10,11 @@ __displayname__ = 'Table Operations'
 import numpy as np
 import pandas as pd
 import vtk
-from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
-# Import Helpers:
-from ..base import FilterBase
-from .. import _helpers
-from .. import interface
+from vtk.util import numpy_support as nps
 
+from .. import _helpers, interface
+from ..base import FilterBase
 
 ###############################################################################
 

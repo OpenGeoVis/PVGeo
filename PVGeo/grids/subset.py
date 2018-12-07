@@ -4,14 +4,16 @@ __all__ = [
 
 __displayname__ = 'Subsetting'
 
-import vtk
-import numpy as np
-from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
-# Import Helpers:
+
+import numpy as np
+import vtk
+from scipy.spatial import cKDTree
+from vtk.numpy_interface import dataset_adapter as dsa
+
+from .. import _helpers, interface
 from ..base import FilterBase
-from .. import _helpers
-from .. import interface
+
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
@@ -66,7 +68,6 @@ class ExtractTopography(FilterBase):
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
-        from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
         # Get input/output of Proxy
         igrid = self.GetInputData(inInfo, 0, 0) # Port 0: grid
         topo = self.GetInputData(inInfo, 1, 0) # Port 1: topography

@@ -9,8 +9,8 @@ __all__ = [
 
 
 import os
-from . import errors as _helpers
 
+from . import errors as _helpers
 
 
 def cleanDataNm(dataNm, FileName):

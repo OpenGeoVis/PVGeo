@@ -12,17 +12,22 @@ __displayname__ = 'File I/O'
 
 # NOTE: Surfer no data value: 1.70141E+38
 
-import vtk
-import numpy as np
-from vtk.numpy_interface import dataset_adapter as dsa
-import pandas as pd
+import re
+import struct
+import sys
 import warnings
+
+import numpy as np
+import pandas as pd
+import properties
+import vtk
+from vtk.numpy_interface import dataset_adapter as dsa
+
 import espatools
 
-import sys
-import struct
-import properties
-import re
+from .. import _helpers, interface
+from ..base import ReaderBase, ReaderBaseBase, WriterBase
+from ..readers import DelimitedTextReader
 
 if sys.version_info < (3,):
     from StringIO import StringIO
@@ -30,11 +35,6 @@ else:
     from io import StringIO
 
 
-# Import Helpers:
-from ..base import WriterBase, ReaderBase, ReaderBaseBase
-from ..readers import DelimitedTextReader
-from .. import _helpers
-from .. import interface
 
 
 ################################################################################

@@ -7,18 +7,14 @@ __all__ = [
 
 __displayname__ = 'Transform'
 
-import vtk
-from vtk.numpy_interface import dataset_adapter as dsa
-import numpy as np
 import warnings
 
-# Import Helpers:
+import numpy as np
+import vtk
+from vtk.numpy_interface import dataset_adapter as dsa
+
+from .. import _helpers, interface
 from ..base import FilterBase
-from .. import _helpers
-from .. import interface
-
-
-
 
 ###############################################################################
 

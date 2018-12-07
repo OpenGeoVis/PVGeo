@@ -6,19 +6,19 @@ __all__ = [
 
 __displayname__ = 'Delimited File I/O'
 
+import sys
+
 import numpy as np
 import pandas as pd
 
-import sys
+from .. import _helpers, interface
+from ..base import ReaderBase
+
 if sys.version_info < (3,):
     from StringIO import StringIO
 else:
     from io import StringIO
 
-# Import Helpers:
-from ..base import ReaderBase
-from .. import _helpers
-from .. import interface
 
 
 class DelimitedTextReader(ReaderBase):
