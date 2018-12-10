@@ -150,7 +150,7 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
     def SetComments(self, identifier):
         DelimitedTextReader.SetComments(self, identifier)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Has Titles', command='SetHasTitles', default_values=True, help='A boolean for if the delimited file has header titles for the data arrays.'))
+    @smproperty.xml(_helpers.getPropertyXml(name='Has Titles', command='SetHasTitles', default_values=False, help='A boolean for if the delimited file has header titles for the data arrays.'))
     def SetHasTitles(self, flag):
         DelimitedTextReader.SetHasTitles(self, flag)
 
