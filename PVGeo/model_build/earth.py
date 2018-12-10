@@ -5,13 +5,12 @@ __all__ = [
 
 import numpy as np
 import pandas as pd
-from scipy.spatial import Delaunay
 import vtk
+from scipy.spatial import Delaunay
 from vtk.util import numpy_support as nps
-# Import Helpers:
+
+from .. import _helpers, interface
 from ..base import AlgorithmBase
-from .. import _helpers
-from .. import interface
 
 
 class OutlineContinents(AlgorithmBase):

@@ -5,14 +5,13 @@ __all__ = [
 
 __displayname__ = 'Writers'
 
-import numpy as np
-import vtk
 import os
 
+import numpy as np
+import vtk
 
+from .. import _helpers, interface
 from ..base import WriterBase
-from .. import _helpers
-from .. import interface
 
 
 class ubcTensorMeshWriterBase(WriterBase):

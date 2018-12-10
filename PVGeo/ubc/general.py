@@ -13,12 +13,9 @@ import pandas as pd
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
-# Import Helpers:
-from ..readers import DelimitedPointsReaderBase
-from .. import _helpers
+from .. import _helpers, interface
 from ..base import FilterPreserveTypeBase
-from .. import interface
-
+from ..readers import DelimitedPointsReaderBase
 
 ################################################################################
 

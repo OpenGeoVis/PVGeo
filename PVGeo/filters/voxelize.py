@@ -12,15 +12,14 @@ __displayname__ = 'Voxelize'
 
 import numpy as np
 import vtk
-from vtk.util import keys
 from vtk.numpy_interface import dataset_adapter as dsa
+from vtk.util import keys
 from vtk.util import numpy_support as nps
 
+from .. import _helpers, interface
 from ..base import FilterBase
-from .. import _helpers
 from ..version import checkNumpy
 from .xyz import RotationTool
-from .. import interface
 
 ###############################################################################
 

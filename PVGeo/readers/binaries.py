@@ -8,7 +8,7 @@ __displayname__ = 'Binary/Serialized File I/O'
 import numpy as np
 import vtk
 import warnings
-# Import Helpers:
+
 from .. import _helpers
 from ..base import ReaderBase
 from .. import interface

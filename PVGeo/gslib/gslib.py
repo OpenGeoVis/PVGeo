@@ -8,7 +8,7 @@ __displayname__ = 'GSLib/GeoEAS File I/O'
 import numpy as np
 import vtk
 import os
-# Import Helpers:
+
 from ..readers import DelimitedTextReader
 from ..base import WriterBase
 from .. import _helpers

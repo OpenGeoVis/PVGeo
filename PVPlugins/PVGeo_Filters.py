@@ -287,6 +287,10 @@ class PVGeoNormalizeArray(NormalizeArray):
     def SetTakeAbsoluteValue(self, flag):
         NormalizeArray.SetTakeAbsoluteValue(self, flag)
 
+    @smproperty.doublevector(name="Shifter", default_values=0.0)
+    def SetShift(self, sft):
+        NormalizeArray.SetShift(self, sft)
+
 
 ###############################################################################
 
@@ -666,5 +670,10 @@ class PVGeoArraysToRGBA(ArraysToRGBA):
 class PVGeoAppendTableToCellData(AppendTableToCellData):
     def __init__(self):
         AppendTableToCellData.__init__(self)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return AppendTableToCellData.GetTimestepValues(self)
 
 ###############################################################################

@@ -11,13 +11,11 @@ __displayname__ = 'Table Operations'
 import numpy as np
 import pandas as pd
 import vtk
-from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
-# Import Helpers:
-from ..base import FilterBase, FilterPreserveTypeBase
-from .. import _helpers
-from .. import interface
+from vtk.util import numpy_support as nps
 
+from .. import _helpers, interface
+from ..base import FilterBase,  FilterPreserveTypeBase
 
 ###############################################################################
 
@@ -331,13 +329,30 @@ class SplitTableOnArray(FilterBase):
 class AppendTableToCellData(FilterPreserveTypeBase):
     """Takes two inputs, a dataset to preserve and a table of data, where the
     data in the table is appended to the CellData of the input dataset.
+    The 0th port is the dataset to preserve and the 1st port is a table whos rows
+    will be appended as CellData to the 0th port. The number of rows in the table
+    MUST match the number of cells in the input dataset.
     """
     __displayname__ = 'Append Table to Cell Data'
     __category__ = 'filter'
     def __init__(self):
         FilterPreserveTypeBase.__init__(self, nInputPorts=2)
-        # NOTE: port 0 is the data set to preserve
-        # Parameters... none
+        self._preservePort = 0 # ensure port 0's type is preserved
+        self.__timesteps = None
+
+
+    def _UpdateTimeSteps(self):
+        """For internal use only: appropriately sets the timesteps.
+        """
+        # Use the inputs' timesteps: this merges the timesteps values
+        ts0 = _helpers.getInputTimeSteps(self, port=0)
+        if ts0 is None: ts0 = np.array([])
+        ts1 = _helpers.getInputTimeSteps(self, port=1)
+        if ts1 is None: ts1 = np.array([])
+        tsAll = np.unique(np.concatenate((ts0, ts1), 0))
+        # Use both inputs' time steps
+        self.__timesteps = _helpers.updateTimeSteps(self, tsAll, explicit=True)
+        return 1
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -361,8 +376,29 @@ class AppendTableToCellData(FilterPreserveTypeBase):
             pdo.GetCellData().AddArray(arr)
         return 1
 
+    def RequestInformation(self, request, inInfo, outInfo):
+        self._UpdateTimeSteps()
+        return 1
+
     def Apply(self, dataset, table):
+        """Update the algorithm and get the output data object
+
+        Args:
+            dataset (vtkDataSet): Any dataset with CellData
+            table (vtkTable): table of data values that will be appended to
+                ``dataset``'s CellData
+        Return:
+            vtkDataSet: The appended dataset as a new object
+        """
         self.SetInputDataObject(0, dataset)
         self.SetInputDataObject(1, table)
         self.Update()
         return self.GetOutput()
+
+    def GetTimestepValues(self):
+        """Use this in ParaView decorator to register timesteps.
+        """
+        # if unset, force at least one attempt to set the timesteps
+        if self.__timesteps is None: self._UpdateTimeSteps()
+        # self.__timesteps should already be of type list
+        return self.__timesteps if self.__timesteps is not None else None

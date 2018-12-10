@@ -7,15 +7,14 @@ __all__ = [
 
 __displayname__ = 'Math Operations'
 
-import vtk
-import numpy as np
-from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
-# Import Helpers:
+
+import numpy as np
+import vtk
+from vtk.numpy_interface import dataset_adapter as dsa
+
+from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase
-from .. import _helpers
-from .. import interface
-# NOTE: internal import - from scipy.spatial import cKDTree
 
 
 
@@ -278,6 +277,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         if isinstance(op, (str, int)):
             op = self.GetNormalization(op)
         self.__normalization = op
+        self.__shift = 0.0
 
 
     #### Array normalization methods ####
@@ -371,6 +371,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         # Take absolute value?
         if self.__absolute:
             arr = np.abs(arr)
+        arr += self.__shift
         # Perform normalization scheme
         arr = self.__normalization(arr)
         # Apply the multiplier
@@ -436,7 +437,6 @@ class NormalizeArray(FilterPreserveTypeBase):
             self.__multiplier = val
             self.Modified()
 
-
     def GetMultiplier(self):
         """Return the set multiplier/scalar
         """
@@ -449,7 +449,6 @@ class NormalizeArray(FilterPreserveTypeBase):
         if self.__newName != name:
             self.__newName = name
             self.Modified()
-
 
     def GetNewArrayName(self):
         return self.__newName
@@ -478,6 +477,12 @@ class NormalizeArray(FilterPreserveTypeBase):
             norm = NormalizeArray.GetNormalization(norm)
         if self.__normalization != norm:
             self.__normalization = norm
+            self.Modified()
+
+    def SetShift(self, sft):
+        """Set a static shifter to the input data array"""
+        if self.__shift != sft:
+            self.__shift = sft
             self.Modified()
 
 

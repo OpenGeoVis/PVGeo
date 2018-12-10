@@ -31,7 +31,6 @@ import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 from vtk.util import numpy_support as nps
 
-# Import helpers
 from . import _helpers
 
 __displayname__ = 'Interface'

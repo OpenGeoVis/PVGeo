@@ -1,9 +1,12 @@
 __all__ = ['camera']
 
-import numpy as np
 import os
 import pickle
-from paraview.simple import RenderAllViews, GetActiveCamera, WriteImage
+
+import numpy as np
+
+from paraview.simple import GetActiveCamera, RenderAllViews, WriteImage
+
 
 class camera:
     """An object to store a single camera location/view. You can make a list/dict of these objects to save interesting views for your project. This object saves just a few parameters about the camera so that it can easily be reconstructed.

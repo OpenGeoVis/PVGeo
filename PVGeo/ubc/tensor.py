@@ -6,20 +6,22 @@ __all__ = [
 
 __displayname__ = 'Tensor Mesh'
 
-import numpy as np
-import vtk
 import os
-import pandas as pd
 import sys
+
+import numpy as np
+import pandas as pd
+import vtk
+
+from .. import _helpers, interface
+from ..base import AlgorithmBase
+from .two_file_base import ModelAppenderBase, ubcMeshReaderBase
+
 if sys.version_info < (3,):
     from StringIO import StringIO
 else:
     from io import StringIO
 
-from ..base import AlgorithmBase
-from .two_file_base import ubcMeshReaderBase, ModelAppenderBase
-from .. import _helpers
-from .. import interface
 
 
 
