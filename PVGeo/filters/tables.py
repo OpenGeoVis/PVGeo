@@ -335,7 +335,21 @@ class AppendTableToCellData(FilterPreserveTypeBase):
     def __init__(self):
         FilterPreserveTypeBase.__init__(self, nInputPorts=2)
         # NOTE: port 0 is the data set to preserve
-        # Parameters... none
+        self.__timesteps = None
+
+
+    def _UpdateTimeSteps(self):
+        """For internal use only: appropriately sets the timesteps.
+        """
+        # Use the inputs' timesteps: this merges the timesteps values
+        ts0 = _helpers.getInputTimeSteps(self, port=0)
+        if ts0 is None: ts0 = np.array([])
+        ts1 = _helpers.getInputTimeSteps(self, port=1)
+        if ts1 is None: ts1 = np.array([])
+        tsAll = np.unique(np.concatenate((ts0, ts1), 0))
+        self.__timesteps = _helpers.updateTimeSteps(self, tsAll, explicit=True)
+        # Use input's time steps which is set by pipeline
+        return 1
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -359,8 +373,20 @@ class AppendTableToCellData(FilterPreserveTypeBase):
             pdo.GetCellData().AddArray(arr)
         return 1
 
+    def RequestInformation(self, request, inInfo, outInfo):
+        self._UpdateTimeSteps()
+        return 1
+
     def Apply(self, dataset, table):
         self.SetInputDataObject(0, dataset)
         self.SetInputDataObject(1, table)
         self.Update()
         return self.GetOutput()
+
+    def GetTimestepValues(self):
+        """Use this in ParaView decorator to register timesteps.
+        """
+        # if unset, force at least one attempt to set the timesteps
+        if self.__timesteps is None: self._UpdateTimeSteps()
+        # self.__timesteps should already be of type list
+        return self.__timesteps if self.__timesteps is not None else None

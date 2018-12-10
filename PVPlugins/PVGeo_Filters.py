@@ -671,4 +671,9 @@ class PVGeoAppendTableToCellData(AppendTableToCellData):
     def __init__(self):
         AppendTableToCellData.__init__(self)
 
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return AppendTableToCellData.GetTimestepValues(self)
+
 ###############################################################################

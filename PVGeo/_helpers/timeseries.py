@@ -5,6 +5,7 @@ __all__ = [
 ]
 
 import numpy as np
+import collections
 
 
 def _calculateTimeRange(nt, dt=1.0):
@@ -13,7 +14,7 @@ def _calculateTimeRange(nt, dt=1.0):
     return np.arange(0,nt*dt,dt, dtype=float)
 
 
-def updateTimeSteps(algorithm, nt, dt):
+def updateTimeSteps(algorithm, nt, dt=1.0, explicit=False):
     """Handles setting up the timesteps on on the pipeline for a file series reader.
 
     Args:
@@ -22,18 +23,29 @@ def updateTimeSteps(algorithm, nt, dt):
         nt (int or list): Number of timesteps (Pass a list to use length of
             that list)
         dt (float): The discrete value in seconds for the time step.
+        explicit (boolean): if true, this will treat the nt argument as the exact
+            timestep values to use
 
     Return:
         numpy.array : Returns the timesteps as an array
     """
-    if isinstance(nt, list):
-        nt = len(nt)
+    if explicit and isinstance(nt, collections.Iterable):
+        timesteps = nt
+    else:
+        if isinstance(nt, collections.Iterable):
+            nt = len(nt)
+        timesteps = _calculateTimeRange(nt, dt=1.0)
+    if len(timesteps) < 1:
+        # NOTE: we may want to raise a warning here on the dev side.
+        #       if developing a new algorithm that uses this, you may want to
+        #       know exactly when this failse to update
+        #'updateTimeSteps() is not updating because passed time step values are NULL.'
+        return None
     executive = algorithm.GetExecutive()
     oi = executive.GetOutputInformation(0)
     #oi = outInfo.GetInformationObject(0)
     oi.Remove(executive.TIME_STEPS())
     oi.Remove(executive.TIME_RANGE())
-    timesteps = _calculateTimeRange(nt, dt=1.0)
     for t in timesteps:
         oi.Append(executive.TIME_STEPS(), t)
     oi.Append(executive.TIME_RANGE(), timesteps[0])
