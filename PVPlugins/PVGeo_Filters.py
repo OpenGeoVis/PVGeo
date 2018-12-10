@@ -287,6 +287,10 @@ class PVGeoNormalizeArray(NormalizeArray):
     def SetTakeAbsoluteValue(self, flag):
         NormalizeArray.SetTakeAbsoluteValue(self, flag)
 
+    @smproperty.doublevector(name="Shifter", default_values=0.0)
+    def SetShift(self, sft):
+        NormalizeArray.SetShift(self, sft)
+
 
 ###############################################################################
 
@@ -652,5 +656,19 @@ class PVGeoArraysToRGBA(ArraysToRGBA):
     @smproperty.doublevector(name="Mask", default_values=-9999.0)
     def SetMaskValue(self, val):
         ArraysToRGBA.SetMaskValue(self, val)
+
+###############################################################################
+
+
+# Append Table to Cell Data
+@smproxy.filter(name='PVGeoAppendTableToCellData', label=AppendTableToCellData.__displayname__)
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+@smproperty.input(name="Table", port_index=1)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
+@smproperty.input(name="DataSet", port_index=0)
+@smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
+class PVGeoAppendTableToCellData(AppendTableToCellData):
+    def __init__(self):
+        AppendTableToCellData.__init__(self)
 
 ###############################################################################

@@ -6,14 +6,14 @@ __all__ = [
     'getVTKArray',
     'addArray',
     'getSelectedArray',
-    #'GetDecimalPlaces',
     'searchForArray',
+    'getAllArrayNames',
 ]
 
 import numpy as np
 import vtk
 from vtk.util import numpy_support as nps
-
+from vtk.numpy_interface import dataset_adapter as dsa
 from . import errors as _helpers
 
 
@@ -49,15 +49,20 @@ def getFieldIdByName(field):
     """Get the field ID by name."""
     fields = dict(
         point=0,
+        pt=0,
+        p=0,
         cell=1,
+        c=1,
         field=2,
+        f=2,
         row=6,
+        r=6,
     )
     field = field.lower()
-    for k in fields.keys():
-        if k in field:
-            return fields[k]
-    raise _helpers.PVGeoError('Field association not defined. Try inputing `point`, `cell`, `field`, or `row`.')
+    try:
+        return fields[field]
+    except KeyError:
+        raise _helpers.PVGeoError('Field association not defined. Try inputing `point`, `cell`, `field`, or `row`.')
 
 
 
@@ -105,8 +110,8 @@ def getNumPyArray(wpdi, field, name):
     """Grabs an array from vtkDataObject given its name and field association.
 
     Args:
-        wpdi  (wrapped vtkDataObject) : the input data object wrapped using vtk
-            dataset adapter
+        wpdi  (wrapped vtkDataObject) : the input data object wrapped using
+            vtk dataset adapter
         field (int or str) : the field type id or name
         name (str) : the name of the input array for the given index
 
@@ -115,6 +120,8 @@ def getNumPyArray(wpdi, field, name):
     """
     if isinstance(field, str):
         field = getFieldIdByName(field)
+    if not isinstance(wpdi, vtk.numpy_interface.dataset_adapter.DataObject):
+        wpdi = dsa.WrapDataObject(wpdi)
     # Point Data
     if field == 0:
         arr = wpdi.PointData[name]
@@ -227,7 +234,7 @@ def _getData(pdi, field):
         else:
             raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
     except AttributeError:
-        raise _helpers.PVGeoError('Input data does not have field type `%d`.' % field)
+        raise _helpers.PVGeoError('Input data does not have field type `{}`.'.format(field))
     return data
 
 
@@ -253,17 +260,6 @@ def getArray(pdi, field, name):
     data = _getData(pdi, field)
     return data.GetArray(name)
 
-# def GetDecimalPlaces(arr, barrier=6):
-#     arr = np.array(arr.flatten(), dtype=str)
-#     num = 0
-#     for val in arr:
-#         n = len(str(val).split('.')[1])
-#         if n > num:
-#             num = n
-#     # Now do not let exceed barrier
-#     if num > barrier: return barrier
-#     return num
-
 
 def searchForArray(pdi, name):
 
@@ -284,5 +280,29 @@ def searchForArray(pdi, name):
             # We found it!
             return arr, field
 
-    raise _helpers.PVGeoError('Array `%s` not found in input data.' % name)
+    raise _helpers.PVGeoError('Array `{}` not found in input data.'.format(name))
+    return None
+
+
+def getAllArrayNames(dataset, field):
+    if isinstance(field, str):
+        field = getFieldIdByName(field)
+    if not isinstance(dataset, vtk.numpy_interface.dataset_adapter.DataObject):
+        wpdi = dsa.WrapDataObject(dataset)
+    else:
+        wpdi = dataset
+    # Point Data
+    if field == 0:
+        return wpdi.PointData.keys()
+    # Cell Data:
+    elif field == 1:
+        return wpdi.CellData.keys()
+    # Field Data:
+    elif field == 2:
+        return wpdi.FieldData.keys()
+    # Row Data:
+    elif field == 6:
+        return wpdi.RowData.keys()
+    else:
+        raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
     return None

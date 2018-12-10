@@ -3,6 +3,7 @@ __all__ = [
     'ReshapeTable',
     'ExtractArray',
     'SplitTableOnArray',
+    'AppendTableToCellData',
 ]
 
 __displayname__ = 'Table Operations'
@@ -14,7 +15,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 from vtk.util import numpy_support as nps
 
 from .. import _helpers, interface
-from ..base import FilterBase
+from ..base import FilterBase,  FilterPreserveTypeBase
 
 ###############################################################################
 
@@ -323,3 +324,43 @@ class SplitTableOnArray(FilterBase):
         return self.GetOutput()
 
 ###############################################################################
+
+
+class AppendTableToCellData(FilterPreserveTypeBase):
+    """Takes two inputs, a dataset to preserve and a table of data, where the
+    data in the table is appended to the CellData of the input dataset.
+    """
+    __displayname__ = 'Append Table to Cell Data'
+    __category__ = 'filter'
+    def __init__(self):
+        FilterPreserveTypeBase.__init__(self, nInputPorts=2)
+        # NOTE: port 0 is the data set to preserve
+        # Parameters... none
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output
+        """
+        # Inputs from different ports:
+        pdi0 = self.GetInputData(inInfo, 0, 0) # Keep me!
+        table = self.GetInputData(inInfo, 1, 0) # add my data to the input
+        pdo = self.GetOutputData(outInfo, 0) # The output
+
+        pdo.DeepCopy(pdi0)
+
+        # Get number of rows
+        nrows = table.GetNumberOfRows()
+        ncells = pdo.GetNumberOfCells()
+        if (nrows != ncells):
+            raise _helpers.PVGeoError('Number rows in table ({}) does not match number of cells ({})'.format(nrows, ncells))
+
+        for i in range(table.GetRowData().GetNumberOfArrays()):
+            arr = table.GetRowData().GetArray(i)
+            pdo.GetCellData().AddArray(arr)
+        return 1
+
+    def Apply(self, dataset, table):
+        self.SetInputDataObject(0, dataset)
+        self.SetInputDataObject(1, table)
+        self.Update()
+        return self.GetOutput()

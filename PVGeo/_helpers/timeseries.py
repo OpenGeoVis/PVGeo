@@ -1,5 +1,4 @@
 __all__ = [
-    # new:
     'updateTimeSteps',
     'getRequestedTime',
     'getInputTimeSteps',
@@ -12,7 +11,6 @@ def _calculateTimeRange(nt, dt=1.0):
     """Discretizes time range accoridng to step size ``dt`` in seconds
     """
     return np.arange(0,nt*dt,dt, dtype=float)
-
 
 
 def updateTimeSteps(algorithm, nt, dt):
@@ -41,6 +39,7 @@ def updateTimeSteps(algorithm, nt, dt):
     oi.Append(executive.TIME_RANGE(), timesteps[0])
     oi.Append(executive.TIME_RANGE(), timesteps[-1])
     return timesteps
+
 
 def getRequestedTime(algorithm, outInfoVec, idx=0):
     """Handles setting up the timesteps on on the pipeline for a file series
@@ -72,6 +71,7 @@ def getRequestedTime(algorithm, outInfoVec, idx=0):
         # if we cant match the time, give first
         assert(len(timesteps) > 0)
         return 0
+
 
 def getInputTimeSteps(algorithm, port=0, idx=0):
     """Get the timestep values for the algorithm's input
