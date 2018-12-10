@@ -329,12 +329,15 @@ class SplitTableOnArray(FilterBase):
 class AppendTableToCellData(FilterPreserveTypeBase):
     """Takes two inputs, a dataset to preserve and a table of data, where the
     data in the table is appended to the CellData of the input dataset.
+    The 0th port is the dataset to preserve and the 1st port is a table whos rows
+    will be appended as CellData to the 0th port. The number of rows in the table
+    MUST match the number of cells in the input dataset.
     """
     __displayname__ = 'Append Table to Cell Data'
     __category__ = 'filter'
     def __init__(self):
         FilterPreserveTypeBase.__init__(self, nInputPorts=2)
-        # NOTE: port 0 is the data set to preserve
+        self._preservePort = 0 # ensure port 0's type is preserved
         self.__timesteps = None
 
 
@@ -347,8 +350,8 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         ts1 = _helpers.getInputTimeSteps(self, port=1)
         if ts1 is None: ts1 = np.array([])
         tsAll = np.unique(np.concatenate((ts0, ts1), 0))
+        # Use both inputs' time steps
         self.__timesteps = _helpers.updateTimeSteps(self, tsAll, explicit=True)
-        # Use input's time steps which is set by pipeline
         return 1
 
 
@@ -378,6 +381,15 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         return 1
 
     def Apply(self, dataset, table):
+        """Update the algorithm and get the output data object
+
+        Args:
+            dataset (vtkDataSet): Any dataset with CellData
+            table (vtkTable): table of data values that will be appended to
+                ``dataset``'s CellData
+        Return:
+            vtkDataSet: The appended dataset as a new object
+        """
         self.SetInputDataObject(0, dataset)
         self.SetInputDataObject(1, table)
         self.Update()
