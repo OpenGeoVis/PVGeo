@@ -17,11 +17,6 @@ from .. import _helpers, interface
 from ..base import AlgorithmBase
 from .two_file_base import ModelAppenderBase, ubcMeshReaderBase
 
-if sys.version_info < (3,):
-    from StringIO import StringIO
-else:
-    from io import StringIO
-
 
 with _helpers.HiddenPrints():
     import discretize

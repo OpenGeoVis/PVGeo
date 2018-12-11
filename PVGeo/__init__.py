@@ -14,10 +14,6 @@ except ImportError:
     # This is because VTK is not compatible with Windows Python 2
     warnings.warn('VTK Python package is unavailable! PVGeo is running in safe mode.')
 else:
-    # Add development projects to the path
-    import sys
-    sys.path.append('/Users/bane/Documents/OpenGeoVis/Software/discretize')
-
     # Import Base Classes
     from .base import *
 
