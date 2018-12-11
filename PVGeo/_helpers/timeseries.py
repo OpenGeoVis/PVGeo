@@ -1,7 +1,9 @@
 __all__ = [
+    '_calculateTimeRange',
     'updateTimeSteps',
     'getRequestedTime',
     'getInputTimeSteps',
+    'getCombinedInputTimeSteps',
 ]
 
 import numpy as np
@@ -95,8 +97,29 @@ def getInputTimeSteps(algorithm, port=0, idx=0):
         idx (int) : optional : the connection index on the input port
 
     Return:
-        list : the time step values of the input
+        list : the time step values of the input (if there arn't any, returns ``None``)
     """
     executive = algorithm.GetExecutive()
     ii = executive.GetInputInformation(port, idx)
     return ii.Get(executive.TIME_STEPS())
+
+
+def getCombinedInputTimeSteps(algorithm, idx=0):
+    """This will iterate over all input ports and combine their unique timesteps
+    for an output algorithm to have.
+
+    Args:
+        algorithm (vtkDataObject) : The data object (Proxy) on the pipeline
+            (pass `self` from algorithm subclasses)
+
+    Return:
+        np.ndarray : a 1D array of all the unique timestep values (empty array if no time variance)
+    """
+    executive = algorithm.GetExecutive()
+    tsteps = []
+    for port in range(executive.GetNumberOfInputPorts()):
+        ii = executive.GetInputInformation(port, idx)
+        ti = ii.Get(executive.TIME_STEPS())
+        if ti is None: ti = np.array([])
+        tsteps.append(ti)
+    return np.unique(np.concatenate(tsteps, 0))
