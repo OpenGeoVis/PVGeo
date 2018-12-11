@@ -30,7 +30,8 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - conda install vtk=8.1.0
+  - conda install vtk>=8.1.0
+  - conda install numpy>=1.15.1
   - python -m pip install --upgrade pip
   - python setup.py install
   - python -m PVGeo install echo
