@@ -24,6 +24,8 @@ from ..base import FilterBase,  FilterPreserveTypeBase
 
 class CombineTables(FilterBase):
     """Takes two tables and combines them if they have the same number of rows.
+    Currently this cannot handle time varing tables as that gets complicated
+    real quick if the tables do not have the same timestep values
     """
     __displayname__ = 'Combine Tables'
     __category__ = 'filter'
@@ -345,11 +347,7 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         """For internal use only: appropriately sets the timesteps.
         """
         # Use the inputs' timesteps: this merges the timesteps values
-        ts0 = _helpers.getInputTimeSteps(self, port=0)
-        if ts0 is None: ts0 = np.array([])
-        ts1 = _helpers.getInputTimeSteps(self, port=1)
-        if ts1 is None: ts1 = np.array([])
-        tsAll = np.unique(np.concatenate((ts0, ts1), 0))
+        tsAll = _helpers.getCombinedInputTimeSteps(self)
         # Use both inputs' time steps
         self.__timesteps = _helpers.updateTimeSteps(self, tsAll, explicit=True)
         return 1

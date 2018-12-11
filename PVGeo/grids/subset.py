@@ -26,6 +26,12 @@ class ExtractTopography(FilterBase):
     the input grid on whether that cell should be active (under topographic
     layer).
 
+    Note:
+        This currenlty ignores time varying inputs. We can implement time 
+        variance but need to think about how we would like to do that. Should
+        the topography surface be static and the volumetric data have time
+        variance?
+
     """
     __displayname__ = 'Extract Topography'
     __category__ = 'filter'
