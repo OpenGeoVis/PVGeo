@@ -58,6 +58,53 @@ class PVGeoGSLibReader(GSLibReader):
 
 
 
+###############################################################################
+
+
+@smproxy.reader(name="PVGeoGSLibPointSetReader",
+       label='PVGeo: %s'%GSLibPointSetReader.__displayname__,
+       extensions=GSLibPointSetReader.extensions,
+       file_description=GSLibPointSetReader.description)
+class PVGeoGSLibPointSetReader(GSLibPointSetReader):
+    def __init__(self):
+        GSLibPointSetReader.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.xml(_helpers.getFileReaderXml(GSLibPointSetReader.extensions, readerDescription=GSLibPointSetReader.description))
+    def AddFileName(self, fname):
+        GSLibPointSetReader.AddFileName(self, fname)
+
+    @smproperty.stringvector(name="Delimiter", default_values=" ")
+    def SetDelimiter(self, deli):
+        GSLibPointSetReader.SetDelimiter(self, deli)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def SetSplitOnWhiteSpace(self, flag):
+        GSLibPointSetReader.SetSplitOnWhiteSpace(self, flag)
+
+    @smproperty.intvector(name="SkipRows", default_values=0)
+    def SetSkipRows(self, skip):
+        GSLibPointSetReader.SetSkipRows(self, skip)
+
+    @smproperty.stringvector(name="Comments", default_values="!")
+    def SetComments(self, identifier):
+        GSLibPointSetReader.SetComments(self, identifier)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        GSLibPointSetReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return GSLibPointSetReader.GetTimestepValues(self)
+
+    @smproperty.xml("""<Property name="Print File Header" command="PrintFileHeader" panel_widget="command_button"/>""")
+    def PrintFileHeader(self):
+        print(GSLibPointSetReader.GetFileHeader(self))
+        return 1
+
 
 ###############################################################################
 
