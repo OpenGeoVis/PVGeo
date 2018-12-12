@@ -30,7 +30,7 @@ class PVGeoGSLibReader(GSLibReader):
     def SetDelimiter(self, deli):
         GSLibReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
     def SetSplitOnWhiteSpace(self, flag):
         GSLibReader.SetSplitOnWhiteSpace(self, flag)
 
@@ -81,7 +81,7 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
     def SetDelimiter(self, deli):
         SGeMSGridReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
     def SetSplitOnWhiteSpace(self, flag):
         SGeMSGridReader.SetSplitOnWhiteSpace(self, flag)
 

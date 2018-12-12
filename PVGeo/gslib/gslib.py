@@ -32,7 +32,7 @@ class GSLibReader(DelimitedTextReader):
     description = 'PVGeo: GSLib Table'
     def __init__(self, outputType='vtkTable', **kwargs):
         DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
-        self.SetDelimiter(kwargs.get('delimiter', ' '))
+        self.SetSplitOnWhiteSpace(True)
         # These are attributes the derived from file contents:
         self.__header = None
 
