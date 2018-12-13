@@ -24,7 +24,6 @@ class _GSLibReaderMethods(object):
     extensions = 'sgems dat geoeas gslib GSLIB txt SGEMS SGeMS'
 
     def _ExtractHeader(self, content):
-        print('_ExtractHeader')
         self._header = content[0]
         try:
             num = int(content[1]) # number of data columns
