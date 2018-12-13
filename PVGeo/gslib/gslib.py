@@ -67,6 +67,7 @@ class GSLibPointSetReader(_GSLibReaderMethods, DelimitedPointsReaderBase):
     __displayname__ = 'GSLib Point Set Reader'
     __category__ = 'reader'
     description = 'PVGeo: GSLib Point Set'
+    extensions = _GSLibReaderMethods.extensions + 'gslibpts ptset gpts'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
         self.SetSplitOnWhiteSpace(True)

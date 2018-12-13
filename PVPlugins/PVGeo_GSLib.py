@@ -65,6 +65,7 @@ class PVGeoGSLibReader(GSLibReader):
        label='PVGeo: %s'%GSLibPointSetReader.__displayname__,
        extensions=GSLibPointSetReader.extensions,
        file_description=GSLibPointSetReader.description)
+@smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
 class PVGeoGSLibPointSetReader(GSLibPointSetReader):
     def __init__(self):
         GSLibPointSetReader.__init__(self)
