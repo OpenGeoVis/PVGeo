@@ -242,9 +242,13 @@ def pointsToPolyData(points, copy_z=False):
     pdata.SetVerts(vtkcells)
 
     # Add attributes if given
+    scalSet = False
     for i, key in enumerate(keys):
         data = convertArray(atts[:, i], name=key)
         pdata.GetPointData().AddArray(data)
+        if not scalSet:
+            pdata.GetPointData().SetActiveScalars(key)
+            scalSet = True
     if copy_z:
         z = convertArray(points[:, 2], name='Elevation')
         pdata.GetPointData().AddArray(z)
