@@ -464,7 +464,7 @@ class TestExtractTopography(TestBase):
         self.assertEqual(grd.GetOrigin(), data.GetOrigin())
         # Now check the active topo cell data?
         # TODO: implement
-        active = dsa.WrapDataObject(grd).CellData['Active Topography']
+        active = dsa.WrapDataObject(grd).CellData['Extracted']
         for i in range(grd.GetNumberOfCells()):
             cell = grd.GetCell(i)
             bounds = cell.GetBounds()

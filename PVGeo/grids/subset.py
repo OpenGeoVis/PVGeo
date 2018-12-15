@@ -27,7 +27,7 @@ class ExtractTopography(FilterBase):
     layer).
 
     Note:
-        This currenlty ignores time varying inputs. We can implement time 
+        This currenlty ignores time varying inputs. We can implement time
         variance but need to think about how we would like to do that. Should
         the topography surface be static and the volumetric data have time
         variance?
@@ -39,7 +39,9 @@ class ExtractTopography(FilterBase):
         FilterBase.__init__(self,
             nInputPorts=2, inputType='vtkDataSet',
             nOutputPorts=1)
-        self.__tolerance = 0.001
+        self._tolerance = 0.001
+        self._offset = 0.0
+        self._operation = self._underneath
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):
@@ -58,6 +60,58 @@ class ExtractTopography(FilterBase):
         self.OutputType = self.GetInputData(inInfo, 0, 0).GetClassName()
         self.FillOutputPortInformation(0, outInfo.GetInformationObject(0))
         return 1
+
+
+    #### Extraction Methods ####
+
+    @staticmethod
+    def _query(topoPts, dataPts):
+        tree = cKDTree(topoPts)
+        i = tree.query(dataPts)[1]
+        return topoPts[i]
+
+    @staticmethod
+    def _underneath(topoPts, dataPts, tolerance):
+        comp = ExtractTopography._query(topoPts, dataPts)
+        return np.array(dataPts[:,2] < (comp[:,2] - tolerance), dtype=int)
+
+    @staticmethod
+    def _intersection(topoPts, dataPts, tolerance):
+        comp = ExtractTopography._query(topoPts, dataPts)
+        return np.array(np.abs((dataPts[:,2] - comp[:,2])) < tolerance, dtype=int)
+
+    @staticmethod
+    def GetOperations():
+        """Returns the extraction operation methods as callable objects in a
+        dictionary
+        """
+        ops = dict(
+            underneath=ExtractTopography._underneath,
+            intersection=ExtractTopography._intersection,
+        )
+        return ops
+
+    @staticmethod
+    def GetOperationNames():
+        """Gets a list of the extraction operation keys
+
+        Return:
+            list(str): the keys for getting the operations
+        """
+        ops = ExtractTopography.GetOperations()
+        return list(ops.keys())
+
+    @staticmethod
+    def GetOperation(idx):
+        """Gets a extraction operation based on an index in the keys
+
+        Return:
+            callable: the operation method
+        """
+        if isinstance(idx, str):
+            return ExtractTopography.GetOperations()[idx]
+        n = ExtractTopography.GetOperationNames()[idx]
+        return ExtractTopography.GetOperations()[n]
 
 
     @staticmethod
@@ -85,20 +139,19 @@ class ExtractTopography(FilterBase):
         active = np.zeros((ncells), dtype=int)
         # Now iterate through the cells in the grid and test if they are beneath the topography
         wtopo = dsa.WrapDataObject(topo)
-        topoPts = wtopo.Points
+        topoPts = np.array(wtopo.Points) # mak sure we do not edit the input
+        #  shift the topography points for the tree
+        topoPts[:,2] = topoPts[:,2] + self._offset
 
         filt = vtk.vtkCellCenters()
         filt.SetInputDataObject(igrid)
         filt.Update()
-        datapts = dsa.WrapDataObject(filt.GetOutput(0)).Points
+        dataPts = dsa.WrapDataObject(filt.GetOutput(0)).Points
 
-        tree = cKDTree(topoPts)
-        i = tree.query(datapts)[1]
-        comp = topoPts[i]
-        active = np.array(datapts[:,2] < (comp[:,2] - self.__tolerance), dtype=int)
+        active = self._operation(topoPts, dataPts, self._tolerance)
 
         # Now add cell data to output
-        active = interface.convertArray(active, name='Active Topography')
+        active = interface.convertArray(active, name='Extracted')
         grid.GetCellData().AddArray(active)
         return 1
 
@@ -109,9 +162,34 @@ class ExtractTopography(FilterBase):
         return self.GetOutput()
 
     def SetTolerance(self, tol):
-        if self.__tolerance != tol:
-            self.__tolerance = tol
+        if self._tolerance != tol:
+            self._tolerance = tol
             self.Modified()
 
     def GetTolerance(self):
-        return self.__tolerance
+        return self._tolerance
+
+    def SetOffset(self, offset):
+        """Sets how far off (in Z dir) to slice the data"""
+        if self._offset != offset:
+            self._offset = offset
+            self.Modified()
+
+    def SetOperation(self, op):
+        """Set the type of extraction to perform
+
+        Args:
+            op (str, int, or callable): The operation as a string key, int
+            index, or callable method
+
+        Note:
+            This can accept a callable method to set a custom operation as long
+            as its signature is: ``<callable>(self, topoPts, dataPts)``
+        """
+        if isinstance(op, str):
+            op = ExtractTopography.GetOperations()[op]
+        elif isinstance(op, int):
+            op = ExtractTopography.GetOperation(op)
+        if self._operation != op:
+            self._operation = op
+            self.Modified()

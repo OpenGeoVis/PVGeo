@@ -185,6 +185,14 @@ class PVGeoExtractTopography(ExtractTopography):
     def SetTolerance(self, tol):
         ExtractTopography.SetTolerance(self, tol)
 
+    @smproperty.doublevector(name="Offset", default_values=0.0)
+    def SetOffset(self, offset):
+        ExtractTopography.SetOffset(self, offset)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Operation', command='SetOperation', labels=ExtractTopography.GetOperationNames(), help='This is the type of extraction operation to apply'))
+    def SetOperation(self, op):
+        ExtractTopography.SetOperation(self, op)
+
 ###############################################################################
 
 
