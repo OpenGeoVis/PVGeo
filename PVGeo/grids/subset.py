@@ -114,17 +114,7 @@ class ExtractTopography(FilterBase):
         return ExtractTopography.GetOperations()[n]
 
 
-    @staticmethod
-    def __GetVoxelCenter(voxel):
-        """Returns tuple for center of Voxel
-
-        Note: The Z-coordinate is at the top of the cell
-        """
-        bounds = voxel.GetBounds()
-        x = (bounds[0]+bounds[1])/2.0
-        y = (bounds[2]+bounds[3])/2.0
-        z = bounds[5]#(bounds[4]+bounds[5])/2.0
-        return (x, y, z)
+    #### Pipeline Methods ####
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
@@ -160,6 +150,8 @@ class ExtractTopography(FilterBase):
         self.SetInputDataObject(1, points)
         self.Update()
         return self.GetOutput()
+
+    #### Setters/Getters ####
 
     def SetTolerance(self, tol):
         if self._tolerance != tol:
