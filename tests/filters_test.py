@@ -795,6 +795,32 @@ class TestPercentThreshold(TestBase):
 
 
 ###############################################################################
+
+
+class TestArraysToRGBA(TestBase):
+    """
+    Test the `ArraysToRGBA` filter
+    """
+
+    def test(self):
+        """`ArraysToRGBA`: make sure no errors arise"""
+        # create an input with three arrays that can be RGB
+        r = np.random.randint(0, 255, 300)
+        g = np.random.randint(0, 255, 300)
+        b = np.random.randint(0, 255, 300)
+        a = np.random.uniform(0, 1, 300)
+        # now make it an arbirtray dataset
+        df = pd.DataFrame(data=np.c_[r,g,b,r,g,b,a], columns=['x','y','z','R','G','B','A'])
+        data = interface.pointsToPolyData(df)
+        # Set up the algorithm
+        colored = ArraysToRGBA().Apply(data, 'R', 'G', 'B', 'A')
+        # Make sure there is a new 'Colors' Array
+        arr = colored.GetPointData().GetArray('Colors')
+        self.assertTrue(isinstance(arr, vtk.vtkUnsignedCharArray))
+        return True
+
+
+###############################################################################
 ###############################################################################
 ###############################################################################
 if __name__ == '__main__':
