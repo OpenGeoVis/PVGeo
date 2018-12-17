@@ -189,7 +189,9 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
 
 class CreateTensorMesh(AlgorithmBase):
     """This creates a vtkRectilinearGrid where the discretization along a
-    given axis is uniformly distributed.
+    given axis is not uniform. Cell spacings along each axis can be set via
+    strings with repeating patterns or explicitly using the ``Set*Cells``
+    methods.
     """
     __displayname__ = 'Create Tensor Mesh'
     __category__ = 'source'
