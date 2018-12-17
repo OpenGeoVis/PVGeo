@@ -35,13 +35,14 @@ class ExtractTopography(FilterBase):
     """
     __displayname__ = 'Extract Topography'
     __category__ = 'filter'
-    def __init__(self):
+    def __init__(self, op='underneath', tolerance=0.001, offset=0.0):
         FilterBase.__init__(self,
             nInputPorts=2, inputType='vtkDataSet',
             nOutputPorts=1)
-        self._tolerance = 0.001
-        self._offset = 0.0
+        self._tolerance = tolerance
+        self._offset = offset
         self._operation = self._underneath
+        self.SetOperation(op)
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):

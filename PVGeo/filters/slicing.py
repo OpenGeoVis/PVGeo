@@ -381,13 +381,10 @@ class SliceThroughTime(ManySlicesAlongAxis):
         self.__dt = dt
         self.__timesteps = None
 
-
     def _UpdateTimeSteps(self):
         """For internal use only
         """
         self.__timesteps = _helpers.updateTimeSteps(self, self.GetNumberOfSlices(), self.__dt)
-
-
 
     #### Algorithm Methods ####
 

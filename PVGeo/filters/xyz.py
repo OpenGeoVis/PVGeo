@@ -245,8 +245,10 @@ class LonLatToUTM(FilterBase):
     __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self, inputType='vtkPolyData', outputType='vtkPolyData', **kwargs)
-        self.__zone = kwargs.get('zone', 11) # User defined
-        self.__ellps = kwargs.get('ellps', 'WGS84') # User defined
+        self.__zone = 11,
+        self.__ellps = 'WGS84'
+        self.SetZone(kwargs.get('zone', 11)) # User defined
+        self.SetEllps(kwargs.get('ellps', 'WGS84')) # User defined
 
     @staticmethod
     def GetAvailableEllps(idx=None):
