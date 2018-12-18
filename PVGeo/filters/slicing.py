@@ -251,16 +251,20 @@ class ManySlicesAlongAxis(_SliceBase):
     This produces a specified number of slices at once each with a normal vector
     oriented along the axis of choice and spaced uniformly through the range of
     the dataset on the chosen axis.
+
+    Args:
+        pad (float): Padding as a percentage (0.0, 1.0)
     """
     __displayname__ = 'Many Slices Along Axis'
     __category__ = 'filter'
-    def __init__(self, numSlices=5, axis=0, rng=None, outputType='vtkMultiBlockDataSet'):
+    def __init__(self, numSlices=5, axis=0, rng=None, pad=0.01, outputType='vtkMultiBlockDataSet'):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType=outputType)
         # Parameters
         self.__axis = axis
         self.__rng = rng
+        self.__pad = pad
 
 
     def _GetOrigin(self, pdi, idx):
@@ -299,7 +303,8 @@ class ManySlicesAlongAxis(_SliceBase):
         """Internal helper to set the slicing range along the set axis
         """
         bounds = self.GetInputBounds(pdi)
-        self.__rng = np.linspace(bounds[0]+0.001, bounds[1]-0.001, num=self.GetNumberOfSlices())
+        padding = (bounds[1] - bounds[0]) * self.__pad # get percent padding
+        self.__rng = np.linspace(bounds[0]+padding, bounds[1]-padding, num=self.GetNumberOfSlices())
 
     def _UpdateNumOutputs(self, num):
         """for internal use only
@@ -360,6 +365,12 @@ class ManySlicesAlongAxis(_SliceBase):
         """Get the set axis to slice upon as int index (0,1,2)
         """
         return self.__axis
+
+    def SetPadding(self, pad):
+        """Set the percent padding for the slices on the edges"""
+        if self.__pad != pad:
+            self.__pad = pad
+            self.Modified()
 
 
 
