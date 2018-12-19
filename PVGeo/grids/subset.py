@@ -8,7 +8,6 @@ from datetime import datetime
 
 import numpy as np
 import vtk
-from scipy.spatial import cKDTree
 from vtk.numpy_interface import dataset_adapter as dsa
 
 from .. import _helpers, interface
@@ -67,8 +66,13 @@ class ExtractTopography(FilterBase):
 
     @staticmethod
     def _query(topoPts, dataPts):
-        tree = cKDTree(topoPts)
-        i = tree.query(dataPts)[1]
+        try:
+            # sklearn's KDTree is faster: use it if available
+            from sklearn.neighbors import KDTree as Tree
+        except:
+            from scipy.spatial import cKDTree  as Tree
+        tree = Tree(topoPts)
+        i = tree.query(dataPts)[1].ravel()
         return topoPts[i]
 
     @staticmethod

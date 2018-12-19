@@ -11,7 +11,6 @@ from datetime import datetime
 
 import numpy as np
 import vtk
-from scipy.spatial import cKDTree
 from vtk.numpy_interface import dataset_adapter as dsa
 
 from .. import _helpers, interface
@@ -104,6 +103,11 @@ class ManySlicesAlongPoints(_SliceBase):
         return 1
 
     def _GetPlanes(self, pdipts):
+        try:
+            # sklearn's KDTree is faster: use it if available
+            from sklearn.neighbors import KDTree as Tree
+        except:
+            from scipy.spatial import cKDTree  as Tree
         if self.GetNumberOfSlices() == 0:
             return []
         # Get the Points over the NumPy interface
@@ -111,8 +115,8 @@ class ManySlicesAlongPoints(_SliceBase):
         points = np.array(wpdi.Points) # New NumPy array of points so we dont destroy input
         numPoints = pdipts.GetNumberOfPoints()
         if self.__useNearestNbr:
-            tree = cKDTree(points)
-            ptsi = tree.query(points[0], k=numPoints)[1]
+            tree = Tree(points)
+            ptsi = tree.query([points[0]], k=numPoints)[1].ravel()
         else:
             ptsi = [i for i in range(numPoints)]
 
