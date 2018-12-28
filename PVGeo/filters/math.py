@@ -198,7 +198,7 @@ class ArrayMath(FilterPreserveTypeBase):
         self.SetInputArrayToProcess(0, 0, 0, field0, arrayName0)
         self.SetInputArrayToProcess(1, 0, 0, field1, arrayName1)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
     def SetMultiplier(self, val):
         """This is a static shifter/scale factor across the array after
@@ -427,7 +427,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
     def SetMultiplier(self, val):
         """This is a static shifter/scale factor across the array after
@@ -578,7 +578,7 @@ class PercentThreshold(FilterBase):
         arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 ################################################################################
 
@@ -739,7 +739,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         self.SetInputArrayToProcess(1, 0, 0, gField, gArray)
         self.SetInputArrayToProcess(2, 0, 0, bField, bArray)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 

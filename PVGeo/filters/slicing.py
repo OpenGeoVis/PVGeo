@@ -178,7 +178,7 @@ class ManySlicesAlongPoints(_SliceBase):
         self.SetInputDataObject(0, points)
         self.SetInputDataObject(1, data)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 ###############################################################################

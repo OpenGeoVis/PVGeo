@@ -154,7 +154,7 @@ class ExtractTopography(FilterBase):
         self.SetInputDataObject(0, data)
         self.SetInputDataObject(1, points)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
     #### Setters/Getters ####
 
