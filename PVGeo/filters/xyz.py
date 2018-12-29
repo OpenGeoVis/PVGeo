@@ -18,6 +18,8 @@ import pandas as pd
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
+# NOTE: internal import of pyproj in LonLatToUTM
+
 from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase
 

@@ -676,23 +676,32 @@ class TestPointsToTube(TestBase):
 
 ###############################################################################
 
-class TestLonLatToUTM(TestBase):
-    """
-    Test the `LonLatToUTM` filter
-    """
-    # NOTE: ``pyproj`` MUST be installed
+proj = False
+try:
+    import pyproj
+    proj = True
+except ImportError:
+    pass
 
-    def test_conversion(self):
-        self.fname = os.path.join(os.path.dirname(__file__), 'data/das-coords.csv')
-        # read in data that has Lat/Lon and pre converted points in zone 11
-        data = pd.read_csv(self.fname)
-        points = interface.pointsToPolyData(data[['longitude', 'latitude', 'altitude']])
-        converted = LonLatToUTM(zone=11).Apply(points)
-        converted.GetPoints()
-        wpdi = dsa.WrapDataObject(converted)
-        points = np.array(wpdi.Points)
-        self.assertTrue(np.allclose(points, data[['x_utm', 'y_utm', 'altitude']]))
-        return True
+
+if proj:
+    class TestLonLatToUTM(TestBase):
+        """
+        Test the `LonLatToUTM` filter
+        """
+        # NOTE: ``pyproj`` MUST be installed
+
+        def test_conversion(self):
+            self.fname = os.path.join(os.path.dirname(__file__), 'data/das-coords.csv')
+            # read in data that has Lat/Lon and pre converted points in zone 11
+            data = pd.read_csv(self.fname)
+            points = interface.pointsToPolyData(data[['longitude', 'latitude', 'altitude']])
+            converted = LonLatToUTM(zone=11).Apply(points)
+            converted.GetPoints()
+            wpdi = dsa.WrapDataObject(converted)
+            points = np.array(wpdi.Points)
+            self.assertTrue(np.allclose(points, data[['x_utm', 'y_utm', 'altitude']]))
+            return True
 
 
 ###############################################################################
