@@ -33,7 +33,7 @@ setuptools.setup(
         'mock>=2.0.0',
         #'pyproj>=1.9',
         'espatools>=0.0.7',
-        'vtki>=0.13.0',
+        # 'vtki>=0.13.0',
     ],
     classifiers=(
         "Programming Language :: Python",
