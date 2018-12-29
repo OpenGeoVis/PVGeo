@@ -6,6 +6,7 @@ site/
 documentation/site/
 .coverage
 coverage.xml
+htmlcov/
 build/
 dist/
 PVGeo.egg-info/
