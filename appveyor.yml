@@ -31,9 +31,9 @@ install:
   - conda update -q conda
   - conda info -a
   - conda install vtk
+  - python -m pip install --upgrade pip
   # Use the master release of vtki
   - pip install git+https://github.com/akaszynski/vtki@master
-  - python -m pip install --upgrade pip
   - pip install -r requirements_win.txt
   - python setup.py install
   - python -m PVGeo install echo
