@@ -73,5 +73,8 @@ if __name__ == '__main__':
         GetInstallationPaths(echo=echo)
     elif arg1.lower() == 'test':
         print('testing is now deprecated for deployed versions of PVGeo.')
+    elif arg1.lower() == 'which':
+        # Telling the user where PVGeo is installed
+        print(os.path.dirname(__file__))
     else:
         raise RuntimeError('Unknown argument: %s' % arg)
