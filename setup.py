@@ -29,7 +29,7 @@ install_requires=[
     'vtki>=0.14.0'
 ]
 
-# add vtk if not windows and 2.7
+# add vtk if not windows and (not Python 3.x or not x64)
 if os.name == 'nt' and (int(sys.version[0]) < 3 or '64' not in platform.architecture()[0]):
     warnings.warn('Will need to install VTK manually')
 else:
