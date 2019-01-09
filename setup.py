@@ -6,6 +6,7 @@ import setuptools
 import warnings
 import platform
 import sys
+import os
 
 __version__ = '1.1.42'
 
