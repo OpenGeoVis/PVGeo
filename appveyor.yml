@@ -37,11 +37,12 @@ install:
   # Install windows requirements available on pip
   - pip install -r requirements_win.txt
   # Handle VTK if archetecture requires conda, else let setup.py install via pip
-  - ps: if ($Env:PLATFORM -eq "x86") {
-        conda install vtk
-        } else {
-        echo "setup.py should install VTK"
-        }
+  - ps: |
+    if ($Env:PLATFORM -eq "x86") {
+      conda install vtk
+    } else {
+      echo "setup.py should install VTK"
+    }
   # Install PVGeo
   - python setup.py install
   # Test the install and see where PVGeo is located
