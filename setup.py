@@ -49,7 +49,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=install_requires,
     extras_require={
-        'pyproj': ['pyproj>=1.9']
+        'pyproj': ['pyproj>=1.9'],
+        'omf': ['omf>=0.9.3', 'omfvtk>=0.0.0']
     },
     classifiers=(
         "Programming Language :: Python",

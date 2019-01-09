@@ -5,29 +5,19 @@ paraview_plugin_version = '1.1.6'
 from paraview.util.vtkAlgorithm import *
 import vtk
 
-import sys
-sys.path.append('/Users/bane/anaconda3/envs/omf/lib/python2.7/site-packages/')
-sys.path.append('/Users/bane/Documents/OpenGeoVis/Projects/omf/omf/')
-
 # Helpers:
 from PVGeo import _helpers, AlgorithmBase
 # Classes to Decorate
-from PVGeo.omf import OMFReader
-
-
-
+from PVGeo.gmggroup import *
 
 
 ###############################################################################
 
 
-OMF_EXTS = 'omf'
-OMF_DESC = 'Open Mining Format Project'
-
 @smproxy.reader(name="PVGeoOMFReader",
        label="PVGeo: Open Mining Format Project Reader",
-       extensions=OMF_EXTS,
-       file_description=OMF_DESC)
+       extensions=OMFReader.extensions,
+       file_description=OMFReader.description)
 class PVGeoOMFReader(OMFReader):
     def __init__(self):
         OMFReader.__init__(self)
@@ -35,7 +25,7 @@ class PVGeoOMFReader(OMFReader):
     #### Seters and Geters ####
 
     # TODO: check this to make sure not time varying
-    @smproperty.xml(_helpers.getFileReaderXml(OMF_EXTS, readerDescription=OMF_DESC))
+    @smproperty.xml(_helpers.getFileReaderXml(OMFReader.extensions, readerDescription=OMFReader.description))
     def AddFileName(self, fname):
         OMFReader.AddFileName(self, fname)
 

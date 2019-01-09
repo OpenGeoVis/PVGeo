@@ -2,16 +2,15 @@ __all__ = [
     'OMFReader',
 ]
 
-import sys
 import numpy as np
 import vtk
-sys.path.append('/Users/bane/anaconda3/envs/omf/lib/python2.7/site-packages/')
-sys.path.append('/Users/bane/Documents/OpenGeoVis/Projects/omf/omf/')
+
 import omf
+import omfvtk
 
 from ..base import ReaderBaseBase
 from .. import _helpers
-from ..filters import PointsToPolyData
+from ..interface import pointsToPolyData
 
 
 
@@ -19,7 +18,9 @@ class OMFReader(ReaderBaseBase):
     """Handles reading an OMF Project
     """
     __displayname__ = 'OMF Project Reader'
-    __type__ = 'reader'
+    __category__ = 'reader'
+    extensions = 'omf'
+    description = 'PVGeo: Open Mining Format Project'
     def __init__(self):
         ReaderBaseBase.__init__(self,
             nOutputPorts=1, outputType='vtkMultiBlockDataSet')
@@ -62,7 +63,7 @@ class OMFReader(ReaderBaseBase):
         for e in self.__project.elements:
             if self._dataselection.ArrayIsEnabled(e.name):
                 if not e.name in self.__data:
-                    self.__data[e.name] = e.toVTK()
+                    self.__data[e.name] = omfvtk.wrap(e)
                 data[e.name] = self.__data[e.name]
         return data
 
