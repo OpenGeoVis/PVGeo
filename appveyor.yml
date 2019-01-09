@@ -39,7 +39,6 @@ install:
   # Handle VTK if archetecture requires conda, else let setup.py install via pip
   - ps: if ($Env:PLATFORM -eq "x86") {
         conda install vtk
-        echo "VTK installed from Anaconda"
         } else {
         echo "setup.py should install VTK"
         }
