@@ -68,7 +68,7 @@ class CombineTables(FilterBase):
         self.SetInputDataObject(0, table0)
         self.SetInputDataObject(1, table1)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 ###############################################################################
@@ -254,7 +254,7 @@ class ExtractArray(FilterBase):
         arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 
@@ -323,7 +323,7 @@ class SplitTableOnArray(FilterBase):
         arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 ###############################################################################
 
@@ -391,7 +391,7 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         self.SetInputDataObject(0, dataset)
         self.SetInputDataObject(1, table)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
     def GetTimestepValues(self):
         """Use this in ParaView decorator to register timesteps.

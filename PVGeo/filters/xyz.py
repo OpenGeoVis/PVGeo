@@ -18,6 +18,8 @@ import pandas as pd
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
+# NOTE: internal import of pyproj in LonLatToUTM
+
 from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase
 
@@ -86,11 +88,17 @@ class AddCellConnToPoints(FilterBase):
         cells = vtk.vtkCellArray()
         numPoints = pdi.GetNumberOfPoints()
         if nrNbr:
-            from scipy.spatial import cKDTree
+            try:
+                # sklearn's KDTree is faster: use it if available
+                from sklearn.neighbors import KDTree as Tree
+            except:
+                from scipy.spatial import cKDTree  as Tree
             # VTK_Line
+            og = np.array([0.0,0.0,0.0]).reshape(1, -1)
             if cellType == vtk.VTK_LINE:
-                tree = cKDTree(points)
-                ind = tree.query([0.0,0.0,0.0], k=numPoints)[1]
+                tree = Tree(points)
+                ind = tree.query(og, k=numPoints)[1].ravel()
+                print(ind)
                 for i in range(len(ind)-1):
                     # Get indices of k nearest points
                     ptsi = [ind[i], ind[i+1]]
@@ -99,9 +107,9 @@ class AddCellConnToPoints(FilterBase):
                     points = np.delete(points, 0, 0) # Deletes first row
             # VTK_PolyLine
             elif cellType == vtk.VTK_POLY_LINE:
-                tree = cKDTree(points)
-                dist, ptsi = tree.query([0.0,0.0,0.0], k=numPoints)
-                cell = _makePolyCell(ptsi)
+                tree = Tree(points)
+                ptsi = tree.query(og, k=numPoints)[1].ravel()
+                cell = _makePolyCell(ptsi.ravel())
                 cells.InsertNextCell(cell)
             else:
                 raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
@@ -162,8 +170,8 @@ class AddCellConnToPoints(FilterBase):
             self.Modified()
 
     def SetUseNearestNbr(self, flag):
-        """Set a flag on whether to use SciPy's ``cKDTree`` nearest neighbor
-        algorithms to sort the points to before adding linear connectivity.
+        """Set a flag on whether to a KDTree nearest neighbor
+        algorithm to sort the points to before adding linear connectivity.
         """
         if flag != self.__usenbr:
             self.__usenbr = flag
@@ -245,8 +253,10 @@ class LonLatToUTM(FilterBase):
     __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self, inputType='vtkPolyData', outputType='vtkPolyData', **kwargs)
-        self.__zone = kwargs.get('zone', 11) # User defined
-        self.__ellps = kwargs.get('ellps', 'WGS84') # User defined
+        self.__zone = 11,
+        self.__ellps = 'WGS84'
+        self.SetZone(kwargs.get('zone', 11)) # User defined
+        self.SetEllps(kwargs.get('ellps', 'WGS84')) # User defined
 
     @staticmethod
     def GetAvailableEllps(idx=None):
@@ -514,14 +524,18 @@ class RotationTool(object):
     def _EstimateAngleAndSpacing(self, pts, sample=.5):
         """internal use only
         """
-        from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
+        try:
+            # sklearn's KDTree is faster: use it if available
+            from sklearn.neighbors import KDTree as Tree
+        except:
+            from scipy.spatial import cKDTree  as Tree
         # Creat the indexing range for searching the points:
         num = len(pts)
         rng = np.linspace(0, num-1, num=num, dtype=int)
         N = int(num*sample) + 1
         rng = np.random.choice(rng, N)
         angles = np.zeros(len(rng))
-        tree = cKDTree(pts)
+        tree = Tree(pts)
         distances = [[],[]]
 
         #######################################################################

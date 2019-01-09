@@ -1,11 +1,15 @@
 from base import TestBase
 import numpy as np
+import pandas as pd
+
+import os
 
 # VTK imports:
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 from PVGeo import _helpers
 from PVGeo import interface
+import PVGeo
 
 # Functionality to test:
 from PVGeo.filters import *
@@ -671,81 +675,159 @@ class TestPointsToTube(TestBase):
         self.assertEqual(10*len(self.pts), output.GetNumberOfPoints())
 
 ###############################################################################
-#
-# class TestLonLatToUTM(TestBase):
-#     """
-#     Test the `LonLatToUTM` filter
-#     """
-#
-#     def test_conversion(self):
-#         fname = '/Users/bane/Documents/OpenGeoVis/Data/data_open/NGDC/zone11.csv'
-#         import pandas as pd
-#         data = pd.read_csv(fname)
-#         points = interface.pointsToPolyData(data[['lon', 'lat', 'idx', 'val']])
-#         good = LonLatToUTM(zone=11).Apply(points)
-#         return
-#
-#
-# ###############################################################################
-#
-#
-# class TestManySlicesAlongPoints(TestBase):
-#     """
-#     Test the `ManySlicesAlongPoints` filter
-#     """
-#
-#     def test_(self):
-#         self.assertTrue(False)
-#
-#
-#
-# ###############################################################################
-#
-# class TestManySlicesAlongAxis(TestBase):
-#     """
-#     Test the `ManySlicesAlongAxis` filter
-#     """
-#
-#     def test_(self):
-#         self.assertTrue(False)
-#
-#
-# ###############################################################################
-#
-# class TestSliceThroughTime(TestBase):
-#     """
-#     Test the `SliceThroughTime` filter
-#     """
-#
-#     def test_(self):
-#         self.assertTrue(False)
-#
-#
-# ###############################################################################
-#
-# class TestExtractPoints(TestBase):
-#     """
-#     Test the `ExtractPoints` filter
-#     """
-#
-#     def test_(self):
-#         self.assertTrue(False)
-#
-#
-# ###############################################################################
+
+proj = False
+try:
+    import pyproj
+    proj = True
+except ImportError:
+    pass
 
 
-# class TestPercentThreshold(TestBase):
-#     """
-#     Test the `PercentThreshold` filter
-#     """
-#
-#     def test(self):
-#         """`PercentThreshold`: make sure no errors arise"""
-#         filt = PercentThreshold()
-#
-#         return
-#
+if proj:
+    class TestLonLatToUTM(TestBase):
+        """
+        Test the `LonLatToUTM` filter
+        """
+        # NOTE: ``pyproj`` MUST be installed
+
+        def test_conversion(self):
+            self.fname = os.path.join(os.path.dirname(__file__), 'data/das-coords.csv')
+            # read in data that has Lat/Lon and pre converted points in zone 11
+            data = pd.read_csv(self.fname)
+            points = interface.pointsToPolyData(data[['longitude', 'latitude', 'altitude']])
+            converted = LonLatToUTM(zone=11).Apply(points)
+            converted.GetPoints()
+            wpdi = dsa.WrapDataObject(converted)
+            points = np.array(wpdi.Points)
+            self.assertTrue(np.allclose(points, data[['x_utm', 'y_utm', 'altitude']]))
+            return True
+
+
+###############################################################################
+
+
+class TestManySlicesAlongPoints(TestBase):
+    """
+    Test the `ManySlicesAlongPoints`, `ManySlicesAlongAxis`, and `SliceThroughTime` filters
+    """
+
+    def setUp(self):
+        TestBase.setUp(self)
+        # create a volumetric data set
+        self.grid = PVGeo.model_build.CreateTensorMesh().Apply()
+        # create a spline throught the data set
+        def path1(y):
+            """Equation: x = a(y-h)^2 + k"""
+            a = -0.0001
+            x = a*y**2 + 1000
+            idxs = np.argwhere(x>0)
+            return x[idxs][:,0], y[idxs][:,0]
+
+        x, y = path1(np.arange(-500.0, 1500.0, 25.0))
+        zo = np.linspace(9.0, 11.0, num=len(y))
+        coords = np.vstack((x,y,zo)).T
+        self.points = interface.pointsToPolyData(coords)
+
+    def test_along_points(self):
+        # run the algorithms
+        slices = ManySlicesAlongPoints(numSlices=10).Apply(self.points, self.grid)
+        self.assertTrue(isinstance(slices, vtk.vtkMultiBlockDataSet))
+        self.assertEqual(10, slices.GetNumberOfBlocks())
+        # Can we really test anything further on this?
+        #   Testing the slice positions would be crazy difficult
+
+    def test_slider(self):
+        # Set up the algorithm
+        alg = SlideSliceAlongPoints(numSlices=10)
+        slc = alg.Apply(self.points, self.grid)
+        self.assertTrue(isinstance(slc, vtk.vtkPolyData))
+        alg.SetLocation(30)
+        alg.Update()
+        self.assertTrue(isinstance(slc, vtk.vtkPolyData))
+        alg.SetLocation(95)
+        alg.Update()
+        self.assertTrue(isinstance(slc, vtk.vtkPolyData))
+        # Can we really test anything further on this?
+        #   Testing the slice positions would be crazy difficult
+
+
+
+
+###############################################################################
+
+class TestManySlicesAlongAxis(TestBase):
+    """
+    Test the `ManySlicesAlongAxis` filter
+    """
+    def setUp(self):
+        TestBase.setUp(self)
+        # create a volumetric data set
+        self.grid = PVGeo.model_build.CreateTensorMesh().Apply()
+
+    def test_along_axis(self):
+        # run the algorithm
+        slices = ManySlicesAlongAxis(numSlices=10, axis=0).Apply(self.grid)
+        self.assertTrue(isinstance(slices, vtk.vtkMultiBlockDataSet))
+        self.assertEqual(10, slices.GetNumberOfBlocks())
+        # Can we really test anything further on this?
+        #   Testing the slice positions would be crazy difficult
+
+
+    def test_through_time(self):
+        # Set up the algorithm
+        alg = SliceThroughTime(numSlices=10, axis=1)
+        slc = alg.Apply(self.grid)
+        self.assertTrue(isinstance(slc, vtk.vtkPolyData))
+        alg.UpdateTimeStep(1)
+        self.assertTrue(isinstance(slc, vtk.vtkPolyData))
+        alg.UpdateTimeStep(3)
+        self.assertTrue(isinstance(slc, vtk.vtkPolyData))
+
+
+
+
+###############################################################################
+
+
+class TestPercentThreshold(TestBase):
+    """
+    Test the `PercentThreshold` filter
+    """
+
+    def test(self):
+        """`PercentThreshold`: make sure no errors arise"""
+        data = PVGeo.model_build.CreateTensorMesh().Apply()
+        thresh = PercentThreshold(percent=75).Apply(data, 'Random Data')
+        self.assertTrue(isinstance(thresh, vtk.vtkUnstructuredGrid))
+        return True
+
+
+###############################################################################
+
+
+class TestArraysToRGBA(TestBase):
+    """
+    Test the `ArraysToRGBA` filter
+    """
+
+    def test(self):
+        """`ArraysToRGBA`: make sure no errors arise"""
+        # create an input with three arrays that can be RGB
+        r = np.random.randint(0, 255, 300)
+        g = np.random.randint(0, 255, 300)
+        b = np.random.randint(0, 255, 300)
+        a = np.random.uniform(0, 1, 300)
+        # now make it an arbirtray dataset
+        df = pd.DataFrame(data=np.c_[r,g,b,r,g,b,a], columns=['x','y','z','R','G','B','A'])
+        data = interface.pointsToPolyData(df)
+        # Set up the algorithm
+        colored = ArraysToRGBA().Apply(data, 'R', 'G', 'B', 'A')
+        # Make sure there is a new 'Colors' Array
+        arr = colored.GetPointData().GetArray('Colors')
+        self.assertTrue(isinstance(arr, vtk.vtkUnsignedCharArray))
+        return True
+
 
 ###############################################################################
 ###############################################################################

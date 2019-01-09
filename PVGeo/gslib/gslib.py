@@ -1,5 +1,6 @@
 __all__ = [
     'GSLibReader',
+    'GSLibPointSetReader',
     'WriteTableToGSLib',
 ]
 
@@ -9,35 +10,21 @@ import numpy as np
 import vtk
 import os
 
-from ..readers import DelimitedTextReader
+from ..readers import DelimitedTextReader, DelimitedPointsReaderBase
 from ..base import WriterBase
 from .. import _helpers
 from .. import interface
 
 
-class GSLibReader(DelimitedTextReader):
-    """Reads a GSLIB file format to a ``vtkTable``. The GSLIB file format has
-    headers lines followed by the data as a space delimited ASCI file (this
-    filter is set up to allow you to choose any single character delimiter).
-    The first header line is the title and will be printed to the console.
-    This line may have the dimensions for a grid to be made of the data.
-    The second line is the number (n) of columns of data. The next n lines are
-    the variable names for the data in each column. You are allowed up to ten
-    characters for the variable name. The data follow with a space between each
-    field (column).
-    """
-    __displayname__ = 'GSLib Table Reader'
-    __category__ = 'reader'
+class _GSLibReaderMethods(object):
+    """A helper class to handle overriding of delimited text reading methods
+    for all GSLib readers."""
+    # NOTE: order of inherritance matters ALOT!
+    _header = None
     extensions = 'sgems dat geoeas gslib GSLIB txt SGEMS SGeMS'
-    description = 'PVGeo: GSLib Table'
-    def __init__(self, outputType='vtkTable', **kwargs):
-        DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
-        self.SetDelimiter(kwargs.get('delimiter', ' '))
-        # These are attributes the derived from file contents:
-        self.__header = None
 
     def _ExtractHeader(self, content):
-        self.__header = content[0]
+        self._header = content[0]
         try:
             num = int(content[1]) # number of data columns
         except ValueError:
@@ -51,7 +38,39 @@ class GSLibReader(DelimitedTextReader):
     def GetFileHeader(self):
         """Returns the file header. If file hasn't been read, returns ``None``
         """
-        return self.__header
+        return self._header
+
+class GSLibReader(_GSLibReaderMethods, DelimitedTextReader):
+    """Reads a GSLIB file format to a ``vtkTable``. The GSLIB file format has
+    headers lines followed by the data as a space delimited ASCI file (this
+    filter is set up to allow you to choose any single character delimiter).
+    The first header line is the title and will be printed to the console.
+    This line may have the dimensions for a grid to be made of the data.
+    The second line is the number (n) of columns of data. The next n lines are
+    the variable names for the data in each column. You are allowed up to ten
+    characters for the variable name. The data follow with a space between each
+    field (column).
+    """
+    __displayname__ = 'GSLib Table Reader'
+    __category__ = 'reader'
+    description = 'PVGeo: GSLib Table'
+    def __init__(self, outputType='vtkTable', **kwargs):
+        DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
+        self.SetSplitOnWhiteSpace(True)
+
+
+class GSLibPointSetReader(_GSLibReaderMethods, DelimitedPointsReaderBase):
+    """Reads a GSLib point set file where the first three columns are the XYZ
+    coordinates and the remainder of the data is consistent with the
+    :class:`GSLibReader` specifications."""
+    __displayname__ = 'GSLib Point Set Reader'
+    __category__ = 'reader'
+    description = 'PVGeo: GSLib Point Set'
+    extensions = _GSLibReaderMethods.extensions + 'gslibpts ptset gpts'
+    def __init__(self, **kwargs):
+        DelimitedPointsReaderBase.__init__(self, **kwargs)
+        self.SetSplitOnWhiteSpace(True)
+
 
 
 class WriteTableToGSLib(WriterBase):
@@ -60,7 +79,7 @@ class WriteTableToGSLib(WriterBase):
     __category__ = 'writer'
     def __init__(self, inputType='vtkTable'):
         WriterBase.__init__(self, inputType=inputType, ext='gslib')
-        self.__header = 'Data saved by PVGeo'
+        self._header = 'Data saved by PVGeo'
 
 
     def PerformWriteOut(self, inputDataObject, filename, objectName):
@@ -77,7 +96,7 @@ class WriteTableToGSLib(WriterBase):
             arrs.append(interface.convertArray(vtkarr))
             titles.append(vtkarr.GetName())
 
-        header = '%s\n' % self.__header
+        header = '%s\n' % self._header
         header += '%d\n' % len(titles)
         datanames = '\n'.join(titles)
         header += datanames
@@ -90,6 +109,6 @@ class WriteTableToGSLib(WriterBase):
 
     def SetHeader(self, header):
         """Set the file header string"""
-        if self.__header != header:
-            self.__header = header
+        if self._header != header:
+            self._header = header
             self.Modified()

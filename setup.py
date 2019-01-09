@@ -3,8 +3,12 @@ and ParaView.
 """
 
 import setuptools
+import warnings
+import platform
+import sys
+import os
 
-__version__ = '1.1.39'
+__version__ = '1.1.42'
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -12,6 +16,26 @@ with open("README.md", "r") as f:
     idx = long_description.find('\n')
     long_description = '# *PVGeo*\n\n' + long_description[idx::]
 
+
+# Manage requirements
+install_requires=[
+    'numpy>=1.13',
+    'scipy>=1.1',
+    'colour-runner==0.0.5',
+    'codecov==2.0.15',
+    'pandas>=0.23.4',
+    'mock>=2.0.0',
+    'espatools>=0.0.7',
+    'vtki>=0.14.1'
+]
+
+# add vtk if not windows and (not Python 3.x or not x64)
+if os.name == 'nt' and (int(sys.version[0]) < 3 or '64' not in platform.architecture()[0]):
+    warnings.warn('\nYou will need to install VTK manually.' +
+                  '  Try using Anaconda.  See:\n'
+                  + 'https://anaconda.org/anaconda/vtk')
+else:
+    install_requires.append(['vtk>=8.1'])
 
 setuptools.setup(
     name="PVGeo",
@@ -23,18 +47,10 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/OpenGeoVis/PVGeo",
     packages=setuptools.find_packages(),
-    install_requires=[
-        'numpy>=1.13',
-        'scipy>=1.1',
-        #'vtk>=8.1',
-        'colour-runner==0.0.5',
-        'codecov==2.0.15',
-        'pandas>=0.23.4',
-        'mock>=2.0.0',
-        #'pyproj>=1.9',
-        'espatools>=0.0.7',
-        'discretize>=0.3.5',
-    ],
+    install_requires=install_requires,
+    extras_require={
+        'pyproj': ['pyproj>=1.9']
+    },
     classifiers=(
         "Programming Language :: Python",
         "License :: OSI Approved :: BSD License",

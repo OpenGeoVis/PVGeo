@@ -20,6 +20,7 @@ import vtk  # NOTE: This is the first import executed in the package! Keep here!
 import vtk.util.vtkAlgorithm as valg  # import VTKPythonAlgorithmBase
 
 from . import _helpers
+from . import interface
 
 ###############################################################################
 
@@ -79,7 +80,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     def Apply(self):
         """Update the algorithm and get the output data object"""
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 ###############################################################################
@@ -171,7 +172,7 @@ class ReaderBaseBase(AlgorithmBase):
         """Given a file name (or list of file names), perfrom the read"""
         self.AddFileName(fname)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 ###############################################################################
 
@@ -191,7 +192,7 @@ class FilterBase(AlgorithmBase):
     def Apply(self, inputDataObject):
         self.SetInputDataObject(inputDataObject)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 
@@ -417,7 +418,7 @@ class TwoFileReaderBase(AlgorithmBase):
         """Perfrom the read with parameters/file names set during init or by
         setters"""
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 ###############################################################################

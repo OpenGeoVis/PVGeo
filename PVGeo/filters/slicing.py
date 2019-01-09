@@ -11,7 +11,6 @@ from datetime import datetime
 
 import numpy as np
 import vtk
-from scipy.spatial import cKDTree
 from vtk.numpy_interface import dataset_adapter as dsa
 
 from .. import _helpers, interface
@@ -104,6 +103,11 @@ class ManySlicesAlongPoints(_SliceBase):
         return 1
 
     def _GetPlanes(self, pdipts):
+        try:
+            # sklearn's KDTree is faster: use it if available
+            from sklearn.neighbors import KDTree as Tree
+        except:
+            from scipy.spatial import cKDTree  as Tree
         if self.GetNumberOfSlices() == 0:
             return []
         # Get the Points over the NumPy interface
@@ -111,8 +115,8 @@ class ManySlicesAlongPoints(_SliceBase):
         points = np.array(wpdi.Points) # New NumPy array of points so we dont destroy input
         numPoints = pdipts.GetNumberOfPoints()
         if self.__useNearestNbr:
-            tree = cKDTree(points)
-            ptsi = tree.query(points[0], k=numPoints)[1]
+            tree = Tree(points)
+            ptsi = tree.query([points[0]], k=numPoints)[1].ravel()
         else:
             ptsi = [i for i in range(numPoints)]
 
@@ -174,7 +178,7 @@ class ManySlicesAlongPoints(_SliceBase):
         self.SetInputDataObject(0, points)
         self.SetInputDataObject(1, data)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 ###############################################################################
@@ -251,16 +255,20 @@ class ManySlicesAlongAxis(_SliceBase):
     This produces a specified number of slices at once each with a normal vector
     oriented along the axis of choice and spaced uniformly through the range of
     the dataset on the chosen axis.
+
+    Args:
+        pad (float): Padding as a percentage (0.0, 1.0)
     """
     __displayname__ = 'Many Slices Along Axis'
     __category__ = 'filter'
-    def __init__(self, numSlices=5, axis=0, rng=None, outputType='vtkMultiBlockDataSet'):
+    def __init__(self, numSlices=5, axis=0, rng=None, pad=0.01, outputType='vtkMultiBlockDataSet'):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType=outputType)
         # Parameters
         self.__axis = axis
         self.__rng = rng
+        self.__pad = pad
 
 
     def _GetOrigin(self, pdi, idx):
@@ -284,9 +292,9 @@ class ManySlicesAlongAxis(_SliceBase):
             tuple: the XYZ coordinates of the center of the data set.
         """
         bounds = pdi.GetBounds()
-        x = (bounds[1] - bounds[0])/2
-        y = (bounds[3] - bounds[2])/2
-        z = (bounds[5] - bounds[4])/2
+        x = (bounds[1] + bounds[0])/2
+        y = (bounds[3] + bounds[2])/2
+        z = (bounds[5] + bounds[4])/2
         return (x, y, z)
 
     def GetNormal(self):
@@ -299,7 +307,8 @@ class ManySlicesAlongAxis(_SliceBase):
         """Internal helper to set the slicing range along the set axis
         """
         bounds = self.GetInputBounds(pdi)
-        self.__rng = np.linspace(bounds[0]+0.001, bounds[1]-0.001, num=self.GetNumberOfSlices())
+        padding = (bounds[1] - bounds[0]) * self.__pad # get percent padding
+        self.__rng = np.linspace(bounds[0]+padding, bounds[1]-padding, num=self.GetNumberOfSlices())
 
     def _UpdateNumOutputs(self, num):
         """for internal use only
@@ -361,6 +370,12 @@ class ManySlicesAlongAxis(_SliceBase):
         """
         return self.__axis
 
+    def SetPadding(self, pad):
+        """Set the percent padding for the slices on the edges"""
+        if self.__pad != pad:
+            self.__pad = pad
+            self.Modified()
+
 
 
 ###############################################################################
@@ -381,13 +396,10 @@ class SliceThroughTime(ManySlicesAlongAxis):
         self.__dt = dt
         self.__timesteps = None
 
-
     def _UpdateTimeSteps(self):
         """For internal use only
         """
         self.__timesteps = _helpers.updateTimeSteps(self, self.GetNumberOfSlices(), self.__dt)
-
-
 
     #### Algorithm Methods ####
 

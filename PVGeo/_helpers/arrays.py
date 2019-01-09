@@ -100,7 +100,7 @@ def copyArraysToPointData(pdi, pdo, field):
             arr = pdi.GetRowData().GetArray(i)
             pdo.GetPointData().AddArray(arr)
     else:
-        raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+        raise _helpers.PVGeoError('Field association ({}) not defined. Try inputing Point, Cell, Field, or Row data.'.format(field))
 
     # Field Data
     return pdo
@@ -135,7 +135,7 @@ def getNumPyArray(wpdi, field, name):
     elif field == 6:
         arr = wpdi.RowData[name]
     else:
-        raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+        raise _helpers.PVGeoError('Field association ({}) not defined. Try inputing Point, Cell, Field, or Row data.'.format(field))
     return arr
 
 def getVTKArray(pdi, field, name):
@@ -164,7 +164,7 @@ def getVTKArray(pdi, field, name):
     elif field == 6:
         arr = pdi.GetRowData().GetArray(name)
     else:
-        raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+        raise _helpers.PVGeoError('Field association ({}) not defined. Try inputing Point, Cell, Field, or Row data.'.format(field))
     return arr
 
 
@@ -210,7 +210,7 @@ def addArray(pdo, field, vtkArray):
     elif field == 6:
         pdo.GetRowData().AddArray(vtkArray)
     else:
-        raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+        raise _helpers.PVGeoError('Field association ({}) not defined. Try inputing Point, Cell, Field, or Row data.'.format(field))
     return pdo
 
 def _getData(pdi, field):
@@ -232,7 +232,7 @@ def _getData(pdi, field):
         elif field == 6:
             data = pdi.GetRowData()
         else:
-            raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+            raise _helpers.PVGeoError('Field association ({}) not defined. Try inputing Point, Cell, Field, or Row data.'.format(field))
     except AttributeError:
         raise _helpers.PVGeoError('Input data does not have field type `{}`.'.format(field))
     return data
@@ -304,5 +304,5 @@ def getAllArrayNames(dataset, field):
     elif field == 6:
         return wpdi.RowData.keys()
     else:
-        raise _helpers.PVGeoError('Field association not defined. Try inputing Point, Cell, Field, or Row data.')
+        raise _helpers.PVGeoError('Field association ({}) not defined. Try inputing Point, Cell, Field, or Row data.'.format(field))
     return None

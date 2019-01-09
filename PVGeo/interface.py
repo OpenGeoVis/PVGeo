@@ -19,6 +19,7 @@ __all__ = [
     'convertCellConn',
     'getArray',
     'getDataDict',
+    'wrapvtki',
 ]
 
 
@@ -242,9 +243,13 @@ def pointsToPolyData(points, copy_z=False):
     pdata.SetVerts(vtkcells)
 
     # Add attributes if given
+    scalSet = False
     for i, key in enumerate(keys):
         data = convertArray(atts[:, i], name=key)
         pdata.GetPointData().AddArray(data)
+        if not scalSet:
+            pdata.GetPointData().SetActiveScalars(key)
+            scalSet = True
     if copy_z:
         z = convertArray(points[:, 2], name='Elevation')
         pdata.GetPointData().AddArray(z)
@@ -291,3 +296,15 @@ def getDataDict(dataset, field='cell'):
     for key in _helpers.getAllArrayNames(dataset, field):
         data[key] = np.array(_helpers.getNumPyArray(dataset, field, key))
     return data
+
+
+def wrapvtki(dataset):
+    """This will wrap any given VTK dataset via the vtkInterface Python package
+    if it is available and return the wrapped data object. If vtki is
+    unavailable, then the given object is returned."""
+    try:
+        import vtki
+        dataset = vtki.wrap(dataset)
+    except ImportError:
+        pass
+    return dataset

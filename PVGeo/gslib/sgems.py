@@ -23,7 +23,7 @@ class SGeMSGridReader(GSLibReader):
     """
     __displayname__ = 'SGeMS Grid Reader'
     __category__ = 'reader'
-    # extensions are inherrited from GSLibReader
+    extensions = GSLibReader.extensions + 'gslibgrid mtxset'
     description = 'PVGeo: SGeMS Uniform Grid'
     def __init__(self, origin=(0.0, 0.0, 0.0), spacing=(1.0, 1.0, 1.0), **kwargs):
         GSLibReader.__init__(self, outputType='vtkImageData', **kwargs)

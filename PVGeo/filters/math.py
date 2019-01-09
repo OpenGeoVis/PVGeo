@@ -198,7 +198,7 @@ class ArrayMath(FilterPreserveTypeBase):
         self.SetInputArrayToProcess(0, 0, 0, field0, arrayName0)
         self.SetInputArrayToProcess(1, 0, 0, field1, arrayName1)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
     def SetMultiplier(self, val):
         """This is a static shifter/scale factor across the array after
@@ -427,7 +427,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
     def SetMultiplier(self, val):
         """This is a static shifter/scale factor across the array after
@@ -578,7 +578,7 @@ class PercentThreshold(FilterBase):
         arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 ################################################################################
 
@@ -726,19 +726,20 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
         return 1
 
-    def Apply(self, inputDataObject, rArray, gAray, bArray, aArray=None):
+    def Apply(self, inputDataObject, rArray, gArray, bArray, aArray=None):
         self.SetInputDataObject(inputDataObject)
         rArr, rField = _helpers.searchForArray(inputDataObject, rArray)
-        gArr, gField = _helpers.searchForArray(inputDataObject, gAray)
+        gArr, gField = _helpers.searchForArray(inputDataObject, gArray)
         bArr, bField = _helpers.searchForArray(inputDataObject, bArray)
         if aArray is not None:
             aArr, aField = _helpers.searchForArray(inputDataObject, aArray)
-            self.SetInputArrayToProcess(3, 0, 0, aArr, aField)
-        self.SetInputArrayToProcess(0, 0, 0, rArr, rField)
-        self.SetInputArrayToProcess(1, 0, 0, gArr, gField)
-        self.SetInputArrayToProcess(2, 0, 0, bArr, bField)
+            self.SetInputArrayToProcess(3, 0, 0, aField, aArray)
+            self.SetUseTransparency(True)
+        self.SetInputArrayToProcess(0, 0, 0, rField, rArray)
+        self.SetInputArrayToProcess(1, 0, 0, gField, gArray)
+        self.SetInputArrayToProcess(2, 0, 0, bField, bArray)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 

@@ -436,7 +436,20 @@ class TestExtractTopography(TestBase):
     """
     Test the `ExtractTopography` filter
     """
-    def test(self):
+    def setUp(self):
+        TestBase.setUp(self)
+        # create a volumetric data set
+        self.grid = PVGeo.model_build.CreateTensorMesh().Apply()
+        # create an unudulating surface in the grid domain
+        #   make XY random in the grid bounds
+        #   make Z ranome within a very small domain inside the grid
+        bnds = self.grid.GetBounds()
+        x = np.random.uniform(bnds[0], bnds[1], 5000)
+        y = np.random.uniform(bnds[2], bnds[3], 5000)
+        z = np.random.uniform(-200, -100, 5000)
+        self.points = interface.pointsToPolyData(np.c_[x,y,z])
+
+    def test_simple_run(self):
         """`ExtractTopography`: Test extraction on simple data"""
         # Produce some input data
         data = vtk.vtkImageData()
@@ -464,7 +477,7 @@ class TestExtractTopography(TestBase):
         self.assertEqual(grd.GetOrigin(), data.GetOrigin())
         # Now check the active topo cell data?
         # TODO: implement
-        active = dsa.WrapDataObject(grd).CellData['Active Topography']
+        active = dsa.WrapDataObject(grd).CellData['Extracted']
         for i in range(grd.GetNumberOfCells()):
             cell = grd.GetCell(i)
             bounds = cell.GetBounds()
@@ -478,6 +491,16 @@ class TestExtractTopography(TestBase):
 
         return
 
+
+    def test_underneath(self):
+        extracted = ExtractTopography(op='underneath').Apply(self.grid, self.points)
+
+
+    def test_intersection(self):
+        extracted = ExtractTopography(op='intersection', tolerance=50).Apply(self.grid, self.points)
+
+    def test_shifted_surface(self):
+        extracted = ExtractTopography(op='intersection', tolerance=50, offset=-250).Apply(self.grid, self.points)
 
 
 class TestCellCenterWriter(TestBase):

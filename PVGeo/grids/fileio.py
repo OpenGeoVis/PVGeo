@@ -411,7 +411,7 @@ class WriteImageDataToSurfer(WriterBase):
         arr, field = _helpers.searchForArray(inputDataObject, arrayName)
         self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
     def Write(self, inputDataObject=None, arrayName=None):
         """Perfrom the write out."""
