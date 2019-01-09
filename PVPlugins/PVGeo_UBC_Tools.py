@@ -9,6 +9,15 @@ from PVGeo import _helpers
 # Classes to Decorate
 from PVGeo.ubc import *
 
+discretize_available = False
+try:
+    with _helpers.HiddenPrints():
+        import discretize
+except ImportError:
+    pass
+else:
+    discretize_available = True
+
 #### GLOBAL VARIABLES ####
 MENU_CAT = 'PVGeo: UBC Mesh Tools'
 
@@ -154,108 +163,108 @@ class PVGeoTopoMeshAppender(TopoMeshAppender):
 # Read OcTree Mesh
 #------------------------------------------------------------------------------
 
-
-@smproxy.reader(name="PVGeoUBCOcTreeMeshReader",
-       label='PVGeo: %s'%OcTreeReader.__displayname__,
-       extensions=OcTreeReader.extensions,
-       file_description=OcTreeReader.description)
-@smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
-class PVGeoUBCOcTreeMeshReader(OcTreeReader):
-    def __init__(self):
-        OcTreeReader.__init__(self)
-
-
-    #### Seters and Geters ####
-
-    @smproperty.xml('''
-        <StringVectorProperty
-            panel_visibility="advanced"
-            name="MeshFile"
-            label="File Name Mesh"
-            command="SetMeshFileName"
-            animateable="1"
-            clean_command="ClearMesh"
-            number_of_elements="1">
-            <FileListDomain name="meshfile"/>
-            <Documentation>This is the mesh file for a OcTree Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
-        </StringVectorProperty>''')
-    def SetMeshFileName(self, fname):
-        OcTreeReader.SetMeshFileName(self, fname)
-
-    @smproperty.xml('''
-        <StringVectorProperty
-          panel_visibility="default"
-          name="ModelFiles"
-          label="File Name(s) Model"
-          command="AddModelFileName"
-          animateable="1"
-          repeat_command="1"
-          clean_command="ClearModels"
-          number_of_elements="1">
-          <FileListDomain name="modelfiles"/>
-          <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
-        </StringVectorProperty>''')
-    def AddModelFileName(self, fname):
-        """Use to set the file names for the reader. Handles singlt string or list of strings."""
-        OcTreeReader.AddModelFileName(self, fname)
+if discretize_available:
+    @smproxy.reader(name="PVGeoUBCOcTreeMeshReader",
+           label='PVGeo: %s'%OcTreeReader.__displayname__,
+           extensions=OcTreeReader.extensions,
+           file_description=OcTreeReader.description)
+    @smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
+    class PVGeoUBCOcTreeMeshReader(OcTreeReader):
+        def __init__(self):
+            OcTreeReader.__init__(self)
 
 
-    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        OcTreeReader.SetTimeDelta(self, dt)
+        #### Seters and Geters ####
 
-    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
-        """This is critical for registering the timesteps"""
-        return OcTreeReader.GetTimestepValues(self)
+        @smproperty.xml('''
+            <StringVectorProperty
+                panel_visibility="advanced"
+                name="MeshFile"
+                label="File Name Mesh"
+                command="SetMeshFileName"
+                animateable="1"
+                clean_command="ClearMesh"
+                number_of_elements="1">
+                <FileListDomain name="meshfile"/>
+                <Documentation>This is the mesh file for a OcTree Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
+            </StringVectorProperty>''')
+        def SetMeshFileName(self, fname):
+            OcTreeReader.SetMeshFileName(self, fname)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
-    panel_visibility="advanced"))
-    def SetUseFileName(self, flag):
-        OcTreeReader.SetUseFileName(self, flag)
+        @smproperty.xml('''
+            <StringVectorProperty
+              panel_visibility="default"
+              name="ModelFiles"
+              label="File Name(s) Model"
+              command="AddModelFileName"
+              animateable="1"
+              repeat_command="1"
+              clean_command="ClearModels"
+              number_of_elements="1">
+              <FileListDomain name="modelfiles"/>
+              <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
+            </StringVectorProperty>''')
+        def AddModelFileName(self, fname):
+            """Use to set the file names for the reader. Handles singlt string or list of strings."""
+            OcTreeReader.AddModelFileName(self, fname)
 
-    @smproperty.stringvector(name='DataName', default_values='Data', panel_visibility="advanced")
-    def SetDataName(self, name):
-        OcTreeReader.SetDataName(self, name)
+
+        @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+        def SetTimeDelta(self, dt):
+            OcTreeReader.SetTimeDelta(self, dt)
+
+        @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+        def GetTimestepValues(self):
+            """This is critical for registering the timesteps"""
+            return OcTreeReader.GetTimestepValues(self)
+
+        @smproperty.xml(_helpers.getPropertyXml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
+        panel_visibility="advanced"))
+        def SetUseFileName(self, flag):
+            OcTreeReader.SetUseFileName(self, flag)
+
+        @smproperty.stringvector(name='DataName', default_values='Data', panel_visibility="advanced")
+        def SetDataName(self, name):
+            OcTreeReader.SetDataName(self, name)
 
 
 
-@smproxy.filter(name="PVGeoOcTreeAppender",
-       label=OcTreeAppender.__displayname__)
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
-@smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkUnstructuredGrid"], composite_data_supported=False)
-class PVGeoOcTreeAppender(OcTreeAppender):
-    """This assumes the input vtkUnstructuredGrid has already handled the timesteps"""
-    def __init__(self):
-        OcTreeAppender.__init__(self)
+    @smproxy.filter(name="PVGeoOcTreeAppender",
+           label=OcTreeAppender.__displayname__)
+    @smhint.xml('''<ShowInMenu category="%s"/>
+        <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
+    @smproperty.input(name="Input", port_index=0)
+    @smdomain.datatype(dataTypes=["vtkUnstructuredGrid"], composite_data_supported=False)
+    class PVGeoOcTreeAppender(OcTreeAppender):
+        """This assumes the input vtkUnstructuredGrid has already handled the timesteps"""
+        def __init__(self):
+            OcTreeAppender.__init__(self)
 
-    @smproperty.xml('''
-        <StringVectorProperty
-          panel_visibility="default"
-          name="ModelFiles"
-          label="File Name(s) Model"
-          command="AddModelFileName"
-          animateable="1"
-          repeat_command="1"
-          clean_command="ClearModels"
-          number_of_elements="1">
-          <FileListDomain name="modelfiles"/>
-          <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
-        </StringVectorProperty>''')
-    def AddModelFileName(self, fname):
-        """Use to set the file names for the reader. Handles single string or list of strings."""
-        OcTreeAppender.AddModelFileName(self, fname)
+        @smproperty.xml('''
+            <StringVectorProperty
+              panel_visibility="default"
+              name="ModelFiles"
+              label="File Name(s) Model"
+              command="AddModelFileName"
+              animateable="1"
+              repeat_command="1"
+              clean_command="ClearModels"
+              number_of_elements="1">
+              <FileListDomain name="modelfiles"/>
+              <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
+            </StringVectorProperty>''')
+        def AddModelFileName(self, fname):
+            """Use to set the file names for the reader. Handles single string or list of strings."""
+            OcTreeAppender.AddModelFileName(self, fname)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
-    panel_visibility="advanced"))
-    def SetUseFileName(self, flag):
-        OcTreeAppender.SetUseFileName(self, flag)
+        @smproperty.xml(_helpers.getPropertyXml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
+        panel_visibility="advanced"))
+        def SetUseFileName(self, flag):
+            OcTreeAppender.SetUseFileName(self, flag)
 
-    @smproperty.stringvector(name='DataName', default_values='Appended Data', panel_visibility="advanced")
-    def SetDataName(self, name):
-        OcTreeAppender.SetDataName(self, name)
+        @smproperty.stringvector(name='DataName', default_values='Appended Data', panel_visibility="advanced")
+        def SetDataName(self, name):
+            OcTreeAppender.SetDataName(self, name)
 
 
 #------------------------------------------------------------------------------
@@ -479,25 +488,26 @@ class PVGeoGeologyMapper(GeologyMapper):
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoDiscretizeMeshReader",
-       label='PVGeo: %s'%DiscretizeMeshReader.__displayname__,
-       extensions=DiscretizeMeshReader.extensions,
-       file_description=DiscretizeMeshReader.description)
-class PVGeoDiscretizeMeshReader(DiscretizeMeshReader):
-    def __init__(self):
-        DiscretizeMeshReader.__init__(self)
+if discretize_available:
+    @smproxy.reader(name="PVGeoDiscretizeMeshReader",
+           label='PVGeo: %s'%DiscretizeMeshReader.__displayname__,
+           extensions=DiscretizeMeshReader.extensions,
+           file_description=DiscretizeMeshReader.description)
+    class PVGeoDiscretizeMeshReader(DiscretizeMeshReader):
+        def __init__(self):
+            DiscretizeMeshReader.__init__(self)
 
-    #### Seters and Geters ####
+        #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(DiscretizeMeshReader.extensions, readerDescription=DiscretizeMeshReader.description))
-    def AddFileName(self, fname):
-        DiscretizeMeshReader.AddFileName(self, fname)
+        @smproperty.xml(_helpers.getFileReaderXml(DiscretizeMeshReader.extensions, readerDescription=DiscretizeMeshReader.description))
+        def AddFileName(self, fname):
+            DiscretizeMeshReader.AddFileName(self, fname)
 
-    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        DiscretizeMeshReader.SetTimeDelta(self, dt)
+        @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+        def SetTimeDelta(self, dt):
+            DiscretizeMeshReader.SetTimeDelta(self, dt)
 
-    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
-        """This is critical for registering the timesteps"""
-        return DiscretizeMeshReader.GetTimestepValues(self)
+        @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+        def GetTimestepValues(self):
+            """This is critical for registering the timesteps"""
+            return DiscretizeMeshReader.GetTimestepValues(self)

@@ -2,6 +2,7 @@ from base import TestBase
 import shutil
 import tempfile
 import os
+import warnings
 import numpy as np
 
 # VTK imports:
@@ -11,6 +12,15 @@ from vtk.numpy_interface import dataset_adapter as dsa
 # Functionality to test:
 from PVGeo.ubc import *
 import PVGeo
+
+discretize_available = False
+try:
+    with PVGeo._helpers.HiddenPrints():
+        import discretize
+except ImportError:
+    warnings.warn('`discretize` is NOT available. Be sure to install it.')
+else:
+    discretize_available = True
 
 RTOL = 0.000001
 
@@ -313,15 +323,16 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
 
 ###############################################################################
 
-class TestOcTreeMeshReader(ubcMeshTesterBase):
-    """
-    Test the `OcTreeReader`
-    """
+if discretize_available:
+    class TestOcTreeMeshReader(ubcMeshTesterBase):
+        """
+        Test the `OcTreeReader`
+        """
 
-    def setUp(self):
-        TestBase.setUp(self)
-        self.test_dir = tempfile.mkdtemp()
-        treeMesh = """16 16 16
+        def setUp(self):
+            TestBase.setUp(self)
+            self.test_dir = tempfile.mkdtemp()
+            treeMesh = """16 16 16
 0.0000 0.0000 48.0000
 1.000 2.000 3.000
 29
@@ -355,98 +366,97 @@ class TestOcTreeMeshReader(ubcMeshTesterBase):
 1 2 16 1
 2 2 16 1
 """
-        # Write out mesh file
-        fname = os.path.join(self.test_dir, 'octree.msh')
-        self.meshFileName = fname
-        with open(fname, 'w') as f:
-            f.write(treeMesh)
+            # Write out mesh file
+            fname = os.path.join(self.test_dir, 'octree.msh')
+            self.meshFileName = fname
+            with open(fname, 'w') as f:
+                f.write(treeMesh)
 
 
-        # write out model file(s)
-        self.nt = 5
-        self.modelFileNames = ['model%d.mod' % i for i in range(self.nt)]
-        self.modelFileNames = [os.path.join(self.test_dir, self.modelFileNames[i]) for i in range(self.nt)]
-        self.arrs = [None] * self.nt
-        for i in range(self.nt):
-            self.arrs[i] = np.random.random(29)
-            np.savetxt(self.modelFileNames[i], self.arrs[i], delimiter=' ', comments='! ')
-        return
+            # write out model file(s)
+            self.nt = 5
+            self.modelFileNames = ['model%d.mod' % i for i in range(self.nt)]
+            self.modelFileNames = [os.path.join(self.test_dir, self.modelFileNames[i]) for i in range(self.nt)]
+            self.arrs = [None] * self.nt
+            for i in range(self.nt):
+                self.arrs[i] = np.random.random(29)
+                np.savetxt(self.modelFileNames[i], self.arrs[i], delimiter=' ', comments='! ')
+            return
 
-    def tearDown(self):
-        # Remove the test data directory after the test
-        shutil.rmtree(self.test_dir)
-        TestBase.tearDown(self)
+        def tearDown(self):
+            # Remove the test data directory after the test
+            shutil.rmtree(self.test_dir)
+            TestBase.tearDown(self)
 
-    def reshapeArrs(self, mesh):
-        for i in range(self.nt):
-            ind_reorder = nps.vtk_to_numpy(
-                mesh.GetCellData().GetArray('index_cell_corner'))
-            self.arrs[i] = self.arrs[i][ind_reorder]
+        def reshapeArrs(self, mesh):
+            for i in range(self.nt):
+                ind_reorder = nps.vtk_to_numpy(
+                    mesh.GetCellData().GetArray('index_cell_corner'))
+                self.arrs[i] = self.arrs[i][ind_reorder]
 
-    def test_simple_octree(self):
-        """`OcTreeReader`: simple octree mesh file"""
-        reader = OcTreeReader()
-        reader.SetMeshFileName(self.meshFileName)
+        def test_simple_octree(self):
+            """`OcTreeReader`: simple octree mesh file"""
+            reader = OcTreeReader()
+            reader.SetMeshFileName(self.meshFileName)
 
-        reader.Update()
+            reader.Update()
 
-        tree = reader.GetOutput()
-        self.assertIsNotNone(tree)
-        self.assertEqual(tree.GetNumberOfCells(), 29)
-        self.assertEqual(tree.GetNumberOfPoints(), 84)
+            tree = reader.GetOutput()
+            self.assertIsNotNone(tree)
+            self.assertEqual(tree.GetNumberOfCells(), 29)
+            self.assertEqual(tree.GetNumberOfPoints(), 84)
 
-    def test_simple_octree(self):
-        """`OcTreeReader`: simple octree mesh with models"""
-        reader = OcTreeReader()
-        reader.SetMeshFileName(self.meshFileName)
-        reader.AddModelFileName(self.modelFileNames)
-        reader.SetDataName('foo')
+        def test_simple_octree(self):
+            """`OcTreeReader`: simple octree mesh with models"""
+            reader = OcTreeReader()
+            reader.SetMeshFileName(self.meshFileName)
+            reader.AddModelFileName(self.modelFileNames)
+            reader.SetDataName('foo')
 
-        reader.Update() # Check that normal update works
+            reader.Update() # Check that normal update works
 
-        tree = reader.GetOutput()
-        self.assertIsNotNone(tree)
-        self.assertEqual(tree.GetNumberOfCells(), 29)
-        self.assertEqual(tree.GetNumberOfPoints(), 84)
+            tree = reader.GetOutput()
+            self.assertIsNotNone(tree)
+            self.assertEqual(tree.GetNumberOfCells(), 29)
+            self.assertEqual(tree.GetNumberOfPoints(), 84)
 
-        self.reshapeArrs(tree)
+            self.reshapeArrs(tree)
 
-        wtree = dsa.WrapDataObject(tree)
-        # Now check time series
-        for i in range(self.nt):
-            reader.UpdateTimeStep(i)
-            arr = wtree.CellData['foo']
-            self.assertTrue(np.allclose(arr, self.arrs[i], rtol=RTOL))
+            wtree = dsa.WrapDataObject(tree)
+            # Now check time series
+            for i in range(self.nt):
+                reader.UpdateTimeStep(i)
+                arr = wtree.CellData['foo']
+                self.assertTrue(np.allclose(arr, self.arrs[i], rtol=RTOL))
 
-        return
+            return
 
-    def test_model_appender(self):
-        """`OcTreeAppender` 2D: Data array name"""
-        # Creat a tree mesh to append
-        reader = OcTreeReader()
-        reader.SetMeshFileName(self.meshFileName)
-        reader.AddModelFileName(self.modelFileNames[0])
-        reader.SetDataName('Initial Data')
-        reader.Update()
-        tree = reader.GetOutput()
-        self.assertIsNotNone(tree)
-        self.assertEqual(tree.GetNumberOfCells(), 29)
-        self.assertEqual(tree.GetNumberOfPoints(), 84)
+        def test_model_appender(self):
+            """`OcTreeAppender` 2D: Data array name"""
+            # Creat a tree mesh to append
+            reader = OcTreeReader()
+            reader.SetMeshFileName(self.meshFileName)
+            reader.AddModelFileName(self.modelFileNames[0])
+            reader.SetDataName('Initial Data')
+            reader.Update()
+            tree = reader.GetOutput()
+            self.assertIsNotNone(tree)
+            self.assertEqual(tree.GetNumberOfCells(), 29)
+            self.assertEqual(tree.GetNumberOfPoints(), 84)
 
-        # Now use the model appender
-        f = OcTreeAppender()
-        f.SetInputDataObject(tree)
-        f.AddModelFileName(self.modelFileNames[1::])
-        f.SetDataName('Appended Data')
-        f.Update()
+            # Now use the model appender
+            f = OcTreeAppender()
+            f.SetInputDataObject(tree)
+            f.AddModelFileName(self.modelFileNames[1::])
+            f.SetDataName('Appended Data')
+            f.Update()
 
-        output = f.GetOutput()
-        # remember that 2 arrays is added by the reader
-        self.assertEqual(output.GetCellData().GetNumberOfArrays(), 4)
-        self.assertEqual(output.GetCellData().GetArrayName(3), os.path.basename(self.modelFileNames[1])) # use file as name
-        self.assertEqual(len(f.GetTimestepValues()), self.nt-1)
-        return
-
+            output = f.GetOutput()
+            # remember that 2 arrays is added by the reader
+            self.assertEqual(output.GetCellData().GetNumberOfArrays(), 4)
+            self.assertEqual(output.GetCellData().GetArrayName(3), os.path.basename(self.modelFileNames[1])) # use file as name
+            self.assertEqual(len(f.GetTimestepValues()), self.nt-1)
+            return
 
 ###############################################################################
 ###############################################################################
