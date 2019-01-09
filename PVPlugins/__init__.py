@@ -9,9 +9,10 @@ from .PVGeo_Model_Builder import *
 from .PVGeo_Readers import *
 from .PVGeo_Tunneling import *
 from .PVGeo_UBC_Tools import *
+import PVGeo_All
 
 
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
-__version__ = '1.1.28'
+__version__ = '1.1.42'

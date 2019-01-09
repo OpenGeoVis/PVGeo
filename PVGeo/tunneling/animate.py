@@ -2,13 +2,14 @@ __all__ = [
     'AnimateTBM',
 ]
 
-import vtk
-import numpy as np
-from vtk.numpy_interface import dataset_adapter as dsa
 from datetime import datetime
-# Import Helpers:
-from ..base import AlgorithmBase
+
+import numpy as np
+import vtk
+from vtk.numpy_interface import dataset_adapter as dsa
+
 from .. import _helpers
+from ..base import AlgorithmBase
 
 
 class AnimateTBM(AlgorithmBase):

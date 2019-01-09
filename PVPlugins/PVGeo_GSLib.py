@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.28'
+paraview_plugin_version = '1.1.42'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -11,19 +11,18 @@ from PVGeo.gslib import *
 
 ###############################################################################
 
+
 @smproxy.reader(name="PVGeoGSLibReader",
-       label="PVGeo: GSLib File Format",
-       extensions="sgems dat geoeas gslib GSLIB txt SGEMS",
-       file_description="GSLib Table")
+       label='PVGeo: %s'%GSLibReader.__displayname__,
+       extensions=GSLibReader.extensions,
+       file_description=GSLibReader.description)
 class PVGeoGSLibReader(GSLibReader):
     def __init__(self):
         GSLibReader.__init__(self)
 
     #### Seters and Geters ####
-    # @smproperty.stringvector(name="FileNames", panel_visibility="advanced")
-    # @smdomain.filelist()
-    # @smhint.filechooser(extensions="sgems dat geoeas gslib GSLIB txt SGEMS", file_description="GSLib Tables")
-    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+
+    @smproperty.xml(_helpers.getFileReaderXml(GSLibReader.extensions, readerDescription=GSLibReader.description))
     def AddFileName(self, fname):
         GSLibReader.AddFileName(self, fname)
 
@@ -31,7 +30,7 @@ class PVGeoGSLibReader(GSLibReader):
     def SetDelimiter(self, deli):
         GSLibReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
     def SetSplitOnWhiteSpace(self, flag):
         GSLibReader.SetSplitOnWhiteSpace(self, flag)
 
@@ -59,14 +58,62 @@ class PVGeoGSLibReader(GSLibReader):
 
 
 
+###############################################################################
+
+
+@smproxy.reader(name="PVGeoGSLibPointSetReader",
+       label='PVGeo: %s'%GSLibPointSetReader.__displayname__,
+       extensions=GSLibPointSetReader.extensions,
+       file_description=GSLibPointSetReader.description)
+@smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
+class PVGeoGSLibPointSetReader(GSLibPointSetReader):
+    def __init__(self):
+        GSLibPointSetReader.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.xml(_helpers.getFileReaderXml(GSLibPointSetReader.extensions, readerDescription=GSLibPointSetReader.description))
+    def AddFileName(self, fname):
+        GSLibPointSetReader.AddFileName(self, fname)
+
+    @smproperty.stringvector(name="Delimiter", default_values=" ")
+    def SetDelimiter(self, deli):
+        GSLibPointSetReader.SetDelimiter(self, deli)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def SetSplitOnWhiteSpace(self, flag):
+        GSLibPointSetReader.SetSplitOnWhiteSpace(self, flag)
+
+    @smproperty.intvector(name="SkipRows", default_values=0)
+    def SetSkipRows(self, skip):
+        GSLibPointSetReader.SetSkipRows(self, skip)
+
+    @smproperty.stringvector(name="Comments", default_values="!")
+    def SetComments(self, identifier):
+        GSLibPointSetReader.SetComments(self, identifier)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        GSLibPointSetReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return GSLibPointSetReader.GetTimestepValues(self)
+
+    @smproperty.xml("""<Property name="Print File Header" command="PrintFileHeader" panel_widget="command_button"/>""")
+    def PrintFileHeader(self):
+        print(GSLibPointSetReader.GetFileHeader(self))
+        return 1
+
 
 ###############################################################################
 
 
 @smproxy.reader(name="PVGeoSGeMSGridReader",
-       label="PVGeo: SGeMS Grid Reader",
-       extensions="dat gslib sgems SGEMS SGeMS",
-       file_description="SGeMS Uniform Grid")
+       label='PVGeo: %s'%SGeMSGridReader.__displayname__,
+       extensions=SGeMSGridReader.extensions,
+       file_description=SGeMSGridReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoSGeMSGridReader(SGeMSGridReader):
     def __init__(self):
@@ -74,7 +121,7 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+    @smproperty.xml(_helpers.getFileReaderXml(SGeMSGridReader.extensions, readerDescription=SGeMSGridReader.description))
     def AddFileName(self, fname):
         SGeMSGridReader.AddFileName(self, fname)
 
@@ -82,7 +129,7 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
     def SetDelimiter(self, deli):
         SGeMSGridReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
     def SetSplitOnWhiteSpace(self, flag):
         SGeMSGridReader.SetSplitOnWhiteSpace(self, flag)
 

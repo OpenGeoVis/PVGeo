@@ -78,7 +78,7 @@ class WriterBase(VTKPythonAlgorithmBase):
         self.Modified()
         self.Update()
 
-    def PerformWriteOut(self, inputDataObject, filename):
+    def PerformWriteOut(self, inputDataObject, filename, objectName):
         """This method must be implemented. This is automatically called by
         ``RequestData`` for single inputs or composite inputs."""
         raise NotImplementedError('PerformWriteOut must be implemented!')
@@ -134,7 +134,7 @@ class WriterBase(VTKPythonAlgorithmBase):
     def RequestData(self, request, inInfoVec, outInfoVec):
         """Subclasses must implement a ``PerformWriteOut`` method that takes an
         input data object and a filename. This method will automatically handle
-        composite data sets. DO NOT OVERWRITE THIS.
+        composite data sets.
         """
         inp = self.GetInputData(inInfoVec, 0, 0)
         if isinstance(inp, vtk.vtkMultiBlockDataSet):
@@ -145,13 +145,14 @@ class WriterBase(VTKPythonAlgorithmBase):
             self.SetBlockFileNames(num)
             for i in range(num):
                 data = inp.GetBlock(i)
+                name = inp.GetMetaData(i).Get(vtk.vtkCompositeDataSet.NAME())
                 if data.IsTypeOf(self.InputType):
-                    self.PerformWriteOut(data, self.GetBlockFileName(i))
+                    self.PerformWriteOut(data, self.GetBlockFileName(i), name)
                 else:
                     warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
         # Handle single input dataset
         else:
-            self.PerformWriteOut(inp, self.GetFileName())
+            self.PerformWriteOut(inp, self.GetFileName(), None)
         return 1
 
 
@@ -174,7 +175,7 @@ class WriteCellCenterData(WriterBase):
         self.__delimiter = ','
 
 
-    def PerformWriteOut(self, inputDataObject, filename):
+    def PerformWriteOut(self, inputDataObject, filename, objectName):
         # Find cell centers
         filt = vtk.vtkCellCenters()
         filt.SetInputDataObject(inputDataObject)
@@ -211,7 +212,47 @@ class WriteCellCenterData(WriterBase):
 
 
 ################################################################################
-## Now wrap that writer for use in ParaView!
+## Now lets use ``WriterBase`` to make a writer algorithm for image data
+
+
+@smproxy.writer(extensions="imgfmt", file_description="Write Custom ImageData", support_reload=False)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
+class WriteCustomImageData(WriterBase):
+    """This is an example of how to make your own file writer!
+
+    .. _PVGeo: http://pvgeo.org
+    .. _Bane Sullivan: http://banesullivan.com
+    """
+    def __init__(self):
+        WriterBase.__init__(self, inputType='vtkImageData')
+        self.__delimiter = ','
+
+
+    def PerformWriteOut(self, inputDataObject, filename, objectName):
+        """Perfrom the file write to the given FileName with the given data
+        object. The super class handles all the complicated stuff.
+        """
+        fname = filename.split('.')
+        fname = '.'.join(fname[0:-1]) + '_%s.%s' % (objectName, fname[-1])
+        writer = vtk.vtkXMLImageDataWriter()
+        writer.SetFileName(fname)
+        writer.SetInputDataObject(inputDataObject)
+        writer.Write()
+        # Success for pipeline
+        return 1
+
+    @smproperty.stringvector(name="FileName", panel_visibility="never")
+    @smdomain.filelist()
+    def SetFileName(self, fname):
+        """Specify filename for the file to write."""
+        WriterBase.SetFileName(self, fname)
+
+
+
+
+################################################################################
+## Now wrap the cell centers writer for use in ParaView!
 
 @smproxy.writer(extensions="dat", file_description="Cell Centers and Cell Data", support_reload=False)
 @smproperty.input(name="Input", port_index=0)

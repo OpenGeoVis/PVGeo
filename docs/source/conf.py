@@ -20,7 +20,7 @@ import shutil
 path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print(path)
 sys.path.insert(0, path)
-sys.path.insert(0, '/Users/bane/Documents/OpenGeoVis/Projects/gendocs/')
+sys.path.insert(0, '/Users/bane/Documents/OpenGeoVis/Software/gendocs/')
 
 
 # Mock the paraview module to build pvmacros docs
@@ -43,14 +43,17 @@ from gendocs import Generator
 Generator().DocumentPackages([PVGeo, pvmacros],
             index_base='../index_base.rst',
             showprivate=True,
+            notify=False,
             )
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'PVGeo'
-copyright = '2018, Bane Sullivan'
+copyright = u'2018, Bane Sullivan, http:://banesullivan.com'
 author = 'Bane Sullivan'
+html_show_copyright = False
+html_show_sphinx = False
 
 # The short X.Y version
 version = ''

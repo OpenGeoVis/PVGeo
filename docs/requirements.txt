@@ -1,5 +1,5 @@
 # For building the documentation:
-gendocs>=0.3.0
+gendocs>=0.3.1
 mock==2.0.0
 Sphinx==1.7.5
 sphinx-autobuild==0.7.1
@@ -14,3 +14,4 @@ codecov==2.0.15
 vtk>=8.1.0
 pandas>=0.23.4
 pyproj>=1.9
+espatools>=0.0.7

@@ -1,4 +1,6 @@
 __all__ = [
+    'AddCellConnToPoints',
+    'PointsToTube',
     'LonLatToUTM',
     'RotatePoints',
     'ExtractPoints',
@@ -9,15 +11,235 @@ __all__ = [
     'ConvertUnits',
 ]
 
-import vtk
+__displayname__ = 'Point/Line Sets'
+
 import numpy as np
 import pandas as pd
-import pyproj
+import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-# Import Helpers:
+
+# NOTE: internal import of pyproj in LonLatToUTM
+
+from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase
-from .. import _helpers
-from .. import interface
+
+###############################################################################
+#---- Cell Connectivity ----#
+
+class AddCellConnToPoints(FilterBase):
+    """This filter will add linear cell connectivity between scattered points.
+    You have the option to add ``VTK_Line`` or ``VTK_PolyLine`` connectivity.
+    ``VTK_Line`` connectivity makes a straight line between the points in order
+    (either in the order by index or using a nearest neighbor calculation).
+    The ``VTK_PolyLine`` adds a poly line connectivity between all points as
+    one spline (either in the order by index or using a nearest neighbor
+    calculation). Type map is specified in `vtkCellType.h`.
+
+    **Cell Connectivity Types:**
+
+    - 4: Poly Line
+    - 3: Line
+    """
+    __displayname__ = 'Add Cell Connectivity to Points'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterBase.__init__(self,
+            nInputPorts=1, inputType='vtkPolyData',
+            nOutputPorts=1, outputType='vtkPolyData')
+        # Parameters
+        self.__cellType = vtk.VTK_POLY_LINE
+        self.__usenbr = kwargs.get('nearestNbr', False)
+        self.__unique = True
+
+
+    def _ConnectCells(self, pdi, pdo, logTime=False):
+        """Internal helper to perfrom the connection
+        """
+        # NOTE: Type map is specified in vtkCellType.h
+        cellType = self.__cellType
+        nrNbr = self.__usenbr
+
+        if logTime:
+            startTime = datetime.now()
+
+        # Get the Points over the NumPy interface
+        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
+        points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+        if self.__unique:
+            # Remove repeated points
+            points = np.unique(points, axis=0)
+
+        def _makePolyCell(ptsi):
+            cell = vtk.vtkPolyLine()
+            cell.GetPointIds().SetNumberOfIds(len(ptsi))
+            for i in ptsi:
+                cell.GetPointIds().SetId(i, ptsi[i])
+            return cell
+
+        def _makeLineCell(ptsi):
+            if len(ptsi) != 2:
+                raise _helpers.PVGeoError('_makeLineCell() only handles two points')
+            aLine = vtk.vtkLine()
+            aLine.GetPointIds().SetId(0, ptsi[0])
+            aLine.GetPointIds().SetId(1, ptsi[1])
+            return aLine
+
+
+        cells = vtk.vtkCellArray()
+        numPoints = pdi.GetNumberOfPoints()
+        if nrNbr:
+            try:
+                # sklearn's KDTree is faster: use it if available
+                from sklearn.neighbors import KDTree as Tree
+            except:
+                from scipy.spatial import cKDTree  as Tree
+            # VTK_Line
+            og = np.array([0.0,0.0,0.0]).reshape(1, -1)
+            if cellType == vtk.VTK_LINE:
+                tree = Tree(points)
+                ind = tree.query(og, k=numPoints)[1].ravel()
+                print(ind)
+                for i in range(len(ind)-1):
+                    # Get indices of k nearest points
+                    ptsi = [ind[i], ind[i+1]]
+                    cell = _makeLineCell(ptsi)
+                    cells.InsertNextCell(cell)
+                    points = np.delete(points, 0, 0) # Deletes first row
+            # VTK_PolyLine
+            elif cellType == vtk.VTK_POLY_LINE:
+                tree = Tree(points)
+                ptsi = tree.query(og, k=numPoints)[1].ravel()
+                cell = _makePolyCell(ptsi.ravel())
+                cells.InsertNextCell(cell)
+            else:
+                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
+        else:
+            # VTK_PolyLine
+            if cellType == vtk.VTK_POLY_LINE:
+                ptsi = [i for i in range(numPoints)]
+                cell = _makePolyCell(ptsi)
+                cells.InsertNextCell(cell)
+            # VTK_Line
+            elif cellType == vtk.VTK_LINE:
+                for i in range(0, numPoints-1):
+                    ptsi = [i, i+1]
+                    cell = _makeLineCell(ptsi)
+                    cells.InsertNextCell(cell)
+            else:
+                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
+
+        if logTime:
+            print((datetime.now() - startTime))
+        # Now add points and cells to output
+        pdo.SetPoints(pdi.GetPoints())
+        pdo.SetLines(cells)
+        # copy point data
+        _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        # Copy cell data if type is LINE
+        if cellType == vtk.VTK_LINE:
+            # Be sure to rearange for Nearest neighbor approxiamtion
+            for i in range(pdi.GetCellData().GetNumberOfArrays()):
+                vtkarr = pdi.GetCellData().GetArray(i)
+                name = vtkarr.GetName()
+                if nrNbr:
+                    arr = interface.convertArray(vtkarr)
+                    arr = arr[ind]
+                    vtkarr = interface.convertArray(arr, name=name)
+                pdo.GetCellData().AddArray(vtkarr)
+        return pdo
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output data object
+        """
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
+        # Perfrom task
+        self._ConnectCells(pdi, pdo)
+        return 1
+
+
+    #### Seters and Geters ####
+
+
+    def SetCellType(self, cellType):
+        """Set the cell typ by the integer id as specified in `vtkCellType.h`
+        """
+        if cellType != self.__cellType:
+            self.__cellType = cellType
+            self.Modified()
+
+    def SetUseNearestNbr(self, flag):
+        """Set a flag on whether to a KDTree nearest neighbor
+        algorithm to sort the points to before adding linear connectivity.
+        """
+        if flag != self.__usenbr:
+            self.__usenbr = flag
+            self.Modified()
+
+    def SetUseUniquePoints(self, flag):
+        """Set a flag on whether to only use unique points"""
+        if flag != self.__unique:
+            self.__unique = flag
+            self.Modified()
+
+
+###############################################################################
+
+
+class PointsToTube(AddCellConnToPoints):
+    """Takes points from a vtkPolyData object and constructs a line of those
+    points then builds a polygonal tube around that line with some specified
+    radius and number of sides.
+    """
+    __displayname__ = 'Points to Tube'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        AddCellConnToPoints.__init__(self, **kwargs)
+        # Additional Parameters
+        # NOTE: CellType should remain vtk.VTK_POLY_LINE (4) connection
+        self.__numSides = 20
+        self.__radius = 10.0
+        self.__capping = False
+
+
+    def _ConnectCells(self, pdi, pdo, logTime=False):
+        """This uses the parent's ``_ConnectCells()`` to build a tub around
+        """
+        AddCellConnToPoints._ConnectCells(self, pdi, pdo, logTime=logTime)
+        tube = vtk.vtkTubeFilter()
+        tube.SetInputData(pdo)
+        # User Defined Parameters
+        tube.SetCapping(self.__capping)
+        tube.SetRadius(self.__radius)
+        tube.SetNumberOfSides(self.__numSides)
+        # Apply the filter
+        tube.Update()
+        pdo.ShallowCopy(tube.GetOutput())
+        return pdo
+
+
+    #### Seters and Geters ####
+
+    def SetRadius(self, radius):
+        """Set the radius of the tube
+        """
+        if self.__radius != radius:
+            self.__radius = radius
+            self.Modified()
+
+    def SetNumberOfSides(self, num):
+        """Set the number of sides (resolution) for the tube
+        """
+        if self.__numSides != num:
+            self.__numSides = num
+            self.Modified()
+
+    def SetCapping(self, flag):
+        if self.__capping != flag:
+            self.__capping = flag
+            self.Modified()
+
 
 
 
@@ -31,13 +253,16 @@ class LonLatToUTM(FilterBase):
     __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self, inputType='vtkPolyData', outputType='vtkPolyData', **kwargs)
-        self.__zone = kwargs.get('zone', 11) # User defined
-        self.__ellps = kwargs.get('ellps', 'WGS84') # User defined
+        self.__zone = 11,
+        self.__ellps = 'WGS84'
+        self.SetZone(kwargs.get('zone', 11)) # User defined
+        self.SetEllps(kwargs.get('ellps', 'WGS84')) # User defined
 
     @staticmethod
     def GetAvailableEllps(idx=None):
         """Returns the available ellps
         """
+        import pyproj
         ellps = pyproj.pj_ellps.keys()
         # Now migrate WGSXX to front so that 84 is always default
         wgs = ['WGS60','WGS66','WGS72', 'WGS84']
@@ -49,6 +274,7 @@ class LonLatToUTM(FilterBase):
 
     def __Convert2D(self, lon, lat, elev):
         """Converts 2D Lon Lat coords to 2D XY UTM points"""
+        import pyproj
         p = pyproj.Proj(proj='utm', zone=self.__zone, ellps=self.__ellps)
         utm_x, utm_y = p(lon, lat)
         return np.c_[utm_x, utm_y, elev]
@@ -90,7 +316,8 @@ class LonLatToUTM(FilterBase):
 
 
 class RotationTool(object):
-    """A class that holds a set of methods/tools for performing and estimating coordinate rotations.
+    """A class that holds a set of methods/tools for performing and estimating
+    coordinate rotations.
     """
     __displayname__ = 'Rotation Tool'
     __category__ = 'filter'
@@ -173,9 +400,9 @@ class RotationTool(object):
         angle is the arccosine of the dot product of the two unit vectors.
         Given a unit vector parallel to the rotation axis, w = [x, y, z] and the rotation angle a,
         the rotation matrix R is::
-                  |  1 + (1-cos(a))*(x*x-1)   -z*sin(a)+(1-cos(a))*x*y   y*sin(a)+(1-cos(a))*x*z |
-            R  =  |  z*sin(a)+(1-cos(a))*x*y   1 + (1-cos(a))*(y*y-1)   -x*sin(a)+(1-cos(a))*y*z |
-                  | -y*sin(a)+(1-cos(a))*x*z   x*sin(a)+(1-cos(a))*y*z   1 + (1-cos(a))*(z*z-1)  |
+                |  1 + (1-cos(a))*(x*x-1)   -z*sin(a)+(1-cos(a))*x*y   y*sin(a)+(1-cos(a))*x*z |
+            R = |  z*sin(a)+(1-cos(a))*x*y   1 + (1-cos(a))*(y*y-1)   -x*sin(a)+(1-cos(a))*y*z |
+                | -y*sin(a)+(1-cos(a))*x*z   x*sin(a)+(1-cos(a))*y*z   1 + (1-cos(a))*(z*z-1)  |
 
         Args:
             vector_orig (umpy array, len 3): The unrotated vector defined in the reference frame.
@@ -297,14 +524,18 @@ class RotationTool(object):
     def _EstimateAngleAndSpacing(self, pts, sample=.5):
         """internal use only
         """
-        from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
+        try:
+            # sklearn's KDTree is faster: use it if available
+            from sklearn.neighbors import KDTree as Tree
+        except:
+            from scipy.spatial import cKDTree  as Tree
         # Creat the indexing range for searching the points:
         num = len(pts)
         rng = np.linspace(0, num-1, num=num, dtype=int)
         N = int(num*sample) + 1
         rng = np.random.choice(rng, N)
         angles = np.zeros(len(rng))
-        tree = cKDTree(pts)
+        tree = Tree(pts)
         distances = [[],[]]
 
         #######################################################################
@@ -342,7 +573,8 @@ class RotationTool(object):
 
 
     def EstimateAndRotate(self, x, y, z):
-        """A method to estimate the rotation of a set of points and correct that rotation on the XY plane
+        """A method to estimate the rotation of a set of points and correct
+        that rotation on the XY plane
         """
         assert(len(x) == len(y) == len(z))
         idxs = np.argwhere(z == z[0])
@@ -356,7 +588,8 @@ class RotationTool(object):
 #---- Coordinate Rotations ----#
 
 class RotatePoints(FilterBase):
-    """Rotates XYZ coordinates in `vtkPolyData` around an origin at a given angle on the XY plane.
+    """Rotates XYZ coordinates in `vtkPolyData` around an origin at a given
+    angle on the XY plane.
     """
     __displayname__ = 'Rotate Points'
     __category__ = 'filter'
@@ -406,7 +639,8 @@ class RotatePoints(FilterBase):
             self.Modified()
 
     def SetUseCorner(self, flag):
-        """A flag to use a corner of the input data set as the rotational origin.
+        """A flag to use a corner of the input data set as the rotational
+        origin.
         """
         if self.__useCorner != flag:
             self.__useCorner = flag
@@ -509,7 +743,8 @@ class IterateOverPoints(FilterBase):
     __displayname__ = 'Iterate Over Points'
     __category__ = 'filter'
     def __init__(self, dt=1.0):
-        FilterBase.__init__(self, nInputPorts=1, inputType='vtkPolyData', nOutputPorts=1, outputType='vtkPolyData')
+        FilterBase.__init__(self, nInputPorts=1, inputType='vtkPolyData',
+                            nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.__dt = dt
         self.__timesteps = None
@@ -517,6 +752,9 @@ class IterateOverPoints(FilterBase):
         self.__tindex = None
         self.__n = 2
         self.__decimate = 100
+        # The point/normal that gets updated on every iteration
+        self.__point = (0.0, 0.0, 0.0)
+        self.__normal = (1.0, 0.0, 0.0)
 
 
     def _UpdateTimeSteps(self):
@@ -537,6 +775,14 @@ class IterateOverPoints(FilterBase):
         i = _helpers.getRequestedTime(self, outInfo)
         # Now grab point at this timestep
         pt = pdi.GetPoints().GetPoint(self.__tindex[i])
+        # Calculate normal
+        pts1 = self.__point
+        pts2 = pt
+        x1, y1, z1 = pts1[0], pts1[1], pts1[2]
+        x2, y2, z2 = pts2[0], pts2[1], pts2[2]
+        normal = [x2-x1, y2-y1, z2-z1]
+        self.__point = pt
+        self.__normal = normal
         poly = interface.pointsToPolyData(np.array(pt))
         pdo.ShallowCopy(poly)
         return 1
@@ -580,6 +826,12 @@ class IterateOverPoints(FilterBase):
         """Use this in ParaView decorator to register timesteps
         """
         return self.__timesteps.tolist() if self.__timesteps is not None else None
+
+    def GetPoint(self):
+        return list(self.__point)
+
+    def GetNormal(self):
+        return list(self.__normal)
 
 
 

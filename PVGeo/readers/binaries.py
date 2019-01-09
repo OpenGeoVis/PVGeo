@@ -1,11 +1,14 @@
 __all__ = [
     'PackedBinariesReader',
-    'MadagascarReader']
+    'MadagascarReader',
+]
+
+__displayname__ = 'Binary/Serialized File I/O'
 
 import numpy as np
 import vtk
 import warnings
-# Import Helpers:
+
 from .. import _helpers
 from ..base import ReaderBase
 from .. import interface
@@ -13,10 +16,19 @@ from .. import interface
 
 
 class PackedBinariesReader(ReaderBase):
-    """This reads in float or double data that is packed into a binary file format. It will treat the data as one long array and make a ``vtkTable`` with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We chose to use a ``vtkTable`` object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
+    """This reads in float or double data that is packed into a binary file
+    format. It will treat the data as one long array and make a ``vtkTable``
+    with one column of that data. The reader uses defaults to import as floats
+    with native endianness. Use the Table to Uniform Grid or the Reshape Table
+    filters to give more meaning to the data. We chose to use a ``vtkTable``
+    object as the output of this reader because it gives us more flexibility in
+    the filters we can apply to this data down the pipeline and keeps thing
+    simple when using filters in this repository.
     """
     __displayname__ = 'Packed Binaries Reader'
     __category__ = 'reader'
+    extensions = 'H@ bin rsf rsf@ HH npz'
+    description = 'PVGeo: Packed Binaries Reader'
     def __init__(self, **kwargs):
         ReaderBase.__init__(self,
             nOutputPorts=1, outputType='vtkTable', **kwargs)
@@ -35,7 +47,7 @@ class PackedBinariesReader(ReaderBase):
             dtype = np.dtype('f')
         try:
             arr = np.fromfile(fileName, dtype=dtype)
-        except (FileNotFoundError, OSError) as fe:
+        except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         return np.asarray(arr, dtype=self.__dtype)
 
@@ -136,13 +148,26 @@ class PackedBinariesReader(ReaderBase):
 
 
 class MadagascarReader(PackedBinariesReader):
-    """This reads in float or double data that is packed into a Madagascar binary file format with a leader header. The reader ignores all of the ascii header details by searching for the sequence of three special characters: EOL EOL EOT and it will treat the followng binary packed data as one long array and make a ``vtkTable`` with one column of that data. The reader uses defaults to import as floats with native endianness. Use the Table to Uniform Grid or the Reshape Table filters to give more meaning to the data. We will later implement the ability to create a gridded volume from the header info. This reader is a quick fix for Samir. We chose to use a ``vtkTable`` object as the output of this reader because it gives us more flexibility in the filters we can apply to this data down the pipeline and keeps thing simple when using filters in this repository.
+    """This reads in float or double data that is packed into a Madagascar
+    binary file format with a leader header. The reader ignores all of the ascii
+    header details by searching for the sequence of three special characters:
+    EOL EOL EOT and it will treat the followng binary packed data as one long
+    array and make a ``vtkTable`` with one column of that data. The reader uses
+    defaults to import as floats with native endianness. Use the Table to
+    Uniform Grid or the Reshape Table filters to give more meaning to the data.
+    We will later implement the ability to create a gridded volume from the
+    header info. This reader is a quick fix for Samir. We chose to use a
+    ``vtkTable`` object as the output of this reader because it gives us more
+    flexibility in the filters we can apply to this data down the pipeline and
+    keeps thing simple when using filters in this repository.
     `Details Here`_.
 
     .. _Details Here: http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF
     """
     __displayname__ = 'Madagascar SSRSF Reader'
     __category__ = 'reader'
+    # extensions are inherrited from PackedBinariesReader
+    description = 'PVGeo: Madagascar Single Stream RSF Files'
     def __init__(self, **kwargs):
         PackedBinariesReader.__init__(self, **kwargs)
 

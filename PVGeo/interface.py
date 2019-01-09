@@ -15,7 +15,15 @@ __all__ = [
     'placeArrInTable',
     'getdTypes',
     'pointsToPolyData',
+    'addArraysFromDataFrame',
+    'convertCellConn',
+    'getArray',
+    'getDataDict',
+    'wrapvtki',
 ]
+
+
+___displayname__ = 'Interface'
 
 
 import numpy as np
@@ -24,7 +32,6 @@ import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 from vtk.util import numpy_support as nps
 
-# Import helpers
 from . import _helpers
 
 __displayname__ = 'Interface'
@@ -41,7 +48,7 @@ def getVTKtype(typ):
         return 13
     return typ
 
-def convertStringArray(arr):
+def convertStringArray(arr, name='Strings'):
     """A helper to convert a numpy array of strings to a vtkStringArray
 
     Return:
@@ -50,6 +57,7 @@ def convertStringArray(arr):
     vtkarr = vtk.vtkStringArray()
     for val in arr:
         vtkarr.InsertNextValue(val)
+    vtkarr.SetName(name)
     return vtkarr
 
 def convertArray(arr, name='Data', deep=0, array_type=None, pdf=False):
@@ -62,21 +70,24 @@ def convertArray(arr, name='Data', deep=0, array_type=None, pdf=False):
         pdf (bool): if input is vtkDataArry, make a pandas DataFrame of the array
 
     Return:
-        vtkDataArray : the converted array if input is a NumPy ndaray
-        ndarray : the converted array if input is a vtkDataArray
-        DataFrame : if pdf==True, the vtkDataArry input will be converted to a pandas DataFrame.
+        vtkDataArray, ndarray, or DataFrame:
+            the converted array (if input is a NumPy ndaray then returns
+            ``vtkDataArray`` or is input is ``vtkDataArray`` then returns NumPy
+            ``ndarray``). If pdf==True and the input is ``vtkDataArry``,
+            return a pandas DataFrame.
 
     """
     if isinstance(arr, np.ndarray):
         if arr.dtype is np.dtype('O'):
             arr = arr.astype('|S')
         arr = np.ascontiguousarray(arr)
-        typ = getVTKtype(arr.dtype)
-        if typ is 13:
-            VTK_data = convertStringArray(arr)
-            return VTK_data
-        arr = np.ascontiguousarray(arr)
-        VTK_data = nps.numpy_to_vtk(num_array=arr, deep=deep, array_type=array_type)
+        try:
+            arr = np.ascontiguousarray(arr)
+            VTK_data = nps.numpy_to_vtk(num_array=arr, deep=deep, array_type=array_type)
+        except ValueError:
+            typ = getVTKtype(arr.dtype)
+            if typ is 13:
+                VTK_data = convertStringArray(arr)
         VTK_data.SetName(name)
         return VTK_data
     # Otherwise input must be a vtkDataArray
@@ -97,8 +108,7 @@ def dataFrameToTable(df, pdo=None):
     if pdo is None:
         pdo = vtk.vtkTable()
     for key in df.keys():
-        VTK_data = convertArray(df[key].values)
-        VTK_data.SetName(key)
+        VTK_data = convertArray(df[key].values, name=key)
         pdo.AddColumn(VTK_data)
     return pdo
 
@@ -121,7 +131,8 @@ def placeArrInTable(ndarr, titles, pdo):
 
     Args:
         ndarr (numpy.ndarray) : The 1D/2D array to be converted to a table
-        titles (list or tuple): The titles for the arrays in the table. Must have same number of elements as columns in input ndarray
+        titles (list or tuple): The titles for the arrays in the table. Must
+            have same number of elements as columns in input ndarray
         pdo (vtkTable) : The output data object pointer
 
     Return:
@@ -153,7 +164,9 @@ def getdTypes(dtype='', endian=None):
     """This converts char dtypes and an endian to a numpy and VTK data type.
 
     Return:
-        tuple (numpy.dtype, int) : the numpy data type and the integer type id specified in vtkType.h for VTK data types
+        tuple (numpy.dtype, int):
+            the numpy data type and the integer type id specified in vtkType.h
+            for VTK data types
     """
     # If native `@` was chosen then do not pass an endian
     if endian is '@':
@@ -178,22 +191,27 @@ def getdTypes(dtype='', endian=None):
 
 
 def pointsToPolyData(points, copy_z=False):
-    """Create ``vtkPolyData`` from a numpy array of XYZ points. If the points have
-    more than 3 dimensions, then all dimensions after the third will be added as attributes.
-    Assume the first three dimensions are the XYZ coordinates.
+    """Create ``vtkPolyData`` from a numpy array of XYZ points. If the points
+    have more than 3 dimensions, then all dimensions after the third will be
+    added as attributes. Assume the first three dimensions are the XYZ
+    coordinates.
 
     Args:
         points (np.ndarray or pandas.DataFrame): The points and pointdata
-        copy_z (bool): A flag on whether to append the z values as a PointData array
+        copy_z (bool): A flag on whether to append the z values as a PointData
+            array
 
     Return:
         vtkPolyData : points with point-vertex cells
     """
     __displayname__ = 'Points to PolyData'
     __category__ = 'filter'
+    # This prevents an error that occurs when only one point is passed
+    if points.ndim < 2:
+        points = points.reshape((1,-1))
+    keys = ['Field %d' % i for i in range(points.shape[1] - 3)]
     # Check if input is anything other than a NumPy array and cast it
     # e.g. you could send a Pandas dataframe
-    keys = ['Field %d' % i for i in range(points.shape[1] - 3)]
     if not isinstance(points, np.ndarray):
         if isinstance(points, pd.DataFrame):
             # If a pandas data frame, lets grab the keys
@@ -213,7 +231,7 @@ def pointsToPolyData(points, copy_z=False):
                        np.arange(npoints).reshape(-1, 1)))
     cells = np.ascontiguousarray(cells, dtype=np.int64)
     vtkcells = vtk.vtkCellArray()
-    vtkcells.SetCells(npoints, nps.numpy_to_vtkIdTypeArray(cells, deep=True))
+    vtkcells.SetCells(npoints, nps.numpy_to_vtk(cells, deep=True, array_type=vtk.VTK_ID_TYPE))
 
     # Convert points to vtk object
     pts = vtk.vtkPoints()
@@ -225,10 +243,68 @@ def pointsToPolyData(points, copy_z=False):
     pdata.SetVerts(vtkcells)
 
     # Add attributes if given
+    scalSet = False
     for i, key in enumerate(keys):
         data = convertArray(atts[:, i], name=key)
         pdata.GetPointData().AddArray(data)
+        if not scalSet:
+            pdata.GetPointData().SetActiveScalars(key)
+            scalSet = True
     if copy_z:
         z = convertArray(points[:, 2], name='Elevation')
         pdata.GetPointData().AddArray(z)
     return pdata
+
+
+def addArraysFromDataFrame(pdo, field, df):
+    """Add all of the arrays from a given data frame to an output's data"""
+    for key in df.keys():
+        VTK_data = convertArray(df[key].values, name=key)
+        _helpers.addArray(pdo, field, VTK_data)
+    return pdo
+
+
+
+def convertCellConn(cellConn):
+    """Converts cell connectivity arrays to a cell matrix array that makes sense
+    for VTK cell arrays.
+    """
+    cellsMat = np.concatenate(
+            (
+                np.ones((cellConn.shape[0], 1), dtype=np.int64)*cellConn.shape[1],
+                cellConn
+            ),
+            axis=1).ravel()
+    return nps.numpy_to_vtk(cellsMat, deep=True, array_type=vtk.VTK_ID_TYPE)
+
+
+def getArray(dataset, name, vtkObj=False):
+    """Given an input dataset, this will return the named array as a NumPy array
+    or a vtkDataArray if spceified
+    """
+    arr, field = _helpers.searchForArray(dataset, name)
+    if vtkObj:
+        return arr
+    return convertArray(arr)
+
+
+def getDataDict(dataset, field='cell'):
+    """Given an input dataset, this will return all the arrays in that object's
+    cell/point/field/row data as named NumPy arrays in a dictionary.
+    """
+    data = {}
+    for key in _helpers.getAllArrayNames(dataset, field):
+        data[key] = np.array(_helpers.getNumPyArray(dataset, field, key))
+    return data
+
+
+def wrapvtki(dataset):
+    """This will wrap any given VTK dataset via the vtkInterface Python package
+    if it is available and return the wrapped data object. If vtki is
+    unavailable, then the given object is returned."""
+    try:
+        import vtki
+        dataset = vtki.wrap(dataset)
+    except ImportError:
+        pass
+    return dataset

@@ -11,20 +11,27 @@ __all__ = [
 
 __displayname__ = 'Base Classes'
 
-from . import _helpers
-
-# Outside Imports:
-import vtk # NOTE: This is the first import executed in the package! Keep here!!
-import vtk.util.vtkAlgorithm as valg #import VTKPythonAlgorithmBase
-import numpy as np
 import warnings
+
+import numpy as np
+# Outside Imports:
+import vtk  # NOTE: This is the first import executed in the package! Keep here!!
+import vtk.util.vtkAlgorithm as valg  # import VTKPythonAlgorithmBase
+
+from . import _helpers
+from . import interface
 
 ###############################################################################
 
 class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     """This is a base class to add convienace methods to the
     ``VTKPythonAlgorithmBase`` for all algorithms implemented in ``PVGeo``.
-    We implement our algorithms in this manner to harness all of the backend support that the ``VTKPythonAlgorithmBase`` class provides for integrating custom algorithms on a VTK pipeline. All of the pipeline methods for setting inputs, getting outputs, making requests are handled by the super classes. For more information on what functionality is available, check out the VTK Docs for the `vtkAlgorithm`_ and then check out the following blog posts:
+    We implement our algorithms in this manner to harness all of the backend
+    support that the ``VTKPythonAlgorithmBase`` class provides for integrating
+    custom algorithms on a VTK pipeline. All of the pipeline methods for setting
+    inputs, getting outputs, making requests are handled by the super classes.
+    For more information on what functionality is available, check out the VTK
+    Docs for the `vtkAlgorithm`_ and then check out the following blog posts:
 
     * `vtkPythonAlgorithm is great`_
     * A VTK pipeline primer `(part 1)`_, `(part 2)`_, and `(part 3)`_
@@ -51,7 +58,8 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         self.__errorObserver.MakeObserver(self)
 
     def GetOutput(self, port=0):
-        """A conveience method to get the output data object of this ``PVGeo`` algorithm.
+        """A conveience method to get the output data object of this ``PVGeo``
+        algorithm.
         """
         return self.GetOutputDataObject(port)
 
@@ -71,7 +79,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     def Apply(self):
         """Update the algorithm and get the output data object"""
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 ###############################################################################
@@ -128,12 +136,15 @@ class ReaderBaseBase(AlgorithmBase):
         """Use to clear file names of the reader.
 
         Note:
-            * This does not set the reader to need to read again as there are no files to read.
+            This does not set the reader to need to read again as there are
+            no files to read.
         """
         self.__fileNames = []
 
     def AddFileName(self, fname):
-        """Use to set the file names for the reader. Handles singlt string or list of strings.
+        """Use to set the file names for the reader. Handles singlt string or
+        list of strings.
+
         Args:
             fname (str): The absolute file name with path to read.
         """
@@ -150,6 +161,8 @@ class ReaderBaseBase(AlgorithmBase):
         """Returns the list of file names or given and index returns a specified
         timestep's filename.
         """
+        if self.__fileNames is None or len(self.__fileNames) < 1:
+            raise _helpers.PVGeoError('File names are not set.')
         if idx is None:
             return self.__fileNames
         return self.__fileNames[idx]
@@ -158,13 +171,14 @@ class ReaderBaseBase(AlgorithmBase):
         """Given a file name (or list of file names), perfrom the read"""
         self.AddFileName(fname)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 ###############################################################################
 
 # Base filter to preserve input data type
 class FilterBase(AlgorithmBase):
-    """A base class for implementing filters which holds several convienace methods"""
+    """A base class for implementing filters which holds several convienace
+    methods"""
     __displayname__ = 'Filter Base'
     __category__ = 'base'
     def __init__(self,
@@ -177,7 +191,7 @@ class FilterBase(AlgorithmBase):
     def Apply(self, inputDataObject):
         self.SetInputDataObject(inputDataObject)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 
@@ -240,10 +254,11 @@ class FilterPreserveTypeBase(FilterBase):
     """
     __displayname__ = 'Filter Preserve Type Base'
     __category__ = 'base'
-    def __init__(self, **kwargs):
+    def __init__(self, nInputPorts=1, **kwargs):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkDataObject',
+            nInputPorts=nInputPorts, inputType='vtkDataObject',
             nOutputPorts=1, **kwargs)
+        self._preservePort = 0 # This is the port to preserve data object type
 
     # THIS IS CRUCIAL to preserve data type through filter
     def RequestDataObject(self, request, inInfo, outInfo):
@@ -251,7 +266,7 @@ class FilterPreserveTypeBase(FilterBase):
         know that the algorithm will dynamically decide the output data type
         based in the input data type.
         """
-        self.OutputType = self.GetInputData(inInfo, 0, 0).GetClassName()
+        self.OutputType = self.GetInputData(inInfo, self._preservePort, 0).GetClassName()
         self.FillOutputPortInformation(0, outInfo.GetInformationObject(0))
         return 1
 
@@ -370,7 +385,8 @@ class TwoFileReaderBase(AlgorithmBase):
             self.Modified(readAgainMesh=True, readAgainModels=False)
 
     def AddModelFileName(self, fname):
-        """Use to set the file names for the reader. Handles single string or list of strings.
+        """Use to set the file names for the reader. Handles single string or
+        list of strings.
 
         Args:
             fname (str or list(str)): the file name(s) to use for the model data.
@@ -398,9 +414,10 @@ class TwoFileReaderBase(AlgorithmBase):
         return self.__meshFileName
 
     def Apply(self):
-        """Perfrom the read with parameters/file names set during init or by setters"""
+        """Perfrom the read with parameters/file names set during init or by
+        setters"""
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 
@@ -420,7 +437,9 @@ class WriterBase(AlgorithmBase):
 
     def FillInputPortInformation(self, port, info):
         """Allows us to save composite datasets as well.
-        NOTE: I only care about ``vtkMultiBlockDataSet``s
+
+        Note:
+            I only care about ``vtkMultiBlockDataSet``
         """
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), self.InputType)
         info.Append(self.INPUT_REQUIRED_DATA_TYPE(), 'vtkMultiBlockDataSet') # vtkCompositeDataSet
@@ -428,7 +447,8 @@ class WriterBase(AlgorithmBase):
 
 
     def SetFileName(self, fname):
-        """Specify the filename for the output. Writer can only handle a single output data object/time step."""
+        """Specify the filename for the output. Writer can only handle a single
+        output data object/time step."""
         if not isinstance(fname, str):
             raise RuntimeError('File name must be string. Only single file is supported.')
         if self.__filename != fname:
@@ -440,7 +460,8 @@ class WriterBase(AlgorithmBase):
         return self.__filename
 
     def RequestData(self, request, inInfoVec, outInfoVec):
-        """OVERWRITE: This is executed by the pipeline and handles the write out"""
+        """OVERWRITE: This is executed by the pipeline and handles the write
+        out"""
         raise NotImplementedError()
         return 1
 
@@ -451,7 +472,7 @@ class WriterBase(AlgorithmBase):
         self.Modified()
         self.Update()
 
-    def PerformWriteOut(self, inputDataObject, filename):
+    def PerformWriteOut(self, inputDataObject, filename, objectName):
         """This method must be implemented. This is automatically called by
         ``RequestData`` for single inputs or composite inputs."""
         raise NotImplementedError('PerformWriteOut must be implemented!')
@@ -513,11 +534,12 @@ class WriterBase(AlgorithmBase):
             self.SetBlockFileNames(num)
             for i in range(num):
                 data = inp.GetBlock(i)
+                name = inp.GetMetaData(i).Get(vtk.vtkCompositeDataSet.NAME())
                 if data.IsTypeOf(self.InputType):
-                    self.PerformWriteOut(data, self.GetBlockFileName(i))
+                    self.PerformWriteOut(data, self.GetBlockFileName(i), name)
                 else:
                     warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
         # Handle single input dataset
         else:
-            self.PerformWriteOut(inp, self.GetFileName())
+            self.PerformWriteOut(inp, self.GetFileName(), None)
         return 1

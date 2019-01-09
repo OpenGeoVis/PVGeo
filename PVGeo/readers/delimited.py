@@ -4,26 +4,33 @@ __all__ = [
     'XYZTextReader'
 ]
 
+__displayname__ = 'Delimited File I/O'
+
+import sys
+
 import numpy as np
 import pandas as pd
 
-import sys
+from .. import _helpers, interface
+from ..base import ReaderBase
+
 if sys.version_info < (3,):
     from StringIO import StringIO
 else:
     from io import StringIO
 
-# Import Helpers:
-from ..base import ReaderBase
-from .. import _helpers
-from .. import interface
 
 
 class DelimitedTextReader(ReaderBase):
-    """This reader will take in any delimited text file and make a ``vtkTable`` from it. This is not much different than the default .txt or .csv reader in ParaView, however it gives us room to use our own extensions and a little more flexibility in the structure of the files we import.
+    """This reader will take in any delimited text file and make a ``vtkTable``
+    from it. This is not much different than the default .txt or .csv reader in
+    ParaView, however it gives us room to use our own extensions and a little
+    more flexibility in the structure of the files we import.
     """
     __displayname__ = 'Delimited Text Reader'
     __category__ = 'reader'
+    extensions = 'dat csv txt text ascii xyz tsv ntab'
+    description = 'PVGeo: Delimited Text Files'
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
@@ -37,7 +44,7 @@ class DelimitedTextReader(ReaderBase):
         self.__hasTitles = kwargs.get('hasTitles', True)
         # Data objects to hold the read data for access by the pipeline methods
         self._data = []
-        self.__titles = []
+        self._titles = []
 
     def _GetDeli(self):
         """For itenral use
@@ -63,7 +70,7 @@ class DelimitedTextReader(ReaderBase):
         for f in fileNames:
             try:
                 contents.append(np.genfromtxt(f, dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::])
-            except (FileNotFoundError, OSError) as fe:
+            except (IOError, OSError) as fe:
                 raise _helpers.PVGeoError(str(fe))
         if idx is not None: return contents[0]
         return contents
@@ -120,7 +127,7 @@ class DelimitedTextReader(ReaderBase):
         """
         # Perform Read
         contents = self._GetFileContents()
-        self.__titles, contents = self._ExtractHeaders(contents)
+        self._titles, contents = self._ExtractHeaders(contents)
         self._data = self._FileContentsToDataFrame(contents)
         self.NeedToRead(flag=False)
         return 1
@@ -136,7 +143,8 @@ class DelimitedTextReader(ReaderBase):
     #### Algorithm Methods ####
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get data for current timestep and populate the output data object.
+        """Used by pipeline to get data for current timestep and populate the
+        output data object.
         """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
@@ -153,7 +161,8 @@ class DelimitedTextReader(ReaderBase):
 
 
     def SetDelimiter(self, deli):
-        """The input file's delimiter. To use a tab delimiter please use ``SetSplitOnWhiteSpace()``
+        """The input file's delimiter. To use a tab delimiter please use
+        ``SetSplitOnWhiteSpace()``
 
         Args:
             deli (str): a string delimiter/seperator
@@ -163,7 +172,8 @@ class DelimitedTextReader(ReaderBase):
             self.Modified()
 
     def SetSplitOnWhiteSpace(self, flag):
-        """Set a boolean flag to override the ``SetDelimiter()`` and use any white space as a delimiter.
+        """Set a boolean flag to override the ``SetDelimiter()`` and use any
+        white space as a delimiter.
         """
         if flag != self.__useTab:
             self.__useTab = flag
@@ -188,7 +198,8 @@ class DelimitedTextReader(ReaderBase):
             self.Modified()
 
     def SetHasTitles(self, flag):
-        """A boolean for if the delimited file has header titles for the data arrays.
+        """A boolean for if the delimited file has header titles for the data
+        arrays.
         """
         if self.__hasTitles != flag:
             self.__hasTitles = flag
@@ -198,16 +209,20 @@ class DelimitedTextReader(ReaderBase):
         return self.__hasTitles
 
     def GetTitles(self):
-        return self.__titles
+        return self._titles
 
 
 ################################################################################
 
 
 class DelimitedPointsReaderBase(DelimitedTextReader):
-    """A base class for delimited text readers that produce ``vtkPolyData`` points."""
+    """A base class for delimited text readers that produce ``vtkPolyData``
+    points.
+    """
     __displayname__ = 'Delimited Points Reader Base'
     __category__ = 'base'
+    # extensions are inherrited from DelimitedTextReader
+    description = 'PVGeo: Delimited Points' # Should be overriden
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, outputType='vtkPolyData', **kwargs)
         self.__copy_z = kwargs.get('copy_z', False)
@@ -223,7 +238,8 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
     #### Algorithm Methods ####
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get data for current timestep and populate the output data object.
+        """Used by pipeline to get data for current timestep and populate the
+        output data object.
         """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
@@ -241,10 +257,13 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
 
 
 class XYZTextReader(DelimitedTextReader):
-    """A makeshift reader for XYZ files where titles have comma delimiter and data has space delimiter.
+    """A makeshift reader for XYZ files where titles have comma delimiter and
+    data has space delimiter.
     """
     __displayname__ = 'XYZ Text Reader'
     __category__ = 'reader'
+    # extensions are inherrited from DelimitedTextReader
+    description = 'PVGeo: XYZ Delimited Text Files where header has comma delimiter.'
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, **kwargs)
         self.SetComments(kwargs.get('comments', '#'))

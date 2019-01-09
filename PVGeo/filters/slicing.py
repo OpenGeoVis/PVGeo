@@ -5,15 +5,16 @@ __all__ = [
     'SliceThroughTime'
 ]
 
-import vtk
-import numpy as np
-from vtk.numpy_interface import dataset_adapter as dsa
+__displayname__ = 'Slicing'
+
 from datetime import datetime
-# Import Helpers:
+
+import numpy as np
+import vtk
+from vtk.numpy_interface import dataset_adapter as dsa
+
+from .. import _helpers, interface
 from ..base import FilterBase
-from .. import _helpers
-from .. import interface
-# NOTE: internal import - from scipy.spatial import cKDTree
 
 
 
@@ -73,7 +74,11 @@ class _SliceBase(FilterBase):
 
 
 class ManySlicesAlongPoints(_SliceBase):
-    """Takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at intervals of that path along the vector of that path at that point. This constructs many slices through the input dataset as a merged ``vtkMultiBlockDataSet``.
+    """Takes a series of points and a data source to be sliced. The points are
+    used to construct a path through the data source and a slice is added at
+    intervals of that path along the vector of that path at that point. This
+    constructs many slices through the input dataset as a merged
+    ``vtkMultiBlockDataSet``.
 
     Note:
         * Make sure the input data source is slice-able.
@@ -98,6 +103,11 @@ class ManySlicesAlongPoints(_SliceBase):
         return 1
 
     def _GetPlanes(self, pdipts):
+        try:
+            # sklearn's KDTree is faster: use it if available
+            from sklearn.neighbors import KDTree as Tree
+        except:
+            from scipy.spatial import cKDTree  as Tree
         if self.GetNumberOfSlices() == 0:
             return []
         # Get the Points over the NumPy interface
@@ -105,9 +115,8 @@ class ManySlicesAlongPoints(_SliceBase):
         points = np.array(wpdi.Points) # New NumPy array of points so we dont destroy input
         numPoints = pdipts.GetNumberOfPoints()
         if self.__useNearestNbr:
-            from scipy.spatial import cKDTree # NOTE: Must have SciPy in ParaView
-            tree = cKDTree(points)
-            ptsi = tree.query(points[0], k=numPoints)[1]
+            tree = Tree(points)
+            ptsi = tree.query([points[0]], k=numPoints)[1].ravel()
         else:
             ptsi = [i for i in range(numPoints)]
 
@@ -158,7 +167,8 @@ class ManySlicesAlongPoints(_SliceBase):
     #### Getters / Setters ####
 
     def SetUseNearestNbr(self, flag):
-        """Set a flag on whether to use SciPy's nearest neighbor approximation when generating the slicing path
+        """Set a flag on whether to use SciPy's nearest neighbor approximation
+        when generating the slicing path
         """
         if self.__useNearestNbr != flag:
             self.__useNearestNbr = flag
@@ -168,13 +178,17 @@ class ManySlicesAlongPoints(_SliceBase):
         self.SetInputDataObject(0, points)
         self.SetInputDataObject(1, data)
         self.Update()
-        return self.GetOutput()
+        return interface.wrapvtki(self.GetOutput())
 
 
 ###############################################################################
 
 class SlideSliceAlongPoints(ManySlicesAlongPoints):
-    """Takes a series of points and a data source to be sliced. The points are used to construct a path through the data source and a slice is added at specified locations along that path along the vector of that path at that point. This constructs one slice through the input dataset which the user can translate via a slider bar in ParaView.
+    """Takes a series of points and a data source to be sliced. The points are
+    used to construct a path through the data source and a slice is added at
+    specified locations along that path along the vector of that path at that
+    point. This constructs one slice through the input dataset which the user
+    can translate via a slider bar in ParaView.
 
     Note:
         * Make sure the input data source is slice-able.
@@ -220,7 +234,8 @@ class SlideSliceAlongPoints(ManySlicesAlongPoints):
         return 1
 
     def SetLocation(self, loc):
-        """Set the location along the input line for the slice location as a percent (0, 99)."""
+        """Set the location along the input line for the slice location as a
+        percent (0, 99)."""
         if (loc > 99 or loc < 0):
             raise _helpers.PVGeoError('Location must be given as a percentage along input path.')
         if self.__loc != loc:
@@ -240,16 +255,20 @@ class ManySlicesAlongAxis(_SliceBase):
     This produces a specified number of slices at once each with a normal vector
     oriented along the axis of choice and spaced uniformly through the range of
     the dataset on the chosen axis.
+
+    Args:
+        pad (float): Padding as a percentage (0.0, 1.0)
     """
     __displayname__ = 'Many Slices Along Axis'
     __category__ = 'filter'
-    def __init__(self, numSlices=5, axis=0, rng=None, outputType='vtkMultiBlockDataSet'):
+    def __init__(self, numSlices=5, axis=0, rng=None, pad=0.01, outputType='vtkMultiBlockDataSet'):
         _SliceBase.__init__(self, numSlices=numSlices,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType=outputType)
         # Parameters
         self.__axis = axis
         self.__rng = rng
+        self.__pad = pad
 
 
     def _GetOrigin(self, pdi, idx):
@@ -273,9 +292,9 @@ class ManySlicesAlongAxis(_SliceBase):
             tuple: the XYZ coordinates of the center of the data set.
         """
         bounds = pdi.GetBounds()
-        x = (bounds[1] - bounds[0])/2
-        y = (bounds[3] - bounds[2])/2
-        z = (bounds[5] - bounds[4])/2
+        x = (bounds[1] + bounds[0])/2
+        y = (bounds[3] + bounds[2])/2
+        z = (bounds[5] + bounds[4])/2
         return (x, y, z)
 
     def GetNormal(self):
@@ -288,7 +307,8 @@ class ManySlicesAlongAxis(_SliceBase):
         """Internal helper to set the slicing range along the set axis
         """
         bounds = self.GetInputBounds(pdi)
-        self.__rng = np.linspace(bounds[0]+0.001, bounds[1]-0.001, num=self.GetNumberOfSlices())
+        padding = (bounds[1] - bounds[0]) * self.__pad # get percent padding
+        self.__rng = np.linspace(bounds[0]+padding, bounds[1]-padding, num=self.GetNumberOfSlices())
 
     def _UpdateNumOutputs(self, num):
         """for internal use only
@@ -350,13 +370,22 @@ class ManySlicesAlongAxis(_SliceBase):
         """
         return self.__axis
 
+    def SetPadding(self, pad):
+        """Set the percent padding for the slices on the edges"""
+        if self.__pad != pad:
+            self.__pad = pad
+            self.Modified()
+
 
 
 ###############################################################################
 
 
 class SliceThroughTime(ManySlicesAlongAxis):
-    """Takes a sliceable ``vtkDataSet`` and progresses a slice of it along a given axis. The macro requires that the clip already exist in the pipeline. This is especially useful if you have many clips linked together as all will move through the seen as a result of this macro.
+    """Takes a sliceable ``vtkDataSet`` and progresses a slice of it along a
+    given axis. The macro requires that the clip already exist in the pipeline.
+    This is especially useful if you have many clips linked together as all will
+    move through the seen as a result of this macro.
     """
     __displayname__ = 'Slice Through Time'
     __category__ = 'filter'
@@ -367,13 +396,10 @@ class SliceThroughTime(ManySlicesAlongAxis):
         self.__dt = dt
         self.__timesteps = None
 
-
     def _UpdateTimeSteps(self):
         """For internal use only
         """
         self.__timesteps = _helpers.updateTimeSteps(self, self.GetNumberOfSlices(), self.__dt)
-
-
 
     #### Algorithm Methods ####
 

@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.28'
+paraview_plugin_version = '1.1.42'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -97,12 +97,39 @@ class PVGeoCreateUniformGrid(CreateUniformGrid):
 ###############################################################################
 
 
-@smproxy.source(name='PVGeoEarthSource', label='Create Earth Source')
+@smproxy.source(name='PVGeoOutlineContinents', label=OutlineContinents.__displayname__)
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
-class PVGeoEarthSource(EarthSource):
+class PVGeoOutlineContinents(OutlineContinents):
     def __init__(self):
-        EarthSource.__init__(self)
+        OutlineContinents.__init__(self)
 
-    @smproperty.doublevector(name="Radius", default_values=6371.0)
+    @smproperty.doublevector(name="Radius", default_values=6371.0e6)
     def SetRadius(self, radius):
-        EarthSource.SetRadius(self, radius)
+        OutlineContinents.SetRadius(self, radius)
+
+
+###############################################################################
+
+
+@smproxy.source(name='PVGeoGlobeSource', label=GlobeSource.__displayname__)
+@smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
+class PVGeoGlobeSource(GlobeSource):
+    def __init__(self):
+        GlobeSource.__init__(self)
+
+    @smproperty.doublevector(name="Radius", default_values=6371.0e6)
+    def SetRadius(self, radius):
+        GlobeSource.SetRadius(self, radius)
+
+    @smproperty.intvector(name="Meridians", default_values=36)
+    @smdomain.intrange(min=2, max=100)
+    def SetNumberOfMeridians(self, n):
+        GlobeSource.SetNumberOfMeridians(self, n)
+
+    @smproperty.intvector(name="Parallels", default_values=15)
+    @smdomain.intrange(min=2, max=100)
+    def SetNumberOfParallels(self, n):
+        GlobeSource.SetNumberOfParallels(self, n)
+
+
+###############################################################################

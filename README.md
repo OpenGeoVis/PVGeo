@@ -1,7 +1,13 @@
 <a href="http://pvgeo.org"><img src="PVGeo_icon_horiz.png" width="35%" /></a>
 
+Share this project: [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20this%20project%20for%20data%20and%20model%20visualization%20in%20ParaView&url=https://github.com/OpenGeoVis/PVGeo&hashtags=ParaView,PVGeo,visualization,geoscience)
 
-The *PVGeo* python package contains VTK powered tools for data visualization in geophysics which are wrapped for direct use within the application [ParaView by Kitware](https://www.paraview.org). These tools are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D time-varying grids.
+
+The *PVGeo* Python package contains VTK powered tools for data visualization in
+geophysics which are wrapped for direct use within the application
+[ParaView by Kitware](https://www.paraview.org). These tools are tailored to
+data visualization in the geosciences with a heavy focus on structured data sets
+like 2D or 3D time-varying grids.
 
 
 **Learn More:**
@@ -9,7 +15,7 @@ The *PVGeo* python package contains VTK powered tools for data visualization in 
 [![Website Build](https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website)](http://pvgeo.org)
 [![Documentation Status](https://readthedocs.org/projects/pvgeo/badge/?version=latest)](http://docs.pvgeo.org/en/latest/?badge=latest)
 [![Slack Badge](https://img.shields.io/badge/Slack-PVGeo-4B0082.svg?logo=slack)](http://slack.pvgeo.org)
-![Twitter Follow](https://img.shields.io/twitter/follow/pyPVGeo.svg?style=social&label=Follow)
+[![Twitter Follow](https://img.shields.io/twitter/follow/pyPVGeo.svg?style=social&label=Follow)](https://twitter.com/pyPVGeo)
 
 **Status:** [![PyPI](https://img.shields.io/pypi/v/PVGeo.svg?logo=python)](https://pypi.org/project/PVGeo/)
 [![Build Status](https://img.shields.io/travis/OpenGeoVis/PVGeo/master.svg?label=build&logo=travis)](https://travis-ci.org/OpenGeoVis/PVGeo)
@@ -24,51 +30,57 @@ The *PVGeo* python package contains VTK powered tools for data visualization in 
 
 ## Demonstrations of *PVGeo*
 
-For a quick overview of how  *PVGeo* can be used in a Python environment or directly within ParaView, please checkout the code snippets and videos on the  [**About Examples Page**](http://pvgeo.org/examples/about-examples/)
+For a quick overview of how  *PVGeo* can be used in a Python environment or
+directly within ParaView, checkout the code snippets and videos on the  
+[**About Examples Page**](http://pvgeo.org/examples/about-examples/)
 
-Also, check out the [**demo page**](http://demo.pvgeo.org/) for a synopsis of the project and some visualization examples. Then check out the rest of the [**full website**](http://pvgeo.org/) to explore the technical aspects of the project and to find use examples.
+Also, check out the [**demo page**](http://demo.pvgeo.org/) for a synopsis of
+the project and some visualization examples. Then check out the rest of the
+[**full website**](http://pvgeo.org/) to explore the technical aspects of the
+project and to find use examples.
+
+## Getting Started
+
+To begin using the *PVGeo* Python package, create/activate your Python virtual
+environment (we highly recommend using anaconda) and install *PVGeo* through pip:
+
+```bash
+pip install PVGeo
+```
+
+Now *PVGeo* is ready for use in your standard Python environment (2.7 or 3.x)
+with all dependencies installed! Go ahead and test your install:
+
+```py
+python -c "import PVGeo; print(PVGeo.__version__)"
+```
 
 
 ## Report Issues and Contribute
-Please feel free to post features you would like to see from this package on the [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues) as a feature request. If you stumble across any bugs or crashes while using code distributed here, please report it in the issues section so we can promptly address it. For other questions please join the [***PVGeo* community on Slack**](http://slack.pvgeo.org).
+Please feel free to post features you would like to see from this package on the
+[**issues page**](https://github.com/OpenGeoVis/PVGeo/issues) as a feature
+request.
+If you stumble across any bugs or crashes while using code distributed here,
+report them in the issues section so we can promptly address it.
+For other questions, join the [***PVGeo* community on Slack**](http://slack.pvgeo.org).
 
 ## About the Authors [![Open Source](https://img.shields.io/badge/open--source-yes-brightgreen.svg)](https://opensource.com/resources/what-open-source)
 
-The *PVGeo* code library is managed by [**Bane Sullivan**](http://banesullivan.com), graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Whitney Trainor-Guitton. If you would like to contact us, please inquire with [**info@pvgeo.org**](mailto:info@pvgeo.org).
+The *PVGeo* code library is managed by [**Bane Sullivan**](http://banesullivan.com),
+graduate student in the Hydrological Science and Engineering interdisciplinary
+program at the Colorado School of Mines under Whitney Trainor-Guitton.
+If you would like to contact us, inquire with [**info@pvgeo.org**](mailto:info@pvgeo.org).
 
-It is important to note the project is open source and that many features in this repository were made possible by contributors volunteering their time. Please take a look at the [**Contributors Page**](https://github.com/OpenGeoVis/PVGeo/graphs/contributors) to learn more about the developers of *PVGeo*.
+It is important to note the project is open source and that many features in
+this repository were made possible by contributors volunteering their time.
+Head over to the [**Contributors Page**](https://github.com/OpenGeoVis/PVGeo/graphs/contributors)
+to learn more about the developers of *PVGeo*.
 
-
-
-# Getting Started
-
-To begin using the *PVGeo* python package, create a new Python virtual environment and install *PVGeo* through pip.
-
-```bash
-# Please use Python 2.7
-$ conda create -n PVGeoEnv27 python=2.7
-
-$ conda activate PVGeoEnv27
-(PVGeoEnv27) $ pip install PVGeo
-
-```
-
-**Non-Windows users:** Now you must install VTK to your virtual environment. For Linux and Mac users, simply install VTK through `pip`:
-
-```bash
-
-# Now install VTK
-(PVGeoEnv27) $ pip install vtk
-
-```
-
-## Windows Users
-
-PVGeo on Windows can be quite (*VERY*) tricky to setup, so please reference previous issues with the installation label and join the [**PVGeo community on Slack**](http://slack.pvgeo.org) for guidance.
-
-Please proceed with the full instructions on the [**Getting Started**](http://pvgeo.org/overview/getting-started/) page.
 
 
 ## Linking PVGeo to ParaView
 
-Now *PVGeo* is ready for use in your standard Python environment (non-Windows) and ready for use in PVGeo (All ). To use the *PVGeo* library as plugins in ParaView, please see the detailed explanation [**here**](http://pvgeo.org/overview/getting-started/).
+To use the *PVGeo* library as plugins in ParaView, please see the detailed
+explanation [**here**](http://pvgeo.org/overview/getting-started/) where you
+must create a second isolated Python 2.7 environment that will host PVGeo for
+ParaView.

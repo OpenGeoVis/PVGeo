@@ -3,13 +3,14 @@ __all__ = [
     'ModelAppenderBase',
 ]
 
+__displayname__ = 'Base Classes'
+
 # Outside Imports:
 import numpy as np
 import pandas as pd
 import vtk
-# Import helpers
-from .. import base
-from .. import _helpers
+
+from .. import _helpers, base
 
 ###############################################################################
 
@@ -20,11 +21,14 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
     """
     __displayname__ = 'UBC Mesh Reader Base'
     __category__ = 'base'
+    extensions = 'mesh msh dat txt text'
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         base.TwoFileReaderBase.__init__(self,
             nOutputPorts=nOutputPorts, outputType=outputType,
             **kwargs)
         self.__dataname = 'Data'
+        self.__useExtName = True # flag on whether or not to use the model file
+                                 # extension as data name
         # For keeping track of type (2D vs 3D)
         self.__sizeM = None
 
@@ -40,7 +44,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         # This is a helper method to read file contents of mesh
         try:
             fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
-        except (FileNotFoundError, OSError) as fe:
+        except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
 
         def _genTup(sft, n):
@@ -68,10 +72,15 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         return xpts, xdisc, zpts, zdisc
 
     def _ReadExtent(self):
-        """Reads the mesh file for the UBC 2D/3D Mesh or OcTree format to get output extents. Computationally inexpensive method to discover whole output extent.
+        """Reads the mesh file for the UBC 2D/3D Mesh or OcTree format to get
+        output extents. Computationally inexpensive method to discover whole
+        output extent.
 
         Return:
-            tuple : This returns a tuple of the whole extent for the grid to be made of the input mesh file (0,n1-1, 0,n2-1, 0,n3-1). This output should be directly passed to set the whole output extent.
+            tuple(int) :
+                This returns a tuple of the whole extent for the grid to be
+                made of the input mesh file (0,n1-1, 0,n2-1, 0,n3-1). This
+                output should be directly passed to set the whole output extent.
 
         """
         # Read the mesh file as line strings, remove lines with comment = !
@@ -84,7 +93,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             else:
                 # This reads whole file :(
                 msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str, comments='!')[0]
-        except (FileNotFoundError, OSError) as fe:
+        except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         # Fist line is the size of the model
         self.__sizeM = np.array(msh.ravel()[0].split(), dtype=int)
@@ -107,13 +116,21 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
 
     @staticmethod
     def ubcModel3D(FileName):
-        """Reads the 3D model file and returns a 1D NumPy float array. Use the PlaceModelOnMesh() method to associate with a grid.
+        """Reads the 3D model file and returns a 1D NumPy float array. Use the
+        PlaceModelOnMesh() method to associate with a grid.
 
         Args:
-            FileName (str) : The model file name(s) as an absolute path for the input model file in UBC 3D Model Model Format. Also accepts a `list` of string file names.
+            FileName (str) : The model file name(s) as an absolute path for the
+                input model file in UBC 3D Model Model Format. Also accepts a
+                `list` of string file names.
 
         Return:
-            np.array : Returns a NumPy float array that holds the model data read from the file. Use the ``PlaceModelOnMesh()`` method to associate with a grid. If a list of file names is given then it will return a dictionary of NumPy float array with keys as the basenames of the files.
+            np.array :
+                Returns a NumPy float array that holds the model data
+                read from the file. Use the ``PlaceModelOnMesh()`` method to
+                associate with a grid. If a list of file names is given then it
+                will return a dictionary of NumPy float array with keys as the
+                basenames of the files.
         """
         # Check if recurssion needed
         if type(FileName) is list:
@@ -124,19 +141,29 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         # Perform IO
         try:
             data = np.genfromtxt(FileName, dtype=np.float, comments='!')
-        except (FileNotFoundError, OSError) as fe:
+        except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         return data
 
+    def SetUseExtensionAsName(self, flag):
+        if self.__useExtName != flag:
+            self.__useExtName = flag
+            self.Modified(readAgainMesh=False, readAgainModels=False)
 
     def SetDataName(self, name):
-        """Set te data array name for the model data on the output grid.
-        """
-        if self.__dataname != name:
+        if name == '':
+            self.__useExtName = True
+            self.Modified(readAgainMesh=False, readAgainModels=False)
+        elif self.__dataname != name:
             self.__dataname = name
+            self.__useExtName = False
             self.Modified(readAgainMesh=False, readAgainModels=False)
 
     def GetDataName(self):
+        if self.__useExtName:
+            mname = self.GetModelFileNames(idx=0)
+            ext = mname.split('.')[-1]
+            return ext
         return self.__dataname
 
 
@@ -156,7 +183,8 @@ class ModelAppenderBase(base.AlgorithmBase):
             nInputPorts=1, inputType=inputType,
             nOutputPorts=1, outputType=outputType)
         self._modelFileNames = kwargs.get('modelfiles', [])
-        self._dataname = kwargs.get('dataname', 'Appended Data')
+        self.__dataname = kwargs.get('dataname', 'Appended Data')
+        self.__useExtName = True
         self._models = []
         self.__needToRead = True
         self._is3D = None
@@ -174,10 +202,12 @@ class ModelAppenderBase(base.AlgorithmBase):
         """Ask self if the reader needs to read the files again
 
         Args:
-            flag (bool): if the flag is set then this method will set the read status
+            flag (bool): if the flag is set then this method will set the read
+                status
 
         Return:
-            bool: The status of the reader aspect of the filter.
+            bool:
+                The status of the reader aspect of the filter.
         """
         if flag is not None and isinstance(flag, (bool, int)):
             self.__needToRead = flag
@@ -255,7 +285,8 @@ class ModelAppenderBase(base.AlgorithmBase):
         self.Modified(readAgain=True)
 
     def AddModelFileName(self, fname):
-        """Use to set the file names for the reader. Handles singlt string or list of strings.
+        """Use to set the file names for the reader. Handles singlt string or
+        list of strings.
         """
         if fname is None:
             return # do nothing if None is passed by a constructor on accident
@@ -269,13 +300,30 @@ class ModelAppenderBase(base.AlgorithmBase):
         return 1
 
     def GetModelFileNames(self, idx=None):
-        """Returns the list of file names or given and index returns a specified timestep's filename.
+        """Returns the list of file names or given and index returns a specified
+        timestep's filename.
         """
         if idx is None or not self.HasModels():
             return self._modelFileNames
         return self._modelFileNames[idx]
 
-    def SetDataName(self, name):
-        if self._dataname != name:
-            self._dataname = name
+    def SetUseExtensionAsName(self, flag):
+        if self.__useExtName != flag:
+            self.__useExtName = flag
             self.Modified(readAgain=False)
+
+    def SetDataName(self, name):
+        if name == '':
+            self.__useExtName = True
+            self.Modified(readAgain=False)
+        elif self.__dataname != name:
+            self.__dataname = name
+            self.__useExtName = False
+            self.Modified(readAgain=False)
+
+    def GetDataName(self):
+        if self.__useExtName:
+            mname = self.GetModelFileNames(idx=0)
+            ext = mname.split('.')[-1]
+            return ext
+        return self.__dataname

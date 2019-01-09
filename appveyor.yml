@@ -16,6 +16,7 @@ image: Visual Studio 2015
 
 platform:
 - x64
+- x86
 
 init:
   - ps: if ($Env:PLATFORM -eq "x64") { $Env:CONDA = "${Env:CONDA}-x64" }
@@ -29,12 +30,21 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - conda install vtk=8.1.0
+  # Upgrade pip
   - python -m pip install --upgrade pip
+  # Install extra dependencies
+  - conda install -c conda-forge pyproj
+  # Install windows requirements available on pip
+  - pip install -r requirements_win.txt
+  # Handle VTK if archetecture requires conda, else let setup.py install via pip
+  - cmd: if "%PLATFORM%" == "x86" (conda install vtk) else (echo "setup.py should install VTK")
+  # Install PVGeo
   - python setup.py install
+  # Test the install and see where PVGeo is located
   - python -m PVGeo install echo
 
-
 test_script:
+  - python -c "import vtk; print(vtk.VTK_VERSION)"
+  - python -c "import vtki; print(vtki.__version__)"
   - python -c "import PVGeo; print('PVGeo Version ', PVGeo.__version__)"
   - python tests/__main__.py close # exit with error code if problem occurs

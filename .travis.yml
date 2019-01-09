@@ -7,7 +7,6 @@ python:
 sudo: false
 install:
     - pip install -r requirements.txt
-    - pip install vtk>=8.1.0
 script:
     - python setup.py install
     - coverage run tests/__main__.py

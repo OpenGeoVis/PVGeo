@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.1.28'
+paraview_plugin_version = '1.1.42'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -17,7 +17,7 @@ MENU_CAT = 'PVGeo: General Grids'
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoReverseImageDataAxii', label='Reverse Image Data Axii')
+@smproxy.filter(name='PVGeoReverseImageDataAxii', label=ReverseImageDataAxii.__displayname__)
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
@@ -43,7 +43,7 @@ class PVGeoReverseImageDataAxii(ReverseImageDataAxii):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoTranslateGridOrigin', label='Translate Grid Origin')
+@smproxy.filter(name='PVGeoTranslateGridOrigin', label=TranslateGridOrigin.__displayname__)
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
@@ -64,9 +64,13 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoTableToGrid', label='Table To Grid')
+@smproxy.filter(name='PVGeoTableToGrid', label=TableToGrid.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
+    <RepresentationType view="RenderView" type="Surface With Edges" />
+    <WarnOnCreate title="Deprecation Warning">
+      This filter is deprecated and will be removed in PVGeo version 2.0, please use the `Table To Time Grid` filter instead.
+      Do you want to continue?
+    </WarnOnCreate>''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoTableToGrid(TableToGrid):
@@ -105,11 +109,66 @@ class PVGeoTableToGrid(TableToGrid):
         TableToGrid.SetSwapXY(self, flag)
 
 
+###############################################################################
+
+
+@smproxy.filter(name='PVGeoTableToTimeGrid', label=TableToTimeGrid.__displayname__)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
+class PVGeoTableToTimeGrid(TableToTimeGrid):
+    def __init__(self):
+        TableToTimeGrid.__init__(self)
+
+
+    #### Setters / Getters ####
+
+
+    @smproperty.intvector(name="Extent", default_values=[10, 10, 10, 1])
+    def SetExtent(self, nx, ny, nz, nt):
+        TableToTimeGrid.SetExtent(self, nx, ny, nz, nt)
+
+    @smproperty.intvector(name="Dimensions", default_values=[0, 1, 2, 3])
+    def SetDimensions(self, x, y, z, t):
+        TableToTimeGrid.SetDimensions(self, x, y, z, t)
+
+    @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0])
+    def SetSpacing(self, dx, dy, dz):
+        TableToTimeGrid.SetSpacing(self, dx, dy, dz)
+
+    @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0, 0.0])
+    def SetOrigin(self, x0, y0, z0):
+        TableToTimeGrid.SetOrigin(self, x0, y0, z0)
+
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Order', command='SetOrder',
+        labels=['C-style: Row-major order', 'Fortran-style: column-major order'],
+        values=[0, 1]))
+    def SetOrder(self, order):
+        o = ['C', 'F']
+        TableToTimeGrid.SetOrder(self, o[order])
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        TableToTimeGrid.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return TableToTimeGrid.GetTimestepValues(self)
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Use Point Data', command='SetUsePoints', default_values=False, panel_visibility='advanced', help='Set whether or not to place the data on the nodes/cells of the grid. In ParaView, switching can be a bit buggy: be sure to turn the visibility of this data object OFF on the pipeline when changing bewteen nodes/cells.'))
+    def SetUsePoints(self, flag):
+        TableToTimeGrid.SetUsePoints(self, flag)
+
+
+
 
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoExtractTopography', label='Extract Topography')
+@smproxy.filter(name='PVGeoExtractTopography', label=ExtractTopography.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Topography", port_index=1)
@@ -126,25 +185,43 @@ class PVGeoExtractTopography(ExtractTopography):
     def SetTolerance(self, tol):
         ExtractTopography.SetTolerance(self, tol)
 
+    @smproperty.doublevector(name="Offset", default_values=0.0)
+    def SetOffset(self, offset):
+        ExtractTopography.SetOffset(self, offset)
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Operation', command='SetOperation', labels=ExtractTopography.GetOperationNames(), help='This is the type of extraction operation to apply'))
+    def SetOperation(self, op):
+        ExtractTopography.SetOperation(self, op)
+
 ###############################################################################
 
+
 @smproxy.reader(name="PVGeoSurferGridReader",
-       label="PVGeo: Surfer Grid File Format",
-       extensions="grd GRD",
-       file_description="Surfer Grid")
+       label='PVGeo: %s'%SurferGridReader.__displayname__,
+       extensions=SurferGridReader.extensions,
+       file_description=SurferGridReader.description)
 class PVGeoSurferGridReader(SurferGridReader):
     def __init__(self):
         SurferGridReader.__init__(self)
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+    @smproperty.xml(_helpers.getFileReaderXml(SurferGridReader.extensions, readerDescription=SurferGridReader.description))
     def AddFileName(self, fname):
         SurferGridReader.AddFileName(self, fname)
 
     @smproperty.stringvector(name='DataName', default_values='Data')
     def SetDataName(self, dataName):
         SurferGridReader.SetDataName(self, dataName)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        SurferGridReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return SurferGridReader.GetTimestepValues(self)
 
 
 ###############################################################################
@@ -204,22 +281,68 @@ class PVGeoWriteCellCenterData(WriteCellCenterData):
 
 
 @smproxy.reader(name="PVGeoEsriGridReader",
-       label="PVGeo: Esri ASCII Grid Reader",
-       extensions="asc dem txt",
-       file_description="Surfer Grid")
-class PVGeoSurferGridReader(EsriGridReader):
+       label='PVGeo: %s'%EsriGridReader.__displayname__,
+       extensions=EsriGridReader.extensions,
+       file_description=EsriGridReader.description)
+class PVGeoEsriGridReader(EsriGridReader):
     def __init__(self):
         EsriGridReader.__init__(self)
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml("sgems dat geoeas gslib GSLIB txt SGEMS", readerDescription='GSLib Table'))
+    @smproperty.xml(_helpers.getFileReaderXml(EsriGridReader.extensions, readerDescription=EsriGridReader.description))
     def AddFileName(self, fname):
         EsriGridReader.AddFileName(self, fname)
 
     @smproperty.stringvector(name='DataName', default_values='Data')
     def SetDataName(self, dataName):
         EsriGridReader.SetDataName(self, dataName)
+
+    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    def SetTimeDelta(self, dt):
+        EsriGridReader.SetTimeDelta(self, dt)
+
+    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    def GetTimestepValues(self):
+        """This is critical for registering the timesteps"""
+        return EsriGridReader.GetTimestepValues(self)
+
+
+
+###############################################################################
+
+
+@smproxy.reader(name="PVGeoLandsatReader",
+       label='PVGeo: %s'%LandsatReader.__displayname__,
+       extensions=LandsatReader.extensions,
+       file_description=LandsatReader.description)
+class PVGeoLandsatReader(LandsatReader):
+    def __init__(self):
+        LandsatReader.__init__(self)
+
+    #### Seters and Geters ####
+
+    @smproperty.xml(_helpers.getFileReaderXml(LandsatReader.extensions, readerDescription=LandsatReader.description))
+    def AddFileName(self, fname):
+        LandsatReader.AddFileName(self, fname)
+
+    @smproperty.dataarrayselection(name="Available Bands")
+    def GetDataSelection(self):
+        return LandsatReader.GetDataSelection(self)
+
+
+    @smproperty.xml(_helpers.getPropertyXml(name='Cast Data Type',
+        command='CastDataType',
+        default_values=True,
+        help='A boolean to set whether to cast the data arrays so invalid points are filled nans.',
+        panel_visibility='advanced'))
+    def CastDataType(self, flag):
+        LandsatReader.CastDataType(self, flag)
+
+
+    @smproperty.xml(_helpers.getDropDownXml(name='Color Scheme', command='SetColorScheme', labels=LandsatReader.GetColorSchemeNames(), help='Set a color scheme to use.'))
+    def SetColorScheme(self, scheme):
+        LandsatReader.SetColorScheme(self, scheme)
 
 
 ###############################################################################

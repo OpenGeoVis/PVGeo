@@ -53,7 +53,7 @@ def generateViewerURL(dataURL):
     viewerURL = "http://viewer.pvgeo.org/"
     return viewerURL + '%s%s' % ("?fileURL=", dataURL)
 
-def getVTKjsURL(host, inURL):
+def getVTKjsURL(*args):
     """After using ``exportVTKjs()`` to create a ``.vtkjs`` file from a ParaView
     data scene which is uploaded to an online file hosting service like Dropbix,
     use this method to get a shareable link to that scene on the
@@ -78,6 +78,14 @@ def getVTKjsURL(host, inURL):
         >>> pvm.export.getVTKjsURL('github', 'https://github.com/OpenGeoVis/PVGeo/raw/docs/ripple.vtkjs')
 
     """
+    if len(args) == 1:
+        host = 'dropbox'
+        inURL = args[0]
+    elif len(args) == 2:
+        host = args[0]
+        inURL = args[1]
+    else:
+        raise RuntimeError('Arguments not understood.')
     if host.lower() == "dropbox":
         convertURL = convertDropboxURL(inURL)
     elif host.lower() == "github":

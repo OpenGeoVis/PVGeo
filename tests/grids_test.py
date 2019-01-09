@@ -129,6 +129,115 @@ class TestTableToGrid(TestBase):
 
 ###############################################################################
 
+class TestTableToTimeGrid(TestBase):
+    """
+    Test the `TableToTimeGrid` filter
+    """
+    def setUp(self):
+        TestBase.setUp(self)
+        # Create some input tables
+        self.table = vtk.vtkTable()
+        # Populate the tables
+        self.arrs = [None, None, None]
+        self.n = 400
+        self.titles = ('Array 0', 'Array 1', 'Array 2')
+        self.arrs[0] = np.random.random(self.n)
+        self.arrs[1] = np.random.random(self.n)
+        self.arrs[2] = np.random.random(self.n)
+        self.table.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
+        self.table.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
+        self.table.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
+        return
+
+    def check_data_fidelity(self, ido, checkme, points=False):
+        """`TableToTimeGrid`: data fidelity"""
+        wido = dsa.WrapDataObject(ido)
+        for i in range(len(self.titles)):
+            if points:
+                arr = wido.PointData[self.titles[i]]
+            else:
+                arr = wido.CellData[self.titles[i]]
+            self.assertTrue(np.allclose(arr, checkme[i], rtol=RTOL))
+
+    def test_simple(self):
+        """`TableToTimeGrid`: check simple"""
+        # Use filter
+        f = TableToTimeGrid()
+        f.SetInputDataObject(self.table)
+        f.SetDimensions(0, 1, 2, 3)
+        f.SetExtent(20, 2, 5, 2)
+        f.SetSpacing(5, 5, 5)
+        f.SetOrigin(3.3, 6.0, 7)
+        f.SetUsePoints(False)
+        f.SetOrder('C')
+        for t in range(2):
+            f.UpdateTimeStep(t)
+            ido = f.GetOutput()
+            checkme = [None] * len(self.arrs)
+            for i in range(len(self.arrs)):
+                a = self.arrs[i].reshape((20, 2, 5, 2))[:,:,:,t]
+                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+            self.check_data_fidelity(ido, checkme, points=False)
+        f.SetUsePoints(True)
+        f.Update()
+        for t in range(2):
+            f.UpdateTimeStep(t)
+            ido = f.GetOutput()
+            checkme = [None] * len(self.arrs)
+            for i in range(len(self.arrs)):
+                a = self.arrs[i].reshape((20, 2, 5, 2))[:,:,:,t]
+                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+            self.check_data_fidelity(ido, checkme, points=True)
+        return
+
+
+    def test_seplib(self):
+        """`TableToTimeGrid`: check a SEPLib ordered array"""
+        def sepit(a):
+            a = a.swapaxes(0, 2)
+            a = a.swapaxes(0, 1)
+            return a
+
+        # Use filter
+        f = TableToTimeGrid()
+        f.SetInputDataObject(self.table)
+        f.SetDimensions(1, 2, 0, 3)
+        f.SetExtent(20, 2, 5, 2)
+        f.SetSpacing(5, 5, 5)
+        f.SetOrigin(3.3, 6.0, 7)
+        f.SetUsePoints(False)
+        f.SetOrder('F')
+        for t in range(2):
+            f.UpdateTimeStep(t)
+            ido = f.GetOutput()
+            self.assertEqual(ido.GetDimensions(), (3, 6, 21))
+            checkme = [None] * len(self.arrs)
+            for i in range(len(self.arrs)):
+                a = self.arrs[i].reshape((20, 2, 5, 2), order='F')[:,:,:,t]
+                a = sepit(a)
+                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+
+            self.check_data_fidelity(ido, checkme, points=False)
+        f.SetUsePoints(True)
+        f.Update()
+        for t in range(2):
+            f.UpdateTimeStep(t)
+            ido = f.GetOutput()
+            self.assertEqual(ido.GetDimensions(), (2, 5, 20))
+            checkme = [None] * len(self.arrs)
+            for i in range(len(self.arrs)):
+                a = self.arrs[i].reshape((20, 2, 5, 2), order='F')[:,:,:,t]
+                a = sepit(a)
+                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+            self.check_data_fidelity(ido, checkme, points=True)
+        return
+
+
+
+
+
+###############################################################################
+
 class TestReverseImageDataAxii(TestBase):
     """
     Test the `ReverseImageDataAxii` filter
@@ -290,14 +399,16 @@ class TestSurferGridReader(TestBase):
         self.assertIsNotNone(img)
         # Check shapes of the surfer grid
         nx, ny, nz = img.GetDimensions()
-        self.assertEqual(nx, 182)
-        self.assertEqual(ny, 222)
+        self.assertEqual(nx, 222)
+        self.assertEqual(ny, 182)
         self.assertEqual(nz, 1)
+
         # Now test writer
         writer = WriteImageDataToSurfer()
         fname = os.path.join(self.test_dir, 'test-writer.grd')
         writer.SetFileName(fname)
         writer.Write(img, 'foo')
+
         # Read again and compare
         reader = SurferGridReader()
         reader.AddFileName(fname)
@@ -306,8 +417,8 @@ class TestSurferGridReader(TestBase):
         read = reader.GetOutput()
         self.assertIsNotNone(read)
         nx, ny, nz = read.GetDimensions()
-        self.assertEqual(nx, 182)
-        self.assertEqual(ny, 222)
+        self.assertEqual(nx, 222)
+        self.assertEqual(ny, 182)
         self.assertEqual(nz, 1)
         self.assertEqual(img.GetBounds(), read.GetBounds())
         # Check the data arrays
@@ -325,7 +436,20 @@ class TestExtractTopography(TestBase):
     """
     Test the `ExtractTopography` filter
     """
-    def test(self):
+    def setUp(self):
+        TestBase.setUp(self)
+        # create a volumetric data set
+        self.grid = PVGeo.model_build.CreateTensorMesh().Apply()
+        # create an unudulating surface in the grid domain
+        #   make XY random in the grid bounds
+        #   make Z ranome within a very small domain inside the grid
+        bnds = self.grid.GetBounds()
+        x = np.random.uniform(bnds[0], bnds[1], 5000)
+        y = np.random.uniform(bnds[2], bnds[3], 5000)
+        z = np.random.uniform(-200, -100, 5000)
+        self.points = interface.pointsToPolyData(np.c_[x,y,z])
+
+    def test_simple_run(self):
         """`ExtractTopography`: Test extraction on simple data"""
         # Produce some input data
         data = vtk.vtkImageData()
@@ -353,7 +477,7 @@ class TestExtractTopography(TestBase):
         self.assertEqual(grd.GetOrigin(), data.GetOrigin())
         # Now check the active topo cell data?
         # TODO: implement
-        active = dsa.WrapDataObject(grd).CellData['Active Topography']
+        active = dsa.WrapDataObject(grd).CellData['Extracted']
         for i in range(grd.GetNumberOfCells()):
             cell = grd.GetCell(i)
             bounds = cell.GetBounds()
@@ -367,6 +491,16 @@ class TestExtractTopography(TestBase):
 
         return
 
+
+    def test_underneath(self):
+        extracted = ExtractTopography(op='underneath').Apply(self.grid, self.points)
+
+
+    def test_intersection(self):
+        extracted = ExtractTopography(op='intersection', tolerance=50).Apply(self.grid, self.points)
+
+    def test_shifted_surface(self):
+        extracted = ExtractTopography(op='intersection', tolerance=50, offset=-250).Apply(self.grid, self.points)
 
 
 class TestCellCenterWriter(TestBase):
@@ -406,7 +540,7 @@ class TestCellCenterWriter(TestBase):
 
 ###############################################################################
 
-class TestGSLibReader(TestBase):
+class TestEsriGridReader(TestBase):
     """
     Test the `EsriGridReader`
     """
@@ -458,32 +592,24 @@ NODATA_value  -9999
         self.assertEqual(oz, 0.0)
         return
 
-
-# class TestGSLibReader(TestBase):
-#     """
-#     Test the `EsriGridReader` with big file
-#     """
-#
-#     ###########################################
-#
-#     def test_read(self):
-#         """`EsriGridReader`: Test the read"""
-#         reader = EsriGridReader()
-#         reader.AddFileName('/Users/bane/Documents/OpenGeoVis/Data/data-testing/Readers/ESRI/la1.dem')
-#         reader.Update()
-#         img = reader.GetOutput()
-#         # Test data object
-#         self.assertIsNotNone(img)
-#         nx, ny, nz = img.GetDimensions()
-#         self.assertEqual(nx, 7317)
-#         self.assertEqual(ny, 8160)
-#         dx, dy, dz = img.GetSpacing()
-#         self.assertTrue(3.0 == dx == dy == dz)
-#         ox, oy, oz = img.GetOrigin()
-#         self.assertTrue(abs(ox - 385440.22544667) < RTOL)
-#         self.assertTrue(abs(oy - 3729089.022415) < RTOL)
-#         self.assertEqual(oz, 0.0)
-#         return
+    # def test_read_big(self):
+    #     """`EsriGridReader`: Test the read"""
+    #     reader = EsriGridReader()
+    #     reader.AddFileName('/Users/bane/Documents/OpenGeoVis/Data/data-testing/Readers/ESRI/DEM/la1.dem')
+    #     reader.Update()
+    #     img = reader.GetOutput()
+    #     # Test data object
+    #     self.assertIsNotNone(img)
+    #     nx, ny, nz = img.GetDimensions()
+    #     self.assertEqual(nx, 7317)
+    #     self.assertEqual(ny, 8160)
+    #     dx, dy, dz = img.GetSpacing()
+    #     self.assertTrue(3.0 == dx == dy == dz)
+    #     ox, oy, oz = img.GetOrigin()
+    #     self.assertTrue(abs(ox - 385440.22544667) < RTOL)
+    #     self.assertTrue(abs(oy - 3729089.022415) < RTOL)
+    #     self.assertEqual(oz, 0.0)
+    #     return
 
 
 ###############################################################################
@@ -492,6 +618,7 @@ NODATA_value  -9999
 ###############################################################################
 ###############################################################################
 if __name__ == '__main__':
+    import unittest
     unittest.main()
 ###############################################################################
 ###############################################################################
