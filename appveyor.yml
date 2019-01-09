@@ -30,11 +30,22 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - if ($Env:PLATFORM -eq "x86") {conda install -c conda-forge vtk}
-  - conda install -c conda-forge pyproj
+  # Upgrade pip
   - python -m pip install --upgrade pip
+  # Install extra dependencies
+  - conda install -c conda-forge pyproj
+  # Install windows requirements available on pip
   - pip install -r requirements_win.txt
+  # Handle VTK if archetecture requires conda, else let setup.py install via pip
+  - ps: if ($Env:PLATFORM -eq "x86") {
+        conda install vtk
+        echo "VTK installed from Anaconda"
+        } else {
+        echo "setup.py should install VTK"
+        }
+  # Install PVGeo
   - python setup.py install
+  # Test the install and see where PVGeo is located
   - python -m PVGeo install echo
 
 test_script:

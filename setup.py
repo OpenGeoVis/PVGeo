@@ -31,7 +31,9 @@ install_requires=[
 
 # add vtk if not windows and (not Python 3.x or not x64)
 if os.name == 'nt' and (int(sys.version[0]) < 3 or '64' not in platform.architecture()[0]):
-    warnings.warn('Will need to install VTK manually')
+    warnings.warn('\nYou will need to install VTK manually.' +
+                  '  Try using Anaconda.  See:\n'
+                  + 'https://anaconda.org/anaconda/vtk')
 else:
     install_requires.append(['vtk>=8.1'])
 
