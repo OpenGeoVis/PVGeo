@@ -30,16 +30,16 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - conda install vtk
+  - conda install -c conda-forge vtk
   - conda install -c conda-forge pyproj
   - python -m pip install --upgrade pip
-  # Use the master release of vtki
-  - pip install git+https://github.com/akaszynski/vtki@master
+  - pip install git+https://github.com/akaszynski/vtki@setup
   - pip install -r requirements_win.txt
   - python setup.py install
   - python -m PVGeo install echo
 
-
 test_script:
+  - python -c "import vtk; print(vtk.VTK_VERSION)"
+  - python -c "import vtki; print(vtki.__version__)"
   - python -c "import PVGeo; print('PVGeo Version ', PVGeo.__version__)"
   - python tests/__main__.py close # exit with error code if problem occurs
