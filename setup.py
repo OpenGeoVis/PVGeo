@@ -47,7 +47,7 @@ setuptools.setup(
     install_requires=install_requires,
     extras_require={
         'pyproj': ['pyproj>=1.9']
-    }
+    },
     classifiers=(
         "Programming Language :: Python",
         "License :: OSI Approved :: BSD License",
