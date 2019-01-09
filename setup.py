@@ -26,7 +26,7 @@ install_requires=[
     'pandas>=0.23.4',
     'mock>=2.0.0',
     'espatools>=0.0.7',
-    'vtki>=0.14.0'
+    'vtki>=0.14.1'
 ]
 
 # add vtk if not windows and (not Python 3.x or not x64)

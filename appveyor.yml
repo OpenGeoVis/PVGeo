@@ -30,10 +30,9 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - conda install -c conda-forge vtk
+  - if ($Env:PLATFORM -eq "x86") {conda install -c conda-forge vtk}
   - conda install -c conda-forge pyproj
   - python -m pip install --upgrade pip
-  - pip install git+https://github.com/akaszynski/vtki@setup
   - pip install -r requirements_win.txt
   - python setup.py install
   - python -m PVGeo install echo
