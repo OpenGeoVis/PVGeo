@@ -10,3 +10,4 @@ pyproj>=1.9
 omf>=0.9.3
 omfvtk>=0.0.2
 espatools>=0.0.8
+discretize>=0.3.8
