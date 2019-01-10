@@ -4,14 +4,10 @@ from .write import *
 from .general import *
 
 try:
-    from .. import _helpers
-    with _helpers.HiddenPrints():
-        import discretize
-except ImportError:
-    pass
-else:
     from .disc_meshes import *
     from .octree import *
+except ImportError:
+    pass
 
 __displayname__ = 'UBC Mesh Tools'
 

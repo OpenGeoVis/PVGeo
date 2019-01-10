@@ -27,8 +27,8 @@ else:
     from . import ubc
 
     try:
-        import omf
-        import omfvtk
+        __import__('omf')
+        __import__('omfvtk')
     except ImportError:
         pass
     else:
