@@ -26,6 +26,14 @@ else:
     #TODO: from . import tunneling
     from . import ubc
 
+    try:
+        import omf
+        import omfvtk
+    except ImportError:
+        pass
+    else:
+        from . import gmggroup
+
     # Import Helpers
     from . import _helpers
     from .interface import *

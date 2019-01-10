@@ -25,7 +25,7 @@ install_requires=[
     'codecov==2.0.15',
     'pandas>=0.23.4',
     'mock>=2.0.0',
-    'espatools>=0.0.7',
+    'espatools>=0.0.8',
     'vtki>=0.14.1'
 ]
 
@@ -50,7 +50,8 @@ setuptools.setup(
     install_requires=install_requires,
     extras_require={
         'pyproj': ['pyproj>=1.9'],
-        'discretize': ['discretize>=0.3.8']
+        'omf': ['omf>=0.9.3', 'omfvtk>=0.0.2'],
+        'discretize': ['discretize>=0.3.8'],
     },
     classifiers=(
         "Programming Language :: Python",
