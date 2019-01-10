@@ -25,7 +25,7 @@ install_requires=[
     'codecov==2.0.15',
     'pandas>=0.23.4',
     'mock>=2.0.0',
-    'espatools>=0.0.7',
+    'espatools>=0.0.8',
     'vtki>=0.14.1'
 ]
 
