@@ -34,10 +34,10 @@ install:
   - python -m pip install --upgrade pip
   # Install extra dependencies
   - conda install -c conda-forge pyproj
-  # Install windows requirements available on pip
-  - pip install -r requirements_win.txt
   # Handle VTK if archetecture requires conda, else let setup.py install via pip
   - cmd: if "%PLATFORM%" == "x86" (conda install vtk) else (echo "setup.py should install VTK")
+  # Install windows requirements available on pip
+  - pip install -r requirements_win.txt
   # Install PVGeo
   - python setup.py install
   # Test the install and see where PVGeo is located
