@@ -126,5 +126,5 @@ def setAxisLabelsFromBounds(name, num=(10, 10, 5)):
     return
 
 
-setAxisLabelsFromBounds.___displayname__ = 'Set Axis Labels from Bounds'
+setAxisLabelsFromBounds.__displayname__ = 'Set Axis Labels from Bounds'
 setAxisLabelsFromBounds.__category__ = 'macro'

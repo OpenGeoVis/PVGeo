@@ -23,7 +23,7 @@ __all__ = [
 ]
 
 
-___displayname__ = 'Interface'
+__displayname__ = 'Interface'
 
 
 import numpy as np
