@@ -49,7 +49,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=install_requires,
     extras_require={
-        'pyproj': ['pyproj>=1.9']
+        'pyproj': ['pyproj>=1.9'],
+        'discretize': ['discretize>=0.3.8']
     },
     classifiers=(
         "Programming Language :: Python",
