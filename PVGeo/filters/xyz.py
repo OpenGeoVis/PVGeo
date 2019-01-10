@@ -13,6 +13,8 @@ __all__ = [
 
 __displayname__ = 'Point/Line Sets'
 
+from datetime import datetime
+
 import numpy as np
 import pandas as pd
 import vtk

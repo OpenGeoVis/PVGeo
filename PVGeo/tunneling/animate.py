@@ -2,8 +2,6 @@ __all__ = [
     'AnimateTBM',
 ]
 
-from datetime import datetime
-
 import numpy as np
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
