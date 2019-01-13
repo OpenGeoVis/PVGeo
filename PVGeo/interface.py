@@ -302,6 +302,8 @@ def wrapvtki(dataset):
     """This will wrap any given VTK dataset via the vtkInterface Python package
     if it is available and return the wrapped data object. If vtki is
     unavailable, then the given object is returned."""
+    if isinstance(dataset, vtk.vtkTable):
+        return dataset
     try:
         import vtki
         dataset = vtki.wrap(dataset)
