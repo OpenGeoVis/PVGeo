@@ -110,7 +110,7 @@ def dataFrameToTable(df, pdo=None):
     for key in df.keys():
         VTK_data = convertArray(df[key].values, name=key)
         pdo.AddColumn(VTK_data)
-    return pdo
+    return wrapvtki(pdo)
 
 
 def tableToDataFrame(table):
@@ -146,7 +146,7 @@ def placeArrInTable(ndarr, titles, pdo):
         if isinstance(ndarr[0], (tuple, np.void)):
             for i in range(len(titles)):
                 placeArrInTable(ndarr['f%d' % i], [titles[i]], pdo)
-            return pdo
+            return wrapvtki(pdo)
         # Otherwise it is just a 1D array which needs to be 2D
         else:
             ndarr = np.reshape(ndarr, (-1, 1))
@@ -156,7 +156,7 @@ def placeArrInTable(ndarr, titles, pdo):
         VTK_data = convertArray(ndarr[:,i])
         VTK_data.SetName(titles[i])
         pdo.AddColumn(VTK_data)
-    return pdo
+    return wrapvtki(pdo)
 
 
 
@@ -253,7 +253,7 @@ def pointsToPolyData(points, copy_z=False):
     if copy_z:
         z = convertArray(points[:, 2], name='Elevation')
         pdata.GetPointData().AddArray(z)
-    return pdata
+    return wrapvtki(pdata)
 
 
 def addArraysFromDataFrame(pdo, field, df):
@@ -261,7 +261,7 @@ def addArraysFromDataFrame(pdo, field, df):
     for key in df.keys():
         VTK_data = convertArray(df[key].values, name=key)
         _helpers.addArray(pdo, field, VTK_data)
-    return pdo
+    return wrapvtki(pdo)
 
 
 
