@@ -1,12 +1,6 @@
 import unittest
-import shutil
-import tempfile
 import os
 import numpy as np
-
-from six.moves import urllib
-
-DATA_URL = "https://raw.githubusercontent.com/gmggroup/omf/master/assets/test_file.omf"
 
 
 # VTK imports:
@@ -35,13 +29,8 @@ if omf_avail:
         """
 
         def setUp(self):
-            self.test_dir = tempfile.mkdtemp()
-            self.fname = os.path.join(self.test_dir, 'test_file.omf')
-            urllib.request.urlretrieve(DATA_URL, self.fname)
+            self.fname = os.path.join(os.path.dirname(__file__), 'data/test_file.omf')
 
-        def tearDown(self):
-            # Remove the test data directory after the test
-            shutil.rmtree(self.test_dir)
 
         def test_read_project(self):
             proj = OMFReader().Apply(self.fname)
