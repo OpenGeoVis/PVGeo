@@ -33,6 +33,7 @@ if omf_avail:
 
 
         def test_read_project(self):
+            """`OMFReader`: read whole project file"""
             proj = OMFReader().Apply(self.fname)
             self.assertIsNotNone(proj)
             self.assertEqual(proj.GetNumberOfBlocks(), 9)

@@ -100,7 +100,6 @@ class AddCellConnToPoints(FilterBase):
             if cellType == vtk.VTK_LINE:
                 tree = Tree(points)
                 ind = tree.query(og, k=numPoints)[1].ravel()
-                print(ind)
                 for i in range(len(ind)-1):
                     # Get indices of k nearest points
                     ptsi = [ind[i], ind[i+1]]

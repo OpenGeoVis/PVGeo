@@ -383,13 +383,16 @@ class TestExtractTopography(TestBase):
 
 
     def test_underneath(self):
+        """`ExtractTopography`: Test extraction on underneath surface"""
         extracted = ExtractTopography(op='underneath').Apply(self.grid, self.points)
 
 
     def test_intersection(self):
+        """`ExtractTopography`: Test extraction on surface"""
         extracted = ExtractTopography(op='intersection', tolerance=50).Apply(self.grid, self.points)
 
     def test_shifted_surface(self):
+        """`ExtractTopography`: Test extraction for shifted surface"""
         extracted = ExtractTopography(op='intersection', tolerance=50, offset=-250).Apply(self.grid, self.points)
 
 

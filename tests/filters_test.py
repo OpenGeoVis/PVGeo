@@ -409,6 +409,7 @@ class TestArrayMath(TestBase):
         return
 
     def test_get_operations(self):
+        """`ArrayMath`: get operations"""
         op = ArrayMath.GetOperation('add')
         self.assertIsNotNone(op)
         op = ArrayMath.GetOperation('subtract')
@@ -435,6 +436,7 @@ class TestArrayMath(TestBase):
 
 
     def test_add(self):
+        """`ArrayMath`: ADD"""
         op = ArrayMath.GetOperation('add')
         check = self.arrs[0] + self.arrs[1]
         self._gen_and_check(op, check)
@@ -444,6 +446,7 @@ class TestArrayMath(TestBase):
 
 
     def test_subtract(self):
+        """`ArrayMath`: SUBTRACT"""
         op = ArrayMath.GetOperation('subtract')
         check = self.arrs[0] - self.arrs[1]
         self._gen_and_check(op, check)
@@ -452,6 +455,7 @@ class TestArrayMath(TestBase):
         self._gen_and_check(op, check, flip=True)
 
     def test_multiply(self):
+        """`ArrayMath`: MULTIPLY"""
         op = ArrayMath.GetOperation('multiply')
         check = self.arrs[0] * self.arrs[1]
         self._gen_and_check(op, check)
@@ -460,6 +464,7 @@ class TestArrayMath(TestBase):
         self._gen_and_check(op, check, flip=True)
 
     def test_divide(self):
+        """`ArrayMath`: DIVIDE"""
         op = ArrayMath.GetOperation('divide')
         check = self.arrs[0] / self.arrs[1]
         self._gen_and_check(op, check)
@@ -468,6 +473,7 @@ class TestArrayMath(TestBase):
         self._gen_and_check(op, check, flip=True)
 
     def test_correlate(self):
+        """`ArrayMath`: CORRELATE"""
         op = ArrayMath.GetOperation('correlate')
         check = np.correlate(self.arrs[0], self.arrs[1], mode='same')
         self._gen_and_check(op, check)
@@ -496,6 +502,7 @@ class TestNormalizeArray(TestBase):
         return
 
     def test_get_operations(self):
+        """`NormalizeArray`: get operations"""
         op = NormalizeArray.GetNormalization('feature_scale')
         self.assertIsNotNone(op)
         op = NormalizeArray.GetNormalization('standard_score')
@@ -520,26 +527,31 @@ class TestNormalizeArray(TestBase):
 
 
     def test_feature_scale(self):
+        """`NormalizeArray`: FEATURE SCALE"""
         op = NormalizeArray.GetNormalization('feature_scale')
         check = NormalizeArray._featureScale(self.arr)
         self._gen_and_check(op, check)
 
     def test_standard_score(self):
+        """`NormalizeArray`: STANDARD SCORE"""
         op = NormalizeArray.GetNormalization('standard_score')
         check = NormalizeArray._standardScore(self.arr)
         self._gen_and_check(op, check)
 
     def test_log10(self):
+        """`NormalizeArray`: LOG10"""
         op = NormalizeArray.GetNormalization('log10')
         check = NormalizeArray._log10(self.arr)
         self._gen_and_check(op, check)
 
     def test_natural_log(self):
+        """`NormalizeArray`: NATURAL LOG"""
         op = NormalizeArray.GetNormalization('natural_log')
         check = NormalizeArray._logNat(self.arr)
         self._gen_and_check(op, check)
 
     def test_just_multiply(self):
+        """`NormalizeArray`: MULTIPLY"""
         op = NormalizeArray.GetNormalization('just_multiply')
         check = NormalizeArray._passArray(self.arr)
         self._gen_and_check(op, check)
@@ -586,6 +598,7 @@ class TestAddCellConnToPoints(TestBase):
         self.vtkpoints = interface.pointsToPolyData(self.pts)
 
     def test_poly_line(self):
+        """`AddCellConnToPoints`: POLY LINE"""
         self.makeSimpleInput()
         f = AddCellConnToPoints()
         f.SetInputDataObject(self.vtkpoints)
@@ -609,6 +622,7 @@ class TestAddCellConnToPoints(TestBase):
         return
 
     def test_line(self):
+        """`AddCellConnToPoints`: LINE"""
         self.makeSimpleInput()
         f = AddCellConnToPoints()
         f.SetInputDataObject(self.vtkpoints)
@@ -692,6 +706,7 @@ if proj:
         # NOTE: ``pyproj`` MUST be installed
 
         def test_conversion(self):
+            """`LonLatToUTM`: CONVERSION"""
             self.fname = os.path.join(os.path.dirname(__file__), 'data/das-coords.csv')
             # read in data that has Lat/Lon and pre converted points in zone 11
             data = pd.read_csv(self.fname)
@@ -730,6 +745,7 @@ class TestManySlicesAlongPoints(TestBase):
         self.points = interface.pointsToPolyData(coords)
 
     def test_along_points(self):
+        """`ManySlicesAlongPoints`: slice along points"""
         # run the algorithms
         slices = ManySlicesAlongPoints(numSlices=10).Apply(self.points, self.grid)
         self.assertTrue(isinstance(slices, vtk.vtkMultiBlockDataSet))
@@ -738,6 +754,7 @@ class TestManySlicesAlongPoints(TestBase):
         #   Testing the slice positions would be crazy difficult
 
     def test_slider(self):
+        """`SlideSliceAlongPoints`: use slider"""
         # Set up the algorithm
         alg = SlideSliceAlongPoints(numSlices=10)
         slc = alg.Apply(self.points, self.grid)
@@ -758,7 +775,7 @@ class TestManySlicesAlongPoints(TestBase):
 
 class TestManySlicesAlongAxis(TestBase):
     """
-    Test the `ManySlicesAlongAxis` filter
+    Test the `ManySlicesAlongAxis` and `SliceThroughTime` filters
     """
     def setUp(self):
         TestBase.setUp(self)
@@ -766,6 +783,7 @@ class TestManySlicesAlongAxis(TestBase):
         self.grid = PVGeo.model_build.CreateTensorMesh().Apply()
 
     def test_along_axis(self):
+        """`ManySlicesAlongAxis`: along axis"""
         # run the algorithm
         slices = ManySlicesAlongAxis(numSlices=10, axis=0).Apply(self.grid)
         self.assertTrue(isinstance(slices, vtk.vtkMultiBlockDataSet))
@@ -775,6 +793,7 @@ class TestManySlicesAlongAxis(TestBase):
 
 
     def test_through_time(self):
+        """`SliceThroughTime`: along axis"""
         # Set up the algorithm
         alg = SliceThroughTime(numSlices=10, axis=1)
         slc = alg.Apply(self.grid)

@@ -40,6 +40,7 @@ class TestDataFrameConversions(TestBase):
     """
 
     def test_df_to_table(self):
+        """`tableToDataFrame`: test interface conversion for tables"""
         names = ['x', 'y', 'z', 'a', 'b']
         data = np.random.rand(100, len(names))
         df = pd.DataFrame(data=data, columns=names)
