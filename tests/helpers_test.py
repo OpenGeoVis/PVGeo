@@ -14,7 +14,7 @@ from PVGeo import interface
 
 RTOL = 0.000001
 
-class TestTableToGrid(TestBase):
+class TestXML(TestBase):
     """
     Test the XML Helpers to make sure no errors are thrown
     """

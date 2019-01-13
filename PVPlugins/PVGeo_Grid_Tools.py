@@ -61,53 +61,6 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
         TranslateGridOrigin.SetCorner(self, corner)
 
 
-###############################################################################
-
-
-@smproxy.filter(name='PVGeoTableToGrid', label=TableToGrid.__displayname__)
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface With Edges" />
-    <WarnOnCreate title="Deprecation Warning">
-      This filter is deprecated and will be removed in PVGeo version 2.0, please use the `Table To Time Grid` filter instead.
-      Do you want to continue?
-    </WarnOnCreate>''' % MENU_CAT)
-@smproperty.input(name="Input", port_index=0)
-@smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
-class PVGeoTableToGrid(TableToGrid):
-    def __init__(self):
-        TableToGrid.__init__(self)
-
-
-    #### Setters / Getters ####
-
-
-    @smproperty.intvector(name="Extent", default_values=[10, 10, 10])
-    def SetExtent(self, nx, ny, nz):
-        TableToGrid.SetExtent(self, nx, ny, nz)
-
-    @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0])
-    def SetSpacing(self, dx, dy, dz):
-        TableToGrid.SetSpacing(self, dx, dy, dz)
-
-    @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0, 0.0])
-    def SetOrigin(self, x0, y0, z0):
-        TableToGrid.SetOrigin(self, x0, y0, z0)
-
-    @smproperty.xml(_helpers.getPropertyXml(name='SEPlib', command='SetSEPlib', default_values=False, help='Use the Stanford Exploration Project\'s axial conventions (d1=z, d2=x, d3=y). Parameters would be entered [z,x,y].'))
-    def SetSEPlib(self, flag):
-        TableToGrid.SetSEPlib(self, flag)
-
-    @smproperty.xml(_helpers.getDropDownXml(name='Order', command='SetOrder',
-        labels=['Fortran-style: column-major order', 'C-style: Row-major order'],
-        values=[0, 1]))
-    def SetOrder(self, order):
-        o = ['F', 'C']
-        TableToGrid.SetOrder(self, o[order])
-
-    @smproperty.xml(_helpers.getPropertyXml(name='Swap XY', command='SetSwapXY', default_values=False))
-    def SetSwapXY(self, flag):
-        TableToGrid.SetSwapXY(self, flag)
-
 
 ###############################################################################
 
