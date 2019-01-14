@@ -78,7 +78,7 @@ For other questions, join the [***PVGeo* community on Slack**](http://slack.pvge
 
 ## About the Authors [![Open Source](https://img.shields.io/badge/open--source-yes-brightgreen.svg)](https://opensource.com/resources/what-open-source)
 
-The *PVGeo* code library is managed by [**Bane Sullivan**](http://banesullivan.com),
+The *PVGeo* code library was created and is managed by [**Bane Sullivan**](http://banesullivan.com),
 graduate student in the Hydrological Science and Engineering interdisciplinary
 program at the Colorado School of Mines under Whitney Trainor-Guitton.
 If you would like to contact us, inquire with [**info@pvgeo.org**](mailto:info@pvgeo.org).
