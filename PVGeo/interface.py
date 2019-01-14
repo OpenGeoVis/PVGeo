@@ -34,8 +34,6 @@ from vtk.util import numpy_support as nps
 
 from . import _helpers
 
-__displayname__ = 'Interface'
-
 
 def getVTKtype(typ):
     """This looks up the VTK type for a give python data type.
