@@ -11,11 +11,11 @@ Welcome to PVGeo's code docs!
    :target: https://vimeo.com/user82050125)
    :alt: Vimeo
 
-.. image:: https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website
+.. image:: https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website&logo=safari&logoColor=white
    :target: http://pvgeo.org
    :alt: Website
 
-.. image:: https://img.shields.io/pypi/v/PVGeo.svg?logo=python
+.. image:: https://img.shields.io/pypi/v/PVGeo.svg?logo=python&logoColor=white
    :target: https://pypi.org/project/PVGeo/
    :alt: PyPI
 

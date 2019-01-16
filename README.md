@@ -12,12 +12,12 @@ like 2D or 3D time-varying grids.
 
 **Learn More:**
 [![Vimeo](https://img.shields.io/badge/demos-grey.svg?logo=vimeo)](https://vimeo.com/user82050125)
-[![Website Build](https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website)](http://pvgeo.org)
-[![Documentation Status](https://readthedocs.org/projects/pvgeo/badge/?version=latest)](http://docs.pvgeo.org/en/latest/?badge=latest)
+[![Website Build](https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website&logo=safari&logoColor=white)](http://pvgeo.org)
+[![Documentation Status](https://img.shields.io/readthedocs/pvgeo.svg?logo=read%20the%20docs&logoColor=white)](http://docs.pvgeo.org/en/latest/?badge=latest)
 [![Slack Badge](https://img.shields.io/badge/Slack-PVGeo-4B0082.svg?logo=slack)](http://slack.pvgeo.org)
 [![Twitter Follow](https://img.shields.io/twitter/follow/pyPVGeo.svg?style=social&label=Follow)](https://twitter.com/pyPVGeo)
 
-**Status:** [![PyPI](https://img.shields.io/pypi/v/PVGeo.svg?logo=python)](https://pypi.org/project/PVGeo/)
+**Status:** [![PyPI](https://img.shields.io/pypi/v/PVGeo.svg?logo=python&logoColor=white)](https://pypi.org/project/PVGeo/)
 [![Build Status](https://img.shields.io/travis/OpenGeoVis/PVGeo/master.svg?label=build&logo=travis)](https://travis-ci.org/OpenGeoVis/PVGeo)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/it085qovtnb0mcgr/branch/master?svg=true)](https://ci.appveyor.com/project/banesullivan/pvgeo/branch/master)
 
