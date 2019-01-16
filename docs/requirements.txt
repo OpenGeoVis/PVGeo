@@ -12,6 +12,7 @@ scipy>=1.1
 colour-runner==0.0.5
 codecov==2.0.15
 vtk>=8.1.0
+vtki>=0.15.0
 pandas>=0.23.4
 pyproj>=1.9
 omf>=0.9.3
