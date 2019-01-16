@@ -39,7 +39,8 @@ the project and some visualization examples. Then check out the rest of the
 [**full website**](http://pvgeo.org/) to explore the technical aspects of the
 project and to find use examples.
 
-### Connections
+
+## Connections
 
 This package provides many VTK-like algorithms designed for geoscientific data
 formats and types to perform data integration and analysis.
