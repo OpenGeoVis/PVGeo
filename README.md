@@ -31,7 +31,7 @@ like 2D or 3D time-varying grids.
 ## Demonstrations of *PVGeo*
 
 For a quick overview of how  *PVGeo* can be used in a Python environment or
-directly within ParaView, checkout the code snippets and videos on the  
+directly within ParaView, checkout the code snippets and videos on the
 [**About Examples Page**](http://pvgeo.org/examples/about-examples/)
 
 Also, check out the [**demo page**](http://demo.pvgeo.org/) for a synopsis of
@@ -66,6 +66,9 @@ with all dependencies installed! Go ahead and test your install:
 ```py
 python -c "import PVGeo; print(PVGeo.__version__)"
 ```
+
+Note that Windows users must use Python 3. Further insight can be found
+in the [**Getting Started Guide**](http://pvgeo.org/overview/getting-started/).
 
 
 ## Report Issues and Contribute
