@@ -50,7 +50,7 @@ setuptools.setup(
     install_requires=install_requires,
     extras_require={
         'pyproj': ['pyproj>=1.9'],
-        'omf': ['omf>=0.9.3', 'omfvtk>=0.0.2'],
+        'omf': ['omf>=0.9.3', 'omfvtk>=0.0.3'],
         'discretize': ['discretize>=0.3.8'],
     },
     classifiers=(
