@@ -146,6 +146,13 @@ class PVGeoExtractTopography(ExtractTopography):
     def SetOperation(self, op):
         ExtractTopography.SetOperation(self, op)
 
+    @smproperty.xml(_helpers.getPropertyXml(name='Invert',
+        command='SetInvert',
+        default_values=False,
+        help='A boolean to set whether on whether to invert the extraction.'))
+    def SetInvert(self, flag):
+        ExtractTopography.SetInvert(self, flag)
+
 ###############################################################################
 
 

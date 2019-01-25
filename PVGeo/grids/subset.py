@@ -18,10 +18,29 @@ from ..base import FilterBase
 ###############################################################################
 
 class ExtractTopography(FilterBase):
-    """This filter takes two inputs: a gridded data set and a set of points for
-    a Topography source. This will add a boolean data array to the cell data of
+    """This filter takes two inputs: any mesh dataset and a set of points for
+    a topography source. This will add a boolean data array to the cell data of
     the input grid on whether that cell should be active (under topographic
-    layer).
+    layer). A user can also choose to directly extract the data rather than
+    appending a boolean scalar array via the ``remove`` argument.
+
+    Args:
+        op (str, int, or callable): The operation as a string key, int
+            index, or callable method
+
+        tolerance (float): buffer around the topography surface to include as
+            part of the decision boundary
+
+        offset (float): static value to shift the reference topography surface
+
+        ivert (bool): optional to invert the extraction.
+
+        remove (bool): Optional parameter to apply a thresholding filter and
+            return a ``vtkUnstructuredGrid`` object with only the extracted
+            cells. The ``remove`` option is only available in Python environments
+            (not available in ParaView). The ``remove`` flag must be set at the
+            time of instantiation of this algorithm.
+
 
     Note:
         This currenlty ignores time varying inputs. We can implement time
@@ -32,12 +51,15 @@ class ExtractTopography(FilterBase):
     """
     __displayname__ = 'Extract Topography'
     __category__ = 'filter'
-    def __init__(self, op='underneath', tolerance=0.001, offset=0.0):
+    def __init__(self, op='underneath', tolerance=0.001, offset=0.0,
+                 invert=False, remove=False):
         FilterBase.__init__(self,
             nInputPorts=2, inputType='vtkDataSet',
             nOutputPorts=1)
         self._tolerance = tolerance
         self._offset = offset
+        self._invert = invert
+        self._remove = remove
         self._operation = self._underneath
         self.SetOperation(op)
 
@@ -47,7 +69,7 @@ class ExtractTopography(FilterBase):
         """
         typ = 'vtkDataSet'
         if port == 1:
-            typ = 'vtkPolyData' # Make sure topography are poly data
+            typ = 'vtkPointSet' # Make sure topography is some sort of point set
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), typ)
         return 1
 
@@ -125,10 +147,10 @@ class ExtractTopography(FilterBase):
         igrid = self.GetInputData(inInfo, 0, 0) # Port 0: grid
         topo = self.GetInputData(inInfo, 1, 0) # Port 1: topography
         grid = self.GetOutputData(outInfo, 0)
+        grid.DeepCopy(igrid)
 
         # Perfrom task
-        grid.DeepCopy(igrid)
-        ncells = grid.GetNumberOfCells()
+        ncells = igrid.GetNumberOfCells()
         active = np.zeros((ncells), dtype=int)
         # Now iterate through the cells in the grid and test if they are beneath the topography
         wtopo = dsa.WrapDataObject(topo)
@@ -143,6 +165,10 @@ class ExtractTopography(FilterBase):
 
         active = self._operation(topoPts, dataPts, self._tolerance)
 
+        if self._invert:
+            # NOTE: assumes the given operation produces zeros and ones only
+            active = 1 - active
+
         # Now add cell data to output
         active = interface.convertArray(active, name='Extracted')
         grid.GetCellData().AddArray(active)
@@ -152,7 +178,13 @@ class ExtractTopography(FilterBase):
         self.SetInputDataObject(0, data)
         self.SetInputDataObject(1, points)
         self.Update()
-        return interface.wrapvtki(self.GetOutput())
+        output = interface.wrapvtki(self.GetOutput())
+        if self._remove:
+            # NOTE: Assumes the given operation produces zeros and ones only
+            #       Also, this does not update the algorithm's output.
+            #       This only sends a new thresholded dataset to the user.
+            return output.threshold(0.5)
+        return output
 
     #### Setters/Getters ####
 
@@ -170,16 +202,23 @@ class ExtractTopography(FilterBase):
             self._offset = offset
             self.Modified()
 
+    def SetInvert(self, flag):
+        """Sets the boolean flag on whether to invert the extraction."""
+        if self._invert != flag:
+            self._invert = flag
+            self.Modified()
+
     def SetOperation(self, op):
-        """Set the type of extraction to perform
+        """Set the type of extraction to perform.
 
         Args:
             op (str, int, or callable): The operation as a string key, int
-            index, or callable method
+                index, or callable method
 
         Note:
             This can accept a callable method to set a custom operation as long
-            as its signature is: ``<callable>(self, topoPts, dataPts)``
+            as its signature is ``<callable>(self, topoPts, dataPts)`` and it
+            strictly produces an integer array of zeros and ones.
         """
         if isinstance(op, str):
             op = ExtractTopography.GetOperations()[op]

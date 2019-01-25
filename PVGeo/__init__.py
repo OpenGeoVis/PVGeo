@@ -12,7 +12,8 @@ except ImportError:
     # Mock the VTK module to run installation
     sys.modules['vtk'] = mock.Mock()
     # This is because VTK is not compatible with Windows Python 2
-    warnings.warn('VTK Python package is unavailable! PVGeo is running in safe mode.')
+    warnings.warn('VTK Python package is unavailable! '\
+        'PVGeo is running in safe mode for installation.')
 else:
     # Import Base Classes
     from .base import *
