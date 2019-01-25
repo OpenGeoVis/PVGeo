@@ -17,7 +17,7 @@ from ..base import AlgorithmBase
 def _makeSpatialCellData(nx, ny, nz):
     """Used for testing
     """
-    arr = np.fromfunction(lambda k, j, i: k*j*i, (nz, ny, nz))
+    arr = np.fromfunction(lambda k, j, i: k*j*i, (nz, ny, nx))
     return arr.flatten()
 
 
