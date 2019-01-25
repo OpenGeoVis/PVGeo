@@ -37,9 +37,12 @@ class ExtractTopography(FilterBase):
 
         remove (bool): Optional parameter to apply a thresholding filter and
             return a ``vtkUnstructuredGrid`` object with only the extracted
-            cells. The ``remove`` option is only available in Python environments
-            (not available in ParaView). The ``remove`` flag must be set at the
-            time of instantiation of this algorithm.
+            cells. The ``remove`` option is only available in Python
+            environments (not available in ParaView). The ``remove`` flag must
+            be set at the time of instantiation of this algorithm.
+            This does not actually update the algorithm's output data object
+            but applies a ``vtki`` threshold filter to pass a new data object
+            after calling ``Apply``.
 
 
     Note:
