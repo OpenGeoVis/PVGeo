@@ -64,7 +64,7 @@ pip install PVGeo
 Now *PVGeo* is ready for use in your standard Python environment (2.7 or 3.x)
 with all dependencies installed! Go ahead and test your install:
 
-```py
+```bash
 python -c "import PVGeo; print(PVGeo.__version__)"
 ```
 

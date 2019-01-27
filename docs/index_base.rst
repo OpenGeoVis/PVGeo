@@ -44,13 +44,23 @@ Welcome to PVGeo's code docs!
    :alt: Documentation Built by gendocs
 
 
-The ``PVGeo`` python package contains VTK powered tools for data visualization in geophysics which are wrapped for direct use within the application `ParaView by Kitware`_. These tools are tailored to data visualization in the geosciences with a heavy focus on structured data sets like 2D or 3D time-varying grids.
+The ``PVGeo`` python package contains VTK powered tools for data visualization
+in geophysics which are wrapped for direct use within the application
+`ParaView by Kitware`_.
+These tools are tailored to data visualization in the geosciences with a heavy
+focus on structured data sets like 2D or 3D time-varying grids.
 
 This website hosts the code documentation for the ``PVGeo`` python package found
-on `GitHub`_ and `PyPI`_. This website strictly documents the code so that users have a convenient and familiar means of searching through the library to understand the backend of the features they are using.
-If you are searching for examples and demonstrations on how to use the ``PVGeo`` library, then head over to the `full website`_ where you can find tutorials with sample data sets and links to many other helpful resources.
+on `GitHub`_ and `PyPI`_. This website strictly documents the code so that users
+have a convenient and familiar means of searching through the library to
+understand how to use PVGeo in a Python environment outside of ParaView.
+If you are searching for examples and demonstrations on how to use the ``PVGeo``
+library, then head over to the `full website`_ where you can find tutorials with
+sample data sets and links to many other helpful resources.
 
-For a quick overview of how ``PVGeo`` can be used in a Python environment or directly within ParaView, please checkout the code snippets and videos on the `About Examples Page`_.
+For a quick overview of how ``PVGeo`` can be used in a Python environment or
+directly within ParaView, please checkout the code snippets and videos on the
+`About Examples Page`_.
 
 
 .. _ParaView by Kitware: https://www.paraview.org
@@ -60,11 +70,31 @@ For a quick overview of how ``PVGeo`` can be used in a Python environment or dir
 .. _About Examples Page: http://pvgeo.org/examples/about-examples/
 
 
+Connections
+-----------
+
+This package provides many VTK-like algorithms designed for geoscientific data
+formats and types to perform data integration and analysis.
+To ensure our users have powerful and easy to use tools that can visualize the
+results of PVGeo algorithms, we are actively involved in the development of
+vtki_: a toolset for easy access to
+VTK data objects and 3D visualization in Python.
+To learn more about pairing PVGeo with ``vtki``, please check out the
+`example Jupyter notebooks`_.
+
+
+.. _vtki: https://github.com/akaszynski/vtki
+.. _example Jupyter notebooks: https://github.com/OpenGeoVis/PVGeo-Examples
+
 
 Requesting Features, Reporting Issues, and Contributing
 -------------------------------------------------------
 
-Please feel free to post features you would like to see from this package on the `issues page`_ as a feature request. If you stumble across any bugs or crashes while using code distributed here, please report it in the issues page so we can promptly address it. For other questions please join the `PVGeo community on Slack`_.
+Please feel free to post features you would like to see from this package on the
+`issues page`_ as a feature request. If you stumble across any bugs or crashes
+while using code distributed here, please report it in the issues page so we can
+promptly address it. For other questions please join the
+`PVGeo community on Slack`_.
 
 .. _issues page: https://github.com/OpenGeoVis/PVGeo/issues
 .. _PVGeo community on Slack: http://slack.pvgeo.org
@@ -72,32 +102,33 @@ Please feel free to post features you would like to see from this package on the
 About the Authors
 -----------------
 
-The ``PVGeo`` code library is managed by `Bane Sullivan`_, graduate student in the Hydrological Science and Engineering interdisciplinary program at the Colorado School of Mines under Whitney Trainor-Guitton. If you would like to contact us, please inquire with `info@pvgeo.org`_.
+The ``PVGeo`` code library was created and is managed by `Bane Sullivan`_,
+graduate student in the Hydrological Science and Engineering interdisciplinary
+program at the Colorado School of Mines under Whitney Trainor-Guitton.
+If you would like to contact us, please inquire with `info@pvgeo.org`_.
 
 .. _Bane Sullivan: http://banesullivan.com
 .. _info@pvgeo.org: mailto:info@pvgeo.org
 
-It is important to note the project is open source and that many features in this repository were made possible by contributors volunteering their time. Please take a look at the `Contributors Page`_ to learn more about the developers of ``PVGeo``.
+It is important to note the project is open source and that many features in
+this repository were made possible by contributors volunteering their time.
+Please take a look at the `Contributors Page`_ to learn more about the
+developers of ``PVGeo``.
 
 .. _Contributors Page: https://github.com/OpenGeoVis/PVGeo/graphs/contributors
 
 Getting Started
 ---------------
 
-To begin using the ``PVGeo`` python package, create a new virtual environment and install ``PVGeo`` through pip.
+To begin using the ``PVGeo`` Python package, create/activate your Python virtual
+environment (we highly recommend using anaconda) and install ``PVGeo`` through
+pip:
 
 .. code-block:: bash
 
-    $ conda create -n PVGeoEnv27 python=2.7
+    pip install PVGeo
 
-    # Activate the virtual environment
-    $ conda activate PVGeoEnv27
 
-    # Install PVGeo
-    (PVGeoEnv27) $ pip install PVGeo
-
-    # Now install VTK>=8.1.0
-    (PVGeoEnv27) $ pip install vtk
 
 .. warning::
 
@@ -106,7 +137,9 @@ To begin using the ``PVGeo`` python package, create a new virtual environment an
 .. _GitHub README: https://github.com/OpenGeoVis/PVGeo/#getting-started
 
 
-Now ``PVGeo`` is ready for use in your standard python environment. To use the *PVGeo* library as plugins in `ParaView`_, please see the `detailed explanation here`_.
+Now ``PVGeo`` is ready for use in your standard python environment. To use the
+*PVGeo* library as plugins in `ParaView`_, please see the
+`detailed explanation here`_.
 
 .. _ParaView: https://paraview.org
 .. _detailed explanation here: http://pvgeo.org/overview/getting-started/
