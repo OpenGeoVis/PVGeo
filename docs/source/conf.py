@@ -27,7 +27,7 @@ sys.path.insert(0, '/Users/bane/Documents/OpenGeoVis/Software/gendocs/')
 # Mock the paraview module to build pvmacros docs
 import mock
 
-MOCK_MODULES = ['paraview', 'paraview.simple']
+MOCK_MODULES = ['paraview', 'paraview.simple', 'discretize', 'pyproj']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
 autodoc_mock_imports = ['paraview']
