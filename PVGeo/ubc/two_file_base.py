@@ -134,7 +134,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
                 basenames of the files.
         """
         # Check if recurssion needed
-        if type(FileName) is list:
+        if isinstance(FileName, (list, tuple)):
             out = {}
             for f in FileName:
                 out[os.path.basename(f)] = ubcMeshReaderBase.ubcModel3D(f)

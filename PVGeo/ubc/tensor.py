@@ -66,7 +66,7 @@ class TensorMeshReader(ubcMeshReaderBase):
             vtkRectilinearGrid :
                 Returns the input ``vtkRectilinearGrid`` with model data appended.
         """
-        if type(model) is dict:
+        if isinstance(model, dict):
             for key in model.keys():
                 TensorMeshReader.PlaceModelOnMesh(mesh, model[key], dataNm=key)
             return mesh
@@ -183,7 +183,7 @@ class TensorMeshReader(ubcMeshReaderBase):
                 return a dictionary of NumPy float array with keys as the
                 basenames of the files.
         """
-        if type(FileName) is list:
+        if isinstance(FileName, (list, tuple)):
             out = {}
             for f in FileName:
                 out[os.path.basename(f)] = TensorMeshReader.ubcModel2D(f)

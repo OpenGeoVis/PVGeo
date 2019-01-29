@@ -84,7 +84,7 @@ class OcTreeReader(ubcMeshReaderBase):
             vtkUnstructuredGrid:
                 The input ``vtkUnstructuredGrid`` with model data appended.
         """
-        if type(model) is dict:
+        if isinstance(model, dict):
             for key in model.keys():
                 mesh = OcTreeReader.PlaceModelOnOcTreeMesh(mesh, model[key], dataNm=key)
             return mesh

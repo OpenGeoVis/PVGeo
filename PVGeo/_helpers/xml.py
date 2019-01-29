@@ -249,7 +249,7 @@ def getInputArrayXml(labels=None, nInputPorts=1, numArrays=1, inputNames='Input'
             return labels
         if nInputPorts > 1:
             for l in labels:
-                if type(l) is not list:
+                if not isinstance(l, list):
                     raise _helpers.PVGeoError('`InputArrayLabels` is improperly structured. Must be a list of lists.')
         return labels
 
@@ -269,7 +269,7 @@ def getInputArrayXml(labels=None, nInputPorts=1, numArrays=1, inputNames='Input'
 
     # Recursively call for each input
     if nInputPorts > 1:
-        if type(numArrays) is not list:
+        if not isinstance(numArrays, list):
             raise _helpers.PVGeoError('When multiple inputs, the `NumberOfInputArrayChoices` must be a list of ints for the number of arrays from each input.')
         if len(numArrays) != nInputPorts:
             raise _helpers.PVGeoError('You must spectify how many arrays come from each input. `len(NumberOfInputArrayChoices) != nInputPorts`.')
