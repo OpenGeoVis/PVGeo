@@ -186,7 +186,7 @@ class ExtractTopography(FilterBase):
             # NOTE: Assumes the given operation produces zeros and ones only
             #       Also, this does not update the algorithm's output.
             #       This only sends a new thresholded dataset to the user.
-            return output.threshold(0.5)
+            return output.threshold(0.5, scalars='Extracted')
         return output
 
     #### Setters/Getters ####
