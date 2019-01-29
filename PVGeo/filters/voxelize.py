@@ -77,7 +77,8 @@ class VoxelizePoints(FilterBase):
         """
         # TODO: implement ability to rotate around Z axis (think PoroTomo vs UTM)
         # TODO: implement way to estimate rotation
-        assert(len(x) == len(y) == len(z))
+        if not (len(x) == len(y) == len(z)):
+            raise AssertionError('Must have same number of coordinates for all components.')
         num = len(x)
         if num == 1:
             # Only one point.. use safe

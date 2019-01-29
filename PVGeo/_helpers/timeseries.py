@@ -83,7 +83,8 @@ def getRequestedTime(algorithm, outInfoVec, idx=0):
         return np.argmin(np.abs(np.array(timesteps) - utime))
     else:
         # if we cant match the time, give first
-        assert(len(timesteps) > 0)
+        if not len(timesteps) > 0:
+            raise AssertionError('Number of timesteps must be greater than 0')
         return 0
 
 

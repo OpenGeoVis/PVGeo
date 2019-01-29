@@ -103,7 +103,8 @@ def getPropertyXml(name, command, default_values, panel_visibility='default', he
 
     if isinstance(value, list):
         num = len(value)
-        assert num > 0
+        if not num > 0:
+            raise AssertionError('length of values must be grater than 0')
         propertyType = type(value[0])
         defaultValues = ' '.join([str(v) for v in value])
     else:

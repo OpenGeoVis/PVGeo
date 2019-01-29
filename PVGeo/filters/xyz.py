@@ -577,7 +577,8 @@ class RotationTool(object):
         """A method to estimate the rotation of a set of points and correct
         that rotation on the XY plane
         """
-        assert(len(x) == len(y) == len(z))
+        if not (len(x) == len(y) == len(z)):
+            raise AssertionError('Must have same number of coordinates for all components.')
         idxs = np.argwhere(z == z[0])
         pts = np.hstack((x[idxs], y[idxs]))
         angle, dx, dy = self._EstimateAngleAndSpacing(pts)
