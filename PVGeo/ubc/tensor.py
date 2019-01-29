@@ -400,12 +400,12 @@ class TensorMeshAppender(ModelAppenderBase):
 
     def _ReadUpFront(self):
         reader = ubcMeshReaderBase.ubcModel3D
-        if not self._is3D:
+        if not self._is_3D:
             # Note how in UBC format, 2D grids are specified on an XZ plane (no Y component)
             # This will only work prior to rotations to account for real spatial reference
             reader = TensorMeshReader.ubcModel2D
         self._models = []
-        for f in self._modelFileNames:
+        for f in self._model_file_names:
             # Read the model data
             self._models.append(reader(f))
         self.NeedToRead(flag=False)
@@ -431,7 +431,7 @@ class TopoMeshAppender(AlgorithmBase):
             nOutputPorts=1, outputType=outputType)
         self._topoFileName = kwargs.get('filename', None)
         self.__indices = None
-        self.__needToRead = True
+        self.__need_to_read = True
         self.__ne, self.__nn = None, None
 
     def NeedToRead(self, flag=None):
@@ -446,13 +446,13 @@ class TopoMeshAppender(AlgorithmBase):
                 The status of the reader aspect of the filter.
         """
         if flag is not None and isinstance(flag, (bool, int)):
-            self.__needToRead = flag
-        return self.__needToRead
+            self.__need_to_read = flag
+        return self.__need_to_read
 
     def Modified(self, readAgain=True):
         """Call modified if the files needs to be read again again.
         """
-        if readAgain: self.__needToRead = readAgain
+        if readAgain: self.__need_to_read = readAgain
         AlgorithmBase.Modified(self)
 
 
@@ -498,7 +498,7 @@ class TopoMeshAppender(AlgorithmBase):
         output = self.GetOutputData(outInfo, 0)
         output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
         # Perfrom task:
-        if self.__needToRead:
+        if self.__need_to_read:
             self._ReadUpFront()
         # Place the model data for given timestep onto the mesh
         self._PlaceOnMesh(output)

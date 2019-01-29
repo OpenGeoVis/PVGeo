@@ -38,10 +38,10 @@ class DelimitedTextReader(ReaderBase):
         # Parameters to control the file read:
         #- if these are set/changed, we must reperform the read
         self.__delimiter = kwargs.get('delimiter', ' ')
-        self.__useTab = kwargs.get('useTab', False)
+        self.__use_tab = kwargs.get('use_tab', False)
         self.__skipRows = kwargs.get('skiprows', 0)
         self.__comments = kwargs.get('comments', '!')
-        self.__hasTitles = kwargs.get('hasTitles', True)
+        self.__has_titles = kwargs.get('has_titles', True)
         # Data objects to hold the read data for access by the pipeline methods
         self._data = []
         self._titles = []
@@ -49,12 +49,12 @@ class DelimitedTextReader(ReaderBase):
     def _GetDeli(self):
         """For itenral use
         """
-        if self.__useTab:
+        if self.__use_tab:
             return None
         return self.__delimiter
 
     def GetSplitOnWhiteSpace(self):
-        return self.__useTab
+        return self.__use_tab
 
     #### Methods for performing the read ####
 
@@ -81,7 +81,7 @@ class DelimitedTextReader(ReaderBase):
         if len(np.shape(content)) > 2:
             raise _helpers.PVGeoError("`_ExtractHeader()` can only handle a sigle file's content")
         idx = 0
-        if self.__hasTitles:
+        if self.__has_titles:
             titles = content[idx].split(self._GetDeli())
             idx += 1
         else:
@@ -175,8 +175,8 @@ class DelimitedTextReader(ReaderBase):
         """Set a boolean flag to override the ``SetDelimiter()`` and use any
         white space as a delimiter.
         """
-        if flag != self.__useTab:
-            self.__useTab = flag
+        if flag != self.__use_tab:
+            self.__use_tab = flag
             self.Modified()
 
 
@@ -201,12 +201,12 @@ class DelimitedTextReader(ReaderBase):
         """A boolean for if the delimited file has header titles for the data
         arrays.
         """
-        if self.__hasTitles != flag:
-            self.__hasTitles = flag
+        if self.__has_titles != flag:
+            self.__has_titles = flag
             self.Modified()
 
     def HasTitles(self):
-        return self.__hasTitles
+        return self.__has_titles
 
     def GetTitles(self):
         return self._titles

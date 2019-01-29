@@ -30,7 +30,7 @@ class TopoReader(DelimitedPointsReaderBase):
     description = 'PVGeo: UBC 3D Topo Files'
     def __init__(self, copy_z=True, **kwargs):
         DelimitedPointsReaderBase.__init__(self, copy_z=copy_z, **kwargs)
-        self.SetHasTitles(False)#kwargs.get('hasTitles', False))
+        self.SetHasTitles(False)#kwargs.get('has_titles', False))
         self.SetSplitOnWhiteSpace(True)
         self.__3d = True # TODO: handle 2D topo files as well
         self.__npts = None
@@ -210,7 +210,7 @@ class GeologyMapper(FilterPreserveTypeBase):
         FilterPreserveTypeBase.__init__(self, **kwargs)
         self.__filename = filename
         self.__deli = delimiter
-        self.__inputArray = [None, None]
+        self.__input_array = [None, None]
 
     @staticmethod
     def _ReadDefinitions(filename, delimiter):
@@ -232,7 +232,7 @@ class GeologyMapper(FilterPreserveTypeBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Get input array
-        field, name = self.__inputArray[0], self.__inputArray[1]
+        field, name = self.__input_array[0], self.__input_array[1]
         #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getNumPyArray(wpdi, field, name)
@@ -261,11 +261,11 @@ class GeologyMapper(FilterPreserveTypeBase):
                 field, and 6 for row)
             name (int): the name of the array
         """
-        if self.__inputArray[0] != field:
-            self.__inputArray[0] = field
+        if self.__input_array[0] != field:
+            self.__input_array[0] = field
             self.Modified()
-        if self.__inputArray[1] != name:
-            self.__inputArray[1] = name
+        if self.__input_array[1] != name:
+            self.__input_array[1] = name
             self.Modified()
         return 1
 

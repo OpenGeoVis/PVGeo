@@ -25,14 +25,14 @@ class _SliceBase(FilterBase):
     """
     __displayname__ = 'Base Slicing Filter'
     __category__ = 'filter'
-    def __init__(self, numSlices=5,
+    def __init__(self, n_slices=5,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         FilterBase.__init__(self,
             nInputPorts=nInputPorts, inputType=inputType,
             nOutputPorts=nOutputPorts, outputType=outputType)
         # Parameters
-        self.__numSlices = numSlices
+        self.__n_slices = n_slices
 
 
     def _GeneratePlane(self, origin, normal):
@@ -60,11 +60,11 @@ class _SliceBase(FilterBase):
         return pdo
 
     def GetNumberOfSlices(self):
-        return self.__numSlices
+        return self.__n_slices
 
     def SetNumberOfSlices(self, num):
-        if self.__numSlices != num:
-            self.__numSlices = num
+        if self.__n_slices != num:
+            self.__n_slices = num
             self.Modified()
 
 
@@ -84,11 +84,11 @@ class ManySlicesAlongPoints(_SliceBase):
     """
     __displayname__ = 'Many Slices Along Points'
     __category__ = 'filter'
-    def __init__(self, numSlices=5, nearestNbr=True, outputType='vtkMultiBlockDataSet'):
-        _SliceBase.__init__(self, numSlices=numSlices,
+    def __init__(self, n_slices=5, nearest_nbr=True, outputType='vtkMultiBlockDataSet'):
+        _SliceBase.__init__(self, n_slices=n_slices,
             nInputPorts=2, inputType='vtkDataSet',
             nOutputPorts=1, outputType=outputType)
-        self.__useNearestNbr = nearestNbr
+        self.__useNearestNbr = nearest_nbr
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):
@@ -194,7 +194,7 @@ class SlideSliceAlongPoints(ManySlicesAlongPoints):
     """
     __displayname__ = 'Slide Slice Along Points'
     __category__ = 'filter'
-    def __init__(self, numSlices=5, nearestNbr=True):
+    def __init__(self, n_slices=5, nearest_nbr=True):
         ManySlicesAlongPoints.__init__(self, outputType='vtkPolyData')
         self.__planes = None
         self.__loc = 50 # Percent (halfway)
@@ -259,8 +259,8 @@ class ManySlicesAlongAxis(_SliceBase):
     """
     __displayname__ = 'Many Slices Along Axis'
     __category__ = 'filter'
-    def __init__(self, numSlices=5, axis=0, rng=None, pad=0.01, outputType='vtkMultiBlockDataSet'):
-        _SliceBase.__init__(self, numSlices=numSlices,
+    def __init__(self, n_slices=5, axis=0, rng=None, pad=0.01, outputType='vtkMultiBlockDataSet'):
+        _SliceBase.__init__(self, n_slices=n_slices,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType=outputType)
         # Parameters
@@ -387,8 +387,8 @@ class SliceThroughTime(ManySlicesAlongAxis):
     """
     __displayname__ = 'Slice Through Time'
     __category__ = 'filter'
-    def __init__(self, numSlices=5, dt=1.0, axis=0, rng=None,):
-        ManySlicesAlongAxis.__init__(self, numSlices=numSlices,
+    def __init__(self, n_slices=5, dt=1.0, axis=0, rng=None,):
+        ManySlicesAlongAxis.__init__(self, n_slices=n_slices,
                 axis=axis, rng=rng, outputType='vtkPolyData')
         # Parameters
         self.__dt = dt

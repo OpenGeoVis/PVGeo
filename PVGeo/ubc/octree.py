@@ -211,7 +211,7 @@ class OcTreeAppender(ModelAppenderBase):
     def _ReadUpFront(self):
         reader = ubcMeshReaderBase.ubcModel3D
         self._models = []
-        for f in self._modelFileNames:
+        for f in self._model_file_names:
             # Read the model data
             self._models.append(reader(f))
         self.NeedToRead(flag=False)

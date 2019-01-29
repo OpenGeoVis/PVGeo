@@ -24,6 +24,15 @@ class ArrayMath(FilterPreserveTypeBase):
     perfrom math operations. The input arrays are used in their order of
     selection for the operations.
 
+    Args:
+        multiplier (float) : a static shifter/scale factor across the array
+            after normalization.
+
+        new_name (str): The new array's string name
+
+        operation (str, int, or callable): The operation as a string key, int
+            index, or callable method
+
     **Available Math Operations:**
 
     - `add`: This adds the two data arrays together
@@ -38,9 +47,9 @@ class ArrayMath(FilterPreserveTypeBase):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
         self.__multiplier = kwargs.get('multiplier', 1.0)
-        self.__newName = kwargs.get('newName', 'Mathed Up')
-        self.__inputArray1 = [None, None]
-        self.__inputArray2 = [None, None]
+        self.__new_name = kwargs.get('new_name', 'Mathed Up')
+        self.__input_array_1 = [None, None]
+        self.__input_array_2 = [None, None]
         # Convert operation to callable method
         op = kwargs.get('operation', 'add')
         if isinstance(op, (str, int)):
@@ -116,8 +125,8 @@ class ArrayMath(FilterPreserveTypeBase):
             # TODO: test this
             pdo = pdi.DeepCopy()
         # Get the input arrays
-        field1, name1 = self.__inputArray1[0], self.__inputArray1[1]
-        field2, name2 = self.__inputArray2[0], self.__inputArray2[1]
+        field1, name1 = self.__input_array_1[0], self.__input_array_1[1]
+        field2, name2 = self.__input_array_2[0], self.__input_array_2[1]
         wpdi = dsa.WrapDataObject(pdi)
         arr1 = _helpers.getNumPyArray(wpdi, field1, name1)
         arr2 = _helpers.getNumPyArray(wpdi, field2, name2)
@@ -126,11 +135,11 @@ class ArrayMath(FilterPreserveTypeBase):
         # Apply the multiplier
         carr *= self.__multiplier
         # If no name given for data by user, use operator name
-        newName = self.__newName
-        if newName == '':
-            newName = 'Mathed Up'
+        new_name = self.__new_name
+        if new_name == '':
+            new_name = 'Mathed Up'
         # Convert to a VTK array
-        c = interface.convertArray(carr, name=newName)
+        c = interface.convertArray(carr, name=new_name)
         # Build output
         pdo.DeepCopy(pdi)
         pdo = _helpers.addArray(pdo, field1, c)
@@ -155,19 +164,19 @@ class ArrayMath(FilterPreserveTypeBase):
 
 
     def _SetInputArray1(self, field, name):
-        if self.__inputArray1[0] != field:
-            self.__inputArray1[0] = field
+        if self.__input_array_1[0] != field:
+            self.__input_array_1[0] = field
             self.Modified()
-        if self.__inputArray1[1] != name:
-            self.__inputArray1[1] = name
+        if self.__input_array_1[1] != name:
+            self.__input_array_1[1] = name
             self.Modified()
 
     def _SetInputArray2(self, field, name):
-        if self.__inputArray2[0] != field:
-            self.__inputArray2[0] = field
+        if self.__input_array_2[0] != field:
+            self.__input_array_2[0] = field
             self.Modified()
-        if self.__inputArray2[1] != name:
-            self.__inputArray2[1] = name
+        if self.__input_array_2[1] != name:
+            self.__input_array_2[1] = name
             self.Modified()
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
@@ -214,12 +223,12 @@ class ArrayMath(FilterPreserveTypeBase):
     def SetNewArrayName(self, name):
         """Give the new array a meaningful name.
         """
-        if self.__newName != name:
-            self.__newName = name
+        if self.__new_name != name:
+            self.__new_name = name
             self.Modified()
 
     def GetNewArrayName(self):
-        return self.__newName
+        return self.__new_name
 
     def SetOperation(self, op):
         """Set the math operation to perform
@@ -253,6 +262,17 @@ class NormalizeArray(FilterPreserveTypeBase):
     choose a multiplier, and can choose from several types of common
     normalizations (more functionality added as requested).
 
+    Args:
+        multiplier (float) : a static shifter/scale factor across the array
+            after normalization.
+
+        new_name (str): The new array's string name
+
+        absolute (bool):
+
+        normalization (str, int, or callable): The operation as a string key, 
+            integer index, or callable method
+
     **Normalization Types:**
 
     - `feature_scale`: Feature Scale
@@ -267,9 +287,9 @@ class NormalizeArray(FilterPreserveTypeBase):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
         self.__multiplier = kwargs.get('multiplier', 1.0)
-        self.__newName = kwargs.get('newName', 'Normalized')
+        self.__new_name = kwargs.get('new_name', 'Normalized')
         self.__absolute = kwargs.get('absolute', False)
-        self.__inputArray = [None, None]
+        self.__input_array = [None, None]
         # Convert operation to callable method
         op = kwargs.get('normalization', 'feature_scale')
         if isinstance(op, (str, int)):
@@ -361,7 +381,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         """Perform normalize on a data array for any given VTK data object.
         """
         # Get input array
-        field, name = self.__inputArray[0], self.__inputArray[1]
+        field, name = self.__input_array[0], self.__input_array[1]
         #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getNumPyArray(wpdi, field, name)
@@ -375,11 +395,11 @@ class NormalizeArray(FilterPreserveTypeBase):
         # Apply the multiplier
         arr *= self.__multiplier
         # If no name given for data by user, use operator name
-        newName = self.__newName
-        if newName == '':
-            newName = 'Normalized ' + name
+        new_name = self.__new_name
+        if new_name == '':
+            new_name = 'Normalized ' + name
         # Convert to VTK array
-        c = interface.convertArray(arr, name=newName)
+        c = interface.convertArray(arr, name=new_name)
         # Build output
         pdo.DeepCopy(pdi)
         pdo = _helpers.addArray(pdo, field, c)
@@ -412,11 +432,11 @@ class NormalizeArray(FilterPreserveTypeBase):
                 field, and 6 for row)
             name (int): the name of the array
         """
-        if self.__inputArray[0] != field:
-            self.__inputArray[0] = field
+        if self.__input_array[0] != field:
+            self.__input_array[0] = field
             self.Modified()
-        if self.__inputArray[1] != name:
-            self.__inputArray[1] = name
+        if self.__input_array[1] != name:
+            self.__input_array[1] = name
             self.Modified()
         return 1
 
@@ -444,12 +464,12 @@ class NormalizeArray(FilterPreserveTypeBase):
     def SetNewArrayName(self, name):
         """Give the new array a meaningful name.
         """
-        if self.__newName != name:
-            self.__newName = name
+        if self.__new_name != name:
+            self.__new_name = name
             self.Modified()
 
     def GetNewArrayName(self):
-        return self.__newName
+        return self.__new_name
 
     def SetTakeAbsoluteValue(self, flag):
         """This will take the absolute value of the array before normalization.
@@ -501,7 +521,7 @@ class PercentThreshold(FilterBase):
         if percent < 1.0: percent *= 100
         self.__percent = percent # NOTE: not decimal percent
         self.__filter = vtk.vtkThreshold()
-        self.__inputArray = [None, None]
+        self.__input_array = [None, None]
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -511,7 +531,7 @@ class PercentThreshold(FilterBase):
         self.__filter.SetInputDataObject(pdi)
         pdo = self.GetOutputData(outInfo, 0)
         # Get Input Array
-        field, name = self.__inputArray[0], self.__inputArray[1]
+        field, name = self.__input_array[0], self.__input_array[1]
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.getNumPyArray(wpdi, field, name)
 
@@ -542,9 +562,9 @@ class PercentThreshold(FilterBase):
                 field, and 6 for row)
             name (int): the name of the array
         """
-        if self.__inputArray[0] != field or self.__inputArray[1] != name:
-            self.__inputArray[0] = field
-            self.__inputArray[1] = name
+        if self.__input_array[0] != field or self.__input_array[1] != name:
+            self.__input_array[0] = field
+            self.__input_array[1] = name
             self.__filter.SetInputArrayToProcess(idx, port, connection, field, name)
             self.Modified()
         return 1

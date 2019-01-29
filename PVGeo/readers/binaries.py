@@ -33,7 +33,7 @@ class PackedBinariesReader(ReaderBase):
         ReaderBase.__init__(self,
             nOutputPorts=1, outputType='vtkTable', **kwargs)
         # Other Parameters
-        self.__dataName = kwargs.get('dataname', 'Data')
+        self.__data_name = kwargs.get('dataname', 'Data')
         self.__dtypechar = kwargs.get('dtype', 'f')
         self.__endian = kwargs.get('endian', '')
         self.__dtype, self.__vtktype = interface.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
@@ -80,7 +80,7 @@ class PackedBinariesReader(ReaderBase):
         """Converts the numpy array to a vtkDataArray
         """
         # Put raw data into vtk array
-        data = interface.convertArray(arr, name=self.__dataName, deep=True, array_type=self.__vtktype)
+        data = interface.convertArray(arr, name=self.__data_name, deep=True, array_type=self.__vtktype)
         return data
 
 
@@ -137,13 +137,13 @@ class PackedBinariesReader(ReaderBase):
     def SetDataName(self, dataName):
         """The string name of the data array generated from the inut file.
         """
-        if dataName != self.__dataName:
-            self.__dataName = dataName
+        if dataName != self.__data_name:
+            self.__data_name = dataName
             self.Modified(readAgain=False) # Don't re-read. Just request data again
 
 
     def GetDataName(self):
-        return self.__dataName
+        return self.__data_name
 
 
 

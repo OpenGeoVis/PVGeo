@@ -114,7 +114,7 @@ class SurferGridReader(ReaderBase):
     def __init__(self, outputType='vtkImageData', **kwargs):
         ReaderBase.__init__(self, outputType=outputType, **kwargs)
         self.__grids = None
-        self.__dataName = 'Data'
+        self.__data_name = kwargs.get('data_name', 'Data')
 
     @staticmethod
     def _surfer7bin(filename):
@@ -315,7 +315,7 @@ class SurferGridReader(ReaderBase):
         i = _helpers.getRequestedTime(self, outInfo)
         # Build the output
         grid = self.__grids[i]
-        grid.toVTK(output=output, dataName=self.__dataName)
+        grid.toVTK(output=output, dataName=self.__data_name)
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
@@ -334,12 +334,12 @@ class SurferGridReader(ReaderBase):
         return 1
 
     def SetDataName(self, dataName):
-        if self.__dataName != dataName:
-            self.__dataName = dataName
+        if self.__data_name != dataName:
+            self.__data_name = dataName
             self.Modified(readAgain=False)
 
     def GetDataName(self):
-        return self.__dataName
+        return self.__data_name
 
 
 ################################################################################
@@ -351,7 +351,7 @@ class WriteImageDataToSurfer(WriterBase):
     __category__ = 'writer'
     def __init__(self):
         WriterBase.__init__(self, inputType='vtkImageData', ext='grd')
-        self.__inputArray = [None, None]
+        self.__input_array = [None, None]
 
 
     def PerformWriteOut(self, inputDataObject, filename, objectName):
@@ -370,7 +370,7 @@ class WriteImageDataToSurfer(WriterBase):
         xmin, xmax, ymin, ymax, zmin, zmax = img.GetBounds()
 
         # Note user has to select a single array to save out
-        field, name = self.__inputArray[0], self.__inputArray[1]
+        field, name = self.__input_array[0], self.__input_array[1]
         vtkarr = _helpers.getVTKArray(img, field, name)
         arr = interface.convertArray(vtkarr)
         dmin, dmax = arr.min(), arr.max()
@@ -398,11 +398,11 @@ class WriteImageDataToSurfer(WriterBase):
                 field, and 6 for row)
             name (int): the name of the array
         """
-        if self.__inputArray[0] != field:
-            self.__inputArray[0] = field
+        if self.__input_array[0] != field:
+            self.__input_array[0] = field
             self.Modified()
-        if self.__inputArray[1] != name:
-            self.__inputArray[1] = name
+        if self.__input_array[1] != name:
+            self.__input_array[1] = name
             self.Modified()
         return 1
 
@@ -443,10 +443,11 @@ class EsriGridReader(DelimitedTextReader):
         self.__xo = None
         self.__yo = None
         self.__cellsize = None
-        self.__dataName = 'Data'
+        self.__data_name = kwargs.get('data_name', 'Data')
         self.NODATA_VALUE = -9999
 
     def _ExtractHeader(self, content):
+        print('RUNNING THE PROPER EXTRATHEADER')
         try:
             self.__nx = int(content[0].split()[1])
             self.__ny = int(content[1].split()[1])
@@ -456,7 +457,7 @@ class EsriGridReader(DelimitedTextReader):
             self.NODATA_VALUE = float(content[5].split()[1])
         except ValueError:
             raise _helpers.PVGeoError('This file is not in proper Esri ASCII Grid format.')
-        return [self.__dataName], content[6::]
+        return [self.__data_name], content[6::]
 
     def _FileContentsToDataFrame(self, contents):
         """Creates a dataframe with a sinlge array for the file data.
@@ -502,7 +503,7 @@ class EsriGridReader(DelimitedTextReader):
 
         # Now add data values as point data
         data = self._GetRawData(idx=i).flatten(order='F')
-        vtkarr = interface.convertArray(data, name=self.__dataName)
+        vtkarr = interface.convertArray(data, name=self.__data_name)
         output.GetPointData().AddArray(vtkarr)
 
         return 1
@@ -522,12 +523,12 @@ class EsriGridReader(DelimitedTextReader):
         return 1
 
     def SetDataName(self, dataName):
-        if self.__dataName != dataName:
-            self.__dataName = dataName
+        if self.__data_name != dataName:
+            self.__data_name = dataName
             self.Modified(readAgain=False)
 
     def GetDataName(self):
-        return self.__dataName
+        return self.__data_name
 
 
 

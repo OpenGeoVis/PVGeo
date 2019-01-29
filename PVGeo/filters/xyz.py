@@ -50,7 +50,7 @@ class AddCellConnToPoints(FilterBase):
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.__cellType = vtk.VTK_POLY_LINE
-        self.__usenbr = kwargs.get('nearestNbr', False)
+        self.__usenbr = kwargs.get('nearest_nbr', False)
         self.__unique = True
 
 
@@ -594,14 +594,14 @@ class RotatePoints(FilterBase):
     """
     __displayname__ = 'Rotate Points'
     __category__ = 'filter'
-    def __init__(self, angle=45.0, origin=[0.0, 0.0], useCorner=True):
+    def __init__(self, angle=45.0, origin=[0.0, 0.0], use_corner=True):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.__angle = angle
         self.__origin = origin
-        self.__useCorner = useCorner
+        self.__use_corner = use_corner
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output.
@@ -614,7 +614,7 @@ class RotatePoints(FilterBase):
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
         origin = self.__origin
-        if self.__useCorner:
+        if self.__use_corner:
             idx = np.argmin(points[:,0])
             origin = [points[idx,0], points[idx,1]]
         points[:,0:2] = RotationTool.RotateAround(points[:,0:2], self.__angle, origin)
@@ -643,8 +643,8 @@ class RotatePoints(FilterBase):
         """A flag to use a corner of the input data set as the rotational
         origin.
         """
-        if self.__useCorner != flag:
-            self.__useCorner = flag
+        if self.__use_corner != flag:
+            self.__use_corner = flag
             self.Modified()
 
 
@@ -844,9 +844,9 @@ class ConvertUnits(FilterPreserveTypeBase):
     """
     __displayname__ = 'Convert XYZ Units'
     __category__ = 'filter'
-    def __init__(self, **kwargs):
+    def __init__(self, conversion='meter_to_feet', **kwargs):
         FilterPreserveTypeBase.__init__(self, **kwargs)
-        self.__conversion = 'meter_to_feet'
+        self.__conversion = conversion
 
     @staticmethod
     def LookupConversions(getkeys=False):

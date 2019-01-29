@@ -211,7 +211,7 @@ class ExtractArray(FilterBase):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkTable')
-        self.__inputArray = [None, None]
+        self.__input_array = [None, None]
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -223,7 +223,7 @@ class ExtractArray(FilterBase):
 
 
         # Note user has to select a single array to save out
-        field, name = self.__inputArray[0], self.__inputArray[1]
+        field, name = self.__input_array[0], self.__input_array[1]
         vtkarr = _helpers.getVTKArray(pdi, field, name)
 
         table.GetRowData().AddArray(vtkarr)
@@ -241,11 +241,11 @@ class ExtractArray(FilterBase):
                 field, and 6 for row)
             name (int): the name of the array
         """
-        if self.__inputArray[0] != field:
-            self.__inputArray[0] = field
+        if self.__input_array[0] != field:
+            self.__input_array[0] = field
             self.Modified()
-        if self.__inputArray[1] != name:
-            self.__inputArray[1] = name
+        if self.__input_array[1] != name:
+            self.__input_array[1] = name
             self.Modified()
         return 1
 
@@ -271,7 +271,7 @@ class SplitTableOnArray(FilterBase):
     def __init__(self):
         FilterBase.__init__(self, nInputPorts=1, inputType='vtkTable',
                             nOutputPorts=1, outputType='vtkMultiBlockDataSet')
-        self.__inputArray = [None, None]
+        self.__input_array = [None, None]
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -281,7 +281,7 @@ class SplitTableOnArray(FilterBase):
         output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
         #### Perfrom task ####
         # Get input array
-        field, name = self.__inputArray[0], self.__inputArray[1]
+        field, name = self.__input_array[0], self.__input_array[1]
         wtbl = dsa.WrapDataObject(table)
         spliton = _helpers.getNumPyArray(wtbl, field, name)
         uniq = np.unique(spliton)
@@ -309,11 +309,11 @@ class SplitTableOnArray(FilterBase):
                 field, and 6 for row)
             name (int): the name of the array
         """
-        if self.__inputArray[0] != field:
-            self.__inputArray[0] = field
+        if self.__input_array[0] != field:
+            self.__input_array[0] = field
             self.Modified()
-        if self.__inputArray[1] != name:
-            self.__inputArray[1] = name
+        if self.__input_array[1] != name:
+            self.__input_array[1] = name
             self.Modified()
         return 1
 
@@ -339,7 +339,7 @@ class AppendTableToCellData(FilterPreserveTypeBase):
     __category__ = 'filter'
     def __init__(self):
         FilterPreserveTypeBase.__init__(self, nInputPorts=2)
-        self._preservePort = 0 # ensure port 0's type is preserved
+        self._preserve_port = 0 # ensure port 0's type is preserved
         self.__timesteps = None
 
 

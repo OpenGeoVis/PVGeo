@@ -747,7 +747,7 @@ class TestManySlicesAlongPoints(TestBase):
     def test_along_points(self):
         """`ManySlicesAlongPoints`: slice along points"""
         # run the algorithms
-        slices = ManySlicesAlongPoints(numSlices=10).Apply(self.points, self.grid)
+        slices = ManySlicesAlongPoints(n_slices=10).Apply(self.points, self.grid)
         self.assertTrue(isinstance(slices, vtk.vtkMultiBlockDataSet))
         self.assertEqual(10, slices.GetNumberOfBlocks())
         # Can we really test anything further on this?
@@ -756,7 +756,7 @@ class TestManySlicesAlongPoints(TestBase):
     def test_slider(self):
         """`SlideSliceAlongPoints`: use slider"""
         # Set up the algorithm
-        alg = SlideSliceAlongPoints(numSlices=10)
+        alg = SlideSliceAlongPoints(n_slices=10)
         slc = alg.Apply(self.points, self.grid)
         self.assertTrue(isinstance(slc, vtk.vtkPolyData))
         alg.SetLocation(30)
@@ -785,7 +785,7 @@ class TestManySlicesAlongAxis(TestBase):
     def test_along_axis(self):
         """`ManySlicesAlongAxis`: along axis"""
         # run the algorithm
-        slices = ManySlicesAlongAxis(numSlices=10, axis=0).Apply(self.grid)
+        slices = ManySlicesAlongAxis(n_slices=10, axis=0).Apply(self.grid)
         self.assertTrue(isinstance(slices, vtk.vtkMultiBlockDataSet))
         self.assertEqual(10, slices.GetNumberOfBlocks())
         # Can we really test anything further on this?
@@ -795,7 +795,7 @@ class TestManySlicesAlongAxis(TestBase):
     def test_through_time(self):
         """`SliceThroughTime`: along axis"""
         # Set up the algorithm
-        alg = SliceThroughTime(numSlices=10, axis=1)
+        alg = SliceThroughTime(n_slices=10, axis=1)
         slc = alg.Apply(self.grid)
         self.assertTrue(isinstance(slc, vtk.vtkPolyData))
         alg.UpdateTimeStep(1)
