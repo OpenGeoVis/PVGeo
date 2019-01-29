@@ -13,7 +13,6 @@ __displayname__ = 'Voxelize'
 import numpy as np
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-from vtk.util import keys
 from vtk.util import numpy_support as nps
 
 from .. import _helpers, interface

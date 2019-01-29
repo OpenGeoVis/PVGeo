@@ -5,8 +5,6 @@ __all__ = [
 
 __displayname__ = 'SGeMS File I/O'
 
-import os
-
 import numpy as np
 import pandas as pd
 import vtk

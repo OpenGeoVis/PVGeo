@@ -7,7 +7,6 @@ __all__ = [
 __displayname__ = 'GSLib/GeoEAS File I/O'
 
 import numpy as np
-import vtk
 import os
 
 from ..readers import DelimitedTextReader, DelimitedPointsReaderBase

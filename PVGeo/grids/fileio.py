@@ -29,11 +29,6 @@ from .. import _helpers, interface
 from ..base import ReaderBase, ReaderBaseBase, WriterBase
 from ..readers import DelimitedTextReader
 
-if sys.version_info < (3,):
-    from StringIO import StringIO
-else:
-    from io import StringIO
-
 
 
 

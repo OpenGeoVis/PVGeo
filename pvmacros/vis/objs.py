@@ -3,8 +3,6 @@ __all__ = ['camera']
 import os
 import pickle
 
-import numpy as np
-
 from paraview.simple import GetActiveCamera, RenderAllViews, WriteImage
 
 

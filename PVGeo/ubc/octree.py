@@ -7,7 +7,6 @@ __all__ = [
 __displayname__ = 'OcTree Mesh'
 
 import os
-import sys
 
 import numpy as np
 import vtk

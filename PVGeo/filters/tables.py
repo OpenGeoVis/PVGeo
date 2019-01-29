@@ -12,7 +12,6 @@ import numpy as np
 import pandas as pd
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-from vtk.util import numpy_support as nps
 
 from .. import _helpers, interface
 from ..base import FilterBase,  FilterPreserveTypeBase

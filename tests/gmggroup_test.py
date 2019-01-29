@@ -1,10 +1,5 @@
 import unittest
 import os
-import numpy as np
-
-
-# VTK imports:
-from vtk.util import numpy_support as nps
 
 from PVGeo import _helpers
 

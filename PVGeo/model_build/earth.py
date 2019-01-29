@@ -9,7 +9,7 @@ import vtk
 from scipy.spatial import Delaunay
 from vtk.util import numpy_support as nps
 
-from .. import _helpers, interface
+from .. import interface
 from ..base import AlgorithmBase
 
 

@@ -3,7 +3,6 @@ paraview_plugin_version = '1.1.6'
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import *
-import vtk
 
 # Helpers:
 from PVGeo import _helpers, AlgorithmBase

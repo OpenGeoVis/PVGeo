@@ -2,7 +2,6 @@ __all__ = [
     'OMFReader',
 ]
 
-import numpy as np
 import vtk
 
 import omf
@@ -10,7 +9,6 @@ import omfvtk
 
 from ..base import ReaderBaseBase
 from .. import _helpers
-from ..interface import pointsToPolyData
 
 
 
