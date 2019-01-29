@@ -35,7 +35,8 @@ class _SliceBase(FilterBase):
         self.__n_slices = n_slices
 
 
-    def _GeneratePlane(self, origin, normal):
+    @staticmethod
+    def _GeneratePlane(origin, normal):
         """Internal helper to build a ``vtkPlane`` for the cutter
         """
         # Get the slicing Plane:
@@ -46,7 +47,8 @@ class _SliceBase(FilterBase):
         plane.SetNormal(normal)
         return plane
 
-    def _Slice(self, pdi, pdo, plane):
+    @staticmethod
+    def _Slice(pdi, pdo, plane):
         """Slice an input on a plane and produce the output
         """
         # create slice
@@ -283,7 +285,8 @@ class ManySlicesAlongAxis(_SliceBase):
         bounds = pdi.GetBounds()
         return bounds[self.__axis*2], bounds[self.__axis*2+1]
 
-    def GetInputCenter(self, pdi):
+    @staticmethod
+    def GetInputCenter(pdi):
         """Gets the center of the input data set
 
         Return:
@@ -307,12 +310,6 @@ class ManySlicesAlongAxis(_SliceBase):
         bounds = self.GetInputBounds(pdi)
         padding = (bounds[1] - bounds[0]) * self.__pad # get percent padding
         self.__rng = np.linspace(bounds[0]+padding, bounds[1]-padding, num=self.GetNumberOfSlices())
-
-    def _UpdateNumOutputs(self, num):
-        """for internal use only
-        """
-        return 1
-
 
 
     def RequestData(self, request, inInfo, outInfo):

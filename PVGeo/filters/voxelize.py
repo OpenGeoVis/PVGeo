@@ -180,7 +180,8 @@ class VoxelizePoints(FilterBase):
         grid.SetCells(vtk.VTK_VOXEL, cells)
         return grid
 
-    def _CopyArrays(self, pdi, pdo):
+    @staticmethod
+    def _CopyArrays(pdi, pdo):
         """internal helper to copy arrays from point data to cell data in the voxels.
         """
         for i in range(pdi.GetPointData().GetNumberOfArrays()):
