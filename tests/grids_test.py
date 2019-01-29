@@ -357,8 +357,8 @@ class TestExtractTopography(TestBase):
 
 
         # # Apply filter
-        filter = ExtractTopography()
-        grd = filter.Apply(data, topo)
+        f = ExtractTopography()
+        grd = f.Apply(data, topo)
 
         # Test the output
         self.assertIsNotNone(grd)
