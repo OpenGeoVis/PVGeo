@@ -9,7 +9,7 @@ def deleteDownstream(input=None):
     filters on the pipeline will be deleted.
 
     Args:
-        input (str): The name of the object on the pipeline to preserve. 
+        input (str): The name of the object on the pipeline to preserve.
 
     """
     import paraview.simple as pvs
