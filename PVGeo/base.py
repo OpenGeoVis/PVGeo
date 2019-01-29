@@ -460,12 +460,6 @@ class WriterBase(AlgorithmBase):
         """Get the set filename."""
         return self.__filename
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
-        """OVERWRITE: This is executed by the pipeline and handles the write
-        out"""
-        raise NotImplementedError()
-        return 1
-
     def Write(self, inputDataObject=None):
         """Perfrom the write out."""
         if inputDataObject:
