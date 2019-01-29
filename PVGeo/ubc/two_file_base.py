@@ -35,13 +35,16 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
 
 
     def Is3D(self):
+        """Returns true if mesh is spatially references in three dimensions"""
         return self.__sizeM.shape[0] >= 3
 
     def Is2D(self):
+        """Returns true if mesh is spatially references in only two dimensions"""
         return self.__sizeM.shape[0] == 1
 
     @staticmethod
     def _ubcMesh2D_part(FileName):
+        """Internal helper to read 2D mesh file"""
         # This is a helper method to read file contents of mesh
         try:
             fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
@@ -147,11 +150,13 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         return data
 
     def SetUseFileName(self, flag):
+        """Set a flag on whether or not to use the filename as the data array name"""
         if self.__use_filename != flag:
             self.__use_filename = flag
             self.Modified(read_again_mesh=False, read_again_models=False)
 
     def SetDataName(self, name):
+        """Set the data array name"""
         if name == '':
             self.__use_filename = True
             self.Modified(read_again_mesh=False, read_again_models=False)
@@ -161,6 +166,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             self.Modified(read_again_mesh=False, read_again_models=False)
 
     def GetDataName(self):
+        """Get the data array name"""
         if self.__use_filename:
             mname = self.GetModelFileNames(idx=0)
             return os.path.basename(mname)
@@ -236,7 +242,7 @@ class ModelAppenderBase(base.AlgorithmBase):
 
 
     def RequestData(self, request, inInfo, outInfo):
-        """DO NOT OVERRIDE
+        """Used by pipeline to generate output
         """
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
@@ -257,7 +263,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
-        """DO NOT OVERRIDE
+        """Used by pipeline to handle time variance and update output extents
         """
         self._UpdateTimeSteps()
         pdi = self.GetInputData(inInfo, 0, 0)
@@ -271,6 +277,7 @@ class ModelAppenderBase(base.AlgorithmBase):
     #### Setters and Getters ####
 
     def HasModels(self):
+        """Return True if models are associated with this mesh"""
         return len(self._model_filenames) > 0
 
     def GetTimestepValues(self):
@@ -311,11 +318,13 @@ class ModelAppenderBase(base.AlgorithmBase):
         return self._model_filenames[idx]
 
     def SetUseFileName(self, flag):
+        """Set a flag on whether or not to use the filename as the data array name"""
         if self.__use_filename != flag:
             self.__use_filename = flag
             self.Modified(read_again=False)
 
     def SetDataName(self, name):
+        """Set the data array name"""
         if name == '':
             self.__use_filename = True
             self.Modified(read_again=False)
@@ -325,6 +334,7 @@ class ModelAppenderBase(base.AlgorithmBase):
             self.Modified(read_again=False)
 
     def GetDataName(self):
+        """Get the data array name"""
         if self.__use_filename:
             mname = self.GetModelFileNames(idx=0)
             return os.path.basename(mname)

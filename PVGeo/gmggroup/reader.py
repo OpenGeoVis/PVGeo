@@ -45,6 +45,7 @@ class OMFReader(ReaderBaseBase):
     #### Methods for performing the read ####
 
     def _ReadUpFront(self):
+        """Internal functiona to read all data at the start"""
         # Read all elements
         reader = omf.OMFReader(self.GetFileName())
         self.__project = reader.get_project()
@@ -93,6 +94,7 @@ class OMFReader(ReaderBaseBase):
 
 
     def GetDataSelection(self):
+        """Return the current user selection of data elements"""
         if self.NeedToRead():
             self._ReadUpFront()
         return self._dataselection

@@ -36,6 +36,9 @@ from ..readers import DelimitedTextReader
 
 
 class GridInfo(properties.HasProperties):
+    """Internal helper class to store Surfer grid properties and create
+    ``vtkImageData`` objects from them.
+    """
     ny = properties.Integer('number of columns', min=2)
     nx = properties.Integer('number of rows', min=2)
     xll = properties.Float('x-value of lower-left corner')
@@ -47,6 +50,7 @@ class GridInfo(properties.HasProperties):
     data = properties.Array('grid of data values', shape=('*',))
 
     def mask(self):
+        """Mask the no data value"""
         data = self.data
         nans = data >= 1.701410009187828e+38
         if np.any(nans):
@@ -60,6 +64,7 @@ class GridInfo(properties.HasProperties):
         return
 
     def toVTK(self, output=None, z=0.0, dz=1.0, data_name='Data'):
+        """Convert to a ``vtkImageData`` object"""
         self.mask()
         self.validate()
         if output is None:
@@ -300,7 +305,8 @@ class SurferGridReader(ReaderBase):
     ########################
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get data for current timestep and populate the output data object.
+        """Used by pipeline to get data for current timestep and populate the
+        output data object.
         """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
@@ -329,11 +335,13 @@ class SurferGridReader(ReaderBase):
         return 1
 
     def SetDataName(self, data_name):
+        """Set the name of the data array"""
         if self.__data_name != data_name:
             self.__data_name = data_name
             self.Modified(read_again=False)
 
     def GetDataName(self):
+        """Get the name of the data array"""
         return self.__data_name
 
 
@@ -350,6 +358,7 @@ class WriteImageDataToSurfer(WriterBase):
 
 
     def PerformWriteOut(self, input_data_object, filename, object_name):
+        """Writes an input ``vtkImageData`` object to a file"""
         img = input_data_object
 
         # Check dims: make sure 2D
@@ -402,6 +411,9 @@ class WriteImageDataToSurfer(WriterBase):
         return 1
 
     def Apply(self, input_data_object, array_name):
+        """Run the algorithm on an input data object, specifying one data array
+        to save out.
+        """
         self.SetInputDataObject(input_data_object)
         arr, field = _helpers.searchForArray(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
@@ -442,7 +454,7 @@ class EsriGridReader(DelimitedTextReader):
         self.NODATA_VALUE = -9999
 
     def _ExtractHeader(self, content):
-        print('RUNNING THE PROPER EXTRATHEADER')
+        """Internal helper to parse header information in ESRI Grid files"""
         try:
             self.__nx = int(content[0].split()[1])
             self.__ny = int(content[1].split()[1])
@@ -518,11 +530,13 @@ class EsriGridReader(DelimitedTextReader):
         return 1
 
     def SetDataName(self, data_name):
+        """Set the name of the data array"""
         if self.__data_name != data_name:
             self.__data_name = data_name
             self.Modified(read_again=False)
 
     def GetDataName(self):
+        """Get the name of the data array"""
         return self.__data_name
 
 
@@ -553,7 +567,7 @@ class LandsatReader(ReaderBaseBase):
     def Modified(self, read_again=False):
         """Ensure default is overridden to be false so array selector can call.
         """
-        ReaderBaseBase.Modified(self, read_again=read_again)
+        return ReaderBaseBase.Modified(self, read_again=read_again)
 
 
     def GetFileName(self):
@@ -577,6 +591,7 @@ class LandsatReader(ReaderBaseBase):
         return
 
     def _ReadUpFront(self):
+        """Internal helper to read all data at start"""
         return self._GetFileContents()
 
     def _GetRawData(self, idx=0):
@@ -673,6 +688,7 @@ class LandsatReader(ReaderBaseBase):
 
     @staticmethod
     def GetColorSchemeNames():
+        """Get a list of the available color schemes"""
         schemes = list(espatools.RasterSet.RGB_SCHEMES.keys())
         schemes.insert(0, 'No Selection')
         return schemes
@@ -694,6 +710,7 @@ class WriteCellCenterData(WriterBase):
 
 
     def PerformWriteOut(self, input_data_object, filename, object_name):
+        """Writes the cell centers of the input data object to a file"""
         # Find cell centers
         filt = vtk.vtkCellCenters()
         filt.SetInputDataObject(input_data_object)

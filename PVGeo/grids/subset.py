@@ -89,6 +89,8 @@ class ExtractTopography(FilterBase):
 
     @staticmethod
     def _query(topo_points, data_points):
+        """Querrys the data points for their closest point on the topography
+        surface"""
         try:
             # sklearn's KDTree is faster: use it if available
             from sklearn.neighbors import KDTree as Tree
@@ -100,11 +102,13 @@ class ExtractTopography(FilterBase):
 
     @staticmethod
     def _underneath(topo_points, data_points, tolerance):
+        """Extract cells underneath the topography surface"""
         comp = ExtractTopography._query(topo_points, data_points)
         return np.array(data_points[:,2] < (comp[:,2] - tolerance), dtype=int)
 
     @staticmethod
     def _intersection(topo_points, data_points, tolerance):
+        """Extract cells intersecting the topography surface"""
         comp = ExtractTopography._query(topo_points, data_points)
         return np.array(np.abs((data_points[:,2] - comp[:,2])) < tolerance, dtype=int)
 
@@ -178,6 +182,7 @@ class ExtractTopography(FilterBase):
         return 1
 
     def Apply(self, data, points):
+        """Run the algorithm on the input data using the topography points"""
         self.SetInputDataObject(0, data)
         self.SetInputDataObject(1, points)
         self.Update()
@@ -192,11 +197,13 @@ class ExtractTopography(FilterBase):
     #### Setters/Getters ####
 
     def SetTolerance(self, tol):
+        """Set the tolerance threshold for the querry"""
         if self._tolerance != tol:
             self._tolerance = tol
             self.Modified()
 
     def GetTolerance(self):
+        """Get the tolerance threshold for the querry"""
         return self._tolerance
 
     def SetOffset(self, offset):

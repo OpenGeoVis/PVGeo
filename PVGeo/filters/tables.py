@@ -65,6 +65,7 @@ class CombineTables(FilterBase):
         return 1
 
     def Apply(self, table0, table1):
+        """Run the algorithm on the two input tables"""
         self.SetInputDataObject(0, table0)
         self.SetInputDataObject(1, table1)
         self.Update()
@@ -172,6 +173,7 @@ class ReshapeTable(FilterBase):
         self.Modified()
 
     def GetNames(self):
+        """Returns a list of the names given to the new arrays"""
         return self.__names
 
     def SetNumberOfColumns(self, ncols):
@@ -250,6 +252,9 @@ class ExtractArray(FilterBase):
         return 1
 
     def Apply(self, input_data_object, array_name):
+        """Run the algorithm on the input data object, specifying the array name
+        to extract.
+        """
         self.SetInputDataObject(input_data_object)
         arr, field = _helpers.searchForArray(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
@@ -275,6 +280,7 @@ class SplitTableOnArray(FilterBase):
 
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         table = self.GetInputData(inInfo, 0, 0)
         # Get number of points
@@ -319,6 +325,9 @@ class SplitTableOnArray(FilterBase):
 
 
     def Apply(self, input_data_object, array_name):
+        """Run the algorithm on the input data object, specifying the array name
+        to use for the split.
+        """
         self.SetInputDataObject(input_data_object)
         arr, field = _helpers.searchForArray(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
@@ -375,6 +384,7 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to handle time variance"""
         self._UpdateTimeSteps()
         return 1
 

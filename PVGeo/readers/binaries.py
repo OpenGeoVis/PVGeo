@@ -41,6 +41,7 @@ class PackedBinariesReader(ReaderBase):
         self.__data = []
 
     def _ReadRawFile(self, filename):
+        """Interanl helper to read the raw data from the file"""
         dtype = self.__dtype
         if dtype == np.dtype('>f'):
             # Checks if big-endian and fixes read
@@ -52,6 +53,7 @@ class PackedBinariesReader(ReaderBase):
         return np.asarray(arr, dtype=self.__dtype)
 
     def _GetFileContents(self, idx=None):
+        """Interanl helper to get all contents for all files"""
         if idx is not None:
             filenames = [self.GetFileNames(idx=idx)]
         else:
@@ -104,7 +106,7 @@ class PackedBinariesReader(ReaderBase):
 
 
     def SetEndian(self, endian):
-        """The endianness of the data file.
+        """Set the endianness of the data file.
 
         Args:
             endian (int or char): no preference = '' or 0, Little = 1 or `<` or Big = 2 `>`.
@@ -118,10 +120,11 @@ class PackedBinariesReader(ReaderBase):
             self.Modified()
 
     def GetEndian(self):
+        """Get the endianness of the data file."""
         return self.__endian
 
     def SetDataType(self, dtype):
-        """The data type of the binary file: `double='d'`, `float='f'`, `int='i'`
+        """Set the data type of the binary file: `double='d'`, `float='f'`, `int='i'`
         """
         pos = ['d', 'f', 'i']
         if isinstance(dtype, int):
@@ -132,6 +135,7 @@ class PackedBinariesReader(ReaderBase):
             self.Modified()
 
     def GetDataTypes(self):
+        """Get the data type of the binary file"""
         return self.__dtype, self.__vtktype
 
     def SetDataName(self, data_name):
@@ -143,6 +147,7 @@ class PackedBinariesReader(ReaderBase):
 
 
     def GetDataName(self):
+        """Get name used for the data array"""
         return self.__data_name
 
 
@@ -172,6 +177,7 @@ class MadagascarReader(PackedBinariesReader):
         PackedBinariesReader.__init__(self, **kwargs)
 
     def _ReadRawFile(self, filename):
+        """Reads the raw data from the file for Madagascar SSRSF files"""
         dtype, vtktype = self.GetDataTypes()
         CTLSEQ = b'\014\014\004' # The control sequence to seperate header from data
         rpl = b''

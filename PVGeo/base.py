@@ -190,6 +190,7 @@ class FilterBase(AlgorithmBase):
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
     def Apply(self, input_data_object):
+        """Run this algorithm on the given input dataset"""
         self.SetInputDataObject(input_data_object)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
@@ -334,6 +335,7 @@ class TwoFileReaderBase(AlgorithmBase):
         return AlgorithmBase.Modified(self)
 
     def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to handle setting up time variance"""
         self.__UpdateTimeSteps()
         return 1
 
@@ -412,6 +414,7 @@ class TwoFileReaderBase(AlgorithmBase):
         return self.__model_filenames[idx]
 
     def GetMeshFileName(self):
+        """Get the mesh filename"""
         return self.__mesh_filename
 
     def Apply(self):
@@ -473,6 +476,7 @@ class WriterBase(AlgorithmBase):
         raise NotImplementedError('PerformWriteOut must be implemented!')
 
     def Apply(self, input_data_object):
+        """Run this writer algorithm on the given input data object"""
         self.SetInputDataObject(input_data_object)
         self.Modified()
         self.Update()
@@ -484,6 +488,7 @@ class WriterBase(AlgorithmBase):
             self.Modified()
 
     def GetFormat(self):
+        """Get the ASCII format used for floats"""
         return self.__fmt
 
     #### Following methods are for composite datasets ####
@@ -512,6 +517,7 @@ class WriterBase(AlgorithmBase):
         return self.__blockfilenames
 
     def GetBlockFileName(self, idx):
+        """Get filename for component of a multi block dataset"""
         return self.__blockfilenames[idx]
 
 
@@ -590,6 +596,7 @@ class InterfacedBaseReader(ReaderBase):
         self.OutputType = self.__objects[0].GetClassName()
 
     def _GetObjectAtIndex(self, idx=None):
+        """Internal helper to get the data object at the specified index"""
         if idx is not None:
             return self.__objects[idx]
         return self.__objects[0]

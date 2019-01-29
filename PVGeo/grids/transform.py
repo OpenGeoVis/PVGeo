@@ -50,6 +50,7 @@ class TableToTimeGrid(FilterBase):
 
 
     def _SetData(self, table):
+        """Internal helper to restructure the inpt table arrays"""
         self.__data = dict()
         dims = np.array([d for d in self.__dims])
         sd = dims.argsort()
@@ -68,6 +69,7 @@ class TableToTimeGrid(FilterBase):
         return
 
     def _BuildImageData(self, img):
+        """Internal helper to consturct the output"""
         if self.__needToUpdateOutput:
             # Clean out the output data object
             img.DeepCopy(vtk.vtkImageData())
@@ -154,6 +156,7 @@ class TableToTimeGrid(FilterBase):
             self.Modified()
 
     def SetDimensions(self, x, y, z, t):
+        """Set the dimensions of the output grid"""
         if self.__dims != [x, y, z, t]:
             self.__dims = [x, y, z, t]
             self.Modified()
@@ -216,6 +219,7 @@ class ReverseImageDataAxii(FilterBase):
         self.__axes = list(axes[::-1]) # Z Y X (FORTRAN)
 
     def _ReverseGridAxii(self, idi, ido):
+        """Internal helper to reverse data along specified axii"""
         # Copy over input to output to be flipped around
         # Deep copy keeps us from messing with the input data
         ox, oy, oz = idi.GetOrigin()
@@ -308,6 +312,7 @@ class TranslateGridOrigin(FilterBase):
 
 
     def _Translate(self, pdi, pdo):
+        """Internal helper to translate the inputs origin"""
         if pdo is None:
             pdo = vtk.vtkImageData()
 

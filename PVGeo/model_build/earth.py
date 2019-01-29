@@ -26,6 +26,7 @@ class OutlineContinents(AlgorithmBase):
         self.__radius = radius
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate the output"""
         pdo = self.GetOutputData(outInfo, 0)
         earth = vtk.vtkEarthSource()
         earth.SetRadius(self.__radius)
@@ -35,6 +36,7 @@ class OutlineContinents(AlgorithmBase):
         return 1
 
     def SetRadius(self, radius):
+        """Set the radius of the globe. Defualt is 6.371.0e9 meters"""
         if self.__radius != radius:
             self.__radius = radius
             self.Modified()

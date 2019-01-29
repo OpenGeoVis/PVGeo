@@ -37,6 +37,7 @@ class TopoReader(DelimitedPointsReaderBase):
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
+        """Internal helper to parse header details for UBC Topo files"""
         # No titles
         # Get number of points
         self.__npts = int(content[0].strip())
@@ -66,6 +67,8 @@ class GravObsReader(DelimitedPointsReaderBase):
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
+        """Internal helper to parse header details for UBC Gravity Observation
+        files"""
         # No titles
         # Get number of points
         self.__npts = int(content[0].strip())
@@ -95,6 +98,8 @@ class GravGradReader(DelimitedPointsReaderBase):
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
+        """Internal helper to parse header details for UBC Gravity Gradiometry
+        files"""
         # Get components
         comps = content[0].split('=')[1].split(',')
         # Get number of points
@@ -139,6 +144,8 @@ class MagObsReader(DelimitedPointsReaderBase):
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
+        """Internal helper to parse header details for UBC Magnetic Observations
+        files"""
         # No titles
         self.__incl, self.__decl, self.__geomag = (float(val) for val in content[0].split(self._GetDeli()))
         self.__ainc, self.__adec, self.__dir = (float(val) for val in content[1].split(self._GetDeli()))
@@ -161,6 +168,7 @@ class MagObsReader(DelimitedPointsReaderBase):
 
     @staticmethod
     def ConvertVector(incl, decl, mag=1):
+        """Converts inclination, declinations, and magntidue to an XYZ vector"""
         x = mag * np.cos(np.deg2rad(incl)) * np.cos(np.deg2rad(decl))
         y = mag * np.cos(np.deg2rad(incl)) * np.sin(np.deg2rad(decl))
         z = mag * np.sin(np.deg2rad(incl))
@@ -228,6 +236,7 @@ class GeologyMapper(FilterPreserveTypeBase):
         return geol[geol.keys()[1::]].iloc[arr]
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -271,11 +280,13 @@ class GeologyMapper(FilterPreserveTypeBase):
 
 
     def SetFileName(self, filename):
+        """Set the file name to read"""
         if self.__filename != filename:
             self.__filename = filename
             self.Modified()
 
     def SetDelimiter(self, deli):
+        """Set the delimiter of the ASCII file"""
         if self.__deli != deli:
             self.__deli = deli
             self.Modified()

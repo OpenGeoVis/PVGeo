@@ -47,13 +47,14 @@ class DelimitedTextReader(ReaderBase):
         self._titles = []
 
     def _GetDeli(self):
-        """For itenral use
+        """For itenral use only!
         """
         if self.__use_tab:
             return None
         return self.__delimiter
 
     def GetSplitOnWhiteSpace(self):
+        """Returns the status of how the delimiter interprets whitespace"""
         return self.__use_tab
 
     #### Methods for performing the read ####
@@ -181,13 +182,15 @@ class DelimitedTextReader(ReaderBase):
 
 
     def SetSkipRows(self, skip):
-        """The integer number of rows to skip at the top of the file.
+        """Set the integer number of rows to skip at the top of the file.
         """
         if skip != self.__skipRows:
             self.__skipRows = skip
             self.Modified()
 
     def GetSkipRows(self):
+        """Get the integer number of rows to skip at the top of the file.
+        """
         return self.__skipRows
 
     def SetComments(self, identifier):
@@ -198,14 +201,17 @@ class DelimitedTextReader(ReaderBase):
             self.Modified()
 
     def SetHasTitles(self, flag):
-        """A boolean for if the delimited file has header titles for the data
-        arrays.
+        """Set the boolean for if the delimited file has header titles for the
+        data arrays.
         """
         if self.__has_titles != flag:
             self.__has_titles = flag
             self.Modified()
 
     def HasTitles(self):
+        """Get the boolean for if the delimited file has header titles for the
+        data arrays.
+        """
         return self.__has_titles
 
     def GetTitles(self):
@@ -228,11 +234,16 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
         self.__copy_z = kwargs.get('copy_z', False)
 
     def SetCopyZ(self, flag):
+        """Set whether or not to copy the Z-component of the points to the
+        Point Data"""
         if self.__copy_z != flag:
             self.__copy_z = flag
             self.Modified()
 
     def GetCopyZ(self):
+        """Get the status of whether or not to copy the Z-component of the
+        points to the Point Data
+        """
         return self.__copy_z
 
     #### Algorithm Methods ####
@@ -270,5 +281,6 @@ class XYZTextReader(DelimitedTextReader):
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
+        """Internal helper to parse header details for XYZ files"""
         titles = content[0][2::].split(', ') # first two characers of header is '! '
         return titles, content[1::]

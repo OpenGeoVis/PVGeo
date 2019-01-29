@@ -52,6 +52,7 @@ class SGeMSGridReader(GSLibReader):
         return (0,n1, 0,n2, 0,n3)
 
     def _ExtractHeader(self, content):
+        """Internal helper to parse header info for the SGeMS file format"""
         titles, content = GSLibReader._ExtractHeader(self, content)
         h = self.GetFileHeader().split(self._GetDeli())
         try:
@@ -133,6 +134,7 @@ class WriteImageDataToSGeMS(WriterBase):
 
 
     def PerformWriteOut(self, input_data_object, filename, object_name):
+        """Write out the input ``vtkImage`` data to the SGeMS file format"""
         # Get the input data object
         grd = input_data_object
 

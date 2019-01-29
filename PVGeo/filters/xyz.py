@@ -237,6 +237,8 @@ class PointsToTube(AddCellConnToPoints):
             self.Modified()
 
     def SetCapping(self, flag):
+        """Set a boolean flag on whether or not to cap the ends of the tube
+        """
         if self.__capping != flag:
             self.__capping = flag
             self.Modified()
@@ -281,6 +283,7 @@ class LonLatToUTM(FilterBase):
         return np.c_[utm_x, utm_y, elev]
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -297,6 +300,7 @@ class LonLatToUTM(FilterBase):
         return 1
 
     def SetZone(self, zone):
+        """Set the UTM zone number"""
         if zone < 1 or zone > 60:
             raise _helpers.PVGeoError('Zone (%d) is invalid.' % zone)
         if self.__zone != zone:
@@ -304,6 +308,7 @@ class LonLatToUTM(FilterBase):
             self.Modified()
 
     def SetEllps(self, ellps):
+        """Set the ellipsoid type"""
         if isinstance(ellps, int):
             ellps = self.GetAvailableEllps(idx=ellps)
         if not isinstance(ellps, str):
@@ -329,6 +334,7 @@ class RotationTool(object):
 
     @staticmethod
     def _GetRotationMatrix(theta):
+        """Internal helper to generate a rotation matrix given a rotation angle"""
         xx = np.cos(theta)
         xy = -np.sin(theta)
         yx = np.sin(theta)
@@ -387,6 +393,7 @@ class RotationTool(object):
 
     @staticmethod
     def SinBetween(pts):
+        """Calculate the sin angle between two points"""
         ydiff = abs(pts[0,1] - pts[1,1])
         dist = RotationTool.DistanceBetween(pts)
         return np.arcsin(ydiff/dist)
@@ -665,6 +672,7 @@ class ExtractPoints(FilterBase):
             nOutputPorts=1, outputType='vtkPolyData')
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -693,6 +701,7 @@ class ExtractCellCenters(FilterBase):
                     nOutputPorts=1, outputType='vtkPolyData', **kwargs)
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Find cell centers
@@ -720,6 +729,7 @@ class AppendCellCenters(FilterPreserveTypeBase):
         FilterPreserveTypeBase.__init__(self, **kwargs)
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Find cell centers
@@ -768,6 +778,7 @@ class IterateOverPoints(FilterBase):
 
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         # Get number of points
@@ -832,9 +843,11 @@ class IterateOverPoints(FilterBase):
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def GetPoint(self):
+        """Get the current point"""
         return list(self.__point)
 
     def GetNormal(self):
+        """Get the current normal vector"""
         return list(self.__normal)
 
 
@@ -867,7 +880,7 @@ class ConvertUnits(FilterPreserveTypeBase):
         return convs
 
     def RequestData(self, request, inInfo, outInfo):
-        """Execute on pipeline"""
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         # Get number of points

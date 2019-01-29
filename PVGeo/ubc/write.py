@@ -30,6 +30,7 @@ class ubcTensorMeshWriterBase(WriterBase):
 
 
     def WriteMesh3D(self, nx, ny, nz, filename):
+        """Write 3D Tensor Mesh to the UBC format"""
         def arr2str(arr):
             return ' '.join(map(str, arr))
 
@@ -85,6 +86,7 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
 
 
     def PerformWriteOut(self, input_data_object, filename, object_name):
+        """Write out a ``vtkRectilinearGrid`` to the UBC file format"""
         # Get the input data object
         grd = input_data_object
 
@@ -133,6 +135,7 @@ class WriteImageDataToUBC(ubcTensorMeshWriterBase):
 
 
     def PerformWriteOut(self, input_data_object, filename, object_name):
+        """Write out a ``vtkImageData`` to the UBC file format"""
         # Get the input data object
         grd = input_data_object
 

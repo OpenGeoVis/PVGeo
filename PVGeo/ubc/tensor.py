@@ -399,6 +399,7 @@ class TensorMeshAppender(ModelAppenderBase):
 
 
     def _ReadUpFront(self):
+        """Internal helepr to read data at start"""
         reader = ubcMeshReaderBase.ubcModel3D
         if not self._is_3D:
             # Note how in UBC format, 2D grids are specified on an XZ plane (no Y component)
@@ -412,6 +413,7 @@ class TensorMeshAppender(ModelAppenderBase):
         return
 
     def _PlaceOnMesh(self, output, idx=0):
+        """Internal helepr to place a model on the mesh for a given index"""
         TensorMeshReader.PlaceModelOnMesh(output, self._models[idx], self.GetDataName())
         return
 
@@ -457,6 +459,7 @@ class TopoMeshAppender(AlgorithmBase):
 
 
     def _ReadUpFront(self):
+        """Internal helepr to read data at start"""
         # Read the file
         content = np.genfromtxt(self._topoFileName, dtype=str, delimiter='\n',
                                 comments='!')
@@ -469,6 +472,7 @@ class TopoMeshAppender(AlgorithmBase):
         return
 
     def _PlaceOnMesh(self, output):
+        """Internal helepr to place an active cells model on the mesh"""
         # Check mesh extents to math topography
         nx, ny, nz = output.GetDimensions()
         nx, ny, nz = nx-1, ny-1, nz-1 # because GetDimensions counts the nodes
@@ -491,7 +495,7 @@ class TopoMeshAppender(AlgorithmBase):
 
 
     def RequestData(self, request, inInfo, outInfo):
-        """DO NOT OVERRIDE
+        """Used by pipeline to generate output
         """
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)

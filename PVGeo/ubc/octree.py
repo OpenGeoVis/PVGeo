@@ -146,6 +146,7 @@ class OcTreeReader(ubcMeshReaderBase):
 
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
@@ -208,6 +209,7 @@ class OcTreeAppender(ModelAppenderBase):
 
 
     def _ReadUpFront(self):
+        """Internal helper to read all data at start"""
         reader = ubcMeshReaderBase.ubcModel3D
         self._models = []
         for f in self._model_filenames:
@@ -217,5 +219,6 @@ class OcTreeAppender(ModelAppenderBase):
         return
 
     def _PlaceOnMesh(self, output, idx=0):
+        """Internal helper to place a model on the mesh for a given index"""
         OcTreeReader.PlaceModelOnOcTreeMesh(output, self._models[idx], self.GetDataName())
         return

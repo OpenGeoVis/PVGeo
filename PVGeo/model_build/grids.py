@@ -39,6 +39,7 @@ class CreateUniformGrid(AlgorithmBase):
 
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate the output"""
         pdo = self.GetOutputData(outInfo, 0)
         nx,ny,nz = self.__extent[0],self.__extent[1],self.__extent[2]
         sx,sy,sz = self.__spacing[0],self.__spacing[1],self.__spacing[2]
@@ -62,6 +63,7 @@ class CreateUniformGrid(AlgorithmBase):
 
 
     def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to handle output extents"""
         # Now set whole output extent
         ext = [0, self.__extent[0]-1, 0,self.__extent[1]-1, 0,self.__extent[2]-1]
         info = outInfo.GetInformationObject(0)
@@ -119,6 +121,7 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
 
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate the output"""
         # Get output of Proxy
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
@@ -146,6 +149,7 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
 
 
     def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to handle output extents"""
         # Now set whole output extent
         ext = [0, self.__extent[0], 0,self.__extent[1], 0,self.__extent[2]]
         info = outInfo.GetInformationObject(0)
@@ -226,12 +230,14 @@ class CreateTensorMesh(AlgorithmBase):
 
 
     def GetExtent(self):
+        """Get the extent of the created mesh"""
         ne,nn,nz = len(self.__xcells), len(self.__ycells), len(self.__zcells)
         return (0,ne, 0,nn, 0,nz)
 
 
 
     def _MakeModel(self, pdo):
+        """Generates the output data object"""
         ox,oy,oz = self.__origin[0], self.__origin[1], self.__origin[2]
 
         # Read the cell sizes
@@ -265,6 +271,9 @@ class CreateTensorMesh(AlgorithmBase):
 
 
     def _AddModelData(self, pdo, data):
+        """Add an array to the output data object. If data is None, random
+        values will be generated.
+        """
         nx, ny, nz = pdo.GetDimensions()
         nx, ny, nz = nx-1, ny-1, nz-1
         # ADD DATA to cells

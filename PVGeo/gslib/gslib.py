@@ -82,6 +82,7 @@ class WriteTableToGSLib(WriterBase):
 
 
     def PerformWriteOut(self, input_data_object, filename, object_name):
+        """Write out the input data object to the GSLib file format"""
         # Get the input data object
         table = input_data_object
 

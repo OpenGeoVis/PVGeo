@@ -66,18 +66,22 @@ class ArrayMath(FilterPreserveTypeBase):
 
     @staticmethod
     def _multiply(arr1, arr2):
+        """Mutlipies two input NumPy arrays"""
         return arr1*arr2
 
     @staticmethod
     def _divide(arr1, arr2):
+        """Divides two input NumPy arrays"""
         return arr1/arr2
 
     @staticmethod
     def _add(arr1, arr2):
+        """Adds two input NumPy arrays"""
         return arr1+arr2
 
     @staticmethod
     def _subtract(arr1, arr2):
+        """Subtracts two input NumPy arrays"""
         return arr1-arr2
 
     @staticmethod
@@ -164,6 +168,7 @@ class ArrayMath(FilterPreserveTypeBase):
 
 
     def _SetInputArray1(self, field, name):
+        """Set 1st input array by name and field"""
         if self.__input_array_1[0] != field:
             self.__input_array_1[0] = field
             self.Modified()
@@ -172,6 +177,7 @@ class ArrayMath(FilterPreserveTypeBase):
             self.Modified()
 
     def _SetInputArray2(self, field, name):
+        """Set 2nd input array by name and field"""
         if self.__input_array_2[0] != field:
             self.__input_array_2[0] = field
             self.Modified()
@@ -199,6 +205,7 @@ class ArrayMath(FilterPreserveTypeBase):
         return 1
 
     def Apply(self, input_data_object, array_name_0, array_name_1):
+        """Run the algorith on an input data object, specifying array names"""
         self.SetInputDataObject(input_data_object)
         arr0, field0 = _helpers.searchForArray(input_data_object, array_name_0)
         arr1, field1 = _helpers.searchForArray(input_data_object, array_name_1)
@@ -228,6 +235,7 @@ class ArrayMath(FilterPreserveTypeBase):
             self.Modified()
 
     def GetNewArrayName(self):
+        """Get the name used for the new array"""
         return self.__new_name
 
     def SetOperation(self, op):
@@ -303,10 +311,12 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     @staticmethod
     def _passArray(arr):
+        """Cast an input array as a NumPy array"""
         return np.array(arr)
 
     @staticmethod
     def _featureScale(arr, rng=None):
+        """Returns feature scale normalization of input array"""
         # TODO: implement ability to use custom range
         if rng is not None:
             mi = rng[0]
@@ -318,14 +328,17 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     @staticmethod
     def _standardScore(arr):
+        """Returns tandard score normalization of input array"""
         return (arr - np.mean(arr)) / (np.std(arr))
 
     @staticmethod
     def _log10(arr):
+        """Returns log base 10 of input array"""
         return np.log10(arr)
 
     @staticmethod
     def _logNat(arr):
+        """Returns natural logarithm of input array"""
         return np.log(arr)
 
     @staticmethod
@@ -441,6 +454,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         return 1
 
     def Apply(self, input_data_object, array_name):
+        """Run the algorithm on an input data object, specifying the array"""
         self.SetInputDataObject(input_data_object)
         arr, field = _helpers.searchForArray(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
@@ -469,6 +483,7 @@ class NormalizeArray(FilterPreserveTypeBase):
             self.Modified()
 
     def GetNewArrayName(self):
+        """Get the name of the new array"""
         return self.__new_name
 
     def SetTakeAbsoluteValue(self, flag):
@@ -592,6 +607,7 @@ class PercentThreshold(FilterBase):
 
 
     def Apply(self, input_data_object, array_name):
+        """Run the algorithm on an input data object, specifying the array"""
         self.SetInputDataObject(input_data_object)
         arr, field = _helpers.searchForArray(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
@@ -618,6 +634,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
 
 
     def _GetArrays(self, wpdi):
+        """Internal helper to fetch RGBA arrays"""
         # Get Red
         fieldr, name = self.__r_array[0], self.__r_array[1]
         r_arr = _helpers.getNumPyArray(wpdi, fieldr, name)
@@ -637,6 +654,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
 
 
     def _MaskArrays(self, r_arr, g_arr, b_arr, a_arr):
+        """Internal helper to mask RGBA arrays"""
         r_arr = np.ma.masked_where(r_arr==self.__mask, r_arr)
         g_arr = np.ma.masked_where(g_arr==self.__mask, g_arr)
         b_arr = np.ma.masked_where(b_arr==self.__mask, b_arr)
@@ -680,16 +698,19 @@ class ArraysToRGBA(FilterPreserveTypeBase):
     #### Seters and Geters ####
 
     def SetUseTransparency(self, flag):
+        """Set a boolean flag on whether or not to use a transparency component"""
         if self.__use_trans != flag:
             self.__use_trans = flag
             self.Modified()
 
     def SetMaskValue(self, val):
+        """Set the value to mask in the RGBA arrays"""
         if self.__mask != val:
             self.__mask = val
             self.Modified()
 
     def _SetInputArrayRed(self, field, name):
+        """Set field and name of red array"""
         if self.__r_array[0] != field:
             self.__r_array[0] = field
             self.Modified()
@@ -698,6 +719,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             self.Modified()
 
     def _SetInputArrayGreen(self, field, name):
+        """Set field and name of green array"""
         if self.__g_array[0] != field:
             self.__g_array[0] = field
             self.Modified()
@@ -706,6 +728,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             self.Modified()
 
     def _SetInputArrayBlue(self, field, name):
+        """Set field and name of blue array"""
         if self.__b_array[0] != field:
             self.__b_array[0] = field
             self.Modified()
@@ -714,6 +737,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             self.Modified()
 
     def _SetInputArrayTrans(self, field, name):
+        """Set field and name of transparency array"""
         if self.__a_array[0] != field:
             self.__a_array[0] = field
             self.Modified()
@@ -745,6 +769,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         return 1
 
     def Apply(self, input_data_object, r_array, g_array, b_array, a_array=None):
+        """Run the algorithm on an input data object, specifying RGBA array names"""
         self.SetInputDataObject(input_data_object)
         r_arr, rField = _helpers.searchForArray(input_data_object, r_array)
         g_arr, gField = _helpers.searchForArray(input_data_object, g_array)
