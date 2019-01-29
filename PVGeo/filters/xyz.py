@@ -195,13 +195,13 @@ class PointsToTube(AddCellConnToPoints):
     """
     __displayname__ = 'Points to Tube'
     __category__ = 'filter'
-    def __init__(self, **kwargs):
+    def __init__(self, num_sides=20, radius=10.0, capping=False, **kwargs):
         AddCellConnToPoints.__init__(self, **kwargs)
         # Additional Parameters
         # NOTE: CellType should remain vtk.VTK_POLY_LINE (4) connection
-        self.__numSides = 20
-        self.__radius = 10.0
-        self.__capping = False
+        self.__numSides = num_sides
+        self.__radius = radius
+        self.__capping = capping
 
 
     def _ConnectCells(self, pdi, pdo, logTime=False):
