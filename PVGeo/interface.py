@@ -263,25 +263,25 @@ def addArraysFromDataFrame(pdo, field, df):
 
 
 
-def convertCellConn(cellConn):
+def convertCellConn(cell_connectivity):
     """Converts cell connectivity arrays to a cell matrix array that makes sense
     for VTK cell arrays.
     """
     cellsMat = np.concatenate(
             (
-                np.ones((cellConn.shape[0], 1), dtype=np.int64)*cellConn.shape[1],
-                cellConn
+                np.ones((cell_connectivity.shape[0], 1), dtype=np.int64)*cell_connectivity.shape[1],
+                cell_connectivity
             ),
             axis=1).ravel()
     return nps.numpy_to_vtk(cellsMat, deep=True, array_type=vtk.VTK_ID_TYPE)
 
 
-def getArray(dataset, name, vtkObj=False):
+def getArray(dataset, name, vtk_object=False):
     """Given an input dataset, this will return the named array as a NumPy array
     or a vtkDataArray if spceified
     """
     arr, field = _helpers.searchForArray(dataset, name)
-    if vtkObj:
+    if vtk_object:
         return arr
     return convertArray(arr)
 

@@ -47,8 +47,8 @@ class PVGeoTensorMeshReader(TensorMeshReader):
             <FileListDomain name="meshfile"/>
             <Documentation>This is the mesh file for a 2D or 3D UBC Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
         </StringVectorProperty>''')
-    def SetMeshFileName(self, fname):
-        TensorMeshReader.SetMeshFileName(self, fname)
+    def SetMeshFileName(self, filename):
+        TensorMeshReader.SetMeshFileName(self, filename)
 
     @smproperty.xml('''
         <StringVectorProperty
@@ -60,12 +60,12 @@ class PVGeoTensorMeshReader(TensorMeshReader):
           repeat_command="1"
           clean_command="ClearModels"
           number_of_elements="1">
-          <FileListDomain name="modelfiles"/>
+          <FileListDomain name="model_files"/>
           <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
         </StringVectorProperty>''')
-    def AddModelFileName(self, fname):
+    def AddModelFileName(self, filename):
         """Use to set the file names for the reader. Handles singlt string or list of strings."""
-        TensorMeshReader.AddModelFileName(self, fname)
+        TensorMeshReader.AddModelFileName(self, filename)
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
@@ -107,12 +107,12 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
           repeat_command="1"
           clean_command="ClearModels"
           number_of_elements="1">
-          <FileListDomain name="modelfiles"/>
+          <FileListDomain name="model_files"/>
           <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
         </StringVectorProperty>''')
-    def AddModelFileName(self, fname):
+    def AddModelFileName(self, filename):
         """Use to set the file names for the reader. Handles single string or list of strings."""
-        TensorMeshAppender.AddModelFileName(self, fname)
+        TensorMeshAppender.AddModelFileName(self, filename)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
     panel_visibility="advanced"))
@@ -153,8 +153,8 @@ class PVGeoTopoMeshAppender(TopoMeshAppender):
             <FileListDomain name="topofile"/>
             <Documentation>This plugin only allows ONE topo file to be defined.</Documentation>
         </StringVectorProperty>''')
-    def SetTopoFileName(self, fname):
-        TopoMeshAppender.SetTopoFileName(self, fname)
+    def SetTopoFileName(self, filename):
+        TopoMeshAppender.SetTopoFileName(self, filename)
 
 
 
@@ -188,8 +188,8 @@ if discretize_available:
                 <FileListDomain name="meshfile"/>
                 <Documentation>This is the mesh file for a OcTree Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
             </StringVectorProperty>''')
-        def SetMeshFileName(self, fname):
-            OcTreeReader.SetMeshFileName(self, fname)
+        def SetMeshFileName(self, filename):
+            OcTreeReader.SetMeshFileName(self, filename)
 
         @smproperty.xml('''
             <StringVectorProperty
@@ -201,12 +201,12 @@ if discretize_available:
               repeat_command="1"
               clean_command="ClearModels"
               number_of_elements="1">
-              <FileListDomain name="modelfiles"/>
+              <FileListDomain name="model_files"/>
               <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
             </StringVectorProperty>''')
-        def AddModelFileName(self, fname):
+        def AddModelFileName(self, filename):
             """Use to set the file names for the reader. Handles singlt string or list of strings."""
-            OcTreeReader.AddModelFileName(self, fname)
+            OcTreeReader.AddModelFileName(self, filename)
 
 
         @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
@@ -250,12 +250,12 @@ if discretize_available:
               repeat_command="1"
               clean_command="ClearModels"
               number_of_elements="1">
-              <FileListDomain name="modelfiles"/>
+              <FileListDomain name="model_files"/>
               <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
             </StringVectorProperty>''')
-        def AddModelFileName(self, fname):
+        def AddModelFileName(self, filename):
             """Use to set the file names for the reader. Handles single string or list of strings."""
-            OcTreeAppender.AddModelFileName(self, fname)
+            OcTreeAppender.AddModelFileName(self, filename)
 
         @smproperty.xml(_helpers.getPropertyXml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
         panel_visibility="advanced"))
@@ -281,9 +281,9 @@ class PVGeoWriteRectilinearGridToUBC(WriteRectilinearGridToUBC):
 
     @smproperty.stringvector(name="FileName", panel_visibility="never")
     @smdomain.filelist()
-    def SetFileName(self, fname):
+    def SetFileName(self, filename):
         """Specify filename for the file to write."""
-        WriteRectilinearGridToUBC.SetFileName(self, fname)
+        WriteRectilinearGridToUBC.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
@@ -300,9 +300,9 @@ class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
 
     @smproperty.stringvector(name="FileName", panel_visibility="never")
     @smdomain.filelist()
-    def SetFileName(self, fname):
+    def SetFileName(self, filename):
         """Specify filename for the file to write."""
-        WriteImageDataToUBC.SetFileName(self, fname)
+        WriteImageDataToUBC.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
@@ -322,9 +322,9 @@ class PVGeoTopoReader(TopoReader):
         TopoReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(TopoReader.extensions, readerDescription=TopoReader.description))
-    def AddFileName(self, fname):
-        TopoReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(TopoReader.extensions, reader_description=TopoReader.description))
+    def AddFileName(self, filename):
+        TopoReader.AddFileName(self, filename)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, dt):
@@ -357,9 +357,9 @@ class PVGeoGravObsReader(GravObsReader):
         GravObsReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(GravObsReader.extensions, readerDescription=GravObsReader.description))
-    def AddFileName(self, fname):
-        GravObsReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(GravObsReader.extensions, reader_description=GravObsReader.description))
+    def AddFileName(self, filename):
+        GravObsReader.AddFileName(self, filename)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, dt):
@@ -391,9 +391,9 @@ class PVGeoGravGradReader(GravGradReader):
         GravGradReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(GravGradReader.extensions, readerDescription=GravGradReader.description))
-    def AddFileName(self, fname):
-        GravGradReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(GravGradReader.extensions, reader_description=GravGradReader.description))
+    def AddFileName(self, filename):
+        GravGradReader.AddFileName(self, filename)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, dt):
@@ -426,9 +426,9 @@ class PVGeoMagObsReader(MagObsReader):
         MagObsReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(MagObsReader.extensions, readerDescription=MagObsReader.description))
-    def AddFileName(self, fname):
-        MagObsReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(MagObsReader.extensions, reader_description=MagObsReader.description))
+    def AddFileName(self, filename):
+        MagObsReader.AddFileName(self, filename)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, dt):
@@ -462,7 +462,7 @@ class PVGeoGeologyMapper(GeologyMapper):
 
     #### SETTERS AND GETTERS ####
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return GeologyMapper.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -477,8 +477,8 @@ class PVGeoGeologyMapper(GeologyMapper):
             <FileListDomain name="filename"/>
             <Documentation>This is the file contating the mapping definitions.</Documentation>
         </StringVectorProperty>''')
-    def SetFileName(self, fname):
-        GeologyMapper.SetFileName(self, fname)
+    def SetFileName(self, filename):
+        GeologyMapper.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Delimiter", default_values=",", panel_visibility="advanced")
     def SetDelimiter(self, deli):
@@ -499,9 +499,9 @@ if discretize_available:
 
         #### Seters and Geters ####
 
-        @smproperty.xml(_helpers.getFileReaderXml(DiscretizeMeshReader.extensions, readerDescription=DiscretizeMeshReader.description))
-        def AddFileName(self, fname):
-            DiscretizeMeshReader.AddFileName(self, fname)
+        @smproperty.xml(_helpers.getFileReaderXml(DiscretizeMeshReader.extensions, reader_description=DiscretizeMeshReader.description))
+        def AddFileName(self, filename):
+            DiscretizeMeshReader.AddFileName(self, filename)
 
         @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
         def SetTimeDelta(self, dt):

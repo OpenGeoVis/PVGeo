@@ -140,10 +140,10 @@ class TableToTimeGrid(FilterBase):
 
     #### Setters / Getters ####
 
-    def Modified(self, runAgain=True):
+    def Modified(self, run_again=True):
         """Call modified if the filter needs to run again"""
-        if runAgain:
-            self.__needToRun = runAgain
+        if run_again:
+            self.__needToRun = run_again
             self.__needToUpdateOutput = True
         FilterBase.Modified(self)
 
@@ -174,7 +174,7 @@ class TableToTimeGrid(FilterBase):
         """Set the reshape order (`'C'` or `'F'`)"""
         if self.__order != order:
             self.__order = order
-            self.Modified(runAgain=True)
+            self.Modified(run_again=True)
 
     def GetTimestepValues(self):
         """Use this in ParaView decorator to register timesteps on the pipeline.
@@ -196,7 +196,7 @@ class TableToTimeGrid(FilterBase):
         """
         if self.__usePointData != flag:
             self.__usePointData = flag
-            self.Modified(runAgain=True)
+            self.Modified(run_again=True)
 
 
 ###############################################################################

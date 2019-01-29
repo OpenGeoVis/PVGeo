@@ -108,14 +108,14 @@ class SGeMSGridReader(GSLibReader):
         spac = (dx, dy, dz)
         if self.__spacing != spac:
             self.__spacing = spac
-            self.Modified(readAgain=False)
+            self.Modified(read_again=False)
 
     def SetOrigin(self, ox, oy, oz):
         """Set the origin corner of the grid"""
         origin = (ox, oy, oz)
         if self.__origin != origin:
             self.__origin = origin
-            self.Modified(readAgain=False)
+            self.Modified(read_again=False)
 
 
 
@@ -132,9 +132,9 @@ class WriteImageDataToSGeMS(WriterBase):
         WriterBase.__init__(self, inputType=inputType, ext='SGeMS')
 
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
+    def PerformWriteOut(self, input_data_object, filename, object_name):
         # Get the input data object
-        grd = inputDataObject
+        grd = input_data_object
 
         # Get grid dimensions and minus one becuase this defines nodes
         nx, ny, nz = grd.GetDimensions()

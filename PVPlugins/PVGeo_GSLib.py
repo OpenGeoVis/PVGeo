@@ -22,9 +22,9 @@ class PVGeoGSLibReader(GSLibReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(GSLibReader.extensions, readerDescription=GSLibReader.description))
-    def AddFileName(self, fname):
-        GSLibReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(GSLibReader.extensions, reader_description=GSLibReader.description))
+    def AddFileName(self, filename):
+        GSLibReader.AddFileName(self, filename)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):
@@ -72,9 +72,9 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(GSLibPointSetReader.extensions, readerDescription=GSLibPointSetReader.description))
-    def AddFileName(self, fname):
-        GSLibPointSetReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(GSLibPointSetReader.extensions, reader_description=GSLibPointSetReader.description))
+    def AddFileName(self, filename):
+        GSLibPointSetReader.AddFileName(self, filename)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):
@@ -121,9 +121,9 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(SGeMSGridReader.extensions, readerDescription=SGeMSGridReader.description))
-    def AddFileName(self, fname):
-        SGeMSGridReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(SGeMSGridReader.extensions, reader_description=SGeMSGridReader.description))
+    def AddFileName(self, filename):
+        SGeMSGridReader.AddFileName(self, filename)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):
@@ -171,9 +171,9 @@ class PVGeoWriteImageDataToSGeMS(WriteImageDataToSGeMS):
 
     @smproperty.stringvector(name="FileName", panel_visibility="never")
     @smdomain.filelist()
-    def SetFileName(self, fname):
+    def SetFileName(self, filename):
         """Specify filename for the file to write."""
-        WriteImageDataToSGeMS.SetFileName(self, fname)
+        WriteImageDataToSGeMS.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
@@ -191,9 +191,9 @@ class PVGeoWriteTableToGSLib(WriteTableToGSLib):
 
     @smproperty.stringvector(name="FileName", panel_visibility="never")
     @smdomain.filelist()
-    def SetFileName(self, fname):
+    def SetFileName(self, filename):
         """Specify filename for the file to write."""
-        WriteTableToGSLib.SetFileName(self, fname)
+        WriteTableToGSLib.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Header", default_values='Saved by PVGeo')
     def SetHeader(self, header):

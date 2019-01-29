@@ -24,11 +24,11 @@ if omf_avail:
         """
 
         def setUp(self):
-            self.fname = os.path.join(os.path.dirname(__file__), 'data/test_file.omf')
+            self.filename = os.path.join(os.path.dirname(__file__), 'data/test_file.omf')
 
 
         def test_read_project(self):
             """`OMFReader`: read whole project file"""
-            proj = OMFReader().Apply(self.fname)
+            proj = OMFReader().Apply(self.filename)
             self.assertIsNotNone(proj)
             self.assertEqual(proj.GetNumberOfBlocks(), 9)

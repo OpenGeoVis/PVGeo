@@ -166,13 +166,13 @@ class PVGeoSurferGridReader(SurferGridReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(SurferGridReader.extensions, readerDescription=SurferGridReader.description))
-    def AddFileName(self, fname):
-        SurferGridReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(SurferGridReader.extensions, reader_description=SurferGridReader.description))
+    def AddFileName(self, filename):
+        SurferGridReader.AddFileName(self, filename)
 
     @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, dataName):
-        SurferGridReader.SetDataName(self, dataName)
+    def SetDataName(self, data_name):
+        SurferGridReader.SetDataName(self, data_name)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, dt):
@@ -196,11 +196,11 @@ class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
 
     @smproperty.stringvector(name="FileName", panel_visibility="never")
     @smdomain.filelist()
-    def SetFileName(self, fname):
+    def SetFileName(self, filename):
         """Specify filename for the file to write."""
-        WriteImageDataToSurfer.SetFileName(self, fname)
+        WriteImageDataToSurfer.SetFileName(self, filename)
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return WriteImageDataToSurfer.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -223,9 +223,9 @@ class PVGeoWriteCellCenterData(WriteCellCenterData):
 
     @smproperty.stringvector(name="FileName", panel_visibility="never")
     @smdomain.filelist()
-    def SetFileName(self, fname):
+    def SetFileName(self, filename):
         """Specify filename for the file to write."""
-        WriteCellCenterData.SetFileName(self, fname)
+        WriteCellCenterData.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):
@@ -250,13 +250,13 @@ class PVGeoEsriGridReader(EsriGridReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(EsriGridReader.extensions, readerDescription=EsriGridReader.description))
-    def AddFileName(self, fname):
-        EsriGridReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(EsriGridReader.extensions, reader_description=EsriGridReader.description))
+    def AddFileName(self, filename):
+        EsriGridReader.AddFileName(self, filename)
 
     @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, dataName):
-        EsriGridReader.SetDataName(self, dataName)
+    def SetDataName(self, data_name):
+        EsriGridReader.SetDataName(self, data_name)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def SetTimeDelta(self, dt):
@@ -282,9 +282,9 @@ class PVGeoLandsatReader(LandsatReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(LandsatReader.extensions, readerDescription=LandsatReader.description))
-    def AddFileName(self, fname):
-        LandsatReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(LandsatReader.extensions, reader_description=LandsatReader.description))
+    def AddFileName(self, filename):
+        LandsatReader.AddFileName(self, filename)
 
     @smproperty.dataarrayselection(name="Available Bands")
     def GetDataSelection(self):

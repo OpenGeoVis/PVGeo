@@ -29,10 +29,10 @@ class OMFReader(ReaderBaseBase):
         self.__data = dict()
         self.__project = None
 
-    def Modified(self, readAgain=False):
+    def Modified(self, read_again=False):
         """Ensure default is overridden to be false so array selector can call.
         """
-        ReaderBaseBase.Modified(self, readAgain=readAgain)
+        ReaderBaseBase.Modified(self, read_again=read_again)
 
     def GetFileName(self):
         """Super class has file names as a list but we will only handle a single

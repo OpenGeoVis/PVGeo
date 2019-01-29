@@ -55,14 +55,14 @@ def updateTimeSteps(algorithm, nt, dt=1.0, explicit=False):
     return timesteps
 
 
-def getRequestedTime(algorithm, outInfoVec, idx=0):
+def getRequestedTime(algorithm, outInfo, idx=0):
     """Handles setting up the timesteps on on the pipeline for a file series
     reader.
 
     Args:
         algorithm (vtkDataObject) : The data object (Proxy) on the pipeline
             (pass `self` from algorithm subclasses)
-        outInfoVec (vtkInformationVector) : The output information for the
+        outInfo (vtkInformationVector) : The output information for the
             algorithm
         idx (int) : the index for the output port
 
@@ -71,11 +71,11 @@ def getRequestedTime(algorithm, outInfoVec, idx=0):
 
     Example:
         >>> # Get requested time index
-        >>> i = _helpers.getRequestedTime(self, outInfoVec)
+        >>> i = _helpers.getRequestedTime(self, outInfo)
     """
     executive = algorithm.GetExecutive()
     timesteps = algorithm.GetTimestepValues()
-    outInfo = outInfoVec.GetInformationObject(idx)
+    outInfo = outInfo.GetInformationObject(idx)
     if timesteps is None or len(timesteps) == 0:
         return 0
     elif outInfo.Has(executive.UPDATE_TIME_STEP()) and len(timesteps) > 0:

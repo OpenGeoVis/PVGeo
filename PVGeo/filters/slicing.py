@@ -102,7 +102,7 @@ class ManySlicesAlongPoints(_SliceBase):
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), typ)
         return 1
 
-    def _GetPlanes(self, pdipts):
+    def _GetPlanes(self, pts):
         try:
             # sklearn's KDTree is faster: use it if available
             from sklearn.neighbors import KDTree as Tree
@@ -111,9 +111,9 @@ class ManySlicesAlongPoints(_SliceBase):
         if self.GetNumberOfSlices() == 0:
             return []
         # Get the Points over the NumPy interface
-        wpdi = dsa.WrapDataObject(pdipts) # NumPy wrapped points
+        wpdi = dsa.WrapDataObject(pts) # NumPy wrapped points
         points = np.array(wpdi.Points) # New NumPy array of points so we dont destroy input
-        numPoints = pdipts.GetNumberOfPoints()
+        numPoints = pts.GetNumberOfPoints()
         if self.__useNearestNbr:
             tree = Tree(points)
             ptsi = tree.query([points[0]], k=numPoints)[1].ravel()
@@ -135,16 +135,16 @@ class ManySlicesAlongPoints(_SliceBase):
 
         return planes
 
-    def _GetSlice(self, pdipts, pdidata, planes, output):
+    def _GetSlice(self, pts, data, planes, output):
         """Internal helper to perfrom the filter
         """
-        numPoints = pdipts.GetNumberOfPoints()
+        numPoints = pts.GetNumberOfPoints()
         # Set number of blocks based on user choice in the selction
         output.SetNumberOfBlocks(self.GetNumberOfSlices())
         blk = 0
         for i, plane in enumerate(planes):
             temp = vtk.vtkPolyData()
-            self._Slice(pdidata, temp, plane)
+            self._Slice(data, temp, plane)
             output.SetBlock(blk, temp)
             output.GetMetaData(blk).Set(vtk.vtkCompositeDataSet.NAME(), 'Slice%.2d' % blk)
             blk += 1
@@ -154,12 +154,12 @@ class ManySlicesAlongPoints(_SliceBase):
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
         # Get input/output of Proxy
-        pdipts = self.GetInputData(inInfo, 0, 0) # Port 0: points
-        pdidata = self.GetInputData(inInfo, 1, 0) # Port 1: sliceable data
+        pts = self.GetInputData(inInfo, 0, 0) # Port 0: points
+        data = self.GetInputData(inInfo, 1, 0) # Port 1: sliceable data
         output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
         # Perfrom task
-        planes = self._GetPlanes(pdipts)
-        self._GetSlice(pdipts, pdidata, planes, output)
+        planes = self._GetPlanes(pts)
+        self._GetSlice(pts, data, planes, output)
         return 1
 
 
@@ -202,35 +202,35 @@ class SlideSliceAlongPoints(ManySlicesAlongPoints):
         self.__loc = 50 # Percent (halfway)
 
 
-    def _GetSlice(self, pdipts, pdidata, planes, output):
+    def _GetSlice(self, pts, data, planes, output):
         """Internal helper to perfrom the filter
         """
         if not isinstance(planes, vtk.vtkPlane):
             raise _helpers.PVGeoError('``_GetSlice`` can only handle one plane.')
-        numPoints = pdipts.GetNumberOfPoints()
+        numPoints = pts.GetNumberOfPoints()
         # Set number of blocks based on user choice in the selction
-        self._Slice(pdidata, output, planes)
+        self._Slice(data, output, planes)
         return output
 
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
         # Get input/output of Proxy
-        pdipts = self.GetInputData(inInfo, 0, 0) # Port 0: points
-        pdidata = self.GetInputData(inInfo, 1, 0) # Port 1: sliceable data
+        pts = self.GetInputData(inInfo, 0, 0) # Port 0: points
+        data = self.GetInputData(inInfo, 1, 0) # Port 1: sliceable data
         output = vtk.vtkPolyData.GetData(outInfo, 0)
         # Perfrom task
         if self.__planes is None or len(self.__planes) < 1:
-            self.SetNumberOfSlices(pdipts.GetNumberOfPoints())
-            self.__planes = self._GetPlanes(pdipts)
-        idx = int(np.floor(pdipts.GetNumberOfPoints() * float(self.__loc / 100.0)))
-        self._GetSlice(pdipts, pdidata, self.__planes[idx], output)
+            self.SetNumberOfSlices(pts.GetNumberOfPoints())
+            self.__planes = self._GetPlanes(pts)
+        idx = int(np.floor(pts.GetNumberOfPoints() * float(self.__loc / 100.0)))
+        self._GetSlice(pts, data, self.__planes[idx], output)
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
-        pdipts = self.GetInputData(inInfo, 0, 0) # Port 0: points
-        self.SetNumberOfSlices(pdipts.GetNumberOfPoints())
-        self.__planes = self._GetPlanes(pdipts)
+        pts = self.GetInputData(inInfo, 0, 0) # Port 0: points
+        self.SetNumberOfSlices(pts.GetNumberOfPoints())
+        self.__planes = self._GetPlanes(pts)
         return 1
 
     def SetLocation(self, loc):
@@ -413,7 +413,7 @@ class SliceThroughTime(ManySlicesAlongAxis):
         self._Slice(pdi, pdo, plane)
         return 1
 
-    def RequestInformation(self, request, inInfoVec, outInfoVec):
+    def RequestInformation(self, request, inInfo, outInfo):
         """Used by pipeline to set the time information
         """
         # register time:

@@ -198,12 +198,12 @@ class ArrayMath(FilterPreserveTypeBase):
             raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
         return 1
 
-    def Apply(self, inputDataObject, arrayName0, arrayName1):
-        self.SetInputDataObject(inputDataObject)
-        arr0, field0 = _helpers.searchForArray(inputDataObject, arrayName0)
-        arr1, field1 = _helpers.searchForArray(inputDataObject, arrayName1)
-        self.SetInputArrayToProcess(0, 0, 0, field0, arrayName0)
-        self.SetInputArrayToProcess(1, 0, 0, field1, arrayName1)
+    def Apply(self, input_data_object, array_name_0, array_name_1):
+        self.SetInputDataObject(input_data_object)
+        arr0, field0 = _helpers.searchForArray(input_data_object, array_name_0)
+        arr1, field1 = _helpers.searchForArray(input_data_object, array_name_1)
+        self.SetInputArrayToProcess(0, 0, 0, field0, array_name_0)
+        self.SetInputArrayToProcess(1, 0, 0, field1, array_name_1)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
@@ -270,7 +270,7 @@ class NormalizeArray(FilterPreserveTypeBase):
 
         absolute (bool):
 
-        normalization (str, int, or callable): The operation as a string key, 
+        normalization (str, int, or callable): The operation as a string key,
             integer index, or callable method
 
     **Normalization Types:**
@@ -440,10 +440,10 @@ class NormalizeArray(FilterPreserveTypeBase):
             self.Modified()
         return 1
 
-    def Apply(self, inputDataObject, arrayName):
-        self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
-        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+    def Apply(self, input_data_object, array_name):
+        self.SetInputDataObject(input_data_object)
+        arr, field = _helpers.searchForArray(input_data_object, array_name)
+        self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
@@ -591,10 +591,10 @@ class PercentThreshold(FilterBase):
             self.Modified()
 
 
-    def Apply(self, inputDataObject, arrayName):
-        self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
-        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+    def Apply(self, input_data_object, array_name):
+        self.SetInputDataObject(input_data_object)
+        arr, field = _helpers.searchForArray(input_data_object, array_name)
+        self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
@@ -620,28 +620,28 @@ class ArraysToRGBA(FilterPreserveTypeBase):
     def _GetArrays(self, wpdi):
         # Get Red
         fieldr, name = self.__r_array[0], self.__r_array[1]
-        rArr = _helpers.getNumPyArray(wpdi, fieldr, name)
+        r_arr = _helpers.getNumPyArray(wpdi, fieldr, name)
         # Get Green
         fieldg, name = self.__g_array[0], self.__g_array[1]
-        gArr = _helpers.getNumPyArray(wpdi, fieldg, name)
+        g_arr = _helpers.getNumPyArray(wpdi, fieldg, name)
         # Get Blue
         fieldb, name = self.__b_array[0], self.__b_array[1]
-        bArr = _helpers.getNumPyArray(wpdi, fieldb, name)
+        b_arr = _helpers.getNumPyArray(wpdi, fieldb, name)
         # Get Trans
         fielda, name = self.__a_array[0], self.__a_array[1]
-        aArr = _helpers.getNumPyArray(wpdi, fielda, name)
+        a_arr = _helpers.getNumPyArray(wpdi, fielda, name)
         if fieldr != fieldg != fieldb: # != fielda
             raise _helpers.PVGeoError('Data arrays must be of the same field.')
         self.__field = fieldr
-        return rArr, gArr, bArr, aArr
+        return r_arr, g_arr, b_arr, a_arr
 
 
-    def _MaskArrays(self, rArr, gArr, bArr, aArr):
-        rArr = np.ma.masked_where(rArr==self.__mask, rArr)
-        gArr = np.ma.masked_where(gArr==self.__mask, gArr)
-        bArr = np.ma.masked_where(bArr==self.__mask, bArr)
-        aArr = np.ma.masked_where(aArr==self.__mask, aArr)
-        return rArr, gArr, bArr, aArr
+    def _MaskArrays(self, r_arr, g_arr, b_arr, a_arr):
+        r_arr = np.ma.masked_where(r_arr==self.__mask, r_arr)
+        g_arr = np.ma.masked_where(g_arr==self.__mask, g_arr)
+        b_arr = np.ma.masked_where(b_arr==self.__mask, b_arr)
+        a_arr = np.ma.masked_where(a_arr==self.__mask, a_arr)
+        return r_arr, g_arr, b_arr, a_arr
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -653,20 +653,20 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         pdo = self.GetOutputData(outInfo, 0)
 
         # Get the arrays for the RGB values
-        rArr, gArr, bArr, aArr = self._GetArrays(wpdi)
-        rArr, gArr, bArr, aArr = self._MaskArrays(rArr, gArr, bArr, aArr)
+        r_arr, g_arr, b_arr, a_arr = self._GetArrays(wpdi)
+        r_arr, g_arr, b_arr, a_arr = self._MaskArrays(r_arr, g_arr, b_arr, a_arr)
 
         # normalize each color array bewteen 0 and 255
-        rArr = NormalizeArray._featureScale(rArr, [0, 255])
-        gArr = NormalizeArray._featureScale(gArr, [0, 255])
-        bArr = NormalizeArray._featureScale(bArr, [0, 255])
+        r_arr = NormalizeArray._featureScale(r_arr, [0, 255])
+        g_arr = NormalizeArray._featureScale(g_arr, [0, 255])
+        b_arr = NormalizeArray._featureScale(b_arr, [0, 255])
 
         # Now concatenate the arrays
         if self.__use_trans:
-            aArr = NormalizeArray._featureScale(aArr, [0, 255])
-            col = np.array(np.c_[rArr, gArr, bArr, aArr], dtype=np.uint8)
+            a_arr = NormalizeArray._featureScale(a_arr, [0, 255])
+            col = np.array(np.c_[r_arr, g_arr, b_arr, a_arr], dtype=np.uint8)
         else:
-            col = np.array(np.c_[rArr, gArr, bArr], dtype=np.uint8)
+            col = np.array(np.c_[r_arr, g_arr, b_arr], dtype=np.uint8)
         colors = interface.convertArray(col, name='Colors')
 
         # Set the output
@@ -744,18 +744,18 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
         return 1
 
-    def Apply(self, inputDataObject, rArray, gArray, bArray, aArray=None):
-        self.SetInputDataObject(inputDataObject)
-        rArr, rField = _helpers.searchForArray(inputDataObject, rArray)
-        gArr, gField = _helpers.searchForArray(inputDataObject, gArray)
-        bArr, bField = _helpers.searchForArray(inputDataObject, bArray)
-        if aArray is not None:
-            aArr, aField = _helpers.searchForArray(inputDataObject, aArray)
-            self.SetInputArrayToProcess(3, 0, 0, aField, aArray)
+    def Apply(self, input_data_object, r_array, g_array, b_array, a_array=None):
+        self.SetInputDataObject(input_data_object)
+        r_arr, rField = _helpers.searchForArray(input_data_object, r_array)
+        g_arr, gField = _helpers.searchForArray(input_data_object, g_array)
+        b_arr, bField = _helpers.searchForArray(input_data_object, b_array)
+        if a_array is not None:
+            a_arr, aField = _helpers.searchForArray(input_data_object, a_array)
+            self.SetInputArrayToProcess(3, 0, 0, aField, a_array)
             self.SetUseTransparency(True)
-        self.SetInputArrayToProcess(0, 0, 0, rField, rArray)
-        self.SetInputArrayToProcess(1, 0, 0, gField, gArray)
-        self.SetInputArrayToProcess(2, 0, 0, bField, bArray)
+        self.SetInputArrayToProcess(0, 0, 0, rField, r_array)
+        self.SetInputArrayToProcess(1, 0, 0, gField, g_array)
+        self.SetInputArrayToProcess(2, 0, 0, bField, b_array)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 

@@ -249,10 +249,10 @@ class ExtractArray(FilterBase):
             self.Modified()
         return 1
 
-    def Apply(self, inputDataObject, arrayName):
-        self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
-        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+    def Apply(self, input_data_object, array_name):
+        self.SetInputDataObject(input_data_object)
+        arr, field = _helpers.searchForArray(input_data_object, array_name)
+        self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
@@ -318,10 +318,10 @@ class SplitTableOnArray(FilterBase):
         return 1
 
 
-    def Apply(self, inputDataObject, arrayName):
-        self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
-        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+    def Apply(self, input_data_object, array_name):
+        self.SetInputDataObject(input_data_object)
+        arr, field = _helpers.searchForArray(input_data_object, array_name)
+        self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 

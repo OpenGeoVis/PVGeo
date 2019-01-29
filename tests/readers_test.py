@@ -21,8 +21,8 @@ class TestDelimitedTextReader(TestBase):
         TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
-        self.commafname = os.path.join(self.test_dir, 'comma.txt')
-        self.tabfname = os.path.join(self.test_dir, 'tab.txt')
+        self.commafilename = os.path.join(self.test_dir, 'comma.txt')
+        self.tabfilename = os.path.join(self.test_dir, 'tab.txt')
         # Make a temporary delimited text file to test:
         lines = ['This is a header line to skip',
                  'int,str,float ! Comment,this line has the data array names',
@@ -33,10 +33,10 @@ class TestDelimitedTextReader(TestBase):
         # Append newlines
         lines = [ln+'\n' for ln in lines]
         # Now write contents to files
-        f = open(self.commafname, 'w')
+        f = open(self.commafilename, 'w')
         f.writelines(lines)
         f.close()
-        f = open(self.tabfname, 'w')
+        f = open(self.tabfilename, 'w')
         f.writelines([ln.replace(',', '\t') for ln in lines])
         f.close()
         return
@@ -96,7 +96,7 @@ class TestDelimitedTextReader(TestBase):
     def test_comma_read(self):
         """`DelimitedTextReader`: comma delimited file"""
         reader = DelimitedTextReader()
-        reader.AddFileName(self.commafname)
+        reader.AddFileName(self.commafilename)
         reader.SetDelimiter(',')
         reader.SetSkipRows(1)
         reader.SetComments('!')
@@ -111,7 +111,7 @@ class TestDelimitedTextReader(TestBase):
     def test_tab_read(self):
         """`DelimitedTextReader`: tab delimited file"""
         reader = DelimitedTextReader()
-        reader.AddFileName(self.tabfname)
+        reader.AddFileName(self.tabfilename)
         reader.SetSplitOnWhiteSpace(True)
         reader.SetSkipRows(1)
         reader.SetComments('!')
@@ -126,7 +126,7 @@ class TestDelimitedTextReader(TestBase):
     def test_no_titles(self):
         """`DelimitedTextReader`: file without headers"""
         reader = DelimitedTextReader()
-        reader.AddFileName(self.commafname)
+        reader.AddFileName(self.commafilename)
         reader.SetDelimiter(',')
         reader.SetSkipRows(2)
         reader.SetHasTitles(False)
@@ -153,19 +153,19 @@ class TestXYZTextReader(TestBase):
         TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
-        self.fname = os.path.join(self.test_dir, 'test.xyz')
+        self.filename = os.path.join(self.test_dir, 'test.xyz')
         # Make a temporary file to test:
         self.nrows = 100
         self.ncols = 8 # LEAVE ALONE
         self.header = 'X, dx, Y, dy, Z, dz, approximate distance, cell index'
         self.data = np.random.random((self.nrows, self.ncols))
-        np.savetxt(self.fname, self.data,
+        np.savetxt(self.filename, self.data,
                    header=self.header,
                    comments='! ',
                    fmt='%.6e'
                    )
         reader = XYZTextReader()
-        reader.AddFileName(self.fname)
+        reader.AddFileName(self.filename)
         reader.Update()
         self.TABLE = reader.GetOutput()
         return
@@ -231,11 +231,11 @@ class TestPackedBinariesReader(TestBase):
         # Make data and write out
         dtype = np.dtype('f')
         arr = np.array(np.random.random(self.n), dtype=dtype)
-        fname = os.path.join(self.test_dir, 'test.bin')
-        arr.tofile(fname)
+        filename = os.path.join(self.test_dir, 'test.bin')
+        arr.tofile(filename)
         # Set up reader
         reader = PackedBinariesReader()
-        reader.AddFileName(fname)
+        reader.AddFileName(filename)
         reader.SetDataType('f')
         reader.SetDataName('Test Data')
         # Perfrom Read
@@ -251,11 +251,11 @@ class TestPackedBinariesReader(TestBase):
         # Make data and write out
         dtype = np.dtype('d')
         arr = np.array(np.random.random(self.n), dtype=dtype)
-        fname = os.path.join(self.test_dir, 'test.bin')
-        arr.tofile(fname)
+        filename = os.path.join(self.test_dir, 'test.bin')
+        arr.tofile(filename)
         # Set up reader
         reader = PackedBinariesReader()
-        reader.AddFileName(fname)
+        reader.AddFileName(filename)
         reader.SetDataType('d')
         # Perfrom Read
         reader.Update()
@@ -269,11 +269,11 @@ class TestPackedBinariesReader(TestBase):
         # Make data and write out
         dtype = np.dtype('i')
         arr = np.array(np.random.random(self.n), dtype=dtype)
-        fname = os.path.join(self.test_dir, 'test.bin')
-        arr.tofile(fname)
+        filename = os.path.join(self.test_dir, 'test.bin')
+        arr.tofile(filename)
         # Set up reader
         reader = PackedBinariesReader()
-        reader.AddFileName(fname)
+        reader.AddFileName(filename)
         reader.SetDataType(2) # 'i' test that sending an int choice works
         # Perfrom Read
         reader.Update()
@@ -287,11 +287,11 @@ class TestPackedBinariesReader(TestBase):
         # Make data and write out
         dtype = np.dtype('>f')
         arr = np.asarray(np.random.random(self.n), dtype=dtype)
-        fname = os.path.join(self.test_dir, 'test.bin')
-        arr.tofile(fname)
+        filename = os.path.join(self.test_dir, 'test.bin')
+        arr.tofile(filename)
         # Set up reader
         reader = PackedBinariesReader()
-        reader.AddFileName(fname)
+        reader.AddFileName(filename)
         reader.SetDataType('f')
         reader.SetEndian('>')
         # Perfrom Read
@@ -306,11 +306,11 @@ class TestPackedBinariesReader(TestBase):
         # Make data and write out
         dtype = np.dtype('<f')
         arr = np.array(np.random.random(self.n), dtype=dtype)
-        fname = os.path.join(self.test_dir, 'test.bin')
-        arr.tofile(fname)
+        filename = os.path.join(self.test_dir, 'test.bin')
+        arr.tofile(filename)
         # Set up reader
         reader = PackedBinariesReader()
-        reader.AddFileName(fname)
+        reader.AddFileName(filename)
         reader.SetDataType('f')
         reader.SetEndian(1) # '<' test that sending an int choice works
         # Perfrom Read
@@ -343,18 +343,18 @@ class TestMadagascarReader(TestBase):
         # Make data and write out
         dtype = np.dtype('f')
         self.data = np.array(np.random.random(self.n), dtype=dtype)
-        fname = os.path.join(self.test_dir, 'test.rsf')
+        filename = os.path.join(self.test_dir, 'test.rsf')
         # Write ascii header
         lines = ['hello\n']*10
-        with open(fname, 'w') as f:
+        with open(filename, 'w') as f:
             f.writelines(lines)
         # Write data
-        with open(fname, 'ab') as f:
+        with open(filename, 'ab') as f:
             f.write(b'\014\014\004') # The control sequence
             self.data.tofile(f)
         # Set up reader
         reader = MadagascarReader()
-        reader.AddFileName(fname)
+        reader.AddFileName(filename)
         reader.SetDataType('f')
         reader.SetDataName('Test Data')
         self.assertEqual(reader.GetDataName(), 'Test Data')

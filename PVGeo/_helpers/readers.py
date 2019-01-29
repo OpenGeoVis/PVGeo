@@ -10,11 +10,11 @@ __all__ = [
 
 import os
 
-def cleanDataNm(dataNm, FileName):
-    """A helper to clean a FileName to make a useful data array name"""
-    if dataNm is None or dataNm == '':
-        dataNm = os.path.splitext(os.path.basename(FileName))[0]
-    return dataNm
+def cleanDataNm(data_name, filename):
+    """A helper to clean a filename to make a useful data array name"""
+    if data_name is None or data_name == '':
+        data_name = os.path.splitext(os.path.basename(filename))[0]
+    return data_name
 
 
 def createModifiedCallback(anobject):

@@ -24,9 +24,9 @@ class PVGeoOMFReader(OMFReader):
     #### Seters and Geters ####
 
     # TODO: check this to make sure not time varying
-    @smproperty.xml(_helpers.getFileReaderXml(OMFReader.extensions, readerDescription=OMFReader.description))
-    def AddFileName(self, fname):
-        OMFReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(OMFReader.extensions, reader_description=OMFReader.description))
+    def AddFileName(self, filename):
+        OMFReader.AddFileName(self, filename)
 
 
     # Array selection API is typical with readers in VTK

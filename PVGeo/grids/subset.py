@@ -88,25 +88,25 @@ class ExtractTopography(FilterBase):
     #### Extraction Methods ####
 
     @staticmethod
-    def _query(topoPts, dataPts):
+    def _query(topo_points, data_points):
         try:
             # sklearn's KDTree is faster: use it if available
             from sklearn.neighbors import KDTree as Tree
         except ImportError:
             from scipy.spatial import cKDTree  as Tree
-        tree = Tree(topoPts)
-        i = tree.query(dataPts)[1].ravel()
-        return topoPts[i]
+        tree = Tree(topo_points)
+        i = tree.query(data_points)[1].ravel()
+        return topo_points[i]
 
     @staticmethod
-    def _underneath(topoPts, dataPts, tolerance):
-        comp = ExtractTopography._query(topoPts, dataPts)
-        return np.array(dataPts[:,2] < (comp[:,2] - tolerance), dtype=int)
+    def _underneath(topo_points, data_points, tolerance):
+        comp = ExtractTopography._query(topo_points, data_points)
+        return np.array(data_points[:,2] < (comp[:,2] - tolerance), dtype=int)
 
     @staticmethod
-    def _intersection(topoPts, dataPts, tolerance):
-        comp = ExtractTopography._query(topoPts, dataPts)
-        return np.array(np.abs((dataPts[:,2] - comp[:,2])) < tolerance, dtype=int)
+    def _intersection(topo_points, data_points, tolerance):
+        comp = ExtractTopography._query(topo_points, data_points)
+        return np.array(np.abs((data_points[:,2] - comp[:,2])) < tolerance, dtype=int)
 
     @staticmethod
     def GetOperations():
@@ -157,16 +157,16 @@ class ExtractTopography(FilterBase):
         active = np.zeros((ncells), dtype=int)
         # Now iterate through the cells in the grid and test if they are beneath the topography
         wtopo = dsa.WrapDataObject(topo)
-        topoPts = np.array(wtopo.Points) # mak sure we do not edit the input
+        topo_points = np.array(wtopo.Points) # mak sure we do not edit the input
         #  shift the topography points for the tree
-        topoPts[:,2] = topoPts[:,2] + self._offset
+        topo_points[:,2] = topo_points[:,2] + self._offset
 
         filt = vtk.vtkCellCenters()
         filt.SetInputDataObject(igrid)
         filt.Update()
-        dataPts = dsa.WrapDataObject(filt.GetOutput(0)).Points
+        data_points = dsa.WrapDataObject(filt.GetOutput(0)).Points
 
-        active = self._operation(topoPts, dataPts, self._tolerance)
+        active = self._operation(topo_points, data_points, self._tolerance)
 
         if self._invert:
             # NOTE: assumes the given operation produces zeros and ones only
@@ -220,7 +220,7 @@ class ExtractTopography(FilterBase):
 
         Note:
             This can accept a callable method to set a custom operation as long
-            as its signature is ``<callable>(self, topoPts, dataPts)`` and it
+            as its signature is ``<callable>(self, topo_points, data_points)`` and it
             strictly produces an integer array of zeros and ones.
         """
         if isinstance(op, str):

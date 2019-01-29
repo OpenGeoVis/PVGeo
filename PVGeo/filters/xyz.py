@@ -49,19 +49,19 @@ class AddCellConnToPoints(FilterBase):
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
-        self.__cellType = vtk.VTK_POLY_LINE
+        self.__cell_type = vtk.VTK_POLY_LINE
         self.__usenbr = kwargs.get('nearest_nbr', False)
         self.__unique = True
 
 
-    def _ConnectCells(self, pdi, pdo, logTime=False):
+    def _ConnectCells(self, pdi, pdo, log_time=False):
         """Internal helper to perfrom the connection
         """
         # NOTE: Type map is specified in vtkCellType.h
-        cellType = self.__cellType
+        cell_type = self.__cell_type
         nrNbr = self.__usenbr
 
-        if logTime:
+        if log_time:
             startTime = datetime.now()
 
         # Get the Points over the NumPy interface
@@ -97,7 +97,7 @@ class AddCellConnToPoints(FilterBase):
                 from scipy.spatial import cKDTree  as Tree
             # VTK_Line
             og = np.array([0.0,0.0,0.0]).reshape(1, -1)
-            if cellType == vtk.VTK_LINE:
+            if cell_type == vtk.VTK_LINE:
                 tree = Tree(points)
                 ind = tree.query(og, k=numPoints)[1].ravel()
                 for i in range(len(ind)-1):
@@ -107,29 +107,29 @@ class AddCellConnToPoints(FilterBase):
                     cells.InsertNextCell(cell)
                     points = np.delete(points, 0, 0) # Deletes first row
             # VTK_PolyLine
-            elif cellType == vtk.VTK_POLY_LINE:
+            elif cell_type == vtk.VTK_POLY_LINE:
                 tree = Tree(points)
                 ptsi = tree.query(og, k=numPoints)[1].ravel()
                 cell = _makePolyCell(ptsi.ravel())
                 cells.InsertNextCell(cell)
             else:
-                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
+                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cell_type)
         else:
             # VTK_PolyLine
-            if cellType == vtk.VTK_POLY_LINE:
+            if cell_type == vtk.VTK_POLY_LINE:
                 ptsi = [i for i in range(numPoints)]
                 cell = _makePolyCell(ptsi)
                 cells.InsertNextCell(cell)
             # VTK_Line
-            elif cellType == vtk.VTK_LINE:
+            elif cell_type == vtk.VTK_LINE:
                 for i in range(0, numPoints-1):
                     ptsi = [i, i+1]
                     cell = _makeLineCell(ptsi)
                     cells.InsertNextCell(cell)
             else:
-                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
+                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cell_type)
 
-        if logTime:
+        if log_time:
             print((datetime.now() - startTime))
         # Now add points and cells to output
         pdo.SetPoints(pdi.GetPoints())
@@ -137,7 +137,7 @@ class AddCellConnToPoints(FilterBase):
         # copy point data
         _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
         # Copy cell data if type is LINE
-        if cellType == vtk.VTK_LINE:
+        if cell_type == vtk.VTK_LINE:
             # Be sure to rearange for Nearest neighbor approxiamtion
             for i in range(pdi.GetCellData().GetNumberOfArrays()):
                 vtkarr = pdi.GetCellData().GetArray(i)
@@ -163,11 +163,11 @@ class AddCellConnToPoints(FilterBase):
     #### Seters and Geters ####
 
 
-    def SetCellType(self, cellType):
+    def SetCellType(self, cell_type):
         """Set the cell typ by the integer id as specified in `vtkCellType.h`
         """
-        if cellType != self.__cellType:
-            self.__cellType = cellType
+        if cell_type != self.__cell_type:
+            self.__cell_type = cell_type
             self.Modified()
 
     def SetUseNearestNbr(self, flag):
@@ -204,10 +204,10 @@ class PointsToTube(AddCellConnToPoints):
         self.__capping = capping
 
 
-    def _ConnectCells(self, pdi, pdo, logTime=False):
+    def _ConnectCells(self, pdi, pdo, log_time=False):
         """This uses the parent's ``_ConnectCells()`` to build a tub around
         """
-        AddCellConnToPoints._ConnectCells(self, pdi, pdo, logTime=logTime)
+        AddCellConnToPoints._ConnectCells(self, pdi, pdo, log_time=log_time)
         tube = vtk.vtkTubeFilter()
         tube.SetInputData(pdo)
         # User Defined Parameters
@@ -522,7 +522,7 @@ class RotationTool(object):
         raise _helpers.PVGeoError('No angle found. Precision too low/high.')
 
 
-    def _EstimateAngleAndSpacing(self, pts, sample=.5):
+    def _EstimateAngleAndSpacing(self, pts, sample=0.5):
         """internal use only
         """
         try:
@@ -692,9 +692,9 @@ class ExtractCellCenters(FilterBase):
         FilterBase.__init__(self, nInputPorts=1, inputType='vtkDataSet',
                     nOutputPorts=1, outputType='vtkPolyData', **kwargs)
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
-        pdi = self.GetInputData(inInfoVec, 0, 0)
-        pdo = self.GetOutputData(outInfoVec, 0)
+    def RequestData(self, request, inInfo, outInfo):
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
         # Find cell centers
         filt = vtk.vtkCellCenters()
         filt.SetInputDataObject(pdi)
@@ -719,9 +719,9 @@ class AppendCellCenters(FilterPreserveTypeBase):
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self, **kwargs)
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
-        pdi = self.GetInputData(inInfoVec, 0, 0)
-        pdo = self.GetOutputData(outInfoVec, 0)
+    def RequestData(self, request, inInfo, outInfo):
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
         # Find cell centers
         filt = vtk.vtkCellCenters()
         filt.SetInputDataObject(pdi)
@@ -852,7 +852,7 @@ class ConvertUnits(FilterPreserveTypeBase):
         self.__conversion = conversion
 
     @staticmethod
-    def LookupConversions(getkeys=False):
+    def LookupConversions(get_keys=False):
         """All Available conversions
 
         Return:
@@ -862,7 +862,7 @@ class ConvertUnits(FilterPreserveTypeBase):
             meter_to_feet=3.2808399,
             feet_to_meter=1/3.2808399,
         )
-        if getkeys:
+        if get_keys:
             return convs.keys()
         return convs
 

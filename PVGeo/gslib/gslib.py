@@ -81,9 +81,9 @@ class WriteTableToGSLib(WriterBase):
         self._header = 'Data saved by PVGeo'
 
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
+    def PerformWriteOut(self, input_data_object, filename, object_name):
         # Get the input data object
-        table = inputDataObject
+        table = input_data_object
 
         numArrs = table.GetRowData().GetNumberOfArrays()
         arrs = []

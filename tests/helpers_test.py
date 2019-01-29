@@ -27,9 +27,9 @@ class TestXML(TestBase):
         self.assertEqual(m['vtkUnstructuredGrid'], 4)
         x = xml.getPropertyXml('foo', 'SetFoo', 4, panel_visibility='default', help='foo help')
         x = xml.getPropertyXml('foo', 'SetFoo', True, panel_visibility='default', help='foo help')
-        x = xml.getFileReaderXml('txt dat', readerDescription='desc!!', command="AddFileName")
+        x = xml.getFileReaderXml('txt dat', reader_description='desc!!', command="AddFileName")
         x = xml.getDropDownXml('foo', 'SetFoo', ['foo1', 'foo2'], help='Help the foo', values=[1, 2])
-        x = xml.getInputArrayXml(labels=['foo'], nInputPorts=1, numArrays=1, inputNames='Input')
+        x = xml.getInputArrayXml(labels=['foo'], nInputPorts=1, n_arrays=1, input_names='Input')
 
         return
 

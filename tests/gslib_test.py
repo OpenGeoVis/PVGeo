@@ -29,16 +29,16 @@ class TestGSLibReader(TestBase):
         self.titles = ['Array 1', 'Array 2', 'Array 3']
         self.header = 'A header line'
         ##### Now generate output for testing ####
-        fname = os.path.join(self.test_dir, 'test.dat')
+        filename = os.path.join(self.test_dir, 'test.dat')
         self.data = np.random.random((self.n, len(self.titles)))
         header = [self.header, '%d' % len(self.titles)]
         for ln in self.titles:
             header.append(ln + '\n')
         header = '\n'.join(header)
-        np.savetxt(fname, self.data, delimiter=' ', header=header, comments='')
+        np.savetxt(filename, self.data, delimiter=' ', header=header, comments='')
         # Set up the reader
         reader = GSLibReader()
-        reader.AddFileName(fname)
+        reader.AddFileName(filename)
         # Perform the read
         reader.Update()
         self.HEADER = reader.GetFileHeader()
@@ -71,15 +71,15 @@ class TestGSLibReader(TestBase):
 
     def test_bad_file(self):
         """`GSLibReader`: check handling of bad input file"""
-        fname = os.path.join(self.test_dir, 'test_bad.dat')
+        filename = os.path.join(self.test_dir, 'test_bad.dat')
         header = ['A header line', 'Bad number of titles']
         for ln in self.titles:
             header.append(ln + '\n')
         header = '\n'.join(header)
-        np.savetxt(fname, self.data, delimiter=' ', header=header, comments='')
+        np.savetxt(filename, self.data, delimiter=' ', header=header, comments='')
         # Set up the reader
         reader = GSLibReader()
-        reader.AddFileName(fname)
+        reader.AddFileName(filename)
         # Perform the read
         reader.Update()
         self.assertTrue(reader.ErrorOccurred())
@@ -87,12 +87,12 @@ class TestGSLibReader(TestBase):
     def test_writer(self):
         """`WriteTableToGSLib`: check data integrity across I/O"""
         writer = WriteTableToGSLib()
-        fname = os.path.join(self.test_dir, 'test-writer.dat')
-        writer.SetFileName(fname)
+        filename = os.path.join(self.test_dir, 'test-writer.dat')
+        writer.SetFileName(filename)
         writer.Write(self.TABLE)
         # Now read that data and compare
         reader = GSLibReader()
-        read = reader.Apply(fname)
+        read = reader.Apply(filename)
         # Compare data
         truedata = self.TABLE.GetRowData()
         testdata = read.GetRowData()
@@ -125,15 +125,15 @@ class TestSGeMSGridReader(TestBase):
         self.extent = (0, self.shape[0], 0, self.shape[1], 0, self.shape[2])
         self.titles = ['Array 1', 'Array 2', 'Array 3']
         ##### Now generate output for testing ####
-        fname = os.path.join(self.test_dir, 'test.dat')
+        filename = os.path.join(self.test_dir, 'test.dat')
         self.data = np.random.random((self.n, len(self.titles)))
         header = ['%d %d %d' % self.shape, '%d' % len(self.titles)]
         for ln in self.titles:
             header.append(ln + '\n')
         header = '\n'.join(header)
-        np.savetxt(fname, self.data, delimiter=' ', header=header, comments='')
+        np.savetxt(filename, self.data, delimiter=' ', header=header, comments='')
         # Set up the reader
-        self.GRID = SGeMSGridReader().Apply(fname)
+        self.GRID = SGeMSGridReader().Apply(filename)
 
     def tearDown(self):
         # Remove the test data directory after the test
@@ -163,15 +163,15 @@ class TestSGeMSGridReader(TestBase):
 
     def test_bad_file(self):
         """`SGeMSGridReader`: check handling of bad input file"""
-        fname = os.path.join(self.test_dir, 'test_bad.dat')
+        filename = os.path.join(self.test_dir, 'test_bad.dat')
         header = ['Bad header', '%d' % len(self.titles)]
         for ln in self.titles:
             header.append(ln + '\n')
         header = '\n'.join(header)
-        np.savetxt(fname, self.data, delimiter=' ', header=header, comments='')
+        np.savetxt(filename, self.data, delimiter=' ', header=header, comments='')
         # Set up the reader
         reader = SGeMSGridReader()
-        reader.AddFileName(fname)
+        reader.AddFileName(filename)
         # Perform the read
         reader.Update()
         self.assertTrue(reader.ErrorOccurred())
@@ -180,12 +180,12 @@ class TestSGeMSGridReader(TestBase):
     def test_writer(self):
         """`WriteImageDataToSGeMS`: check data integrity across I/O"""
         writer = WriteImageDataToSGeMS()
-        fname = os.path.join(self.test_dir, 'test-writer.dat')
-        writer.SetFileName(fname)
+        filename = os.path.join(self.test_dir, 'test-writer.dat')
+        writer.SetFileName(filename)
         writer.Write(self.GRID)
         # Now read that data and compare
         reader = SGeMSGridReader()
-        read = reader.Apply(fname)
+        read = reader.Apply(filename)
         # Compare data
         truedata = self.GRID.GetCellData()
         testdata = read.GetCellData()

@@ -63,11 +63,11 @@ class DelimitedTextReader(ReaderBase):
         allows us to load the file contents, parse the header then use numpy or
         pandas to parse the data."""
         if idx is not None:
-            fileNames = [self.GetFileNames(idx=idx)]
+            filenames = [self.GetFileNames(idx=idx)]
         else:
-            fileNames = self.GetFileNames()
+            filenames = self.GetFileNames()
         contents = []
-        for f in fileNames:
+        for f in filenames:
             try:
                 contents.append(np.genfromtxt(f, dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::])
             except (IOError, OSError) as fe:

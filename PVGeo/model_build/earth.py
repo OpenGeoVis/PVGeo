@@ -94,10 +94,10 @@ class GlobeSource(AlgorithmBase):
         points = interface.pointsToPolyData(pts).GetPoints()
         texcoords = interface.convertArray(tex, name='Texture Coordinates')
         # Now generate triangles
-        cellConn = Delaunay(pos).simplices.astype(int)
+        cell_connectivity = Delaunay(pos).simplices.astype(int)
         cells = vtk.vtkCellArray()
-        cells.SetNumberOfCells(cellConn.shape[0])
-        cells.SetCells(cellConn.shape[0], interface.convertCellConn(cellConn))
+        cells.SetNumberOfCells(cell_connectivity.shape[0])
+        cells.SetCells(cell_connectivity.shape[0], interface.convertCellConn(cell_connectivity))
         # Generate output
         output = vtk.vtkPolyData()
         output.SetPoints(points)

@@ -707,9 +707,9 @@ if proj:
 
         def test_conversion(self):
             """`LonLatToUTM`: CONVERSION"""
-            self.fname = os.path.join(os.path.dirname(__file__), 'data/das-coords.csv')
+            self.filename = os.path.join(os.path.dirname(__file__), 'data/das-coords.csv')
             # read in data that has Lat/Lon and pre converted points in zone 11
-            data = pd.read_csv(self.fname)
+            data = pd.read_csv(self.filename)
             points = interface.pointsToPolyData(data[['longitude', 'latitude', 'altitude']])
             converted = LonLatToUTM(zone=11).Apply(points)
             converted.GetPoints()

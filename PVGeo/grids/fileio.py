@@ -59,7 +59,7 @@ class GridInfo(properties.HasProperties):
         self.data = data
         return
 
-    def toVTK(self, output=None, z=0.0, dz=1.0, dataName='Data'):
+    def toVTK(self, output=None, z=0.0, dz=1.0, data_name='Data'):
         self.mask()
         self.validate()
         if output is None:
@@ -68,7 +68,7 @@ class GridInfo(properties.HasProperties):
         output.SetOrigin(self.xll, self.yll, z)
         output.SetSpacing(self.dx, self.dy, dz)
         output.SetDimensions(self.nx, self.ny, 1)
-        vtkarr = interface.convertArray(self.data, name=dataName)
+        vtkarr = interface.convertArray(self.data, name=data_name)
         output.GetPointData().AddArray(vtkarr)
         return output
 
@@ -262,11 +262,11 @@ class SurferGridReader(ReaderBase):
         """This parses the first file to determine grid file type then reads
         all files set."""
         if idx is not None:
-            fileNames = [self.GetFileNames(idx=idx)]
+            filenames = [self.GetFileNames(idx=idx)]
         else:
-            fileNames = self.GetFileNames()
+            filenames = self.GetFileNames()
         contents = []
-        f = open(fileNames[0], 'rb')
+        f = open(filenames[0], 'rb')
         key = struct.unpack('4s', f.read(4))[0]
         f.close()
         if key == b'DSRB':
@@ -279,7 +279,7 @@ class SurferGridReader(ReaderBase):
             raise _helpers.PVGeoError('''Invalid file identifier for Surfer .grd file.
             First 4 characters must be DSRB, DSBB, or DSAA. This file contains: %s''' % key)
 
-        for f in fileNames:
+        for f in filenames:
             try:
                 contents.append(reader(f))
             except (IOError, OSError) as fe:
@@ -310,7 +310,7 @@ class SurferGridReader(ReaderBase):
         i = _helpers.getRequestedTime(self, outInfo)
         # Build the output
         grid = self.__grids[i]
-        grid.toVTK(output=output, dataName=self.__data_name)
+        grid.toVTK(output=output, data_name=self.__data_name)
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
@@ -328,10 +328,10 @@ class SurferGridReader(ReaderBase):
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
-    def SetDataName(self, dataName):
-        if self.__data_name != dataName:
-            self.__data_name = dataName
-            self.Modified(readAgain=False)
+    def SetDataName(self, data_name):
+        if self.__data_name != data_name:
+            self.__data_name = data_name
+            self.Modified(read_again=False)
 
     def GetDataName(self):
         return self.__data_name
@@ -349,8 +349,8 @@ class WriteImageDataToSurfer(WriterBase):
         self.__input_array = [None, None]
 
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
-        img = inputDataObject
+    def PerformWriteOut(self, input_data_object, filename, object_name):
+        img = input_data_object
 
         # Check dims: make sure 2D
         # TODO: handle any orientation
@@ -401,20 +401,20 @@ class WriteImageDataToSurfer(WriterBase):
             self.Modified()
         return 1
 
-    def Apply(self, inputDataObject, arrayName):
-        self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
-        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+    def Apply(self, input_data_object, array_name):
+        self.SetInputDataObject(input_data_object)
+        arr, field = _helpers.searchForArray(input_data_object, array_name)
+        self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
-    def Write(self, inputDataObject=None, arrayName=None):
+    def Write(self, input_data_object=None, array_name=None):
         """Perfrom the write out."""
-        if inputDataObject:
-            self.SetInputDataObject(inputDataObject)
-            if arrayName:
-                arr, field = _helpers.searchForArray(inputDataObject, arrayName)
-                self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        if input_data_object:
+            self.SetInputDataObject(input_data_object)
+            if array_name:
+                arr, field = _helpers.searchForArray(input_data_object, array_name)
+                self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Modified()
         self.Update()
 
@@ -517,10 +517,10 @@ class EsriGridReader(DelimitedTextReader):
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
-    def SetDataName(self, dataName):
-        if self.__data_name != dataName:
-            self.__data_name = dataName
-            self.Modified(readAgain=False)
+    def SetDataName(self, data_name):
+        if self.__data_name != data_name:
+            self.__data_name = data_name
+            self.Modified(read_again=False)
 
     def GetDataName(self):
         return self.__data_name
@@ -550,10 +550,10 @@ class LandsatReader(ReaderBaseBase):
         self._dataselection.AddObserver("ModifiedEvent", _helpers.createModifiedCallback(self))
 
 
-    def Modified(self, readAgain=False):
+    def Modified(self, read_again=False):
         """Ensure default is overridden to be false so array selector can call.
         """
-        ReaderBaseBase.Modified(self, readAgain=readAgain)
+        ReaderBaseBase.Modified(self, read_again=read_again)
 
 
     def GetFileName(self):
@@ -693,14 +693,14 @@ class WriteCellCenterData(WriterBase):
         self.__delimiter = ','
 
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
+    def PerformWriteOut(self, input_data_object, filename, object_name):
         # Find cell centers
         filt = vtk.vtkCellCenters()
-        filt.SetInputDataObject(inputDataObject)
+        filt.SetInputDataObject(input_data_object)
         filt.Update()
         centers = dsa.WrapDataObject(filt.GetOutput(0)).Points
         # Get CellData
-        wpdi = dsa.WrapDataObject(inputDataObject)
+        wpdi = dsa.WrapDataObject(input_data_object)
         celldata = wpdi.CellData
         keys = celldata.keys()
         # Save out using numpy
@@ -713,7 +713,7 @@ class WriteCellCenterData(WriterBase):
         repl = '_' if self.__delimiter != '_' else '-'
         for i, name in enumerate(keys):
             keys[i] = name.replace(self.__delimiter, repl)
-        header = '! %s\n%s' % (objectName, ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys))
+        header = '! %s\n%s' % (object_name, ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys))
         np.savetxt(filename, arr,
                    header=header,
                    delimiter=self.__delimiter,

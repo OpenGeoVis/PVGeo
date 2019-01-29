@@ -28,7 +28,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             nOutputPorts=nOutputPorts, outputType=outputType,
             **kwargs)
         self.__data_name = 'Data'
-        self.__use_file_name = True # flag on whether or not to use the model file
+        self.__use_filename = True # flag on whether or not to use the model file
                                  # extension as data name
         # For keeping track of type (2D vs 3D)
         self.__sizeM = None
@@ -90,7 +90,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         try:
             if v[0] >= 1 and v[1] >= 10:
                 # max_rows in numpy versions >= 1.10
-                msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str,comments='!', max_rows=1)
+                msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str, comments='!', max_rows=1)
             else:
                 # This reads whole file :(
                 msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str, comments='!')[0]
@@ -147,21 +147,21 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         return data
 
     def SetUseFileName(self, flag):
-        if self.__use_file_name != flag:
-            self.__use_file_name = flag
+        if self.__use_filename != flag:
+            self.__use_filename = flag
             self.Modified(read_again_mesh=False, read_again_models=False)
 
     def SetDataName(self, name):
         if name == '':
-            self.__use_file_name = True
+            self.__use_filename = True
             self.Modified(read_again_mesh=False, read_again_models=False)
         elif self.__data_name != name:
             self.__data_name = name
-            self.__use_file_name = False
+            self.__use_filename = False
             self.Modified(read_again_mesh=False, read_again_models=False)
 
     def GetDataName(self):
-        if self.__use_file_name:
+        if self.__use_filename:
             mname = self.GetModelFileNames(idx=0)
             return os.path.basename(mname)
         return self.__data_name
@@ -182,9 +182,9 @@ class ModelAppenderBase(base.AlgorithmBase):
         base.AlgorithmBase.__init__(self,
             nInputPorts=1, inputType=inputType,
             nOutputPorts=1, outputType=outputType)
-        self._model_file_names = kwargs.get('modelfiles', [])
+        self._model_filenames = kwargs.get('model_files', [])
         self.__data_name = kwargs.get('dataname', 'Appended Data')
-        self.__use_file_name = True
+        self.__use_filename = True
         self._models = []
         self.__need_to_read = True
         self._is_3D = None
@@ -210,10 +210,10 @@ class ModelAppenderBase(base.AlgorithmBase):
             self._UpdateTimeSteps()
         return self.__need_to_read
 
-    def Modified(self, readAgain=True):
+    def Modified(self, read_again=True):
         """Call modified if the files needs to be read again again.
         """
-        if readAgain: self.__need_to_read = readAgain
+        if read_again: self.__need_to_read = read_again
         base.AlgorithmBase.Modified(self)
 
     def _UpdateTimeSteps(self):
@@ -222,7 +222,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         # Use the inputs' timesteps: this merges the timesteps values
         ts0 = _helpers.getInputTimeSteps(self, port=0)
         if ts0 is None: ts0 = np.array([])
-        ts1 = _helpers._calculateTimeRange(len(self._model_file_names), self.__dt)
+        ts1 = _helpers._calculateTimeRange(len(self._model_filenames), self.__dt)
         tsAll = np.unique(np.concatenate((ts0, ts1), 0))
         # Use both inputs' time steps
         self.__timesteps = _helpers.updateTimeSteps(self, tsAll, explicit=True)
@@ -271,7 +271,7 @@ class ModelAppenderBase(base.AlgorithmBase):
     #### Setters and Getters ####
 
     def HasModels(self):
-        return len(self._model_file_names) > 0
+        return len(self._model_filenames) > 0
 
     def GetTimestepValues(self):
         """Use this in ParaView decorator to register timesteps.
@@ -283,22 +283,22 @@ class ModelAppenderBase(base.AlgorithmBase):
     def ClearModels(self):
         """Use to clear data file names.
         """
-        self._model_file_names = []
+        self._model_filenames = []
         self._models = []
-        self.Modified(readAgain=True)
+        self.Modified(read_again=True)
 
-    def AddModelFileName(self, fname):
+    def AddModelFileName(self, filename):
         """Use to set the file names for the reader. Handles single string or
         list of strings.
         """
-        if fname is None:
+        if filename is None:
             return # do nothing if None is passed by a constructor on accident
-        if isinstance(fname, list):
-            for f in fname:
+        elif isinstance(filename, (list, tuple)):
+            for f in filename:
                 self.AddModelFileName(f)
             self.Modified()
-        elif fname not in self._model_file_names:
-            self._model_file_names.append(fname)
+        elif filename not in self._model_filenames:
+            self._model_filenames.append(filename)
             self.Modified()
         return 1
 
@@ -307,25 +307,25 @@ class ModelAppenderBase(base.AlgorithmBase):
         timestep's filename.
         """
         if idx is None or not self.HasModels():
-            return self._model_file_names
-        return self._model_file_names[idx]
+            return self._model_filenames
+        return self._model_filenames[idx]
 
     def SetUseFileName(self, flag):
-        if self.__use_file_name != flag:
-            self.__use_file_name = flag
-            self.Modified(readAgain=False)
+        if self.__use_filename != flag:
+            self.__use_filename = flag
+            self.Modified(read_again=False)
 
     def SetDataName(self, name):
         if name == '':
-            self.__use_file_name = True
-            self.Modified(readAgain=False)
+            self.__use_filename = True
+            self.Modified(read_again=False)
         elif self.__data_name != name:
             self.__data_name = name
-            self.__use_file_name = False
-            self.Modified(readAgain=False)
+            self.__use_filename = False
+            self.Modified(read_again=False)
 
     def GetDataName(self):
-        if self.__use_file_name:
+        if self.__use_filename:
             mname = self.GetModelFileNames(idx=0)
             return os.path.basename(mname)
         return self.__data_name

@@ -101,6 +101,13 @@ class ErrorObserver:
 
 
 class HiddenPrints:
+    """Use this object to hide print statements when perfroming a task.
+    This is used to suppress printed warnings from discretize on import:
+
+    Example:
+    >>> with HiddenPrints():
+    ...     import discretize
+    """
     def __enter__(self):
         self._original_stdout = sys.stdout
         sys.stdout = open(os.devnull, 'w')

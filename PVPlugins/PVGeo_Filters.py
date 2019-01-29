@@ -31,8 +31,8 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
 
     @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
         labels=['Line', 'Poly Line'], values=[3, 4]))
-    def SetCellType(self, cellType):
-        AddCellConnToPoints.SetCellType(self, cellType)
+    def SetCellType(self, cell_type):
+        AddCellConnToPoints.SetCellType(self, cell_type)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Use Neareast Nbr Approx',
         command='SetUseNearestNbr', default_values=False,
@@ -75,7 +75,7 @@ class PVGeoSplitTableOnArray(SplitTableOnArray):
     def __init__(self):
         SplitTableOnArray.__init__(self)
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return SplitTableOnArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -122,8 +122,8 @@ class PVGeoPointsToTube(PointsToTube):
 
     @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
         labels=['Line', 'Poly Line'], values=[3, 4]))
-    def SetCellType(self, cellType):
-        PointsToTube.SetCellType(self, cellType)
+    def SetCellType(self, cell_type):
+        PointsToTube.SetCellType(self, cell_type)
 
     @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
         command='SetUseUniquePoints', default_values=False,
@@ -227,21 +227,21 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
                 _helpers.addArray(pdo, 1, arr) # adds to CELL data
         return pdo
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
+    def RequestData(self, request, inInfo, outInfo):
         # Handle input arrays
-        pdi = self.GetInputData(inInfoVec, 0, 0)
+        pdi = self.GetInputData(inInfo, 0, 0)
         wpdi = dsa.WrapDataObject(pdi)
         dx = _helpers.getNumPyArray(wpdi, self.__dx_id[0], self.__dx_id[1])
         dy = _helpers.getNumPyArray(wpdi, self.__dy_id[0], self.__dy_id[1])
         dz = _helpers.getNumPyArray(wpdi, self.__dz_id[0], self.__dz_id[1])
         VoxelizePoints.SetDeltas(self, dx, dy, dz)
         # call parent and make sure EstimateGrid is set to False
-        return VoxelizePoints.RequestData(self, request, inInfoVec, outInfoVec)
+        return VoxelizePoints.RequestData(self, request, inInfo, outInfo)
 
     #### Seters and Geters ####
 
     #(int idx, int port, int connection, int fieldAssociation, const char *name)
-    @smproperty.xml(_helpers.getInputArrayXml(labels=['dx','dy','dz'], nInputPorts=1, numArrays=3))
+    @smproperty.xml(_helpers.getInputArrayXml(labels=['dx','dy','dz'], nInputPorts=1, n_arrays=3))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         if idx == 0:
             self.__dx_id = [field, name]
@@ -267,7 +267,7 @@ class PVGeoNormalizeArray(NormalizeArray):
 
     #### SETTERS AND GETTERS ####
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return NormalizeArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -305,7 +305,7 @@ class PVGeoArrayMath(ArrayMath):
 
     #### SETTERS AND GETTERS ####
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=2))
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=2))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return ArrayMath.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -503,7 +503,7 @@ class PVGeoPercentThreshold(PercentThreshold):
     def SetInvert(self, flag):
         PercentThreshold.SetInvert(self, flag)
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return PercentThreshold.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -520,7 +520,7 @@ class PVGeoExtractArray(ExtractArray):
     def __init__(self):
         ExtractArray.__init__(self)
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=1))
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return ExtractArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -642,7 +642,7 @@ class PVGeoArraysToRGBA(ArraysToRGBA):
         ArraysToRGBA.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, numArrays=4, labels=['Red', 'Green', 'Blue', 'Transparency']))
+    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=4, labels=['Red', 'Green', 'Blue', 'Transparency']))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return ArraysToRGBA.SetInputArrayToProcess(self, idx, port, connection, field, name)
 

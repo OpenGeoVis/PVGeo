@@ -27,9 +27,9 @@ class CreateUniformGrid(AlgorithmBase):
     __displayname__ = 'Create Uniform Grid'
     __category__ = 'source'
     def __init__(self,
-                 extent=[10, 10, 10],
-                 spacing=[1.0, 1.0, 1.0],
-                 origin=[0.0, 0.0, 0.0]):
+                 extent=(10, 10, 10),
+                 spacing=(1.0, 1.0, 1.0),
+                 origin=(0.0, 0.0, 0.0)):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkImageData')
@@ -272,7 +272,7 @@ class CreateTensorMesh(AlgorithmBase):
             data = np.random.rand(nx*ny*nz)
             data = interface.convertArray(data, name='Random Data', deep=True)
         else:
-            data = interface.convertArray(data, name=dataNm, deep=True)
+            data = interface.convertArray(data, name=data_name, deep=True)
         pdo.GetCellData().AddArray(data)
         return pdo
 

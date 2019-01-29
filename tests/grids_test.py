@@ -270,7 +270,7 @@ class TestSurferGridReader(TestBase):
     def setUp(self):
         TestBase.setUp(self)
         self.test_dir = tempfile.mkdtemp()
-        self.fname = os.path.join(os.path.dirname(__file__), 'data/surfer-grid.grd')
+        self.filename = os.path.join(os.path.dirname(__file__), 'data/surfer-grid.grd')
 
 
     def tearDown(self):
@@ -282,7 +282,7 @@ class TestSurferGridReader(TestBase):
     def test(self):
         """`SurferGridReader` and `WriteImageDataToSurfer`: Test reader and writer for Surfer format"""
         reader = SurferGridReader()
-        reader.AddFileName(self.fname)
+        reader.AddFileName(self.filename)
         reader.SetDataName('foo')
         reader.Update()
         img = reader.GetOutput()
@@ -295,13 +295,13 @@ class TestSurferGridReader(TestBase):
 
         # Now test writer
         writer = WriteImageDataToSurfer()
-        fname = os.path.join(self.test_dir, 'test-writer.grd')
-        writer.SetFileName(fname)
+        filename = os.path.join(self.test_dir, 'test-writer.grd')
+        writer.SetFileName(filename)
         writer.Write(img, 'foo')
 
         # Read again and compare
         reader = SurferGridReader()
-        reader.AddFileName(fname)
+        reader.AddFileName(filename)
         reader.SetDataName('foo2')
         reader.Update()
         read = reader.GetOutput()
@@ -403,7 +403,7 @@ class TestCellCenterWriter(TestBase):
     def setUp(self):
         TestBase.setUp(self)
         self.test_dir = tempfile.mkdtemp()
-        self.fname = os.path.join(self.test_dir, 'test.txt')
+        self.filename = os.path.join(self.test_dir, 'test.txt')
 
 
     def tearDown(self):
@@ -426,8 +426,8 @@ class TestCellCenterWriter(TestBase):
 
         # test the wirter
         writer = WriteCellCenterData()
-        fname = os.path.join(self.fname)
-        writer.SetFileName(fname)
+        filename = os.path.join(self.filename)
+        writer.SetFileName(filename)
         writer.Write(comp)
 
 
@@ -441,7 +441,7 @@ class TestEsriGridReader(TestBase):
         TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
-        self.fname = os.path.join(self.test_dir, 'test.dat')
+        self.filename = os.path.join(self.test_dir, 'test.dat')
         sample = """ncols         4
 nrows         6
 xllcorner     100.0
@@ -455,7 +455,7 @@ NODATA_value  -9999
 88 75 27 9
 13 5 1 -9999
 """
-        with open(self.fname, 'w') as f:
+        with open(self.filename, 'w') as f:
             f.write(sample)
 
 
@@ -469,7 +469,7 @@ NODATA_value  -9999
     def test_read(self):
         """`EsriGridReader`: Test the read"""
         reader = EsriGridReader()
-        reader.AddFileName(self.fname)
+        reader.AddFileName(self.filename)
         reader.Update()
         img = reader.GetOutput()
         # Test data object

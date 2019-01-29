@@ -57,36 +57,36 @@ class WriterBase(VTKPythonAlgorithmBase):
         return 1
 
 
-    def SetFileName(self, fname):
+    def SetFileName(self, filename):
         """Specify the filename for the output.
         This will be appended if saving composite datasets.
         """
-        if not isinstance(fname, str):
+        if not isinstance(filename, str):
             raise RuntimeError('File name must be string. Only single file is supported.')
-        if self.__filename != fname:
-            self.__filename = fname
+        if self.__filename != filename:
+            self.__filename = filename
             self.Modified()
 
     def GetFileName(self):
         """Get the set filename."""
         return self.__filename
 
-    def Write(self, inputDataObject=None):
+    def Write(self, input_data_object=None):
         """A Python focused conveinance method to perform the write out."""
-        if inputDataObject:
-            self.SetInputDataObject(inputDataObject)
+        if input_data_object:
+            self.SetInputDataObject(input_data_object)
         self.Modified()
         self.Update()
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
+    def PerformWriteOut(self, input_data_object, filename, object_name):
         """This method must be implemented. This is automatically called by
         ``RequestData`` for single inputs or composite inputs."""
         raise NotImplementedError('PerformWriteOut must be implemented!')
 
-    def Apply(self, inputDataObject):
+    def Apply(self, input_data_object):
         """A convienace method if using these algorithms in a Python environment.
         """
-        self.SetInputDataObject(inputDataObject)
+        self.SetInputDataObject(input_data_object)
         self.Modified()
         self.Update()
 
@@ -131,12 +131,12 @@ class WriterBase(VTKPythonAlgorithmBase):
         return self.__blockfilenames[idx]
 
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
+    def RequestData(self, request, inInfo, outInfo):
         """Subclasses must implement a ``PerformWriteOut`` method that takes an
         input data object and a filename. This method will automatically handle
         composite data sets.
         """
-        inp = self.GetInputData(inInfoVec, 0, 0)
+        inp = self.GetInputData(inInfo, 0, 0)
         if isinstance(inp, vtk.vtkMultiBlockDataSet):
             self.__composite = True
         # Handle composite datasets. NOTE: This only handles vtkMultiBlockDataSet
@@ -175,14 +175,14 @@ class WriteCellCenterData(WriterBase):
         self.__delimiter = ','
 
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
+    def PerformWriteOut(self, input_data_object, filename, object_name):
         # Find cell centers
         filt = vtk.vtkCellCenters()
-        filt.SetInputDataObject(inputDataObject)
+        filt.SetInputDataObject(input_data_object)
         filt.Update()
         centers = dsa.WrapDataObject(filt.GetOutput(0)).Points
         # Get CellData
-        wpdi = dsa.WrapDataObject(inputDataObject)
+        wpdi = dsa.WrapDataObject(input_data_object)
         celldata = wpdi.CellData
         keys = celldata.keys()
         # Save out using numpy
@@ -229,24 +229,24 @@ class WriteCustomImageData(WriterBase):
         self.__delimiter = ','
 
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
+    def PerformWriteOut(self, input_data_object, filename, object_name):
         """Perfrom the file write to the given FileName with the given data
         object. The super class handles all the complicated stuff.
         """
-        fname = filename.split('.')
-        fname = '.'.join(fname[0:-1]) + '_%s.%s' % (objectName, fname[-1])
+        filename = filename.split('.')
+        filename = '.'.join(filename[0:-1]) + '_%s.%s' % (object_name, filename[-1])
         writer = vtk.vtkXMLImageDataWriter()
-        writer.SetFileName(fname)
-        writer.SetInputDataObject(inputDataObject)
+        writer.SetFileName(filename)
+        writer.SetInputDataObject(input_data_object)
         writer.Write()
         # Success for pipeline
         return 1
 
     @smproperty.stringvector(name="FileName", panel_visibility="never")
     @smdomain.filelist()
-    def SetFileName(self, fname):
+    def SetFileName(self, filename):
         """Specify filename for the file to write."""
-        WriterBase.SetFileName(self, fname)
+        WriterBase.SetFileName(self, filename)
 
 
 
@@ -267,9 +267,9 @@ class PVWriteCellCenterData(WriteCellCenterData):
 
     @smproperty.stringvector(name="FileName", panel_visibility="never")
     @smdomain.filelist()
-    def SetFileName(self, fname):
+    def SetFileName(self, filename):
         """Specify filename for the file to write."""
-        WriteCellCenterData.SetFileName(self, fname)
+        WriteCellCenterData.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Format", default_values='%.9e')
     def SetFormat(self, fmt):

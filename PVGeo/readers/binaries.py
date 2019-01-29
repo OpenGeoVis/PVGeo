@@ -40,24 +40,24 @@ class PackedBinariesReader(ReaderBase):
         # Data objects to hold the read data for access by the pipeline methods
         self.__data = []
 
-    def _ReadRawFile(self, fileName):
+    def _ReadRawFile(self, filename):
         dtype = self.__dtype
         if dtype == np.dtype('>f'):
             # Checks if big-endian and fixes read
             dtype = np.dtype('f')
         try:
-            arr = np.fromfile(fileName, dtype=dtype)
+            arr = np.fromfile(filename, dtype=dtype)
         except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         return np.asarray(arr, dtype=self.__dtype)
 
     def _GetFileContents(self, idx=None):
         if idx is not None:
-            fileNames = [self.GetFileNames(idx=idx)]
+            filenames = [self.GetFileNames(idx=idx)]
         else:
-            fileNames = self.GetFileNames()
+            filenames = self.GetFileNames()
         contents = []
-        for f in fileNames:
+        for f in filenames:
             contents.append(self._ReadRawFile(f))
         if idx is not None: return contents[0]
         return contents
@@ -134,12 +134,12 @@ class PackedBinariesReader(ReaderBase):
     def GetDataTypes(self):
         return self.__dtype, self.__vtktype
 
-    def SetDataName(self, dataName):
+    def SetDataName(self, data_name):
         """The string name of the data array generated from the inut file.
         """
-        if dataName != self.__data_name:
-            self.__data_name = dataName
-            self.Modified(readAgain=False) # Don't re-read. Just request data again
+        if data_name != self.__data_name:
+            self.__data_name = data_name
+            self.Modified(read_again=False) # Don't re-read. Just request data again
 
 
     def GetDataName(self):
@@ -171,12 +171,12 @@ class MadagascarReader(PackedBinariesReader):
     def __init__(self, **kwargs):
         PackedBinariesReader.__init__(self, **kwargs)
 
-    def _ReadRawFile(self, fileName):
+    def _ReadRawFile(self, filename):
         dtype, vtktype = self.GetDataTypes()
         CTLSEQ = b'\014\014\004' # The control sequence to seperate header from data
         rpl = b''
         raw = []
-        with open(fileName, 'rb') as file:
+        with open(filename, 'rb') as file:
             raw = file.read()
             idx = raw.find(CTLSEQ)
             if idx == -1:

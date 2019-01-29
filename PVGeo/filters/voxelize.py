@@ -190,12 +190,12 @@ class VoxelizePoints(FilterBase):
             _helpers.addArray(pdo, 1, arr) # adds to CELL data
         return pdo
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
+    def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output
         """
         # Get input/output of Proxy
-        pdi = self.GetInputData(inInfoVec, 0, 0)
-        pdo = self.GetOutputData(outInfoVec, 0)
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
         wpdi = dsa.WrapDataObject(pdi)
         pts = wpdi.Points

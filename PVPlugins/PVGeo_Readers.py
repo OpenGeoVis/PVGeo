@@ -24,9 +24,9 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
         PackedBinariesReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(PackedBinariesReader.extensions, readerDescription=PackedBinariesReader.description))
-    def AddFileName(self, fname):
-        PackedBinariesReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(PackedBinariesReader.extensions, reader_description=PackedBinariesReader.description))
+    def AddFileName(self, filename):
+        PackedBinariesReader.AddFileName(self, filename)
 
 
 
@@ -53,8 +53,8 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
 
 
     @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, dataName):
-        PackedBinariesReader.SetDataName(self, dataName)
+    def SetDataName(self, data_name):
+        PackedBinariesReader.SetDataName(self, data_name)
 
 
 ###############################################################################
@@ -72,9 +72,9 @@ class PVGeoMadagascarReader(MadagascarReader):
     #### Seters and Geters ####
 
 
-    @smproperty.xml(_helpers.getFileReaderXml(MadagascarReader.extensions, readerDescription=MadagascarReader.description))
-    def AddFileName(self, fname):
-        MadagascarReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(MadagascarReader.extensions, reader_description=MadagascarReader.description))
+    def AddFileName(self, filename):
+        MadagascarReader.AddFileName(self, filename)
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
@@ -100,8 +100,8 @@ class PVGeoMadagascarReader(MadagascarReader):
 
 
     @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, dataName):
-        MadagascarReader.SetDataName(self, dataName)
+    def SetDataName(self, data_name):
+        MadagascarReader.SetDataName(self, data_name)
 
 
 
@@ -119,9 +119,9 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(DelimitedTextReader.extensions, readerDescription=DelimitedTextReader.description))
-    def AddFileName(self, fname):
-        DelimitedTextReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(DelimitedTextReader.extensions, reader_description=DelimitedTextReader.description))
+    def AddFileName(self, filename):
+        DelimitedTextReader.AddFileName(self, filename)
 
 
 
@@ -170,9 +170,9 @@ class PVGeoXYZTextReader(XYZTextReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(XYZTextReader.extensions, readerDescription=XYZTextReader.description))
-    def AddFileName(self, fname):
-        XYZTextReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.getFileReaderXml(XYZTextReader.extensions, reader_description=XYZTextReader.description))
+    def AddFileName(self, filename):
+        XYZTextReader.AddFileName(self, filename)
 
 
 

@@ -270,9 +270,9 @@ class GeologyMapper(FilterPreserveTypeBase):
         return 1
 
 
-    def SetFileName(self, fname):
-        if self.__filename != fname:
-            self.__filename = fname
+    def SetFileName(self, filename):
+        if self.__filename != filename:
+            self.__filename = filename
             self.Modified()
 
     def SetDelimiter(self, deli):

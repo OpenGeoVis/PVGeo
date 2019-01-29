@@ -62,7 +62,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         """A conveience method to get the output data object of this ``PVGeo``
         algorithm.
         """
-        return self.GetOutputDataObject(port)
+        return interface.wrapvtki(self.GetOutputDataObject(port))
 
     def ErrorOccurred(self):
         """A conveience method for handling errors on the VTK pipeline
@@ -96,7 +96,7 @@ class ReaderBaseBase(AlgorithmBase):
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the reader
-        self.__file_names = kwargs.get('filenames', [])
+        self.__filenames = kwargs.get('filenames', [])
         # To know whether or not the read needs to perform
         self.__need_to_read = True
 
@@ -113,10 +113,10 @@ class ReaderBaseBase(AlgorithmBase):
             self.__need_to_read = flag
         return self.__need_to_read
 
-    def Modified(self, readAgain=True):
+    def Modified(self, read_again=True):
         """Call modified if the files needs to be read again again
         """
-        if readAgain: self.__need_to_read = readAgain
+        if read_again: self.__need_to_read = read_again
         AlgorithmBase.Modified(self)
 
     #### Methods for performing the read ####
@@ -140,37 +140,37 @@ class ReaderBaseBase(AlgorithmBase):
             This does not set the reader to need to read again as there are
             no files to read.
         """
-        self.__file_names = []
+        self.__filenames = []
 
-    def AddFileName(self, fname):
+    def AddFileName(self, filename):
         """Use to set the file names for the reader. Handles singlt string or
         list of strings.
 
         Args:
-            fname (str): The absolute file name with path to read.
+            filename (str): The absolute file name with path to read.
         """
-        if fname is None:
+        if filename is None:
             return # do nothing if None is passed by a constructor on accident
-        if isinstance(fname, list):
-            for f in fname:
+        if isinstance(filename, list):
+            for f in filename:
                 self.AddFileName(f)
-        elif fname not in self.__file_names:
-            self.__file_names.append(fname)
+        elif filename not in self.__filenames:
+            self.__filenames.append(filename)
         self.Modified()
 
     def GetFileNames(self, idx=None):
         """Returns the list of file names or given and index returns a specified
         timestep's filename.
         """
-        if self.__file_names is None or len(self.__file_names) < 1:
+        if self.__filenames is None or len(self.__filenames) < 1:
             raise _helpers.PVGeoError('File names are not set.')
         if idx is None:
-            return self.__file_names
-        return self.__file_names[idx]
+            return self.__filenames
+        return self.__filenames[idx]
 
-    def Apply(self, fname):
+    def Apply(self, filename):
         """Given a file name (or list of file names), perfrom the read"""
-        self.AddFileName(fname)
+        self.AddFileName(filename)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
@@ -189,8 +189,8 @@ class FilterBase(AlgorithmBase):
             nInputPorts=nInputPorts, inputType=inputType,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
-    def Apply(self, inputDataObject):
-        self.SetInputDataObject(inputDataObject)
+    def Apply(self, input_data_object):
+        self.SetInputDataObject(input_data_object)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
@@ -286,11 +286,11 @@ class TwoFileReaderBase(AlgorithmBase):
             nOutputPorts=nOutputPorts, outputType=outputType)
         self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
-        self.__mesh_file_name = kwargs.get('meshfile', None) # Can only be one!
-        modfiles = kwargs.get('modelfiles', []) # Can be many (single attribute, manytimesteps)
+        self.__mesh_filename = kwargs.get('meshfile', None) # Can only be one!
+        modfiles = kwargs.get('model_files', []) # Can be many (single attribute, manytimesteps)
         if isinstance(modfiles, str):
             modfiles = [modfiles]
-        self.__model_file_names = modfiles
+        self.__model_filenames = modfiles
         self.__need_to_read_mesh = True
         self.__need_to_read_models = True
 
@@ -298,8 +298,8 @@ class TwoFileReaderBase(AlgorithmBase):
     def __UpdateTimeSteps(self):
         """For internal use only
         """
-        if len(self.__model_file_names) > 0:
-            self.__timesteps = _helpers.updateTimeSteps(self, self.__model_file_names, self.__dt)
+        if len(self.__model_filenames) > 0:
+            self.__timesteps = _helpers.updateTimeSteps(self, self.__model_filenames, self.__dt)
         return 1
 
     def NeedToReadMesh(self, flag=None):
@@ -342,17 +342,17 @@ class TwoFileReaderBase(AlgorithmBase):
 
 
     @staticmethod
-    def HasModels(modelfiles):
+    def HasModels(model_files):
         """A convienance method to see if a list contatins models filenames.
         """
-        if isinstance(modelfiles, list):
-            return len(modelfiles) > 0
-        return modelfiles is not None
+        if isinstance(model_files, list):
+            return len(model_files) > 0
+        return model_files is not None
 
     def ThisHasModels(self):
         """Ask self if the reader has model filenames set.
         """
-        return TwoFileReaderBase.HasModels(self.__model_file_names)
+        return TwoFileReaderBase.HasModels(self.__model_filenames)
 
     def GetTimestepValues(self):
         """Use this in ParaView decorator to register timesteps
@@ -369,37 +369,37 @@ class TwoFileReaderBase(AlgorithmBase):
     def ClearMesh(self):
         """Use to clear mesh file name
         """
-        self.__mesh_file_name = None
+        self.__mesh_filename = None
         self.Modified(read_again_mesh=True, read_again_models=False)
 
     def ClearModels(self):
         """Use to clear data file names
         """
-        self.__model_file_names = []
+        self.__model_filenames = []
         self.Modified(read_again_mesh=False, read_again_models=True)
 
-    def SetMeshFileName(self, fname):
+    def SetMeshFileName(self, filename):
         """Set the mesh file name.
         """
-        if self.__mesh_file_name != fname:
-            self.__mesh_file_name = fname
+        if self.__mesh_filename != filename:
+            self.__mesh_filename = filename
             self.Modified(read_again_mesh=True, read_again_models=False)
 
-    def AddModelFileName(self, fname):
+    def AddModelFileName(self, filename):
         """Use to set the file names for the reader. Handles single string or
         list of strings.
 
         Args:
-            fname (str or list(str)): the file name(s) to use for the model data.
+            filename (str or list(str)): the file name(s) to use for the model data.
         """
-        if fname is None:
+        if filename is None:
             return # do nothing if None is passed by a constructor on accident
-        if isinstance(fname, list):
-            for f in fname:
+        if isinstance(filename, list):
+            for f in filename:
                 self.AddModelFileName(f)
             self.Modified(read_again_mesh=False, read_again_models=True)
-        elif fname not in self.__model_file_names:
-            self.__model_file_names.append(fname)
+        elif filename not in self.__model_filenames:
+            self.__model_filenames.append(filename)
             self.Modified(read_again_mesh=False, read_again_models=True)
         return 1
 
@@ -408,11 +408,11 @@ class TwoFileReaderBase(AlgorithmBase):
         timestep's filename.
         """
         if idx is None or not self.ThisHasModels():
-            return self.__model_file_names
-        return self.__model_file_names[idx]
+            return self.__model_filenames
+        return self.__model_filenames[idx]
 
     def GetMeshFileName(self):
-        return self.__mesh_file_name
+        return self.__mesh_filename
 
     def Apply(self):
         """Perfrom the read with parameters/file names set during init or by
@@ -447,33 +447,33 @@ class WriterBase(AlgorithmBase):
         return 1
 
 
-    def SetFileName(self, fname):
+    def SetFileName(self, filename):
         """Specify the filename for the output. Writer can only handle a single
         output data object/time step."""
-        if not isinstance(fname, str):
+        if not isinstance(filename, str):
             raise RuntimeError('File name must be string. Only single file is supported.')
-        if self.__filename != fname:
-            self.__filename = fname
+        if self.__filename != filename:
+            self.__filename = filename
             self.Modified()
 
     def GetFileName(self):
         """Get the set filename."""
         return self.__filename
 
-    def Write(self, inputDataObject=None):
+    def Write(self, input_data_object=None):
         """Perfrom the write out."""
-        if inputDataObject:
-            self.SetInputDataObject(inputDataObject)
+        if input_data_object:
+            self.SetInputDataObject(input_data_object)
         self.Modified()
         self.Update()
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
+    def PerformWriteOut(self, input_data_object, filename, object_name):
         """This method must be implemented. This is automatically called by
         ``RequestData`` for single inputs or composite inputs."""
         raise NotImplementedError('PerformWriteOut must be implemented!')
 
-    def Apply(self, inputDataObject):
-        self.SetInputDataObject(inputDataObject)
+    def Apply(self, input_data_object):
+        self.SetInputDataObject(input_data_object)
         self.Modified()
         self.Update()
 
@@ -515,12 +515,12 @@ class WriterBase(AlgorithmBase):
         return self.__blockfilenames[idx]
 
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
+    def RequestData(self, request, inInfo, outInfo):
         """Subclasses must implement a ``PerformWriteOut`` method that takes an
         input data object and a filename. This method will automatically handle
         composite data sets.
         """
-        inp = self.GetInputData(inInfoVec, 0, 0)
+        inp = self.GetInputData(inInfo, 0, 0)
         if isinstance(inp, vtk.vtkMultiBlockDataSet):
             self.__composite = True
         # Handle composite datasets. NOTE: This only handles vtkMultiBlockDataSet
@@ -577,9 +577,9 @@ class InterfacedBaseReader(ReaderBase):
 
     def _ReadUpFront(self):
         """Do not override. A predifiened routine for reading the files up front."""
-        fileNames = self.GetFileNames()
+        filenames = self.GetFileNames()
         self.__objects = []
-        for f in fileNames:
+        for f in filenames:
             mesh = self._readFile(f)
             obj = self._getVTKObject(mesh)
             self.__objects.append(obj)
