@@ -53,13 +53,13 @@ class TestGSLibReader(TestBase):
 
     def test_data_array_titles(self):
         """`GSLibReader`: data array names"""
-        for i in range(len(self.titles)):
-            self.assertEqual(self.TABLE.GetColumnName(i), self.titles[i])
+        for i, title in enumerate(self.titles):
+            self.assertEqual(self.TABLE.GetColumnName(i), title)
         return
 
     def test_data_fidelity(self):
         """`GSLibReader`: data fidelity"""
-        for i in range(len(self.titles)):
+        for i, title in enumerate(self.titles):
             arr = nps.vtk_to_numpy(self.TABLE.GetColumn(i))
             self.assertTrue(np.allclose(self.data[:,i], arr, rtol=RTOL))
         return
@@ -144,8 +144,8 @@ class TestSGeMSGridReader(TestBase):
 
     def test_data_array_titles(self):
         """`SGeMSGridReader`: data array titles"""
-        for i in range(len(self.titles)):
-            self.assertEqual(self.GRID.GetCellData().GetArrayName(i), self.titles[i])
+        for i, title in enumerate(self.titles):
+            self.assertEqual(self.GRID.GetCellData().GetArrayName(i), title)
         return
 
     def test_shape(self):
@@ -156,7 +156,7 @@ class TestSGeMSGridReader(TestBase):
 
     def test_data(self,):
         """`SGeMSGridReader`: data fidelity"""
-        for i in range(len(self.titles)):
+        for i, title in enumerate(self.titles):
             arr = nps.vtk_to_numpy(self.GRID.GetCellData().GetArray(i))
             self.assertTrue(np.allclose(self.data[:,i], arr, rtol=RTOL))
         return

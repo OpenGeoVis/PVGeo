@@ -620,8 +620,8 @@ class RotatePoints(FilterBase):
         points[:,0:2] = RotationTool.RotateAround(points[:,0:2], self.__angle, origin)
         pdo.DeepCopy(pdi)
         pts = pdo.GetPoints()
-        for i in range(len(points)):
-            pts.SetPoint(i, points[i])
+        for i, pt in enumerate(points):
+            pts.SetPoint(i, pt)
         return 1
 
     def SetRotationDegrees(self, theta):

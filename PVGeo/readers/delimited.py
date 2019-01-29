@@ -96,8 +96,8 @@ class DelimitedTextReader(ReaderBase):
         get all file contents. Your should override ``_ExtractHeader``.
         """
         ts = []
-        for i in range(len(contents)):
-            titles, newcontent = self._ExtractHeader(contents[i])
+        for i, c in enumerate(contents):
+            titles, newcontent = self._ExtractHeader(c)
             contents[i] = newcontent
             ts.append(titles)
         # Check that the titles are the same across files:

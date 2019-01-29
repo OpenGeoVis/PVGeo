@@ -170,8 +170,8 @@ def getDropDownXml(name, command, labels, help='', values=None):
         if values is None:
             values = range(len(labels))
         els = []
-        for i in range(len(labels)):
-            els.append('<Entry value="%d" text="%s"/>' % (values[i],labels[i]))
+        for i, lab in enumerate(labels):
+            els.append('<Entry value="%d" text="%s"/>' % (values[i],lab))
 
         formatter = r'%s\n'*len(els)
         dom = '''\

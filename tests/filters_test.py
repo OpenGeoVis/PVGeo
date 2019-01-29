@@ -57,14 +57,14 @@ class TestCombineTables(TestBase):
 
     def test_data_array_names(self):
         """`CombineTables`: data array names"""
-        for i in range(len(self.titles)):
-            self.assertEqual(self.TABLE.GetColumnName(i), self.titles[i])
+        for i, title in enumerate(self.titles):
+            self.assertEqual(self.TABLE.GetColumnName(i), title)
 
     def test_data_fidelity(self):
         """`CombineTables`: data fidelity"""
         wpdi = dsa.WrapDataObject(self.TABLE)
-        for i in range(len(self.titles)):
-            arr = wpdi.RowData[self.titles[i]]
+        for i, title in enumerate(self.titles):
+            arr = wpdi.RowData[title]
             self.assertTrue(np.allclose(arr, self.arrs[i], rtol=RTOL))
 
 ###############################################################################
@@ -111,8 +111,8 @@ class TestReshapeTable(TestBase):
         return
 
     def _check_data_array_titles(self, table, titles):
-        for i in range(len(titles)):
-            self.assertEqual(table.GetColumnName(i), titles[i])
+        for i, title in enumerate(titles):
+            self.assertEqual(table.GetColumnName(i), title)
         return
 
     def _generate_output(self, order, titles=None):

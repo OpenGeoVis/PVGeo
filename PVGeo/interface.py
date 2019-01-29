@@ -142,8 +142,8 @@ def placeArrInTable(ndarr, titles, pdo):
     if len(np.shape(ndarr)) == 1:
         # First check if it is an array full of tuples (varying type)
         if isinstance(ndarr[0], (tuple, np.void)):
-            for i in range(len(titles)):
-                placeArrInTable(ndarr['f%d' % i], [titles[i]], pdo)
+            for i, title in enumerate(titles):
+                placeArrInTable(ndarr['f%d' % i], title, pdo)
             return wrapvtki(pdo)
         # Otherwise it is just a 1D array which needs to be 2D
         else:

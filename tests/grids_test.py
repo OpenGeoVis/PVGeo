@@ -42,11 +42,11 @@ class TestTableToTimeGrid(TestBase):
     def check_data_fidelity(self, ido, checkme, points=False):
         """`TableToTimeGrid`: data fidelity"""
         wido = dsa.WrapDataObject(ido)
-        for i in range(len(self.titles)):
+        for i, title in enumerate(self.titles):
             if points:
-                arr = wido.PointData[self.titles[i]]
+                arr = wido.PointData[title]
             else:
-                arr = wido.CellData[self.titles[i]]
+                arr = wido.CellData[title]
             self.assertTrue(np.allclose(arr, checkme[i], rtol=RTOL))
 
     def test_simple(self):
@@ -64,8 +64,8 @@ class TestTableToTimeGrid(TestBase):
             f.UpdateTimeStep(t)
             ido = f.GetOutput()
             checkme = [None] * len(self.arrs)
-            for i in range(len(self.arrs)):
-                a = self.arrs[i].reshape((20, 2, 5, 2))[:,:,:,t]
+            for i, arr in enumerate(self.arrs):
+                a = arr.reshape((20, 2, 5, 2))[:,:,:,t]
                 checkme[i] = a.flatten(order='F') # Order F because in XYZ format
             self.check_data_fidelity(ido, checkme, points=False)
         f.SetUsePoints(True)
@@ -74,8 +74,8 @@ class TestTableToTimeGrid(TestBase):
             f.UpdateTimeStep(t)
             ido = f.GetOutput()
             checkme = [None] * len(self.arrs)
-            for i in range(len(self.arrs)):
-                a = self.arrs[i].reshape((20, 2, 5, 2))[:,:,:,t]
+            for i, arr in enumerate(self.arrs):
+                a = arr.reshape((20, 2, 5, 2))[:,:,:,t]
                 checkme[i] = a.flatten(order='F') # Order F because in XYZ format
             self.check_data_fidelity(ido, checkme, points=True)
         return
@@ -102,8 +102,8 @@ class TestTableToTimeGrid(TestBase):
             ido = f.GetOutput()
             self.assertEqual(ido.GetDimensions(), (3, 6, 21))
             checkme = [None] * len(self.arrs)
-            for i in range(len(self.arrs)):
-                a = self.arrs[i].reshape((20, 2, 5, 2), order='F')[:,:,:,t]
+            for i, arr in enumerate(self.arrs):
+                a = arr.reshape((20, 2, 5, 2), order='F')[:,:,:,t]
                 a = sepit(a)
                 checkme[i] = a.flatten(order='F') # Order F because in XYZ format
 
@@ -115,8 +115,8 @@ class TestTableToTimeGrid(TestBase):
             ido = f.GetOutput()
             self.assertEqual(ido.GetDimensions(), (2, 5, 20))
             checkme = [None] * len(self.arrs)
-            for i in range(len(self.arrs)):
-                a = self.arrs[i].reshape((20, 2, 5, 2), order='F')[:,:,:,t]
+            for i, arr in enumerate(self.arrs):
+                a = arr.reshape((20, 2, 5, 2), order='F')[:,:,:,t]
                 a = sepit(a)
                 checkme[i] = a.flatten(order='F') # Order F because in XYZ format
             self.check_data_fidelity(ido, checkme, points=True)
