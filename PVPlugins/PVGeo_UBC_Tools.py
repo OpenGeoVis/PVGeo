@@ -481,8 +481,8 @@ class PVGeoGeologyMapper(GeologyMapper):
         GeologyMapper.SetFileName(self, fname)
 
     @smproperty.stringvector(name="Delimiter", default_values=",", panel_visibility="advanced")
-    def SetDelimiter(self, identifier):
-        GeologyMapper.SetDelimiter(self, identifier)
+    def SetDelimiter(self, deli):
+        GeologyMapper.SetDelimiter(self, deli)
 
 
 ###############################################################################

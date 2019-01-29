@@ -233,9 +233,9 @@ class PVGeoWriteCellCenterData(WriteCellCenterData):
         WriteCellCenterData.SetFormat(self, fmt)
 
     @smproperty.stringvector(name="Delimiter", default_values=',')
-    def SetDelimiter(self, delimiter):
+    def SetDelimiter(self, deli):
         """The string delimiter to use"""
-        WriteCellCenterData.SetDelimiter(self, delimiter)
+        WriteCellCenterData.SetDelimiter(self, deli)
 
 ###############################################################################
 

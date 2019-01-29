@@ -204,10 +204,10 @@ class WriteCellCenterData(WriterBase):
         # Success for pipeline
         return 1
 
-    def SetDelimiter(self, delimiter):
+    def SetDelimiter(self, deli):
         """The string delimiter to use"""
-        if self.__delimiter != delimiter:
-            self.__delimiter = delimiter
+        if self.__delimiter != deli:
+            self.__delimiter = deli
             self.Modified()
 
 
@@ -277,6 +277,6 @@ class PVWriteCellCenterData(WriteCellCenterData):
         WriteCellCenterData.SetFormat(self, fmt)
 
     @smproperty.stringvector(name="Delimiter", default_values=',')
-    def SetDelimiter(self, delimiter):
+    def SetDelimiter(self, deli):
         """The string delimiter to use"""
-        WriteCellCenterData.SetDelimiter(self, delimiter)
+        WriteCellCenterData.SetDelimiter(self, deli)

@@ -406,7 +406,7 @@ if discretize_available:
             self.assertEqual(tree.GetNumberOfCells(), 29)
             self.assertEqual(tree.GetNumberOfPoints(), 84)
 
-        def test_simple_octree(self):
+        def test_simple_octree_models(self):
             """`OcTreeReader`: simple octree mesh with models"""
             reader = OcTreeReader()
             reader.SetMeshFileName(self.meshFileName)
