@@ -626,7 +626,7 @@ try:
         @smproperty.xml(_helpers.getDropDownXml(name='Ellps', command='SetEllps', labels=LonLatToUTM.GetAvailableEllps(), help='This will set the ellps.'))
         def SetEllps(self, ellps):
             LonLatToUTM.SetEllps(self, ellps)
-except:
+except ImportError:
     pass
 
 

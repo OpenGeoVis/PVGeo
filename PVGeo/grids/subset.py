@@ -92,7 +92,7 @@ class ExtractTopography(FilterBase):
         try:
             # sklearn's KDTree is faster: use it if available
             from sklearn.neighbors import KDTree as Tree
-        except:
+        except ImportError:
             from scipy.spatial import cKDTree  as Tree
         tree = Tree(topoPts)
         i = tree.query(dataPts)[1].ravel()

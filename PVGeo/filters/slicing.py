@@ -104,7 +104,7 @@ class ManySlicesAlongPoints(_SliceBase):
         try:
             # sklearn's KDTree is faster: use it if available
             from sklearn.neighbors import KDTree as Tree
-        except:
+        except ImportError:
             from scipy.spatial import cKDTree  as Tree
         if self.GetNumberOfSlices() == 0:
             return []

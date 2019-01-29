@@ -93,7 +93,7 @@ class AddCellConnToPoints(FilterBase):
             try:
                 # sklearn's KDTree is faster: use it if available
                 from sklearn.neighbors import KDTree as Tree
-            except:
+            except ImportError:
                 from scipy.spatial import cKDTree  as Tree
             # VTK_Line
             og = np.array([0.0,0.0,0.0]).reshape(1, -1)
@@ -528,7 +528,7 @@ class RotationTool(object):
         try:
             # sklearn's KDTree is faster: use it if available
             from sklearn.neighbors import KDTree as Tree
-        except:
+        except ImportError:
             from scipy.spatial import cKDTree  as Tree
         # Creat the indexing range for searching the points:
         num = len(pts)
