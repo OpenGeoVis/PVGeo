@@ -25,19 +25,19 @@ class TableToTimeGrid(FilterBase):
     """
     __displayname__ = 'Table To Time Grid'
     __category__ = 'filter'
-    def __init__(self, extent=[10, 10, 10, 1], order='C',
-                 spacing=[1.0, 1.0, 1.0], origin=[0.0, 0.0, 0.0],
-                 dims=[0, 1, 2, 3], dt=1.0, points=False, **kwargs):
+    def __init__(self, extent=(10, 10, 10, 1), order='C',
+                 spacing=(1.0, 1.0, 1.0), origin=(0.0, 0.0, 0.0),
+                 dims=(0, 1, 2, 3), dt=1.0, points=False, **kwargs):
         FilterBase.__init__(self, nInputPorts=1, nOutputPorts=1,
                 inputType='vtkTable', outputType='vtkImageData', **kwargs)
         if len(extent) != 4:
             raise _helpers.PVGeoError('`extent` must be of length 4.')
-        self.__extent = extent
-        self.__dims = dims # these are indexes for the filter to use on the reshape.
+        self.__extent = list(extent)
+        self.__dims = list(dims) # these are indexes for the filter to use on the reshape.
         # NOTE: self.__dims[0] is the x axis index, etc., self.__dims[3] is the time axis
-        self.__spacing = spacing # image data spacing
-        self.__origin = origin # image data origin
-        self.__order = order # unpacking order: 'C' or 'F'
+        self.__spacing = list(spacing) # image data spacing
+        self.__origin = list(origin) # image data origin
+        self.__order = list(order) # unpacking order: 'C' or 'F'
         self.__data = None # this is where we hold the data so entire filter does
         # not execute on every time step. Data will be a disctionary of 4D arrays
         # each 4D array will be in (nx, ny, nz, nt) shape
@@ -209,11 +209,11 @@ class ReverseImageDataAxii(FilterBase):
     """
     __displayname__ = 'Reverse Image Data Axii'
     __category__ = 'filter'
-    def __init__(self, axes=[True, True, True]):
+    def __init__(self, axes=(True, True, True)):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
             nOutputPorts=1, outputType='vtkImageData')
-        self.__axes = axes[::-1] # Z Y X (FORTRAN)
+        self.__axes = list(axes[::-1]) # Z Y X (FORTRAN)
 
     def _ReverseGridAxii(self, idi, ido):
         # Copy over input to output to be flipped around

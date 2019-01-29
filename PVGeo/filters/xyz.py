@@ -594,12 +594,14 @@ class RotatePoints(FilterBase):
     """
     __displayname__ = 'Rotate Points'
     __category__ = 'filter'
-    def __init__(self, angle=45.0, origin=[0.0, 0.0], use_corner=True):
+    def __init__(self, angle=45.0, origin=None, use_corner=True):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.__angle = angle
+        if origin is None:
+            origin = [0.0, 0.0]
         self.__origin = origin
         self.__use_corner = use_corner
 
