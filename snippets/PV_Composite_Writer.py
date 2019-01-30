@@ -83,7 +83,7 @@ class WriterBase(VTKPythonAlgorithmBase):
         ``RequestData`` for single inputs or composite inputs."""
         raise NotImplementedError('PerformWriteOut must be implemented!')
 
-    def Apply(self, input_data_object):
+    def apply(self, input_data_object):
         """A convienace method if using these algorithms in a Python environment.
         """
         self.SetInputDataObject(input_data_object)

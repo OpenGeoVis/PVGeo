@@ -170,7 +170,7 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         np.savetxt(filename, X=indices, fmt='%d', comments='', header='3 3')
         # Create input grid
         grid = PVGeo.model_build.CreateTensorMesh(xcellstr='1.0 1.0 1.0',
-                    ycellstr='1.0 1.0 1.0', zcellstr='1.0 1.0 1.0').Apply()
+                    ycellstr='1.0 1.0 1.0', zcellstr='1.0 1.0 1.0').apply()
         # run the filter
         f = TopoMeshAppender()
         f.SetInputDataObject(grid)
@@ -455,7 +455,7 @@ if discretize_available:
             # remember that 2 arrays is added by the reader
             self.assertEqual(output.GetCellData().GetNumberOfArrays(), 4)
             self.assertEqual(output.GetCellData().GetArrayName(3), os.path.basename(self.modelFileNames[1])) # use file as name
-            self.assertEqual(len(f.GetTimestepValues()), self.nt-1)
+            self.assertEqual(len(f.get_time_step_values()), self.nt-1)
             return
 
 ###############################################################################

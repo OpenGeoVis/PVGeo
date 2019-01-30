@@ -43,13 +43,13 @@ class PVGeoGSLibReader(GSLibReader):
         GSLibReader.SetComments(self, identifier)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        GSLibReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        GSLibReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return GSLibReader.GetTimestepValues(self)
+        return GSLibReader.get_time_step_values(self)
 
     @smproperty.xml("""<Property name="Print File Header" command="PrintFileHeader" panel_widget="command_button"/>""")
     def PrintFileHeader(self):
@@ -93,13 +93,13 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
         GSLibPointSetReader.SetComments(self, identifier)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        GSLibPointSetReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        GSLibPointSetReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return GSLibPointSetReader.GetTimestepValues(self)
+        return GSLibPointSetReader.get_time_step_values(self)
 
     @smproperty.xml("""<Property name="Print File Header" command="PrintFileHeader" panel_widget="command_button"/>""")
     def PrintFileHeader(self):
@@ -142,13 +142,13 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
         SGeMSGridReader.SetComments(self, identifier)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        SGeMSGridReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        SGeMSGridReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return SGeMSGridReader.GetTimestepValues(self)
+        return SGeMSGridReader.get_time_step_values(self)
 
     @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0],)
     def SetSpacing(self, dx, dy, dz):

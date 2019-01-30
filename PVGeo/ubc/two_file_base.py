@@ -213,7 +213,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         """
         if flag is not None and isinstance(flag, (bool, int)):
             self.__need_to_read = flag
-            self._UpdateTimeSteps()
+            self._update_time_steps()
         return self.__need_to_read
 
     def Modified(self, read_again=True):
@@ -222,7 +222,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         if read_again: self.__need_to_read = read_again
         base.AlgorithmBase.Modified(self)
 
-    def _UpdateTimeSteps(self):
+    def _update_time_steps(self):
         """For internal use only: appropriately sets the timesteps.
         """
         # Use the inputs' timesteps: this merges the timesteps values
@@ -265,7 +265,7 @@ class ModelAppenderBase(base.AlgorithmBase):
     def RequestInformation(self, request, inInfo, outInfo):
         """Used by pipeline to handle time variance and update output extents
         """
-        self._UpdateTimeSteps()
+        self._update_time_steps()
         pdi = self.GetInputData(inInfo, 0, 0)
         # Determine if 2D or 3D and read
         if isinstance(pdi, vtk.vtkRectilinearGrid) and pdi.GetExtent()[3] == 1:
@@ -280,11 +280,11 @@ class ModelAppenderBase(base.AlgorithmBase):
         """Return True if models are associated with this mesh"""
         return len(self._model_filenames) > 0
 
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps.
         """
         # if unset, force at least one attempt to set the timesteps
-        if self.__timesteps is None: self._UpdateTimeSteps()
+        if self.__timesteps is None: self._update_time_steps()
         return self.__timesteps if self.__timesteps is not None else None
 
     def ClearModels(self):

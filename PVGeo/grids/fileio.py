@@ -410,7 +410,7 @@ class WriteImageDataToSurfer(WriterBase):
             self.Modified()
         return 1
 
-    def Apply(self, input_data_object, array_name):
+    def apply(self, input_data_object, array_name):
         """Run the algorithm on an input data object, specifying one data array
         to save out.
         """

@@ -69,13 +69,13 @@ class PVGeoTensorMeshReader(TensorMeshReader):
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        TensorMeshReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        TensorMeshReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return TensorMeshReader.GetTimestepValues(self)
+        return TensorMeshReader.get_time_step_values(self)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
     panel_visibility="advanced"))
@@ -124,9 +124,9 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
         TensorMeshAppender.SetDataName(self, name)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return TensorMeshAppender.GetTimestepValues(self)
+        return TensorMeshAppender.get_time_step_values(self)
 
 
 
@@ -210,13 +210,13 @@ if discretize_available:
 
 
         @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-        def SetTimeDelta(self, dt):
-            OcTreeReader.SetTimeDelta(self, dt)
+        def set_time_delta(self, dt):
+            OcTreeReader.set_time_delta(self, dt)
 
         @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-        def GetTimestepValues(self):
+        def get_time_step_values(self):
             """This is critical for registering the timesteps"""
-            return OcTreeReader.GetTimestepValues(self)
+            return OcTreeReader.get_time_step_values(self)
 
         @smproperty.xml(_helpers.get_property_xml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
         panel_visibility="advanced"))
@@ -327,13 +327,13 @@ class PVGeoTopoReader(TopoReader):
         TopoReader.AddFileName(self, filename)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        TopoReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        TopoReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return TopoReader.GetTimestepValues(self)
+        return TopoReader.get_time_step_values(self)
 
     @smproperty.intvector(name="SkipRows", default_values=0, panel_visibility="advanced")
     def SetSkipRows(self, skip):
@@ -362,13 +362,13 @@ class PVGeoGravObsReader(GravObsReader):
         GravObsReader.AddFileName(self, filename)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        GravObsReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        GravObsReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return GravObsReader.GetTimestepValues(self)
+        return GravObsReader.get_time_step_values(self)
 
     @smproperty.intvector(name="SkipRows", default_values=0, panel_visibility="advanced")
     def SetSkipRows(self, skip):
@@ -396,13 +396,13 @@ class PVGeoGravGradReader(GravGradReader):
         GravGradReader.AddFileName(self, filename)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        GravGradReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        GravGradReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return GravGradReader.GetTimestepValues(self)
+        return GravGradReader.get_time_step_values(self)
 
     @smproperty.intvector(name="SkipRows", default_values=0, panel_visibility="advanced")
     def SetSkipRows(self, skip):
@@ -431,13 +431,13 @@ class PVGeoMagObsReader(MagObsReader):
         MagObsReader.AddFileName(self, filename)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        MagObsReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        MagObsReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return MagObsReader.GetTimestepValues(self)
+        return MagObsReader.get_time_step_values(self)
 
     @smproperty.intvector(name="SkipRows", default_values=0, panel_visibility="advanced")
     def SetSkipRows(self, skip):
@@ -504,10 +504,10 @@ if discretize_available:
             DiscretizeMeshReader.AddFileName(self, filename)
 
         @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-        def SetTimeDelta(self, dt):
-            DiscretizeMeshReader.SetTimeDelta(self, dt)
+        def set_time_delta(self, dt):
+            DiscretizeMeshReader.set_time_delta(self, dt)
 
         @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-        def GetTimestepValues(self):
+        def get_time_step_values(self):
             """This is critical for registering the timesteps"""
-            return DiscretizeMeshReader.GetTimestepValues(self)
+            return DiscretizeMeshReader.get_time_step_values(self)

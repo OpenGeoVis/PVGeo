@@ -45,7 +45,7 @@ class VoxelizePoints(FilterBase):
 
 
 
-    def AddFieldData(self, grid):
+    def add_field_data(self, grid):
         """An internal helper to add the recovered information as field data
         """
         # Add angle
@@ -63,7 +63,7 @@ class VoxelizePoints(FilterBase):
         return grid
 
     @staticmethod
-    def AddCellData(grid, arr, name):
+    def add_cell_data(grid, arr, name):
         """Add a NumPy array as cell data to the given grid input
         """
         c = interface.convertArray(arr, name=name)
@@ -71,7 +71,7 @@ class VoxelizePoints(FilterBase):
         return grid
 
 
-    def EstimateUniformSpacing(self, x, y, z):
+    def estimate_uniform_spacing(self, x, y, z):
         """This assumes that the input points make up some sort of uniformly
         spaced grid on at least an XY plane.
         """
@@ -85,7 +85,7 @@ class VoxelizePoints(FilterBase):
             return x, y, z, self.__safe, self.__safe, self.__safe, 0.0
 
         r = RotationTool()
-        xr, yr, zr, dx, dy, angle = r.EstimateAndRotate(x, y, z)
+        xr, yr, zr, dx, dy, angle = r.estimate_and_rotate(x, y, z)
         self.__angle = angle
         uz = np.diff(np.unique(z))
         if len(uz) > 0: dz = np.average(uz)
@@ -96,7 +96,7 @@ class VoxelizePoints(FilterBase):
         return xr, yr, zr
 
 
-    def PointsToGrid(self, xo,yo,zo, dx,dy,dz, grid=None):
+    def points_to_grid(self, xo,yo,zo, dx,dy,dz, grid=None):
         """Convert XYZ points to a ``vtkUnstructuredGrid``.
         """
         if not checkNumpy(alert='warn'):
@@ -107,7 +107,7 @@ class VoxelizePoints(FilterBase):
         # TODO: Check dtypes on all arrays. Need to be floats
 
         if self.__estimateGrid:
-            x,y,z = self.EstimateUniformSpacing(xo, yo, zo)
+            x,y,z = self.estimate_uniform_spacing(xo, yo, zo)
         else:
             x,y,z = xo, yo, zo
 
@@ -159,8 +159,8 @@ class VoxelizePoints(FilterBase):
 
         # insert unique nodes as points
         if self.__estimateGrid:
-            unique_nodes[:,0:2] = RotationTool.Rotate(unique_nodes[:,0:2], -self.__angle)
-            self.AddFieldData(grid)
+            unique_nodes[:,0:2] = RotationTool.rotate(unique_nodes[:,0:2], -self.__angle)
+            self.add_field_data(grid)
 
         # Add unique nodes as points in output
         pts.SetData(interface.convertArray(unique_nodes))
@@ -182,7 +182,7 @@ class VoxelizePoints(FilterBase):
         return grid
 
     @staticmethod
-    def _CopyArrays(pdi, pdo):
+    def _copy_arrays(pdi, pdo):
         """internal helper to copy arrays from point data to cell data in the voxels.
         """
         for i in range(pdi.GetPointData().GetNumberOfArrays()):
@@ -200,24 +200,24 @@ class VoxelizePoints(FilterBase):
         wpdi = dsa.WrapDataObject(pdi)
         pts = wpdi.Points
         x, y, z = pts[:,0], pts[:,1], pts[:,2]
-        self.PointsToGrid(x, y, z,
+        self.points_to_grid(x, y, z,
             self.__dx, self.__dy, self.__dz, grid=pdo)
         # Now append data to grid
-        self._CopyArrays(pdi, pdo)
+        self._copy_arrays(pdi, pdo)
         return 1
 
 
     #### Seters and Geters ####
 
 
-    def SetSafeSize(self, safe):
+    def set_safe_size(self, safe):
         """A voxel size to use if a spacing cannot be determined for an axis
         """
         if self.__safe != safe:
             self.__safe = safe
             self.Modified()
 
-    def SetDeltaX(self, dx):
+    def set_delta_x(self, dx):
         """Set the X cells spacing
 
         Args:
@@ -227,7 +227,7 @@ class VoxelizePoints(FilterBase):
         self.__dx = dx
         self.Modified()
 
-    def SetDeltaY(self, dy):
+    def set_delta_y(self, dy):
         """Set the Y cells spacing
 
         Args:
@@ -237,7 +237,7 @@ class VoxelizePoints(FilterBase):
         self.__dy = dy
         self.Modified()
 
-    def SetDeltaZ(self, dz):
+    def set_delta_z(self, dz):
         """Set the Z cells spacing
 
         Args:
@@ -245,10 +245,10 @@ class VoxelizePoints(FilterBase):
                 the Z-direction
         """
         self.__dz = dz
-        self.SetSafeSize(np.min(dz))
+        self.set_safe_size(np.min(dz))
         self.Modified()
 
-    def SetDeltas(self, dx, dy, dz):
+    def set_deltas(self, dx, dy, dz):
         """Set the cell spacings for each axial direction
 
         Args:
@@ -259,11 +259,11 @@ class VoxelizePoints(FilterBase):
             dz (float or np.array(floats)): the spacing(s) for the cells in
                 the Z-direction
         """
-        self.SetDeltaX(dx)
-        self.SetDeltaY(dy)
-        self.SetDeltaZ(dz)
+        self.set_delta_x(dx)
+        self.set_delta_y(dy)
+        self.set_delta_z(dz)
 
-    def SetEstimateGrid(self, flag):
+    def set_estimate_grid(self, flag):
         """Set a flag on whether or not to estimate the grid spacing/rotation
         """
         if self.__estimateGrid != flag:
@@ -271,7 +271,7 @@ class VoxelizePoints(FilterBase):
             self.Modified()
 
 
-    def GetRecoveredAngle(self, degrees=True):
+    def get_recovered_angle(self, degrees=True):
         """Returns the recovered angle if set to recover the input grid. If the
         input points are rotated, then this angle will reflect a close
         approximation of that rotation.
@@ -282,7 +282,7 @@ class VoxelizePoints(FilterBase):
         if degrees: return np.rad2deg(self.__angle)
         return self.__angle
 
-    def GetSpacing(self):
+    def get_spacing(self):
         """Get the cell spacings"""
         return (self.__dx, self.__dy, self.__dz)
 

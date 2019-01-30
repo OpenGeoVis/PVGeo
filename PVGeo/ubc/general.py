@@ -242,7 +242,7 @@ class GeologyMapper(FilterPreserveTypeBase):
         pdo = self.GetOutputData(outInfo, 0)
         # Get input array
         field, name = self.__input_array[0], self.__input_array[1]
-        #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
+        #self.__range = NormalizeArray.get_array_range(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.get_numpy_array(wpdi, field, name)
 

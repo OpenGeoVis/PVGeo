@@ -42,7 +42,7 @@ class ExtractTopography(FilterBase):
             be set at the time of instantiation of this algorithm.
             This does not actually update the algorithm's output data object
             but applies a ``vtki`` threshold filter to pass a new data object
-            after calling ``Apply``.
+            after calling ``apply``.
 
 
     Note:
@@ -64,7 +64,7 @@ class ExtractTopography(FilterBase):
         self._invert = invert
         self._remove = remove
         self._operation = self._underneath
-        self.SetOperation(op)
+        self.set_operation(op)
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):
@@ -113,7 +113,7 @@ class ExtractTopography(FilterBase):
         return np.array(np.abs((data_points[:,2] - comp[:,2])) < tolerance, dtype=int)
 
     @staticmethod
-    def GetOperations():
+    def get_operations():
         """Returns the extraction operation methods as callable objects in a
         dictionary
         """
@@ -124,26 +124,26 @@ class ExtractTopography(FilterBase):
         return ops
 
     @staticmethod
-    def GetOperationNames():
+    def get_operation_names():
         """Gets a list of the extraction operation keys
 
         Return:
             list(str): the keys for getting the operations
         """
-        ops = ExtractTopography.GetOperations()
+        ops = ExtractTopography.get_operations()
         return list(ops.keys())
 
     @staticmethod
-    def GetOperation(idx):
+    def get_operation(idx):
         """Gets a extraction operation based on an index in the keys
 
         Return:
             callable: the operation method
         """
         if isinstance(idx, str):
-            return ExtractTopography.GetOperations()[idx]
-        n = ExtractTopography.GetOperationNames()[idx]
-        return ExtractTopography.GetOperations()[n]
+            return ExtractTopography.get_operations()[idx]
+        n = ExtractTopography.get_operation_names()[idx]
+        return ExtractTopography.get_operations()[n]
 
 
     #### Pipeline Methods ####
@@ -181,7 +181,7 @@ class ExtractTopography(FilterBase):
         grid.GetCellData().AddArray(active)
         return 1
 
-    def Apply(self, data, points):
+    def apply(self, data, points):
         """Run the algorithm on the input data using the topography points"""
         self.SetInputDataObject(0, data)
         self.SetInputDataObject(1, points)
@@ -218,7 +218,7 @@ class ExtractTopography(FilterBase):
             self._invert = flag
             self.Modified()
 
-    def SetOperation(self, op):
+    def set_operation(self, op):
         """Set the type of extraction to perform.
 
         Args:
@@ -231,9 +231,9 @@ class ExtractTopography(FilterBase):
             strictly produces an integer array of zeros and ones.
         """
         if isinstance(op, str):
-            op = ExtractTopography.GetOperations()[op]
+            op = ExtractTopography.get_operations()[op]
         elif isinstance(op, int):
-            op = ExtractTopography.GetOperation(op)
+            op = ExtractTopography.get_operation(op)
         if self._operation != op:
             self._operation = op
             self.Modified()

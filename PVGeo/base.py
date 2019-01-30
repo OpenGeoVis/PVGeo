@@ -77,7 +77,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         """
         return self.__error_observer.get_error_message()
 
-    def Apply(self):
+    def apply(self):
         """Update the algorithm and get the output data object"""
         self.Update()
         return interface.wrapvtki(self.GetOutput())
@@ -168,7 +168,7 @@ class ReaderBaseBase(AlgorithmBase):
             return self.__filenames
         return self.__filenames[idx]
 
-    def Apply(self, filename):
+    def apply(self, filename):
         """Given a file name (or list of file names), perfrom the read"""
         self.AddFileName(filename)
         self.Update()
@@ -189,7 +189,7 @@ class FilterBase(AlgorithmBase):
             nInputPorts=nInputPorts, inputType=inputType,
             nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
-    def Apply(self, input_data_object):
+    def apply(self, input_data_object):
         """Run this algorithm on the given input dataset"""
         self.SetInputDataObject(input_data_object)
         self.Update()
@@ -214,7 +214,7 @@ class ReaderBase(ReaderBaseBase):
         self.__timesteps = None
 
 
-    def _UpdateTimeSteps(self):
+    def _update_time_steps(self):
         """For internal use only: appropriately sets the timesteps.
         """
         if len(self.GetFileNames()) > 1:
@@ -228,18 +228,18 @@ class ReaderBase(ReaderBaseBase):
         This will handle setting the timesteps appropriately based on the number
         of file names when the pipeline needs to know the time information.
         """
-        self._UpdateTimeSteps()
+        self._update_time_steps()
         return 1
 
 
     #### Seters and Geters ####
 
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps on the pipeline.
         """
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
-    def SetTimeDelta(self, dt):
+    def set_time_delta(self, dt):
         """An advanced property to set the time step in seconds.
         """
         if dt != self.__dt:
@@ -296,7 +296,7 @@ class TwoFileReaderBase(AlgorithmBase):
         self.__need_to_read_models = True
 
 
-    def __UpdateTimeSteps(self):
+    def __update_time_steps(self):
         """For internal use only
         """
         if len(self.__model_filenames) > 0:
@@ -336,7 +336,7 @@ class TwoFileReaderBase(AlgorithmBase):
 
     def RequestInformation(self, request, inInfo, outInfo):
         """Used by pipeline to handle setting up time variance"""
-        self.__UpdateTimeSteps()
+        self.__update_time_steps()
         return 1
 
 
@@ -356,12 +356,12 @@ class TwoFileReaderBase(AlgorithmBase):
         """
         return TwoFileReaderBase.HasModels(self.__model_filenames)
 
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps
         """
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
-    def SetTimeDelta(self, dt):
+    def set_time_delta(self, dt):
         """An advanced property for the time step in seconds.
         """
         if dt != self.__dt:
@@ -417,7 +417,7 @@ class TwoFileReaderBase(AlgorithmBase):
         """Get the mesh filename"""
         return self.__mesh_filename
 
-    def Apply(self):
+    def apply(self):
         """Perfrom the read with parameters/file names set during init or by
         setters"""
         self.Update()
@@ -475,7 +475,7 @@ class WriterBase(AlgorithmBase):
         ``RequestData`` for single inputs or composite inputs."""
         raise NotImplementedError('PerformWriteOut must be implemented!')
 
-    def Apply(self, input_data_object):
+    def apply(self, input_data_object):
         """Run this writer algorithm on the given input data object"""
         self.SetInputDataObject(input_data_object)
         self.Modified()

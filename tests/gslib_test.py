@@ -92,7 +92,7 @@ class TestGSLibReader(TestBase):
         writer.Write(self.TABLE)
         # Now read that data and compare
         reader = GSLibReader()
-        read = reader.Apply(filename)
+        read = reader.apply(filename)
         # Compare data
         truedata = self.TABLE.GetRowData()
         testdata = read.GetRowData()
@@ -133,7 +133,7 @@ class TestSGeMSGridReader(TestBase):
         header = '\n'.join(header)
         np.savetxt(filename, self.data, delimiter=' ', header=header, comments='')
         # Set up the reader
-        self.GRID = SGeMSGridReader().Apply(filename)
+        self.GRID = SGeMSGridReader().apply(filename)
 
     def tearDown(self):
         # Remove the test data directory after the test
@@ -185,7 +185,7 @@ class TestSGeMSGridReader(TestBase):
         writer.Write(self.GRID)
         # Now read that data and compare
         reader = SGeMSGridReader()
-        read = reader.Apply(filename)
+        read = reader.apply(filename)
         # Compare data
         truedata = self.GRID.GetCellData()
         testdata = read.GetCellData()

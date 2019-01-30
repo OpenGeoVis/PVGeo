@@ -74,7 +74,7 @@ def get_requested_time(algorithm, outInfo, idx=0):
         >>> i = _helpers.get_requested_time(self, outInfo)
     """
     executive = algorithm.GetExecutive()
-    timesteps = algorithm.GetTimestepValues()
+    timesteps = algorithm.get_time_step_values()
     outInfo = outInfo.GetInformationObject(idx)
     if timesteps is None or len(timesteps) == 0:
         return 0

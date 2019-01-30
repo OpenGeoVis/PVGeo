@@ -53,7 +53,7 @@ class ArrayMath(FilterPreserveTypeBase):
         # Convert operation to callable method
         op = kwargs.get('operation', 'add')
         if isinstance(op, (str, int)):
-            op = self.GetOperation(op)
+            op = self.get_operation(op)
         self.__operation = op
 
 
@@ -85,7 +85,7 @@ class ArrayMath(FilterPreserveTypeBase):
         return arr1-arr2
 
     @staticmethod
-    def GetOperations():
+    def get_operations():
         """Returns the math operation methods as callable objects in a
         dictionary
         """
@@ -99,29 +99,29 @@ class ArrayMath(FilterPreserveTypeBase):
         return ops
 
     @staticmethod
-    def GetOperationNames():
+    def get_operation_names():
         """Gets a list of the math operation keys
 
         Return:
             list(str): the keys for getting the math operations
         """
-        ops = ArrayMath.GetOperations()
+        ops = ArrayMath.get_operations()
         return list(ops.keys())
 
     @staticmethod
-    def GetOperation(idx):
+    def get_operation(idx):
         """Gets a math operation based on an index in the keys
 
         Return:
             callable: the math operation method
         """
         if isinstance(idx, str):
-            return ArrayMath.GetOperations()[idx]
-        n = ArrayMath.GetOperationNames()[idx]
-        return ArrayMath.GetOperations()[n]
+            return ArrayMath.get_operations()[idx]
+        n = ArrayMath.get_operation_names()[idx]
+        return ArrayMath.get_operations()[n]
 
 
-    def _MathUp(self, pdi, pdo):
+    def _math_up(self, pdi, pdo):
         """Make sure to pass array names and integer associated fields.
         Use helpers to get these properties.
         """
@@ -136,7 +136,7 @@ class ArrayMath(FilterPreserveTypeBase):
         arr2 = _helpers.get_numpy_array(wpdi, field2, name2)
         # Perform Math Operation
         carr = self.__operation(arr1, arr2)
-        # Apply the multiplier
+        # apply the multiplier
         carr *= self.__multiplier
         # If no name given for data by user, use operator name
         new_name = self.__new_name
@@ -160,14 +160,14 @@ class ArrayMath(FilterPreserveTypeBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
-        self._MathUp(pdi, pdo)
+        self._math_up(pdi, pdo)
         return 1
 
 
     #### Seters and Geters ####
 
 
-    def _SetInputArray1(self, field, name):
+    def _set_input_array_1(self, field, name):
         """Set 1st input array by name and field"""
         if self.__input_array_1[0] != field:
             self.__input_array_1[0] = field
@@ -176,7 +176,7 @@ class ArrayMath(FilterPreserveTypeBase):
             self.__input_array_1[1] = name
             self.Modified()
 
-    def _SetInputArray2(self, field, name):
+    def _set_input_array_2(self, field, name):
         """Set 2nd input array by name and field"""
         if self.__input_array_2[0] != field:
             self.__input_array_2[0] = field
@@ -197,14 +197,14 @@ class ArrayMath(FilterPreserveTypeBase):
             name (int): the name of the array
         """
         if idx == 0:
-            self._SetInputArray1(field, name)
+            self._set_input_array_1(field, name)
         elif idx == 1:
-            self._SetInputArray2(field, name)
+            self._set_input_array_2(field, name)
         else:
             raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
         return 1
 
-    def Apply(self, input_data_object, array_name_0, array_name_1):
+    def apply(self, input_data_object, array_name_0, array_name_1):
         """Run the algorith on an input data object, specifying array names"""
         self.SetInputDataObject(input_data_object)
         arr0, field0 = _helpers.search_for_array(input_data_object, array_name_0)
@@ -214,7 +214,7 @@ class ArrayMath(FilterPreserveTypeBase):
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
-    def SetMultiplier(self, val):
+    def set_multiplier(self, val):
         """This is a static shifter/scale factor across the array after
         normalization.
         """
@@ -222,23 +222,23 @@ class ArrayMath(FilterPreserveTypeBase):
             self.__multiplier = val
             self.Modified()
 
-    def GetMultiplier(self):
+    def get_multiplier(self):
         """Return the set multiplier/scalar
         """
         return self.__multiplier
 
-    def SetNewArrayName(self, name):
+    def set_new_array_name(self, name):
         """Give the new array a meaningful name.
         """
         if self.__new_name != name:
             self.__new_name = name
             self.Modified()
 
-    def GetNewArrayName(self):
+    def get_new_array_name(self):
         """Get the name used for the new array"""
         return self.__new_name
 
-    def SetOperation(self, op):
+    def set_operation(self, op):
         """Set the math operation to perform
 
         Args:
@@ -250,9 +250,9 @@ class ArrayMath(FilterPreserveTypeBase):
             as its signature is: ``<callable>(arr1, arr2)``
         """
         if isinstance(op, str):
-            op = ArrayMath.GetOperations()[op]
+            op = ArrayMath.get_operations()[op]
         elif isinstance(op, int):
-            op = ArrayMath.GetOperation(op)
+            op = ArrayMath.get_operation(op)
         if self.__operation != op:
             self.__operation = op
             self.Modified()
@@ -301,7 +301,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         # Convert operation to callable method
         op = kwargs.get('normalization', 'feature_scale')
         if isinstance(op, (str, int)):
-            op = self.GetNormalization(op)
+            op = self.get_normalization(op)
         self.__normalization = op
         self.__shift = 0.0
 
@@ -310,12 +310,12 @@ class NormalizeArray(FilterPreserveTypeBase):
 
 
     @staticmethod
-    def _passArray(arr):
+    def _pass_array(arr):
         """Cast an input array as a NumPy array"""
         return np.array(arr)
 
     @staticmethod
-    def _featureScale(arr, rng=None):
+    def _feature_scale(arr, rng=None):
         """Returns feature scale normalization of input array"""
         # TODO: implement ability to use custom range
         if rng is not None:
@@ -327,7 +327,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         return (arr - mi) / (ma - mi)
 
     @staticmethod
-    def _standardScore(arr):
+    def _standard_score(arr):
         """Returns tandard score normalization of input array"""
         return (arr - np.mean(arr)) / (np.std(arr))
 
@@ -337,50 +337,50 @@ class NormalizeArray(FilterPreserveTypeBase):
         return np.log10(arr)
 
     @staticmethod
-    def _logNat(arr):
+    def _log_nat(arr):
         """Returns natural logarithm of input array"""
         return np.log(arr)
 
     @staticmethod
-    def GetNormalizations():
+    def get_normalizations():
         """All Available normalizations
 
         Return:
             dict: dictionary of callable methods for normalizing an array
         """
         ops = dict(
-            feature_scale=NormalizeArray._featureScale,
-            standard_score=NormalizeArray._standardScore,
+            feature_scale=NormalizeArray._feature_scale,
+            standard_score=NormalizeArray._standard_score,
             log10=NormalizeArray._log10,
-            natural_log=NormalizeArray._logNat,
-            just_multiply=NormalizeArray._passArray,
+            natural_log=NormalizeArray._log_nat,
+            just_multiply=NormalizeArray._pass_array,
         )
         return ops
 
     @staticmethod
-    def GetNormalizationNames():
+    def get_normalization_names():
         """Gets a list of the normalization keys
 
         Return:
             list(str): the keys for getting the normalizations
         """
-        ops = NormalizeArray.GetNormalizations()
+        ops = NormalizeArray.get_normalizations()
         return list(ops.keys())
 
     @staticmethod
-    def GetNormalization(idx):
+    def get_normalization(idx):
         """Gets a normalization based on an index in the keys
 
         Return:
             callable: the normalization method
         """
         if isinstance(idx, str):
-            return NormalizeArray.GetNormalizations()[idx]
-        n = NormalizeArray.GetNormalizationNames()[idx]
-        return NormalizeArray.GetNormalizations()[n]
+            return NormalizeArray.get_normalizations()[idx]
+        n = NormalizeArray.get_normalization_names()[idx]
+        return NormalizeArray.get_normalizations()[n]
 
     @staticmethod
-    def GetArrayRange(pdi, field, name):
+    def get_array_range(pdi, field, name):
         """Returns a tuple of the range for a ``vtkDataArray`` on a
         ``vtkDataObject``.
         """
@@ -390,12 +390,12 @@ class NormalizeArray(FilterPreserveTypeBase):
         return (np.nanmin(arr), np.nanmax(arr))
 
 
-    def _Normalize(self, pdi, pdo):
+    def _normalize(self, pdi, pdo):
         """Perform normalize on a data array for any given VTK data object.
         """
         # Get input array
         field, name = self.__input_array[0], self.__input_array[1]
-        #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
+        #self.__range = NormalizeArray.get_array_range(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.get_numpy_array(wpdi, field, name)
         arr = np.array(arr, dtype=float)
@@ -405,7 +405,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         arr += self.__shift
         # Perform normalization scheme
         arr = self.__normalization(arr)
-        # Apply the multiplier
+        # apply the multiplier
         arr *= self.__multiplier
         # If no name given for data by user, use operator name
         new_name = self.__new_name
@@ -428,7 +428,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
-        self._Normalize(pdi, pdo)
+        self._normalize(pdi, pdo)
         return 1
 
     #### Seters and Geters ####
@@ -453,7 +453,7 @@ class NormalizeArray(FilterPreserveTypeBase):
             self.Modified()
         return 1
 
-    def Apply(self, input_data_object, array_name):
+    def apply(self, input_data_object, array_name):
         """Run the algorithm on an input data object, specifying the array"""
         self.SetInputDataObject(input_data_object)
         arr, field = _helpers.search_for_array(input_data_object, array_name)
@@ -461,7 +461,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
-    def SetMultiplier(self, val):
+    def set_multiplier(self, val):
         """This is a static shifter/scale factor across the array after
         normalization.
         """
@@ -469,31 +469,31 @@ class NormalizeArray(FilterPreserveTypeBase):
             self.__multiplier = val
             self.Modified()
 
-    def GetMultiplier(self):
+    def get_multiplier(self):
         """Return the set multiplier/scalar
         """
         return self.__multiplier
 
 
-    def SetNewArrayName(self, name):
+    def set_new_array_name(self, name):
         """Give the new array a meaningful name.
         """
         if self.__new_name != name:
             self.__new_name = name
             self.Modified()
 
-    def GetNewArrayName(self):
+    def get_new_array_name(self):
         """Get the name of the new array"""
         return self.__new_name
 
-    def SetTakeAbsoluteValue(self, flag):
+    def set_take_absolute_value(self, flag):
         """This will take the absolute value of the array before normalization.
         """
         if self.__absolute != flag:
             self.__absolute = flag
             self.Modified()
 
-    def SetNormalization(self, norm):
+    def set_normalization(self, norm):
         """Set the normalization operation to perform
 
         Args:
@@ -505,14 +505,14 @@ class NormalizeArray(FilterPreserveTypeBase):
             as its signature is: ``<callable>(arr)``
         """
         if isinstance(norm, str):
-            norm = NormalizeArray.GetNormalizations()[norm]
+            norm = NormalizeArray.get_normalizations()[norm]
         elif isinstance(norm, int):
-            norm = NormalizeArray.GetNormalization(norm)
+            norm = NormalizeArray.get_normalization(norm)
         if self.__normalization != norm:
             self.__normalization = norm
             self.Modified()
 
-    def SetShift(self, sft):
+    def set_shift(self, sft):
         """Set a static shifter to the input data array"""
         if self.__shift != sft:
             self.__shift = sft
@@ -584,7 +584,7 @@ class PercentThreshold(FilterBase):
             self.Modified()
         return 1
 
-    def SetPercent(self, percent):
+    def set_percent(self, percent):
         """Set the percent for the threshold in range (0, 100).
         Any values falling beneath the set percent of the total data range
         will be removed."""
@@ -606,7 +606,7 @@ class PercentThreshold(FilterBase):
             self.Modified()
 
 
-    def Apply(self, input_data_object, array_name):
+    def apply(self, input_data_object, array_name):
         """Run the algorithm on an input data object, specifying the array"""
         self.SetInputDataObject(input_data_object)
         arr, field = _helpers.search_for_array(input_data_object, array_name)
@@ -633,7 +633,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         self.__mask = -9999
 
 
-    def _GetArrays(self, wpdi):
+    def _get_arrays(self, wpdi):
         """Internal helper to fetch RGBA arrays"""
         # Get Red
         fieldr, name = self.__r_array[0], self.__r_array[1]
@@ -653,7 +653,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         return r_arr, g_arr, b_arr, a_arr
 
 
-    def _MaskArrays(self, r_arr, g_arr, b_arr, a_arr):
+    def _mask_arrays(self, r_arr, g_arr, b_arr, a_arr):
         """Internal helper to mask RGBA arrays"""
         r_arr = np.ma.masked_where(r_arr==self.__mask, r_arr)
         g_arr = np.ma.masked_where(g_arr==self.__mask, g_arr)
@@ -671,17 +671,17 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         pdo = self.GetOutputData(outInfo, 0)
 
         # Get the arrays for the RGB values
-        r_arr, g_arr, b_arr, a_arr = self._GetArrays(wpdi)
-        r_arr, g_arr, b_arr, a_arr = self._MaskArrays(r_arr, g_arr, b_arr, a_arr)
+        r_arr, g_arr, b_arr, a_arr = self._get_arrays(wpdi)
+        r_arr, g_arr, b_arr, a_arr = self._mask_arrays(r_arr, g_arr, b_arr, a_arr)
 
         # normalize each color array bewteen 0 and 255
-        r_arr = NormalizeArray._featureScale(r_arr, [0, 255])
-        g_arr = NormalizeArray._featureScale(g_arr, [0, 255])
-        b_arr = NormalizeArray._featureScale(b_arr, [0, 255])
+        r_arr = NormalizeArray._feature_scale(r_arr, [0, 255])
+        g_arr = NormalizeArray._feature_scale(g_arr, [0, 255])
+        b_arr = NormalizeArray._feature_scale(b_arr, [0, 255])
 
         # Now concatenate the arrays
         if self.__use_trans:
-            a_arr = NormalizeArray._featureScale(a_arr, [0, 255])
+            a_arr = NormalizeArray._feature_scale(a_arr, [0, 255])
             col = np.array(np.c_[r_arr, g_arr, b_arr, a_arr], dtype=np.uint8)
         else:
             col = np.array(np.c_[r_arr, g_arr, b_arr], dtype=np.uint8)
@@ -697,19 +697,19 @@ class ArraysToRGBA(FilterPreserveTypeBase):
 
     #### Seters and Geters ####
 
-    def SetUseTransparency(self, flag):
+    def set_use_transparency(self, flag):
         """Set a boolean flag on whether or not to use a transparency component"""
         if self.__use_trans != flag:
             self.__use_trans = flag
             self.Modified()
 
-    def SetMaskValue(self, val):
+    def set_mask_value(self, val):
         """Set the value to mask in the RGBA arrays"""
         if self.__mask != val:
             self.__mask = val
             self.Modified()
 
-    def _SetInputArrayRed(self, field, name):
+    def _set_input_array_red(self, field, name):
         """Set field and name of red array"""
         if self.__r_array[0] != field:
             self.__r_array[0] = field
@@ -718,7 +718,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             self.__r_array[1] = name
             self.Modified()
 
-    def _SetInputArrayGreen(self, field, name):
+    def _set_input_array_green(self, field, name):
         """Set field and name of green array"""
         if self.__g_array[0] != field:
             self.__g_array[0] = field
@@ -727,7 +727,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             self.__g_array[1] = name
             self.Modified()
 
-    def _SetInputArrayBlue(self, field, name):
+    def _set_input_array_blue(self, field, name):
         """Set field and name of blue array"""
         if self.__b_array[0] != field:
             self.__b_array[0] = field
@@ -736,7 +736,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             self.__b_array[1] = name
             self.Modified()
 
-    def _SetInputArrayTrans(self, field, name):
+    def _set_input_array_trans(self, field, name):
         """Set field and name of transparency array"""
         if self.__a_array[0] != field:
             self.__a_array[0] = field
@@ -757,18 +757,18 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             name (int): the name of the array
         """
         if idx == 0:
-            self._SetInputArrayRed(field, name)
+            self._set_input_array_red(field, name)
         elif idx == 1:
-            self._SetInputArrayGreen(field, name)
+            self._set_input_array_green(field, name)
         elif idx == 2:
-            self._SetInputArrayBlue(field, name)
+            self._set_input_array_blue(field, name)
         elif idx == 3:
-            self._SetInputArrayTrans(field, name)
+            self._set_input_array_trans(field, name)
         else:
             raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
         return 1
 
-    def Apply(self, input_data_object, r_array, g_array, b_array, a_array=None):
+    def apply(self, input_data_object, r_array, g_array, b_array, a_array=None):
         """Run the algorithm on an input data object, specifying RGBA array names"""
         self.SetInputDataObject(input_data_object)
         r_arr, rField = _helpers.search_for_array(input_data_object, r_array)
@@ -777,7 +777,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         if a_array is not None:
             a_arr, aField = _helpers.search_for_array(input_data_object, a_array)
             self.SetInputArrayToProcess(3, 0, 0, aField, a_array)
-            self.SetUseTransparency(True)
+            self.set_use_transparency(True)
         self.SetInputArrayToProcess(0, 0, 0, rField, r_array)
         self.SetInputArrayToProcess(1, 0, 0, gField, g_array)
         self.SetInputArrayToProcess(2, 0, 0, bField, b_array)

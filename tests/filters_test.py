@@ -118,11 +118,11 @@ class TestReshapeTable(TestBase):
     def _generate_output(self, order, titles=None):
         f = ReshapeTable()
         f.SetInputDataObject(0, self.t0)
-        f.SetNumberOfColumns(self.ncols)
-        f.SetNumberOfRows(self.nrows)
-        f.SetOrder(order)
+        f.set_number_of_columns(self.ncols)
+        f.set_number_of_rows(self.nrows)
+        f.set_order(order)
         if titles is not None:
-            f.SetNames(titles)
+            f.set_names(titles)
         f.Update()
         return f.GetOutputDataObject(0)
 
@@ -225,8 +225,8 @@ class TestRotationTool(TestBase):
         z = np.reshape(z, (len(z), -1))
         pts = np.concatenate((x,y,z), axis=1)
         rot = np.deg2rad(-33.3)
-        pts[:, 0:2] = r.Rotate(pts[:, 0:2], rot)
-        xx, yy, zz, dx, dy, angle = r.EstimateAndRotate(pts[:,0], pts[:,1], pts[:,2])
+        pts[:, 0:2] = r.rotate(pts[:, 0:2], rot)
+        xx, yy, zz, dx, dy, angle = r.estimate_and_rotate(pts[:,0], pts[:,1], pts[:,2])
         rpts = np.vstack((xx,yy,zz)).T
         self.assertTrue(np.allclose(angle, np.deg2rad(33.3), rtol=RTOL), msg='Recovered angle is incorrect.')
         self.assertTrue(np.allclose(dx, 1.0, rtol=RTOL), msg='Recovered x-spacing is incorrect.')
@@ -239,7 +239,7 @@ class TestRotationTool(TestBase):
         """`RotationTool`: This is primarily to make sure no errors arise"""
         r = RotationTool()
         pts = ROTATED_POINTS
-        dx, dy, angle = r.EstimateAndRotate(pts[:,0], pts[:,1], pts[:,2])[3::]
+        dx, dy, angle = r.estimate_and_rotate(pts[:,0], pts[:,1], pts[:,2])[3::]
         self.assertTrue(np.allclose(angle, np.deg2rad(53.55), rtol=self.RTOL), msg='Recovered angle is incorrect.')
         self.assertTrue(np.allclose(dx, 25.0, rtol=0.1), msg='Recovered x-spacing is incorrect.')
         self.assertTrue(np.allclose(dy, 25.0, rtol=0.1), msg='Recovered y-spacing is incorrect.')
@@ -268,7 +268,7 @@ class TestRotatePoints(TestBase):
         """`RotatePoints`: Assert produces and output"""
         f = RotatePoints()
         f.SetInputDataObject(self.vtkpoints)
-        f.SetRotationDegrees(33.3)
+        f.set_rotation_degrees(33.3)
         f.Update()
         output = f.GetOutput()
         self.assertIsNotNone(output)
@@ -297,7 +297,7 @@ class TestVoxelizePoints(TestBase):
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
-        v.SetSafeSize(5.0)
+        v.set_safe_size(5.0)
         v.Update()
         grid = v.GetOutput()
         # Checkout output:
@@ -315,7 +315,7 @@ class TestVoxelizePoints(TestBase):
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
-        v.SetSafeSize(5.0)
+        v.set_safe_size(5.0)
         v.Update()
         grid = v.GetOutput()
         # Checkout output:
@@ -339,10 +339,10 @@ class TestVoxelizePoints(TestBase):
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
-        v.SetEstimateGrid(False) # Cell size is explicitly set
-        v.SetDeltaX(10)
-        v.SetDeltaY(10)
-        v.SetDeltaZ(10)
+        v.set_estimate_grid(False) # Cell size is explicitly set
+        v.set_delta_x(10)
+        v.set_delta_y(10)
+        v.set_delta_z(10)
         v.Update()
         grid = v.GetOutput()
         wgrd = dsa.WrapDataObject(grid)
@@ -355,7 +355,7 @@ class TestVoxelizePoints(TestBase):
 
         # Now check that we can set the spacing for every cell
         spac = np.full((len(points)), 10.0)
-        v.SetDeltas(spac, spac, spac)
+        v.set_deltas(spac, spac, spac)
         v.Update()
         grid = v.GetOutput()
         wgrd = dsa.WrapDataObject(grid)
@@ -410,26 +410,26 @@ class TestArrayMath(TestBase):
 
     def test_get_operations(self):
         """`ArrayMath`: get operations"""
-        op = ArrayMath.GetOperation('add')
+        op = ArrayMath.get_operation('add')
         self.assertIsNotNone(op)
-        op = ArrayMath.GetOperation('subtract')
+        op = ArrayMath.get_operation('subtract')
         self.assertIsNotNone(op)
-        op = ArrayMath.GetOperation('multiply')
+        op = ArrayMath.get_operation('multiply')
         self.assertIsNotNone(op)
-        op = ArrayMath.GetOperation('divide')
+        op = ArrayMath.get_operation('divide')
         self.assertIsNotNone(op)
-        op = ArrayMath.GetOperation('correlate')
+        op = ArrayMath.get_operation('correlate')
         self.assertIsNotNone(op)
 
     def _gen_and_check(self, op, check, flip=False):
         # Perform filter
         f = ArrayMath()
-        f.SetOperation(op)
-        f.SetNewArrayName('test')
+        f.set_operation(op)
+        f.set_new_array_name('test')
         if flip:
-            output = f.Apply(self.t0, self.titles[1], self.titles[0])
+            output = f.apply(self.t0, self.titles[1], self.titles[0])
         else:
-            output = f.Apply(self.t0, self.titles[0], self.titles[1])
+            output = f.apply(self.t0, self.titles[0], self.titles[1])
         wout = dsa.WrapDataObject(output)
         arr = wout.RowData['test']
         self.assertTrue(np.allclose(arr, check, rtol=RTOL))
@@ -437,7 +437,7 @@ class TestArrayMath(TestBase):
 
     def test_add(self):
         """`ArrayMath`: ADD"""
-        op = ArrayMath.GetOperation('add')
+        op = ArrayMath.get_operation('add')
         check = self.arrs[0] + self.arrs[1]
         self._gen_and_check(op, check)
         # now flip order and check
@@ -447,7 +447,7 @@ class TestArrayMath(TestBase):
 
     def test_subtract(self):
         """`ArrayMath`: SUBTRACT"""
-        op = ArrayMath.GetOperation('subtract')
+        op = ArrayMath.get_operation('subtract')
         check = self.arrs[0] - self.arrs[1]
         self._gen_and_check(op, check)
         # now flip order and check
@@ -456,7 +456,7 @@ class TestArrayMath(TestBase):
 
     def test_multiply(self):
         """`ArrayMath`: MULTIPLY"""
-        op = ArrayMath.GetOperation('multiply')
+        op = ArrayMath.get_operation('multiply')
         check = self.arrs[0] * self.arrs[1]
         self._gen_and_check(op, check)
         # now flip order and check
@@ -465,7 +465,7 @@ class TestArrayMath(TestBase):
 
     def test_divide(self):
         """`ArrayMath`: DIVIDE"""
-        op = ArrayMath.GetOperation('divide')
+        op = ArrayMath.get_operation('divide')
         check = self.arrs[0] / self.arrs[1]
         self._gen_and_check(op, check)
         # now flip order and check
@@ -474,7 +474,7 @@ class TestArrayMath(TestBase):
 
     def test_correlate(self):
         """`ArrayMath`: CORRELATE"""
-        op = ArrayMath.GetOperation('correlate')
+        op = ArrayMath.get_operation('correlate')
         check = np.correlate(self.arrs[0], self.arrs[1], mode='same')
         self._gen_and_check(op, check)
         # now flip order and check
@@ -503,24 +503,24 @@ class TestNormalizeArray(TestBase):
 
     def test_get_operations(self):
         """`NormalizeArray`: get operations"""
-        op = NormalizeArray.GetNormalization('feature_scale')
+        op = NormalizeArray.get_normalization('feature_scale')
         self.assertIsNotNone(op)
-        op = NormalizeArray.GetNormalization('standard_score')
+        op = NormalizeArray.get_normalization('standard_score')
         self.assertIsNotNone(op)
-        op = NormalizeArray.GetNormalization('log10')
+        op = NormalizeArray.get_normalization('log10')
         self.assertIsNotNone(op)
-        op = NormalizeArray.GetNormalization('natural_log')
+        op = NormalizeArray.get_normalization('natural_log')
         self.assertIsNotNone(op)
-        op = NormalizeArray.GetNormalization('just_multiply')
+        op = NormalizeArray.get_normalization('just_multiply')
         self.assertIsNotNone(op)
 
     def _gen_and_check(self, op, check, flip=False):
         # Perform filter
         f = NormalizeArray()
-        f.SetNormalization(op)
-        f.SetNewArrayName('test')
+        f.set_normalization(op)
+        f.set_new_array_name('test')
         # Now test the result
-        output = f.Apply(self.t0, self.title)
+        output = f.apply(self.t0, self.title)
         wout = dsa.WrapDataObject(output)
         arr = wout.RowData['test']
         self.assertTrue(np.allclose(arr, check, rtol=RTOL))
@@ -528,32 +528,32 @@ class TestNormalizeArray(TestBase):
 
     def test_feature_scale(self):
         """`NormalizeArray`: FEATURE SCALE"""
-        op = NormalizeArray.GetNormalization('feature_scale')
-        check = NormalizeArray._featureScale(self.arr)
+        op = NormalizeArray.get_normalization('feature_scale')
+        check = NormalizeArray._feature_scale(self.arr)
         self._gen_and_check(op, check)
 
     def test_standard_score(self):
         """`NormalizeArray`: STANDARD SCORE"""
-        op = NormalizeArray.GetNormalization('standard_score')
-        check = NormalizeArray._standardScore(self.arr)
+        op = NormalizeArray.get_normalization('standard_score')
+        check = NormalizeArray._standard_score(self.arr)
         self._gen_and_check(op, check)
 
     def test_log10(self):
         """`NormalizeArray`: LOG10"""
-        op = NormalizeArray.GetNormalization('log10')
+        op = NormalizeArray.get_normalization('log10')
         check = NormalizeArray._log10(self.arr)
         self._gen_and_check(op, check)
 
     def test_natural_log(self):
         """`NormalizeArray`: NATURAL LOG"""
-        op = NormalizeArray.GetNormalization('natural_log')
-        check = NormalizeArray._logNat(self.arr)
+        op = NormalizeArray.get_normalization('natural_log')
+        check = NormalizeArray._log_nat(self.arr)
         self._gen_and_check(op, check)
 
     def test_just_multiply(self):
         """`NormalizeArray`: MULTIPLY"""
-        op = NormalizeArray.GetNormalization('just_multiply')
-        check = NormalizeArray._passArray(self.arr)
+        op = NormalizeArray.get_normalization('just_multiply')
+        check = NormalizeArray._pass_array(self.arr)
         self._gen_and_check(op, check)
 
 
@@ -602,7 +602,7 @@ class TestAddCellConnToPoints(TestBase):
         self.makeSimpleInput()
         f = AddCellConnToPoints()
         f.SetInputDataObject(self.vtkpoints)
-        f.SetCellType(vtk.VTK_POLY_LINE)
+        f.set_cell_type(vtk.VTK_POLY_LINE)
         f.Update()
         output = f.GetOutput()
         self.assertEqual(1, output.GetNumberOfCells())
@@ -610,8 +610,8 @@ class TestAddCellConnToPoints(TestBase):
         self.makeComplicatedInput()
         f = AddCellConnToPoints()
         f.SetInputDataObject(self.vtkpoints)
-        f.SetCellType(vtk.VTK_POLY_LINE)
-        f.SetUseNearestNbr(True)
+        f.set_cell_type(vtk.VTK_POLY_LINE)
+        f.set_use_nearest_nbr(True)
         f.Update()
         output = f.GetOutput()
         self.assertEqual(1, output.GetNumberOfCells())
@@ -626,7 +626,7 @@ class TestAddCellConnToPoints(TestBase):
         self.makeSimpleInput()
         f = AddCellConnToPoints()
         f.SetInputDataObject(self.vtkpoints)
-        f.SetCellType(vtk.VTK_LINE)
+        f.set_cell_type(vtk.VTK_LINE)
         f.Update()
         output = f.GetOutput()
         self.assertEqual(len(self.pts)-1, output.GetNumberOfCells())
@@ -634,8 +634,8 @@ class TestAddCellConnToPoints(TestBase):
         self.makeComplicatedInput()
         f = AddCellConnToPoints()
         f.SetInputDataObject(self.vtkpoints)
-        f.SetCellType(vtk.VTK_LINE)
-        f.SetUseNearestNbr(True)
+        f.set_cell_type(vtk.VTK_LINE)
+        f.set_use_nearest_nbr(True)
         f.Update()
         output = f.GetOutput()
         self.assertEqual(len(self.pts)-1, output.GetNumberOfCells())
@@ -681,8 +681,8 @@ class TestPointsToTube(TestBase):
         f = PointsToTube()
         f.SetInputDataObject(self.vtkpoints)
         f.SetRadius(20)
-        f.SetNumberOfSides(10)
-        f.SetUseNearestNbr(True)
+        f.set_number_of_sides(10)
+        f.set_use_nearest_nbr(True)
         f.Update()
         output = f.GetOutput()
         self.assertEqual(10, output.GetNumberOfCells())
@@ -711,7 +711,7 @@ if proj:
             # read in data that has Lat/Lon and pre converted points in zone 11
             data = pd.read_csv(self.filename)
             points = interface.pointsToPolyData(data[['longitude', 'latitude', 'altitude']])
-            converted = LonLatToUTM(zone=11).Apply(points)
+            converted = LonLatToUTM(zone=11).apply(points)
             converted.GetPoints()
             wpdi = dsa.WrapDataObject(converted)
             points = np.array(wpdi.Points)
@@ -730,7 +730,7 @@ class TestManySlicesAlongPoints(TestBase):
     def setUp(self):
         TestBase.setUp(self)
         # create a volumetric data set
-        self.grid = PVGeo.model_build.CreateTensorMesh().Apply()
+        self.grid = PVGeo.model_build.CreateTensorMesh().apply()
         # create a spline throught the data set
         def path1(y):
             """Equation: x = a(y-h)^2 + k"""
@@ -747,7 +747,7 @@ class TestManySlicesAlongPoints(TestBase):
     def test_along_points(self):
         """`ManySlicesAlongPoints`: slice along points"""
         # run the algorithms
-        slices = ManySlicesAlongPoints(n_slices=10).Apply(self.points, self.grid)
+        slices = ManySlicesAlongPoints(n_slices=10).apply(self.points, self.grid)
         self.assertTrue(isinstance(slices, vtk.vtkMultiBlockDataSet))
         self.assertEqual(10, slices.GetNumberOfBlocks())
         # Can we really test anything further on this?
@@ -757,12 +757,12 @@ class TestManySlicesAlongPoints(TestBase):
         """`SlideSliceAlongPoints`: use slider"""
         # Set up the algorithm
         alg = SlideSliceAlongPoints(n_slices=10)
-        slc = alg.Apply(self.points, self.grid)
+        slc = alg.apply(self.points, self.grid)
         self.assertTrue(isinstance(slc, vtk.vtkPolyData))
-        alg.SetLocation(30)
+        alg.set_location(30)
         alg.Update()
         self.assertTrue(isinstance(slc, vtk.vtkPolyData))
-        alg.SetLocation(95)
+        alg.set_location(95)
         alg.Update()
         self.assertTrue(isinstance(slc, vtk.vtkPolyData))
         # Can we really test anything further on this?
@@ -780,12 +780,12 @@ class TestManySlicesAlongAxis(TestBase):
     def setUp(self):
         TestBase.setUp(self)
         # create a volumetric data set
-        self.grid = PVGeo.model_build.CreateTensorMesh().Apply()
+        self.grid = PVGeo.model_build.CreateTensorMesh().apply()
 
     def test_along_axis(self):
         """`ManySlicesAlongAxis`: along axis"""
         # run the algorithm
-        slices = ManySlicesAlongAxis(n_slices=10, axis=0).Apply(self.grid)
+        slices = ManySlicesAlongAxis(n_slices=10, axis=0).apply(self.grid)
         self.assertTrue(isinstance(slices, vtk.vtkMultiBlockDataSet))
         self.assertEqual(10, slices.GetNumberOfBlocks())
         # Can we really test anything further on this?
@@ -796,7 +796,7 @@ class TestManySlicesAlongAxis(TestBase):
         """`SliceThroughTime`: along axis"""
         # Set up the algorithm
         alg = SliceThroughTime(n_slices=10, axis=1)
-        slc = alg.Apply(self.grid)
+        slc = alg.apply(self.grid)
         self.assertTrue(isinstance(slc, vtk.vtkPolyData))
         alg.UpdateTimeStep(1)
         self.assertTrue(isinstance(slc, vtk.vtkPolyData))
@@ -816,8 +816,8 @@ class TestPercentThreshold(TestBase):
 
     def test(self):
         """`PercentThreshold`: make sure no errors arise"""
-        data = PVGeo.model_build.CreateTensorMesh().Apply()
-        thresh = PercentThreshold(percent=75).Apply(data, 'Random Data')
+        data = PVGeo.model_build.CreateTensorMesh().apply()
+        thresh = PercentThreshold(percent=75).apply(data, 'Random Data')
         self.assertTrue(isinstance(thresh, vtk.vtkUnstructuredGrid))
         return True
 
@@ -841,7 +841,7 @@ class TestArraysToRGBA(TestBase):
         df = pd.DataFrame(data=np.c_[r,g,b,r,g,b,a], columns=['x','y','z','R','G','B','A'])
         data = interface.pointsToPolyData(df)
         # Set up the algorithm
-        colored = ArraysToRGBA().Apply(data, 'R', 'G', 'B', 'A')
+        colored = ArraysToRGBA().apply(data, 'R', 'G', 'B', 'A')
         # Make sure there is a new 'Colors' Array
         arr = colored.GetPointData().GetArray('Colors')
         self.assertTrue(isinstance(arr, vtk.vtkUnsignedCharArray))

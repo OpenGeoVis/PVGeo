@@ -88,7 +88,7 @@ class TableToTimeGrid(FilterBase):
         img.SetOrigin(ox, oy, oz)
         return img
 
-    def _UpdateTimeSteps(self):
+    def _update_time_steps(self):
         """For internal use only: appropriately sets the timesteps.
         """
         nt = self.__extent[self.__dims[3]]
@@ -135,7 +135,7 @@ class TableToTimeGrid(FilterBase):
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         # Now set the number of timesteps:
-        self._UpdateTimeSteps()
+        self._update_time_steps()
         return 1
 
 
@@ -173,18 +173,18 @@ class TableToTimeGrid(FilterBase):
             self.__origin = [x0, y0, z0]
             self.Modified()
 
-    def SetOrder(self, order):
+    def set_order(self, order):
         """Set the reshape order (`'C'` or `'F'`)"""
         if self.__order != order:
             self.__order = order
             self.Modified(run_again=True)
 
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps on the pipeline.
         """
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
-    def SetTimeDelta(self, dt):
+    def set_time_delta(self, dt):
         """An advanced property to set the time step in seconds.
         """
         if dt != self.__dt:

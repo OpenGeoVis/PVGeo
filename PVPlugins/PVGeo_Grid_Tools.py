@@ -95,21 +95,21 @@ class PVGeoTableToTimeGrid(TableToTimeGrid):
         TableToTimeGrid.SetOrigin(self, x0, y0, z0)
 
 
-    @smproperty.xml(_helpers.get_drop_down_xml(name='Order', command='SetOrder',
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Order', command='set_order',
         labels=['C-style: Row-major order', 'Fortran-style: column-major order'],
         values=[0, 1]))
-    def SetOrder(self, order):
+    def set_order(self, order):
         o = ['C', 'F']
-        TableToTimeGrid.SetOrder(self, o[order])
+        TableToTimeGrid.set_order(self, o[order])
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        TableToTimeGrid.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        TableToTimeGrid.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return TableToTimeGrid.GetTimestepValues(self)
+        return TableToTimeGrid.get_time_step_values(self)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Point Data', command='SetUsePoints', default_values=False, panel_visibility='advanced', help='Set whether or not to place the data on the nodes/cells of the grid. In ParaView, switching can be a bit buggy: be sure to turn the visibility of this data object OFF on the pipeline when changing bewteen nodes/cells.'))
     def SetUsePoints(self, flag):
@@ -142,9 +142,9 @@ class PVGeoExtractTopography(ExtractTopography):
     def SetOffset(self, offset):
         ExtractTopography.SetOffset(self, offset)
 
-    @smproperty.xml(_helpers.get_drop_down_xml(name='Operation', command='SetOperation', labels=ExtractTopography.GetOperationNames(), help='This is the type of extraction operation to apply'))
-    def SetOperation(self, op):
-        ExtractTopography.SetOperation(self, op)
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Operation', command='set_operation', labels=ExtractTopography.get_operation_names(), help='This is the type of extraction operation to apply'))
+    def set_operation(self, op):
+        ExtractTopography.set_operation(self, op)
 
     @smproperty.xml(_helpers.get_property_xml(name='Invert',
         command='SetInvert',
@@ -175,13 +175,13 @@ class PVGeoSurferGridReader(SurferGridReader):
         SurferGridReader.SetDataName(self, data_name)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        SurferGridReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        SurferGridReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return SurferGridReader.GetTimestepValues(self)
+        return SurferGridReader.get_time_step_values(self)
 
 
 ###############################################################################
@@ -259,13 +259,13 @@ class PVGeoEsriGridReader(EsriGridReader):
         EsriGridReader.SetDataName(self, data_name)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        EsriGridReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        EsriGridReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return EsriGridReader.GetTimestepValues(self)
+        return EsriGridReader.get_time_step_values(self)
 
 
 

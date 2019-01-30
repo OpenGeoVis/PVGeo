@@ -31,13 +31,13 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        PackedBinariesReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        PackedBinariesReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return PackedBinariesReader.GetTimestepValues(self)
+        return PackedBinariesReader.get_time_step_values(self)
 
     @smproperty.xml(_helpers.get_drop_down_xml('Endian','SetEndian',
         ['Native', 'Little-Endian', 'Big-Endian'],
@@ -78,13 +78,13 @@ class PVGeoMadagascarReader(MadagascarReader):
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        MadagascarReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        MadagascarReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return MadagascarReader.GetTimestepValues(self)
+        return MadagascarReader.get_time_step_values(self)
 
     @smproperty.xml(_helpers.get_drop_down_xml('Endian','SetEndian',
         ['Native', 'Little-Endian', 'Big-Endian'],
@@ -126,13 +126,13 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        DelimitedTextReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        DelimitedTextReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return DelimitedTextReader.GetTimestepValues(self)
+        return DelimitedTextReader.get_time_step_values(self)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):
@@ -177,13 +177,13 @@ class PVGeoXYZTextReader(XYZTextReader):
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        XYZTextReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        XYZTextReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return XYZTextReader.GetTimestepValues(self)
+        return XYZTextReader.get_time_step_values(self)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
     def SetDelimiter(self, deli):

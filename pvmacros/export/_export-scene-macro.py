@@ -460,7 +460,7 @@ for rIdx in range(renderers.GetNumberOfItems()):
         if dataObject.GetNumberOfBlocks() == 1:
           dataset = dataObject.GetBlock(0)
         else:
-          print('Apply geometry filter')
+          print('apply geometry filter')
           gf = vtkCompositeDataGeometryFilter()
           gf.SetInputData(dataObject)
           gf.Update()

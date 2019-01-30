@@ -59,7 +59,7 @@ class TestTableToTimeGrid(TestBase):
         f.SetSpacing(5, 5, 5)
         f.SetOrigin(3.3, 6.0, 7)
         f.SetUsePoints(False)
-        f.SetOrder('C')
+        f.set_order('C')
         for t in range(2):
             f.UpdateTimeStep(t)
             ido = f.GetOutput()
@@ -96,7 +96,7 @@ class TestTableToTimeGrid(TestBase):
         f.SetSpacing(5, 5, 5)
         f.SetOrigin(3.3, 6.0, 7)
         f.SetUsePoints(False)
-        f.SetOrder('F')
+        f.set_order('F')
         for t in range(2):
             f.UpdateTimeStep(t)
             ido = f.GetOutput()
@@ -329,7 +329,7 @@ class TestExtractTopography(TestBase):
     def setUp(self):
         TestBase.setUp(self)
         # create a volumetric data set
-        self.grid = PVGeo.model_build.CreateTensorMesh().Apply()
+        self.grid = PVGeo.model_build.CreateTensorMesh().apply()
         # create an unudulating surface in the grid domain
         #   make XY random in the grid bounds
         #   make Z ranome within a very small domain inside the grid
@@ -356,9 +356,9 @@ class TestExtractTopography(TestBase):
         topo = interface.pointsToPolyData(points)
 
 
-        # # Apply filter
+        # # apply filter
         f = ExtractTopography()
-        grd = f.Apply(data, topo)
+        grd = f.apply(data, topo)
 
         # Test the output
         self.assertIsNotNone(grd)
@@ -384,16 +384,16 @@ class TestExtractTopography(TestBase):
 
     def test_underneath(self):
         """`ExtractTopography`: Test extraction on underneath surface"""
-        extracted = ExtractTopography(op='underneath').Apply(self.grid, self.points)
+        extracted = ExtractTopography(op='underneath').apply(self.grid, self.points)
 
 
     def test_intersection(self):
         """`ExtractTopography`: Test extraction on surface"""
-        extracted = ExtractTopography(op='intersection', tolerance=50).Apply(self.grid, self.points)
+        extracted = ExtractTopography(op='intersection', tolerance=50).apply(self.grid, self.points)
 
     def test_shifted_surface(self):
         """`ExtractTopography`: Test extraction for shifted surface"""
-        extracted = ExtractTopography(op='intersection', tolerance=50, offset=-250).Apply(self.grid, self.points)
+        extracted = ExtractTopography(op='intersection', tolerance=50, offset=-250).apply(self.grid, self.points)
 
 
 class TestCellCenterWriter(TestBase):
@@ -415,8 +415,8 @@ class TestCellCenterWriter(TestBase):
     def test(self):
         """`SurferGridReader` and `WriteImageDataToSurfer`: Test reader and writer for Surfer format"""
         # create some input datasets
-        grid0 = PVGeo.model_build.CreateTensorMesh().Apply()
-        grid1 = PVGeo.model_build.CreateEvenRectilinearGrid().Apply()
+        grid0 = PVGeo.model_build.CreateTensorMesh().apply()
+        grid1 = PVGeo.model_build.CreateEvenRectilinearGrid().apply()
 
         # make a composite dataset
         comp = vtk.vtkMultiBlockDataSet()

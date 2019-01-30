@@ -64,7 +64,7 @@ class CombineTables(FilterBase):
             pdo.GetRowData().AddArray(arr)
         return 1
 
-    def Apply(self, table0, table1):
+    def apply(self, table0, table1):
         """Run the algorithm on the two input tables"""
         self.SetInputDataObject(0, table0)
         self.SetInputDataObject(1, table1)
@@ -93,7 +93,7 @@ class ReshapeTable(FilterBase):
         self.__names = kwargs.get('names', [])
         self.__order = kwargs.get('order', 'F')
 
-    def _Reshape(self, pdi, pdo):
+    def _reshape(self, pdi, pdo):
         """Internal helper to perfrom the reshape
         """
         # Get number of columns
@@ -145,13 +145,13 @@ class ReshapeTable(FilterBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
-        self._Reshape(pdi, pdo)
+        self._reshape(pdi, pdo)
         return 1
 
 
     #### Seters and Geters ####
 
-    def SetNames(self, names):
+    def set_names(self, names):
         """Set names using a semicolon (;) seperated string or a list of strings
 
         Args:
@@ -165,18 +165,18 @@ class ReshapeTable(FilterBase):
             self.__names = names
             self.Modified()
 
-    def AddName(self, name):
+    def add_name(self, name):
         """Use to append a name to the list of data array names for the output
         table.
         """
         self.__names.append(name)
         self.Modified()
 
-    def GetNames(self):
+    def get_names(self):
         """Returns a list of the names given to the new arrays"""
         return self.__names
 
-    def SetNumberOfColumns(self, ncols):
+    def set_number_of_columns(self, ncols):
         """Set the number of columns for the output ``vtkTable``
         """
         if isinstance(ncols, float):
@@ -185,7 +185,7 @@ class ReshapeTable(FilterBase):
             self.__ncols = ncols
             self.Modified()
 
-    def SetNumberOfRows(self, nrows):
+    def set_number_of_rows(self, nrows):
         """Set the number of rows for the output ``vtkTable``
         """
         if isinstance(nrows, float):
@@ -194,7 +194,7 @@ class ReshapeTable(FilterBase):
             self.__nrows = nrows
             self.Modified()
 
-    def SetOrder(self, order):
+    def set_order(self, order):
         """Set the reshape order (``'C'`` of ``'F'``)
         """
         if self.__order != order:
@@ -251,7 +251,7 @@ class ExtractArray(FilterBase):
             self.Modified()
         return 1
 
-    def Apply(self, input_data_object, array_name):
+    def apply(self, input_data_object, array_name):
         """Run the algorithm on the input data object, specifying the array name
         to extract.
         """
@@ -324,7 +324,7 @@ class SplitTableOnArray(FilterBase):
         return 1
 
 
-    def Apply(self, input_data_object, array_name):
+    def apply(self, input_data_object, array_name):
         """Run the algorithm on the input data object, specifying the array name
         to use for the split.
         """
@@ -352,7 +352,7 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         self.__timesteps = None
 
 
-    def _UpdateTimeSteps(self):
+    def _update_time_steps(self):
         """For internal use only: appropriately sets the timesteps.
         """
         # Use the inputs' timesteps: this merges the timesteps values
@@ -385,10 +385,10 @@ class AppendTableToCellData(FilterPreserveTypeBase):
 
     def RequestInformation(self, request, inInfo, outInfo):
         """Used by pipeline to handle time variance"""
-        self._UpdateTimeSteps()
+        self._update_time_steps()
         return 1
 
-    def Apply(self, dataset, table):
+    def apply(self, dataset, table):
         """Update the algorithm and get the output data object
 
         Args:
@@ -403,10 +403,10 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps.
         """
         # if unset, force at least one attempt to set the timesteps
-        if self.__timesteps is None: self._UpdateTimeSteps()
+        if self.__timesteps is None: self._update_time_steps()
         # self.__timesteps should already be of type list
         return self.__timesteps if self.__timesteps is not None else None
