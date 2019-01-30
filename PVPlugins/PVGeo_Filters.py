@@ -29,18 +29,18 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
+    @smproperty.xml(_helpers.get_drop_down_xml(name='CellType', command='SetCellType',
         labels=['Line', 'Poly Line'], values=[3, 4]))
     def SetCellType(self, cell_type):
         AddCellConnToPoints.SetCellType(self, cell_type)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Neareast Nbr Approx',
+    @smproperty.xml(_helpers.get_property_xml(name='Use Neareast Nbr Approx',
         command='SetUseNearestNbr', default_values=False,
         help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
     def SetUseNearestNbr(self, flag):
         AddCellConnToPoints.SetUseNearestNbr(self, flag)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
+    @smproperty.xml(_helpers.get_property_xml(name='Use Unique Points',
         command='SetUseUniquePoints', default_values=False,
         help='Set a flag on whether to only use unique points'))
     def SetUseUniquePoints(self, flag):
@@ -75,7 +75,7 @@ class PVGeoSplitTableOnArray(SplitTableOnArray):
     def __init__(self):
         SplitTableOnArray.__init__(self)
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
+    @smproperty.xml(_helpers.get_input_array_xml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return SplitTableOnArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -108,24 +108,24 @@ class PVGeoPointsToTube(PointsToTube):
     def SetNumberOfSides(self, num):
         PointsToTube.SetNumberOfSides(self, num)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Nearest Neighbor',
+    @smproperty.xml(_helpers.get_property_xml(name='Use Nearest Neighbor',
         command='SetUseNearestNbr', default_values=False,
         help='A boolean to set whether to use a nearest neighbor approxiamtion when building path from input points.'))
     def SetUseNearestNbr(self, flag):
         PointsToTube.SetUseNearestNbr(self, flag)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Capping',
+    @smproperty.xml(_helpers.get_property_xml(name='Capping',
         command='SetCapping', default_values=False,
         help='A boolean to set whether to cap the ends of the tube.'))
     def SetCapping(self, flag):
         PointsToTube.SetCapping(self, flag)
 
-    @smproperty.xml(_helpers.getDropDownXml(name='CellType', command='SetCellType',
+    @smproperty.xml(_helpers.get_drop_down_xml(name='CellType', command='SetCellType',
         labels=['Line', 'Poly Line'], values=[3, 4]))
     def SetCellType(self, cell_type):
         PointsToTube.SetCellType(self, cell_type)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Unique Points',
+    @smproperty.xml(_helpers.get_property_xml(name='Use Unique Points',
         command='SetUseUniquePoints', default_values=False,
         help='Set a flag on whether to only use unique points'))
     def SetUseUniquePoints(self, flag):
@@ -160,7 +160,7 @@ class PVGeoReshapeTable(ReshapeTable):
     def SetNumberOfRows(self, nrows):
         ReshapeTable.SetNumberOfRows(self, nrows)
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Order', command='SetOrder',
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Order', command='SetOrder',
         labels=['Fortran-style: column-major order', 'C-style: Row-major order'],
         values=[0, 1]))
     def SetOrder(self, order):
@@ -187,13 +187,13 @@ class PVGeoVoxelizePoints(VoxelizePoints):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Estimate Grid Spacing',
+    @smproperty.xml(_helpers.get_property_xml(name='Estimate Grid Spacing',
         command='SetEstimateGrid', default_values=True,
         help='A boolean to set whether to try to estimate the proper dx, dy, and dz spacings for a grid on a regular cartesian coordinate system.', panel_visibility='advanced'))
     def SetEstimateGrid(self, flag):
         VoxelizePoints.SetEstimateGrid(self, flag)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Cell Size', command='SetCellSize', default_values=[10.0, 10.0, 10.0], help='The cell size (dx, dy, dz) to use as a default for all generated voxels.', panel_visibility='advanced'))
+    @smproperty.xml(_helpers.get_property_xml(name='Cell Size', command='SetCellSize', default_values=[10.0, 10.0, 10.0], help='The cell size (dx, dy, dz) to use as a default for all generated voxels.', panel_visibility='advanced'))
     def SetCellSize(self, dx, dy, dz):
         VoxelizePoints.SetDeltas(self, dx, dy, dz)
 
@@ -224,16 +224,16 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         for i in range(pdi.GetPointData().GetNumberOfArrays()):
             arr = pdi.GetPointData().GetArray(i)
             if arr.GetName() not in exclude:
-                _helpers.addArray(pdo, 1, arr) # adds to CELL data
+                _helpers.add_array(pdo, 1, arr) # adds to CELL data
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):
         # Handle input arrays
         pdi = self.GetInputData(inInfo, 0, 0)
         wpdi = dsa.WrapDataObject(pdi)
-        dx = _helpers.getNumPyArray(wpdi, self.__dx_id[0], self.__dx_id[1])
-        dy = _helpers.getNumPyArray(wpdi, self.__dy_id[0], self.__dy_id[1])
-        dz = _helpers.getNumPyArray(wpdi, self.__dz_id[0], self.__dz_id[1])
+        dx = _helpers.get_numpy_array(wpdi, self.__dx_id[0], self.__dx_id[1])
+        dy = _helpers.get_numpy_array(wpdi, self.__dy_id[0], self.__dy_id[1])
+        dz = _helpers.get_numpy_array(wpdi, self.__dz_id[0], self.__dz_id[1])
         VoxelizePoints.SetDeltas(self, dx, dy, dz)
         # call parent and make sure EstimateGrid is set to False
         return VoxelizePoints.RequestData(self, request, inInfo, outInfo)
@@ -241,7 +241,7 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
     #### Seters and Geters ####
 
     #(int idx, int port, int connection, int fieldAssociation, const char *name)
-    @smproperty.xml(_helpers.getInputArrayXml(labels=['dx','dy','dz'], nInputPorts=1, n_arrays=3))
+    @smproperty.xml(_helpers.get_input_array_xml(labels=['dx','dy','dz'], nInputPorts=1, n_arrays=3))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         if idx == 0:
             self.__dx_id = [field, name]
@@ -267,7 +267,7 @@ class PVGeoNormalizeArray(NormalizeArray):
 
     #### SETTERS AND GETTERS ####
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
+    @smproperty.xml(_helpers.get_input_array_xml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return NormalizeArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -279,11 +279,11 @@ class PVGeoNormalizeArray(NormalizeArray):
     def SetNewArrayName(self, name):
         NormalizeArray.SetNewArrayName(self, name)
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Normalization', command='SetNormalization', labels=NormalizeArray.GetNormalizationNames(), help='This is the type of normalization to apply to the input array.'))
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Normalization', command='SetNormalization', labels=NormalizeArray.GetNormalizationNames(), help='This is the type of normalization to apply to the input array.'))
     def SetNormalization(self, norm):
         NormalizeArray.SetNormalization(self, norm)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Absolute Value', command='SetTakeAbsoluteValue', default_values=False, help='This will take the absolute value of the array before normalization.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Absolute Value', command='SetTakeAbsoluteValue', default_values=False, help='This will take the absolute value of the array before normalization.'))
     def SetTakeAbsoluteValue(self, flag):
         NormalizeArray.SetTakeAbsoluteValue(self, flag)
 
@@ -305,7 +305,7 @@ class PVGeoArrayMath(ArrayMath):
 
     #### SETTERS AND GETTERS ####
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=2))
+    @smproperty.xml(_helpers.get_input_array_xml(nInputPorts=1, n_arrays=2))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return ArrayMath.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -317,7 +317,7 @@ class PVGeoArrayMath(ArrayMath):
     def SetNewArrayName(self, name):
         ArrayMath.SetNewArrayName(self, name)
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Operation', command='SetOperation', labels=ArrayMath.GetOperationNames(), help='This is the type of operation to apply to the input arrays.'))
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Operation', command='SetOperation', labels=ArrayMath.GetOperationNames(), help='This is the type of operation to apply to the input arrays.'))
     def SetOperation(self, op):
         ArrayMath.SetOperation(self, op)
 
@@ -338,7 +338,7 @@ class PVGeoManySlicesAlongAxis(ManySlicesAlongAxis):
     def SetNumberOfSlices(self, num):
         ManySlicesAlongAxis.SetNumberOfSlices(self, num)
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Axis', command='SetAxis',
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Axis', command='SetAxis',
         labels=['X Axis', 'Y Axis', 'Z Axis'],
         values=[0, 1, 2]))
     def SetAxis(self, axis):
@@ -366,7 +366,7 @@ class PVGeoSliceThroughTime(SliceThroughTime):
     def SetTimeDelta(self, dt):
         SliceThroughTime.SetTimeDelta(self, dt)
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Axis', command='SetAxis',
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Axis', command='SetAxis',
         labels=['X Axis', 'Y Axis', 'Z Axis'],
         values=[0, 1, 2]))
     def SetAxis(self, axis):
@@ -398,7 +398,7 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
         ManySlicesAlongPoints.SetNumberOfSlices(self, num)
 
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Neareast Nbr Approx',
+    @smproperty.xml(_helpers.get_property_xml(name='Use Neareast Nbr Approx',
         command='SetUseNearestNbr', default_values=False,
         help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
     def SetUseNearestNbr(self, flag):
@@ -425,7 +425,7 @@ class PVGeoSlideSliceAlongPoints(SlideSliceAlongPoints):
         SlideSliceAlongPoints.SetLocation(self, loc)
 
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Neareast Nbr Approx',
+    @smproperty.xml(_helpers.get_property_xml(name='Use Neareast Nbr Approx',
         command='SetUseNearestNbr', default_values=False,
         help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
     def SetUseNearestNbr(self, flag):
@@ -454,7 +454,7 @@ class PVGeoRotatePoints(RotatePoints):
     def SetOrigin(self, xo, yo):
         RotatePoints.SetOrigin(self, xo, yo)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Corner',
+    @smproperty.xml(_helpers.get_property_xml(name='Use Corner',
         command='SetUseCorner', default_values=True,
         help='Use the corner as the rotation origin.', panel_visibility='advanced'))
     def SetUseCorner(self, flag):
@@ -492,18 +492,18 @@ class PVGeoPercentThreshold(PercentThreshold):
         PercentThreshold.SetPercent(self, percent)
 
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Continuous Cell Range',
+    @smproperty.xml(_helpers.get_property_xml(name='Use Continuous Cell Range',
         command='SetUseContinuousCellRange', default_values=False))
     def SetUseContinuousCellRange(self, flag):
         PercentThreshold.SetUseContinuousCellRange(self, flag)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Invert',
+    @smproperty.xml(_helpers.get_property_xml(name='Invert',
         command='SetInvert', default_values=False,
         help='Use to invert the threshold filter.'))
     def SetInvert(self, flag):
         PercentThreshold.SetInvert(self, flag)
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
+    @smproperty.xml(_helpers.get_input_array_xml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return PercentThreshold.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -520,7 +520,7 @@ class PVGeoExtractArray(ExtractArray):
     def __init__(self):
         ExtractArray.__init__(self)
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
+    @smproperty.xml(_helpers.get_input_array_xml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return ExtractArray.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -599,7 +599,7 @@ class PVGeoConvertUnits(ConvertUnits):
 
     #### SETTERS AND GETTERS ####
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Conversion', command='SetConversion', labels=ConvertUnits.LookupConversions(True), help='This will set the spatial conversion.'))
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Conversion', command='SetConversion', labels=ConvertUnits.LookupConversions(True), help='This will set the spatial conversion.'))
     def SetConversion(self, key):
         ConvertUnits.SetConversion(self, key)
 
@@ -623,7 +623,7 @@ try:
         def SetZone(self, zone):
             LonLatToUTM.SetZone(self, zone)
 
-        @smproperty.xml(_helpers.getDropDownXml(name='Ellps', command='SetEllps', labels=LonLatToUTM.GetAvailableEllps(), help='This will set the ellps.'))
+        @smproperty.xml(_helpers.get_drop_down_xml(name='Ellps', command='SetEllps', labels=LonLatToUTM.GetAvailableEllps(), help='This will set the ellps.'))
         def SetEllps(self, ellps):
             LonLatToUTM.SetEllps(self, ellps)
 except ImportError:
@@ -642,11 +642,11 @@ class PVGeoArraysToRGBA(ArraysToRGBA):
         ArraysToRGBA.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=4, labels=['Red', 'Green', 'Blue', 'Transparency']))
+    @smproperty.xml(_helpers.get_input_array_xml(nInputPorts=1, n_arrays=4, labels=['Red', 'Green', 'Blue', 'Transparency']))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return ArraysToRGBA.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Transparency',
+    @smproperty.xml(_helpers.get_property_xml(name='Use Transparency',
         command='SetUseTransparency', default_values=False,
         help='A boolean to control whether or not to use the Transparency array.'))
     def SetUseTransparency(self, flag):

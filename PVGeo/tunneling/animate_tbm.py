@@ -43,17 +43,17 @@ def RequestData():
     #- Grab all fields for input arrays:
     fields = []
     for i in range(3):
-        fields.append(inputhelp.getSelectedArrayField(self, i))
+        fields.append(inputhelp.get_selected_array_field(self, i))
     #- Simply grab the names
     names = []
     for i in range(9):
-        names.append(inputhelp.getSelectedArrayName(self, i))
+        names.append(inputhelp.get_selected_array_name(self, i))
     # Pass array names and associations on to process
     # Get the input arrays
     wpdi = dsa.WrapDataObject(pdi)
     arrs = []
     for i in range(9):
-        arrs.append(inputhelp.getArray(wpdi, fields[i], names[i]))
+        arrs.append(inputhelp.get_array(wpdi, fields[i], names[i]))
 
     # grab coordinates for each part of boring machine at time idx as row
     executive = self.GetExecutive()

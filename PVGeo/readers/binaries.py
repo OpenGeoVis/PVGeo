@@ -94,7 +94,7 @@ class PackedBinariesReader(ReaderBase):
         if self.NeedToRead():
             self._ReadUpFront()
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         # Generate the data object
         arr = self._GetRawData(idx=i)
         data = self.ConvertArray(arr)

@@ -400,7 +400,7 @@ class SliceThroughTime(ManySlicesAlongAxis):
     def _UpdateTimeSteps(self):
         """For internal use only
         """
-        self.__timesteps = _helpers.updateTimeSteps(self, self.GetNumberOfSlices(), self.__dt)
+        self.__timesteps = _helpers.update_time_steps(self, self.GetNumberOfSlices(), self.__dt)
 
     #### Algorithm Methods ####
 
@@ -411,7 +411,7 @@ class SliceThroughTime(ManySlicesAlongAxis):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         self._SetAxialRange(pdi)
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         # Perfrom task
         normal = self.GetNormal()
         origin = self._GetOrigin(pdi, i)

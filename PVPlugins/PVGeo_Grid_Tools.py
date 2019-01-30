@@ -27,15 +27,15 @@ class PVGeoReverseImageDataAxii(ReverseImageDataAxii):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Flip X Axis', command='SetFlipX', default_values=True, help='A boolean to set whether to flip the X axis.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Flip X Axis', command='SetFlipX', default_values=True, help='A boolean to set whether to flip the X axis.'))
     def SetFlipX(self, flag):
         ReverseImageDataAxii.SetFlipX(self, flag)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Flip Y Axis', command='SetFlipY', default_values=True, help='A boolean to set whether to flip the Y axis.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Flip Y Axis', command='SetFlipY', default_values=True, help='A boolean to set whether to flip the Y axis.'))
     def SetFlipY(self, flag):
         ReverseImageDataAxii.SetFlipY(self, flag)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Flip Z Axis', command='SetFlipZ', default_values=True, help='A boolean to set whether to flip the Z axis.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Flip Z Axis', command='SetFlipZ', default_values=True, help='A boolean to set whether to flip the Z axis.'))
     def SetFlipZ(self, flag):
         ReverseImageDataAxii.SetFlipZ(self, flag)
 
@@ -53,7 +53,7 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Corner', command='SetCorner',
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Corner', command='SetCorner',
         labels=['South East Bottom', 'North West Bottom', 'North East Bottom',
         'South West Top', 'South East Top', 'North West Top', 'North East Top'],
         values=[1,2,3,4,5,6,7]))
@@ -95,7 +95,7 @@ class PVGeoTableToTimeGrid(TableToTimeGrid):
         TableToTimeGrid.SetOrigin(self, x0, y0, z0)
 
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Order', command='SetOrder',
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Order', command='SetOrder',
         labels=['C-style: Row-major order', 'Fortran-style: column-major order'],
         values=[0, 1]))
     def SetOrder(self, order):
@@ -111,7 +111,7 @@ class PVGeoTableToTimeGrid(TableToTimeGrid):
         """This is critical for registering the timesteps"""
         return TableToTimeGrid.GetTimestepValues(self)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Point Data', command='SetUsePoints', default_values=False, panel_visibility='advanced', help='Set whether or not to place the data on the nodes/cells of the grid. In ParaView, switching can be a bit buggy: be sure to turn the visibility of this data object OFF on the pipeline when changing bewteen nodes/cells.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Use Point Data', command='SetUsePoints', default_values=False, panel_visibility='advanced', help='Set whether or not to place the data on the nodes/cells of the grid. In ParaView, switching can be a bit buggy: be sure to turn the visibility of this data object OFF on the pipeline when changing bewteen nodes/cells.'))
     def SetUsePoints(self, flag):
         TableToTimeGrid.SetUsePoints(self, flag)
 
@@ -142,11 +142,11 @@ class PVGeoExtractTopography(ExtractTopography):
     def SetOffset(self, offset):
         ExtractTopography.SetOffset(self, offset)
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Operation', command='SetOperation', labels=ExtractTopography.GetOperationNames(), help='This is the type of extraction operation to apply'))
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Operation', command='SetOperation', labels=ExtractTopography.GetOperationNames(), help='This is the type of extraction operation to apply'))
     def SetOperation(self, op):
         ExtractTopography.SetOperation(self, op)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Invert',
+    @smproperty.xml(_helpers.get_property_xml(name='Invert',
         command='SetInvert',
         default_values=False,
         help='A boolean to set whether on whether to invert the extraction.'))
@@ -166,7 +166,7 @@ class PVGeoSurferGridReader(SurferGridReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(SurferGridReader.extensions, reader_description=SurferGridReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(SurferGridReader.extensions, reader_description=SurferGridReader.description))
     def AddFileName(self, filename):
         SurferGridReader.AddFileName(self, filename)
 
@@ -200,7 +200,7 @@ class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
         """Specify filename for the file to write."""
         WriteImageDataToSurfer.SetFileName(self, filename)
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
+    @smproperty.xml(_helpers.get_input_array_xml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return WriteImageDataToSurfer.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -250,7 +250,7 @@ class PVGeoEsriGridReader(EsriGridReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(EsriGridReader.extensions, reader_description=EsriGridReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(EsriGridReader.extensions, reader_description=EsriGridReader.description))
     def AddFileName(self, filename):
         EsriGridReader.AddFileName(self, filename)
 
@@ -282,7 +282,7 @@ class PVGeoLandsatReader(LandsatReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(LandsatReader.extensions, reader_description=LandsatReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(LandsatReader.extensions, reader_description=LandsatReader.description))
     def AddFileName(self, filename):
         LandsatReader.AddFileName(self, filename)
 
@@ -291,7 +291,7 @@ class PVGeoLandsatReader(LandsatReader):
         return LandsatReader.GetDataSelection(self)
 
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Cast Data Type',
+    @smproperty.xml(_helpers.get_property_xml(name='Cast Data Type',
         command='CastDataType',
         default_values=True,
         help='A boolean to set whether to cast the data arrays so invalid points are filled nans.',
@@ -300,7 +300,7 @@ class PVGeoLandsatReader(LandsatReader):
         LandsatReader.CastDataType(self, flag)
 
 
-    @smproperty.xml(_helpers.getDropDownXml(name='Color Scheme', command='SetColorScheme', labels=LandsatReader.GetColorSchemeNames(), help='Set a color scheme to use.'))
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Color Scheme', command='SetColorScheme', labels=LandsatReader.GetColorSchemeNames(), help='Set a color scheme to use.'))
     def SetColorScheme(self, scheme):
         LandsatReader.SetColorScheme(self, scheme)
 

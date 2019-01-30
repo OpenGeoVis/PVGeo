@@ -244,14 +244,14 @@ class GeologyMapper(FilterPreserveTypeBase):
         field, name = self.__input_array[0], self.__input_array[1]
         #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
-        arr = _helpers.getNumPyArray(wpdi, field, name)
+        arr = _helpers.get_numpy_array(wpdi, field, name)
 
         #### Perfrom task ####
         geol = self._ReadDefinitions(self.__filename, self.__deli)
         data = self._MapValues(geol, arr)
 
         pdo.DeepCopy(pdi)
-        interface.addArraysFromDataFrame(pdo, field, data)
+        interface.add_arraysFromDataFrame(pdo, field, data)
 
         return 1
 

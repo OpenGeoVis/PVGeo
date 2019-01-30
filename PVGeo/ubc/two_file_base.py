@@ -226,12 +226,12 @@ class ModelAppenderBase(base.AlgorithmBase):
         """For internal use only: appropriately sets the timesteps.
         """
         # Use the inputs' timesteps: this merges the timesteps values
-        ts0 = _helpers.getInputTimeSteps(self, port=0)
+        ts0 = _helpers.get_input_time_steps(self, port=0)
         if ts0 is None: ts0 = np.array([])
-        ts1 = _helpers._calculateTimeRange(len(self._model_filenames), self.__dt)
+        ts1 = _helpers._calculate_time_range(len(self._model_filenames), self.__dt)
         tsAll = np.unique(np.concatenate((ts0, ts1), 0))
         # Use both inputs' time steps
-        self.__timesteps = _helpers.updateTimeSteps(self, tsAll, explicit=True)
+        self.__timesteps = _helpers.update_time_steps(self, tsAll, explicit=True)
         return 1
 
     def _ReadUpFront(self):
@@ -249,7 +249,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         output = self.GetOutputData(outInfo, 0)
         output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         # Perfrom task:
         if self.__need_to_read:
             self._ReadUpFront()

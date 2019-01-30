@@ -313,7 +313,7 @@ class SurferGridReader(ReaderBase):
         if self.NeedToRead():
             self._ReadUpFront()
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         # Build the output
         grid = self.__grids[i]
         grid.toVTK(output=output, data_name=self.__data_name)
@@ -375,7 +375,7 @@ class WriteImageDataToSurfer(WriterBase):
 
         # Note user has to select a single array to save out
         field, name = self.__input_array[0], self.__input_array[1]
-        vtkarr = _helpers.getVTKArray(img, field, name)
+        vtkarr = _helpers.get_vtk_array(img, field, name)
         arr = interface.convertArray(vtkarr)
         dmin, dmax = arr.min(), arr.max()
 
@@ -415,7 +415,7 @@ class WriteImageDataToSurfer(WriterBase):
         to save out.
         """
         self.SetInputDataObject(input_data_object)
-        arr, field = _helpers.searchForArray(input_data_object, array_name)
+        arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
@@ -425,7 +425,7 @@ class WriteImageDataToSurfer(WriterBase):
         if input_data_object:
             self.SetInputDataObject(input_data_object)
             if array_name:
-                arr, field = _helpers.searchForArray(input_data_object, array_name)
+                arr, field = _helpers.search_for_array(input_data_object, array_name)
                 self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Modified()
         self.Update()
@@ -501,7 +501,7 @@ class EsriGridReader(DelimitedTextReader):
             self._ReadUpFront()
 
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
 
         # Build the data object
         output.SetOrigin(self.__xo, self.__yo, 0.0)
@@ -561,7 +561,7 @@ class LandsatReader(ReaderBaseBase):
         self.__scheme = 'infrared'
         # Properties:
         self._dataselection = vtk.vtkDataArraySelection()
-        self._dataselection.AddObserver("ModifiedEvent", _helpers.createModifiedCallback(self))
+        self._dataselection.AddObserver("ModifiedEvent", _helpers.create_modified_callback(self))
 
 
     def Modified(self, read_again=False):

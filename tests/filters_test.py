@@ -382,7 +382,7 @@ class TestExtractPoints(TestBase):
         f = ExtractPoints()
         f.SetInputDataObject(img)
         f.Update()
-        self.assertTrue(f.ErrorOccurred())
+        self.assertTrue(f.error_occurred())
         return
 
 

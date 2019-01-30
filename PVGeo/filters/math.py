@@ -132,8 +132,8 @@ class ArrayMath(FilterPreserveTypeBase):
         field1, name1 = self.__input_array_1[0], self.__input_array_1[1]
         field2, name2 = self.__input_array_2[0], self.__input_array_2[1]
         wpdi = dsa.WrapDataObject(pdi)
-        arr1 = _helpers.getNumPyArray(wpdi, field1, name1)
-        arr2 = _helpers.getNumPyArray(wpdi, field2, name2)
+        arr1 = _helpers.get_numpy_array(wpdi, field1, name1)
+        arr2 = _helpers.get_numpy_array(wpdi, field2, name2)
         # Perform Math Operation
         carr = self.__operation(arr1, arr2)
         # Apply the multiplier
@@ -146,7 +146,7 @@ class ArrayMath(FilterPreserveTypeBase):
         c = interface.convertArray(carr, name=new_name)
         # Build output
         pdo.DeepCopy(pdi)
-        pdo = _helpers.addArray(pdo, field1, c)
+        pdo = _helpers.add_array(pdo, field1, c)
         return pdo
 
 
@@ -207,8 +207,8 @@ class ArrayMath(FilterPreserveTypeBase):
     def Apply(self, input_data_object, array_name_0, array_name_1):
         """Run the algorith on an input data object, specifying array names"""
         self.SetInputDataObject(input_data_object)
-        arr0, field0 = _helpers.searchForArray(input_data_object, array_name_0)
-        arr1, field1 = _helpers.searchForArray(input_data_object, array_name_1)
+        arr0, field0 = _helpers.search_for_array(input_data_object, array_name_0)
+        arr1, field1 = _helpers.search_for_array(input_data_object, array_name_1)
         self.SetInputArrayToProcess(0, 0, 0, field0, array_name_0)
         self.SetInputArrayToProcess(1, 0, 0, field1, array_name_1)
         self.Update()
@@ -385,7 +385,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         ``vtkDataObject``.
         """
         wpdi = dsa.WrapDataObject(pdi)
-        arr = _helpers.getNumPyArray(wpdi, field, name)
+        arr = _helpers.get_numpy_array(wpdi, field, name)
         arr = np.array(arr)
         return (np.nanmin(arr), np.nanmax(arr))
 
@@ -397,7 +397,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         field, name = self.__input_array[0], self.__input_array[1]
         #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
-        arr = _helpers.getNumPyArray(wpdi, field, name)
+        arr = _helpers.get_numpy_array(wpdi, field, name)
         arr = np.array(arr, dtype=float)
         # Take absolute value?
         if self.__absolute:
@@ -415,7 +415,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         c = interface.convertArray(arr, name=new_name)
         # Build output
         pdo.DeepCopy(pdi)
-        pdo = _helpers.addArray(pdo, field, c)
+        pdo = _helpers.add_array(pdo, field, c)
         return pdo
 
     #### Algorithm Methods ####
@@ -456,7 +456,7 @@ class NormalizeArray(FilterPreserveTypeBase):
     def Apply(self, input_data_object, array_name):
         """Run the algorithm on an input data object, specifying the array"""
         self.SetInputDataObject(input_data_object)
-        arr, field = _helpers.searchForArray(input_data_object, array_name)
+        arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
@@ -548,7 +548,7 @@ class PercentThreshold(FilterBase):
         # Get Input Array
         field, name = self.__input_array[0], self.__input_array[1]
         wpdi = dsa.WrapDataObject(pdi)
-        arr = _helpers.getNumPyArray(wpdi, field, name)
+        arr = _helpers.get_numpy_array(wpdi, field, name)
 
         dmin, dmax = np.nanmin(arr), np.nanmax(arr)
         val = dmin + (self.__percent / 100.0) * (dmax - dmin)
@@ -609,7 +609,7 @@ class PercentThreshold(FilterBase):
     def Apply(self, input_data_object, array_name):
         """Run the algorithm on an input data object, specifying the array"""
         self.SetInputDataObject(input_data_object)
-        arr, field = _helpers.searchForArray(input_data_object, array_name)
+        arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
@@ -637,16 +637,16 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         """Internal helper to fetch RGBA arrays"""
         # Get Red
         fieldr, name = self.__r_array[0], self.__r_array[1]
-        r_arr = _helpers.getNumPyArray(wpdi, fieldr, name)
+        r_arr = _helpers.get_numpy_array(wpdi, fieldr, name)
         # Get Green
         fieldg, name = self.__g_array[0], self.__g_array[1]
-        g_arr = _helpers.getNumPyArray(wpdi, fieldg, name)
+        g_arr = _helpers.get_numpy_array(wpdi, fieldg, name)
         # Get Blue
         fieldb, name = self.__b_array[0], self.__b_array[1]
-        b_arr = _helpers.getNumPyArray(wpdi, fieldb, name)
+        b_arr = _helpers.get_numpy_array(wpdi, fieldb, name)
         # Get Trans
         fielda, name = self.__a_array[0], self.__a_array[1]
-        a_arr = _helpers.getNumPyArray(wpdi, fielda, name)
+        a_arr = _helpers.get_numpy_array(wpdi, fielda, name)
         if fieldr != fieldg != fieldb: # != fielda
             raise _helpers.PVGeoError('Data arrays must be of the same field.')
         self.__field = fieldr
@@ -690,7 +690,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         # Set the output
         pdo.DeepCopy(pdi)
         # Add new color array
-        _helpers.addArray(pdo, self.__field, colors)
+        _helpers.add_array(pdo, self.__field, colors)
         return 1
 
 
@@ -771,11 +771,11 @@ class ArraysToRGBA(FilterPreserveTypeBase):
     def Apply(self, input_data_object, r_array, g_array, b_array, a_array=None):
         """Run the algorithm on an input data object, specifying RGBA array names"""
         self.SetInputDataObject(input_data_object)
-        r_arr, rField = _helpers.searchForArray(input_data_object, r_array)
-        g_arr, gField = _helpers.searchForArray(input_data_object, g_array)
-        b_arr, bField = _helpers.searchForArray(input_data_object, b_array)
+        r_arr, rField = _helpers.search_for_array(input_data_object, r_array)
+        g_arr, gField = _helpers.search_for_array(input_data_object, g_array)
+        b_arr, bField = _helpers.search_for_array(input_data_object, b_array)
         if a_array is not None:
-            a_arr, aField = _helpers.searchForArray(input_data_object, a_array)
+            a_arr, aField = _helpers.search_for_array(input_data_object, a_array)
             self.SetInputArrayToProcess(3, 0, 0, aField, a_array)
             self.SetUseTransparency(True)
         self.SetInputArrayToProcess(0, 0, 0, rField, r_array)

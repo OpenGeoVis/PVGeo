@@ -135,7 +135,7 @@ class AddCellConnToPoints(FilterBase):
         pdo.SetPoints(pdi.GetPoints())
         pdo.SetLines(cells)
         # copy point data
-        _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        _helpers.copy_arrays_to_point_data(pdi, pdo, 0) # 0 is point data
         # Copy cell data if type is LINE
         if cell_type == vtk.VTK_LINE:
             # Be sure to rearange for Nearest neighbor approxiamtion
@@ -296,7 +296,7 @@ class LonLatToUTM(FilterBase):
         # Now Conver the points
         points = self.__Convert2D(coords[:, 0], coords[:, 1], coords[:, 2])
         pdo.DeepCopy(interface.pointsToPolyData(points))
-        _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        _helpers.copy_arrays_to_point_data(pdi, pdo, 0) # 0 is point data
         return 1
 
     def SetZone(self, zone):
@@ -688,7 +688,7 @@ class ExtractPoints(FilterBase):
         f.Update()
         d = f.GetOutput()
         pdo.ShallowCopy(interface.pointsToPolyData(points))
-        _helpers.copyArraysToPointData(d, pdo, 0) # 0 is point data
+        _helpers.copy_arrays_to_point_data(d, pdo, 0) # 0 is point data
         return 1
 
 
@@ -774,7 +774,7 @@ class IterateOverPoints(FilterBase):
     def _UpdateTimeSteps(self):
         """For internal use only
         """
-        self.__timesteps = _helpers.updateTimeSteps(self, self.__n, self.__dt)
+        self.__timesteps = _helpers.update_time_steps(self, self.__n, self.__dt)
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -787,7 +787,7 @@ class IterateOverPoints(FilterBase):
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         # Now grab point at this timestep
         pt = pdi.GetPoints().GetPoint(self.__tindex[i])
         # Calculate normal

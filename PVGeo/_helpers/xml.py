@@ -1,20 +1,20 @@
 # This file has a ton of convienance methods for generating extra XML for
 # the pvpluginss
 __all__ = [
-    'getPythonPathProperty',
-    'getReaderTimeStepValues',
-    'getVTKTypeMap',
-    'getPropertyXml',
-    'getFileReaderXml',
-    'getDropDownXml',
-    '_helpArraysXml',
-    'getInputArrayXml'
+    'get_python_path_property',
+    'get_reader_time_step_values',
+    'get_vtk_type_map',
+    'get_property_xml',
+    'get_file_reader_xml',
+    'get_drop_down_xml',
+    '_help_arrays_xml',
+    'get_input_array_xml'
 ]
 
 from . import errors as _helpers
 
 
-def getPythonPathProperty():
+def get_python_path_property():
     """Get the XML content for setting the Python path when making a ParaView
     plugin.
     """
@@ -29,7 +29,7 @@ def getPythonPathProperty():
       </StringVectorProperty>'''
 
 
-def getReaderTimeStepValues(extensions, reader_description):
+def get_reader_time_step_values(extensions, reader_description):
     """Get the XML content for reader time step values the Python path when
     making a ParaView plugin.
     """
@@ -50,7 +50,7 @@ def getReaderTimeStepValues(extensions, reader_description):
 
 
 
-def getVTKTypeMap():
+def get_vtk_type_map():
     """Get the the VTK Type Map as specified in ``vtkType.h``
     """
     return {
@@ -80,14 +80,14 @@ def getVTKTypeMap():
 
 
 
-def getPropertyXml(name, command, default_values, panel_visibility='default', help=''):
+def get_property_xml(name, command, default_values, panel_visibility='default', help=''):
     """Get the XML content for a property of a parameter for a python data
     object when making a ParaView plugin.
     """
     # A helper to build XML for any data type/method
     value = default_values
 
-    def _propXML(typ, panel_visibility, name, command, default_values, num, help, extra=''):
+    def _prop_xml(typ, panel_visibility, name, command, default_values, num, help, extra=''):
         return '''
       <%sVectorProperty
         panel_visibility="%s"
@@ -125,13 +125,13 @@ def getPropertyXml(name, command, default_values, panel_visibility='default', he
     elif propertyType is int:
         typ = 'Int'
     else:
-        raise RuntimeError('getPropertyXml(): Unknown property type: %r' % propertyType)
+        raise RuntimeError('get_property_xml(): Unknown property type: %r' % propertyType)
 
-    return _propXML(typ, panel_visibility, name, command, default_values, num, help, extra)
+    return _prop_xml(typ, panel_visibility, name, command, default_values, num, help, extra)
 
 
 
-def getFileReaderXml(extensions, reader_description='', command="AddFileName"):
+def get_file_reader_xml(extensions, reader_description='', command="AddFileName"):
     """Get the XML for a selectectable file for a reader when building a ParaView plugin
 
     Note:
@@ -163,7 +163,7 @@ def getFileReaderXml(extensions, reader_description='', command="AddFileName"):
       </Hints>''' % (command, extensions, reader_description)
 
 
-def getDropDownXml(name, command, labels, help='', values=None):
+def get_drop_down_xml(name, command, labels, help='', values=None):
     """Get the XML content for a drop down menu when making a ParaView plugin.
     """
 
@@ -201,7 +201,7 @@ def getDropDownXml(name, command, labels, help='', values=None):
 
 
 
-def _helpArraysXml(idx, input_name=None, label=None):
+def _help_arrays_xml(idx, input_name=None, label=None):
     """Internal helper
     """
     if input_name is None:
@@ -240,11 +240,11 @@ def _helpArraysXml(idx, input_name=None, label=None):
 
 
 
-def getInputArrayXml(labels=None, nInputPorts=1, n_arrays=1, input_names='Input'):
+def get_input_array_xml(labels=None, nInputPorts=1, n_arrays=1, input_names='Input'):
     """Get the XML content for an array selection drop down menu when making a
     ParaView plugin.
     """
-    def getLabels(labels):
+    def get_labels(labels):
         if labels is None and nInputPorts > 1:
             labels = [None]*nInputPorts
             return labels
@@ -254,9 +254,9 @@ def getInputArrayXml(labels=None, nInputPorts=1, n_arrays=1, input_names='Input'
                     raise _helpers.PVGeoError('`InputArrayLabels` is improperly structured. Must be a list of lists.')
         return labels
 
-    labels = getLabels(labels)
+    labels = get_labels(labels)
 
-    def fixArrayLabels(labels, n_arrays):
+    def fix_array_labels(labels, n_arrays):
         if n_arrays is 0:
             return ''
         if labels is None:
@@ -279,85 +279,17 @@ def getInputArrayXml(labels=None, nInputPorts=1, n_arrays=1, input_names='Input'
         out = []
         for i in range(nInputPorts):
             # Fix labels
-            labs = fixArrayLabels(labels[i], n_arrays[i])
+            labs = fix_array_labels(labels[i], n_arrays[i])
             xml = ''
             for j in range(n_arrays[i]):
-                xml += _helpArraysXml(i+j, input_name=input_names[i], label=labs[j])
+                xml += _help_arrays_xml(i+j, input_name=input_names[i], label=labs[j])
             out.append(xml)
         outstr = "\n".join(inp for inp in out)
         return outstr
     else:
         # Get parameters from info and call:
-        labs = fixArrayLabels(labels, n_arrays)
+        labs = fix_array_labels(labels, n_arrays)
         xml = ''
         for j in range(n_arrays):
-            xml += _helpArraysXml(j, input_name=None, label=labs[j])
+            xml += _help_arrays_xml(j, input_name=None, label=labs[j])
         return xml
-
-
-
-
-
-# import inspect
-# import textwrap
-#
-# def escapeForXmlAttribute(s):
-#
-#     # http://www.w3.org/TR/2000/WD-xml-c14n-20000119.html#charescaping
-#     # In character data and attribute values, the character information items "<" and "&" are represented by "&lt;" and "&amp;" respectively.
-#     # In attribute values, the double-quote character information item (") is represented by "&quot;".
-#     # In attribute values, the character information items TAB (#x9), newline (#xA), and carriage-return (#xD) are represented by "&#x9;", "&#xA;", and "&#xD;" respectively.
-#
-#     s = s.replace('&', '&amp;') # Must be done first!
-#     s = s.replace('<', '&lt;')
-#     s = s.replace('>', '&gt;')
-#     s = s.replace('"', '&quot;')
-#     s = s.replace('\r', '&#xD;')
-#     s = s.replace('\n', '&#xA;')
-#     s = s.replace('\t', '&#x9;')
-#     return s
-#
-#
-# def _replaceFunctionWithSourceString(func, allowEmpty=True):
-#
-#     if not func:
-#         if allowEmpty:
-#             namespace[functionName] = ''
-#             return
-#         else:
-#             raise _helpers.PVGeoError('Function not found.')
-#
-#     # if not inspect.isfunction(func):
-#     #     raise _helpers.PVGeoError('Object is not a function object.')
-#
-#     lines = inspect.getsourcelines(func)[0]
-#
-#     if len(lines) <= 1:
-#         raise _helpers.PVGeoError('Function %s must not be a single line of code.' % functionName)
-#
-#     # skip first line (the declaration) and then dedent the source code
-#     sourceCode = textwrap.dedent(''.join(lines[1:]))
-#
-#     return sourceCode
-#
-#
-#
-# def getRequestInfoScriptXml(func):
-#     """For testing only"""
-#     e = escapeForXmlAttribute
-#     rinfo = e(_replaceFunctionWithSourceString(func))
-#     return '''
-#       <StringVectorProperty
-#         name="InformationScript"
-#         label="RequestInformation Script"
-#         command="SetInformationScript"
-#         number_of_elements="1"
-#         default_values="%s"
-#         panel_visibility="advanced">
-#         <Hints>
-#           <Widget type="multi_line" syntax="python"/>
-#         </Hints>
-#         <Documentation>This property is a python script that is executed during
-#         the RequestInformation pipeline pass. Use this to provide information
-#         such as WHOLE_EXTENT to the pipeline downstream.</Documentation>
-#       </StringVectorProperty>''' % rinfo

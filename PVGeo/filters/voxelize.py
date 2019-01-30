@@ -187,7 +187,7 @@ class VoxelizePoints(FilterBase):
         """
         for i in range(pdi.GetPointData().GetNumberOfArrays()):
             arr = pdi.GetPointData().GetArray(i)
-            _helpers.addArray(pdo, 1, arr) # adds to CELL data
+            _helpers.add_array(pdo, 1, arr) # adds to CELL data
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):

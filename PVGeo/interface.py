@@ -15,9 +15,9 @@ __all__ = [
     'placeArrInTable',
     'getdTypes',
     'pointsToPolyData',
-    'addArraysFromDataFrame',
+    'add_arraysFromDataFrame',
     'convertCellConn',
-    'getArray',
+    'get_array',
     'getDataDict',
     'wrapvtki',
 ]
@@ -254,11 +254,11 @@ def pointsToPolyData(points, copy_z=False):
     return wrapvtki(pdata)
 
 
-def addArraysFromDataFrame(pdo, field, df):
+def add_arraysFromDataFrame(pdo, field, df):
     """Add all of the arrays from a given data frame to an output's data"""
     for key in df.keys():
         VTK_data = convertArray(df[key].values, name=key)
-        _helpers.addArray(pdo, field, VTK_data)
+        _helpers.add_array(pdo, field, VTK_data)
     return wrapvtki(pdo)
 
 
@@ -276,11 +276,11 @@ def convertCellConn(cell_connectivity):
     return nps.numpy_to_vtk(cellsMat, deep=True, array_type=vtk.VTK_ID_TYPE)
 
 
-def getArray(dataset, name, vtk_object=False):
+def get_array(dataset, name, vtk_object=False):
     """Given an input dataset, this will return the named array as a NumPy array
     or a vtkDataArray if spceified
     """
-    arr, field = _helpers.searchForArray(dataset, name)
+    arr, field = _helpers.search_for_array(dataset, name)
     if vtk_object:
         return arr
     return convertArray(arr)
@@ -291,8 +291,8 @@ def getDataDict(dataset, field='cell'):
     cell/point/field/row data as named NumPy arrays in a dictionary.
     """
     data = {}
-    for key in _helpers.getAllArrayNames(dataset, field):
-        data[key] = np.array(_helpers.getNumPyArray(dataset, field, key))
+    for key in _helpers.get_all_array_names(dataset, field):
+        data[key] = np.array(_helpers.get_numpy_array(dataset, field, key))
     return data
 
 

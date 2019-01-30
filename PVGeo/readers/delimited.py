@@ -150,7 +150,7 @@ class DelimitedTextReader(ReaderBase):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         if self.NeedToRead():
             self._ReadUpFront()
         # Generate the data object
@@ -255,7 +255,7 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         if self.NeedToRead():
             self._ReadUpFront()
         # Generate the PolyData output

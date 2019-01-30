@@ -93,7 +93,7 @@ class TableToTimeGrid(FilterBase):
         """
         nt = self.__extent[self.__dims[3]]
         if nt > 1:
-            self.__timesteps = _helpers.updateTimeSteps(self, nt, self.__dt)
+            self.__timesteps = _helpers.update_time_steps(self, nt, self.__dt)
         return 1
 
 
@@ -109,7 +109,7 @@ class TableToTimeGrid(FilterBase):
         if self.__needToRun:
             self._SetData(table)
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         for k, arr in self.__data.items():
             # NOTE: Keep order='F' because of the way the grid is already reshaped
             #       the 3D array has XYZ structure so VTK requires F ordering

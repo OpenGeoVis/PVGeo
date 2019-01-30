@@ -31,7 +31,7 @@ class PVGeoError(Exception):
         return self.message #.replace(self.QUALIFIER, '')
 
     @staticmethod
-    def CleanMessage(message):
+    def clean_message(message):
         return message.replace(PVGeoError.QUALIFIER_L, '').replace(PVGeoError.QUALIFIER_R, '')
 
 
@@ -45,51 +45,51 @@ class ErrorObserver:
         >>> # Only use this observer on sub classes of the AlgorithmBase:
         >>> f = PVGeo.AlgorithmBase()
         >>> f.Update()
-        >>> if f.ErrorOccurred():
-        >>>    print(f.ErrorMessage())
+        >>> if f.error_occurred():
+        >>>    print(f.get_error_message())
         ERROR: ...
 
     """
     def __init__(self):
-        self.__ErrorOccurred = False
-        self.__ErrorMessage = None
-        self.__ErrorMessageEtc = None
+        self.__error_occurred = False
+        self.__get_error_message = None
+        self.__get_error_messageEtc = None
         self.CallDataType = 'string0'
         # Object to observe:
         self.__observing = False
 
     def __call__(self, obj, event, message):
-        self.__ErrorOccurred = True
+        self.__error_occurred = True
         # Serch the message for a PVGeoError qualifier to extract
         msg = PVGeoError.SEARCHER.findall(message)
         if len(msg) > 0:
             info = '\nPVGeoError: '
-            message = info + info.join(PVGeoError.CleanMessage(m) for m in msg)
-        elif self.__ErrorMessage is not None:
-            self.__ErrorMessageEtc = message
+            message = info + info.join(PVGeoError.clean_message(m) for m in msg)
+        elif self.__get_error_message is not None:
+            self.__get_error_messageEtc = message
             return
         # if no qualifier is present and message has not already been set, entire message stream gets set
-        self.__ErrorMessage = message
+        self.__get_error_message = message
         print(message)
 
-    def ErrorOccurred(self):
+    def error_occurred(self):
         """Ask self if an error has occured
         """
-        occ = self.__ErrorOccurred
-        self.__ErrorOccurred = False
+        occ = self.__error_occurred
+        self.__error_occurred = False
         return occ
 
-    def ErrorMessage(self, etc=False):
+    def get_error_message(self, etc=False):
         """Get the last set error message
 
         Return:
             str: the last set error message
         """
         if etc:
-            return self.__ErrorMessageEtc
-        return self.__ErrorMessage
+            return self.__get_error_messageEtc
+        return self.__get_error_message
 
-    def MakeObserver(self, algorithm):
+    def make_observer(self, algorithm):
         """Make this an observer of an algorithm
         """
         if self.__observing:

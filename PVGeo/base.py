@@ -56,7 +56,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
             nOutputPorts=nOutputPorts, outputType=outputType)
         # Add error handler to make errors easier to deal with
         self.__error_observer = _helpers.ErrorObserver()
-        self.__error_observer.MakeObserver(self)
+        self.__error_observer.make_observer(self)
 
     def GetOutput(self, port=0):
         """A conveience method to get the output data object of this ``PVGeo``
@@ -64,18 +64,18 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         """
         return interface.wrapvtki(self.GetOutputDataObject(port))
 
-    def ErrorOccurred(self):
+    def error_occurred(self):
         """A conveience method for handling errors on the VTK pipeline
 
         Return:
             bool: true if an error has ovvured since last checked
         """
-        return self.__error_observer.ErrorOccurred()
+        return self.__error_observer.error_occurred()
 
-    def ErrorMessage(self):
+    def get_error_message(self):
         """A conveience method to print the error message.
         """
-        return self.__error_observer.ErrorMessage()
+        return self.__error_observer.get_error_message()
 
     def Apply(self):
         """Update the algorithm and get the output data object"""
@@ -218,7 +218,7 @@ class ReaderBase(ReaderBaseBase):
         """For internal use only: appropriately sets the timesteps.
         """
         if len(self.GetFileNames()) > 1:
-            self.__timesteps = _helpers.updateTimeSteps(self, self.GetFileNames(), self.__dt)
+            self.__timesteps = _helpers.update_time_steps(self, self.GetFileNames(), self.__dt)
         return 1
 
     #### Algorithm Methods ####
@@ -300,7 +300,7 @@ class TwoFileReaderBase(AlgorithmBase):
         """For internal use only
         """
         if len(self.__model_filenames) > 0:
-            self.__timesteps = _helpers.updateTimeSteps(self, self.__model_filenames, self.__dt)
+            self.__timesteps = _helpers.update_time_steps(self, self.__model_filenames, self.__dt)
         return 1
 
     def NeedToReadMesh(self, flag=None):
@@ -606,7 +606,7 @@ class InterfacedBaseReader(ReaderBase):
         and populate the output data object.
         """
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         output.ShallowCopy(self._GetObjectAtIndex(idx=i))

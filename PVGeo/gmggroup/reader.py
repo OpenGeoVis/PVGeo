@@ -24,7 +24,7 @@ class OMFReader(ReaderBaseBase):
             nOutputPorts=1, outputType='vtkMultiBlockDataSet')
         # Properties:
         self._dataselection = vtk.vtkDataArraySelection()
-        self._dataselection.AddObserver("ModifiedEvent", _helpers.createModifiedCallback(self))
+        self._dataselection.AddObserver("ModifiedEvent", _helpers.create_modified_callback(self))
         self.__names = []
         self.__data = dict()
         self.__project = None

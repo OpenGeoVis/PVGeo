@@ -22,7 +22,7 @@ class PVGeoGSLibReader(GSLibReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(GSLibReader.extensions, reader_description=GSLibReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(GSLibReader.extensions, reader_description=GSLibReader.description))
     def AddFileName(self, filename):
         GSLibReader.AddFileName(self, filename)
 
@@ -30,7 +30,7 @@ class PVGeoGSLibReader(GSLibReader):
     def SetDelimiter(self, deli):
         GSLibReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
     def SetSplitOnWhiteSpace(self, flag):
         GSLibReader.SetSplitOnWhiteSpace(self, flag)
 
@@ -72,7 +72,7 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.getFileReaderXml(GSLibPointSetReader.extensions, reader_description=GSLibPointSetReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(GSLibPointSetReader.extensions, reader_description=GSLibPointSetReader.description))
     def AddFileName(self, filename):
         GSLibPointSetReader.AddFileName(self, filename)
 
@@ -80,7 +80,7 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
     def SetDelimiter(self, deli):
         GSLibPointSetReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
     def SetSplitOnWhiteSpace(self, flag):
         GSLibPointSetReader.SetSplitOnWhiteSpace(self, flag)
 
@@ -121,7 +121,7 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(SGeMSGridReader.extensions, reader_description=SGeMSGridReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(SGeMSGridReader.extensions, reader_description=SGeMSGridReader.description))
     def AddFileName(self, filename):
         SGeMSGridReader.AddFileName(self, filename)
 
@@ -129,7 +129,7 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
     def SetDelimiter(self, deli):
         SGeMSGridReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
     def SetSplitOnWhiteSpace(self, flag):
         SGeMSGridReader.SetSplitOnWhiteSpace(self, flag)
 

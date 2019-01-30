@@ -150,7 +150,7 @@ class OcTreeReader(ubcMeshReaderBase):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         self.__ubcOcTree(
             self.GetMeshFileName(),
             self.GetModelFileNames(),

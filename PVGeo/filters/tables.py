@@ -226,7 +226,7 @@ class ExtractArray(FilterBase):
 
         # Note user has to select a single array to save out
         field, name = self.__input_array[0], self.__input_array[1]
-        vtkarr = _helpers.getVTKArray(pdi, field, name)
+        vtkarr = _helpers.get_vtk_array(pdi, field, name)
 
         table.GetRowData().AddArray(vtkarr)
 
@@ -256,7 +256,7 @@ class ExtractArray(FilterBase):
         to extract.
         """
         self.SetInputDataObject(input_data_object)
-        arr, field = _helpers.searchForArray(input_data_object, array_name)
+        arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
@@ -289,7 +289,7 @@ class SplitTableOnArray(FilterBase):
         # Get input array
         field, name = self.__input_array[0], self.__input_array[1]
         wtbl = dsa.WrapDataObject(table)
-        spliton = _helpers.getNumPyArray(wtbl, field, name)
+        spliton = _helpers.get_numpy_array(wtbl, field, name)
         uniq = np.unique(spliton)
         # Split the input data based on indices
         df = interface.tableToDataFrame(table)
@@ -329,7 +329,7 @@ class SplitTableOnArray(FilterBase):
         to use for the split.
         """
         self.SetInputDataObject(input_data_object)
-        arr, field = _helpers.searchForArray(input_data_object, array_name)
+        arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
@@ -356,9 +356,9 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         """For internal use only: appropriately sets the timesteps.
         """
         # Use the inputs' timesteps: this merges the timesteps values
-        tsAll = _helpers.getCombinedInputTimeSteps(self)
+        tsAll = _helpers.get_combined_input_time_steps(self)
         # Use both inputs' time steps
-        self.__timesteps = _helpers.updateTimeSteps(self, tsAll, explicit=True)
+        self.__timesteps = _helpers.update_time_steps(self, tsAll, explicit=True)
         return 1
 
 

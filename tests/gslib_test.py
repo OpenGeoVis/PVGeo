@@ -82,7 +82,7 @@ class TestGSLibReader(TestBase):
         reader.AddFileName(filename)
         # Perform the read
         reader.Update()
-        self.assertTrue(reader.ErrorOccurred())
+        self.assertTrue(reader.error_occurred())
 
     def test_writer(self):
         """`WriteTableToGSLib`: check data integrity across I/O"""
@@ -174,7 +174,7 @@ class TestSGeMSGridReader(TestBase):
         reader.AddFileName(filename)
         # Perform the read
         reader.Update()
-        self.assertTrue(reader.ErrorOccurred())
+        self.assertTrue(reader.error_occurred())
 
 
     def test_writer(self):

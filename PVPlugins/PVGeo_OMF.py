@@ -24,7 +24,7 @@ class PVGeoOMFReader(OMFReader):
     #### Seters and Geters ####
 
     # TODO: check this to make sure not time varying
-    @smproperty.xml(_helpers.getFileReaderXml(OMFReader.extensions, reader_description=OMFReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(OMFReader.extensions, reader_description=OMFReader.description))
     def AddFileName(self, filename):
         OMFReader.AddFileName(self, filename)
 

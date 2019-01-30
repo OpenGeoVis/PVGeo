@@ -77,7 +77,7 @@ class PVGeoTensorMeshReader(TensorMeshReader):
         """This is critical for registering the timesteps"""
         return TensorMeshReader.GetTimestepValues(self)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
+    @smproperty.xml(_helpers.get_property_xml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
     panel_visibility="advanced"))
     def SetUseFileName(self, flag):
         TensorMeshReader.SetUseFileName(self, flag)
@@ -114,7 +114,7 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
         """Use to set the file names for the reader. Handles single string or list of strings."""
         TensorMeshAppender.AddModelFileName(self, filename)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
+    @smproperty.xml(_helpers.get_property_xml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
     panel_visibility="advanced"))
     def SetUseFileName(self, flag):
         TensorMeshAppender.SetUseFileName(self, flag)
@@ -218,7 +218,7 @@ if discretize_available:
             """This is critical for registering the timesteps"""
             return OcTreeReader.GetTimestepValues(self)
 
-        @smproperty.xml(_helpers.getPropertyXml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
+        @smproperty.xml(_helpers.get_property_xml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
         panel_visibility="advanced"))
         def SetUseFileName(self, flag):
             OcTreeReader.SetUseFileName(self, flag)
@@ -257,7 +257,7 @@ if discretize_available:
             """Use to set the file names for the reader. Handles single string or list of strings."""
             OcTreeAppender.AddModelFileName(self, filename)
 
-        @smproperty.xml(_helpers.getPropertyXml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
+        @smproperty.xml(_helpers.get_property_xml(name='Use file as data name', command='SetUseFileName', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
         panel_visibility="advanced"))
         def SetUseFileName(self, flag):
             OcTreeAppender.SetUseFileName(self, flag)
@@ -322,7 +322,7 @@ class PVGeoTopoReader(TopoReader):
         TopoReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(TopoReader.extensions, reader_description=TopoReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(TopoReader.extensions, reader_description=TopoReader.description))
     def AddFileName(self, filename):
         TopoReader.AddFileName(self, filename)
 
@@ -357,7 +357,7 @@ class PVGeoGravObsReader(GravObsReader):
         GravObsReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(GravObsReader.extensions, reader_description=GravObsReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(GravObsReader.extensions, reader_description=GravObsReader.description))
     def AddFileName(self, filename):
         GravObsReader.AddFileName(self, filename)
 
@@ -391,7 +391,7 @@ class PVGeoGravGradReader(GravGradReader):
         GravGradReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(GravGradReader.extensions, reader_description=GravGradReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(GravGradReader.extensions, reader_description=GravGradReader.description))
     def AddFileName(self, filename):
         GravGradReader.AddFileName(self, filename)
 
@@ -426,7 +426,7 @@ class PVGeoMagObsReader(MagObsReader):
         MagObsReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(MagObsReader.extensions, reader_description=MagObsReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(MagObsReader.extensions, reader_description=MagObsReader.description))
     def AddFileName(self, filename):
         MagObsReader.AddFileName(self, filename)
 
@@ -462,7 +462,7 @@ class PVGeoGeologyMapper(GeologyMapper):
 
     #### SETTERS AND GETTERS ####
 
-    @smproperty.xml(_helpers.getInputArrayXml(nInputPorts=1, n_arrays=1))
+    @smproperty.xml(_helpers.get_input_array_xml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         return GeologyMapper.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
@@ -499,7 +499,7 @@ if discretize_available:
 
         #### Seters and Geters ####
 
-        @smproperty.xml(_helpers.getFileReaderXml(DiscretizeMeshReader.extensions, reader_description=DiscretizeMeshReader.description))
+        @smproperty.xml(_helpers.get_file_reader_xml(DiscretizeMeshReader.extensions, reader_description=DiscretizeMeshReader.description))
         def AddFileName(self, filename):
             DiscretizeMeshReader.AddFileName(self, filename)
 

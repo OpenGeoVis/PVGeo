@@ -24,7 +24,7 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
         PackedBinariesReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(PackedBinariesReader.extensions, reader_description=PackedBinariesReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(PackedBinariesReader.extensions, reader_description=PackedBinariesReader.description))
     def AddFileName(self, filename):
         PackedBinariesReader.AddFileName(self, filename)
 
@@ -39,13 +39,13 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
         """This is critical for registering the timesteps"""
         return PackedBinariesReader.GetTimestepValues(self)
 
-    @smproperty.xml(_helpers.getDropDownXml('Endian','SetEndian',
+    @smproperty.xml(_helpers.get_drop_down_xml('Endian','SetEndian',
         ['Native', 'Little-Endian', 'Big-Endian'],
         help='This is the type memory endianness.'))
     def SetEndian(self, endian):
         PackedBinariesReader.SetEndian(self, endian)
 
-    @smproperty.xml(_helpers.getDropDownXml('DataType','SetDataType',
+    @smproperty.xml(_helpers.get_drop_down_xml('DataType','SetDataType',
         ['Float64', 'Float32', 'Integer4'],
         help='This is data type to read.'))
     def SetDataType(self, dtype):
@@ -72,7 +72,7 @@ class PVGeoMadagascarReader(MadagascarReader):
     #### Seters and Geters ####
 
 
-    @smproperty.xml(_helpers.getFileReaderXml(MadagascarReader.extensions, reader_description=MadagascarReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(MadagascarReader.extensions, reader_description=MadagascarReader.description))
     def AddFileName(self, filename):
         MadagascarReader.AddFileName(self, filename)
 
@@ -86,13 +86,13 @@ class PVGeoMadagascarReader(MadagascarReader):
         """This is critical for registering the timesteps"""
         return MadagascarReader.GetTimestepValues(self)
 
-    @smproperty.xml(_helpers.getDropDownXml('Endian','SetEndian',
+    @smproperty.xml(_helpers.get_drop_down_xml('Endian','SetEndian',
         ['Native', 'Little-Endian', 'Big-Endian'],
         help='This is the type memory endianness.'))
     def SetEndian(self, endian):
         MadagascarReader.SetEndian(self, endian)
 
-    @smproperty.xml(_helpers.getDropDownXml('DataType','SetDataType',
+    @smproperty.xml(_helpers.get_drop_down_xml('DataType','SetDataType',
         ['Float64', 'Float32', 'Integer4'],
         help='This is data type to read.'))
     def SetDataType(self, dtype):
@@ -119,7 +119,7 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(DelimitedTextReader.extensions, reader_description=DelimitedTextReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(DelimitedTextReader.extensions, reader_description=DelimitedTextReader.description))
     def AddFileName(self, filename):
         DelimitedTextReader.AddFileName(self, filename)
 
@@ -138,7 +138,7 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
     def SetDelimiter(self, deli):
         DelimitedTextReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
     def SetSplitOnWhiteSpace(self, flag):
         DelimitedTextReader.SetSplitOnWhiteSpace(self, flag)
 
@@ -150,7 +150,7 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
     def SetComments(self, identifier):
         DelimitedTextReader.SetComments(self, identifier)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Has Titles', command='SetHasTitles', default_values=False, help='A boolean for if the delimited file has header titles for the data arrays.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Has Titles', command='SetHasTitles', default_values=False, help='A boolean for if the delimited file has header titles for the data arrays.'))
     def SetHasTitles(self, flag):
         DelimitedTextReader.SetHasTitles(self, flag)
 
@@ -170,7 +170,7 @@ class PVGeoXYZTextReader(XYZTextReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(XYZTextReader.extensions, reader_description=XYZTextReader.description))
+    @smproperty.xml(_helpers.get_file_reader_xml(XYZTextReader.extensions, reader_description=XYZTextReader.description))
     def AddFileName(self, filename):
         XYZTextReader.AddFileName(self, filename)
 
@@ -189,7 +189,7 @@ class PVGeoXYZTextReader(XYZTextReader):
     def SetDelimiter(self, deli):
         XYZTextReader.SetDelimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
     def SetSplitOnWhiteSpace(self, flag):
         XYZTextReader.SetSplitOnWhiteSpace(self, flag)
 
