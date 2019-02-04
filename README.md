@@ -15,7 +15,7 @@ like 2D or 3D time-varying grids.
 [![Website Build](https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website&logo=safari&logoColor=white)](http://pvgeo.org)
 [![Documentation Status](https://img.shields.io/readthedocs/pvgeo.svg?logo=read%20the%20docs&logoColor=white)](http://docs.pvgeo.org/en/latest/?badge=latest)
 [![Slack Badge](https://img.shields.io/badge/Slack-PVGeo-4B0082.svg?logo=slack)](http://slack.pvgeo.org)
-[![Twitter Follow](https://img.shields.io/twitter/follow/pyPVGeo.svg?style=social&label=Follow)](https://twitter.com/pyPVGeo)
+[![Twitter Follow](https://img.shields.io/twitter/follow/OpenGeoVis.svg?style=social&label=Follow)](https://twitter.com/OpenGeoVis)
 
 **Status:** [![PyPI](https://img.shields.io/pypi/v/PVGeo.svg?logo=python&logoColor=white)](https://pypi.org/project/PVGeo/)
 [![Build Status](https://img.shields.io/travis/OpenGeoVis/PVGeo/master.svg?label=build&logo=travis)](https://travis-ci.org/OpenGeoVis/PVGeo)
