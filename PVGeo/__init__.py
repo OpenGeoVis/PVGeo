@@ -40,6 +40,7 @@ else:
     from .interface import *
 # VTK-dependent imports complete
 
+from .cmaps import *
 from . import version
 
 # Project MetaData
