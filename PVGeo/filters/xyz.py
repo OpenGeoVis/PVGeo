@@ -9,6 +9,7 @@ __all__ = [
     'AppendCellCenters',
     'IterateOverPoints',
     'ConvertUnits',
+    'BuildSurfaceFromPoints',
 ]
 
 __displayname__ = 'Point/Line Sets'
@@ -19,11 +20,14 @@ import numpy as np
 import pandas as pd
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
+import vtki
 
 # NOTE: internal import of pyproj in LonLatToUTM
 
 from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase
+# improt CreateTensorMesh for its cell string parsing
+from ..model_build import CreateTensorMesh
 
 ###############################################################################
 #---- Cell Connectivity ----#
@@ -899,3 +903,124 @@ class ConvertUnits(FilterPreserveTypeBase):
         """Get the conversion value"""
         convs = self.LookupConversions()
         return convs[self.__conversion]
+
+
+
+
+
+class BuildSurfaceFromPoints(FilterBase):
+    """From the sorted x, y, and z station locations in the input PolyData,
+    create a surface to project down from the line of those points. Use the
+    Z cells to control the size of the mesh surface
+    """
+    __displayname__ = 'Build Surface From Points'
+    __category__ = 'filter'
+    def __init__(self, **kwargs):
+        FilterBase.__init__(self, inputType='vtkPolyData',
+                            outputType='vtkUnstructuredGrid', **kwargs)
+        self.__zcoords = CreateTensorMesh._ReadCellLine('0. 50.')
+        zcoords = kwargs.get('zcoords', self.__zcoords)
+        if not isinstance(zcoords, (str, list, tuple, np.ndarray)):
+            raise TypeError('zcoords of bad type.')
+        if isinstance(zcoords, str):
+            self.SetZCoordsStr(zcoords)
+        else:
+            self.SetZCoords(zcoords)
+
+
+    @staticmethod
+    def create_surface(points, z_range):
+        """From the sorted x, y, and z station locations, create a surface
+        to display a seismic recording/migration on in space. The result is
+        defined in the X,Y,Z-z_range 3D space.
+
+        The z_range should be treated as relative coordinates to the values
+        given on the third column of the points array. If you want the values
+        in the z_range to be treated as the absolute coordinates, simply
+        do not pass any Z values in the points array - if points is N by 2,
+        then the values in z_range will be inferred as absolute.
+
+        Args:
+            points (np.ndarray): array-like of the station x and y locations
+            (npts by 2-3) z_range (np.ndarray): The linear space of the z
+            dimension. This will be filled out for every station location.
+
+        Return:
+            vtki.UnstructuredGrid
+        """
+        if hasattr(points, 'values'):
+            # This will extract data from pandas dataframes if those are given
+            points = points.values
+        points = np.array(points)
+        z_range = np.array(z_range)
+        xloc = points[:,0]
+        yloc = points[:,1]
+        if points.shape[1] > 2:
+            zloc = points[:,2]
+        else:
+            val = np.nanmax(z_range)
+            z_range = val - np.flip(z_range)
+            zloc = np.full(xloc.shape, val)
+        if not len(xloc) == len(yloc) == len(zloc):
+            raise AssertionError('Coordinate shapes do not match.')
+        nt = len(xloc)
+        ns = len(z_range)
+
+        # Extrapolate points to a 2D surface
+        # repeat the XY locations across
+        points = np.repeat(np.c_[xloc,yloc,zloc], ns, axis=0)
+        # repeat the Z locations across
+        tp = np.repeat(z_range.reshape((-1, len(z_range))), nt, axis=0)
+        tp = zloc[:,None] - tp
+        points[:,-1] = tp.ravel()
+
+        # Create cell indices for that surface
+        indexes = np.array(range(0, (nt*ns)))
+        indexes = np.reshape(indexes, (nt, ns) )
+
+        # Define the cell connectivity on the surface
+        cellConn = np.zeros(( nt-1, ns-1 , 4), dtype=np.int)
+        cellConn[:,:,0] = indexes[:-1, :-1]
+        cellConn[:,:,1] = indexes[1:, :-1]
+        cellConn[:,:,2] = indexes[1:, 1:]
+        cellConn[:,:,3] = indexes[:-1, 1:]
+        cellConn = cellConn.reshape((ns-1)*(nt-1) , 4)
+        cells = vtk.vtkCellArray()
+        cells.SetNumberOfCells(cellConn.shape[0])
+        cells.SetCells(cellConn.shape[0], interface.convertCellConn(cellConn))
+
+        # Produce the output
+        output = vtki.UnstructuredGrid()
+        output.points = points
+        output.SetCells(vtk.VTK_QUAD, cells)
+        return output
+
+
+    def RequestData(self, request, inInfo, outInfo):
+        """Execute on pipeline"""
+        # Get input/output of Proxy
+        pdi = self.GetInputData(inInfo, 0, 0)
+        # Get number of points
+        pdo = self.GetOutputData(outInfo, 0)
+        #### Perfrom task ####
+        data = vtki.wrap(pdi)
+        output = BuildSurfaceFromPoints.create_surface(data.points, np.array(self.__zcoords))
+        pdo.DeepCopy(output)
+        return 1
+
+    def SetZCoords(self, zcoords):
+        """Set the spacings for the cells in the Z direction
+
+        Args:
+            zcoords (list or np.array(floats)): the spacings along the Z-axis"""
+        if len(zcoords) != len(self.__zcoords) or not np.allclose(self.__zcoords, zcoords):
+            self.__zcoords = zcoords
+            self.Modified()
+
+    def SetZCoordsStr(self, zcoordstr):
+        """Set the spacings for the cells in the Z direction
+
+        Args:
+            zcoordstr (str)  : the spacings along the Z-axis in the UBC style"""
+        zcoords = CreateTensorMesh._ReadCellLine(zcoordstr)
+        self.SetZCoords(zcoords)
