@@ -120,7 +120,8 @@ discussion of the various software packages and finds that there are many
 platforms available for integrated visualizations for limited data types.
 Having the ability to visually fuse datasets, construct 3D models, or generate
 horizons within the visualizations can be what separates closed-source software
-from open-source software [@witter].
+from open-source software [@witter] - development of PVGeo aims to create an
+open-source alternative for researchers.
 
 
 
