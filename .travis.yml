@@ -3,7 +3,8 @@ os:
     - linux
 python:
     - 2.7 # build on Python 2 first
-    - 3.6 # Build and deploy here
+    - 3.6
+    - 3.7
 sudo: false
 install:
     - pip install -r requirements.txt
