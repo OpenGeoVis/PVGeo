@@ -53,10 +53,8 @@ of scientific visualization, which enables scientists to cost-effectively and
 reproducibly communicate their findings.
 
 
-![Figure 1](images/expansion-diagram.png)
-**Figure 1**. PVGeo providing a link for geoscience to the VTK and ParaView
-realm of data visualization.
-
+![PVGeo providing a link for geoscience to the VTK and ParaView
+realm of data visualization.](images/expansion-diagram.png)
 
 
 ## Background
@@ -87,15 +85,14 @@ resource models, and geological in Figure 2, which can hinder their ability to
 interpret the spatial relationships of varying data types.
 
 
-![Figure 2](./images/forge-iso.png)
-**Figure 2:** Demonstration of how PVGeo links various geoscientific
+![Demonstration of how PVGeo links various geoscientific
 data formats and filtering algorithms with VTK-based visualization software
 to create an integrated rendering environment
 ([FORGE Geothermal Project](http://forge.pvgeo.org)).
 This rendering includes a digital land surface with overlain satellite imagery
 and geologic map, a subsurface temperature model, scattered points of the
 sampled temperature values, geophysical well logging data, GIS site boundary,
-and interpreted faulting surfaces.
+and interpreted faulting surfaces.](./images/forge-iso.png)
 
 
 As authors of this software and geoscientists, we rely on calibrating and
