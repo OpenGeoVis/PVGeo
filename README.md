@@ -61,15 +61,15 @@ environment (we highly recommend using anaconda) and install *PVGeo* through pip
 pip install PVGeo
 ```
 
-Now *PVGeo* is ready for use in your standard Python environment (2.7 or 3.x)
+Now *PVGeo* is ready for use in your standard Python environment (2.7 or >=3.6)
 with all dependencies installed! Go ahead and test your install:
 
 ```bash
 python -c "import PVGeo; print(PVGeo.__version__)"
 ```
 
-Note that Windows users must use Python 3. Further insight can be found
-in the [**Getting Started Guide**](http://pvgeo.org/overview/getting-started/).
+Note that Windows users must use Python >=3.6 when outside of ParaView.
+Further insight can be found in the [**Getting Started Guide**](http://pvgeo.org/overview/getting-started/).
 
 
 ## Report Issues and Contribute
