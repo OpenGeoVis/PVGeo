@@ -5,6 +5,9 @@ __all__ = [
 
 __displayname__ = 'SGeMS File I/O'
 
+import os
+import re
+
 import numpy as np
 import pandas as pd
 import vtk
@@ -28,6 +31,18 @@ class SGeMSGridReader(GSLibReader):
         self.__extent = None
         self.__origin = origin
         self.__spacing = spacing
+        self.__mask = kwargs.get("mask", -9966699.)
+
+    def __parse_extent(self, header):
+        regex = re.compile('\S\s\((\d+)x(\d+)x(\d+)\)')
+        dims = regex.findall(header)
+        if len(dims) < 1:
+            regex = re.compile('(\d+) (\d+) (\d+)')
+            dims = regex.findall(header)
+        if len(dims) < 1:
+            raise _helpers.PVGeoError('File not in proper SGeMS Grid fromat.')
+        dims = dims[0]
+        return int(dims[0]), int(dims[1]), int(dims[2])
 
     def _ReadExtent(self):
         """Reads the input file for the SGeMS format to get output extents.
@@ -44,21 +59,18 @@ class SGeMSGridReader(GSLibReader):
         # Read first file... extent cannot vary with time
         # TODO: make more efficient to only reader header of file
         fileLines = self._GetFileContents(idx=0)
-        h = fileLines[0+self.GetSkipRows()].split(self._GetDeli())
-        try:
-            n1,n2,n3 = int(h[0]), int(h[1]), int(h[2])
-        except ValueError:
-            raise _helpers.PVGeoError('File not in proper SGeMS Grid fromat.')
+        h = fileLines[0+self.GetSkipRows()]
+        n1,n2,n3 = self.__parse_extent(h)
         return (0,n1, 0,n2, 0,n3)
 
     def _ExtractHeader(self, content):
         """Internal helper to parse header info for the SGeMS file format"""
         titles, content = GSLibReader._ExtractHeader(self, content)
-        h = self.GetFileHeader().split(self._GetDeli())
+        h = self.GetFileHeader()
         try:
             if self.__extent is None:
-                self.__extent = (int(h[0]), int(h[1]), int(h[2]))
-            elif self.__extent != (int(h[0]), int(h[1]), int(h[2])):
+                self.__extent = self.__parse_extent(h)
+            elif self.__extent != (self.__parse_extent(h)):
                 raise _helpers.PVGeoError('Grid dimensions change in file time series.')
         except ValueError:
             raise _helpers.PVGeoError('File not in proper SGeMS Grid fromat.')
@@ -81,9 +93,12 @@ class SGeMSGridReader(GSLibReader):
         output.SetDimensions(n1+1, n2+1, n3+1)
         output.SetSpacing(dx, dy, dz)
         output.SetOrigin(ox, oy, oz)
-        # Use table generater and convert because its easy:
+        # Use table generator and convert because its easy:
         table = vtk.vtkTable()
-        interface.dataFrameToTable(self._GetRawData(idx=i), table)
+        df = self._GetRawData(idx=i)
+        # Replace all masked values with NaN
+        df.replace(self.__mask, np.nan, inplace=True)
+        interface.dataFrameToTable(df, table)
         # now get arrays from table and add to point data of pdo
         for i in range(table.GetNumberOfColumns()):
             output.GetCellData().AddArray(table.GetColumn(i))

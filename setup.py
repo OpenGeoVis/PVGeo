@@ -8,7 +8,7 @@ import platform
 import sys
 import os
 
-__version__ = '1.2.1'
+__version__ = '1.2.3'
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -48,6 +48,7 @@ setuptools.setup(
     url="https://github.com/OpenGeoVis/PVGeo",
     packages=setuptools.find_packages(),
     install_requires=install_requires,
+    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*',
     extras_require={
         'pyproj': ['pyproj>=1.9'],
         'omf': ['omf>=0.9.3', 'omfvtk>=0.0.3'],

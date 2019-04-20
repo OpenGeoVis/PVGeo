@@ -12,6 +12,9 @@ environment:
     - PYTHON_VERSION: 3.6
       CONDA: C:\Miniconda36
 
+    - PYTHON_VERSION: 3.7
+      CONDA: C:\Miniconda36
+
 image: Visual Studio 2015
 
 platform:
@@ -32,6 +35,8 @@ install:
   - conda info -a
   # Upgrade pip
   - python -m pip install --upgrade pip
+  # Install NumPy ahead of time for discretize
+  - python -m pip install --upgrade numpy
   # Install extra dependencies
   - conda install -c conda-forge pyproj
   # Handle VTK if archetecture requires conda, else let setup.py install via pip

@@ -40,13 +40,14 @@ else:
     from .interface import *
 # VTK-dependent imports complete
 
+from .cmaps import *
 from . import version
 
 # Project MetaData
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
-__version__ = '1.2.1'
+__version__ = '1.2.3'
 __displayname__ = 'PVGeo'
 
 

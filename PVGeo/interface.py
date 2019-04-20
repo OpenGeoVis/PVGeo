@@ -228,6 +228,7 @@ def pointsToPolyData(points, copy_z=False):
     cells = np.hstack((np.ones((npoints, 1)),
                        np.arange(npoints).reshape(-1, 1)))
     cells = np.ascontiguousarray(cells, dtype=np.int64)
+    cells = np.reshape(cells, (2*npoints))
     vtkcells = vtk.vtkCellArray()
     vtkcells.SetCells(npoints, nps.numpy_to_vtk(cells, deep=True, array_type=vtk.VTK_ID_TYPE))
 

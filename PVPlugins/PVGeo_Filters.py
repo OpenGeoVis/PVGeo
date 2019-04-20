@@ -1,4 +1,4 @@
-paraview_plugin_version = '1.2.1'
+paraview_plugin_version = '1.2.3'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
@@ -675,5 +675,22 @@ class PVGeoAppendTableToCellData(AppendTableToCellData):
     def get_time_step_values(self):
         """This is critical for registering the timesteps"""
         return AppendTableToCellData.get_time_step_values(self)
+
+###############################################################################
+
+# BuildSurfaceFromPoints
+@smproxy.filter(name='PVGeoBuildSurfaceFromPoints', label=BuildSurfaceFromPoints.__displayname__)
+@smhint.xml('''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smproperty.input(name="Input", port_index=0)
+@smdomain.datatype(dataTypes=["vtkPolyData"], composite_data_supported=True)
+class PVGeoBuildSurfaceFromPoints(BuildSurfaceFromPoints):
+    def __init__(self):
+        BuildSurfaceFromPoints.__init__(self)
+
+    @smproperty.stringvector(name="Z Coords", default_values='0. 50.0')
+    def SetZCoordsStr(self, zcellstr):
+        BuildSurfaceFromPoints.SetZCoordsStr(self, zcellstr)
+
 
 ###############################################################################
