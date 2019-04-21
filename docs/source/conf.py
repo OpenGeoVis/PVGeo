@@ -58,6 +58,18 @@ example_toc = """
    about-examples.rst
    examples/index
 
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Development Guide
+   :hidden:
+
+   dev-guide/contributing
+   dev-guide/repo-structure
+   dev-guide/templates
+   dev-guide/snippets/index
+   dev-guide/resources
+
 """
 with open(os.path.join(os.path.dirname(__file__), 'index.rst'), 'a') as f:
     f.write(example_toc)

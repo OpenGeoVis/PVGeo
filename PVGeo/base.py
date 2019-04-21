@@ -477,10 +477,10 @@ class WriterBase(AlgorithmBase):
         self.Modified()
         self.Update()
 
-    def PerformWriteOut(self, input_data_object, filename, object_name):
+    def perform_write_out(self, input_data_object, filename, object_name):
         """This method must be implemented. This is automatically called by
         ``RequestData`` for single inputs or composite inputs."""
-        raise NotImplementedError('PerformWriteOut must be implemented!')
+        raise NotImplementedError('perform_write_out must be implemented!')
 
     def apply(self, input_data_object):
         """Run this writer algorithm on the given input data object"""
@@ -529,7 +529,7 @@ class WriterBase(AlgorithmBase):
 
 
     def RequestData(self, request, inInfo, outInfo):
-        """Subclasses must implement a ``PerformWriteOut`` method that takes an
+        """Subclasses must implement a ``perform_write_out`` method that takes an
         input data object and a filename. This method will automatically handle
         composite data sets.
         """
@@ -544,12 +544,12 @@ class WriterBase(AlgorithmBase):
                 data = inp.GetBlock(i)
                 name = inp.GetMetaData(i).Get(vtk.vtkCompositeDataSet.NAME())
                 if data.IsTypeOf(self.InputType):
-                    self.PerformWriteOut(data, self.GetBlockFileName(i), name)
+                    self.perform_write_out(data, self.GetBlockFileName(i), name)
                 else:
                     warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
         # Handle single input dataset
         else:
-            self.PerformWriteOut(inp, self.GetFileName(), None)
+            self.perform_write_out(inp, self.GetFileName(), None)
         return 1
 
 ###############################################################################

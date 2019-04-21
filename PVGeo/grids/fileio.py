@@ -357,7 +357,7 @@ class WriteImageDataToSurfer(WriterBase):
         self.__input_array = [None, None]
 
 
-    def PerformWriteOut(self, input_data_object, filename, object_name):
+    def perform_write_out(self, input_data_object, filename, object_name):
         """Writes an input ``vtkImageData`` object to a file"""
         img = input_data_object
 
@@ -709,7 +709,7 @@ class WriteCellCenterData(WriterBase):
         self.__delimiter = ','
 
 
-    def PerformWriteOut(self, input_data_object, filename, object_name):
+    def perform_write_out(self, input_data_object, filename, object_name):
         """Writes the cell centers of the input data object to a file"""
         # Find cell centers
         filt = vtk.vtkCellCenters()
