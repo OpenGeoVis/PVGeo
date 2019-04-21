@@ -15,10 +15,8 @@
 import os
 import sys
 import shutil
-
-if sys.version_info >= (3, 0):
-    import faulthandler
-    faulthandler.enable()
+import faulthandler
+faulthandler.enable()
 
 # Add PVGeo to the path
 path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -27,7 +25,6 @@ sys.path.insert(0, path)
 sys.path.insert(0, '/Users/bane/Documents/OpenGeoVis/Software/gendocs/')
 
 
-# Mock the paraview module to build pvmacros docs
 # Mock the paraview module to build pvmacros docs
 import mock
 
