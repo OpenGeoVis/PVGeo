@@ -88,6 +88,19 @@ readers can be used to immediately produce a data object:
 
 
 
+ParaView Usage
+++++++++++++++
+
+The *PVGeo* readers aren't directly available in the GUI menus of ParaView but
+rather a dialog will appear for you to select the desired file reader when
+selecting **File -> Open...** within ParaView like the screen recording below:
+
+.. raw:: html
+
+    <iframe src="https://player.vimeo.com/video/281726394?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+
+
 Filter Algorithms
 -----------------
 
@@ -147,6 +160,16 @@ to make repetitive calls on them much like we showed with readers:
 
 
 
+ParaView Usage
+++++++++++++++
+
+Within ParaView, filters are available for selection directly from the GUI menus
+when an input data source is selected on the pipeline. All of the *PVGeo*
+filters  are available under their own categories in the **Filters** menu.
+
+.. raw:: html
+
+    <iframe src="https://player.vimeo.com/video/282010041?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 
 Source Algorithms
@@ -170,6 +193,16 @@ immediately produce an output like below:
 
 
 
+ParaView Usage
+++++++++++++++
+
+Within ParaView, sources are available for selection directly from the GUI
+menus. All of the *PVGeo* sources are available under their own categories in
+the **Sources** menu.
+
+.. raw:: html
+
+    <iframe src="https://player.vimeo.com/video/281726486?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 Writer Algorithms
 -----------------
@@ -192,3 +225,19 @@ immediately write out a data object like below.
     filename = 'test-writer.grd'
     writer.SetFileName(filename)
     writer.Write(inputDataObject)
+
+
+
+ParaView Usage
+++++++++++++++
+
+Demonstrated in the following video, a user can select *File -> Save Data* in
+ParaView with a selected dataset then choose one of *PVGeo*'s writers.
+The first *1 minute* in the video demonstrates the *Extract Topography* then the
+video shows how to save a ``vtkRectilinearGrid`` and its attributes to the UBC
+Tensor Mesh/Model formats using a PVGeo writer.
+
+
+.. raw:: html
+
+    <iframe src="https://player.vimeo.com/video/284294249?loop=1&autoplay=0" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
