@@ -4,7 +4,7 @@ Visualization
 
 .. toctree::
    :maxdepth: 5
-   :hidden:
+
     
    
    axes.rst

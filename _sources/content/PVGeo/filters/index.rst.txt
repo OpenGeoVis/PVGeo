@@ -4,7 +4,7 @@ General Filters
 
 .. toctree::
    :maxdepth: 5
-   :hidden:
+
     
    
    math.rst

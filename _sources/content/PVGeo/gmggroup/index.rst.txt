@@ -7,7 +7,7 @@ GMG Group Standards
 
 .. toctree::
    :maxdepth: 5
-   :hidden:
+
     
    
    reader.rst

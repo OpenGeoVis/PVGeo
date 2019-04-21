@@ -4,7 +4,7 @@ UBC Mesh Tools
 
 .. toctree::
    :maxdepth: 5
-   :hidden:
+
     
    
    disc_meshes.rst

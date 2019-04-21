@@ -159,7 +159,7 @@ Export
 
 .. toctree::
    :maxdepth: 5
-   :hidden:
+
     
    
    vtkjs.rst
