@@ -86,9 +86,9 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         """Alias for self.Update()"""
         return self.Update()
 
-    def get_output(self):
+    def get_output(self, port=0):
         """Alias for self.GetOutput()"""
-        return self.GetOutput()
+        return self.GetOutput(port=port)
 
 ###############################################################################
 # Base Base Reader
