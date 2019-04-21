@@ -239,7 +239,7 @@
             <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span>
             <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">)</span>
         <span class="c1"># Parameters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__cell_type</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cell_type&#39;</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_POLY_LINE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cell_type</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cell_type&#39;</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_LINE</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__usenbr</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nearest_nbr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__unique</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -249,94 +249,56 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># NOTE: Type map is specified in vtkCellType.h</span>
         <span class="n">cell_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cell_type</span>
-        <span class="n">nrNbr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__usenbr</span>
 
         <span class="k">if</span> <span class="n">log_time</span><span class="p">:</span>
             <span class="n">startTime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
         <span class="c1"># Get the Points over the NumPy interface</span>
-        <span class="n">wpdi</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">WrapDataObject</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span> <span class="c1"># NumPy wrapped input</span>
-        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">wpdi</span><span class="o">.</span><span class="n">Points</span><span class="p">)</span> <span class="c1"># New NumPy array of poins so we dont destroy input</span>
+        <span class="n">pdi</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">pdi</span><span class="o">.</span><span class="n">points</span><span class="p">)</span> <span class="c1"># New NumPy array of poins so we dont destroy input</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unique</span><span class="p">:</span>
             <span class="c1"># Remove repeated points</span>
             <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="k">def</span> <span class="nf">_make_poly_cell</span><span class="p">(</span><span class="n">ptsi</span><span class="p">):</span>
-            <span class="n">cell</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyLine</span><span class="p">()</span>
-            <span class="n">cell</span><span class="o">.</span><span class="n">GetPointIds</span><span class="p">()</span><span class="o">.</span><span class="n">SetNumberOfIds</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ptsi</span><span class="p">))</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ptsi</span><span class="p">:</span>
-                <span class="n">cell</span><span class="o">.</span><span class="n">GetPointIds</span><span class="p">()</span><span class="o">.</span><span class="n">SetId</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ptsi</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">return</span> <span class="n">cell</span>
-
-        <span class="k">def</span> <span class="nf">_make_line_cell</span><span class="p">(</span><span class="n">ptsi</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ptsi</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;_make_line_cell() only handles two points&#39;</span><span class="p">)</span>
-            <span class="n">aLine</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkLine</span><span class="p">()</span>
-            <span class="n">aLine</span><span class="o">.</span><span class="n">GetPointIds</span><span class="p">()</span><span class="o">.</span><span class="n">SetId</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ptsi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">aLine</span><span class="o">.</span><span class="n">GetPointIds</span><span class="p">()</span><span class="o">.</span><span class="n">SetId</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ptsi</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">return</span> <span class="n">aLine</span>
-
-
-        <span class="n">cells</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCellArray</span><span class="p">()</span>
-        <span class="n">numPoints</span> <span class="o">=</span> <span class="n">pdi</span><span class="o">.</span><span class="n">GetNumberOfPoints</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">nrNbr</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">_find_min_path</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="c1"># sklearn&#39;s KDTree is faster: use it if available</span>
                 <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KDTree</span> <span class="k">as</span> <span class="n">Tree</span>
             <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
                 <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">cKDTree</span>  <span class="k">as</span> <span class="n">Tree</span>
-            <span class="c1"># VTK_Line</span>
-            <span class="n">og</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">cell_type</span> <span class="o">==</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_LINE</span><span class="p">:</span>
-                <span class="n">tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-                <span class="n">ind</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">og</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">numPoints</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-                    <span class="c1"># Get indices of k nearest points</span>
-                    <span class="n">ptsi</span> <span class="o">=</span> <span class="p">[</span><span class="n">ind</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ind</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span>
-                    <span class="n">cell</span> <span class="o">=</span> <span class="n">_make_line_cell</span><span class="p">(</span><span class="n">ptsi</span><span class="p">)</span>
-                    <span class="n">cells</span><span class="o">.</span><span class="n">InsertNextCell</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-                    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Deletes first row</span>
-            <span class="c1"># VTK_PolyLine</span>
-            <span class="k">elif</span> <span class="n">cell_type</span> <span class="o">==</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_POLY_LINE</span><span class="p">:</span>
-                <span class="n">tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-                <span class="n">ptsi</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">og</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">numPoints</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-                <span class="n">cell</span> <span class="o">=</span> <span class="n">_make_poly_cell</span><span class="p">(</span><span class="n">ptsi</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
-                <span class="n">cells</span><span class="o">.</span><span class="n">InsertNextCell</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Cell Type </span><span class="si">%d</span><span class="s1"> not ye implemented.&#39;</span> <span class="o">%</span> <span class="n">cell_type</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># VTK_PolyLine</span>
-            <span class="k">if</span> <span class="n">cell_type</span> <span class="o">==</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_POLY_LINE</span><span class="p">:</span>
-                <span class="n">ptsi</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numPoints</span><span class="p">)]</span>
-                <span class="n">cell</span> <span class="o">=</span> <span class="n">_make_poly_cell</span><span class="p">(</span><span class="n">ptsi</span><span class="p">)</span>
-                <span class="n">cells</span><span class="o">.</span><span class="n">InsertNextCell</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-            <span class="c1"># VTK_Line</span>
-            <span class="k">elif</span> <span class="n">cell_type</span> <span class="o">==</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_LINE</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">numPoints</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-                    <span class="n">ptsi</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="n">cell</span> <span class="o">=</span> <span class="n">_make_line_cell</span><span class="p">(</span><span class="n">ptsi</span><span class="p">)</span>
-                    <span class="n">cells</span><span class="o">.</span><span class="n">InsertNextCell</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Cell Type </span><span class="si">%d</span><span class="s1"> not ye implemented.&#39;</span> <span class="o">%</span> <span class="n">cell_type</span><span class="p">)</span>
+            <span class="n">_compute_dist</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">pt0</span><span class="p">,</span> <span class="n">pt1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">pt0</span><span class="o">-</span><span class="n">pt1</span><span class="p">)</span>
+            <span class="n">ind</span><span class="p">,</span> <span class="n">min_dist</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">pt</span> <span class="ow">in</span> <span class="n">points</span><span class="p">:</span>
+                <span class="n">cur_ind</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">([</span><span class="n">pt</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+                <span class="n">dist</span> <span class="o">=</span> <span class="mf">0.</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cur_ind</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">dist</span> <span class="o">+=</span> <span class="n">_compute_dist</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">cur_ind</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">points</span><span class="p">[</span><span class="n">cur_ind</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span>
+                <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">min_dist</span><span class="p">:</span>
+                    <span class="n">ind</span> <span class="o">=</span> <span class="n">cur_ind</span>
+                    <span class="n">min_dist</span> <span class="o">=</span> <span class="n">dist</span>
+            <span class="k">return</span> <span class="n">ind</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">log_time</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">((</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">startTime</span><span class="p">))</span>
-        <span class="c1"># Now add points and cells to output</span>
-        <span class="n">pdo</span><span class="o">.</span><span class="n">SetPoints</span><span class="p">(</span><span class="n">pdi</span><span class="o">.</span><span class="n">GetPoints</span><span class="p">())</span>
-        <span class="n">pdo</span><span class="o">.</span><span class="n">SetLines</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
-        <span class="c1"># copy point data</span>
-        <span class="n">_helpers</span><span class="o">.</span><span class="n">copy_arrays_to_point_data</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># 0 is point data</span>
-        <span class="c1"># Copy cell data if type is LINE</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__usenbr</span><span class="p">:</span>
+            <span class="n">ind</span> <span class="o">=</span> <span class="n">_find_min_path</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">points</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">cell_type</span> <span class="o">==</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_LINE</span><span class="p">:</span>
-            <span class="c1"># Be sure to rearange for Nearest neighbor approxiamtion</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pdi</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">GetNumberOfArrays</span><span class="p">()):</span>
-                <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">pdi</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">GetArray</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="n">vtkarr</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">nrNbr</span><span class="p">:</span>
-                    <span class="n">arr</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
-                    <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
-                    <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
-                <span class="n">pdo</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
+            <span class="n">poly</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ind</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ind</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+        <span class="k">elif</span> <span class="n">cell_type</span> <span class="o">==</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_POLY_LINE</span><span class="p">:</span>
+            <span class="n">cells</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCellArray</span><span class="p">()</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyLine</span><span class="p">()</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">GetPointIds</span><span class="p">()</span><span class="o">.</span><span class="n">SetNumberOfIds</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ind</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ind</span><span class="p">:</span>
+                <span class="n">cell</span><span class="o">.</span><span class="n">GetPointIds</span><span class="p">()</span><span class="o">.</span><span class="n">SetId</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ind</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">cells</span><span class="o">.</span><span class="n">InsertNextCell</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+            <span class="n">poly</span><span class="o">.</span><span class="n">SetLines</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Cell type (</span><span class="si">{}</span><span class="s1">) not supported&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cell_type</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">pdi</span><span class="o">.</span><span class="n">point_arrays</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">poly</span><span class="o">.</span><span class="n">point_arrays</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pdo</span></div>
 
 <div class="viewcode-block" id="AddCellConnToPoints.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.AddCellConnToPoints.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
