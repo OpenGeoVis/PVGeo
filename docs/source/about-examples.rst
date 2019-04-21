@@ -8,7 +8,7 @@ visualization.
 The following sections on this page demonstrate general procedures and syntax to
 use each type of algorithm within ParaView or directly in a Python environment.
 
-Take a look at the :ref:`gallery` for an outline of all the available
+Take a look at the :ref:`ref_examples` for an outline of all the available
 examples at this time.
 
 If you think there may be a serious problem with an example, please open an
