@@ -1,4 +1,3 @@
-# Import base classes
 try:
     # Safely test if VTK is avaialable. This is needed for Windows installation
     def tryVTK():
@@ -48,7 +47,7 @@ __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
 __version__ = '1.2.3'
-__displayname__ = 'PVGeo API Index'
+__displayname__ = 'PVGeo'
 
 
 # Now check that NumPy is at a satisfactory version
