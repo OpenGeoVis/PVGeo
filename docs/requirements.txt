@@ -1,5 +1,5 @@
 # For building the documentation:
-gendocs>=0.3.1
+gendocs>=0.3.4
 mock
 Sphinx
 sphinx-autobuild

@@ -40,15 +40,7 @@ autodoc_mock_imports = ['paraview']
 import PVGeo, pvmacros # for documenting
 from gendocs import Generator
 
-# Automatically generate documentaion pages
-Generator().DocumentPackages([PVGeo, pvmacros],
-            index_base='../index_base.rst',
-            showprivate=True,
-            notify=False,
-            )
-
-# HACK: Now append the examples toc to the end of the index
-example_toc = """
+append_material = """
 
 .. toctree::
    :maxdepth: 2
@@ -58,6 +50,9 @@ example_toc = """
    about-examples.rst
    examples/index
 
+"""
+
+extra = """
 
 .. toctree::
    :maxdepth: 2
@@ -71,8 +66,20 @@ example_toc = """
    dev-guide/resources
 
 """
-with open(os.path.join(os.path.dirname(__file__), 'index.rst'), 'a') as f:
-    f.write(example_toc)
+
+# Automatically generate documentaion pages
+Generator().DocumentPackages([PVGeo, pvmacros],
+            index_base='../index_base.rst',
+            showprivate=True,
+            notify=False,
+            intro_pages=['overview/why-pvgeo',
+                         'overview/getting-started',
+                         'overview/featured',
+                         'overview/agu-2018',
+                        ],
+            append_material=append_material,
+            extra=extra,
+            )
 
 import vtki
 import numpy as np
@@ -257,7 +264,7 @@ todo_include_todos = True
 
 # -- Sphinx Gallery Options
 from sphinx_gallery.sorting import FileNameSortKey
-
+# thumb_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'PVGeo_icon_horiz.png')
 sphinx_gallery_conf = {
     # path to your examples scripts
     "examples_dirs": [
@@ -277,4 +284,5 @@ sphinx_gallery_conf = {
     "doc_module": "PVGeo",
     "image_scrapers": (vtki.Scraper(), 'matplotlib'),
     "thumbnail_size": (350, 350),
+    # 'default_thumb_file': thumb_path,
 }

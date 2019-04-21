@@ -25,4 +25,4 @@ __copyright__ = '2018, Bane Sullivan'
 __version__ = '1.2.3'
 
 
-__displayname__ = 'ParaView Macros'
+__displayname__ = 'ParaView Macros API Index'
