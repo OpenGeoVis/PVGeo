@@ -55,7 +55,7 @@ class GSLibReader(_GSLibReaderMethods, DelimitedTextReader):
     description = 'PVGeo: GSLib Table'
     def __init__(self, outputType='vtkTable', **kwargs):
         DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
-        self.SetSplitOnWhiteSpace(True)
+        self.set_split_on_white_space(True)
 
 
 class GSLibPointSetReader(_GSLibReaderMethods, DelimitedPointsReaderBase):
@@ -68,7 +68,7 @@ class GSLibPointSetReader(_GSLibReaderMethods, DelimitedPointsReaderBase):
     extensions = _GSLibReaderMethods.extensions + 'gslibpts ptset gpts'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
-        self.SetSplitOnWhiteSpace(True)
+        self.set_split_on_white_space(True)
 
 
 
@@ -107,7 +107,7 @@ class WriteTableToGSLib(WriterBase):
         return 1
 
 
-    def SetHeader(self, header):
+    def set_header(self, header):
         """Set the file header string"""
         if self._header != header:
             self._header = header

@@ -680,7 +680,7 @@ class TestPointsToTube(TestBase):
         self.makeComplicatedInput()
         f = PointsToTube()
         f.SetInputDataObject(self.vtkpoints)
-        f.SetRadius(20)
+        f.set_radius(20)
         f.set_number_of_sides(10)
         f.set_use_nearest_nbr(True)
         f.Update()

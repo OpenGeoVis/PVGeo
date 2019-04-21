@@ -101,8 +101,8 @@ class PVGeoPointsToTube(PointsToTube):
     # It is still accesible to change though...
 
     @smproperty.doublevector(name="Radius", default_values=10.0)
-    def SetRadius(self, radius):
-        PointsToTube.SetRadius(self, radius)
+    def set_radius(self, radius):
+        PointsToTube.set_radius(self, radius)
 
     @smproperty.intvector(name="Number of Sides", default_values=20)
     def set_number_of_sides(self, num):
@@ -193,8 +193,8 @@ class PVGeoVoxelizePoints(VoxelizePoints):
     def set_estimate_grid(self, flag):
         VoxelizePoints.set_estimate_grid(self, flag)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Cell Size', command='SetCellSize', default_values=[10.0, 10.0, 10.0], help='The cell size (dx, dy, dz) to use as a default for all generated voxels.', panel_visibility='advanced'))
-    def SetCellSize(self, dx, dy, dz):
+    @smproperty.xml(_helpers.get_property_xml(name='Cell Size', command='set_cell_size', default_values=[10.0, 10.0, 10.0], help='The cell size (dx, dy, dz) to use as a default for all generated voxels.', panel_visibility='advanced'))
+    def set_cell_size(self, dx, dy, dz):
         VoxelizePoints.set_deltas(self, dx, dy, dz)
 
 
@@ -451,8 +451,8 @@ class PVGeoRotatePoints(RotatePoints):
         RotatePoints.set_rotation_degrees(self, theta)
 
     @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0], panel_visibility='advanced')
-    def SetOrigin(self, xo, yo):
-        RotatePoints.SetOrigin(self, xo, yo)
+    def set_origin(self, xo, yo):
+        RotatePoints.set_origin(self, xo, yo)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Corner',
         command='set_use_corner', default_values=True,
@@ -493,15 +493,15 @@ class PVGeoPercentThreshold(PercentThreshold):
 
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Continuous Cell Range',
-        command='SetUseContinuousCellRange', default_values=False))
-    def SetUseContinuousCellRange(self, flag):
-        PercentThreshold.SetUseContinuousCellRange(self, flag)
+        command='set_use_continuous_cell_range', default_values=False))
+    def set_use_continuous_cell_range(self, flag):
+        PercentThreshold.set_use_continuous_cell_range(self, flag)
 
     @smproperty.xml(_helpers.get_property_xml(name='Invert',
-        command='SetInvert', default_values=False,
+        command='set_invert', default_values=False,
         help='Use to invert the threshold filter.'))
-    def SetInvert(self, flag):
-        PercentThreshold.SetInvert(self, flag)
+    def set_invert(self, flag):
+        PercentThreshold.set_invert(self, flag)
 
     @smproperty.xml(_helpers.get_input_array_xml(nInputPorts=1, n_arrays=1))
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
@@ -599,9 +599,9 @@ class PVGeoConvertUnits(ConvertUnits):
 
     #### SETTERS AND GETTERS ####
 
-    @smproperty.xml(_helpers.get_drop_down_xml(name='Conversion', command='SetConversion', labels=ConvertUnits.LookupConversions(True), help='This will set the spatial conversion.'))
-    def SetConversion(self, key):
-        ConvertUnits.SetConversion(self, key)
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Conversion', command='set_conversion', labels=ConvertUnits.LookupConversions(True), help='This will set the spatial conversion.'))
+    def set_conversion(self, key):
+        ConvertUnits.set_conversion(self, key)
 
 ###############################################################################
 
@@ -689,8 +689,8 @@ class PVGeoBuildSurfaceFromPoints(BuildSurfaceFromPoints):
         BuildSurfaceFromPoints.__init__(self)
 
     @smproperty.stringvector(name="Z Coords", default_values='0. 50.0')
-    def SetZCoordsStr(self, zcellstr):
-        BuildSurfaceFromPoints.SetZCoordsStr(self, zcellstr)
+    def set_z_coords_str(self, zcellstr):
+        BuildSurfaceFromPoints.set_z_coords_str(self, zcellstr)
 
 
 ###############################################################################

@@ -35,7 +35,7 @@ class OutlineContinents(AlgorithmBase):
         pdo.ShallowCopy(earth.GetOutput())
         return 1
 
-    def SetRadius(self, radius):
+    def set_radius(self, radius):
         """Set the radius of the globe. Defualt is 6.371.0e9 meters"""
         if self.__radius != radius:
             self.__radius = radius
@@ -114,19 +114,19 @@ class GlobeSource(AlgorithmBase):
         pdo.ShallowCopy(globe)
         return 1
 
-    def SetRadius(self, radius):
+    def set_radius(self, radius):
         """Set the radius of the globe. Defualt is 6.371.0e9 meters"""
         if self.__radius != radius:
             self.__radius = radius
             self.Modified()
 
-    def SetNumberOfMeridians(self, n):
+    def set_n_meridians(self, n):
         """Set the number of meridians to use"""
         if self.__nmer != n:
             self.__nmer = n
             self.Modified()
 
-    def SetNumberOfParallels(self, n):
+    def set_n_parallels(self, n):
         """Set the number of parallels to use"""
         if self.__npar != n:
             self.__npar = n

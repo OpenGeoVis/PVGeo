@@ -27,20 +27,20 @@ class PVGeoGSLibReader(GSLibReader):
         GSLibReader.AddFileName(self, filename)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
-    def SetDelimiter(self, deli):
-        GSLibReader.SetDelimiter(self, deli)
+    def set_delimiter(self, deli):
+        GSLibReader.set_delimiter(self, deli)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
-    def SetSplitOnWhiteSpace(self, flag):
-        GSLibReader.SetSplitOnWhiteSpace(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='set_split_on_white_space', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def set_split_on_white_space(self, flag):
+        GSLibReader.set_split_on_white_space(self, flag)
 
     @smproperty.intvector(name="SkipRows", default_values=0)
-    def SetSkipRows(self, skip):
-        GSLibReader.SetSkipRows(self, skip)
+    def set_skip_rows(self, skip):
+        GSLibReader.set_skip_rows(self, skip)
 
     @smproperty.stringvector(name="Comments", default_values="!")
-    def SetComments(self, identifier):
-        GSLibReader.SetComments(self, identifier)
+    def set_comments(self, identifier):
+        GSLibReader.set_comments(self, identifier)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def set_time_delta(self, dt):
@@ -51,8 +51,8 @@ class PVGeoGSLibReader(GSLibReader):
         """This is critical for registering the timesteps"""
         return GSLibReader.get_time_step_values(self)
 
-    @smproperty.xml("""<Property name="Print File Header" command="PrintFileHeader" panel_widget="command_button"/>""")
-    def PrintFileHeader(self):
+    @smproperty.xml("""<Property name="Print File Header" command="print_file_header" panel_widget="command_button"/>""")
+    def print_file_header(self):
         print(GSLibReader.GetFileHeader(self))
         return 1
 
@@ -77,20 +77,20 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
         GSLibPointSetReader.AddFileName(self, filename)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
-    def SetDelimiter(self, deli):
-        GSLibPointSetReader.SetDelimiter(self, deli)
+    def set_delimiter(self, deli):
+        GSLibPointSetReader.set_delimiter(self, deli)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
-    def SetSplitOnWhiteSpace(self, flag):
-        GSLibPointSetReader.SetSplitOnWhiteSpace(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='set_split_on_white_space', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def set_split_on_white_space(self, flag):
+        GSLibPointSetReader.set_split_on_white_space(self, flag)
 
     @smproperty.intvector(name="SkipRows", default_values=0)
-    def SetSkipRows(self, skip):
-        GSLibPointSetReader.SetSkipRows(self, skip)
+    def set_skip_rows(self, skip):
+        GSLibPointSetReader.set_skip_rows(self, skip)
 
     @smproperty.stringvector(name="Comments", default_values="!")
-    def SetComments(self, identifier):
-        GSLibPointSetReader.SetComments(self, identifier)
+    def set_comments(self, identifier):
+        GSLibPointSetReader.set_comments(self, identifier)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def set_time_delta(self, dt):
@@ -101,8 +101,8 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
         """This is critical for registering the timesteps"""
         return GSLibPointSetReader.get_time_step_values(self)
 
-    @smproperty.xml("""<Property name="Print File Header" command="PrintFileHeader" panel_widget="command_button"/>""")
-    def PrintFileHeader(self):
+    @smproperty.xml("""<Property name="Print File Header" command="print_file_header" panel_widget="command_button"/>""")
+    def print_file_header(self):
         print(GSLibPointSetReader.GetFileHeader(self))
         return 1
 
@@ -126,20 +126,20 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
         SGeMSGridReader.AddFileName(self, filename)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
-    def SetDelimiter(self, deli):
-        SGeMSGridReader.SetDelimiter(self, deli)
+    def set_delimiter(self, deli):
+        SGeMSGridReader.set_delimiter(self, deli)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
-    def SetSplitOnWhiteSpace(self, flag):
-        SGeMSGridReader.SetSplitOnWhiteSpace(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='set_split_on_white_space', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def set_split_on_white_space(self, flag):
+        SGeMSGridReader.set_split_on_white_space(self, flag)
 
     @smproperty.intvector(name="SkipRows", default_values=0)
-    def SetSkipRows(self, skip):
-        SGeMSGridReader.SetSkipRows(self, skip)
+    def set_skip_rows(self, skip):
+        SGeMSGridReader.set_skip_rows(self, skip)
 
     @smproperty.stringvector(name="Comments", default_values="!")
-    def SetComments(self, identifier):
-        SGeMSGridReader.SetComments(self, identifier)
+    def set_comments(self, identifier):
+        SGeMSGridReader.set_comments(self, identifier)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def set_time_delta(self, dt):
@@ -151,12 +151,12 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
         return SGeMSGridReader.get_time_step_values(self)
 
     @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0],)
-    def SetSpacing(self, dx, dy, dz):
-        SGeMSGridReader.SetSpacing(self, dx, dy, dz)
+    def set_spacing(self, dx, dy, dz):
+        SGeMSGridReader.set_spacing(self, dx, dy, dz)
 
     @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0, 0.0],)
-    def SetOrigin(self, ox, oy, oz):
-        SGeMSGridReader.SetOrigin(self, ox, oy, oz)
+    def set_origin(self, ox, oy, oz):
+        SGeMSGridReader.set_origin(self, ox, oy, oz)
 
 
 ###############################################################################
@@ -176,9 +176,9 @@ class PVGeoWriteImageDataToSGeMS(WriteImageDataToSGeMS):
         WriteImageDataToSGeMS.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Format", default_values='%.9e')
-    def SetFormat(self, fmt):
+    def set_format(self, fmt):
         """Use to set the ASCII format for the writer default is ``'%.9e'``"""
-        WriteImageDataToSGeMS.SetFormat(self, fmt)
+        WriteImageDataToSGeMS.set_format(self, fmt)
 
 ###############################################################################
 
@@ -196,12 +196,12 @@ class PVGeoWriteTableToGSLib(WriteTableToGSLib):
         WriteTableToGSLib.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Header", default_values='Saved by PVGeo')
-    def SetHeader(self, header):
-        WriteTableToGSLib.SetHeader(self, header)
+    def set_header(self, header):
+        WriteTableToGSLib.set_header(self, header)
 
     @smproperty.stringvector(name="Format", default_values='%.9e')
-    def SetFormat(self, fmt):
+    def set_format(self, fmt):
         """Use to set the ASCII format for the writer default is ``'%.9e'``"""
-        WriteTableToGSLib.SetFormat(self, fmt)
+        WriteTableToGSLib.set_format(self, fmt)
 
 ###############################################################################

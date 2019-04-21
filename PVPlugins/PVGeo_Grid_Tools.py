@@ -27,17 +27,17 @@ class PVGeoReverseImageDataAxii(ReverseImageDataAxii):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.get_property_xml(name='Flip X Axis', command='SetFlipX', default_values=True, help='A boolean to set whether to flip the X axis.'))
-    def SetFlipX(self, flag):
-        ReverseImageDataAxii.SetFlipX(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Flip X Axis', command='set_flip_x', default_values=True, help='A boolean to set whether to flip the X axis.'))
+    def set_flip_x(self, flag):
+        ReverseImageDataAxii.set_flip_x(self, flag)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Flip Y Axis', command='SetFlipY', default_values=True, help='A boolean to set whether to flip the Y axis.'))
-    def SetFlipY(self, flag):
-        ReverseImageDataAxii.SetFlipY(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Flip Y Axis', command='set_flip_y', default_values=True, help='A boolean to set whether to flip the Y axis.'))
+    def set_flip_y(self, flag):
+        ReverseImageDataAxii.set_flip_y(self, flag)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Flip Z Axis', command='SetFlipZ', default_values=True, help='A boolean to set whether to flip the Z axis.'))
-    def SetFlipZ(self, flag):
-        ReverseImageDataAxii.SetFlipZ(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Flip Z Axis', command='set_flip_z', default_values=True, help='A boolean to set whether to flip the Z axis.'))
+    def set_flip_z(self, flag):
+        ReverseImageDataAxii.set_flip_z(self, flag)
 
 
 ###############################################################################
@@ -53,12 +53,12 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.get_drop_down_xml(name='Corner', command='SetCorner',
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Corner', command='set_corner',
         labels=['South East Bottom', 'North West Bottom', 'North East Bottom',
         'South West Top', 'South East Top', 'North West Top', 'North East Top'],
         values=[1,2,3,4,5,6,7]))
-    def SetCorner(self, corner):
-        TranslateGridOrigin.SetCorner(self, corner)
+    def set_corner(self, corner):
+        TranslateGridOrigin.set_corner(self, corner)
 
 
 
@@ -79,20 +79,20 @@ class PVGeoTableToTimeGrid(TableToTimeGrid):
 
 
     @smproperty.intvector(name="Extent", default_values=[10, 10, 10, 1])
-    def SetExtent(self, nx, ny, nz, nt):
-        TableToTimeGrid.SetExtent(self, nx, ny, nz, nt)
+    def set_extent(self, nx, ny, nz, nt):
+        TableToTimeGrid.set_extent(self, nx, ny, nz, nt)
 
     @smproperty.intvector(name="Dimensions", default_values=[0, 1, 2, 3])
-    def SetDimensions(self, x, y, z, t):
-        TableToTimeGrid.SetDimensions(self, x, y, z, t)
+    def set_dimensions(self, x, y, z, t):
+        TableToTimeGrid.set_dimensions(self, x, y, z, t)
 
     @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0])
-    def SetSpacing(self, dx, dy, dz):
-        TableToTimeGrid.SetSpacing(self, dx, dy, dz)
+    def set_spacing(self, dx, dy, dz):
+        TableToTimeGrid.set_spacing(self, dx, dy, dz)
 
     @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0, 0.0])
-    def SetOrigin(self, x0, y0, z0):
-        TableToTimeGrid.SetOrigin(self, x0, y0, z0)
+    def set_origin(self, x0, y0, z0):
+        TableToTimeGrid.set_origin(self, x0, y0, z0)
 
 
     @smproperty.xml(_helpers.get_drop_down_xml(name='Order', command='set_order',
@@ -111,9 +111,9 @@ class PVGeoTableToTimeGrid(TableToTimeGrid):
         """This is critical for registering the timesteps"""
         return TableToTimeGrid.get_time_step_values(self)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Use Point Data', command='SetUsePoints', default_values=False, panel_visibility='advanced', help='Set whether or not to place the data on the nodes/cells of the grid. In ParaView, switching can be a bit buggy: be sure to turn the visibility of this data object OFF on the pipeline when changing bewteen nodes/cells.'))
-    def SetUsePoints(self, flag):
-        TableToTimeGrid.SetUsePoints(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Use Point Data', command='set_use_points', default_values=False, panel_visibility='advanced', help='Set whether or not to place the data on the nodes/cells of the grid. In ParaView, switching can be a bit buggy: be sure to turn the visibility of this data object OFF on the pipeline when changing bewteen nodes/cells.'))
+    def set_use_points(self, flag):
+        TableToTimeGrid.set_use_points(self, flag)
 
 
 
@@ -135,23 +135,23 @@ class PVGeoExtractTopography(ExtractTopography):
     #### Seters and Geters ####
 
     @smproperty.doublevector(name="Tolerance", default_values=1.0)
-    def SetTolerance(self, tol):
-        ExtractTopography.SetTolerance(self, tol)
+    def set_tolerance(self, tol):
+        ExtractTopography.set_tolerance(self, tol)
 
     @smproperty.doublevector(name="Offset", default_values=0.0)
-    def SetOffset(self, offset):
-        ExtractTopography.SetOffset(self, offset)
+    def set_offset(self, offset):
+        ExtractTopography.set_offset(self, offset)
 
     @smproperty.xml(_helpers.get_drop_down_xml(name='Operation', command='set_operation', labels=ExtractTopography.get_operation_names(), help='This is the type of extraction operation to apply'))
     def set_operation(self, op):
         ExtractTopography.set_operation(self, op)
 
     @smproperty.xml(_helpers.get_property_xml(name='Invert',
-        command='SetInvert',
+        command='set_invert',
         default_values=False,
         help='A boolean to set whether on whether to invert the extraction.'))
-    def SetInvert(self, flag):
-        ExtractTopography.SetInvert(self, flag)
+    def set_invert(self, flag):
+        ExtractTopography.set_invert(self, flag)
 
 ###############################################################################
 
@@ -171,8 +171,8 @@ class PVGeoSurferGridReader(SurferGridReader):
         SurferGridReader.AddFileName(self, filename)
 
     @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, data_name):
-        SurferGridReader.SetDataName(self, data_name)
+    def set_data_name(self, data_name):
+        SurferGridReader.set_data_name(self, data_name)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def set_time_delta(self, dt):
@@ -205,9 +205,9 @@ class PVGeoWriteImageDataToSurfer(WriteImageDataToSurfer):
         return WriteImageDataToSurfer.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
     @smproperty.stringvector(name="Format", default_values='%.9e')
-    def SetFormat(self, fmt):
+    def set_format(self, fmt):
         """Use to set the ASCII format for the writer default is ``'%.9e'``"""
-        WriteImageDataToSurfer.SetFormat(self, fmt)
+        WriteImageDataToSurfer.set_format(self, fmt)
 
 
 
@@ -228,14 +228,14 @@ class PVGeoWriteCellCenterData(WriteCellCenterData):
         WriteCellCenterData.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Format", default_values='%.9e')
-    def SetFormat(self, fmt):
+    def set_format(self, fmt):
         """Use to set the ASCII format for the writer default is ``'%.9e'``"""
-        WriteCellCenterData.SetFormat(self, fmt)
+        WriteCellCenterData.set_format(self, fmt)
 
     @smproperty.stringvector(name="Delimiter", default_values=',')
-    def SetDelimiter(self, deli):
+    def set_delimiter(self, deli):
         """The string delimiter to use"""
-        WriteCellCenterData.SetDelimiter(self, deli)
+        WriteCellCenterData.set_delimiter(self, deli)
 
 ###############################################################################
 
@@ -255,8 +255,8 @@ class PVGeoEsriGridReader(EsriGridReader):
         EsriGridReader.AddFileName(self, filename)
 
     @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, data_name):
-        EsriGridReader.SetDataName(self, data_name)
+    def set_data_name(self, data_name):
+        EsriGridReader.set_data_name(self, data_name)
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
     def set_time_delta(self, dt):
@@ -292,17 +292,17 @@ class PVGeoLandsatReader(LandsatReader):
 
 
     @smproperty.xml(_helpers.get_property_xml(name='Cast Data Type',
-        command='CastDataType',
+        command='set_cast_data_type',
         default_values=True,
         help='A boolean to set whether to cast the data arrays so invalid points are filled nans.',
         panel_visibility='advanced'))
-    def CastDataType(self, flag):
-        LandsatReader.CastDataType(self, flag)
+    def set_cast_data_type(self, flag):
+        LandsatReader.set_cast_data_type(self, flag)
 
 
-    @smproperty.xml(_helpers.get_drop_down_xml(name='Color Scheme', command='SetColorScheme', labels=LandsatReader.GetColorSchemeNames(), help='Set a color scheme to use.'))
-    def SetColorScheme(self, scheme):
-        LandsatReader.SetColorScheme(self, scheme)
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Color Scheme', command='set_color_scheme', labels=LandsatReader.GetColorSchemeNames(), help='Set a color scheme to use.'))
+    def set_color_scheme(self, scheme):
+        LandsatReader.set_color_scheme(self, scheme)
 
 
 ###############################################################################

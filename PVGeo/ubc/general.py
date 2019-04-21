@@ -30,8 +30,8 @@ class TopoReader(DelimitedPointsReaderBase):
     description = 'PVGeo: UBC 3D Topo Files'
     def __init__(self, copy_z=True, **kwargs):
         DelimitedPointsReaderBase.__init__(self, copy_z=copy_z, **kwargs)
-        self.SetHasTitles(False)#kwargs.get('has_titles', False))
-        self.SetSplitOnWhiteSpace(True)
+        self.set_has_titles(False)#kwargs.get('has_titles', False))
+        self.set_split_on_white_space(True)
         self.__3d = True # TODO: handle 2D topo files as well
         self.__npts = None
 
@@ -61,8 +61,8 @@ class GravObsReader(DelimitedPointsReaderBase):
     description = 'PVGeo: GIF Gravity Observations'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
-        self.SetHasTitles(False)
-        self.SetSplitOnWhiteSpace(True)
+        self.set_has_titles(False)
+        self.set_split_on_white_space(True)
         self.__npts = None
 
     # Simply override the extract titles functionality
@@ -92,8 +92,8 @@ class GravGradReader(DelimitedPointsReaderBase):
     description = 'PVGeo: GIF Gravity Gradiometry Observations'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
-        self.SetHasTitles(False)
-        self.SetSplitOnWhiteSpace(True)
+        self.set_has_titles(False)
+        self.set_split_on_white_space(True)
         self.__npts = None
 
     # Simply override the extract titles functionality
@@ -131,8 +131,8 @@ class MagObsReader(DelimitedPointsReaderBase):
     description = 'PVGeo: GIF Magnetic Observations'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
-        self.SetHasTitles(False)
-        self.SetSplitOnWhiteSpace(True)
+        self.set_has_titles(False)
+        self.set_split_on_white_space(True)
         self.__npts = None
         self.__incl = None
         self.__decl = None
@@ -285,7 +285,7 @@ class GeologyMapper(FilterPreserveTypeBase):
             self.__filename = filename
             self.Modified()
 
-    def SetDelimiter(self, deli):
+    def set_delimiter(self, deli):
         """Set the delimiter of the ASCII file"""
         if self.__deli != deli:
             self.__deli = deli

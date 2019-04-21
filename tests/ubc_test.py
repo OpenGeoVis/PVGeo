@@ -105,21 +105,21 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         self.modname_multi, self.data_multi = self._write_model_multi()
         # Set up the reader:
         reader = TensorMeshReader()
-        reader.SetMeshFileName(self.meshname)
+        reader.set_mesh_filename(self.meshname)
         # Get and test output:
         reader.Update() # Read only mesh upfront
-        reader.AddModelFileName(self.modname)
-        reader.SetDataName(self.data_name)
+        reader.add_model_file_name(self.modname)
+        reader.set_data_name(self.data_name)
         reader.Update() # Read models upfront
         self.GRID = reader.GetOutput()
         #### Now read mesh with multi component data
         # Set up the reader:
         reader = TensorMeshReader()
-        reader.SetMeshFileName(self.meshname)
+        reader.set_mesh_filename(self.meshname)
         # Get and test output:
         reader.Update() # Read only mesh upfront
-        reader.AddModelFileName(self.modname_multi)
-        reader.SetDataName(self.data_name)
+        reader.add_model_file_name(self.modname_multi)
+        reader.set_data_name(self.data_name)
         reader.Update() # Read models upfront
         self.GRID_MULTI = reader.GetOutput()
 
@@ -155,8 +155,8 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         modname, appdata = self._write_model('testApp.mod')
         f = TensorMeshAppender()
         f.SetInputDataObject(self.GRID)
-        f.AddModelFileName(modname)
-        f.SetDataName('appended')
+        f.add_model_file_name(modname)
+        f.set_data_name('appended')
         f.Update()
         output = f.GetOutput()
         self.assertEqual(output.GetCellData().GetNumberOfArrays(), 2)
@@ -174,7 +174,7 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         # run the filter
         f = TopoMeshAppender()
         f.SetInputDataObject(grid)
-        f.SetTopoFileName(filename)
+        f.set_topo_filename(filename)
         f.Update()
         output = f.GetOutput()
         # TODO: check output
@@ -190,10 +190,10 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         writer.Write(self.GRID)
         # Now read in the data again and compare!
         reader = TensorMeshReader()
-        reader.SetMeshFileName(filename)
+        reader.set_mesh_filename(filename)
         modname = os.path.join(self.test_dir, '%s.mod' % self.data_name)
-        reader.AddModelFileName(modname)
-        reader.SetDataName(self.data_name)
+        reader.add_model_file_name(modname)
+        reader.set_data_name(self.data_name)
         reader.Update()
         test = reader.GetOutput()
         # Compare the data
@@ -276,11 +276,11 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
         modname, self.data = self._write_model()
         # Set up the reader:
         reader = TensorMeshReader()
-        reader.SetMeshFileName(meshname)
+        reader.set_mesh_filename(meshname)
         # Get and test output:
         reader.Update() # Test the read up front for the mesh
-        reader.AddModelFileName(modname)
-        reader.SetDataName(self.data_name)
+        reader.add_model_file_name(modname)
+        reader.set_data_name(self.data_name)
         reader.Update() # Now read the models upfront
         self.GRID = reader.GetOutput()
         return
@@ -313,8 +313,8 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
         modname, appdata = self._write_model('testApp.mod')
         f = TensorMeshAppender()
         f.SetInputDataObject(self.GRID)
-        f.AddModelFileName(modname)
-        f.SetDataName('appended')
+        f.add_model_file_name(modname)
+        f.set_data_name('appended')
         f.Update()
         output = f.GetOutput()
         self.assertEqual(output.GetCellData().GetNumberOfArrays(), 2)
@@ -397,7 +397,7 @@ if discretize_available:
         def test_simple_octree(self):
             """`OcTreeReader`: simple octree mesh file"""
             reader = OcTreeReader()
-            reader.SetMeshFileName(self.meshFileName)
+            reader.set_mesh_filename(self.meshFileName)
 
             reader.Update()
 
@@ -409,9 +409,9 @@ if discretize_available:
         def test_simple_octree_models(self):
             """`OcTreeReader`: simple octree mesh with models"""
             reader = OcTreeReader()
-            reader.SetMeshFileName(self.meshFileName)
-            reader.AddModelFileName(self.modelFileNames)
-            reader.SetDataName('foo')
+            reader.set_mesh_filename(self.meshFileName)
+            reader.add_model_file_name(self.modelFileNames)
+            reader.set_data_name('foo')
 
             reader.Update() # Check that normal update works
 
@@ -435,9 +435,9 @@ if discretize_available:
             """`OcTreeAppender` 2D: Data array name"""
             # Creat a tree mesh to append
             reader = OcTreeReader()
-            reader.SetMeshFileName(self.meshFileName)
-            reader.AddModelFileName(self.modelFileNames[0])
-            reader.SetDataName('Initial Data')
+            reader.set_mesh_filename(self.meshFileName)
+            reader.add_model_file_name(self.modelFileNames[0])
+            reader.set_data_name('Initial Data')
             reader.Update()
             tree = reader.GetOutput()
             self.assertIsNotNone(tree)
@@ -447,8 +447,8 @@ if discretize_available:
             # Now use the model appender
             f = OcTreeAppender()
             f.SetInputDataObject(tree)
-            f.AddModelFileName(self.modelFileNames[1::])
-            f.SetDataName('Appended Data')
+            f.add_model_file_name(self.modelFileNames[1::])
+            f.set_data_name('Appended Data')
             f.Update()
 
             output = f.GetOutput()

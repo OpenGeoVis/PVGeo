@@ -39,22 +39,22 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
         """This is critical for registering the timesteps"""
         return PackedBinariesReader.get_time_step_values(self)
 
-    @smproperty.xml(_helpers.get_drop_down_xml('Endian','SetEndian',
+    @smproperty.xml(_helpers.get_drop_down_xml('Endian','set_endian',
         ['Native', 'Little-Endian', 'Big-Endian'],
         help='This is the type memory endianness.'))
-    def SetEndian(self, endian):
-        PackedBinariesReader.SetEndian(self, endian)
+    def set_endian(self, endian):
+        PackedBinariesReader.set_endian(self, endian)
 
-    @smproperty.xml(_helpers.get_drop_down_xml('DataType','SetDataType',
+    @smproperty.xml(_helpers.get_drop_down_xml('DataType','set_data_type',
         ['Float64', 'Float32', 'Integer4'],
         help='This is data type to read.'))
-    def SetDataType(self, dtype):
-        PackedBinariesReader.SetDataType(self, dtype)
+    def set_data_type(self, dtype):
+        PackedBinariesReader.set_data_type(self, dtype)
 
 
     @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, data_name):
-        PackedBinariesReader.SetDataName(self, data_name)
+    def set_data_name(self, data_name):
+        PackedBinariesReader.set_data_name(self, data_name)
 
 
 ###############################################################################
@@ -86,22 +86,22 @@ class PVGeoMadagascarReader(MadagascarReader):
         """This is critical for registering the timesteps"""
         return MadagascarReader.get_time_step_values(self)
 
-    @smproperty.xml(_helpers.get_drop_down_xml('Endian','SetEndian',
+    @smproperty.xml(_helpers.get_drop_down_xml('Endian','set_endian',
         ['Native', 'Little-Endian', 'Big-Endian'],
         help='This is the type memory endianness.'))
-    def SetEndian(self, endian):
-        MadagascarReader.SetEndian(self, endian)
+    def set_endian(self, endian):
+        MadagascarReader.set_endian(self, endian)
 
-    @smproperty.xml(_helpers.get_drop_down_xml('DataType','SetDataType',
+    @smproperty.xml(_helpers.get_drop_down_xml('DataType','set_data_type',
         ['Float64', 'Float32', 'Integer4'],
         help='This is data type to read.'))
-    def SetDataType(self, dtype):
-        MadagascarReader.SetDataType(self, dtype)
+    def set_data_type(self, dtype):
+        MadagascarReader.set_data_type(self, dtype)
 
 
     @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, data_name):
-        MadagascarReader.SetDataName(self, data_name)
+    def set_data_name(self, data_name):
+        MadagascarReader.set_data_name(self, data_name)
 
 
 
@@ -135,24 +135,24 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
         return DelimitedTextReader.get_time_step_values(self)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
-    def SetDelimiter(self, deli):
-        DelimitedTextReader.SetDelimiter(self, deli)
+    def set_delimiter(self, deli):
+        DelimitedTextReader.set_delimiter(self, deli)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
-    def SetSplitOnWhiteSpace(self, flag):
-        DelimitedTextReader.SetSplitOnWhiteSpace(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='set_split_on_white_space', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def set_split_on_white_space(self, flag):
+        DelimitedTextReader.set_split_on_white_space(self, flag)
 
     @smproperty.intvector(name="SkipRows", default_values=0)
-    def SetSkipRows(self, skip):
-        DelimitedTextReader.SetSkipRows(self, skip)
+    def set_skip_rows(self, skip):
+        DelimitedTextReader.set_skip_rows(self, skip)
 
     @smproperty.stringvector(name="Comments", default_values="!")
-    def SetComments(self, identifier):
-        DelimitedTextReader.SetComments(self, identifier)
+    def set_comments(self, identifier):
+        DelimitedTextReader.set_comments(self, identifier)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Has Titles', command='SetHasTitles', default_values=False, help='A boolean for if the delimited file has header titles for the data arrays.'))
-    def SetHasTitles(self, flag):
-        DelimitedTextReader.SetHasTitles(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Has Titles', command='set_has_titles', default_values=False, help='A boolean for if the delimited file has header titles for the data arrays.'))
+    def set_has_titles(self, flag):
+        DelimitedTextReader.set_has_titles(self, flag)
 
 
 
@@ -186,17 +186,17 @@ class PVGeoXYZTextReader(XYZTextReader):
         return XYZTextReader.get_time_step_values(self)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
-    def SetDelimiter(self, deli):
-        XYZTextReader.SetDelimiter(self, deli)
+    def set_delimiter(self, deli):
+        XYZTextReader.set_delimiter(self, deli)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
-    def SetSplitOnWhiteSpace(self, flag):
-        XYZTextReader.SetSplitOnWhiteSpace(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='set_split_on_white_space', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def set_split_on_white_space(self, flag):
+        XYZTextReader.set_split_on_white_space(self, flag)
 
     @smproperty.intvector(name="SkipRows", default_values=0)
-    def SetSkipRows(self, skip):
-        XYZTextReader.SetSkipRows(self, skip)
+    def set_skip_rows(self, skip):
+        XYZTextReader.set_skip_rows(self, skip)
 
     @smproperty.stringvector(name="Comments", default_values="!")
-    def SetComments(self, identifier):
-        XYZTextReader.SetComments(self, identifier)
+    def set_comments(self, identifier):
+        XYZTextReader.set_comments(self, identifier)

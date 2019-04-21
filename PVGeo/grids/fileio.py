@@ -334,7 +334,7 @@ class SurferGridReader(ReaderBase):
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
-    def SetDataName(self, data_name):
+    def set_data_name(self, data_name):
         """Set the name of the data array"""
         if self.__data_name != data_name:
             self.__data_name = data_name
@@ -444,7 +444,7 @@ class EsriGridReader(DelimitedTextReader):
     def __init__(self, outputType='vtkImageData', **kwargs):
         DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
         # These are attributes the derived from file contents:
-        self.SetDelimiter(' ')
+        self.set_delimiter(' ')
         self.__nx = None
         self.__ny = None
         self.__xo = None
@@ -529,7 +529,7 @@ class EsriGridReader(DelimitedTextReader):
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
-    def SetDataName(self, data_name):
+    def set_data_name(self, data_name):
         """Set the name of the data array"""
         if self.__data_name != data_name:
             self.__data_name = data_name
@@ -665,7 +665,7 @@ class LandsatReader(ReaderBaseBase):
         return self._dataselection
 
 
-    def CastDataType(self, flag):
+    def set_cast_data_type(self, flag):
         """A flag to cast all data arrays as floats/doubles.
         This will fill invalid values with nans instead of a fill value"""
         if self.__cast != flag:
@@ -673,7 +673,7 @@ class LandsatReader(ReaderBaseBase):
             self.Modified()
 
 
-    def SetColorScheme(self, scheme):
+    def set_color_scheme(self, scheme):
         """Get an RGB scheme from the raster set. If no scheme is desired, pass
         any string that is not a defined scheme as the scheme argument."""
         if isinstance(scheme, int):
@@ -739,7 +739,7 @@ class WriteCellCenterData(WriterBase):
         # Success for pipeline
         return 1
 
-    def SetDelimiter(self, deli):
+    def set_delimiter(self, deli):
         """The string delimiter to use"""
         if self.__delimiter != deli:
             self.__delimiter = deli

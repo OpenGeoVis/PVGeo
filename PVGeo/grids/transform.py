@@ -149,25 +149,25 @@ class TableToTimeGrid(FilterBase):
             self.__needToUpdateOutput = True
         FilterBase.Modified(self)
 
-    def SetExtent(self, nx, ny, nz, nt):
+    def set_extent(self, nx, ny, nz, nt):
         """Set the extent of the output grid"""
         if self.__extent != [nx, ny, nz, nt]:
             self.__extent = [nx, ny, nz, nt]
             self.Modified()
 
-    def SetDimensions(self, x, y, z, t):
+    def set_dimensions(self, x, y, z, t):
         """Set the dimensions of the output grid"""
         if self.__dims != [x, y, z, t]:
             self.__dims = [x, y, z, t]
             self.Modified()
 
-    def SetSpacing(self, dx, dy, dz):
+    def set_spacing(self, dx, dy, dz):
         """Set the spacing for the points along each axial direction"""
         if self.__spacing != [dx, dy, dz]:
             self.__spacing = [dx, dy, dz]
             self.Modified()
 
-    def SetOrigin(self, x0, y0, z0):
+    def set_origin(self, x0, y0, z0):
         """Set the origin of the output `vtkImageData`"""
         if self.__origin != [x0, y0, z0]:
             self.__origin = [x0, y0, z0]
@@ -191,7 +191,7 @@ class TableToTimeGrid(FilterBase):
             self.__dt = dt
             self.Modified()
 
-    def SetUsePoints(self, flag):
+    def set_use_points(self, flag):
         """Set whether or not to place the data on the nodes/cells of the grid.
         True places data on nodes, false places data at cell centers (CellData).
         In ParaView, switching can be a bit buggy: be sure to turn the visibility
@@ -271,21 +271,21 @@ class ReverseImageDataAxii(FilterBase):
     #### Seters and Geters ####
 
 
-    def SetFlipX(self, flag):
+    def set_flip_x(self, flag):
         """Set the filter to flip th input data along the X-axis
         """
         if self.__axes[2] != flag:
             self.__axes[2] = flag
             self.Modified()
 
-    def SetFlipY(self, flag):
+    def set_flip_y(self, flag):
         """Set the filter to flip th input data along the Y-axis
         """
         if self.__axes[1] != flag:
             self.__axes[1] = flag
             self.Modified()
 
-    def SetFlipZ(self, flag):
+    def set_flip_z(self, flag):
         """Set the filter to flip th input data along the Z-axis
         """
         if self.__axes[0] != flag:
@@ -378,7 +378,7 @@ class TranslateGridOrigin(FilterBase):
     #### Seters and Geters ####
 
 
-    def SetCorner(self, corner):
+    def set_corner(self, corner):
         """Set the corner to use
 
         Args:

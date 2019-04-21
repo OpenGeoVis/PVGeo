@@ -149,13 +149,13 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             raise _helpers.PVGeoError(str(fe))
         return data
 
-    def SetUseFileName(self, flag):
+    def set_use_filename(self, flag):
         """Set a flag on whether or not to use the filename as the data array name"""
         if self.__use_filename != flag:
             self.__use_filename = flag
             self.Modified(read_again_mesh=False, read_again_models=False)
 
-    def SetDataName(self, name):
+    def set_data_name(self, name):
         """Set the data array name"""
         if name == '':
             self.__use_filename = True
@@ -294,7 +294,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         self._models = []
         self.Modified(read_again=True)
 
-    def AddModelFileName(self, filename):
+    def add_model_file_name(self, filename):
         """Use to set the file names for the reader. Handles single string or
         list of strings.
         """
@@ -302,7 +302,7 @@ class ModelAppenderBase(base.AlgorithmBase):
             return # do nothing if None is passed by a constructor on accident
         elif isinstance(filename, (list, tuple)):
             for f in filename:
-                self.AddModelFileName(f)
+                self.add_model_file_name(f)
             self.Modified()
         elif filename not in self._model_filenames:
             self._model_filenames.append(filename)
@@ -317,13 +317,13 @@ class ModelAppenderBase(base.AlgorithmBase):
             return self._model_filenames
         return self._model_filenames[idx]
 
-    def SetUseFileName(self, flag):
+    def set_use_filename(self, flag):
         """Set a flag on whether or not to use the filename as the data array name"""
         if self.__use_filename != flag:
             self.__use_filename = flag
             self.Modified(read_again=False)
 
-    def SetDataName(self, name):
+    def set_data_name(self, name):
         """Set the data array name"""
         if name == '':
             self.__use_filename = True
