@@ -1,0 +1,19 @@
+
+
+Discretize
+==========
+
+.. automodule:: PVGeo.ubc.disc_meshes
+    :private-members:
+
+
+
+Discretize Mesh Reader
+----------------------
+
+.. autoclass:: PVGeo.ubc.disc_meshes.DiscretizeMeshReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

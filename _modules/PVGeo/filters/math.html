@@ -1,0 +1,1062 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PVGeo.filters.math &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/filters/math.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>PVGeo.filters.math</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for PVGeo.filters.math</h1><div class="highlight"><pre>
+<span></span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;ArrayMath&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NormalizeArray&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PercentThreshold&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ArraysToRGBA&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Math Operations&#39;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">vtk</span>
+<span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">FilterBase</span><span class="p">,</span> <span class="n">FilterPreserveTypeBase</span>
+
+
+
+<span class="c1">###############################################################################</span>
+
+<span class="c1">#---- ArrayMath ----#</span>
+<div class="viewcode-block" id="ArrayMath"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath">[docs]</a><span class="k">class</span> <span class="nc">ArrayMath</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This filter allows the user to select two input data arrays on which to</span>
+<span class="sd">    perfrom math operations. The input arrays are used in their order of</span>
+<span class="sd">    selection for the operations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        multiplier (float) : a static shifter/scale factor across the array</span>
+<span class="sd">            after normalization.</span>
+
+<span class="sd">        new_name (str): The new array&#39;s string name</span>
+
+<span class="sd">        operation (str, int, or callable): The operation as a string key, int</span>
+<span class="sd">            index, or callable method</span>
+
+<span class="sd">    **Available Math Operations:**</span>
+
+<span class="sd">    - `add`: This adds the two data arrays together</span>
+<span class="sd">    - `subtract`: This subtracts input array 2 from input array 1</span>
+<span class="sd">    - `multiply`: Multiplies the two data arrays together</span>
+<span class="sd">    - `divide`: Divide input array 1 by input array 2 (arr1/arr2)</span>
+<span class="sd">    - `correlate`: Use `np.correlate(arr1, arr2, mode=&#39;same&#39;)`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Array Math&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">FilterPreserveTypeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c1"># Parameters:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;multiplier&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;new_name&#39;</span><span class="p">,</span> <span class="s1">&#39;Mathed Up&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_1</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_2</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="c1"># Convert operation to callable method</span>
+        <span class="n">op</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;operation&#39;</span><span class="p">,</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_operation</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__operation</span> <span class="o">=</span> <span class="n">op</span>
+
+
+<div class="viewcode-block" id="ArrayMath._correlate"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._correlate">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_correlate</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use ``np.correlate()`` on ``mode=&#39;same&#39;`` on two selected arrays</span>
+<span class="sd">        from one input.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ArrayMath._multiply"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._multiply">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_multiply</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Mutlipies two input NumPy arrays&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">arr1</span><span class="o">*</span><span class="n">arr2</span></div>
+
+<div class="viewcode-block" id="ArrayMath._divide"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._divide">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_divide</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Divides two input NumPy arrays&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">arr1</span><span class="o">/</span><span class="n">arr2</span></div>
+
+<div class="viewcode-block" id="ArrayMath._add"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._add">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_add</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds two input NumPy arrays&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">arr1</span><span class="o">+</span><span class="n">arr2</span></div>
+
+<div class="viewcode-block" id="ArrayMath._subtract"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._subtract">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_subtract</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Subtracts two input NumPy arrays&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">arr1</span><span class="o">-</span><span class="n">arr2</span></div>
+
+<div class="viewcode-block" id="ArrayMath.get_operations"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.get_operations">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_operations</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns the math operation methods as callable objects in a</span>
+<span class="sd">        dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">add</span><span class="o">=</span><span class="n">ArrayMath</span><span class="o">.</span><span class="n">_add</span><span class="p">,</span>
+            <span class="n">subtract</span><span class="o">=</span><span class="n">ArrayMath</span><span class="o">.</span><span class="n">_subtract</span><span class="p">,</span>
+            <span class="n">multiply</span><span class="o">=</span><span class="n">ArrayMath</span><span class="o">.</span><span class="n">_multiply</span><span class="p">,</span>
+            <span class="n">divide</span><span class="o">=</span><span class="n">ArrayMath</span><span class="o">.</span><span class="n">_divide</span><span class="p">,</span>
+            <span class="n">correlate</span><span class="o">=</span><span class="n">ArrayMath</span><span class="o">.</span><span class="n">_correlate</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">ops</span></div>
+
+<div class="viewcode-block" id="ArrayMath.get_operation_names"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.get_operation_names">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_operation_names</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Gets a list of the math operation keys</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            list(str): the keys for getting the math operations</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ops</span> <span class="o">=</span> <span class="n">ArrayMath</span><span class="o">.</span><span class="n">get_operations</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">ops</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="ArrayMath.get_operation"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.get_operation">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_operation</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Gets a math operation based on an index in the keys</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            callable: the math operation method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ArrayMath</span><span class="o">.</span><span class="n">get_operations</span><span class="p">()[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">ArrayMath</span><span class="o">.</span><span class="n">get_operation_names</span><span class="p">()[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ArrayMath</span><span class="o">.</span><span class="n">get_operations</span><span class="p">()[</span><span class="n">n</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="ArrayMath._math_up"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._math_up">[docs]</a>    <span class="k">def</span> <span class="nf">_math_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make sure to pass array names and integer associated fields.</span>
+<span class="sd">        Use helpers to get these properties.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pdo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># TODO: test this</span>
+            <span class="n">pdo</span> <span class="o">=</span> <span class="n">pdi</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">()</span>
+        <span class="c1"># Get the input arrays</span>
+        <span class="n">field1</span><span class="p">,</span> <span class="n">name1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">field2</span><span class="p">,</span> <span class="n">name2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">wpdi</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">WrapDataObject</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="n">arr1</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">field1</span><span class="p">,</span> <span class="n">name1</span><span class="p">)</span>
+        <span class="n">arr2</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">field2</span><span class="p">,</span> <span class="n">name2</span><span class="p">)</span>
+        <span class="c1"># Perform Math Operation</span>
+        <span class="n">carr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__operation</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+        <span class="c1"># apply the multiplier</span>
+        <span class="n">carr</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span>
+        <span class="c1"># If no name given for data by user, use operator name</span>
+        <span class="n">new_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span>
+        <span class="k">if</span> <span class="n">new_name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">new_name</span> <span class="o">=</span> <span class="s1">&#39;Mathed Up&#39;</span>
+        <span class="c1"># Convert to a VTK array</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">carr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">new_name</span><span class="p">)</span>
+        <span class="c1"># Build output</span>
+        <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">add_array</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="n">field1</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pdo</span></div>
+
+
+    <span class="c1">#### Algorithm Methods ####</span>
+
+
+<div class="viewcode-block" id="ArrayMath.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Used by pipeline to perfrom operation and generate output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get input/output of Proxy</span>
+        <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Perfrom task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_math_up</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+    <span class="c1">#### Seters and Geters ####</span>
+
+
+<div class="viewcode-block" id="ArrayMath._set_input_array_1"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._set_input_array_1">[docs]</a>    <span class="k">def</span> <span class="nf">_set_input_array_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set 1st input array by name and field&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArrayMath._set_input_array_2"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._set_input_array_2">[docs]</a>    <span class="k">def</span> <span class="nf">_set_input_array_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set 2nd input array by name and field&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArrayMath.SetInputArrayToProcess"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.SetInputArrayToProcess">[docs]</a>    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            idx (int): the index of the array to process</span>
+<span class="sd">            port (int): input port (use 0 if unsure)</span>
+<span class="sd">            connection (int): the connection on the port (use 0 if unsure)</span>
+<span class="sd">            field (int): the array field (0 for points, 1 for cells, 2 for</span>
+<span class="sd">                field, and 6 for row)</span>
+<span class="sd">            name (int): the name of the array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_input_array_1</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_input_array_2</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;SetInputArrayToProcess() do not know how to handle idx: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">idx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="ArrayMath.apply"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name_0</span><span class="p">,</span> <span class="n">array_name_1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the algorith on an input data object, specifying array names&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
+        <span class="n">arr0</span><span class="p">,</span> <span class="n">field0</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name_0</span><span class="p">)</span>
+        <span class="n">arr1</span><span class="p">,</span> <span class="n">field1</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name_1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field0</span><span class="p">,</span> <span class="n">array_name_0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field1</span><span class="p">,</span> <span class="n">array_name_1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="ArrayMath.set_multiplier"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.set_multiplier">[docs]</a>    <span class="k">def</span> <span class="nf">set_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a static shifter/scale factor across the array after</span>
+<span class="sd">        normalization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span> <span class="o">!=</span> <span class="n">val</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArrayMath.get_multiplier"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.get_multiplier">[docs]</a>    <span class="k">def</span> <span class="nf">get_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the set multiplier/scalar</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span></div>
+
+<div class="viewcode-block" id="ArrayMath.set_new_array_name"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.set_new_array_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Give the new array a meaningful name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArrayMath.get_new_array_name"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.get_new_array_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the name used for the new array&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span></div>
+
+<div class="viewcode-block" id="ArrayMath.set_operation"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.set_operation">[docs]</a>    <span class="k">def</span> <span class="nf">set_operation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the math operation to perform</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            op (str, int, or callable): The operation as a string key, int</span>
+<span class="sd">            index, or callable method</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This can accept a callable method to set a custom operation as long</span>
+<span class="sd">            as its signature is: ``&lt;callable&gt;(arr1, arr2)``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="n">ArrayMath</span><span class="o">.</span><span class="n">get_operations</span><span class="p">()[</span><span class="n">op</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="n">ArrayMath</span><span class="o">.</span><span class="n">get_operation</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__operation</span> <span class="o">!=</span> <span class="n">op</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__operation</span> <span class="o">=</span> <span class="n">op</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
+
+
+
+<span class="c1">###############################################################################</span>
+
+<span class="c1">#---- Normalizations ----#</span>
+
+<div class="viewcode-block" id="NormalizeArray"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray">[docs]</a><span class="k">class</span> <span class="nc">NormalizeArray</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This filter allows the user to select an array from the input data set</span>
+<span class="sd">    to be normalized. The filter will append another array to that data set for</span>
+<span class="sd">    the output. The user can specify how they want to rename the array, can</span>
+<span class="sd">    choose a multiplier, and can choose from several types of common</span>
+<span class="sd">    normalizations (more functionality added as requested).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        multiplier (float) : a static shifter/scale factor across the array</span>
+<span class="sd">            after normalization.</span>
+
+<span class="sd">        new_name (str): The new array&#39;s string name</span>
+
+<span class="sd">        absolute (bool):</span>
+
+<span class="sd">        normalization (str, int, or callable): The operation as a string key,</span>
+<span class="sd">            integer index, or callable method</span>
+
+<span class="sd">    **Normalization Types:**</span>
+
+<span class="sd">    - `feature_scale`: Feature Scale</span>
+<span class="sd">    - `standard_score`: tandard Score</span>
+<span class="sd">    - `log10`: Natural Log</span>
+<span class="sd">    - `natural_log`: Log Base 10</span>
+<span class="sd">    - `just_multiply`: Only Multiply by Multiplier</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Normalize Array&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">FilterPreserveTypeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c1"># Parameters:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;multiplier&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;new_name&#39;</span><span class="p">,</span> <span class="s1">&#39;Normalized&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__absolute</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;absolute&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="c1"># Convert operation to callable method</span>
+        <span class="n">op</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;normalization&#39;</span><span class="p">,</span> <span class="s1">&#39;feature_scale&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_normalization</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__normalization</span> <span class="o">=</span> <span class="n">op</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__shift</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+
+    <span class="c1">#### Array normalization methods ####</span>
+
+
+<div class="viewcode-block" id="NormalizeArray._pass_array"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._pass_array">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_pass_array</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cast an input array as a NumPy array&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NormalizeArray._feature_scale"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._feature_scale">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_feature_scale</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns feature scale normalization of input array&quot;&quot;&quot;</span>
+        <span class="c1"># TODO: implement ability to use custom range</span>
+        <span class="k">if</span> <span class="n">rng</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mi</span> <span class="o">=</span> <span class="n">rng</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">ma</span> <span class="o">=</span> <span class="n">rng</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+            <span class="n">ma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">arr</span> <span class="o">-</span> <span class="n">mi</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ma</span> <span class="o">-</span> <span class="n">mi</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NormalizeArray._standard_score"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._standard_score">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_standard_score</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns tandard score normalization of input array&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">arr</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="NormalizeArray._log10"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._log10">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_log10</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns log base 10 of input array&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NormalizeArray._log_nat"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._log_nat">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_log_nat</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns natural logarithm of input array&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.get_normalizations"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_normalizations">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_normalizations</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;All Available normalizations</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            dict: dictionary of callable methods for normalizing an array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">feature_scale</span><span class="o">=</span><span class="n">NormalizeArray</span><span class="o">.</span><span class="n">_feature_scale</span><span class="p">,</span>
+            <span class="n">standard_score</span><span class="o">=</span><span class="n">NormalizeArray</span><span class="o">.</span><span class="n">_standard_score</span><span class="p">,</span>
+            <span class="n">log10</span><span class="o">=</span><span class="n">NormalizeArray</span><span class="o">.</span><span class="n">_log10</span><span class="p">,</span>
+            <span class="n">natural_log</span><span class="o">=</span><span class="n">NormalizeArray</span><span class="o">.</span><span class="n">_log_nat</span><span class="p">,</span>
+            <span class="n">just_multiply</span><span class="o">=</span><span class="n">NormalizeArray</span><span class="o">.</span><span class="n">_pass_array</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">ops</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.get_normalization_names"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_normalization_names">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_normalization_names</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Gets a list of the normalization keys</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            list(str): the keys for getting the normalizations</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ops</span> <span class="o">=</span> <span class="n">NormalizeArray</span><span class="o">.</span><span class="n">get_normalizations</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">ops</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.get_normalization"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_normalization">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_normalization</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Gets a normalization based on an index in the keys</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            callable: the normalization method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">NormalizeArray</span><span class="o">.</span><span class="n">get_normalizations</span><span class="p">()[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">NormalizeArray</span><span class="o">.</span><span class="n">get_normalization_names</span><span class="p">()[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">NormalizeArray</span><span class="o">.</span><span class="n">get_normalizations</span><span class="p">()[</span><span class="n">n</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.get_array_range"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_array_range">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_array_range</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a tuple of the range for a ``vtkDataArray`` on a</span>
+<span class="sd">        ``vtkDataObject``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">wpdi</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">WrapDataObject</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">arr</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="NormalizeArray._normalize"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._normalize">[docs]</a>    <span class="k">def</span> <span class="nf">_normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Perform normalize on a data array for any given VTK data object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get input array</span>
+        <span class="n">field</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1">#self.__range = NormalizeArray.get_array_range(pdi, field, name)</span>
+        <span class="n">wpdi</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">WrapDataObject</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="c1"># Take absolute value?</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__absolute</span><span class="p">:</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="n">arr</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__shift</span>
+        <span class="c1"># Perform normalization scheme</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__normalization</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="c1"># apply the multiplier</span>
+        <span class="n">arr</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span>
+        <span class="c1"># If no name given for data by user, use operator name</span>
+        <span class="n">new_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span>
+        <span class="k">if</span> <span class="n">new_name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">new_name</span> <span class="o">=</span> <span class="s1">&#39;Normalized &#39;</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="c1"># Convert to VTK array</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">new_name</span><span class="p">)</span>
+        <span class="c1"># Build output</span>
+        <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">add_array</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pdo</span></div>
+
+    <span class="c1">#### Algorithm Methods ####</span>
+
+
+<div class="viewcode-block" id="NormalizeArray.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get input/output of Proxy</span>
+        <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Perfrom task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+    <span class="c1">#### Seters and Geters ####</span>
+
+
+<div class="viewcode-block" id="NormalizeArray.SetInputArrayToProcess"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.SetInputArrayToProcess">[docs]</a>    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            idx (int): the index of the array to process</span>
+<span class="sd">            port (int): input port (use 0 if unsure)</span>
+<span class="sd">            connection (int): the connection on the port (use 0 if unsure)</span>
+<span class="sd">            field (int): the array field (0 for points, 1 for cells, 2 for</span>
+<span class="sd">                field, and 6 for row)</span>
+<span class="sd">            name (int): the name of the array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.apply"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the algorithm on an input data object, specifying the array&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
+        <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.set_multiplier"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_multiplier">[docs]</a>    <span class="k">def</span> <span class="nf">set_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a static shifter/scale factor across the array after</span>
+<span class="sd">        normalization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span> <span class="o">!=</span> <span class="n">val</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.get_multiplier"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_multiplier">[docs]</a>    <span class="k">def</span> <span class="nf">get_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the set multiplier/scalar</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span></div>
+
+
+<div class="viewcode-block" id="NormalizeArray.set_new_array_name"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_new_array_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Give the new array a meaningful name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.get_new_array_name"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_new_array_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the name of the new array&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.set_take_absolute_value"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_take_absolute_value">[docs]</a>    <span class="k">def</span> <span class="nf">set_take_absolute_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This will take the absolute value of the array before normalization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__absolute</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__absolute</span> <span class="o">=</span> <span class="n">flag</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.set_normalization"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_normalization">[docs]</a>    <span class="k">def</span> <span class="nf">set_normalization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">norm</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the normalization operation to perform</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            norm (str, int, or callable): The operation as a string key, int</span>
+<span class="sd">                index, or callable method</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This can accept a callable method to set a custom operation as long</span>
+<span class="sd">            as its signature is: ``&lt;callable&gt;(arr)``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">norm</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">norm</span> <span class="o">=</span> <span class="n">NormalizeArray</span><span class="o">.</span><span class="n">get_normalizations</span><span class="p">()[</span><span class="n">norm</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">norm</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">norm</span> <span class="o">=</span> <span class="n">NormalizeArray</span><span class="o">.</span><span class="n">get_normalization</span><span class="p">(</span><span class="n">norm</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__normalization</span> <span class="o">!=</span> <span class="n">norm</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__normalization</span> <span class="o">=</span> <span class="n">norm</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="NormalizeArray.set_shift"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_shift">[docs]</a>    <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sft</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set a static shifter to the input data array&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__shift</span> <span class="o">!=</span> <span class="n">sft</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__shift</span> <span class="o">=</span> <span class="n">sft</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
+
+
+<span class="c1">###############################################################################</span>
+
+
+<div class="viewcode-block" id="PercentThreshold"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold">[docs]</a><span class="k">class</span> <span class="nc">PercentThreshold</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Allows user to select a percent of the data range to threshold.</span>
+<span class="sd">    This will find the data range of the selected input array and remove the</span>
+<span class="sd">    bottom percent. This can be reversed using the invert property.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Percent Threshold&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
+                            <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__invert</span> <span class="o">=</span> <span class="n">invert</span>
+        <span class="k">if</span> <span class="n">percent</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span> <span class="n">percent</span> <span class="o">*=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__percent</span> <span class="o">=</span> <span class="n">percent</span> <span class="c1"># NOTE: not decimal percent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__filter</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkThreshold</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="PercentThreshold.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Used by pipeline for execution&quot;&quot;&quot;</span>
+        <span class="c1"># Get input/output of Proxy</span>
+        <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__filter</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Get Input Array</span>
+        <span class="n">field</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">wpdi</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">WrapDataObject</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="n">dmin</span><span class="p">,</span> <span class="n">dmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">arr</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">dmin</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__percent</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">dmax</span> <span class="o">-</span> <span class="n">dmin</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__invert</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__filter</span><span class="o">.</span><span class="n">ThresholdByLower</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__filter</span><span class="o">.</span><span class="n">ThresholdByUpper</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__filter</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+
+        <span class="n">filt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__filter</span><span class="o">.</span><span class="n">GetOutputDataObject</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">pdo</span><span class="o">.</span><span class="n">ShallowCopy</span><span class="p">(</span><span class="n">filt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="PercentThreshold.SetInputArrayToProcess"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.SetInputArrayToProcess">[docs]</a>    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            idx (int): the index of the array to process</span>
+<span class="sd">            port (int): input port (use 0 if unsure)</span>
+<span class="sd">            connection (int): the connection on the port (use 0 if unsure)</span>
+<span class="sd">            field (int): the array field (0 for points, 1 for cells, 2 for</span>
+<span class="sd">                field, and 6 for row)</span>
+<span class="sd">            name (int): the name of the array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__filter</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="PercentThreshold.set_percent"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.set_percent">[docs]</a>    <span class="k">def</span> <span class="nf">set_percent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">percent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the percent for the threshold in range (0, 100).</span>
+<span class="sd">        Any values falling beneath the set percent of the total data range</span>
+<span class="sd">        will be removed.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__percent</span> <span class="o">!=</span> <span class="n">percent</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__percent</span> <span class="o">=</span> <span class="n">percent</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PercentThreshold.set_use_continuous_cell_range"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.set_use_continuous_cell_range">[docs]</a>    <span class="k">def</span> <span class="nf">set_use_continuous_cell_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;If this is on (default is off), we will use the continuous</span>
+<span class="sd">        interval [minimum cell scalar, maxmimum cell scalar] to intersect</span>
+<span class="sd">        the threshold bound , rather than the set of discrete scalar</span>
+<span class="sd">        values from the vertices&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__filter</span><span class="o">.</span><span class="n">SetUseContinuousCellRange</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PercentThreshold.set_invert"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.set_invert">[docs]</a>    <span class="k">def</span> <span class="nf">set_invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use to invert the threshold filter&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__invert</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__invert</span> <span class="o">=</span> <span class="n">flag</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PercentThreshold.apply"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the algorithm on an input data object, specifying the array&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
+        <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+
+<span class="c1">################################################################################</span>
+
+<div class="viewcode-block" id="ArraysToRGBA"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA">[docs]</a><span class="k">class</span> <span class="nc">ArraysToRGBA</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Use arrays from input data object to set an RGBA array. Sets colors and</span>
+<span class="sd">    transparencies.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Arrays To RGBA&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">FilterPreserveTypeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__use_trans</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__g_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__b_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__a_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__field</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__mask</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span>
+
+
+<div class="viewcode-block" id="ArraysToRGBA._get_arrays"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._get_arrays">[docs]</a>    <span class="k">def</span> <span class="nf">_get_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wpdi</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal helper to fetch RGBA arrays&quot;&quot;&quot;</span>
+        <span class="c1"># Get Red</span>
+        <span class="n">fieldr</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">r_arr</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">fieldr</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="c1"># Get Green</span>
+        <span class="n">fieldg</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__g_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__g_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">g_arr</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">fieldg</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="c1"># Get Blue</span>
+        <span class="n">fieldb</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__b_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__b_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">b_arr</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">fieldb</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="c1"># Get Trans</span>
+        <span class="n">fielda</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__a_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__a_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">a_arr</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">fielda</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fieldr</span> <span class="o">!=</span> <span class="n">fieldg</span> <span class="o">!=</span> <span class="n">fieldb</span><span class="p">:</span> <span class="c1"># != fielda</span>
+            <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Data arrays must be of the same field.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__field</span> <span class="o">=</span> <span class="n">fieldr</span>
+        <span class="k">return</span> <span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">,</span> <span class="n">a_arr</span></div>
+
+
+<div class="viewcode-block" id="ArraysToRGBA._mask_arrays"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._mask_arrays">[docs]</a>    <span class="k">def</span> <span class="nf">_mask_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">,</span> <span class="n">a_arr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal helper to mask RGBA arrays&quot;&quot;&quot;</span>
+        <span class="n">r_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">r_arr</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">__mask</span><span class="p">,</span> <span class="n">r_arr</span><span class="p">)</span>
+        <span class="n">g_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">g_arr</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">__mask</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">)</span>
+        <span class="n">b_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">b_arr</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">__mask</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">)</span>
+        <span class="n">a_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">a_arr</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">__mask</span><span class="p">,</span> <span class="n">a_arr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">,</span> <span class="n">a_arr</span></div>
+
+
+<div class="viewcode-block" id="ArraysToRGBA.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Execute on pipeline&quot;&quot;&quot;</span>
+        <span class="c1"># Get input/output of Proxy</span>
+        <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">wpdi</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">WrapDataObject</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="c1"># Get number of points</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Get the arrays for the RGB values</span>
+        <span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">,</span> <span class="n">a_arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_arrays</span><span class="p">(</span><span class="n">wpdi</span><span class="p">)</span>
+        <span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">,</span> <span class="n">a_arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mask_arrays</span><span class="p">(</span><span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">,</span> <span class="n">a_arr</span><span class="p">)</span>
+
+        <span class="c1"># normalize each color array bewteen 0 and 255</span>
+        <span class="n">r_arr</span> <span class="o">=</span> <span class="n">NormalizeArray</span><span class="o">.</span><span class="n">_feature_scale</span><span class="p">(</span><span class="n">r_arr</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+        <span class="n">g_arr</span> <span class="o">=</span> <span class="n">NormalizeArray</span><span class="o">.</span><span class="n">_feature_scale</span><span class="p">(</span><span class="n">g_arr</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+        <span class="n">b_arr</span> <span class="o">=</span> <span class="n">NormalizeArray</span><span class="o">.</span><span class="n">_feature_scale</span><span class="p">(</span><span class="n">b_arr</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+
+        <span class="c1"># Now concatenate the arrays</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_trans</span><span class="p">:</span>
+            <span class="n">a_arr</span> <span class="o">=</span> <span class="n">NormalizeArray</span><span class="o">.</span><span class="n">_feature_scale</span><span class="p">(</span><span class="n">a_arr</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">,</span> <span class="n">a_arr</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Colors&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Set the output</span>
+        <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="c1"># Add new color array</span>
+        <span class="n">_helpers</span><span class="o">.</span><span class="n">add_array</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__field</span><span class="p">,</span> <span class="n">colors</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+
+    <span class="c1">#### Seters and Geters ####</span>
+
+<div class="viewcode-block" id="ArraysToRGBA.set_use_transparency"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA.set_use_transparency">[docs]</a>    <span class="k">def</span> <span class="nf">set_use_transparency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set a boolean flag on whether or not to use a transparency component&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_trans</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__use_trans</span> <span class="o">=</span> <span class="n">flag</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArraysToRGBA.set_mask_value"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA.set_mask_value">[docs]</a>    <span class="k">def</span> <span class="nf">set_mask_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the value to mask in the RGBA arrays&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mask</span> <span class="o">!=</span> <span class="n">val</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__mask</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArraysToRGBA._set_input_array_red"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_red">[docs]</a>    <span class="k">def</span> <span class="nf">_set_input_array_red</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set field and name of red array&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArraysToRGBA._set_input_array_green"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_green">[docs]</a>    <span class="k">def</span> <span class="nf">_set_input_array_green</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set field and name of green array&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__g_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__g_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__g_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__g_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArraysToRGBA._set_input_array_blue"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_blue">[docs]</a>    <span class="k">def</span> <span class="nf">_set_input_array_blue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set field and name of blue array&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__b_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__b_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__b_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__b_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArraysToRGBA._set_input_array_trans"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_trans">[docs]</a>    <span class="k">def</span> <span class="nf">_set_input_array_trans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set field and name of transparency array&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__a_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__a_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__a_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__a_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArraysToRGBA.SetInputArrayToProcess"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA.SetInputArrayToProcess">[docs]</a>    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            idx (int): the index of the array to process</span>
+<span class="sd">            port (int): input port (use 0 if unsure)</span>
+<span class="sd">            connection (int): the connection on the port (use 0 if unsure)</span>
+<span class="sd">            field (int): the array field (0 for points, 1 for cells, 2 for</span>
+<span class="sd">                field, and 6 for row)</span>
+<span class="sd">            name (int): the name of the array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_input_array_red</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_input_array_green</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_input_array_blue</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_input_array_trans</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;SetInputArrayToProcess() do not know how to handle idx: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">idx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="ArraysToRGBA.apply"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">r_array</span><span class="p">,</span> <span class="n">g_array</span><span class="p">,</span> <span class="n">b_array</span><span class="p">,</span> <span class="n">a_array</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the algorithm on an input data object, specifying RGBA array names&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
+        <span class="n">r_arr</span><span class="p">,</span> <span class="n">rField</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">r_array</span><span class="p">)</span>
+        <span class="n">g_arr</span><span class="p">,</span> <span class="n">gField</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">g_array</span><span class="p">)</span>
+        <span class="n">b_arr</span><span class="p">,</span> <span class="n">bField</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">b_array</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">a_array</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">a_arr</span><span class="p">,</span> <span class="n">aField</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">a_array</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aField</span><span class="p">,</span> <span class="n">a_array</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_use_transparency</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rField</span><span class="p">,</span> <span class="n">r_array</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">gField</span><span class="p">,</span> <span class="n">g_array</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">bField</span><span class="p">,</span> <span class="n">b_array</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+
+
+
+<span class="c1">################################################################################</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

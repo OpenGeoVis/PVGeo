@@ -1,0 +1,52 @@
+
+
+Slicing
+=======
+
+.. automodule:: PVGeo.filters.slicing
+    :private-members:
+
+
+
+Many Slices Along Axis
+----------------------
+
+.. autoclass:: PVGeo.filters.slicing.ManySlicesAlongAxis
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Many Slices Along Points
+------------------------
+
+.. autoclass:: PVGeo.filters.slicing.ManySlicesAlongPoints
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Slice Through Time
+------------------
+
+.. autoclass:: PVGeo.filters.slicing.SliceThroughTime
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Slide Slice Along Points
+------------------------
+
+.. autoclass:: PVGeo.filters.slicing.SlideSliceAlongPoints
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

@@ -1,0 +1,14 @@
+
+Internal Helpers
+****************
+
+.. toctree::
+   :maxdepth: 5
+   :hidden:
+    
+   
+   arrays.rst
+   errors.rst
+   readers.rst
+   timeseries.rst
+   xml.rst

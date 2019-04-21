@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Table Operations &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/filters/tables.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Voxelize" href="voxelize.html" />
+    <link rel="prev" title="Slicing" href="slicing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">General Filters</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="math.html">Math Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html">Slicing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Table Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#append-table-to-cell-data">Append Table to Cell Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#combine-tables">Combine Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extract-array">Extract Array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reshape-table">Reshape Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#split-table-on-array">Split Table On Array</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="voxelize.html">Voxelize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html">Point/Line Sets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">General Filters</a> &raquo;</li>
+        
+      <li>Table Operations</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-PVGeo.filters.tables">
+<span id="table-operations"></span><h1>Table Operations<a class="headerlink" href="#module-PVGeo.filters.tables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="append-table-to-cell-data">
+<h2>Append Table to Cell Data<a class="headerlink" href="#append-table-to-cell-data" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.tables.AppendTableToCellData">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.tables.</code><code class="descname">AppendTableToCellData</code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterPreserveTypeBase</span></code></a></p>
+<p>Takes two inputs, a dataset to preserve and a table of data, where the
+data in the table is appended to the CellData of the input dataset.
+The 0th port is the dataset to preserve and the 1st port is a table whos rows
+will be appended as CellData to the 0th port. The number of rows in the table
+MUST match the number of cells in the input dataset.</p>
+<dl class="method">
+<dt id="PVGeo.filters.tables.AppendTableToCellData.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.AppendTableToCellData.RequestInformation">
+<code class="descname">RequestInformation</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to handle time variance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.AppendTableToCellData._update_time_steps">
+<code class="descname">_update_time_steps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData._update_time_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData._update_time_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>For internal use only: appropriately sets the timesteps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.AppendTableToCellData.apply">
+<code class="descname">apply</code><span class="sig-paren">(</span><em>dataset</em>, <em>table</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the algorithm and get the output data object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<em>vtkDataSet</em>) – Any dataset with CellData</p></li>
+<li><p><strong>table</strong> (<em>vtkTable</em>) – table of data values that will be appended to
+<code class="docutils literal notranslate"><span class="pre">dataset</span></code>’s CellData</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The appended dataset as a new object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>vtkDataSet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.AppendTableToCellData.get_time_step_values">
+<code class="descname">get_time_step_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.get_time_step_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.get_time_step_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this in ParaView decorator to register timesteps.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="combine-tables">
+<h2>Combine Tables<a class="headerlink" href="#combine-tables" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.tables.CombineTables">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.tables.</code><code class="descname">CombineTables</code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>Takes two tables and combines them if they have the same number of rows.
+Currently this cannot handle time varing tables as that gets complicated
+real quick if the tables do not have the same timestep values</p>
+<dl class="method">
+<dt id="PVGeo.filters.tables.CombineTables.FillInputPortInformation">
+<code class="descname">FillInputPortInformation</code><span class="sig-paren">(</span><em>port</em>, <em>info</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables.FillInputPortInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables.FillInputPortInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline. Necessary when dealing with multiple input ports</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.CombineTables.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.CombineTables.apply">
+<code class="descname">apply</code><span class="sig-paren">(</span><em>table0</em>, <em>table1</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the algorithm on the two input tables</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="extract-array">
+<h2>Extract Array<a class="headerlink" href="#extract-array" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.tables.ExtractArray">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.tables.</code><code class="descname">ExtractArray</code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>Extract an array from a <code class="docutils literal notranslate"><span class="pre">vtkDataSet</span></code> and make a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> of it.</p>
+<dl class="method">
+<dt id="PVGeo.filters.tables.ExtractArray.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.ExtractArray.SetInputArrayToProcess">
+<code class="descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em>idx</em>, <em>port</em>, <em>connection</em>, <em>field</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to set the input array(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the index of the array to process</p></li>
+<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – input port (use 0 if unsure)</p></li>
+<li><p><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the connection on the port (use 0 if unsure)</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the array field (0 for points, 1 for cells, 2 for
+field, and 6 for row)</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the name of the array</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.ExtractArray.apply">
+<code class="descname">apply</code><span class="sig-paren">(</span><em>input_data_object</em>, <em>array_name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the algorithm on the input data object, specifying the array name
+to extract.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="reshape-table">
+<h2>Reshape Table<a class="headerlink" href="#reshape-table" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.tables.ReshapeTable">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.tables.</code><code class="descname">ReshapeTable</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>This filter will take a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> object and reshape it. This filter
+essentially treats <code class="docutils literal notranslate"><span class="pre">vtkTable``s</span> <span class="pre">as</span> <span class="pre">2D</span> <span class="pre">matrices</span> <span class="pre">and</span> <span class="pre">reshapes</span> <span class="pre">them</span> <span class="pre">using</span>
+<span class="pre">``numpy.reshape</span></code> in a C contiguous manner. Unfortunately, data fields will
+be renamed arbitrarily because VTK data arrays require a name.</p>
+<dl class="method">
+<dt id="PVGeo.filters.tables.ReshapeTable.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.ReshapeTable._reshape">
+<code class="descname">_reshape</code><span class="sig-paren">(</span><em>pdi</em>, <em>pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable._reshape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable._reshape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to perfrom the reshape</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.ReshapeTable.add_name">
+<code class="descname">add_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.add_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.add_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to append a name to the list of data array names for the output
+table.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.ReshapeTable.get_names">
+<code class="descname">get_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.get_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.get_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the names given to the new arrays</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.ReshapeTable.set_names">
+<code class="descname">set_names</code><span class="sig-paren">(</span><em>names</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set names using a semicolon (;) seperated string or a list of strings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>names</strong> (<em>string</em>) – a string of data array names for the reshaped table
+using a semicolon (;) to spearate</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.ReshapeTable.set_number_of_columns">
+<code class="descname">set_number_of_columns</code><span class="sig-paren">(</span><em>ncols</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_number_of_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_number_of_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number of columns for the output <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.ReshapeTable.set_number_of_rows">
+<code class="descname">set_number_of_rows</code><span class="sig-paren">(</span><em>nrows</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_number_of_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_number_of_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number of rows for the output <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.ReshapeTable.set_order">
+<code class="descname">set_order</code><span class="sig-paren">(</span><em>order</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the reshape order (<code class="docutils literal notranslate"><span class="pre">'C'</span></code> of <code class="docutils literal notranslate"><span class="pre">'F'</span></code>)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="split-table-on-array">
+<h2>Split Table On Array<a class="headerlink" href="#split-table-on-array" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.tables.SplitTableOnArray">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.tables.</code><code class="descname">SplitTableOnArray</code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>A filter to seperate table data based on the unique values of a given data
+array into a <code class="docutils literal notranslate"><span class="pre">vtkMultiBlockDataSet</span></code>.</p>
+<dl class="method">
+<dt id="PVGeo.filters.tables.SplitTableOnArray.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.SplitTableOnArray.SetInputArrayToProcess">
+<code class="descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em>idx</em>, <em>port</em>, <em>connection</em>, <em>field</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to set the input array(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the index of the array to process</p></li>
+<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – input port (use 0 if unsure)</p></li>
+<li><p><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the connection on the port (use 0 if unsure)</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the array field (0 for points, 1 for cells, 2 for
+field, and 6 for row)</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the name of the array</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.tables.SplitTableOnArray.apply">
+<code class="descname">apply</code><span class="sig-paren">(</span><em>input_data_object</em>, <em>array_name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the algorithm on the input data object, specifying the array name
+to use for the split.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="voxelize.html" class="btn btn-neutral float-right" title="Voxelize" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="slicing.html" class="btn btn-neutral float-left" title="Slicing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

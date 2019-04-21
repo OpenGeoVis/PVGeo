@@ -1,0 +1,13 @@
+
+A suite of algorithms designed for compatibilty with GMG Group projects such
+as the Open Mining Format specification.
+
+GMG Group Standards
+*******************
+
+.. toctree::
+   :maxdepth: 5
+   :hidden:
+    
+   
+   reader.rst

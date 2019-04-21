@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Templates &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/dev-guide/templates.html"/>
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Development Example Snippets" href="snippets/index.html" />
+    <link rel="prev" title="Project Structure" href="repo-structure.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../content/pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#readers">Readers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writers">Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Templates</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="templates">
+<h1>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h1>
+<p>Here are a few templates for various types of algorithms to provide a place to
+start developing your own readers, filters, writers, and sources!</p>
+<p>Once you have your new algorithm implemented, head over to <a class="reference external" href="./snippets/composite-data-writers">this example</a> to learn
+more about wrapping your algorithm for direct use in ParaView. Through decorating
+a new subclass of your algorithm, you can define a user interface that ParaView
+can easily yield to users!</p>
+<div class="section" id="readers">
+<h2>Readers<a class="headerlink" href="#readers" title="Permalink to this headline">¶</a></h2>
+<p>We’ve found that it is difficult to make generic templates for readers as there
+are already so many reader base classes to choose from.
+If you are developing a new reader, talk to one of the active developers on
+[Slack](<a class="reference external" href="http://slack.pvgeo.org">http://slack.pvgeo.org</a>) and we can work with you to ensure you are using an appropriate base class.</p>
+</div>
+<div class="section" id="filters">
+<h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<p>A filter that will preserve the input data type:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vtki</span>
+<span class="c1"># Import Helpers: TODO Check relativity</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">FilterPreserveTypeBase</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span>
+
+<span class="k">class</span> <span class="nc">FilterTemplate</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A filter that preserves the input type template for you! Inheriting</span>
+<span class="sd">    from ``FilterPreserveTypeBase`` allows your new filter to handle all</span>
+<span class="sd">    the complicated processes necessary for making sure the pipeline properly</span>
+<span class="sd">    sets up the output data object. All you have to so is appropriately fill</span>
+<span class="sd">    out the ``RequestData`` method!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Filter Template&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">FilterPreserveTypeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__property</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;property&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is where you fill out your algorithm&quot;&quot;&quot;</span>
+        <span class="n">pdi</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># int args are port and index</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># int arg is port</span>
+        <span class="c1"># TODO: Perform your data processing here</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Code me up!&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="c1"># ALWAYS return 1</span>
+
+    <span class="k">def</span> <span class="nf">set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A generic setter method for a private property&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__property</span> <span class="o">!=</span> <span class="n">prop</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__property</span> <span class="o">=</span> <span class="n">prop</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>A filter that will alter the data type:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vtki</span>
+<span class="c1"># Import Helpers: TODO Check relativity</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">FilterBase</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span>
+
+<span class="k">class</span> <span class="nc">FilterTemplate</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A generic filter template for you! Inheriting from ``FilterBase``</span>
+<span class="sd">    allows your new filter to be properly set up on the</span>
+<span class="sd">    pipeline with ease. Be sure to properly set the input/output data object</span>
+<span class="sd">    types and number of ports via the ``FilterBase`` super constructor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Filter Template&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
+                            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__property</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;property&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is where you fill out your algorithm&quot;&quot;&quot;</span>
+        <span class="n">pdi</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># int args are port and index</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># int arg is port</span>
+
+        <span class="c1"># TODO: Perform your data processing here</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Code me up!&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="c1"># ALWAYS return 1</span>
+
+    <span class="k">def</span> <span class="nf">set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A generic setter method for a private property&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__property</span> <span class="o">!=</span> <span class="n">prop</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__property</span> <span class="o">=</span> <span class="n">prop</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Need to include a data array selection in your filter? It’s easy:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vtki</span>
+<span class="c1"># Import Helpers: TODO Check relativity</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">FilterBase</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span>
+
+<span class="k">class</span> <span class="nc">FilterTemplate</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A generic filter template with a data array selection for you!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Filter Template&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
+                            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__inputArray</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is where you fill out your algorithm&quot;&quot;&quot;</span>
+        <span class="n">pdi</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># int args are port and index</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># int arg is port</span>
+
+        <span class="c1"># Get input array in NumPy data structure</span>
+        <span class="n">field</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inputArray</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inputArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">arr</span> <span class="o">=</span>  <span class="n">pdi</span><span class="o">.</span><span class="n">get_scalar</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+
+        <span class="c1"># TODO: Perform your data processing here</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Code me up!&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="c1"># ALWAYS return 1</span>
+
+    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            idx (int): the index of the array to process</span>
+<span class="sd">            port (int): input port (use 0 if unsure)</span>
+<span class="sd">            connection (int): the connection on the port (use 0 if unsure)</span>
+<span class="sd">            field (int): the array field (0 for points, 1 for cells, 2 for field, and 6 for row)</span>
+<span class="sd">            name (int): the name of the array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inputArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inputArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__inputArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__inputArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__filter</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writers">
+<h2>Writers<a class="headerlink" href="#writers" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Helpers: TODO Check relativity</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">WriterBase</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span>
+
+<span class="k">class</span> <span class="nc">WriteTemplate</span><span class="p">(</span><span class="n">WriterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A writer template for you! Write the overall description of this writer</span>
+<span class="sd">    here. E.g. This writers takes ``XXX`` as and saves it to a file of the</span>
+<span class="sd">    ``YYY`` format for use in software such as ZZZ.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Write Template&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;writer&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">WriterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Set private variables here!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__foo</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">perform_write_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputDataObject</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use ``inputDataObject`` and ``filename`` to save the VTK data object</span>
+<span class="sd">        to your custom file type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            inputDataObject (vtkDataObject): This is guaranteed to be of the type specified by the ``inputType`` in your ``__init__`` unless you override ``FillInputPortInformation``.</span>
+<span class="sd">            filename (str): A full filename with an index appended if needed. Use this string to save your data.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">        int: return 1 on success</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Code me up!&#39;</span><span class="p">)</span>
+        <span class="c1"># Always return 1</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">set_foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">foo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the foo variable&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__foo</span> <span class="o">!=</span> <span class="n">foo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__foo</span> <span class="o">=</span> <span class="n">foo</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sources">
+<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vtki</span>
+<span class="c1"># Import Helpers: TODO: Check relativity</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">AlgorithmBase</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span>
+
+<span class="k">class</span> <span class="nc">TemplateSource</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A source template for you! Write the overall description of this source</span>
+<span class="sd">    here. E.g. This source produces a ``XXX`` object that describes some</span>
+<span class="sd">    useful information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Template Source&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;source&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">)</span>
+        <span class="c1"># Set private variables here!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__foo</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is where you fill out your algorithm&quot;&quot;&quot;</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="c1"># TODO: Fill in the output data object: ``pdo``</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Code me up!&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">set_foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">foo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the foo variable&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__foo</span> <span class="o">!=</span> <span class="n">foo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__foo</span> <span class="o">=</span> <span class="n">foo</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="snippets/index.html" class="btn btn-neutral float-right" title="Development Example Snippets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="repo-structure.html" class="btn btn-neutral float-left" title="Project Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

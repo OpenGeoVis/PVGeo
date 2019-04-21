@@ -1,0 +1,63 @@
+
+
+General Tools
+=============
+
+.. automodule:: PVGeo.ubc.general
+    :private-members:
+
+
+
+UBC Geology Mapper
+------------------
+
+.. autoclass:: PVGeo.ubc.general.GeologyMapper
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+GIF Gravity Gradiometry Observations
+------------------------------------
+
+.. autoclass:: PVGeo.ubc.general.GravGradReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+UBC Gravity Observations
+------------------------
+
+.. autoclass:: PVGeo.ubc.general.GravObsReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+UBC Magnetic Observations
+-------------------------
+
+.. autoclass:: PVGeo.ubc.general.MagObsReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+GIF Topo Reader
+---------------
+
+.. autoclass:: PVGeo.ubc.general.TopoReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

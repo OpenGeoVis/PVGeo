@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>reader &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/gmggroup/reader.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Grid Tools" href="../grids/index.html" />
+    <link rel="prev" title="GMG Group Standards" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filters/index.html">General Filters</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">GMG Group Standards</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">reader</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#omf-project-reader">OMF Project Reader</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">GMG Group Standards</a> &raquo;</li>
+        
+      <li>reader</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-PVGeo.gmggroup.reader">
+<span id="reader"></span><h1>reader<a class="headerlink" href="#module-PVGeo.gmggroup.reader" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="omf-project-reader">
+<h2>OMF Project Reader<a class="headerlink" href="#omf-project-reader" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.gmggroup.reader.OMFReader">
+<em class="property">class </em><code class="descclassname">PVGeo.gmggroup.reader.</code><code class="descname">OMFReader</code><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBaseBase" title="PVGeo.base.ReaderBaseBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.ReaderBaseBase</span></code></a></p>
+<p>Handles reading an OMF Project</p>
+<dl class="method">
+<dt id="PVGeo.gmggroup.reader.OMFReader.GetDataSelection">
+<code class="descname">GetDataSelection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.GetDataSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.GetDataSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current user selection of data elements</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.gmggroup.reader.OMFReader.GetFileName">
+<code class="descname">GetFileName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.GetFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.GetFileName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Super class has file names as a list but we will only handle a single
+project file. This provides a conveinant way of making sure we only
+access that single file.
+A user could still access the list of file names using <code class="docutils literal notranslate"><span class="pre">GetFileNames()</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.gmggroup.reader.OMFReader.Modified">
+<code class="descname">Modified</code><span class="sig-paren">(</span><em>read_again=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.Modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure default is overridden to be false so array selector can call.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.gmggroup.reader.OMFReader.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to get data for current timestep and populate the output data object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.gmggroup.reader.OMFReader._GetRawData">
+<code class="descname">_GetRawData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader._GetRawData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader._GetRawData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts OMF data to VTK data objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.gmggroup.reader.OMFReader._ReadUpFront">
+<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader._ReadUpFront" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal functiona to read all data at the start</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.gmggroup.reader.OMFReader.description">
+<code class="descname">description</code><em class="property"> = 'PVGeo: Open Mining Format Project'</em><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.gmggroup.reader.OMFReader.extensions">
+<code class="descname">extensions</code><em class="property"> = 'omf'</em><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.extensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../grids/index.html" class="btn btn-neutral float-right" title="Grid Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="GMG Group Standards" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

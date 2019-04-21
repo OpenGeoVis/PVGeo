@@ -1,0 +1,30 @@
+
+
+Binary/Serialized File I/O
+==========================
+
+.. automodule:: PVGeo.readers.binaries
+    :private-members:
+
+
+
+Madagascar SSRSF Reader
+-----------------------
+
+.. autoclass:: PVGeo.readers.binaries.MadagascarReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Packed Binaries Reader
+----------------------
+
+.. autoclass:: PVGeo.readers.binaries.PackedBinariesReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

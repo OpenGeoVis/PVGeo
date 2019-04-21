@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Base Classes &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/ubc/two_file_base.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Writers" href="write.html" />
+    <link rel="prev" title="Tensor Mesh" href="tensor.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readers/index.html">General Readers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">UBC Mesh Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="disc_meshes.html">Discretize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="octree.html">OcTree Mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tensor.html">Tensor Mesh</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Base Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#model-appender-base">Model Appender Base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ubc-mesh-reader-base">UBC Mesh Reader Base</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="write.html">Writers</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">UBC Mesh Tools</a> &raquo;</li>
+        
+      <li>Base Classes</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-PVGeo.ubc.two_file_base">
+<span id="base-classes"></span><h1>Base Classes<a class="headerlink" href="#module-PVGeo.ubc.two_file_base" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="model-appender-base">
+<h2>Model Appender Base<a class="headerlink" href="#model-appender-base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase">
+<em class="property">class </em><code class="descclassname">PVGeo.ubc.two_file_base.</code><code class="descname">ModelAppenderBase</code><span class="sig-paren">(</span><em>inputType='vtkRectilinearGrid'</em>, <em>outputType='vtkRectilinearGrid'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
+<p>A base class for create mesh-model appenders on the UBC Mesh formats</p>
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.ClearModels">
+<code class="descname">ClearModels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.ClearModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.ClearModels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to clear data file names.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.GetDataName">
+<code class="descname">GetDataName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.GetDataName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.GetDataName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data array name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.GetModelFileNames">
+<code class="descname">GetModelFileNames</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.GetModelFileNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.GetModelFileNames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of file names or given and index returns a specified
+timestep’s filename.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.HasModels">
+<code class="descname">HasModels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.HasModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.HasModels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if models are associated with this mesh</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.Modified">
+<code class="descname">Modified</code><span class="sig-paren">(</span><em>read_again=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.Modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call modified if the files needs to be read again again.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.NeedToRead">
+<code class="descname">NeedToRead</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.NeedToRead"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.NeedToRead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask self if the reader needs to read the files again</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – if the flag is set then this method will set the read
+status</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The status of the reader aspect of the filter.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.RequestInformation">
+<code class="descname">RequestInformation</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to handle time variance and update output extents</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase._PlaceOnMesh">
+<code class="descname">_PlaceOnMesh</code><span class="sig-paren">(</span><em>output</em>, <em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._PlaceOnMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._PlaceOnMesh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase._ReadUpFront">
+<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._ReadUpFront" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase._update_time_steps">
+<code class="descname">_update_time_steps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._update_time_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._update_time_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>For internal use only: appropriately sets the timesteps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.add_model_file_name">
+<code class="descname">add_model_file_name</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.add_model_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.add_model_file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to set the file names for the reader. Handles single string or
+list of strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.get_time_step_values">
+<code class="descname">get_time_step_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_time_step_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_time_step_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this in ParaView decorator to register timesteps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.set_data_name">
+<code class="descname">set_data_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.set_data_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.set_data_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the data array name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.set_use_filename">
+<code class="descname">set_use_filename</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.set_use_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.set_use_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a flag on whether or not to use the filename as the data array name</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="ubc-mesh-reader-base">
+<h2>UBC Mesh Reader Base<a class="headerlink" href="#ubc-mesh-reader-base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase">
+<em class="property">class </em><code class="descclassname">PVGeo.ubc.two_file_base.</code><code class="descname">ubcMeshReaderBase</code><span class="sig-paren">(</span><em>nOutputPorts=1</em>, <em>outputType='vtkUnstructuredGrid'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.TwoFileReaderBase" title="PVGeo.base.TwoFileReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.TwoFileReaderBase</span></code></a></p>
+<p>A base class for the UBC mesh readers</p>
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.GetDataName">
+<code class="descname">GetDataName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.GetDataName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.GetDataName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data array name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.Is2D">
+<code class="descname">Is2D</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.Is2D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.Is2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if mesh is spatially references in only two dimensions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.Is3D">
+<code class="descname">Is3D</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.Is3D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.Is3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if mesh is spatially references in three dimensions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase._ReadExtent">
+<code class="descname">_ReadExtent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase._ReadExtent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase._ReadExtent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the mesh file for the UBC 2D/3D Mesh or OcTree format to get
+output extents. Computationally inexpensive method to discover whole
+output extent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>This returns a tuple of the whole extent for the grid to be
+made of the input mesh file (0,n1-1, 0,n2-1, 0,n3-1). This
+output should be directly passed to set the whole output extent.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a>(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase._ubcMesh2D_part">
+<em class="property">static </em><code class="descname">_ubcMesh2D_part</code><span class="sig-paren">(</span><em>FileName</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase._ubcMesh2D_part"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase._ubcMesh2D_part" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to read 2D mesh file</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.extensions">
+<code class="descname">extensions</code><em class="property"> = 'mesh msh dat txt text'</em><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.extensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_data_name">
+<code class="descname">set_data_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.set_data_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_data_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the data array name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_use_filename">
+<code class="descname">set_use_filename</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.set_use_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_use_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a flag on whether or not to use the filename as the data array name</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.ubcModel3D">
+<em class="property">static </em><code class="descname">ubcModel3D</code><span class="sig-paren">(</span><em>FileName</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.ubcModel3D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.ubcModel3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the 3D model file and returns a 1D NumPy float array. Use the
+PlaceModelOnMesh() method to associate with a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The model file name(s) as an absolute path for the
+input model file in UBC 3D Model Model Format. Also accepts a
+<cite>list</cite> of string file names.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a NumPy float array that holds the model data
+read from the file. Use the <code class="docutils literal notranslate"><span class="pre">PlaceModelOnMesh()</span></code> method to
+associate with a grid. If a list of file names is given then it
+will return a dictionary of NumPy float array with keys as the
+basenames of the files.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="write.html" class="btn btn-neutral float-right" title="Writers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tensor.html" class="btn btn-neutral float-left" title="Tensor Mesh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

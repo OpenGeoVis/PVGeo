@@ -1,0 +1,52 @@
+
+
+Math Operations
+===============
+
+.. automodule:: PVGeo.filters.math
+    :private-members:
+
+
+
+Array Math
+----------
+
+.. autoclass:: PVGeo.filters.math.ArrayMath
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Arrays To RGBA
+--------------
+
+.. autoclass:: PVGeo.filters.math.ArraysToRGBA
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Normalize Array
+---------------
+
+.. autoclass:: PVGeo.filters.math.NormalizeArray
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Percent Threshold
+-----------------
+
+.. autoclass:: PVGeo.filters.math.PercentThreshold
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

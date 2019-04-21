@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>General Tools &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/ubc/general.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="OcTree Mesh" href="octree.html" />
+    <link rel="prev" title="Discretize" href="disc_meshes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readers/index.html">General Readers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">UBC Mesh Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="disc_meshes.html">Discretize</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">General Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ubc-geology-mapper">UBC Geology Mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gif-gravity-gradiometry-observations">GIF Gravity Gradiometry Observations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ubc-gravity-observations">UBC Gravity Observations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ubc-magnetic-observations">UBC Magnetic Observations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gif-topo-reader">GIF Topo Reader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="octree.html">OcTree Mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tensor.html">Tensor Mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_file_base.html">Base Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="write.html">Writers</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">UBC Mesh Tools</a> &raquo;</li>
+        
+      <li>General Tools</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-PVGeo.ubc.general">
+<span id="general-tools"></span><h1>General Tools<a class="headerlink" href="#module-PVGeo.ubc.general" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ubc-geology-mapper">
+<h2>UBC Geology Mapper<a class="headerlink" href="#ubc-geology-mapper" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.ubc.general.GeologyMapper">
+<em class="property">class </em><code class="descclassname">PVGeo.ubc.general.</code><code class="descname">GeologyMapper</code><span class="sig-paren">(</span><em>filename=None</em>, <em>delimiter='</em>, <em>'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterPreserveTypeBase</span></code></a></p>
+<p>A filter to load a GIF geology definity file and map its values to a given
+data array in an input data object.</p>
+<dl class="method">
+<dt id="PVGeo.ubc.general.GeologyMapper.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.general.GeologyMapper.SetFileName">
+<code class="descname">SetFileName</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.SetFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.SetFileName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the file name to read</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.general.GeologyMapper.SetInputArrayToProcess">
+<code class="descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em>idx</em>, <em>port</em>, <em>connection</em>, <em>field</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to set the input array(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the index of the array to process</p></li>
+<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – input port (use 0 if unsure)</p></li>
+<li><p><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the connection on the port (use 0 if unsure)</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the array field (0 for points, 1 for cells, 2 for
+field, and 6 for row)</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the name of the array</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.ubc.general.GeologyMapper._MapValues">
+<em class="property">static </em><code class="descname">_MapValues</code><span class="sig-paren">(</span><em>geol</em>, <em>arr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper._MapValues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper._MapValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map the values defined by <code class="docutils literal notranslate"><span class="pre">geol</span></code> dataframe to the values in <code class="docutils literal notranslate"><span class="pre">arr</span></code>.
+The first column (name should be <code class="docutils literal notranslate"><span class="pre">Index</span></code>) will be used for the mapping.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.ubc.general.GeologyMapper._ReadDefinitions">
+<em class="property">static </em><code class="descname">_ReadDefinitions</code><span class="sig-paren">(</span><em>filename</em>, <em>delimiter</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper._ReadDefinitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper._ReadDefinitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reades the geology definition file as a pandas DataFrame</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.ubc.general.GeologyMapper.description">
+<code class="descname">description</code><em class="property"> = 'PVGeo: UBC Geology Mapper'</em><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.general.GeologyMapper.set_delimiter">
+<code class="descname">set_delimiter</code><span class="sig-paren">(</span><em>deli</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.set_delimiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.set_delimiter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the delimiter of the ASCII file</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="gif-gravity-gradiometry-observations">
+<h2>GIF Gravity Gradiometry Observations<a class="headerlink" href="#gif-gravity-gradiometry-observations" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.ubc.general.GravGradReader">
+<em class="property">class </em><code class="descclassname">PVGeo.ubc.general.</code><code class="descname">GravGradReader</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravGradReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravGradReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="PVGeo.readers.delimited.DelimitedPointsReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedPointsReaderBase</span></code></a></p>
+<p>Read <a class="reference external" href="https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/ggfile.html">GIF Gravity Gradiometry Observations</a> file.</p>
+<dl class="method">
+<dt id="PVGeo.ubc.general.GravGradReader._ExtractHeader">
+<code class="descname">_ExtractHeader</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravGradReader._ExtractHeader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravGradReader._ExtractHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to parse header details for UBC Gravity Gradiometry
+files</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.ubc.general.GravGradReader.description">
+<code class="descname">description</code><em class="property"> = 'PVGeo: GIF Gravity Gradiometry Observations'</em><a class="headerlink" href="#PVGeo.ubc.general.GravGradReader.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.ubc.general.GravGradReader.extensions">
+<code class="descname">extensions</code><em class="property"> = 'grv gg txt dat'</em><a class="headerlink" href="#PVGeo.ubc.general.GravGradReader.extensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="ubc-gravity-observations">
+<h2>UBC Gravity Observations<a class="headerlink" href="#ubc-gravity-observations" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.ubc.general.GravObsReader">
+<em class="property">class </em><code class="descclassname">PVGeo.ubc.general.</code><code class="descname">GravObsReader</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravObsReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravObsReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="PVGeo.readers.delimited.DelimitedPointsReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedPointsReaderBase</span></code></a></p>
+<p>Read <a class="reference external" href="https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/gravfile.html">GIF Gravity Observations</a> file.</p>
+<dl class="method">
+<dt id="PVGeo.ubc.general.GravObsReader._ExtractHeader">
+<code class="descname">_ExtractHeader</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravObsReader._ExtractHeader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravObsReader._ExtractHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to parse header details for UBC Gravity Observation
+files</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.ubc.general.GravObsReader.description">
+<code class="descname">description</code><em class="property"> = 'PVGeo: GIF Gravity Observations'</em><a class="headerlink" href="#PVGeo.ubc.general.GravObsReader.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.ubc.general.GravObsReader.extensions">
+<code class="descname">extensions</code><em class="property"> = 'grv txt dat'</em><a class="headerlink" href="#PVGeo.ubc.general.GravObsReader.extensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="ubc-magnetic-observations">
+<h2>UBC Magnetic Observations<a class="headerlink" href="#ubc-magnetic-observations" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.ubc.general.MagObsReader">
+<em class="property">class </em><code class="descclassname">PVGeo.ubc.general.</code><code class="descname">MagObsReader</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="PVGeo.readers.delimited.DelimitedPointsReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedPointsReaderBase</span></code></a></p>
+<p>Read <a class="reference external" href="https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/magfile.html">GIF Magnetic Observations</a> file.</p>
+<dl class="staticmethod">
+<dt id="PVGeo.ubc.general.MagObsReader.ConvertVector">
+<em class="property">static </em><code class="descname">ConvertVector</code><span class="sig-paren">(</span><em>incl</em>, <em>decl</em>, <em>mag=1</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader.ConvertVector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader.ConvertVector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts inclination, declinations, and magntidue to an XYZ vector</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.general.MagObsReader.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to get data for current timestep and populate the
+output data object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.general.MagObsReader._ExtractHeader">
+<code class="descname">_ExtractHeader</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader._ExtractHeader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader._ExtractHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to parse header details for UBC Magnetic Observations
+files</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.ubc.general.MagObsReader.description">
+<code class="descname">description</code><em class="property"> = 'PVGeo: GIF Magnetic Observations'</em><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.ubc.general.MagObsReader.extensions">
+<code class="descname">extensions</code><em class="property"> = 'mag loc txt dat pre'</em><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader.extensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="gif-topo-reader">
+<h2>GIF Topo Reader<a class="headerlink" href="#gif-topo-reader" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.ubc.general.TopoReader">
+<em class="property">class </em><code class="descclassname">PVGeo.ubc.general.</code><code class="descname">TopoReader</code><span class="sig-paren">(</span><em>copy_z=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#TopoReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.TopoReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="PVGeo.readers.delimited.DelimitedPointsReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedPointsReaderBase</span></code></a></p>
+<p>A reader to handle .topo files in UBC format to create a topography
+surface.</p>
+<dl class="method">
+<dt id="PVGeo.ubc.general.TopoReader._ExtractHeader">
+<code class="descname">_ExtractHeader</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#TopoReader._ExtractHeader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.TopoReader._ExtractHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to parse header details for UBC Topo files</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.ubc.general.TopoReader.description">
+<code class="descname">description</code><em class="property"> = 'PVGeo: UBC 3D Topo Files'</em><a class="headerlink" href="#PVGeo.ubc.general.TopoReader.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.ubc.general.TopoReader.extensions">
+<code class="descname">extensions</code><em class="property"> = 'topo txt dat'</em><a class="headerlink" href="#PVGeo.ubc.general.TopoReader.extensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="octree.html" class="btn btn-neutral float-right" title="OcTree Mesh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="disc_meshes.html" class="btn btn-neutral float-left" title="Discretize" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

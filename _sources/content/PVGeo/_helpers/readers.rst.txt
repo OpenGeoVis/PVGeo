@@ -1,0 +1,22 @@
+
+
+readers
+=======
+
+.. automodule:: PVGeo._helpers.readers
+    :private-members:
+
+
+
+clean_data_name
+---------------
+
+.. autofunction:: PVGeo._helpers.readers.clean_data_name
+
+
+
+create_modified_callback
+------------------------
+
+.. autofunction:: PVGeo._helpers.readers.create_modified_callback
+

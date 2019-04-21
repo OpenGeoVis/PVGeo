@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Transform &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/grids/transform.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GSLib &amp; SGeMS" href="../gslib/index.html" />
+    <link rel="prev" title="Subsetting" href="subset.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Grid Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fileio.html">File I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subset.html">Subsetting</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Transform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reverse-image-data-axii">Reverse Image Data Axii</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-to-time-grid">Table To Time Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#translate-grid-origin">Translate Grid Origin</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Grid Tools</a> &raquo;</li>
+        
+      <li>Transform</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-PVGeo.grids.transform">
+<span id="transform"></span><h1>Transform<a class="headerlink" href="#module-PVGeo.grids.transform" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="reverse-image-data-axii">
+<h2>Reverse Image Data Axii<a class="headerlink" href="#reverse-image-data-axii" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.grids.transform.ReverseImageDataAxii">
+<em class="property">class </em><code class="descclassname">PVGeo.grids.transform.</code><code class="descname">ReverseImageDataAxii</code><span class="sig-paren">(</span><em>axes=(True</em>, <em>True</em>, <em>True)</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>This filter will flip <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> on any of the three cartesian axii.
+A checkbox is provided for each axis on which you may desire to flip the data.</p>
+<dl class="method">
+<dt id="PVGeo.grids.transform.ReverseImageDataAxii.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.ReverseImageDataAxii._ReverseGridAxii">
+<code class="descname">_ReverseGridAxii</code><span class="sig-paren">(</span><em>idi</em>, <em>ido</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii._ReverseGridAxii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii._ReverseGridAxii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to reverse data along specified axii</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.ReverseImageDataAxii.set_flip_x">
+<code class="descname">set_flip_x</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.set_flip_x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the filter to flip th input data along the X-axis</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.ReverseImageDataAxii.set_flip_y">
+<code class="descname">set_flip_y</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.set_flip_y"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the filter to flip th input data along the Y-axis</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.ReverseImageDataAxii.set_flip_z">
+<code class="descname">set_flip_z</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.set_flip_z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the filter to flip th input data along the Z-axis</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="table-to-time-grid">
+<h2>Table To Time Grid<a class="headerlink" href="#table-to-time-grid" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.grids.transform.TableToTimeGrid">
+<em class="property">class </em><code class="descclassname">PVGeo.grids.transform.</code><code class="descname">TableToTimeGrid</code><span class="sig-paren">(</span><em>extent=(10</em>, <em>10</em>, <em>10</em>, <em>1)</em>, <em>order='C'</em>, <em>spacing=(1.0</em>, <em>1.0</em>, <em>1.0)</em>, <em>origin=(0.0</em>, <em>0.0</em>, <em>0.0)</em>, <em>dims=(0</em>, <em>1</em>, <em>2</em>, <em>3)</em>, <em>dt=1.0</em>, <em>points=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>A filter to convert a static (no time variance) table to a time varying
+grid. This effectively reashapes a table full of data arrays as a 4D array
+that is placed onto the CellData of a <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> object.</p>
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.Modified">
+<code class="descname">Modified</code><span class="sig-paren">(</span><em>run_again=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.Modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call modified if the filter needs to run again</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.RequestInformation">
+<code class="descname">RequestInformation</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to set whole output extent.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid._BuildImageData">
+<code class="descname">_BuildImageData</code><span class="sig-paren">(</span><em>img</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._BuildImageData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._BuildImageData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to consturct the output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid._SetData">
+<code class="descname">_SetData</code><span class="sig-paren">(</span><em>table</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._SetData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._SetData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to restructure the inpt table arrays</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid._update_time_steps">
+<code class="descname">_update_time_steps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._update_time_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._update_time_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>For internal use only: appropriately sets the timesteps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.get_time_step_values">
+<code class="descname">get_time_step_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.get_time_step_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.get_time_step_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this in ParaView decorator to register timesteps on the pipeline.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.set_dimensions">
+<code class="descname">set_dimensions</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>t</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_dimensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the dimensions of the output grid</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.set_extent">
+<code class="descname">set_extent</code><span class="sig-paren">(</span><em>nx</em>, <em>ny</em>, <em>nz</em>, <em>nt</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the extent of the output grid</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.set_order">
+<code class="descname">set_order</code><span class="sig-paren">(</span><em>order</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the reshape order (<cite>‘C’</cite> or <cite>‘F’</cite>)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.set_origin">
+<code class="descname">set_origin</code><span class="sig-paren">(</span><em>x0</em>, <em>y0</em>, <em>z0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the origin of the output <cite>vtkImageData</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.set_spacing">
+<code class="descname">set_spacing</code><span class="sig-paren">(</span><em>dx</em>, <em>dy</em>, <em>dz</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_spacing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacing for the points along each axial direction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.set_time_delta">
+<code class="descname">set_time_delta</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_time_delta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_time_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>An advanced property to set the time step in seconds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.set_use_points">
+<code class="descname">set_use_points</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_use_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_use_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set whether or not to place the data on the nodes/cells of the grid.
+True places data on nodes, false places data at cell centers (CellData).
+In ParaView, switching can be a bit buggy: be sure to turn the visibility
+of this data object OFF on the pipeline when changing between nodes/cells.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="translate-grid-origin">
+<h2>Translate Grid Origin<a class="headerlink" href="#translate-grid-origin" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.grids.transform.TranslateGridOrigin">
+<em class="property">class </em><code class="descclassname">PVGeo.grids.transform.</code><code class="descname">TranslateGridOrigin</code><span class="sig-paren">(</span><em>corner=1</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>This filter will translate the origin of <cite>vtkImageData</cite> to any specified
+Corner of the data set assuming it is currently in the South West Bottom
+Corner (will not work if Corner was moved prior).</p>
+<dl class="method">
+<dt id="PVGeo.grids.transform.TranslateGridOrigin.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TranslateGridOrigin._Translate">
+<code class="descname">_Translate</code><span class="sig-paren">(</span><em>pdi</em>, <em>pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin._Translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin._Translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to translate the inputs origin</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TranslateGridOrigin.set_corner">
+<code class="descname">set_corner</code><span class="sig-paren">(</span><em>corner</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin.set_corner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin.set_corner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the corner to use</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>corner</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – corner location; see note.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>1: South East Bottom</p></li>
+<li><p>2: North West Bottom</p></li>
+<li><p>3: North East Bottom</p></li>
+<li><p>4: South West Top</p></li>
+<li><p>5: South East Top</p></li>
+<li><p>6: North West Top</p></li>
+<li><p>7: North East Top</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../gslib/index.html" class="btn btn-neutral float-right" title="GSLib &amp; SGeMS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="subset.html" class="btn btn-neutral float-left" title="Subsetting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

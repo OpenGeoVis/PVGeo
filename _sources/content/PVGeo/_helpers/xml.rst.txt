@@ -1,0 +1,64 @@
+
+
+xml
+===
+
+.. automodule:: PVGeo._helpers.xml
+    :private-members:
+
+
+
+_help_arrays_xml
+----------------
+
+.. autofunction:: PVGeo._helpers.xml._help_arrays_xml
+
+
+
+get_drop_down_xml
+-----------------
+
+.. autofunction:: PVGeo._helpers.xml.get_drop_down_xml
+
+
+
+get_file_reader_xml
+-------------------
+
+.. autofunction:: PVGeo._helpers.xml.get_file_reader_xml
+
+
+
+get_input_array_xml
+-------------------
+
+.. autofunction:: PVGeo._helpers.xml.get_input_array_xml
+
+
+
+get_property_xml
+----------------
+
+.. autofunction:: PVGeo._helpers.xml.get_property_xml
+
+
+
+get_python_path_property
+------------------------
+
+.. autofunction:: PVGeo._helpers.xml.get_python_path_property
+
+
+
+get_reader_time_step_values
+---------------------------
+
+.. autofunction:: PVGeo._helpers.xml.get_reader_time_step_values
+
+
+
+get_vtk_type_map
+----------------
+
+.. autofunction:: PVGeo._helpers.xml.get_vtk_type_map
+

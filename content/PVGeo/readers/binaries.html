@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Binary/Serialized File I/O &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/readers/binaries.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Delimited File I/O" href="delimited.html" />
+    <link rel="prev" title="General Readers" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">General Readers</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Binary/Serialized File I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#madagascar-ssrsf-reader">Madagascar SSRSF Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#packed-binaries-reader">Packed Binaries Reader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="delimited.html">Delimited File I/O</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">General Readers</a> &raquo;</li>
+        
+      <li>Binary/Serialized File I/O</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-PVGeo.readers.binaries">
+<span id="binary-serialized-file-i-o"></span><h1>Binary/Serialized File I/O<a class="headerlink" href="#module-PVGeo.readers.binaries" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="madagascar-ssrsf-reader">
+<h2>Madagascar SSRSF Reader<a class="headerlink" href="#madagascar-ssrsf-reader" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.readers.binaries.MadagascarReader">
+<em class="property">class </em><code class="descclassname">PVGeo.readers.binaries.</code><code class="descname">MadagascarReader</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#MadagascarReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.MadagascarReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.readers.binaries.PackedBinariesReader" title="PVGeo.readers.binaries.PackedBinariesReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.binaries.PackedBinariesReader</span></code></a></p>
+<p>This reads in float or double data that is packed into a Madagascar
+binary file format with a leader header. The reader ignores all of the ascii
+header details by searching for the sequence of three special characters:
+EOL EOL EOT and it will treat the followng binary packed data as one long
+array and make a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> with one column of that data. The reader uses
+defaults to import as floats with native endianness. Use the Table to
+Uniform Grid or the Reshape Table filters to give more meaning to the data.
+We will later implement the ability to create a gridded volume from the
+header info. This reader is a quick fix for Samir. We chose to use a
+<code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> object as the output of this reader because it gives us more
+flexibility in the filters we can apply to this data down the pipeline and
+keeps thing simple when using filters in this repository.
+<a class="reference external" href="http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF">Details Here</a>.</p>
+<dl class="method">
+<dt id="PVGeo.readers.binaries.MadagascarReader._ReadRawFile">
+<code class="descname">_ReadRawFile</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#MadagascarReader._ReadRawFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.MadagascarReader._ReadRawFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the raw data from the file for Madagascar SSRSF files</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.readers.binaries.MadagascarReader.description">
+<code class="descname">description</code><em class="property"> = 'PVGeo: Madagascar Single Stream RSF Files'</em><a class="headerlink" href="#PVGeo.readers.binaries.MadagascarReader.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="packed-binaries-reader">
+<h2>Packed Binaries Reader<a class="headerlink" href="#packed-binaries-reader" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader">
+<em class="property">class </em><code class="descclassname">PVGeo.readers.binaries.</code><code class="descname">PackedBinariesReader</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBase" title="PVGeo.base.ReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.ReaderBase</span></code></a></p>
+<p>This reads in float or double data that is packed into a binary file
+format. It will treat the data as one long array and make a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code>
+with one column of that data. The reader uses defaults to import as floats
+with native endianness. Use the Table to Uniform Grid or the Reshape Table
+filters to give more meaning to the data. We chose to use a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code>
+object as the output of this reader because it gives us more flexibility in
+the filters we can apply to this data down the pipeline and keeps thing
+simple when using filters in this repository.</p>
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader.ConvertArray">
+<code class="descname">ConvertArray</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.ConvertArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.ConvertArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the numpy array to a vtkDataArray</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader.GetDataName">
+<code class="descname">GetDataName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.GetDataName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.GetDataName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get name used for the data array</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader.GetDataTypes">
+<code class="descname">GetDataTypes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.GetDataTypes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.GetDataTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data type of the binary file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader.GetEndian">
+<code class="descname">GetEndian</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.GetEndian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.GetEndian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the endianness of the data file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to request data for current timestep</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader._GetFileContents">
+<code class="descname">_GetFileContents</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._GetFileContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._GetFileContents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interanl helper to get all contents for all files</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader._GetRawData">
+<code class="descname">_GetRawData</code><span class="sig-paren">(</span><em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._GetRawData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._GetRawData" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will return the proper data for the given timestep</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader._ReadRawFile">
+<code class="descname">_ReadRawFile</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._ReadRawFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._ReadRawFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interanl helper to read the raw data from the file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader._ReadUpFront">
+<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._ReadUpFront" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should not need to be overridden</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader.description">
+<code class="descname">description</code><em class="property"> = 'PVGeo: Packed Binaries Reader'</em><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader.extensions">
+<code class="descname">extensions</code><em class="property"> = 'H&#64; bin rsf rsf&#64; HH npz'</em><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.extensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader.set_data_name">
+<code class="descname">set_data_name</code><span class="sig-paren">(</span><em>data_name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.set_data_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.set_data_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The string name of the data array generated from the inut file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader.set_data_type">
+<code class="descname">set_data_type</code><span class="sig-paren">(</span><em>dtype</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.set_data_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.set_data_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the data type of the binary file: <cite>double=’d’</cite>, <cite>float=’f’</cite>, <cite>int=’i’</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.binaries.PackedBinariesReader.set_endian">
+<code class="descname">set_endian</code><span class="sig-paren">(</span><em>endian</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.set_endian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.set_endian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the endianness of the data file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>endian</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em> or </em><em>char</em>) – no preference = ‘’ or 0, Little = 1 or <cite>&lt;</cite> or Big = 2 <cite>&gt;</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="delimited.html" class="btn btn-neutral float-right" title="Delimited File I/O" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="General Readers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

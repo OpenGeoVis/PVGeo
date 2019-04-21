@@ -1,0 +1,71 @@
+
+
+arrays
+======
+
+.. automodule:: PVGeo._helpers.arrays
+    :private-members:
+
+
+
+add_array
+---------
+
+.. autofunction:: PVGeo._helpers.arrays.add_array
+
+
+
+copy_arrays_to_point_data
+-------------------------
+
+.. autofunction:: PVGeo._helpers.arrays.copy_arrays_to_point_data
+
+
+
+get_all_array_names
+-------------------
+
+.. autofunction:: PVGeo._helpers.arrays.get_all_array_names
+
+
+
+get_numpy_array
+---------------
+
+.. autofunction:: PVGeo._helpers.arrays.get_numpy_array
+
+
+
+get_selected_array
+------------------
+
+.. autofunction:: PVGeo._helpers.arrays.get_selected_array
+
+
+
+get_selected_array_field
+------------------------
+
+.. autofunction:: PVGeo._helpers.arrays.get_selected_array_field
+
+
+
+get_selected_array_name
+-----------------------
+
+.. autofunction:: PVGeo._helpers.arrays.get_selected_array_name
+
+
+
+get_vtk_array
+-------------
+
+.. autofunction:: PVGeo._helpers.arrays.get_vtk_array
+
+
+
+search_for_array
+----------------
+
+.. autofunction:: PVGeo._helpers.arrays.search_for_array
+

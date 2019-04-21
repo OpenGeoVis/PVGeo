@@ -1,0 +1,63 @@
+
+
+Table Operations
+================
+
+.. automodule:: PVGeo.filters.tables
+    :private-members:
+
+
+
+Append Table to Cell Data
+-------------------------
+
+.. autoclass:: PVGeo.filters.tables.AppendTableToCellData
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Combine Tables
+--------------
+
+.. autoclass:: PVGeo.filters.tables.CombineTables
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Extract Array
+-------------
+
+.. autoclass:: PVGeo.filters.tables.ExtractArray
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Reshape Table
+-------------
+
+.. autoclass:: PVGeo.filters.tables.ReshapeTable
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Split Table On Array
+--------------------
+
+.. autoclass:: PVGeo.filters.tables.SplitTableOnArray
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

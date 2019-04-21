@@ -1,0 +1,30 @@
+
+
+SGeMS File I/O
+==============
+
+.. automodule:: PVGeo.gslib.sgems
+    :private-members:
+
+
+
+SGeMS Grid Reader
+-----------------
+
+.. autoclass:: PVGeo.gslib.sgems.SGeMSGridReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Write ``vtkImageData`` To SGeMS Grid Format
+-------------------------------------------
+
+.. autoclass:: PVGeo.gslib.sgems.WriteImageDataToSGeMS
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

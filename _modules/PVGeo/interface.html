@@ -1,0 +1,584 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PVGeo.interface &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/interface.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>PVGeo.interface</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for PVGeo.interface</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;The ``interface`` module provides functions to convert/cast between common</span>
+<span class="sd">VTK and NumPy/Pandas data types. These methods provide a simple to use interface</span>
+<span class="sd">for VTK data types so that users can make changes to VTK data strucutres via</span>
+<span class="sd">Python data structures that are a bit easier to perform numerical operations</span>
+<span class="sd">upon.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;getVTKtype&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;convertStringArray&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;convertArray&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dataFrameToTable&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;tableToDataFrame&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;placeArrInTable&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;getdTypes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pointsToPolyData&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;add_arraysFromDataFrame&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;convertCellConn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_array&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;getDataDict&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;wrapvtki&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Interface&#39;</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">vtk</span>
+<span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
+<span class="kn">from</span> <span class="nn">vtk.util</span> <span class="k">import</span> <span class="n">numpy_support</span> <span class="k">as</span> <span class="n">nps</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">_helpers</span>
+
+
+<div class="viewcode-block" id="getVTKtype"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.getVTKtype">[docs]</a><span class="k">def</span> <span class="nf">getVTKtype</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This looks up the VTK type for a give python data type.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        int : the integer type id specified in vtkType.h</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">typ</span> <span class="o">=</span> <span class="n">nps</span><span class="o">.</span><span class="n">get_vtk_array_type</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">is</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">13</span>
+    <span class="k">return</span> <span class="n">typ</span></div>
+
+<div class="viewcode-block" id="convertStringArray"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.convertStringArray">[docs]</a><span class="k">def</span> <span class="nf">convertStringArray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Strings&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A helper to convert a numpy array of strings to a vtkStringArray</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        vtkStringArray : the converted array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+        <span class="n">vtkarr</span><span class="o">.</span><span class="n">InsertNextValue</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">vtkarr</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vtkarr</span></div>
+
+<div class="viewcode-block" id="convertArray"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.convertArray">[docs]</a><span class="k">def</span> <span class="nf">convertArray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pdf</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A helper to convert a NumPy array to a vtkDataArray or vice versa</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        arr (ndarray or vtkDataArry) : A numpy array or vtkDataArry to convert</span>
+<span class="sd">        name (str): the name of the data array for VTK</span>
+<span class="sd">        deep (bool, int): if input is numpy array then deep copy values</span>
+<span class="sd">        pdf (bool): if input is vtkDataArry, make a pandas DataFrame of the array</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        vtkDataArray, ndarray, or DataFrame:</span>
+<span class="sd">            the converted array (if input is a NumPy ndaray then returns</span>
+<span class="sd">            ``vtkDataArray`` or is input is ``vtkDataArray`` then returns NumPy</span>
+<span class="sd">            ``ndarray``). If pdf==True and the input is ``vtkDataArry``,</span>
+<span class="sd">            return a pandas DataFrame.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">):</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;|S&#39;</span><span class="p">)</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+            <span class="n">VTK_data</span> <span class="o">=</span> <span class="n">nps</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">num_array</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">deep</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="n">array_type</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">typ</span> <span class="o">=</span> <span class="n">getVTKtype</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">typ</span> <span class="ow">is</span> <span class="mi">13</span><span class="p">:</span>
+                <span class="n">VTK_data</span> <span class="o">=</span> <span class="n">convertStringArray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="n">VTK_data</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">VTK_data</span>
+    <span class="c1"># Otherwise input must be a vtkDataArray</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkDataArray</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Invalid input array.&#39;</span><span class="p">)</span>
+    <span class="c1"># Convert from vtkDataArry to NumPy</span>
+    <span class="n">num_data</span> <span class="o">=</span> <span class="n">nps</span><span class="o">.</span><span class="n">vtk_to_numpy</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pdf</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">num_data</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">num_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">arr</span><span class="o">.</span><span class="n">GetName</span><span class="p">()])</span></div>
+
+
+
+<div class="viewcode-block" id="dataFrameToTable"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.dataFrameToTable">[docs]</a><span class="k">def</span> <span class="nf">dataFrameToTable</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pdo</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts a pandas DataFrame to a vtkTable&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Input is not a pandas DataFrame&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pdo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pdo</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">VTK_data</span> <span class="o">=</span> <span class="n">convertArray</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">pdo</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">VTK_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapvtki</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="tableToDataFrame"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.tableToDataFrame">[docs]</a><span class="k">def</span> <span class="nf">tableToDataFrame</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts a vtkTable to a pandas DataFrame&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Input is not a vtkTable&#39;</span><span class="p">)</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">GetNumberOfColumns</span><span class="p">()</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">table</span><span class="o">.</span><span class="n">GetColumnName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">WrapDataObject</span><span class="p">(</span><span class="n">table</span><span class="p">)</span><span class="o">.</span><span class="n">RowData</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="placeArrInTable"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.placeArrInTable">[docs]</a><span class="k">def</span> <span class="nf">placeArrInTable</span><span class="p">(</span><span class="n">ndarr</span><span class="p">,</span> <span class="n">titles</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Takes a 1D/2D numpy array and makes a vtkTable of it</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ndarr (numpy.ndarray) : The 1D/2D array to be converted to a table</span>
+<span class="sd">        titles (list or tuple): The titles for the arrays in the table. Must</span>
+<span class="sd">            have same number of elements as columns in input ndarray</span>
+<span class="sd">        pdo (vtkTable) : The output data object pointer</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        vtkTable : returns the same input pdo table</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Put columns into table</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">ndarr</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Input np.ndarray must be 1D or 2D to be converted to vtkTable.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">ndarr</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># First check if it is an array full of tuples (varying type)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ndarr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">void</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">titles</span><span class="p">):</span>
+                <span class="n">placeArrInTable</span><span class="p">(</span><span class="n">ndarr</span><span class="p">[</span><span class="s1">&#39;f</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">],</span> <span class="n">title</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">wrapvtki</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span>
+        <span class="c1"># Otherwise it is just a 1D array which needs to be 2D</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ndarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ndarr</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">ndarr</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+        <span class="n">VTK_data</span> <span class="o">=</span> <span class="n">convertArray</span><span class="p">(</span><span class="n">ndarr</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">VTK_data</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">pdo</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">VTK_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapvtki</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="getdTypes"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.getdTypes">[docs]</a><span class="k">def</span> <span class="nf">getdTypes</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">endian</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This converts char dtypes and an endian to a numpy and VTK data type.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        tuple (numpy.dtype, int):</span>
+<span class="sd">            the numpy data type and the integer type id specified in vtkType.h</span>
+<span class="sd">            for VTK data types</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># If native `@` was chosen then do not pass an endian</span>
+    <span class="k">if</span> <span class="n">endian</span> <span class="ow">is</span> <span class="s1">&#39;@&#39;</span><span class="p">:</span>
+        <span class="c1">#print(&#39;WARNING: Native endianness no longer supported for packed binary reader. Please chose `&gt;` or `&lt;`. This defaults to big `&gt;`.&#39;)</span>
+        <span class="n">endian</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="c1"># No endian specified:</span>
+    <span class="k">elif</span> <span class="n">endian</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">endian</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="c1"># Get numpy and VTK data types and return them both</span>
+    <span class="k">if</span> <span class="n">dtype</span> <span class="ow">is</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span>
+        <span class="n">vtktype</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_DOUBLE</span>
+    <span class="k">elif</span> <span class="n">dtype</span> <span class="ow">is</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span>
+        <span class="n">vtktype</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_FLOAT</span>
+    <span class="k">elif</span> <span class="n">dtype</span> <span class="ow">is</span> <span class="s1">&#39;i&#39;</span><span class="p">:</span>
+        <span class="n">vtktype</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_INT</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;dtype </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> unknown:&#39;</span> <span class="o">%</span> <span class="n">dtype</span><span class="p">)</span>
+    <span class="c1"># Return data types</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">endian</span><span class="p">,</span> <span class="n">dtype</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">vtktype</span></div>
+
+
+
+<div class="viewcode-block" id="pointsToPolyData"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.pointsToPolyData">[docs]</a><span class="k">def</span> <span class="nf">pointsToPolyData</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">copy_z</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create ``vtkPolyData`` from a numpy array of XYZ points. If the points</span>
+<span class="sd">    have more than 3 dimensions, then all dimensions after the third will be</span>
+<span class="sd">    added as attributes. Assume the first three dimensions are the XYZ</span>
+<span class="sd">    coordinates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        points (np.ndarray or pandas.DataFrame): The points and pointdata</span>
+<span class="sd">        copy_z (bool): A flag on whether to append the z values as a PointData</span>
+<span class="sd">            array</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        vtkPolyData : points with point-vertex cells</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Points to PolyData&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+    <span class="c1"># This prevents an error that occurs when only one point is passed</span>
+    <span class="k">if</span> <span class="n">points</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Field </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)]</span>
+    <span class="c1"># Check if input is anything other than a NumPy array and cast it</span>
+    <span class="c1"># e.g. you could send a Pandas dataframe</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="c1"># If a pandas data frame, lets grab the keys</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">3</span><span class="p">::]</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+    <span class="c1"># If points are not 3D</span>
+    <span class="k">if</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Points must be 3D. Try adding a third dimension of zeros.&#39;</span><span class="p">)</span>
+
+    <span class="n">atts</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">::]</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="n">npoints</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Make VTK cells array</span>
+    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">npoints</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">npoints</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">npoints</span><span class="p">))</span>
+    <span class="n">vtkcells</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCellArray</span><span class="p">()</span>
+    <span class="n">vtkcells</span><span class="o">.</span><span class="n">SetCells</span><span class="p">(</span><span class="n">npoints</span><span class="p">,</span> <span class="n">nps</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="n">vtk</span><span class="o">.</span><span class="n">VTK_ID_TYPE</span><span class="p">))</span>
+
+    <span class="c1"># Convert points to vtk object</span>
+    <span class="n">pts</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
+    <span class="n">pts</span><span class="o">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">convertArray</span><span class="p">(</span><span class="n">points</span><span class="p">))</span>
+
+    <span class="c1"># Create polydata</span>
+    <span class="n">pdata</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">()</span>
+    <span class="n">pdata</span><span class="o">.</span><span class="n">SetPoints</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
+    <span class="n">pdata</span><span class="o">.</span><span class="n">SetVerts</span><span class="p">(</span><span class="n">vtkcells</span><span class="p">)</span>
+
+    <span class="c1"># Add attributes if given</span>
+    <span class="n">scalSet</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">convertArray</span><span class="p">(</span><span class="n">atts</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">pdata</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">scalSet</span><span class="p">:</span>
+            <span class="n">pdata</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetActiveScalars</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">scalSet</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">copy_z</span><span class="p">:</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">convertArray</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Elevation&#39;</span><span class="p">)</span>
+        <span class="n">pdata</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapvtki</span><span class="p">(</span><span class="n">pdata</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="add_arraysFromDataFrame"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.add_arraysFromDataFrame">[docs]</a><span class="k">def</span> <span class="nf">add_arraysFromDataFrame</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add all of the arrays from a given data frame to an output&#39;s data&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">VTK_data</span> <span class="o">=</span> <span class="n">convertArray</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">_helpers</span><span class="o">.</span><span class="n">add_array</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">VTK_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapvtki</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="convertCellConn"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.convertCellConn">[docs]</a><span class="k">def</span> <span class="nf">convertCellConn</span><span class="p">(</span><span class="n">cell_connectivity</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts cell connectivity arrays to a cell matrix array that makes sense</span>
+<span class="sd">    for VTK cell arrays.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cellsMat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">cell_connectivity</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">*</span><span class="n">cell_connectivity</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">cell_connectivity</span>
+            <span class="p">),</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">nps</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">cellsMat</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="n">vtk</span><span class="o">.</span><span class="n">VTK_ID_TYPE</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_array"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.get_array">[docs]</a><span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">vtk_object</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Given an input dataset, this will return the named array as a NumPy array</span>
+<span class="sd">    or a vtkDataArray if spceified</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">vtk_object</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">arr</span>
+    <span class="k">return</span> <span class="n">convertArray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="getDataDict"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.getDataDict">[docs]</a><span class="k">def</span> <span class="nf">getDataDict</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="s1">&#39;cell&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Given an input dataset, this will return all the arrays in that object&#39;s</span>
+<span class="sd">    cell/point/field/row data as named NumPy arrays in a dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_all_array_names</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_helpers</span><span class="o">.</span><span class="n">get_numpy_array</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="wrapvtki"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.wrapvtki">[docs]</a><span class="k">def</span> <span class="nf">wrapvtki</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This will wrap any given VTK dataset via the vtkInterface Python package</span>
+<span class="sd">    if it is available and return the wrapped data object. If vtki is</span>
+<span class="sd">    unavailable, then the given object is returned.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">dataset</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">vtki</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">dataset</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+
+General Filters
+***************
+
+.. toctree::
+   :maxdepth: 5
+   :hidden:
+    
+   
+   math.rst
+   slicing.rst
+   tables.rst
+   voxelize.rst
+   xyz.rst

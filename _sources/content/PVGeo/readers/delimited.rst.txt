@@ -1,0 +1,41 @@
+
+
+Delimited File I/O
+==================
+
+.. automodule:: PVGeo.readers.delimited
+    :private-members:
+
+
+
+Delimited Points Reader Base
+----------------------------
+
+.. autoclass:: PVGeo.readers.delimited.DelimitedPointsReaderBase
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Delimited Text Reader
+---------------------
+
+.. autoclass:: PVGeo.readers.delimited.DelimitedTextReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+XYZ Text Reader
+---------------
+
+.. autoclass:: PVGeo.readers.delimited.XYZTextReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

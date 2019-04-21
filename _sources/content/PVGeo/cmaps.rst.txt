@@ -1,0 +1,15 @@
+
+
+Color Maps
+==========
+
+.. automodule:: PVGeo.cmaps
+    :private-members:
+
+
+
+getParulaMap
+------------
+
+.. autofunction:: PVGeo.cmaps.getParulaMap
+

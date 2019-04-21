@@ -1,0 +1,30 @@
+
+
+Base Classes
+============
+
+.. automodule:: PVGeo.ubc.two_file_base
+    :private-members:
+
+
+
+Model Appender Base
+-------------------
+
+.. autoclass:: PVGeo.ubc.two_file_base.ModelAppenderBase
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+UBC Mesh Reader Base
+--------------------
+
+.. autoclass:: PVGeo.ubc.two_file_base.ubcMeshReaderBase
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

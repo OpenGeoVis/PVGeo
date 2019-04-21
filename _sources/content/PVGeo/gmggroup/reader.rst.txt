@@ -1,0 +1,19 @@
+
+
+reader
+======
+
+.. automodule:: PVGeo.gmggroup.reader
+    :private-members:
+
+
+
+OMF Project Reader
+------------------
+
+.. autoclass:: PVGeo.gmggroup.reader.OMFReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

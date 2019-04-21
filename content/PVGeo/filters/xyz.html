@@ -1,0 +1,779 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Point/Line Sets &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/filters/xyz.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GMG Group Standards" href="../gmggroup/index.html" />
+    <link rel="prev" title="Voxelize" href="voxelize.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">General Filters</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="math.html">Math Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html">Slicing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html">Table Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="voxelize.html">Voxelize</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Point/Line Sets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#add-cell-connectivity-to-points">Add Cell Connectivity to Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#append-cell-centers">Append Cell Centers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-surface-from-points">Build Surface From Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-xyz-units">Convert XYZ Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extract-cell-centers">Extract Cell Centers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extract-points">Extract Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterate-over-points">Iterate Over Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lat-lon-to-utm">Lat Lon To UTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#points-to-tube">Points to Tube</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rotate-points">Rotate Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rotation-tool">Rotation Tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">General Filters</a> &raquo;</li>
+        
+      <li>Point/Line Sets</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-PVGeo.filters.xyz">
+<span id="point-line-sets"></span><h1>Point/Line Sets<a class="headerlink" href="#module-PVGeo.filters.xyz" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="add-cell-connectivity-to-points">
+<h2>Add Cell Connectivity to Points<a class="headerlink" href="#add-cell-connectivity-to-points" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.AddCellConnToPoints">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">AddCellConnToPoints</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#AddCellConnToPoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.AddCellConnToPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>This filter will add linear cell connectivity between scattered points.
+You have the option to add <code class="docutils literal notranslate"><span class="pre">VTK_Line</span></code> or <code class="docutils literal notranslate"><span class="pre">VTK_PolyLine</span></code> connectivity.
+<code class="docutils literal notranslate"><span class="pre">VTK_Line</span></code> connectivity makes a straight line between the points in order
+(either in the order by index or using a nearest neighbor calculation).
+The <code class="docutils literal notranslate"><span class="pre">VTK_PolyLine</span></code> adds a poly line connectivity between all points as
+one spline (either in the order by index or using a nearest neighbor
+calculation). Type map is specified in <cite>vtkCellType.h</cite>.</p>
+<p><strong>Cell Connectivity Types:</strong></p>
+<ul class="simple">
+<li><p>4: Poly Line</p></li>
+<li><p>3: Line</p></li>
+</ul>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.AddCellConnToPoints.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#AddCellConnToPoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.AddCellConnToPoints.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output data object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.AddCellConnToPoints._connect_cells">
+<code class="descname">_connect_cells</code><span class="sig-paren">(</span><em>pdi</em>, <em>pdo</em>, <em>log_time=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#AddCellConnToPoints._connect_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.AddCellConnToPoints._connect_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to perfrom the connection</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.AddCellConnToPoints.set_cell_type">
+<code class="descname">set_cell_type</code><span class="sig-paren">(</span><em>cell_type</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#AddCellConnToPoints.set_cell_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.AddCellConnToPoints.set_cell_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the cell typ by the integer id as specified in <cite>vtkCellType.h</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.AddCellConnToPoints.set_use_nearest_nbr">
+<code class="descname">set_use_nearest_nbr</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#AddCellConnToPoints.set_use_nearest_nbr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.AddCellConnToPoints.set_use_nearest_nbr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a flag on whether to a KDTree nearest neighbor
+algorithm to sort the points to before adding linear connectivity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.AddCellConnToPoints.set_use_unique_points">
+<code class="descname">set_use_unique_points</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#AddCellConnToPoints.set_use_unique_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.AddCellConnToPoints.set_use_unique_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a flag on whether to only use unique points</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="append-cell-centers">
+<h2>Append Cell Centers<a class="headerlink" href="#append-cell-centers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.AppendCellCenters">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">AppendCellCenters</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#AppendCellCenters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.AppendCellCenters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterPreserveTypeBase</span></code></a></p>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.AppendCellCenters.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#AppendCellCenters.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.AppendCellCenters.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="build-surface-from-points">
+<h2>Build Surface From Points<a class="headerlink" href="#build-surface-from-points" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.BuildSurfaceFromPoints">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">BuildSurfaceFromPoints</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#BuildSurfaceFromPoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.BuildSurfaceFromPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>From the sorted x, y, and z station locations in the input PolyData,
+create a surface to project down from the line of those points. Use the
+Z cells to control the size of the mesh surface</p>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.BuildSurfaceFromPoints.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#BuildSurfaceFromPoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.BuildSurfaceFromPoints.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute on pipeline</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.BuildSurfaceFromPoints.SetZCoords">
+<code class="descname">SetZCoords</code><span class="sig-paren">(</span><em>zcoords</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#BuildSurfaceFromPoints.SetZCoords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.BuildSurfaceFromPoints.SetZCoords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the Z direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>zcoords</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Z-axis</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.filters.xyz.BuildSurfaceFromPoints.create_surface">
+<em class="property">static </em><code class="descname">create_surface</code><span class="sig-paren">(</span><em>points</em>, <em>z_range</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#BuildSurfaceFromPoints.create_surface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.BuildSurfaceFromPoints.create_surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>From the sorted x, y, and z station locations, create a surface
+to display a seismic recording/migration on in space. The result is
+defined in the X,Y,Z-z_range 3D space.</p>
+<p>The z_range should be treated as relative coordinates to the values
+given on the third column of the points array. If you want the values
+in the z_range to be treated as the absolute coordinates, simply
+do not pass any Z values in the points array - if points is N by 2,
+then the values in z_range will be inferred as absolute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>np.ndarray</em>) – array-like of the station x and y locations</p></li>
+<li><p><strong>by 2-3</strong><strong>) </strong><strong>z_range</strong> (<em>(</em><em>npts</em>) – The linear space of the z</p></li>
+<li><p><strong>This will be filled out for every station location.</strong> (<em>dimension.</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>vtki.UnstructuredGrid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.BuildSurfaceFromPoints.set_z_coords_str">
+<code class="descname">set_z_coords_str</code><span class="sig-paren">(</span><em>zcoordstr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#BuildSurfaceFromPoints.set_z_coords_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.BuildSurfaceFromPoints.set_z_coords_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the Z direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>zcoordstr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the spacings along the Z-axis in the UBC style</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="convert-xyz-units">
+<h2>Convert XYZ Units<a class="headerlink" href="#convert-xyz-units" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.ConvertUnits">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">ConvertUnits</code><span class="sig-paren">(</span><em>conversion='meter_to_feet'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterPreserveTypeBase</span></code></a></p>
+<p>Convert points in an input data object to from meters to feet or vice versa.
+This simply uses a <code class="docutils literal notranslate"><span class="pre">vtkTransformFilter</span></code> and scales input data object with
+common conversions.</p>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.ConvertUnits.GetConversion">
+<code class="descname">GetConversion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits.GetConversion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits.GetConversion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the conversion value</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.filters.xyz.ConvertUnits.LookupConversions">
+<em class="property">static </em><code class="descname">LookupConversions</code><span class="sig-paren">(</span><em>get_keys=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits.LookupConversions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits.LookupConversions" title="Permalink to this definition">¶</a></dt>
+<dd><p>All Available conversions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dictionary of conversion units</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.ConvertUnits.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.ConvertUnits.set_conversion">
+<code class="descname">set_conversion</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits.set_conversion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits.set_conversion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the conversion via a lookup table</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="extract-cell-centers">
+<h2>Extract Cell Centers<a class="headerlink" href="#extract-cell-centers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.ExtractCellCenters">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">ExtractCellCenters</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ExtractCellCenters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ExtractCellCenters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.ExtractCellCenters.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ExtractCellCenters.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ExtractCellCenters.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="extract-points">
+<h2>Extract Points<a class="headerlink" href="#extract-points" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.ExtractPoints">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">ExtractPoints</code><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ExtractPoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ExtractPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>Extracts XYZ coordinates and point/cell data from an input <code class="docutils literal notranslate"><span class="pre">vtkDataSet</span></code></p>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.ExtractPoints.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ExtractPoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ExtractPoints.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="iterate-over-points">
+<h2>Iterate Over Points<a class="headerlink" href="#iterate-over-points" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.IterateOverPoints">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">IterateOverPoints</code><span class="sig-paren">(</span><em>dt=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>Iterate over points in a time varying manner.</p>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.IterateOverPoints.GetPoint">
+<code class="descname">GetPoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.GetPoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.GetPoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current point</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.IterateOverPoints.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.IterateOverPoints.RequestInformation">
+<code class="descname">RequestInformation</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to set the time information</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.IterateOverPoints._update_time_steps">
+<code class="descname">_update_time_steps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints._update_time_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints._update_time_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>For internal use only</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.IterateOverPoints.get_normal">
+<code class="descname">get_normal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.get_normal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.get_normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current normal vector</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.IterateOverPoints.get_time_step_values">
+<code class="descname">get_time_step_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.get_time_step_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.get_time_step_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this in ParaView decorator to register timesteps</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.IterateOverPoints.set_decimate">
+<code class="descname">set_decimate</code><span class="sig-paren">(</span><em>percent</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.set_decimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.set_decimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the percent (1 to 100) to decimate</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.IterateOverPoints.set_time_delta">
+<code class="descname">set_time_delta</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.set_time_delta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.set_time_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the time step interval in seconds</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="lat-lon-to-utm">
+<h2>Lat Lon To UTM<a class="headerlink" href="#lat-lon-to-utm" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.LonLatToUTM">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">LonLatToUTM</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#LonLatToUTM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.LonLatToUTM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>Converts Points from Lon Lat to UTM</p>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.LonLatToUTM.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#LonLatToUTM.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.LonLatToUTM.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.LonLatToUTM._LonLatToUTM__convert_2d">
+<code class="descname">_LonLatToUTM__convert_2d</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em>, <em>elev</em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.filters.xyz.LonLatToUTM._LonLatToUTM__convert_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts 2D Lon Lat coords to 2D XY UTM points</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.filters.xyz.LonLatToUTM.get_available_ellps">
+<em class="property">static </em><code class="descname">get_available_ellps</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#LonLatToUTM.get_available_ellps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.LonLatToUTM.get_available_ellps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the available ellps</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.LonLatToUTM.set_ellps">
+<code class="descname">set_ellps</code><span class="sig-paren">(</span><em>ellps</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#LonLatToUTM.set_ellps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.LonLatToUTM.set_ellps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the ellipsoid type</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.LonLatToUTM.set_zone">
+<code class="descname">set_zone</code><span class="sig-paren">(</span><em>zone</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#LonLatToUTM.set_zone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.LonLatToUTM.set_zone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the UTM zone number</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="points-to-tube">
+<h2>Points to Tube<a class="headerlink" href="#points-to-tube" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.PointsToTube">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">PointsToTube</code><span class="sig-paren">(</span><em>num_sides=20</em>, <em>radius=10.0</em>, <em>capping=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#PointsToTube"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.PointsToTube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.filters.xyz.AddCellConnToPoints" title="PVGeo.filters.xyz.AddCellConnToPoints"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.xyz.AddCellConnToPoints</span></code></a></p>
+<p>Takes points from a vtkPolyData object and constructs a line of those
+points then builds a polygonal tube around that line with some specified
+radius and number of sides.</p>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.PointsToTube._connect_cells">
+<code class="descname">_connect_cells</code><span class="sig-paren">(</span><em>pdi</em>, <em>pdo</em>, <em>log_time=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#PointsToTube._connect_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.PointsToTube._connect_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>This uses the parent’s <code class="docutils literal notranslate"><span class="pre">_connect_cells()</span></code> to build a tub around</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.PointsToTube.set_capping">
+<code class="descname">set_capping</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#PointsToTube.set_capping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.PointsToTube.set_capping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a boolean flag on whether or not to cap the ends of the tube</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.PointsToTube.set_number_of_sides">
+<code class="descname">set_number_of_sides</code><span class="sig-paren">(</span><em>num</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#PointsToTube.set_number_of_sides"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.PointsToTube.set_number_of_sides" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number of sides (resolution) for the tube</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.PointsToTube.set_radius">
+<code class="descname">set_radius</code><span class="sig-paren">(</span><em>radius</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#PointsToTube.set_radius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.PointsToTube.set_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the radius of the tube</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="rotate-points">
+<h2>Rotate Points<a class="headerlink" href="#rotate-points" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.RotatePoints">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">RotatePoints</code><span class="sig-paren">(</span><em>angle=45.0</em>, <em>origin=None</em>, <em>use_corner=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotatePoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotatePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<p>Rotates XYZ coordinates in <cite>vtkPolyData</cite> around an origin at a given
+angle on the XY plane.</p>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.RotatePoints.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotatePoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotatePoints.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.RotatePoints.set_origin">
+<code class="descname">set_origin</code><span class="sig-paren">(</span><em>xo</em>, <em>yo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotatePoints.set_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotatePoints.set_origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the origin to perform the rotate around.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.RotatePoints.set_rotation_degrees">
+<code class="descname">set_rotation_degrees</code><span class="sig-paren">(</span><em>theta</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotatePoints.set_rotation_degrees"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotatePoints.set_rotation_degrees" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the rotational angle in degrees.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.RotatePoints.set_use_corner">
+<code class="descname">set_use_corner</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotatePoints.set_use_corner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotatePoints.set_use_corner" title="Permalink to this definition">¶</a></dt>
+<dd><p>A flag to use a corner of the input data set as the rotational
+origin.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="rotation-tool">
+<h2>Rotation Tool<a class="headerlink" href="#rotation-tool" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.filters.xyz.RotationTool">
+<em class="property">class </em><code class="descclassname">PVGeo.filters.xyz.</code><code class="descname">RotationTool</code><span class="sig-paren">(</span><em>decimals=6</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A class that holds a set of methods/tools for performing and estimating
+coordinate rotations.</p>
+<dl class="method">
+<dt id="PVGeo.filters.xyz.RotationTool._converge_angle">
+<code class="descname">_converge_angle</code><span class="sig-paren">(</span><em>pt1</em>, <em>pt2</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool._converge_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool._converge_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal use only: pts should only be a two neighboring points.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.RotationTool._estimate_angle_and_spacing">
+<code class="descname">_estimate_angle_and_spacing</code><span class="sig-paren">(</span><em>pts</em>, <em>sample=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool._estimate_angle_and_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool._estimate_angle_and_spacing" title="Permalink to this definition">¶</a></dt>
+<dd><p>internal use only</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.filters.xyz.RotationTool._get_rotation_matrix">
+<em class="property">static </em><code class="descname">_get_rotation_matrix</code><span class="sig-paren">(</span><em>theta</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool._get_rotation_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool._get_rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helper to generate a rotation matrix given a rotation angle</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.filters.xyz.RotationTool.cos_between">
+<em class="property">static </em><code class="descname">cos_between</code><span class="sig-paren">(</span><em>pts</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool.cos_between"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool.cos_between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the cosine between two points</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.filters.xyz.RotationTool.distance_between">
+<em class="property">static </em><code class="descname">distance_between</code><span class="sig-paren">(</span><em>pts</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool.distance_between"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool.distance_between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the distance between two points</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.RotationTool.estimate_and_rotate">
+<code class="descname">estimate_and_rotate</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool.estimate_and_rotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool.estimate_and_rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method to estimate the rotation of a set of points and correct
+that rotation on the XY plane</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.filters.xyz.RotationTool.rotate">
+<em class="property">static </em><code class="descname">rotate</code><span class="sig-paren">(</span><em>pts</em>, <em>theta</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool.rotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotate points around (0,0,0) given an anlge on the XY plane</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.filters.xyz.RotationTool.rotate_around">
+<em class="property">static </em><code class="descname">rotate_around</code><span class="sig-paren">(</span><em>pts</em>, <em>theta</em>, <em>origin</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool.rotate_around"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool.rotate_around" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotate points around an origins given an anlge on the XY plane</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.filters.xyz.RotationTool.rotation_matrix">
+<em class="property">static </em><code class="descname">rotation_matrix</code><span class="sig-paren">(</span><em>vector_orig</em>, <em>vector_fin</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool.rotation_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool.rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the rotation matrix required to rotate from one vector to another.
+For the rotation of one vector to another, there are an infinit series of rotation matrices
+possible.  Due to axially symmetry, the rotation axis can be any vector lying in the symmetry
+plane between the two vectors.  Hence the axis-angle convention will be used to construct the
+matrix with the rotation axis defined as the cross product of the two vectors.  The rotation
+angle is the arccosine of the dot product of the two unit vectors.
+Given a unit vector parallel to the rotation axis, w = [x, y, z] and the rotation angle a,
+the rotation matrix R is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">|</span>  <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>   <span class="o">-</span><span class="n">z</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span>   <span class="n">y</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">z</span> <span class="o">|</span>
+<span class="n">R</span> <span class="o">=</span> <span class="o">|</span>  <span class="n">z</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span>   <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>   <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span> <span class="o">|</span>
+    <span class="o">|</span> <span class="o">-</span><span class="n">y</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">z</span>   <span class="n">x</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span>   <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">z</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="o">|</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vector_orig</strong> (<em>umpy array</em><em>, </em><em>len 3</em>) – The unrotated vector defined in the reference frame.</p></li>
+<li><p><strong>vector_fin</strong> (<em>numpy array</em><em>, </em><em>len 3</em>) – The rotated vector defined in the reference frame.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This code was adopted from <a class="reference external" href="https://github.com/Wallacoloo/printipi/blob/master/util/rotation_matrix.py">printipi</a> under the MIT license.</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.filters.xyz.RotationTool.sin_between">
+<em class="property">static </em><code class="descname">sin_between</code><span class="sig-paren">(</span><em>pts</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool.sin_between"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool.sin_between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the sin angle between two points</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../gmggroup/index.html" class="btn btn-neutral float-right" title="GMG Group Standards" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="voxelize.html" class="btn btn-neutral float-left" title="Voxelize" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

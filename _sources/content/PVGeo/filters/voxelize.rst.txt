@@ -1,0 +1,19 @@
+
+
+Voxelize
+========
+
+.. automodule:: PVGeo.filters.voxelize
+    :private-members:
+
+
+
+Voxelize Points
+---------------
+
+.. autoclass:: PVGeo.filters.voxelize.VoxelizePoints
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

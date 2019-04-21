@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GSLib/GeoEAS File I/O &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/gslib/gslib.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="SGeMS File I/O" href="sgems.html" />
+    <link rel="prev" title="GSLib &amp; SGeMS" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">GSLib &amp; SGeMS</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">GSLib/GeoEAS File I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gslib-point-set-reader">GSLib Point Set Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gslib-table-reader">GSLib Table Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#write-vtktable-to-gslib-format">Write <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> To GSLib Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sgems.html">SGeMS File I/O</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">GSLib &amp; SGeMS</a> &raquo;</li>
+        
+      <li>GSLib/GeoEAS File I/O</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-PVGeo.gslib.gslib">
+<span id="gslib-geoeas-file-i-o"></span><h1>GSLib/GeoEAS File I/O<a class="headerlink" href="#module-PVGeo.gslib.gslib" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="gslib-point-set-reader">
+<h2>GSLib Point Set Reader<a class="headerlink" href="#gslib-point-set-reader" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.gslib.gslib.GSLibPointSetReader">
+<em class="property">class </em><code class="descclassname">PVGeo.gslib.gslib.</code><code class="descname">GSLibPointSetReader</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#GSLibPointSetReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibPointSetReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.gslib.gslib._GSLibReaderMethods</span></code>, <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="PVGeo.readers.delimited.DelimitedPointsReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedPointsReaderBase</span></code></a></p>
+<p>Reads a GSLib point set file where the first three columns are the XYZ
+coordinates and the remainder of the data is consistent with the
+<a class="reference internal" href="#PVGeo.gslib.gslib.GSLibReader" title="PVGeo.gslib.gslib.GSLibReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">GSLibReader</span></code></a> specifications.</p>
+<dl class="attribute">
+<dt id="PVGeo.gslib.gslib.GSLibPointSetReader.description">
+<code class="descname">description</code><em class="property"> = 'PVGeo: GSLib Point Set'</em><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibPointSetReader.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PVGeo.gslib.gslib.GSLibPointSetReader.extensions">
+<code class="descname">extensions</code><em class="property"> = 'sgems dat geoeas gslib GSLIB txt SGEMS SGeMSgslibpts ptset gpts'</em><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibPointSetReader.extensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="gslib-table-reader">
+<h2>GSLib Table Reader<a class="headerlink" href="#gslib-table-reader" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.gslib.gslib.GSLibReader">
+<em class="property">class </em><code class="descclassname">PVGeo.gslib.gslib.</code><code class="descname">GSLibReader</code><span class="sig-paren">(</span><em>outputType='vtkTable'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#GSLibReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.gslib.gslib._GSLibReaderMethods</span></code>, <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader" title="PVGeo.readers.delimited.DelimitedTextReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedTextReader</span></code></a></p>
+<p>Reads a GSLIB file format to a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code>. The GSLIB file format has
+headers lines followed by the data as a space delimited ASCI file (this
+filter is set up to allow you to choose any single character delimiter).
+The first header line is the title and will be printed to the console.
+This line may have the dimensions for a grid to be made of the data.
+The second line is the number (n) of columns of data. The next n lines are
+the variable names for the data in each column. You are allowed up to ten
+characters for the variable name. The data follow with a space between each
+field (column).</p>
+<dl class="attribute">
+<dt id="PVGeo.gslib.gslib.GSLibReader.description">
+<code class="descname">description</code><em class="property"> = 'PVGeo: GSLib Table'</em><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibReader.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="write-vtktable-to-gslib-format">
+<h2>Write <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> To GSLib Format<a class="headerlink" href="#write-vtktable-to-gslib-format" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.gslib.gslib.WriteTableToGSLib">
+<em class="property">class </em><code class="descclassname">PVGeo.gslib.gslib.</code><code class="descname">WriteTableToGSLib</code><span class="sig-paren">(</span><em>inputType='vtkTable'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#WriteTableToGSLib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.gslib.WriteTableToGSLib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.WriterBase" title="PVGeo.base.WriterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.WriterBase</span></code></a></p>
+<p>Write the row data in a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> to the GSLib Format</p>
+<dl class="method">
+<dt id="PVGeo.gslib.gslib.WriteTableToGSLib.perform_write_out">
+<code class="descname">perform_write_out</code><span class="sig-paren">(</span><em>input_data_object</em>, <em>filename</em>, <em>object_name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#WriteTableToGSLib.perform_write_out"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.gslib.WriteTableToGSLib.perform_write_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write out the input data object to the GSLib file format</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.gslib.gslib.WriteTableToGSLib.set_header">
+<code class="descname">set_header</code><span class="sig-paren">(</span><em>header</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#WriteTableToGSLib.set_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.gslib.WriteTableToGSLib.set_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the file header string</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sgems.html" class="btn btn-neutral float-right" title="SGeMS File I/O" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="GSLib &amp; SGeMS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

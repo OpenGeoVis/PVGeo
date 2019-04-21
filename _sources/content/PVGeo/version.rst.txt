@@ -1,0 +1,15 @@
+
+
+Version Verifier
+================
+
+.. automodule:: PVGeo.version
+    :private-members:
+
+
+
+checkNumpy
+----------
+
+.. autofunction:: PVGeo.version.checkNumpy
+

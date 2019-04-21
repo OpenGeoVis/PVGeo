@@ -1,0 +1,11 @@
+
+General Readers
+***************
+
+.. toctree::
+   :maxdepth: 5
+   :hidden:
+    
+   
+   binaries.rst
+   delimited.rst

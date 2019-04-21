@@ -1,0 +1,96 @@
+
+
+Base Classes
+============
+
+.. automodule:: PVGeo.base
+    :private-members:
+
+
+
+Algorithm Base
+--------------
+
+.. autoclass:: PVGeo.base.AlgorithmBase
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Filter Base
+-----------
+
+.. autoclass:: PVGeo.base.FilterBase
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Filter Preserve Type Base
+-------------------------
+
+.. autoclass:: PVGeo.base.FilterPreserveTypeBase
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Interfaced Base Reader
+----------------------
+
+.. autoclass:: PVGeo.base.InterfacedBaseReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Reader Base: Time Varying
+-------------------------
+
+.. autoclass:: PVGeo.base.ReaderBase
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Reader Base Base
+----------------
+
+.. autoclass:: PVGeo.base.ReaderBaseBase
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Two File Reader Base
+--------------------
+
+.. autoclass:: PVGeo.base.TwoFileReaderBase
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Writer Base
+-----------
+
+.. autoclass:: PVGeo.base.WriterBase
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

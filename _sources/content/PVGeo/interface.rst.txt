@@ -1,0 +1,99 @@
+
+
+Interface
+=========
+
+.. automodule:: PVGeo.interface
+    :private-members:
+
+
+
+add_arraysFromDataFrame
+-----------------------
+
+.. autofunction:: PVGeo.interface.add_arraysFromDataFrame
+
+
+
+convertArray
+------------
+
+.. autofunction:: PVGeo.interface.convertArray
+
+
+
+convertCellConn
+---------------
+
+.. autofunction:: PVGeo.interface.convertCellConn
+
+
+
+convertStringArray
+------------------
+
+.. autofunction:: PVGeo.interface.convertStringArray
+
+
+
+dataFrameToTable
+----------------
+
+.. autofunction:: PVGeo.interface.dataFrameToTable
+
+
+
+getDataDict
+-----------
+
+.. autofunction:: PVGeo.interface.getDataDict
+
+
+
+getVTKtype
+----------
+
+.. autofunction:: PVGeo.interface.getVTKtype
+
+
+
+get_array
+---------
+
+.. autofunction:: PVGeo.interface.get_array
+
+
+
+getdTypes
+---------
+
+.. autofunction:: PVGeo.interface.getdTypes
+
+
+
+placeArrInTable
+---------------
+
+.. autofunction:: PVGeo.interface.placeArrInTable
+
+
+
+pointsToPolyData
+----------------
+
+.. autofunction:: PVGeo.interface.pointsToPolyData
+
+
+
+tableToDataFrame
+----------------
+
+.. autofunction:: PVGeo.interface.tableToDataFrame
+
+
+
+wrapvtki
+--------
+
+.. autofunction:: PVGeo.interface.wrapvtki
+

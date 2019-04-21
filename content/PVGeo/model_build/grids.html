@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Grids &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/model_build/grids.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="General Readers" href="../readers/index.html" />
+    <link rel="prev" title="earth" href="earth.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Model Builder</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="earth.html">earth</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Grids</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-even-rectilinear-grid">Create Even Rectilinear Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-tensor-mesh">Create Tensor Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-uniform-grid">Create Uniform Grid</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Model Builder</a> &raquo;</li>
+        
+      <li>Grids</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-PVGeo.model_build.grids">
+<span id="grids"></span><h1>Grids<a class="headerlink" href="#module-PVGeo.model_build.grids" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="create-even-rectilinear-grid">
+<h2>Create Even Rectilinear Grid<a class="headerlink" href="#create-even-rectilinear-grid" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid">
+<em class="property">class </em><code class="descclassname">PVGeo.model_build.grids.</code><code class="descname">CreateEvenRectilinearGrid</code><span class="sig-paren">(</span><em>extent=[10, 10, 10], xrng=[-1.0, 1.0], yrng=[-1.0, 1.0], zrng=[-1.0, 1.0]</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
+<p>This creates a vtkRectilinearGrid where the discretization along a
+given axis is uniformly distributed.</p>
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate the output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestInformation">
+<code class="descname">RequestInformation</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to handle output extents</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_extent">
+<code class="descname">set_extent</code><span class="sig-paren">(</span><em>nx</em>, <em>ny</em>, <em>nz</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the extent of the output grid.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_x_range">
+<code class="descname">set_x_range</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_x_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_x_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set range (min, max) for the grid in the X-direction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_y_range">
+<code class="descname">set_y_range</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_y_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_y_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set range (min, max) for the grid in the Y-direction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_z_range">
+<code class="descname">set_z_range</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_z_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_z_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set range (min, max) for the grid in the Z-direction</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="create-tensor-mesh">
+<h2>Create Tensor Mesh<a class="headerlink" href="#create-tensor-mesh" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh">
+<em class="property">class </em><code class="descclassname">PVGeo.model_build.grids.</code><code class="descname">CreateTensorMesh</code><span class="sig-paren">(</span><em>origin=[-350.0, -400.0, 0.0], data_name='Data', xcellstr='200 100 50 20*50.0 50 100 200', ycellstr='200 100 50 21*50.0 50 100 200', zcellstr='20*25.0 50 100 200'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
+<p>This creates a vtkRectilinearGrid where the discretization along a
+given axis is not uniform. Cell spacings along each axis can be set via
+strings with repeating patterns or explicitly using the <code class="docutils literal notranslate"><span class="pre">Set*Cells</span></code>
+methods.</p>
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.GetExtent">
+<code class="descname">GetExtent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.GetExtent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.GetExtent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the extent of the created mesh</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output data object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.RequestInformation">
+<code class="descname">RequestInformation</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to set output whole extent</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.SetXCells">
+<code class="descname">SetXCells</code><span class="sig-paren">(</span><em>xcells</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.SetXCells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.SetXCells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the X direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xcells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the X-axis</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.SetYCells">
+<code class="descname">SetYCells</code><span class="sig-paren">(</span><em>ycells</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.SetYCells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.SetYCells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the Y direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ycells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Y-axis</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.SetZCells">
+<code class="descname">SetZCells</code><span class="sig-paren">(</span><em>zcells</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.SetZCells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.SetZCells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the Z direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>zcells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Z-axis</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh._AddModelData">
+<code class="descname">_AddModelData</code><span class="sig-paren">(</span><em>pdo</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._AddModelData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._AddModelData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an array to the output data object. If data is None, random
+values will be generated.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh._MakeModel">
+<code class="descname">_MakeModel</code><span class="sig-paren">(</span><em>pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._MakeModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._MakeModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the output data object</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh._ReadCellLine">
+<em class="property">static </em><code class="descname">_ReadCellLine</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._ReadCellLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._ReadCellLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read cell sizes for each line in the UBC mesh line strings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.set_origin">
+<code class="descname">set_origin</code><span class="sig-paren">(</span><em>x0</em>, <em>y0</em>, <em>z0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the origin of the output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.set_x_cells_str">
+<code class="descname">set_x_cells_str</code><span class="sig-paren">(</span><em>xcellstr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_x_cells_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_x_cells_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the X direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xcellstr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the spacings along the X-axis in the UBC style</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.set_y_cells_str">
+<code class="descname">set_y_cells_str</code><span class="sig-paren">(</span><em>ycellstr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_y_cells_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the Y direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ycellstr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the spacings along the Y-axis in the UBC style</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.set_z_cells_str">
+<code class="descname">set_z_cells_str</code><span class="sig-paren">(</span><em>zcellstr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_z_cells_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_z_cells_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the Z direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>zcellstr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the spacings along the Z-axis in the UBC style</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="create-uniform-grid">
+<h2>Create Uniform Grid<a class="headerlink" href="#create-uniform-grid" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PVGeo.model_build.grids.CreateUniformGrid">
+<em class="property">class </em><code class="descclassname">PVGeo.model_build.grids.</code><code class="descname">CreateUniformGrid</code><span class="sig-paren">(</span><em>extent=(10</em>, <em>10</em>, <em>10)</em>, <em>spacing=(1.0</em>, <em>1.0</em>, <em>1.0)</em>, <em>origin=(0.0</em>, <em>0.0</em>, <em>0.0)</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
+<p>Create uniform grid (<code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code>)</p>
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateUniformGrid.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate the output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateUniformGrid.RequestInformation">
+<code class="descname">RequestInformation</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to handle output extents</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateUniformGrid.set_extent">
+<code class="descname">set_extent</code><span class="sig-paren">(</span><em>nx</em>, <em>ny</em>, <em>nz</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.set_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.set_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the extent of the output grid.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateUniformGrid.set_origin">
+<code class="descname">set_origin</code><span class="sig-paren">(</span><em>x0</em>, <em>y0</em>, <em>z0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.set_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.set_origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the origin of the output grid.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateUniformGrid.set_spacing">
+<code class="descname">set_spacing</code><span class="sig-paren">(</span><em>dx</em>, <em>dy</em>, <em>dz</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.set_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.set_spacing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacing for the points along each axial direction.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../readers/index.html" class="btn btn-neutral float-right" title="General Readers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="earth.html" class="btn btn-neutral float-left" title="earth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

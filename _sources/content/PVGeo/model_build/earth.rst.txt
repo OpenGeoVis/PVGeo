@@ -1,0 +1,30 @@
+
+
+earth
+=====
+
+.. automodule:: PVGeo.model_build.earth
+    :private-members:
+
+
+
+Globe Source
+------------
+
+.. autoclass:: PVGeo.model_build.earth.GlobeSource
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+Outline Continents
+------------------
+
+.. autoclass:: PVGeo.model_build.earth.OutlineContinents
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

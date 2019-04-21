@@ -1,0 +1,30 @@
+
+
+OcTree Mesh
+===========
+
+.. automodule:: PVGeo.ubc.octree
+    :private-members:
+
+
+
+UBC OcTree Mesh Appender
+------------------------
+
+.. autoclass:: PVGeo.ubc.octree.OcTreeAppender
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+UBC OcTree Mesh Reader
+----------------------
+
+.. autoclass:: PVGeo.ubc.octree.OcTreeReader
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

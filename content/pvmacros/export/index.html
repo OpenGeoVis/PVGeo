@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Export &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/pvmacros/export/index.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="vtkjs" href="vtkjs.html" />
+    <link rel="prev" title="Pipeline" href="../pipeline.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PVGeo/ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html">Pipeline</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Export</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vtk-js">VTK.js</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#demo-shareable-format">Demo Shareable Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-use">Example Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-share">How to Share</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#quick-and-easy">Quick and Easy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-bit-more-robust">A Bit More Robust</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Export</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Export</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="export">
+<h1>Export<a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h1>
+<p>On this page, we demonstrate how to quickly share a 3D rendering of your
+ParaView visualizations with anyone who has access to the internet so that that
+can explore the whole scene in a dynamic manner.</p>
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>In order to effectively communicate our geoscientific findings, we often need to
+share our 3D visualizations with interested stakeholders. These interested
+parties are likely not going to have ParaView or other visualization software
+at hand. Thus we desire to have a means to export our complex visualizations in
+ParaView to a simple, shareable format that anyone can view. To accomplish this,
+we will take advantage of vtk.js and its standalone web viewer for vtk.js
+formats.</p>
+<p>Would not it be great to send your client or interested parties an interactive
+3D scene of your Geophysical findings like the example below?</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="http://tunnels.pvgeo.org/" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div></div>
+<div class="section" id="vtk-js">
+<h2>VTK.js<a class="headerlink" href="#vtk-js" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://kitware.github.io/vtk-js/">vtk.js</a> is a rendering library made for
+scientific visualization on the web. This code base brings high performance
+rendering into anyone’s web browser. This library allows us to export complex
+scenes from ParaView and share them with anyone that has a web browser like
+Safari or Google Chrome.</p>
+<p>The vtk.js library has an open-source <a class="reference external" href="https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader/StandaloneSceneLoader.html">standalone scene viewer</a>
+which they have a <a class="reference external" href="https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html">nice demo</a>.
+The first link can either be downloaded as an HTML file to be ran locally, or
+you can go to that link and run from the vtk.js server. vtk.js also published a
+scene export macro for ParaView that compresses a data scene in ParaView to a
+shareable format for viewing on the web. The <a class="reference external" href="https://raw.githubusercontent.com/Kitware/vtk-js/master/Utilities/ParaView/export-scene-macro.py">macro from the vtk.js library</a>
+can be used but we also deploy an updated (we think more robust) version of
+this export macro in the sub-module <cite>export</cite> of our Python module <cite>pvmacros</cite>.</p>
+<div class="section" id="demo-shareable-format">
+<h3>Demo Shareable Format<a class="headerlink" href="#demo-shareable-format" title="Permalink to this headline">¶</a></h3>
+<p>Here are some samples to demonstrate the web viewer which we host on
+<a class="reference external" href="http://viewer.vtki.org">viewer.vtki.org</a>. We have included a few of our
+scenes and one of the vtk.js sample scenes for you to demo:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://viewer.vtki.org/?fileURL=https://dl.dropbox.com/s/qnahdwedjwndo7t/fluvsim_channels.vtkjs?dl=0">Fluvial Channels</a></p></li>
+<li><p><a class="reference external" href="http://volcano.pvgeo.org">Volcano</a></p></li>
+<li><p><a class="reference external" href="http://ripple.pvgeo.org">Ripple</a></p></li>
+<li><p><a class="reference external" href="http://tunnels.pvgeo.org">Tunnels</a></p></li>
+<li><p><a class="reference external" href="http://viewer.vtki.org/?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download">vtk.js Sample Scene</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="example-use">
+<h2>Example Use<a class="headerlink" href="#example-use" title="Permalink to this headline">¶</a></h2>
+<p>First, make a complex scene in ParaView that you might like to share with someone.
+Now that you have your scene loaded, open the python shell from’View-&gt;Python Shell’
+(or ‘Tools-&gt;Python Shell’ depending on your ParaView version) within ParaView.
+From here, import our Python module delivered in the repository called
+<code class="docutils literal notranslate"><span class="pre">#!py</span> <span class="pre">pvmacros</span></code>. From the <code class="docutils literal notranslate"><span class="pre">#!py</span> <span class="pre">export</span></code> sub-module, there is a function called
+<code class="docutils literal notranslate"><span class="pre">#!py</span> <span class="pre">def</span> <span class="pre">exportVTKjs()</span></code> which takes two optional arguments (<cite>FileName</cite> string
+and <cite>compress</cite> boolean). Execute this function and note the output text as it
+will describe where the exported scene was saved.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## Import our ParaView Macros module:</span>
+<span class="kn">import</span> <span class="nn">pvmacros</span> <span class="kn">as</span> <span class="nn">pvm</span>
+
+<span class="c1">## Now run the exportVTKjs script from the export sub-module</span>
+<span class="n">pvm</span><span class="o">.</span><span class="n">export</span><span class="o">.</span><span class="n">exportVTKjs</span><span class="p">(</span><span class="n">FileName</span><span class="o">=</span><span class="s1">&#39;test_export&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now open the standalone web viewer by opening <a class="reference external" href="http://viewer.vtki.org">viewer.vtki.org</a></p>
+<p>Select the exported scene as the input file for the web viewer from where you
+saved it (should be under <code class="docutils literal notranslate"><span class="pre">~/Dropbox/PVGeo_vtkjs/</span></code>). The export macro should
+have printed out the location of the saved scene in the Python Shell.</p>
+<p>If you have trouble post on our <a class="reference external" href="https://github.com/OpenGeoVis/PVGeo/issues">issues page</a>
+or read the <a class="reference external" href="https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html">vtk.js documentation</a></p>
+</div>
+<div class="section" id="how-to-share">
+<h2>How to Share<a class="headerlink" href="#how-to-share" title="Permalink to this headline">¶</a></h2>
+<p>To share these exported scenes with non-technical stakeholders, we recommend the
+following processes:</p>
+<div class="section" id="quick-and-easy">
+<h3>Quick and Easy<a class="headerlink" href="#quick-and-easy" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Create your scene and export to the vtk.js format (follow process above)</p></li>
+<li><p>Quality control your visualization by viewing in web browser yourself (follow process above)</p></li>
+<li><p>Send an email with your visualization (<code class="docutils literal notranslate"><span class="pre">*.vtkjs</span></code> file) and something along the lines of:</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Check out the data scene/model by downloading the attached file.
+Then go to the link below and open that downloaded file.
+
+`http://viewer.vtki.org/ &lt;http://viewer.vtki.org&gt;`_
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-bit-more-robust">
+<h3>A Bit More Robust<a class="headerlink" href="#a-bit-more-robust" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes we might want to give someone a direct link to the web visualization
+so all they have to do is open the link on any device and they can see our
+visualization. Here is a method to share scenes that have a slightly easier
+process of viewing the file for the end user and will handle the case for mobile
+platforms.</p>
+<p>Unfortunately, making the experience for the end user simple means making your
+experience a bit more complicated. You will need to host your file on a web
+service like GitHub or Dropbox <em>(we have been unsuccessful in getting Google
+Drive to work)</em>. Then get a public link to the <cite>*.vtkjs</cite> file on that web
+service and append it to the web viewer URL.</p>
+<p>We have created a Python script to generate these links for you if you are
+sharing your data file on either Dropbox or GitHub. The script is delivered
+in the repository.</p>
+<p>The easiest way that we have found is to share the files on Dropbox.
+Use the desktop client for Dropbox and right-click your exported <cite>*.vtkjs</cite> file
+and select “Copy Dropbox Link.”</p>
+<p>Once you have that link, use the this script on your URLs in this manner:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Usage:</span>
+python get_vtkjs_url.py &lt;web file host&gt; &lt;file link&gt;
+
+<span class="c1">## Dropbox example:</span>
+python get_vtkjs_url.py dropbox <span class="s2">&quot;https://www.dropbox.com/s/6m5ttdbv5bf4ngj/ripple.vtkjs?dl=0&quot;</span>
+</pre></div>
+</div>
+<iframe src="https://player.vimeo.com/video/257833915" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/257833915">PVGeo Export Demo</a> from <a href="https://vimeo.com/user82050125">Bane Sullivan</a> on <a href="https://vimeo.com">Vimeo</a>.</p><div class="section" id="id3">
+<h4>Export<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="vtkjs.html" class="btn btn-neutral float-right" title="vtkjs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../pipeline.html" class="btn btn-neutral float-left" title="Pipeline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

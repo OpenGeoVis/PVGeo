@@ -1,0 +1,908 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PVGeo.base &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/base.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>PVGeo.base</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for PVGeo.base</h1><div class="highlight"><pre>
+<span></span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;AlgorithmBase&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ReaderBaseBase&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ReaderBase&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;FilterBase&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;FilterPreserveTypeBase&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TwoFileReaderBase&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;WriterBase&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;InterfacedBaseReader&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Base Classes&#39;</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Outside Imports:</span>
+<span class="kn">import</span> <span class="nn">vtk</span>  <span class="c1"># NOTE: This is the first import executed in the package! Keep here!!</span>
+<span class="kn">import</span> <span class="nn">vtk.util.vtkAlgorithm</span> <span class="k">as</span> <span class="nn">valg</span>  <span class="c1"># import VTKPythonAlgorithmBase</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">_helpers</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">interface</span>
+
+<span class="c1">###############################################################################</span>
+
+<div class="viewcode-block" id="AlgorithmBase"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase">[docs]</a><span class="k">class</span> <span class="nc">AlgorithmBase</span><span class="p">(</span><span class="n">valg</span><span class="o">.</span><span class="n">VTKPythonAlgorithmBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is a base class to add convienace methods to the</span>
+<span class="sd">    ``VTKPythonAlgorithmBase`` for all algorithms implemented in ``PVGeo``.</span>
+<span class="sd">    We implement our algorithms in this manner to harness all of the backend</span>
+<span class="sd">    support that the ``VTKPythonAlgorithmBase`` class provides for integrating</span>
+<span class="sd">    custom algorithms on a VTK pipeline. All of the pipeline methods for setting</span>
+<span class="sd">    inputs, getting outputs, making requests are handled by the super classes.</span>
+<span class="sd">    For more information on what functionality is available, check out the VTK</span>
+<span class="sd">    Docs for the `vtkAlgorithm`_ and then check out the following blog posts:</span>
+
+<span class="sd">    * `vtkPythonAlgorithm is great`_</span>
+<span class="sd">    * A VTK pipeline primer `(part 1)`_, `(part 2)`_, and `(part 3)`_</span>
+<span class="sd">    * `ParaView Python Docs`_</span>
+
+<span class="sd">    .. _vtkAlgorithm: https://www.vtk.org/doc/nightly/html/classvtkAlgorithm.html</span>
+<span class="sd">    .. _vtkPythonAlgorithm is great: https://blog.kitware.com/vtkpythonalgorithm-is-great/</span>
+<span class="sd">    .. _(part 1): https://blog.kitware.com/a-vtk-pipeline-primer-part-1/</span>
+<span class="sd">    .. _(part 2): https://blog.kitware.com/a-vtk-pipeline-primer-part-2/</span>
+<span class="sd">    .. _(part 3): https://blog.kitware.com/a-vtk-pipeline-primer-part-3/</span>
+<span class="sd">    .. _ParaView Python Docs: https://www.paraview.org/ParaView/Doc/Nightly/www/py-doc/paraview.util.vtkAlgorithm.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Algorithm Base&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
+                <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">valg</span><span class="o">.</span><span class="n">VTKPythonAlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
+            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
+        <span class="c1"># Add error handler to make errors easier to deal with</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__error_observer</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">ErrorObserver</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__error_observer</span><span class="o">.</span><span class="n">make_observer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AlgorithmBase.GetOutput"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.GetOutput">[docs]</a>    <span class="k">def</span> <span class="nf">GetOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A conveience method to get the output data object of this ``PVGeo``</span>
+<span class="sd">        algorithm.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutputDataObject</span><span class="p">(</span><span class="n">port</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="AlgorithmBase.error_occurred"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.error_occurred">[docs]</a>    <span class="k">def</span> <span class="nf">error_occurred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A conveience method for handling errors on the VTK pipeline</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            bool: true if an error has ovvured since last checked</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__error_observer</span><span class="o">.</span><span class="n">error_occurred</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="AlgorithmBase.get_error_message"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.get_error_message">[docs]</a>    <span class="k">def</span> <span class="nf">get_error_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A conveience method to print the error message.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__error_observer</span><span class="o">.</span><span class="n">get_error_message</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="AlgorithmBase.apply"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update the algorithm and get the output data object&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="AlgorithmBase.update"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Alias for self.Update()&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="AlgorithmBase.get_output"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.get_output">[docs]</a>    <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Alias for self.GetOutput()&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span></div></div>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Base Base Reader</span>
+<div class="viewcode-block" id="ReaderBaseBase"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase">[docs]</a><span class="k">class</span> <span class="nc">ReaderBaseBase</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A base class for inherrited functionality common to all reader algorithms</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Reader Base Base&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Attributes are namemangled to ensure proper setters/getters are used</span>
+        <span class="c1"># For the reader</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__filenames</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;filenames&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="c1"># To know whether or not the read needs to perform</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="ReaderBaseBase.NeedToRead"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.NeedToRead">[docs]</a>    <span class="k">def</span> <span class="nf">NeedToRead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ask self if the reader needs to read the files again.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            flag (bool): Set the read status</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            bool: the status of the reader.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">flag</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="n">flag</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span></div>
+
+<div class="viewcode-block" id="ReaderBaseBase.Modified"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.Modified">[docs]</a>    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Call modified if the files needs to be read again again</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">read_again</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="n">read_again</span>
+        <span class="n">AlgorithmBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+    <span class="c1">#### Methods for performing the read ####</span>
+    <span class="c1"># These are meant to be overwritten by child classes</span>
+
+<div class="viewcode-block" id="ReaderBaseBase._GetFileContents"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase._GetFileContents">[docs]</a>    <span class="k">def</span> <span class="nf">_GetFileContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ReaderBaseBase._ReadUpFront"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase._ReadUpFront">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadUpFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ReaderBaseBase._GetRawData"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase._GetRawData">[docs]</a>    <span class="k">def</span> <span class="nf">_GetRawData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+    <span class="c1">#### Seters and Geters ####</span>
+
+<div class="viewcode-block" id="ReaderBaseBase.ClearFileNames"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.ClearFileNames">[docs]</a>    <span class="k">def</span> <span class="nf">ClearFileNames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use to clear file names of the reader.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This does not set the reader to need to read again as there are</span>
+<span class="sd">            no files to read.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__filenames</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+<div class="viewcode-block" id="ReaderBaseBase.AddFileName"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.AddFileName">[docs]</a>    <span class="k">def</span> <span class="nf">AddFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use to set the file names for the reader. Handles singlt string or</span>
+<span class="sd">        list of strings.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str): The absolute file name with path to read.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="c1"># do nothing if None is passed by a constructor on accident</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">AddFileName</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">filename</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__filenames</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ReaderBaseBase.GetFileNames"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.GetFileNames">[docs]</a>    <span class="k">def</span> <span class="nf">GetFileNames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the list of file names or given and index returns a specified</span>
+<span class="sd">        timestep&#39;s filename.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__filenames</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__filenames</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;File names are not set.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__filenames</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__filenames</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ReaderBaseBase.apply"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Given a file name (or list of file names), perfrom the read&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">AddFileName</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+
+<span class="c1">###############################################################################</span>
+
+<span class="c1"># Base filter to preserve input data type</span>
+<div class="viewcode-block" id="FilterBase"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.FilterBase">[docs]</a><span class="k">class</span> <span class="nc">FilterBase</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A base class for implementing filters which holds several convienace</span>
+<span class="sd">    methods&quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Filter Base&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+        <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
+        <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
+            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FilterBase.apply"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.FilterBase.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run this algorithm on the given input dataset&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Base Reader</span>
+<div class="viewcode-block" id="ReaderBase"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBase">[docs]</a><span class="k">class</span> <span class="nc">ReaderBase</span><span class="p">(</span><span class="n">ReaderBaseBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A base class for inherrited functionality common to all reader algorithms</span>
+<span class="sd">    that need to handle a time series.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Reader Base: Time Varying&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Attributes are namemangled to ensure proper setters/getters are used</span>
+        <span class="c1"># For the VTK/ParaView pipeline</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dt&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="ReaderBase._update_time_steps"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBase._update_time_steps">[docs]</a>    <span class="k">def</span> <span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;For internal use only: appropriately sets the timesteps.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+    <span class="c1">#### Algorithm Methods ####</span>
+
+<div class="viewcode-block" id="ReaderBase.RequestInformation"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBase.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a conveience method that should be overwritten when needed.</span>
+<span class="sd">        This will handle setting the timesteps appropriately based on the number</span>
+<span class="sd">        of file names when the pipeline needs to know the time information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_time_steps</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+    <span class="c1">#### Seters and Geters ####</span>
+
+<div class="viewcode-block" id="ReaderBase.get_time_step_values"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBase.get_time_step_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use this in ParaView decorator to register timesteps on the pipeline.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="ReaderBase.set_time_delta"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBase.set_time_delta">[docs]</a>    <span class="k">def</span> <span class="nf">set_time_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An advanced property to set the time step in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dt</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span> <span class="o">=</span> <span class="n">dt</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
+
+
+<span class="c1">###############################################################################</span>
+
+<span class="c1"># Base filter to preserve input data type</span>
+<div class="viewcode-block" id="FilterPreserveTypeBase"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.FilterPreserveTypeBase">[docs]</a><span class="k">class</span> <span class="nc">FilterPreserveTypeBase</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A Base class for implementing filters that preserve the data type of</span>
+<span class="sd">    their arbitrary input.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Filter Preserve Type Base&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataObject&#39;</span><span class="p">,</span>
+            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_port</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># This is the port to preserve data object type</span>
+
+    <span class="c1"># THIS IS CRUCIAL to preserve data type through filter</span>
+<div class="viewcode-block" id="FilterPreserveTypeBase.RequestDataObject"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.FilterPreserveTypeBase.RequestDataObject">[docs]</a>    <span class="k">def</span> <span class="nf">RequestDataObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;There is no need to overwrite this. This method lets the pipeline</span>
+<span class="sd">        know that the algorithm will dynamically decide the output data type</span>
+<span class="sd">        based in the input data type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OutputType</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_port</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">GetClassName</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">FillOutputPortInformation</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">outInfo</span><span class="o">.</span><span class="n">GetInformationObject</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">return</span> <span class="mi">1</span></div></div>
+
+<span class="c1">###############################################################################</span>
+
+<span class="c1"># Two File Reader Base</span>
+<div class="viewcode-block" id="TwoFileReaderBase"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase">[docs]</a><span class="k">class</span> <span class="nc">TwoFileReaderBase</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A base clase for readers that need to handle two input files.</span>
+<span class="sd">    One meta-data file and a series of data files.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Two File Reader Base&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dt&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__mesh_filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;meshfile&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Can only be one!</span>
+        <span class="n">modfiles</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;model_files&#39;</span><span class="p">,</span> <span class="p">[])</span> <span class="c1"># Can be many (single attribute, manytimesteps)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">modfiles</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">modfiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">modfiles</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model_filenames</span> <span class="o">=</span> <span class="n">modfiles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read_mesh</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read_models</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+    <span class="k">def</span> <span class="nf">__update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;For internal use only</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__model_filenames</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model_filenames</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+<div class="viewcode-block" id="TwoFileReaderBase.NeedToReadMesh"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.NeedToReadMesh">[docs]</a>    <span class="k">def</span> <span class="nf">NeedToReadMesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ask self if the reader needs to read the mesh file again.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            flag (bool): set the status of the reader for mesh files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">flag</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read_mesh</span> <span class="o">=</span> <span class="n">flag</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read_mesh</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.NeedToReadModels"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.NeedToReadModels">[docs]</a>    <span class="k">def</span> <span class="nf">NeedToReadModels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ask self if the reader needs to read the model files again.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            flag (bool): set the status of the reader for model files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">flag</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read_models</span> <span class="o">=</span> <span class="n">flag</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read_models</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.Modified"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.Modified">[docs]</a>    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">read_again_models</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Call modified if the files needs to be read again again</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            read_again_mesh (bool): set the status of the reader for mesh files.</span>
+<span class="sd">            read_again_models (bool): set the status of the reader for model files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">read_again_mesh</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadMesh</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="n">read_again_mesh</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">read_again_models</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadModels</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="n">read_again_models</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AlgorithmBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.RequestInformation"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Used by pipeline to handle setting up time variance&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__update_time_steps</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+    <span class="c1">#### Seters and Geters ####</span>
+
+
+<div class="viewcode-block" id="TwoFileReaderBase.HasModels"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.HasModels">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">HasModels</span><span class="p">(</span><span class="n">model_files</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A convienance method to see if a list contatins models filenames.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model_files</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">model_files</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.ThisHasModels"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.ThisHasModels">[docs]</a>    <span class="k">def</span> <span class="nf">ThisHasModels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ask self if the reader has model filenames set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TwoFileReaderBase</span><span class="o">.</span><span class="n">HasModels</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__model_filenames</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.get_time_step_values"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.get_time_step_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use this in ParaView decorator to register timesteps</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.set_time_delta"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.set_time_delta">[docs]</a>    <span class="k">def</span> <span class="nf">set_time_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An advanced property for the time step in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dt</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span> <span class="o">=</span> <span class="n">dt</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again_mesh</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">read_again_models</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.ClearMesh"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.ClearMesh">[docs]</a>    <span class="k">def</span> <span class="nf">ClearMesh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use to clear mesh file name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__mesh_filename</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">read_again_models</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.ClearModels"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.ClearModels">[docs]</a>    <span class="k">def</span> <span class="nf">ClearModels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use to clear data file names</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model_filenames</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again_mesh</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">read_again_models</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.set_mesh_filename"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.set_mesh_filename">[docs]</a>    <span class="k">def</span> <span class="nf">set_mesh_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the mesh file name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mesh_filename</span> <span class="o">!=</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__mesh_filename</span> <span class="o">=</span> <span class="n">filename</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">read_again_models</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.add_model_file_name"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.add_model_file_name">[docs]</a>    <span class="k">def</span> <span class="nf">add_model_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use to set the file names for the reader. Handles single string or</span>
+<span class="sd">        list of strings.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str or list(str)): the file name(s) to use for the model data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="c1"># do nothing if None is passed by a constructor on accident</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_model_file_name</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again_mesh</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">read_again_models</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">filename</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model_filenames</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__model_filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again_mesh</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">read_again_models</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.GetModelFileNames"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.GetModelFileNames">[docs]</a>    <span class="k">def</span> <span class="nf">GetModelFileNames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the list of file names or given and index returns a specified</span>
+<span class="sd">        timestep&#39;s filename.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">ThisHasModels</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model_filenames</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model_filenames</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.GetMeshFileName"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.GetMeshFileName">[docs]</a>    <span class="k">def</span> <span class="nf">GetMeshFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the mesh filename&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mesh_filename</span></div>
+
+<div class="viewcode-block" id="TwoFileReaderBase.apply"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Perfrom the read with parameters/file names set during init or by</span>
+<span class="sd">        setters&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+
+
+<span class="c1">###############################################################################</span>
+
+<div class="viewcode-block" id="WriterBase"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase">[docs]</a><span class="k">class</span> <span class="nc">WriterBase</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Writer Base&#39;</span>
+    <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
+                                     <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__fmt</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.9e</span><span class="s1">&#39;</span>
+        <span class="c1"># For composite datasets: not always used</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__blockfilenames</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__composite</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="WriterBase.FillInputPortInformation"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.FillInputPortInformation">[docs]</a>    <span class="k">def</span> <span class="nf">FillInputPortInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Allows us to save composite datasets as well.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            I only care about ``vtkMultiBlockDataSet``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">INPUT_REQUIRED_DATA_TYPE</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">InputType</span><span class="p">)</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">INPUT_REQUIRED_DATA_TYPE</span><span class="p">(),</span> <span class="s1">&#39;vtkMultiBlockDataSet&#39;</span><span class="p">)</span> <span class="c1"># vtkCompositeDataSet</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="WriterBase.SetFileName"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.SetFileName">[docs]</a>    <span class="k">def</span> <span class="nf">SetFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Specify the filename for the output. Writer can only handle a single</span>
+<span class="sd">        output data object/time step.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;File name must be string. Only single file is supported.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__filename</span> <span class="o">!=</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__filename</span> <span class="o">=</span> <span class="n">filename</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="WriterBase.GetFileName"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.GetFileName">[docs]</a>    <span class="k">def</span> <span class="nf">GetFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the set filename.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__filename</span></div>
+
+<div class="viewcode-block" id="WriterBase.Write"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.Write">[docs]</a>    <span class="k">def</span> <span class="nf">Write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Perfrom the write out.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">input_data_object</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="WriterBase.perform_write_out"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.perform_write_out">[docs]</a>    <span class="k">def</span> <span class="nf">perform_write_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">object_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This method must be implemented. This is automatically called by</span>
+<span class="sd">        ``RequestData`` for single inputs or composite inputs.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;perform_write_out must be implemented!&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="WriterBase.apply"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run this writer algorithm on the given input data object&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="WriterBase.set_format"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.set_format">[docs]</a>    <span class="k">def</span> <span class="nf">set_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use to set the ASCII format for the writer default is ``&#39;%.9e&#39;``&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fmt</span> <span class="o">!=</span> <span class="n">fmt</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__fmt</span> <span class="o">=</span> <span class="n">fmt</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="WriterBase.GetFormat"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.GetFormat">[docs]</a>    <span class="k">def</span> <span class="nf">GetFormat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the ASCII format used for floats&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fmt</span></div>
+
+    <span class="c1">#### Following methods are for composite datasets ####</span>
+
+<div class="viewcode-block" id="WriterBase.UseComposite"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.UseComposite">[docs]</a>    <span class="k">def</span> <span class="nf">UseComposite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;True if input dataset is a composite dataset&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__composite</span></div>
+
+<div class="viewcode-block" id="WriterBase.SetBlockFileNames"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.SetBlockFileNames">[docs]</a>    <span class="k">def</span> <span class="nf">SetBlockFileNames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Gets a list of filenames based on user input filename and creates a</span>
+<span class="sd">        numbered list of filenames for the reader to save out. Assumes the</span>
+<span class="sd">        filename has an extension set already.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">number</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">number</span> <span class="o">//</span> <span class="mi">10</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">count</span>
+        <span class="n">identifier</span> <span class="o">=</span> <span class="s1">&#39;_%.&#39;</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s1">&#39;d&#39;</span>
+        <span class="n">blocknum</span> <span class="o">=</span> <span class="p">[</span><span class="n">identifier</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="c1"># Check the file extension:</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">basename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ext</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__blockfilenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">basename</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">blocknum</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ext</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__blockfilenames</span></div>
+
+<div class="viewcode-block" id="WriterBase.GetBlockFileName"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.GetBlockFileName">[docs]</a>    <span class="k">def</span> <span class="nf">GetBlockFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get filename for component of a multi block dataset&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__blockfilenames</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="WriterBase.RequestData"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Subclasses must implement a ``perform_write_out`` method that takes an</span>
+<span class="sd">        input data object and a filename. This method will automatically handle</span>
+<span class="sd">        composite data sets.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkMultiBlockDataSet</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__composite</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Handle composite datasets. NOTE: This only handles vtkMultiBlockDataSet</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__composite</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">GetNumberOfBlocks</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">SetBlockFileNames</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">GetBlock</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">GetMetaData</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkCompositeDataSet</span><span class="o">.</span><span class="n">NAME</span><span class="p">())</span>
+                <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">IsTypeOf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputType</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">perform_write_out</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetBlockFileName</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">name</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Input block </span><span class="si">%d</span><span class="s1"> of type(</span><span class="si">%s</span><span class="s1">) not saveable by writer.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+        <span class="c1"># Handle single input dataset</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perform_write_out</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span></div></div>
+
+<span class="c1">###############################################################################</span>
+
+<div class="viewcode-block" id="InterfacedBaseReader"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.InterfacedBaseReader">[docs]</a><span class="k">class</span> <span class="nc">InterfacedBaseReader</span><span class="p">(</span><span class="n">ReaderBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A general base reader for all interfacing with librarues that already</span>
+<span class="sd">    have file I/O methods and VTK data object interfaces. This provides a</span>
+<span class="sd">    routine for using an external library to handle all I/O and produce the</span>
+<span class="sd">    VTK data objects.&quot;&quot;&quot;</span>
+    <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Interfaced Base Reader&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">ReaderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__objects</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+    <span class="c1"># THIS IS CRUCIAL to dynamically decided output type</span>
+<div class="viewcode-block" id="InterfacedBaseReader.RequestDataObject"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.InterfacedBaseReader.RequestDataObject">[docs]</a>    <span class="k">def</span> <span class="nf">RequestDataObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Do not override. This method lets the us dynamically decide the</span>
+<span class="sd">        output data type based in the read meshes.</span>
+<span class="sd">        Note: they all have to be the same VTK type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">FillOutputPortInformation</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">outInfo</span><span class="o">.</span><span class="n">GetInformationObject</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="InterfacedBaseReader._readFile"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.InterfacedBaseReader._readFile">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_readFile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;OVERRIDE: Reads from the the libraries format and returns an object</span>
+<span class="sd">        in the given library&#39;s format.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="InterfacedBaseReader._getVTKObject"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.InterfacedBaseReader._getVTKObject">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_getVTKObject</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;OVERRIDE: Given an object in the interfaced library&#39;s type, return</span>
+<span class="sd">        a converted VTK data object.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="InterfacedBaseReader._ReadUpFront"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.InterfacedBaseReader._ReadUpFront">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadUpFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Do not override. A predifiened routine for reading the files up front.&quot;&quot;&quot;</span>
+        <span class="n">filenames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__objects</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="n">mesh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_readFile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getVTKObject</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="c1"># Now check that all objects in list are same type and set output type</span>
+        <span class="n">typ</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__objects</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__objects</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Input VTK objects are not all of the same type.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OutputType</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__objects</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">GetClassName</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="InterfacedBaseReader._GetObjectAtIndex"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.InterfacedBaseReader._GetObjectAtIndex">[docs]</a>    <span class="k">def</span> <span class="nf">_GetObjectAtIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal helper to get the data object at the specified index&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__objects</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__objects</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="InterfacedBaseReader.RequestData"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.InterfacedBaseReader.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Do not override. Used by pipeline to get data for current timestep</span>
+<span class="sd">        and populate the output data object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get requested time index</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_requested_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
+        <span class="c1"># Get output:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">ShallowCopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_GetObjectAtIndex</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">))</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="InterfacedBaseReader.RequestInformation"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.InterfacedBaseReader.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Do not override. Used by pipeline to set extents and time info.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Call parent to handle time stuff</span>
+        <span class="n">ReaderBase</span><span class="o">.</span><span class="n">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
+        <span class="c1"># Now set whole output extent</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">outInfo</span><span class="o">.</span><span class="n">GetInformationObject</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__objects</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Get first grid to set output extents</span>
+        <span class="c1"># Set WHOLE_EXTENT: This is absolutely necessary</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">GetExtent</span><span class="p">()</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkStreamingDemandDrivenPipeline</span><span class="o">.</span><span class="n">WHOLE_EXTENT</span><span class="p">(),</span> <span class="n">ext</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span></div></div>
+
+<span class="c1">###############################################################################</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

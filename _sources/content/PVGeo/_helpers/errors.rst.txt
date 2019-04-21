@@ -1,0 +1,41 @@
+
+
+errors
+======
+
+.. automodule:: PVGeo._helpers.errors
+    :private-members:
+
+
+
+ErrorObserver
+-------------
+
+.. autoclass:: PVGeo._helpers.errors.ErrorObserver
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+HiddenPrints
+------------
+
+.. autoclass:: PVGeo._helpers.errors.HiddenPrints
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+
+
+
+PVGeoError
+----------
+
+.. autoclass:: PVGeo._helpers.errors.PVGeoError
+    :show-inheritance:
+    :members:
+    :undoc-members:
+    :private-members:
+

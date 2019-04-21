@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>About Examples &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/about-examples.html"/>
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Quick Examples" href="examples/index.html" />
+    <link rel="prev" title="AGU 2018" href="overview/agu-2018.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">About Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#typical-usage">Typical Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reader-algorithms">Reader Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#paraview-usage">ParaView Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#filter-algorithms">Filter Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">ParaView Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#source-algorithms">Source Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">ParaView Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#writer-algorithms">Writer Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">ParaView Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PVGeo/ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>About Examples</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="about-examples">
+<h1>About Examples<a class="headerlink" href="#about-examples" title="Permalink to this headline">¶</a></h1>
+<p><cite>PVGeo</cite> is deployed in various sub-packages called <em>suites</em>. These <em>suites</em>
+consist of a set of reader, filter, source, or writer algorithms (or any
+combination of those) for a general area of geoscientific processing and
+visualization.
+The following sections on this page demonstrate general procedures and syntax to
+use each type of algorithm within ParaView or directly in a Python environment.</p>
+<p>Take a look at the <a class="reference internal" href="examples/index.html#ref-examples"><span class="std std-ref">Quick Examples</span></a> for an outline of all the available
+examples at this time.</p>
+<p>If you think there may be a serious problem with an example, please open an
+issue on the <a class="reference external" href="https://github.com/OpenGeoVis/PVGeo/issues">issues page</a> so that we can promptly fix it.</p>
+<div class="section" id="typical-usage">
+<h2>Typical Usage<a class="headerlink" href="#typical-usage" title="Permalink to this headline">¶</a></h2>
+<p>All algorithms deployed in <em>PVGeo</em> are useable in the following manners in a
+Python environment where the algorithm can be called and instantiated with
+keyword arguments for its parameters and then applied on some input data set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<span class="c1"># PSEUDOCODE: Typical use of a PVGeo algorithm:</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Algorithm</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or we can instantiate the algorithm for repetitive calls if, for example, we
+need to request varying time steps.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<span class="c1"># PSEUDOCODE: Typical use of a PVGeo algorithm:</span>
+<span class="n">alg</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Algorithm</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># Grab the output data object</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">alg</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="c1"># Update the output to a desired time step</span>
+<span class="n">alg</span><span class="o">.</span><span class="n">UpdateTimeStep</span><span class="p">(</span><span class="mf">6.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reader-algorithms">
+<h2>Reader Algorithms<a class="headerlink" href="#reader-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>A reader takes data from files and puts them into the proper VTK
+data structures so that we can visualize that data on the VTK or ParaView
+pipeline.
+ParaView and <cite>vtki</cite> come with a plethora of native data format readers but
+there are still many more formats in the geosciences that have not been
+implemented. By creating formats for common geoscientific formats, we hope to
+make the process of getting data into the ParaView pipeline or into <cite>vtki</cite>
+data structures as simple as possible.</p>
+<p>The file readers in <em>PVGeo</em> are available for use in the same manner as all
+algorithms in <em>PVGeo</em>. Readers are typically used in a manner that allows the
+reader algorithm to be repetitively called to request various time steps:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<span class="c1"># PSEUDOCODE: Typical use of a PVGeo reader:</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="n">reader</span><span class="o">.</span><span class="n">AddFileName</span><span class="p">([</span><span class="s1">&#39;file</span><span class="si">%.2d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)])</span>
+
+<span class="c1"># Grab the output data object</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span> <span class="c1"># NOTE: Readers have no input for the `apply()` call</span>
+
+<span class="c1"># Update the output to a desired time step</span>
+<span class="n">reader</span><span class="o">.</span><span class="n">UpdateTimeStep</span><span class="p">(</span><span class="mf">6.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is worth noting that if you have only one file (one time step) to read, then
+readers can be used to immediately produce a data object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<span class="c1"># PSEUDOCODE: Typical use of a PVGeo reader:</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s1">&#39;fname.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="paraview-usage">
+<h3>ParaView Usage<a class="headerlink" href="#paraview-usage" title="Permalink to this headline">¶</a></h3>
+<p>The <em>PVGeo</em> readers aren’t directly available in the GUI menus of ParaView but
+rather a dialog will appear for you to select the desired file reader when
+selecting <strong>File -&gt; Open…</strong> within ParaView like the screen recording below:</p>
+<iframe src="https://player.vimeo.com/video/281726394?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+</div>
+<div class="section" id="filter-algorithms">
+<h2>Filter Algorithms<a class="headerlink" href="#filter-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>A filter modifies, transforms, combines, analyses, processes, etc. data in VTK
+data structures on either a VTK or ParaView pipeline. Filters provide a means
+for changing how we visualize data or create a means of generating topology for
+an input data source to better represent that data in a 3D rendering environment.</p>
+<p>For example, we have developed a filter called Voxelize Points
+which takes a set of scattered points sampled on a rectilinear reference frame
+and generates voxels for every point such that the volume of data made by the
+points is filled with topologically connected cells.
+Or for another filter, maybe we might have a series of scattered points that we
+know represent the center of a tunnel or tube that represents a well. We can use
+a filter to transform those points into a connected line that we then construct
+a cylinder around. This allows us to save out minimal data (just XYZ points as
+opposed to complex geometries that make up the tunnel) to our hard drive
+while still having complex visualizations from that data.</p>
+<p>Filters are typically used in a manner that parameters are set and an input
+dataset is provided to immediately produce an output. The parameters/options of
+the filter are set via the <cite>**kwargs</cite> upon construction and the input(s) is/are
+given to the <cite>apply()</cite> call:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<span class="c1"># PSEUDOCODE: Typical use of a PVGeo filter:</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">inputDataObject</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<span class="c1"># PSEUDOCODE: Typical use of a PVGeo filter with multiple inputs:</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">input0</span><span class="p">,</span> <span class="n">input1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is also worth noting that filter algorithms can be used as their own entities
+to make repetitive calls on them much like we showed with readers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<span class="c1"># PSEUDOCODE: Typical use of a PVGeo filter:</span>
+<span class="n">filt</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">inputDataObject</span><span class="p">)</span>
+
+<span class="c1"># Change a parameter of the filter</span>
+<span class="n">filt</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># PSEUDOCODE</span>
+<span class="n">filt</span><span class="o">.</span><span class="n">update</span><span class="p">()</span> <span class="c1"># Make sure to update the output after changing a parameter</span>
+
+<span class="c1"># Request a different time step</span>
+<span class="n">filt</span><span class="o">.</span><span class="n">UpdateTimeStep</span><span class="p">(</span><span class="mf">6.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h3>ParaView Usage<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Within ParaView, filters are available for selection directly from the GUI menus
+when an input data source is selected on the pipeline. All of the <em>PVGeo</em>
+filters  are available under their own categories in the <strong>Filters</strong> menu.</p>
+<iframe src="https://player.vimeo.com/video/282010041?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+</div>
+<div class="section" id="source-algorithms">
+<h2>Source Algorithms<a class="headerlink" href="#source-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>A source takes input parameters from a user and generates a data object for
+visualization or export. In <em>PVGeo</em>, we have implemented the <em>Model Building</em>
+suite with many sources that allow for a user to specify attributes of a data
+set such as a model discretization and have a data source appear in the
+rendering environment alongside their other data for that scene.</p>
+<p>Sources can be used like any algorithm in <em>PVGeo</em> and are typically called to
+immediately produce an output like below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<span class="c1"># PSEUDOCODE: Typical use of a PVGeo source:</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="id2">
+<h3>ParaView Usage<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Within ParaView, sources are available for selection directly from the GUI
+menus. All of the <em>PVGeo</em> sources are available under their own categories in
+the <strong>Sources</strong> menu.</p>
+<iframe src="https://player.vimeo.com/video/281726486?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+</div>
+<div class="section" id="writer-algorithms">
+<h2>Writer Algorithms<a class="headerlink" href="#writer-algorithms" title="Permalink to this headline">¶</a></h2>
+<p><em>PVGeo</em> writers take VTK data structures and write them out to the disk in a
+non-VTK formats that might be a standard for geoscientific data.
+PVGeo readers are often deployed with their complimentary writer equivalents
+such that data can be imported to the pipeline using readers, transformed using
+filters, then output to the same format in memory for use in an external
+processing library.</p>
+<p>Writers can be used like any algorithm in <em>PVGeo</em> and are typically called to
+immediately write out a data object like below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<span class="c1"># PSEUDOCODE: Typical use of a PVGeo writer:</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;test-writer.grd&#39;</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">inputDataObject</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="id3">
+<h3>ParaView Usage<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Demonstrated in the following video, a user can select <em>File -&gt; Save Data</em> in
+ParaView with a selected dataset then choose one of <em>PVGeo</em>’s writers.
+The first <em>1 minute</em> in the video demonstrates the <em>Extract Topography</em> then the
+video shows how to save a <code class="docutils literal notranslate"><span class="pre">vtkRectilinearGrid</span></code> and its attributes to the UBC
+Tensor Mesh/Model formats using a PVGeo writer.</p>
+<iframe src="https://player.vimeo.com/video/284294249?loop=1&autoplay=0" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="examples/index.html" class="btn btn-neutral float-right" title="Quick Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview/agu-2018.html" class="btn btn-neutral float-left" title="AGU 2018" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

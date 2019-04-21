@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PVGeo._helpers.timeseries &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/_helpers/timeseries.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/base.html">Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/cmaps.html">Color Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/version.html">Version Verifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/filters/index.html">General Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/grids/index.html">Grid Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/model_build/index.html">Model Builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/readers/index.html">General Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/PVGeo/ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/pvmacros/about.html">About ParaView Macros API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/pvmacros/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/pvmacros/export/index.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../content/pvmacros/vis/index.html">Visualization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>PVGeo._helpers.timeseries</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for PVGeo._helpers.timeseries</h1><div class="highlight"><pre>
+<span></span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;_calculate_time_range&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;update_time_steps&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_requested_time&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_input_time_steps&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_combined_input_time_steps&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+
+<div class="viewcode-block" id="_calculate_time_range"><a class="viewcode-back" href="../../../content/PVGeo/_helpers/timeseries.html#PVGeo._helpers.timeseries._calculate_time_range">[docs]</a><span class="k">def</span> <span class="nf">_calculate_time_range</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Discretizes time range accoridng to step size ``dt`` in seconds</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nt</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span><span class="n">dt</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="update_time_steps"><a class="viewcode-back" href="../../../content/PVGeo/_helpers/timeseries.html#PVGeo._helpers.timeseries.update_time_steps">[docs]</a><span class="k">def</span> <span class="nf">update_time_steps</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">explicit</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Handles setting up the timesteps on on the pipeline for a file series reader.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        algorithm (vtkDataObject): The data object (Proxy) on the pipeline</span>
+<span class="sd">            (pass `self` from algorithm subclasses)</span>
+<span class="sd">        nt (int or list): Number of timesteps (Pass a list to use length of</span>
+<span class="sd">            that list)</span>
+<span class="sd">        dt (float): The discrete value in seconds for the time step.</span>
+<span class="sd">        explicit (boolean): if true, this will treat the nt argument as the exact</span>
+<span class="sd">            timestep values to use</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        numpy.array : Returns the timesteps as an array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">explicit</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+        <span class="n">timesteps</span> <span class="o">=</span> <span class="n">nt</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+            <span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span>
+        <span class="n">timesteps</span> <span class="o">=</span> <span class="n">_calculate_time_range</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># NOTE: we may want to raise a warning here on the dev side.</span>
+        <span class="c1">#       if developing a new algorithm that uses this, you may want to</span>
+        <span class="c1">#       know exactly when this failse to update</span>
+        <span class="c1">#&#39;update_time_steps() is not updating because passed time step values are NULL.&#39;</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">executive</span> <span class="o">=</span> <span class="n">algorithm</span><span class="o">.</span><span class="n">GetExecutive</span><span class="p">()</span>
+    <span class="n">oi</span> <span class="o">=</span> <span class="n">executive</span><span class="o">.</span><span class="n">GetOutputInformation</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1">#oi = outInfo.GetInformationObject(0)</span>
+    <span class="n">oi</span><span class="o">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">TIME_STEPS</span><span class="p">())</span>
+    <span class="n">oi</span><span class="o">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">TIME_RANGE</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">timesteps</span><span class="p">:</span>
+        <span class="n">oi</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">TIME_STEPS</span><span class="p">(),</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">oi</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">TIME_RANGE</span><span class="p">(),</span> <span class="n">timesteps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">oi</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">TIME_RANGE</span><span class="p">(),</span> <span class="n">timesteps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">timesteps</span></div>
+
+
+<div class="viewcode-block" id="get_requested_time"><a class="viewcode-back" href="../../../content/PVGeo/_helpers/timeseries.html#PVGeo._helpers.timeseries.get_requested_time">[docs]</a><span class="k">def</span> <span class="nf">get_requested_time</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Handles setting up the timesteps on on the pipeline for a file series</span>
+<span class="sd">    reader.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        algorithm (vtkDataObject) : The data object (Proxy) on the pipeline</span>
+<span class="sd">            (pass `self` from algorithm subclasses)</span>
+<span class="sd">        outInfo (vtkInformationVector) : The output information for the</span>
+<span class="sd">            algorithm</span>
+<span class="sd">        idx (int) : the index for the output port</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        int : the index of the requested time</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; # Get requested time index</span>
+<span class="sd">        &gt;&gt;&gt; i = _helpers.get_requested_time(self, outInfo)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">executive</span> <span class="o">=</span> <span class="n">algorithm</span><span class="o">.</span><span class="n">GetExecutive</span><span class="p">()</span>
+    <span class="n">timesteps</span> <span class="o">=</span> <span class="n">algorithm</span><span class="o">.</span><span class="n">get_time_step_values</span><span class="p">()</span>
+    <span class="n">outInfo</span> <span class="o">=</span> <span class="n">outInfo</span><span class="o">.</span><span class="n">GetInformationObject</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">timesteps</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">outInfo</span><span class="o">.</span><span class="n">Has</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">UPDATE_TIME_STEP</span><span class="p">())</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">utime</span> <span class="o">=</span> <span class="n">outInfo</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">UPDATE_TIME_STEP</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span> <span class="o">-</span> <span class="n">utime</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># if we cant match the time, give first</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s1">&#39;Number of timesteps must be greater than 0&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="get_input_time_steps"><a class="viewcode-back" href="../../../content/PVGeo/_helpers/timeseries.html#PVGeo._helpers.timeseries.get_input_time_steps">[docs]</a><span class="k">def</span> <span class="nf">get_input_time_steps</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the timestep values for the algorithm&#39;s input</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        algorithm (vtkDataObject) : The data object (Proxy) on the pipeline</span>
+<span class="sd">            (pass `self` from algorithm subclasses)</span>
+<span class="sd">        port (int)  : the input port</span>
+<span class="sd">        idx (int) : optional : the connection index on the input port</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        list : the time step values of the input (if there arn&#39;t any, returns ``None``)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">executive</span> <span class="o">=</span> <span class="n">algorithm</span><span class="o">.</span><span class="n">GetExecutive</span><span class="p">()</span>
+    <span class="n">ii</span> <span class="o">=</span> <span class="n">executive</span><span class="o">.</span><span class="n">GetInputInformation</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ii</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">TIME_STEPS</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="get_combined_input_time_steps"><a class="viewcode-back" href="../../../content/PVGeo/_helpers/timeseries.html#PVGeo._helpers.timeseries.get_combined_input_time_steps">[docs]</a><span class="k">def</span> <span class="nf">get_combined_input_time_steps</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This will iterate over all input ports and combine their unique timesteps</span>
+<span class="sd">    for an output algorithm to have.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        algorithm (vtkDataObject) : The data object (Proxy) on the pipeline</span>
+<span class="sd">            (pass `self` from algorithm subclasses)</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        np.ndarray : a 1D array of all the unique timestep values (empty array if no time variance)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">executive</span> <span class="o">=</span> <span class="n">algorithm</span><span class="o">.</span><span class="n">GetExecutive</span><span class="p">()</span>
+    <span class="n">tsteps</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">GetNumberOfInputPorts</span><span class="p">()):</span>
+        <span class="n">ii</span> <span class="o">=</span> <span class="n">executive</span><span class="o">.</span><span class="n">GetInputInformation</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+        <span class="n">ti</span> <span class="o">=</span> <span class="n">ii</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">TIME_STEPS</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">ti</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">ti</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="n">tsteps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ti</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">tsteps</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>
