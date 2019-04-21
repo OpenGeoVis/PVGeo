@@ -32,5 +32,7 @@ grid = SGeMSGridReader().apply(filename)
 print(grid)
 
 ################################################################################
-warped = grid.cell_data_to_point_data().warp_by_scalar(scale_factor=5)
-warped.plot()
+
+grid.plot()
+# warped = grid.cell_data_to_point_data().warp_by_scalar(scale_factor=5)
+# warped.plot()
