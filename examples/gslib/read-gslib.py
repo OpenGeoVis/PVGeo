@@ -26,7 +26,7 @@ point_set.plot()
 # SGeMS Grid
 # ++++++++++
 grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/a_wlreferencecat.zip'
-filename, _ = examples.downloads._retrieve_file(grid_url, 'a_wlreferencecat.sgems.zip')
+filename, _ = examples.downloads._retrieve_file(grid_url, 'A_WLreferenceCAT.sgems.zip')
 
 grid = SGeMSGridReader().apply(filename)
 print(grid)
