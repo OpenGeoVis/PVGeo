@@ -33,6 +33,5 @@ print(grid)
 
 ################################################################################
 
-grid.plot()
-# warped = grid.cell_data_to_point_data().warp_by_scalar(scale_factor=5)
-# warped.plot()
+warped = grid.cell_data_to_point_data().warp_by_scalar(scale_factor=5)
+warped.plot()
