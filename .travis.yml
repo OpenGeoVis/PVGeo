@@ -41,8 +41,8 @@ script:
         make html;
         set -e;
         make html;
-        doctr deploy --built-docs ./build/html/ .;
         cd ..;
+        doctr deploy --built-docs ./docs/build/html/ .;
       fi
 
 notifications:
