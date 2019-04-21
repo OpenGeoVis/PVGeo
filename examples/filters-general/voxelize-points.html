@@ -39,6 +39,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Extract Topography" href="../grids/extract-topography.html" />
@@ -253,7 +255,7 @@ object (essentially a point cloud).</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f4ec1010888)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7fe6d30cf768)
   N Cells:      499200
   N Points:     499200
   X Bounds:     3.268e+05, 3.302e+05
@@ -270,7 +272,7 @@ describe the presence of a fault.</p>
 object and pass the thresholding value. We can then plot the result by
 calling the plot function. (Note: change the notebook parameter to
 <code class="docutils literal notranslate"><span class="pre">False</span></code> for an interactive window)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vtkpoints</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vtkpoints</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">point_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_voxelize-points_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize-points_001.png" />
@@ -303,7 +305,7 @@ The full pipeline method</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Voxelizing... done.
 Recovered Angle (deg.): 53.550
 Recovered Cell Sizes: (25.00, 25.00, 25.00)
-UnstructuredGrid (0x7f4ec1010a68)
+UnstructuredGrid (0x7fe6d30cf9a8)
   N Cells:      499200
   N Points:     524064
   X Bounds:     3.268e+05, 3.302e+05
@@ -328,7 +330,7 @@ create 3 orthogonal slices through a data volume.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7f4ec1010768)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7fe6d30cf6a8)
   N Blocks:     3
   X Bounds:     326804.336, 330185.260
   Y Bounds:     4406253.954, 4409862.606
@@ -348,7 +350,7 @@ create 3 orthogonal slices through a data volume.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_voxelize-points_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize-points_003.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  29.417 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  30.137 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-voxelize-points-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/26eee8aad2c1647ea7d3396af058d480/voxelize-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">voxelize-points.py</span></code></a></p>
