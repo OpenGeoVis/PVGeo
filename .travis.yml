@@ -1,20 +1,50 @@
 sudo: required
+
 dist: xenial
+
 os:
   - linux
+
 language: python
+
 python:
   - '2.7'
   - '3.5'
   - '3.6'
   - '3.7'
+
+env:
+  global:
+    # Doctr deploy key for OpenGeoVis/PVGeo
+    - secure: "UFohcAvj8rOpYEYt1pItOKx7yem561t/Ks31qJMd5JUitNPnGwHy06YqSFJ4qEsk/6DKc/gFU2nTxDQm+2y0HWL8m/WGa5sxSLe0iIYdrc4IyeRvMUIGyTD3y+ZFcO+YXoPRSiK4uufTb0Nh8CqoDzL2bSqy4lljVgTu0Q3wVBEDakH63fFC6bp7ztykyyE+vQ4AjEIUAvCPhgZOvjrDwZDmwVB3HeLoroTbXLitCYfBiEswxxuoClIIWebCNaBmVUXTAIzVxv31uzbTvFduqjRtS5110Jx1SYOrct/K4oJKAafRvnxaPffLPQcvzJckW0NsgROxop62bA+tnTyREfXqoUBnY7KGcaqfAxTz/yBSoQn8VGB20S4nh2OB0vf7QF/kEB0mDETvVlUQUTjCfnPFUxR9QbrB9jexO4OaEy7LuHSnaN0x4Tq8od9mopXpWZXKVVAVNq6+oo1c31SPAHy5QrhTCTX7QuXsA0oJ8rv/RaDGTe9L4PozRt81nEr1ZlwZOfvYny+4ZMlpgHz4evqDyE4JBMaXaNhWBkuve7FaQKjBKCU/bG0arPUE7/N+0h0GgEG6QUhLrI6TC05fj/AN/q1J5zijqhExIFwH8MbiY0ukNdUyaYBGQMlo86PB/0EG2kojgtuLNXAJX6+ZBIkKpcJdtoRV+kQfG8SJ/Yg="
+
+before_install:
+  # configure a headless display
+  - git clone --depth 1 git://github.com/vtkiorg/gl-ci-helpers.git
+  - source ./gl-ci-helpers/travis/setup_headless_display.sh
+
 install:
     - pip install -r requirements.txt
-script:
+    - if [[($TRAVIS_PYTHON_VERSION == 3.7)]]; then
+        pip install -r ./docs/requirements.txt;
+      fi
     - python setup.py install
+
+script:
     - coverage run tests/__main__.py
     - codecov --token=8da9d332-1618-450d-8654-09a8ecf3c2dc
     - python tests/__main__.py close # exit with error code if problem occurs
+    # Make and deploy docs - I have no idea why but it always segfault on first make - so make twice
+    # TODO: doctr deploy --built-docs ./build/html/ .;
+    - if [[($TRAVIS_PYTHON_VERSION == 3.7)]]; then
+        echo "Building and uploading the docs";
+        cd ./docs;
+        make html;
+        set -e;
+        make html;
+        cd ..;
+      fi
+
 notifications:
     slack:
         on_success: change
@@ -26,6 +56,7 @@ notifications:
             - info@pvgeo.org
         on_success: never
         on_failure: never
+
 deploy:
     provider: pypi
     user: "pvgeosupport"

@@ -48,7 +48,7 @@ __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
 __version__ = '1.2.3'
-__displayname__ = 'PVGeo'
+__displayname__ = 'PVGeo API Index'
 
 
 # Now check that NumPy is at a satisfactory version

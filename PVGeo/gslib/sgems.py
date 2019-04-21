@@ -148,7 +148,7 @@ class WriteImageDataToSGeMS(WriterBase):
         WriterBase.__init__(self, inputType=inputType, ext='SGeMS')
 
 
-    def PerformWriteOut(self, input_data_object, filename, object_name):
+    def perform_write_out(self, input_data_object, filename, object_name):
         """Write out the input ``vtkImage`` data to the SGeMS file format"""
         # Get the input data object
         grd = input_data_object

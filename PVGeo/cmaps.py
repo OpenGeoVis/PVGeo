@@ -2,6 +2,8 @@ __all__ = [
     'getParulaMap',
 ]
 
+__displayname__ = 'Color Maps'
+
 def getParulaMap():
     """A convienance method for getting a matplotlib friendly version of
     MATLAB's parula colormap.

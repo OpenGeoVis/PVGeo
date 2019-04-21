@@ -15,6 +15,8 @@
 import os
 import sys
 import shutil
+import faulthandler
+faulthandler.enable()
 
 # Add PVGeo to the path
 path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -23,7 +25,6 @@ sys.path.insert(0, path)
 sys.path.insert(0, '/Users/bane/Documents/OpenGeoVis/Software/gendocs/')
 
 
-# Mock the paraview module to build pvmacros docs
 # Mock the paraview module to build pvmacros docs
 import mock
 
@@ -39,18 +40,61 @@ autodoc_mock_imports = ['paraview']
 import PVGeo, pvmacros # for documenting
 from gendocs import Generator
 
+append_material = """
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Examples
+   :hidden:
+
+   about-examples.rst
+   examples/index
+
+"""
+
+extra = """
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Development Guide
+   :hidden:
+
+   dev-guide/contributing
+   dev-guide/repo-structure
+   dev-guide/templates
+   dev-guide/snippets/index
+   dev-guide/resources
+
+"""
+
 # Automatically generate documentaion pages
 Generator().DocumentPackages([PVGeo, pvmacros],
             index_base='../index_base.rst',
             showprivate=True,
             notify=False,
+            intro_pages=['overview/why-pvgeo',
+                         'overview/getting-started',
+                         'overview/featured',
+                         'overview/agu-2018',
+                        ],
+            append_material=append_material,
+            extra=extra,
             )
+
+import vtki
+import numpy as np
+# Manage errors
+vtki.set_error_output_file('errors.txt')
+# Ensure that offscreen rendering is used for docs generation
+vtki.OFF_SCREEN = True # Not necessary - simply an insurance policy
+# Preferred plotting style for documentation
+vtki.set_plot_theme('document')
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'PVGeo'
-copyright = u'2018, Bane Sullivan, http:://banesullivan.com'
+copyright = u'2018-2019, Bane Sullivan, http:://banesullivan.com'
 author = 'Bane Sullivan'
 html_show_copyright = False
 html_show_sphinx = False
@@ -80,6 +124,8 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinxcontrib.napoleon',
+    'sphinx_copybutton',
+    'sphinx_gallery.gen_gallery'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -213,3 +259,30 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+
+
+# -- Sphinx Gallery Options
+from sphinx_gallery.sorting import FileNameSortKey
+# thumb_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'PVGeo_icon_horiz.png')
+sphinx_gallery_conf = {
+    # path to your examples scripts
+    "examples_dirs": [
+        "../../examples/",
+    ],
+    # path where to save gallery generated examples
+    "gallery_dirs": ["examples"],
+    # Patter to search for example files
+    "filename_pattern": r"\.py",
+    # Remove the "Download all examples" button from the top level gallery
+    "download_all_examples": False,
+    # Sort gallery example by file name instead of number of lines (default)
+    "within_subsection_order": FileNameSortKey,
+    # directory where function granular galleries are stored
+    "backreferences_dir": False,
+    # Modules for which function level galleries are created.  In
+    "doc_module": "PVGeo",
+    "image_scrapers": (vtki.Scraper(), 'matplotlib'),
+    "thumbnail_size": (350, 350),
+    # 'default_thumb_file': thumb_path,
+}
