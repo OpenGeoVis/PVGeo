@@ -32,7 +32,7 @@ class VoxelizePoints(FilterBase):
     __category__ = 'filter'
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkPolyData',
+            nInputPorts=1, inputType='vtkPointSet',
             nOutputPorts=1, outputType='vtkUnstructuredGrid')
         self.__dx = kwargs.get('dx', None)
         self.__dy = kwargs.get('dy', None)

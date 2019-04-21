@@ -82,6 +82,13 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
+    def update(self):
+        """Alias for self.Update()"""
+        return self.Update()
+
+    def get_output(self):
+        """Alias for self.GetOutput()"""
+        return self.GetOutput()
 
 ###############################################################################
 # Base Base Reader
