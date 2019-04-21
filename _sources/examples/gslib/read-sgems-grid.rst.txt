@@ -45,7 +45,7 @@ Read SGeMS Grid file formats. The examples shown here are downloaded from
 
  .. code-block:: none
 
-    UniformGrid (0x7fe6d30a01c8)
+    UniformGrid (0x7f39e20371c8)
       N Cells:      78000
       N Points:     157122
       X Bounds:     0.000e+00, 2.600e+02
@@ -141,7 +141,7 @@ Read SGeMS Grid file formats. The examples shown here are downloaded from
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  49.122 seconds)
+   **Total running time of the script:** ( 0 minutes  48.972 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-sgems-grid.py:
