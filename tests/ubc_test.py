@@ -203,6 +203,21 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         self.assertEqual(test.GetCellData().GetArrayName(0), self.data_name)
         return
 
+    def test_chile_example(self):
+        """`TensorMeshReader`: Test Chile mesh example"""
+        meshfile = os.path.join(os.path.dirname(__file__), 'data/Craig-Chile/craig_chile.msh')
+        modfile = os.path.join(os.path.dirname(__file__), 'data/Craig-Chile/Lpout.mod')
+        reader = TensorMeshReader()
+        reader.set_mesh_filename(meshfile)
+        # Get and test output:
+        reader.Update() # Read only mesh upfront
+        reader.add_model_file_name(modfile)
+        reader.set_data_name('Lpout')
+        mesh = reader.apply()
+        self.assertTrue(mesh.n_cells > 0)
+        self.assertTrue(mesh.n_scalars > 0)
+
+
 ###############################################################################
 
 class Test2DTensorMeshReader(ubcMeshTesterBase):
@@ -457,6 +472,47 @@ if discretize_available:
             self.assertEqual(output.GetCellData().GetArrayName(3), os.path.basename(self.modelFileNames[1])) # use file as name
             self.assertEqual(len(f.get_time_step_values()), self.nt-1)
             return
+
+
+###############################################################################
+
+class TestGravObsReader(TestBase):
+    """
+    Test the `GravObsReader`
+    """
+    def setUp(self):
+        TestBase.setUp(self)
+        self.filename = os.path.join(os.path.dirname(__file__), 'data/Craig-Chile/LdM_grav_obs.grv')
+
+    def test(self):
+        """`GravObsReader`: Test reader for UBC Gravity Observations"""
+        reader = GravObsReader()
+        data = reader.apply(self.filename)
+        self.assertIsNotNone(data)
+        # Check shapes of the surfer grid
+        self.assertTrue(data.n_points > 0)
+        return
+
+
+###############################################################################
+
+class TestTopoReader(TestBase):
+    """
+    Test the `TopoReader`
+    """
+    def setUp(self):
+        TestBase.setUp(self)
+        self.filename = os.path.join(os.path.dirname(__file__), 'data/Craig-Chile/LdM_topo.topo')
+
+    def test(self):
+        """`TopoReader`: Test reader for UBC topography"""
+        reader = TopoReader()
+        data = reader.apply(self.filename)
+        self.assertIsNotNone(data)
+        # Check shapes of the surfer grid
+        self.assertTrue(data.n_points > 0)
+        return
+
 
 ###############################################################################
 ###############################################################################
