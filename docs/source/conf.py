@@ -153,7 +153,7 @@ language = None
 exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = 'friendly'
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -286,3 +286,8 @@ sphinx_gallery_conf = {
     "thumbnail_size": (350, 350),
     # 'default_thumb_file': thumb_path,
 }
+
+
+def setup(app):
+    app.add_stylesheet("style.css")
+    app.add_stylesheet("copybutton.css")
