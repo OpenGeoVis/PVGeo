@@ -1,0 +1,26 @@
+About PVGeo
+===========
+
+* Author: Bane Sullivan
+* License: BSD-3-Clause
+* Copyright: 2018, Bane Sullivan
+* Version: 1.2.3
+
+
+
+.. toctree::
+   :maxdepth: 5
+   :caption: PVGeo:
+
+   base.rst
+   cmaps.rst
+   interface.rst
+   version.rst
+   _helpers/index.rst
+   filters/index.rst
+   gmggroup/index.rst
+   grids/index.rst
+   gslib/index.rst
+   model_build/index.rst
+   readers/index.rst
+   ubc/index.rst

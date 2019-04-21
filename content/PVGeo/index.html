@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>About PVGeo &mdash; PVGeo  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/index.html"/>
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Base Classes" href="base.html" />
+    <link rel="prev" title="Read UBC Topography File" href="../../examples/ubc/read-topo.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> PVGeo
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome to PVGeo’s code docs!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/why-pvgeo.html">Why PVGeo?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/featured.html">Featured</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/agu-2018.html">AGU 2018</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Quick Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Index:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">About PVGeo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base.html">Base Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmaps.html">Color Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="version.html">Version Verifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_helpers/index.html">Internal Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters/index.html">General Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gmggroup/index.html">GMG Group Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grids/index.html">Grid Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslib/index.html">GSLib &amp; SGeMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_build/index.html">Model Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readers/index.html">General Readers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ubc/index.html">UBC Mesh Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pvmacros/index.html">About ParaView Macros</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/repo-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/snippets/index.html">Development Example Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-guide/resources.html">External References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PVGeo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>About PVGeo</li>
+    
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="about-pvgeo">
+<h1>About PVGeo<a class="headerlink" href="#about-pvgeo" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Author: Bane Sullivan</p></li>
+<li><p>License: BSD-3-Clause</p></li>
+<li><p>Copyright: 2018, Bane Sullivan</p></li>
+<li><p>Version: 1.2.3</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">PVGeo:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="base.html">Base Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base.html#algorithm-base">Algorithm Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#filter-base">Filter Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#filter-preserve-type-base">Filter Preserve Type Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#interfaced-base-reader">Interfaced Base Reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#reader-base-time-varying">Reader Base: Time Varying</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#reader-base-base">Reader Base Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#two-file-reader-base">Two File Reader Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#writer-base">Writer Base</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmaps.html">Color Maps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmaps.html#get-parula-map">get_parula_map</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#add-arrays-from-data-frame">add_arrays_from_data_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#convert-array">convert_array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#convert-cell-conn">convert_cell_conn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#convert-string-array">convert_string_array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#data-frame-to-table">data_frame_to_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#get-array">get_array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#get-data-dict">get_data_dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#get-dtypes">get_dtypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#get-vtk-type">get_vtk_type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#place-array-in-table">place_array_in_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#points-to-poly-data">points_to_poly_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#table-to-data-frame">table_to_data_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#wrap-vtki">wrap_vtki</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">Version Verifier</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="version.html#check-numpy">check_numpy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_helpers/index.html">Internal Helpers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_helpers/arrays.html">arrays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/arrays.html#add-array">add_array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/arrays.html#copy-arrays-to-point-data">copy_arrays_to_point_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/arrays.html#get-all-array-names">get_all_array_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/arrays.html#get-numpy-array">get_numpy_array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/arrays.html#get-selected-array">get_selected_array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/arrays.html#get-selected-array-field">get_selected_array_field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/arrays.html#get-selected-array-name">get_selected_array_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/arrays.html#get-vtk-array">get_vtk_array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/arrays.html#search-for-array">search_for_array</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_helpers/errors.html">errors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/errors.html#errorobserver">ErrorObserver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/errors.html#hiddenprints">HiddenPrints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/errors.html#pvgeoerror">PVGeoError</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_helpers/readers.html">readers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/readers.html#clean-data-name">clean_data_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/readers.html#create-modified-callback">create_modified_callback</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_helpers/timeseries.html">timeseries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/timeseries.html#calculate-time-range">_calculate_time_range</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/timeseries.html#get-combined-input-time-steps">get_combined_input_time_steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/timeseries.html#get-input-time-steps">get_input_time_steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/timeseries.html#get-requested-time">get_requested_time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/timeseries.html#update-time-steps">update_time_steps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_helpers/xml.html">xml</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/xml.html#help-arrays-xml">_help_arrays_xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/xml.html#get-drop-down-xml">get_drop_down_xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/xml.html#get-file-reader-xml">get_file_reader_xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/xml.html#get-input-array-xml">get_input_array_xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/xml.html#get-property-xml">get_property_xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/xml.html#get-python-path-property">get_python_path_property</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/xml.html#get-reader-time-step-values">get_reader_time_step_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_helpers/xml.html#get-vtk-type-map">get_vtk_type_map</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filters/index.html">General Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filters/math.html">Math Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters/math.html#array-math">Array Math</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/math.html#arrays-to-rgba">Arrays To RGBA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/math.html#normalize-array">Normalize Array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/math.html#percent-threshold">Percent Threshold</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters/slicing.html">Slicing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters/slicing.html#many-slices-along-axis">Many Slices Along Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/slicing.html#many-slices-along-points">Many Slices Along Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/slicing.html#slice-through-time">Slice Through Time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/slicing.html#slide-slice-along-points">Slide Slice Along Points</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters/tables.html">Table Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters/tables.html#append-table-to-cell-data">Append Table to Cell Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/tables.html#combine-tables">Combine Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/tables.html#extract-array">Extract Array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/tables.html#reshape-table">Reshape Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/tables.html#split-table-on-array">Split Table On Array</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters/voxelize.html">Voxelize</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters/voxelize.html#voxelize-points">Voxelize Points</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters/xyz.html">Point/Line Sets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#add-cell-connectivity-to-points">Add Cell Connectivity to Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#append-cell-centers">Append Cell Centers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#build-surface-from-points">Build Surface From Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#convert-xyz-units">Convert XYZ Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#extract-cell-centers">Extract Cell Centers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#extract-points">Extract Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#iterate-over-points">Iterate Over Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#lat-lon-to-utm">Lat Lon To UTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#points-to-tube">Points to Tube</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#rotate-points">Rotate Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters/xyz.html#rotation-tool">Rotation Tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gmggroup/index.html">GMG Group Standards</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gmggroup/reader.html">reader</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gmggroup/reader.html#omf-project-reader">OMF Project Reader</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="grids/index.html">Grid Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="grids/fileio.html">File I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="grids/fileio.html#esri-grid-reader">Esri Grid Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="grids/fileio.html#landsat-xml-reader">Landsat XML Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="grids/fileio.html#surfer-grid-reader">Surfer Grid Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="grids/fileio.html#write-cell-centers-to-csv">Write Cell Centers To CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="grids/fileio.html#write-vtkimagedata-to-surfer-format">Write <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> to Surfer Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="grids/subset.html">Subsetting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="grids/subset.html#extract-topography">Extract Topography</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="grids/transform.html">Transform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="grids/transform.html#reverse-image-data-axii">Reverse Image Data Axii</a></li>
+<li class="toctree-l3"><a class="reference internal" href="grids/transform.html#table-to-time-grid">Table To Time Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="grids/transform.html#translate-grid-origin">Translate Grid Origin</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gslib/index.html">GSLib &amp; SGeMS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gslib/gslib.html">GSLib/GeoEAS File I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gslib/gslib.html#gslib-point-set-reader">GSLib Point Set Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gslib/gslib.html#gslib-table-reader">GSLib Table Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gslib/gslib.html#write-vtktable-to-gslib-format">Write <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> To GSLib Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gslib/sgems.html">SGeMS File I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gslib/sgems.html#sgems-grid-reader">SGeMS Grid Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gslib/sgems.html#write-vtkimagedata-to-sgems-grid-format">Write <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> To SGeMS Grid Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_build/index.html">Model Builder</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model_build/earth.html">earth</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="model_build/earth.html#globe-source">Globe Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="model_build/earth.html#outline-continents">Outline Continents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="model_build/grids.html">Grids</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="model_build/grids.html#create-even-rectilinear-grid">Create Even Rectilinear Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="model_build/grids.html#create-tensor-mesh">Create Tensor Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="model_build/grids.html#create-uniform-grid">Create Uniform Grid</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="readers/index.html">General Readers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="readers/binaries.html">Binary/Serialized File I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="readers/binaries.html#madagascar-ssrsf-reader">Madagascar SSRSF Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readers/binaries.html#packed-binaries-reader">Packed Binaries Reader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="readers/delimited.html">Delimited File I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="readers/delimited.html#delimited-points-reader-base">Delimited Points Reader Base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readers/delimited.html#delimited-text-reader">Delimited Text Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readers/delimited.html#xyz-text-reader">XYZ Text Reader</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ubc/index.html">UBC Mesh Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ubc/disc_meshes.html">Discretize</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ubc/disc_meshes.html#discretize-mesh-reader">Discretize Mesh Reader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ubc/general.html">General Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ubc/general.html#ubc-geology-mapper">UBC Geology Mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ubc/general.html#gif-gravity-gradiometry-observations">GIF Gravity Gradiometry Observations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ubc/general.html#ubc-gravity-observations">UBC Gravity Observations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ubc/general.html#ubc-magnetic-observations">UBC Magnetic Observations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ubc/general.html#gif-topo-reader">GIF Topo Reader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ubc/octree.html">OcTree Mesh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ubc/octree.html#ubc-octree-mesh-appender">UBC OcTree Mesh Appender</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ubc/octree.html#ubc-octree-mesh-reader">UBC OcTree Mesh Reader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ubc/tensor.html">Tensor Mesh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ubc/tensor.html#ubc-tensor-mesh-appender">UBC Tensor Mesh Appender</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ubc/tensor.html#ubc-tensor-mesh-reader">UBC Tensor Mesh Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ubc/tensor.html#append-ubc-discrete-topography">Append UBC Discrete Topography</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ubc/two_file_base.html">Base Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ubc/two_file_base.html#model-appender-base">Model Appender Base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ubc/two_file_base.html#ubc-mesh-reader-base">UBC Mesh Reader Base</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ubc/write.html">Writers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ubc/write.html#write-vtkimagedata-to-ubc-tensor-mesh">Write <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> to UBC Tensor Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ubc/write.html#write-vtkrectilineargrid-to-ubc-tensor-mesh">Write <code class="docutils literal notranslate"><span class="pre">vtkRectilinearGrid</span></code> to UBC Tensor Mesh</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="base.html" class="btn btn-neutral float-right" title="Base Classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../examples/ubc/read-topo.html" class="btn btn-neutral float-left" title="Read UBC Topography File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+
+ 
+
+    <div role="contentinfo">
+        © 2018,
+        <a href="http://banesullivan.com">Bane Sullivan</a><br />
+        <br>
+        Except where noted, this work is licensed under a
+        <a rel="license" href="https://opensource.org/licenses/BSD-3-Clause">
+            BSD 3-Clause License
+        </a>
+    </div>
+    <br>
+    <div>
+    Built with
+        <a href="http://sphinx-doc.org/">Sphinx</a>
+        using a
+        <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+        provided by
+        <a href="https://readthedocs.org">Read the Docs</a>.
+    </div>
+    <div role="contentinfo">
+        <br>
+        This documentation was automatically generated by
+        <a href="https://gendocs.readthedocs.io/en/latest/">gendocs</a><br />
+    </div>
+
+
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115959679-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #546E7A;
+    }
+  </style>
+
+
+</body>
+</html>

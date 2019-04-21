@@ -1,5 +1,5 @@
-About ParaView Macros API Index
-===============================
+About ParaView Macros
+=====================
 
 * Author: Bane Sullivan
 * License: BSD-3-Clause
@@ -21,3 +21,12 @@ recurring tasks either in ParaView's GUI or ParaView's batch processing
 environment. We will use macros to complete everyday tasks like saving
 screenshots of isometric views of a data scene or tedious tasks like making
 many slices of a single data set along a line.
+
+
+.. toctree::
+   :maxdepth: 5
+   :caption: ParaView Macros:
+
+   pipeline.rst
+   export/index.rst
+   vis/index.rst

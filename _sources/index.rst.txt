@@ -1,10 +1,6 @@
-.. PVGeo documentation master file, created by
-   sphinx-quickstart on Tue Jul 10 19:56:04 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
+#############################
 Welcome to PVGeo's code docs!
-=============================
+#############################
 
 
 .. image:: https://img.shields.io/badge/demos-grey.svg?logo=vimeo
@@ -165,30 +161,11 @@ Current Statistics
 .. toctree::
    :maxdepth: 5
    :hidden:
-   :caption: PVGeo API Index:
+   :caption: API Index:
 
-   content/PVGeo/base.rst
-   content/PVGeo/cmaps.rst
-   content/PVGeo/interface.rst
-   content/PVGeo/version.rst
-   content/PVGeo/_helpers/index.rst
-   content/PVGeo/filters/index.rst
-   content/PVGeo/gmggroup/index.rst
-   content/PVGeo/grids/index.rst
-   content/PVGeo/gslib/index.rst
-   content/PVGeo/model_build/index.rst
-   content/PVGeo/readers/index.rst
-   content/PVGeo/ubc/index.rst
 
-.. toctree::
-   :maxdepth: 5
-   :hidden:
-   :caption: ParaView Macros API Index:
-
-   content/pvmacros/about.rst
-   content/pvmacros/pipeline.rst
-   content/pvmacros/export/index.rst
-   content/pvmacros/vis/index.rst
+   content/PVGeo/index.rst
+   content/pvmacros/index.rst
 
 .. toctree::
    :maxdepth: 2

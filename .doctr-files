@@ -159,6 +159,7 @@
 ./_sources/content/PVGeo/gslib/gslib.rst.txt
 ./_sources/content/PVGeo/gslib/index.rst.txt
 ./_sources/content/PVGeo/gslib/sgems.rst.txt
+./_sources/content/PVGeo/index.rst.txt
 ./_sources/content/PVGeo/interface.rst.txt
 ./_sources/content/PVGeo/model_build/earth.rst.txt
 ./_sources/content/PVGeo/model_build/grids.rst.txt
@@ -174,9 +175,9 @@
 ./_sources/content/PVGeo/ubc/two_file_base.rst.txt
 ./_sources/content/PVGeo/ubc/write.rst.txt
 ./_sources/content/PVGeo/version.rst.txt
-./_sources/content/pvmacros/about.rst.txt
 ./_sources/content/pvmacros/export/index.rst.txt
 ./_sources/content/pvmacros/export/vtkjs.rst.txt
+./_sources/content/pvmacros/index.rst.txt
 ./_sources/content/pvmacros/pipeline.rst.txt
 ./_sources/content/pvmacros/vis/axes.rst.txt
 ./_sources/content/pvmacros/vis/index.rst.txt
@@ -301,6 +302,7 @@
 ./content/PVGeo/gslib/gslib.html
 ./content/PVGeo/gslib/index.html
 ./content/PVGeo/gslib/sgems.html
+./content/PVGeo/index.html
 ./content/PVGeo/interface.html
 ./content/PVGeo/model_build/earth.html
 ./content/PVGeo/model_build/grids.html
@@ -316,9 +318,9 @@
 ./content/PVGeo/ubc/two_file_base.html
 ./content/PVGeo/ubc/write.html
 ./content/PVGeo/version.html
-./content/pvmacros/about.html
 ./content/pvmacros/export/index.html
 ./content/pvmacros/export/vtkjs.html
+./content/pvmacros/index.html
 ./content/pvmacros/pipeline.html
 ./content/pvmacros/vis/axes.html
 ./content/pvmacros/vis/index.html

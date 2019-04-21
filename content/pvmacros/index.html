@@ -8,14 +8,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>About ParaView Macros API Index &mdash; PVGeo  documentation</title>
+  <title>About ParaView Macros &mdash; PVGeo  documentation</title>
   
 
   
   
   
   
-    <link rel="canonical" href="http://docs.pvgeo.org/content/pvmacros/about.html"/>
+    <link rel="canonical" href="http://docs.pvgeo.org/content/pvmacros/index.html"/>
   
 
   
@@ -97,27 +97,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Quick Examples</a></li>
 </ul>
-<p class="caption"><span class="caption-text">PVGeo API Index:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/base.html">Base Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/cmaps.html">Color Maps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/interface.html">Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/version.html">Version Verifier</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/_helpers/index.html">Internal Helpers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/filters/index.html">General Filters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/gmggroup/index.html">GMG Group Standards</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/grids/index.html">Grid Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/gslib/index.html">GSLib &amp; SGeMS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/model_build/index.html">Model Builder</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/readers/index.html">General Readers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PVGeo/ubc/index.html">UBC Mesh Tools</a></li>
-</ul>
-<p class="caption"><span class="caption-text">ParaView Macros API Index:</span></p>
+<p class="caption"><span class="caption-text">API Index:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">About ParaView Macros API Index</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="export/index.html">Export</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PVGeo/index.html">About PVGeo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">About ParaView Macros</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export/index.html">Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vis/index.html">Visualization</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Development Guide</span></p>
 <ul>
@@ -171,7 +159,7 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>About ParaView Macros API Index</li>
+      <li>About ParaView Macros</li>
     
     
 
@@ -183,8 +171,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="about-paraview-macros-api-index">
-<h1>About ParaView Macros API Index<a class="headerlink" href="#about-paraview-macros-api-index" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="about-paraview-macros">
+<h1>About ParaView Macros<a class="headerlink" href="#about-paraview-macros" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Author: Bane Sullivan</p></li>
 <li><p>License: BSD-3-Clause</p></li>
@@ -203,6 +191,49 @@ recurring tasks either in ParaView’s GUI or ParaView’s batch processing
 environment. We will use macros to complete everyday tasks like saving
 screenshots of isometric views of a data scene or tedious tasks like making
 many slices of a single data set along a line.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">ParaView Macros:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html#delete-downstream-filters">Delete Downstream Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="export/index.html">Export</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="export/index.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export/index.html#vtk-js">VTK.js</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="export/index.html#demo-shareable-format">Demo Shareable Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="export/index.html#example-use">Example Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export/index.html#how-to-share">How to Share</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="export/index.html#quick-and-easy">Quick and Easy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="export/index.html#a-bit-more-robust">A Bit More Robust</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="export/index.html#id3">Export</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="export/vtkjs.html">vtkjs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vis/index.html">Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vis/axes.html">axes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vis/axes.html#custom-axis-ticks">Custom Axis Ticks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vis/axes.html#reset-axis-ticks">Reset Axis Ticks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vis/axes.html#scale-axis">Scale Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vis/axes.html#set-axis-labels-from-bounds">Set Axis Labels from Bounds</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vis/objs.html">objs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vis/objs.html#camera">Camera</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 
 
