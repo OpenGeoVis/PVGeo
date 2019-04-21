@@ -53,7 +53,7 @@ class AddCellConnToPoints(FilterBase):
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
-        self.__cell_type = kwargs.get('cell_type', vtk.VTK_LINE)
+        self.__cell_type = kwargs.get('cell_type', vtk.VTK_POLY_LINE)
         self.__usenbr = kwargs.get('nearest_nbr', False)
         self.__unique = True
 
