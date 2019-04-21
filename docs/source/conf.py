@@ -58,6 +58,7 @@ example_toc = """
    :caption: Examples
    :hidden:
 
+   about-examples.rst
    examples/index
 
 """
