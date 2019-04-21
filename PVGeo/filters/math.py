@@ -143,7 +143,7 @@ class ArrayMath(FilterPreserveTypeBase):
         if new_name == '':
             new_name = 'Mathed Up'
         # Convert to a VTK array
-        c = interface.convertArray(carr, name=new_name)
+        c = interface.convert_array(carr, name=new_name)
         # Build output
         pdo.DeepCopy(pdi)
         pdo = _helpers.add_array(pdo, field1, c)
@@ -212,7 +212,7 @@ class ArrayMath(FilterPreserveTypeBase):
         self.SetInputArrayToProcess(0, 0, 0, field0, array_name_0)
         self.SetInputArrayToProcess(1, 0, 0, field1, array_name_1)
         self.Update()
-        return interface.wrapvtki(self.GetOutput())
+        return interface.wrap_vtki(self.GetOutput())
 
     def set_multiplier(self, val):
         """This is a static shifter/scale factor across the array after
@@ -412,7 +412,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         if new_name == '':
             new_name = 'Normalized ' + name
         # Convert to VTK array
-        c = interface.convertArray(arr, name=new_name)
+        c = interface.convert_array(arr, name=new_name)
         # Build output
         pdo.DeepCopy(pdi)
         pdo = _helpers.add_array(pdo, field, c)
@@ -459,7 +459,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
-        return interface.wrapvtki(self.GetOutput())
+        return interface.wrap_vtki(self.GetOutput())
 
     def set_multiplier(self, val):
         """This is a static shifter/scale factor across the array after
@@ -612,7 +612,7 @@ class PercentThreshold(FilterBase):
         arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
-        return interface.wrapvtki(self.GetOutput())
+        return interface.wrap_vtki(self.GetOutput())
 
 ################################################################################
 
@@ -685,7 +685,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
             col = np.array(np.c_[r_arr, g_arr, b_arr, a_arr], dtype=np.uint8)
         else:
             col = np.array(np.c_[r_arr, g_arr, b_arr], dtype=np.uint8)
-        colors = interface.convertArray(col, name='Colors')
+        colors = interface.convert_array(col, name='Colors')
 
         # Set the output
         pdo.DeepCopy(pdi)
@@ -782,7 +782,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         self.SetInputArrayToProcess(1, 0, 0, gField, g_array)
         self.SetInputArrayToProcess(2, 0, 0, bField, b_array)
         self.Update()
-        return interface.wrapvtki(self.GetOutput())
+        return interface.wrap_vtki(self.GetOutput())
 
 
 

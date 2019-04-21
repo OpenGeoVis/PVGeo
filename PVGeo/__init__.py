@@ -52,4 +52,4 @@ __displayname__ = 'PVGeo API Index'
 
 
 # Now check that NumPy is at a satisfactory version
-version.checkNumpy()
+version.check_numpy()

@@ -51,12 +51,12 @@ class CreateUniformGrid(AlgorithmBase):
         #pdo.SetExtent(0,nx-1, 0,ny-1, 0,nz-1)
         # Add CELL data
         data = _makeSpatialCellData(nx-1, ny-1, nz-1) # minus 1 b/c cell data not point data
-        data = interface.convertArray(data, name='Spatial Cell Data', deep=True)
+        data = interface.convert_array(data, name='Spatial Cell Data', deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetCellData().AddArray(data)
         # Add Point data
         data = _makeSpatialCellData(nx, ny, nz)
-        data = interface.convertArray(data, name='Spatial Point Data', deep=True)
+        data = interface.convert_array(data, name='Spatial Point Data', deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetPointData().AddArray(data)
         return 1
@@ -132,9 +132,9 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
         zcoords = np.linspace(self.__zrange[0], self.__zrange[1], num=nz)
 
         # CONVERT TO VTK #
-        xcoords = interface.convertArray(xcoords,deep=True)
-        ycoords = interface.convertArray(ycoords,deep=True)
-        zcoords = interface.convertArray(zcoords,deep=True)
+        xcoords = interface.convert_array(xcoords,deep=True)
+        ycoords = interface.convert_array(ycoords,deep=True)
+        zcoords = interface.convert_array(zcoords,deep=True)
 
         pdo.SetDimensions(nx,ny,nz)
         pdo.SetXCoordinates(xcoords)
@@ -142,7 +142,7 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
         pdo.SetZCoordinates(zcoords)
 
         data = _makeSpatialCellData(nx-1, ny-1, nz-1)
-        data = interface.convertArray(data, name='Spatial Data', deep=True)
+        data = interface.convert_array(data, name='Spatial Data', deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         pdo.GetCellData().AddArray(data)
         return 1
@@ -263,9 +263,9 @@ class CreateTensorMesh(AlgorithmBase):
         nx,ny,nz = ext[1]+1,ext[3]+1,ext[5]+1
         pdo.SetDimensions(nx,ny,nz)
         # Convert to VTK array for setting coordinates
-        pdo.SetXCoordinates(interface.convertArray(cox, deep=True))
-        pdo.SetYCoordinates(interface.convertArray(coy, deep=True))
-        pdo.SetZCoordinates(interface.convertArray(coz, deep=True))
+        pdo.SetXCoordinates(interface.convert_array(cox, deep=True))
+        pdo.SetYCoordinates(interface.convert_array(coy, deep=True))
+        pdo.SetZCoordinates(interface.convert_array(coz, deep=True))
 
         return pdo
 
@@ -279,9 +279,9 @@ class CreateTensorMesh(AlgorithmBase):
         # ADD DATA to cells
         if data is None:
             data = np.random.rand(nx*ny*nz)
-            data = interface.convertArray(data, name='Random Data', deep=True)
+            data = interface.convert_array(data, name='Random Data', deep=True)
         else:
-            data = interface.convertArray(data, name=data_name, deep=True)
+            data = interface.convert_array(data, name=data_name, deep=True)
         pdo.GetCellData().AddArray(data)
         return pdo
 

@@ -103,7 +103,7 @@ class OcTreeReader(ubcMeshReaderBase):
         model = model[ind_reorder]
 
         # Convert data to VTK data structure and append to output
-        c = interface.convertArray(model, name=data_name, deep=True)
+        c = interface.convert_array(model, name=data_name, deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)
         return mesh
@@ -130,18 +130,18 @@ class OcTreeReader(ubcMeshReaderBase):
                 Mesh is defined by the input mesh file. Cell data is defined by
                 the input model file.
         """
-        if self.NeedToReadMesh():
+        if self.need_to_readMesh():
             # Construct/read the mesh
             self.ubcOcTreeMesh(filename_mesh, pdo=output)
-            self.NeedToReadMesh(flag=False)
+            self.need_to_readMesh(flag=False)
         output.DeepCopy(self.__mesh.toVTK())
-        if self.NeedToReadModels() and self.ThisHasModels():
+        if self.need_to_readModels() and self.this_has_models():
             # Read the model data
             self.__models = []
             for f in filename_models:
                 # Read the model data
                 self.__models.append(ubcMeshReaderBase.ubcModel3D(f))
-            self.NeedToReadModels(flag=False)
+            self.need_to_readModels(flag=False)
         return output
 
 
@@ -152,8 +152,8 @@ class OcTreeReader(ubcMeshReaderBase):
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
         self.__ubcOcTree(
-            self.GetMeshFileName(),
-            self.GetModelFileNames(),
+            self.get_mesh_filename(),
+            self.get_model_filenames(),
             output)
 
         # Place the model data for given timestep onto the mesh
@@ -170,24 +170,24 @@ class OcTreeReader(ubcMeshReaderBase):
         # Call parent to handle time stuff
         ubcMeshReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
-        if self.NeedToReadMesh():
+        if self.need_to_readMesh():
             ext = self._ReadExtent()
             info = outInfo.GetInformationObject(0)
             # Set WHOLE_EXTENT: This is absolutely necessary
             info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
-    def ClearMesh(self):
+    def clear_mesh(self):
         """Use to clean/rebuild the mesh.
         """
         self.__mesh = vtk.vtkUnstructuredGrid()
-        ubcMeshReaderBase.ClearModels(self)
+        ubcMeshReaderBase.clear_models(self)
 
-    def ClearModels(self):
+    def clear_models(self):
         """Use to clean the models and reread the data
         """
         self.__models = []
-        ubcMeshReaderBase.ClearModels(self)
+        ubcMeshReaderBase.clear_models(self)
 
 
 
@@ -208,14 +208,14 @@ class OcTreeAppender(ModelAppenderBase):
             **kwargs)
 
 
-    def _ReadUpFront(self):
+    def _read_up_front(self):
         """Internal helper to read all data at start"""
         reader = ubcMeshReaderBase.ubcModel3D
         self._models = []
         for f in self._model_filenames:
             # Read the model data
             self._models.append(reader(f))
-        self.NeedToRead(flag=False)
+        self.need_to_read(flag=False)
         return
 
     def _PlaceOnMesh(self, output, idx=0):

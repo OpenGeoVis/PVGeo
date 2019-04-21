@@ -54,7 +54,7 @@ class TableToTimeGrid(FilterBase):
         self.__data = dict()
         dims = np.array([d for d in self.__dims])
         sd = dims.argsort()
-        df = interface.tableToDataFrame(table)
+        df = interface.table_to_data_frame(table)
         keys = df.keys().tolist()
         for k in keys:
             # perfrom the reshape properly. using the user given extent
@@ -113,7 +113,7 @@ class TableToTimeGrid(FilterBase):
         for k, arr in self.__data.items():
             # NOTE: Keep order='F' because of the way the grid is already reshaped
             #       the 3D array has XYZ structure so VTK requires F ordering
-            narr = interface.convertArray(arr[:,:,:,i].flatten(order='F'), name=k)
+            narr = interface.convert_array(arr[:,:,:,i].flatten(order='F'), name=k)
             if self.__usePointData:
                 img.GetPointData().AddArray(narr)
             else:
@@ -240,7 +240,7 @@ class ReverseImageDataAxii(FilterBase):
                 if self.__axes[i]:
                     arr = np.flip(arr, axis=i)
             # Now add that data array to the output
-            data = interface.convertArray(arr.flatten(), name=idi.GetPointData().GetArrayName(j))
+            data = interface.convert_array(arr.flatten(), name=idi.GetPointData().GetArrayName(j))
             ido.GetPointData().AddArray(data)
 
         # Iterate over all array in the CellData
@@ -252,7 +252,7 @@ class ReverseImageDataAxii(FilterBase):
                 if self.__axes[i]:
                     arr = np.flip(arr, axis=i)
             # Now add that data array to the output
-            data = interface.convertArray(arr.flatten(), name=idi.GetCellData().GetArrayName(j))
+            data = interface.convert_array(arr.flatten(), name=idi.GetCellData().GetArrayName(j))
             ido.GetCellData().AddArray(data)
 
         return ido

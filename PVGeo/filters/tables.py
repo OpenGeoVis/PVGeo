@@ -69,7 +69,7 @@ class CombineTables(FilterBase):
         self.SetInputDataObject(0, table0)
         self.SetInputDataObject(1, table1)
         self.Update()
-        return interface.wrapvtki(self.GetOutput())
+        return interface.wrap_vtki(self.GetOutput())
 
 
 ###############################################################################
@@ -115,7 +115,7 @@ class ReshapeTable(FilterBase):
         data = np.empty((rows,cols))
         for i in range(cols):
             c = pdi.GetColumn(i)
-            data[:,i] = interface.convertArray(c)
+            data[:,i] = interface.convert_array(c)
 
         if ((self.__ncols*self.__nrows) != (cols*rows)):
             raise _helpers.PVGeoError('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
@@ -131,7 +131,7 @@ class ReshapeTable(FilterBase):
             col = np.array(data[:,i])
             # allow type to be determined by input
             # VTK arrays need a name. Set arbitrarily
-            insert = interface.convertArray(col, name=self.__names[i]) # array_type=vtk.VTK_FLOAT
+            insert = interface.convert_array(col, name=self.__names[i]) # array_type=vtk.VTK_FLOAT
             #pdo.AddColumn(insert) # these are not getting added to the output table
             # ... work around:
             pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData
@@ -259,7 +259,7 @@ class ExtractArray(FilterBase):
         arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
-        return interface.wrapvtki(self.GetOutput())
+        return interface.wrap_vtki(self.GetOutput())
 
 
 
@@ -292,11 +292,11 @@ class SplitTableOnArray(FilterBase):
         spliton = _helpers.get_numpy_array(wtbl, field, name)
         uniq = np.unique(spliton)
         # Split the input data based on indices
-        df = interface.tableToDataFrame(table)
+        df = interface.table_to_data_frame(table)
         blk = 0
         output.SetNumberOfBlocks(len(uniq))
         for val in uniq:
-            temp = interface.dataFrameToTable(df[df[name] == val])
+            temp = interface.data_frame_to_table(df[df[name] == val])
             output.SetBlock(blk, temp)
             output.GetMetaData(blk).Set(vtk.vtkCompositeDataSet.NAME(), '{}{}'.format(name, val))
             blk += 1
@@ -332,7 +332,7 @@ class SplitTableOnArray(FilterBase):
         arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
-        return interface.wrapvtki(self.GetOutput())
+        return interface.wrap_vtki(self.GetOutput())
 
 ###############################################################################
 
@@ -401,7 +401,7 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         self.SetInputDataObject(0, dataset)
         self.SetInputDataObject(1, table)
         self.Update()
-        return interface.wrapvtki(self.GetOutput())
+        return interface.wrap_vtki(self.GetOutput())
 
     def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps.

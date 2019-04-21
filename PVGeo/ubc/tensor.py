@@ -100,7 +100,7 @@ class TensorMeshReader(ubcMeshReaderBase):
             model = model.flatten()
 
         # Convert data to VTK data structure and append to output
-        c = interface.convertArray(model, name=data_name, deep=True)
+        c = interface.convert_array(model, name=data_name, deep=True)
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)
         return mesh
@@ -149,11 +149,11 @@ class TensorMeshReader(ubcMeshReaderBase):
             c = np.array(c,dtype=float)
             if z:
                 c = -c[::-1]
-            return interface.convertArray(c,deep=True)
+            return interface.convert_array(c,deep=True)
 
         xcoords = _genCoords(xpts, xdisc)
         zcoords = _genCoords(zpts, zdisc, z=True)
-        ycoords = interface.convertArray(np.zeros(1),deep=True)
+        ycoords = interface.convert_array(np.zeros(1),deep=True)
 
         output.SetDimensions(nx,2,nz) # note this subtracts 1
         output.SetXCoordinates(xcoords)
@@ -202,16 +202,16 @@ class TensorMeshReader(ubcMeshReaderBase):
         """Helper method to read a 2D mesh
         """
         # Construct/read the mesh
-        if self.NeedToReadMesh():
+        if self.need_to_readMesh():
             TensorMeshReader.ubcMesh2D(filename_mesh, self.__mesh)
-            self.NeedToReadMesh(flag=False)
+            self.need_to_readMesh(flag=False)
         output.DeepCopy(self.__mesh)
-        if self.NeedToReadModels() and self.ThisHasModels():
+        if self.need_to_readModels() and self.this_has_models():
             self.__models = []
             for f in filename_models:
                 # Read the model data
                 self.__models.append(TensorMeshReader.ubcModel2D(f))
-            self.NeedToReadModels(flag=False)
+            self.need_to_readModels(flag=False)
         return output
 
 
@@ -286,9 +286,9 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Set the dims and coordinates for the output
         output.SetDimensions(dim[0],dim[1],dim[2])
         # Convert to VTK array for setting coordinates
-        output.SetXCoordinates(interface.convertArray(cox,deep=True))
-        output.SetYCoordinates(interface.convertArray(coy,deep=True))
-        output.SetZCoordinates(interface.convertArray(coz,deep=True))
+        output.SetXCoordinates(interface.convert_array(cox,deep=True))
+        output.SetYCoordinates(interface.convert_array(coy,deep=True))
+        output.SetZCoordinates(interface.convert_array(coz,deep=True))
 
         return output
 
@@ -296,16 +296,16 @@ class TensorMeshReader(ubcMeshReaderBase):
     def __ubcMeshData3D(self, filename_mesh, filename_models, output):
         """Helper method to read a 3D mesh"""
         # Construct/read the mesh
-        if self.NeedToReadMesh():
+        if self.need_to_readMesh():
             TensorMeshReader.ubcMesh3D(filename_mesh, self.__mesh)
-            self.NeedToReadMesh(flag=False)
+            self.need_to_readMesh(flag=False)
         output.DeepCopy(self.__mesh)
-        if self.NeedToReadModels() and self.ThisHasModels():
+        if self.need_to_readModels() and self.this_has_models():
             self.__models = []
             for f in filename_models:
                 # Read the model data
                 self.__models.append(TensorMeshReader.ubcModel3D(f))
-            self.NeedToReadModels(flag=False)
+            self.need_to_readModels(flag=False)
         return output
 
 
@@ -349,8 +349,8 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
         self.__ubcTensorMesh(
-            self.GetMeshFileName(),
-            self.GetModelFileNames(),
+            self.get_mesh_filename(),
+            self.get_model_filenames(),
             output)
         # Place the model data for given timestep onto the mesh
         if len(self.__models) > i:
@@ -364,24 +364,24 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Call parent to handle time stuff
         ubcMeshReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
-        if self.NeedToReadMesh():
+        if self.need_to_readMesh():
             ext = self._ReadExtent()
             info = outInfo.GetInformationObject(0)
             # Set WHOLE_EXTENT: This is absolutely necessary
             info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
-    def ClearMesh(self):
+    def clear_mesh(self):
         """Use to clean/rebuild the mesh
         """
         self.__mesh = vtk.vtkRectilinearGrid()
-        ubcMeshReaderBase.ClearModels(self)
+        ubcMeshReaderBase.clear_models(self)
 
-    def ClearModels(self):
+    def clear_models(self):
         """Use to clean the models and reread
         """
         self.__models = []
-        ubcMeshReaderBase.ClearModels(self)
+        ubcMeshReaderBase.clear_models(self)
 
 ################################################################################
 
@@ -398,7 +398,7 @@ class TensorMeshAppender(ModelAppenderBase):
             **kwargs)
 
 
-    def _ReadUpFront(self):
+    def _read_up_front(self):
         """Internal helepr to read data at start"""
         reader = ubcMeshReaderBase.ubcModel3D
         if not self._is_3D:
@@ -409,7 +409,7 @@ class TensorMeshAppender(ModelAppenderBase):
         for f in self._model_filenames:
             # Read the model data
             self._models.append(reader(f))
-        self.NeedToRead(flag=False)
+        self.need_to_read(flag=False)
         return
 
     def _PlaceOnMesh(self, output, idx=0):
@@ -436,7 +436,7 @@ class TopoMeshAppender(AlgorithmBase):
         self.__need_to_read = True
         self.__ne, self.__nn = None, None
 
-    def NeedToRead(self, flag=None):
+    def need_to_read(self, flag=None):
         """Ask self if the reader needs to read the files again
 
         Args:
@@ -458,7 +458,7 @@ class TopoMeshAppender(AlgorithmBase):
         AlgorithmBase.Modified(self)
 
 
-    def _ReadUpFront(self):
+    def _read_up_front(self):
         """Internal helepr to read data at start"""
         # Read the file
         content = np.genfromtxt(self._topoFileName, dtype=str, delimiter='\n',
@@ -468,7 +468,7 @@ class TopoMeshAppender(AlgorithmBase):
         self.__indices = pd.read_csv(StringIO("\n".join(content[1::])),
                             names=['i', 'j', 'k'], delim_whitespace=True)
         # NOTE: K indices are inverted
-        self.NeedToRead(flag=False)
+        self.need_to_read(flag=False)
         return
 
     def _PlaceOnMesh(self, output):
@@ -503,7 +503,7 @@ class TopoMeshAppender(AlgorithmBase):
         output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
         # Perfrom task:
         if self.__need_to_read:
-            self._ReadUpFront()
+            self._read_up_front()
         # Place the model data for given timestep onto the mesh
         self._PlaceOnMesh(output)
         return 1

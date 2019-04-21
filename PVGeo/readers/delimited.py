@@ -59,7 +59,7 @@ class DelimitedTextReader(ReaderBase):
 
     #### Methods for performing the read ####
 
-    def _GetFileContents(self, idx=None):
+    def _get_file_contents(self, idx=None):
         """This grabs the lines of the input data file as a string array. This
         allows us to load the file contents, parse the header then use numpy or
         pandas to parse the data."""
@@ -123,19 +123,19 @@ class DelimitedTextReader(ReaderBase):
             data.append(df)
         return data
 
-    def _ReadUpFront(self):
+    def _read_up_front(self):
         """Should not need to be overridden.
         """
         # Perform Read
-        contents = self._GetFileContents()
+        contents = self._get_file_contents()
         self._titles, contents = self._ExtractHeaders(contents)
         self._data = self._FileContentsToDataFrame(contents)
-        self.NeedToRead(flag=False)
+        self.need_to_read(flag=False)
         return 1
 
     #### Methods for accessing the data read in #####
 
-    def _GetRawData(self, idx=0):
+    def _get_raw_data(self, idx=0):
         """This will return the proper data for the given timestep as a dataframe
         """
         return self._data[idx]
@@ -151,10 +151,10 @@ class DelimitedTextReader(ReaderBase):
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
-        if self.NeedToRead():
-            self._ReadUpFront()
+        if self.need_to_read():
+            self._read_up_front()
         # Generate the data object
-        interface.dataFrameToTable(self._GetRawData(idx=i), output)
+        interface.data_frame_to_table(self._get_raw_data(idx=i), output)
         return 1
 
 
@@ -256,11 +256,11 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
-        if self.NeedToRead():
-            self._ReadUpFront()
+        if self.need_to_read():
+            self._read_up_front()
         # Generate the PolyData output
-        data = self._GetRawData(idx=i)
-        output.DeepCopy(interface.pointsToPolyData(data, copy_z=self.GetCopyZ()))
+        data = self._get_raw_data(idx=i)
+        output.DeepCopy(interface.points_to_poly_data(data, copy_z=self.GetCopyZ()))
         return 1
 
 

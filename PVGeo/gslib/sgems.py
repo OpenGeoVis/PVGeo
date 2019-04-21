@@ -58,7 +58,7 @@ class SGeMSGridReader(GSLibReader):
         """
         # Read first file... extent cannot vary with time
         # TODO: make more efficient to only reader header of file
-        fileLines = self._GetFileContents(idx=0)
+        fileLines = self._get_file_contents(idx=0)
         h = fileLines[0+self.GetSkipRows()]
         n1,n2,n3 = self.__parse_extent(h)
         return (0,n1, 0,n2, 0,n3)
@@ -84,8 +84,8 @@ class SGeMSGridReader(GSLibReader):
         output = vtk.vtkImageData.GetData(outInfo)
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
-        if self.NeedToRead():
-            self._ReadUpFront()
+        if self.need_to_read():
+            self._read_up_front()
         # Generate the data object
         n1, n2, n3 = self.__extent
         dx, dy, dz = self.__spacing
@@ -95,10 +95,10 @@ class SGeMSGridReader(GSLibReader):
         output.SetOrigin(ox, oy, oz)
         # Use table generator and convert because its easy:
         table = vtk.vtkTable()
-        df = self._GetRawData(idx=i)
+        df = self._get_raw_data(idx=i)
         # Replace all masked values with NaN
         df.replace(self.__mask, np.nan, inplace=True)
-        interface.dataFrameToTable(df, table)
+        interface.data_frame_to_table(df, table)
         # now get arrays from table and add to point data of pdo
         for i in range(table.GetNumberOfColumns()):
             output.GetCellData().AddArray(table.GetColumn(i))
@@ -166,7 +166,7 @@ class WriteImageDataToSGeMS(WriterBase):
         # Get data arrays
         for i in range(numArrs):
             vtkarr = grd.GetCellData().GetArray(i)
-            arrs.append(interface.convertArray(vtkarr))
+            arrs.append(interface.convert_array(vtkarr))
             titles.append(vtkarr.GetName())
 
         datanames = '\n'.join(titles)
@@ -178,6 +178,6 @@ class WriteImageDataToSGeMS(WriterBase):
             f.write('%d\n' % len(titles))
             f.write(datanames)
             f.write('\n')
-            df.to_csv(f, sep=' ', header=None, index=False, float_format=self.GetFormat())
+            df.to_csv(f, sep=' ', header=None, index=False, float_format=self.get_format())
 
         return 1

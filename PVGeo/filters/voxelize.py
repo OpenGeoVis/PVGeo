@@ -17,7 +17,7 @@ from vtk.util import numpy_support as nps
 
 from .. import _helpers, interface
 from ..base import FilterBase
-from ..version import checkNumpy
+from ..version import check_numpy
 from .xyz import RotationTool
 
 ###############################################################################
@@ -66,7 +66,7 @@ class VoxelizePoints(FilterBase):
     def add_cell_data(grid, arr, name):
         """Add a NumPy array as cell data to the given grid input
         """
-        c = interface.convertArray(arr, name=name)
+        c = interface.convert_array(arr, name=name)
         grid.GetCellData().AddArray(c)
         return grid
 
@@ -99,7 +99,7 @@ class VoxelizePoints(FilterBase):
     def points_to_grid(self, xo,yo,zo, dx,dy,dz, grid=None):
         """Convert XYZ points to a ``vtkUnstructuredGrid``.
         """
-        if not checkNumpy(alert='warn'):
+        if not check_numpy(alert='warn'):
             return grid
         if grid is None:
             grid = vtk.vtkUnstructuredGrid()
@@ -163,7 +163,7 @@ class VoxelizePoints(FilterBase):
             self.add_field_data(grid)
 
         # Add unique nodes as points in output
-        pts.SetData(interface.convertArray(unique_nodes))
+        pts.SetData(interface.convert_array(unique_nodes))
 
         # Add cell vertices
         j = np.multiply(np.tile(np.arange(0, 8, 1), numCells), numCells)

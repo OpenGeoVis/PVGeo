@@ -23,11 +23,11 @@ class DiscretizeMeshReader(InterfacedBaseReader):
         InterfacedBaseReader.__init__(self, **kwargs)
 
     @staticmethod
-    def _readFile(filename):
+    def _read_file(filename):
         """Reads a mesh object from the serialized format"""
         return discretize.MeshIO.load_mesh(filename)
 
     @staticmethod
-    def _getVTKObject(obj):
+    def _get_vtk_object(obj):
         """Returns the mesh's proper VTK data object"""
         return obj.toVTK()

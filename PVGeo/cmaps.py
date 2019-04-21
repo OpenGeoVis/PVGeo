@@ -1,10 +1,10 @@
 __all__ = [
-    'getParulaMap',
+    'get_parula_map',
 ]
 
 __displayname__ = 'Color Maps'
 
-def getParulaMap():
+def get_parula_map():
     """A convienance method for getting a matplotlib friendly version of
     MATLAB's parula colormap.
     """

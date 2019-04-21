@@ -40,12 +40,12 @@ class TestDataFrameConversions(TestBase):
     """
 
     def test_df_to_table(self):
-        """`tableToDataFrame`: test interface conversion for tables"""
+        """`table_to_data_frame`: test interface conversion for tables"""
         names = ['x', 'y', 'z', 'a', 'b']
         data = np.random.rand(100, len(names))
         df = pd.DataFrame(data=data, columns=names)
         table = vtk.vtkTable()
-        interface.dataFrameToTable(df, table)
+        interface.data_frame_to_table(df, table)
         wtbl = dsa.WrapDataObject(table)
         # Now check the vtkTable
         for i, name in enumerate(names):
@@ -56,7 +56,7 @@ class TestDataFrameConversions(TestBase):
             self.assertTrue(np.allclose(arr, df[name].values, rtol=RTOL))
 
         # Now test backwards compatability
-        dfo = interface.tableToDataFrame(table)
+        dfo = interface.table_to_data_frame(table)
         self.assertTrue(df.equals(dfo))
         return
 

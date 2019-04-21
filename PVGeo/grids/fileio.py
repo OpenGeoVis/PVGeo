@@ -73,7 +73,7 @@ class GridInfo(properties.HasProperties):
         output.SetOrigin(self.xll, self.yll, z)
         output.SetSpacing(self.dx, self.dy, dz)
         output.SetDimensions(self.nx, self.ny, 1)
-        vtkarr = interface.convertArray(self.data, name=data_name)
+        vtkarr = interface.convert_array(self.data, name=data_name)
         output.GetPointData().AddArray(vtkarr)
         return output
 
@@ -293,12 +293,12 @@ class SurferGridReader(ReaderBase):
         return contents
 
 
-    def _ReadUpFront(self):
+    def _read_up_front(self):
         """Should not need to be overridden.
         """
         # Perform Read
         self.__grids = self._ReadGrids()
-        self.NeedToRead(flag=False)
+        self.need_to_read(flag=False)
         return 1
 
 
@@ -310,8 +310,8 @@ class SurferGridReader(ReaderBase):
         """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
-        if self.NeedToRead():
-            self._ReadUpFront()
+        if self.need_to_read():
+            self._read_up_front()
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
         # Build the output
@@ -322,8 +322,8 @@ class SurferGridReader(ReaderBase):
     def RequestInformation(self, request, inInfo, outInfo):
         """Used by pipeline to set grid extents.
         """
-        if self.NeedToRead():
-            self._ReadUpFront()
+        if self.need_to_read():
+            self._read_up_front()
         # Call parent to handle time stuff
         ReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
@@ -376,7 +376,7 @@ class WriteImageDataToSurfer(WriterBase):
         # Note user has to select a single array to save out
         field, name = self.__input_array[0], self.__input_array[1]
         vtkarr = _helpers.get_vtk_array(img, field, name)
-        arr = interface.convertArray(vtkarr)
+        arr = interface.convert_array(vtkarr)
         dmin, dmax = arr.min(), arr.max()
 
         # arr = arr.reshape((nx, ny), order='F')
@@ -384,7 +384,7 @@ class WriteImageDataToSurfer(WriterBase):
         meta = 'DSAA\n%d %d\n%f %f\n%f %f\n%f %f' % (nx, ny, xmin, xmax,
                                                      ymin, ymax, dmin, dmax)
         # Now write out the data!
-        np.savetxt(filename, arr, header=meta, comments='', fmt=self.GetFormat())
+        np.savetxt(filename, arr, header=meta, comments='', fmt=self.get_format())
 
 
         return 1
@@ -418,7 +418,7 @@ class WriteImageDataToSurfer(WriterBase):
         arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
-        return interface.wrapvtki(self.GetOutput())
+        return interface.wrap_vtki(self.GetOutput())
 
     def Write(self, input_data_object=None, array_name=None):
         """Perfrom the write out."""
@@ -477,7 +477,7 @@ class EsriGridReader(DelimitedTextReader):
         return data
 
 
-    def _GetRawData(self, idx=0):
+    def _get_raw_data(self, idx=0):
         """This will return the proper data for the given timestep.
         This method handles Surfer's NaN data values and checkes the value range
         """
@@ -497,8 +497,8 @@ class EsriGridReader(DelimitedTextReader):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
 
-        if self.NeedToRead():
-            self._ReadUpFront()
+        if self.need_to_read():
+            self._read_up_front()
 
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
@@ -509,8 +509,8 @@ class EsriGridReader(DelimitedTextReader):
         output.SetDimensions(self.__nx, self.__ny, 1)
 
         # Now add data values as point data
-        data = self._GetRawData(idx=i).flatten(order='F')
-        vtkarr = interface.convertArray(data, name=self.__data_name)
+        data = self._get_raw_data(idx=i).flatten(order='F')
+        vtkarr = interface.convert_array(data, name=self.__data_name)
         output.GetPointData().AddArray(vtkarr)
 
         return 1
@@ -518,8 +518,8 @@ class EsriGridReader(DelimitedTextReader):
     def RequestInformation(self, request, inInfo, outInfo):
         """Used by pipeline to set grid extents.
         """
-        if self.NeedToRead():
-            self._ReadUpFront()
+        if self.need_to_read():
+            self._read_up_front()
         # Call parent to handle time stuff
         DelimitedTextReader.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
@@ -581,20 +581,20 @@ class LandsatReader(ReaderBaseBase):
 
     #### Methods for performing the read ####
 
-    def _GetFileContents(self, idx=None):
+    def _get_file_contents(self, idx=None):
         """Reads XML meta data, no data read."""
         self.__reader.SetFileName(self.GetFileName())
         self.__raster = self.__reader.Read(meta_only=True)
         for n in self.__raster.bands.keys():
             self._dataselection.AddArray(n)
-        self.NeedToRead(flag=False) # Only meta data has been read
+        self.need_to_read(flag=False) # Only meta data has been read
         return
 
-    def _ReadUpFront(self):
+    def _read_up_front(self):
         """Internal helper to read all data at start"""
-        return self._GetFileContents()
+        return self._get_file_contents()
 
-    def _GetRawData(self, idx=0):
+    def _get_raw_data(self, idx=0):
         """Perfroms the read for the selected bands"""
         allowed = []
         for i in range(self._dataselection.GetNumberOfArrays()):
@@ -624,16 +624,16 @@ class LandsatReader(ReaderBaseBase):
         output = vtk.vtkImageData.GetData(outInfo, 0)
         # Perform Read if needed
         if self.__raster is None:
-            self._ReadUpFront()
-        self._GetRawData()
+            self._read_up_front()
+        self._get_raw_data()
         self._BuildImageData(output)
         # Now add the data based on what the user has selected
         for name, band in self.__raster.bands.items():
             data = band.data
-            output.GetPointData().AddArray(interface.convertArray(data.flatten(), name=name))
+            output.GetPointData().AddArray(interface.convert_array(data.flatten(), name=name))
         if self.__scheme is not None:
             colors = self.__raster.GetRGB(scheme=self.__scheme).reshape((-1,3))
-            output.GetPointData().SetScalars(interface.convertArray(colors, name=self.__scheme))
+            output.GetPointData().SetScalars(interface.convert_array(colors, name=self.__scheme))
             output.GetPointData().SetActiveScalars(self.__scheme)
         return 1
 
@@ -642,7 +642,7 @@ class LandsatReader(ReaderBaseBase):
         # Call parent to handle time stuff
         ReaderBaseBase.RequestInformation(self, request, inInfo, outInfo)
         if self.__raster is None:
-            self._ReadUpFront()
+            self._read_up_front()
         # Now set whole output extent
         b = self.__raster.bands.get(list(self.__raster.bands.keys())[0])
         nx, ny, nz = b.nsamps, b.nlines, 1
@@ -657,9 +657,9 @@ class LandsatReader(ReaderBaseBase):
 
     def GetDataSelection(self):
         """Used by ParaView GUI"""
-        if self.NeedToRead():
+        if self.need_to_read():
             try:
-                self._ReadUpFront()
+                self._read_up_front()
             except:
                 pass
         return self._dataselection
@@ -734,7 +734,7 @@ class WriteCellCenterData(WriterBase):
         np.savetxt(filename, arr,
                    header=header,
                    delimiter=self.__delimiter,
-                   fmt=self.GetFormat(),
+                   fmt=self.get_format(),
                    comments='')
         # Success for pipeline
         return 1

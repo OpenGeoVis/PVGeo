@@ -44,7 +44,7 @@ class OMFReader(ReaderBaseBase):
 
     #### Methods for performing the read ####
 
-    def _ReadUpFront(self):
+    def _read_up_front(self):
         """Internal functiona to read all data at the start"""
         # Read all elements
         reader = omf.OMFReader(self.GetFileName())
@@ -52,10 +52,10 @@ class OMFReader(ReaderBaseBase):
         self.__names = [e.name for e in self.__project.elements]
         for n in self.__names:
             self._dataselection.AddArray(n)
-        self.NeedToRead(flag=False)
+        self.need_to_read(flag=False)
         return 1
 
-    def _GetRawData(self):
+    def _get_raw_data(self):
         """Converts OMF data to VTK data objects."""
         # Now iterate over the elements and add converted data to the data dict:
         data = dict()
@@ -75,9 +75,9 @@ class OMFReader(ReaderBaseBase):
         #output = self.GetOutputData(outInfo, 0)
         output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
         # Perfrom the read
-        if self.NeedToRead():
-            self._ReadUpFront()
-        data = self._GetRawData()
+        if self.need_to_read():
+            self._read_up_front()
+        data = self._get_raw_data()
         # Set number of blocks based on user choice in the selction
         output.SetNumberOfBlocks(self._dataselection.GetNumberOfArraysEnabled())
         blk = 0
@@ -95,6 +95,6 @@ class OMFReader(ReaderBaseBase):
 
     def GetDataSelection(self):
         """Return the current user selection of data elements"""
-        if self.NeedToRead():
-            self._ReadUpFront()
+        if self.need_to_read():
+            self._read_up_front()
         return self._dataselection

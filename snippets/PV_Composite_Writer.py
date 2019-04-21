@@ -97,16 +97,16 @@ class WriterBase(VTKPythonAlgorithmBase):
             self.__fmt = fmt
             self.Modified()
 
-    def GetFormat(self):
+    def get_format(self):
         return self.__fmt
 
     #### Following methods are for composite datasets ####
 
-    def UseComposite(self):
+    def use_composite(self):
         """True if input dataset is a composite dataset"""
         return self.__composite
 
-    def SetBlockFileNames(self, n):
+    def set_block_filenames(self, n):
         """Gets a list of filenames based on user input filename and creates a
         numbered list of filenames for the reader to save out. Assumes the
         filename has an extension set already.
@@ -125,7 +125,7 @@ class WriterBase(VTKPythonAlgorithmBase):
         self.__blockfilenames = [basename + '%s.%s' % (blocknum[i], ext) for i in range(n)]
         return self.__blockfilenames
 
-    def GetBlockFileName(self, idx):
+    def get_block_filename(self, idx):
         """Get the filename for a specific block if composite dataset.
         """
         return self.__blockfilenames[idx]
@@ -142,12 +142,12 @@ class WriterBase(VTKPythonAlgorithmBase):
         # Handle composite datasets. NOTE: This only handles vtkMultiBlockDataSet
         if self.__composite:
             num = inp.GetNumberOfBlocks()
-            self.SetBlockFileNames(num)
+            self.set_block_filenames(num)
             for i in range(num):
                 data = inp.GetBlock(i)
                 name = inp.GetMetaData(i).Get(vtk.vtkCompositeDataSet.NAME())
                 if data.IsTypeOf(self.InputType):
-                    self.PerformWriteOut(data, self.GetBlockFileName(i), name)
+                    self.PerformWriteOut(data, self.get_block_filename(i), name)
                 else:
                     warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
         # Handle single input dataset
@@ -199,7 +199,7 @@ class WriteCellCenterData(WriterBase):
         np.savetxt(filename, arr,
                    header=header,
                    delimiter=self.__delimiter,
-                   fmt=self.GetFormat(),
+                   fmt=self.get_format(),
                    comments='')
         # Success for pipeline
         return 1

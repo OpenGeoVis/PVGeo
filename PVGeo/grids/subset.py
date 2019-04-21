@@ -177,7 +177,7 @@ class ExtractTopography(FilterBase):
             active = 1 - active
 
         # Now add cell data to output
-        active = interface.convertArray(active, name='Extracted')
+        active = interface.convert_array(active, name='Extracted')
         grid.GetCellData().AddArray(active)
         return 1
 
@@ -186,7 +186,7 @@ class ExtractTopography(FilterBase):
         self.SetInputDataObject(0, data)
         self.SetInputDataObject(1, points)
         self.Update()
-        output = interface.wrapvtki(self.GetOutput())
+        output = interface.wrap_vtki(self.GetOutput())
         if self._remove:
             # NOTE: Assumes the given operation produces zeros and ones only
             #       Also, this does not update the algorithm's output.

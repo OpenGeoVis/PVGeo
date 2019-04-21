@@ -147,9 +147,9 @@ class AddCellConnToPoints(FilterBase):
                 vtkarr = pdi.GetCellData().GetArray(i)
                 name = vtkarr.GetName()
                 if nrNbr:
-                    arr = interface.convertArray(vtkarr)
+                    arr = interface.convert_array(vtkarr)
                     arr = arr[ind]
-                    vtkarr = interface.convertArray(arr, name=name)
+                    vtkarr = interface.convert_array(arr, name=name)
                 pdo.GetCellData().AddArray(vtkarr)
         return pdo
 
@@ -299,7 +299,7 @@ class LonLatToUTM(FilterBase):
         coords = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
         # Now Conver the points
         points = self.__convert_2d(coords[:, 0], coords[:, 1], coords[:, 2])
-        pdo.DeepCopy(interface.pointsToPolyData(points))
+        pdo.DeepCopy(interface.points_to_poly_data(points))
         _helpers.copy_arrays_to_point_data(pdi, pdo, 0) # 0 is point data
         return 1
 
@@ -691,7 +691,7 @@ class ExtractPoints(FilterBase):
         f.SetInputData(pdi)
         f.Update()
         d = f.GetOutput()
-        pdo.ShallowCopy(interface.pointsToPolyData(points))
+        pdo.ShallowCopy(interface.points_to_poly_data(points))
         _helpers.copy_arrays_to_point_data(d, pdo, 0) # 0 is point data
         return 1
 
@@ -720,7 +720,7 @@ class ExtractCellCenters(FilterBase):
         keys = celldata.keys()
 
         # Make poly data of Cell centers:
-        pdo.DeepCopy(interface.pointsToPolyData(centers))
+        pdo.DeepCopy(interface.points_to_poly_data(centers))
         for i, name in enumerate(keys):
             pdo.GetPointData().AddArray(pdi.GetCellData().GetArray(name))
         return 1
@@ -743,7 +743,7 @@ class AppendCellCenters(FilterPreserveTypeBase):
 
         # I use the dataset adapter/numpy interface because its easy
         centers = dsa.WrapDataObject(filt.GetOutput()).Points
-        centers = interface.convertArray(centers)
+        centers = interface.convert_array(centers)
         centers.SetName('Cell Centers')
 
         # Copy input data and add cell centers as tuple array
@@ -802,7 +802,7 @@ class IterateOverPoints(FilterBase):
         normal = [x2-x1, y2-y1, z2-z1]
         self.__point = pt
         self.__normal = normal
-        poly = interface.pointsToPolyData(np.array(pt))
+        poly = interface.points_to_poly_data(np.array(pt))
         pdo.ShallowCopy(poly)
         return 1
 
@@ -1003,7 +1003,7 @@ class BuildSurfaceFromPoints(FilterBase):
         cellConn = cellConn.reshape((ns-1)*(nt-1) , 4)
         cells = vtk.vtkCellArray()
         cells.SetNumberOfCells(cellConn.shape[0])
-        cells.SetCells(cellConn.shape[0], interface.convertCellConn(cellConn))
+        cells.SetCells(cellConn.shape[0], interface.convert_cell_conn(cellConn))
 
         # Produce the output
         output = vtki.UnstructuredGrid()

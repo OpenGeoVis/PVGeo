@@ -66,11 +66,11 @@ class ubcTensorMeshWriterBase(WriterBase):
         # make up file names for models
         for i in range(grd.GetCellData().GetNumberOfArrays()):
             vtkarr = grd.GetCellData().GetArray(i)
-            arr = interface.convertArray(vtkarr)
+            arr = interface.convert_array(vtkarr)
             arr = reshapeModel(arr)
             path = os.path.dirname(filename)
             filename = '%s/%s.mod' % (path, vtkarr.GetName().replace(' ', '_'))
-            np.savetxt(filename, arr, comments='! ', header='Mesh File: %s' % os.path.basename(filename), fmt=self.GetFormat())
+            np.savetxt(filename, arr, comments='! ', header='Mesh File: %s' % os.path.basename(filename), fmt=self.get_format())
 
         return
 
@@ -95,9 +95,9 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
 
 
         # get the points and convert to spacings
-        xcoords = interface.convertArray(grd.GetXCoordinates())
-        ycoords = interface.convertArray(grd.GetYCoordinates())
-        zcoords = interface.convertArray(grd.GetZCoordinates())
+        xcoords = interface.convert_array(grd.GetXCoordinates())
+        ycoords = interface.convert_array(grd.GetYCoordinates())
+        zcoords = interface.convert_array(grd.GetZCoordinates())
 
         # TODO: decide if 2D or 3D
 

@@ -36,9 +36,9 @@ class TestCombineTables(TestBase):
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
         self.arrs[2] = np.random.random(self.n) # Table 1
-        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
-        self.t1.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
+        self.t0.AddColumn(interface.convert_array(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convert_array(self.arrs[1], self.titles[1]))
+        self.t1.AddColumn(interface.convert_array(self.arrs[2], self.titles[2]))
         # Now use the `CombineTables` filter:
         f = CombineTables()
         f.SetInputDataObject(0, self.t0)
@@ -87,9 +87,9 @@ class TestReshapeTable(TestBase):
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
         self.arrs[2] = np.random.random(self.n) # Table 1
-        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
-        self.t0.AddColumn(interface.convertArray(self.arrs[2], self.titles[2]))
+        self.t0.AddColumn(interface.convert_array(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convert_array(self.arrs[1], self.titles[1]))
+        self.t0.AddColumn(interface.convert_array(self.arrs[2], self.titles[2]))
         return
 
 
@@ -261,7 +261,7 @@ class TestRotatePoints(TestBase):
         y = np.reshape(y, (len(y), -1))
         z = np.reshape(z, (len(z), -1))
         self.pts = np.concatenate((x,y,z), axis=1)
-        self.vtkpoints = interface.pointsToPolyData(self.pts)
+        self.vtkpoints = interface.points_to_poly_data(self.pts)
         return
 
     def test_rotation(self):
@@ -293,7 +293,7 @@ class TestVoxelizePoints(TestBase):
         y = np.reshape(y, (len(y), -1))
         z = np.reshape(z, (len(z), -1))
         pts = np.concatenate((x,y,z), axis=1)
-        vtkpoints = interface.pointsToPolyData(pts)
+        vtkpoints = interface.points_to_poly_data(pts)
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
@@ -311,7 +311,7 @@ class TestVoxelizePoints(TestBase):
     def test_simple_rotated_case(self):
         """`VoxelizePoints`: simple rotated case"""
         pts = ROTATED_POINTS
-        vtkpoints = interface.pointsToPolyData(ROTATED_POINTS)
+        vtkpoints = interface.points_to_poly_data(ROTATED_POINTS)
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
@@ -334,8 +334,8 @@ class TestVoxelizePoints(TestBase):
         # Convert to XYZ points
         points = np.vstack(map(np.ravel, g)).T
         rand = np.random.random(len(points))
-        vtkpoints = interface.pointsToPolyData(points)
-        vtkpoints.GetPointData().AddArray(interface.convertArray(rand, 'Random'))
+        vtkpoints = interface.points_to_poly_data(points)
+        vtkpoints.GetPointData().AddArray(interface.convert_array(rand, 'Random'))
         # Use filter
         v = VoxelizePoints()
         v.SetInputDataObject(vtkpoints)
@@ -404,8 +404,8 @@ class TestArrayMath(TestBase):
         self.titles = ('Array 0', 'Array 1')
         self.arrs[0] = np.random.random(self.n) # Table 0
         self.arrs[1] = np.random.random(self.n) # Table 0
-        self.t0.AddColumn(interface.convertArray(self.arrs[0], self.titles[0]))
-        self.t0.AddColumn(interface.convertArray(self.arrs[1], self.titles[1]))
+        self.t0.AddColumn(interface.convert_array(self.arrs[0], self.titles[0]))
+        self.t0.AddColumn(interface.convert_array(self.arrs[1], self.titles[1]))
         return
 
     def test_get_operations(self):
@@ -498,7 +498,7 @@ class TestNormalizeArray(TestBase):
         self.n = 400
         self.title = 'Array 0'
         self.arr = np.random.random(self.n) # Table 0
-        self.t0.AddColumn(interface.convertArray(self.arr, self.title))
+        self.t0.AddColumn(interface.convert_array(self.arr, self.title))
         return
 
     def test_get_operations(self):
@@ -572,7 +572,7 @@ class TestAddCellConnToPoints(TestBase):
         y = np.reshape(y, (len(y), -1))
         z = np.reshape(z, (len(z), -1))
         self.pts = np.concatenate((x,y,z), axis=1)
-        self.vtkpoints = interface.pointsToPolyData(self.pts)
+        self.vtkpoints = interface.points_to_poly_data(self.pts)
 
     def makeComplicatedInput(self, shuffle=True):
         def path1(y):
@@ -595,7 +595,7 @@ class TestAddCellConnToPoints(TestBase):
 
         np.random.shuffle(coords)
         self.pts = coords
-        self.vtkpoints = interface.pointsToPolyData(self.pts)
+        self.vtkpoints = interface.points_to_poly_data(self.pts)
 
     def test_poly_line(self):
         """`AddCellConnToPoints`: POLY LINE"""
@@ -673,7 +673,7 @@ class TestPointsToTube(TestBase):
 
         np.random.shuffle(coords)
         self.pts = coords
-        self.vtkpoints = interface.pointsToPolyData(self.pts)
+        self.vtkpoints = interface.points_to_poly_data(self.pts)
 
     def test_(self):
         """`PointsToTube`: Test generation of tube from shuffled points"""
@@ -710,7 +710,7 @@ if proj:
             self.filename = os.path.join(os.path.dirname(__file__), 'data/das-coords.csv')
             # read in data that has Lat/Lon and pre converted points in zone 11
             data = pd.read_csv(self.filename)
-            points = interface.pointsToPolyData(data[['longitude', 'latitude', 'altitude']])
+            points = interface.points_to_poly_data(data[['longitude', 'latitude', 'altitude']])
             converted = LonLatToUTM(zone=11).apply(points)
             converted.GetPoints()
             wpdi = dsa.WrapDataObject(converted)
@@ -742,7 +742,7 @@ class TestManySlicesAlongPoints(TestBase):
         x, y = path1(np.arange(-500.0, 1500.0, 25.0))
         zo = np.linspace(9.0, 11.0, num=len(y))
         coords = np.vstack((x,y,zo)).T
-        self.points = interface.pointsToPolyData(coords)
+        self.points = interface.points_to_poly_data(coords)
 
     def test_along_points(self):
         """`ManySlicesAlongPoints`: slice along points"""
@@ -839,7 +839,7 @@ class TestArraysToRGBA(TestBase):
         a = np.random.uniform(0, 1, 300)
         # now make it an arbirtray dataset
         df = pd.DataFrame(data=np.c_[r,g,b,r,g,b,a], columns=['x','y','z','R','G','B','A'])
-        data = interface.pointsToPolyData(df)
+        data = interface.points_to_poly_data(df)
         # Set up the algorithm
         colored = ArraysToRGBA().apply(data, 'R', 'G', 'B', 'A')
         # Make sure there is a new 'Colors' Array

@@ -42,7 +42,7 @@ class PVGeoTensorMeshReader(TensorMeshReader):
             label="File Name Mesh"
             command="set_mesh_filename"
             animateable="1"
-            clean_command="ClearMesh"
+            clean_command="clear_mesh"
             number_of_elements="1">
             <FileListDomain name="meshfile"/>
             <Documentation>This is the mesh file for a 2D or 3D UBC Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
@@ -58,7 +58,7 @@ class PVGeoTensorMeshReader(TensorMeshReader):
           command="add_model_file_name"
           animateable="1"
           repeat_command="1"
-          clean_command="ClearModels"
+          clean_command="clear_models"
           number_of_elements="1">
           <FileListDomain name="model_files"/>
           <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
@@ -105,7 +105,7 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
           command="add_model_file_name"
           animateable="1"
           repeat_command="1"
-          clean_command="ClearModels"
+          clean_command="clear_models"
           number_of_elements="1">
           <FileListDomain name="model_files"/>
           <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
@@ -183,7 +183,7 @@ if discretize_available:
                 label="File Name Mesh"
                 command="set_mesh_filename"
                 animateable="1"
-                clean_command="ClearMesh"
+                clean_command="clear_mesh"
                 number_of_elements="1">
                 <FileListDomain name="meshfile"/>
                 <Documentation>This is the mesh file for a OcTree Mesh grid. This plugin only allows ONE mesh to be defined.</Documentation>
@@ -199,7 +199,7 @@ if discretize_available:
               command="add_model_file_name"
               animateable="1"
               repeat_command="1"
-              clean_command="ClearModels"
+              clean_command="clear_models"
               number_of_elements="1">
               <FileListDomain name="model_files"/>
               <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>
@@ -248,7 +248,7 @@ if discretize_available:
               command="add_model_file_name"
               animateable="1"
               repeat_command="1"
-              clean_command="ClearModels"
+              clean_command="clear_models"
               number_of_elements="1">
               <FileListDomain name="model_files"/>
               <Documentation>This is for a single sets of model files to append to the mesh as data time varying attributes. You can chose as many files as you would like for this for the given attribute.</Documentation>

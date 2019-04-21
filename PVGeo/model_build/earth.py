@@ -93,13 +93,13 @@ class GlobeSource(AlgorithmBase):
         """Generates the globe as ``vtkPolyData``"""
         pos, tex = self.CreateSphere()
         pts = self.SphericalToCartesian(pos[:,0], pos[:,1])
-        points = interface.pointsToPolyData(pts).GetPoints()
-        texcoords = interface.convertArray(tex, name='Texture Coordinates')
+        points = interface.points_to_poly_data(pts).GetPoints()
+        texcoords = interface.convert_array(tex, name='Texture Coordinates')
         # Now generate triangles
         cell_connectivity = Delaunay(pos).simplices.astype(int)
         cells = vtk.vtkCellArray()
         cells.SetNumberOfCells(cell_connectivity.shape[0])
-        cells.SetCells(cell_connectivity.shape[0], interface.convertCellConn(cell_connectivity))
+        cells.SetCells(cell_connectivity.shape[0], interface.convert_cell_conn(cell_connectivity))
         # Generate output
         output = vtk.vtkPolyData()
         output.SetPoints(points)

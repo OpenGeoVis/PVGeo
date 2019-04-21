@@ -93,7 +93,7 @@ class WriteTableToGSLib(WriterBase):
         # Get data arrays
         for i in range(numArrs):
             vtkarr = table.GetRowData().GetArray(i)
-            arrs.append(interface.convertArray(vtkarr))
+            arrs.append(interface.convert_array(vtkarr))
             titles.append(vtkarr.GetName())
 
         header = '%s\n' % self._header
@@ -102,7 +102,7 @@ class WriteTableToGSLib(WriterBase):
         header += datanames
 
         arrs = np.array(arrs).T
-        np.savetxt(filename, arrs, comments='', header=header, fmt=self.GetFormat())
+        np.savetxt(filename, arrs, comments='', header=header, fmt=self.get_format())
 
         return 1
 

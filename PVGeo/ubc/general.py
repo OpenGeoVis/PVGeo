@@ -251,7 +251,7 @@ class GeologyMapper(FilterPreserveTypeBase):
         data = self._MapValues(geol, arr)
 
         pdo.DeepCopy(pdi)
-        interface.add_arraysFromDataFrame(pdo, field, data)
+        interface.add_arrays_from_data_frame(pdo, field, data)
 
         return 1
 

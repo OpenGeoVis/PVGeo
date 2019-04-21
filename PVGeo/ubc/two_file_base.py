@@ -89,7 +89,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         """
         # Read the mesh file as line strings, remove lines with comment = !
         v = np.array(np.__version__.split('.')[0:2], dtype=int)
-        FileName = self.GetMeshFileName()
+        FileName = self.get_mesh_filename()
         try:
             if v[0] >= 1 and v[1] >= 10:
                 # max_rows in numpy versions >= 1.10
@@ -168,7 +168,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
     def GetDataName(self):
         """Get the data array name"""
         if self.__use_filename:
-            mname = self.GetModelFileNames(idx=0)
+            mname = self.get_model_filenames(idx=0)
             return os.path.basename(mname)
         return self.__data_name
 
@@ -200,7 +200,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         self.__last_successfull_index = 0 #This is the index to use if the current timestep is unavailable
 
 
-    def NeedToRead(self, flag=None):
+    def need_to_read(self, flag=None):
         """Ask self if the reader needs to read the files again
 
         Args:
@@ -234,7 +234,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         self.__timesteps = _helpers.update_time_steps(self, tsAll, explicit=True)
         return 1
 
-    def _ReadUpFront(self):
+    def _read_up_front(self):
         raise NotImpelementedError()
 
     def _PlaceOnMesh(self, output, idx=0):
@@ -252,7 +252,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         i = _helpers.get_requested_time(self, outInfo)
         # Perfrom task:
         if self.__need_to_read:
-            self._ReadUpFront()
+            self._read_up_front()
         # Place the model data for given timestep onto the mesh
         if len(self._models) > i:
             self._PlaceOnMesh(output, idx=i)
@@ -276,7 +276,7 @@ class ModelAppenderBase(base.AlgorithmBase):
 
     #### Setters and Getters ####
 
-    def HasModels(self):
+    def has_models(self):
         """Return True if models are associated with this mesh"""
         return len(self._model_filenames) > 0
 
@@ -287,7 +287,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         if self.__timesteps is None: self._update_time_steps()
         return self.__timesteps if self.__timesteps is not None else None
 
-    def ClearModels(self):
+    def clear_models(self):
         """Use to clear data file names.
         """
         self._model_filenames = []
@@ -309,11 +309,11 @@ class ModelAppenderBase(base.AlgorithmBase):
             self.Modified()
         return 1
 
-    def GetModelFileNames(self, idx=None):
+    def get_model_filenames(self, idx=None):
         """Returns the list of file names or given and index returns a specified
         timestep's filename.
         """
-        if idx is None or not self.HasModels():
+        if idx is None or not self.has_models():
             return self._model_filenames
         return self._model_filenames[idx]
 
@@ -336,6 +336,6 @@ class ModelAppenderBase(base.AlgorithmBase):
     def GetDataName(self):
         """Get the data array name"""
         if self.__use_filename:
-            mname = self.GetModelFileNames(idx=0)
+            mname = self.get_model_filenames(idx=0)
             return os.path.basename(mname)
         return self.__data_name

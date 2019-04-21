@@ -36,7 +36,7 @@ class PackedBinariesReader(ReaderBase):
         self.__data_name = kwargs.get('dataname', 'Data')
         self.__dtypechar = kwargs.get('dtype', 'f')
         self.__endian = kwargs.get('endian', '')
-        self.__dtype, self.__vtktype = interface.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
+        self.__dtype, self.__vtktype = interface.get_dtypes(dtype=self.__dtypechar, endian=self.__endian)
         # Data objects to hold the read data for access by the pipeline methods
         self.__data = []
 
@@ -52,7 +52,7 @@ class PackedBinariesReader(ReaderBase):
             raise _helpers.PVGeoError(str(fe))
         return np.asarray(arr, dtype=self.__dtype)
 
-    def _GetFileContents(self, idx=None):
+    def _get_file_contents(self, idx=None):
         """Interanl helper to get all contents for all files"""
         if idx is not None:
             filenames = [self.GetFileNames(idx=idx)]
@@ -65,15 +65,15 @@ class PackedBinariesReader(ReaderBase):
         return contents
 
 
-    def _ReadUpFront(self):
+    def _read_up_front(self):
         """Should not need to be overridden
         """
         # Perform Read
-        self.__data = self._GetFileContents()
-        self.NeedToRead(flag=False)
+        self.__data = self._get_file_contents()
+        self.need_to_read(flag=False)
         return 1
 
-    def _GetRawData(self, idx=0):
+    def _get_raw_data(self, idx=0):
         """This will return the proper data for the given timestep
         """
         return self.__data[idx]
@@ -82,7 +82,7 @@ class PackedBinariesReader(ReaderBase):
         """Converts the numpy array to a vtkDataArray
         """
         # Put raw data into vtk array
-        data = interface.convertArray(arr, name=self.__data_name, deep=True, array_type=self.__vtktype)
+        data = interface.convert_array(arr, name=self.__data_name, deep=True, array_type=self.__vtktype)
         return data
 
 
@@ -91,12 +91,12 @@ class PackedBinariesReader(ReaderBase):
         """
         # Get output:
         output = vtk.vtkTable.GetData(outInfo)
-        if self.NeedToRead():
-            self._ReadUpFront()
+        if self.need_to_read():
+            self._read_up_front()
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
         # Generate the data object
-        arr = self._GetRawData(idx=i)
+        arr = self._get_raw_data(idx=i)
         data = self.ConvertArray(arr)
         output.AddColumn(data)
         return 1
@@ -116,7 +116,7 @@ class PackedBinariesReader(ReaderBase):
             endian = pos[endian]
         if endian != self.__endian:
             self.__endian = endian
-            self.__dtype, self.__vtktype = interface.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
+            self.__dtype, self.__vtktype = interface.get_dtypes(dtype=self.__dtypechar, endian=self.__endian)
             self.Modified()
 
     def GetEndian(self):
@@ -131,7 +131,7 @@ class PackedBinariesReader(ReaderBase):
             dtype = pos[dtype]
         if dtype != self.__dtype:
             self.__dtypechar = dtype
-            self.__dtype, self.__vtktype = interface.getdTypes(dtype=self.__dtypechar, endian=self.__endian)
+            self.__dtype, self.__vtktype = interface.get_dtypes(dtype=self.__dtypechar, endian=self.__endian)
             self.Modified()
 
     def GetDataTypes(self):

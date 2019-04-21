@@ -1,5 +1,5 @@
 __all__ = [
-    'checkNumpy',
+    'check_numpy',
 ]
 
 __displayname__ = 'Version Verifier'
@@ -9,7 +9,7 @@ try:
 except ImportError:
     PVGeoError = RuntimeError
 
-def checkNumpy(alert='print'):
+def check_numpy(alert='print'):
     """A method to check the active environment's version of NumPy for
     compatibility with PVGeo.
 

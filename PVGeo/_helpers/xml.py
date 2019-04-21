@@ -149,7 +149,7 @@ def get_file_reader_xml(extensions, reader_description='', command="AddFileName"
         animateable="0"
         number_of_elements="0"
         command="%s"
-        clean_command="ClearFileNames"
+        clean_command="clear_file_names"
         repeat_command="1"
         panel_visibility="never">
         <FileListDomain name="files"/>
