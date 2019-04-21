@@ -8,7 +8,7 @@ import platform
 import sys
 import os
 
-__version__ = '1.2.3'
+__version__ = '2.0.0a'
 
 with open("README.md", "r") as f:
     long_description = f.read()
