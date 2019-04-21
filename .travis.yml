@@ -25,9 +25,12 @@ before_install:
 
 install:
     - pip install -r requirements.txt
+    - if [[($TRAVIS_PYTHON_VERSION == 3.7)]]; then
+        pip install -r ./requirements.txt;
+      fi
+    - python setup.py install
 
 script:
-    - python setup.py install
     - coverage run tests/__main__.py
     - codecov --token=8da9d332-1618-450d-8654-09a8ecf3c2dc
     - python tests/__main__.py close # exit with error code if problem occurs
@@ -35,7 +38,6 @@ script:
     - if [[($TRAVIS_PYTHON_VERSION == 3.7)]]; then
         echo "Building and uploading the docs";
         cd ./docs;
-        pip install -r ./requirements.txt;
         make html;
         cd ..;
       fi
