@@ -38,7 +38,8 @@ script:
         cd ./docs;
         pip install -r ./requirements.txt;
         make html;
-        doctr deploy --built-docs ./docs/build/html/ .;
+        doctr deploy --built-docs ./build/html/ .;
+        cd ..;
       fi
 
 notifications:
