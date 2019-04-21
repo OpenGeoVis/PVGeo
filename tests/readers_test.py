@@ -97,9 +97,9 @@ class TestDelimitedTextReader(TestBase):
         """`DelimitedTextReader`: comma delimited file"""
         reader = DelimitedTextReader()
         reader.AddFileName(self.commafilename)
-        reader.SetDelimiter(',')
-        reader.SetSkipRows(1)
-        reader.SetComments('!')
+        reader.set_delimiter(',')
+        reader.set_skip_rows(1)
+        reader.set_comments('!')
         reader.Update()
         table = reader.GetOutput()
         self._check_shape(table)
@@ -112,9 +112,9 @@ class TestDelimitedTextReader(TestBase):
         """`DelimitedTextReader`: tab delimited file"""
         reader = DelimitedTextReader()
         reader.AddFileName(self.tabfilename)
-        reader.SetSplitOnWhiteSpace(True)
-        reader.SetSkipRows(1)
-        reader.SetComments('!')
+        reader.set_split_on_white_space(True)
+        reader.set_skip_rows(1)
+        reader.set_comments('!')
         reader.Update()
         table = reader.GetOutput()
         self._check_shape(table)
@@ -127,10 +127,10 @@ class TestDelimitedTextReader(TestBase):
         """`DelimitedTextReader`: file without headers"""
         reader = DelimitedTextReader()
         reader.AddFileName(self.commafilename)
-        reader.SetDelimiter(',')
-        reader.SetSkipRows(2)
-        reader.SetHasTitles(False)
-        reader.SetComments('!')
+        reader.set_delimiter(',')
+        reader.set_skip_rows(2)
+        reader.set_has_titles(False)
+        reader.set_comments('!')
         reader.Update()
         table = reader.GetOutput()
         self._check_shape(table)
@@ -236,8 +236,8 @@ class TestPackedBinariesReader(TestBase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(filename)
-        reader.SetDataType('f')
-        reader.SetDataName('Test Data')
+        reader.set_data_type('f')
+        reader.set_data_name('Test Data')
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
@@ -256,7 +256,7 @@ class TestPackedBinariesReader(TestBase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(filename)
-        reader.SetDataType('d')
+        reader.set_data_type('d')
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
@@ -274,7 +274,7 @@ class TestPackedBinariesReader(TestBase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(filename)
-        reader.SetDataType(2) # 'i' test that sending an int choice works
+        reader.set_data_type(2) # 'i' test that sending an int choice works
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
@@ -292,8 +292,8 @@ class TestPackedBinariesReader(TestBase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(filename)
-        reader.SetDataType('f')
-        reader.SetEndian('>')
+        reader.set_data_type('f')
+        reader.set_endian('>')
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
@@ -311,8 +311,8 @@ class TestPackedBinariesReader(TestBase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(filename)
-        reader.SetDataType('f')
-        reader.SetEndian(1) # '<' test that sending an int choice works
+        reader.set_data_type('f')
+        reader.set_endian(1) # '<' test that sending an int choice works
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
@@ -355,8 +355,8 @@ class TestMadagascarReader(TestBase):
         # Set up reader
         reader = MadagascarReader()
         reader.AddFileName(filename)
-        reader.SetDataType('f')
-        reader.SetDataName('Test Data')
+        reader.set_data_type('f')
+        reader.set_data_name('Test Data')
         self.assertEqual(reader.GetDataName(), 'Test Data')
         # Perfrom Read
         reader.Update()

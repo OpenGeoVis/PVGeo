@@ -387,14 +387,14 @@ class TwoFileReaderBase(AlgorithmBase):
         self.__model_filenames = []
         self.Modified(read_again_mesh=False, read_again_models=True)
 
-    def SetMeshFileName(self, filename):
+    def set_mesh_filename(self, filename):
         """Set the mesh file name.
         """
         if self.__mesh_filename != filename:
             self.__mesh_filename = filename
             self.Modified(read_again_mesh=True, read_again_models=False)
 
-    def AddModelFileName(self, filename):
+    def add_model_file_name(self, filename):
         """Use to set the file names for the reader. Handles single string or
         list of strings.
 
@@ -405,7 +405,7 @@ class TwoFileReaderBase(AlgorithmBase):
             return # do nothing if None is passed by a constructor on accident
         if isinstance(filename, list):
             for f in filename:
-                self.AddModelFileName(f)
+                self.add_model_file_name(f)
             self.Modified(read_again_mesh=False, read_again_models=True)
         elif filename not in self.__model_filenames:
             self.__model_filenames.append(filename)
@@ -488,7 +488,7 @@ class WriterBase(AlgorithmBase):
         self.Modified()
         self.Update()
 
-    def SetFormat(self, fmt):
+    def set_format(self, fmt):
         """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         if self.__fmt != fmt and isinstance(fmt, str):
             self.__fmt = fmt

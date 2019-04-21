@@ -226,7 +226,7 @@ class PointsToTube(AddCellConnToPoints):
 
     #### Seters and Geters ####
 
-    def SetRadius(self, radius):
+    def set_radius(self, radius):
         """Set the radius of the tube
         """
         if self.__radius != radius:
@@ -646,7 +646,7 @@ class RotatePoints(FilterBase):
             self.__angle = theta
             self.Modified()
 
-    def SetOrigin(self, xo, yo):
+    def set_origin(self, xo, yo):
         """Sets the origin to perform the rotate around.
         """
         if self.__origin != [xo, yo]:
@@ -902,7 +902,7 @@ class ConvertUnits(FilterPreserveTypeBase):
 
 
 
-    def SetConversion(self, key):
+    def set_conversion(self, key):
         """Set the conversion via a lookup table"""
         convs = self.LookupConversions()
         if isinstance(key, str):
@@ -939,7 +939,7 @@ class BuildSurfaceFromPoints(FilterBase):
         if not isinstance(zcoords, (str, list, tuple, np.ndarray)):
             raise TypeError('zcoords of bad type.')
         if isinstance(zcoords, str):
-            self.SetZCoordsStr(zcoords)
+            self.set_z_coords_str(zcoords)
         else:
             self.SetZCoords(zcoords)
 
@@ -1033,7 +1033,7 @@ class BuildSurfaceFromPoints(FilterBase):
             self.__zcoords = zcoords
             self.Modified()
 
-    def SetZCoordsStr(self, zcoordstr):
+    def set_z_coords_str(self, zcoordstr):
         """Set the spacings for the cells in the Z direction
 
         Args:

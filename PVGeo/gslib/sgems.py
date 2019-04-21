@@ -119,14 +119,14 @@ class SGeMSGridReader(GSLibReader):
         return 1
 
 
-    def SetSpacing(self, dx, dy, dz):
+    def set_spacing(self, dx, dy, dz):
         """Set the spacing for each axial direction"""
         spac = (dx, dy, dz)
         if self.__spacing != spac:
             self.__spacing = spac
             self.Modified(read_again=False)
 
-    def SetOrigin(self, ox, oy, oz):
+    def set_origin(self, ox, oy, oz):
         """Set the origin corner of the grid"""
         origin = (ox, oy, oz)
         if self.__origin != origin:

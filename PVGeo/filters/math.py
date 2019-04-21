@@ -592,14 +592,14 @@ class PercentThreshold(FilterBase):
             self.__percent = percent
             self.Modified()
 
-    def SetUseContinuousCellRange(self, flag):
+    def set_use_continuous_cell_range(self, flag):
         """If this is on (default is off), we will use the continuous
         interval [minimum cell scalar, maxmimum cell scalar] to intersect
         the threshold bound , rather than the set of discrete scalar
         values from the vertices"""
         return self.__filter.SetUseContinuousCellRange(flag)
 
-    def SetInvert(self, flag):
+    def set_invert(self, flag):
         """Use to invert the threshold filter"""
         if self.__invert != flag:
             self.__invert = flag

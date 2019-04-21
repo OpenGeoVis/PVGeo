@@ -90,7 +90,7 @@ class WriterBase(VTKPythonAlgorithmBase):
         self.Modified()
         self.Update()
 
-    def SetFormat(self, fmt):
+    def set_format(self, fmt):
         """Use to set the ASCII format for the writer default is ``'%.9e'``
         """
         if self.__fmt != fmt and isinstance(fmt, str):
@@ -204,7 +204,7 @@ class WriteCellCenterData(WriterBase):
         # Success for pipeline
         return 1
 
-    def SetDelimiter(self, deli):
+    def set_delimiter(self, deli):
         """The string delimiter to use"""
         if self.__delimiter != deli:
             self.__delimiter = deli
@@ -272,11 +272,11 @@ class PVWriteCellCenterData(WriteCellCenterData):
         WriteCellCenterData.SetFileName(self, filename)
 
     @smproperty.stringvector(name="Format", default_values='%.9e')
-    def SetFormat(self, fmt):
+    def set_format(self, fmt):
         """Use to set the ASCII format for the writer default is ``'%.9e'``"""
-        WriteCellCenterData.SetFormat(self, fmt)
+        WriteCellCenterData.set_format(self, fmt)
 
     @smproperty.stringvector(name="Delimiter", default_values=',')
-    def SetDelimiter(self, deli):
+    def set_delimiter(self, deli):
         """The string delimiter to use"""
-        WriteCellCenterData.SetDelimiter(self, deli)
+        WriteCellCenterData.set_delimiter(self, deli)

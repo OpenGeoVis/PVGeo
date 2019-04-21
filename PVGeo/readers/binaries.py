@@ -105,7 +105,7 @@ class PackedBinariesReader(ReaderBase):
     #### Seters and Geters ####
 
 
-    def SetEndian(self, endian):
+    def set_endian(self, endian):
         """Set the endianness of the data file.
 
         Args:
@@ -123,7 +123,7 @@ class PackedBinariesReader(ReaderBase):
         """Get the endianness of the data file."""
         return self.__endian
 
-    def SetDataType(self, dtype):
+    def set_data_type(self, dtype):
         """Set the data type of the binary file: `double='d'`, `float='f'`, `int='i'`
         """
         pos = ['d', 'f', 'i']
@@ -138,7 +138,7 @@ class PackedBinariesReader(ReaderBase):
         """Get the data type of the binary file"""
         return self.__dtype, self.__vtktype
 
-    def SetDataName(self, data_name):
+    def set_data_name(self, data_name):
         """The string name of the data array generated from the inut file.
         """
         if data_name != self.__data_name:

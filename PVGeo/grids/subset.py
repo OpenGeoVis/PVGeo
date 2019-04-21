@@ -196,7 +196,7 @@ class ExtractTopography(FilterBase):
 
     #### Setters/Getters ####
 
-    def SetTolerance(self, tol):
+    def set_tolerance(self, tol):
         """Set the tolerance threshold for the querry"""
         if self._tolerance != tol:
             self._tolerance = tol
@@ -206,13 +206,13 @@ class ExtractTopography(FilterBase):
         """Get the tolerance threshold for the querry"""
         return self._tolerance
 
-    def SetOffset(self, offset):
+    def set_offset(self, offset):
         """Sets how far off (in Z dir) to slice the data"""
         if self._offset != offset:
             self._offset = offset
             self.Modified()
 
-    def SetInvert(self, flag):
+    def set_invert(self, flag):
         """Sets the boolean flag on whether to invert the extraction."""
         if self._invert != flag:
             self._invert = flag

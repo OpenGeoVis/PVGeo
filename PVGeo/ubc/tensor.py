@@ -517,7 +517,7 @@ class TopoMeshAppender(AlgorithmBase):
         self._topoFileName = None
         self.Modified(read_again=True)
 
-    def SetTopoFileName(self, filename):
+    def set_topo_filename(self, filename):
         """Use to set the file names for the reader. Handles single strings only
         """
         if filename is None:

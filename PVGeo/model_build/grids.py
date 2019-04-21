@@ -75,21 +75,21 @@ class CreateUniformGrid(AlgorithmBase):
     #### Setters / Getters ####
 
 
-    def SetExtent(self, nx, ny, nz):
+    def set_extent(self, nx, ny, nz):
         """Set the extent of the output grid.
         """
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
-    def SetSpacing(self, dx, dy, dz):
+    def set_spacing(self, dx, dy, dz):
         """Set the spacing for the points along each axial direction.
         """
         if self.__spacing != [dx, dy, dz]:
             self.__spacing = [dx, dy, dz]
             self.Modified()
 
-    def SetOrigin(self, x0, y0, z0):
+    def set_origin(self, x0, y0, z0):
         """Set the origin of the output grid.
         """
         if self.__origin != [x0, y0, z0]:
@@ -161,28 +161,28 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
     #### Setters / Getters ####
 
 
-    def SetExtent(self, nx, ny, nz):
+    def set_extent(self, nx, ny, nz):
         """Set the extent of the output grid.
         """
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
-    def SetXRange(self, start, stop):
+    def set_x_range(self, start, stop):
         """Set range (min, max) for the grid in the X-direction.
         """
         if self.__xrange != [start, stop]:
             self.__xrange = [start, stop]
             self.Modified()
 
-    def SetYRange(self, start, stop):
+    def set_y_range(self, start, stop):
         """Set range (min, max) for the grid in the Y-direction
         """
         if self.__yrange != [start, stop]:
             self.__yrange = [start, stop]
             self.Modified()
 
-    def SetZRange(self, start, stop):
+    def set_z_range(self, start, stop):
         """Set range (min, max) for the grid in the Z-direction
         """
         if self.__zrange != [start, stop]:
@@ -311,7 +311,7 @@ class CreateTensorMesh(AlgorithmBase):
     #### Getters / Setters ####
 
 
-    def SetOrigin(self, x0, y0, z0):
+    def set_origin(self, x0, y0, z0):
         """Set the origin of the output
         """
         if self.__origin != [x0, y0, z0]:
@@ -345,7 +345,7 @@ class CreateTensorMesh(AlgorithmBase):
             self.__zcells = zcells
             self.Modified()
 
-    def SetXCellsStr(self, xcellstr):
+    def set_x_cells_str(self, xcellstr):
         """Set the spacings for the cells in the X direction
 
         Args:
@@ -353,7 +353,7 @@ class CreateTensorMesh(AlgorithmBase):
         xcells = CreateTensorMesh._ReadCellLine(xcellstr)
         self.SetXCells(xcells)
 
-    def SetYCellsStr(self, ycellstr):
+    def set_y_cells_str(self, ycellstr):
         """Set the spacings for the cells in the Y direction
 
         Args:
@@ -361,7 +361,7 @@ class CreateTensorMesh(AlgorithmBase):
         ycells = CreateTensorMesh._ReadCellLine(ycellstr)
         self.SetYCells(ycells)
 
-    def SetZCellsStr(self, zcellstr):
+    def set_z_cells_str(self, zcellstr):
         """Set the spacings for the cells in the Z direction
 
         Args:

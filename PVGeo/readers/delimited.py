@@ -161,9 +161,9 @@ class DelimitedTextReader(ReaderBase):
     #### Seters and Geters ####
 
 
-    def SetDelimiter(self, deli):
+    def set_delimiter(self, deli):
         """The input file's delimiter. To use a tab delimiter please use
-        ``SetSplitOnWhiteSpace()``
+        ``set_split_on_white_space()``
 
         Args:
             deli (str): a string delimiter/seperator
@@ -172,8 +172,8 @@ class DelimitedTextReader(ReaderBase):
             self.__delimiter = deli
             self.Modified()
 
-    def SetSplitOnWhiteSpace(self, flag):
-        """Set a boolean flag to override the ``SetDelimiter()`` and use any
+    def set_split_on_white_space(self, flag):
+        """Set a boolean flag to override the ``set_delimiter()`` and use any
         white space as a delimiter.
         """
         if flag != self.__use_tab:
@@ -181,7 +181,7 @@ class DelimitedTextReader(ReaderBase):
             self.Modified()
 
 
-    def SetSkipRows(self, skip):
+    def set_skip_rows(self, skip):
         """Set the integer number of rows to skip at the top of the file.
         """
         if skip != self.__skipRows:
@@ -193,14 +193,14 @@ class DelimitedTextReader(ReaderBase):
         """
         return self.__skipRows
 
-    def SetComments(self, identifier):
+    def set_comments(self, identifier):
         """The character identifier for comments within the file.
         """
         if identifier != self.__comments:
             self.__comments = identifier
             self.Modified()
 
-    def SetHasTitles(self, flag):
+    def set_has_titles(self, flag):
         """Set the boolean for if the delimited file has header titles for the
         data arrays.
         """
@@ -277,7 +277,7 @@ class XYZTextReader(DelimitedTextReader):
     description = 'PVGeo: XYZ Delimited Text Files where header has comma delimiter.'
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, **kwargs)
-        self.SetComments(kwargs.get('comments', '#'))
+        self.set_comments(kwargs.get('comments', '#'))
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
