@@ -12,6 +12,10 @@ import glob
 import os
 import sys
 
+if sys.version_info >= (3, 0):
+    import faulthandler
+    faulthandler.enable()
+
 
 def test(close=False):
     """This is a convienance method to run all of the tests in ``PVGeo`` while

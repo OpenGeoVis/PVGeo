@@ -50,8 +50,7 @@ vtkPoints = points_to_poly_data(coords)
 line = AddCellConnToPoints().apply(vtkPoints)
 
 p = vtki.Plotter()
-p.add_mesh(vtkPoints, point_size=10)
-p.add_mesh(line, line_width=5)
+p.add_mesh(line, line_width=5, point_size=10)
 p.show()
 
 
@@ -68,6 +67,5 @@ p.show()
 line_o = AddCellConnToPoints(nearest_nbr=True).apply(vtkPoints)
 
 p = vtki.Plotter()
-p.add_mesh(vtkPoints, point_size=10)
-p.add_mesh(line_o, line_width=5)
+p.add_mesh(line_o, line_width=5, point_size=10)
 p.show()

@@ -53,7 +53,7 @@ class AddCellConnToPoints(FilterBase):
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
-        self.__cell_type = kwargs.get('cell_type', vtk.VTK_POLY_LINE)
+        self.__cell_type = kwargs.get('cell_type', vtk.VTK_LINE)
         self.__usenbr = kwargs.get('nearest_nbr', False)
         self.__unique = True
 
@@ -63,94 +63,56 @@ class AddCellConnToPoints(FilterBase):
         """
         # NOTE: Type map is specified in vtkCellType.h
         cell_type = self.__cell_type
-        nrNbr = self.__usenbr
 
         if log_time:
             startTime = datetime.now()
 
         # Get the Points over the NumPy interface
-        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
-        points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+        pdi = vtki.wrap(pdi)
+        points = np.copy(pdi.points) # New NumPy array of poins so we dont destroy input
         if self.__unique:
             # Remove repeated points
             points = np.unique(points, axis=0)
 
-        def _make_poly_cell(ptsi):
-            cell = vtk.vtkPolyLine()
-            cell.GetPointIds().SetNumberOfIds(len(ptsi))
-            for i in ptsi:
-                cell.GetPointIds().SetId(i, ptsi[i])
-            return cell
-
-        def _make_line_cell(ptsi):
-            if len(ptsi) != 2:
-                raise _helpers.PVGeoError('_make_line_cell() only handles two points')
-            aLine = vtk.vtkLine()
-            aLine.GetPointIds().SetId(0, ptsi[0])
-            aLine.GetPointIds().SetId(1, ptsi[1])
-            return aLine
-
-
-        cells = vtk.vtkCellArray()
-        numPoints = pdi.GetNumberOfPoints()
-        if nrNbr:
+        def _find_min_path(points):
             try:
                 # sklearn's KDTree is faster: use it if available
                 from sklearn.neighbors import KDTree as Tree
             except ImportError:
                 from scipy.spatial import cKDTree  as Tree
-            # VTK_Line
-            og = np.array([0.0,0.0,0.0]).reshape(1, -1)
-            if cell_type == vtk.VTK_LINE:
-                tree = Tree(points)
-                ind = tree.query(og, k=numPoints)[1].ravel()
-                for i in range(len(ind)-1):
-                    # Get indices of k nearest points
-                    ptsi = [ind[i], ind[i+1]]
-                    cell = _make_line_cell(ptsi)
-                    cells.InsertNextCell(cell)
-                    points = np.delete(points, 0, 0) # Deletes first row
-            # VTK_PolyLine
-            elif cell_type == vtk.VTK_POLY_LINE:
-                tree = Tree(points)
-                ptsi = tree.query(og, k=numPoints)[1].ravel()
-                cell = _make_poly_cell(ptsi.ravel())
-                cells.InsertNextCell(cell)
-            else:
-                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cell_type)
-        else:
-            # VTK_PolyLine
-            if cell_type == vtk.VTK_POLY_LINE:
-                ptsi = [i for i in range(numPoints)]
-                cell = _make_poly_cell(ptsi)
-                cells.InsertNextCell(cell)
-            # VTK_Line
-            elif cell_type == vtk.VTK_LINE:
-                for i in range(0, numPoints-1):
-                    ptsi = [i, i+1]
-                    cell = _make_line_cell(ptsi)
-                    cells.InsertNextCell(cell)
-            else:
-                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cell_type)
+            _compute_dist = lambda pt0, pt1: np.linalg.norm(pt0-pt1)
+            ind, min_dist = None, np.inf
+            tree = Tree(points)
+            for pt in points:
+                cur_ind = tree.query([pt], k=len(points))[1].ravel()
+                dist = 0.
+                for i in range(len(cur_ind)-1):
+                    dist += _compute_dist(points[cur_ind[i]], points[cur_ind[i+1]])
+                if dist < min_dist:
+                    ind = cur_ind
+                    min_dist = dist
+            return ind.ravel()
 
-        if log_time:
-            print((datetime.now() - startTime))
-        # Now add points and cells to output
-        pdo.SetPoints(pdi.GetPoints())
-        pdo.SetLines(cells)
-        # copy point data
-        _helpers.copy_arrays_to_point_data(pdi, pdo, 0) # 0 is point data
-        # Copy cell data if type is LINE
+        if self.__usenbr:
+            ind = _find_min_path(points)
+        else:
+            ind = np.arange(len(points), dtype=int)
+        poly = vtki.PolyData(np.copy(points))
         if cell_type == vtk.VTK_LINE:
-            # Be sure to rearange for Nearest neighbor approxiamtion
-            for i in range(pdi.GetCellData().GetNumberOfArrays()):
-                vtkarr = pdi.GetCellData().GetArray(i)
-                name = vtkarr.GetName()
-                if nrNbr:
-                    arr = interface.convert_array(vtkarr)
-                    arr = arr[ind]
-                    vtkarr = interface.convert_array(arr, name=name)
-                pdo.GetCellData().AddArray(vtkarr)
+            poly.lines = np.c_[np.full(len(ind)-1, 2), ind[0:-1], ind[1:]]
+        elif cell_type == vtk.VTK_POLY_LINE:
+            cells = vtk.vtkCellArray()
+            cell = vtk.vtkPolyLine()
+            cell.GetPointIds().SetNumberOfIds(len(ind))
+            for i in ind:
+                cell.GetPointIds().SetId(i, ind[i])
+            cells.InsertNextCell(cell)
+            poly.SetLines(cells)
+        else:
+            raise _helpers.PVGeoError('Cell type ({}) not supported'.format(cell_type))
+        for key, val in pdi.point_arrays.items():
+            poly.point_arrays[key] = val
+        pdo.DeepCopy(poly)
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):
