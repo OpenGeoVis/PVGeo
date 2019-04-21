@@ -25,7 +25,7 @@ sphinx_gallery_thumbnail_number = 2
 
     import numpy as np
     import vtki
-    from PVGeo import pointsToPolyData
+    from PVGeo import points_to_poly_data
     from PVGeo.filters import AddCellConnToPoints
 
 
@@ -54,7 +54,7 @@ First, lets generate some points which we'd like to connect
     np.random.shuffle(coords)
 
     # Make a VTK data object for the filter to use
-    vtkPoints = pointsToPolyData(coords)
+    vtkPoints = points_to_poly_data(coords)
 
 
 
@@ -122,7 +122,7 @@ Now it looks good (see image below)!
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.609 seconds)
+   **Total running time of the script:** ( 0 minutes  0.597 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_add-cell-connectivity-to-points.py:

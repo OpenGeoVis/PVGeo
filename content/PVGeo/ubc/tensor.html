@@ -213,8 +213,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.ubc.tensor.TensorMeshAppender._ReadUpFront">
-<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshAppender._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshAppender._ReadUpFront" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.tensor.TensorMeshAppender._read_up_front">
+<code class="descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshAppender._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshAppender._read_up_front" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helepr to read data at start</p>
 </dd></dl>
 
@@ -239,18 +239,6 @@ assumption. If the mesh file is 2D, then then model file must also be in the
 <p>Model File is optional. Reader will still construct
 <code class="docutils literal notranslate"><span class="pre">vtkRectilinearGrid</span></code> safely.</p>
 </div>
-<dl class="method">
-<dt id="PVGeo.ubc.tensor.TensorMeshReader.ClearMesh">
-<code class="descname">ClearMesh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.ClearMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.ClearMesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use to clean/rebuild the mesh</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.ubc.tensor.TensorMeshReader.ClearModels">
-<code class="descname">ClearModels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.ClearModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.ClearModels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use to clean the models and reread</p>
-</dd></dl>
-
 <dl class="staticmethod">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader.PlaceModelOnMesh">
 <em class="property">static </em><code class="descname">PlaceModelOnMesh</code><span class="sig-paren">(</span><em>mesh</em>, <em>model</em>, <em>data_name='Data'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.PlaceModelOnMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.PlaceModelOnMesh" title="Permalink to this definition">¶</a></dt>
@@ -328,6 +316,18 @@ Cell data is defined by the input model file.</p>
 <dd class="field-odd"><p>vtkRectilinearGrid</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.tensor.TensorMeshReader.clear_mesh">
+<code class="descname">clear_mesh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.clear_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.clear_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to clean/rebuild the mesh</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.tensor.TensorMeshReader.clear_models">
+<code class="descname">clear_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.clear_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.clear_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to clean the models and reread</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -437,8 +437,26 @@ boolean data array.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.ubc.tensor.TopoMeshAppender.NeedToRead">
-<code class="descname">NeedToRead</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.NeedToRead"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.NeedToRead" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.tensor.TopoMeshAppender.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.tensor.TopoMeshAppender._PlaceOnMesh">
+<code class="descname">_PlaceOnMesh</code><span class="sig-paren">(</span><em>output</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender._PlaceOnMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender._PlaceOnMesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helepr to place an active cells model on the mesh</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.tensor.TopoMeshAppender._read_up_front">
+<code class="descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender._read_up_front" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal helepr to read data at start</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.tensor.TopoMeshAppender.need_to_read">
+<code class="descname">need_to_read</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.need_to_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.need_to_read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ask self if the reader needs to read the files again</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -452,24 +470,6 @@ status</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.ubc.tensor.TopoMeshAppender.RequestData">
-<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.RequestData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Used by pipeline to generate output</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.ubc.tensor.TopoMeshAppender._PlaceOnMesh">
-<code class="descname">_PlaceOnMesh</code><span class="sig-paren">(</span><em>output</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender._PlaceOnMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender._PlaceOnMesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Internal helepr to place an active cells model on the mesh</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.ubc.tensor.TopoMeshAppender._ReadUpFront">
-<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender._ReadUpFront" title="Permalink to this definition">¶</a></dt>
-<dd><p>Internal helepr to read data at start</p>
 </dd></dl>
 
 <dl class="method">

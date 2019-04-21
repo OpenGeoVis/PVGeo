@@ -206,13 +206,13 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">InterfacedBaseReader</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DiscretizeMeshReader._readFile"><a class="viewcode-back" href="../../../content/PVGeo/ubc/disc_meshes.html#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._readFile">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_readFile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<div class="viewcode-block" id="DiscretizeMeshReader._read_file"><a class="viewcode-back" href="../../../content/PVGeo/ubc/disc_meshes.html#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._read_file">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads a mesh object from the serialized format&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">discretize</span><span class="o">.</span><span class="n">MeshIO</span><span class="o">.</span><span class="n">load_mesh</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DiscretizeMeshReader._getVTKObject"><a class="viewcode-back" href="../../../content/PVGeo/ubc/disc_meshes.html#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._getVTKObject">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_getVTKObject</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+<div class="viewcode-block" id="DiscretizeMeshReader._get_vtk_object"><a class="viewcode-back" href="../../../content/PVGeo/ubc/disc_meshes.html#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._get_vtk_object">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_vtk_object</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the mesh&#39;s proper VTK data object&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">toVTK</span><span class="p">()</span></div></div>
 </pre></div>

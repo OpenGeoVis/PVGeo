@@ -8,14 +8,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Read GSLib File &mdash; PVGeo  documentation</title>
+  <title>Read UBC Gravity Observations &mdash; PVGeo  documentation</title>
   
 
   
   
   
   
-    <link rel="canonical" href="http://docs.pvgeo.org/examples/gslib/read-gslib.html"/>
+    <link rel="canonical" href="http://docs.pvgeo.org/examples/ubc/read-grv-obs.html"/>
   
 
   
@@ -41,8 +41,8 @@
   <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Base Classes" href="../../content/PVGeo/base.html" />
-    <link rel="prev" title="Read Surfer Grid File" href="../grids/read-surfer.html" /> 
+    <link rel="next" title="Read Tensor Mesh" href="read-tensor-mesh.html" />
+    <link rel="prev" title="Read SGeMS Grid" href="../gslib/read-sgems-grid.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -96,12 +96,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index.html#general-filters">General Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#gslib">GSLib</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Read GSLib File</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gslib-point-set">GSLib Point Set</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sgems-grid">SGeMS Grid</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Read UBC Gravity Observations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="read-tensor-mesh.html">Read Tensor Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="read-topo.html">Read UBC Topography File</a></li>
 </ul>
 </li>
 </ul>
@@ -183,7 +182,7 @@
         
           <li><a href="../index.html">Quick Examples</a> &raquo;</li>
         
-      <li>Read GSLib File</li>
+      <li>Read UBC Gravity Observations</li>
     
     
 
@@ -197,76 +196,50 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-examples-gslib-read-gslib-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-ubc-read-grv-obs-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="read-gslib-file">
-<span id="sphx-glr-examples-gslib-read-gslib-py"></span><h1>Read GSLib File<a class="headerlink" href="#read-gslib-file" title="Permalink to this headline">¶</a></h1>
-<p>Read GSLib and SGeMS dat file formats</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
+<div class="sphx-glr-example-title section" id="read-ubc-gravity-observations">
+<span id="sphx-glr-examples-ubc-read-grv-obs-py"></span><h1>Read UBC Gravity Observations<a class="headerlink" href="#read-ubc-gravity-observations" title="Permalink to this headline">¶</a></h1>
+<p>Read a UBC gravity observations file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 1</span>
+<span class="kn">import</span> <span class="nn">PVGeo</span>
 <span class="kn">import</span> <span class="nn">vtki</span>
 <span class="kn">from</span> <span class="nn">vtki</span> <span class="k">import</span> <span class="n">examples</span>
-<span class="kn">from</span> <span class="nn">PVGeo.gslib</span> <span class="k">import</span> <span class="n">GSLibPointSetReader</span><span class="p">,</span> <span class="n">SGeMSGridReader</span>
 </pre></div>
 </div>
-<div class="section" id="gslib-point-set">
-<h2>GSLib Point Set<a class="headerlink" href="#gslib-point-set" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">points_url</span> <span class="o">=</span> <span class="s1">&#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/b_100sampledatawl.sgems&#39;</span>
-<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">points_url</span><span class="p">,</span> <span class="s1">&#39;b_100sampledatawl.sgems&#39;</span><span class="p">)</span>
-
-<span class="n">point_set</span> <span class="o">=</span> <span class="n">GSLibPointSetReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">point_set</span><span class="p">)</span>
+<p>Download sample data files and keep track of names:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/Craig-Chile/LdM_grav_obs.grv&#39;</span>
+<span class="n">grav_file</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;LdM_grav_obs.grv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f70264771c8)
-  N Cells:      100
-  N Points:     100
-  X Bounds:     3.000e+00, 2.520e+02
-  Y Bounds:     1.000e+00, 2.980e+02
-  Z Bounds:     0.000e+00, 0.000e+00
-  N Scalars:    1
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">point_set</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-</pre></div>
-</div>
-<img alt="../../_images/sphx_glr_read-gslib_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-gslib_001.png" />
-</div>
-<div class="section" id="sgems-grid">
-<h2>SGeMS Grid<a class="headerlink" href="#sgems-grid" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid_url</span> <span class="o">=</span> <span class="s1">&#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/a_wlreferencecat.zip&#39;</span>
-<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">grid_url</span><span class="p">,</span> <span class="s1">&#39;A_WLreferenceCAT.sgems.zip&#39;</span><span class="p">)</span>
-
-<span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grav</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">ubc</span><span class="o">.</span><span class="n">GravObsReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">grav_file</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grav</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>UniformGrid (0x7f702648cee8)
-  N Cells:      78000
-  N Points:     157122
-  X Bounds:     0.000e+00, 2.600e+02
-  Y Bounds:     0.000e+00, 3.000e+02
-  Z Bounds:     0.000e+00, 1.000e+00
-  N Scalars:    1
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f4ec0fe53a8)
+  N Cells:      191
+  N Points:     191
+  X Bounds:     3.565e+05, 3.702e+05
+  Y Bounds:     6.000e+06, 6.015e+06
+  Z Bounds:     2.155e+03, 2.865e+03
+  N Scalars:    2
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">warped</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">cell_data_to_point_data</span><span class="p">()</span><span class="o">.</span><span class="n">warp_by_scalar</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">warped</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grav</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">render_points_as_spheres</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">point_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_read-gslib_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-gslib_002.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.408 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gslib-read-gslib-py">
+<img alt="../../_images/sphx_glr_read-grv-obs_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-grv-obs_001.png" />
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.785 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-ubc-read-grv-obs-py">
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/65f7cda45a6c462e0e91f494123f590e/read-gslib.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-gslib.py</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/463f5044a8b596846a6da59eabd1db80/read-grv-obs.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-grv-obs.py</span></code></a></p>
 </div>
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/0db5e35ef379b3822e2c027422bac513/read-gslib.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">read-gslib.ipynb</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/5a87c5ef7f2535332ba3f1934a42e280/read-grv-obs.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">read-grv-obs.ipynb</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
-</div>
 </div>
 
 
@@ -277,10 +250,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../content/PVGeo/base.html" class="btn btn-neutral float-right" title="Base Classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="read-tensor-mesh.html" class="btn btn-neutral float-right" title="Read Tensor Mesh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../grids/read-surfer.html" class="btn btn-neutral float-left" title="Read Surfer Grid File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../gslib/read-sgems-grid.html" class="btn btn-neutral float-left" title="Read SGeMS Grid" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

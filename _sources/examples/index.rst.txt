@@ -351,13 +351,13 @@ GSLib
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Read GSLib and SGeMS dat file formats">
+    <div class="sphx-glr-thumbcontainer" tooltip="Read GSLib point set file">
 
 .. only:: html
 
-    .. figure:: /examples/gslib/images/thumb/sphx_glr_read-gslib_thumb.png
+    .. figure:: /examples/gslib/images/thumb/sphx_glr_read-point-set_thumb.png
 
-        :ref:`sphx_glr_examples_gslib_read-gslib.py`
+        :ref:`sphx_glr_examples_gslib_read-point-set.py`
 
 .. raw:: html
 
@@ -367,7 +367,99 @@ GSLib
 .. toctree::
    :hidden:
 
-   /examples/gslib/read-gslib
+   /examples/gslib/read-point-set
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read SGeMS Grid file formats. The examples shown here are downloaded from `Multiple-point Geost...">
+
+.. only:: html
+
+    .. figure:: /examples/gslib/images/thumb/sphx_glr_read-sgems-grid_thumb.png
+
+        :ref:`sphx_glr_examples_gslib_read-sgems-grid.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gslib/read-sgems-grid
+.. raw:: html
+
+    <div style='clear:both'></div>
+
+
+
+.. _sphx_glr_examples_ubc:
+
+UBC Data Formats
+----------------
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read a UBC gravity observations file">
+
+.. only:: html
+
+    .. figure:: /examples/ubc/images/thumb/sphx_glr_read-grv-obs_thumb.png
+
+        :ref:`sphx_glr_examples_ubc_read-grv-obs.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/ubc/read-grv-obs
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read a UBC tensor mesh file">
+
+.. only:: html
+
+    .. figure:: /examples/ubc/images/thumb/sphx_glr_read-tensor-mesh_thumb.png
+
+        :ref:`sphx_glr_examples_ubc_read-tensor-mesh.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/ubc/read-tensor-mesh
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read a UBC topography file">
+
+.. only:: html
+
+    .. figure:: /examples/ubc/images/thumb/sphx_glr_read-topo_thumb.png
+
+        :ref:`sphx_glr_examples_ubc_read-topo.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/ubc/read-topo
 .. raw:: html
 
     <div style='clear:both'></div>

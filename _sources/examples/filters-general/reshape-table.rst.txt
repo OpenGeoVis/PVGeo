@@ -46,9 +46,9 @@ Create some input table
     arrs[1] = np.random.random(n)
     arrs[2] = np.random.random(n)
 
-    t0.AddColumn(PVGeo.convertArray(arrs[0], titles[0]))
-    t0.AddColumn(PVGeo.convertArray(arrs[1], titles[1]))
-    t0.AddColumn(PVGeo.convertArray(arrs[2], titles[2]))
+    t0.AddColumn(PVGeo.convert_array(arrs[0], titles[0]))
+    t0.AddColumn(PVGeo.convert_array(arrs[1], titles[1]))
+    t0.AddColumn(PVGeo.convert_array(arrs[2], titles[2]))
 
 
 
@@ -98,7 +98,7 @@ Check the output against NumPy
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.063 seconds)
+   **Total running time of the script:** ( 0 minutes  0.059 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_reshape-table.py:

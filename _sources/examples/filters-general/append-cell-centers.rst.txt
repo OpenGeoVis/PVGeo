@@ -44,7 +44,7 @@ Use an example mesh from vtki
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f70264eddc8)
+    RectilinearGrid (0x7f4ec109b528)
       N Cells:      16146
       N Points:     18144
       X Bounds:     -3.500e+02, 1.350e+03
@@ -71,7 +71,7 @@ Run the PVGeo algorithm
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f70265080a8)
+    RectilinearGrid (0x7f4ec109b5e8)
       N Cells:      16146
       N Points:     18144
       X Bounds:     -3.500e+02, 1.350e+03

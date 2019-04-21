@@ -284,7 +284,7 @@
             <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 
         <span class="c1"># Convert data to VTK data structure and append to output</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">data_name</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">data_name</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="c1"># THIS IS CELL DATA! Add the model data to CELL data:</span>
         <span class="n">mesh</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mesh</span></div>
@@ -333,11 +333,11 @@
             <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">z</span><span class="p">:</span>
                 <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="n">c</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-            <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">xcoords</span> <span class="o">=</span> <span class="n">_genCoords</span><span class="p">(</span><span class="n">xpts</span><span class="p">,</span> <span class="n">xdisc</span><span class="p">)</span>
         <span class="n">zcoords</span> <span class="o">=</span> <span class="n">_genCoords</span><span class="p">(</span><span class="n">zpts</span><span class="p">,</span> <span class="n">zdisc</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">ycoords</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ycoords</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">output</span><span class="o">.</span><span class="n">SetDimensions</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">nz</span><span class="p">)</span> <span class="c1"># note this subtracts 1</span>
         <span class="n">output</span><span class="o">.</span><span class="n">SetXCoordinates</span><span class="p">(</span><span class="n">xcoords</span><span class="p">)</span>
@@ -386,16 +386,16 @@
         <span class="sd">&quot;&quot;&quot;Helper method to read a 2D mesh</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Construct/read the mesh</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadMesh</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">():</span>
             <span class="n">TensorMeshReader</span><span class="o">.</span><span class="n">ubcMesh2D</span><span class="p">(</span><span class="n">filename_mesh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadMesh</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadModels</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ThisHasModels</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readModels</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">this_has_models</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__models</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filename_models</span><span class="p">:</span>
                 <span class="c1"># Read the model data</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">__models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TensorMeshReader</span><span class="o">.</span><span class="n">ubcModel2D</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadModels</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readModels</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span>
 
 
@@ -470,9 +470,9 @@
         <span class="c1"># Set the dims and coordinates for the output</span>
         <span class="n">output</span><span class="o">.</span><span class="n">SetDimensions</span><span class="p">(</span><span class="n">dim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">dim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">dim</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
         <span class="c1"># Convert to VTK array for setting coordinates</span>
-        <span class="n">output</span><span class="o">.</span><span class="n">SetXCoordinates</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">cox</span><span class="p">,</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        <span class="n">output</span><span class="o">.</span><span class="n">SetYCoordinates</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">coy</span><span class="p">,</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        <span class="n">output</span><span class="o">.</span><span class="n">SetZCoordinates</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">coz</span><span class="p">,</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">SetXCoordinates</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">cox</span><span class="p">,</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">SetYCoordinates</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">coy</span><span class="p">,</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">SetZCoordinates</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">coz</span><span class="p">,</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">output</span></div>
 
@@ -480,16 +480,16 @@
     <span class="k">def</span> <span class="nf">__ubcMeshData3D</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename_mesh</span><span class="p">,</span> <span class="n">filename_models</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Helper method to read a 3D mesh&quot;&quot;&quot;</span>
         <span class="c1"># Construct/read the mesh</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadMesh</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">():</span>
             <span class="n">TensorMeshReader</span><span class="o">.</span><span class="n">ubcMesh3D</span><span class="p">(</span><span class="n">filename_mesh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadMesh</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadModels</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ThisHasModels</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readModels</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">this_has_models</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__models</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filename_models</span><span class="p">:</span>
                 <span class="c1"># Read the model data</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">__models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TensorMeshReader</span><span class="o">.</span><span class="n">ubcModel3D</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadModels</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readModels</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span>
 
 
@@ -533,8 +533,8 @@
         <span class="c1"># Get requested time index</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_requested_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__ubcTensorMesh</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">GetMeshFileName</span><span class="p">(),</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">GetModelFileNames</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_mesh_filename</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_model_filenames</span><span class="p">(),</span>
             <span class="n">output</span><span class="p">)</span>
         <span class="c1"># Place the model data for given timestep onto the mesh</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__models</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">:</span>
@@ -548,24 +548,24 @@
         <span class="c1"># Call parent to handle time stuff</span>
         <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="c1"># Now set whole output extent</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadMesh</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">():</span>
             <span class="n">ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ReadExtent</span><span class="p">()</span>
             <span class="n">info</span> <span class="o">=</span> <span class="n">outInfo</span><span class="o">.</span><span class="n">GetInformationObject</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="c1"># Set WHOLE_EXTENT: This is absolutely necessary</span>
             <span class="n">info</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkStreamingDemandDrivenPipeline</span><span class="o">.</span><span class="n">WHOLE_EXTENT</span><span class="p">(),</span> <span class="n">ext</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="TensorMeshReader.ClearMesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.ClearMesh">[docs]</a>    <span class="k">def</span> <span class="nf">ClearMesh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TensorMeshReader.clear_mesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.clear_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">clear_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Use to clean/rebuild the mesh</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkRectilinearGrid</span><span class="p">()</span>
-        <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">ClearModels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+        <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TensorMeshReader.ClearModels"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.ClearModels">[docs]</a>    <span class="k">def</span> <span class="nf">ClearModels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TensorMeshReader.clear_models"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.clear_models">[docs]</a>    <span class="k">def</span> <span class="nf">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Use to clean the models and reread</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__models</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">ClearModels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+        <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
 
 <span class="c1">################################################################################</span>
 
@@ -582,7 +582,7 @@
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="TensorMeshAppender._ReadUpFront"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshAppender._ReadUpFront">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadUpFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TensorMeshAppender._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshAppender._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal helepr to read data at start&quot;&quot;&quot;</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">ubcModel3D</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_3D</span><span class="p">:</span>
@@ -593,7 +593,7 @@
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_filenames</span><span class="p">:</span>
             <span class="c1"># Read the model data</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="TensorMeshAppender._PlaceOnMesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshAppender._PlaceOnMesh">[docs]</a>    <span class="k">def</span> <span class="nf">_PlaceOnMesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -620,7 +620,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__ne</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__nn</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="TopoMeshAppender.NeedToRead"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.NeedToRead">[docs]</a>    <span class="k">def</span> <span class="nf">NeedToRead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="TopoMeshAppender.need_to_read"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.need_to_read">[docs]</a>    <span class="k">def</span> <span class="nf">need_to_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Ask self if the reader needs to read the files again</span>
 
 <span class="sd">        Args:</span>
@@ -642,7 +642,7 @@
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="TopoMeshAppender._ReadUpFront"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender._ReadUpFront">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadUpFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TopoMeshAppender._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal helepr to read data at start&quot;&quot;&quot;</span>
         <span class="c1"># Read the file</span>
         <span class="n">content</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topoFileName</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
@@ -652,7 +652,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__indices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">content</span><span class="p">[</span><span class="mi">1</span><span class="p">::])),</span>
                             <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">],</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="c1"># NOTE: K indices are inverted</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="TopoMeshAppender._PlaceOnMesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender._PlaceOnMesh">[docs]</a>    <span class="k">def</span> <span class="nf">_PlaceOnMesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
@@ -687,7 +687,7 @@
         <span class="n">output</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span> <span class="c1"># ShallowCopy if you want changes to propagate upstream</span>
         <span class="c1"># Perfrom task:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="c1"># Place the model data for given timestep onto the mesh</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_PlaceOnMesh</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>

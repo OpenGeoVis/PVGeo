@@ -201,7 +201,7 @@
 
 <span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
 <span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">FilterBase</span>
-<span class="kn">from</span> <span class="nn">..version</span> <span class="k">import</span> <span class="n">checkNumpy</span>
+<span class="kn">from</span> <span class="nn">..version</span> <span class="k">import</span> <span class="n">check_numpy</span>
 <span class="kn">from</span> <span class="nn">.xyz</span> <span class="k">import</span> <span class="n">RotationTool</span>
 
 <span class="c1">###############################################################################</span>
@@ -250,7 +250,7 @@
     <span class="k">def</span> <span class="nf">add_cell_data</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a NumPy array as cell data to the given grid input</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
         <span class="n">grid</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">grid</span></div>
 
@@ -283,7 +283,7 @@
 <div class="viewcode-block" id="VoxelizePoints.points_to_grid"><a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.points_to_grid">[docs]</a>    <span class="k">def</span> <span class="nf">points_to_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xo</span><span class="p">,</span><span class="n">yo</span><span class="p">,</span><span class="n">zo</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">dz</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert XYZ points to a ``vtkUnstructuredGrid``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">checkNumpy</span><span class="p">(</span><span class="n">alert</span><span class="o">=</span><span class="s1">&#39;warn&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">check_numpy</span><span class="p">(</span><span class="n">alert</span><span class="o">=</span><span class="s1">&#39;warn&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">grid</span>
         <span class="k">if</span> <span class="n">grid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">grid</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkUnstructuredGrid</span><span class="p">()</span>
@@ -347,7 +347,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">add_field_data</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
 
         <span class="c1"># Add unique nodes as points in output</span>
-        <span class="n">pts</span><span class="o">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">unique_nodes</span><span class="p">))</span>
+        <span class="n">pts</span><span class="o">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">unique_nodes</span><span class="p">))</span>
 
         <span class="c1"># Add cell vertices</span>
         <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">numCells</span><span class="p">),</span> <span class="n">numCells</span><span class="p">)</span>

@@ -64,11 +64,11 @@ within the algorithms ``FillInputPortInformation`` method.
             if isinstance(inp, vtk.vtkMultiBlockDataSet):
                 num = inp.GetNumberOfBlocks()
                 # Create a list of filenames that vary by block index
-                self.SetBlockFileNames(num)
+                self.set_block_filenames(num)
                 for i in range(num):
                     data = inp.GetBlock(i)
                     if data.IsTypeOf(self.InputType):
-                        self.perform_write_out(data, self.GetBlockFileName(i))
+                        self.perform_write_out(data, self.get_block_filename(i))
                     else:
                         print('Invalid input block %d of type(%s)' % (i, type(data)))
             # Handle single input dataset
@@ -136,7 +136,7 @@ Example
             np.savetxt(filename, arr,
                        header=header,
                        delimiter=self.__delimiter,
-                       fmt=self.GetFormat(),
+                       fmt=self.get_format(),
                        comments='')
             # Success for pipeline
             return 1

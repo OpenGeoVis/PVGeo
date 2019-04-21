@@ -42,7 +42,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Color Maps" href="cmaps.html" />
-    <link rel="prev" title="Read GSLib File" href="../../examples/gslib/read-gslib.html" /> 
+    <link rel="prev" title="Read UBC Topography File" href="../../examples/ubc/read-topo.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -247,7 +247,7 @@ algorithm.</p>
 
 <dl class="method">
 <dt id="PVGeo.base.AlgorithmBase.get_output">
-<code class="descname">get_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#AlgorithmBase.get_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.AlgorithmBase.get_output" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_output</code><span class="sig-paren">(</span><em>port=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#AlgorithmBase.get_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.AlgorithmBase.get_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for self.GetOutput()</p>
 </dd></dl>
 
@@ -328,29 +328,29 @@ Note: they all have to be the same VTK type.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.base.InterfacedBaseReader._GetObjectAtIndex">
-<code class="descname">_GetObjectAtIndex</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#InterfacedBaseReader._GetObjectAtIndex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.InterfacedBaseReader._GetObjectAtIndex" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.base.InterfacedBaseReader._get_object_at_index">
+<code class="descname">_get_object_at_index</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#InterfacedBaseReader._get_object_at_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.InterfacedBaseReader._get_object_at_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to get the data object at the specified index</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="PVGeo.base.InterfacedBaseReader._ReadUpFront">
-<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#InterfacedBaseReader._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.InterfacedBaseReader._ReadUpFront" title="Permalink to this definition">¶</a></dt>
-<dd><p>Do not override. A predifiened routine for reading the files up front.</p>
-</dd></dl>
-
 <dl class="staticmethod">
-<dt id="PVGeo.base.InterfacedBaseReader._getVTKObject">
-<em class="property">static </em><code class="descname">_getVTKObject</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#InterfacedBaseReader._getVTKObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.InterfacedBaseReader._getVTKObject" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.base.InterfacedBaseReader._get_vtk_object">
+<em class="property">static </em><code class="descname">_get_vtk_object</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#InterfacedBaseReader._get_vtk_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.InterfacedBaseReader._get_vtk_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>OVERRIDE: Given an object in the interfaced library’s type, return
 a converted VTK data object.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="PVGeo.base.InterfacedBaseReader._readFile">
-<em class="property">static </em><code class="descname">_readFile</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#InterfacedBaseReader._readFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.InterfacedBaseReader._readFile" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.base.InterfacedBaseReader._read_file">
+<em class="property">static </em><code class="descname">_read_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#InterfacedBaseReader._read_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.InterfacedBaseReader._read_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>OVERRIDE: Reads from the the libraries format and returns an object
 in the given library’s format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.InterfacedBaseReader._read_up_front">
+<code class="descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#InterfacedBaseReader._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.InterfacedBaseReader._read_up_front" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do not override. A predifiened routine for reading the files up front.</p>
 </dd></dl>
 
 </dd></dl>
@@ -413,17 +413,6 @@ list of strings.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.base.ReaderBaseBase.ClearFileNames">
-<code class="descname">ClearFileNames</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.ClearFileNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.ClearFileNames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use to clear file names of the reader.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This does not set the reader to need to read again as there are
-no files to read.</p>
-</div>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.base.ReaderBaseBase.GetFileNames">
 <code class="descname">GetFileNames</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.GetFileNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.GetFileNames" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the list of file names or given and index returns a specified
@@ -437,8 +426,45 @@ timestep’s filename.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.base.ReaderBaseBase.NeedToRead">
-<code class="descname">NeedToRead</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.NeedToRead"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.NeedToRead" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.base.ReaderBaseBase._get_file_contents">
+<code class="descname">_get_file_contents</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase._get_file_contents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase._get_file_contents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.ReaderBaseBase._get_raw_data">
+<code class="descname">_get_raw_data</code><span class="sig-paren">(</span><em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase._get_raw_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase._get_raw_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.ReaderBaseBase._read_up_front">
+<code class="descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase._read_up_front" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.ReaderBaseBase.apply">
+<code class="descname">apply</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a file name (or list of file names), perfrom the read</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.ReaderBaseBase.clear_file_names">
+<code class="descname">clear_file_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.clear_file_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.clear_file_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to clear file names of the reader.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This does not set the reader to need to read again as there are
+no files to read.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.ReaderBaseBase.modified">
+<code class="descname">modified</code><span class="sig-paren">(</span><em>read_again=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.ReaderBaseBase.need_to_read">
+<code class="descname">need_to_read</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.need_to_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.need_to_read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ask self if the reader needs to read the files again.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -453,27 +479,6 @@ timestep’s filename.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="PVGeo.base.ReaderBaseBase._GetFileContents">
-<code class="descname">_GetFileContents</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase._GetFileContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase._GetFileContents" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.base.ReaderBaseBase._GetRawData">
-<code class="descname">_GetRawData</code><span class="sig-paren">(</span><em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase._GetRawData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase._GetRawData" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.base.ReaderBaseBase._ReadUpFront">
-<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase._ReadUpFront" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.base.ReaderBaseBase.apply">
-<code class="descname">apply</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.apply" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a file name (or list of file names), perfrom the read</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -485,37 +490,6 @@ timestep’s filename.</p>
 <dd><p>Bases: <a class="reference internal" href="#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
 <p>A base clase for readers that need to handle two input files.
 One meta-data file and a series of data files.</p>
-<dl class="method">
-<dt id="PVGeo.base.TwoFileReaderBase.ClearMesh">
-<code class="descname">ClearMesh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.ClearMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.ClearMesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use to clear mesh file name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.base.TwoFileReaderBase.ClearModels">
-<code class="descname">ClearModels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.ClearModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.ClearModels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use to clear data file names</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.base.TwoFileReaderBase.GetMeshFileName">
-<code class="descname">GetMeshFileName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.GetMeshFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.GetMeshFileName" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the mesh filename</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.base.TwoFileReaderBase.GetModelFileNames">
-<code class="descname">GetModelFileNames</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.GetModelFileNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.GetModelFileNames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the list of file names or given and index returns a specified
-timestep’s filename.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="PVGeo.base.TwoFileReaderBase.HasModels">
-<em class="property">static </em><code class="descname">HasModels</code><span class="sig-paren">(</span><em>model_files</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.HasModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.HasModels" title="Permalink to this definition">¶</a></dt>
-<dd><p>A convienance method to see if a list contatins models filenames.</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="PVGeo.base.TwoFileReaderBase.Modified">
 <code class="descname">Modified</code><span class="sig-paren">(</span><em>read_again_mesh=True</em>, <em>read_again_models=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.Modified" title="Permalink to this definition">¶</a></dt>
@@ -531,37 +505,9 @@ timestep’s filename.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.base.TwoFileReaderBase.NeedToReadMesh">
-<code class="descname">NeedToReadMesh</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.NeedToReadMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.NeedToReadMesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ask self if the reader needs to read the mesh file again.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – set the status of the reader for mesh files.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.base.TwoFileReaderBase.NeedToReadModels">
-<code class="descname">NeedToReadModels</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.NeedToReadModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.NeedToReadModels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ask self if the reader needs to read the model files again.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – set the status of the reader for model files.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.base.TwoFileReaderBase.RequestInformation">
 <code class="descname">RequestInformation</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to handle setting up time variance</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.base.TwoFileReaderBase.ThisHasModels">
-<code class="descname">ThisHasModels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.ThisHasModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.ThisHasModels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ask self if the reader has model filenames set.</p>
 </dd></dl>
 
 <dl class="method">
@@ -590,9 +536,67 @@ setters</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="PVGeo.base.TwoFileReaderBase.clear_mesh">
+<code class="descname">clear_mesh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.clear_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.clear_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to clear mesh file name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.TwoFileReaderBase.clear_models">
+<code class="descname">clear_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.clear_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.clear_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to clear data file names</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.TwoFileReaderBase.get_mesh_filename">
+<code class="descname">get_mesh_filename</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.get_mesh_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.get_mesh_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the mesh filename</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.TwoFileReaderBase.get_model_filenames">
+<code class="descname">get_model_filenames</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.get_model_filenames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.get_model_filenames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of file names or given and index returns a specified
+timestep’s filename.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="PVGeo.base.TwoFileReaderBase.get_time_step_values">
 <code class="descname">get_time_step_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.get_time_step_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.get_time_step_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this in ParaView decorator to register timesteps</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.base.TwoFileReaderBase.has_models">
+<em class="property">static </em><code class="descname">has_models</code><span class="sig-paren">(</span><em>model_files</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.has_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.has_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>A convienance method to see if a list contatins models filenames.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.TwoFileReaderBase.modified">
+<code class="descname">modified</code><span class="sig-paren">(</span><em>read_again_mesh=True</em>, <em>read_again_models=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.TwoFileReaderBase.need_to_readMesh">
+<code class="descname">need_to_readMesh</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.need_to_readMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.need_to_readMesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask self if the reader needs to read the mesh file again.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – set the status of the reader for mesh files.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.TwoFileReaderBase.need_to_readModels">
+<code class="descname">need_to_readModels</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.need_to_readModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.need_to_readModels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask self if the reader needs to read the model files again.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – set the status of the reader for model files.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -605,6 +609,12 @@ setters</p>
 <dt id="PVGeo.base.TwoFileReaderBase.set_time_delta">
 <code class="descname">set_time_delta</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.set_time_delta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.set_time_delta" title="Permalink to this definition">¶</a></dt>
 <dd><p>An advanced property for the time step in seconds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.TwoFileReaderBase.this_has_models">
+<code class="descname">this_has_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.this_has_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.this_has_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask self if the reader has model filenames set.</p>
 </dd></dl>
 
 </dd></dl>
@@ -627,21 +637,9 @@ setters</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.base.WriterBase.GetBlockFileName">
-<code class="descname">GetBlockFileName</code><span class="sig-paren">(</span><em>idx</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.GetBlockFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.GetBlockFileName" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get filename for component of a multi block dataset</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.base.WriterBase.GetFileName">
 <code class="descname">GetFileName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.GetFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.GetFileName" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the set filename.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.base.WriterBase.GetFormat">
-<code class="descname">GetFormat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.GetFormat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.GetFormat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the ASCII format used for floats</p>
 </dd></dl>
 
 <dl class="method">
@@ -653,24 +651,10 @@ composite data sets.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.base.WriterBase.SetBlockFileNames">
-<code class="descname">SetBlockFileNames</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.SetBlockFileNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.SetBlockFileNames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets a list of filenames based on user input filename and creates a
-numbered list of filenames for the reader to save out. Assumes the
-filename has an extension set already.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.base.WriterBase.SetFileName">
 <code class="descname">SetFileName</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.SetFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.SetFileName" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specify the filename for the output. Writer can only handle a single
 output data object/time step.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.base.WriterBase.UseComposite">
-<code class="descname">UseComposite</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.UseComposite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.UseComposite" title="Permalink to this definition">¶</a></dt>
-<dd><p>True if input dataset is a composite dataset</p>
 </dd></dl>
 
 <dl class="method">
@@ -686,6 +670,18 @@ output data object/time step.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="PVGeo.base.WriterBase.get_block_filename">
+<code class="descname">get_block_filename</code><span class="sig-paren">(</span><em>idx</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.get_block_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.get_block_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get filename for component of a multi block dataset</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.WriterBase.get_format">
+<code class="descname">get_format</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.get_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.get_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the ASCII format used for floats</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="PVGeo.base.WriterBase.perform_write_out">
 <code class="descname">perform_write_out</code><span class="sig-paren">(</span><em>input_data_object</em>, <em>filename</em>, <em>object_name</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.perform_write_out"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.perform_write_out" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method must be implemented. This is automatically called by
@@ -693,10 +689,29 @@ output data object/time step.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="PVGeo.base.WriterBase.set_block_filenames">
+<code class="descname">set_block_filenames</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.set_block_filenames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.set_block_filenames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list of filenames based on user input filename and creates a
+numbered list of filenames for the reader to save out. Assumes the
+filename has an extension set already.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="PVGeo.base.WriterBase.set_format">
 <code class="descname">set_format</code><span class="sig-paren">(</span><em>fmt</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.set_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.set_format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to set the ASCII format for the writer default is <code class="docutils literal notranslate"><span class="pre">'%.9e'</span></code></p>
 </dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.WriterBase.use_composite">
+<code class="descname">use_composite</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.use_composite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.use_composite" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if input dataset is a composite dataset</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.WriterBase.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>input_data_object=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -714,7 +729,7 @@ output data object/time step.</p>
         <a href="cmaps.html" class="btn btn-neutral float-right" title="Color Maps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../../examples/gslib/read-gslib.html" class="btn btn-neutral float-left" title="Read GSLib File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../../examples/ubc/read-topo.html" class="btn btn-neutral float-left" title="Read UBC Topography File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

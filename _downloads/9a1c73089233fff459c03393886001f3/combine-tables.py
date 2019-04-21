@@ -22,10 +22,10 @@ n = 100
 titles = ('Array 0', 'Array 1', 'Array 2')
 arr0 = np.random.random(n) # Table 0
 arr1 = np.random.random(n) # Table 0
-t0.AddColumn(PVGeo.convertArray(arr0, titles[0]))
-t0.AddColumn(PVGeo.convertArray(arr1, titles[1]))
+t0.AddColumn(PVGeo.convert_array(arr0, titles[0]))
+t0.AddColumn(PVGeo.convert_array(arr1, titles[1]))
 arr2 = np.random.random(n) # Table 1
-t1.AddColumn(PVGeo.convertArray(arr2, titles[2]))
+t1.AddColumn(PVGeo.convert_array(arr2, titles[2]))
 arrs = [arr0, arr1, arr2]
 
 ################################################################################

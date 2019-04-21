@@ -16,7 +16,7 @@ spline (either in the order by index or using a nearest neighbor calculation).
 # sphinx_gallery_thumbnail_number = 2
 import numpy as np
 import vtki
-from PVGeo import pointsToPolyData
+from PVGeo import points_to_poly_data
 from PVGeo.filters import AddCellConnToPoints
 
 ################################################################################
@@ -36,7 +36,7 @@ coords = np.vstack((x,y,zo)).T
 np.random.shuffle(coords)
 
 # Make a VTK data object for the filter to use
-vtkPoints = pointsToPolyData(coords)
+vtkPoints = points_to_poly_data(coords)
 
 ################################################################################
 # Apply the Filter

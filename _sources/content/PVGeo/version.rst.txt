@@ -8,8 +8,8 @@ Version Verifier
 
 
 
-checkNumpy
-----------
+check_numpy
+-----------
 
-.. autofunction:: PVGeo.version.checkNumpy
+.. autofunction:: PVGeo.version.check_numpy
 

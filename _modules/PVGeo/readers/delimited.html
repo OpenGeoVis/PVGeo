@@ -243,7 +243,7 @@
 
     <span class="c1">#### Methods for performing the read ####</span>
 
-<div class="viewcode-block" id="DelimitedTextReader._GetFileContents"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._GetFileContents">[docs]</a>    <span class="k">def</span> <span class="nf">_GetFileContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedTextReader._get_file_contents"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._get_file_contents">[docs]</a>    <span class="k">def</span> <span class="nf">_get_file_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This grabs the lines of the input data file as a string array. This</span>
 <span class="sd">        allows us to load the file contents, parse the header then use numpy or</span>
 <span class="sd">        pandas to parse the data.&quot;&quot;&quot;</span>
@@ -307,19 +307,19 @@
             <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader._ReadUpFront"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._ReadUpFront">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadUpFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedTextReader._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Should not need to be overridden.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Perform Read</span>
-        <span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GetFileContents</span><span class="p">()</span>
+        <span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_file_contents</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_titles</span><span class="p">,</span> <span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ExtractHeaders</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_FileContentsToDataFrame</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
     <span class="c1">#### Methods for accessing the data read in #####</span>
 
-<div class="viewcode-block" id="DelimitedTextReader._GetRawData"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._GetRawData">[docs]</a>    <span class="k">def</span> <span class="nf">_GetRawData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedTextReader._get_raw_data"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._get_raw_data">[docs]</a>    <span class="k">def</span> <span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This will return the proper data for the given timestep as a dataframe</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
@@ -335,10 +335,10 @@
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Get requested time index</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_requested_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="c1"># Generate the data object</span>
-        <span class="n">interface</span><span class="o">.</span><span class="n">dataFrameToTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_GetRawData</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">),</span> <span class="n">output</span><span class="p">)</span>
+        <span class="n">interface</span><span class="o">.</span><span class="n">data_frame_to_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">),</span> <span class="n">output</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
 
@@ -440,11 +440,11 @@
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Get requested time index</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_requested_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="c1"># Generate the PolyData output</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GetRawData</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">output</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">pointsToPolyData</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">copy_z</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">GetCopyZ</span><span class="p">()))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">points_to_poly_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">copy_z</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">GetCopyZ</span><span class="p">()))</span>
         <span class="k">return</span> <span class="mi">1</span></div></div>
 
 

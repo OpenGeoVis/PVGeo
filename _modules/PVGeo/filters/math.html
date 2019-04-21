@@ -327,7 +327,7 @@
         <span class="k">if</span> <span class="n">new_name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
             <span class="n">new_name</span> <span class="o">=</span> <span class="s1">&#39;Mathed Up&#39;</span>
         <span class="c1"># Convert to a VTK array</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">carr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">new_name</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">carr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">new_name</span><span class="p">)</span>
         <span class="c1"># Build output</span>
         <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">add_array</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="n">field1</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
@@ -396,7 +396,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field0</span><span class="p">,</span> <span class="n">array_name_0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field1</span><span class="p">,</span> <span class="n">array_name_1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="ArrayMath.set_multiplier"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.set_multiplier">[docs]</a>    <span class="k">def</span> <span class="nf">set_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This is a static shifter/scale factor across the array after</span>
@@ -596,7 +596,7 @@
         <span class="k">if</span> <span class="n">new_name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
             <span class="n">new_name</span> <span class="o">=</span> <span class="s1">&#39;Normalized &#39;</span> <span class="o">+</span> <span class="n">name</span>
         <span class="c1"># Convert to VTK array</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">new_name</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">new_name</span><span class="p">)</span>
         <span class="c1"># Build output</span>
         <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">add_array</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
@@ -643,7 +643,7 @@
         <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="NormalizeArray.set_multiplier"><a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_multiplier">[docs]</a>    <span class="k">def</span> <span class="nf">set_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This is a static shifter/scale factor across the array after</span>
@@ -796,7 +796,7 @@
         <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
 
 <span class="c1">################################################################################</span>
 
@@ -869,7 +869,7 @@
             <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">,</span> <span class="n">a_arr</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
-        <span class="n">colors</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Colors&#39;</span><span class="p">)</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Colors&#39;</span><span class="p">)</span>
 
         <span class="c1"># Set the output</span>
         <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
@@ -966,7 +966,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">gField</span><span class="p">,</span> <span class="n">g_array</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">bField</span><span class="p">,</span> <span class="n">b_array</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
 
 
 

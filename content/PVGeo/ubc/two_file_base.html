@@ -205,52 +205,15 @@
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
 <p>A base class for create mesh-model appenders on the UBC Mesh formats</p>
 <dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.ClearModels">
-<code class="descname">ClearModels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.ClearModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.ClearModels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use to clear data file names.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.GetDataName">
 <code class="descname">GetDataName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.GetDataName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.GetDataName" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the data array name</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.GetModelFileNames">
-<code class="descname">GetModelFileNames</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.GetModelFileNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.GetModelFileNames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the list of file names or given and index returns a specified
-timestep’s filename.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.HasModels">
-<code class="descname">HasModels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.HasModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.HasModels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return True if models are associated with this mesh</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.Modified">
 <code class="descname">Modified</code><span class="sig-paren">(</span><em>read_again=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.Modified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call modified if the files needs to be read again again.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.NeedToRead">
-<code class="descname">NeedToRead</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.NeedToRead"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.NeedToRead" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ask self if the reader needs to read the files again</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – if the flag is set then this method will set the read
-status</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The status of the reader aspect of the filter.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -271,8 +234,8 @@ status</p>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase._ReadUpFront">
-<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._ReadUpFront" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase._read_up_front">
+<code class="descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._read_up_front" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -289,9 +252,46 @@ list of strings.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.clear_models">
+<code class="descname">clear_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.clear_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.clear_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to clear data file names.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.get_model_filenames">
+<code class="descname">get_model_filenames</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_model_filenames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_model_filenames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of file names or given and index returns a specified
+timestep’s filename.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.get_time_step_values">
 <code class="descname">get_time_step_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_time_step_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_time_step_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this in ParaView decorator to register timesteps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.has_models">
+<code class="descname">has_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.has_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.has_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if models are associated with this mesh</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.need_to_read">
+<code class="descname">need_to_read</code><span class="sig-paren">(</span><em>flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.need_to_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.need_to_read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask self if the reader needs to read the files again</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – if the flag is set then this method will set the read
+status</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The status of the reader aspect of the filter.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">

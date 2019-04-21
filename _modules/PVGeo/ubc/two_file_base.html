@@ -273,7 +273,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Read the mesh file as line strings, remove lines with comment = !</span>
         <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-        <span class="n">FileName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMeshFileName</span><span class="p">()</span>
+        <span class="n">FileName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mesh_filename</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
                 <span class="c1"># max_rows in numpy versions &gt;= 1.10</span>
@@ -352,7 +352,7 @@
 <div class="viewcode-block" id="ubcMeshReaderBase.GetDataName"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase.GetDataName">[docs]</a>    <span class="k">def</span> <span class="nf">GetDataName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the data array name&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_filename</span><span class="p">:</span>
-            <span class="n">mname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetModelFileNames</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">mname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_model_filenames</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">mname</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span></div></div>
 
@@ -384,7 +384,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__last_successfull_index</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#This is the index to use if the current timestep is unavailable</span>
 
 
-<div class="viewcode-block" id="ModelAppenderBase.NeedToRead"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.NeedToRead">[docs]</a>    <span class="k">def</span> <span class="nf">NeedToRead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelAppenderBase.need_to_read"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.need_to_read">[docs]</a>    <span class="k">def</span> <span class="nf">need_to_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Ask self if the reader needs to read the files again</span>
 
 <span class="sd">        Args:</span>
@@ -418,7 +418,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsAll</span><span class="p">,</span> <span class="n">explicit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="ModelAppenderBase._ReadUpFront"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase._ReadUpFront">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadUpFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelAppenderBase._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">NotImpelementedError</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ModelAppenderBase._PlaceOnMesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase._PlaceOnMesh">[docs]</a>    <span class="k">def</span> <span class="nf">_PlaceOnMesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -436,7 +436,7 @@
         <span class="n">i</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_requested_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="c1"># Perfrom task:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="c1"># Place the model data for given timestep onto the mesh</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_PlaceOnMesh</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
@@ -460,7 +460,7 @@
 
     <span class="c1">#### Setters and Getters ####</span>
 
-<div class="viewcode-block" id="ModelAppenderBase.HasModels"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.HasModels">[docs]</a>    <span class="k">def</span> <span class="nf">HasModels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelAppenderBase.has_models"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.has_models">[docs]</a>    <span class="k">def</span> <span class="nf">has_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return True if models are associated with this mesh&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_filenames</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
@@ -471,7 +471,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_time_steps</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="ModelAppenderBase.ClearModels"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.ClearModels">[docs]</a>    <span class="k">def</span> <span class="nf">ClearModels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelAppenderBase.clear_models"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.clear_models">[docs]</a>    <span class="k">def</span> <span class="nf">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Use to clear data file names.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_filenames</span> <span class="o">=</span> <span class="p">[]</span>
@@ -493,11 +493,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="ModelAppenderBase.GetModelFileNames"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.GetModelFileNames">[docs]</a>    <span class="k">def</span> <span class="nf">GetModelFileNames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelAppenderBase.get_model_filenames"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.get_model_filenames">[docs]</a>    <span class="k">def</span> <span class="nf">get_model_filenames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the list of file names or given and index returns a specified</span>
 <span class="sd">        timestep&#39;s filename.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">HasModels</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_models</span><span class="p">():</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_filenames</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_filenames</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
 
@@ -520,7 +520,7 @@
 <div class="viewcode-block" id="ModelAppenderBase.GetDataName"><a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.GetDataName">[docs]</a>    <span class="k">def</span> <span class="nf">GetDataName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the data array name&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_filename</span><span class="p">:</span>
-            <span class="n">mname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetModelFileNames</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">mname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_model_filenames</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">mname</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span></div></div>
 </pre></div>

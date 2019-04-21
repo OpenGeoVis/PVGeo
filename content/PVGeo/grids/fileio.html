@@ -237,8 +237,8 @@ output data object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.fileio.EsriGridReader._GetRawData">
-<code class="descname">_GetRawData</code><span class="sig-paren">(</span><em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader._GetRawData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader._GetRawData" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.fileio.EsriGridReader._get_raw_data">
+<code class="descname">_get_raw_data</code><span class="sig-paren">(</span><em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader._get_raw_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader._get_raw_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>This will return the proper data for the given timestep.
 This method handles Surfer’s NaN data values and checkes the value range</p>
 </dd></dl>
@@ -317,20 +317,20 @@ A user could still access the list of file names using <code class="docutils lit
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.fileio.LandsatReader._GetFileContents">
-<code class="descname">_GetFileContents</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader._GetFileContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader._GetFileContents" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.fileio.LandsatReader._get_file_contents">
+<code class="descname">_get_file_contents</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader._get_file_contents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader._get_file_contents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads XML meta data, no data read.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.fileio.LandsatReader._GetRawData">
-<code class="descname">_GetRawData</code><span class="sig-paren">(</span><em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader._GetRawData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader._GetRawData" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.fileio.LandsatReader._get_raw_data">
+<code class="descname">_get_raw_data</code><span class="sig-paren">(</span><em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader._get_raw_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader._get_raw_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perfroms the read for the selected bands</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.fileio.LandsatReader._ReadUpFront">
-<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader._ReadUpFront" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.fileio.LandsatReader._read_up_front">
+<code class="descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader._read_up_front" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to read all data at start</p>
 </dd></dl>
 
@@ -416,8 +416,8 @@ all files set.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.fileio.SurferGridReader._ReadUpFront">
-<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#SurferGridReader._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.SurferGridReader._ReadUpFront" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.fileio.SurferGridReader._read_up_front">
+<code class="descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#SurferGridReader._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.SurferGridReader._read_up_front" title="Permalink to this definition">¶</a></dt>
 <dd><p>Should not need to be overridden.</p>
 </dd></dl>
 

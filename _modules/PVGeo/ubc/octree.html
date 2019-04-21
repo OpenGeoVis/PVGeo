@@ -287,7 +287,7 @@
         <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">ind_reorder</span><span class="p">]</span>
 
         <span class="c1"># Convert data to VTK data structure and append to output</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">data_name</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">data_name</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="c1"># THIS IS CELL DATA! Add the model data to CELL data:</span>
         <span class="n">mesh</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mesh</span></div>
@@ -314,18 +314,18 @@
 <span class="sd">                Mesh is defined by the input mesh file. Cell data is defined by</span>
 <span class="sd">                the input model file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadMesh</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">():</span>
             <span class="c1"># Construct/read the mesh</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ubcOcTreeMesh</span><span class="p">(</span><span class="n">filename_mesh</span><span class="p">,</span> <span class="n">pdo</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadMesh</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="o">.</span><span class="n">toVTK</span><span class="p">())</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadModels</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ThisHasModels</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readModels</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">this_has_models</span><span class="p">():</span>
             <span class="c1"># Read the model data</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__models</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filename_models</span><span class="p">:</span>
                 <span class="c1"># Read the model data</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">__models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">ubcModel3D</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadModels</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readModels</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span>
 
 
@@ -336,8 +336,8 @@
         <span class="c1"># Get requested time index</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_requested_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__ubcOcTree</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">GetMeshFileName</span><span class="p">(),</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">GetModelFileNames</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_mesh_filename</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_model_filenames</span><span class="p">(),</span>
             <span class="n">output</span><span class="p">)</span>
 
         <span class="c1"># Place the model data for given timestep onto the mesh</span>
@@ -354,24 +354,24 @@
         <span class="c1"># Call parent to handle time stuff</span>
         <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="c1"># Now set whole output extent</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToReadMesh</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">():</span>
             <span class="n">ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ReadExtent</span><span class="p">()</span>
             <span class="n">info</span> <span class="o">=</span> <span class="n">outInfo</span><span class="o">.</span><span class="n">GetInformationObject</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="c1"># Set WHOLE_EXTENT: This is absolutely necessary</span>
             <span class="n">info</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkStreamingDemandDrivenPipeline</span><span class="o">.</span><span class="n">WHOLE_EXTENT</span><span class="p">(),</span> <span class="n">ext</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="OcTreeReader.ClearMesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/octree.html#PVGeo.ubc.octree.OcTreeReader.ClearMesh">[docs]</a>    <span class="k">def</span> <span class="nf">ClearMesh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="OcTreeReader.clear_mesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/octree.html#PVGeo.ubc.octree.OcTreeReader.clear_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">clear_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Use to clean/rebuild the mesh.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkUnstructuredGrid</span><span class="p">()</span>
-        <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">ClearModels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+        <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="OcTreeReader.ClearModels"><a class="viewcode-back" href="../../../content/PVGeo/ubc/octree.html#PVGeo.ubc.octree.OcTreeReader.ClearModels">[docs]</a>    <span class="k">def</span> <span class="nf">ClearModels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="OcTreeReader.clear_models"><a class="viewcode-back" href="../../../content/PVGeo/ubc/octree.html#PVGeo.ubc.octree.OcTreeReader.clear_models">[docs]</a>    <span class="k">def</span> <span class="nf">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Use to clean the models and reread the data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__models</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">ClearModels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+        <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
 
 
 
@@ -392,14 +392,14 @@
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="OcTreeAppender._ReadUpFront"><a class="viewcode-back" href="../../../content/PVGeo/ubc/octree.html#PVGeo.ubc.octree.OcTreeAppender._ReadUpFront">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadUpFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="OcTreeAppender._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/ubc/octree.html#PVGeo.ubc.octree.OcTreeAppender._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal helper to read all data at start&quot;&quot;&quot;</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">ubcModel3D</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_models</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_filenames</span><span class="p">:</span>
             <span class="c1"># Read the model data</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="OcTreeAppender._PlaceOnMesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/octree.html#PVGeo.ubc.octree.OcTreeAppender._PlaceOnMesh">[docs]</a>    <span class="k">def</span> <span class="nf">_PlaceOnMesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>

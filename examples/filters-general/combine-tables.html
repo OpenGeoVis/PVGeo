@@ -111,6 +111,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a></li>
 </ul>
 </li>
 </ul>
@@ -226,10 +227,10 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 <span class="n">titles</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Array 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Array 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Array 2&#39;</span><span class="p">)</span>
 <span class="n">arr0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># Table 0</span>
 <span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># Table 0</span>
-<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">arr0</span><span class="p">,</span> <span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">titles</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arr0</span><span class="p">,</span> <span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">titles</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 <span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># Table 1</span>
-<span class="n">t1</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">arr2</span><span class="p">,</span> <span class="n">titles</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">t1</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arr2</span><span class="p">,</span> <span class="n">titles</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
 <span class="n">arrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">arr0</span><span class="p">,</span> <span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">]</span>
 </pre></div>
 </div>

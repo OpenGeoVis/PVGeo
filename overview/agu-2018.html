@@ -306,12 +306,12 @@ we built for <cite>discretize &lt;http://discretize.simpeg.xyz/en/latest/&gt;</c
     <span class="c1">#### Methods that will talk to the external library ####</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_readFile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads a mesh object from the serialized format&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">discretize</span><span class="o">.</span><span class="n">MeshIO</span><span class="o">.</span><span class="n">load_mesh</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_getVTKObject</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_vtk_object</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the mesh&#39;s proper VTK data object&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">toVTK</span><span class="p">()</span>
 

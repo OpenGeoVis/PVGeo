@@ -111,6 +111,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a></li>
 </ul>
 </li>
 </ul>
@@ -230,9 +231,9 @@
 <span class="n">arrs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">arrs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">arrs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">arrs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">titles</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">arrs</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">titles</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arrs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arrs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">titles</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arrs</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">titles</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
 </pre></div>
 </div>
 <p>Use the filter to reshape the table</p>
@@ -256,7 +257,7 @@
 <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tarr</span><span class="p">,</span> <span class="n">arrs</span><span class="p">))</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.063 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.059 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-reshape-table-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/9b9c773d55c0d1605eb4db1d66ed7309/reshape-table.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">reshape-table.py</span></code></a></p>

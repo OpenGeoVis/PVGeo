@@ -8,52 +8,38 @@ Interface
 
 
 
-add_arraysFromDataFrame
------------------------
+add_arrays_from_data_frame
+--------------------------
 
-.. autofunction:: PVGeo.interface.add_arraysFromDataFrame
-
-
-
-convertArray
-------------
-
-.. autofunction:: PVGeo.interface.convertArray
+.. autofunction:: PVGeo.interface.add_arrays_from_data_frame
 
 
 
-convertCellConn
----------------
+convert_array
+-------------
 
-.. autofunction:: PVGeo.interface.convertCellConn
-
-
-
-convertStringArray
-------------------
-
-.. autofunction:: PVGeo.interface.convertStringArray
+.. autofunction:: PVGeo.interface.convert_array
 
 
 
-dataFrameToTable
-----------------
+convert_cell_conn
+-----------------
 
-.. autofunction:: PVGeo.interface.dataFrameToTable
-
-
-
-getDataDict
------------
-
-.. autofunction:: PVGeo.interface.getDataDict
+.. autofunction:: PVGeo.interface.convert_cell_conn
 
 
 
-getVTKtype
-----------
+convert_string_array
+--------------------
 
-.. autofunction:: PVGeo.interface.getVTKtype
+.. autofunction:: PVGeo.interface.convert_string_array
+
+
+
+data_frame_to_table
+-------------------
+
+.. autofunction:: PVGeo.interface.data_frame_to_table
 
 
 
@@ -64,36 +50,50 @@ get_array
 
 
 
-getdTypes
+get_data_dict
+-------------
+
+.. autofunction:: PVGeo.interface.get_data_dict
+
+
+
+get_dtypes
+----------
+
+.. autofunction:: PVGeo.interface.get_dtypes
+
+
+
+get_vtk_type
+------------
+
+.. autofunction:: PVGeo.interface.get_vtk_type
+
+
+
+place_array_in_table
+--------------------
+
+.. autofunction:: PVGeo.interface.place_array_in_table
+
+
+
+points_to_poly_data
+-------------------
+
+.. autofunction:: PVGeo.interface.points_to_poly_data
+
+
+
+table_to_data_frame
+-------------------
+
+.. autofunction:: PVGeo.interface.table_to_data_frame
+
+
+
+wrap_vtki
 ---------
 
-.. autofunction:: PVGeo.interface.getdTypes
-
-
-
-placeArrInTable
----------------
-
-.. autofunction:: PVGeo.interface.placeArrInTable
-
-
-
-pointsToPolyData
-----------------
-
-.. autofunction:: PVGeo.interface.pointsToPolyData
-
-
-
-tableToDataFrame
-----------------
-
-.. autofunction:: PVGeo.interface.tableToDataFrame
-
-
-
-wrapvtki
---------
-
-.. autofunction:: PVGeo.interface.wrapvtki
+.. autofunction:: PVGeo.interface.wrap_vtki
 

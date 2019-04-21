@@ -257,7 +257,7 @@
         <span class="n">output</span><span class="o">.</span><span class="n">SetOrigin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xll</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yll</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">SetSpacing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">SetDimensions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ny</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">data_name</span><span class="p">)</span>
+        <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">data_name</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span>
 
@@ -477,12 +477,12 @@
         <span class="k">return</span> <span class="n">contents</span></div>
 
 
-<div class="viewcode-block" id="SurferGridReader._ReadUpFront"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader._ReadUpFront">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadUpFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SurferGridReader._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Should not need to be overridden.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Perform Read</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__grids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ReadGrids</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
 
@@ -494,8 +494,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Get output:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="c1"># Get requested time index</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_requested_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="c1"># Build the output</span>
@@ -506,8 +506,8 @@
 <div class="viewcode-block" id="SurferGridReader.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Used by pipeline to set grid extents.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="c1"># Call parent to handle time stuff</span>
         <span class="n">ReaderBase</span><span class="o">.</span><span class="n">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="c1"># Now set whole output extent</span>
@@ -560,7 +560,7 @@
         <span class="c1"># Note user has to select a single array to save out</span>
         <span class="n">field</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_vtk_array</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="n">arr</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
         <span class="n">dmin</span><span class="p">,</span> <span class="n">dmax</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">arr</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 
         <span class="c1"># arr = arr.reshape((nx, ny), order=&#39;F&#39;)</span>
@@ -568,7 +568,7 @@
         <span class="n">meta</span> <span class="o">=</span> <span class="s1">&#39;DSAA</span><span class="se">\n</span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="se">\n</span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="se">\n</span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="se">\n</span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span>
                                                      <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">dmin</span><span class="p">,</span> <span class="n">dmax</span><span class="p">)</span>
         <span class="c1"># Now write out the data!</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFormat</span><span class="p">())</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_format</span><span class="p">())</span>
 
 
         <span class="k">return</span> <span class="mi">1</span></div>
@@ -602,7 +602,7 @@
         <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrapvtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="WriteImageDataToSurfer.Write"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteImageDataToSurfer.Write">[docs]</a>    <span class="k">def</span> <span class="nf">Write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Perfrom the write out.&quot;&quot;&quot;</span>
@@ -661,7 +661,7 @@
         <span class="k">return</span> <span class="n">data</span></div>
 
 
-<div class="viewcode-block" id="EsriGridReader._GetRawData"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader._GetRawData">[docs]</a>    <span class="k">def</span> <span class="nf">_GetRawData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="EsriGridReader._get_raw_data"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader._get_raw_data">[docs]</a>    <span class="k">def</span> <span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This will return the proper data for the given timestep.</span>
 <span class="sd">        This method handles Surfer&#39;s NaN data values and checkes the value range</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -681,8 +681,8 @@
         <span class="c1"># Get output:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
 
         <span class="c1"># Get requested time index</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_requested_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
@@ -693,8 +693,8 @@
         <span class="n">output</span><span class="o">.</span><span class="n">SetDimensions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__nx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ny</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
         <span class="c1"># Now add data values as point data</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GetRawData</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
-        <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+        <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="mi">1</span></div>
@@ -702,8 +702,8 @@
 <div class="viewcode-block" id="EsriGridReader.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Used by pipeline to set grid extents.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="c1"># Call parent to handle time stuff</span>
         <span class="n">DelimitedTextReader</span><span class="o">.</span><span class="n">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="c1"># Now set whole output extent</span>
@@ -765,20 +765,20 @@
 
     <span class="c1">#### Methods for performing the read ####</span>
 
-<div class="viewcode-block" id="LandsatReader._GetFileContents"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._GetFileContents">[docs]</a>    <span class="k">def</span> <span class="nf">_GetFileContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="LandsatReader._get_file_contents"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._get_file_contents">[docs]</a>    <span class="k">def</span> <span class="nf">_get_file_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads XML meta data, no data read.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__reader</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__reader</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">meta_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dataselection</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Only meta data has been read</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Only meta data has been read</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="LandsatReader._ReadUpFront"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._ReadUpFront">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadUpFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LandsatReader._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal helper to read all data at start&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GetFileContents</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_file_contents</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="LandsatReader._GetRawData"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._GetRawData">[docs]</a>    <span class="k">def</span> <span class="nf">_GetRawData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="LandsatReader._get_raw_data"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._get_raw_data">[docs]</a>    <span class="k">def</span> <span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Perfroms the read for the selected bands&quot;&quot;&quot;</span>
         <span class="n">allowed</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dataselection</span><span class="o">.</span><span class="n">GetNumberOfArrays</span><span class="p">()):</span>
@@ -808,16 +808,16 @@
         <span class="n">output</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkImageData</span><span class="o">.</span><span class="n">GetData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Perform Read if needed</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_GetRawData</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_BuildImageData</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="c1"># Now add the data based on what the user has selected</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">band</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">band</span><span class="o">.</span><span class="n">data</span>
-            <span class="n">output</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__scheme</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">colors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span><span class="o">.</span><span class="n">GetRGB</span><span class="p">(</span><span class="n">scheme</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__scheme</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-            <span class="n">output</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetScalars</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convertArray</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__scheme</span><span class="p">))</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetScalars</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__scheme</span><span class="p">))</span>
             <span class="n">output</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetActiveScalars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scheme</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
@@ -826,7 +826,7 @@
         <span class="c1"># Call parent to handle time stuff</span>
         <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="n">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="c1"># Now set whole output extent</span>
         <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__raster</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">nsamps</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">nlines</span><span class="p">,</span> <span class="mi">1</span>
@@ -841,9 +841,9 @@
 
 <div class="viewcode-block" id="LandsatReader.GetDataSelection"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.GetDataSelection">[docs]</a>    <span class="k">def</span> <span class="nf">GetDataSelection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Used by ParaView GUI&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataselection</span></div>
@@ -918,7 +918,7 @@
         <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span>
                    <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span>
                    <span class="n">delimiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__delimiter</span><span class="p">,</span>
-                   <span class="n">fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFormat</span><span class="p">(),</span>
+                   <span class="n">fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_format</span><span class="p">(),</span>
                    <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="c1"># Success for pipeline</span>
         <span class="k">return</span> <span class="mi">1</span></div>

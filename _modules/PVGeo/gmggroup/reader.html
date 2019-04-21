@@ -228,7 +228,7 @@
 
     <span class="c1">#### Methods for performing the read ####</span>
 
-<div class="viewcode-block" id="OMFReader._ReadUpFront"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader._ReadUpFront">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadUpFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="OMFReader._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal functiona to read all data at the start&quot;&quot;&quot;</span>
         <span class="c1"># Read all elements</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">omf</span><span class="o">.</span><span class="n">OMFReader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">())</span>
@@ -236,10 +236,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__names</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__project</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__names</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dataselection</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="OMFReader._GetRawData"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader._GetRawData">[docs]</a>    <span class="k">def</span> <span class="nf">_GetRawData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="OMFReader._get_raw_data"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader._get_raw_data">[docs]</a>    <span class="k">def</span> <span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Converts OMF data to VTK data objects.&quot;&quot;&quot;</span>
         <span class="c1"># Now iterate over the elements and add converted data to the data dict:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -259,9 +259,9 @@
         <span class="c1">#output = self.GetOutputData(outInfo, 0)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkMultiBlockDataSet</span><span class="o">.</span><span class="n">GetData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Perfrom the read</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GetRawData</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">()</span>
         <span class="c1"># Set number of blocks based on user choice in the selction</span>
         <span class="n">output</span><span class="o">.</span><span class="n">SetNumberOfBlocks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dataselection</span><span class="o">.</span><span class="n">GetNumberOfArraysEnabled</span><span class="p">())</span>
         <span class="n">blk</span> <span class="o">=</span> <span class="mi">0</span>
@@ -279,8 +279,8 @@
 
 <div class="viewcode-block" id="OMFReader.GetDataSelection"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader.GetDataSelection">[docs]</a>    <span class="k">def</span> <span class="nf">GetDataSelection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the current user selection of data elements&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">NeedToRead</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ReadUpFront</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataselection</span></div></div>
 </pre></div>
 

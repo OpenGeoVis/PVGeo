@@ -243,11 +243,11 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkMultiBlockDataSet</span><span class="p">):</span>
             <span class="n">num</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">GetNumberOfBlocks</span><span class="p">()</span>
             <span class="c1"># Create a list of filenames that vary by block index</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">SetBlockFileNames</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_block_filenames</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">GetBlock</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">IsTypeOf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputType</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">perform_write_out</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetBlockFileName</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">perform_write_out</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_block_filename</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Invalid input block </span><span class="si">%d</span><span class="s1"> of type(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
         <span class="c1"># Handle single input dataset</span>
@@ -311,7 +311,7 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
         <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span>
                    <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span>
                    <span class="n">delimiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__delimiter</span><span class="p">,</span>
-                   <span class="n">fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFormat</span><span class="p">(),</span>
+                   <span class="n">fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_format</span><span class="p">(),</span>
                    <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="c1"># Success for pipeline</span>
         <span class="k">return</span> <span class="mi">1</span>

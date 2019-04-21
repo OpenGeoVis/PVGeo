@@ -114,6 +114,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a></li>
 </ul>
 </li>
 </ul>
@@ -221,7 +222,7 @@ spline (either in the order by index or using a nearest neighbor calculation).
 sphinx_gallery_thumbnail_number = 2</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">vtki</span>
-<span class="kn">from</span> <span class="nn">PVGeo</span> <span class="k">import</span> <span class="n">pointsToPolyData</span>
+<span class="kn">from</span> <span class="nn">PVGeo</span> <span class="k">import</span> <span class="n">points_to_poly_data</span>
 <span class="kn">from</span> <span class="nn">PVGeo.filters</span> <span class="k">import</span> <span class="n">AddCellConnToPoints</span>
 </pre></div>
 </div>
@@ -240,7 +241,7 @@ sphinx_gallery_thumbnail_number = 2</p>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
 
 <span class="c1"># Make a VTK data object for the filter to use</span>
-<span class="n">vtkPoints</span> <span class="o">=</span> <span class="n">pointsToPolyData</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+<span class="n">vtkPoints</span> <span class="o">=</span> <span class="n">points_to_poly_data</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="section" id="apply-the-filter">
@@ -275,7 +276,7 @@ Now it looks good (see image below)!</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_add-cell-connectivity-to-points_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_add-cell-connectivity-to-points_002.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.609 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.597 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-add-cell-connectivity-to-points-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/b114a98e6062a4fa9240e5ff35a302d0/add-cell-connectivity-to-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">add-cell-connectivity-to-points.py</span></code></a></p>

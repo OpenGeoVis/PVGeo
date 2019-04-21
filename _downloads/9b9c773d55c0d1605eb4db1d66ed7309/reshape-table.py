@@ -28,9 +28,9 @@ arrs[0] = np.random.random(n)
 arrs[1] = np.random.random(n)
 arrs[2] = np.random.random(n)
 
-t0.AddColumn(PVGeo.convertArray(arrs[0], titles[0]))
-t0.AddColumn(PVGeo.convertArray(arrs[1], titles[1]))
-t0.AddColumn(PVGeo.convertArray(arrs[2], titles[2]))
+t0.AddColumn(PVGeo.convert_array(arrs[0], titles[0]))
+t0.AddColumn(PVGeo.convert_array(arrs[1], titles[1]))
+t0.AddColumn(PVGeo.convert_array(arrs[2], titles[2]))
 
 ################################################################################
 # Use the filter to reshape the table

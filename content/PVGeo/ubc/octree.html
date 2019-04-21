@@ -212,8 +212,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.ubc.octree.OcTreeAppender._ReadUpFront">
-<code class="descname">_ReadUpFront</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeAppender._ReadUpFront"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeAppender._ReadUpFront" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.octree.OcTreeAppender._read_up_front">
+<code class="descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeAppender._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeAppender._read_up_front" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to read all data at start</p>
 </dd></dl>
 
@@ -229,18 +229,6 @@
 <p>This class reads a UBC OcTree Mesh file and builds a
 <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> of the data in the file. Model File is optional.
 Reader will still construct <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> safely.</p>
-<dl class="method">
-<dt id="PVGeo.ubc.octree.OcTreeReader.ClearMesh">
-<code class="descname">ClearMesh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.ClearMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.ClearMesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use to clean/rebuild the mesh.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.ubc.octree.OcTreeReader.ClearModels">
-<code class="descname">ClearModels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.ClearModels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.ClearModels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use to clean the models and reread the data</p>
-</dd></dl>
-
 <dl class="staticmethod">
 <dt id="PVGeo.ubc.octree.OcTreeReader.PlaceModelOnOcTreeMesh">
 <em class="property">static </em><code class="descname">PlaceModelOnOcTreeMesh</code><span class="sig-paren">(</span><em>mesh</em>, <em>model</em>, <em>data_name='Data'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.PlaceModelOnOcTreeMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.PlaceModelOnOcTreeMesh" title="Permalink to this definition">¶</a></dt>
@@ -308,6 +296,18 @@ the input model file.</p>
 <dd class="field-even"><p>vtkUnstructuredGrid</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.octree.OcTreeReader.clear_mesh">
+<code class="descname">clear_mesh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.clear_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.clear_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to clean/rebuild the mesh.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.octree.OcTreeReader.clear_models">
+<code class="descname">clear_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.clear_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.clear_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to clean the models and reread the data</p>
 </dd></dl>
 
 <dl class="attribute">

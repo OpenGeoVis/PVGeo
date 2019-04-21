@@ -106,11 +106,16 @@
 <li class="toctree-l3"><a class="reference internal" href="points-to-tube.html">Points to Tube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reshape-table.html">Reshape Table</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rotate-points.html">Rotate Points</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Voxelize Points</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Voxelize Points</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#points-to-voxelized-volume">Points to Voxelized Volume</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filter-volumetric-data">Filter Volumetric Data</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a></li>
 </ul>
 </li>
 </ul>
@@ -214,42 +219,136 @@ volumetric operations.</p>
 <p>This example demos <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.VoxelizePoints</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
 <span class="kn">import</span> <span class="nn">vtki</span>
+<span class="kn">from</span> <span class="nn">vtki</span> <span class="k">import</span> <span class="n">examples</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">PVGeo</span>
 <span class="kn">from</span> <span class="nn">PVGeo.filters</span> <span class="k">import</span> <span class="n">VoxelizePoints</span>
 </pre></div>
 </div>
-<p>Make a mesh grid</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dd</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">dd</span><span class="p">)</span>
-<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-<span class="n">points</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">zz</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
-<span class="c1"># points.rotate_z(25.) # TODO: angle recovery isn&#39;t working for this dataset</span>
-
-<span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">n_points</span><span class="p">)</span>
-<span class="n">points</span><span class="p">[</span><span class="s1">&#39;Random&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span>
-
-<span class="n">points</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">show_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<p>Download sample data files and keep track of names:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/fault_points.csv&#39;</span>
+<span class="n">fault_file</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;fault_points.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s go ahead and load a simple file that has XYZ coordinates and a boolean
+array for fault presence. This point cloud makes some sort of regular grid,
+but we have forgotten the deatials of the cell spacings and local coordinate
+rotations.</p>
+<p>We will read in this data with <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and send it to the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">PVGeo.points_to_poly_data()</span></code> helper to create a <code class="xref py py-class docutils literal notranslate"><span class="pre">vtki.PolyData</span></code>
+object (essentially a point cloud).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fault_file</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>X            Y       Z  Fault
+0  326819.497  4407450.636  1287.5      0
+1  326834.340  4407470.753  1287.5      0
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vtkpoints</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">points_to_poly_data</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vtkpoints</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f4ec1010888)
+  N Cells:      499200
+  N Points:     499200
+  X Bounds:     3.268e+05, 3.302e+05
+  Y Bounds:     4.406e+06, 4.410e+06
+  Z Bounds:     1.250e+01, 1.288e+03
+  N Scalars:    1
+</pre></div>
+</div>
+<p>Note that we have a <code class="xref py py-class docutils literal notranslate"><span class="pre">vtki.PolyData</span></code> object now which allows us to do
+all types of immediate plotting of our data. First, lets threshold our points
+as the point cloud has a bunch of zeros and ones throughout the dataspace to
+describe the presence of a fault.</p>
+<p>To threshold the points, we call the threshold filter directly on our data
+object and pass the thresholding value. We can then plot the result by
+calling the plot function. (Note: change the notebook parameter to
+<code class="docutils literal notranslate"><span class="pre">False</span></code> for an interactive window)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vtkpoints</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_voxelize-points_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize-points_001.png" />
-<p>Use the filter</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instantiate the algorithm</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">VoxelizePoints</span><span class="p">()</span>
-<span class="n">v</span><span class="o">.</span><span class="n">set_estimate_grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<div class="section" id="points-to-voxelized-volume">
+<h2>Points to Voxelized Volume<a class="headerlink" href="#points-to-voxelized-volume" title="Permalink to this headline">¶</a></h2>
+<p>The above figure is pretty cool! But its a point cloud which means out
+filtering options are pretty limited. Fortunately, we know that the point
+cloud represents some sort of regularlized gridded volume of data and PVGeo
+has a filter to recover that volume. This will allow further volumetric
+operations can be performed with other PVGeo or VTK filters.</p>
+<p>Remember that these points are rotated and we do not know the cell sizes…
+this is okay! The VoxelizePoints filter from PVGeo will handle the recovory of
+the coordinate rotation and grid our data without running an interpolation
+scheme. The VoxelizePoints filter assumes that the points are structure on some
+rotated XY-plane with regular cell spacings and does the rest on its own!
+Check out VoxelizePoints code docs for more details.
+The full pipeline method</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voxelizing... &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">voxelizer</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">VoxelizePoints</span><span class="p">()</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">vtkpoints</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;done.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Output the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recovered Angle (deg.): </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">get_recovered_angle</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recovered Cell Sizes: (</span><span class="si">%.2f</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">get_spacing</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">recovered</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recovered rotation angle: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">get_recovered_angle</span><span class="p">()))</span>
-<span class="n">recovered</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Voxelizing... done.
+Recovered Angle (deg.): 53.550
+Recovered Cell Sizes: (25.00, 25.00, 25.00)
+UnstructuredGrid (0x7f4ec1010a68)
+  N Cells:      499200
+  N Points:     524064
+  X Bounds:     3.268e+05, 3.302e+05
+  Y Bounds:     4.406e+06, 4.410e+06
+  Z Bounds:     0.000e+00, 1.300e+03
+  N Scalars:    1
+</pre></div>
+</div>
+<p>And now we can plot the voxelized volume</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_voxelize-points_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize-points_002.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Recovered rotation angle: 0.0
+</div>
+<div class="section" id="filter-volumetric-data">
+<h2>Filter Volumetric Data<a class="headerlink" href="#filter-volumetric-data" title="Permalink to this headline">¶</a></h2>
+<p>Now lets use one of <code class="docutils literal notranslate"><span class="pre">vtki</span></code>’s filters to create slices of the thresholded
+dataset. Specifically, we are using the <code class="docutils literal notranslate"><span class="pre">slice_orthogonal</span></code> filter that will
+create 3 orthogonal slices through a data volume.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">slices</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">slice_orthogonal</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">slices</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.362 seconds)</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7f4ec1010768)
+  N Blocks:     3
+  X Bounds:     326804.336, 330185.260
+  Y Bounds:     4406253.954, 4409862.606
+  Z Bounds:     0.000, 1300.000
+</pre></div>
+</div>
+<p>And let’s use a <code class="docutils literal notranslate"><span class="pre">clip</span></code> filter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clip</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">normal</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">normal</span><span class="o">=</span><span class="s1">&#39;-y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now display the slices and clipped volume</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">slices</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">clip</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show_grid</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_voxelize-points_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize-points_003.png" />
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  29.417 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-voxelize-points-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/26eee8aad2c1647ea7d3396af058d480/voxelize-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">voxelize-points.py</span></code></a></p>
@@ -259,6 +358,7 @@ volumetric operations.</p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
 </div>
 
 

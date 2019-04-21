@@ -8,8 +8,8 @@ Color Maps
 
 
 
-getParulaMap
-------------
+get_parula_map
+--------------
 
-.. autofunction:: PVGeo.cmaps.getParulaMap
+.. autofunction:: PVGeo.cmaps.get_parula_map
 
