@@ -1,6 +1,6 @@
 """
 Read Surfer Grid File
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 Read an Surfer ASCII grid file
 """
