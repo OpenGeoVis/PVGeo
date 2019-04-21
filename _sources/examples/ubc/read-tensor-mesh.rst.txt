@@ -62,7 +62,7 @@ Read the mesh and model
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f31ff777ac8)
+    RectilinearGrid (0x7fce837503a8)
       N Cells:      190440
       N Points:     200900
       X Bounds:     3.550e+05, 3.722e+05
@@ -123,7 +123,7 @@ Or threshold a data range
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.181 seconds)
+   **Total running time of the script:** ( 0 minutes  3.887 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-tensor-mesh.py:
