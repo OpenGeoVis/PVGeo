@@ -1,15 +1,15 @@
 """
-Read ESRI Grid File
+Read Surfer Grid File
 ~~~~~~~~~~~~~~~~~~~
 
-Read an ESRI ASCII grid file
+Read an Surfer ASCII grid file
 """
 import vtki
 from PVGeo.grids import SurferGridReader
 from vtki import examples
 
 ################################################################################
-# Download a sample ESRI grid file
+# Download a sample Surfer grid file
 fname = 'surfer-grid.grd'
 url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/{}'.format(fname)
 filename, _ = examples.downloads._retrieve_file(url, fname)
