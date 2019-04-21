@@ -27,9 +27,9 @@ class CreateUniformGrid(AlgorithmBase):
     __displayname__ = 'Create Uniform Grid'
     __category__ = 'source'
     def __init__(self,
-                 extent=[10, 10, 10],
-                 spacing=[1.0, 1.0, 1.0],
-                 origin=[0.0, 0.0, 0.0]):
+                 extent=(10, 10, 10),
+                 spacing=(1.0, 1.0, 1.0),
+                 origin=(0.0, 0.0, 0.0)):
         AlgorithmBase.__init__(self,
             nInputPorts=0,
             nOutputPorts=1, outputType='vtkImageData')
@@ -39,6 +39,7 @@ class CreateUniformGrid(AlgorithmBase):
 
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate the output"""
         pdo = self.GetOutputData(outInfo, 0)
         nx,ny,nz = self.__extent[0],self.__extent[1],self.__extent[2]
         sx,sy,sz = self.__spacing[0],self.__spacing[1],self.__spacing[2]
@@ -62,6 +63,7 @@ class CreateUniformGrid(AlgorithmBase):
 
 
     def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to handle output extents"""
         # Now set whole output extent
         ext = [0, self.__extent[0]-1, 0,self.__extent[1]-1, 0,self.__extent[2]-1]
         info = outInfo.GetInformationObject(0)
@@ -73,21 +75,21 @@ class CreateUniformGrid(AlgorithmBase):
     #### Setters / Getters ####
 
 
-    def SetExtent(self, nx, ny, nz):
+    def set_extent(self, nx, ny, nz):
         """Set the extent of the output grid.
         """
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
-    def SetSpacing(self, dx, dy, dz):
+    def set_spacing(self, dx, dy, dz):
         """Set the spacing for the points along each axial direction.
         """
         if self.__spacing != [dx, dy, dz]:
             self.__spacing = [dx, dy, dz]
             self.Modified()
 
-    def SetOrigin(self, x0, y0, z0):
+    def set_origin(self, x0, y0, z0):
         """Set the origin of the output grid.
         """
         if self.__origin != [x0, y0, z0]:
@@ -119,6 +121,7 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
 
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate the output"""
         # Get output of Proxy
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
@@ -146,6 +149,7 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
 
 
     def RequestInformation(self, request, inInfo, outInfo):
+        """Used by pipeline to handle output extents"""
         # Now set whole output extent
         ext = [0, self.__extent[0], 0,self.__extent[1], 0,self.__extent[2]]
         info = outInfo.GetInformationObject(0)
@@ -157,28 +161,28 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
     #### Setters / Getters ####
 
 
-    def SetExtent(self, nx, ny, nz):
+    def set_extent(self, nx, ny, nz):
         """Set the extent of the output grid.
         """
         if self.__extent != [nx, ny, nz]:
             self.__extent = [nx, ny, nz]
             self.Modified()
 
-    def SetXRange(self, start, stop):
+    def set_x_range(self, start, stop):
         """Set range (min, max) for the grid in the X-direction.
         """
         if self.__xrange != [start, stop]:
             self.__xrange = [start, stop]
             self.Modified()
 
-    def SetYRange(self, start, stop):
+    def set_y_range(self, start, stop):
         """Set range (min, max) for the grid in the Y-direction
         """
         if self.__yrange != [start, stop]:
             self.__yrange = [start, stop]
             self.Modified()
 
-    def SetZRange(self, start, stop):
+    def set_z_range(self, start, stop):
         """Set range (min, max) for the grid in the Z-direction
         """
         if self.__zrange != [start, stop]:
@@ -195,7 +199,7 @@ class CreateTensorMesh(AlgorithmBase):
     """
     __displayname__ = 'Create Tensor Mesh'
     __category__ = 'source'
-    def __init__(self, origin=[-350.0, -400.0, 0.0], dataname='Data',
+    def __init__(self, origin=[-350.0, -400.0, 0.0], data_name='Data',
             xcellstr='200 100 50 20*50.0 50 100 200',
             ycellstr='200 100 50 21*50.0 50 100 200',
             zcellstr='20*25.0 50 100 200',):
@@ -205,7 +209,7 @@ class CreateTensorMesh(AlgorithmBase):
         self.__xcells = CreateTensorMesh._ReadCellLine(xcellstr)
         self.__ycells = CreateTensorMesh._ReadCellLine(ycellstr)
         self.__zcells = CreateTensorMesh._ReadCellLine(zcellstr)
-        self.__dataName = dataname
+        self.__data_name = data_name
 
 
     @staticmethod
@@ -226,12 +230,14 @@ class CreateTensorMesh(AlgorithmBase):
 
 
     def GetExtent(self):
+        """Get the extent of the created mesh"""
         ne,nn,nz = len(self.__xcells), len(self.__ycells), len(self.__zcells)
         return (0,ne, 0,nn, 0,nz)
 
 
 
     def _MakeModel(self, pdo):
+        """Generates the output data object"""
         ox,oy,oz = self.__origin[0], self.__origin[1], self.__origin[2]
 
         # Read the cell sizes
@@ -265,6 +271,9 @@ class CreateTensorMesh(AlgorithmBase):
 
 
     def _AddModelData(self, pdo, data):
+        """Add an array to the output data object. If data is None, random
+        values will be generated.
+        """
         nx, ny, nz = pdo.GetDimensions()
         nx, ny, nz = nx-1, ny-1, nz-1
         # ADD DATA to cells
@@ -272,7 +281,7 @@ class CreateTensorMesh(AlgorithmBase):
             data = np.random.rand(nx*ny*nz)
             data = interface.convertArray(data, name='Random Data', deep=True)
         else:
-            data = interface.convertArray(data, name=dataNm, deep=True)
+            data = interface.convertArray(data, name=data_name, deep=True)
         pdo.GetCellData().AddArray(data)
         return pdo
 
@@ -302,7 +311,7 @@ class CreateTensorMesh(AlgorithmBase):
     #### Getters / Setters ####
 
 
-    def SetOrigin(self, x0, y0, z0):
+    def set_origin(self, x0, y0, z0):
         """Set the origin of the output
         """
         if self.__origin != [x0, y0, z0]:
@@ -336,7 +345,7 @@ class CreateTensorMesh(AlgorithmBase):
             self.__zcells = zcells
             self.Modified()
 
-    def SetXCellsStr(self, xcellstr):
+    def set_x_cells_str(self, xcellstr):
         """Set the spacings for the cells in the X direction
 
         Args:
@@ -344,7 +353,7 @@ class CreateTensorMesh(AlgorithmBase):
         xcells = CreateTensorMesh._ReadCellLine(xcellstr)
         self.SetXCells(xcells)
 
-    def SetYCellsStr(self, ycellstr):
+    def set_y_cells_str(self, ycellstr):
         """Set the spacings for the cells in the Y direction
 
         Args:
@@ -352,7 +361,7 @@ class CreateTensorMesh(AlgorithmBase):
         ycells = CreateTensorMesh._ReadCellLine(ycellstr)
         self.SetYCells(ycells)
 
-    def SetZCellsStr(self, zcellstr):
+    def set_z_cells_str(self, zcellstr):
         """Set the spacings for the cells in the Z direction
 
         Args:

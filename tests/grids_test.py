@@ -42,11 +42,11 @@ class TestTableToTimeGrid(TestBase):
     def check_data_fidelity(self, ido, checkme, points=False):
         """`TableToTimeGrid`: data fidelity"""
         wido = dsa.WrapDataObject(ido)
-        for i in range(len(self.titles)):
+        for i, title in enumerate(self.titles):
             if points:
-                arr = wido.PointData[self.titles[i]]
+                arr = wido.PointData[title]
             else:
-                arr = wido.CellData[self.titles[i]]
+                arr = wido.CellData[title]
             self.assertTrue(np.allclose(arr, checkme[i], rtol=RTOL))
 
     def test_simple(self):
@@ -54,28 +54,28 @@ class TestTableToTimeGrid(TestBase):
         # Use filter
         f = TableToTimeGrid()
         f.SetInputDataObject(self.table)
-        f.SetDimensions(0, 1, 2, 3)
-        f.SetExtent(20, 2, 5, 2)
-        f.SetSpacing(5, 5, 5)
-        f.SetOrigin(3.3, 6.0, 7)
-        f.SetUsePoints(False)
-        f.SetOrder('C')
+        f.set_dimensions(0, 1, 2, 3)
+        f.set_extent(20, 2, 5, 2)
+        f.set_spacing(5, 5, 5)
+        f.set_origin(3.3, 6.0, 7)
+        f.set_use_points(False)
+        f.set_order('C')
         for t in range(2):
             f.UpdateTimeStep(t)
             ido = f.GetOutput()
             checkme = [None] * len(self.arrs)
-            for i in range(len(self.arrs)):
-                a = self.arrs[i].reshape((20, 2, 5, 2))[:,:,:,t]
+            for i, arr in enumerate(self.arrs):
+                a = arr.reshape((20, 2, 5, 2))[:,:,:,t]
                 checkme[i] = a.flatten(order='F') # Order F because in XYZ format
             self.check_data_fidelity(ido, checkme, points=False)
-        f.SetUsePoints(True)
+        f.set_use_points(True)
         f.Update()
         for t in range(2):
             f.UpdateTimeStep(t)
             ido = f.GetOutput()
             checkme = [None] * len(self.arrs)
-            for i in range(len(self.arrs)):
-                a = self.arrs[i].reshape((20, 2, 5, 2))[:,:,:,t]
+            for i, arr in enumerate(self.arrs):
+                a = arr.reshape((20, 2, 5, 2))[:,:,:,t]
                 checkme[i] = a.flatten(order='F') # Order F because in XYZ format
             self.check_data_fidelity(ido, checkme, points=True)
         return
@@ -91,32 +91,32 @@ class TestTableToTimeGrid(TestBase):
         # Use filter
         f = TableToTimeGrid()
         f.SetInputDataObject(self.table)
-        f.SetDimensions(1, 2, 0, 3)
-        f.SetExtent(20, 2, 5, 2)
-        f.SetSpacing(5, 5, 5)
-        f.SetOrigin(3.3, 6.0, 7)
-        f.SetUsePoints(False)
-        f.SetOrder('F')
+        f.set_dimensions(1, 2, 0, 3)
+        f.set_extent(20, 2, 5, 2)
+        f.set_spacing(5, 5, 5)
+        f.set_origin(3.3, 6.0, 7)
+        f.set_use_points(False)
+        f.set_order('F')
         for t in range(2):
             f.UpdateTimeStep(t)
             ido = f.GetOutput()
             self.assertEqual(ido.GetDimensions(), (3, 6, 21))
             checkme = [None] * len(self.arrs)
-            for i in range(len(self.arrs)):
-                a = self.arrs[i].reshape((20, 2, 5, 2), order='F')[:,:,:,t]
+            for i, arr in enumerate(self.arrs):
+                a = arr.reshape((20, 2, 5, 2), order='F')[:,:,:,t]
                 a = sepit(a)
                 checkme[i] = a.flatten(order='F') # Order F because in XYZ format
 
             self.check_data_fidelity(ido, checkme, points=False)
-        f.SetUsePoints(True)
+        f.set_use_points(True)
         f.Update()
         for t in range(2):
             f.UpdateTimeStep(t)
             ido = f.GetOutput()
             self.assertEqual(ido.GetDimensions(), (2, 5, 20))
             checkme = [None] * len(self.arrs)
-            for i in range(len(self.arrs)):
-                a = self.arrs[i].reshape((20, 2, 5, 2), order='F')[:,:,:,t]
+            for i, arr in enumerate(self.arrs):
+                a = arr.reshape((20, 2, 5, 2), order='F')[:,:,:,t]
                 a = sepit(a)
                 checkme[i] = a.flatten(order='F') # Order F because in XYZ format
             self.check_data_fidelity(ido, checkme, points=True)
@@ -150,9 +150,9 @@ class TestReverseImageDataAxii(TestBase):
         # Now perfrom the reverse for only X:
         f = ReverseImageDataAxii()
         f.SetInputDataObject(image)
-        f.SetFlipX(True)
-        f.SetFlipY(False)
-        f.SetFlipZ(False)
+        f.set_flip_x(True)
+        f.set_flip_y(False)
+        f.set_flip_z(False)
         f.Update()
         ido = f.GetOutput()
         self.assertIsNotNone(ido)
@@ -164,9 +164,9 @@ class TestReverseImageDataAxii(TestBase):
         self.assertTrue(np.allclose(test, np.flip(arr, axis=2).flatten(), rtol=RTOL))
         self.assertTrue(np.allclose(testCells, np.flip(arrCells, axis=2).flatten(), rtol=RTOL))
         # Now perfrom the reverse for all axii:
-        f.SetFlipX(True)
-        f.SetFlipY(True)
-        f.SetFlipZ(True)
+        f.set_flip_x(True)
+        f.set_flip_y(True)
+        f.set_flip_z(True)
         f.Update()
         ido = f.GetOutput()
         self.assertIsNotNone(ido)
@@ -209,49 +209,49 @@ class TestTranslateGridOrigin(TestBase):
         """`TranslateGridOrigin`: make sure works"""
         f = TranslateGridOrigin()
         f.SetInputDataObject(self.idi)
-        f.SetCorner(1)
+        f.set_corner(1)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
         self.assertEqual(ox, 100-19)
         self.assertEqual(oy, 100)
         self.assertEqual(oz, 100)
-        f.SetCorner(2)
+        f.set_corner(2)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
         self.assertEqual(ox, 100)
         self.assertEqual(oy, 100-1)
         self.assertEqual(oz, 100)
-        f.SetCorner(3)
+        f.set_corner(3)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
         self.assertEqual(ox, 100-19)
         self.assertEqual(oy, 100-1)
         self.assertEqual(oz, 100)
-        f.SetCorner(4)
+        f.set_corner(4)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
         self.assertEqual(ox, 100)
         self.assertEqual(oy, 100)
         self.assertEqual(oz, 100-9)
-        f.SetCorner(5)
+        f.set_corner(5)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
         self.assertEqual(ox, 100-19)
         self.assertEqual(oy, 100)
         self.assertEqual(oz, 100-9)
-        f.SetCorner(6)
+        f.set_corner(6)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
         self.assertEqual(ox, 100)
         self.assertEqual(oy, 100-1)
         self.assertEqual(oz, 100-9)
-        f.SetCorner(7)
+        f.set_corner(7)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
@@ -270,7 +270,7 @@ class TestSurferGridReader(TestBase):
     def setUp(self):
         TestBase.setUp(self)
         self.test_dir = tempfile.mkdtemp()
-        self.fname = os.path.join(os.path.dirname(__file__), 'data/surfer-grid.grd')
+        self.filename = os.path.join(os.path.dirname(__file__), 'data/surfer-grid.grd')
 
 
     def tearDown(self):
@@ -282,8 +282,8 @@ class TestSurferGridReader(TestBase):
     def test(self):
         """`SurferGridReader` and `WriteImageDataToSurfer`: Test reader and writer for Surfer format"""
         reader = SurferGridReader()
-        reader.AddFileName(self.fname)
-        reader.SetDataName('foo')
+        reader.AddFileName(self.filename)
+        reader.set_data_name('foo')
         reader.Update()
         img = reader.GetOutput()
         self.assertIsNotNone(img)
@@ -295,14 +295,14 @@ class TestSurferGridReader(TestBase):
 
         # Now test writer
         writer = WriteImageDataToSurfer()
-        fname = os.path.join(self.test_dir, 'test-writer.grd')
-        writer.SetFileName(fname)
+        filename = os.path.join(self.test_dir, 'test-writer.grd')
+        writer.SetFileName(filename)
         writer.Write(img, 'foo')
 
         # Read again and compare
         reader = SurferGridReader()
-        reader.AddFileName(fname)
-        reader.SetDataName('foo2')
+        reader.AddFileName(filename)
+        reader.set_data_name('foo2')
         reader.Update()
         read = reader.GetOutput()
         self.assertIsNotNone(read)
@@ -329,7 +329,7 @@ class TestExtractTopography(TestBase):
     def setUp(self):
         TestBase.setUp(self)
         # create a volumetric data set
-        self.grid = PVGeo.model_build.CreateTensorMesh().Apply()
+        self.grid = PVGeo.model_build.CreateTensorMesh().apply()
         # create an unudulating surface in the grid domain
         #   make XY random in the grid bounds
         #   make Z ranome within a very small domain inside the grid
@@ -356,9 +356,9 @@ class TestExtractTopography(TestBase):
         topo = interface.pointsToPolyData(points)
 
 
-        # # Apply filter
-        filter = ExtractTopography()
-        grd = filter.Apply(data, topo)
+        # # apply filter
+        f = ExtractTopography()
+        grd = f.apply(data, topo)
 
         # Test the output
         self.assertIsNotNone(grd)
@@ -384,16 +384,16 @@ class TestExtractTopography(TestBase):
 
     def test_underneath(self):
         """`ExtractTopography`: Test extraction on underneath surface"""
-        extracted = ExtractTopography(op='underneath').Apply(self.grid, self.points)
+        extracted = ExtractTopography(op='underneath').apply(self.grid, self.points)
 
 
     def test_intersection(self):
         """`ExtractTopography`: Test extraction on surface"""
-        extracted = ExtractTopography(op='intersection', tolerance=50).Apply(self.grid, self.points)
+        extracted = ExtractTopography(op='intersection', tolerance=50).apply(self.grid, self.points)
 
     def test_shifted_surface(self):
         """`ExtractTopography`: Test extraction for shifted surface"""
-        extracted = ExtractTopography(op='intersection', tolerance=50, offset=-250).Apply(self.grid, self.points)
+        extracted = ExtractTopography(op='intersection', tolerance=50, offset=-250).apply(self.grid, self.points)
 
 
 class TestCellCenterWriter(TestBase):
@@ -403,7 +403,7 @@ class TestCellCenterWriter(TestBase):
     def setUp(self):
         TestBase.setUp(self)
         self.test_dir = tempfile.mkdtemp()
-        self.fname = os.path.join(self.test_dir, 'test.txt')
+        self.filename = os.path.join(self.test_dir, 'test.txt')
 
 
     def tearDown(self):
@@ -415,8 +415,8 @@ class TestCellCenterWriter(TestBase):
     def test(self):
         """`SurferGridReader` and `WriteImageDataToSurfer`: Test reader and writer for Surfer format"""
         # create some input datasets
-        grid0 = PVGeo.model_build.CreateTensorMesh().Apply()
-        grid1 = PVGeo.model_build.CreateEvenRectilinearGrid().Apply()
+        grid0 = PVGeo.model_build.CreateTensorMesh().apply()
+        grid1 = PVGeo.model_build.CreateEvenRectilinearGrid().apply()
 
         # make a composite dataset
         comp = vtk.vtkMultiBlockDataSet()
@@ -426,8 +426,8 @@ class TestCellCenterWriter(TestBase):
 
         # test the wirter
         writer = WriteCellCenterData()
-        fname = os.path.join(self.fname)
-        writer.SetFileName(fname)
+        filename = os.path.join(self.filename)
+        writer.SetFileName(filename)
         writer.Write(comp)
 
 
@@ -441,7 +441,7 @@ class TestEsriGridReader(TestBase):
         TestBase.setUp(self)
         # Create a temporary directory
         self.test_dir = tempfile.mkdtemp()
-        self.fname = os.path.join(self.test_dir, 'test.dat')
+        self.filename = os.path.join(self.test_dir, 'test.dat')
         sample = """ncols         4
 nrows         6
 xllcorner     100.0
@@ -455,7 +455,7 @@ NODATA_value  -9999
 88 75 27 9
 13 5 1 -9999
 """
-        with open(self.fname, 'w') as f:
+        with open(self.filename, 'w') as f:
             f.write(sample)
 
 
@@ -469,7 +469,7 @@ NODATA_value  -9999
     def test_read(self):
         """`EsriGridReader`: Test the read"""
         reader = EsriGridReader()
-        reader.AddFileName(self.fname)
+        reader.AddFileName(self.filename)
         reader.Update()
         img = reader.GetOutput()
         # Test data object

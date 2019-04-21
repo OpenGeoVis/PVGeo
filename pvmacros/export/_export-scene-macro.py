@@ -317,8 +317,8 @@ writerMapping['vtkImageData'] = dumpImageData
 # -----------------------------------------------------------------------------
 
 def writeDataSet(filePath, dataset, outputDir, colorArrayInfo, newDSName = None, compress = True):
-  fileName = newDSName if newDSName else os.path.basename(filePath)
-  datasetDir = os.path.join(outputDir, fileName)
+  filename = newDSName if newDSName else os.path.basename(filePath)
+  datasetDir = os.path.join(outputDir, filename)
   dataDir = os.path.join(datasetDir, 'data')
 
   if not os.path.exists(dataDir):
@@ -326,7 +326,7 @@ def writeDataSet(filePath, dataset, outputDir, colorArrayInfo, newDSName = None,
 
   root = {}
   root['metadata'] = {}
-  root['metadata']['name'] = fileName
+  root['metadata']['name'] = filename
 
   writer = writerMapping[dataset.GetClassName()]
   if writer:
@@ -349,17 +349,17 @@ def generateSceneName():
     proxyGroup = val.SMProxy.GetXMLGroup()
     if 'sources' in proxyGroup:
       nameParts.append(key[0])
-  fileName = '-'.join(nameParts)
+  filename = '-'.join(nameParts)
 
   # limit to a reasonable length characters
-  fileName = fileName[:12] if len(fileName) > 15 else fileName
-  if len(fileName) == 0:
-    fileName = 'SceneExport'
-  sceneName = '%s' % fileName
+  filename = filename[:12] if len(filename) > 15 else filename
+  if len(filename) == 0:
+    filename = 'SceneExport'
+  sceneName = '%s' % filename
   counter = 0
   while os.path.isfile(os.path.join(ROOT_OUTPUT_DIRECTORY, '%s%s' % (sceneName, FILENAME_EXTENSION))):
     counter += 1
-    sceneName = '%s (%d)' % (fileName, counter)
+    sceneName = '%s (%d)' % (filename, counter)
 
   return sceneName
 
@@ -460,7 +460,7 @@ for rIdx in range(renderers.GetNumberOfItems()):
         if dataObject.GetNumberOfBlocks() == 1:
           dataset = dataObject.GetBlock(0)
         else:
-          print('Apply geometry filter')
+          print('apply geometry filter')
           gf = vtkCompositeDataGeometryFilter()
           gf.SetInputData(dataObject)
           gf.Update()
@@ -601,8 +601,8 @@ zf = zipfile.ZipFile(sceneFileName, mode='w')
 
 try:
   for dirName, subdirList, fileList in os.walk(outputDir):
-    for fname in fileList:
-      fullPath = os.path.join(dirName, fname)
+    for filename in fileList:
+      fullPath = os.path.join(dirName, filename)
       relPath = '%s/%s' % (sceneName, os.path.relpath(fullPath, outputDir))
       zf.write(fullPath, arcname=relPath, compress_type=compression)
 finally:

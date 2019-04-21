@@ -15,9 +15,9 @@ __all__ = [
     'placeArrInTable',
     'getdTypes',
     'pointsToPolyData',
-    'addArraysFromDataFrame',
+    'add_arraysFromDataFrame',
     'convertCellConn',
-    'getArray',
+    'get_array',
     'getDataDict',
     'wrapvtki',
 ]
@@ -142,8 +142,8 @@ def placeArrInTable(ndarr, titles, pdo):
     if len(np.shape(ndarr)) == 1:
         # First check if it is an array full of tuples (varying type)
         if isinstance(ndarr[0], (tuple, np.void)):
-            for i in range(len(titles)):
-                placeArrInTable(ndarr['f%d' % i], [titles[i]], pdo)
+            for i, title in enumerate(titles):
+                placeArrInTable(ndarr['f%d' % i], title, pdo)
             return wrapvtki(pdo)
         # Otherwise it is just a 1D array which needs to be 2D
         else:
@@ -255,34 +255,34 @@ def pointsToPolyData(points, copy_z=False):
     return wrapvtki(pdata)
 
 
-def addArraysFromDataFrame(pdo, field, df):
+def add_arraysFromDataFrame(pdo, field, df):
     """Add all of the arrays from a given data frame to an output's data"""
     for key in df.keys():
         VTK_data = convertArray(df[key].values, name=key)
-        _helpers.addArray(pdo, field, VTK_data)
+        _helpers.add_array(pdo, field, VTK_data)
     return wrapvtki(pdo)
 
 
 
-def convertCellConn(cellConn):
+def convertCellConn(cell_connectivity):
     """Converts cell connectivity arrays to a cell matrix array that makes sense
     for VTK cell arrays.
     """
     cellsMat = np.concatenate(
             (
-                np.ones((cellConn.shape[0], 1), dtype=np.int64)*cellConn.shape[1],
-                cellConn
+                np.ones((cell_connectivity.shape[0], 1), dtype=np.int64)*cell_connectivity.shape[1],
+                cell_connectivity
             ),
             axis=1).ravel()
     return nps.numpy_to_vtk(cellsMat, deep=True, array_type=vtk.VTK_ID_TYPE)
 
 
-def getArray(dataset, name, vtkObj=False):
+def get_array(dataset, name, vtk_object=False):
     """Given an input dataset, this will return the named array as a NumPy array
     or a vtkDataArray if spceified
     """
-    arr, field = _helpers.searchForArray(dataset, name)
-    if vtkObj:
+    arr, field = _helpers.search_for_array(dataset, name)
+    if vtk_object:
         return arr
     return convertArray(arr)
 
@@ -292,8 +292,8 @@ def getDataDict(dataset, field='cell'):
     cell/point/field/row data as named NumPy arrays in a dictionary.
     """
     data = {}
-    for key in _helpers.getAllArrayNames(dataset, field):
-        data[key] = np.array(_helpers.getNumPyArray(dataset, field, key))
+    for key in _helpers.get_all_array_names(dataset, field):
+        data[key] = np.array(_helpers.get_numpy_array(dataset, field, key))
     return data
 
 

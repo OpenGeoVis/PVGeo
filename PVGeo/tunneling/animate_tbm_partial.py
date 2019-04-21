@@ -42,17 +42,17 @@ def RequestData():
     #- Grab all fields for input arrays:
     fields = []
     for i in range(4):
-        fields.append(inputhelp.getSelectedArrayField(self, i))
+        fields.append(inputhelp.get_selected_array_field(self, i))
     #- Simply grab the names
     names = []
     for i in range(4):
-        names.append(inputhelp.getSelectedArrayName(self, i))
+        names.append(inputhelp.get_selected_array_name(self, i))
     # Pass array names and associations on to process
     # Get the input arrays
     wpdi = dsa.WrapDataObject(pdi)
     arrs = []
     for i in range(4):
-        arrs.append(inputhelp.getArray(wpdi, fields[i], names[i]))
+        arrs.append(inputhelp.get_array(wpdi, fields[i], names[i]))
 
     # Get indices for TimeSteps
     idcs = np.where(arrs[3] == 2)[0]
@@ -133,10 +133,10 @@ def RequestInformation(self):
     pdi = self.GetInput()
     # Calculate list of timesteps here
     #- Get status array
-    field = inputhelp.getSelectedArrayField(self, 3)
-    name = inputhelp.getSelectedArrayName(self, 3)
+    field = inputhelp.get_selected_array_field(self, 3)
+    name = inputhelp.get_selected_array_name(self, 3)
     wpdi = dsa.WrapDataObject(pdi)
-    statarr = inputhelp.getArray(wpdi, field, name)
+    statarr = inputhelp.get_array(wpdi, field, name)
     idcs = np.where(statarr == 2)[0]
     #- Get number of rows in table and use that for num time steps
     xtime = np.arange(0,len(idcs)*dt,dt, dtype=float)

@@ -2,7 +2,6 @@ __all__ = [
     'OMFReader',
 ]
 
-import numpy as np
 import vtk
 
 import omf
@@ -10,7 +9,6 @@ import omfvtk
 
 from ..base import ReaderBaseBase
 from .. import _helpers
-from ..interface import pointsToPolyData
 
 
 
@@ -26,15 +24,15 @@ class OMFReader(ReaderBaseBase):
             nOutputPorts=1, outputType='vtkMultiBlockDataSet')
         # Properties:
         self._dataselection = vtk.vtkDataArraySelection()
-        self._dataselection.AddObserver("ModifiedEvent", _helpers.createModifiedCallback(self))
+        self._dataselection.AddObserver("ModifiedEvent", _helpers.create_modified_callback(self))
         self.__names = []
         self.__data = dict()
         self.__project = None
 
-    def Modified(self, readAgain=False):
+    def Modified(self, read_again=False):
         """Ensure default is overridden to be false so array selector can call.
         """
-        ReaderBaseBase.Modified(self, readAgain=readAgain)
+        ReaderBaseBase.Modified(self, read_again=read_again)
 
     def GetFileName(self):
         """Super class has file names as a list but we will only handle a single
@@ -47,6 +45,7 @@ class OMFReader(ReaderBaseBase):
     #### Methods for performing the read ####
 
     def _ReadUpFront(self):
+        """Internal functiona to read all data at the start"""
         # Read all elements
         reader = omf.OMFReader(self.GetFileName())
         self.__project = reader.get_project()
@@ -95,6 +94,7 @@ class OMFReader(ReaderBaseBase):
 
 
     def GetDataSelection(self):
+        """Return the current user selection of data elements"""
         if self.NeedToRead():
             self._ReadUpFront()
         return self._dataselection

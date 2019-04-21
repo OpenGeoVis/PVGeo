@@ -24,37 +24,37 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
         PackedBinariesReader.__init__(self)
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(PackedBinariesReader.extensions, readerDescription=PackedBinariesReader.description))
-    def AddFileName(self, fname):
-        PackedBinariesReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.get_file_reader_xml(PackedBinariesReader.extensions, reader_description=PackedBinariesReader.description))
+    def AddFileName(self, filename):
+        PackedBinariesReader.AddFileName(self, filename)
 
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        PackedBinariesReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        PackedBinariesReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return PackedBinariesReader.GetTimestepValues(self)
+        return PackedBinariesReader.get_time_step_values(self)
 
-    @smproperty.xml(_helpers.getDropDownXml('Endian','SetEndian',
+    @smproperty.xml(_helpers.get_drop_down_xml('Endian','set_endian',
         ['Native', 'Little-Endian', 'Big-Endian'],
         help='This is the type memory endianness.'))
-    def SetEndian(self, endian):
-        PackedBinariesReader.SetEndian(self, endian)
+    def set_endian(self, endian):
+        PackedBinariesReader.set_endian(self, endian)
 
-    @smproperty.xml(_helpers.getDropDownXml('DataType','SetDataType',
+    @smproperty.xml(_helpers.get_drop_down_xml('DataType','set_data_type',
         ['Float64', 'Float32', 'Integer4'],
         help='This is data type to read.'))
-    def SetDataType(self, dtype):
-        PackedBinariesReader.SetDataType(self, dtype)
+    def set_data_type(self, dtype):
+        PackedBinariesReader.set_data_type(self, dtype)
 
 
     @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, dataName):
-        PackedBinariesReader.SetDataName(self, dataName)
+    def set_data_name(self, data_name):
+        PackedBinariesReader.set_data_name(self, data_name)
 
 
 ###############################################################################
@@ -72,36 +72,36 @@ class PVGeoMadagascarReader(MadagascarReader):
     #### Seters and Geters ####
 
 
-    @smproperty.xml(_helpers.getFileReaderXml(MadagascarReader.extensions, readerDescription=MadagascarReader.description))
-    def AddFileName(self, fname):
-        MadagascarReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.get_file_reader_xml(MadagascarReader.extensions, reader_description=MadagascarReader.description))
+    def AddFileName(self, filename):
+        MadagascarReader.AddFileName(self, filename)
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        MadagascarReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        MadagascarReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return MadagascarReader.GetTimestepValues(self)
+        return MadagascarReader.get_time_step_values(self)
 
-    @smproperty.xml(_helpers.getDropDownXml('Endian','SetEndian',
+    @smproperty.xml(_helpers.get_drop_down_xml('Endian','set_endian',
         ['Native', 'Little-Endian', 'Big-Endian'],
         help='This is the type memory endianness.'))
-    def SetEndian(self, endian):
-        MadagascarReader.SetEndian(self, endian)
+    def set_endian(self, endian):
+        MadagascarReader.set_endian(self, endian)
 
-    @smproperty.xml(_helpers.getDropDownXml('DataType','SetDataType',
+    @smproperty.xml(_helpers.get_drop_down_xml('DataType','set_data_type',
         ['Float64', 'Float32', 'Integer4'],
         help='This is data type to read.'))
-    def SetDataType(self, dtype):
-        MadagascarReader.SetDataType(self, dtype)
+    def set_data_type(self, dtype):
+        MadagascarReader.set_data_type(self, dtype)
 
 
     @smproperty.stringvector(name='DataName', default_values='Data')
-    def SetDataName(self, dataName):
-        MadagascarReader.SetDataName(self, dataName)
+    def set_data_name(self, data_name):
+        MadagascarReader.set_data_name(self, data_name)
 
 
 
@@ -119,40 +119,40 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(DelimitedTextReader.extensions, readerDescription=DelimitedTextReader.description))
-    def AddFileName(self, fname):
-        DelimitedTextReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.get_file_reader_xml(DelimitedTextReader.extensions, reader_description=DelimitedTextReader.description))
+    def AddFileName(self, filename):
+        DelimitedTextReader.AddFileName(self, filename)
 
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        DelimitedTextReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        DelimitedTextReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return DelimitedTextReader.GetTimestepValues(self)
+        return DelimitedTextReader.get_time_step_values(self)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
-    def SetDelimiter(self, deli):
-        DelimitedTextReader.SetDelimiter(self, deli)
+    def set_delimiter(self, deli):
+        DelimitedTextReader.set_delimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
-    def SetSplitOnWhiteSpace(self, flag):
-        DelimitedTextReader.SetSplitOnWhiteSpace(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='set_split_on_white_space', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def set_split_on_white_space(self, flag):
+        DelimitedTextReader.set_split_on_white_space(self, flag)
 
     @smproperty.intvector(name="SkipRows", default_values=0)
-    def SetSkipRows(self, skip):
-        DelimitedTextReader.SetSkipRows(self, skip)
+    def set_skip_rows(self, skip):
+        DelimitedTextReader.set_skip_rows(self, skip)
 
     @smproperty.stringvector(name="Comments", default_values="!")
-    def SetComments(self, identifier):
-        DelimitedTextReader.SetComments(self, identifier)
+    def set_comments(self, identifier):
+        DelimitedTextReader.set_comments(self, identifier)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Has Titles', command='SetHasTitles', default_values=False, help='A boolean for if the delimited file has header titles for the data arrays.'))
-    def SetHasTitles(self, flag):
-        DelimitedTextReader.SetHasTitles(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Has Titles', command='set_has_titles', default_values=False, help='A boolean for if the delimited file has header titles for the data arrays.'))
+    def set_has_titles(self, flag):
+        DelimitedTextReader.set_has_titles(self, flag)
 
 
 
@@ -170,33 +170,33 @@ class PVGeoXYZTextReader(XYZTextReader):
 
 
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.getFileReaderXml(XYZTextReader.extensions, readerDescription=XYZTextReader.description))
-    def AddFileName(self, fname):
-        XYZTextReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.get_file_reader_xml(XYZTextReader.extensions, reader_description=XYZTextReader.description))
+    def AddFileName(self, filename):
+        XYZTextReader.AddFileName(self, filename)
 
 
 
     @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
-    def SetTimeDelta(self, dt):
-        XYZTextReader.SetTimeDelta(self, dt)
+    def set_time_delta(self, dt):
+        XYZTextReader.set_time_delta(self, dt)
 
     @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """This is critical for registering the timesteps"""
-        return XYZTextReader.GetTimestepValues(self)
+        return XYZTextReader.get_time_step_values(self)
 
     @smproperty.stringvector(name="Delimiter", default_values=" ")
-    def SetDelimiter(self, deli):
-        XYZTextReader.SetDelimiter(self, deli)
+    def set_delimiter(self, deli):
+        XYZTextReader.set_delimiter(self, deli)
 
-    @smproperty.xml(_helpers.getPropertyXml(name='Use Split on Whitespace', command='SetSplitOnWhiteSpace', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
-    def SetSplitOnWhiteSpace(self, flag):
-        XYZTextReader.SetSplitOnWhiteSpace(self, flag)
+    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='set_split_on_white_space', default_values=False, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    def set_split_on_white_space(self, flag):
+        XYZTextReader.set_split_on_white_space(self, flag)
 
     @smproperty.intvector(name="SkipRows", default_values=0)
-    def SetSkipRows(self, skip):
-        XYZTextReader.SetSkipRows(self, skip)
+    def set_skip_rows(self, skip):
+        XYZTextReader.set_skip_rows(self, skip)
 
     @smproperty.stringvector(name="Comments", default_values="!")
-    def SetComments(self, identifier):
-        XYZTextReader.SetComments(self, identifier)
+    def set_comments(self, identifier):
+        XYZTextReader.set_comments(self, identifier)

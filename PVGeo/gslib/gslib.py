@@ -7,7 +7,6 @@ __all__ = [
 __displayname__ = 'GSLib/GeoEAS File I/O'
 
 import numpy as np
-import vtk
 import os
 
 from ..readers import DelimitedTextReader, DelimitedPointsReaderBase
@@ -56,7 +55,7 @@ class GSLibReader(_GSLibReaderMethods, DelimitedTextReader):
     description = 'PVGeo: GSLib Table'
     def __init__(self, outputType='vtkTable', **kwargs):
         DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
-        self.SetSplitOnWhiteSpace(True)
+        self.set_split_on_white_space(True)
 
 
 class GSLibPointSetReader(_GSLibReaderMethods, DelimitedPointsReaderBase):
@@ -69,7 +68,7 @@ class GSLibPointSetReader(_GSLibReaderMethods, DelimitedPointsReaderBase):
     extensions = _GSLibReaderMethods.extensions + 'gslibpts ptset gpts'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
-        self.SetSplitOnWhiteSpace(True)
+        self.set_split_on_white_space(True)
 
 
 
@@ -82,9 +81,10 @@ class WriteTableToGSLib(WriterBase):
         self._header = 'Data saved by PVGeo'
 
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
+    def PerformWriteOut(self, input_data_object, filename, object_name):
+        """Write out the input data object to the GSLib file format"""
         # Get the input data object
-        table = inputDataObject
+        table = input_data_object
 
         numArrs = table.GetRowData().GetNumberOfArrays()
         arrs = []
@@ -107,7 +107,7 @@ class WriteTableToGSLib(WriterBase):
         return 1
 
 
-    def SetHeader(self, header):
+    def set_header(self, header):
         """Set the file header string"""
         if self._header != header:
             self._header = header

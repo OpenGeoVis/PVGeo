@@ -6,7 +6,7 @@ __displayname__ = 'Version Verifier'
 
 try:
     from ._helpers import PVGeoError
-except:
+except ImportError:
     PVGeoError = RuntimeError
 
 def checkNumpy(alert='print'):

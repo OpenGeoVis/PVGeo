@@ -8,7 +8,6 @@ __all__ = [
     'getVTKjsURL',
 ]
 
-import sys
 
 def exportVTKjs(FileName='', compress=False):
     """This function will execute a script to export the current scene from your rendering into the VTKjs shareable file format.

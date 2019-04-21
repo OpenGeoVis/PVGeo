@@ -1,22 +1,22 @@
 __all__ = [
-    '_calculateTimeRange',
-    'updateTimeSteps',
-    'getRequestedTime',
-    'getInputTimeSteps',
-    'getCombinedInputTimeSteps',
+    '_calculate_time_range',
+    'update_time_steps',
+    'get_requested_time',
+    'get_input_time_steps',
+    'get_combined_input_time_steps',
 ]
 
 import numpy as np
 import collections
 
 
-def _calculateTimeRange(nt, dt=1.0):
+def _calculate_time_range(nt, dt=1.0):
     """Discretizes time range accoridng to step size ``dt`` in seconds
     """
     return np.arange(0,nt*dt,dt, dtype=float)
 
 
-def updateTimeSteps(algorithm, nt, dt=1.0, explicit=False):
+def update_time_steps(algorithm, nt, dt=1.0, explicit=False):
     """Handles setting up the timesteps on on the pipeline for a file series reader.
 
     Args:
@@ -36,12 +36,12 @@ def updateTimeSteps(algorithm, nt, dt=1.0, explicit=False):
     else:
         if isinstance(nt, collections.Iterable):
             nt = len(nt)
-        timesteps = _calculateTimeRange(nt, dt=1.0)
+        timesteps = _calculate_time_range(nt, dt=1.0)
     if len(timesteps) < 1:
         # NOTE: we may want to raise a warning here on the dev side.
         #       if developing a new algorithm that uses this, you may want to
         #       know exactly when this failse to update
-        #'updateTimeSteps() is not updating because passed time step values are NULL.'
+        #'update_time_steps() is not updating because passed time step values are NULL.'
         return None
     executive = algorithm.GetExecutive()
     oi = executive.GetOutputInformation(0)
@@ -55,14 +55,14 @@ def updateTimeSteps(algorithm, nt, dt=1.0, explicit=False):
     return timesteps
 
 
-def getRequestedTime(algorithm, outInfoVec, idx=0):
+def get_requested_time(algorithm, outInfo, idx=0):
     """Handles setting up the timesteps on on the pipeline for a file series
     reader.
 
     Args:
         algorithm (vtkDataObject) : The data object (Proxy) on the pipeline
             (pass `self` from algorithm subclasses)
-        outInfoVec (vtkInformationVector) : The output information for the
+        outInfo (vtkInformationVector) : The output information for the
             algorithm
         idx (int) : the index for the output port
 
@@ -71,11 +71,11 @@ def getRequestedTime(algorithm, outInfoVec, idx=0):
 
     Example:
         >>> # Get requested time index
-        >>> i = _helpers.getRequestedTime(self, outInfoVec)
+        >>> i = _helpers.get_requested_time(self, outInfo)
     """
     executive = algorithm.GetExecutive()
-    timesteps = algorithm.GetTimestepValues()
-    outInfo = outInfoVec.GetInformationObject(idx)
+    timesteps = algorithm.get_time_step_values()
+    outInfo = outInfo.GetInformationObject(idx)
     if timesteps is None or len(timesteps) == 0:
         return 0
     elif outInfo.Has(executive.UPDATE_TIME_STEP()) and len(timesteps) > 0:
@@ -83,11 +83,12 @@ def getRequestedTime(algorithm, outInfoVec, idx=0):
         return np.argmin(np.abs(np.array(timesteps) - utime))
     else:
         # if we cant match the time, give first
-        assert(len(timesteps) > 0)
+        if not len(timesteps) > 0:
+            raise AssertionError('Number of timesteps must be greater than 0')
         return 0
 
 
-def getInputTimeSteps(algorithm, port=0, idx=0):
+def get_input_time_steps(algorithm, port=0, idx=0):
     """Get the timestep values for the algorithm's input
 
     Args:
@@ -104,7 +105,7 @@ def getInputTimeSteps(algorithm, port=0, idx=0):
     return ii.Get(executive.TIME_STEPS())
 
 
-def getCombinedInputTimeSteps(algorithm, idx=0):
+def get_combined_input_time_steps(algorithm, idx=0):
     """This will iterate over all input ports and combine their unique timesteps
     for an output algorithm to have.
 

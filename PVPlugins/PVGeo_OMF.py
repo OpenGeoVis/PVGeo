@@ -3,7 +3,6 @@ paraview_plugin_version = '1.1.6'
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import *
-import vtk
 
 # Helpers:
 from PVGeo import _helpers, AlgorithmBase
@@ -25,9 +24,9 @@ class PVGeoOMFReader(OMFReader):
     #### Seters and Geters ####
 
     # TODO: check this to make sure not time varying
-    @smproperty.xml(_helpers.getFileReaderXml(OMFReader.extensions, readerDescription=OMFReader.description))
-    def AddFileName(self, fname):
-        OMFReader.AddFileName(self, fname)
+    @smproperty.xml(_helpers.get_file_reader_xml(OMFReader.extensions, reader_description=OMFReader.description))
+    def AddFileName(self, filename):
+        OMFReader.AddFileName(self, filename)
 
 
     # Array selection API is typical with readers in VTK

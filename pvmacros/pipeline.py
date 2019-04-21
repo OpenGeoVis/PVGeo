@@ -4,16 +4,16 @@ __all__ = [
 
 __displayname__ = 'Pipeline'
 
-def deleteDownstream(input=None):
-    """Delete downstream filters for a given input. If no input provided, all
-    filters on the pipeline will be deleted.
+def deleteDownstream(input_source=None):
+    """Delete downstream filters for a given input source. If no input source
+    provided, all filters on the pipeline will be deleted.
 
     Args:
-        input (str): The name of the object on the pipeline to preserve. 
+        input_source (str): The name of the object on the pipeline to preserve.
 
     """
     import paraview.simple as pvs
-    if input is None:
+    if input_source is None:
         # The below snippet deletes all Filters on the pipeline
         #- i.e. deletes anything that has an input
         #- preserves readers and sources
@@ -22,9 +22,9 @@ def deleteDownstream(input=None):
                 pvs.Delete(f)
     else:
         # Be able to specify upstream source
-        src = pvs.FindSource(input)
+        src = pvs.FindSource(input_source)
         #print('src: ', src)
-        # Delete ALL things downstream of input
+        # Delete ALL things downstream of input_source
         for f in pvs.GetSources().values():
             #print('f: ', f)
             #print('f.Input: ', f.GetProperty("Input"))

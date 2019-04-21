@@ -30,13 +30,14 @@ class TopoReader(DelimitedPointsReaderBase):
     description = 'PVGeo: UBC 3D Topo Files'
     def __init__(self, copy_z=True, **kwargs):
         DelimitedPointsReaderBase.__init__(self, copy_z=copy_z, **kwargs)
-        self.SetHasTitles(False)#kwargs.get('hasTitles', False))
-        self.SetSplitOnWhiteSpace(True)
+        self.set_has_titles(False)#kwargs.get('has_titles', False))
+        self.set_split_on_white_space(True)
         self.__3d = True # TODO: handle 2D topo files as well
         self.__npts = None
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
+        """Internal helper to parse header details for UBC Topo files"""
         # No titles
         # Get number of points
         self.__npts = int(content[0].strip())
@@ -60,12 +61,14 @@ class GravObsReader(DelimitedPointsReaderBase):
     description = 'PVGeo: GIF Gravity Observations'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
-        self.SetHasTitles(False)
-        self.SetSplitOnWhiteSpace(True)
+        self.set_has_titles(False)
+        self.set_split_on_white_space(True)
         self.__npts = None
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
+        """Internal helper to parse header details for UBC Gravity Observation
+        files"""
         # No titles
         # Get number of points
         self.__npts = int(content[0].strip())
@@ -89,12 +92,14 @@ class GravGradReader(DelimitedPointsReaderBase):
     description = 'PVGeo: GIF Gravity Gradiometry Observations'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
-        self.SetHasTitles(False)
-        self.SetSplitOnWhiteSpace(True)
+        self.set_has_titles(False)
+        self.set_split_on_white_space(True)
         self.__npts = None
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
+        """Internal helper to parse header details for UBC Gravity Gradiometry
+        files"""
         # Get components
         comps = content[0].split('=')[1].split(',')
         # Get number of points
@@ -126,8 +131,8 @@ class MagObsReader(DelimitedPointsReaderBase):
     description = 'PVGeo: GIF Magnetic Observations'
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
-        self.SetHasTitles(False)
-        self.SetSplitOnWhiteSpace(True)
+        self.set_has_titles(False)
+        self.set_split_on_white_space(True)
         self.__npts = None
         self.__incl = None
         self.__decl = None
@@ -139,6 +144,8 @@ class MagObsReader(DelimitedPointsReaderBase):
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
+        """Internal helper to parse header details for UBC Magnetic Observations
+        files"""
         # No titles
         self.__incl, self.__decl, self.__geomag = (float(val) for val in content[0].split(self._GetDeli()))
         self.__ainc, self.__adec, self.__dir = (float(val) for val in content[1].split(self._GetDeli()))
@@ -161,6 +168,7 @@ class MagObsReader(DelimitedPointsReaderBase):
 
     @staticmethod
     def ConvertVector(incl, decl, mag=1):
+        """Converts inclination, declinations, and magntidue to an XYZ vector"""
         x = mag * np.cos(np.deg2rad(incl)) * np.cos(np.deg2rad(decl))
         y = mag * np.cos(np.deg2rad(incl)) * np.sin(np.deg2rad(decl))
         z = mag * np.sin(np.deg2rad(incl))
@@ -210,7 +218,7 @@ class GeologyMapper(FilterPreserveTypeBase):
         FilterPreserveTypeBase.__init__(self, **kwargs)
         self.__filename = filename
         self.__deli = delimiter
-        self.__inputArray = [None, None]
+        self.__input_array = [None, None]
 
     @staticmethod
     def _ReadDefinitions(filename, delimiter):
@@ -228,21 +236,22 @@ class GeologyMapper(FilterPreserveTypeBase):
         return geol[geol.keys()[1::]].iloc[arr]
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Get input array
-        field, name = self.__inputArray[0], self.__inputArray[1]
-        #self.__range = NormalizeArray.GetArrayRange(pdi, field, name)
+        field, name = self.__input_array[0], self.__input_array[1]
+        #self.__range = NormalizeArray.get_array_range(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
-        arr = _helpers.getNumPyArray(wpdi, field, name)
+        arr = _helpers.get_numpy_array(wpdi, field, name)
 
         #### Perfrom task ####
         geol = self._ReadDefinitions(self.__filename, self.__deli)
         data = self._MapValues(geol, arr)
 
         pdo.DeepCopy(pdi)
-        interface.addArraysFromDataFrame(pdo, field, data)
+        interface.add_arraysFromDataFrame(pdo, field, data)
 
         return 1
 
@@ -261,21 +270,23 @@ class GeologyMapper(FilterPreserveTypeBase):
                 field, and 6 for row)
             name (int): the name of the array
         """
-        if self.__inputArray[0] != field:
-            self.__inputArray[0] = field
+        if self.__input_array[0] != field:
+            self.__input_array[0] = field
             self.Modified()
-        if self.__inputArray[1] != name:
-            self.__inputArray[1] = name
+        if self.__input_array[1] != name:
+            self.__input_array[1] = name
             self.Modified()
         return 1
 
 
     def SetFileName(self, filename):
+        """Set the file name to read"""
         if self.__filename != filename:
             self.__filename = filename
             self.Modified()
 
-    def SetDelimiter(self, deli):
+    def set_delimiter(self, deli):
+        """Set the delimiter of the ASCII file"""
         if self.__deli != deli:
             self.__deli = deli
             self.Modified()

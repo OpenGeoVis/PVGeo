@@ -24,20 +24,20 @@ class PVGeoCreateEvenRectilinearGrid(CreateEvenRectilinearGrid):
     #### Setters / Getters ####
 
     @smproperty.intvector(name="Extent", default_values=[10, 10, 10])
-    def SetExtent(self, nx, ny, nz):
-        CreateEvenRectilinearGrid.SetExtent(self, nx, ny, nz)
+    def set_extent(self, nx, ny, nz):
+        CreateEvenRectilinearGrid.set_extent(self, nx, ny, nz)
 
     @smproperty.doublevector(name="X Range", default_values=[-1.0, 1.0])
-    def SetXRange(self, start, stop):
-        CreateEvenRectilinearGrid.SetXRange(self, start, stop)
+    def set_x_range(self, start, stop):
+        CreateEvenRectilinearGrid.set_x_range(self, start, stop)
 
     @smproperty.doublevector(name="Y Range", default_values=[-1.0, 1.0])
-    def SetYRange(self, start, stop):
-        CreateEvenRectilinearGrid.SetYRange(self, start, stop)
+    def set_y_range(self, start, stop):
+        CreateEvenRectilinearGrid.set_y_range(self, start, stop)
 
     @smproperty.doublevector(name="Z Range", default_values=[-1.0, 1.0])
-    def SetZRange(self, start, stop):
-        CreateEvenRectilinearGrid.SetZRange(self, start, stop)
+    def set_z_range(self, start, stop):
+        CreateEvenRectilinearGrid.set_z_range(self, start, stop)
 
 
 ###############################################################################
@@ -51,20 +51,20 @@ class PVGeoCreateTensorMesh(CreateTensorMesh):
         CreateTensorMesh.__init__(self)
 
     @smproperty.stringvector(name="X Cells", default_values='200 100 50 20*50.0 50 100 200')
-    def SetXCellsStr(self, xcellstr):
-        CreateTensorMesh.SetXCellsStr(self, xcellstr)
+    def set_x_cells_str(self, xcellstr):
+        CreateTensorMesh.set_x_cells_str(self, xcellstr)
 
     @smproperty.stringvector(name="Y Cells", default_values='200 100 50 21*50.0 50 100 200')
-    def SetYCellsStr(self, ycellstr):
-        CreateTensorMesh.SetYCellsStr(self, ycellstr)
+    def set_y_cells_str(self, ycellstr):
+        CreateTensorMesh.set_y_cells_str(self, ycellstr)
 
     @smproperty.stringvector(name="Z Cells", default_values='20*25.0 50 100 200')
-    def SetZCellsStr(self, zcellstr):
-        CreateTensorMesh.SetZCellsStr(self, zcellstr)
+    def set_z_cells_str(self, zcellstr):
+        CreateTensorMesh.set_z_cells_str(self, zcellstr)
 
     @smproperty.doublevector(name="Origin", default_values=[-350.0, -400.0, 0.0])
-    def SetOrigin(self, x0, y0, z0):
-        CreateTensorMesh.SetOrigin(self, x0, y0, z0)
+    def set_origin(self, x0, y0, z0):
+        CreateTensorMesh.set_origin(self, x0, y0, z0)
 
 
 ###############################################################################
@@ -82,16 +82,16 @@ class PVGeoCreateUniformGrid(CreateUniformGrid):
 
 
     @smproperty.intvector(name="Extent", default_values=[10, 10, 10])
-    def SetExtent(self, nx, ny, nz):
-        CreateUniformGrid.SetExtent(self, nx, ny, nz)
+    def set_extent(self, nx, ny, nz):
+        CreateUniformGrid.set_extent(self, nx, ny, nz)
 
     @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0])
-    def SetSpacing(self, dx, dy, dz):
-        CreateUniformGrid.SetSpacing(self, dx, dy, dz)
+    def set_spacing(self, dx, dy, dz):
+        CreateUniformGrid.set_spacing(self, dx, dy, dz)
 
     @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0, 0.0])
-    def SetOrigin(self, x0, y0, z0):
-        CreateUniformGrid.SetOrigin(self, x0, y0, z0)
+    def set_origin(self, x0, y0, z0):
+        CreateUniformGrid.set_origin(self, x0, y0, z0)
 
 
 ###############################################################################
@@ -104,8 +104,8 @@ class PVGeoOutlineContinents(OutlineContinents):
         OutlineContinents.__init__(self)
 
     @smproperty.doublevector(name="Radius", default_values=6371.0e6)
-    def SetRadius(self, radius):
-        OutlineContinents.SetRadius(self, radius)
+    def set_radius(self, radius):
+        OutlineContinents.set_radius(self, radius)
 
 
 ###############################################################################
@@ -118,18 +118,18 @@ class PVGeoGlobeSource(GlobeSource):
         GlobeSource.__init__(self)
 
     @smproperty.doublevector(name="Radius", default_values=6371.0e6)
-    def SetRadius(self, radius):
-        GlobeSource.SetRadius(self, radius)
+    def set_radius(self, radius):
+        GlobeSource.set_radius(self, radius)
 
     @smproperty.intvector(name="Meridians", default_values=36)
     @smdomain.intrange(min=2, max=100)
-    def SetNumberOfMeridians(self, n):
-        GlobeSource.SetNumberOfMeridians(self, n)
+    def set_n_meridians(self, n):
+        GlobeSource.set_n_meridians(self, n)
 
     @smproperty.intvector(name="Parallels", default_values=15)
     @smdomain.intrange(min=2, max=100)
-    def SetNumberOfParallels(self, n):
-        GlobeSource.SetNumberOfParallels(self, n)
+    def set_n_parallels(self, n):
+        GlobeSource.set_n_parallels(self, n)
 
 
 ###############################################################################

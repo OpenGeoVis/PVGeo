@@ -18,7 +18,7 @@ class TestOutlineContinents(TestBase):
     def test_generation(self):
         """`OutlineContinents`: make sure works."""
         s = OutlineContinents()
-        s.SetRadius(6000.0)
+        s.set_radius(6000.0)
         s.Update()
         e = s.GetOutput()
         self.assertIsNotNone(e)
@@ -37,7 +37,7 @@ class TestGlobeSource(TestBase):
     def test_generation(self):
         """`GlobeSource`: make sure works."""
         s = GlobeSource()
-        s.SetRadius(6000.0)
+        s.set_radius(6000.0)
         s.Update()
         e = s.GetOutput()
         self.assertIsNotNone(e)
@@ -55,9 +55,9 @@ class TestCreateUniformGrid(TestBase):
     def test_generation(self):
         """`CreateUniformGrid`: make sure works."""
         g = CreateUniformGrid()
-        g.SetExtent(20, 10, 35)
-        g.SetOrigin(33.3, 45.5, 6.6)
-        g.SetSpacing(5,1,7)
+        g.set_extent(20, 10, 35)
+        g.set_origin(33.3, 45.5, 6.6)
+        g.set_spacing(5,1,7)
         g.Update()
         grid = g.GetOutput()
         self.assertIsNotNone(grid)
@@ -79,10 +79,10 @@ class TestCreateEvenRectilinearGrid(TestBase):
     def test_generation(self):
         """`CreateEvenRectilinearGrid`: make sure works."""
         g = CreateEvenRectilinearGrid()
-        g.SetExtent(20, 10, 35)
-        g.SetXRange(0, 100)
-        g.SetYRange(-100, 0)
-        g.SetZRange(10, 50)
+        g.set_extent(20, 10, 35)
+        g.set_x_range(0, 100)
+        g.set_y_range(-100, 0)
+        g.set_z_range(10, 50)
         g.Update()
         grid = g.GetOutput()
         self.assertIsNotNone(grid)
@@ -103,10 +103,10 @@ class TestCreateTensorMesh(TestBase):
     def test_generation(self):
         """`CreateTensorMesh`: make sure works."""
         g = CreateTensorMesh()
-        g.SetXCellsStr('200 100 50 30*50.0 50 100 200')
-        g.SetYCellsStr('200 100 50 25*50.0 50 100 200')
-        g.SetZCellsStr('25*25.0 50 100 200')
-        g.SetOrigin(-300.0, -450.0, 10.0)
+        g.set_x_cells_str('200 100 50 30*50.0 50 100 200')
+        g.set_y_cells_str('200 100 50 25*50.0 50 100 200')
+        g.set_z_cells_str('25*25.0 50 100 200')
+        g.set_origin(-300.0, -450.0, 10.0)
         g.Update()
         grid = g.GetOutput()
         self.assertIsNotNone(grid)

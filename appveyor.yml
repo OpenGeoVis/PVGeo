@@ -19,7 +19,6 @@ image: Visual Studio 2015
 
 platform:
 - x64
-- x86
 
 init:
   - ps: if ($Env:PLATFORM -eq "x64") { $Env:CONDA = "${Env:CONDA}-x64" }

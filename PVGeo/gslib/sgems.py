@@ -64,6 +64,7 @@ class SGeMSGridReader(GSLibReader):
         return (0,n1, 0,n2, 0,n3)
 
     def _ExtractHeader(self, content):
+        """Internal helper to parse header info for the SGeMS file format"""
         titles, content = GSLibReader._ExtractHeader(self, content)
         h = self.GetFileHeader()
         try:
@@ -82,7 +83,7 @@ class SGeMSGridReader(GSLibReader):
         # Get output:
         output = vtk.vtkImageData.GetData(outInfo)
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         if self.NeedToRead():
             self._ReadUpFront()
         # Generate the data object
@@ -118,19 +119,19 @@ class SGeMSGridReader(GSLibReader):
         return 1
 
 
-    def SetSpacing(self, dx, dy, dz):
+    def set_spacing(self, dx, dy, dz):
         """Set the spacing for each axial direction"""
         spac = (dx, dy, dz)
         if self.__spacing != spac:
             self.__spacing = spac
-            self.Modified(readAgain=False)
+            self.Modified(read_again=False)
 
-    def SetOrigin(self, ox, oy, oz):
+    def set_origin(self, ox, oy, oz):
         """Set the origin corner of the grid"""
         origin = (ox, oy, oz)
         if self.__origin != origin:
             self.__origin = origin
-            self.Modified(readAgain=False)
+            self.Modified(read_again=False)
 
 
 
@@ -147,9 +148,10 @@ class WriteImageDataToSGeMS(WriterBase):
         WriterBase.__init__(self, inputType=inputType, ext='SGeMS')
 
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
+    def PerformWriteOut(self, input_data_object, filename, object_name):
+        """Write out the input ``vtkImage`` data to the SGeMS file format"""
         # Get the input data object
-        grd = inputDataObject
+        grd = input_data_object
 
         # Get grid dimensions and minus one becuase this defines nodes
         nx, ny, nz = grd.GetDimensions()

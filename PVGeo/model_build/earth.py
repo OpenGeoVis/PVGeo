@@ -9,7 +9,7 @@ import vtk
 from scipy.spatial import Delaunay
 from vtk.util import numpy_support as nps
 
-from .. import _helpers, interface
+from .. import interface
 from ..base import AlgorithmBase
 
 
@@ -26,6 +26,7 @@ class OutlineContinents(AlgorithmBase):
         self.__radius = radius
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate the output"""
         pdo = self.GetOutputData(outInfo, 0)
         earth = vtk.vtkEarthSource()
         earth.SetRadius(self.__radius)
@@ -34,7 +35,8 @@ class OutlineContinents(AlgorithmBase):
         pdo.ShallowCopy(earth.GetOutput())
         return 1
 
-    def SetRadius(self, radius):
+    def set_radius(self, radius):
+        """Set the radius of the globe. Defualt is 6.371.0e9 meters"""
         if self.__radius != radius:
             self.__radius = radius
             self.Modified()
@@ -94,10 +96,10 @@ class GlobeSource(AlgorithmBase):
         points = interface.pointsToPolyData(pts).GetPoints()
         texcoords = interface.convertArray(tex, name='Texture Coordinates')
         # Now generate triangles
-        cellConn = Delaunay(pos).simplices.astype(int)
+        cell_connectivity = Delaunay(pos).simplices.astype(int)
         cells = vtk.vtkCellArray()
-        cells.SetNumberOfCells(cellConn.shape[0])
-        cells.SetCells(cellConn.shape[0], interface.convertCellConn(cellConn))
+        cells.SetNumberOfCells(cell_connectivity.shape[0])
+        cells.SetCells(cell_connectivity.shape[0], interface.convertCellConn(cell_connectivity))
         # Generate output
         output = vtk.vtkPolyData()
         output.SetPoints(points)
@@ -112,19 +114,19 @@ class GlobeSource(AlgorithmBase):
         pdo.ShallowCopy(globe)
         return 1
 
-    def SetRadius(self, radius):
+    def set_radius(self, radius):
         """Set the radius of the globe. Defualt is 6.371.0e9 meters"""
         if self.__radius != radius:
             self.__radius = radius
             self.Modified()
 
-    def SetNumberOfMeridians(self, n):
+    def set_n_meridians(self, n):
         """Set the number of meridians to use"""
         if self.__nmer != n:
             self.__nmer = n
             self.Modified()
 
-    def SetNumberOfParallels(self, n):
+    def set_n_parallels(self, n):
         """Set the number of parallels to use"""
         if self.__npar != n:
             self.__npar = n

@@ -25,19 +25,19 @@ class TableToTimeGrid(FilterBase):
     """
     __displayname__ = 'Table To Time Grid'
     __category__ = 'filter'
-    def __init__(self, extent=[10, 10, 10, 1], order='C',
-                 spacing=[1.0, 1.0, 1.0], origin=[0.0, 0.0, 0.0],
-                 dims=[0, 1, 2, 3], dt=1.0, points=False, **kwargs):
+    def __init__(self, extent=(10, 10, 10, 1), order='C',
+                 spacing=(1.0, 1.0, 1.0), origin=(0.0, 0.0, 0.0),
+                 dims=(0, 1, 2, 3), dt=1.0, points=False, **kwargs):
         FilterBase.__init__(self, nInputPorts=1, nOutputPorts=1,
                 inputType='vtkTable', outputType='vtkImageData', **kwargs)
         if len(extent) != 4:
             raise _helpers.PVGeoError('`extent` must be of length 4.')
-        self.__extent = extent
-        self.__dims = dims # these are indexes for the filter to use on the reshape.
+        self.__extent = list(extent)
+        self.__dims = list(dims) # these are indexes for the filter to use on the reshape.
         # NOTE: self.__dims[0] is the x axis index, etc., self.__dims[3] is the time axis
-        self.__spacing = spacing # image data spacing
-        self.__origin = origin # image data origin
-        self.__order = order # unpacking order: 'C' or 'F'
+        self.__spacing = list(spacing) # image data spacing
+        self.__origin = list(origin) # image data origin
+        self.__order = list(order) # unpacking order: 'C' or 'F'
         self.__data = None # this is where we hold the data so entire filter does
         # not execute on every time step. Data will be a disctionary of 4D arrays
         # each 4D array will be in (nx, ny, nz, nt) shape
@@ -50,6 +50,7 @@ class TableToTimeGrid(FilterBase):
 
 
     def _SetData(self, table):
+        """Internal helper to restructure the inpt table arrays"""
         self.__data = dict()
         dims = np.array([d for d in self.__dims])
         sd = dims.argsort()
@@ -68,6 +69,7 @@ class TableToTimeGrid(FilterBase):
         return
 
     def _BuildImageData(self, img):
+        """Internal helper to consturct the output"""
         if self.__needToUpdateOutput:
             # Clean out the output data object
             img.DeepCopy(vtk.vtkImageData())
@@ -86,12 +88,12 @@ class TableToTimeGrid(FilterBase):
         img.SetOrigin(ox, oy, oz)
         return img
 
-    def _UpdateTimeSteps(self):
+    def _update_time_steps(self):
         """For internal use only: appropriately sets the timesteps.
         """
         nt = self.__extent[self.__dims[3]]
         if nt > 1:
-            self.__timesteps = _helpers.updateTimeSteps(self, nt, self.__dt)
+            self.__timesteps = _helpers.update_time_steps(self, nt, self.__dt)
         return 1
 
 
@@ -107,7 +109,7 @@ class TableToTimeGrid(FilterBase):
         if self.__needToRun:
             self._SetData(table)
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         for k, arr in self.__data.items():
             # NOTE: Keep order='F' because of the way the grid is already reshaped
             #       the 3D array has XYZ structure so VTK requires F ordering
@@ -133,62 +135,63 @@ class TableToTimeGrid(FilterBase):
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         # Now set the number of timesteps:
-        self._UpdateTimeSteps()
+        self._update_time_steps()
         return 1
 
 
 
     #### Setters / Getters ####
 
-    def Modified(self, runAgain=True):
+    def Modified(self, run_again=True):
         """Call modified if the filter needs to run again"""
-        if runAgain:
-            self.__needToRun = runAgain
+        if run_again:
+            self.__needToRun = run_again
             self.__needToUpdateOutput = True
         FilterBase.Modified(self)
 
-    def SetExtent(self, nx, ny, nz, nt):
+    def set_extent(self, nx, ny, nz, nt):
         """Set the extent of the output grid"""
         if self.__extent != [nx, ny, nz, nt]:
             self.__extent = [nx, ny, nz, nt]
             self.Modified()
 
-    def SetDimensions(self, x, y, z, t):
+    def set_dimensions(self, x, y, z, t):
+        """Set the dimensions of the output grid"""
         if self.__dims != [x, y, z, t]:
             self.__dims = [x, y, z, t]
             self.Modified()
 
-    def SetSpacing(self, dx, dy, dz):
+    def set_spacing(self, dx, dy, dz):
         """Set the spacing for the points along each axial direction"""
         if self.__spacing != [dx, dy, dz]:
             self.__spacing = [dx, dy, dz]
             self.Modified()
 
-    def SetOrigin(self, x0, y0, z0):
+    def set_origin(self, x0, y0, z0):
         """Set the origin of the output `vtkImageData`"""
         if self.__origin != [x0, y0, z0]:
             self.__origin = [x0, y0, z0]
             self.Modified()
 
-    def SetOrder(self, order):
+    def set_order(self, order):
         """Set the reshape order (`'C'` or `'F'`)"""
         if self.__order != order:
             self.__order = order
-            self.Modified(runAgain=True)
+            self.Modified(run_again=True)
 
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps on the pipeline.
         """
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
-    def SetTimeDelta(self, dt):
+    def set_time_delta(self, dt):
         """An advanced property to set the time step in seconds.
         """
         if dt != self.__dt:
             self.__dt = dt
             self.Modified()
 
-    def SetUsePoints(self, flag):
+    def set_use_points(self, flag):
         """Set whether or not to place the data on the nodes/cells of the grid.
         True places data on nodes, false places data at cell centers (CellData).
         In ParaView, switching can be a bit buggy: be sure to turn the visibility
@@ -196,7 +199,7 @@ class TableToTimeGrid(FilterBase):
         """
         if self.__usePointData != flag:
             self.__usePointData = flag
-            self.Modified(runAgain=True)
+            self.Modified(run_again=True)
 
 
 ###############################################################################
@@ -209,13 +212,14 @@ class ReverseImageDataAxii(FilterBase):
     """
     __displayname__ = 'Reverse Image Data Axii'
     __category__ = 'filter'
-    def __init__(self, axes=[True, True, True]):
+    def __init__(self, axes=(True, True, True)):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkImageData',
             nOutputPorts=1, outputType='vtkImageData')
-        self.__axes = axes[::-1] # Z Y X (FORTRAN)
+        self.__axes = list(axes[::-1]) # Z Y X (FORTRAN)
 
     def _ReverseGridAxii(self, idi, ido):
+        """Internal helper to reverse data along specified axii"""
         # Copy over input to output to be flipped around
         # Deep copy keeps us from messing with the input data
         ox, oy, oz = idi.GetOrigin()
@@ -267,21 +271,21 @@ class ReverseImageDataAxii(FilterBase):
     #### Seters and Geters ####
 
 
-    def SetFlipX(self, flag):
+    def set_flip_x(self, flag):
         """Set the filter to flip th input data along the X-axis
         """
         if self.__axes[2] != flag:
             self.__axes[2] = flag
             self.Modified()
 
-    def SetFlipY(self, flag):
+    def set_flip_y(self, flag):
         """Set the filter to flip th input data along the Y-axis
         """
         if self.__axes[1] != flag:
             self.__axes[1] = flag
             self.Modified()
 
-    def SetFlipZ(self, flag):
+    def set_flip_z(self, flag):
         """Set the filter to flip th input data along the Z-axis
         """
         if self.__axes[0] != flag:
@@ -308,6 +312,7 @@ class TranslateGridOrigin(FilterBase):
 
 
     def _Translate(self, pdi, pdo):
+        """Internal helper to translate the inputs origin"""
         if pdo is None:
             pdo = vtk.vtkImageData()
 
@@ -373,7 +378,7 @@ class TranslateGridOrigin(FilterBase):
     #### Seters and Geters ####
 
 
-    def SetCorner(self, corner):
+    def set_corner(self, corner):
         """Set the corner to use
 
         Args:

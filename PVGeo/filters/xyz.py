@@ -53,19 +53,19 @@ class AddCellConnToPoints(FilterBase):
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
-        self.__cellType = kwargs.get('cell_type', vtk.VTK_POLY_LINE)
-        self.__usenbr = kwargs.get('nearestNbr', False)
+        self.__cell_type = kwargs.get('cell_type', vtk.VTK_POLY_LINE)
+        self.__usenbr = kwargs.get('nearest_nbr', False)
         self.__unique = True
 
 
-    def _ConnectCells(self, pdi, pdo, logTime=False):
+    def _connect_cells(self, pdi, pdo, log_time=False):
         """Internal helper to perfrom the connection
         """
         # NOTE: Type map is specified in vtkCellType.h
-        cellType = self.__cellType
+        cell_type = self.__cell_type
         nrNbr = self.__usenbr
 
-        if logTime:
+        if log_time:
             startTime = datetime.now()
 
         # Get the Points over the NumPy interface
@@ -75,16 +75,16 @@ class AddCellConnToPoints(FilterBase):
             # Remove repeated points
             points = np.unique(points, axis=0)
 
-        def _makePolyCell(ptsi):
+        def _make_poly_cell(ptsi):
             cell = vtk.vtkPolyLine()
             cell.GetPointIds().SetNumberOfIds(len(ptsi))
             for i in ptsi:
                 cell.GetPointIds().SetId(i, ptsi[i])
             return cell
 
-        def _makeLineCell(ptsi):
+        def _make_line_cell(ptsi):
             if len(ptsi) != 2:
-                raise _helpers.PVGeoError('_makeLineCell() only handles two points')
+                raise _helpers.PVGeoError('_make_line_cell() only handles two points')
             aLine = vtk.vtkLine()
             aLine.GetPointIds().SetId(0, ptsi[0])
             aLine.GetPointIds().SetId(1, ptsi[1])
@@ -97,51 +97,51 @@ class AddCellConnToPoints(FilterBase):
             try:
                 # sklearn's KDTree is faster: use it if available
                 from sklearn.neighbors import KDTree as Tree
-            except:
+            except ImportError:
                 from scipy.spatial import cKDTree  as Tree
             # VTK_Line
             og = np.array([0.0,0.0,0.0]).reshape(1, -1)
-            if cellType == vtk.VTK_LINE:
+            if cell_type == vtk.VTK_LINE:
                 tree = Tree(points)
                 ind = tree.query(og, k=numPoints)[1].ravel()
                 for i in range(len(ind)-1):
                     # Get indices of k nearest points
                     ptsi = [ind[i], ind[i+1]]
-                    cell = _makeLineCell(ptsi)
+                    cell = _make_line_cell(ptsi)
                     cells.InsertNextCell(cell)
                     points = np.delete(points, 0, 0) # Deletes first row
             # VTK_PolyLine
-            elif cellType == vtk.VTK_POLY_LINE:
+            elif cell_type == vtk.VTK_POLY_LINE:
                 tree = Tree(points)
                 ptsi = tree.query(og, k=numPoints)[1].ravel()
-                cell = _makePolyCell(ptsi.ravel())
+                cell = _make_poly_cell(ptsi.ravel())
                 cells.InsertNextCell(cell)
             else:
-                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
+                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cell_type)
         else:
             # VTK_PolyLine
-            if cellType == vtk.VTK_POLY_LINE:
+            if cell_type == vtk.VTK_POLY_LINE:
                 ptsi = [i for i in range(numPoints)]
-                cell = _makePolyCell(ptsi)
+                cell = _make_poly_cell(ptsi)
                 cells.InsertNextCell(cell)
             # VTK_Line
-            elif cellType == vtk.VTK_LINE:
+            elif cell_type == vtk.VTK_LINE:
                 for i in range(0, numPoints-1):
                     ptsi = [i, i+1]
-                    cell = _makeLineCell(ptsi)
+                    cell = _make_line_cell(ptsi)
                     cells.InsertNextCell(cell)
             else:
-                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cellType)
+                raise _helpers.PVGeoError('Cell Type %d not ye implemented.' % cell_type)
 
-        if logTime:
+        if log_time:
             print((datetime.now() - startTime))
         # Now add points and cells to output
         pdo.SetPoints(pdi.GetPoints())
         pdo.SetLines(cells)
         # copy point data
-        _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        _helpers.copy_arrays_to_point_data(pdi, pdo, 0) # 0 is point data
         # Copy cell data if type is LINE
-        if cellType == vtk.VTK_LINE:
+        if cell_type == vtk.VTK_LINE:
             # Be sure to rearange for Nearest neighbor approxiamtion
             for i in range(pdi.GetCellData().GetNumberOfArrays()):
                 vtkarr = pdi.GetCellData().GetArray(i)
@@ -160,21 +160,21 @@ class AddCellConnToPoints(FilterBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
-        self._ConnectCells(pdi, pdo)
+        self._connect_cells(pdi, pdo)
         return 1
 
 
     #### Seters and Geters ####
 
 
-    def SetCellType(self, cellType):
+    def set_cell_type(self, cell_type):
         """Set the cell typ by the integer id as specified in `vtkCellType.h`
         """
-        if cellType != self.__cellType:
-            self.__cellType = cellType
+        if cell_type != self.__cell_type:
+            self.__cell_type = cell_type
             self.Modified()
 
-    def SetUseNearestNbr(self, flag):
+    def set_use_nearest_nbr(self, flag):
         """Set a flag on whether to a KDTree nearest neighbor
         algorithm to sort the points to before adding linear connectivity.
         """
@@ -182,7 +182,7 @@ class AddCellConnToPoints(FilterBase):
             self.__usenbr = flag
             self.Modified()
 
-    def SetUseUniquePoints(self, flag):
+    def set_use_unique_points(self, flag):
         """Set a flag on whether to only use unique points"""
         if flag != self.__unique:
             self.__unique = flag
@@ -208,17 +208,17 @@ class PointsToTube(AddCellConnToPoints):
         self.__capping = capping
 
 
-    def _ConnectCells(self, pdi, pdo, logTime=False):
-        """This uses the parent's ``_ConnectCells()`` to build a tub around
+    def _connect_cells(self, pdi, pdo, log_time=False):
+        """This uses the parent's ``_connect_cells()`` to build a tub around
         """
-        AddCellConnToPoints._ConnectCells(self, pdi, pdo, logTime=logTime)
+        AddCellConnToPoints._connect_cells(self, pdi, pdo, log_time=log_time)
         tube = vtk.vtkTubeFilter()
         tube.SetInputData(pdo)
         # User Defined Parameters
         tube.SetCapping(self.__capping)
         tube.SetRadius(self.__radius)
         tube.SetNumberOfSides(self.__numSides)
-        # Apply the filter
+        # apply the filter
         tube.Update()
         pdo.ShallowCopy(tube.GetOutput())
         return pdo
@@ -226,21 +226,23 @@ class PointsToTube(AddCellConnToPoints):
 
     #### Seters and Geters ####
 
-    def SetRadius(self, radius):
+    def set_radius(self, radius):
         """Set the radius of the tube
         """
         if self.__radius != radius:
             self.__radius = radius
             self.Modified()
 
-    def SetNumberOfSides(self, num):
+    def set_number_of_sides(self, num):
         """Set the number of sides (resolution) for the tube
         """
         if self.__numSides != num:
             self.__numSides = num
             self.Modified()
 
-    def SetCapping(self, flag):
+    def set_capping(self, flag):
+        """Set a boolean flag on whether or not to cap the ends of the tube
+        """
         if self.__capping != flag:
             self.__capping = flag
             self.Modified()
@@ -260,11 +262,11 @@ class LonLatToUTM(FilterBase):
         FilterBase.__init__(self, inputType='vtkPolyData', outputType='vtkPolyData', **kwargs)
         self.__zone = 11,
         self.__ellps = 'WGS84'
-        self.SetZone(kwargs.get('zone', 11)) # User defined
-        self.SetEllps(kwargs.get('ellps', 'WGS84')) # User defined
+        self.set_zone(kwargs.get('zone', 11)) # User defined
+        self.set_ellps(kwargs.get('ellps', 'WGS84')) # User defined
 
     @staticmethod
-    def GetAvailableEllps(idx=None):
+    def get_available_ellps(idx=None):
         """Returns the available ellps
         """
         import pyproj
@@ -277,7 +279,7 @@ class LonLatToUTM(FilterBase):
         if idx is not None: return ellps[idx]
         return ellps
 
-    def __Convert2D(self, lon, lat, elev):
+    def __convert_2d(self, lon, lat, elev):
         """Converts 2D Lon Lat coords to 2D XY UTM points"""
         import pyproj
         p = pyproj.Proj(proj='utm', zone=self.__zone, ellps=self.__ellps)
@@ -285,6 +287,7 @@ class LonLatToUTM(FilterBase):
         return np.c_[utm_x, utm_y, elev]
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -295,21 +298,23 @@ class LonLatToUTM(FilterBase):
             raise _helpers.PVGeoError('Input data object does not have points to convert.')
         coords = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
         # Now Conver the points
-        points = self.__Convert2D(coords[:, 0], coords[:, 1], coords[:, 2])
+        points = self.__convert_2d(coords[:, 0], coords[:, 1], coords[:, 2])
         pdo.DeepCopy(interface.pointsToPolyData(points))
-        _helpers.copyArraysToPointData(pdi, pdo, 0) # 0 is point data
+        _helpers.copy_arrays_to_point_data(pdi, pdo, 0) # 0 is point data
         return 1
 
-    def SetZone(self, zone):
+    def set_zone(self, zone):
+        """Set the UTM zone number"""
         if zone < 1 or zone > 60:
             raise _helpers.PVGeoError('Zone (%d) is invalid.' % zone)
         if self.__zone != zone:
             self.__zone = int(zone)
             self.Modified()
 
-    def SetEllps(self, ellps):
+    def set_ellps(self, ellps):
+        """Set the ellipsoid type"""
         if isinstance(ellps, int):
-            ellps = self.GetAvailableEllps(idx=ellps)
+            ellps = self.get_available_ellps(idx=ellps)
         if not isinstance(ellps, str):
             raise _helpers.PVGeoError('Ellps must be a string.')
         if self.__ellps != ellps:
@@ -332,7 +337,8 @@ class RotationTool(object):
         self.DECIMALS = decimals
 
     @staticmethod
-    def _GetRotationMatrix(theta):
+    def _get_rotation_matrix(theta):
+        """Internal helper to generate a rotation matrix given a rotation angle"""
         xx = np.cos(theta)
         xy = -np.sin(theta)
         yx = np.sin(theta)
@@ -349,7 +355,7 @@ class RotationTool(object):
         return mat
 
     @staticmethod
-    def RotateAround(pts, theta, origin):
+    def rotate_around(pts, theta, origin):
         """Rotate points around an origins given an anlge on the XY plane
         """
         xarr, yarr = pts[:,0], pts[:,1]
@@ -359,17 +365,17 @@ class RotationTool(object):
         return np.vstack((qx, qy)).T
 
     @staticmethod
-    def Rotate(pts, theta):
+    def rotate(pts, theta):
         """Rotate points around (0,0,0) given an anlge on the XY plane
         """
-        rot = RotationTool._GetRotationMatrix(theta)
+        rot = RotationTool._get_rotation_matrix(theta)
         rotated = pts.dot(rot)
         if not isinstance(theta, np.ndarray):
             return rotated
         return np.swapaxes(rotated, 0, 1)
 
     @staticmethod
-    def DistanceBetween(pts):
+    def distance_between(pts):
         """Gets the distance between two points
         """
         if pts.ndim < 3:
@@ -377,26 +383,27 @@ class RotationTool(object):
         return np.sqrt((pts[:, 0,0] - pts[:, 1,0])**2 + (pts[:, 0,1] - pts[:, 1,1])**2)
 
     @staticmethod
-    def CosBetween(pts):
+    def cos_between(pts):
         """Gets the cosine between two points
         """
         if pts.ndim < 3:
             xdiff = abs(pts[0,0] - pts[1,0])
-            dist = RotationTool.DistanceBetween(pts)
+            dist = RotationTool.distance_between(pts)
             return np.arccos(xdiff/dist)
         # Otherwise we have a set of points
         xdiff = abs(pts[:, 0,0] - pts[:, 1,0])
-        dist = RotationTool.DistanceBetween(pts)
+        dist = RotationTool.distance_between(pts)
         return np.arccos(xdiff/dist)
 
     @staticmethod
-    def SinBetween(pts):
+    def sin_between(pts):
+        """Calculate the sin angle between two points"""
         ydiff = abs(pts[0,1] - pts[1,1])
-        dist = RotationTool.DistanceBetween(pts)
+        dist = RotationTool.distance_between(pts)
         return np.arcsin(ydiff/dist)
 
     @staticmethod
-    def RotationMatrix(vector_orig, vector_fin):
+    def rotation_matrix(vector_orig, vector_fin):
         """Calculate the rotation matrix required to rotate from one vector to another.
         For the rotation of one vector to another, there are an infinit series of rotation matrices
         possible.  Due to axially symmetry, the rotation axis can be any vector lying in the symmetry
@@ -459,15 +466,15 @@ class RotationTool(object):
         return R
 
 
-    # def _ConvergeAngle2(self, pt1, pt2):
+    # def _converge_angle2(self, pt1, pt2):
     #     """internal use only: pts should only be a two neighboring points"""
     #     # Make the theta range up to 90 degrees to rotate points through
     #     #- angles = [0.0, 90.0)
     #     angles = np.arange(0.0, np.pi/2, self.RESOLUTION)
-    #     pts = self.Rotate(np.vstack((pt1, pt2)), angles)
+    #     pts = self.rotate(np.vstack((pt1, pt2)), angles)
     #     # Get the angles between the points
-    #     c = self.CosBetween(pts)
-    #     dist = self.DistanceBetween(pts)
+    #     c = self.cos_between(pts)
+    #     dist = self.distance_between(pts)
     #
     #     # Find angles that satisfy grid conditions
     #     xidx = np.argwhere(abs(c - np.pi/2.0) < (1 * 10**-self.DECIMALS))
@@ -481,7 +488,7 @@ class RotationTool(object):
     #         raise _helpers.PVGeoError('No angle found')
 
 
-    def _ConvergeAngle(self, pt1, pt2):
+    def _converge_angle(self, pt1, pt2):
         """Internal use only: pts should only be a two neighboring points.
         """
         # Make the theta range up to 90 degrees to rotate points through
@@ -494,9 +501,9 @@ class RotationTool(object):
         #     raise RuntimeError()
         pts = np.vstack((pt1, pt2))
 
-        rotated = self.Rotate(pts, angles) # Points rotated for all angles
-        cosbtw = self.CosBetween(rotated)
-        distbtw = self.DistanceBetween(rotated)
+        rotated = self.rotate(pts, angles) # Points rotated for all angles
+        cosbtw = self.cos_between(rotated)
+        distbtw = self.distance_between(rotated)
         # Now find minimum
 
         # X axis
@@ -511,7 +518,7 @@ class RotationTool(object):
             if self.DECIMALS < 0:
                 self.DECIMALS = 0
                 raise _helpers.PVGeoError('No angle found.')
-            return self._ConvergeAngle(pt1, pt2)
+            return self._converge_angle(pt1, pt2)
 
         # Figure out of the two points share the x axis or y axis and return
         if len(xmin) > 0 and len(ymin) > 0:
@@ -526,13 +533,13 @@ class RotationTool(object):
         raise _helpers.PVGeoError('No angle found. Precision too low/high.')
 
 
-    def _EstimateAngleAndSpacing(self, pts, sample=.5):
+    def _estimate_angle_and_spacing(self, pts, sample=0.5):
         """internal use only
         """
         try:
             # sklearn's KDTree is faster: use it if available
             from sklearn.neighbors import KDTree as Tree
-        except:
+        except ImportError:
             from scipy.spatial import cKDTree  as Tree
         # Creat the indexing range for searching the points:
         num = len(pts)
@@ -552,11 +559,11 @@ class RotationTool(object):
         idx = 0
         for i in rng:
             # OPTIMIZE
-            ax, angles[idx], dist = self._ConvergeAngle(pt1all[i], pt2all[i])
+            ax, angles[idx], dist = self._converge_angle(pt1all[i], pt2all[i])
             distances[ax].append(dist)
             idx += 1
         #######################################################################
-        #TODO??? angles, distances = self._ConvergeAngle(pt1all, pt2all)
+        #TODO??? angles, distances = self._converge_angle(pt1all, pt2all)
         #######################################################################
         #######################################################################
         dx, dy = distances[0], distances[1]
@@ -577,15 +584,16 @@ class RotationTool(object):
         return angle, dx[0], dy[0]
 
 
-    def EstimateAndRotate(self, x, y, z):
+    def estimate_and_rotate(self, x, y, z):
         """A method to estimate the rotation of a set of points and correct
         that rotation on the XY plane
         """
-        assert(len(x) == len(y) == len(z))
+        if not (len(x) == len(y) == len(z)):
+            raise AssertionError('Must have same number of coordinates for all components.')
         idxs = np.argwhere(z == z[0])
         pts = np.hstack((x[idxs], y[idxs]))
-        angle, dx, dy = self._EstimateAngleAndSpacing(pts)
-        inv = self.Rotate(np.vstack((x, y)).T, angle)
+        angle, dx, dy = self._estimate_angle_and_spacing(pts)
+        inv = self.rotate(np.vstack((x, y)).T, angle)
         return inv[:,0], inv[:,1], z, dx, dy, angle
 
 
@@ -598,14 +606,16 @@ class RotatePoints(FilterBase):
     """
     __displayname__ = 'Rotate Points'
     __category__ = 'filter'
-    def __init__(self, angle=45.0, origin=[0.0, 0.0], useCorner=True):
+    def __init__(self, angle=45.0, origin=None, use_corner=True):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkPolyData',
             nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.__angle = angle
+        if origin is None:
+            origin = [0.0, 0.0]
         self.__origin = origin
-        self.__useCorner = useCorner
+        self.__use_corner = use_corner
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output.
@@ -618,17 +628,17 @@ class RotatePoints(FilterBase):
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         points = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
         origin = self.__origin
-        if self.__useCorner:
+        if self.__use_corner:
             idx = np.argmin(points[:,0])
             origin = [points[idx,0], points[idx,1]]
-        points[:,0:2] = RotationTool.RotateAround(points[:,0:2], self.__angle, origin)
+        points[:,0:2] = RotationTool.rotate_around(points[:,0:2], self.__angle, origin)
         pdo.DeepCopy(pdi)
         pts = pdo.GetPoints()
-        for i in range(len(points)):
-            pts.SetPoint(i, points[i])
+        for i, pt in enumerate(points):
+            pts.SetPoint(i, pt)
         return 1
 
-    def SetRotationDegrees(self, theta):
+    def set_rotation_degrees(self, theta):
         """Sets the rotational angle in degrees.
         """
         theta = np.deg2rad(theta)
@@ -636,19 +646,19 @@ class RotatePoints(FilterBase):
             self.__angle = theta
             self.Modified()
 
-    def SetOrigin(self, xo, yo):
+    def set_origin(self, xo, yo):
         """Sets the origin to perform the rotate around.
         """
         if self.__origin != [xo, yo]:
             self.__origin = [xo, yo]
             self.Modified()
 
-    def SetUseCorner(self, flag):
+    def set_use_corner(self, flag):
         """A flag to use a corner of the input data set as the rotational
         origin.
         """
-        if self.__useCorner != flag:
-            self.__useCorner = flag
+        if self.__use_corner != flag:
+            self.__use_corner = flag
             self.Modified()
 
 
@@ -666,6 +676,7 @@ class ExtractPoints(FilterBase):
             nOutputPorts=1, outputType='vtkPolyData')
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -681,7 +692,7 @@ class ExtractPoints(FilterBase):
         f.Update()
         d = f.GetOutput()
         pdo.ShallowCopy(interface.pointsToPolyData(points))
-        _helpers.copyArraysToPointData(d, pdo, 0) # 0 is point data
+        _helpers.copy_arrays_to_point_data(d, pdo, 0) # 0 is point data
         return 1
 
 
@@ -693,9 +704,10 @@ class ExtractCellCenters(FilterBase):
         FilterBase.__init__(self, nInputPorts=1, inputType='vtkDataSet',
                     nOutputPorts=1, outputType='vtkPolyData', **kwargs)
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
-        pdi = self.GetInputData(inInfoVec, 0, 0)
-        pdo = self.GetOutputData(outInfoVec, 0)
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
         # Find cell centers
         filt = vtk.vtkCellCenters()
         filt.SetInputDataObject(pdi)
@@ -720,9 +732,10 @@ class AppendCellCenters(FilterPreserveTypeBase):
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self, **kwargs)
 
-    def RequestData(self, request, inInfoVec, outInfoVec):
-        pdi = self.GetInputData(inInfoVec, 0, 0)
-        pdo = self.GetOutputData(outInfoVec, 0)
+    def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
+        pdi = self.GetInputData(inInfo, 0, 0)
+        pdo = self.GetOutputData(outInfo, 0)
         # Find cell centers
         filt = vtk.vtkCellCenters()
         filt.SetInputDataObject(pdi)
@@ -762,13 +775,14 @@ class IterateOverPoints(FilterBase):
         self.__normal = (1.0, 0.0, 0.0)
 
 
-    def _UpdateTimeSteps(self):
+    def _update_time_steps(self):
         """For internal use only
         """
-        self.__timesteps = _helpers.updateTimeSteps(self, self.__n, self.__dt)
+        self.__timesteps = _helpers.update_time_steps(self, self.__n, self.__dt)
 
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         # Get number of points
@@ -777,7 +791,7 @@ class IterateOverPoints(FilterBase):
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         # Now grab point at this timestep
         pt = pdi.GetPoints().GetPoint(self.__tindex[i])
         # Calculate normal
@@ -800,14 +814,14 @@ class IterateOverPoints(FilterBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         # Get number of points
         self.__original = pdi.GetNumberOfPoints()
-        self.SetDecimate(self.__decimate)
+        self.set_decimate(self.__decimate)
         # register time:
-        self._UpdateTimeSteps()
+        self._update_time_steps()
         return 1
 
     #### Public Getters / Setters ####
 
-    def SetDecimate(self, percent):
+    def set_decimate(self, percent):
         """Set the percent (1 to 100) to decimate
         """
         if percent > 100 or percent < 1:
@@ -815,27 +829,29 @@ class IterateOverPoints(FilterBase):
         self.__decimate = percent
         self.__n = int(self.__original * (percent/100.0))
         self.__tindex = np.linspace(0, self.__original-1, self.__n, dtype=int)
-        self._UpdateTimeSteps()
+        self._update_time_steps()
         self.Modified()
 
-    def SetTimeDelta(self, dt):
+    def set_time_delta(self, dt):
         """
         Set the time step interval in seconds
         """
         if self.__dt != dt:
             self.__dt = dt
-            self._UpdateTimeSteps()
+            self._update_time_steps()
             self.Modified()
 
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps
         """
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def GetPoint(self):
+        """Get the current point"""
         return list(self.__point)
 
-    def GetNormal(self):
+    def get_normal(self):
+        """Get the current normal vector"""
         return list(self.__normal)
 
 
@@ -848,12 +864,12 @@ class ConvertUnits(FilterPreserveTypeBase):
     """
     __displayname__ = 'Convert XYZ Units'
     __category__ = 'filter'
-    def __init__(self, **kwargs):
+    def __init__(self, conversion='meter_to_feet', **kwargs):
         FilterPreserveTypeBase.__init__(self, **kwargs)
-        self.__conversion = 'meter_to_feet'
+        self.__conversion = conversion
 
     @staticmethod
-    def LookupConversions(getkeys=False):
+    def LookupConversions(get_keys=False):
         """All Available conversions
 
         Return:
@@ -863,12 +879,12 @@ class ConvertUnits(FilterPreserveTypeBase):
             meter_to_feet=3.2808399,
             feet_to_meter=1/3.2808399,
         )
-        if getkeys:
+        if get_keys:
             return convs.keys()
         return convs
 
     def RequestData(self, request, inInfo, outInfo):
-        """Execute on pipeline"""
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         # Get number of points
@@ -886,7 +902,7 @@ class ConvertUnits(FilterPreserveTypeBase):
 
 
 
-    def SetConversion(self, key):
+    def set_conversion(self, key):
         """Set the conversion via a lookup table"""
         convs = self.LookupConversions()
         if isinstance(key, str):
@@ -923,7 +939,7 @@ class BuildSurfaceFromPoints(FilterBase):
         if not isinstance(zcoords, (str, list, tuple, np.ndarray)):
             raise TypeError('zcoords of bad type.')
         if isinstance(zcoords, str):
-            self.SetZCoordsStr(zcoords)
+            self.set_z_coords_str(zcoords)
         else:
             self.SetZCoords(zcoords)
 
@@ -1017,7 +1033,7 @@ class BuildSurfaceFromPoints(FilterBase):
             self.__zcoords = zcoords
             self.Modified()
 
-    def SetZCoordsStr(self, zcoordstr):
+    def set_z_coords_str(self, zcoordstr):
         """Set the spacings for the cells in the Z direction
 
         Args:

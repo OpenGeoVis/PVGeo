@@ -12,7 +12,6 @@ import numpy as np
 import pandas as pd
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-from vtk.util import numpy_support as nps
 
 from .. import _helpers, interface
 from ..base import FilterBase,  FilterPreserveTypeBase
@@ -57,14 +56,16 @@ class CombineTables(FilterBase):
         # Get number of rows
         nrows = pdi0.GetNumberOfRows()
         nrows1 = pdi1.GetNumberOfRows()
-        assert(nrows == nrows1)
+        if not (nrows == nrows1):
+            raise AssertionError('Tables must have the same number of rows')
 
         for i in range(pdi1.GetRowData().GetNumberOfArrays()):
             arr = pdi1.GetRowData().GetArray(i)
             pdo.GetRowData().AddArray(arr)
         return 1
 
-    def Apply(self, table0, table1):
+    def apply(self, table0, table1):
+        """Run the algorithm on the two input tables"""
         self.SetInputDataObject(0, table0)
         self.SetInputDataObject(1, table1)
         self.Update()
@@ -92,7 +93,7 @@ class ReshapeTable(FilterBase):
         self.__names = kwargs.get('names', [])
         self.__order = kwargs.get('order', 'F')
 
-    def _Reshape(self, pdi, pdo):
+    def _reshape(self, pdi, pdo):
         """Internal helper to perfrom the reshape
         """
         # Get number of columns
@@ -144,13 +145,13 @@ class ReshapeTable(FilterBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
-        self._Reshape(pdi, pdo)
+        self._reshape(pdi, pdo)
         return 1
 
 
     #### Seters and Geters ####
 
-    def SetNames(self, names):
+    def set_names(self, names):
         """Set names using a semicolon (;) seperated string or a list of strings
 
         Args:
@@ -164,17 +165,18 @@ class ReshapeTable(FilterBase):
             self.__names = names
             self.Modified()
 
-    def AddName(self, name):
+    def add_name(self, name):
         """Use to append a name to the list of data array names for the output
         table.
         """
         self.__names.append(name)
         self.Modified()
 
-    def GetNames(self):
+    def get_names(self):
+        """Returns a list of the names given to the new arrays"""
         return self.__names
 
-    def SetNumberOfColumns(self, ncols):
+    def set_number_of_columns(self, ncols):
         """Set the number of columns for the output ``vtkTable``
         """
         if isinstance(ncols, float):
@@ -183,7 +185,7 @@ class ReshapeTable(FilterBase):
             self.__ncols = ncols
             self.Modified()
 
-    def SetNumberOfRows(self, nrows):
+    def set_number_of_rows(self, nrows):
         """Set the number of rows for the output ``vtkTable``
         """
         if isinstance(nrows, float):
@@ -192,7 +194,7 @@ class ReshapeTable(FilterBase):
             self.__nrows = nrows
             self.Modified()
 
-    def SetOrder(self, order):
+    def set_order(self, order):
         """Set the reshape order (``'C'`` of ``'F'``)
         """
         if self.__order != order:
@@ -211,7 +213,7 @@ class ExtractArray(FilterBase):
         FilterBase.__init__(self,
             nInputPorts=1, inputType='vtkDataSet',
             nOutputPorts=1, outputType='vtkTable')
-        self.__inputArray = [None, None]
+        self.__input_array = [None, None]
 
 
     def RequestData(self, request, inInfo, outInfo):
@@ -223,8 +225,8 @@ class ExtractArray(FilterBase):
 
 
         # Note user has to select a single array to save out
-        field, name = self.__inputArray[0], self.__inputArray[1]
-        vtkarr = _helpers.getVTKArray(pdi, field, name)
+        field, name = self.__input_array[0], self.__input_array[1]
+        vtkarr = _helpers.get_vtk_array(pdi, field, name)
 
         table.GetRowData().AddArray(vtkarr)
 
@@ -241,18 +243,21 @@ class ExtractArray(FilterBase):
                 field, and 6 for row)
             name (int): the name of the array
         """
-        if self.__inputArray[0] != field:
-            self.__inputArray[0] = field
+        if self.__input_array[0] != field:
+            self.__input_array[0] = field
             self.Modified()
-        if self.__inputArray[1] != name:
-            self.__inputArray[1] = name
+        if self.__input_array[1] != name:
+            self.__input_array[1] = name
             self.Modified()
         return 1
 
-    def Apply(self, inputDataObject, arrayName):
-        self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
-        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+    def apply(self, input_data_object, array_name):
+        """Run the algorithm on the input data object, specifying the array name
+        to extract.
+        """
+        self.SetInputDataObject(input_data_object)
+        arr, field = _helpers.search_for_array(input_data_object, array_name)
+        self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
@@ -271,19 +276,20 @@ class SplitTableOnArray(FilterBase):
     def __init__(self):
         FilterBase.__init__(self, nInputPorts=1, inputType='vtkTable',
                             nOutputPorts=1, outputType='vtkMultiBlockDataSet')
-        self.__inputArray = [None, None]
+        self.__input_array = [None, None]
 
 
     def RequestData(self, request, inInfo, outInfo):
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         table = self.GetInputData(inInfo, 0, 0)
         # Get number of points
         output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
         #### Perfrom task ####
         # Get input array
-        field, name = self.__inputArray[0], self.__inputArray[1]
+        field, name = self.__input_array[0], self.__input_array[1]
         wtbl = dsa.WrapDataObject(table)
-        spliton = _helpers.getNumPyArray(wtbl, field, name)
+        spliton = _helpers.get_numpy_array(wtbl, field, name)
         uniq = np.unique(spliton)
         # Split the input data based on indices
         df = interface.tableToDataFrame(table)
@@ -309,19 +315,22 @@ class SplitTableOnArray(FilterBase):
                 field, and 6 for row)
             name (int): the name of the array
         """
-        if self.__inputArray[0] != field:
-            self.__inputArray[0] = field
+        if self.__input_array[0] != field:
+            self.__input_array[0] = field
             self.Modified()
-        if self.__inputArray[1] != name:
-            self.__inputArray[1] = name
+        if self.__input_array[1] != name:
+            self.__input_array[1] = name
             self.Modified()
         return 1
 
 
-    def Apply(self, inputDataObject, arrayName):
-        self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
-        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+    def apply(self, input_data_object, array_name):
+        """Run the algorithm on the input data object, specifying the array name
+        to use for the split.
+        """
+        self.SetInputDataObject(input_data_object)
+        arr, field = _helpers.search_for_array(input_data_object, array_name)
+        self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
@@ -339,17 +348,17 @@ class AppendTableToCellData(FilterPreserveTypeBase):
     __category__ = 'filter'
     def __init__(self):
         FilterPreserveTypeBase.__init__(self, nInputPorts=2)
-        self._preservePort = 0 # ensure port 0's type is preserved
+        self._preserve_port = 0 # ensure port 0's type is preserved
         self.__timesteps = None
 
 
-    def _UpdateTimeSteps(self):
+    def _update_time_steps(self):
         """For internal use only: appropriately sets the timesteps.
         """
         # Use the inputs' timesteps: this merges the timesteps values
-        tsAll = _helpers.getCombinedInputTimeSteps(self)
+        tsAll = _helpers.get_combined_input_time_steps(self)
         # Use both inputs' time steps
-        self.__timesteps = _helpers.updateTimeSteps(self, tsAll, explicit=True)
+        self.__timesteps = _helpers.update_time_steps(self, tsAll, explicit=True)
         return 1
 
 
@@ -375,10 +384,11 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
-        self._UpdateTimeSteps()
+        """Used by pipeline to handle time variance"""
+        self._update_time_steps()
         return 1
 
-    def Apply(self, dataset, table):
+    def apply(self, dataset, table):
         """Update the algorithm and get the output data object
 
         Args:
@@ -393,10 +403,10 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
-    def GetTimestepValues(self):
+    def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps.
         """
         # if unset, force at least one attempt to set the timesteps
-        if self.__timesteps is None: self._UpdateTimeSteps()
+        if self.__timesteps is None: self._update_time_steps()
         # self.__timesteps should already be of type list
         return self.__timesteps if self.__timesteps is not None else None

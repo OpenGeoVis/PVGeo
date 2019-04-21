@@ -51,32 +51,32 @@ class Test3DTensorMesh(ubcMeshTesterBase):
     Test the `TensorMeshReader`, `TensorMeshAppender`, `TopoMeshAppender`, and  `WriteRectilinearGridToUBC` for 3D data
     """
     def _write_mesh(self):
-        fname = os.path.join(self.test_dir, 'test.msh')
-        with open(fname, 'w') as f:
+        filename = os.path.join(self.test_dir, 'test.msh')
+        with open(filename, 'w') as f:
             f.write('%d %d %d\n' % self.shape)
             f.write('%d %d %d\n' % self.origin)
             f.write('%s\n' % self.xCells)
             f.write('%s\n' % self.yCells)
             f.write('%s\n' % self.zCells)
-        return fname
+        return filename
 
-    def _write_model(self, fname='test.mod'):
-        fname = os.path.join(self.test_dir, fname)
+    def _write_model(self, filename='test.mod'):
+        filename = os.path.join(self.test_dir, filename)
         model = np.random.random(self.n)
-        np.savetxt(fname, model, delimiter=' ', comments='! ')
+        np.savetxt(filename, model, delimiter=' ', comments='! ')
         model = np.reshape(model, self.shape)
         model = np.swapaxes(model,0,1)
         model = np.swapaxes(model,0,2)
         # Now reverse Z axis
         model = model[::-1,:,:] # Note it is in Fortran ordering
         model = model.flatten()
-        return fname, model
+        return filename, model
 
-    def _write_model_multi(self, fname='test.fld'):
+    def _write_model_multi(self, filename='test.fld'):
         """writes a multi component model"""
-        fname = os.path.join(self.test_dir, fname)
+        filename = os.path.join(self.test_dir, filename)
         model = np.random.random((self.n, 3))
-        np.savetxt(fname, model, delimiter=' ', comments='! ')
+        np.savetxt(filename, model, delimiter=' ', comments='! ')
         shp = self.shape
         model = np.reshape(model, (shp[0], shp[1], shp[2], 3) )
         model = np.swapaxes(model,0,1)
@@ -84,7 +84,7 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         # Now reverse Z axis
         model = model[::-1,:,:,:] # Note it is in Fortran ordering
         model = np.reshape(model, (shp[0]*shp[1]*shp[2], 3))
-        return fname, model
+        return filename, model
 
     def setUp(self):
         TestBase.setUp(self)
@@ -97,7 +97,7 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         self.shape = (26, 27, 23)
         self.n = self.shape[0]*self.shape[1]*self.shape[2]
         self.extent = (0, self.shape[0], 0, self.shape[1], 0, self.shape[2])
-        self.dataName = 'foo'
+        self.data_name = 'foo'
         ##### Now generate output for testing ####
         # Produce data and write out files:
         self.meshname = self._write_mesh()
@@ -105,21 +105,21 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         self.modname_multi, self.data_multi = self._write_model_multi()
         # Set up the reader:
         reader = TensorMeshReader()
-        reader.SetMeshFileName(self.meshname)
+        reader.set_mesh_filename(self.meshname)
         # Get and test output:
         reader.Update() # Read only mesh upfront
-        reader.AddModelFileName(self.modname)
-        reader.SetDataName(self.dataName)
+        reader.add_model_file_name(self.modname)
+        reader.set_data_name(self.data_name)
         reader.Update() # Read models upfront
         self.GRID = reader.GetOutput()
         #### Now read mesh with multi component data
         # Set up the reader:
         reader = TensorMeshReader()
-        reader.SetMeshFileName(self.meshname)
+        reader.set_mesh_filename(self.meshname)
         # Get and test output:
         reader.Update() # Read only mesh upfront
-        reader.AddModelFileName(self.modname_multi)
-        reader.SetDataName(self.dataName)
+        reader.add_model_file_name(self.modname_multi)
+        reader.set_data_name(self.data_name)
         reader.Update() # Read models upfront
         self.GRID_MULTI = reader.GetOutput()
 
@@ -147,16 +147,16 @@ class Test3DTensorMesh(ubcMeshTesterBase):
 
     def test_grid_data_name(self):
         """`TensorMeshReader` 3D: Data array name"""
-        self.assertEqual(self.GRID.GetCellData().GetArrayName(0), self.dataName)
-        self.assertEqual(self.GRID_MULTI.GetCellData().GetArrayName(0), self.dataName)
+        self.assertEqual(self.GRID.GetCellData().GetArrayName(0), self.data_name)
+        self.assertEqual(self.GRID_MULTI.GetCellData().GetArrayName(0), self.data_name)
 
     def test_model_appender(self):
         """`TensorMeshAppender` 3D: Data array name"""
         modname, appdata = self._write_model('testApp.mod')
         f = TensorMeshAppender()
         f.SetInputDataObject(self.GRID)
-        f.AddModelFileName(modname)
-        f.SetDataName('appended')
+        f.add_model_file_name(modname)
+        f.set_data_name('appended')
         f.Update()
         output = f.GetOutput()
         self.assertEqual(output.GetCellData().GetNumberOfArrays(), 2)
@@ -166,15 +166,15 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         """`TopoMeshAppender` 3D:Test topography appender"""
         indices = np.array([[0,0,1], [0,1,1], [0,2,1], [1,0,1], [1,1,1],
             [1,2,1], [2,0,1], [2,1,1], [2,2,2], ], dtype=int)
-        fname = os.path.join(self.test_dir, 'disc-topo.txt')
-        np.savetxt(fname, X=indices, fmt='%d', comments='', header='3 3')
+        filename = os.path.join(self.test_dir, 'disc-topo.txt')
+        np.savetxt(filename, X=indices, fmt='%d', comments='', header='3 3')
         # Create input grid
         grid = PVGeo.model_build.CreateTensorMesh(xcellstr='1.0 1.0 1.0',
-                    ycellstr='1.0 1.0 1.0', zcellstr='1.0 1.0 1.0').Apply()
+                    ycellstr='1.0 1.0 1.0', zcellstr='1.0 1.0 1.0').apply()
         # run the filter
         f = TopoMeshAppender()
         f.SetInputDataObject(grid)
-        f.SetTopoFileName(fname)
+        f.set_topo_filename(filename)
         f.Update()
         output = f.GetOutput()
         # TODO: check output
@@ -185,22 +185,22 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         """`WriteRectilinearGridToUBC`: Test data integretiy across I/O"""
         # Write known data back out using the writer:
         writer = WriteRectilinearGridToUBC()
-        fname = os.path.join(self.test_dir, 'test-writer.msh')
-        writer.SetFileName(fname)
+        filename = os.path.join(self.test_dir, 'test-writer.msh')
+        writer.SetFileName(filename)
         writer.Write(self.GRID)
         # Now read in the data again and compare!
         reader = TensorMeshReader()
-        reader.SetMeshFileName(fname)
-        modname = os.path.join(self.test_dir, '%s.mod' % self.dataName)
-        reader.AddModelFileName(modname)
-        reader.SetDataName(self.dataName)
+        reader.set_mesh_filename(filename)
+        modname = os.path.join(self.test_dir, '%s.mod' % self.data_name)
+        reader.add_model_file_name(modname)
+        reader.set_data_name(self.data_name)
         reader.Update()
         test = reader.GetOutput()
         # Compare the data
         self._check_shape(test)
         self._check_spatial_reference(test)
         self._check_data(test, self.data)
-        self.assertEqual(test.GetCellData().GetArrayName(0), self.dataName)
+        self.assertEqual(test.GetCellData().GetArrayName(0), self.data_name)
         return
 
 ###############################################################################
@@ -211,15 +211,15 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
     """
 
     def _write_mesh(self):
-        fname = os.path.join(self.test_dir, 'test.msh')
-        with open(fname, 'w') as f:
+        filename = os.path.join(self.test_dir, 'test.msh')
+        with open(filename, 'w') as f:
             f.write(self.mesh)
-        return fname
+        return filename
 
-    def _write_model(self, fname='test.mod'):
-        fname = os.path.join(self.test_dir, fname)
+    def _write_model(self, filename='test.mod'):
+        filename = os.path.join(self.test_dir, filename)
         model = np.random.random((self.nz,self.nx))
-        with open(fname, 'w') as f:
+        with open(filename, 'w') as f:
             f.write('%d %d\n' % (self.nx, self.nz))
             for k in range(self.nz):
                 for i in range(self.nx):
@@ -232,7 +232,7 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
         # Now reverse Z axis
         model = model[::-1,:,:] # Note it is in Fortran ordering
         model = model.flatten()
-        return fname, model
+        return filename, model
 
     def setUp(self):
         TestBase.setUp(self)
@@ -269,18 +269,18 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
         self.nz = 27
         self.shape = (self.nx, 1, self.nz)
         self.extent = (0, self.shape[0], 0, self.shape[1], 0, self.shape[2])
-        self.dataName = 'foo'
+        self.data_name = 'foo'
         ##### Now generate output for testing ####
         # Produce data and write out files:
         meshname = self._write_mesh()
         modname, self.data = self._write_model()
         # Set up the reader:
         reader = TensorMeshReader()
-        reader.SetMeshFileName(meshname)
+        reader.set_mesh_filename(meshname)
         # Get and test output:
         reader.Update() # Test the read up front for the mesh
-        reader.AddModelFileName(modname)
-        reader.SetDataName(self.dataName)
+        reader.add_model_file_name(modname)
+        reader.set_data_name(self.data_name)
         reader.Update() # Now read the models upfront
         self.GRID = reader.GetOutput()
         return
@@ -306,15 +306,15 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
 
     def test_grid_data_name(self):
         """`TensorMeshReader` 2D: Data array name"""
-        self.assertEqual(self.GRID.GetCellData().GetArrayName(0), self.dataName)
+        self.assertEqual(self.GRID.GetCellData().GetArrayName(0), self.data_name)
 
     def test_model_appender(self):
         """`TensorMeshAppender` 2D: Data array name"""
         modname, appdata = self._write_model('testApp.mod')
         f = TensorMeshAppender()
         f.SetInputDataObject(self.GRID)
-        f.AddModelFileName(modname)
-        f.SetDataName('appended')
+        f.add_model_file_name(modname)
+        f.set_data_name('appended')
         f.Update()
         output = f.GetOutput()
         self.assertEqual(output.GetCellData().GetNumberOfArrays(), 2)
@@ -367,9 +367,9 @@ if discretize_available:
 2 2 16 1
 """
             # Write out mesh file
-            fname = os.path.join(self.test_dir, 'octree.msh')
-            self.meshFileName = fname
-            with open(fname, 'w') as f:
+            filename = os.path.join(self.test_dir, 'octree.msh')
+            self.meshFileName = filename
+            with open(filename, 'w') as f:
                 f.write(treeMesh)
 
 
@@ -397,7 +397,7 @@ if discretize_available:
         def test_simple_octree(self):
             """`OcTreeReader`: simple octree mesh file"""
             reader = OcTreeReader()
-            reader.SetMeshFileName(self.meshFileName)
+            reader.set_mesh_filename(self.meshFileName)
 
             reader.Update()
 
@@ -406,16 +406,16 @@ if discretize_available:
             self.assertEqual(tree.GetNumberOfCells(), 29)
             self.assertEqual(tree.GetNumberOfPoints(), 84)
 
-        def test_simple_octree(self):
+        def test_simple_octree_models(self):
             """`OcTreeReader`: simple octree mesh with models"""
             reader = OcTreeReader()
-            reader.SetMeshFileName(self.meshFileName)
-            reader.AddModelFileName(self.modelFileNames)
-            reader.SetDataName('foo')
+            reader.set_mesh_filename(self.meshFileName)
+            reader.add_model_file_name(self.modelFileNames)
+            reader.set_data_name('foo')
 
             reader.Update() # Check that normal update works
 
-            tree = reader.GetOutput()
+            tree = reader.GetOutputDataObject(0)
             self.assertIsNotNone(tree)
             self.assertEqual(tree.GetNumberOfCells(), 29)
             self.assertEqual(tree.GetNumberOfPoints(), 84)
@@ -435,9 +435,9 @@ if discretize_available:
             """`OcTreeAppender` 2D: Data array name"""
             # Creat a tree mesh to append
             reader = OcTreeReader()
-            reader.SetMeshFileName(self.meshFileName)
-            reader.AddModelFileName(self.modelFileNames[0])
-            reader.SetDataName('Initial Data')
+            reader.set_mesh_filename(self.meshFileName)
+            reader.add_model_file_name(self.modelFileNames[0])
+            reader.set_data_name('Initial Data')
             reader.Update()
             tree = reader.GetOutput()
             self.assertIsNotNone(tree)
@@ -447,15 +447,15 @@ if discretize_available:
             # Now use the model appender
             f = OcTreeAppender()
             f.SetInputDataObject(tree)
-            f.AddModelFileName(self.modelFileNames[1::])
-            f.SetDataName('Appended Data')
+            f.add_model_file_name(self.modelFileNames[1::])
+            f.set_data_name('Appended Data')
             f.Update()
 
             output = f.GetOutput()
             # remember that 2 arrays is added by the reader
             self.assertEqual(output.GetCellData().GetNumberOfArrays(), 4)
             self.assertEqual(output.GetCellData().GetArrayName(3), os.path.basename(self.modelFileNames[1])) # use file as name
-            self.assertEqual(len(f.GetTimestepValues()), self.nt-1)
+            self.assertEqual(len(f.get_time_step_values()), self.nt-1)
             return
 
 ###############################################################################

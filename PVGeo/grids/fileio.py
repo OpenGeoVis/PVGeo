@@ -29,11 +29,6 @@ from .. import _helpers, interface
 from ..base import ReaderBase, ReaderBaseBase, WriterBase
 from ..readers import DelimitedTextReader
 
-if sys.version_info < (3,):
-    from StringIO import StringIO
-else:
-    from io import StringIO
-
 
 
 
@@ -41,6 +36,9 @@ else:
 
 
 class GridInfo(properties.HasProperties):
+    """Internal helper class to store Surfer grid properties and create
+    ``vtkImageData`` objects from them.
+    """
     ny = properties.Integer('number of columns', min=2)
     nx = properties.Integer('number of rows', min=2)
     xll = properties.Float('x-value of lower-left corner')
@@ -52,6 +50,7 @@ class GridInfo(properties.HasProperties):
     data = properties.Array('grid of data values', shape=('*',))
 
     def mask(self):
+        """Mask the no data value"""
         data = self.data
         nans = data >= 1.701410009187828e+38
         if np.any(nans):
@@ -64,7 +63,8 @@ class GridInfo(properties.HasProperties):
         self.data = data
         return
 
-    def toVTK(self, output=None, z=0.0, dz=1.0, dataName='Data'):
+    def toVTK(self, output=None, z=0.0, dz=1.0, data_name='Data'):
+        """Convert to a ``vtkImageData`` object"""
         self.mask()
         self.validate()
         if output is None:
@@ -73,7 +73,7 @@ class GridInfo(properties.HasProperties):
         output.SetOrigin(self.xll, self.yll, z)
         output.SetSpacing(self.dx, self.dy, dz)
         output.SetDimensions(self.nx, self.ny, 1)
-        vtkarr = interface.convertArray(self.data, name=dataName)
+        vtkarr = interface.convertArray(self.data, name=data_name)
         output.GetPointData().AddArray(vtkarr)
         return output
 
@@ -114,7 +114,7 @@ class SurferGridReader(ReaderBase):
     def __init__(self, outputType='vtkImageData', **kwargs):
         ReaderBase.__init__(self, outputType=outputType, **kwargs)
         self.__grids = None
-        self.__dataName = 'Data'
+        self.__data_name = kwargs.get('data_name', 'Data')
 
     @staticmethod
     def _surfer7bin(filename):
@@ -267,11 +267,11 @@ class SurferGridReader(ReaderBase):
         """This parses the first file to determine grid file type then reads
         all files set."""
         if idx is not None:
-            fileNames = [self.GetFileNames(idx=idx)]
+            filenames = [self.GetFileNames(idx=idx)]
         else:
-            fileNames = self.GetFileNames()
+            filenames = self.GetFileNames()
         contents = []
-        f = open(fileNames[0], 'rb')
+        f = open(filenames[0], 'rb')
         key = struct.unpack('4s', f.read(4))[0]
         f.close()
         if key == b'DSRB':
@@ -284,7 +284,7 @@ class SurferGridReader(ReaderBase):
             raise _helpers.PVGeoError('''Invalid file identifier for Surfer .grd file.
             First 4 characters must be DSRB, DSBB, or DSAA. This file contains: %s''' % key)
 
-        for f in fileNames:
+        for f in filenames:
             try:
                 contents.append(reader(f))
             except (IOError, OSError) as fe:
@@ -305,17 +305,18 @@ class SurferGridReader(ReaderBase):
     ########################
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get data for current timestep and populate the output data object.
+        """Used by pipeline to get data for current timestep and populate the
+        output data object.
         """
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         if self.NeedToRead():
             self._ReadUpFront()
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         # Build the output
         grid = self.__grids[i]
-        grid.toVTK(output=output, dataName=self.__dataName)
+        grid.toVTK(output=output, data_name=self.__data_name)
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
@@ -333,13 +334,15 @@ class SurferGridReader(ReaderBase):
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
-    def SetDataName(self, dataName):
-        if self.__dataName != dataName:
-            self.__dataName = dataName
-            self.Modified(readAgain=False)
+    def set_data_name(self, data_name):
+        """Set the name of the data array"""
+        if self.__data_name != data_name:
+            self.__data_name = data_name
+            self.Modified(read_again=False)
 
     def GetDataName(self):
-        return self.__dataName
+        """Get the name of the data array"""
+        return self.__data_name
 
 
 ################################################################################
@@ -351,11 +354,12 @@ class WriteImageDataToSurfer(WriterBase):
     __category__ = 'writer'
     def __init__(self):
         WriterBase.__init__(self, inputType='vtkImageData', ext='grd')
-        self.__inputArray = [None, None]
+        self.__input_array = [None, None]
 
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
-        img = inputDataObject
+    def PerformWriteOut(self, input_data_object, filename, object_name):
+        """Writes an input ``vtkImageData`` object to a file"""
+        img = input_data_object
 
         # Check dims: make sure 2D
         # TODO: handle any orientation
@@ -370,8 +374,8 @@ class WriteImageDataToSurfer(WriterBase):
         xmin, xmax, ymin, ymax, zmin, zmax = img.GetBounds()
 
         # Note user has to select a single array to save out
-        field, name = self.__inputArray[0], self.__inputArray[1]
-        vtkarr = _helpers.getVTKArray(img, field, name)
+        field, name = self.__input_array[0], self.__input_array[1]
+        vtkarr = _helpers.get_vtk_array(img, field, name)
         arr = interface.convertArray(vtkarr)
         dmin, dmax = arr.min(), arr.max()
 
@@ -398,28 +402,31 @@ class WriteImageDataToSurfer(WriterBase):
                 field, and 6 for row)
             name (int): the name of the array
         """
-        if self.__inputArray[0] != field:
-            self.__inputArray[0] = field
+        if self.__input_array[0] != field:
+            self.__input_array[0] = field
             self.Modified()
-        if self.__inputArray[1] != name:
-            self.__inputArray[1] = name
+        if self.__input_array[1] != name:
+            self.__input_array[1] = name
             self.Modified()
         return 1
 
-    def Apply(self, inputDataObject, arrayName):
-        self.SetInputDataObject(inputDataObject)
-        arr, field = _helpers.searchForArray(inputDataObject, arrayName)
-        self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+    def apply(self, input_data_object, array_name):
+        """Run the algorithm on an input data object, specifying one data array
+        to save out.
+        """
+        self.SetInputDataObject(input_data_object)
+        arr, field = _helpers.search_for_array(input_data_object, array_name)
+        self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return interface.wrapvtki(self.GetOutput())
 
-    def Write(self, inputDataObject=None, arrayName=None):
+    def Write(self, input_data_object=None, array_name=None):
         """Perfrom the write out."""
-        if inputDataObject:
-            self.SetInputDataObject(inputDataObject)
-            if arrayName:
-                arr, field = _helpers.searchForArray(inputDataObject, arrayName)
-                self.SetInputArrayToProcess(0, 0, 0, field, arrayName)
+        if input_data_object:
+            self.SetInputDataObject(input_data_object)
+            if array_name:
+                arr, field = _helpers.search_for_array(input_data_object, array_name)
+                self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Modified()
         self.Update()
 
@@ -437,16 +444,17 @@ class EsriGridReader(DelimitedTextReader):
     def __init__(self, outputType='vtkImageData', **kwargs):
         DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
         # These are attributes the derived from file contents:
-        self.SetDelimiter(' ')
+        self.set_delimiter(' ')
         self.__nx = None
         self.__ny = None
         self.__xo = None
         self.__yo = None
         self.__cellsize = None
-        self.__dataName = 'Data'
+        self.__data_name = kwargs.get('data_name', 'Data')
         self.NODATA_VALUE = -9999
 
     def _ExtractHeader(self, content):
+        """Internal helper to parse header information in ESRI Grid files"""
         try:
             self.__nx = int(content[0].split()[1])
             self.__ny = int(content[1].split()[1])
@@ -456,7 +464,7 @@ class EsriGridReader(DelimitedTextReader):
             self.NODATA_VALUE = float(content[5].split()[1])
         except ValueError:
             raise _helpers.PVGeoError('This file is not in proper Esri ASCII Grid format.')
-        return [self.__dataName], content[6::]
+        return [self.__data_name], content[6::]
 
     def _FileContentsToDataFrame(self, contents):
         """Creates a dataframe with a sinlge array for the file data.
@@ -493,7 +501,7 @@ class EsriGridReader(DelimitedTextReader):
             self._ReadUpFront()
 
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
 
         # Build the data object
         output.SetOrigin(self.__xo, self.__yo, 0.0)
@@ -502,7 +510,7 @@ class EsriGridReader(DelimitedTextReader):
 
         # Now add data values as point data
         data = self._GetRawData(idx=i).flatten(order='F')
-        vtkarr = interface.convertArray(data, name=self.__dataName)
+        vtkarr = interface.convertArray(data, name=self.__data_name)
         output.GetPointData().AddArray(vtkarr)
 
         return 1
@@ -521,13 +529,15 @@ class EsriGridReader(DelimitedTextReader):
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
-    def SetDataName(self, dataName):
-        if self.__dataName != dataName:
-            self.__dataName = dataName
-            self.Modified(readAgain=False)
+    def set_data_name(self, data_name):
+        """Set the name of the data array"""
+        if self.__data_name != data_name:
+            self.__data_name = data_name
+            self.Modified(read_again=False)
 
     def GetDataName(self):
-        return self.__dataName
+        """Get the name of the data array"""
+        return self.__data_name
 
 
 
@@ -551,13 +561,13 @@ class LandsatReader(ReaderBaseBase):
         self.__scheme = 'infrared'
         # Properties:
         self._dataselection = vtk.vtkDataArraySelection()
-        self._dataselection.AddObserver("ModifiedEvent", _helpers.createModifiedCallback(self))
+        self._dataselection.AddObserver("ModifiedEvent", _helpers.create_modified_callback(self))
 
 
-    def Modified(self, readAgain=False):
+    def Modified(self, read_again=False):
         """Ensure default is overridden to be false so array selector can call.
         """
-        ReaderBaseBase.Modified(self, readAgain=readAgain)
+        return ReaderBaseBase.Modified(self, read_again=read_again)
 
 
     def GetFileName(self):
@@ -581,6 +591,7 @@ class LandsatReader(ReaderBaseBase):
         return
 
     def _ReadUpFront(self):
+        """Internal helper to read all data at start"""
         return self._GetFileContents()
 
     def _GetRawData(self, idx=0):
@@ -654,7 +665,7 @@ class LandsatReader(ReaderBaseBase):
         return self._dataselection
 
 
-    def CastDataType(self, flag):
+    def set_cast_data_type(self, flag):
         """A flag to cast all data arrays as floats/doubles.
         This will fill invalid values with nans instead of a fill value"""
         if self.__cast != flag:
@@ -662,7 +673,7 @@ class LandsatReader(ReaderBaseBase):
             self.Modified()
 
 
-    def SetColorScheme(self, scheme):
+    def set_color_scheme(self, scheme):
         """Get an RGB scheme from the raster set. If no scheme is desired, pass
         any string that is not a defined scheme as the scheme argument."""
         if isinstance(scheme, int):
@@ -677,6 +688,7 @@ class LandsatReader(ReaderBaseBase):
 
     @staticmethod
     def GetColorSchemeNames():
+        """Get a list of the available color schemes"""
         schemes = list(espatools.RasterSet.RGB_SCHEMES.keys())
         schemes.insert(0, 'No Selection')
         return schemes
@@ -697,14 +709,15 @@ class WriteCellCenterData(WriterBase):
         self.__delimiter = ','
 
 
-    def PerformWriteOut(self, inputDataObject, filename, objectName):
+    def PerformWriteOut(self, input_data_object, filename, object_name):
+        """Writes the cell centers of the input data object to a file"""
         # Find cell centers
         filt = vtk.vtkCellCenters()
-        filt.SetInputDataObject(inputDataObject)
+        filt.SetInputDataObject(input_data_object)
         filt.Update()
         centers = dsa.WrapDataObject(filt.GetOutput(0)).Points
         # Get CellData
-        wpdi = dsa.WrapDataObject(inputDataObject)
+        wpdi = dsa.WrapDataObject(input_data_object)
         celldata = wpdi.CellData
         keys = celldata.keys()
         # Save out using numpy
@@ -717,7 +730,7 @@ class WriteCellCenterData(WriterBase):
         repl = '_' if self.__delimiter != '_' else '-'
         for i, name in enumerate(keys):
             keys[i] = name.replace(self.__delimiter, repl)
-        header = '! %s\n%s' % (objectName, ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys))
+        header = '! %s\n%s' % (object_name, ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys))
         np.savetxt(filename, arr,
                    header=header,
                    delimiter=self.__delimiter,
@@ -726,10 +739,10 @@ class WriteCellCenterData(WriterBase):
         # Success for pipeline
         return 1
 
-    def SetDelimiter(self, delimiter):
+    def set_delimiter(self, deli):
         """The string delimiter to use"""
-        if self.__delimiter != delimiter:
-            self.__delimiter = delimiter
+        if self.__delimiter != deli:
+            self.__delimiter = deli
             self.Modified()
 
 

@@ -1,23 +1,22 @@
 __all__ = [
-    'getSelectedArrayName',
-    'getSelectedArrayField',
-    'copyArraysToPointData',
-    'getNumPyArray',
-    'getVTKArray',
-    'addArray',
-    'getSelectedArray',
-    'searchForArray',
-    'getAllArrayNames',
+    'get_selected_array_name',
+    'get_selected_array_field',
+    'copy_arrays_to_point_data',
+    'get_numpy_array',
+    'get_vtk_array',
+    'add_array',
+    'get_selected_array',
+    'search_for_array',
+    'get_all_array_names',
 ]
 
 import numpy as np
 import vtk
-from vtk.util import numpy_support as nps
 from vtk.numpy_interface import dataset_adapter as dsa
 from . import errors as _helpers
 
 
-def getSelectedArrayName(algorithm, idx):
+def get_selected_array_name(algorithm, idx):
     """Gets the name of the input array for a given index on a VTK algorithm
 
     Args:
@@ -31,7 +30,7 @@ def getSelectedArrayName(algorithm, idx):
     return info.Get(vtk.vtkDataObject.FIELD_NAME())
 
 
-def getSelectedArrayField(algorithm, idx):
+def get_selected_array_field(algorithm, idx):
     """Gets the field of the input array for a given index on a VTK algorithm
 
     Args:
@@ -45,7 +44,7 @@ def getSelectedArrayField(algorithm, idx):
     return info.Get(vtk.vtkDataObject.FIELD_ASSOCIATION())
 
 
-def getFieldIdByName(field):
+def get_field_id_by_name(field):
     """Get the field ID by name."""
     fields = dict(
         point=0,
@@ -66,7 +65,7 @@ def getFieldIdByName(field):
 
 
 
-def copyArraysToPointData(pdi, pdo, field):
+def copy_arrays_to_point_data(pdi, pdo, field):
     """Copys arrays from an input to an ouput's point data.
 
     Args:
@@ -78,7 +77,7 @@ def copyArraysToPointData(pdi, pdo, field):
         vtkDataObject : returns the output data object parameter
     """
     if isinstance(field, str):
-        field = getFieldIdByName(field)
+        field = get_field_id_by_name(field)
     # Point Data
     if field == 0:
         for i in range(pdi.GetPointData().GetNumberOfArrays()):
@@ -106,7 +105,7 @@ def copyArraysToPointData(pdi, pdo, field):
     return pdo
 
 
-def getNumPyArray(wpdi, field, name):
+def get_numpy_array(wpdi, field, name):
     """Grabs an array from vtkDataObject given its name and field association.
 
     Args:
@@ -119,7 +118,7 @@ def getNumPyArray(wpdi, field, name):
         numpy.array : a wrapped ``vtkDataArray`` for NumPy
     """
     if isinstance(field, str):
-        field = getFieldIdByName(field)
+        field = get_field_id_by_name(field)
     if not isinstance(wpdi, vtk.numpy_interface.dataset_adapter.DataObject):
         wpdi = dsa.WrapDataObject(wpdi)
     # Point Data
@@ -138,7 +137,7 @@ def getNumPyArray(wpdi, field, name):
         raise _helpers.PVGeoError('Field association ({}) not defined. Try inputing Point, Cell, Field, or Row data.'.format(field))
     return arr
 
-def getVTKArray(pdi, field, name):
+def get_vtk_array(pdi, field, name):
     """Grabs an array from vtkDataObject given its name and field association.
 
     Args:
@@ -150,7 +149,7 @@ def getVTKArray(pdi, field, name):
         vtkDataArray : the array from input field and name
     """
     if isinstance(field, str):
-        field = getFieldIdByName(field)
+        field = get_field_id_by_name(field)
     # Point Data
     if field == 0:
         arr = pdi.GetPointData().GetArray(name)
@@ -168,7 +167,7 @@ def getVTKArray(pdi, field, name):
     return arr
 
 
-def getSelectedArray(algorithm, wpdi, idx):
+def get_selected_array(algorithm, wpdi, idx):
     """Gets selectected array at index idx wrapped for NumPy
 
     Args:
@@ -180,11 +179,11 @@ def getSelectedArray(algorithm, wpdi, idx):
     Return:
         numpy.array : a wrapped ``vtkDataArray`` for NumPy
     """
-    name = getSelectedArrayName(algorithm, idx)
-    field = getSelectedArrayField(algorithm, idx)
-    return getArray(wpdi, field, name)
+    name = get_selected_array_name(algorithm, idx)
+    field = get_selected_array_field(algorithm, idx)
+    return get_array(wpdi, field, name)
 
-def addArray(pdo, field, vtkArray):
+def add_array(pdo, field, vtkArray):
     """Adds an array to a vtkDataObject given its field association.
 
     Args:
@@ -196,7 +195,7 @@ def addArray(pdo, field, vtkArray):
         vtkDataObject : the output data object with the data array added
     """
     if isinstance(field, str):
-        field = getFieldIdByName(field)
+        field = get_field_id_by_name(field)
     # Point Data
     if field == 0:
         pdo.GetPointData().AddArray(vtkArray)
@@ -213,11 +212,11 @@ def addArray(pdo, field, vtkArray):
         raise _helpers.PVGeoError('Field association ({}) not defined. Try inputing Point, Cell, Field, or Row data.'.format(field))
     return pdo
 
-def _getData(pdi, field):
+def _get_data(pdi, field):
     """Gets data field from input vtkDataObject"""
     data = None
     if isinstance(field, str):
-        field = getFieldIdByName(field)
+        field = get_field_id_by_name(field)
     try:
         # Point Data
         if field == 0:
@@ -238,7 +237,7 @@ def _getData(pdi, field):
     return data
 
 
-def getArray(pdi, field, name):
+def get_array(pdi, field, name):
     """Gets an array from a vtkDataObject given its field association and name.
 
     Notes:
@@ -256,15 +255,15 @@ def getArray(pdi, field, name):
         vtkDataObject: the output data object
     """
     if isinstance(field, str):
-        field = getFieldIdByName(field)
-    data = _getData(pdi, field)
+        field = get_field_id_by_name(field)
+    data = _get_data(pdi, field)
     return data.GetArray(name)
 
 
-def searchForArray(pdi, name):
+def search_for_array(pdi, name):
 
-    def _SearchField(field):
-        data = _getData(pdi, field)
+    def _search_field(field):
+        data = _get_data(pdi, field)
         for i in range(data.GetNumberOfArrays()):
             if data.GetArrayName(i) == name:
                 return data.GetArray(i)
@@ -273,7 +272,7 @@ def searchForArray(pdi, name):
     fields = [0, 1, 2, 6]
     for field in fields:
         try:
-            arr = _SearchField(field)
+            arr = _search_field(field)
         except _helpers.PVGeoError:
             continue
         if arr is not None:
@@ -284,9 +283,9 @@ def searchForArray(pdi, name):
     return None
 
 
-def getAllArrayNames(dataset, field):
+def get_all_array_names(dataset, field):
     if isinstance(field, str):
-        field = getFieldIdByName(field)
+        field = get_field_id_by_name(field)
     if not isinstance(dataset, vtk.numpy_interface.dataset_adapter.DataObject):
         wpdi = dsa.WrapDataObject(dataset)
     else:

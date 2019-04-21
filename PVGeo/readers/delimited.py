@@ -38,23 +38,24 @@ class DelimitedTextReader(ReaderBase):
         # Parameters to control the file read:
         #- if these are set/changed, we must reperform the read
         self.__delimiter = kwargs.get('delimiter', ' ')
-        self.__useTab = kwargs.get('useTab', False)
+        self.__use_tab = kwargs.get('use_tab', False)
         self.__skipRows = kwargs.get('skiprows', 0)
         self.__comments = kwargs.get('comments', '!')
-        self.__hasTitles = kwargs.get('hasTitles', True)
+        self.__has_titles = kwargs.get('has_titles', True)
         # Data objects to hold the read data for access by the pipeline methods
         self._data = []
         self._titles = []
 
     def _GetDeli(self):
-        """For itenral use
+        """For itenral use only!
         """
-        if self.__useTab:
+        if self.__use_tab:
             return None
         return self.__delimiter
 
     def GetSplitOnWhiteSpace(self):
-        return self.__useTab
+        """Returns the status of how the delimiter interprets whitespace"""
+        return self.__use_tab
 
     #### Methods for performing the read ####
 
@@ -63,11 +64,11 @@ class DelimitedTextReader(ReaderBase):
         allows us to load the file contents, parse the header then use numpy or
         pandas to parse the data."""
         if idx is not None:
-            fileNames = [self.GetFileNames(idx=idx)]
+            filenames = [self.GetFileNames(idx=idx)]
         else:
-            fileNames = self.GetFileNames()
+            filenames = self.GetFileNames()
         contents = []
-        for f in fileNames:
+        for f in filenames:
             try:
                 contents.append(np.genfromtxt(f, dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::])
             except (IOError, OSError) as fe:
@@ -81,7 +82,7 @@ class DelimitedTextReader(ReaderBase):
         if len(np.shape(content)) > 2:
             raise _helpers.PVGeoError("`_ExtractHeader()` can only handle a sigle file's content")
         idx = 0
-        if self.__hasTitles:
+        if self.__has_titles:
             titles = content[idx].split(self._GetDeli())
             idx += 1
         else:
@@ -96,8 +97,8 @@ class DelimitedTextReader(ReaderBase):
         get all file contents. Your should override ``_ExtractHeader``.
         """
         ts = []
-        for i in range(len(contents)):
-            titles, newcontent = self._ExtractHeader(contents[i])
+        for i, c in enumerate(contents):
+            titles, newcontent = self._ExtractHeader(c)
             contents[i] = newcontent
             ts.append(titles)
         # Check that the titles are the same across files:
@@ -149,7 +150,7 @@ class DelimitedTextReader(ReaderBase):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         if self.NeedToRead():
             self._ReadUpFront()
         # Generate the data object
@@ -160,9 +161,9 @@ class DelimitedTextReader(ReaderBase):
     #### Seters and Geters ####
 
 
-    def SetDelimiter(self, deli):
+    def set_delimiter(self, deli):
         """The input file's delimiter. To use a tab delimiter please use
-        ``SetSplitOnWhiteSpace()``
+        ``set_split_on_white_space()``
 
         Args:
             deli (str): a string delimiter/seperator
@@ -171,42 +172,47 @@ class DelimitedTextReader(ReaderBase):
             self.__delimiter = deli
             self.Modified()
 
-    def SetSplitOnWhiteSpace(self, flag):
-        """Set a boolean flag to override the ``SetDelimiter()`` and use any
+    def set_split_on_white_space(self, flag):
+        """Set a boolean flag to override the ``set_delimiter()`` and use any
         white space as a delimiter.
         """
-        if flag != self.__useTab:
-            self.__useTab = flag
+        if flag != self.__use_tab:
+            self.__use_tab = flag
             self.Modified()
 
 
-    def SetSkipRows(self, skip):
-        """The integer number of rows to skip at the top of the file.
+    def set_skip_rows(self, skip):
+        """Set the integer number of rows to skip at the top of the file.
         """
         if skip != self.__skipRows:
             self.__skipRows = skip
             self.Modified()
 
     def GetSkipRows(self):
+        """Get the integer number of rows to skip at the top of the file.
+        """
         return self.__skipRows
 
-    def SetComments(self, identifier):
+    def set_comments(self, identifier):
         """The character identifier for comments within the file.
         """
         if identifier != self.__comments:
             self.__comments = identifier
             self.Modified()
 
-    def SetHasTitles(self, flag):
-        """A boolean for if the delimited file has header titles for the data
-        arrays.
+    def set_has_titles(self, flag):
+        """Set the boolean for if the delimited file has header titles for the
+        data arrays.
         """
-        if self.__hasTitles != flag:
-            self.__hasTitles = flag
+        if self.__has_titles != flag:
+            self.__has_titles = flag
             self.Modified()
 
     def HasTitles(self):
-        return self.__hasTitles
+        """Get the boolean for if the delimited file has header titles for the
+        data arrays.
+        """
+        return self.__has_titles
 
     def GetTitles(self):
         return self._titles
@@ -228,11 +234,16 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
         self.__copy_z = kwargs.get('copy_z', False)
 
     def SetCopyZ(self, flag):
+        """Set whether or not to copy the Z-component of the points to the
+        Point Data"""
         if self.__copy_z != flag:
             self.__copy_z = flag
             self.Modified()
 
     def GetCopyZ(self):
+        """Get the status of whether or not to copy the Z-component of the
+        points to the Point Data
+        """
         return self.__copy_z
 
     #### Algorithm Methods ####
@@ -244,7 +255,7 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
-        i = _helpers.getRequestedTime(self, outInfo)
+        i = _helpers.get_requested_time(self, outInfo)
         if self.NeedToRead():
             self._ReadUpFront()
         # Generate the PolyData output
@@ -266,9 +277,10 @@ class XYZTextReader(DelimitedTextReader):
     description = 'PVGeo: XYZ Delimited Text Files where header has comma delimiter.'
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, **kwargs)
-        self.SetComments(kwargs.get('comments', '#'))
+        self.set_comments(kwargs.get('comments', '#'))
 
     # Simply override the extract titles functionality
     def _ExtractHeader(self, content):
+        """Internal helper to parse header details for XYZ files"""
         titles = content[0][2::].split(', ') # first two characers of header is '! '
         return titles, content[1::]
