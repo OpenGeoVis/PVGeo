@@ -5,6 +5,6 @@
 
 Computation times
 =================
-**00:02.316** total execution time for **examples_gslib** files:
+**00:02.408** total execution time for **examples_gslib** files:
 
-- **00:02.316**: :ref:`sphx_glr_examples_gslib_read-gslib.py` (``read-gslib.py``)
+- **00:02.408**: :ref:`sphx_glr_examples_gslib_read-gslib.py` (``read-gslib.py``)

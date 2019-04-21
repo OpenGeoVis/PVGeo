@@ -44,7 +44,7 @@ Use an example mesh from vtki
 
  .. code-block:: none
 
-    RectilinearGrid (0x7fce478f0d08)
+    RectilinearGrid (0x7f70264eddc8)
       N Cells:      16146
       N Points:     18144
       X Bounds:     -3.500e+02, 1.350e+03
@@ -71,7 +71,7 @@ Run the PVGeo algorithm
 
  .. code-block:: none
 
-    RectilinearGrid (0x7fce478f0f48)
+    RectilinearGrid (0x7f70265080a8)
       N Cells:      16146
       N Points:     18144
       X Bounds:     -3.500e+02, 1.350e+03
@@ -96,7 +96,7 @@ Run the PVGeo algorithm
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.812 seconds)
+   **Total running time of the script:** ( 0 minutes  0.810 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_append-cell-centers.py:

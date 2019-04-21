@@ -47,7 +47,7 @@ GSLib Point Set
 
  .. code-block:: none
 
-    PolyData (0x7fce478791c8)
+    PolyData (0x7f70264771c8)
       N Cells:      100
       N Points:     100
       X Bounds:     3.000e+00, 2.520e+02
@@ -93,7 +93,7 @@ SGeMS Grid
 
  .. code-block:: none
 
-    UniformGrid (0x7fce4788ee88)
+    UniformGrid (0x7f702648cee8)
       N Cells:      78000
       N Points:     157122
       X Bounds:     0.000e+00, 2.600e+02
@@ -120,7 +120,7 @@ SGeMS Grid
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.316 seconds)
+   **Total running time of the script:** ( 0 minutes  2.408 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-gslib.py:

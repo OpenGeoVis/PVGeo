@@ -57,12 +57,12 @@ Construct the filter
 
  .. code-block:: none
 
-    vtkTable (0x3c09040)
+    vtkTable (0x25ba610)
       Debug: Off
       Modified Time: 21889
       Reference Count: 2
       Registered Events: (none)
-      Information: 0x50666a0
+      Information: 0x2bf7220
       Data Released: False
       Global Release Data: Off
       UpdateTime: 21901
