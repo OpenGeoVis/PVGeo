@@ -12,8 +12,6 @@ like 2D or 3D time-varying grids.
 
 **Learn More:**
 [![Vimeo](https://img.shields.io/badge/demos-grey.svg?logo=vimeo)](https://vimeo.com/user82050125)
-[![Website Build](https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website&logo=safari&logoColor=white)](http://pvgeo.org)
-[![Documentation Status](https://img.shields.io/readthedocs/pvgeo.svg?logo=read%20the%20docs&logoColor=white)](http://docs.pvgeo.org/en/latest/?badge=latest)
 [![Slack Badge](https://img.shields.io/badge/Slack-PVGeo-4B0082.svg?logo=slack)](http://slack.pvgeo.org)
 [![Twitter Follow](https://img.shields.io/twitter/follow/OpenGeoVis.svg?style=social&label=Follow)](https://twitter.com/OpenGeoVis)
 
@@ -32,12 +30,8 @@ like 2D or 3D time-varying grids.
 
 For a quick overview of how  *PVGeo* can be used in a Python environment or
 directly within ParaView, checkout the code snippets and videos on the
-[**About Examples Page**](http://pvgeo.org/examples/about-examples/)
+[**About Examples Page**](https://pvgeo.org/about-examples.html)
 
-Also, check out the [**demo page**](http://demo.pvgeo.org/) for a synopsis of
-the project and some visualization examples. Then check out the rest of the
-[**full website**](http://pvgeo.org/) to explore the technical aspects of the
-project and to find use examples.
 
 
 ## Connections
@@ -46,7 +40,7 @@ This package provides many VTK-like algorithms designed for geoscientific data
 formats and types to perform data integration and analysis.
 To ensure our users have powerful and easy to use tools that can visualize the
 results of PVGeo algorithms, we are actively involved in the development of
-[**`vtki`**](https://github.com/akaszynski/vtki): a toolset for easy access to
+[**`vtki`**](https://github.com/vtkiorg/vtki): a toolset for easy access to
 VTK data objects and 3D visualization in Python.
 To learn more about pairing PVGeo with `vtki`, please check out the
 [**example Jupyter notebooks**](https://github.com/OpenGeoVis/PVGeo-Examples).
@@ -69,7 +63,7 @@ python -c "import PVGeo; print(PVGeo.__version__)"
 ```
 
 Note that Windows users must use Python >=3.6 when outside of ParaView.
-Further insight can be found in the [**Getting Started Guide**](http://pvgeo.org/overview/getting-started/).
+Further insight can be found in the [**Getting Started Guide**](http://pvgeo.org/overview/getting-started.html).
 
 
 ## Report Issues and Contribute
@@ -97,6 +91,6 @@ to learn more about the developers of *PVGeo*.
 ## Linking PVGeo to ParaView
 
 To use the *PVGeo* library as plugins in ParaView, please see the detailed
-explanation [**here**](http://pvgeo.org/overview/getting-started/) where you
+explanation [**here**](http://pvgeo.org/overview/getting-started) where you
 must create a second isolated Python 2.7 environment that will host PVGeo for
 ParaView.
