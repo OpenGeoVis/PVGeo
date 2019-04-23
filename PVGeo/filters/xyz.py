@@ -72,7 +72,8 @@ class AddCellConnToPoints(FilterBase):
         points = np.copy(pdi.points) # New NumPy array of poins so we dont destroy input
         if self.__unique:
             # Remove repeated points
-            points = np.unique(points, axis=0)
+            indexes = np.unique(points, return_index=True, axis=0)[1]
+            points = np.array(points[sorted(indexes)])
 
         def _find_min_path(points):
             try:
