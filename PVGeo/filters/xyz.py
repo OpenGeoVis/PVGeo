@@ -56,6 +56,7 @@ class AddCellConnToPoints(FilterBase):
         self.__cell_type = kwargs.get('cell_type', vtk.VTK_POLY_LINE)
         self.__usenbr = kwargs.get('nearest_nbr', False)
         self.__close_loop = kwargs.get('close_loop', False)
+        self.__keep_vertices = kwargs.get('keep_vertices', False)
         self.__unique = True
 
 
@@ -99,7 +100,11 @@ class AddCellConnToPoints(FilterBase):
             ind = _find_min_path(points)
         else:
             ind = np.arange(len(points), dtype=int)
-        poly = vtki.PolyData(np.copy(points))
+        if self.__keep_vertices:
+            poly = vtki.PolyData(np.copy(points))
+        else:
+            poly = vtki.PolyData()
+            poly.points = np.copy(points)
         if cell_type == vtk.VTK_LINE:
             lines = np.c_[np.full(len(ind)-1, 2), ind[0:-1], ind[1:]]
             if self.__close_loop:
