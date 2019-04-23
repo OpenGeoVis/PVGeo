@@ -55,6 +55,7 @@ class AddCellConnToPoints(FilterBase):
         # Parameters
         self.__cell_type = kwargs.get('cell_type', vtk.VTK_POLY_LINE)
         self.__usenbr = kwargs.get('nearest_nbr', False)
+        self.__close_loop = kwargs.get('close_loop', False)
         self.__unique = True
 
 
@@ -100,13 +101,22 @@ class AddCellConnToPoints(FilterBase):
             ind = np.arange(len(points), dtype=int)
         poly = vtki.PolyData(np.copy(points))
         if cell_type == vtk.VTK_LINE:
-            poly.lines = np.c_[np.full(len(ind)-1, 2), ind[0:-1], ind[1:]]
+            lines = np.c_[np.full(len(ind)-1, 2), ind[0:-1], ind[1:]]
+            if self.__close_loop:
+                app = np.append(lines, [[2, ind[-1], ind[0]],], axis=0)
+                lines = app
+            poly.lines = lines
         elif cell_type == vtk.VTK_POLY_LINE:
             cells = vtk.vtkCellArray()
             cell = vtk.vtkPolyLine()
-            cell.GetPointIds().SetNumberOfIds(len(ind))
+            if self.__close_loop:
+                cell.GetPointIds().SetNumberOfIds(len(ind) + 1)
+            else:
+                cell.GetPointIds().SetNumberOfIds(len(ind))
             for i in ind:
                 cell.GetPointIds().SetId(i, ind[i])
+            if self.__close_loop:
+                cell.GetPointIds().SetId(i+1, ind[0])
             cells.InsertNextCell(cell)
             poly.SetLines(cells)
         else:

@@ -649,6 +649,32 @@ class TestAddCellConnToPoints(TestBase):
         # NOTE: assumes developers visually inspect in ParaView if functionality changes
         return
 
+    def test_line_closed(self):
+        """`AddCellConnToPoints`: LINE"""
+        self.makeSimpleInput()
+        f = AddCellConnToPoints(close_loop=True)
+        f.SetInputDataObject(self.vtkpoints)
+        f.set_cell_type(vtk.VTK_LINE)
+        f.Update()
+        output = f.GetOutput()
+        # NOTE: the algorithm adds vertice and line cells
+        self.assertEqual(len(self.pts) + len(self.pts), output.GetNumberOfCells())
+        # Now test nearest neighbor functionality
+        self.makeComplicatedInput()
+        f = AddCellConnToPoints(close_loop=True)
+        f.SetInputDataObject(self.vtkpoints)
+        f.set_cell_type(vtk.VTK_LINE)
+        f.set_use_nearest_nbr(True)
+        f.Update()
+        output = f.GetOutput()
+        # NOTE: the algorithm adds vertice and line cells
+        self.assertEqual(len(self.pts) + len(self.pts), output.GetNumberOfCells())
+        # Its fairly difficult to test the nearest neighbor approximations...
+        # This was done visually in ParaView.
+        # The above test is just there to make sure no errors are thrown
+        # NOTE: assumes developers visually inspect in ParaView if functionality changes
+        return
+
 
 ###############################################################################
 
