@@ -40,25 +40,25 @@ Welcome to PVGeo's code docs!
    :alt: Documentation Built by gendocs
 
 
-The ``PVGeo`` python package contains VTK powered tools for data visualization
+The ``PVGeo`` Python package contains VTK powered tools for data visualization
 in geophysics which are wrapped for direct use within the application
-`ParaView by Kitware`_.
+`ParaView by Kitware`_ or directly in a Python >=3.6 environment when paired
+with the `vtki Python package`_.
 These tools are tailored to data visualization in the geosciences with a heavy
 focus on structured data sets like 2D or 3D time-varying grids.
 
-This website hosts the code documentation for the ``PVGeo`` python package found
+This website hosts the documentation for the ``PVGeo`` Python package found
 on `GitHub`_ and `PyPI`_.
 
 For a quick overview of how ``PVGeo`` can be used in a Python environment or
 directly within ParaView, please checkout the code snippets and videos on the
-`About Examples Page`_.
+:ref:`About Examples Page`.
 
 
 .. _ParaView by Kitware: https://www.paraview.org
 .. _GitHub: https://github.com/OpenGeoVis/PVGeo\
 .. _PyPI: https://pypi.org/project/PVGeo/
-.. _full website: http://pvgeo.org
-.. _About Examples Page: http://pvgeo.org/examples/about-examples/
+.. _vtki Python package: http://docs.vtki.org
 
 
 Connections

@@ -123,10 +123,14 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx.ext.extlinks',
     'sphinxcontrib.napoleon',
     'sphinx_copybutton',
     'sphinx_gallery.gen_gallery'
 ]
+
+linkcheck_retries = 3
+linkcheck_timeout = 500
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
