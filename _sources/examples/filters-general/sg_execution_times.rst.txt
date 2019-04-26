@@ -5,17 +5,17 @@
 
 Computation times
 =================
-**00:38.350** total execution time for **examples_filters-general** files:
+**00:37.844** total execution time for **examples_filters-general** files:
 
-- **00:28.812**: :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)
-- **00:03.700**: :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)
-- **00:02.257**: :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)
-- **00:00.811**: :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)
-- **00:00.748**: :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)
-- **00:00.696**: :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)
-- **00:00.589**: :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``)
-- **00:00.479**: :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)
-- **00:00.069**: :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
+- **00:28.282**: :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)
+- **00:03.737**: :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)
+- **00:02.263**: :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)
+- **00:00.815**: :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)
+- **00:00.752**: :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)
+- **00:00.686**: :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)
+- **00:00.580**: :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``)
+- **00:00.473**: :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)
+- **00:00.068**: :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
+- **00:00.064**: :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)
 - **00:00.064**: :ref:`sphx_glr_examples_filters-general_reshape-table.py` (``reshape-table.py``)
-- **00:00.063**: :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)
-- **00:00.060**: :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``combine-tables.py``)
+- **00:00.061**: :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``combine-tables.py``)

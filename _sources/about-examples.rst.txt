@@ -1,3 +1,5 @@
+.. _About Examples Page:
+
 About Examples
 ==============
 
