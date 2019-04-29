@@ -231,13 +231,13 @@ class PointsToTube(AddCellConnToPoints):
 ###############################################################################
 #---- LonLat to Cartesian ----#
 
-class LonLatToUTM(FilterBase):
+class LonLatToUTM(FilterPreserveTypeBase):
     """Converts Points from Lon Lat to UTM
     """
     __displayname__ = 'Lat Lon To UTM'
     __category__ = 'filter'
     def __init__(self, **kwargs):
-        FilterBase.__init__(self, inputType='vtkPolyData', outputType='vtkPolyData', **kwargs)
+        FilterPreserveTypeBase.__init__(self, inputType='vtkDataSet', **kwargs)
         self.__zone = 11,
         self.__ellps = 'WGS84'
         self.set_zone(kwargs.get('zone', 11)) # User defined
@@ -267,18 +267,17 @@ class LonLatToUTM(FilterBase):
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
         # Get input/output of Proxy
-        pdi = self.GetInputData(inInfo, 0, 0)
+        pdi = vtki.wrap(self.GetInputData(inInfo, 0, 0))
         pdo = self.GetOutputData(outInfo, 0)
         #### Perfrom task ####
-        # Get the Points over the NumPy interface
-        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
-        if not hasattr(wpdi, 'Points'):
+        if not hasattr(pdi, 'points'):
             raise _helpers.PVGeoError('Input data object does not have points to convert.')
-        coords = np.array(wpdi.Points) # New NumPy array of poins so we dont destroy input
+        coords = pdi.points.copy() # New NumPy array of poins so we dont destroy input
         # Now Conver the points
         points = self.__convert_2d(coords[:, 0], coords[:, 1], coords[:, 2])
-        pdo.DeepCopy(interface.points_to_poly_data(points))
-        _helpers.copy_arrays_to_point_data(pdi, pdo, 0) # 0 is point data
+        output = pdi.copy()
+        output.points = points
+        pdo.DeepCopy(output)
         return 1
 
     def set_zone(self, zone):

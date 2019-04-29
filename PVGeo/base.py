@@ -268,7 +268,7 @@ class FilterPreserveTypeBase(FilterBase):
     __category__ = 'base'
     def __init__(self, nInputPorts=1, **kwargs):
         FilterBase.__init__(self,
-            nInputPorts=nInputPorts, inputType='vtkDataObject',
+            nInputPorts=nInputPorts, inputType=kwargs.pop('inputType', 'vtkDataObject'),
             nOutputPorts=1, **kwargs)
         self._preserve_port = 0 # This is the port to preserve data object type
 
