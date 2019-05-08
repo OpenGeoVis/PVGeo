@@ -41,7 +41,7 @@ class ExtractTopography(FilterBase):
             environments (not available in ParaView). The ``remove`` flag must
             be set at the time of instantiation of this algorithm.
             This does not actually update the algorithm's output data object
-            but applies a ``vtki`` threshold filter to pass a new data object
+            but applies a ``vista`` threshold filter to pass a new data object
             after calling ``apply``.
 
 
@@ -186,7 +186,7 @@ class ExtractTopography(FilterBase):
         self.SetInputDataObject(0, data)
         self.SetInputDataObject(1, points)
         self.Update()
-        output = interface.wrap_vtki(self.GetOutput())
+        output = interface.wrap_vista(self.GetOutput())
         if self._remove:
             # NOTE: Assumes the given operation produces zeros and ones only
             #       Also, this does not update the algorithm's output.

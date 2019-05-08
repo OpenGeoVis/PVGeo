@@ -83,7 +83,7 @@ PVGeo in Python
 +++++++++++++++
 
 PVGeo is built to work in Python 3 across operating systems.
-Once PVGeo and `vtki <http://docs.vtki.org>`_ are installed to your
+Once PVGeo and `vista <http://docs.vista.org>`_ are installed to your
 active environment you can get to
 work using PVGeo directly in your workflows for analysis, data integration,
 and visualization!
@@ -92,7 +92,7 @@ and visualization!
 
 
     import PVGeo
-    import vtki
+    import vista
 
 To learn more about using PVGeo in your Python environment, check out the
 psuedo-code on the `About Examples Page <../examples/about-examples>`_

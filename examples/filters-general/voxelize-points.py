@@ -10,8 +10,8 @@ volumetric operations.
 This example demos :class:`PVGeo.filters.VoxelizePoints`
 """
 # sphinx_gallery_thumbnail_number = 2
-import vtki
-from vtki import examples
+import vista
+from vista import examples
 import numpy as np
 import pandas as pd
 import PVGeo
@@ -29,7 +29,7 @@ fault_file, _ = examples.downloads._retrieve_file(url, 'fault_points.csv')
 # rotations.
 #
 # We will read in this data with ``pandas`` and send it to the
-# :func:`PVGeo.points_to_poly_data` helper to create a :class:`vtki.PolyData`
+# :func:`PVGeo.points_to_poly_data` helper to create a :class:`vista.PolyData`
 # object (essentially a point cloud).
 points = pd.read_csv(fault_file)
 print(points[0:2])
@@ -40,7 +40,7 @@ vtkpoints = PVGeo.points_to_poly_data(points)
 print(vtkpoints)
 
 ################################################################################
-# Note that we have a :class:`vtki.PolyData` object now which allows us to do
+# Note that we have a :class:`vista.PolyData` object now which allows us to do
 # all types of immediate plotting of our data. First, lets threshold our points
 # as the point cloud has a bunch of zeros and ones throughout the dataspace to
 # describe the presence of a fault.
@@ -87,7 +87,7 @@ grid.plot()
 # Filter Volumetric Data
 # ++++++++++++++++++++++
 #
-# Now lets use one of ``vtki``'s filters to create slices of the thresholded
+# Now lets use one of ``vista``'s filters to create slices of the thresholded
 # dataset. Specifically, we are using the ``slice_orthogonal`` filter that will
 # create 3 orthogonal slices through a data volume.
 slices = grid.slice_orthogonal()
@@ -100,7 +100,7 @@ clip = grid.clip(normal='x').clip(normal='-y').threshold(0.5)
 ################################################################################
 # Now display the slices and clipped volume
 
-p = vtki.Plotter()
+p = vista.Plotter()
 p.add_mesh(slices)
 p.add_mesh(clip)
 p.show_grid()

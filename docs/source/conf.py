@@ -81,14 +81,14 @@ Generator().DocumentPackages([PVGeo, pvmacros],
             extra=extra,
             )
 
-import vtki
+import vista
 import numpy as np
 # Manage errors
-vtki.set_error_output_file('errors.txt')
+vista.set_error_output_file('errors.txt')
 # Ensure that offscreen rendering is used for docs generation
-vtki.OFF_SCREEN = True # Not necessary - simply an insurance policy
+vista.OFF_SCREEN = True # Not necessary - simply an insurance policy
 # Preferred plotting style for documentation
-vtki.set_plot_theme('document')
+vista.set_plot_theme('document')
 
 
 # -- Project information -----------------------------------------------------
@@ -286,7 +286,7 @@ sphinx_gallery_conf = {
     "backreferences_dir": False,
     # Modules for which function level galleries are created.  In
     "doc_module": "PVGeo",
-    "image_scrapers": (vtki.Scraper(), 'matplotlib'),
+    "image_scrapers": (vista.Scraper(), 'matplotlib'),
     "thumbnail_size": (350, 350),
     # 'default_thumb_file': thumb_path,
 }

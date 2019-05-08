@@ -7,7 +7,7 @@ to make a `vtkTable` of that single data array
 This example demos :class:`PVGeo.filters.ExtractArray`
 """
 from PVGeo.filters import ExtractArray
-from vtki import examples
+from vista import examples
 ################################################################################
 # Create input data
 grd = examples.load_rectilinear()

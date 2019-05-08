@@ -39,9 +39,9 @@ This package provides many VTK-like algorithms designed for geoscientific data
 formats and types to perform data integration and analysis.
 To ensure our users have powerful and easy to use tools that can visualize the
 results of PVGeo algorithms, we are actively involved in the development of
-[**`vtki`**](https://github.com/vtkiorg/vtki): a toolset for easy access to
+[**`vista`**](https://github.com/pyvista/vista): a toolset for easy access to
 VTK data objects and 3D visualization in Python.
-To learn more about pairing PVGeo with `vtki`, please check out the
+To learn more about pairing PVGeo with `vista`, please check out the
 [**example Jupyter notebooks**](https://github.com/OpenGeoVis/PVGeo-Examples).
 
 

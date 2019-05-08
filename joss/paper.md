@@ -46,7 +46,7 @@ K-Means clustering, volume interpolation, iso-contouring, and Virtual Reality
 [@pvguide], [@vtkbook].
 By linking geoscience to VTK and ParaView, geoscientists can harness all of the
 native tools within ParaView, and other VTK powered libraries like ParaViewWeb
-[@pvweb], VTK.js [@vtkjs], and `vtki` [@vtki] or extend that data into new
+[@pvweb], VTK.js [@vtkjs], and `vista` [@vista] or extend that data into new
 domains like Virtual Reality, as outlined in Figure 1.
 PVGeo couples geoscientific information to software libraries at the forefront
 of scientific visualization, which enables scientists to cost-effectively and
@@ -99,14 +99,14 @@ integrating our data with all types of subsurface information to further
 illuminate the value of geophysical imaging techniques.
 This fosters a need for a visualization package to work seamlessly across
 data types and formats that extends the functionality of an already
-robust visualization platform like ParaView [@pvguide] or `vtki` [@vtki].
+robust visualization platform like ParaView [@pvguide] or `vista` [@vista].
 This visualization library is the PVGeo Python package; a free and open-source
 library for integrating geoscientific datasets in a common rendering environment
 to address various visualization and spatial analysis needs in geoscience.
 The PVGeo package is powered by VTK [@vtkbook] and provides plugins for
 ParaView, a user-friendly software environment for VTK.
 As a pure-Python package, PVGeo is interoperable with other Python, VTK-based
-software like the `vtki` Python package [@vtki].
+software like the `vista` Python package [@vista].
 
 
 There are various software available for geoscientific visualization; however,
@@ -125,11 +125,11 @@ open-source alternative for researchers.
 
 
 Development for PVGeo is complemented by development for
-[`vtki`](http://docs.vtki.org): *A Streamlined Python Interface for the Visualization Toolkit*.
-PVGeo provides an extension package to `vtki` linking data formats
-and filtering routines common in geoscientific disciplines to `vtki`'s
+[`vista`](http://docs.vista.org): *A Streamlined Python Interface for the Visualization Toolkit*.
+PVGeo provides an extension package to `vista` linking data formats
+and filtering routines common in geoscientific disciplines to `vista`'s
 generalized framework for 3D visualization.
-PVGeo leverages `vtki` to make the inputs and outputs of PVGeo algorithms more
+PVGeo leverages `vista` to make the inputs and outputs of PVGeo algorithms more
 accessible so that users can create compelling, integrated visualizations of
 their work in a reproducible workflow.
 

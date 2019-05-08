@@ -26,7 +26,7 @@ A filter that will preserve the input data type:
 
 .. code-block:: python
 
-    import vtki
+    import vista
     # Import Helpers: TODO Check relativity
     from ..base import FilterPreserveTypeBase
     from .. import _helpers
@@ -46,8 +46,8 @@ A filter that will preserve the input data type:
 
         def RequestData(self, request, inInfo, outInfo):
             """This is where you fill out your algorithm"""
-            pdi = vtki.wrap(self.GetInputData(inInfo, 0, 0)) # int args are port and index
-            pdo = vtki.wrap(self.GetOutputData(outInfo, 0)) # int arg is port
+            pdi = vista.wrap(self.GetInputData(inInfo, 0, 0)) # int args are port and index
+            pdo = vista.wrap(self.GetOutputData(outInfo, 0)) # int arg is port
             # TODO: Perform your data processing here
             raise NotImplementedError('Code me up!')
             return 1 # ALWAYS return 1
@@ -64,7 +64,7 @@ A filter that will alter the data type:
 
 .. code-block:: python
 
-    import vtki
+    import vista
     # Import Helpers: TODO Check relativity
     from ..base import FilterBase
     from .. import _helpers
@@ -84,8 +84,8 @@ A filter that will alter the data type:
 
         def RequestData(self, request, inInfo, outInfo):
             """This is where you fill out your algorithm"""
-            pdi = vtki.wrap(self.GetInputData(inInfo, 0, 0)) # int args are port and index
-            pdo = vtki.wrap(self.GetOutputData(outInfo, 0)) # int arg is port
+            pdi = vista.wrap(self.GetInputData(inInfo, 0, 0)) # int args are port and index
+            pdo = vista.wrap(self.GetOutputData(outInfo, 0)) # int arg is port
 
             # TODO: Perform your data processing here
             raise NotImplementedError('Code me up!')
@@ -104,7 +104,7 @@ Need to include a data array selection in your filter? It's easy:
 
 .. code-block:: python
 
-    import vtki
+    import vista
     # Import Helpers: TODO Check relativity
     from ..base import FilterBase
     from .. import _helpers
@@ -121,8 +121,8 @@ Need to include a data array selection in your filter? It's easy:
 
         def RequestData(self, request, inInfo, outInfo):
             """This is where you fill out your algorithm"""
-            pdi = vtki.wrap(self.GetInputData(inInfo, 0, 0)) # int args are port and index
-            pdo = vtki.wrap(self.GetOutputData(outInfo, 0)) # int arg is port
+            pdi = vista.wrap(self.GetInputData(inInfo, 0, 0)) # int args are port and index
+            pdo = vista.wrap(self.GetOutputData(outInfo, 0)) # int arg is port
 
             # Get input array in NumPy data structure
             field, name = self.__inputArray[0], self.__inputArray[1]
@@ -200,7 +200,7 @@ Sources
 
 .. code-block:: python
 
-    import vtki
+    import vista
     # Import Helpers: TODO: Check relativity
     from ..base import AlgorithmBase
     from .. import _helpers
@@ -221,7 +221,7 @@ Sources
 
         def RequestData(self, request, inInfo, outInfo):
             """This is where you fill out your algorithm"""
-            pdo = vtki.wrap(self.GetOutputData(outInfo, 0))
+            pdo = vista.wrap(self.GetOutputData(outInfo, 0))
             # TODO: Fill in the output data object: ``pdo``
             raise NotImplementedError('Code me up!')
             return 1

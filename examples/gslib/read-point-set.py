@@ -5,8 +5,8 @@ Read GSLib Point Set
 Read GSLib point set file
 """
 # sphinx_gallery_thumbnail_number = 1
-import vtki
-from vtki import examples
+import vista
+from vista import examples
 from PVGeo.gslib import GSLibPointSetReader
 
 ################################################################################

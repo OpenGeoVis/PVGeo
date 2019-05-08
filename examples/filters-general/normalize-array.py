@@ -15,8 +15,8 @@ This example demos :class:`PVGeo.filters.NormalizeArray`
 
 """
 import numpy as np
-import vtki
-from vtki import examples
+import vista
+from vista import examples
 import PVGeo
 from PVGeo.filters import NormalizeArray
 
