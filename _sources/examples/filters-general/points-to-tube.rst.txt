@@ -19,7 +19,7 @@ then builds a polygonal tube around that line with some specified radius and num
 .. code-block:: default
 
     # sphinx_gallery_thumbnail_number = 2
-    import vtki
+    import vista
     import numpy as np
     from PVGeo.filters import PointsToTube
 
@@ -41,7 +41,7 @@ then builds a polygonal tube around that line with some specified radius and num
 
     x, y = path(np.arange(0.0, 200.0, 25.0))
     zo = np.linspace(9.0, 11.0, num=len(y))
-    points = vtki.PolyData(np.c_[x,y,zo])
+    points = vista.PolyData(np.c_[x,y,zo])
 
     points.plot(point_size=10)
 
@@ -73,7 +73,7 @@ then builds a polygonal tube around that line with some specified radius and num
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.475 seconds)
+   **Total running time of the script:** ( 0 minutes  0.465 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_points-to-tube.py:

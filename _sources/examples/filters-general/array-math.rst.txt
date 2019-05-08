@@ -23,7 +23,7 @@ This example demos: :class:`PVGeo.filters.ArrayMath`
 .. code-block:: default
 
     import numpy as np
-    import vtki
+    import vista
     import PVGeo
     from PVGeo.filters import ArrayMath
 
@@ -38,7 +38,7 @@ Create some input data. This can be any `vtkDataObject`
 
 .. code-block:: default
 
-    inp = vtki.UniformGrid((10,10,4))
+    inp = vista.UniformGrid((10,10,4))
     # Populate the tables
     n = 400
     arr0 = np.random.random(n)
@@ -72,7 +72,7 @@ Use the filter:
 
  .. code-block:: none
 
-    UniformGrid (0x7f3c6fff7708)
+    UniformGrid (0x7f78301b9108)
       N Cells:      243
       N Points:     400
       X Bounds:     0.000e+00, 9.000e+00
@@ -120,7 +120,7 @@ Use a custom math operation:
 
  .. code-block:: none
 
-    UniformGrid (0x7f3c6fff7a08)
+    UniformGrid (0x7f78301b9408)
       N Cells:      243
       N Points:     400
       X Bounds:     0.000e+00, 9.000e+00
@@ -143,7 +143,7 @@ Use a custom math operation:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.061 seconds)
+   **Total running time of the script:** ( 0 minutes  0.063 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_array-math.py:

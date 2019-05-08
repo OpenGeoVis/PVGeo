@@ -8,7 +8,7 @@ any input data set that has valid PointData into a `vtkPolyData` object.
 This example demos :class:`PVGeo.filters.ExtractPoints`
 """
 # sphinx_gallery_thumbnail_number = 2
-from vtki import examples
+from vista import examples
 from PVGeo.filters import ExtractPoints
 
 ################################################################################

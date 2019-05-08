@@ -203,8 +203,8 @@ regular grid to create a <cite>vtkUnstructuredGrid</cite> which can be used to p
 volumetric operations.</p>
 <p>This example demos <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.VoxelizePoints</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
-<span class="kn">import</span> <span class="nn">vtki</span>
-<span class="kn">from</span> <span class="nn">vtki</span> <span class="k">import</span> <span class="n">examples</span>
+<span class="kn">import</span> <span class="nn">vista</span>
+<span class="kn">from</span> <span class="nn">vista</span> <span class="k">import</span> <span class="n">examples</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">PVGeo</span>
@@ -221,7 +221,7 @@ array for fault presence. This point cloud makes some sort of regular grid,
 but we have forgotten the deatials of the cell spacings and local coordinate
 rotations.</p>
 <p>We will read in this data with <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and send it to the
-<code class="xref py py-func docutils literal notranslate"><span class="pre">PVGeo.points_to_poly_data()</span></code> helper to create a <code class="xref py py-class docutils literal notranslate"><span class="pre">vtki.PolyData</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">PVGeo.points_to_poly_data()</span></code> helper to create a <code class="xref py py-class docutils literal notranslate"><span class="pre">vista.PolyData</span></code>
 object (essentially a point cloud).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fault_file</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
@@ -238,7 +238,7 @@ object (essentially a point cloud).</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f3c6e835588)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f7830195fa8)
   N Cells:      499200
   N Points:     499200
   X Bounds:     3.268e+05, 3.302e+05
@@ -247,7 +247,7 @@ object (essentially a point cloud).</p>
   N Scalars:    1
 </pre></div>
 </div>
-<p>Note that we have a <code class="xref py py-class docutils literal notranslate"><span class="pre">vtki.PolyData</span></code> object now which allows us to do
+<p>Note that we have a <code class="xref py py-class docutils literal notranslate"><span class="pre">vista.PolyData</span></code> object now which allows us to do
 all types of immediate plotting of our data. First, lets threshold our points
 as the point cloud has a bunch of zeros and ones throughout the dataspace to
 describe the presence of a fault.</p>
@@ -288,13 +288,13 @@ The full pipeline method</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Voxelizing... done.
 Recovered Angle (deg.): 53.550
 Recovered Cell Sizes: (25.00, 25.00, 25.00)
-UnstructuredGrid (0x7f3c6e835528)
+UnstructuredGrid (0x7f7830195ee8)
   N Cells:      499200
   N Points:     524064
   X Bounds:     3.268e+05, 3.302e+05
   Y Bounds:     4.406e+06, 4.410e+06
   Z Bounds:     0.000e+00, 1.300e+03
-  N Scalars:    1
+  N Scalars:    3
 </pre></div>
 </div>
 <p>And now we can plot the voxelized volume</p>
@@ -305,7 +305,7 @@ UnstructuredGrid (0x7f3c6e835528)
 </div>
 <div class="section" id="filter-volumetric-data">
 <h2>Filter Volumetric Data<a class="headerlink" href="#filter-volumetric-data" title="Permalink to this headline">¶</a></h2>
-<p>Now lets use one of <code class="docutils literal notranslate"><span class="pre">vtki</span></code>’s filters to create slices of the thresholded
+<p>Now lets use one of <code class="docutils literal notranslate"><span class="pre">vista</span></code>’s filters to create slices of the thresholded
 dataset. Specifically, we are using the <code class="docutils literal notranslate"><span class="pre">slice_orthogonal</span></code> filter that will
 create 3 orthogonal slices through a data volume.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">slices</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">slice_orthogonal</span><span class="p">()</span>
@@ -313,7 +313,7 @@ create 3 orthogonal slices through a data volume.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7f3c6e835828)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7f782f579228)
   N Blocks:     3
   X Bounds:     326804.336, 330185.260
   Y Bounds:     4406253.954, 4409862.606
@@ -325,7 +325,7 @@ create 3 orthogonal slices through a data volume.</p>
 </pre></div>
 </div>
 <p>Now display the slices and clipped volume</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">vista</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">slices</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">clip</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show_grid</span><span class="p">()</span>
@@ -333,7 +333,7 @@ create 3 orthogonal slices through a data volume.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_voxelize-points_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize-points_003.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  27.546 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  27.853 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-voxelize-points-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/26eee8aad2c1647ea7d3396af058d480/voxelize-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">voxelize-points.py</span></code></a></p>

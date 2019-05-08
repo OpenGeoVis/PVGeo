@@ -18,7 +18,6 @@ About PVGeo
    version.rst
    _helpers/index.rst
    filters/index.rst
-   gmggroup/index.rst
    grids/index.rst
    gslib/index.rst
    model_build/index.rst

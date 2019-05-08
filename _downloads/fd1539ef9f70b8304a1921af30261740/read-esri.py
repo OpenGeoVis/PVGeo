@@ -4,9 +4,9 @@ Read ESRI Grid File
 
 Read an ESRI ASCII grid file
 """
-import vtki
+import vista
 from PVGeo.grids import EsriGridReader
-from vtki import examples
+from vista import examples
 
 ################################################################################
 # Download a sample ESRI grid file

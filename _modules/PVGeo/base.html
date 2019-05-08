@@ -231,7 +231,7 @@
         <span class="sd">&quot;&quot;&quot;A conveience method to get the output data object of this ``PVGeo``</span>
 <span class="sd">        algorithm.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutputDataObject</span><span class="p">(</span><span class="n">port</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutputDataObject</span><span class="p">(</span><span class="n">port</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="AlgorithmBase.error_occurred"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.error_occurred">[docs]</a>    <span class="k">def</span> <span class="nf">error_occurred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;A conveience method for handling errors on the VTK pipeline</span>
@@ -249,7 +249,7 @@
 <div class="viewcode-block" id="AlgorithmBase.apply"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Update the algorithm and get the output data object&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="AlgorithmBase.update"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Alias for self.Update()&quot;&quot;&quot;</span>
@@ -351,7 +351,7 @@
         <span class="sd">&quot;&quot;&quot;Given a file name (or list of file names), perfrom the read&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">AddFileName</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
 
 <span class="c1">###############################################################################</span>
 
@@ -372,7 +372,7 @@
         <span class="sd">&quot;&quot;&quot;Run this algorithm on the given input dataset&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
 
 
 
@@ -437,7 +437,7 @@
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataObject&#39;</span><span class="p">,</span>
+            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;inputType&#39;</span><span class="p">,</span> <span class="s1">&#39;vtkDataObject&#39;</span><span class="p">),</span>
             <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_port</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># This is the port to preserve data object type</span>
 
@@ -603,7 +603,7 @@
         <span class="sd">&quot;&quot;&quot;Perfrom the read with parameters/file names set during init or by</span>
 <span class="sd">        setters&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
 
 
 <span class="c1">###############################################################################</span>

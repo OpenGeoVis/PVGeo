@@ -4,9 +4,9 @@ Read Surfer Grid File
 
 Read an Surfer ASCII grid file
 """
-import vtki
+import vista
 from PVGeo.grids import SurferGridReader
-from vtki import examples
+from vista import examples
 
 ################################################################################
 # Download a sample Surfer grid file

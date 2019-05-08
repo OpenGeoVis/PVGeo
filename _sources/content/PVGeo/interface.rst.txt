@@ -92,8 +92,8 @@ table_to_data_frame
 
 
 
-wrap_vtki
----------
+wrap_vista
+----------
 
-.. autofunction:: PVGeo.interface.wrap_vtki
+.. autofunction:: PVGeo.interface.wrap_vista
 

@@ -15,7 +15,7 @@ spline (either in the order by index or using a nearest neighbor calculation).
 ################################################################################
 # sphinx_gallery_thumbnail_number = 2
 import numpy as np
-import vtki
+import vista
 from PVGeo import points_to_poly_data
 from PVGeo.filters import AddCellConnToPoints
 
@@ -49,7 +49,7 @@ vtkPoints = points_to_poly_data(coords)
 # below; this is good.
 line = AddCellConnToPoints().apply(vtkPoints)
 
-p = vtki.Plotter()
+p = vista.Plotter()
 p.add_mesh(line, line_width=5, point_size=10)
 p.show()
 
@@ -66,6 +66,6 @@ p.show()
 # Use the filter: Here is vtkPolyData containing the connected line:
 line_o = AddCellConnToPoints(nearest_nbr=True).apply(vtkPoints)
 
-p = vtki.Plotter()
+p = vista.Plotter()
 p.add_mesh(line_o, line_width=5, point_size=10)
 p.show()

@@ -210,7 +210,7 @@
 <span class="sd">            environments (not available in ParaView). The ``remove`` flag must</span>
 <span class="sd">            be set at the time of instantiation of this algorithm.</span>
 <span class="sd">            This does not actually update the algorithm&#39;s output data object</span>
-<span class="sd">            but applies a ``vtki`` threshold filter to pass a new data object</span>
+<span class="sd">            but applies a ``vista`` threshold filter to pass a new data object</span>
 <span class="sd">            after calling ``apply``.</span>
 
 
@@ -355,7 +355,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vtki</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_vista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_remove</span><span class="p">:</span>
             <span class="c1"># NOTE: Assumes the given operation produces zeros and ones only</span>
             <span class="c1">#       Also, this does not update the algorithm&#39;s output.</span>

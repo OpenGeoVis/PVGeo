@@ -29,8 +29,8 @@ cells field.
 .. code-block:: default
 
     # sphinx_gallery_thumbnail_number = 6
-    import vtki
-    from vtki import examples
+    import vista
+    from vista import examples
     from PVGeo.model_build import CreateTensorMesh
     from PVGeo.grids import ExtractTopography
     import os
@@ -76,9 +76,9 @@ Now load the topography file from the example data:
 
     link = 'https://dl.dropbox.com/s/gw5v3tiq68oge3l/Example-Extract-Topo.zip?dl=0'
     examples.downloads._retrieve_file(link, 'Example-Extract-Topo.zip')
-    topo = vtki.read(os.path.join(vtki.EXAMPLES_PATH, 'topo.vtk'))
+    topo = vista.read(os.path.join(vista.EXAMPLES_PATH, 'topo.vtk'))
 
-    p = vtki.Plotter()
+    p = vista.Plotter()
     p.add_mesh(topo, cmap='terrain')
     p.add_mesh(mesh, color=True, show_edges=False, opacity=0.75)
     p.show_grid()
@@ -142,7 +142,7 @@ How well did this remove cells above the topography surface?
 .. code-block:: default
 
 
-    p = vtki.Plotter()
+    p = vista.Plotter()
     p.add_mesh(topo, cmap='terrain')
     p.add_mesh(threshed, color=True, show_edges=True)
     p.show_grid()
@@ -165,7 +165,7 @@ topographic surface, you can set a tolerance:
 
     extracted = ExtractTopography(tolerance=100., remove=True).apply(mesh, topo)
 
-    p = vtki.Plotter()
+    p = vista.Plotter()
     p.add_mesh(topo, cmap='terrain')
     p.add_mesh(extracted, color=True, show_edges=True)
     p.show_grid()
@@ -201,7 +201,7 @@ Note that there are other extraction operations like an ``'intersection'``:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.179 seconds)
+   **Total running time of the script:** ( 0 minutes  11.478 seconds)
 
 
 .. _sphx_glr_download_examples_grids_extract-topography.py:

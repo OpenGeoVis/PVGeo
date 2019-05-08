@@ -14,9 +14,9 @@ Read an Surfer ASCII grid file
 
 .. code-block:: default
 
-    import vtki
+    import vista
     from PVGeo.grids import SurferGridReader
-    from vtki import examples
+    from vista import examples
 
 
 
@@ -59,7 +59,7 @@ Apply a filter to the DEM to have realistic topography
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.255 seconds)
+   **Total running time of the script:** ( 0 minutes  1.383 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-surfer.py:

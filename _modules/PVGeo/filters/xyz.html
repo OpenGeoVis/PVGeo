@@ -189,7 +189,7 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">vtk</span>
 <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
-<span class="kn">import</span> <span class="nn">vtki</span>
+<span class="kn">import</span> <span class="nn">vista</span>
 
 <span class="c1"># NOTE: internal import of pyproj in LonLatToUTM</span>
 
@@ -239,7 +239,7 @@
             <span class="n">startTime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
         <span class="c1"># Get the Points over the NumPy interface</span>
-        <span class="n">pdi</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="n">pdi</span> <span class="o">=</span> <span class="n">vista</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
         <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">pdi</span><span class="o">.</span><span class="n">points</span><span class="p">)</span> <span class="c1"># New NumPy array of poins so we dont destroy input</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unique</span><span class="p">:</span>
             <span class="c1"># Remove repeated points</span>
@@ -270,9 +270,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__keep_vertices</span><span class="p">:</span>
-            <span class="n">poly</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">points</span><span class="p">))</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="n">vista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">points</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">poly</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">PolyData</span><span class="p">()</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="n">vista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">()</span>
             <span class="n">poly</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">cell_type</span> <span class="o">==</span> <span class="n">vtk</span><span class="o">.</span><span class="n">VTK_LINE</span><span class="p">:</span>
             <span class="n">lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ind</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ind</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
@@ -400,13 +400,13 @@
 <span class="c1">###############################################################################</span>
 <span class="c1">#---- LonLat to Cartesian ----#</span>
 
-<div class="viewcode-block" id="LonLatToUTM"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.LonLatToUTM">[docs]</a><span class="k">class</span> <span class="nc">LonLatToUTM</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+<div class="viewcode-block" id="LonLatToUTM"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.LonLatToUTM">[docs]</a><span class="k">class</span> <span class="nc">LonLatToUTM</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts Points from Lon Lat to UTM</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Lat Lon To UTM&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">FilterPreserveTypeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__zone</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__ellps</span> <span class="o">=</span> <span class="s1">&#39;WGS84&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_zone</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;zone&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span> <span class="c1"># User defined</span>
@@ -436,18 +436,17 @@
 <div class="viewcode-block" id="LonLatToUTM.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.LonLatToUTM.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
-        <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pdi</span> <span class="o">=</span> <span class="n">vista</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1">#### Perfrom task ####</span>
-        <span class="c1"># Get the Points over the NumPy interface</span>
-        <span class="n">wpdi</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">WrapDataObject</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span> <span class="c1"># NumPy wrapped input</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="s1">&#39;Points&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="s1">&#39;points&#39;</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Input data object does not have points to convert.&#39;</span><span class="p">)</span>
-        <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">wpdi</span><span class="o">.</span><span class="n">Points</span><span class="p">)</span> <span class="c1"># New NumPy array of poins so we dont destroy input</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">pdi</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1"># New NumPy array of poins so we dont destroy input</span>
         <span class="c1"># Now Conver the points</span>
         <span class="n">points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__convert_2d</span><span class="p">(</span><span class="n">coords</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">coords</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
-        <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">points_to_poly_data</span><span class="p">(</span><span class="n">points</span><span class="p">))</span>
-        <span class="n">_helpers</span><span class="o">.</span><span class="n">copy_arrays_to_point_data</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># 0 is point data</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">pdi</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points</span>
+        <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="LonLatToUTM.set_zone"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.LonLatToUTM.set_zone">[docs]</a>    <span class="k">def</span> <span class="nf">set_zone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zone</span><span class="p">):</span>
@@ -1109,7 +1108,7 @@
 <span class="sd">            dimension. This will be filled out for every station location.</span>
 
 <span class="sd">        Return:</span>
-<span class="sd">            vtki.UnstructuredGrid</span>
+<span class="sd">            vista.UnstructuredGrid</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">):</span>
             <span class="c1"># This will extract data from pandas dataframes if those are given</span>
@@ -1153,7 +1152,7 @@
         <span class="n">cells</span><span class="o">.</span><span class="n">SetCells</span><span class="p">(</span><span class="n">cellConn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_cell_conn</span><span class="p">(</span><span class="n">cellConn</span><span class="p">))</span>
 
         <span class="c1"># Produce the output</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">UnstructuredGrid</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">vista</span><span class="o">.</span><span class="n">UnstructuredGrid</span><span class="p">()</span>
         <span class="n">output</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points</span>
         <span class="n">output</span><span class="o">.</span><span class="n">SetCells</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">VTK_QUAD</span><span class="p">,</span> <span class="n">cells</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span></div>
@@ -1166,7 +1165,7 @@
         <span class="c1"># Get number of points</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1">#### Perfrom task ####</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">vista</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">BuildSurfaceFromPoints</span><span class="o">.</span><span class="n">create_surface</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__zcoords</span><span class="p">))</span>
         <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>

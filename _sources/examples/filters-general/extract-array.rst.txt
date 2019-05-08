@@ -17,7 +17,7 @@ This example demos :class:`PVGeo.filters.ExtractArray`
 .. code-block:: default
 
     from PVGeo.filters import ExtractArray
-    from vtki import examples
+    from vista import examples
 
 
 
@@ -57,12 +57,12 @@ Construct the filter
 
  .. code-block:: none
 
-    vtkTable (0x53847e0)
+    vtkTable (0x3b45490)
       Debug: Off
       Modified Time: 21527
       Reference Count: 2
       Registered Events: (none)
-      Information: 0x38717d0
+      Information: 0x4bc9780
       Data Released: False
       Global Release Data: Off
       UpdateTime: 21539
@@ -99,7 +99,7 @@ Construct the filter
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.065 seconds)
+   **Total running time of the script:** ( 0 minutes  0.068 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-array.py:

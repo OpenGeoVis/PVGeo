@@ -20,8 +20,8 @@ This example demos :class:`PVGeo.filters.VoxelizePoints`
 .. code-block:: default
 
     # sphinx_gallery_thumbnail_number = 2
-    import vtki
-    from vtki import examples
+    import vista
+    from vista import examples
     import numpy as np
     import pandas as pd
     import PVGeo
@@ -53,7 +53,7 @@ but we have forgotten the deatials of the cell spacings and local coordinate
 rotations.
 
 We will read in this data with ``pandas`` and send it to the
-:func:`PVGeo.points_to_poly_data` helper to create a :class:`vtki.PolyData`
+:func:`PVGeo.points_to_poly_data` helper to create a :class:`vista.PolyData`
 object (essentially a point cloud).
 
 
@@ -94,7 +94,7 @@ object (essentially a point cloud).
 
  .. code-block:: none
 
-    PolyData (0x7f3c6e835588)
+    PolyData (0x7f7830195fa8)
       N Cells:      499200
       N Points:     499200
       X Bounds:     3.268e+05, 3.302e+05
@@ -103,7 +103,7 @@ object (essentially a point cloud).
       N Scalars:    1
 
 
-Note that we have a :class:`vtki.PolyData` object now which allows us to do
+Note that we have a :class:`vista.PolyData` object now which allows us to do
 all types of immediate plotting of our data. First, lets threshold our points
 as the point cloud has a bunch of zeros and ones throughout the dataspace to
 describe the presence of a fault.
@@ -170,13 +170,13 @@ The full pipeline method
     Voxelizing... done.
     Recovered Angle (deg.): 53.550
     Recovered Cell Sizes: (25.00, 25.00, 25.00)
-    UnstructuredGrid (0x7f3c6e835528)
+    UnstructuredGrid (0x7f7830195ee8)
       N Cells:      499200
       N Points:     524064
       X Bounds:     3.268e+05, 3.302e+05
       Y Bounds:     4.406e+06, 4.410e+06
       Z Bounds:     0.000e+00, 1.300e+03
-      N Scalars:    1
+      N Scalars:    3
 
 
 And now we can plot the voxelized volume
@@ -199,7 +199,7 @@ And now we can plot the voxelized volume
 Filter Volumetric Data
 ++++++++++++++++++++++
 
-Now lets use one of ``vtki``'s filters to create slices of the thresholded
+Now lets use one of ``vista``'s filters to create slices of the thresholded
 dataset. Specifically, we are using the ``slice_orthogonal`` filter that will
 create 3 orthogonal slices through a data volume.
 
@@ -219,7 +219,7 @@ create 3 orthogonal slices through a data volume.
 
  .. code-block:: none
 
-    MultiBlock (0x7f3c6e835828)
+    MultiBlock (0x7f782f579228)
       N Blocks:     3
       X Bounds:     326804.336, 330185.260
       Y Bounds:     4406253.954, 4409862.606
@@ -245,7 +245,7 @@ Now display the slices and clipped volume
 .. code-block:: default
 
 
-    p = vtki.Plotter()
+    p = vista.Plotter()
     p.add_mesh(slices)
     p.add_mesh(clip)
     p.show_grid()
@@ -262,7 +262,7 @@ Now display the slices and clipped volume
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  27.546 seconds)
+   **Total running time of the script:** ( 0 minutes  27.853 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:

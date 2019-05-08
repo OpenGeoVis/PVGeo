@@ -6,8 +6,8 @@ Read a UBC topography file
 """
 # sphinx_gallery_thumbnail_number = 1
 import PVGeo
-import vtki
-from vtki import examples
+import vista
+from vista import examples
 
 ################################################################################
 # Download sample data files and keep track of names:

@@ -16,8 +16,8 @@ Read SGeMS Grid file formats. The examples shown here are downloaded from
 .. code-block:: default
 
     # sphinx_gallery_thumbnail_number = 2
-    import vtki
-    from vtki import examples
+    import vista
+    from vista import examples
     from PVGeo.gslib import SGeMSGridReader
 
 
@@ -45,7 +45,7 @@ Read SGeMS Grid file formats. The examples shown here are downloaded from
 
  .. code-block:: none
 
-    UniformGrid (0x7f3c6ffb5fa8)
+    UniformGrid (0x7f782f598108)
       N Cells:      78000
       N Points:     157122
       X Bounds:     0.000e+00, 2.600e+02
@@ -141,7 +141,7 @@ Read SGeMS Grid file formats. The examples shown here are downloaded from
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  47.622 seconds)
+   **Total running time of the script:** ( 0 minutes  49.202 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-sgems-grid.py:

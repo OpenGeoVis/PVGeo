@@ -199,7 +199,7 @@
 <p>Takes points from a <cite>vtkPolyData</cite> object and constructs a line of those points
 then builds a polygonal tube around that line with some specified radius and number of sides.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
-<span class="kn">import</span> <span class="nn">vtki</span>
+<span class="kn">import</span> <span class="nn">vista</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">PVGeo.filters</span> <span class="k">import</span> <span class="n">PointsToTube</span>
 </pre></div>
@@ -212,7 +212,7 @@ then builds a polygonal tube around that line with some specified radius and num
 
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">path</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">))</span>
 <span class="n">zo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">9.0</span><span class="p">,</span> <span class="mf">11.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
-<span class="n">points</span> <span class="o">=</span> <span class="n">vtki</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">zo</span><span class="p">])</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">vista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">zo</span><span class="p">])</span>
 
 <span class="n">points</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">point_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -224,7 +224,7 @@ then builds a polygonal tube around that line with some specified radius and num
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_points-to-tube_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_points-to-tube_002.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.475 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.465 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-points-to-tube-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/0373e61df988001817ad2eb9d303b5aa/points-to-tube.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">points-to-tube.py</span></code></a></p>
