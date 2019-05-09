@@ -22,7 +22,7 @@ from .pipeline import *
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
-__version__ = '2.0.0a'
+__version__ = '2.0.0b'
 
 
 __displayname__ = 'ParaView Macros'
