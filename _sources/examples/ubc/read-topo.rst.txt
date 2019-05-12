@@ -16,8 +16,8 @@ Read a UBC topography file
 
     # sphinx_gallery_thumbnail_number = 1
     import PVGeo
-    import vista
-    from vista import examples
+    import pyvista
+    from pyvista import examples
 
 
 
@@ -55,7 +55,7 @@ Download sample data files and keep track of names:
 
  .. code-block:: none
 
-    PolyData (0x7f319c3b7168)
+    PolyData (0x7f061771bfa8)
       N Cells:      381924
       N Points:     381924
       X Bounds:     3.550e+05, 3.720e+05
@@ -80,7 +80,7 @@ Download sample data files and keep track of names:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.303 seconds)
+   **Total running time of the script:** ( 0 minutes  4.336 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-topo.py:

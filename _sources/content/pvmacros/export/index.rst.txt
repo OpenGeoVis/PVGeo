@@ -49,14 +49,14 @@ Demo Shareable Format
 +++++++++++++++++++++
 
 Here are some samples to demonstrate the web viewer which we host on
-`viewer.vista.org <http://viewer.vista.org>`_. We have included a few of our
+`viewer.pyvista.org <http://viewer.pyvista.org>`_. We have included a few of our
 scenes and one of the vtk.js sample scenes for you to demo:
 
-- `Fluvial Channels <http://viewer.vista.org/?fileURL=https://dl.dropbox.com/s/qnahdwedjwndo7t/fluvsim_channels.vtkjs?dl=0>`_
+- `Fluvial Channels <http://viewer.pyvista.org/?fileURL=https://dl.dropbox.com/s/qnahdwedjwndo7t/fluvsim_channels.vtkjs?dl=0>`_
 - `Volcano <http://volcano.pvgeo.org>`_
 - `Ripple <http://ripple.pvgeo.org>`_
 - `Tunnels <http://tunnels.pvgeo.org>`_
-- `vtk.js Sample Scene <http://viewer.vista.org/?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download>`_
+- `vtk.js Sample Scene <http://viewer.pyvista.org/?fileURL=https://data.kitware.com/api/v1/file/587003c38d777f05f44a5c93/download>`_
 
 
 
@@ -81,7 +81,7 @@ will describe where the exported scene was saved.
     pvm.export.exportVTKjs(FileName='test_export')
 
 
-Now open the standalone web viewer by opening `viewer.vista.org <http://viewer.vista.org>`_
+Now open the standalone web viewer by opening `viewer.pyvista.org <http://viewer.pyvista.org>`_
 
 Select the exported scene as the input file for the web viewer from where you
 saved it (should be under ``~/Dropbox/PVGeo_vtkjs/``). The export macro should
@@ -109,7 +109,7 @@ Quick and Easy
     Check out the data scene/model by downloading the attached file.
     Then go to the link below and open that downloaded file.
 
-    `http://viewer.vista.org/ <http://viewer.vista.org>`_
+    `http://viewer.pyvista.org/ <http://viewer.pyvista.org>`_
 
 
 A Bit More Robust

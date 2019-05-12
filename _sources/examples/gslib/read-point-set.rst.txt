@@ -15,8 +15,8 @@ Read GSLib point set file
 .. code-block:: default
 
     # sphinx_gallery_thumbnail_number = 1
-    import vista
-    from vista import examples
+    import pyvista
+    from pyvista import examples
     from PVGeo.gslib import GSLibPointSetReader
 
 
@@ -44,7 +44,7 @@ Read GSLib point set file
 
  .. code-block:: none
 
-    PolyData (0x7f31b3fb7c48)
+    PolyData (0x7f061775cb28)
       N Cells:      100
       N Points:     100
       X Bounds:     3.000e+00, 2.520e+02
@@ -69,7 +69,7 @@ Read GSLib point set file
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.541 seconds)
+   **Total running time of the script:** ( 0 minutes  0.545 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-point-set.py:

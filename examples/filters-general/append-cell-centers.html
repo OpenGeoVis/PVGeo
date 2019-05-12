@@ -196,22 +196,23 @@
 <span id="sphx-glr-examples-filters-general-append-cell-centers-py"></span><h1>Append Cell Centers<a class="headerlink" href="#append-cell-centers" title="Permalink to this headline">¶</a></h1>
 <p>This example will demonstrate how to append a dataset’s cell centers as a length 3 tuple array.</p>
 <p>This example demonstrates <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.AppendCellCenters</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vista</span> <span class="k">import</span> <span class="n">examples</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyvista</span> <span class="k">import</span> <span class="n">examples</span>
 <span class="kn">from</span> <span class="nn">PVGeo.filters</span> <span class="k">import</span> <span class="n">AppendCellCenters</span>
 </pre></div>
 </div>
-<p>Use an example mesh from vista</p>
+<p>Use an example mesh from pyvista</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">load_rectilinear</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>RectilinearGrid (0x7f31b308d948)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>RectilinearGrid (0x7f0617806d08)
   N Cells:      16146
   N Points:     18144
   X Bounds:     -3.500e+02, 1.350e+03
   Y Bounds:     -4.000e+02, 1.350e+03
   Z Bounds:     -8.500e+02, 0.000e+00
+  Dimensions:   27, 28, 24
   N Scalars:    1
 </pre></div>
 </div>
@@ -221,12 +222,13 @@
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>RectilinearGrid (0x7f31b308da68)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>RectilinearGrid (0x7f0617806e28)
   N Cells:      16146
   N Points:     18144
   X Bounds:     -3.500e+02, 1.350e+03
   Y Bounds:     -4.000e+02, 1.350e+03
   Z Bounds:     -8.500e+02, 0.000e+00
+  Dimensions:   27, 28, 24
   N Scalars:    2
 </pre></div>
 </div>
@@ -234,7 +236,7 @@
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_append-cell-centers_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_append-cell-centers_001.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.791 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.812 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-append-cell-centers-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/d1754dab2850102fd74d6417f48c95c7/append-cell-centers.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">append-cell-centers.py</span></code></a></p>

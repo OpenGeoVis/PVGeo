@@ -17,7 +17,7 @@ This example demonstrates :class:`PVGeo.filters.AppendCellCenters`
 .. code-block:: default
 
 
-    from vista import examples
+    from pyvista import examples
     from PVGeo.filters import AppendCellCenters
 
 
@@ -26,7 +26,7 @@ This example demonstrates :class:`PVGeo.filters.AppendCellCenters`
 
 
 
-Use an example mesh from vista
+Use an example mesh from pyvista
 
 
 .. code-block:: default
@@ -44,12 +44,13 @@ Use an example mesh from vista
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f31b308d948)
+    RectilinearGrid (0x7f0617806d08)
       N Cells:      16146
       N Points:     18144
       X Bounds:     -3.500e+02, 1.350e+03
       Y Bounds:     -4.000e+02, 1.350e+03
       Z Bounds:     -8.500e+02, 0.000e+00
+      Dimensions:   27, 28, 24
       N Scalars:    1
 
 
@@ -71,12 +72,13 @@ Run the PVGeo algorithm
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f31b308da68)
+    RectilinearGrid (0x7f0617806e28)
       N Cells:      16146
       N Points:     18144
       X Bounds:     -3.500e+02, 1.350e+03
       Y Bounds:     -4.000e+02, 1.350e+03
       Z Bounds:     -8.500e+02, 0.000e+00
+      Dimensions:   27, 28, 24
       N Scalars:    2
 
 
@@ -96,7 +98,7 @@ Run the PVGeo algorithm
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.791 seconds)
+   **Total running time of the script:** ( 0 minutes  0.812 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_append-cell-centers.py:

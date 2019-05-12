@@ -188,7 +188,7 @@
     <span class="s1">&#39;convert_cell_conn&#39;</span><span class="p">,</span>
     <span class="s1">&#39;get_array&#39;</span><span class="p">,</span>
     <span class="s1">&#39;get_data_dict&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;wrap_vista&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;wrap_pyvista&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -277,7 +277,7 @@
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="n">VTK_data</span> <span class="o">=</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
         <span class="n">pdo</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">VTK_data</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">wrap_vista</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">wrap_pyvista</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="table_to_data_frame"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.table_to_data_frame">[docs]</a><span class="k">def</span> <span class="nf">table_to_data_frame</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
@@ -313,7 +313,7 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ndarr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">void</span><span class="p">)):</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">titles</span><span class="p">):</span>
                 <span class="n">place_array_in_table</span><span class="p">(</span><span class="n">ndarr</span><span class="p">[</span><span class="s1">&#39;f</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">],</span> <span class="n">title</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">wrap_vista</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">wrap_pyvista</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span>
         <span class="c1"># Otherwise it is just a 1D array which needs to be 2D</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ndarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ndarr</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
@@ -323,7 +323,7 @@
         <span class="n">VTK_data</span> <span class="o">=</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">ndarr</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
         <span class="n">VTK_data</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="n">pdo</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">VTK_data</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">wrap_vista</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">wrap_pyvista</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span></div>
 
 
 
@@ -421,7 +421,7 @@
     <span class="k">if</span> <span class="n">copy_z</span><span class="p">:</span>
         <span class="n">z</span> <span class="o">=</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Elevation&#39;</span><span class="p">)</span>
         <span class="n">pdata</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">wrap_vista</span><span class="p">(</span><span class="n">pdata</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">wrap_pyvista</span><span class="p">(</span><span class="n">pdata</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="add_arrays_from_data_frame"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.add_arrays_from_data_frame">[docs]</a><span class="k">def</span> <span class="nf">add_arrays_from_data_frame</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
@@ -429,7 +429,7 @@
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="n">VTK_data</span> <span class="o">=</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
         <span class="n">_helpers</span><span class="o">.</span><span class="n">add_array</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">VTK_data</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">wrap_vista</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">wrap_pyvista</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span></div>
 
 
 
@@ -466,15 +466,15 @@
     <span class="k">return</span> <span class="n">data</span></div>
 
 
-<div class="viewcode-block" id="wrap_vista"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.wrap_vista">[docs]</a><span class="k">def</span> <span class="nf">wrap_vista</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+<div class="viewcode-block" id="wrap_pyvista"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.wrap_pyvista">[docs]</a><span class="k">def</span> <span class="nf">wrap_pyvista</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This will wrap any given VTK dataset via the vtkInterface Python package</span>
-<span class="sd">    if it is available and return the wrapped data object. If vista is</span>
+<span class="sd">    if it is available and return the wrapped data object. If pyvista is</span>
 <span class="sd">    unavailable, then the given object is returned.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">dataset</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">vista</span>
-        <span class="n">dataset</span> <span class="o">=</span> <span class="n">vista</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="kn">import</span> <span class="nn">pyvista</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">dataset</span></div>

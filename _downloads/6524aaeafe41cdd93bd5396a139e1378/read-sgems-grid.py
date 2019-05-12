@@ -6,8 +6,8 @@ Read SGeMS Grid file formats. The examples shown here are downloaded from
 `Multiple-point Geostatistics stochastic modeling with training images <http://www.trainingimages.org/training-images-library.html>`_ website.
 """
 # sphinx_gallery_thumbnail_number = 2
-import vista
-from vista import examples
+import pyvista
+from pyvista import examples
 from PVGeo.gslib import SGeMSGridReader
 
 ################################################################################

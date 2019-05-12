@@ -24,8 +24,8 @@ This example demos :class:`PVGeo.filters.NormalizeArray`
 .. code-block:: default
 
     import numpy as np
-    import vista
-    from vista import examples
+    import pyvista
+    from pyvista import examples
     import PVGeo
     from PVGeo.filters import NormalizeArray
 
@@ -71,12 +71,14 @@ Create some input data. this can be any `vtkDataObject`
 
  .. code-block:: none
 
-    UniformGrid (0x7f31b302ce88)
+    UniformGrid (0x7f0617806fa8)
       N Cells:      729
       N Points:     1000
       X Bounds:     0.000e+00, 9.000e+00
       Y Bounds:     0.000e+00, 9.000e+00
       Z Bounds:     0.000e+00, 9.000e+00
+      Dimensions:   10, 10, 10
+      Spacing:      1.000e+00, 1.000e+00, 1.000e+00
       N Scalars:    3
 
 
@@ -96,7 +98,7 @@ Create some input data. this can be any `vtkDataObject`
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.154 seconds)
+   **Total running time of the script:** ( 0 minutes  2.252 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_normalize-array.py:

@@ -112,6 +112,7 @@
 ./_modules/PVGeo/filters/tables.html
 ./_modules/PVGeo/filters/voxelize.html
 ./_modules/PVGeo/filters/xyz.html
+./_modules/PVGeo/gmggroup/reader.html
 ./_modules/PVGeo/grids/fileio.html
 ./_modules/PVGeo/grids/subset.html
 ./_modules/PVGeo/grids/transform.html
@@ -149,6 +150,8 @@
 ./_sources/content/PVGeo/filters/tables.rst.txt
 ./_sources/content/PVGeo/filters/voxelize.rst.txt
 ./_sources/content/PVGeo/filters/xyz.rst.txt
+./_sources/content/PVGeo/gmggroup/index.rst.txt
+./_sources/content/PVGeo/gmggroup/reader.rst.txt
 ./_sources/content/PVGeo/grids/fileio.rst.txt
 ./_sources/content/PVGeo/grids/index.rst.txt
 ./_sources/content/PVGeo/grids/subset.rst.txt
@@ -290,6 +293,8 @@
 ./content/PVGeo/filters/tables.html
 ./content/PVGeo/filters/voxelize.html
 ./content/PVGeo/filters/xyz.html
+./content/PVGeo/gmggroup/index.html
+./content/PVGeo/gmggroup/reader.html
 ./content/PVGeo/grids/fileio.html
 ./content/PVGeo/grids/index.html
 ./content/PVGeo/grids/subset.html

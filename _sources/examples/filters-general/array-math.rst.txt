@@ -23,7 +23,7 @@ This example demos: :class:`PVGeo.filters.ArrayMath`
 .. code-block:: default
 
     import numpy as np
-    import vista
+    import pyvista
     import PVGeo
     from PVGeo.filters import ArrayMath
 
@@ -38,7 +38,7 @@ Create some input data. This can be any `vtkDataObject`
 
 .. code-block:: default
 
-    inp = vista.UniformGrid((10,10,4))
+    inp = pyvista.UniformGrid((10,10,4))
     # Populate the tables
     n = 400
     arr0 = np.random.random(n)
@@ -72,12 +72,14 @@ Use the filter:
 
  .. code-block:: none
 
-    UniformGrid (0x7f31b308dfa8)
+    UniformGrid (0x7f06177b23a8)
       N Cells:      243
       N Points:     400
       X Bounds:     0.000e+00, 9.000e+00
       Y Bounds:     0.000e+00, 9.000e+00
       Z Bounds:     0.000e+00, 3.000e+00
+      Dimensions:   10, 10, 4
+      Spacing:      1.000e+00, 1.000e+00, 1.000e+00
       N Scalars:    3
 
 
@@ -120,12 +122,14 @@ Use a custom math operation:
 
  .. code-block:: none
 
-    UniformGrid (0x7f31b302c2e8)
+    UniformGrid (0x7f06177b26a8)
       N Cells:      243
       N Points:     400
       X Bounds:     0.000e+00, 9.000e+00
       Y Bounds:     0.000e+00, 9.000e+00
       Z Bounds:     0.000e+00, 3.000e+00
+      Dimensions:   10, 10, 4
+      Spacing:      1.000e+00, 1.000e+00, 1.000e+00
       N Scalars:    3
 
 
@@ -143,7 +147,7 @@ Use a custom math operation:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.060 seconds)
+   **Total running time of the script:** ( 0 minutes  0.068 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_array-math.py:

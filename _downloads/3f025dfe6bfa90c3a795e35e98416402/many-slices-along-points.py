@@ -19,14 +19,14 @@ This example demos :class:`PVGeo.filters.ManySlicesAlongPoints`
 """
 ################################################################################
 # sphinx_gallery_thumbnail_number = 3
-import vista
-from vista import examples
+import pyvista
+from pyvista import examples
 import numpy as np
 import PVGeo
 from PVGeo.filters import ManySlicesAlongPoints
 
 ################################################################################
-# Load a volumetric model to be sliced from vista's examples
+# Load a volumetric model to be sliced from pyvista's examples
 model = examples.load_channels()
 model.plot()
 
@@ -43,9 +43,9 @@ def path(y):
 x, y = path(np.arange(model.bounds[2], model.bounds[3], 15.0))
 zo = np.linspace(9.0, 11.0, num=len(y))
 # Make a VTK data object for the filter to use
-points = vista.PolyData(np.c_[x,y,zo])
+points = pyvista.PolyData(np.c_[x,y,zo])
 
-p = vista.Plotter()
+p = pyvista.Plotter()
 p.add_mesh(model.outline(), color='k')
 p.add_mesh(points, point_size=10.0)
 p.show()
@@ -62,7 +62,7 @@ print(slices)
 
 ################################################################################
 line = PVGeo.filters.AddCellConnToPoints().apply(points)
-p = vista.Plotter()
+p = pyvista.Plotter()
 p.add_mesh(line, line_width=10)
 p.add_mesh(slices, lighting=False)
 p.add_mesh(model.outline(), color='k')
