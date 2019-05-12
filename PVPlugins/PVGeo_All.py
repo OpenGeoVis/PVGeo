@@ -17,7 +17,7 @@ from PVGeo_Tunneling import *
 from PVGeo_UBC_Tools import *
 try:
     import omf
-    import omfvtk
+    import omfvista
 except ImportError:
     pass
 else:

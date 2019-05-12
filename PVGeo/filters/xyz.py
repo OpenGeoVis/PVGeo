@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-import vista
+import pyvista
 
 # NOTE: internal import of pyproj in LonLatToUTM
 
@@ -70,7 +70,7 @@ class AddCellConnToPoints(FilterBase):
             startTime = datetime.now()
 
         # Get the Points over the NumPy interface
-        pdi = vista.wrap(pdi)
+        pdi = pyvista.wrap(pdi)
         points = np.copy(pdi.points) # New NumPy array of poins so we dont destroy input
         if self.__unique:
             # Remove repeated points
@@ -101,9 +101,9 @@ class AddCellConnToPoints(FilterBase):
         else:
             ind = np.arange(len(points), dtype=int)
         if self.__keep_vertices:
-            poly = vista.PolyData(np.copy(points))
+            poly = pyvista.PolyData(np.copy(points))
         else:
-            poly = vista.PolyData()
+            poly = pyvista.PolyData()
             poly.points = np.copy(points)
         if cell_type == vtk.VTK_LINE:
             lines = np.c_[np.full(len(ind)-1, 2), ind[0:-1], ind[1:]]
@@ -267,7 +267,7 @@ class LonLatToUTM(FilterPreserveTypeBase):
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
         # Get input/output of Proxy
-        pdi = vista.wrap(self.GetInputData(inInfo, 0, 0))
+        pdi = pyvista.wrap(self.GetInputData(inInfo, 0, 0))
         pdo = self.GetOutputData(outInfo, 0)
         #### Perfrom task ####
         if not hasattr(pdi, 'points'):
@@ -939,7 +939,7 @@ class BuildSurfaceFromPoints(FilterBase):
             dimension. This will be filled out for every station location.
 
         Return:
-            vista.UnstructuredGrid
+            pyvista.UnstructuredGrid
         """
         if hasattr(points, 'values'):
             # This will extract data from pandas dataframes if those are given
@@ -983,7 +983,7 @@ class BuildSurfaceFromPoints(FilterBase):
         cells.SetCells(cellConn.shape[0], interface.convert_cell_conn(cellConn))
 
         # Produce the output
-        output = vista.UnstructuredGrid()
+        output = pyvista.UnstructuredGrid()
         output.points = points
         output.SetCells(vtk.VTK_QUAD, cells)
         return output
@@ -996,7 +996,7 @@ class BuildSurfaceFromPoints(FilterBase):
         # Get number of points
         pdo = self.GetOutputData(outInfo, 0)
         #### Perfrom task ####
-        data = vista.wrap(pdi)
+        data = pyvista.wrap(pdi)
         output = BuildSurfaceFromPoints.create_surface(data.points, np.array(self.__zcoords))
         pdo.DeepCopy(output)
         return 1

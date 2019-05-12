@@ -26,7 +26,7 @@ install_requires=[
     'pandas>=0.23.4',
     'mock>=2.0.0',
     'espatools>=0.0.8',
-    'vista>=0.19.0'
+    'pyvista>=0.20.0'
 ]
 
 # add vtk if not windows and (not Python 3.x or not x64)
@@ -51,7 +51,7 @@ setuptools.setup(
     python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*',
     extras_require={
         'pyproj': ['pyproj>=1.9'],
-        'omf': ['omf>=0.9.3', 'omfvtk>=0.0.3'],
+        'omf': ['omf>=0.9.3', 'omfvista>=0.2.0'],
         'discretize': ['discretize>=0.3.8'],
     },
     classifiers=(

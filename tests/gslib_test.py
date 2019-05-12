@@ -4,7 +4,7 @@ import shutil
 import tempfile
 import os
 import numpy as np
-import vista
+import pyvista
 
 # VTK imports:
 from vtk.util import numpy_support as nps
@@ -207,7 +207,7 @@ class TestSGeMSGridReader(TestBase):
 
 
     def test_sgems_grid_writer_no_data(self):
-        grid = vista.UniformGrid((10, 10, 10), (2,2,2))
+        grid = pyvista.UniformGrid((10, 10, 10), (2,2,2))
         writer = WriteImageDataToSGeMS()
         filename = os.path.join(self.test_dir, 'test-writer-no-data.dat')
         writer.SetFileName(filename)

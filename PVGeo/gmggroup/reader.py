@@ -5,7 +5,7 @@ __all__ = [
 import vtk
 
 import omf
-import omfvtk
+import omfvista
 
 from ..base import ReaderBaseBase
 from .. import _helpers
@@ -62,7 +62,7 @@ class OMFReader(ReaderBaseBase):
         for e in self.__project.elements:
             if self._dataselection.ArrayIsEnabled(e.name):
                 if not e.name in self.__data:
-                    self.__data[e.name] = omfvtk.wrap(e)
+                    self.__data[e.name] = omfvista.wrap(e)
                 data[e.name] = self.__data[e.name]
         return data
 

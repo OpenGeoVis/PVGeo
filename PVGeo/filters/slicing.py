@@ -182,7 +182,7 @@ class ManySlicesAlongPoints(_SliceBase):
         self.SetInputDataObject(0, points)
         self.SetInputDataObject(1, data)
         self.Update()
-        return interface.wrap_vista(self.GetOutput())
+        return interface.wrap_pyvista(self.GetOutput())
 
 
 ###############################################################################

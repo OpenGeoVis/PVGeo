@@ -9,7 +9,7 @@ how to use VTK in a Python environment and learning the ParaView interface.
 VTK & Python
 ------------
 
-First, brush up on `vista <http://docs.vista.org>`_. ``vista`` provides a major
+First, brush up on `pyvista <http://docs.pyvista.org>`_. ``pyvista`` provides a major
 foundation for PVGeo.
 
 

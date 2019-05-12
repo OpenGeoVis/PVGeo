@@ -28,7 +28,7 @@ else:
 
     try:
         __import__('omf')
-        __import__('omfvtk')
+        __import__('omfvista')
     except ImportError:
         pass
     else:

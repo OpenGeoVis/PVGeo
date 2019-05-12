@@ -81,14 +81,14 @@ Generator().DocumentPackages([PVGeo, pvmacros],
             extra=extra,
             )
 
-import vista
+import pyvista
 import numpy as np
 # Manage errors
-vista.set_error_output_file('errors.txt')
+pyvista.set_error_output_file('errors.txt')
 # Ensure that offscreen rendering is used for docs generation
-vista.OFF_SCREEN = True # Not necessary - simply an insurance policy
+pyvista.OFF_SCREEN = True # Not necessary - simply an insurance policy
 # Preferred plotting style for documentation
-vista.set_plot_theme('document')
+pyvista.set_plot_theme('document')
 
 
 # -- Project information -----------------------------------------------------
@@ -286,7 +286,7 @@ sphinx_gallery_conf = {
     "backreferences_dir": False,
     # Modules for which function level galleries are created.  In
     "doc_module": "PVGeo",
-    "image_scrapers": (vista.Scraper(), 'matplotlib'),
+    "image_scrapers": (pyvista.Scraper(), 'matplotlib'),
     "thumbnail_size": (350, 350),
     # 'default_thumb_file': thumb_path,
 }

@@ -4,9 +4,9 @@ Read ESRI Grid File
 
 Read an ESRI ASCII grid file
 """
-import vista
+import pyvista
 from PVGeo.grids import EsriGridReader
-from vista import examples
+from pyvista import examples
 
 ################################################################################
 # Download a sample ESRI grid file

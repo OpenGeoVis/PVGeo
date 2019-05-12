@@ -20,8 +20,8 @@ cells field.
 
 """
 # sphinx_gallery_thumbnail_number = 6
-import vista
-from vista import examples
+import pyvista
+from pyvista import examples
 from PVGeo.model_build import CreateTensorMesh
 from PVGeo.grids import ExtractTopography
 import os
@@ -46,9 +46,9 @@ mesh.plot(show_grid=True, color=True, show_edges=True)
 # Now load the topography file from the example data:
 link = 'https://dl.dropbox.com/s/gw5v3tiq68oge3l/Example-Extract-Topo.zip?dl=0'
 examples.downloads._retrieve_file(link, 'Example-Extract-Topo.zip')
-topo = vista.read(os.path.join(vista.EXAMPLES_PATH, 'topo.vtk'))
+topo = pyvista.read(os.path.join(pyvista.EXAMPLES_PATH, 'topo.vtk'))
 
-p = vista.Plotter()
+p = pyvista.Plotter()
 p.add_mesh(topo, cmap='terrain')
 p.add_mesh(mesh, color=True, show_edges=False, opacity=0.75)
 p.show_grid()
@@ -76,7 +76,7 @@ threshed.plot(color=True, show_edges=True)
 ################################################################################
 # How well did this remove cells above the topography surface?
 
-p = vista.Plotter()
+p = pyvista.Plotter()
 p.add_mesh(topo, cmap='terrain')
 p.add_mesh(threshed, color=True, show_edges=True)
 p.show_grid()
@@ -87,7 +87,7 @@ p.show()
 # topographic surface, you can set a tolerance:
 extracted = ExtractTopography(tolerance=100., remove=True).apply(mesh, topo)
 
-p = vista.Plotter()
+p = pyvista.Plotter()
 p.add_mesh(topo, cmap='terrain')
 p.add_mesh(extracted, color=True, show_edges=True)
 p.show_grid()

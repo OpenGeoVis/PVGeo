@@ -14,13 +14,13 @@ This example demos: :class:`PVGeo.filters.ArrayMath`
 
 """
 import numpy as np
-import vista
+import pyvista
 import PVGeo
 from PVGeo.filters import ArrayMath
 
 ################################################################################
 # Create some input data. This can be any `vtkDataObject`
-inp = vista.UniformGrid((10,10,4))
+inp = pyvista.UniformGrid((10,10,4))
 # Populate the tables
 n = 400
 arr0 = np.random.random(n)

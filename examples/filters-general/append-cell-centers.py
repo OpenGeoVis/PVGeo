@@ -7,11 +7,11 @@ This example will demonstrate how to append a dataset's cell centers as a length
 This example demonstrates :class:`PVGeo.filters.AppendCellCenters`
 """
 
-from vista import examples
+from pyvista import examples
 from PVGeo.filters import AppendCellCenters
 
 ################################################################################
-# Use an example mesh from vista
+# Use an example mesh from pyvista
 mesh = examples.load_rectilinear()
 print(mesh)
 

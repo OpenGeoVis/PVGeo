@@ -6,8 +6,8 @@ Read a UBC tensor mesh file
 """
 # sphinx_gallery_thumbnail_number = 1
 import PVGeo
-import vista
-from vista import examples
+import pyvista
+from pyvista import examples
 
 ################################################################################
 # Download sample data files and keep track of names:
@@ -25,7 +25,7 @@ mesh = reader.apply()
 print(mesh)
 
 ################################################################################
-# Use a ``vista`` ``threshold`` filter to remove ``NaN`` data values
+# Use a ``pyvista`` ``threshold`` filter to remove ``NaN`` data values
 mesh.threshold().plot()
 
 

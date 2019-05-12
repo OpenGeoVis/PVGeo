@@ -15,8 +15,8 @@ This example demos :class:`PVGeo.filters.NormalizeArray`
 
 """
 import numpy as np
-import vista
-from vista import examples
+import pyvista
+from pyvista import examples
 import PVGeo
 from PVGeo.filters import NormalizeArray
 

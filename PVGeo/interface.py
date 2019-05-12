@@ -19,7 +19,7 @@ __all__ = [
     'convert_cell_conn',
     'get_array',
     'get_data_dict',
-    'wrap_vista',
+    'wrap_pyvista',
 ]
 
 
@@ -108,7 +108,7 @@ def data_frame_to_table(df, pdo=None):
     for key in df.keys():
         VTK_data = convert_array(df[key].values, name=key)
         pdo.AddColumn(VTK_data)
-    return wrap_vista(pdo)
+    return wrap_pyvista(pdo)
 
 
 def table_to_data_frame(table):
@@ -144,7 +144,7 @@ def place_array_in_table(ndarr, titles, pdo):
         if isinstance(ndarr[0], (tuple, np.void)):
             for i, title in enumerate(titles):
                 place_array_in_table(ndarr['f%d' % i], title, pdo)
-            return wrap_vista(pdo)
+            return wrap_pyvista(pdo)
         # Otherwise it is just a 1D array which needs to be 2D
         else:
             ndarr = np.reshape(ndarr, (-1, 1))
@@ -154,7 +154,7 @@ def place_array_in_table(ndarr, titles, pdo):
         VTK_data = convert_array(ndarr[:,i])
         VTK_data.SetName(titles[i])
         pdo.AddColumn(VTK_data)
-    return wrap_vista(pdo)
+    return wrap_pyvista(pdo)
 
 
 
@@ -252,7 +252,7 @@ def points_to_poly_data(points, copy_z=False):
     if copy_z:
         z = convert_array(points[:, 2], name='Elevation')
         pdata.GetPointData().AddArray(z)
-    return wrap_vista(pdata)
+    return wrap_pyvista(pdata)
 
 
 def add_arrays_from_data_frame(pdo, field, df):
@@ -260,7 +260,7 @@ def add_arrays_from_data_frame(pdo, field, df):
     for key in df.keys():
         VTK_data = convert_array(df[key].values, name=key)
         _helpers.add_array(pdo, field, VTK_data)
-    return wrap_vista(pdo)
+    return wrap_pyvista(pdo)
 
 
 
@@ -297,15 +297,15 @@ def get_data_dict(dataset, field='cell'):
     return data
 
 
-def wrap_vista(dataset):
+def wrap_pyvista(dataset):
     """This will wrap any given VTK dataset via the vtkInterface Python package
-    if it is available and return the wrapped data object. If vista is
+    if it is available and return the wrapped data object. If pyvista is
     unavailable, then the given object is returned."""
     if isinstance(dataset, vtk.vtkTable):
         return dataset
     try:
-        import vista
-        dataset = vista.wrap(dataset)
+        import pyvista
+        dataset = pyvista.wrap(dataset)
     except ImportError:
         pass
     return dataset
