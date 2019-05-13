@@ -94,7 +94,7 @@ object (essentially a point cloud).
 
  .. code-block:: none
 
-    PolyData (0x7fccb86b34c8)
+    PolyData (0x7f002e123408)
       N Cells:      499200
       N Points:     499200
       X Bounds:     3.268e+05, 3.302e+05
@@ -170,7 +170,7 @@ The full pipeline method
     Voxelizing... done.
     Recovered Angle (deg.): 53.550
     Recovered Cell Sizes: (25.00, 25.00, 25.00)
-    UnstructuredGrid (0x7fccb86b3468)
+    UnstructuredGrid (0x7f002e1233a8)
       N Cells:      499200
       N Points:     524064
       X Bounds:     3.268e+05, 3.302e+05
@@ -199,7 +199,7 @@ And now we can plot the voxelized volume
 Filter Volumetric Data
 ++++++++++++++++++++++
 
-Now lets use one of ``pyvista``'s filters to create slices of the thresholded
+Now lets use one of `PyVista`'s filters to create slices of the thresholded
 dataset. Specifically, we are using the ``slice_orthogonal`` filter that will
 create 3 orthogonal slices through a data volume.
 
@@ -219,7 +219,7 @@ create 3 orthogonal slices through a data volume.
 
  .. code-block:: none
 
-    MultiBlock (0x7fccb86b3768)
+    MultiBlock (0x7f002e1236a8)
       N Blocks:     3
       X Bounds:     326804.336, 330185.260
       Y Bounds:     4406253.954, 4409862.606
@@ -262,7 +262,7 @@ Now display the slices and clipped volume
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  28.517 seconds)
+   **Total running time of the script:** ( 0 minutes  28.885 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:

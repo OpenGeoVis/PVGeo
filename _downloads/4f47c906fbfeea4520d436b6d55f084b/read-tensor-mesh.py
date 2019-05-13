@@ -25,7 +25,7 @@ mesh = reader.apply()
 print(mesh)
 
 ################################################################################
-# Use a ``pyvista`` ``threshold`` filter to remove ``NaN`` data values
+# Use a `PyVista` ``threshold`` filter to remove ``NaN`` data values
 mesh.threshold().plot()
 
 

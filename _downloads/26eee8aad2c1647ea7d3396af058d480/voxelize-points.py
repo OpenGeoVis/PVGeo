@@ -87,7 +87,7 @@ grid.plot()
 # Filter Volumetric Data
 # ++++++++++++++++++++++
 #
-# Now lets use one of ``pyvista``'s filters to create slices of the thresholded
+# Now lets use one of `PyVista`'s filters to create slices of the thresholded
 # dataset. Specifically, we are using the ``slice_orthogonal`` filter that will
 # create 3 orthogonal slices through a data volume.
 slices = grid.slice_orthogonal()
