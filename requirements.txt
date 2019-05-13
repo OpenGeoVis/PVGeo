@@ -1,5 +1,5 @@
 vtk>=8.1.1
-pyvista>=0.20.0
+pyvista>=0.20.1
 numpy>=1.13
 scipy>=1.1
 colour-runner
