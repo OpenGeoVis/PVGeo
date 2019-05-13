@@ -46,7 +46,7 @@ K-Means clustering, volume interpolation, iso-contouring, and Virtual Reality
 [@pvguide], [@vtkbook].
 By linking geoscience to VTK and ParaView, geoscientists can harness all of the
 native tools within ParaView, and other VTK powered libraries like ParaViewWeb
-[@pvweb], VTK.js [@vtkjs], and `pyvista` [@pyvista] or extend that data into new
+[@pvweb], VTK.js [@vtkjs], and PyVista [@pyvista] or extend that data into new
 domains like Virtual Reality, as outlined in Figure 1.
 PVGeo couples geoscientific information to software libraries at the forefront
 of scientific visualization, which enables scientists to cost-effectively and
@@ -99,14 +99,14 @@ integrating our data with all types of subsurface information to further
 illuminate the value of geophysical imaging techniques.
 This fosters a need for a visualization package to work seamlessly across
 data types and formats that extends the functionality of an already
-robust visualization platform like ParaView [@pvguide] or `pyvista` [@pyvista].
+robust visualization platform like ParaView [@pvguide] or PyVista [@pyvista].
 This visualization library is the PVGeo Python package; a free and open-source
 library for integrating geoscientific datasets in a common rendering environment
 to address various visualization and spatial analysis needs in geoscience.
 The PVGeo package is powered by VTK [@vtkbook] and provides plugins for
 ParaView, a user-friendly software environment for VTK.
 As a pure-Python package, PVGeo is interoperable with other Python, VTK-based
-software like the `pyvista` Python package [@pyvista].
+software like the PyVista Python package [@pyvista].
 
 
 There are various software available for geoscientific visualization; however,
@@ -125,11 +125,11 @@ open-source alternative for researchers.
 
 
 Development for PVGeo is complemented by development for
-[`pyvista`](http://docs.pyvista.org): *A Streamlined Python Interface for the Visualization Toolkit*.
-PVGeo provides an extension package to `pyvista` linking data formats
-and filtering routines common in geoscientific disciplines to `pyvista`'s
+[PyVista](http://docs.pyvista.org): *A Streamlined Python Interface for the Visualization Toolkit*.
+PVGeo provides an extension package to PyVista linking data formats
+and filtering routines common in geoscientific disciplines to PyVista's
 generalized framework for 3D visualization.
-PVGeo leverages `pyvista` to make the inputs and outputs of PVGeo algorithms more
+PVGeo leverages PyVista to make the inputs and outputs of PVGeo algorithms more
 accessible so that users can create compelling, integrated visualizations of
 their work in a reproducible workflow.
 

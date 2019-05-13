@@ -41,7 +41,7 @@ class ExtractTopography(FilterBase):
             environments (not available in ParaView). The ``remove`` flag must
             be set at the time of instantiation of this algorithm.
             This does not actually update the algorithm's output data object
-            but applies a ``pyvista`` threshold filter to pass a new data object
+            but applies a `PyVista` threshold filter to pass a new data object
             after calling ``apply``.
 
 

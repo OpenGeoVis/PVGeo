@@ -53,10 +53,10 @@ Reader Algorithms
 A reader takes data from files and puts them into the proper VTK
 data structures so that we can visualize that data on the VTK or ParaView
 pipeline.
-ParaView and `pyvista` come with a plethora of native data format readers but
+ParaView and PyVista come with a plethora of native data format readers but
 there are still many more formats in the geosciences that have not been
 implemented. By creating formats for common geoscientific formats, we hope to
-make the process of getting data into the ParaView pipeline or into `pyvista`
+make the process of getting data into the ParaView pipeline or into PyVista
 data structures as simple as possible.
 
 
