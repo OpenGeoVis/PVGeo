@@ -40,7 +40,7 @@ class PackedBinariesReader(ReaderBase):
         # Data objects to hold the read data for access by the pipeline methods
         self.__data = []
 
-    def _ReadRawFile(self, filename):
+    def _read_raw_file(self, filename):
         """Interanl helper to read the raw data from the file"""
         dtype = self.__dtype
         if dtype == np.dtype('>f'):
@@ -55,12 +55,12 @@ class PackedBinariesReader(ReaderBase):
     def _get_file_contents(self, idx=None):
         """Interanl helper to get all contents for all files"""
         if idx is not None:
-            filenames = [self.GetFileNames(idx=idx)]
+            filenames = [self.get_file_names(idx=idx)]
         else:
-            filenames = self.GetFileNames()
+            filenames = self.get_file_names()
         contents = []
         for f in filenames:
-            contents.append(self._ReadRawFile(f))
+            contents.append(self._read_raw_file(f))
         if idx is not None: return contents[0]
         return contents
 
@@ -78,7 +78,7 @@ class PackedBinariesReader(ReaderBase):
         """
         return self.__data[idx]
 
-    def ConvertArray(self, arr):
+    def convert_array(self, arr):
         """Converts the numpy array to a vtkDataArray
         """
         # Put raw data into vtk array
@@ -97,7 +97,7 @@ class PackedBinariesReader(ReaderBase):
         i = _helpers.get_requested_time(self, outInfo)
         # Generate the data object
         arr = self._get_raw_data(idx=i)
-        data = self.ConvertArray(arr)
+        data = self.convert_array(arr)
         output.AddColumn(data)
         return 1
 
@@ -119,7 +119,7 @@ class PackedBinariesReader(ReaderBase):
             self.__dtype, self.__vtktype = interface.get_dtypes(dtype=self.__dtypechar, endian=self.__endian)
             self.Modified()
 
-    def GetEndian(self):
+    def get_endian(self):
         """Get the endianness of the data file."""
         return self.__endian
 
@@ -134,7 +134,7 @@ class PackedBinariesReader(ReaderBase):
             self.__dtype, self.__vtktype = interface.get_dtypes(dtype=self.__dtypechar, endian=self.__endian)
             self.Modified()
 
-    def GetDataTypes(self):
+    def get_data_types(self):
         """Get the data type of the binary file"""
         return self.__dtype, self.__vtktype
 
@@ -146,7 +146,7 @@ class PackedBinariesReader(ReaderBase):
             self.Modified(read_again=False) # Don't re-read. Just request data again
 
 
-    def GetDataName(self):
+    def get_data_name(self):
         """Get name used for the data array"""
         return self.__data_name
 
@@ -176,9 +176,9 @@ class MadagascarReader(PackedBinariesReader):
     def __init__(self, **kwargs):
         PackedBinariesReader.__init__(self, **kwargs)
 
-    def _ReadRawFile(self, filename):
+    def _read_raw_file(self, filename):
         """Reads the raw data from the file for Madagascar SSRSF files"""
-        dtype, vtktype = self.GetDataTypes()
+        dtype, vtktype = self.get_data_types()
         CTLSEQ = b'\014\014\004' # The control sequence to seperate header from data
         rpl = b''
         raw = []

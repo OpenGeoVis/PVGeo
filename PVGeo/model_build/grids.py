@@ -206,14 +206,14 @@ class CreateTensorMesh(AlgorithmBase):
         AlgorithmBase.__init__(self, nInputPorts=0,
             nOutputPorts=1, outputType='vtkRectilinearGrid')
         self.__origin = origin
-        self.__xcells = CreateTensorMesh._ReadCellLine(xcellstr)
-        self.__ycells = CreateTensorMesh._ReadCellLine(ycellstr)
-        self.__zcells = CreateTensorMesh._ReadCellLine(zcellstr)
+        self.__xcells = CreateTensorMesh._read_cell_line(xcellstr)
+        self.__ycells = CreateTensorMesh._read_cell_line(ycellstr)
+        self.__zcells = CreateTensorMesh._read_cell_line(zcellstr)
         self.__data_name = data_name
 
 
     @staticmethod
-    def _ReadCellLine(line):
+    def _read_cell_line(line):
         """Read cell sizes for each line in the UBC mesh line strings
         """
         # OPTIMIZE: work in progress
@@ -229,14 +229,14 @@ class CreateTensorMesh(AlgorithmBase):
         return np.concatenate(line_list)
 
 
-    def GetExtent(self):
+    def get_extent(self):
         """Get the extent of the created mesh"""
         ne,nn,nz = len(self.__xcells), len(self.__ycells), len(self.__zcells)
         return (0,ne, 0,nn, 0,nz)
 
 
 
-    def _MakeModel(self, pdo):
+    def _make_model(self, pdo):
         """Generates the output data object"""
         ox,oy,oz = self.__origin[0], self.__origin[1], self.__origin[2]
 
@@ -259,7 +259,7 @@ class CreateTensorMesh(AlgorithmBase):
         coz = np.insert(coz,0,oz)
 
         # Set the dims and coordinates for the output
-        ext = self.GetExtent()
+        ext = self.get_extent()
         nx,ny,nz = ext[1]+1,ext[3]+1,ext[5]+1
         pdo.SetDimensions(nx,ny,nz)
         # Convert to VTK array for setting coordinates
@@ -270,7 +270,7 @@ class CreateTensorMesh(AlgorithmBase):
         return pdo
 
 
-    def _AddModelData(self, pdo, data):
+    def _add_model_data(self, pdo, data):
         """Add an array to the output data object. If data is None, random
         values will be generated.
         """
@@ -292,8 +292,8 @@ class CreateTensorMesh(AlgorithmBase):
         # Get input/output of Proxy
         pdo = self.GetOutputData(outInfo, 0)
         # Perform the task
-        self._MakeModel(pdo)
-        self._AddModelData(pdo, None) # TODO: add ability to set input data
+        self._make_model(pdo)
+        self._add_model_data(pdo, None) # TODO: add ability to set input data
         return 1
 
 
@@ -301,7 +301,7 @@ class CreateTensorMesh(AlgorithmBase):
         """Used by pipeline to set output whole extent
         """
         # Now set whole output extent
-        ext = self.GetExtent()
+        ext = self.get_extent()
         info = outInfo.GetInformationObject(0)
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
@@ -318,7 +318,7 @@ class CreateTensorMesh(AlgorithmBase):
             self.__origin = [x0, y0, z0]
             self.Modified()
 
-    def SetXCells(self, xcells):
+    def set_x_cells(self, xcells):
         """Set the spacings for the cells in the X direction
 
         Args:
@@ -327,7 +327,7 @@ class CreateTensorMesh(AlgorithmBase):
             self.__xcells = xcells
             self.Modified()
 
-    def SetYCells(self, ycells):
+    def set_y_cells(self, ycells):
         """Set the spacings for the cells in the Y direction
 
         Args:
@@ -336,7 +336,7 @@ class CreateTensorMesh(AlgorithmBase):
             self.__ycells = ycells
             self.Modified()
 
-    def SetZCells(self, zcells):
+    def set_z_cells(self, zcells):
         """Set the spacings for the cells in the Z direction
 
         Args:
@@ -350,21 +350,21 @@ class CreateTensorMesh(AlgorithmBase):
 
         Args:
             xcellstr (str) : the spacings along the X-axis in the UBC style"""
-        xcells = CreateTensorMesh._ReadCellLine(xcellstr)
-        self.SetXCells(xcells)
+        xcells = CreateTensorMesh._read_cell_line(xcellstr)
+        self.set_x_cells(xcells)
 
     def set_y_cells_str(self, ycellstr):
         """Set the spacings for the cells in the Y direction
 
         Args:
             ycellstr (str) : the spacings along the Y-axis in the UBC style"""
-        ycells = CreateTensorMesh._ReadCellLine(ycellstr)
-        self.SetYCells(ycells)
+        ycells = CreateTensorMesh._read_cell_line(ycellstr)
+        self.set_y_cells(ycells)
 
     def set_z_cells_str(self, zcellstr):
         """Set the spacings for the cells in the Z direction
 
         Args:
             zcellstr (str)  : the spacings along the Z-axis in the UBC style"""
-        zcells = CreateTensorMesh._ReadCellLine(zcellstr)
-        self.SetZCells(zcells)
+        zcells = CreateTensorMesh._read_cell_line(zcellstr)
+        self.set_z_cells(zcells)

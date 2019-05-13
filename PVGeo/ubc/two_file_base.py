@@ -34,16 +34,16 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         self.__sizeM = None
 
 
-    def Is3D(self):
+    def is_3d(self):
         """Returns true if mesh is spatially references in three dimensions"""
         return self.__sizeM.shape[0] >= 3
 
-    def Is2D(self):
+    def is_2d(self):
         """Returns true if mesh is spatially references in only two dimensions"""
         return self.__sizeM.shape[0] == 1
 
     @staticmethod
-    def _ubcMesh2D_part(FileName):
+    def _ubc_mesh_2d_part(FileName):
         """Internal helper to read 2D mesh file"""
         # This is a helper method to read file contents of mesh
         try:
@@ -75,7 +75,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
 
         return xpts, xdisc, zpts, zdisc
 
-    def _ReadExtent(self):
+    def _read_extent(self):
         """Reads the mesh file for the UBC 2D/3D Mesh or OcTree format to get
         output extents. Computationally inexpensive method to discover whole
         output extent.
@@ -104,7 +104,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         # Check if the mesh is a UBC 2D mesh
         if self.__sizeM.shape[0] == 1:
             # Read in data from file
-            xpts, xdisc, zpts, zdisc = ubcMeshReaderBase._ubcMesh2D_part(FileName)
+            xpts, xdisc, zpts, zdisc = ubcMeshReaderBase._ubc_mesh_2d_part(FileName)
             nx = np.sum(np.array(xdisc,dtype=int))+1
             nz = np.sum(np.array(zdisc,dtype=int))+1
             return (0,nx, 0,1, 0,nz)
@@ -119,9 +119,9 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
 
 
     @staticmethod
-    def ubcModel3D(FileName):
+    def ubc_model_3d(FileName):
         """Reads the 3D model file and returns a 1D NumPy float array. Use the
-        PlaceModelOnMesh() method to associate with a grid.
+        place_model_on_mesh() method to associate with a grid.
 
         Args:
             FileName (str) : The model file name(s) as an absolute path for the
@@ -131,7 +131,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         Return:
             np.array :
                 Returns a NumPy float array that holds the model data
-                read from the file. Use the ``PlaceModelOnMesh()`` method to
+                read from the file. Use the ``place_model_on_mesh()`` method to
                 associate with a grid. If a list of file names is given then it
                 will return a dictionary of NumPy float array with keys as the
                 basenames of the files.
@@ -140,7 +140,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         if isinstance(FileName, (list, tuple)):
             out = {}
             for f in FileName:
-                out[os.path.basename(f)] = ubcMeshReaderBase.ubcModel3D(f)
+                out[os.path.basename(f)] = ubcMeshReaderBase.ubc_model_3d(f)
             return out
         # Perform IO
         try:
@@ -165,7 +165,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             self.__use_filename = False
             self.Modified(read_again_mesh=False, read_again_models=False)
 
-    def GetDataName(self):
+    def get_data_name(self):
         """Get the data array name"""
         if self.__use_filename:
             mname = self.get_model_filenames(idx=0)
@@ -222,6 +222,11 @@ class ModelAppenderBase(base.AlgorithmBase):
         if read_again: self.__need_to_read = read_again
         base.AlgorithmBase.Modified(self)
 
+    def modified(self, read_again=True):
+        """Call modified if the files needs to be read again again.
+        """
+        return self.Modified(read_again=read_again)
+
     def _update_time_steps(self):
         """For internal use only: appropriately sets the timesteps.
         """
@@ -237,7 +242,7 @@ class ModelAppenderBase(base.AlgorithmBase):
     def _read_up_front(self):
         raise NotImpelementedError()
 
-    def _PlaceOnMesh(self, output, idx=0):
+    def _place_on_mesh(self, output, idx=0):
         raise NotImplementedError()
 
 
@@ -255,11 +260,11 @@ class ModelAppenderBase(base.AlgorithmBase):
             self._read_up_front()
         # Place the model data for given timestep onto the mesh
         if len(self._models) > i:
-            self._PlaceOnMesh(output, idx=i)
+            self._place_on_mesh(output, idx=i)
             self.__last_successfull_index = i
         else:
             # put the last array as a placeholder
-            self._PlaceOnMesh(output, idx=self.__last_successfull_index)
+            self._place_on_mesh(output, idx=self.__last_successfull_index)
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
@@ -333,7 +338,7 @@ class ModelAppenderBase(base.AlgorithmBase):
             self.__use_filename = False
             self.Modified(read_again=False)
 
-    def GetDataName(self):
+    def get_data_name(self):
         """Get the data array name"""
         if self.__use_filename:
             mname = self.get_model_filenames(idx=0)

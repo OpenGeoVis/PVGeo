@@ -599,7 +599,7 @@ class PVGeoConvertUnits(ConvertUnits):
 
     #### SETTERS AND GETTERS ####
 
-    @smproperty.xml(_helpers.get_drop_down_xml(name='Conversion', command='set_conversion', labels=ConvertUnits.LookupConversions(True), help='This will set the spatial conversion.'))
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Conversion', command='set_conversion', labels=ConvertUnits.lookup_conversions(True), help='This will set the spatial conversion.'))
     def set_conversion(self, key):
         ConvertUnits.set_conversion(self, key)
 

@@ -177,7 +177,7 @@ class ReaderBaseBase(AlgorithmBase):
         """
         return self.AddFileName(filename)
 
-    def GetFileNames(self, idx=None):
+    def get_file_names(self, idx=None):
         """Returns the list of file names or given and index returns a specified
         timestep's filename.
         """
@@ -186,12 +186,6 @@ class ReaderBaseBase(AlgorithmBase):
         if idx is None:
             return self.__filenames
         return self.__filenames[idx]
-
-    def get_file_names(self, idx=None):
-        """Returns the list of file names or given and index returns a specified
-        timestep's filename.
-        """
-        return self.GetFileNames(idx=idx)
 
     def apply(self, filename):
         """Given a file name (or list of file names), perfrom the read"""
@@ -242,8 +236,8 @@ class ReaderBase(ReaderBaseBase):
     def _update_time_steps(self):
         """For internal use only: appropriately sets the timesteps.
         """
-        if len(self.GetFileNames()) > 1:
-            self.__timesteps = _helpers.update_time_steps(self, self.GetFileNames(), self.__dt)
+        if len(self.get_file_names()) > 1:
+            self.__timesteps = _helpers.update_time_steps(self, self.get_file_names(), self.__dt)
         return 1
 
     #### Algorithm Methods ####
@@ -492,13 +486,9 @@ class WriterBase(AlgorithmBase):
         output data object/time step."""
         return self.SetFileName(filename)
 
-    def GetFileName(self):
-        """Get the set filename."""
-        return self.__filename
-
     def get_file_name(self):
         """Get the set filename."""
-        return self.GetFileName()
+        return self.__filename
 
     def Write(self, input_data_object=None):
         """Perfrom the write out."""
@@ -551,8 +541,8 @@ class WriterBase(AlgorithmBase):
         identifier = '_%.' + count + 'd'
         blocknum = [identifier % i for i in range(n)]
         # Check the file extension:
-        ext = self.GetFileName().split('.')[-1]
-        basename = self.GetFileName().replace('.%s' % ext, '')
+        ext = self.get_file_name().split('.')[-1]
+        basename = self.get_file_name().replace('.%s' % ext, '')
         self.__blockfilenames = [basename + '%s.%s' % (blocknum[i], ext) for i in range(n)]
         return self.__blockfilenames
 
@@ -582,7 +572,7 @@ class WriterBase(AlgorithmBase):
                     warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
         # Handle single input dataset
         else:
-            self.perform_write_out(inp, self.GetFileName(), None)
+            self.perform_write_out(inp, self.get_file_name(), None)
         return 1
 
 ###############################################################################
@@ -623,7 +613,7 @@ class InterfacedBaseReader(ReaderBase):
 
     def _read_up_front(self):
         """Do not override. A predifiened routine for reading the files up front."""
-        filenames = self.GetFileNames()
+        filenames = self.get_file_names()
         self.__objects = []
         for f in filenames:
             mesh = self._read_file(f)

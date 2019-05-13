@@ -34,20 +34,25 @@ class OMFReader(ReaderBaseBase):
         """
         ReaderBaseBase.Modified(self, read_again=read_again)
 
-    def GetFileName(self):
+    def modified(self, read_again=False):
+        """Ensure default is overridden to be false so array selector can call.
+        """
+        return self.Modified(read_again=read_again)
+
+    def get_file_name(self):
         """Super class has file names as a list but we will only handle a single
         project file. This provides a conveinant way of making sure we only
         access that single file.
-        A user could still access the list of file names using ``GetFileNames()``.
+        A user could still access the list of file names using ``get_file_names()``.
         """
-        return ReaderBaseBase.GetFileNames(self, idx=0)
+        return ReaderBaseBase.get_file_names(self, idx=0)
 
     #### Methods for performing the read ####
 
     def _read_up_front(self):
         """Internal functiona to read all data at the start"""
         # Read all elements
-        reader = omf.OMFReader(self.GetFileName())
+        reader = omf.OMFReader(self.get_file_name())
         self.__project = reader.get_project()
         self.__names = [e.name for e in self.__project.elements]
         for n in self.__names:

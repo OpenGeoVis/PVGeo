@@ -36,12 +36,12 @@ class TopoReader(DelimitedPointsReaderBase):
         self.__npts = None
 
     # Simply override the extract titles functionality
-    def _ExtractHeader(self, content):
+    def _extract_header(self, content):
         """Internal helper to parse header details for UBC Topo files"""
         # No titles
         # Get number of points
         self.__npts = int(content[0].strip())
-        if len(content[1].split(self._GetDeli())) != 3:
+        if len(content[1].split(self._get_delimiter())) != 3:
             raise _helpers.PVGeoError('Data improperly formatted')
         return ['X', 'Y', 'Z'], content[1::]
 
@@ -66,14 +66,14 @@ class GravObsReader(DelimitedPointsReaderBase):
         self.__npts = None
 
     # Simply override the extract titles functionality
-    def _ExtractHeader(self, content):
+    def _extract_header(self, content):
         """Internal helper to parse header details for UBC Gravity Observation
         files"""
         # No titles
         # Get number of points
         self.__npts = int(content[0].strip())
         # Now decide if it is single or multi component
-        if len(content[1].split(self._GetDeli())) != 5:
+        if len(content[1].split(self._get_delimiter())) != 5:
             raise _helpers.PVGeoError('Data improperly formatted')
         return ['X', 'Y', 'Z', 'Grav', 'Err'], content[1::]
 
@@ -97,7 +97,7 @@ class GravGradReader(DelimitedPointsReaderBase):
         self.__npts = None
 
     # Simply override the extract titles functionality
-    def _ExtractHeader(self, content):
+    def _extract_header(self, content):
         """Internal helper to parse header details for UBC Gravity Gradiometry
         files"""
         # Get components
@@ -108,7 +108,7 @@ class GravGradReader(DelimitedPointsReaderBase):
         for c in comps:
             titles.append(c)
         # Now decipher if it has stddevs
-        num = len(content[2].split(self._GetDeli()))
+        num = len(content[2].split(self._get_delimiter()))
         if num != len(titles):
             if num != (len(titles) + len(comps)):
                 raise _helpers.PVGeoError('Data improperly formatted')
@@ -143,19 +143,19 @@ class MagObsReader(DelimitedPointsReaderBase):
 
 
     # Simply override the extract titles functionality
-    def _ExtractHeader(self, content):
+    def _extract_header(self, content):
         """Internal helper to parse header details for UBC Magnetic Observations
         files"""
         # No titles
-        self.__incl, self.__decl, self.__geomag = (float(val) for val in content[0].split(self._GetDeli()))
-        self.__ainc, self.__adec, self.__dir = (float(val) for val in content[1].split(self._GetDeli()))
+        self.__incl, self.__decl, self.__geomag = (float(val) for val in content[0].split(self._get_delimiter()))
+        self.__ainc, self.__adec, self.__dir = (float(val) for val in content[1].split(self._get_delimiter()))
         # Get number of points
         self.__npts = int(content[2].strip())
         # Now decide if it is single or multi component
-        row = content[3].split(self._GetDeli())
+        row = content[3].split(self._get_delimiter())
         num = len(row)
         if num == 3: # just locations
-            self.SetCopyZ(True)
+            self.set_copy_z(True)
             return ['X', 'Y', 'Z'], content[3::]
         elif num == 4: # single component
             return ['X', 'Y', 'Z', 'Mag'], content[3::]
@@ -167,7 +167,7 @@ class MagObsReader(DelimitedPointsReaderBase):
             raise _helpers.PVGeoError('Data improperly formatted.')
 
     @staticmethod
-    def ConvertVector(incl, decl, mag=1):
+    def convert_vector(incl, decl, mag=1):
         """Converts inclination, declinations, and magntidue to an XYZ vector"""
         x = mag * np.cos(np.deg2rad(incl)) * np.cos(np.deg2rad(decl))
         y = mag * np.cos(np.deg2rad(incl)) * np.sin(np.deg2rad(decl))
@@ -184,7 +184,7 @@ class MagObsReader(DelimitedPointsReaderBase):
         output = self.GetOutputData(outInfo, 0)
 
         # Add inducing magnetic field
-        x, y, z = self.ConvertVector(self.__incl, self.__decl, mag=self.__geomag)
+        x, y, z = self.convert_vector(self.__incl, self.__decl, mag=self.__geomag)
         ind = vtk.vtkDoubleArray()
         ind.SetName('Inducing Magnetic Field')
         ind.SetNumberOfComponents(3)
@@ -192,7 +192,7 @@ class MagObsReader(DelimitedPointsReaderBase):
         output.GetFieldData().AddArray(ind)
 
         # Add Inclination and declination of the anomaly projection
-        x, y, z = self.ConvertVector(self.__ainc, self.__adec)
+        x, y, z = self.convert_vector(self.__ainc, self.__adec)
         anom = vtk.vtkDoubleArray()
         anom.SetName('Anomaly Projection')
         anom.SetNumberOfComponents(3)
@@ -221,12 +221,12 @@ class GeologyMapper(FilterPreserveTypeBase):
         self.__input_array = [None, None]
 
     @staticmethod
-    def _ReadDefinitions(filename, delimiter):
+    def _read_definitions(filename, delimiter):
         """Reades the geology definition file as a pandas DataFrame"""
         return pd.read_csv(filename, sep=delimiter)
 
     @staticmethod
-    def _MapValues(geol, arr):
+    def _map_values(geol, arr):
         """Map the values defined by ``geol`` dataframe to the values in ``arr``.
         The first column (name should be ``Index``) will be used for the mapping.
         """
@@ -247,8 +247,8 @@ class GeologyMapper(FilterPreserveTypeBase):
         arr = _helpers.get_numpy_array(wpdi, field, name)
 
         #### Perfrom task ####
-        geol = self._ReadDefinitions(self.__filename, self.__deli)
-        data = self._MapValues(geol, arr)
+        geol = self._read_definitions(self.__filename, self.__deli)
+        data = self._map_values(geol, arr)
 
         pdo.DeepCopy(pdi)
         interface.add_arrays_from_data_frame(pdo, field, data)
@@ -284,6 +284,10 @@ class GeologyMapper(FilterPreserveTypeBase):
         if self.__filename != filename:
             self.__filename = filename
             self.Modified()
+
+    def set_file_name(self, filename):
+        """Set the file name to read"""
+        return self.SetFileName(filename)
 
     def set_delimiter(self, deli):
         """Set the delimiter of the ASCII file"""

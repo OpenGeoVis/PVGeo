@@ -63,7 +63,7 @@ class GlobeSource(AlgorithmBase):
         self.__nmer = nmer
         # TODO: use **kwargs
 
-    def SphericalToCartesian(self, meridian, parallel):
+    def spherical_to_cartesian(self, meridian, parallel):
         """Converts longitude/latitude to catesian coordinates. Assumes the
         arguments are given in degrees.
         """
@@ -74,7 +74,7 @@ class GlobeSource(AlgorithmBase):
         z = self.__radius * np.sin(lat_r)
         return np.vstack((x, y, z)).T
 
-    def CreateSphere(self):
+    def create_sphere(self):
         """Creates longitude/latitude as 2D points and returns the corresponding
         texture coordinates for those positions."""
         lon = np.linspace(-180.0, 180.0, self.__nmer)
@@ -89,10 +89,10 @@ class GlobeSource(AlgorithmBase):
         tex = np.vstack([tcgx.ravel(), tcgy.ravel()]).T
         return pos, tex
 
-    def BuildGlobe(self):
+    def build_globe(self):
         """Generates the globe as ``vtkPolyData``"""
-        pos, tex = self.CreateSphere()
-        pts = self.SphericalToCartesian(pos[:,0], pos[:,1])
+        pos, tex = self.create_sphere()
+        pts = self.spherical_to_cartesian(pos[:,0], pos[:,1])
         points = interface.points_to_poly_data(pts).GetPoints()
         texcoords = interface.convert_array(tex, name='Texture Coordinates')
         # Now generate triangles
@@ -110,7 +110,7 @@ class GlobeSource(AlgorithmBase):
     def RequestData(self, request, inInfo, outInfo):
         """The pipeline executes this to generate output"""
         pdo = self.GetOutputData(outInfo, 0)
-        globe = self.BuildGlobe()
+        globe = self.build_globe()
         pdo.ShallowCopy(globe)
         return 1
 

@@ -39,7 +39,7 @@ class OcTreeReader(ubcMeshReaderBase):
         self.__models = []
 
 
-    def ubcOcTreeMesh(self, FileName, pdo=None):
+    def ubc_octree_mesh(self, FileName, pdo=None):
         """This method reads a UBC OcTree Mesh file and builds a
         ``vtkUnstructuredGrid`` of the data in the file. This method generates
         the ``vtkUnstructuredGrid`` without any data attributes.
@@ -54,7 +54,7 @@ class OcTreeReader(ubcMeshReaderBase):
                 a ``vtkUnstructuredGrid`` generated from the UBCMesh grid.
                 Mesh is defined by the input mesh file.
                 No data attributes here, simply an empty mesh. Use the
-                ``PlaceModelOnOcTreeMesh()`` method to associate with model data.
+                ``place_model_on_octree_mesh()`` method to associate with model data.
         """
         try:
             self.__mesh = discretize.TreeMesh.readUBC(FileName)
@@ -67,7 +67,7 @@ class OcTreeReader(ubcMeshReaderBase):
         return pdo
 
     @staticmethod
-    def PlaceModelOnOcTreeMesh(mesh, model, data_name='Data'):
+    def place_model_on_octree_mesh(mesh, model, data_name='Data'):
         """Places model data onto a mesh. This is for the UBC Grid data reaers
         to associate model data with the mesh grid.
 
@@ -85,7 +85,7 @@ class OcTreeReader(ubcMeshReaderBase):
         """
         if isinstance(model, dict):
             for key in model.keys():
-                mesh = OcTreeReader.PlaceModelOnOcTreeMesh(mesh, model[key], data_name=key)
+                mesh = OcTreeReader.place_model_on_octree_mesh(mesh, model[key], data_name=key)
             return mesh
         # Make sure this model file fits the dimensions of the mesh
         numCells = mesh.GetNumberOfCells()
@@ -110,7 +110,7 @@ class OcTreeReader(ubcMeshReaderBase):
 
 
 
-    def __ubcOcTree(self, filename_mesh, filename_models, output):
+    def __ubc_octree(self, filename_mesh, filename_models, output):
         """Wrapper to Read UBC GIF OcTree mesh and model file pairs. UBC OcTree
         models are defined using a 2-file format. The "mesh" file describes how
         the data is descritized. The "model" file lists the physical property
@@ -132,7 +132,7 @@ class OcTreeReader(ubcMeshReaderBase):
         """
         if self.need_to_readMesh():
             # Construct/read the mesh
-            self.ubcOcTreeMesh(filename_mesh, pdo=output)
+            self.ubc_octree_mesh(filename_mesh, pdo=output)
             self.need_to_readMesh(flag=False)
         output.DeepCopy(self.__mesh.toVTK())
         if self.need_to_readModels() and self.this_has_models():
@@ -140,7 +140,7 @@ class OcTreeReader(ubcMeshReaderBase):
             self.__models = []
             for f in filename_models:
                 # Read the model data
-                self.__models.append(ubcMeshReaderBase.ubcModel3D(f))
+                self.__models.append(ubcMeshReaderBase.ubc_model_3d(f))
             self.need_to_readModels(flag=False)
         return output
 
@@ -151,14 +151,14 @@ class OcTreeReader(ubcMeshReaderBase):
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
-        self.__ubcOcTree(
+        self.__ubc_octree(
             self.get_mesh_filename(),
             self.get_model_filenames(),
             output)
 
         # Place the model data for given timestep onto the mesh
         if len(self.__models) > i:
-            self.PlaceModelOnOcTreeMesh(output, self.__models[i], self.GetDataName())
+            self.place_model_on_octree_mesh(output, self.__models[i], self.get_data_name())
 
         return 1
 
@@ -171,7 +171,7 @@ class OcTreeReader(ubcMeshReaderBase):
         ubcMeshReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
         if self.need_to_readMesh():
-            ext = self._ReadExtent()
+            ext = self._read_extent()
             info = outInfo.GetInformationObject(0)
             # Set WHOLE_EXTENT: This is absolutely necessary
             info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
@@ -210,7 +210,7 @@ class OcTreeAppender(ModelAppenderBase):
 
     def _read_up_front(self):
         """Internal helper to read all data at start"""
-        reader = ubcMeshReaderBase.ubcModel3D
+        reader = ubcMeshReaderBase.ubc_model_3d
         self._models = []
         for f in self._model_filenames:
             # Read the model data
@@ -218,7 +218,7 @@ class OcTreeAppender(ModelAppenderBase):
         self.need_to_read(flag=False)
         return
 
-    def _PlaceOnMesh(self, output, idx=0):
+    def _place_on_mesh(self, output, idx=0):
         """Internal helper to place a model on the mesh for a given index"""
-        OcTreeReader.PlaceModelOnOcTreeMesh(output, self._models[idx], self.GetDataName())
+        OcTreeReader.place_model_on_octree_mesh(output, self._models[idx], self.get_data_name())
         return

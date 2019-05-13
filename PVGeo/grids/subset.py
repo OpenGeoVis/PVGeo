@@ -202,7 +202,7 @@ class ExtractTopography(FilterBase):
             self._tolerance = tol
             self.Modified()
 
-    def GetTolerance(self):
+    def get_tolerance(self):
         """Get the tolerance threshold for the querry"""
         return self._tolerance
 

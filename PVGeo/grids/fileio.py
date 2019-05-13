@@ -263,13 +263,13 @@ class SurferGridReader(ReaderBase):
         return grd
 
 
-    def _ReadGrids(self, idx=None):
+    def _read_grids(self, idx=None):
         """This parses the first file to determine grid file type then reads
         all files set."""
         if idx is not None:
-            filenames = [self.GetFileNames(idx=idx)]
+            filenames = [self.get_file_names(idx=idx)]
         else:
-            filenames = self.GetFileNames()
+            filenames = self.get_file_names()
         contents = []
         f = open(filenames[0], 'rb')
         key = struct.unpack('4s', f.read(4))[0]
@@ -297,7 +297,7 @@ class SurferGridReader(ReaderBase):
         """Should not need to be overridden.
         """
         # Perform Read
-        self.__grids = self._ReadGrids()
+        self.__grids = self._read_grids()
         self.need_to_read(flag=False)
         return 1
 
@@ -340,7 +340,7 @@ class SurferGridReader(ReaderBase):
             self.__data_name = data_name
             self.Modified(read_again=False)
 
-    def GetDataName(self):
+    def get_data_name(self):
         """Get the name of the data array"""
         return self.__data_name
 
@@ -431,6 +431,10 @@ class WriteImageDataToSurfer(WriterBase):
         self.Update()
 
 
+    def write(self, input_data_object=None, array_name=None):
+        """Perfrom the write out."""
+        return self.Write(input_data_object=input_data_object, array_name=array_name)
+
 ###############################################################################
 
 
@@ -453,7 +457,7 @@ class EsriGridReader(DelimitedTextReader):
         self.__data_name = kwargs.get('data_name', 'Data')
         self.NODATA_VALUE = -9999
 
-    def _ExtractHeader(self, content):
+    def _extract_header(self, content):
         """Internal helper to parse header information in ESRI Grid files"""
         try:
             self.__nx = int(content[0].split()[1])
@@ -466,13 +470,13 @@ class EsriGridReader(DelimitedTextReader):
             raise _helpers.PVGeoError('This file is not in proper Esri ASCII Grid format.')
         return [self.__data_name], content[6::]
 
-    def _FileContentsToDataFrame(self, contents):
+    def _file_contents_to_data_frame(self, contents):
         """Creates a dataframe with a sinlge array for the file data.
         """
         data = []
         for content in contents:
             arr = np.fromiter((float(s) for line in content for s in line.split()), dtype=float)
-            df = pd.DataFrame(data=arr, columns=[self.GetDataName()])
+            df = pd.DataFrame(data=arr, columns=[self.get_data_name()])
             data.append(df)
         return data
 
@@ -535,7 +539,7 @@ class EsriGridReader(DelimitedTextReader):
             self.__data_name = data_name
             self.Modified(read_again=False)
 
-    def GetDataName(self):
+    def get_data_name(self):
         """Get the name of the data array"""
         return self.__data_name
 
@@ -569,21 +573,24 @@ class LandsatReader(ReaderBaseBase):
         """
         return ReaderBaseBase.Modified(self, read_again=read_again)
 
+    def modified(self, read_again=False):
+        return self.Modified(read_again=read_again)
 
-    def GetFileName(self):
+
+    def get_file_name(self):
         """Super class has file names as a list but we will only handle a single
         project file. This provides a conveinant way of making sure we only
         access that single file.
-        A user could still access the list of file names using ``GetFileNames()``.
+        A user could still access the list of file names using ``get_file_names()``.
         """
-        return ReaderBaseBase.GetFileNames(self, idx=0)
+        return ReaderBaseBase.get_file_names(self, idx=0)
 
 
     #### Methods for performing the read ####
 
     def _get_file_contents(self, idx=None):
         """Reads XML meta data, no data read."""
-        self.__reader.SetFileName(self.GetFileName())
+        self.__reader.SetFileName(self.get_file_name())
         self.__raster = self.__reader.Read(meta_only=True)
         for n in self.__raster.bands.keys():
             self._dataselection.AddArray(n)
@@ -604,7 +611,7 @@ class LandsatReader(ReaderBaseBase):
         self.__raster = self.__reader.Read(meta_only=False, allowed=allowed, cast=self.__cast)
         return self.__raster
 
-    def _BuildImageData(self, output):
+    def _build_image_data(self, output):
         """Properly builds the output ``vtkImageData`` object"""
         if self.__raster is None:
             raise _helpers.PVGeoError('Raster invalid.')
@@ -626,7 +633,7 @@ class LandsatReader(ReaderBaseBase):
         if self.__raster is None:
             self._read_up_front()
         self._get_raw_data()
-        self._BuildImageData(output)
+        self._build_image_data(output)
         # Now add the data based on what the user has selected
         for name, band in self.__raster.bands.items():
             data = band.data
@@ -677,7 +684,7 @@ class LandsatReader(ReaderBaseBase):
         """Get an RGB scheme from the raster set. If no scheme is desired, pass
         any string that is not a defined scheme as the scheme argument."""
         if isinstance(scheme, int):
-            scheme = self.GetColorSchemeNames()[scheme]
+            scheme = self.get_color_scheme_names()[scheme]
         if scheme in list(espatools.RasterSet.RGB_SCHEMES.keys()) and self.__scheme != scheme:
             self.__scheme = scheme
             self.Modified()
@@ -687,7 +694,7 @@ class LandsatReader(ReaderBaseBase):
 
 
     @staticmethod
-    def GetColorSchemeNames():
+    def get_color_scheme_names():
         """Get a list of the available color schemes"""
         schemes = list(espatools.RasterSet.RGB_SCHEMES.keys())
         schemes.insert(0, 'No Selection')

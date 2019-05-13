@@ -53,7 +53,7 @@ class PVGeoGSLibReader(GSLibReader):
 
     @smproperty.xml("""<Property name="Print File Header" command="print_file_header" panel_widget="command_button"/>""")
     def print_file_header(self):
-        print(GSLibReader.GetFileHeader(self))
+        print(GSLibReader.get_file_header(self))
         return 1
 
 
@@ -103,7 +103,7 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
 
     @smproperty.xml("""<Property name="Print File Header" command="print_file_header" panel_widget="command_button"/>""")
     def print_file_header(self):
-        print(GSLibPointSetReader.GetFileHeader(self))
+        print(GSLibPointSetReader.get_file_header(self))
         return 1
 
 

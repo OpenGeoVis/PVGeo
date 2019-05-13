@@ -42,7 +42,7 @@ class TestGSLibReader(TestBase):
         reader.AddFileName(filename)
         # Perform the read
         reader.Update()
-        self.HEADER = reader.GetFileHeader()
+        self.HEADER = reader.get_file_header()
         self.TABLE = reader.GetOutput()
 
     def tearDown(self):

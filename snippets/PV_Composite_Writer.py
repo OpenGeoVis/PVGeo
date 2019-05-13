@@ -67,7 +67,7 @@ class WriterBase(VTKPythonAlgorithmBase):
             self.__filename = filename
             self.Modified()
 
-    def GetFileName(self):
+    def get_file_name(self):
         """Get the set filename."""
         return self.__filename
 
@@ -120,8 +120,8 @@ class WriterBase(VTKPythonAlgorithmBase):
         identifier = '_%.' + count + 'd'
         blocknum = [identifier % i for i in range(n)]
         # Check the file extension:
-        ext = self.GetFileName().split('.')[-1]
-        basename = self.GetFileName().replace('.%s' % ext, '')
+        ext = self.get_file_name().split('.')[-1]
+        basename = self.get_file_name().replace('.%s' % ext, '')
         self.__blockfilenames = [basename + '%s.%s' % (blocknum[i], ext) for i in range(n)]
         return self.__blockfilenames
 
@@ -152,7 +152,7 @@ class WriterBase(VTKPythonAlgorithmBase):
                     warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
         # Handle single input dataset
         else:
-            self.PerformWriteOut(inp, self.GetFileName(), None)
+            self.PerformWriteOut(inp, self.get_file_name(), None)
         return 1
 
 

@@ -44,7 +44,7 @@ class SGeMSGridReader(GSLibReader):
         dims = dims[0]
         return int(dims[0]), int(dims[1]), int(dims[2])
 
-    def _ReadExtent(self):
+    def _read_extent(self):
         """Reads the input file for the SGeMS format to get output extents.
         Computationally inexpensive method to discover whole output extent.
 
@@ -59,14 +59,14 @@ class SGeMSGridReader(GSLibReader):
         # Read first file... extent cannot vary with time
         # TODO: make more efficient to only reader header of file
         fileLines = self._get_file_contents(idx=0)
-        h = fileLines[0+self.GetSkipRows()]
+        h = fileLines[0+self.get_skip_rows()]
         n1,n2,n3 = self.__parse_extent(h)
         return (0,n1, 0,n2, 0,n3)
 
-    def _ExtractHeader(self, content):
+    def _extract_header(self, content):
         """Internal helper to parse header info for the SGeMS file format"""
-        titles, content = GSLibReader._ExtractHeader(self, content)
-        h = self.GetFileHeader()
+        titles, content = GSLibReader._extract_header(self, content)
+        h = self.get_file_header()
         try:
             if self.__extent is None:
                 self.__extent = self.__parse_extent(h)
@@ -112,7 +112,7 @@ class SGeMSGridReader(GSLibReader):
         # Call parent to handle time stuff
         GSLibReader.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
-        ext = self._ReadExtent()
+        ext = self._read_extent()
         info = outInfo.GetInformationObject(0)
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)

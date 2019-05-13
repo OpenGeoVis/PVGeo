@@ -50,7 +50,7 @@ class TensorMeshReader(ubcMeshReaderBase):
 
 
     @staticmethod
-    def PlaceModelOnMesh(mesh, model, data_name='Data'):
+    def place_model_on_mesh(mesh, model, data_name='Data'):
         """Places model data onto a mesh. This is for the UBC Grid data reaers
         to associate model data with the mesh grid.
 
@@ -68,7 +68,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         """
         if isinstance(model, dict):
             for key in model.keys():
-                TensorMeshReader.PlaceModelOnMesh(mesh, model[key], data_name=key)
+                TensorMeshReader.place_model_on_mesh(mesh, model[key], data_name=key)
             return mesh
 
         # model.GetNumberOfValues() if model is vtkDataArray
@@ -110,7 +110,7 @@ class TensorMeshReader(ubcMeshReaderBase):
     #------------------------------------------------------------------#
 
     @staticmethod
-    def ubcMesh2D(FileName, output):
+    def ubc_mesh_2d(FileName, output):
         """This method reads a UBC 2D Mesh file and builds an empty
         ``vtkRectilinearGrid`` for data to be inserted into. `Format Specs`_.
 
@@ -126,10 +126,10 @@ class TensorMeshReader(ubcMeshReaderBase):
                 a ``vtkRectilinearGrid`` generated from the UBC 3D Mesh grid.
                 Mesh is defined by the input mesh file.
                 No data attributes here, simply an empty mesh. Use the
-                ``PlaceModelOnMesh()`` method to associate with model data.
+                ``place_model_on_mesh()`` method to associate with model data.
         """
         # Read in data from file
-        xpts, xdisc, zpts, zdisc = ubcMeshReaderBase._ubcMesh2D_part(FileName)
+        xpts, xdisc, zpts, zdisc = ubcMeshReaderBase._ubc_mesh_2d_part(FileName)
 
         nx = np.sum(np.array(xdisc,dtype=int))+1
         nz = np.sum(np.array(zdisc,dtype=int))+1
@@ -163,9 +163,9 @@ class TensorMeshReader(ubcMeshReaderBase):
         return output
 
     @staticmethod
-    def ubcModel2D(FileName):
+    def ubc_model_2d(FileName):
         """Reads a 2D model file and returns a 1D NumPy float array. Use the
-        ``PlaceModelOnMesh()`` method to associate with a grid.
+        ``place_model_on_mesh()`` method to associate with a grid.
 
         Note:
             Only supports single component data
@@ -178,7 +178,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         Return:
             np.array :
                 a NumPy float array that holds the model data read from
-                the file. Use the ``PlaceModelOnMesh()`` method to associate
+                the file. Use the ``place_model_on_mesh()`` method to associate
                 with a grid. If a list of file names is given then it will
                 return a dictionary of NumPy float array with keys as the
                 basenames of the files.
@@ -186,7 +186,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         if isinstance(FileName, (list, tuple)):
             out = {}
             for f in FileName:
-                out[os.path.basename(f)] = TensorMeshReader.ubcModel2D(f)
+                out[os.path.basename(f)] = TensorMeshReader.ubc_model_2d(f)
             return out
 
         dim = np.genfromtxt(FileName, dtype=int, delimiter=None, comments='!', max_rows=1)
@@ -198,19 +198,19 @@ class TensorMeshReader(ubcMeshReaderBase):
         return data.flatten(order='F')
 
 
-    def __ubcMeshData2D(self, filename_mesh, filename_models, output):
+    def __ubc_mesh_data_2d(self, filename_mesh, filename_models, output):
         """Helper method to read a 2D mesh
         """
         # Construct/read the mesh
         if self.need_to_readMesh():
-            TensorMeshReader.ubcMesh2D(filename_mesh, self.__mesh)
+            TensorMeshReader.ubc_mesh_2d(filename_mesh, self.__mesh)
             self.need_to_readMesh(flag=False)
         output.DeepCopy(self.__mesh)
         if self.need_to_readModels() and self.this_has_models():
             self.__models = []
             for f in filename_models:
                 # Read the model data
-                self.__models.append(TensorMeshReader.ubcModel2D(f))
+                self.__models.append(TensorMeshReader.ubc_model_2d(f))
             self.need_to_readModels(flag=False)
         return output
 
@@ -220,7 +220,7 @@ class TensorMeshReader(ubcMeshReaderBase):
     #------------------------------------------------------------------#
 
     @staticmethod
-    def ubcMesh3D(FileName, output):
+    def ubc_mesh_3d(FileName, output):
         """This method reads a UBC 3D Mesh file and builds an empty
         ``vtkRectilinearGrid`` for data to be inserted into.
 
@@ -234,7 +234,7 @@ class TensorMeshReader(ubcMeshReaderBase):
                 a ``vtkRectilinearGrid`` generated from the UBC 3D Mesh grid.
                 Mesh is defined by the input mesh file.
                 No data attributes here, simply an empty mesh. Use the
-                ``PlaceModelOnMesh()`` method to associate with model data.
+                ``place_model_on_mesh()`` method to associate with model data.
         """
 
         #--- Read in the mesh ---#
@@ -293,23 +293,23 @@ class TensorMeshReader(ubcMeshReaderBase):
         return output
 
 
-    def __ubcMeshData3D(self, filename_mesh, filename_models, output):
+    def __ubc_mesh_data_3d(self, filename_mesh, filename_models, output):
         """Helper method to read a 3D mesh"""
         # Construct/read the mesh
         if self.need_to_readMesh():
-            TensorMeshReader.ubcMesh3D(filename_mesh, self.__mesh)
+            TensorMeshReader.ubc_mesh_3d(filename_mesh, self.__mesh)
             self.need_to_readMesh(flag=False)
         output.DeepCopy(self.__mesh)
         if self.need_to_readModels() and self.this_has_models():
             self.__models = []
             for f in filename_models:
                 # Read the model data
-                self.__models.append(TensorMeshReader.ubcModel3D(f))
+                self.__models.append(TensorMeshReader.ubc_model_3d(f))
             self.need_to_readModels(flag=False)
         return output
 
 
-    def __ubcTensorMesh(self, filename_mesh, filename_models, output):
+    def __ubc_tensor_mesh(self, filename_mesh, filename_models, output):
         """Wrapper to Read UBC GIF 2D and 3D meshes. UBC Mesh 2D/3D models are
         defined using a 2-file format. The "mesh" file describes how the data is
         descritized. The "model" file lists the physical property values for all
@@ -332,11 +332,11 @@ class TensorMeshReader(ubcMeshReaderBase):
 
         """
         # Check if the mesh is a UBC 2D mesh
-        if self.Is2D():
-            self.__ubcMeshData2D(filename_mesh, filename_models, output)
+        if self.is_2d():
+            self.__ubc_mesh_data_2d(filename_mesh, filename_models, output)
         # Check if the mesh is a UBC 3D mesh
-        elif self.Is3D():
-            self.__ubcMeshData3D(filename_mesh, filename_models, output)
+        elif self.is_3d():
+            self.__ubc_mesh_data_3d(filename_mesh, filename_models, output)
         else:
             raise _helpers.PVGeoError('File format not recognized')
         return output
@@ -348,13 +348,13 @@ class TensorMeshReader(ubcMeshReaderBase):
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
-        self.__ubcTensorMesh(
+        self.__ubc_tensor_mesh(
             self.get_mesh_filename(),
             self.get_model_filenames(),
             output)
         # Place the model data for given timestep onto the mesh
         if len(self.__models) > i:
-            TensorMeshReader.PlaceModelOnMesh(output, self.__models[i], self.GetDataName())
+            TensorMeshReader.place_model_on_mesh(output, self.__models[i], self.get_data_name())
         return 1
 
 
@@ -365,7 +365,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         ubcMeshReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
         if self.need_to_readMesh():
-            ext = self._ReadExtent()
+            ext = self._read_extent()
             info = outInfo.GetInformationObject(0)
             # Set WHOLE_EXTENT: This is absolutely necessary
             info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
@@ -400,11 +400,11 @@ class TensorMeshAppender(ModelAppenderBase):
 
     def _read_up_front(self):
         """Internal helepr to read data at start"""
-        reader = ubcMeshReaderBase.ubcModel3D
+        reader = ubcMeshReaderBase.ubc_model_3d
         if not self._is_3D:
             # Note how in UBC format, 2D grids are specified on an XZ plane (no Y component)
             # This will only work prior to rotations to account for real spatial reference
-            reader = TensorMeshReader.ubcModel2D
+            reader = TensorMeshReader.ubc_model_2d
         self._models = []
         for f in self._model_filenames:
             # Read the model data
@@ -412,9 +412,9 @@ class TensorMeshAppender(ModelAppenderBase):
         self.need_to_read(flag=False)
         return
 
-    def _PlaceOnMesh(self, output, idx=0):
+    def _place_on_mesh(self, output, idx=0):
         """Internal helepr to place a model on the mesh for a given index"""
-        TensorMeshReader.PlaceModelOnMesh(output, self._models[idx], self.GetDataName())
+        TensorMeshReader.place_model_on_mesh(output, self._models[idx], self.get_data_name())
         return
 
 
@@ -457,6 +457,11 @@ class TopoMeshAppender(AlgorithmBase):
         if read_again: self.__need_to_read = read_again
         AlgorithmBase.Modified(self)
 
+    def modified(self, read_again=True):
+        """Call modified if the files needs to be read again again.
+        """
+        return self.Modified(read_again=read_again)
+
 
     def _read_up_front(self):
         """Internal helepr to read data at start"""
@@ -471,7 +476,7 @@ class TopoMeshAppender(AlgorithmBase):
         self.need_to_read(flag=False)
         return
 
-    def _PlaceOnMesh(self, output):
+    def _place_on_mesh(self, output):
         """Internal helepr to place an active cells model on the mesh"""
         # Check mesh extents to math topography
         nx, ny, nz = output.GetDimensions()
@@ -489,8 +494,8 @@ class TopoMeshAppender(AlgorithmBase):
             i, j, k = row
             topo[i, j, k+1:] = 0
             topo[i, j, :k+1] = 1
-        # Add as model... ``PlaceModelOnMesh`` handles the rest
-        TensorMeshReader.PlaceModelOnMesh(output, topo.flatten(), 'Active Topography')
+        # Add as model... ``place_model_on_mesh`` handles the rest
+        TensorMeshReader.place_model_on_mesh(output, topo.flatten(), 'Active Topography')
         return
 
 
@@ -505,13 +510,13 @@ class TopoMeshAppender(AlgorithmBase):
         if self.__need_to_read:
             self._read_up_front()
         # Place the model data for given timestep onto the mesh
-        self._PlaceOnMesh(output)
+        self._place_on_mesh(output)
         return 1
 
 
     #### Setters and Getters ####
 
-    def ClearTopoFile(self):
+    def clear_topo_file(self):
         """Use to clear data file name.
         """
         self._topoFileName = None

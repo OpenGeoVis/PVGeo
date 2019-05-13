@@ -29,7 +29,7 @@ class ubcTensorMeshWriterBase(WriterBase):
         self.origin= None
 
 
-    def WriteMesh3D(self, nx, ny, nz, filename):
+    def write_mesh_3d(self, nx, ny, nz, filename):
         """Write 3D Tensor Mesh to the UBC format"""
         def arr2str(arr):
             return ' '.join(map(str, arr))
@@ -45,14 +45,14 @@ class ubcTensorMeshWriterBase(WriterBase):
             f.write('%s\n' % arr2str(self.zcells))
         return
 
-    def WriteModels(self, grd, filename):
+    def write_models(self, grd, filename):
         """Write cell data attributes to model files"""
         nx, ny, nz = grd.GetDimensions()
         nx -= 1
         ny -= 1
         nz -= 1
 
-        def reshapeModel(model):
+        def reshape_model(model):
             # Swap axes because VTK structures the coordinates a bit differently
             #-  This is absolutely crucial!
             #-  Do not play with unless you know what you are doing!
@@ -67,7 +67,7 @@ class ubcTensorMeshWriterBase(WriterBase):
         for i in range(grd.GetCellData().GetNumberOfArrays()):
             vtkarr = grd.GetCellData().GetArray(i)
             arr = interface.convert_array(vtkarr)
-            arr = reshapeModel(arr)
+            arr = reshape_model(arr)
             path = os.path.dirname(filename)
             filename = '%s/%s.mod' % (path, vtkarr.GetName().replace(' ', '_'))
             np.savetxt(filename, arr, comments='! ', header='Mesh File: %s' % os.path.basename(filename), fmt=self.get_format())
@@ -113,10 +113,10 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
         self.zcells = self.zcells[::-1]
 
         # Write mesh
-        self.WriteMesh3D(nx-1, ny-1, nz-1, filename)
+        self.write_mesh_3d(nx-1, ny-1, nz-1, filename)
 
         # Now write out model data
-        self.WriteModels(grd, filename)
+        self.write_models(grd, filename)
 
         # Always return 1 from pipeline methods or seg-faults will occur
         return 1
@@ -161,10 +161,10 @@ class WriteImageDataToUBC(ubcTensorMeshWriterBase):
         # TODO: decide if 2D or 3D
 
         # Write mesh
-        self.WriteMesh3D(nx, ny, nz, filename)
+        self.write_mesh_3d(nx, ny, nz, filename)
 
         # Now write out model data
-        self.WriteModels(grd, filename)
+        self.write_models(grd, filename)
 
         # Always return 1 from pipeline methods or seg-faults will occur
         return 1

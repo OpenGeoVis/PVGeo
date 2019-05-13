@@ -148,7 +148,7 @@ class PVGeoTopoMeshAppender(TopoMeshAppender):
             label="File Name Topo"
             command="set_topo_filename"
             animateable="1"
-            clean_command="ClearTopoFile"
+            clean_command="clear_topo_file"
             number_of_elements="1">
             <FileListDomain name="topofile"/>
             <Documentation>This plugin only allows ONE topo file to be defined.</Documentation>

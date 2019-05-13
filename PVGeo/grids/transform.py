@@ -49,7 +49,7 @@ class TableToTimeGrid(FilterBase):
         self.__needToUpdateOutput = True
 
 
-    def _SetData(self, table):
+    def _set_data(self, table):
         """Internal helper to restructure the inpt table arrays"""
         self.__data = dict()
         dims = np.array([d for d in self.__dims])
@@ -68,7 +68,7 @@ class TableToTimeGrid(FilterBase):
         self.__needToRun = False
         return
 
-    def _BuildImageData(self, img):
+    def _build_image_data(self, img):
         """Internal helper to consturct the output"""
         if self.__needToUpdateOutput:
             # Clean out the output data object
@@ -104,10 +104,10 @@ class TableToTimeGrid(FilterBase):
         # Get input/output of Proxy
         table = self.GetInputData(inInfo, 0, 0)
         img = self.GetOutputData(outInfo, 0)
-        self._BuildImageData(img)
+        self._build_image_data(img)
         # Perfrom task
         if self.__needToRun:
-            self._SetData(table)
+            self._set_data(table)
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
         for k, arr in self.__data.items():
@@ -148,6 +148,10 @@ class TableToTimeGrid(FilterBase):
             self.__needToRun = run_again
             self.__needToUpdateOutput = True
         FilterBase.Modified(self)
+
+    def modified(self, run_again=True):
+        """Call modified if the filter needs to run again"""
+        return self.Modified(run_again=run_again)
 
     def set_extent(self, nx, ny, nz, nt):
         """Set the extent of the output grid"""
@@ -218,7 +222,7 @@ class ReverseImageDataAxii(FilterBase):
             nOutputPorts=1, outputType='vtkImageData')
         self.__axes = list(axes[::-1]) # Z Y X (FORTRAN)
 
-    def _ReverseGridAxii(self, idi, ido):
+    def _reverse_grid_axes(self, idi, ido):
         """Internal helper to reverse data along specified axii"""
         # Copy over input to output to be flipped around
         # Deep copy keeps us from messing with the input data
@@ -264,7 +268,7 @@ class ReverseImageDataAxii(FilterBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
-        self._ReverseGridAxii(pdi, pdo)
+        self._reverse_grid_axes(pdi, pdo)
         return 1
 
 
@@ -311,7 +315,7 @@ class TranslateGridOrigin(FilterBase):
         self.__corner = corner
 
 
-    def _Translate(self, pdi, pdo):
+    def _translate(self, pdi, pdo):
         """Internal helper to translate the inputs origin"""
         if pdo is None:
             pdo = vtk.vtkImageData()
@@ -371,7 +375,7 @@ class TranslateGridOrigin(FilterBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
-        self._Translate(pdi, pdo)
+        self._translate(pdi, pdo)
         return 1
 
 

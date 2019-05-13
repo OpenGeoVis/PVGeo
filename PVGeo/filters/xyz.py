@@ -823,7 +823,7 @@ class IterateOverPoints(FilterBase):
         """
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
-    def GetPoint(self):
+    def get_point(self):
         """Get the current point"""
         return list(self.__point)
 
@@ -846,7 +846,7 @@ class ConvertUnits(FilterPreserveTypeBase):
         self.__conversion = conversion
 
     @staticmethod
-    def LookupConversions(get_keys=False):
+    def lookup_conversions(get_keys=False):
         """All Available conversions
 
         Return:
@@ -869,7 +869,7 @@ class ConvertUnits(FilterPreserveTypeBase):
         #### Perfrom task ####
         filt = vtk.vtkTransformFilter()
         trans = vtk.vtkTransform()
-        trans.Scale(self.GetConversion(), self.GetConversion(), self.GetConversion())
+        trans.Scale(self.get_conversion(), self.get_conversion(), self.get_conversion())
         filt.SetTransform(trans)
         filt.SetInputDataObject(pdi)
         filt.Update()
@@ -881,7 +881,7 @@ class ConvertUnits(FilterPreserveTypeBase):
 
     def set_conversion(self, key):
         """Set the conversion via a lookup table"""
-        convs = self.LookupConversions()
+        convs = self.lookup_conversions()
         if isinstance(key, str):
             if key.lower() not in convs.keys():
                 raise _helpers.PVGeoError('Converion `%s` not available.' % key)
@@ -892,9 +892,9 @@ class ConvertUnits(FilterPreserveTypeBase):
             self.Modified()
         return 1
 
-    def GetConversion(self):
+    def get_conversion(self):
         """Get the conversion value"""
-        convs = self.LookupConversions()
+        convs = self.lookup_conversions()
         return convs[self.__conversion]
 
 
@@ -911,14 +911,14 @@ class BuildSurfaceFromPoints(FilterBase):
     def __init__(self, **kwargs):
         FilterBase.__init__(self, inputType='vtkPolyData',
                             outputType='vtkUnstructuredGrid', **kwargs)
-        self.__zcoords = CreateTensorMesh._ReadCellLine('0. 50.')
+        self.__zcoords = CreateTensorMesh._read_cell_line('0. 50.')
         zcoords = kwargs.get('zcoords', self.__zcoords)
         if not isinstance(zcoords, (str, list, tuple, np.ndarray)):
             raise TypeError('zcoords of bad type.')
         if isinstance(zcoords, str):
             self.set_z_coords_str(zcoords)
         else:
-            self.SetZCoords(zcoords)
+            self.set_z_coords(zcoords)
 
 
     @staticmethod
@@ -1001,7 +1001,7 @@ class BuildSurfaceFromPoints(FilterBase):
         pdo.DeepCopy(output)
         return 1
 
-    def SetZCoords(self, zcoords):
+    def set_z_coords(self, zcoords):
         """Set the spacings for the cells in the Z direction
 
         Args:
@@ -1015,5 +1015,5 @@ class BuildSurfaceFromPoints(FilterBase):
 
         Args:
             zcoordstr (str)  : the spacings along the Z-axis in the UBC style"""
-        zcoords = CreateTensorMesh._ReadCellLine(zcoordstr)
-        self.SetZCoords(zcoords)
+        zcoords = CreateTensorMesh._read_cell_line(zcoordstr)
+        self.set_z_coords(zcoords)

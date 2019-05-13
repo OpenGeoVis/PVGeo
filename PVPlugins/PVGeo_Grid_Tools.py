@@ -300,7 +300,7 @@ class PVGeoLandsatReader(LandsatReader):
         LandsatReader.set_cast_data_type(self, flag)
 
 
-    @smproperty.xml(_helpers.get_drop_down_xml(name='Color Scheme', command='set_color_scheme', labels=LandsatReader.GetColorSchemeNames(), help='Set a color scheme to use.'))
+    @smproperty.xml(_helpers.get_drop_down_xml(name='Color Scheme', command='set_color_scheme', labels=LandsatReader.get_color_scheme_names(), help='Set a color scheme to use.'))
     def set_color_scheme(self, scheme):
         LandsatReader.set_color_scheme(self, scheme)
 

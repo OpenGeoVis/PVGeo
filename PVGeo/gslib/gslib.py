@@ -22,7 +22,7 @@ class _GSLibReaderMethods(object):
     _header = None
     extensions = 'sgems dat geoeas gslib GSLIB txt SGEMS SGeMS'
 
-    def _ExtractHeader(self, content):
+    def _extract_header(self, content):
         self._header = content[0]
         try:
             num = int(content[1]) # number of data columns
@@ -34,7 +34,7 @@ class _GSLibReaderMethods(object):
 
     #### Seters and Geters ####
 
-    def GetFileHeader(self):
+    def get_file_header(self):
         """Returns the file header. If file hasn't been read, returns ``None``
         """
         return self._header

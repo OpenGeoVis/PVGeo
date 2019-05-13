@@ -357,7 +357,7 @@ class TestMadagascarReader(TestBase):
         reader.AddFileName(filename)
         reader.set_data_type('f')
         reader.set_data_name('Test Data')
-        self.assertEqual(reader.GetDataName(), 'Test Data')
+        self.assertEqual(reader.get_data_name(), 'Test Data')
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
