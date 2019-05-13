@@ -168,6 +168,15 @@ class ReaderBaseBase(AlgorithmBase):
             self.__filenames.append(filename)
         self.Modified()
 
+    def add_file_name(self, filename):
+        """Use to set the file names for the reader. Handles singlt string or
+        list of strings.
+
+        Args:
+            filename (str): The absolute file name with path to read.
+        """
+        return self.AddFileName(filename)
+
     def GetFileNames(self, idx=None):
         """Returns the list of file names or given and index returns a specified
         timestep's filename.
@@ -177,6 +186,12 @@ class ReaderBaseBase(AlgorithmBase):
         if idx is None:
             return self.__filenames
         return self.__filenames[idx]
+
+    def get_file_names(self, idx=None):
+        """Returns the list of file names or given and index returns a specified
+        timestep's filename.
+        """
+        return self.GetFileNames(idx=idx)
 
     def apply(self, filename):
         """Given a file name (or list of file names), perfrom the read"""
@@ -472,9 +487,18 @@ class WriterBase(AlgorithmBase):
             self.__filename = filename
             self.Modified()
 
+    def set_file_name(self, filename):
+        """Specify the filename for the output. Writer can only handle a single
+        output data object/time step."""
+        return self.SetFileName(filename)
+
     def GetFileName(self):
         """Get the set filename."""
         return self.__filename
+
+    def get_file_name(self):
+        """Get the set filename."""
+        return self.GetFileName()
 
     def Write(self, input_data_object=None):
         """Perfrom the write out."""
