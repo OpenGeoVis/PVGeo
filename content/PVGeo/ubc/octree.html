@@ -207,8 +207,8 @@
 <p>This filter reads a timeseries of models and appends it to an input
 <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code></p>
 <dl class="method">
-<dt id="PVGeo.ubc.octree.OcTreeAppender._PlaceOnMesh">
-<code class="descname">_PlaceOnMesh</code><span class="sig-paren">(</span><em>output</em>, <em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeAppender._PlaceOnMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeAppender._PlaceOnMesh" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.octree.OcTreeAppender._place_on_mesh">
+<code class="descname">_place_on_mesh</code><span class="sig-paren">(</span><em>output</em>, <em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeAppender._place_on_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeAppender._place_on_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to place a model on the mesh for a given index</p>
 </dd></dl>
 
@@ -230,31 +230,6 @@
 <p>This class reads a UBC OcTree Mesh file and builds a
 <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> of the data in the file. Model File is optional.
 Reader will still construct <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> safely.</p>
-<dl class="staticmethod">
-<dt id="PVGeo.ubc.octree.OcTreeReader.PlaceModelOnOcTreeMesh">
-<em class="property">static </em><code class="descname">PlaceModelOnOcTreeMesh</code><span class="sig-paren">(</span><em>mesh</em>, <em>model</em>, <em>data_name='Data'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.PlaceModelOnOcTreeMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.PlaceModelOnOcTreeMesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Places model data onto a mesh. This is for the UBC Grid data reaers
-to associate model data with the mesh grid.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mesh</strong> (<em>vtkUnstructuredGrid</em>) – The <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> that is the
-mesh to place the model data upon. Needs to have been read in by ubcOcTree</p></li>
-<li><p><strong>model</strong> (<em>np.ndarray</em>) – A NumPy float array that holds all of the data
-to place inside of the mesh’s cells.</p></li>
-<li><p><strong>data_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The name of the model data array once placed on the
-<code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The input <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> with model data appended.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>vtkUnstructuredGrid</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="method">
 <dt id="PVGeo.ubc.octree.OcTreeReader.RequestData">
 <code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.RequestData" title="Permalink to this definition">¶</a></dt>
@@ -269,8 +244,8 @@ step values</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.ubc.octree.OcTreeReader._OcTreeReader__ubcOcTree">
-<code class="descname">_OcTreeReader__ubcOcTree</code><span class="sig-paren">(</span><em>filename_mesh</em>, <em>filename_models</em>, <em>output</em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader._OcTreeReader__ubcOcTree" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.octree.OcTreeReader._OcTreeReader__ubc_octree">
+<code class="descname">_OcTreeReader__ubc_octree</code><span class="sig-paren">(</span><em>filename_mesh</em>, <em>filename_models</em>, <em>output</em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader._OcTreeReader__ubc_octree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper to Read UBC GIF OcTree mesh and model file pairs. UBC OcTree
 models are defined using a 2-file format. The “mesh” file describes how
 the data is descritized. The “model” file lists the physical property
@@ -316,9 +291,34 @@ the input model file.</p>
 <code class="descname">description</code><em class="property"> = 'PVGeo: UBC OcTree Mesh'</em><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="staticmethod">
+<dt id="PVGeo.ubc.octree.OcTreeReader.place_model_on_octree_mesh">
+<em class="property">static </em><code class="descname">place_model_on_octree_mesh</code><span class="sig-paren">(</span><em>mesh</em>, <em>model</em>, <em>data_name='Data'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.place_model_on_octree_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.place_model_on_octree_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Places model data onto a mesh. This is for the UBC Grid data reaers
+to associate model data with the mesh grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mesh</strong> (<em>vtkUnstructuredGrid</em>) – The <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> that is the
+mesh to place the model data upon. Needs to have been read in by ubcOcTree</p></li>
+<li><p><strong>model</strong> (<em>np.ndarray</em>) – A NumPy float array that holds all of the data
+to place inside of the mesh’s cells.</p></li>
+<li><p><strong>data_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The name of the model data array once placed on the
+<code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The input <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> with model data appended.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>vtkUnstructuredGrid</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="method">
-<dt id="PVGeo.ubc.octree.OcTreeReader.ubcOcTreeMesh">
-<code class="descname">ubcOcTreeMesh</code><span class="sig-paren">(</span><em>FileName</em>, <em>pdo=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.ubcOcTreeMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.ubcOcTreeMesh" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.octree.OcTreeReader.ubc_octree_mesh">
+<code class="descname">ubc_octree_mesh</code><span class="sig-paren">(</span><em>FileName</em>, <em>pdo=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.ubc_octree_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.ubc_octree_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method reads a UBC OcTree Mesh file and builds a
 <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> of the data in the file. This method generates
 the <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> without any data attributes.</p>
@@ -334,7 +334,7 @@ mesh file in UBC OcTree format.</p></li>
 <dd class="field-even"><p>a <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> generated from the UBCMesh grid.
 Mesh is defined by the input mesh file.
 No data attributes here, simply an empty mesh. Use the
-<code class="docutils literal notranslate"><span class="pre">PlaceModelOnOcTreeMesh()</span></code> method to associate with model data.</p>
+<code class="docutils literal notranslate"><span class="pre">place_model_on_octree_mesh()</span></code> method to associate with model data.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>vtkUnstructuredGrid</p>

@@ -212,29 +212,22 @@ already mapped. The globe’s center is assumed to be (0,0,0).</p>
 </dd>
 </dl>
 <dl class="method">
-<dt id="PVGeo.model_build.earth.GlobeSource.BuildGlobe">
-<code class="descname">BuildGlobe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.BuildGlobe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.BuildGlobe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates the globe as <code class="docutils literal notranslate"><span class="pre">vtkPolyData</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.model_build.earth.GlobeSource.CreateSphere">
-<code class="descname">CreateSphere</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.CreateSphere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.CreateSphere" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates longitude/latitude as 2D points and returns the corresponding
-texture coordinates for those positions.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.model_build.earth.GlobeSource.RequestData">
 <code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>The pipeline executes this to generate output</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.model_build.earth.GlobeSource.SphericalToCartesian">
-<code class="descname">SphericalToCartesian</code><span class="sig-paren">(</span><em>meridian</em>, <em>parallel</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.SphericalToCartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.SphericalToCartesian" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts longitude/latitude to catesian coordinates. Assumes the
-arguments are given in degrees.</p>
+<dt id="PVGeo.model_build.earth.GlobeSource.build_globe">
+<code class="descname">build_globe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.build_globe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.build_globe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the globe as <code class="docutils literal notranslate"><span class="pre">vtkPolyData</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.earth.GlobeSource.create_sphere">
+<code class="descname">create_sphere</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.create_sphere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.create_sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates longitude/latitude as 2D points and returns the corresponding
+texture coordinates for those positions.</p>
 </dd></dl>
 
 <dl class="method">
@@ -253,6 +246,13 @@ arguments are given in degrees.</p>
 <dt id="PVGeo.model_build.earth.GlobeSource.set_radius">
 <code class="descname">set_radius</code><span class="sig-paren">(</span><em>radius</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.set_radius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.set_radius" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the radius of the globe. Defualt is 6.371.0e9 meters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.earth.GlobeSource.spherical_to_cartesian">
+<code class="descname">spherical_to_cartesian</code><span class="sig-paren">(</span><em>meridian</em>, <em>parallel</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.spherical_to_cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.spherical_to_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts longitude/latitude to catesian coordinates. Assumes the
+arguments are given in degrees.</p>
 </dd></dl>
 
 </dd></dl>

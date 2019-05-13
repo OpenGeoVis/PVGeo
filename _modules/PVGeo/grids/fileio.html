@@ -432,13 +432,13 @@
         <span class="k">return</span> <span class="n">grd</span></div>
 
 
-<div class="viewcode-block" id="SurferGridReader._ReadGrids"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader._ReadGrids">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadGrids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="SurferGridReader._read_grids"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader._read_grids">[docs]</a>    <span class="k">def</span> <span class="nf">_read_grids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This parses the first file to determine grid file type then reads</span>
 <span class="sd">        all files set.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">idx</span><span class="p">)]</span>
+            <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_file_names</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">idx</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">filenames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">()</span>
+            <span class="n">filenames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_names</span><span class="p">()</span>
         <span class="n">contents</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
         <span class="n">key</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;4s&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
@@ -466,7 +466,7 @@
         <span class="sd">&quot;&quot;&quot;Should not need to be overridden.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Perform Read</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__grids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ReadGrids</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__grids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_grids</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
@@ -509,7 +509,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span> <span class="o">=</span> <span class="n">data_name</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SurferGridReader.GetDataName"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader.GetDataName">[docs]</a>    <span class="k">def</span> <span class="nf">GetDataName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SurferGridReader.get_data_name"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader.get_data_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the name of the data array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span></div></div>
 
@@ -597,8 +597,12 @@
                 <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span></div>
 
+
+<div class="viewcode-block" id="WriteImageDataToSurfer.write"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteImageDataToSurfer.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Perfrom the write out.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">input_data_object</span><span class="o">=</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="n">array_name</span><span class="p">)</span></div></div>
 
 <span class="c1">###############################################################################</span>
 
@@ -622,7 +626,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data_name&#39;</span><span class="p">,</span> <span class="s1">&#39;Data&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">NODATA_VALUE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span>
 
-<div class="viewcode-block" id="EsriGridReader._ExtractHeader"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader._ExtractHeader">[docs]</a>    <span class="k">def</span> <span class="nf">_ExtractHeader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+<div class="viewcode-block" id="EsriGridReader._extract_header"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader._extract_header">[docs]</a>    <span class="k">def</span> <span class="nf">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal helper to parse header information in ESRI Grid files&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__nx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
@@ -635,13 +639,13 @@
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;This file is not in proper Esri ASCII Grid format.&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span><span class="p">],</span> <span class="n">content</span><span class="p">[</span><span class="mi">6</span><span class="p">::]</span></div>
 
-<div class="viewcode-block" id="EsriGridReader._FileContentsToDataFrame"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader._FileContentsToDataFrame">[docs]</a>    <span class="k">def</span> <span class="nf">_FileContentsToDataFrame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
+<div class="viewcode-block" id="EsriGridReader._file_contents_to_data_frame"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader._file_contents_to_data_frame">[docs]</a>    <span class="k">def</span> <span class="nf">_file_contents_to_data_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates a dataframe with a sinlge array for the file data.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">:</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromiter</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">GetDataName</span><span class="p">()])</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_data_name</span><span class="p">()])</span>
             <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span></div>
 
@@ -704,7 +708,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span> <span class="o">=</span> <span class="n">data_name</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="EsriGridReader.GetDataName"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.GetDataName">[docs]</a>    <span class="k">def</span> <span class="nf">GetDataName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="EsriGridReader.get_data_name"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.get_data_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the name of the data array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span></div></div>
 
@@ -738,21 +742,24 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="n">read_again</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="LandsatReader.modified"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.modified">[docs]</a>    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="n">read_again</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LandsatReader.GetFileName"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.GetFileName">[docs]</a>    <span class="k">def</span> <span class="nf">GetFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LandsatReader.get_file_name"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.get_file_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Super class has file names as a list but we will only handle a single</span>
 <span class="sd">        project file. This provides a conveinant way of making sure we only</span>
 <span class="sd">        access that single file.</span>
-<span class="sd">        A user could still access the list of file names using ``GetFileNames()``.</span>
+<span class="sd">        A user could still access the list of file names using ``get_file_names()``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="n">get_file_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
 
 
     <span class="c1">#### Methods for performing the read ####</span>
 
 <div class="viewcode-block" id="LandsatReader._get_file_contents"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._get_file_contents">[docs]</a>    <span class="k">def</span> <span class="nf">_get_file_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads XML meta data, no data read.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__reader</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__reader</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_file_name</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__reader</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">meta_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dataselection</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -773,7 +780,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__reader</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">meta_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allowed</span><span class="o">=</span><span class="n">allowed</span><span class="p">,</span> <span class="n">cast</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__cast</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span></div>
 
-<div class="viewcode-block" id="LandsatReader._BuildImageData"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._BuildImageData">[docs]</a>    <span class="k">def</span> <span class="nf">_BuildImageData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+<div class="viewcode-block" id="LandsatReader._build_image_data"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._build_image_data">[docs]</a>    <span class="k">def</span> <span class="nf">_build_image_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Properly builds the output ``vtkImageData`` object&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Raster invalid.&#39;</span><span class="p">)</span>
@@ -795,7 +802,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_BuildImageData</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_build_image_data</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="c1"># Now add the data based on what the user has selected</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">band</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">band</span><span class="o">.</span><span class="n">data</span>
@@ -846,7 +853,7 @@
         <span class="sd">&quot;&quot;&quot;Get an RGB scheme from the raster set. If no scheme is desired, pass</span>
 <span class="sd">        any string that is not a defined scheme as the scheme argument.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scheme</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="n">scheme</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetColorSchemeNames</span><span class="p">()[</span><span class="n">scheme</span><span class="p">]</span>
+            <span class="n">scheme</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color_scheme_names</span><span class="p">()[</span><span class="n">scheme</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">scheme</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">espatools</span><span class="o">.</span><span class="n">RasterSet</span><span class="o">.</span><span class="n">RGB_SCHEMES</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__scheme</span> <span class="o">!=</span> <span class="n">scheme</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__scheme</span> <span class="o">=</span> <span class="n">scheme</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
@@ -855,8 +862,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="LandsatReader.GetColorSchemeNames"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.GetColorSchemeNames">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">GetColorSchemeNames</span><span class="p">():</span>
+<div class="viewcode-block" id="LandsatReader.get_color_scheme_names"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.get_color_scheme_names">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_color_scheme_names</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;Get a list of the available color schemes&quot;&quot;&quot;</span>
         <span class="n">schemes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">espatools</span><span class="o">.</span><span class="n">RasterSet</span><span class="o">.</span><span class="n">RGB_SCHEMES</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="n">schemes</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;No Selection&#39;</span><span class="p">)</span>

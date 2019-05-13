@@ -203,20 +203,25 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="n">read_again</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="OMFReader.GetFileName"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader.GetFileName">[docs]</a>    <span class="k">def</span> <span class="nf">GetFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="OMFReader.modified"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader.modified">[docs]</a>    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ensure default is overridden to be false so array selector can call.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="n">read_again</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="OMFReader.get_file_name"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader.get_file_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Super class has file names as a list but we will only handle a single</span>
 <span class="sd">        project file. This provides a conveinant way of making sure we only</span>
 <span class="sd">        access that single file.</span>
-<span class="sd">        A user could still access the list of file names using ``GetFileNames()``.</span>
+<span class="sd">        A user could still access the list of file names using ``get_file_names()``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="n">get_file_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
 
     <span class="c1">#### Methods for performing the read ####</span>
 
 <div class="viewcode-block" id="OMFReader._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal functiona to read all data at the start&quot;&quot;&quot;</span>
         <span class="c1"># Read all elements</span>
-        <span class="n">reader</span> <span class="o">=</span> <span class="n">omf</span><span class="o">.</span><span class="n">OMFReader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">())</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">omf</span><span class="o">.</span><span class="n">OMFReader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_file_name</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__project</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">get_project</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__names</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__project</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__names</span><span class="p">:</span>

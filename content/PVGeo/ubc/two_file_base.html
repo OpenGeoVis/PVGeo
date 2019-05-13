@@ -206,12 +206,6 @@
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
 <p>A base class for create mesh-model appenders on the UBC Mesh formats</p>
 <dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.GetDataName">
-<code class="descname">GetDataName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.GetDataName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.GetDataName" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the data array name</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.Modified">
 <code class="descname">Modified</code><span class="sig-paren">(</span><em>read_again=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.Modified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call modified if the files needs to be read again again.</p>
@@ -230,8 +224,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase._PlaceOnMesh">
-<code class="descname">_PlaceOnMesh</code><span class="sig-paren">(</span><em>output</em>, <em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._PlaceOnMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._PlaceOnMesh" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase._place_on_mesh">
+<code class="descname">_place_on_mesh</code><span class="sig-paren">(</span><em>output</em>, <em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._place_on_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._place_on_mesh" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -259,6 +253,12 @@ list of strings.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.get_data_name">
+<code class="descname">get_data_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_data_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_data_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data array name</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.get_model_filenames">
 <code class="descname">get_model_filenames</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_model_filenames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_model_filenames" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the list of file names or given and index returns a specified
@@ -275,6 +275,12 @@ timestep’s filename.</p>
 <dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.has_models">
 <code class="descname">has_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.has_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.has_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if models are associated with this mesh</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ModelAppenderBase.modified">
+<code class="descname">modified</code><span class="sig-paren">(</span><em>read_again=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call modified if the files needs to be read again again.</p>
 </dd></dl>
 
 <dl class="method">
@@ -318,26 +324,8 @@ status</p>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.TwoFileReaderBase" title="PVGeo.base.TwoFileReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.TwoFileReaderBase</span></code></a></p>
 <p>A base class for the UBC mesh readers</p>
 <dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.GetDataName">
-<code class="descname">GetDataName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.GetDataName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.GetDataName" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the data array name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.Is2D">
-<code class="descname">Is2D</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.Is2D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.Is2D" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns true if mesh is spatially references in only two dimensions</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.Is3D">
-<code class="descname">Is3D</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.Is3D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.Is3D" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns true if mesh is spatially references in three dimensions</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase._ReadExtent">
-<code class="descname">_ReadExtent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase._ReadExtent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase._ReadExtent" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase._read_extent">
+<code class="descname">_read_extent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase._read_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase._read_extent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the mesh file for the UBC 2D/3D Mesh or OcTree format to get
 output extents. Computationally inexpensive method to discover whole
 output extent.</p>
@@ -354,8 +342,8 @@ output should be directly passed to set the whole output extent.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase._ubcMesh2D_part">
-<em class="property">static </em><code class="descname">_ubcMesh2D_part</code><span class="sig-paren">(</span><em>FileName</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase._ubcMesh2D_part"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase._ubcMesh2D_part" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase._ubc_mesh_2d_part">
+<em class="property">static </em><code class="descname">_ubc_mesh_2d_part</code><span class="sig-paren">(</span><em>FileName</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase._ubc_mesh_2d_part"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase._ubc_mesh_2d_part" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to read 2D mesh file</p>
 </dd></dl>
 
@@ -363,6 +351,24 @@ output should be directly passed to set the whole output extent.</p>
 <dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.extensions">
 <code class="descname">extensions</code><em class="property"> = 'mesh msh dat txt text'</em><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.extensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.get_data_name">
+<code class="descname">get_data_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.get_data_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.get_data_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data array name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_2d">
+<code class="descname">is_2d</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.is_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if mesh is spatially references in only two dimensions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_3d">
+<code class="descname">is_3d</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.is_3d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if mesh is spatially references in three dimensions</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_data_name">
@@ -377,10 +383,10 @@ output should be directly passed to set the whole output extent.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.ubcModel3D">
-<em class="property">static </em><code class="descname">ubcModel3D</code><span class="sig-paren">(</span><em>FileName</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.ubcModel3D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.ubcModel3D" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.ubc_model_3d">
+<em class="property">static </em><code class="descname">ubc_model_3d</code><span class="sig-paren">(</span><em>FileName</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.ubc_model_3d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.ubc_model_3d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the 3D model file and returns a 1D NumPy float array. Use the
-PlaceModelOnMesh() method to associate with a grid.</p>
+place_model_on_mesh() method to associate with a grid.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The model file name(s) as an absolute path for the
@@ -389,7 +395,7 @@ input model file in UBC 3D Model Model Format. Also accepts a
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Returns a NumPy float array that holds the model data
-read from the file. Use the <code class="docutils literal notranslate"><span class="pre">PlaceModelOnMesh()</span></code> method to
+read from the file. Use the <code class="docutils literal notranslate"><span class="pre">place_model_on_mesh()</span></code> method to
 associate with a grid. If a list of file names is given then it
 will return a dictionary of NumPy float array with keys as the
 basenames of the files.</p>

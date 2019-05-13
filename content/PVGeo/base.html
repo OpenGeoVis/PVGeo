@@ -414,13 +414,6 @@ list of strings.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.base.ReaderBaseBase.GetFileNames">
-<code class="descname">GetFileNames</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.GetFileNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.GetFileNames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the list of file names or given and index returns a specified
-timestep’s filename.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.base.ReaderBaseBase.Modified">
 <code class="descname">Modified</code><span class="sig-paren">(</span><em>read_again=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.Modified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call modified if the files needs to be read again again</p>
@@ -442,6 +435,18 @@ timestep’s filename.</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="PVGeo.base.ReaderBaseBase.add_file_name">
+<code class="descname">add_file_name</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.add_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.add_file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to set the file names for the reader. Handles singlt string or
+list of strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The absolute file name with path to read.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="PVGeo.base.ReaderBaseBase.apply">
 <code class="descname">apply</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a file name (or list of file names), perfrom the read</p>
@@ -456,6 +461,13 @@ timestep’s filename.</p>
 <p>This does not set the reader to need to read again as there are
 no files to read.</p>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.ReaderBaseBase.get_file_names">
+<code class="descname">get_file_names</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.get_file_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.get_file_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of file names or given and index returns a specified
+timestep’s filename.</p>
 </dd></dl>
 
 <dl class="method">
@@ -638,12 +650,6 @@ timestep’s filename.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.base.WriterBase.GetFileName">
-<code class="descname">GetFileName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.GetFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.GetFileName" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the set filename.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.base.WriterBase.RequestData">
 <code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Subclasses must implement a <code class="docutils literal notranslate"><span class="pre">perform_write_out</span></code> method that takes an
@@ -677,6 +683,12 @@ output data object/time step.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="PVGeo.base.WriterBase.get_file_name">
+<code class="descname">get_file_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.get_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.get_file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the set filename.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="PVGeo.base.WriterBase.get_format">
 <code class="descname">get_format</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.get_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.get_format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the ASCII format used for floats</p>
@@ -695,6 +707,13 @@ output data object/time step.</p>
 <dd><p>Gets a list of filenames based on user input filename and creates a
 numbered list of filenames for the reader to save out. Assumes the
 filename has an extension set already.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.base.WriterBase.set_file_name">
+<code class="descname">set_file_name</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.set_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.base.WriterBase.set_file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify the filename for the output. Writer can only handle a single
+output data object/time step.</p>
 </dd></dl>
 
 <dl class="method">

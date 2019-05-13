@@ -207,12 +207,6 @@
 <dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader" title="PVGeo.readers.delimited.DelimitedTextReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedTextReader</span></code></a></p>
 <p>See details: <a class="reference external" href="https://en.wikipedia.org/wiki/Esri_grid">https://en.wikipedia.org/wiki/Esri_grid</a></p>
 <dl class="method">
-<dt id="PVGeo.grids.fileio.EsriGridReader.GetDataName">
-<code class="descname">GetDataName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader.GetDataName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader.GetDataName" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the name of the data array</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.grids.fileio.EsriGridReader.RequestData">
 <code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to get data for current timestep and populate the
@@ -226,14 +220,14 @@ output data object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.fileio.EsriGridReader._ExtractHeader">
-<code class="descname">_ExtractHeader</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader._ExtractHeader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader._ExtractHeader" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.fileio.EsriGridReader._extract_header">
+<code class="descname">_extract_header</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader._extract_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to parse header information in ESRI Grid files</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.fileio.EsriGridReader._FileContentsToDataFrame">
-<code class="descname">_FileContentsToDataFrame</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader._FileContentsToDataFrame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader._FileContentsToDataFrame" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.fileio.EsriGridReader._file_contents_to_data_frame">
+<code class="descname">_file_contents_to_data_frame</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader._file_contents_to_data_frame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader._file_contents_to_data_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a dataframe with a sinlge array for the file data.</p>
 </dd></dl>
 
@@ -255,6 +249,12 @@ This method handles Surfer’s NaN data values and checkes the value range</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="PVGeo.grids.fileio.EsriGridReader.get_data_name">
+<code class="descname">get_data_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader.get_data_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader.get_data_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of the data array</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="PVGeo.grids.fileio.EsriGridReader.set_data_name">
 <code class="descname">set_data_name</code><span class="sig-paren">(</span><em>data_name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader.set_data_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader.set_data_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the name of the data array</p>
@@ -272,25 +272,10 @@ This method handles Surfer’s NaN data values and checkes the value range</p>
 <p>A reader that will handle ESPA XML files for Landsat Imagery. This reader
 uses the <code class="docutils literal notranslate"><span class="pre">espatools</span></code> package to read Landsat rasters (band sets) and
 creates vtkImageData with each band as point data</p>
-<dl class="staticmethod">
-<dt id="PVGeo.grids.fileio.LandsatReader.GetColorSchemeNames">
-<em class="property">static </em><code class="descname">GetColorSchemeNames</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader.GetColorSchemeNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader.GetColorSchemeNames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a list of the available color schemes</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="PVGeo.grids.fileio.LandsatReader.GetDataSelection">
 <code class="descname">GetDataSelection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader.GetDataSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader.GetDataSelection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by ParaView GUI</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.grids.fileio.LandsatReader.GetFileName">
-<code class="descname">GetFileName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader.GetFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader.GetFileName" title="Permalink to this definition">¶</a></dt>
-<dd><p>Super class has file names as a list but we will only handle a single
-project file. This provides a conveinant way of making sure we only
-access that single file.
-A user could still access the list of file names using <code class="docutils literal notranslate"><span class="pre">GetFileNames()</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -312,8 +297,8 @@ A user could still access the list of file names using <code class="docutils lit
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.fileio.LandsatReader._BuildImageData">
-<code class="descname">_BuildImageData</code><span class="sig-paren">(</span><em>output</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader._BuildImageData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader._BuildImageData" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.fileio.LandsatReader._build_image_data">
+<code class="descname">_build_image_data</code><span class="sig-paren">(</span><em>output</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader._build_image_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader._build_image_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Properly builds the output <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> object</p>
 </dd></dl>
 
@@ -343,6 +328,26 @@ A user could still access the list of file names using <code class="docutils lit
 <dl class="attribute">
 <dt id="PVGeo.grids.fileio.LandsatReader.extensions">
 <code class="descname">extensions</code><em class="property"> = 'xml'</em><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader.extensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="PVGeo.grids.fileio.LandsatReader.get_color_scheme_names">
+<em class="property">static </em><code class="descname">get_color_scheme_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader.get_color_scheme_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader.get_color_scheme_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of the available color schemes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.fileio.LandsatReader.get_file_name">
+<code class="descname">get_file_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader.get_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader.get_file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Super class has file names as a list but we will only handle a single
+project file. This provides a conveinant way of making sure we only
+access that single file.
+A user could still access the list of file names using <code class="docutils literal notranslate"><span class="pre">get_file_names()</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.fileio.LandsatReader.modified">
+<code class="descname">modified</code><span class="sig-paren">(</span><em>read_again=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader.modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader.modified" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -391,12 +396,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.</p>
 </div>
 <dl class="method">
-<dt id="PVGeo.grids.fileio.SurferGridReader.GetDataName">
-<code class="descname">GetDataName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#SurferGridReader.GetDataName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.SurferGridReader.GetDataName" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the name of the data array</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.grids.fileio.SurferGridReader.RequestData">
 <code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#SurferGridReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.SurferGridReader.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to get data for current timestep and populate the
@@ -410,8 +409,8 @@ output data object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.fileio.SurferGridReader._ReadGrids">
-<code class="descname">_ReadGrids</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#SurferGridReader._ReadGrids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.SurferGridReader._ReadGrids" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.fileio.SurferGridReader._read_grids">
+<code class="descname">_read_grids</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#SurferGridReader._read_grids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.SurferGridReader._read_grids" title="Permalink to this definition">¶</a></dt>
 <dd><p>This parses the first file to determine grid file type then reads
 all files set.</p>
 </dd></dl>
@@ -449,6 +448,12 @@ all files set.</p>
 <dt id="PVGeo.grids.fileio.SurferGridReader.extensions">
 <code class="descname">extensions</code><em class="property"> = 'grd GRD'</em><a class="headerlink" href="#PVGeo.grids.fileio.SurferGridReader.extensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.fileio.SurferGridReader.get_data_name">
+<code class="descname">get_data_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#SurferGridReader.get_data_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.SurferGridReader.get_data_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of the data array</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.grids.fileio.SurferGridReader.set_data_name">
@@ -526,6 +531,12 @@ to save out.</p>
 <dt id="PVGeo.grids.fileio.WriteImageDataToSurfer.perform_write_out">
 <code class="descname">perform_write_out</code><span class="sig-paren">(</span><em>input_data_object</em>, <em>filename</em>, <em>object_name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#WriteImageDataToSurfer.perform_write_out"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.WriteImageDataToSurfer.perform_write_out" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes an input <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> object to a file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.fileio.WriteImageDataToSurfer.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>input_data_object=None</em>, <em>array_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#WriteImageDataToSurfer.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.fileio.WriteImageDataToSurfer.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perfrom the write out.</p>
 </dd></dl>
 
 </dd></dl>

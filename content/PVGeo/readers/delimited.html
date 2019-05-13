@@ -204,30 +204,30 @@
 <p>A base class for delimited text readers that produce <code class="docutils literal notranslate"><span class="pre">vtkPolyData</span></code>
 points.</p>
 <dl class="method">
-<dt id="PVGeo.readers.delimited.DelimitedPointsReaderBase.GetCopyZ">
-<code class="descname">GetCopyZ</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedPointsReaderBase.GetCopyZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedPointsReaderBase.GetCopyZ" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the status of whether or not to copy the Z-component of the
-points to the Point Data</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.readers.delimited.DelimitedPointsReaderBase.RequestData">
 <code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedPointsReaderBase.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedPointsReaderBase.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to get data for current timestep and populate the
 output data object.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="PVGeo.readers.delimited.DelimitedPointsReaderBase.SetCopyZ">
-<code class="descname">SetCopyZ</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedPointsReaderBase.SetCopyZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedPointsReaderBase.SetCopyZ" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set whether or not to copy the Z-component of the points to the
-Point Data</p>
-</dd></dl>
-
 <dl class="attribute">
 <dt id="PVGeo.readers.delimited.DelimitedPointsReaderBase.description">
 <code class="descname">description</code><em class="property"> = 'PVGeo: Delimited Points'</em><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedPointsReaderBase.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.delimited.DelimitedPointsReaderBase.get_copy_z">
+<code class="descname">get_copy_z</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedPointsReaderBase.get_copy_z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedPointsReaderBase.get_copy_z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the status of whether or not to copy the Z-component of the
+points to the Point Data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.delimited.DelimitedPointsReaderBase.set_copy_z">
+<code class="descname">set_copy_z</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedPointsReaderBase.set_copy_z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedPointsReaderBase.set_copy_z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set whether or not to copy the Z-component of the points to the
+Point Data</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -243,30 +243,6 @@ from it. This is not much different than the default .txt or .csv reader in
 ParaView, however it gives us room to use our own extensions and a little
 more flexibility in the structure of the files we import.</p>
 <dl class="method">
-<dt id="PVGeo.readers.delimited.DelimitedTextReader.GetSkipRows">
-<code class="descname">GetSkipRows</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader.GetSkipRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader.GetSkipRows" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the integer number of rows to skip at the top of the file.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.readers.delimited.DelimitedTextReader.GetSplitOnWhiteSpace">
-<code class="descname">GetSplitOnWhiteSpace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader.GetSplitOnWhiteSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader.GetSplitOnWhiteSpace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the status of how the delimiter interprets whitespace</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.readers.delimited.DelimitedTextReader.GetTitles">
-<code class="descname">GetTitles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader.GetTitles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader.GetTitles" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.readers.delimited.DelimitedTextReader.HasTitles">
-<code class="descname">HasTitles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader.HasTitles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader.HasTitles" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the boolean for if the delimited file has header titles for the
-data arrays.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.readers.delimited.DelimitedTextReader.RequestData">
 <code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to get data for current timestep and populate the
@@ -274,30 +250,30 @@ output data object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.readers.delimited.DelimitedTextReader._ExtractHeader">
-<code class="descname">_ExtractHeader</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader._ExtractHeader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader._ExtractHeader" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.readers.delimited.DelimitedTextReader._extract_header">
+<code class="descname">_extract_header</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader._extract_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this. Removes header from single file’s content.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.readers.delimited.DelimitedTextReader._ExtractHeaders">
-<code class="descname">_ExtractHeaders</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader._ExtractHeaders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader._ExtractHeaders" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.readers.delimited.DelimitedTextReader._extract_headers">
+<code class="descname">_extract_headers</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader._extract_headers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader._extract_headers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Should NOT be overriden. This is a convienance methods to iteratively
-get all file contents. Your should override <code class="docutils literal notranslate"><span class="pre">_ExtractHeader</span></code>.</p>
+get all file contents. Your should override <code class="docutils literal notranslate"><span class="pre">_extract_header</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.readers.delimited.DelimitedTextReader._FileContentsToDataFrame">
-<code class="descname">_FileContentsToDataFrame</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader._FileContentsToDataFrame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader._FileContentsToDataFrame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should NOT need to be overriden. After <code class="docutils literal notranslate"><span class="pre">_ExtractHeaders</span></code> handles
+<dt id="PVGeo.readers.delimited.DelimitedTextReader._file_contents_to_data_frame">
+<code class="descname">_file_contents_to_data_frame</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader._file_contents_to_data_frame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader._file_contents_to_data_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should NOT need to be overriden. After <code class="docutils literal notranslate"><span class="pre">_extract_headers</span></code> handles
 removing the file header from the file contents, this method will parse
 the remainder of the contents into a pandas DataFrame with column names
-generated from the titles resulting from in <code class="docutils literal notranslate"><span class="pre">_ExtractHeaders</span></code>.</p>
+generated from the titles resulting from in <code class="docutils literal notranslate"><span class="pre">_extract_headers</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.readers.delimited.DelimitedTextReader._GetDeli">
-<code class="descname">_GetDeli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader._GetDeli"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader._GetDeli" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.readers.delimited.DelimitedTextReader._get_delimiter">
+<code class="descname">_get_delimiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader._get_delimiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader._get_delimiter" title="Permalink to this definition">¶</a></dt>
 <dd><p>For itenral use only!</p>
 </dd></dl>
 
@@ -330,6 +306,30 @@ pandas to parse the data.</p>
 <dt id="PVGeo.readers.delimited.DelimitedTextReader.extensions">
 <code class="descname">extensions</code><em class="property"> = 'dat csv txt text ascii xyz tsv ntab'</em><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader.extensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.delimited.DelimitedTextReader.get_skip_rows">
+<code class="descname">get_skip_rows</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader.get_skip_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader.get_skip_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the integer number of rows to skip at the top of the file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.delimited.DelimitedTextReader.get_split_on_white_space">
+<code class="descname">get_split_on_white_space</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader.get_split_on_white_space"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader.get_split_on_white_space" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the status of how the delimiter interprets whitespace</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.delimited.DelimitedTextReader.get_titles">
+<code class="descname">get_titles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader.get_titles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader.get_titles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.readers.delimited.DelimitedTextReader.has_titles">
+<code class="descname">has_titles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader.has_titles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader.has_titles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the boolean for if the delimited file has header titles for the
+data arrays.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.readers.delimited.DelimitedTextReader.set_comments">
@@ -381,8 +381,8 @@ white space as a delimiter.</p>
 <p>A makeshift reader for XYZ files where titles have comma delimiter and
 data has space delimiter.</p>
 <dl class="method">
-<dt id="PVGeo.readers.delimited.XYZTextReader._ExtractHeader">
-<code class="descname">_ExtractHeader</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#XYZTextReader._ExtractHeader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.XYZTextReader._ExtractHeader" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.readers.delimited.XYZTextReader._extract_header">
+<code class="descname">_extract_header</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#XYZTextReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.readers.delimited.XYZTextReader._extract_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to parse header details for XYZ files</p>
 </dd></dl>
 

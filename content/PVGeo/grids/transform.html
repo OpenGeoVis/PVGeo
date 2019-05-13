@@ -211,8 +211,8 @@ A checkbox is provided for each axis on which you may desire to flip the data.</
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.transform.ReverseImageDataAxii._ReverseGridAxii">
-<code class="descname">_ReverseGridAxii</code><span class="sig-paren">(</span><em>idi</em>, <em>ido</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii._ReverseGridAxii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii._ReverseGridAxii" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.transform.ReverseImageDataAxii._reverse_grid_axes">
+<code class="descname">_reverse_grid_axes</code><span class="sig-paren">(</span><em>idi</em>, <em>ido</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii._reverse_grid_axes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii._reverse_grid_axes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to reverse data along specified axii</p>
 </dd></dl>
 
@@ -265,14 +265,14 @@ that is placed onto the CellData of a <code class="docutils literal notranslate"
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.transform.TableToTimeGrid._BuildImageData">
-<code class="descname">_BuildImageData</code><span class="sig-paren">(</span><em>img</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._BuildImageData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._BuildImageData" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.transform.TableToTimeGrid._build_image_data">
+<code class="descname">_build_image_data</code><span class="sig-paren">(</span><em>img</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._build_image_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._build_image_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to consturct the output</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.transform.TableToTimeGrid._SetData">
-<code class="descname">_SetData</code><span class="sig-paren">(</span><em>table</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._SetData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._SetData" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.transform.TableToTimeGrid._set_data">
+<code class="descname">_set_data</code><span class="sig-paren">(</span><em>table</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._set_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._set_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to restructure the inpt table arrays</p>
 </dd></dl>
 
@@ -286,6 +286,12 @@ that is placed onto the CellData of a <code class="docutils literal notranslate"
 <dt id="PVGeo.grids.transform.TableToTimeGrid.get_time_step_values">
 <code class="descname">get_time_step_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.get_time_step_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.get_time_step_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this in ParaView decorator to register timesteps on the pipeline.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.grids.transform.TableToTimeGrid.modified">
+<code class="descname">modified</code><span class="sig-paren">(</span><em>run_again=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call modified if the filter needs to run again</p>
 </dd></dl>
 
 <dl class="method">
@@ -352,8 +358,8 @@ Corner (will not work if Corner was moved prior).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.grids.transform.TranslateGridOrigin._Translate">
-<code class="descname">_Translate</code><span class="sig-paren">(</span><em>pdi</em>, <em>pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin._Translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin._Translate" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.grids.transform.TranslateGridOrigin._translate">
+<code class="descname">_translate</code><span class="sig-paren">(</span><em>pdi</em>, <em>pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin._translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin._translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to translate the inputs origin</p>
 </dd></dl>
 

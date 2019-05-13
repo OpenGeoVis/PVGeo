@@ -198,7 +198,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">origin</span><span class="o">=</span> <span class="kc">None</span>
 
 
-    <span class="k">def</span> <span class="nf">WriteMesh3D</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">write_mesh_3d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write 3D Tensor Mesh to the UBC format&quot;&quot;&quot;</span>
         <span class="k">def</span> <span class="nf">arr2str</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
             <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">arr</span><span class="p">))</span>
@@ -214,14 +214,14 @@
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">arr2str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zcells</span><span class="p">))</span>
         <span class="k">return</span>
 
-    <span class="k">def</span> <span class="nf">WriteModels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grd</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">write_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grd</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write cell data attributes to model files&quot;&quot;&quot;</span>
         <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span> <span class="o">=</span> <span class="n">grd</span><span class="o">.</span><span class="n">GetDimensions</span><span class="p">()</span>
         <span class="n">nx</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="n">ny</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="n">nz</span> <span class="o">-=</span> <span class="mi">1</span>
 
-        <span class="k">def</span> <span class="nf">reshapeModel</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">reshape_model</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
             <span class="c1"># Swap axes because VTK structures the coordinates a bit differently</span>
             <span class="c1">#-  This is absolutely crucial!</span>
             <span class="c1">#-  Do not play with unless you know what you are doing!</span>
@@ -236,7 +236,7 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">grd</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">GetNumberOfArrays</span><span class="p">()):</span>
             <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">grd</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">GetArray</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
-            <span class="n">arr</span> <span class="o">=</span> <span class="n">reshapeModel</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">reshape_model</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">.mod&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">vtkarr</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">))</span>
             <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;! &#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="s1">&#39;Mesh File: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span> <span class="n">fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_format</span><span class="p">())</span>
@@ -282,10 +282,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">zcells</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">zcells</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
         <span class="c1"># Write mesh</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">WriteMesh3D</span><span class="p">(</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nz</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_mesh_3d</span><span class="p">(</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nz</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
         <span class="c1"># Now write out model data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">WriteModels</span><span class="p">(</span><span class="n">grd</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_models</span><span class="p">(</span><span class="n">grd</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
         <span class="c1"># Always return 1 from pipeline methods or seg-faults will occur</span>
         <span class="k">return</span> <span class="mi">1</span></div></div>
@@ -330,10 +330,10 @@
         <span class="c1"># TODO: decide if 2D or 3D</span>
 
         <span class="c1"># Write mesh</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">WriteMesh3D</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_mesh_3d</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
         <span class="c1"># Now write out model data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">WriteModels</span><span class="p">(</span><span class="n">grd</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_models</span><span class="p">(</span><span class="n">grd</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
         <span class="c1"># Always return 1 from pipeline methods or seg-faults will occur</span>
         <span class="k">return</span> <span class="mi">1</span></div></div>

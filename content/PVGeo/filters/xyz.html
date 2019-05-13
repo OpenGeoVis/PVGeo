@@ -288,17 +288,6 @@ Z cells to control the size of the mesh surface</p>
 <dd><p>Execute on pipeline</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="PVGeo.filters.xyz.BuildSurfaceFromPoints.SetZCoords">
-<code class="descname">SetZCoords</code><span class="sig-paren">(</span><em>zcoords</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#BuildSurfaceFromPoints.SetZCoords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.BuildSurfaceFromPoints.SetZCoords" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the spacings for the cells in the Z direction</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>zcoords</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Z-axis</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="staticmethod">
 <dt id="PVGeo.filters.xyz.BuildSurfaceFromPoints.create_surface">
 <em class="property">static </em><code class="descname">create_surface</code><span class="sig-paren">(</span><em>points</em>, <em>z_range</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#BuildSurfaceFromPoints.create_surface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.BuildSurfaceFromPoints.create_surface" title="Permalink to this definition">¶</a></dt>
@@ -320,6 +309,17 @@ then the values in z_range will be inferred as absolute.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>pyvista.UnstructuredGrid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.BuildSurfaceFromPoints.set_z_coords">
+<code class="descname">set_z_coords</code><span class="sig-paren">(</span><em>zcoords</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#BuildSurfaceFromPoints.set_z_coords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.BuildSurfaceFromPoints.set_z_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the Z direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>zcoords</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Z-axis</p>
 </dd>
 </dl>
 </dd></dl>
@@ -348,14 +348,20 @@ then the values in z_range will be inferred as absolute.</p>
 This simply uses a <code class="docutils literal notranslate"><span class="pre">vtkTransformFilter</span></code> and scales input data object with
 common conversions.</p>
 <dl class="method">
-<dt id="PVGeo.filters.xyz.ConvertUnits.GetConversion">
-<code class="descname">GetConversion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits.GetConversion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits.GetConversion" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.filters.xyz.ConvertUnits.RequestData">
+<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits.RequestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by pipeline to generate output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.ConvertUnits.get_conversion">
+<code class="descname">get_conversion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits.get_conversion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits.get_conversion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the conversion value</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="PVGeo.filters.xyz.ConvertUnits.LookupConversions">
-<em class="property">static </em><code class="descname">LookupConversions</code><span class="sig-paren">(</span><em>get_keys=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits.LookupConversions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits.LookupConversions" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.filters.xyz.ConvertUnits.lookup_conversions">
+<em class="property">static </em><code class="descname">lookup_conversions</code><span class="sig-paren">(</span><em>get_keys=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits.lookup_conversions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits.lookup_conversions" title="Permalink to this definition">¶</a></dt>
 <dd><p>All Available conversions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -365,12 +371,6 @@ common conversions.</p>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.filters.xyz.ConvertUnits.RequestData">
-<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#ConvertUnits.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.ConvertUnits.RequestData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
 <dl class="method">
@@ -421,12 +421,6 @@ common conversions.</p>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>Iterate over points in a time varying manner.</p>
 <dl class="method">
-<dt id="PVGeo.filters.xyz.IterateOverPoints.GetPoint">
-<code class="descname">GetPoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.GetPoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.GetPoint" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the current point</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.filters.xyz.IterateOverPoints.RequestData">
 <code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
@@ -448,6 +442,12 @@ common conversions.</p>
 <dt id="PVGeo.filters.xyz.IterateOverPoints.get_normal">
 <code class="descname">get_normal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.get_normal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.get_normal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the current normal vector</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.xyz.IterateOverPoints.get_point">
+<code class="descname">get_point</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#IterateOverPoints.get_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.IterateOverPoints.get_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current point</p>
 </dd></dl>
 
 <dl class="method">

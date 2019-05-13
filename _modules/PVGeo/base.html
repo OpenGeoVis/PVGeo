@@ -337,7 +337,16 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ReaderBaseBase.GetFileNames"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.GetFileNames">[docs]</a>    <span class="k">def</span> <span class="nf">GetFileNames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ReaderBaseBase.add_file_name"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.add_file_name">[docs]</a>    <span class="k">def</span> <span class="nf">add_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use to set the file names for the reader. Handles singlt string or</span>
+<span class="sd">        list of strings.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str): The absolute file name with path to read.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">AddFileName</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ReaderBaseBase.get_file_names"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.get_file_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_file_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the list of file names or given and index returns a specified</span>
 <span class="sd">        timestep&#39;s filename.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -396,8 +405,8 @@
 <div class="viewcode-block" id="ReaderBase._update_time_steps"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBase._update_time_steps">[docs]</a>    <span class="k">def</span> <span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;For internal use only: appropriately sets the timesteps.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_file_names</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_names</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
     <span class="c1">#### Algorithm Methods ####</span>
@@ -641,7 +650,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__filename</span> <span class="o">=</span> <span class="n">filename</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="WriterBase.GetFileName"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.GetFileName">[docs]</a>    <span class="k">def</span> <span class="nf">GetFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="WriterBase.set_file_name"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.set_file_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Specify the filename for the output. Writer can only handle a single</span>
+<span class="sd">        output data object/time step.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="WriterBase.get_file_name"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase.get_file_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the set filename.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__filename</span></div>
 
@@ -696,8 +710,8 @@
         <span class="n">identifier</span> <span class="o">=</span> <span class="s1">&#39;_%.&#39;</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s1">&#39;d&#39;</span>
         <span class="n">blocknum</span> <span class="o">=</span> <span class="p">[</span><span class="n">identifier</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
         <span class="c1"># Check the file extension:</span>
-        <span class="n">ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">basename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ext</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">basename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_name</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ext</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__blockfilenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">basename</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">blocknum</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ext</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__blockfilenames</span></div>
 
@@ -727,7 +741,7 @@
                     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Input block </span><span class="si">%d</span><span class="s1"> of type(</span><span class="si">%s</span><span class="s1">) not saveable by writer.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
         <span class="c1"># Handle single input dataset</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">perform_write_out</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileName</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perform_write_out</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_name</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div></div>
 
 <span class="c1">###############################################################################</span>
@@ -768,7 +782,7 @@
 
 <div class="viewcode-block" id="InterfacedBaseReader._read_up_front"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.InterfacedBaseReader._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Do not override. A predifiened routine for reading the files up front.&quot;&quot;&quot;</span>
-        <span class="n">filenames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">()</span>
+        <span class="n">filenames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_names</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__objects</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
             <span class="n">mesh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>

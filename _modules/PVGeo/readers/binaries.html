@@ -209,7 +209,7 @@
         <span class="c1"># Data objects to hold the read data for access by the pipeline methods</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__data</span> <span class="o">=</span> <span class="p">[]</span>
 
-<div class="viewcode-block" id="PackedBinariesReader._ReadRawFile"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader._ReadRawFile">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadRawFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="viewcode-block" id="PackedBinariesReader._read_raw_file"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader._read_raw_file">[docs]</a>    <span class="k">def</span> <span class="nf">_read_raw_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Interanl helper to read the raw data from the file&quot;&quot;&quot;</span>
         <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dtype</span>
         <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;f&#39;</span><span class="p">):</span>
@@ -224,12 +224,12 @@
 <div class="viewcode-block" id="PackedBinariesReader._get_file_contents"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader._get_file_contents">[docs]</a>    <span class="k">def</span> <span class="nf">_get_file_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Interanl helper to get all contents for all files&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">idx</span><span class="p">)]</span>
+            <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_file_names</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">idx</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">filenames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFileNames</span><span class="p">()</span>
+            <span class="n">filenames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_names</span><span class="p">()</span>
         <span class="n">contents</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
-            <span class="n">contents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ReadRawFile</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+            <span class="n">contents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_read_raw_file</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">contents</span></div>
 
@@ -247,7 +247,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="PackedBinariesReader.ConvertArray"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader.ConvertArray">[docs]</a>    <span class="k">def</span> <span class="nf">ConvertArray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arr</span><span class="p">):</span>
+<div class="viewcode-block" id="PackedBinariesReader.convert_array"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader.convert_array">[docs]</a>    <span class="k">def</span> <span class="nf">convert_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arr</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Converts the numpy array to a vtkDataArray</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Put raw data into vtk array</span>
@@ -266,7 +266,7 @@
         <span class="n">i</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_requested_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="c1"># Generate the data object</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConvertArray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
@@ -288,7 +288,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vtktype</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_dtypes</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__dtypechar</span><span class="p">,</span> <span class="n">endian</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__endian</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PackedBinariesReader.GetEndian"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader.GetEndian">[docs]</a>    <span class="k">def</span> <span class="nf">GetEndian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PackedBinariesReader.get_endian"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader.get_endian">[docs]</a>    <span class="k">def</span> <span class="nf">get_endian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the endianness of the data file.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__endian</span></div>
 
@@ -303,7 +303,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vtktype</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_dtypes</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__dtypechar</span><span class="p">,</span> <span class="n">endian</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__endian</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PackedBinariesReader.GetDataTypes"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader.GetDataTypes">[docs]</a>    <span class="k">def</span> <span class="nf">GetDataTypes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PackedBinariesReader.get_data_types"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader.get_data_types">[docs]</a>    <span class="k">def</span> <span class="nf">get_data_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the data type of the binary file&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vtktype</span></div>
 
@@ -315,7 +315,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Don&#39;t re-read. Just request data again</span></div>
 
 
-<div class="viewcode-block" id="PackedBinariesReader.GetDataName"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader.GetDataName">[docs]</a>    <span class="k">def</span> <span class="nf">GetDataName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PackedBinariesReader.get_data_name"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.PackedBinariesReader.get_data_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get name used for the data array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span></div></div>
 
@@ -345,9 +345,9 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">PackedBinariesReader</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="MadagascarReader._ReadRawFile"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.MadagascarReader._ReadRawFile">[docs]</a>    <span class="k">def</span> <span class="nf">_ReadRawFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="viewcode-block" id="MadagascarReader._read_raw_file"><a class="viewcode-back" href="../../../content/PVGeo/readers/binaries.html#PVGeo.readers.binaries.MadagascarReader._read_raw_file">[docs]</a>    <span class="k">def</span> <span class="nf">_read_raw_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads the raw data from the file for Madagascar SSRSF files&quot;&quot;&quot;</span>
-        <span class="n">dtype</span><span class="p">,</span> <span class="n">vtktype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetDataTypes</span><span class="p">()</span>
+        <span class="n">dtype</span><span class="p">,</span> <span class="n">vtktype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data_types</span><span class="p">()</span>
         <span class="n">CTLSEQ</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\014\014\004</span><span class="s1">&#39;</span> <span class="c1"># The control sequence to seperate header from data</span>
         <span class="n">rpl</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
         <span class="n">raw</span> <span class="o">=</span> <span class="p">[]</span>

@@ -992,7 +992,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="IterateOverPoints.GetPoint"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints.GetPoint">[docs]</a>    <span class="k">def</span> <span class="nf">GetPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IterateOverPoints.get_point"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints.get_point">[docs]</a>    <span class="k">def</span> <span class="nf">get_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the current point&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__point</span><span class="p">)</span></div>
 
@@ -1014,8 +1014,8 @@
         <span class="n">FilterPreserveTypeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__conversion</span> <span class="o">=</span> <span class="n">conversion</span>
 
-<div class="viewcode-block" id="ConvertUnits.LookupConversions"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ConvertUnits.LookupConversions">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">LookupConversions</span><span class="p">(</span><span class="n">get_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="ConvertUnits.lookup_conversions"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ConvertUnits.lookup_conversions">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">lookup_conversions</span><span class="p">(</span><span class="n">get_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;All Available conversions</span>
 
 <span class="sd">        Return:</span>
@@ -1038,7 +1038,7 @@
         <span class="c1">#### Perfrom task ####</span>
         <span class="n">filt</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTransformFilter</span><span class="p">()</span>
         <span class="n">trans</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTransform</span><span class="p">()</span>
-        <span class="n">trans</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetConversion</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetConversion</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetConversion</span><span class="p">())</span>
+        <span class="n">trans</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_conversion</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_conversion</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_conversion</span><span class="p">())</span>
         <span class="n">filt</span><span class="o">.</span><span class="n">SetTransform</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
         <span class="n">filt</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
         <span class="n">filt</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
@@ -1050,7 +1050,7 @@
 
 <div class="viewcode-block" id="ConvertUnits.set_conversion"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ConvertUnits.set_conversion">[docs]</a>    <span class="k">def</span> <span class="nf">set_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the conversion via a lookup table&quot;&quot;&quot;</span>
-        <span class="n">convs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LookupConversions</span><span class="p">()</span>
+        <span class="n">convs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_conversions</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">convs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Converion `</span><span class="si">%s</span><span class="s1">` not available.&#39;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
@@ -1061,9 +1061,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="ConvertUnits.GetConversion"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ConvertUnits.GetConversion">[docs]</a>    <span class="k">def</span> <span class="nf">GetConversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ConvertUnits.get_conversion"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ConvertUnits.get_conversion">[docs]</a>    <span class="k">def</span> <span class="nf">get_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the conversion value&quot;&quot;&quot;</span>
-        <span class="n">convs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LookupConversions</span><span class="p">()</span>
+        <span class="n">convs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_conversions</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">convs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__conversion</span><span class="p">]</span></div></div>
 
 
@@ -1080,14 +1080,14 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span>
                             <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__zcoords</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_ReadCellLine</span><span class="p">(</span><span class="s1">&#39;0. 50.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__zcoords</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_read_cell_line</span><span class="p">(</span><span class="s1">&#39;0. 50.&#39;</span><span class="p">)</span>
         <span class="n">zcoords</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;zcoords&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__zcoords</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">zcoords</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;zcoords of bad type.&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">zcoords</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_z_coords_str</span><span class="p">(</span><span class="n">zcoords</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">SetZCoords</span><span class="p">(</span><span class="n">zcoords</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_z_coords</span><span class="p">(</span><span class="n">zcoords</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="BuildSurfaceFromPoints.create_surface"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.create_surface">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -1170,7 +1170,7 @@
         <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="BuildSurfaceFromPoints.SetZCoords"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.SetZCoords">[docs]</a>    <span class="k">def</span> <span class="nf">SetZCoords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zcoords</span><span class="p">):</span>
+<div class="viewcode-block" id="BuildSurfaceFromPoints.set_z_coords"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.set_z_coords">[docs]</a>    <span class="k">def</span> <span class="nf">set_z_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zcoords</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the Z direction</span>
 
 <span class="sd">        Args:</span>
@@ -1184,8 +1184,8 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            zcoordstr (str)  : the spacings along the Z-axis in the UBC style&quot;&quot;&quot;</span>
-        <span class="n">zcoords</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_ReadCellLine</span><span class="p">(</span><span class="n">zcoordstr</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">SetZCoords</span><span class="p">(</span><span class="n">zcoords</span><span class="p">)</span></div></div>
+        <span class="n">zcoords</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_read_cell_line</span><span class="p">(</span><span class="n">zcoordstr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_z_coords</span><span class="p">(</span><span class="n">zcoords</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>

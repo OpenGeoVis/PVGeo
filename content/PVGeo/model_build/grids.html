@@ -253,12 +253,6 @@ given axis is not uniform. Cell spacings along each axis can be set via
 strings with repeating patterns or explicitly using the <code class="docutils literal notranslate"><span class="pre">Set*Cells</span></code>
 methods.</p>
 <dl class="method">
-<dt id="PVGeo.model_build.grids.CreateTensorMesh.GetExtent">
-<code class="descname">GetExtent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.GetExtent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.GetExtent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the extent of the created mesh</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.RequestData">
 <code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output data object</p>
@@ -271,61 +265,45 @@ methods.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.model_build.grids.CreateTensorMesh.SetXCells">
-<code class="descname">SetXCells</code><span class="sig-paren">(</span><em>xcells</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.SetXCells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.SetXCells" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the spacings for the cells in the X direction</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>xcells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the X-axis</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.model_build.grids.CreateTensorMesh.SetYCells">
-<code class="descname">SetYCells</code><span class="sig-paren">(</span><em>ycells</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.SetYCells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.SetYCells" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the spacings for the cells in the Y direction</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ycells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Y-axis</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.model_build.grids.CreateTensorMesh.SetZCells">
-<code class="descname">SetZCells</code><span class="sig-paren">(</span><em>zcells</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.SetZCells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.SetZCells" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the spacings for the cells in the Z direction</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>zcells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Z-axis</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="PVGeo.model_build.grids.CreateTensorMesh._AddModelData">
-<code class="descname">_AddModelData</code><span class="sig-paren">(</span><em>pdo</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._AddModelData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._AddModelData" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.model_build.grids.CreateTensorMesh._add_model_data">
+<code class="descname">_add_model_data</code><span class="sig-paren">(</span><em>pdo</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._add_model_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._add_model_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add an array to the output data object. If data is None, random
 values will be generated.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.model_build.grids.CreateTensorMesh._MakeModel">
-<code class="descname">_MakeModel</code><span class="sig-paren">(</span><em>pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._MakeModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._MakeModel" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.model_build.grids.CreateTensorMesh._make_model">
+<code class="descname">_make_model</code><span class="sig-paren">(</span><em>pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._make_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._make_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates the output data object</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="PVGeo.model_build.grids.CreateTensorMesh._ReadCellLine">
-<em class="property">static </em><code class="descname">_ReadCellLine</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._ReadCellLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._ReadCellLine" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.model_build.grids.CreateTensorMesh._read_cell_line">
+<em class="property">static </em><code class="descname">_read_cell_line</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._read_cell_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._read_cell_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read cell sizes for each line in the UBC mesh line strings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.get_extent">
+<code class="descname">get_extent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.get_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.get_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the extent of the created mesh</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.set_origin">
 <code class="descname">set_origin</code><span class="sig-paren">(</span><em>x0</em>, <em>y0</em>, <em>z0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_origin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the origin of the output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.set_x_cells">
+<code class="descname">set_x_cells</code><span class="sig-paren">(</span><em>xcells</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_x_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_x_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the X direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xcells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the X-axis</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -340,12 +318,34 @@ values will be generated.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.set_y_cells">
+<code class="descname">set_y_cells</code><span class="sig-paren">(</span><em>ycells</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_y_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the Y direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ycells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Y-axis</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.set_y_cells_str">
 <code class="descname">set_y_cells_str</code><span class="sig-paren">(</span><em>ycellstr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_y_cells_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells_str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the spacings for the cells in the Y direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>ycellstr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the spacings along the Y-axis in the UBC style</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.model_build.grids.CreateTensorMesh.set_z_cells">
+<code class="descname">set_z_cells</code><span class="sig-paren">(</span><em>zcells</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_z_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_z_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the spacings for the cells in the Z direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>zcells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Z-axis</p>
 </dd>
 </dl>
 </dd></dl>

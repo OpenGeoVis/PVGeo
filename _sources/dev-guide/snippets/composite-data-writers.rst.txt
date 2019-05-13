@@ -73,7 +73,7 @@ within the algorithms ``FillInputPortInformation`` method.
                         print('Invalid input block %d of type(%s)' % (i, type(data)))
             # Handle single input dataset
             else:
-                self.perform_write_out(inp, self.GetFileName())
+                self.perform_write_out(inp, self.get_file_name())
             return 1
 
 

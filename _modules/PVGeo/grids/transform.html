@@ -218,7 +218,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__needToUpdateOutput</span> <span class="o">=</span> <span class="kc">True</span>
 
 
-<div class="viewcode-block" id="TableToTimeGrid._SetData"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid._SetData">[docs]</a>    <span class="k">def</span> <span class="nf">_SetData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+<div class="viewcode-block" id="TableToTimeGrid._set_data"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid._set_data">[docs]</a>    <span class="k">def</span> <span class="nf">_set_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal helper to restructure the inpt table arrays&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="n">dims</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dims</span><span class="p">])</span>
@@ -237,7 +237,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__needToRun</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid._BuildImageData"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid._BuildImageData">[docs]</a>    <span class="k">def</span> <span class="nf">_BuildImageData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+<div class="viewcode-block" id="TableToTimeGrid._build_image_data"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid._build_image_data">[docs]</a>    <span class="k">def</span> <span class="nf">_build_image_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal helper to consturct the output&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__needToUpdateOutput</span><span class="p">:</span>
             <span class="c1"># Clean out the output data object</span>
@@ -273,10 +273,10 @@
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_BuildImageData</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_build_image_data</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
         <span class="c1"># Perfrom task</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__needToRun</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_SetData</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_data</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
         <span class="c1"># Get requested time index</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_requested_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">arr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -317,6 +317,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__needToRun</span> <span class="o">=</span> <span class="n">run_again</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__needToUpdateOutput</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TableToTimeGrid.modified"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.modified">[docs]</a>    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Call modified if the filter needs to run again&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">run_again</span><span class="o">=</span><span class="n">run_again</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TableToTimeGrid.set_extent"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_extent">[docs]</a>    <span class="k">def</span> <span class="nf">set_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">nt</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the extent of the output grid&quot;&quot;&quot;</span>
@@ -387,7 +391,7 @@
             <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__axes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">axes</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># Z Y X (FORTRAN)</span>
 
-<div class="viewcode-block" id="ReverseImageDataAxii._ReverseGridAxii"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii._ReverseGridAxii">[docs]</a>    <span class="k">def</span> <span class="nf">_ReverseGridAxii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idi</span><span class="p">,</span> <span class="n">ido</span><span class="p">):</span>
+<div class="viewcode-block" id="ReverseImageDataAxii._reverse_grid_axes"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii._reverse_grid_axes">[docs]</a>    <span class="k">def</span> <span class="nf">_reverse_grid_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idi</span><span class="p">,</span> <span class="n">ido</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal helper to reverse data along specified axii&quot;&quot;&quot;</span>
         <span class="c1"># Copy over input to output to be flipped around</span>
         <span class="c1"># Deep copy keeps us from messing with the input data</span>
@@ -433,7 +437,7 @@
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Perfrom task</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_ReverseGridAxii</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reverse_grid_axes</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
 
@@ -480,7 +484,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__corner</span> <span class="o">=</span> <span class="n">corner</span>
 
 
-<div class="viewcode-block" id="TranslateGridOrigin._Translate"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TranslateGridOrigin._Translate">[docs]</a>    <span class="k">def</span> <span class="nf">_Translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
+<div class="viewcode-block" id="TranslateGridOrigin._translate"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TranslateGridOrigin._translate">[docs]</a>    <span class="k">def</span> <span class="nf">_translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal helper to translate the inputs origin&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">pdo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pdo</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkImageData</span><span class="p">()</span>
@@ -540,7 +544,7 @@
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Perfrom task</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_Translate</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_translate</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
 
