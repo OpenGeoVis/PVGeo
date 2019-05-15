@@ -74,7 +74,7 @@ To learn more about pairing PVGeo with `PyVista`, please check out the
 `example Jupyter notebooks`_.
 
 
-.. _PyVista: https://github.com/akaszynski/pyvista
+.. _PyVista: https://github.com/pyvista/pyvista
 .. _example Jupyter notebooks: https://github.com/OpenGeoVis/PVGeo-Examples
 
 
