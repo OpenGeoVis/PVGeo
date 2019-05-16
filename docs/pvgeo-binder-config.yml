@@ -1,0 +1,6 @@
+default_context:
+    repo_name: "PVGeo-examples"
+    github_account: "OpenGeoVis"
+    description: "Quick examples demonstrating what PVGeo can do! Simply launch this Binder project and test drive PVGeo"
+    author_name: "PVGeo Developers"
+    year: "2019"
