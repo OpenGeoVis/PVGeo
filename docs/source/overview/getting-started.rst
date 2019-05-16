@@ -14,6 +14,17 @@ Install PVGeo via `pip <https://pypi.org/project/PVGeo/>`_::
     pip install PVGeo
 
 
+Required dependencies
++++++++++++++++++++++
+
+* `vtk <https://pypi.org/project/vtk/>`_
+* `pyvista <https://pypi.org/project/pyvista/>`_
+* `numpy <https://pypi.org/project/numpy/>`_
+* `scipy <https://pypi.org/project/scipy/>`_
+* `pandas <https://pypi.org/project/pandas/>`_
+* `espatools <https://pypi.org/project/espatools/>`_
+
+
 Optional dependencies
 +++++++++++++++++++++
 
@@ -25,7 +36,7 @@ with PVGeo. Some useful dependencies:
 
 - `discretize <https://pypi.org/project/discretize/>`_: Adds algorithms that harnesses ``discretize``'s finite volume code and file IO methods.
 - `pyproj <https://pypi.org/project/pyproj/>`_: Adds algorithms that can perform coordinate transformations
-
+- `omf <https://pypi.org/project/omf/>`_ and `omfvista <https://pypi.org/project/omfvista/>`_: Provides support for the Open Mining Format (OMF)
 
 
 Using PVGeo in ParaView
