@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:09.555** total execution time for **examples_ubc** files:
+**00:09.477** total execution time for **examples_ubc** files:
 
-- **00:04.416**: :ref:`sphx_glr_examples_ubc_read-tensor-mesh.py` (``read-tensor-mesh.py``)
-- **00:04.361**: :ref:`sphx_glr_examples_ubc_read-topo.py` (``read-topo.py``)
-- **00:00.778**: :ref:`sphx_glr_examples_ubc_read-grv-obs.py` (``read-grv-obs.py``)
+- **00:04.369**: :ref:`sphx_glr_examples_ubc_read-topo.py` (``read-topo.py``)
+- **00:04.285**: :ref:`sphx_glr_examples_ubc_read-tensor-mesh.py` (``read-tensor-mesh.py``)
+- **00:00.823**: :ref:`sphx_glr_examples_ubc_read-grv-obs.py` (``read-grv-obs.py``)
