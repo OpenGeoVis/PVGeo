@@ -34,6 +34,15 @@ script:
     - coverage run tests/__main__.py
     - codecov --token=8da9d332-1618-450d-8654-09a8ecf3c2dc
     - python tests/__main__.py close # exit with error code if problem occurs
+    # Make docs - I have no idea why but it always segfault on first make - so make twice
+    - if [[($TRAVIS_PYTHON_VERSION == 3.7)]]; then
+        echo "Building and uploading the docs";
+        cd ./docs;
+        make html;
+        set -e;
+        make html;
+        cd ..;
+      fi
 
 notifications:
     slack:
