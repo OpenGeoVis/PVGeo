@@ -44,7 +44,7 @@ Use an example mesh from pyvista
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f5d3db32a08)
+    RectilinearGrid (0x7eff30376a08)
       N Cells:      16146
       N Points:     18144
       X Bounds:     -3.500e+02, 1.350e+03
@@ -72,7 +72,7 @@ Run the PVGeo algorithm
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f5d3db32b28)
+    RectilinearGrid (0x7eff30376b28)
       N Cells:      16146
       N Points:     18144
       X Bounds:     -3.500e+02, 1.350e+03
