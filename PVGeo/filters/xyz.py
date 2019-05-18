@@ -57,7 +57,7 @@ class AddCellConnToPoints(FilterBase):
         self.__usenbr = kwargs.get('nearest_nbr', False)
         self.__close_loop = kwargs.get('close_loop', False)
         self.__keep_vertices = kwargs.get('keep_vertices', False)
-        self.__unique = True
+        self.__unique = kwargs.get('unique', False)
 
 
     def _connect_cells(self, pdi, pdo, log_time=False):
