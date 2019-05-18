@@ -81,7 +81,7 @@ processing routines which can lead to using several different visualization
 environments for a single project.
 Unfortunately, geoscientists are often left without a toolset for visual
 integration across those different data types, like pairing well locations,
-resource models, and geological in Figure 2, which can hinder their ability to
+resource models, and geological models, which can hinder their ability to
 interpret the spatial relationships of varying data types.
 
 
