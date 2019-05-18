@@ -124,8 +124,9 @@ open-source alternative for researchers.
 ## Mentions
 
 
-Development for PVGeo is complemented by development for
-[PyVista](http://docs.pyvista.org): *A Streamlined Python Interface for the Visualization Toolkit*.
+Development for PVGeo is complemented by development for PyVista
+([github.com/pyvista/pyvista](https://github.com/pyvista/pyvista)):
+*3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)*.
 PVGeo provides an extension package to PyVista linking data formats
 and filtering routines common in geoscientific disciplines to PyVista's
 generalized framework for 3D visualization.
