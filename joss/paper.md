@@ -85,15 +85,6 @@ resource models, and geological in Figure 2, which can hinder their ability to
 interpret the spatial relationships of varying data types.
 
 
-![Demonstration of how PVGeo links various geoscientific
-data formats and filtering algorithms with VTK-based visualization software
-to create an integrated rendering environment (FORGE Geothermal Project).
-This rendering includes a digital land surface with overlain satellite imagery
-and geologic map, a subsurface temperature model, scattered points of the
-sampled temperature values, geophysical well logging data, GIS site boundary,
-and interpreted faulting surfaces.](./images/forge-iso.png)
-
-
 As authors of this software and geoscientists, we rely on calibrating and
 integrating our data with all types of subsurface information to further
 illuminate the value of geophysical imaging techniques.
@@ -118,6 +109,15 @@ Having the ability to visually fuse datasets, construct 3D models, or generate
 horizons within the visualizations can be what separates closed-source software
 from open-source software [@witter] - development of PVGeo aims to create an
 open-source alternative for researchers.
+
+
+![Demonstration of how PVGeo links various geoscientific
+data formats and filtering algorithms with VTK-based visualization software
+to create an integrated rendering environment (FORGE Geothermal Project).
+This rendering includes a digital land surface with overlain satellite imagery
+and geologic map, a subsurface temperature model, scattered points of the
+sampled temperature values, geophysical well logging data, GIS site boundary,
+and interpreted faulting surfaces.](./images/forge-iso.png)
 
 
 
