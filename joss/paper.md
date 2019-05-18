@@ -111,15 +111,6 @@ from open-source software [@witter] - development of PVGeo aims to create an
 open-source alternative for researchers.
 
 
-![Demonstration of how PVGeo links various geoscientific
-data formats and filtering algorithms with VTK-based visualization software
-to create an integrated rendering environment (FORGE Geothermal Project).
-This rendering includes a digital land surface with overlain satellite imagery
-and geologic map, a subsurface temperature model, scattered points of the
-sampled temperature values, geophysical well logging data, GIS site boundary,
-and interpreted faulting surfaces.](./images/forge-iso.png)
-
-
 
 ## Mentions
 
