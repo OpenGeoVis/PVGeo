@@ -202,19 +202,19 @@
 <h2>UBC OcTree Mesh Appender<a class="headerlink" href="#ubc-octree-mesh-appender" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="PVGeo.ubc.octree.OcTreeAppender">
-<em class="property">class </em><code class="descclassname">PVGeo.ubc.octree.</code><code class="descname">OcTreeAppender</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeAppender"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeAppender" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.octree.</code><code class="sig-name descname">OcTreeAppender</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeAppender"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeAppender" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase" title="PVGeo.ubc.two_file_base.ModelAppenderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.ubc.two_file_base.ModelAppenderBase</span></code></a></p>
 <p>This filter reads a timeseries of models and appends it to an input
 <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code></p>
 <dl class="method">
 <dt id="PVGeo.ubc.octree.OcTreeAppender._place_on_mesh">
-<code class="descname">_place_on_mesh</code><span class="sig-paren">(</span><em>output</em>, <em>idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeAppender._place_on_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeAppender._place_on_mesh" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_place_on_mesh</code><span class="sig-paren">(</span><em class="sig-param">output</em>, <em class="sig-param">idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeAppender._place_on_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeAppender._place_on_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to place a model on the mesh for a given index</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.ubc.octree.OcTreeAppender._read_up_front">
-<code class="descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeAppender._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeAppender._read_up_front" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeAppender._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeAppender._read_up_front" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to read all data at start</p>
 </dd></dl>
 
@@ -225,27 +225,27 @@
 <h2>UBC OcTree Mesh Reader<a class="headerlink" href="#ubc-octree-mesh-reader" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="PVGeo.ubc.octree.OcTreeReader">
-<em class="property">class </em><code class="descclassname">PVGeo.ubc.octree.</code><code class="descname">OcTreeReader</code><span class="sig-paren">(</span><em>nOutputPorts=1</em>, <em>outputType='vtkUnstructuredGrid'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.octree.</code><code class="sig-name descname">OcTreeReader</code><span class="sig-paren">(</span><em class="sig-param">nOutputPorts=1</em>, <em class="sig-param">outputType='vtkUnstructuredGrid'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase" title="PVGeo.ubc.two_file_base.ubcMeshReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.ubc.two_file_base.ubcMeshReaderBase</span></code></a></p>
 <p>This class reads a UBC OcTree Mesh file and builds a
 <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> of the data in the file. Model File is optional.
 Reader will still construct <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> safely.</p>
 <dl class="method">
 <dt id="PVGeo.ubc.octree.OcTreeReader.RequestData">
-<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.ubc.octree.OcTreeReader.RequestInformation">
-<code class="descname">RequestInformation</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pipeline method for handling requests about the grid extents and time
 step values</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.ubc.octree.OcTreeReader._OcTreeReader__ubc_octree">
-<code class="descname">_OcTreeReader__ubc_octree</code><span class="sig-paren">(</span><em>filename_mesh</em>, <em>filename_models</em>, <em>output</em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader._OcTreeReader__ubc_octree" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_OcTreeReader__ubc_octree</code><span class="sig-paren">(</span><em class="sig-param">filename_mesh</em>, <em class="sig-param">filename_models</em>, <em class="sig-param">output</em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader._OcTreeReader__ubc_octree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper to Read UBC GIF OcTree mesh and model file pairs. UBC OcTree
 models are defined using a 2-file format. The “mesh” file describes how
 the data is descritized. The “model” file lists the physical property
@@ -276,24 +276,24 @@ the input model file.</p>
 
 <dl class="method">
 <dt id="PVGeo.ubc.octree.OcTreeReader.clear_mesh">
-<code class="descname">clear_mesh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.clear_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.clear_mesh" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">clear_mesh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.clear_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.clear_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to clean/rebuild the mesh.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.ubc.octree.OcTreeReader.clear_models">
-<code class="descname">clear_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.clear_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.clear_models" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">clear_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.clear_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.clear_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to clean the models and reread the data</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PVGeo.ubc.octree.OcTreeReader.description">
-<code class="descname">description</code><em class="property"> = 'PVGeo: UBC OcTree Mesh'</em><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.description" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">description</code><em class="property"> = 'PVGeo: UBC OcTree Mesh'</em><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="PVGeo.ubc.octree.OcTreeReader.place_model_on_octree_mesh">
-<em class="property">static </em><code class="descname">place_model_on_octree_mesh</code><span class="sig-paren">(</span><em>mesh</em>, <em>model</em>, <em>data_name='Data'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.place_model_on_octree_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.place_model_on_octree_mesh" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">place_model_on_octree_mesh</code><span class="sig-paren">(</span><em class="sig-param">mesh</em>, <em class="sig-param">model</em>, <em class="sig-param">data_name='Data'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.place_model_on_octree_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.place_model_on_octree_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Places model data onto a mesh. This is for the UBC Grid data reaers
 to associate model data with the mesh grid.</p>
 <dl class="field-list simple">
@@ -318,7 +318,7 @@ to place inside of the mesh’s cells.</p></li>
 
 <dl class="method">
 <dt id="PVGeo.ubc.octree.OcTreeReader.ubc_octree_mesh">
-<code class="descname">ubc_octree_mesh</code><span class="sig-paren">(</span><em>FileName</em>, <em>pdo=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.ubc_octree_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.ubc_octree_mesh" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">ubc_octree_mesh</code><span class="sig-paren">(</span><em class="sig-param">FileName</em>, <em class="sig-param">pdo=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/octree.html#OcTreeReader.ubc_octree_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.octree.OcTreeReader.ubc_octree_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method reads a UBC OcTree Mesh file and builds a
 <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> of the data in the file. This method generates
 the <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> without any data attributes.</p>

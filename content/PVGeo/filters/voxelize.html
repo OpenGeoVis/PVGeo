@@ -204,45 +204,45 @@ capable of handling non-uniformly gridded points</p>
 <h2>Voxelize Points<a class="headerlink" href="#voxelize-points" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints">
-<em class="property">class </em><code class="descclassname">PVGeo.filters.voxelize.</code><code class="descname">VoxelizePoints</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.voxelize.</code><code class="sig-name descname">VoxelizePoints</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>This makes a <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> of scattered points given voxel
 sizes as input arrays. This assumes that the data is at least 2-Dimensional
 on the XY Plane.</p>
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.RequestData">
-<code class="descname">RequestData</code><span class="sig-paren">(</span><em>request</em>, <em>inInfo</em>, <em>outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints._copy_arrays">
-<em class="property">static </em><code class="descname">_copy_arrays</code><span class="sig-paren">(</span><em>pdi</em>, <em>pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints._copy_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints._copy_arrays" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_copy_arrays</code><span class="sig-paren">(</span><em class="sig-param">pdi</em>, <em class="sig-param">pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints._copy_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints._copy_arrays" title="Permalink to this definition">¶</a></dt>
 <dd><p>internal helper to copy arrays from point data to cell data in the voxels.</p>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.add_cell_data">
-<em class="property">static </em><code class="descname">add_cell_data</code><span class="sig-paren">(</span><em>grid</em>, <em>arr</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.add_cell_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.add_cell_data" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">add_cell_data</code><span class="sig-paren">(</span><em class="sig-param">grid</em>, <em class="sig-param">arr</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.add_cell_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.add_cell_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a NumPy array as cell data to the given grid input</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.add_field_data">
-<code class="descname">add_field_data</code><span class="sig-paren">(</span><em>grid</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.add_field_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.add_field_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_field_data</code><span class="sig-paren">(</span><em class="sig-param">grid</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.add_field_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.add_field_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>An internal helper to add the recovered information as field data</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.estimate_uniform_spacing">
-<code class="descname">estimate_uniform_spacing</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.estimate_uniform_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.estimate_uniform_spacing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">estimate_uniform_spacing</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">z</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.estimate_uniform_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.estimate_uniform_spacing" title="Permalink to this definition">¶</a></dt>
 <dd><p>This assumes that the input points make up some sort of uniformly
 spaced grid on at least an XY plane.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.get_recovered_angle">
-<code class="descname">get_recovered_angle</code><span class="sig-paren">(</span><em>degrees=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.get_recovered_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.get_recovered_angle" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_recovered_angle</code><span class="sig-paren">(</span><em class="sig-param">degrees=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.get_recovered_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.get_recovered_angle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the recovered angle if set to recover the input grid. If the
 input points are rotated, then this angle will reflect a close
 approximation of that rotation.</p>
@@ -255,19 +255,19 @@ approximation of that rotation.</p>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.get_spacing">
-<code class="descname">get_spacing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.get_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.get_spacing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_spacing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.get_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.get_spacing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the cell spacings</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.points_to_grid">
-<code class="descname">points_to_grid</code><span class="sig-paren">(</span><em>xo</em>, <em>yo</em>, <em>zo</em>, <em>dx</em>, <em>dy</em>, <em>dz</em>, <em>grid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.points_to_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.points_to_grid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">points_to_grid</code><span class="sig-paren">(</span><em class="sig-param">xo</em>, <em class="sig-param">yo</em>, <em class="sig-param">zo</em>, <em class="sig-param">dx</em>, <em class="sig-param">dy</em>, <em class="sig-param">dz</em>, <em class="sig-param">grid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.points_to_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.points_to_grid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert XYZ points to a <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.set_delta_x">
-<code class="descname">set_delta_x</code><span class="sig-paren">(</span><em>dx</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_delta_x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_delta_x" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_delta_x</code><span class="sig-paren">(</span><em class="sig-param">dx</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_delta_x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_delta_x" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the X cells spacing</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -279,7 +279,7 @@ the X-direction</p>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.set_delta_y">
-<code class="descname">set_delta_y</code><span class="sig-paren">(</span><em>dy</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_delta_y"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_delta_y" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_delta_y</code><span class="sig-paren">(</span><em class="sig-param">dy</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_delta_y"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_delta_y" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the Y cells spacing</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -291,7 +291,7 @@ the Y-direction</p>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.set_delta_z">
-<code class="descname">set_delta_z</code><span class="sig-paren">(</span><em>dz</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_delta_z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_delta_z" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_delta_z</code><span class="sig-paren">(</span><em class="sig-param">dz</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_delta_z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_delta_z" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the Z cells spacing</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -303,7 +303,7 @@ the Z-direction</p>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.set_deltas">
-<code class="descname">set_deltas</code><span class="sig-paren">(</span><em>dx</em>, <em>dy</em>, <em>dz</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_deltas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_deltas" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_deltas</code><span class="sig-paren">(</span><em class="sig-param">dx</em>, <em class="sig-param">dy</em>, <em class="sig-param">dz</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_deltas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_deltas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the cell spacings for each axial direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -321,13 +321,13 @@ the Z-direction</p></li>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.set_estimate_grid">
-<code class="descname">set_estimate_grid</code><span class="sig-paren">(</span><em>flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_estimate_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_estimate_grid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_estimate_grid</code><span class="sig-paren">(</span><em class="sig-param">flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_estimate_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_estimate_grid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set a flag on whether or not to estimate the grid spacing/rotation</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.set_safe_size">
-<code class="descname">set_safe_size</code><span class="sig-paren">(</span><em>safe</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_safe_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_safe_size" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_safe_size</code><span class="sig-paren">(</span><em class="sig-param">safe</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_safe_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_safe_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>A voxel size to use if a spacing cannot be determined for an axis</p>
 </dd></dl>
 
