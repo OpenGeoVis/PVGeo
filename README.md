@@ -67,12 +67,15 @@ Further insight can be found in the [**Getting Started Guide**](http://pvgeo.org
 
 
 ## Report Issues and Contribute
+
 Please feel free to post features you would like to see from this package on the
 [**issues page**](https://github.com/OpenGeoVis/PVGeo/issues) as a feature
 request.
 If you stumble across any bugs or crashes while using code distributed here,
 report them in the issues section so we can promptly address it.
 For other questions, join the [***PVGeo* community on Slack**](http://slack.pvgeo.org).
+
+Interested in contributing to PVGeo? Please see the [contributing guide](https://pvgeo.org/dev-guide/contributing.html)
 
 ## About the Authors [![Open Source](https://img.shields.io/badge/open--source-yes-brightgreen.svg)](https://opensource.com/resources/what-open-source)
 
