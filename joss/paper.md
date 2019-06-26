@@ -33,7 +33,7 @@ As a software extension package to VTK and ParaView, PVGeo addresses the lack of
 geoscientific compatibility by creating a framework for geovisualization.
 PVGeo aims to make the process of importing geoscience data into VTK based
 software fluid and straightforward for users while providing a framework for new features
-avoiding the typical, ambitious programming endeavor of building VTK software
+that avoids the typical, ambitious programming endeavor of building VTK software
 plugins.
 We have developed this code library, PVGeo, to link geoscientific data and
 models with VTK-based 3D rendering environments like ParaView: an open-source
@@ -104,8 +104,8 @@ This visualization library is the PVGeo Python package; a free and open-source
 library for integrating geoscientific datasets in a common rendering environment
 to address various visualization and spatial analysis needs in geoscience.
 The PVGeo package is powered by VTK [@vtkbook] and provides plugins for
-ParaView, a user-friendly software environment for VTK.
-As a pure-Python package, PVGeo is interoperable with other Python, VTK-based
+ParaView.
+As a pure-Python package, PVGeo is interoperable with other Python and VTK-based
 software like the PyVista Python package [@pyvista].
 
 
@@ -124,9 +124,7 @@ open-source alternative for researchers.
 ## Mentions
 
 
-Development for PVGeo is complemented by development for PyVista:
-*3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)*
-[@pyvista].
+Development for PVGeo is complemented by development for PyVista.
 PVGeo provides an extension package to PyVista linking data formats
 and filtering routines common in geoscientific disciplines to PyVista's
 generalized framework for 3D visualization.
