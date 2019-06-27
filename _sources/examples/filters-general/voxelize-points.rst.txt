@@ -96,7 +96,7 @@ object (essentially a point cloud).
 
  .. code-block:: none
 
-    PolyData (0x7f5bf67739a8)
+    PolyData (0x7efc9e5f6648)
       N Cells:      499200
       N Points:     499200
       X Bounds:     3.268e+05, 3.302e+05
@@ -174,7 +174,7 @@ The full pipeline method
     Voxelizing... done.
     Recovered Angle (deg.): 53.550
     Recovered Cell Sizes: (25.00, 25.00, 25.00)
-    UnstructuredGrid (0x7f5bf6773108)
+    UnstructuredGrid (0x7efc9e5f6708)
       N Cells:      499200
       N Points:     524064
       X Bounds:     3.268e+05, 3.302e+05
@@ -225,7 +225,7 @@ create 3 orthogonal slices through a data volume.
 
  .. code-block:: none
 
-    MultiBlock (0x7f5bf6773b88)
+    MultiBlock (0x7efc9e5f6888)
       N Blocks:     3
       X Bounds:     326804.336, 330185.260
       Y Bounds:     4406253.954, 4409862.606
@@ -270,7 +270,7 @@ Now display the slices and clipped volume
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  29.217 seconds)
+   **Total running time of the script:** ( 0 minutes  32.083 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:
