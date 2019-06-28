@@ -4,7 +4,7 @@ About ParaView Macros
 * Author: Bane Sullivan
 * License: BSD-3-Clause
 * Copyright: 2018, Bane Sullivan
-* Version: 2.0.0
+* Version: 2.0.1
 
 
 We will from now on refer to macros as a set of standard codes that can be used

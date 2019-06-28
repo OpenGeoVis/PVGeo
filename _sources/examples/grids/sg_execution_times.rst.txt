@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:23.401** total execution time for **examples_grids** files:
+**00:24.256** total execution time for **examples_grids** files:
 
-- **00:11.946**: :ref:`sphx_glr_examples_grids_read-esri.py` (``read-esri.py``)
-- **00:10.143**: :ref:`sphx_glr_examples_grids_extract-topography.py` (``extract-topography.py``)
-- **00:01.312**: :ref:`sphx_glr_examples_grids_read-surfer.py` (``read-surfer.py``)
+- **00:12.417**: :ref:`sphx_glr_examples_grids_read-esri.py` (``read-esri.py``)
+- **00:10.373**: :ref:`sphx_glr_examples_grids_extract-topography.py` (``extract-topography.py``)
+- **00:01.466**: :ref:`sphx_glr_examples_grids_read-surfer.py` (``read-surfer.py``)
