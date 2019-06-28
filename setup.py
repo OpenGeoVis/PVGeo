@@ -8,7 +8,7 @@ import platform
 import sys
 import os
 
-__version__ = '2.0.0'
+__version__ = '2.0.1'
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -24,7 +24,7 @@ install_requires=[
     'colour-runner==0.0.5',
     'codecov==2.0.15',
     'pandas>=0.23.4',
-    'mock>=2.0.0',
+    'mock>=2.0.1',
     'espatools>=0.0.8',
     'pyvista>=0.20.1'
 ]
