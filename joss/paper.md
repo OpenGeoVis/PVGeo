@@ -31,7 +31,7 @@ visualization, yet the development of tools compatible with geoscience data and
 models has been limited.
 As a software extension package to VTK and ParaView, PVGeo addresses the lack of
 geoscientific compatibility by creating a framework for geovisualization.
-PVGeo aims to make the process of importing geoscience data into VTK based
+PVGeo aims to make the process of importing geoscience data into VTK-based
 software fluid and straightforward for users while providing a framework for new features
 that avoids the typical, ambitious programming endeavor of building VTK software
 plugins.
@@ -43,7 +43,7 @@ a rich toolbox of features common for visualization and spatial analysis across
 disciplines [@vtkbook].
 Examples of standard features include volume rendering, glyphing, subsetting,
 K-Means clustering, volume interpolation, iso-contouring, and Virtual Reality
-[@pvguide], [@vtkbook].
+[@pvguide; @vtkbook].
 By linking geoscience to VTK and ParaView, geoscientists can harness all of the
 native tools within ParaView, and other VTK powered libraries like ParaViewWeb
 [@pvweb], VTK.js [@vtkjs], and PyVista [@pyvista] or extend that data into new
@@ -73,7 +73,7 @@ or other known information.
 Through these spatial relations, geoscientists and stakeholders can directly
 engage with their data to gain insight and begin to rapidly evaluate data and
 models either on various 2D planes simultaneously or in a complex 3D environment
-[@witter, @Carr1997].
+[@witter; @Carr1997].
 
 
 Geoscientists often use specific visualization software for different data
@@ -102,7 +102,7 @@ software like the PyVista Python package [@pyvista].
 
 There are various software available for geoscientific visualization; however,
 these software often handle a few proprietary data formats and are closed-source
-with licensing fees. Witter et al. [@witter] provides a comprehensive list and
+with licensing fees. @witter provide a comprehensive list and
 discussion of the various software packages and finds that there are many
 platforms available for integrated visualizations for limited data types.
 Having the ability to visually fuse datasets, construct 3D models, or generate
