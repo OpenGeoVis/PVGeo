@@ -45,7 +45,7 @@ Read GSLib point set file
 
  .. code-block:: none
 
-    PolyData (0x7f8a5203ad68)
+    PolyData (0x7efbf2565228)
       N Cells:      100
       N Points:     100
       X Bounds:     3.000e+00, 2.520e+02
