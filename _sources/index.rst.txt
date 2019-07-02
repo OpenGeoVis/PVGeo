@@ -3,6 +3,10 @@ Welcome to PVGeo's code docs!
 #############################
 
 
+.. image:: http://joss.theoj.org/papers/10.21105/joss.01451/status.svg
+   :target: https://doi.org/10.21105/joss.01451
+
+
 .. image:: https://img.shields.io/badge/demos-grey.svg?logo=vimeo
    :target: https://vimeo.com/user82050125)
    :alt: Vimeo
