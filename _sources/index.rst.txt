@@ -108,6 +108,8 @@ developers of ``PVGeo``.
 
 .. _Contributors Page: https://github.com/OpenGeoVis/PVGeo/graphs/contributors
 
+.. include:: ../../CITATION.rst
+
 Getting Started
 ---------------
 
