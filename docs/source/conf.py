@@ -178,6 +178,24 @@ html_theme_options = {
 
 }
 
+html_context = {
+    # Enable the "Edit in GitHub link within the header of each page.
+    'display_github': True,
+    # Set the following variables to generate the resulting github URL for each page.
+    # Format Template: https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}
+    'github_user': 'OpenGeoVis',
+    'github_repo': 'PVGeo',
+    'github_version': 'master/docs/',
+    'menu_links_name': 'Getting Connected',
+    'menu_links': [
+        ('<i class="fa fa-slack fa-fw"></i> Slack Community', 'http://slack.pyvista.org'),
+        ('<i class="fa fa-comment fa-fw"></i> Support', 'https://github.com/pyvista/pyvista-support'),
+        ('<i class="fa fa-github fa-fw"></i> Source Code', 'https://github.com/OpenGeoVis/PVGeo'),
+        ('<i class="fa fa-gavel fa-fw"></i> Contributing', 'https://pvgeo.org/dev-guide/contributing.html'),
+        ('<i class="fa fa-file-text fa-fw"></i> The Paper', 'https://doi.org/10.21105/joss.01451'),
+    ],
+}
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
