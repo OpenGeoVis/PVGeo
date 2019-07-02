@@ -90,6 +90,18 @@ Head over to the [**Contributors Page**](https://github.com/OpenGeoVis/PVGeo/gra
 to learn more about the developers of *PVGeo*.
 
 
+### Citing PVGeo
+
+There is a [paper about PVGeo](https://doi.org/10.21105/joss.01451)!
+
+If you are using PVGeo in your scientific research, please help our scientific
+visibility by citing our work!
+
+> Sullivan et al., (2019). PVGeo: an open-source Python package for geoscientific visualization in VTK and ParaView. Journal of Open Source Software, 4(38), 1451, https://doi.org/10.21105/joss.01451
+
+See [CITATION.rst](https://github.com/OpenGeoVis/PVGeo/blob/master/CITATION.rst)
+for more details.
+
 
 ## Linking PVGeo to ParaView
 
