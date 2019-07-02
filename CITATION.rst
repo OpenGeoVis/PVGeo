@@ -3,6 +3,9 @@
 Citing PVGeo
 ------------
 
+.. image:: http://joss.theoj.org/papers/10.21105/joss.01451/status.svg
+   :target: https://doi.org/10.21105/joss.01451
+
 There is a `paper about PVGeo <https://doi.org/10.21105/joss.01451>`_!
 
 If you are using PVGeo in your scientific research, please help our scientific

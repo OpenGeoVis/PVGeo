@@ -12,6 +12,7 @@ like 2D or 3D time-varying grids.
 
 
 **Learn More:**
+[![DOI](http://joss.theoj.org/papers/10.21105/joss.01451/status.svg)](https://doi.org/10.21105/joss.01451)
 [![Vimeo](https://img.shields.io/badge/demos-grey.svg?logo=vimeo)](https://vimeo.com/user82050125)
 [![Slack Badge](https://img.shields.io/badge/Slack-PVGeo-4B0082.svg?logo=slack)](http://slack.pvgeo.org)
 
