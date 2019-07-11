@@ -5,6 +5,7 @@ __all__ = [
 
 import numpy as np
 import pandas as pd
+import pyvista as pv
 import vtk
 from scipy.spatial import Delaunay
 from vtk.util import numpy_support as nps
@@ -32,7 +33,13 @@ class OutlineContinents(AlgorithmBase):
         earth.SetRadius(self.__radius)
         earth.OutlineOn()
         earth.Update()
-        pdo.ShallowCopy(earth.GetOutput())
+        foo = pv.wrap(earth.GetOutput())
+        # Copy the geometries only
+        continents = pv.PolyData()
+        continents.points = foo.points.copy()
+        continents.lines = foo.lines.copy()
+        del foo
+        pdo.ShallowCopy(continents)
         return 1
 
     def set_radius(self, radius):
