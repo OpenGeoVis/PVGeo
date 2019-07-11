@@ -219,6 +219,7 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
 <span class="kn">import</span> <span class="nn">vtk</span>
 <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">Delaunay</span>
 <span class="kn">from</span> <span class="nn">vtk.util</span> <span class="k">import</span> <span class="n">numpy_support</span> <span class="k">as</span> <span class="n">nps</span>
@@ -246,7 +247,13 @@
         <span class="n">earth</span><span class="o">.</span><span class="n">SetRadius</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__radius</span><span class="p">)</span>
         <span class="n">earth</span><span class="o">.</span><span class="n">OutlineOn</span><span class="p">()</span>
         <span class="n">earth</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="n">pdo</span><span class="o">.</span><span class="n">ShallowCopy</span><span class="p">(</span><span class="n">earth</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span>
+        <span class="n">foo</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">earth</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span>
+        <span class="c1"># Copy the geometries only</span>
+        <span class="n">continents</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">PolyData</span><span class="p">()</span>
+        <span class="n">continents</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">continents</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">foo</span>
+        <span class="n">pdo</span><span class="o">.</span><span class="n">ShallowCopy</span><span class="p">(</span><span class="n">continents</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="OutlineContinents.set_radius"><a class="viewcode-back" href="../../../content/PVGeo/model_build/earth.html#PVGeo.model_build.earth.OutlineContinents.set_radius">[docs]</a>    <span class="k">def</span> <span class="nf">set_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
