@@ -115,9 +115,9 @@ class VoxelizePoints(FilterBase):
         if isinstance(dx, np.ndarray) and len(dx) != len(x):
             raise _helpers.PVGeoError('X-Cell spacings are not properly defined for all points.')
         if isinstance(dy, np.ndarray) and len(dy) != len(y):
-            raise _helpers.PVGeoError('X-Cell spacings are not properly defined for all points.')
+            raise _helpers.PVGeoError('Y-Cell spacings are not properly defined for all points.')
         if isinstance(dz, np.ndarray) and len(dz) != len(z):
-            raise _helpers.PVGeoError('X-Cell spacings are not properly defined for all points.')
+            raise _helpers.PVGeoError('Z-Cell spacings are not properly defined for all points.')
 
         numCells = len(x)
 
