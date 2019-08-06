@@ -37,8 +37,9 @@ class VoxelizePoints(FilterBase):
         self.__dx = kwargs.get('dx', None)
         self.__dy = kwargs.get('dy', None)
         self.__dz = kwargs.get('dz', None)
-        self.__estimateGrid = kwargs.get('estimate', True)
+        self.__estimate_grid = kwargs.get('estimate', True)
         self.__safe = kwargs.get('safe', 10.0)
+        self.__unique = kwargs.get('unique', True)
 
         # Not controlled by user:
         self.__angle = 0.0
@@ -106,7 +107,7 @@ class VoxelizePoints(FilterBase):
 
         # TODO: Check dtypes on all arrays. Need to be floats
 
-        if self.__estimateGrid:
+        if self.__estimate_grid:
             x,y,z = self.estimate_uniform_spacing(xo, yo, zo)
         else:
             x,y,z = xo, yo, zo
@@ -119,7 +120,7 @@ class VoxelizePoints(FilterBase):
         if isinstance(dz, np.ndarray) and len(dz) != len(z):
             raise _helpers.PVGeoError('Z-Cell spacings are not properly defined for all points.')
 
-        numCells = len(x)
+        n_cells = len(x)
 
         # Generate cell nodes for all points in data set
         #- Bottom
@@ -144,37 +145,41 @@ class VoxelizePoints(FilterBase):
             c_n7,
             c_n8), axis=0)
 
-        # Search for unique nodes and use the min cell size as the tolerance
-        TOLERANCE = np.min([dx, dy]) / 2.0
-        # Round XY plane by the tolerance
-        txy = np.around(all_nodes[:,0:2]/TOLERANCE)
-        all_nodes[:,0:2] = txy
-        unique_nodes, ind_nodes = np.unique(all_nodes, return_inverse=True, axis=0)
-        unique_nodes[:,0:2] *= TOLERANCE
-        numPts = len(unique_nodes)
-
-        # Make the cells
         pts = vtk.vtkPoints()
         cells = vtk.vtkCellArray()
 
-        # insert unique nodes as points
-        if self.__estimateGrid:
-            unique_nodes[:,0:2] = RotationTool.rotate(unique_nodes[:,0:2], -self.__angle)
-            self.add_field_data(grid)
+        if self.__unique:
+            # Search for unique nodes and use the min cell size as the tolerance
+            TOLERANCE = np.min([dx, dy]) / 2.0
+            # Round XY plane by the tolerance
+            txy = np.around(all_nodes[:,0:2]/TOLERANCE)
+            all_nodes[:,0:2] = txy
+            unique_nodes, ind_nodes = np.unique(all_nodes, return_inverse=True, axis=0)
+            unique_nodes[:,0:2] *= TOLERANCE
+            # insert unique nodes as points
+            if self.__estimate_grid:
+                unique_nodes[:,0:2] = RotationTool.rotate(unique_nodes[:,0:2], -self.__angle)
+                self.add_field_data(grid)
+            pts.SetData(interface.convert_array(unique_nodes))
+        else:
+            if self.__estimate_grid:
+                all_nodes[:,0:2] = RotationTool.rotate(all_nodes[:,0:2], -self.__angle)
+                self.add_field_data(grid)
+            # Add unique nodes as points in output
+            pts.SetData(interface.convert_array(all_nodes))
+            ind_nodes = np.arange(0, len(all_nodes), dtype=int)
 
-        # Add unique nodes as points in output
-        pts.SetData(interface.convert_array(unique_nodes))
 
         # Add cell vertices
-        j = np.multiply(np.tile(np.arange(0, 8, 1), numCells), numCells)
-        arridx = np.add(j, np.repeat(np.arange(0, numCells, 1, dtype=int), 8))
+        j = np.multiply(np.tile(np.arange(0, 8, 1), n_cells), n_cells)
+        arridx = np.add(j, np.repeat(np.arange(0, n_cells, 1, dtype=int), 8))
+        ids = ind_nodes[arridx].reshape((n_cells, 8))
 
-        ids = ind_nodes[arridx].reshape((numCells, 8))
-        cellsMat = np.concatenate((np.ones((ids.shape[0], 1), dtype=np.int64)*ids.shape[1], ids), axis=1).ravel()
+        cells_mat = np.concatenate((np.ones((ids.shape[0], 1), dtype=np.int64)*ids.shape[1], ids), axis=1).ravel()
 
         cells = vtk.vtkCellArray()
-        cells.SetNumberOfCells(numCells)
-        cells.SetCells(numCells, nps.numpy_to_vtk(cellsMat, deep=True, array_type=vtk.VTK_ID_TYPE))
+        cells.SetNumberOfCells(n_cells)
+        cells.SetCells(n_cells, nps.numpy_to_vtk(cells_mat, deep=True, array_type=vtk.VTK_ID_TYPE))
 
         # Set the output
         grid.SetPoints(pts)
@@ -266,8 +271,16 @@ class VoxelizePoints(FilterBase):
     def set_estimate_grid(self, flag):
         """Set a flag on whether or not to estimate the grid spacing/rotation
         """
-        if self.__estimateGrid != flag:
-            self.__estimateGrid = flag
+        if self.__estimate_grid != flag:
+            self.__estimate_grid = flag
+            self.Modified()
+
+
+    def set_unique(self, flag):
+        """Set a flag on whether or not to try to elimate non unique elements
+        """
+        if self.__unique != flag:
+            self.__unique = flag
             self.Modified()
 
 

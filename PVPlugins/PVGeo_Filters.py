@@ -198,6 +198,13 @@ class PVGeoVoxelizePoints(VoxelizePoints):
         VoxelizePoints.set_deltas(self, dx, dy, dz)
 
 
+    @smproperty.xml(_helpers.get_property_xml(name='Extract Unique',
+        command='set_unique', default_values=True,
+        help='Set a flag on whether to only use unique points'))
+    def set_unique(self, flag):
+        VoxelizePoints.set_unique(self, flag)
+
+
 ###############################################################################
 
 
@@ -252,6 +259,13 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         else:
             raise RuntimeError('Bad input array index.')
         return 1
+
+
+    @smproperty.xml(_helpers.get_property_xml(name='Extract Unique',
+        command='set_unique', default_values=True,
+        help='Set a flag on whether to only use unique elements'))
+    def set_unique(self, flag):
+        VoxelizePoints.set_unique(self, flag)
 
 
 ###############################################################################
