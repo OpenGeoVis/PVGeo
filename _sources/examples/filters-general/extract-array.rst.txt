@@ -58,12 +58,12 @@ Construct the filter
 
  .. code-block:: none
 
-    vtkTable (0x36f39a0)
+    vtkTable (0x3b2bbc0)
       Debug: Off
       Modified Time: 22555
       Reference Count: 2
       Registered Events: (none)
-      Information: 0x33e6540
+      Information: 0x34e41c0
       Data Released: False
       Global Release Data: Off
       UpdateTime: 22567
@@ -103,7 +103,7 @@ Construct the filter
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.076 seconds)
+   **Total running time of the script:** ( 0 minutes  0.077 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-array.py:
