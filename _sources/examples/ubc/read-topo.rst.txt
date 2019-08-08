@@ -56,7 +56,7 @@ Download sample data files and keep track of names:
 
  .. code-block:: none
 
-    PolyData (0x7ff93749bee8)
+    PolyData (0x7f4d89a5cc48)
       N Cells:      381924
       N Points:     381924
       X Bounds:     3.550e+05, 3.720e+05
@@ -83,7 +83,7 @@ Download sample data files and keep track of names:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.256 seconds)
+   **Total running time of the script:** ( 0 minutes  4.538 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-topo.py:

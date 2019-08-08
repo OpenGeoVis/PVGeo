@@ -113,7 +113,7 @@ slices to what you prefer!
 
  .. code-block:: none
 
-    MultiBlock (0x7ff93749b648)
+    MultiBlock (0x7f4d89a5cb28)
       N Blocks:     6
       X Bounds:     0.000, 250.000
       Y Bounds:     0.000, 250.000
@@ -143,7 +143,7 @@ slices to what you prefer!
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.786 seconds)
+   **Total running time of the script:** ( 0 minutes  3.749 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_many-slices-along-points.py:
