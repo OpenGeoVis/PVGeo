@@ -158,7 +158,6 @@ class VoxelizePoints(FilterBase):
             all_nodes[:,0:2] = txy
             unique_nodes, ind_nodes = np.unique(all_nodes, return_inverse=True, axis=0)
             unique_nodes[:,0:2] *= TOLERANCE
-            print('goo')
             all_nodes = unique_nodes
         else:
             ind_nodes = np.arange(0, len(all_nodes), dtype=int)
