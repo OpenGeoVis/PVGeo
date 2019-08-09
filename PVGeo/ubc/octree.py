@@ -61,9 +61,9 @@ class OcTreeReader(ubcMeshReaderBase):
         except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         if pdo is None:
-            pdo = self.__mesh.toVTK()
+            pdo = self.__mesh.to_vtk()
         else:
-            pdo.DeepCopy(self.__mesh.toVTK())
+            pdo.DeepCopy(self.__mesh.to_vtk())
         return pdo
 
     @staticmethod
@@ -134,7 +134,7 @@ class OcTreeReader(ubcMeshReaderBase):
             # Construct/read the mesh
             self.ubc_octree_mesh(filename_mesh, pdo=output)
             self.need_to_readMesh(flag=False)
-        output.DeepCopy(self.__mesh.toVTK())
+        output.DeepCopy(self.__mesh.to_vtk())
         if self.need_to_readModels() and self.this_has_models():
             # Read the model data
             self.__models = []

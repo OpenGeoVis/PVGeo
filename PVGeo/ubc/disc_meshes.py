@@ -30,4 +30,4 @@ class DiscretizeMeshReader(InterfacedBaseReader):
     @staticmethod
     def _get_vtk_object(obj):
         """Returns the mesh's proper VTK data object"""
-        return obj.toVTK()
+        return obj.to_vtk()

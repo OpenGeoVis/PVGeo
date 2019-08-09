@@ -63,7 +63,7 @@ class GridInfo(properties.HasProperties):
         self.data = data
         return
 
-    def toVTK(self, output=None, z=0.0, dz=1.0, data_name='Data'):
+    def to_vtk(self, output=None, z=0.0, dz=1.0, data_name='Data'):
         """Convert to a ``vtkImageData`` object"""
         self.mask()
         self.validate()
@@ -316,7 +316,7 @@ class SurferGridReader(ReaderBase):
         i = _helpers.get_requested_time(self, outInfo)
         # Build the output
         grid = self.__grids[i]
-        grid.toVTK(output=output, data_name=self.__data_name)
+        grid.to_vtk(output=output, data_name=self.__data_name)
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
