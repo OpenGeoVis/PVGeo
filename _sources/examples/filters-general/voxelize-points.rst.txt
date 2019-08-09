@@ -96,7 +96,7 @@ object (essentially a point cloud).
 
  .. code-block:: none
 
-    PolyData (0x7f4d89a5cbe8)
+    PolyData (0x7f7a51acd348)
       N Cells:      499200
       N Points:     499200
       X Bounds:     3.268e+05, 3.302e+05
@@ -157,7 +157,7 @@ The full pipeline method
     print('done.')
 
     # Output the results
-    print('Recovered Angle (deg.): %.3f' % voxelizer.get_recovered_angle())
+    print('Recovered Angle (deg.): %.3f' % voxelizer.get_angle())
     print('Recovered Cell Sizes: (%.2f, %.2f, %.2f)' % voxelizer.get_spacing())
     print(grid)
 
@@ -171,10 +171,11 @@ The full pipeline method
 
  .. code-block:: none
 
-    Voxelizing... done.
+    Voxelizing... goo
+    done.
     Recovered Angle (deg.): 53.550
     Recovered Cell Sizes: (25.00, 25.00, 25.00)
-    UnstructuredGrid (0x7f4d89a5c8e8)
+    UnstructuredGrid (0x7f7a51b08be8)
       N Cells:      499200
       N Points:     524064
       X Bounds:     3.268e+05, 3.302e+05
@@ -225,7 +226,7 @@ create 3 orthogonal slices through a data volume.
 
  .. code-block:: none
 
-    MultiBlock (0x7f4d89a5ce28)
+    MultiBlock (0x7f7a51b22528)
       N Blocks:     3
       X Bounds:     326804.336, 330185.260
       Y Bounds:     4406253.954, 4409862.606
@@ -270,7 +271,7 @@ Now display the slices and clipped volume
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  17.579 seconds)
+   **Total running time of the script:** ( 0 minutes  16.843 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:

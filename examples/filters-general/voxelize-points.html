@@ -283,7 +283,7 @@ object (essentially a point cloud).</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f4d89a5cbe8)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f7a51acd348)
   N Cells:      499200
   N Points:     499200
   X Bounds:     3.268e+05, 3.302e+05
@@ -324,16 +324,17 @@ The full pipeline method</p>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;done.&#39;</span><span class="p">)</span>
 
 <span class="c1"># Output the results</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recovered Angle (deg.): </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">get_recovered_angle</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recovered Angle (deg.): </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">get_angle</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recovered Cell Sizes: (</span><span class="si">%.2f</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">get_spacing</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Voxelizing... done.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Voxelizing... goo
+done.
 Recovered Angle (deg.): 53.550
 Recovered Cell Sizes: (25.00, 25.00, 25.00)
-UnstructuredGrid (0x7f4d89a5c8e8)
+UnstructuredGrid (0x7f7a51b08be8)
   N Cells:      499200
   N Points:     524064
   X Bounds:     3.268e+05, 3.302e+05
@@ -358,7 +359,7 @@ create 3 orthogonal slices through a data volume.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7f4d89a5ce28)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7f7a51b22528)
   N Blocks:     3
   X Bounds:     326804.336, 330185.260
   Y Bounds:     4406253.954, 4409862.606
@@ -378,7 +379,7 @@ create 3 orthogonal slices through a data volume.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_voxelize-points_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize-points_003.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  17.579 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  16.843 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-voxelize-points-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/26eee8aad2c1647ea7d3396af058d480/voxelize-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">voxelize-points.py</span></code></a></p>

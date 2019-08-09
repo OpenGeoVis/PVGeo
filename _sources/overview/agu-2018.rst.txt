@@ -146,7 +146,7 @@ we built for `discretize <http://discretize.simpeg.xyz/en/latest/>`:
         @staticmethod
         def _get_vtk_object(obj):
             """Returns the mesh's proper VTK data object"""
-            return obj.toVTK()
+            return obj.to_vtk()
 
         #### Setters and Getters for the GUI ####
 

@@ -275,9 +275,9 @@
         <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">fe</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fe</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">pdo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="o">.</span><span class="n">toVTK</span><span class="p">()</span>
+            <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="o">.</span><span class="n">to_vtk</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="o">.</span><span class="n">toVTK</span><span class="p">())</span>
+            <span class="n">pdo</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="o">.</span><span class="n">to_vtk</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">pdo</span></div>
 
 <div class="viewcode-block" id="OcTreeReader.place_model_on_octree_mesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/octree.html#PVGeo.ubc.octree.OcTreeReader.place_model_on_octree_mesh">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -348,7 +348,7 @@
             <span class="c1"># Construct/read the mesh</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ubc_octree_mesh</span><span class="p">(</span><span class="n">filename_mesh</span><span class="p">,</span> <span class="n">pdo</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">output</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="o">.</span><span class="n">toVTK</span><span class="p">())</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="o">.</span><span class="n">to_vtk</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readModels</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">this_has_models</span><span class="p">():</span>
             <span class="c1"># Read the model data</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__models</span> <span class="o">=</span> <span class="p">[]</span>

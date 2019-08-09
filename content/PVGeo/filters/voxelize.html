@@ -286,8 +286,8 @@ spaced grid on at least an XY plane.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PVGeo.filters.voxelize.VoxelizePoints.get_recovered_angle">
-<code class="sig-name descname">get_recovered_angle</code><span class="sig-paren">(</span><em class="sig-param">degrees=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.get_recovered_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.get_recovered_angle" title="Permalink to this definition">¶</a></dt>
+<dt id="PVGeo.filters.voxelize.VoxelizePoints.get_angle">
+<code class="sig-name descname">get_angle</code><span class="sig-paren">(</span><em class="sig-param">degrees=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.get_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.get_angle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the recovered angle if set to recover the input grid. If the
 input points are rotated, then this angle will reflect a close
 approximation of that rotation.</p>
@@ -296,6 +296,12 @@ approximation of that rotation.</p>
 <dd class="field-odd"><p><strong>degrees</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – A flag on to return decimal degrees or radians.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.voxelize.VoxelizePoints.get_recovered_angle">
+<code class="sig-name descname">get_recovered_angle</code><span class="sig-paren">(</span><em class="sig-param">degrees=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.get_recovered_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.get_recovered_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED: use <cite>get_angle</cite></p>
 </dd></dl>
 
 <dl class="method">
@@ -308,6 +314,12 @@ approximation of that rotation.</p>
 <dt id="PVGeo.filters.voxelize.VoxelizePoints.points_to_grid">
 <code class="sig-name descname">points_to_grid</code><span class="sig-paren">(</span><em class="sig-param">xo</em>, <em class="sig-param">yo</em>, <em class="sig-param">zo</em>, <em class="sig-param">dx</em>, <em class="sig-param">dy</em>, <em class="sig-param">dz</em>, <em class="sig-param">grid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.points_to_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.points_to_grid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert XYZ points to a <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PVGeo.filters.voxelize.VoxelizePoints.set_angle">
+<code class="sig-name descname">set_angle</code><span class="sig-paren">(</span><em class="sig-param">angle</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints.set_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints.set_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the rotation angle manually</p>
 </dd></dl>
 
 <dl class="method">
