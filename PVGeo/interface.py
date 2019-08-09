@@ -28,6 +28,8 @@ __displayname__ = 'Interface'
 
 import numpy as np
 import pandas as pd
+import pyvista as pv
+from pyvista.utilities import convert_string_array, get_vtk_type
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 from vtk.util import numpy_support as nps
@@ -35,28 +37,6 @@ from vtk.util import numpy_support as nps
 from . import _helpers
 
 
-def get_vtk_type(typ):
-    """This looks up the VTK type for a give python data type.
-
-    Return:
-        int : the integer type id specified in vtkType.h
-    """
-    typ = nps.get_vtk_array_type(typ)
-    if typ is 3:
-        return 13
-    return typ
-
-def convert_string_array(arr, name='Strings'):
-    """A helper to convert a numpy array of strings to a vtkStringArray
-
-    Return:
-        vtkStringArray : the converted array
-    """
-    vtkarr = vtk.vtkStringArray()
-    for val in arr:
-        vtkarr.InsertNextValue(val)
-    vtkarr.SetName(name)
-    return vtkarr
 
 def convert_array(arr, name='Data', deep=0, array_type=None, pdf=False):
     """A helper to convert a NumPy array to a vtkDataArray or vice versa
@@ -220,26 +200,10 @@ def points_to_poly_data(points, copy_z=False):
         raise RuntimeError('Points must be 3D. Try adding a third dimension of zeros.')
 
     atts = points[:, 3::]
-    points = points[:, 0:3]
-
-    npoints = points.shape[0]
-
-    # Make VTK cells array
-    cells = np.hstack((np.ones((npoints, 1)),
-                       np.arange(npoints).reshape(-1, 1)))
-    cells = np.ascontiguousarray(cells, dtype=np.int64)
-    cells = np.reshape(cells, (2*npoints))
-    vtkcells = vtk.vtkCellArray()
-    vtkcells.SetCells(npoints, nps.numpy_to_vtk(cells, deep=True, array_type=vtk.VTK_ID_TYPE))
-
-    # Convert points to vtk object
-    pts = vtk.vtkPoints()
-    pts.SetData(convert_array(points))
+    points = points[:, 0:3].astype(np.float)
 
     # Create polydata
-    pdata = vtk.vtkPolyData()
-    pdata.SetPoints(pts)
-    pdata.SetVerts(vtkcells)
+    pdata = pv.PolyData(points)
 
     # Add attributes if given
     scalSet = False
