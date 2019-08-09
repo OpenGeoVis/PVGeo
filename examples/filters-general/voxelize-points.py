@@ -74,7 +74,7 @@ grid = voxelizer.apply(vtkpoints)
 print('done.')
 
 # Output the results
-print('Recovered Angle (deg.): %.3f' % voxelizer.get_recovered_angle())
+print('Recovered Angle (deg.): %.3f' % voxelizer.get_angle())
 print('Recovered Cell Sizes: (%.2f, %.2f, %.2f)' % voxelizer.get_spacing())
 print(grid)
 

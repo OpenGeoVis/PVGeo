@@ -40,10 +40,8 @@ class VoxelizePoints(FilterBase):
         self.__estimate_grid = kwargs.get('estimate', True)
         self.__safe = kwargs.get('safe', 10.0)
         self.__unique = kwargs.get('unique', True)
-
-        # Not controlled by user:
-        self.__angle = 0.0
-
+        self.__tolerance = kwargs.get('tolerance', None)
+        self.__angle = kwargs.get('angle', 0.0)
 
 
     def add_field_data(self, grid):
@@ -62,6 +60,7 @@ class VoxelizePoints(FilterBase):
         s.InsertNextTuple3(self.__dx, self.__dy, self.__dz)
         grid.GetFieldData().AddArray(s)
         return grid
+
 
     @staticmethod
     def add_cell_data(grid, arr, name):
@@ -150,25 +149,25 @@ class VoxelizePoints(FilterBase):
 
         if self.__unique:
             # Search for unique nodes and use the min cell size as the tolerance
-            TOLERANCE = np.min([dx, dy]) / 2.0
+            if self.__tolerance is None:
+                TOLERANCE = np.min([dx, dy]) / 2.0
+            else:
+                TOLERANCE = self.__tolerance
             # Round XY plane by the tolerance
             txy = np.around(all_nodes[:,0:2]/TOLERANCE)
             all_nodes[:,0:2] = txy
             unique_nodes, ind_nodes = np.unique(all_nodes, return_inverse=True, axis=0)
             unique_nodes[:,0:2] *= TOLERANCE
-            # insert unique nodes as points
-            if self.__estimate_grid:
-                unique_nodes[:,0:2] = RotationTool.rotate(unique_nodes[:,0:2], -self.__angle)
-                self.add_field_data(grid)
-            pts.SetData(interface.convert_array(unique_nodes))
+            print('goo')
+            all_nodes = unique_nodes
         else:
-            if self.__estimate_grid:
-                all_nodes[:,0:2] = RotationTool.rotate(all_nodes[:,0:2], -self.__angle)
-                self.add_field_data(grid)
-            # Add unique nodes as points in output
-            pts.SetData(interface.convert_array(all_nodes))
             ind_nodes = np.arange(0, len(all_nodes), dtype=int)
 
+        all_nodes[:,0:2] = RotationTool.rotate(all_nodes[:,0:2], -self.__angle)
+        if self.__estimate_grid:
+            self.add_field_data(grid)
+        # Add unique nodes as points in output
+        pts.SetData(interface.convert_array(all_nodes))
 
         # Add cell vertices
         j = np.multiply(np.tile(np.arange(0, 8, 1), n_cells), n_cells)
@@ -186,6 +185,7 @@ class VoxelizePoints(FilterBase):
         grid.SetCells(vtk.VTK_VOXEL, cells)
         return grid
 
+
     @staticmethod
     def _copy_arrays(pdi, pdo):
         """internal helper to copy arrays from point data to cell data in the voxels.
@@ -194,6 +194,7 @@ class VoxelizePoints(FilterBase):
             arr = pdi.GetPointData().GetArray(i)
             _helpers.add_array(pdo, 1, arr) # adds to CELL data
         return pdo
+
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output
@@ -222,6 +223,7 @@ class VoxelizePoints(FilterBase):
             self.__safe = safe
             self.Modified()
 
+
     def set_delta_x(self, dx):
         """Set the X cells spacing
 
@@ -231,6 +233,7 @@ class VoxelizePoints(FilterBase):
         """
         self.__dx = dx
         self.Modified()
+
 
     def set_delta_y(self, dy):
         """Set the Y cells spacing
@@ -242,6 +245,7 @@ class VoxelizePoints(FilterBase):
         self.__dy = dy
         self.Modified()
 
+
     def set_delta_z(self, dz):
         """Set the Z cells spacing
 
@@ -252,6 +256,7 @@ class VoxelizePoints(FilterBase):
         self.__dz = dz
         self.set_safe_size(np.min(dz))
         self.Modified()
+
 
     def set_deltas(self, dx, dy, dz):
         """Set the cell spacings for each axial direction
@@ -267,6 +272,7 @@ class VoxelizePoints(FilterBase):
         self.set_delta_x(dx)
         self.set_delta_y(dy)
         self.set_delta_z(dz)
+
 
     def set_estimate_grid(self, flag):
         """Set a flag on whether or not to estimate the grid spacing/rotation
@@ -284,7 +290,7 @@ class VoxelizePoints(FilterBase):
             self.Modified()
 
 
-    def get_recovered_angle(self, degrees=True):
+    def get_angle(self, degrees=True):
         """Returns the recovered angle if set to recover the input grid. If the
         input points are rotated, then this angle will reflect a close
         approximation of that rotation.
@@ -294,6 +300,19 @@ class VoxelizePoints(FilterBase):
         """
         if degrees: return np.rad2deg(self.__angle)
         return self.__angle
+
+
+    def get_recovered_angle(self, degrees=True):
+        """DEPRECATED: use `get_angle`"""
+        return self.get_angle(degrees=degrees)
+
+
+    def set_angle(self, angle):
+        """Set the rotation angle manually"""
+        if self.__angle != angle:
+            self.__angle = angle
+            self.Modified()
+
 
     def get_spacing(self):
         """Get the cell spacings"""
