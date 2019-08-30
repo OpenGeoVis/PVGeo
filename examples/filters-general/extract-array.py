@@ -8,11 +8,11 @@ This example demos :class:`PVGeo.filters.ExtractArray`
 """
 from PVGeo.filters import ExtractArray
 from pyvista import examples
-################################################################################
+###############################################################################
 # Create input data
 grd = examples.load_rectilinear()
 
-################################################################################
+###############################################################################
 # Construct the filter
 filt = ExtractArray()
 # Define the array to extract

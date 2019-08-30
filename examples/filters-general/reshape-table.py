@@ -14,7 +14,7 @@ import pyvista as pv
 import PVGeo
 from PVGeo.filters import ReshapeTable
 
-################################################################################
+###############################################################################
 # Create some input table
 t0 = pv.Table()
 # Populate the tables
@@ -31,7 +31,7 @@ t0[titles[0]] = arrs[0]
 t0[titles[1]] = arrs[1]
 t0[titles[2]] = arrs[2]
 
-################################################################################
+###############################################################################
 # Use the filter to reshape the table
 order = 'F'
 newtitles = ['Title %d' % i for i in range(ncols)]
@@ -41,7 +41,7 @@ output = ReshapeTable(order=order,
                       names=newtitles).apply(t0)
 print(output)
 
-################################################################################
+###############################################################################
 # Check the output
 tarr = np.zeros((nrows, ncols))
 for i in range(ncols):

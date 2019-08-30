@@ -383,7 +383,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         self.__models = []
         ubcMeshReaderBase.clear_models(self)
 
-################################################################################
+###############################################################################
 
 class TensorMeshAppender(ModelAppenderBase):
     """This filter reads a timeseries of models and appends it to an input
@@ -418,7 +418,7 @@ class TensorMeshAppender(ModelAppenderBase):
         return
 
 
-################################################################################
+###############################################################################
 
 class TopoMeshAppender(AlgorithmBase):
     """This filter reads a single discrete topography file and appends it as a
@@ -533,7 +533,7 @@ class TopoMeshAppender(AlgorithmBase):
         return 1
 
 
-################################################################################
+###############################################################################
 
 #
 # import numpy as np

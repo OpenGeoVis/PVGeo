@@ -11,12 +11,12 @@ This example demos :class:`PVGeo.filters.ExtractPoints`
 from pyvista import examples
 from PVGeo.filters import ExtractPoints
 
-################################################################################
+###############################################################################
 # Have some input data source with valid PointData
 data = examples.load_globe()
 data.plot()
 
-################################################################################
+###############################################################################
 # Apply the filter:
 polyData = ExtractPoints().apply(data)
 polyData.plot()

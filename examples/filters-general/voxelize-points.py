@@ -17,12 +17,12 @@ import pandas as pd
 import PVGeo
 from PVGeo.filters import VoxelizePoints
 
-################################################################################
+###############################################################################
 # Download sample data files and keep track of names:
 url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/fault_points.csv'
 fault_file, _ = examples.downloads._retrieve_file(url, 'fault_points.csv')
 
-################################################################################
+###############################################################################
 # Let's go ahead and load a simple file that has XYZ coordinates and a boolean
 # array for fault presence. This point cloud makes some sort of regular grid,
 # but we have forgotten the deatials of the cell spacings and local coordinate
@@ -34,12 +34,12 @@ fault_file, _ = examples.downloads._retrieve_file(url, 'fault_points.csv')
 points = pd.read_csv(fault_file)
 print(points[0:2])
 
-################################################################################
+###############################################################################
 
 vtkpoints = PVGeo.points_to_poly_data(points)
 print(vtkpoints)
 
-################################################################################
+###############################################################################
 # Note that we have a :class:`pyvista.PolyData` object now which allows us to do
 # all types of immediate plotting of our data. First, lets threshold our points
 # as the point cloud has a bunch of zeros and ones throughout the dataspace to
@@ -51,7 +51,7 @@ print(vtkpoints)
 # ``False`` for an interactive window)
 vtkpoints.plot(clim=[0,1], point_size=1)
 
-################################################################################
+###############################################################################
 # Points to Voxelized Volume
 # ++++++++++++++++++++++++++
 #
@@ -78,12 +78,12 @@ print('Recovered Angle (deg.): %.3f' % voxelizer.get_angle())
 print('Recovered Cell Sizes: (%.2f, %.2f, %.2f)' % voxelizer.get_spacing())
 print(grid)
 
-################################################################################
+###############################################################################
 # And now we can plot the voxelized volume
 grid.plot()
 
 
-################################################################################
+###############################################################################
 # Filter Volumetric Data
 # ++++++++++++++++++++++
 #
@@ -93,11 +93,11 @@ grid.plot()
 slices = grid.slice_orthogonal()
 print(slices)
 
-################################################################################
+###############################################################################
 # And let's use a ``clip`` filter:
 clip = grid.clip(normal='x').clip(normal='-y').threshold(0.5)
 
-################################################################################
+###############################################################################
 # Now display the slices and clipped volume
 
 p = pyvista.Plotter()

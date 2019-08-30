@@ -12,14 +12,14 @@ The ``VTK_POLYLINE`` adds polyline connectivity between all points as one
 spline (either in the order by index or using a nearest neighbor calculation).
 
 """
-################################################################################
+###############################################################################
 # sphinx_gallery_thumbnail_number = 2
 import numpy as np
 import pyvista
 from PVGeo import points_to_poly_data
 from PVGeo.filters import AddCellConnToPoints
 
-################################################################################
+###############################################################################
 # First, lets generate some points which we'd like to connect
 
 def path1(y):
@@ -38,7 +38,7 @@ np.random.shuffle(coords)
 # Make a VTK data object for the filter to use
 vtkPoints = points_to_poly_data(coords)
 
-################################################################################
+###############################################################################
 # Apply the Filter
 # ++++++++++++++++
 #
@@ -54,7 +54,7 @@ p.add_mesh(line, line_width=5, point_size=10)
 p.show()
 
 
-################################################################################
+###############################################################################
 # Remember that in the script given above we shuffle the points to demonstrate
 # that the points make a useable line but we need to reconstruct the order of the
 # points. We do this by using the *Use Nearest Nbr Approx* checkbox; this will

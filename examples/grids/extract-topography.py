@@ -26,7 +26,7 @@ from PVGeo.model_build import CreateTensorMesh
 from PVGeo.grids import ExtractTopography
 import os
 
-################################################################################
+###############################################################################
 # For the grid data set, let's use one of the Model Building sources
 # with the following parameters:
 #
@@ -42,7 +42,7 @@ mesh = CreateTensorMesh(origin=[793000, 9192500, 2690],
 
 mesh.plot(show_grid=True, color=True, show_edges=True)
 
-################################################################################
+###############################################################################
 # Now load the topography file from the example data:
 link = 'https://dl.dropbox.com/s/gw5v3tiq68oge3l/Example-Extract-Topo.zip?dl=0'
 examples.downloads._retrieve_file(link, 'Example-Extract-Topo.zip')
@@ -54,14 +54,14 @@ p.add_mesh(mesh, color=True, show_edges=False, opacity=0.75)
 p.show_grid()
 p.show()
 
-################################################################################
+###############################################################################
 # Now that you have the topography and a grid data set,
 # let's go ahead and use the **Extract Topography** filter. Be sure to properly
 # select the inputs to the algorithm.
 extracted = ExtractTopography().apply(mesh, topo)
 extracted.plot(scalars='Extracted')
 
-################################################################################
+###############################################################################
 # op='underneath', tolerance=0.001, offset=0.0, invert=False, remove=False
 # This will show the cells that are active underneath the topography surface
 # (0 for above surface and 1 for below surface). Now we can threshold this gridded
@@ -73,7 +73,7 @@ extracted.plot(scalars='Extracted')
 threshed = extracted.threshold(0.5)
 threshed.plot(color=True, show_edges=True)
 
-################################################################################
+###############################################################################
 # How well did this remove cells above the topography surface?
 
 p = pyvista.Plotter()
@@ -82,7 +82,7 @@ p.add_mesh(threshed, color=True, show_edges=True)
 p.show_grid()
 p.show()
 
-################################################################################
+###############################################################################
 # Is that extraction too close to the topography surface? To better extract the
 # topographic surface, you can set a tolerance:
 extracted = ExtractTopography(tolerance=100., remove=True).apply(mesh, topo)
@@ -93,7 +93,7 @@ p.add_mesh(extracted, color=True, show_edges=True)
 p.show_grid()
 p.show()
 
-################################################################################
+###############################################################################
 # Note that there are other extraction operations like an ``'intersection'``:
 extracted = ExtractTopography(op='intersection',
                               remove=True,

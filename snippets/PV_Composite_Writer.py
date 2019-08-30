@@ -157,7 +157,7 @@ class WriterBase(VTKPythonAlgorithmBase):
 
 
 
-################################################################################
+###############################################################################
 ## Now lets use ``WriterBase`` to make a writer algorithm that ParaView can use
 
 
@@ -211,7 +211,7 @@ class WriteCellCenterData(WriterBase):
             self.Modified()
 
 
-################################################################################
+###############################################################################
 ## Now lets use ``WriterBase`` to make a writer algorithm for image data
 
 
@@ -251,7 +251,7 @@ class WriteCustomImageData(WriterBase):
 
 
 
-################################################################################
+###############################################################################
 ## Now wrap the cell centers writer for use in ParaView!
 
 @smproxy.writer(extensions="dat", file_description="Cell Centers and Cell Data", support_reload=False)

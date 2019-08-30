@@ -193,7 +193,7 @@ class OcTreeReader(ubcMeshReaderBase):
 
 
 
-################################################################################
+###############################################################################
 
 class OcTreeAppender(ModelAppenderBase):
     """This filter reads a timeseries of models and appends it to an input

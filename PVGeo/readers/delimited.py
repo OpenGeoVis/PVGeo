@@ -218,7 +218,7 @@ class DelimitedTextReader(ReaderBase):
         return self._titles
 
 
-################################################################################
+###############################################################################
 
 
 class DelimitedPointsReaderBase(DelimitedTextReader):
@@ -264,7 +264,7 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
         return 1
 
 
-################################################################################
+###############################################################################
 
 
 class XYZTextReader(DelimitedTextReader):

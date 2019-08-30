@@ -614,7 +614,7 @@ class PercentThreshold(FilterBase):
         self.Update()
         return interface.wrap_pyvista(self.GetOutput())
 
-################################################################################
+###############################################################################
 
 class ArraysToRGBA(FilterPreserveTypeBase):
     """Use arrays from input data object to set an RGBA array. Sets colors and
@@ -786,4 +786,4 @@ class ArraysToRGBA(FilterPreserveTypeBase):
 
 
 
-################################################################################
+###############################################################################

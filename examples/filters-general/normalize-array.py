@@ -20,17 +20,17 @@ from pyvista import examples
 import PVGeo
 from PVGeo.filters import NormalizeArray
 
-################################################################################
+###############################################################################
 # Create some input data. this can be any `vtkDataObject`
 mesh = examples.load_uniform()
 title = 'Spatial Point Data'
 mesh.plot(scalars=title)
-################################################################################
+###############################################################################
 
 # Apply the filter
 f = NormalizeArray(normalization='feature_scale', new_name='foo')
 output = f.apply(mesh, title)
 print(output)
 
-################################################################################
+###############################################################################
 output.plot(scalars='foo')

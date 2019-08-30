@@ -17,7 +17,7 @@ from .. import _helpers, interface
 from ..base import FilterPreserveTypeBase
 from ..readers import DelimitedPointsReaderBase
 
-################################################################################
+###############################################################################
 
 
 class TopoReader(DelimitedPointsReaderBase):
@@ -47,7 +47,7 @@ class TopoReader(DelimitedPointsReaderBase):
 
 
 
-################################################################################
+###############################################################################
 
 
 class GravObsReader(DelimitedPointsReaderBase):
@@ -78,7 +78,7 @@ class GravObsReader(DelimitedPointsReaderBase):
         return ['X', 'Y', 'Z', 'Grav', 'Err'], content[1::]
 
 
-################################################################################
+###############################################################################
 
 
 class GravGradReader(DelimitedPointsReaderBase):
@@ -117,7 +117,7 @@ class GravGradReader(DelimitedPointsReaderBase):
         return titles, content[2::]
 
 
-################################################################################
+###############################################################################
 
 
 class MagObsReader(DelimitedPointsReaderBase):
@@ -203,7 +203,7 @@ class MagObsReader(DelimitedPointsReaderBase):
 
 
 
-################################################################################
+###############################################################################
 
 
 
