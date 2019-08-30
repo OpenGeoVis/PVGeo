@@ -265,8 +265,6 @@ def wrap_pyvista(dataset):
     """This will wrap any given VTK dataset via the vtkInterface Python package
     if it is available and return the wrapped data object. If pyvista is
     unavailable, then the given object is returned."""
-    if isinstance(dataset, vtk.vtkTable):
-        return dataset
     try:
         import pyvista
         dataset = pyvista.wrap(dataset)

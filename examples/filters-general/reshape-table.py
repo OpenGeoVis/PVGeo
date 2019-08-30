@@ -10,14 +10,13 @@ This example demos :class:`PVGeo.filters.ReshapeTable`
 
 """
 import numpy as np
-import vtk
-from vtk.numpy_interface import dataset_adapter as dsa
+import pyvista as pv
 import PVGeo
 from PVGeo.filters import ReshapeTable
 
 ################################################################################
 # Create some input table
-t0 = vtk.vtkTable()
+t0 = pv.Table()
 # Populate the tables
 arrs = [None, None, None]
 n = 400
@@ -28,9 +27,9 @@ arrs[0] = np.random.random(n)
 arrs[1] = np.random.random(n)
 arrs[2] = np.random.random(n)
 
-t0.AddColumn(PVGeo.convert_array(arrs[0], titles[0]))
-t0.AddColumn(PVGeo.convert_array(arrs[1], titles[1]))
-t0.AddColumn(PVGeo.convert_array(arrs[2], titles[2]))
+t0[titles[0]] = arrs[0]
+t0[titles[1]] = arrs[1]
+t0[titles[2]] = arrs[2]
 
 ################################################################################
 # Use the filter to reshape the table
@@ -40,14 +39,13 @@ output = ReshapeTable(order=order,
                       ncols=ncols,
                       nrows=nrows,
                       names=newtitles).apply(t0)
-
+print(output)
 
 ################################################################################
-# Check the output against NumPy
-wpdi = dsa.WrapDataObject(output)
+# Check the output
 tarr = np.zeros((nrows, ncols))
 for i in range(ncols):
-    tarr[:,i] = wpdi.RowData[i]
+    tarr[:,i] = output[i]
 arrs = np.array(arrs).T
 arrs = arrs.flatten()
 arrs = np.reshape(arrs, (nrows, ncols), order=order)
