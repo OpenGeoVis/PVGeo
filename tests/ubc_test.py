@@ -215,7 +215,7 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         reader.set_data_name('Lpout')
         mesh = reader.apply()
         self.assertTrue(mesh.n_cells > 0)
-        self.assertTrue(mesh.n_scalars > 0)
+        self.assertTrue(mesh.n_arrays > 0)
 
 
 ###############################################################################
