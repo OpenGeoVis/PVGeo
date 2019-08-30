@@ -300,7 +300,7 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="kn">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
 
-<span class="c1">################################################################################</span>
+<span class="c1">###############################################################################</span>
 <span class="c1">## Now lets use ``WriterBase`` to make a writer algorithm that ParaView can use</span>
 
 <span class="k">class</span> <span class="nc">WriteCellCenterData</span><span class="p">(</span><span class="n">WriterBase</span><span class="p">):</span>
@@ -353,7 +353,7 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
 
 
-<span class="c1">################################################################################</span>
+<span class="c1">###############################################################################</span>
 <span class="c1">## Now lets use ``WriterBase`` to make a writer algorithm for image data</span>
 
 
@@ -393,7 +393,7 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
 
 
 
-<span class="c1">################################################################################</span>
+<span class="c1">###############################################################################</span>
 <span class="c1">## Now wrap the cell centers writer for use in ParaView!</span>
 
 <span class="nd">@smproxy.writer</span><span class="p">(</span><span class="n">extensions</span><span class="o">=</span><span class="s2">&quot;dat&quot;</span><span class="p">,</span> <span class="n">file_description</span><span class="o">=</span><span class="s2">&quot;Cell Centers and Cell Data&quot;</span><span class="p">,</span> <span class="n">support_reload</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>

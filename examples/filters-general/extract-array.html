@@ -240,71 +240,43 @@
 <div class="sphx-glr-example-title section" id="extract-array-to-table">
 <span id="sphx-glr-examples-filters-general-extract-array-py"></span><h1>Extract Array to Table<a class="headerlink" href="#extract-array-to-table" title="Permalink to this headline">¶</a></h1>
 <p>This example will demonstrate how to extract an array from any input data set
-to make a <cite>vtkTable</cite> of that single data array</p>
+to make a <code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.Table</span></code> of that single data array. Aftwards, we plot
+a histogram of that data array.</p>
 <p>This example demos <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.ExtractArray</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PVGeo.filters</span> <span class="k">import</span> <span class="n">ExtractArray</span>
 <span class="kn">from</span> <span class="nn">pyvista</span> <span class="k">import</span> <span class="n">examples</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 <p>Create input data</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grd</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">load_rectilinear</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">download_st_helens</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Construct the filter</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">filt</span> <span class="o">=</span> <span class="n">ExtractArray</span><span class="p">()</span>
 <span class="c1"># Define the array to extract</span>
 <span class="c1"># Apply the filter on the input</span>
-<span class="n">table</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">grd</span><span class="p">,</span> <span class="s1">&#39;Random Data&#39;</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="s1">&#39;Elevation&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>vtkTable (0x39b4b70)
-  Debug: Off
-  Modified Time: 22528
-  Reference Count: 2
-  Registered Events: (none)
-  Information: 0x2b9ff50
-  Data Released: False
-  Global Release Data: Off
-  UpdateTime: 22540
-  Field Data:
-    Debug: Off
-    Modified Time: 22522
-    Reference Count: 1
-    Registered Events: (none)
-    Number Of Arrays: 0
-    Number Of Components: 0
-    Number Of Tuples: 0
-  RowData:
-    Debug: Off
-    Modified Time: 22536
-    Reference Count: 1
-    Registered Events: (none)
-    Number Of Arrays: 1
-    Array 0 name = Random Data
-    Number Of Components: 1
-    Number Of Tuples: 16146
-    Copy Tuple Flags: ( 1 1 1 1 1 0 1 1 )
-    Interpolate Flags: ( 1 1 1 1 1 0 0 1 )
-    Pass Through Flags: ( 1 1 1 1 1 1 1 1 )
-    Scalars: (none)
-    Vectors: (none)
-    Normals: (none)
-    TCoords: (none)
-    Tensors: (none)
-    GlobalIds: (none)
-    PedigreeIds: (none)
-    EdgeFlag: (none)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7fa2e114a468)
+  N Rows:       152709
+  N Arrays:     1
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.071 seconds)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;Elevation&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_extract-array_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_extract-array_001.png" />
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.921 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-extract-array-py">
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/d808e7ed6a3afd12bcecdc4f1b141ba7/extract-array.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">extract-array.py</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/d5e305259705a30f317e2789ecdb0101/extract-array.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">extract-array.py</span></code></a></p>
 </div>
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/5c62fa9ed6fc2116f7024b73823bf947/extract-array.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">extract-array.ipynb</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/a70caf2293cb4135123f6513cf529770/extract-array.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">extract-array.ipynb</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

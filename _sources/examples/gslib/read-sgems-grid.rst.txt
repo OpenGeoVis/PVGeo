@@ -10,14 +10,12 @@
 Read SGeMS Grid
 ~~~~~~~~~~~~~~~
 
-Read SGeMS Grid file formats. The examples shown here are downloaded from
-`Multiple-point Geostatistics stochastic modeling with training images <http://www.trainingimages.org/training-images-library.html>`_ website.
+Read SGeMS Grid file formats.
 
 
 .. code-block:: default
 
     # sphinx_gallery_thumbnail_number = 2
-    import pyvista
     from pyvista import examples
     from PVGeo.gslib import SGeMSGridReader
 
@@ -46,7 +44,7 @@ Read SGeMS Grid file formats. The examples shown here are downloaded from
 
  .. code-block:: none
 
-    UniformGrid (0x7f7a51b08ca8)
+    UniformGrid (0x7fa2e114af48)
       N Cells:      78000
       N Points:     157122
       X Bounds:     0.000e+00, 2.600e+02
@@ -146,7 +144,7 @@ Read SGeMS Grid file formats. The examples shown here are downloaded from
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  47.413 seconds)
+   **Total running time of the script:** ( 0 minutes  48.912 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-sgems-grid.py:

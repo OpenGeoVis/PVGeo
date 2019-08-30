@@ -10,8 +10,8 @@
 Array Math
 ~~~~~~~~~~
 
-This example will demonstrate how to to powerful a mathematical operation
-between to input arrays for any given source.
+This example will demonstrate how to perform a mathematical operation
+between two input arrays for any given source.
 
 This filter allows the user to select two input data arrays on which to perform
 math operations. The input arrays are used in their order of selection for the
@@ -73,7 +73,7 @@ Use the filter:
 
  .. code-block:: none
 
-    UniformGrid (0x7f7a51b08ac8)
+    UniformGrid (0x7fa2e114a0a8)
       N Cells:      243
       N Points:     400
       X Bounds:     0.000e+00, 9.000e+00
@@ -125,7 +125,7 @@ Use a custom math operation:
 
  .. code-block:: none
 
-    UniformGrid (0x7f7a51b08d68)
+    UniformGrid (0x7fa2e114a348)
       N Cells:      243
       N Points:     400
       X Bounds:     0.000e+00, 9.000e+00
@@ -150,9 +150,23 @@ Use a custom math operation:
 
 
 
+
+.. code-block:: default
+
+    output.plot(scalars='powered')
+
+
+
+.. image:: /examples/filters-general/images/sphx_glr_array-math_001.png
+    :class: sphx-glr-single-img
+
+
+
+
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.065 seconds)
+   **Total running time of the script:** ( 0 minutes  0.839 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_array-math.py:

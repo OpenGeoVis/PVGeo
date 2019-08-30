@@ -15,12 +15,13 @@ same number of rows into a single `vtkTable`.
 
 This example demos :class:`PVGeo.filters.CombineTables`
 
+Please note that this example only works on version of PyVista>=0.22.0
+
 
 .. code-block:: default
 
     import numpy as np
-    import vtk
-    from vtk.numpy_interface import dataset_adapter as dsa
+    import pyvista as pv
     import PVGeo
     from PVGeo.filters import CombineTables
 
@@ -35,17 +36,18 @@ Create some input tables
 
 .. code-block:: default
 
-    t0 = vtk.vtkTable()
-    t1 = vtk.vtkTable()
+    t0 = pv.Table()
+    t1 = pv.Table()
+
     # Populate the tables
     n = 100
     titles = ('Array 0', 'Array 1', 'Array 2')
     arr0 = np.random.random(n) # Table 0
     arr1 = np.random.random(n) # Table 0
-    t0.AddColumn(PVGeo.convert_array(arr0, titles[0]))
-    t0.AddColumn(PVGeo.convert_array(arr1, titles[1]))
+    t0[titles[0]] = arr0
+    t0[titles[1]] = arr1
     arr2 = np.random.random(n) # Table 1
-    t1.AddColumn(PVGeo.convert_array(arr2, titles[2]))
+    t1[titles[2]] = arr2
     arrs = [arr0, arr1, arr2]
 
 
@@ -57,16 +59,79 @@ Create some input tables
 
 .. code-block:: default
 
+    print(t0)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    Table (0x7fa2e11a1ee8)
+      N Rows:       100
+      N Arrays:     2
+
+
+
+
+
+.. code-block:: default
+
+    print(t1)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    Table (0x7fa2e11a1dc8)
+      N Rows:       100
+      N Arrays:     1
+
+
+
+
+
+.. code-block:: default
+
 
     # Now use the `CombineTables` filter:
     output = CombineTables().apply(t0, t1)
+    print(output)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    Table (0x7fa2e114a6a8)
+      N Rows:       100
+      N Arrays:     3
+
+
+
+
+
+.. code-block:: default
 
 
     # Here I verify the result
-    wpdi = dsa.WrapDataObject(output)
-
     for i in range(len(titles)):
-        arr = wpdi.RowData[titles[i]]
+        arr = output[titles[i]]
         assert(np.allclose(arr, arrs[i], rtol=0.0001))
 
 
@@ -77,7 +142,7 @@ Create some input tables
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.065 seconds)
+   **Total running time of the script:** ( 0 minutes  0.073 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_combine-tables.py:

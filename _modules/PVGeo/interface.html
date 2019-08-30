@@ -242,6 +242,8 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
+<span class="kn">from</span> <span class="nn">pyvista.utilities</span> <span class="k">import</span> <span class="n">convert_string_array</span><span class="p">,</span> <span class="n">get_vtk_type</span>
 <span class="kn">import</span> <span class="nn">vtk</span>
 <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
 <span class="kn">from</span> <span class="nn">vtk.util</span> <span class="k">import</span> <span class="n">numpy_support</span> <span class="k">as</span> <span class="n">nps</span>
@@ -249,28 +251,6 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">_helpers</span>
 
 
-<div class="viewcode-block" id="get_vtk_type"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.get_vtk_type">[docs]</a><span class="k">def</span> <span class="nf">get_vtk_type</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This looks up the VTK type for a give python data type.</span>
-
-<span class="sd">    Return:</span>
-<span class="sd">        int : the integer type id specified in vtkType.h</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">typ</span> <span class="o">=</span> <span class="n">nps</span><span class="o">.</span><span class="n">get_vtk_array_type</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">is</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">13</span>
-    <span class="k">return</span> <span class="n">typ</span></div>
-
-<div class="viewcode-block" id="convert_string_array"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.convert_string_array">[docs]</a><span class="k">def</span> <span class="nf">convert_string_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Strings&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A helper to convert a numpy array of strings to a vtkStringArray</span>
-
-<span class="sd">    Return:</span>
-<span class="sd">        vtkStringArray : the converted array</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
-        <span class="n">vtkarr</span><span class="o">.</span><span class="n">InsertNextValue</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-    <span class="n">vtkarr</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">vtkarr</span></div>
 
 <div class="viewcode-block" id="convert_array"><a class="viewcode-back" href="../../content/PVGeo/interface.html#PVGeo.interface.convert_array">[docs]</a><span class="k">def</span> <span class="nf">convert_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pdf</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A helper to convert a NumPy array to a vtkDataArray or vice versa</span>
@@ -434,26 +414,10 @@
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Points must be 3D. Try adding a third dimension of zeros.&#39;</span><span class="p">)</span>
 
     <span class="n">atts</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">::]</span>
-    <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-
-    <span class="n">npoints</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="c1"># Make VTK cells array</span>
-    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">npoints</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
-                       <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">npoints</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
-    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
-    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">npoints</span><span class="p">))</span>
-    <span class="n">vtkcells</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCellArray</span><span class="p">()</span>
-    <span class="n">vtkcells</span><span class="o">.</span><span class="n">SetCells</span><span class="p">(</span><span class="n">npoints</span><span class="p">,</span> <span class="n">nps</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="n">vtk</span><span class="o">.</span><span class="n">VTK_ID_TYPE</span><span class="p">))</span>
-
-    <span class="c1"># Convert points to vtk object</span>
-    <span class="n">pts</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
-    <span class="n">pts</span><span class="o">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">convert_array</span><span class="p">(</span><span class="n">points</span><span class="p">))</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
 
     <span class="c1"># Create polydata</span>
-    <span class="n">pdata</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">()</span>
-    <span class="n">pdata</span><span class="o">.</span><span class="n">SetPoints</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
-    <span class="n">pdata</span><span class="o">.</span><span class="n">SetVerts</span><span class="p">(</span><span class="n">vtkcells</span><span class="p">)</span>
+    <span class="n">pdata</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 
     <span class="c1"># Add attributes if given</span>
     <span class="n">scalSet</span> <span class="o">=</span> <span class="kc">False</span>
@@ -515,8 +479,6 @@
     <span class="sd">&quot;&quot;&quot;This will wrap any given VTK dataset via the vtkInterface Python package</span>
 <span class="sd">    if it is available and return the wrapped data object. If pyvista is</span>
 <span class="sd">    unavailable, then the given object is returned.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">dataset</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">pyvista</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>

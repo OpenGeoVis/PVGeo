@@ -243,14 +243,13 @@
 <p>This filter will take a <cite>vtkTable</cite> object and reshape it. This filter essentially treats <cite>vtkTable`s as 2D matrices and reshapes them using `numpy.reshape</cite> in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.</p>
 <p>This example demos <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.ReshapeTable</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">vtk</span>
-<span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
 <span class="kn">import</span> <span class="nn">PVGeo</span>
 <span class="kn">from</span> <span class="nn">PVGeo.filters</span> <span class="k">import</span> <span class="n">ReshapeTable</span>
 </pre></div>
 </div>
 <p>Create some input table</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Table</span><span class="p">()</span>
 <span class="c1"># Populate the tables</span>
 <span class="n">arrs</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">400</span>
@@ -261,9 +260,9 @@
 <span class="n">arrs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">arrs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arrs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arrs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">titles</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-<span class="n">t0</span><span class="o">.</span><span class="n">AddColumn</span><span class="p">(</span><span class="n">PVGeo</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arrs</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">titles</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">t0</span><span class="p">[</span><span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">arrs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">t0</span><span class="p">[</span><span class="n">titles</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">arrs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">t0</span><span class="p">[</span><span class="n">titles</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span> <span class="o">=</span> <span class="n">arrs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Use the filter to reshape the table</p>
@@ -273,13 +272,19 @@
                       <span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span>
                       <span class="n">nrows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span>
                       <span class="n">names</span><span class="o">=</span><span class="n">newtitles</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">t0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Check the output against NumPy</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wpdi</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">WrapDataObject</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="n">tarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="p">))</span>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7fa2e114ae28)
+  N Rows:       600
+  N Arrays:     2
+</pre></div>
+</div>
+<p>Check the output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncols</span><span class="p">):</span>
-    <span class="n">tarr</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">wpdi</span><span class="o">.</span><span class="n">RowData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">tarr</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 <span class="n">arrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arrs</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 <span class="n">arrs</span> <span class="o">=</span> <span class="n">arrs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="n">arrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">arrs</span><span class="p">,</span> <span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
@@ -287,13 +292,13 @@
 <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tarr</span><span class="p">,</span> <span class="n">arrs</span><span class="p">))</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.064 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.059 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-reshape-table-py">
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/9b9c773d55c0d1605eb4db1d66ed7309/reshape-table.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">reshape-table.py</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/4c7be5225fe65e0abfc2bdd9f7216d1f/reshape-table.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">reshape-table.py</span></code></a></p>
 </div>
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/fed3c77f4b80a3f3d82e213139c1bf55/reshape-table.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">reshape-table.ipynb</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/5f914090dc1b46d55f8543ad4808776b/reshape-table.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">reshape-table.ipynb</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

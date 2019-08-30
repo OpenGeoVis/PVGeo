@@ -95,7 +95,7 @@ Example
     import numpy as np
     from vtk.numpy_interface import dataset_adapter as dsa
 
-    ################################################################################
+    ###############################################################################
     ## Now lets use ``WriterBase`` to make a writer algorithm that ParaView can use
 
     class WriteCellCenterData(WriterBase):
@@ -148,7 +148,7 @@ Example
                 self.Modified()
 
 
-    ################################################################################
+    ###############################################################################
     ## Now lets use ``WriterBase`` to make a writer algorithm for image data
 
 
@@ -188,7 +188,7 @@ Example
 
 
 
-    ################################################################################
+    ###############################################################################
     ## Now wrap the cell centers writer for use in ParaView!
 
     @smproxy.writer(extensions="dat", file_description="Cell Centers and Cell Data", support_reload=False)

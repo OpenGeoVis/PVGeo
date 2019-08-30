@@ -10,7 +10,8 @@
 Extract Array to Table
 ~~~~~~~~~~~~~~~~~~~~~~
 This example will demonstrate how to extract an array from any input data set
-to make a `vtkTable` of that single data array
+to make a :class:`pyvista.Table` of that single data array. Aftwards, we plot
+a histogram of that data array.
 
 This example demos :class:`PVGeo.filters.ExtractArray`
 
@@ -19,6 +20,8 @@ This example demos :class:`PVGeo.filters.ExtractArray`
 
     from PVGeo.filters import ExtractArray
     from pyvista import examples
+    import matplotlib.pyplot as plt
+
 
 
 
@@ -30,7 +33,7 @@ Create input data
 
 .. code-block:: default
 
-    grd = examples.load_rectilinear()
+    dataset = examples.download_st_helens()
 
 
 
@@ -46,8 +49,9 @@ Construct the filter
     filt = ExtractArray()
     # Define the array to extract
     # Apply the filter on the input
-    table = filt.apply(grd, 'Random Data')
+    table = filt.apply(dataset, 'Elevation')
     print(table)
+
 
 
 
@@ -58,44 +62,22 @@ Construct the filter
 
  .. code-block:: none
 
-    vtkTable (0x39b4b70)
-      Debug: Off
-      Modified Time: 22528
-      Reference Count: 2
-      Registered Events: (none)
-      Information: 0x2b9ff50
-      Data Released: False
-      Global Release Data: Off
-      UpdateTime: 22540
-      Field Data:
-        Debug: Off
-        Modified Time: 22522
-        Reference Count: 1
-        Registered Events: (none)
-        Number Of Arrays: 0
-        Number Of Components: 0
-        Number Of Tuples: 0
-      RowData: 
-        Debug: Off
-        Modified Time: 22536
-        Reference Count: 1
-        Registered Events: (none)
-        Number Of Arrays: 1
-        Array 0 name = Random Data
-        Number Of Components: 1
-        Number Of Tuples: 16146
-        Copy Tuple Flags: ( 1 1 1 1 1 0 1 1 )
-        Interpolate Flags: ( 1 1 1 1 1 0 0 1 )
-        Pass Through Flags: ( 1 1 1 1 1 1 1 1 )
-        Scalars: (none)
-        Vectors: (none)
-        Normals: (none)
-        TCoords: (none)
-        Tensors: (none)
-        GlobalIds: (none)
-        PedigreeIds: (none)
-        EdgeFlag: (none)
+    Table (0x7fa2e114a468)
+      N Rows:       152709
+      N Arrays:     1
 
+
+
+
+
+.. code-block:: default
+
+    plt.hist(table['Elevation'])
+
+
+
+.. image:: /examples/filters-general/images/sphx_glr_extract-array_001.png
+    :class: sphx-glr-single-img
 
 
 
@@ -103,7 +85,7 @@ Construct the filter
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.071 seconds)
+   **Total running time of the script:** ( 0 minutes  0.921 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-array.py:

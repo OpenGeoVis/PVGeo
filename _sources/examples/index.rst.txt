@@ -67,7 +67,7 @@ General Filters
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to to powerful a mathematical operation between to input arra...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to perform a mathematical operation between two input arrays ...">
 
 .. only:: html
 
@@ -347,6 +347,9 @@ Grids
 GSLib
 -----
 
+The examples shown here are downloaded from
+`Multiple-point Geostatistics stochastic modeling with training images <http://www.trainingimages.org/training-images-library.html>`_ website.
+
 
 
 .. raw:: html
@@ -371,7 +374,7 @@ GSLib
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Read SGeMS Grid file formats. The examples shown here are downloaded from `Multiple-point Geost...">
+    <div class="sphx-glr-thumbcontainer" tooltip="Read SGeMS Grid file formats.">
 
 .. only:: html
 
@@ -388,6 +391,26 @@ GSLib
    :hidden:
 
    /examples/gslib/read-sgems-grid
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read any GSLib file as a table pyvist.Table">
+
+.. only:: html
+
+    .. figure:: /examples/gslib/images/thumb/sphx_glr_read-table_thumb.png
+
+        :ref:`sphx_glr_examples_gslib_read-table.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gslib/read-table
 .. raw:: html
 
     <div style='clear:both'></div>
