@@ -236,15 +236,15 @@
 <span class="kn">from</span> <span class="nn">PVGeo.gslib</span> <span class="k">import</span> <span class="n">GSLibPointSetReader</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">points_url</span> <span class="o">=</span> <span class="s1">&#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/b_100sampledatawl.sgems&#39;</span>
-<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">points_url</span><span class="p">,</span> <span class="s1">&#39;b_100sampledatawl.sgems&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># points_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/b_100sampledatawl.sgems&#39;</span>
+<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span><span class="s1">&#39;b_100sampledatawl.sgems&#39;</span><span class="p">)</span>
 
 <span class="n">point_set</span> <span class="o">=</span> <span class="n">GSLibPointSetReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">point_set</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7fb546c98dc8)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7fe9ef24d8e8)
   N Cells:      100
   N Points:     100
   X Bounds:     3.000e+00, 2.520e+02
@@ -257,7 +257,7 @@
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_read-point-set_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-point-set_001.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.506 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.796 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gslib-read-point-set-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/72449efec2368b5a0221d3a668dba2df/read-point-set.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-point-set.py</span></code></a></p>

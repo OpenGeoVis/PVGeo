@@ -71,7 +71,7 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7fb546c98ee8)
+    Table (0x7fe9ee789f48)
       N Rows:       100
       N Arrays:     2
 
@@ -93,7 +93,7 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7fb546c98dc8)
+    Table (0x7fe9ee789d68)
       N Rows:       100
       N Arrays:     1
 
@@ -118,7 +118,7 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7fb546c4d6a8)
+    Table (0x7fe9ee789fa8)
       N Rows:       100
       N Arrays:     3
 
@@ -142,7 +142,7 @@ Create some input tables
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.061 seconds)
+   **Total running time of the script:** ( 0 minutes  0.089 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_combine-tables.py:

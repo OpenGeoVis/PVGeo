@@ -236,15 +236,15 @@
 <span class="kn">from</span> <span class="nn">PVGeo.gslib</span> <span class="k">import</span> <span class="n">SGeMSGridReader</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid_url</span> <span class="o">=</span> <span class="s1">&#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/a_wlreferencecat.zip&#39;</span>
-<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">grid_url</span><span class="p">,</span> <span class="s1">&#39;A_WLreferenceCAT.sgems.zip&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/a_wlreferencecat.zip&#39;</span>
+<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span><span class="s1">&#39;A_WLreferenceCAT.sgems&#39;</span><span class="p">)</span>
 
 <span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>UniformGrid (0x7fb546c4df48)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>UniformGrid (0x7fe9ee7bb288)
   N Cells:      78000
   N Points:     157122
   X Bounds:     0.000e+00, 2.600e+02
@@ -260,24 +260,24 @@
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_read-sgems-grid_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-sgems-grid_001.png" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid_url</span> <span class="o">=</span> <span class="s1">&#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/maules_creek_3d.zip&#39;</span>
-<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">grid_url</span><span class="p">,</span> <span class="s1">&#39;Maules_Creek_3D.SGEMS.zip&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/maules_creek_3d.zip&#39;</span>
+<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span><span class="s1">&#39;Maules_Creek_3D.SGEMS.zip&#39;</span><span class="p">)</span>
 
 <span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_read-sgems-grid_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-sgems-grid_002.png" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid_url</span> <span class="o">=</span> <span class="s1">&#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti_horizons_continuous.zip&#39;</span>
-<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">grid_url</span><span class="p">,</span> <span class="s1">&#39;TI_horizons_continuous.SGEMS.zip&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti_horizons_continuous.zip&#39;</span>
+<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span><span class="s1">&#39;TI_horizons_continuous.SGEMS.zip&#39;</span><span class="p">)</span>
 
 <span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">grid</span><span class="o">.</span><span class="n">threshold</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.06</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clim</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">get_data_range</span><span class="p">())</span>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_read-sgems-grid_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-sgems-grid_003.png" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid_url</span> <span class="o">=</span> <span class="s1">&#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti.zip&#39;</span>
-<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">grid_url</span><span class="p">,</span> <span class="s1">&#39;ti.sgems.zip&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti.zip&#39;</span>
+<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span><span class="s1">&#39;ti.sgems.zip&#39;</span><span class="p">)</span>
 
 <span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;photo&#39;</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bone&#39;</span><span class="p">)</span>
@@ -288,7 +288,7 @@
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_read-sgems-grid_005.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-sgems-grid_005.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  47.048 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  55.420 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gslib-read-sgems-grid-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/56a5c2e9da1b3123e2e5d4aaf2ca9c68/read-sgems-grid.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-sgems-grid.py</span></code></a></p>

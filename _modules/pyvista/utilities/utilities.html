@@ -219,17 +219,13 @@
 <span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">ctypes</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">imageio</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scooby</span>
 <span class="kn">import</span> <span class="nn">vtk</span>
 <span class="kn">import</span> <span class="nn">vtk.util.numpy_support</span> <span class="k">as</span> <span class="nn">nps</span>
 
 <span class="kn">import</span> <span class="nn">pyvista</span>
-
-<span class="kn">from</span> <span class="nn">.fileio</span> <span class="k">import</span> <span class="n">get_ext</span><span class="p">,</span> <span class="n">get_reader</span><span class="p">,</span> <span class="n">standard_reader_routine</span>
 
 <span class="n">POINT_DATA_FIELD</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">CELL_DATA_FIELD</span> <span class="o">=</span> <span class="mi">1</span>
@@ -459,15 +455,18 @@
     <span class="k">return</span> <span class="n">vtkpts</span>
 
 
-<span class="k">def</span> <span class="nf">lines_from_points</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">line_segments_from_points</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates line from points.  Assumes points are ordered as line segments.</span>
+<span class="sd">    Generates non-connected line segments from points.</span>
+<span class="sd">    Assumes points are ordered as line segments and an even number of points</span>
+<span class="sd">    are</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    points : np.ndarray</span>
-<span class="sd">        Points representing line segments.  For example, two line segments</span>
-<span class="sd">        would be represented as:</span>
+<span class="sd">        Points representing line segments. An even number must be given as</span>
+<span class="sd">        every two vertices represent a single line segment. For example, two</span>
+<span class="sd">        line segments would be represented as:</span>
 
 <span class="sd">        np.array([[0, 0, 0], [1, 0, 0], [1, 0, 0], [1, 1, 0]])</span>
 
@@ -487,6 +486,8 @@
 <span class="sd">    &gt;&gt;&gt; lines.plot() # doctest:+SKIP</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;An even number of points must be given to define each segment.&quot;</span><span class="p">)</span>
     <span class="c1"># Assuming ordered points, create array defining line order</span>
     <span class="n">n_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
     <span class="n">n_lines</span> <span class="o">=</span> <span class="n">n_points</span> <span class="o">//</span> <span class="mi">2</span>
@@ -496,6 +497,32 @@
     <span class="n">poly</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">()</span>
     <span class="n">poly</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points</span>
     <span class="n">poly</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span>
+    <span class="k">return</span> <span class="n">poly</span>
+
+
+<span class="k">def</span> <span class="nf">lines_from_points</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Given an array of points, make a connected line set</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    points : np.ndarray</span>
+<span class="sd">        Points representing the vertices of the connected segments. For</span>
+<span class="sd">        example, two line segments would be represented as:</span>
+
+<span class="sd">        np.array([[0, 0, 0], [1, 0, 0], [1, 1, 0]])</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    lines : pyvista.PolyData</span>
+<span class="sd">        PolyData with lines and cells.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">poly</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">()</span>
+    <span class="n">poly</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points</span>
+    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+    <span class="n">cells</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+    <span class="n">cells</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+    <span class="n">poly</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="n">cells</span>
     <span class="k">return</span> <span class="n">poly</span>
 
 
@@ -574,16 +601,16 @@
 <span class="sd">    * 3D :class:`numpy.ndarray` representing a volume. Values will be scalars.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wrappers</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;vtkUnstructuredGrid&#39;</span> <span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UnstructuredGrid</span><span class="p">,</span>
-        <span class="s1">&#39;vtkRectilinearGrid&#39;</span> <span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">RectilinearGrid</span><span class="p">,</span>
-        <span class="s1">&#39;vtkStructuredGrid&#39;</span> <span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">StructuredGrid</span><span class="p">,</span>
-        <span class="s1">&#39;vtkPolyData&#39;</span> <span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">,</span>
-        <span class="s1">&#39;vtkImageData&#39;</span> <span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">,</span>
-        <span class="s1">&#39;vtkStructuredPoints&#39;</span> <span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">,</span>
-        <span class="s1">&#39;vtkMultiBlockDataSet&#39;</span> <span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">,</span>
-        <span class="s1">&#39;vtkTable&#39;</span> <span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Table</span><span class="p">,</span>
-        <span class="c1"># &#39;vtkParametricSpline&#39; : pyvista.Spline,</span>
-        <span class="p">}</span>
+        <span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UnstructuredGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">RectilinearGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkStructuredGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">StructuredGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkPolyData&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">,</span>
+        <span class="s1">&#39;vtkImageData&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkStructuredPoints&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkMultiBlockDataSet&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">,</span>
+        <span class="s1">&#39;vtkTable&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Table</span><span class="p">,</span>
+        <span class="c1"># &#39;vtkParametricSpline&#39;: pyvista.Spline,</span>
+    <span class="p">}</span>
     <span class="c1"># Otherwise, we assume a VTK data object was passed</span>
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">vtkdataset</span><span class="p">,</span> <span class="s1">&#39;GetClassName&#39;</span><span class="p">):</span>
         <span class="n">key</span> <span class="o">=</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">GetClassName</span><span class="p">()</span>
@@ -615,22 +642,14 @@
 <span class="k">def</span> <span class="nf">image_to_texture</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts ``vtkImageData`` (:class:`pyvista.UniformGrid`) to a ``vtkTexture``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">vtex</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTexture</span><span class="p">()</span>
-    <span class="n">vtex</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="n">vtex</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">vtex</span>
+    <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Texture</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">numpy_to_texture</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert a NumPy image array to a vtk.vtkTexture&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Unknown input type (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">image</span><span class="p">)))</span>
-    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s1">&#39;Input image must be nn by nm by RGB&#39;</span><span class="p">)</span>
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">((</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="n">grid</span><span class="o">.</span><span class="n">point_arrays</span><span class="p">[</span><span class="s1">&#39;Image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="o">.</span><span class="n">set_active_scalar</span><span class="p">(</span><span class="s1">&#39;Image&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">image_to_texture</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Texture</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">is_inside_bounds</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">bounds</span><span class="p">):</span>

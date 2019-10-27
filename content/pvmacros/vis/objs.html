@@ -234,7 +234,7 @@
 <dl class="class">
 <dt id="pvmacros.vis.objs.camera">
 <em class="property">class </em><code class="sig-prename descclassname">pvmacros.vis.objs.</code><code class="sig-name descname">camera</code><span class="sig-paren">(</span><em class="sig-param">cam=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>An object to store a single camera location/view. You can make a list/dict of these objects to save interesting views for your project. This object saves just a few parameters about the camera so that it can easily be reconstructed.</p>
 <dl class="method">
 <dt id="pvmacros.vis.objs.camera._getFocalPoint">
@@ -263,8 +263,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The file basename for the serialized file (defualt is default for output def)</p></li>
-<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The directory from which you wish to load the views. Defaults to user home directory for relative paths.</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The file basename for the serialized file (defualt is default for output def)</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The directory from which you wish to load the views. Defaults to user home directory for relative paths.</p></li>
 </ul>
 </dd>
 </dl>
@@ -277,9 +277,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>lib</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – some iterable object containg multiple <cite>camera</cite> objects</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The file basename for the serialized file</p></li>
-<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The directory you wish to save the views. Defaults to user home directory</p></li>
+<li><p><strong>lib</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – some iterable object containg multiple <cite>camera</cite> objects</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The file basename for the serialized file</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The directory you wish to save the views. Defaults to user home directory</p></li>
 </ul>
 </dd>
 </dl>
@@ -293,8 +293,8 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cam</strong> (<em>vtkRenderingOpenGL2Python.vtkOpenGLCamera</em>) – The camera you wish to view then save a screenshot</p></li>
-<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The directory you wish to save the screenshot. Defaults to user home directory</p></li>
-<li><p><strong>basenm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The file basename for the screenshot</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The directory you wish to save the screenshot. Defaults to user home directory</p></li>
+<li><p><strong>basenm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The file basename for the screenshot</p></li>
 </ul>
 </dd>
 </dl>
@@ -309,8 +309,8 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>d</strong> (<em>view</em>) – some iterable object containg multiple <cite>camera</cite> objects</p></li>
 <li><p><strong>cam</strong> (<em>vtkRenderingOpenGL2Python.vtkOpenGLCamera</em>) – The camera you wish to view then save a screenshot</p></li>
-<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The directory you wish to save the screenshot. Defaults to user home directory</p></li>
-<li><p><strong>basenm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The file basename for the screenshot</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The directory you wish to save the screenshot. Defaults to user home directory</p></li>
+<li><p><strong>basenm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The file basename for the screenshot</p></li>
 </ul>
 </dd>
 </dl>

@@ -28,8 +28,9 @@ Read SGeMS Grid file formats.
 
 .. code-block:: default
 
-    grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/a_wlreferencecat.zip'
-    filename, _ = examples.downloads._retrieve_file(grid_url, 'A_WLreferenceCAT.sgems.zip')
+
+    # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/a_wlreferencecat.zip'
+    filename, _ = examples.downloads._download_file('A_WLreferenceCAT.sgems')
 
     grid = SGeMSGridReader().apply(filename)
     print(grid)
@@ -44,7 +45,7 @@ Read SGeMS Grid file formats.
 
  .. code-block:: none
 
-    UniformGrid (0x7fb546c4df48)
+    UniformGrid (0x7fe9ee7bb288)
       N Cells:      78000
       N Points:     157122
       X Bounds:     0.000e+00, 2.600e+02
@@ -75,8 +76,9 @@ Read SGeMS Grid file formats.
 
 .. code-block:: default
 
-    grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/maules_creek_3d.zip'
-    filename, _ = examples.downloads._retrieve_file(grid_url, 'Maules_Creek_3D.SGEMS.zip')
+
+    # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/maules_creek_3d.zip'
+    filename, _ = examples.downloads._download_file('Maules_Creek_3D.SGEMS.zip')
 
     grid = SGeMSGridReader().apply(filename)
     grid.plot(categories=True)
@@ -94,8 +96,9 @@ Read SGeMS Grid file formats.
 
 .. code-block:: default
 
-    grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti_horizons_continuous.zip'
-    filename, _ = examples.downloads._retrieve_file(grid_url, 'TI_horizons_continuous.SGEMS.zip')
+
+    # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti_horizons_continuous.zip'
+    filename, _ = examples.downloads._download_file('TI_horizons_continuous.SGEMS.zip')
 
     grid = SGeMSGridReader().apply(filename)
     grid.threshold([-4, 1.06]).plot(clim=grid.get_data_range())
@@ -113,8 +116,9 @@ Read SGeMS Grid file formats.
 
 .. code-block:: default
 
-    grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti.zip'
-    filename, _ = examples.downloads._retrieve_file(grid_url, 'ti.sgems.zip')
+
+    # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti.zip'
+    filename, _ = examples.downloads._download_file('ti.sgems.zip')
 
     grid = SGeMSGridReader().apply(filename)
     grid.plot(scalars='photo', cpos='xy', cmap='bone')
@@ -144,7 +148,7 @@ Read SGeMS Grid file formats.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  47.048 seconds)
+   **Total running time of the script:** ( 0 minutes  55.420 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-sgems-grid.py:

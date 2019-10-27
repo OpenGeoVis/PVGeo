@@ -28,8 +28,9 @@ Read GSLib point set file
 
 .. code-block:: default
 
-    points_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/b_100sampledatawl.sgems'
-    filename, _ = examples.downloads._retrieve_file(points_url, 'b_100sampledatawl.sgems')
+
+    # points_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/b_100sampledatawl.sgems'
+    filename, _ = examples.downloads._download_file('b_100sampledatawl.sgems')
 
     point_set = GSLibPointSetReader().apply(filename)
     print(point_set)
@@ -44,7 +45,7 @@ Read GSLib point set file
 
  .. code-block:: none
 
-    PolyData (0x7fb546c98dc8)
+    PolyData (0x7fe9ef24d8e8)
       N Cells:      100
       N Points:     100
       X Bounds:     3.000e+00, 2.520e+02
@@ -71,7 +72,7 @@ Read GSLib point set file
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.506 seconds)
+   **Total running time of the script:** ( 0 minutes  0.796 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-point-set.py:
