@@ -90,10 +90,3 @@ table_to_data_frame
 
 .. autofunction:: PVGeo.interface.table_to_data_frame
 
-
-
-wrap_pyvista
-------------
-
-.. autofunction:: PVGeo.interface.wrap_pyvista
-

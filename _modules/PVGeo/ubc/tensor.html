@@ -255,9 +255,10 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;UBC Tensor Mesh Reader&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;reader&#39;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: UBC Mesh 2D/3D Two-File Format&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                                   <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkRectilinearGrid</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__models</span> <span class="o">=</span> <span class="p">[]</span>
@@ -453,7 +454,7 @@
 
         <span class="c1">#--- Read in the mesh ---#</span>
         <span class="n">fileLines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">FileName</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;!&#39;</span><span class="p">)</span>
+                                  <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;!&#39;</span><span class="p">)</span>
 
         <span class="c1"># Get mesh dimensions</span>
         <span class="n">dim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fileLines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
@@ -605,11 +606,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;UBC Tensor Mesh Appender&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ModelAppenderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span>
-            <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span>
-            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                                   <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span>
+                                   <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span>
+                                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="TensorMeshAppender._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshAppender._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -640,11 +642,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Append UBC Discrete Topography&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span>
-                       <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                 <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
+                               <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
+                               <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_topoFileName</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__indices</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="kc">True</span>
@@ -668,7 +671,8 @@
 <div class="viewcode-block" id="TopoMeshAppender.Modified"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.Modified">[docs]</a>    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Call modified if the files needs to be read again again.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">read_again</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="n">read_again</span>
+        <span class="k">if</span> <span class="n">read_again</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="n">read_again</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TopoMeshAppender.modified"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.modified">[docs]</a>    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -685,7 +689,7 @@
         <span class="n">dim</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__ne</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__nn</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dim</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">dim</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__indices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">content</span><span class="p">[</span><span class="mi">1</span><span class="p">::])),</span>
-                            <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">],</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                                     <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">],</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="c1"># NOTE: K indices are inverted</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span></div>
@@ -729,6 +733,7 @@
 
 
     <span class="c1">#### Setters and Getters ####</span>
+
 
 <div class="viewcode-block" id="TopoMeshAppender.clear_topo_file"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.clear_topo_file">[docs]</a>    <span class="k">def</span> <span class="nf">clear_topo_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Use to clear data file name.</span>

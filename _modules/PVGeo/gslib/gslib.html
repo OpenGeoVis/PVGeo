@@ -221,12 +221,10 @@
 <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;GSLib/GeoEAS File I/O&#39;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">from</span> <span class="nn">..readers</span> <span class="k">import</span> <span class="n">DelimitedTextReader</span><span class="p">,</span> <span class="n">DelimitedPointsReaderBase</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
 <span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">WriterBase</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">interface</span>
+<span class="kn">from</span> <span class="nn">..readers</span> <span class="k">import</span> <span class="n">DelimitedPointsReaderBase</span><span class="p">,</span> <span class="n">DelimitedTextReader</span>
 
 
 <span class="k">class</span> <span class="nc">_GSLibReaderMethods</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -248,6 +246,7 @@
 
     <span class="c1">#### Seters and Geters ####</span>
 
+
     <span class="k">def</span> <span class="nf">get_file_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the file header. If file hasn&#39;t been read, returns ``None``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -267,6 +266,7 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;GSLib Table Reader&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;reader&#39;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: GSLib Table&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">DelimitedTextReader</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_split_on_white_space</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
@@ -280,6 +280,7 @@
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;reader&#39;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: GSLib Point Set&#39;</span>
     <span class="n">extensions</span> <span class="o">=</span> <span class="n">_GSLibReaderMethods</span><span class="o">.</span><span class="n">extensions</span> <span class="o">+</span> <span class="s1">&#39;gslibpts ptset gpts&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">DelimitedPointsReaderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_split_on_white_space</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
@@ -290,6 +291,7 @@
     <span class="sd">&quot;&quot;&quot;Write the row data in a ``vtkTable`` to the GSLib Format&quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Write ``vtkTable`` To GSLib Format&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;writer&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">):</span>
         <span class="n">WriterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;gslib&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_header</span> <span class="o">=</span> <span class="s1">&#39;Data saved by PVGeo&#39;</span>

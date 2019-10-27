@@ -220,15 +220,12 @@
 
 <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Transform&#39;</span>
 
-<span class="kn">import</span> <span class="nn">warnings</span>
-
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">vtk</span>
 <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
 
 <span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
 <span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">FilterBase</span>
-
 
 <span class="c1">###############################################################################</span>
 
@@ -239,11 +236,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Table To Time Grid&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">,</span>
                  <span class="n">spacing</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">origin</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
                  <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                            <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">extent</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;`extent` must be of length 4.&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">extent</span><span class="p">)</span>
@@ -313,6 +311,7 @@
 
     <span class="c1">#### Algorithm Methods ####</span>
 
+
 <div class="viewcode-block" id="TableToTimeGrid.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
@@ -355,6 +354,7 @@
 
 
     <span class="c1">#### Setters / Getters ####</span>
+
 
 <div class="viewcode-block" id="TableToTimeGrid.Modified"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.Modified">[docs]</a>    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Call modified if the filter needs to run again&quot;&quot;&quot;</span>
@@ -430,10 +430,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Reverse Image Data Axii&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)):</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">)</span>
+                            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span>
+                            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__axes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">axes</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># Z Y X (FORTRAN)</span>
 
 <div class="viewcode-block" id="ReverseImageDataAxii._reverse_grid_axes"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii._reverse_grid_axes">[docs]</a>    <span class="k">def</span> <span class="nf">_reverse_grid_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idi</span><span class="p">,</span> <span class="n">ido</span><span class="p">):</span>
@@ -522,10 +523,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Translate Grid Origin&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corner</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">)</span>
+                            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span>
+                            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__corner</span> <span class="o">=</span> <span class="n">corner</span>
 
 

@@ -228,13 +228,13 @@
 
 <span class="kn">import</span> <span class="nn">warnings</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="c1"># Outside Imports:</span>
 <span class="kn">import</span> <span class="nn">vtk</span>  <span class="c1"># NOTE: This is the first import executed in the package! Keep here!!</span>
 <span class="kn">import</span> <span class="nn">vtk.util.vtkAlgorithm</span> <span class="k">as</span> <span class="nn">valg</span>  <span class="c1"># import VTKPythonAlgorithmBase</span>
 
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
+
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">_helpers</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">interface</span>
 
 <span class="c1">###############################################################################</span>
 
@@ -263,11 +263,11 @@
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
-                <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                 <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
+                 <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">valg</span><span class="o">.</span><span class="n">VTKPythonAlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
+                                             <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
+                                             <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
         <span class="c1"># Add error handler to make errors easier to deal with</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__error_observer</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">ErrorObserver</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__error_observer</span><span class="o">.</span><span class="n">make_observer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -276,7 +276,7 @@
         <span class="sd">&quot;&quot;&quot;A conveience method to get the output data object of this ``PVGeo``</span>
 <span class="sd">        algorithm.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_pyvista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutputDataObject</span><span class="p">(</span><span class="n">port</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutputDataObject</span><span class="p">(</span><span class="n">port</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="AlgorithmBase.error_occurred"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.error_occurred">[docs]</a>    <span class="k">def</span> <span class="nf">error_occurred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;A conveience method for handling errors on the VTK pipeline</span>
@@ -294,7 +294,7 @@
 <div class="viewcode-block" id="AlgorithmBase.apply"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Update the algorithm and get the output data object&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_pyvista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="AlgorithmBase.update"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.AlgorithmBase.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Alias for self.Update()&quot;&quot;&quot;</span>
@@ -311,10 +311,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Reader Base Base&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                               <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                               <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c1"># Attributes are namemangled to ensure proper setters/getters are used</span>
         <span class="c1"># For the reader</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__filenames</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;filenames&#39;</span><span class="p">,</span> <span class="p">[])</span>
@@ -337,7 +338,8 @@
 <div class="viewcode-block" id="ReaderBaseBase.Modified"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.Modified">[docs]</a>    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Call modified if the files needs to be read again again</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">read_again</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="n">read_again</span>
+        <span class="k">if</span> <span class="n">read_again</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="n">read_again</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ReaderBaseBase.modified"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBaseBase.modified">[docs]</a>    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -405,7 +407,7 @@
         <span class="sd">&quot;&quot;&quot;Given a file name (or list of file names), perfrom the read&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">AddFileName</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_pyvista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
 
 <span class="c1">###############################################################################</span>
 
@@ -415,18 +417,19 @@
 <span class="sd">    methods&quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Filter Base&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-        <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
-        <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                 <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
+                 <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                               <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
+                               <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="FilterBase.apply"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.FilterBase.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run this algorithm on the given input dataset&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_pyvista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
 
 
 
@@ -438,9 +441,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Reader Base: Time Varying&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                                <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c1"># Attributes are namemangled to ensure proper setters/getters are used</span>
         <span class="c1"># For the VTK/ParaView pipeline</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dt&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
@@ -467,6 +471,7 @@
 
     <span class="c1">#### Seters and Geters ####</span>
 
+
 <div class="viewcode-block" id="ReaderBase.get_time_step_values"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.ReaderBase.get_time_step_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Use this in ParaView decorator to register timesteps on the pipeline.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -489,10 +494,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Filter Preserve Type Base&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;inputType&#39;</span><span class="p">,</span> <span class="s1">&#39;vtkDataObject&#39;</span><span class="p">),</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;inputType&#39;</span><span class="p">,</span> <span class="s1">&#39;vtkDataObject&#39;</span><span class="p">),</span>
+                            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_port</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># This is the port to preserve data object type</span>
 
     <span class="c1"># THIS IS CRUCIAL to preserve data type through filter</span>
@@ -514,10 +520,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Two File Reader Base&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
+                               <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                               <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dt&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__mesh_filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;meshfile&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># Can only be one!</span>
@@ -563,8 +570,10 @@
 <span class="sd">            read_again_mesh (bool): set the status of the reader for mesh files.</span>
 <span class="sd">            read_again_models (bool): set the status of the reader for model files.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">read_again_mesh</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="n">read_again_mesh</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">read_again_models</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readModels</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="n">read_again_models</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">read_again_mesh</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="n">read_again_mesh</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">read_again_models</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readModels</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="n">read_again_models</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">AlgorithmBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TwoFileReaderBase.modified"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.TwoFileReaderBase.modified">[docs]</a>    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">read_again_models</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -657,7 +666,7 @@
         <span class="sd">&quot;&quot;&quot;Perfrom the read with parameters/file names set during init or by</span>
 <span class="sd">        setters&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_pyvista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
 
 
 <span class="c1">###############################################################################</span>
@@ -665,9 +674,10 @@
 <div class="viewcode-block" id="WriterBase"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.WriterBase">[docs]</a><span class="k">class</span> <span class="nc">WriterBase</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Writer Base&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
-                                     <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                               <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__fmt</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.9e</span><span class="s1">&#39;</span>
         <span class="c1"># For composite datasets: not always used</span>
@@ -797,12 +807,15 @@
 <span class="sd">    routine for using an external library to handle all I/O and produce the</span>
 <span class="sd">    VTK data objects.&quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Interfaced Base Reader&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ReaderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__objects</span> <span class="o">=</span> <span class="p">[]</span>
 
 
     <span class="c1"># THIS IS CRUCIAL to dynamically decided output type</span>
+
+
 <div class="viewcode-block" id="InterfacedBaseReader.RequestDataObject"><a class="viewcode-back" href="../../content/PVGeo/base.html#PVGeo.base.InterfacedBaseReader.RequestDataObject">[docs]</a>    <span class="k">def</span> <span class="nf">RequestDataObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Do not override. This method lets the us dynamically decide the</span>
 <span class="sd">        output data type based in the read meshes.</span>

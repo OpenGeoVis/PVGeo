@@ -245,9 +245,10 @@
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;reader&#39;</span>
     <span class="n">extensions</span> <span class="o">=</span> <span class="s1">&#39;dat csv txt text ascii xyz tsv ntab&#39;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: Delimited Text Files&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkTable&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ReaderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c1"># Parameters to control the file read:</span>
         <span class="c1">#- if these are set/changed, we must reperform the read</span>
@@ -287,7 +288,8 @@
                 <span class="n">contents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__comments</span><span class="p">)[</span><span class="bp">self</span><span class="o">.</span><span class="n">__skipRows</span><span class="p">::])</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">fe</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fe</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">contents</span></div>
 
 <div class="viewcode-block" id="DelimitedTextReader._extract_header"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._extract_header">[docs]</a>    <span class="k">def</span> <span class="nf">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
@@ -356,6 +358,7 @@
 
 
     <span class="c1">#### Algorithm Methods ####</span>
+
 
 <div class="viewcode-block" id="DelimitedTextReader.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Used by pipeline to get data for current timestep and populate the</span>
@@ -443,6 +446,7 @@
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
     <span class="c1"># extensions are inherrited from DelimitedTextReader</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: Delimited Points&#39;</span> <span class="c1"># Should be overriden</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">DelimitedTextReader</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__copy_z</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;copy_z&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
@@ -489,6 +493,7 @@
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;reader&#39;</span>
     <span class="c1"># extensions are inherrited from DelimitedTextReader</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: XYZ Delimited Text Files where header has comma delimiter.&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">DelimitedTextReader</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_comments</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">))</span>

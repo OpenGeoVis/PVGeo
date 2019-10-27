@@ -225,9 +225,10 @@
 <span class="kn">import</span> <span class="nn">vtk</span>
 <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
-<span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">FilterBase</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
 
+<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">FilterBase</span>
 
 
 <span class="k">class</span> <span class="nc">_SliceBase</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
@@ -239,12 +240,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Base Slicing Filter&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_slices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">):</span>
+                 <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
+                 <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">):</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
+                            <span class="n">nInputPorts</span><span class="o">=</span><span class="n">nInputPorts</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
+                            <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
         <span class="c1"># Parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__n_slices</span> <span class="o">=</span> <span class="n">n_slices</span>
 
@@ -302,10 +304,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Many Slices Along Points&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_slices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">nearest_nbr</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkMultiBlockDataSet&#39;</span><span class="p">):</span>
         <span class="n">_SliceBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_slices</span><span class="o">=</span><span class="n">n_slices</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
+                            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
+                            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__useNearestNbr</span> <span class="o">=</span> <span class="n">nearest_nbr</span>
 
     <span class="c1"># CRITICAL for multiple input ports</span>
@@ -324,7 +327,7 @@
             <span class="c1"># sklearn&#39;s KDTree is faster: use it if available</span>
             <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KDTree</span> <span class="k">as</span> <span class="n">Tree</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">cKDTree</span>  <span class="k">as</span> <span class="n">Tree</span>
+            <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">cKDTree</span> <span class="k">as</span> <span class="n">Tree</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_number_of_slices</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[]</span>
         <span class="c1"># Get the Points over the NumPy interface</span>
@@ -355,7 +358,7 @@
 <div class="viewcode-block" id="ManySlicesAlongPoints._get_slice"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints._get_slice">[docs]</a>    <span class="k">def</span> <span class="nf">_get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pts</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">planes</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Internal helper to perfrom the filter</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">numPoints</span> <span class="o">=</span> <span class="n">pts</span><span class="o">.</span><span class="n">GetNumberOfPoints</span><span class="p">()</span>
+        <span class="c1"># numPoints = pts.GetNumberOfPoints()</span>
         <span class="c1"># Set number of blocks based on user choice in the selction</span>
         <span class="n">output</span><span class="o">.</span><span class="n">SetNumberOfBlocks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_number_of_slices</span><span class="p">())</span>
         <span class="n">blk</span> <span class="o">=</span> <span class="mi">0</span>
@@ -383,6 +386,7 @@
 
     <span class="c1">#### Getters / Setters ####</span>
 
+
 <div class="viewcode-block" id="ManySlicesAlongPoints.set_use_nearest_nbr"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.set_use_nearest_nbr">[docs]</a>    <span class="k">def</span> <span class="nf">set_use_nearest_nbr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set a flag on whether to use SciPy&#39;s nearest neighbor approximation</span>
 <span class="sd">        when generating the slicing path</span>
@@ -396,7 +400,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_pyvista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
 
 
 <span class="c1">###############################################################################</span>
@@ -414,6 +418,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Slide Slice Along Points&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_slices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">nearest_nbr</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">ManySlicesAlongPoints</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__planes</span> <span class="o">=</span> <span class="kc">None</span>
@@ -425,7 +430,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">planes</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPlane</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;``_get_slice`` can only handle one plane.&#39;</span><span class="p">)</span>
-        <span class="n">numPoints</span> <span class="o">=</span> <span class="n">pts</span><span class="o">.</span><span class="n">GetNumberOfPoints</span><span class="p">()</span>
+        <span class="c1"># numPoints = pts.GetNumberOfPoints()</span>
         <span class="c1"># Set number of blocks based on user choice in the selction</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">planes</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span></div>
@@ -481,10 +486,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Many Slices Along Axis&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_slices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkMultiBlockDataSet&#39;</span><span class="p">):</span>
         <span class="n">_SliceBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_slices</span><span class="o">=</span><span class="n">n_slices</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
+                            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span>
+                            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
         <span class="c1"># Parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__axis</span> <span class="o">=</span> <span class="n">axis</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__rng</span> <span class="o">=</span> <span class="n">rng</span>
@@ -604,9 +610,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Slice Through Time&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_slices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">,):</span>
         <span class="n">ManySlicesAlongAxis</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_slices</span><span class="o">=</span><span class="n">n_slices</span><span class="p">,</span>
-                <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">)</span>
+                                     <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">)</span>
         <span class="c1"># Parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span> <span class="o">=</span> <span class="n">dt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="kc">None</span>

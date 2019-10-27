@@ -226,10 +226,8 @@
 
 <span class="c1"># NOTE: Surfer no data value: 1.70141E+38</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">struct</span>
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="k">import</span> <span class="n">unpack</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -238,13 +236,11 @@
 <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
 
 <span class="kn">import</span> <span class="nn">espatools</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
 
 <span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
 <span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">ReaderBase</span><span class="p">,</span> <span class="n">ReaderBaseBase</span><span class="p">,</span> <span class="n">WriterBase</span>
 <span class="kn">from</span> <span class="nn">..readers</span> <span class="k">import</span> <span class="n">DelimitedTextReader</span>
-
-
-
 
 <span class="c1">###############################################################################</span>
 
@@ -325,6 +321,7 @@
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;reader&#39;</span>
     <span class="n">extensions</span> <span class="o">=</span> <span class="s1">&#39;grd GRD&#39;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: Surfer Grid&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ReaderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__grids</span> <span class="o">=</span> <span class="kc">None</span>
@@ -337,7 +334,7 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;4s&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="sa">b</span><span class="s1">&#39;DSRB&#39;</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span>
-                <span class="sd">&#39;&#39;&#39;Invalid file identifier for Surfer 7 binary .grd</span>
+                    <span class="sd">&#39;&#39;&#39;Invalid file identifier for Surfer 7 binary .grd</span>
 <span class="sd">                    file. First 4 characters must be DSRB.&#39;&#39;&#39;</span>
                 <span class="p">)</span>
             <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>  <span class="c1">#Size &amp; Version</span>
@@ -486,7 +483,7 @@
             <span class="n">filenames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_names</span><span class="p">()</span>
         <span class="n">contents</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;4s&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;4s&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;DSRB&#39;</span><span class="p">:</span>
             <span class="n">reader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_surfer7bin</span>
@@ -503,7 +500,8 @@
                 <span class="n">contents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">fe</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fe</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">contents</span></div>
 
 
@@ -517,6 +515,7 @@
 
 
     <span class="c1">########################</span>
+
 
 <div class="viewcode-block" id="SurferGridReader.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Used by pipeline to get data for current timestep and populate the</span>
@@ -566,6 +565,7 @@
     <span class="sd">&quot;&quot;&quot;Write a 2D ``vtkImageData`` object to the Surfer grid format&quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Write ``vtkImageData`` to Surfer Format&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;writer&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">WriterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;grd&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
@@ -632,7 +632,7 @@
         <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">interface</span><span class="o">.</span><span class="n">wrap_pyvista</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="WriteImageDataToSurfer.Write"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteImageDataToSurfer.Write">[docs]</a>    <span class="k">def</span> <span class="nf">Write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Perfrom the write out.&quot;&quot;&quot;</span>
@@ -659,6 +659,7 @@
     <span class="n">__type__</span> <span class="o">=</span> <span class="s1">&#39;reader&#39;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: Esri Grid&#39;</span>
     <span class="n">extensions</span> <span class="o">=</span> <span class="s1">&#39;asc dem txt&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">DelimitedTextReader</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c1"># These are attributes the derived from file contents:</span>
@@ -699,7 +700,7 @@
         <span class="sd">&quot;&quot;&quot;This will return the proper data for the given timestep.</span>
 <span class="sd">        This method handles Surfer&#39;s NaN data values and checkes the value range</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">data</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
         <span class="n">nans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">NODATA_VALUE</span><span class="p">)</span>
         <span class="c1"># if np.any(nans):</span>
         <span class="c1">#     data = np.ma.masked_where(nans, data)</span>
@@ -771,6 +772,7 @@
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;reader&#39;</span>
     <span class="n">extensions</span> <span class="o">=</span> <span class="s2">&quot;xml&quot;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: Landsat ESPA XML Metadata&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__reader</span> <span class="o">=</span> <span class="n">espatools</span><span class="o">.</span><span class="n">RasterSetReader</span><span class="p">(</span><span class="n">yflip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -801,6 +803,7 @@
 
 
     <span class="c1">#### Methods for performing the read ####</span>
+
 
 <div class="viewcode-block" id="LandsatReader._get_file_contents"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._get_file_contents">[docs]</a>    <span class="k">def</span> <span class="nf">_get_file_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads XML meta data, no data read.&quot;&quot;&quot;</span>
@@ -839,6 +842,7 @@
 
     <span class="c1">#### Pipeline Methods ####</span>
 
+
 <div class="viewcode-block" id="LandsatReader.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get output:</span>
@@ -875,6 +879,7 @@
 
 
     <span class="c1">#### Seters and Geters for the GUI ####</span>
+
 
 <div class="viewcode-block" id="LandsatReader.GetDataSelection"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.GetDataSelection">[docs]</a>    <span class="k">def</span> <span class="nf">GetDataSelection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Used by ParaView GUI&quot;&quot;&quot;</span>
@@ -925,6 +930,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Write Cell Centers To CSV&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;writer&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">WriterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__delimiter</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span>

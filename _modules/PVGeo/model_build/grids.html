@@ -222,9 +222,8 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">vtk</span>
-<span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">interface</span>
 <span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">AlgorithmBase</span>
 
 
@@ -240,13 +239,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Create Uniform Grid&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;source&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
                  <span class="n">spacing</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
                  <span class="n">origin</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)):</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">)</span>
+                               <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                               <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span> <span class="o">=</span> <span class="n">extent</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__spacing</span> <span class="o">=</span> <span class="n">spacing</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">=</span> <span class="n">origin</span>
@@ -320,14 +320,15 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Create Even Rectilinear Grid&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;source&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
                  <span class="n">xrng</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
                  <span class="n">yrng</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
                  <span class="n">zrng</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]):</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">)</span>
+                               <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                               <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span> <span class="o">=</span> <span class="n">extent</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__xrange</span> <span class="o">=</span> <span class="n">xrng</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__yrange</span> <span class="o">=</span> <span class="n">yrng</span>
@@ -413,12 +414,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Create Tensor Mesh&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;source&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">350.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">400.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span>
-            <span class="n">xcellstr</span><span class="o">=</span><span class="s1">&#39;200 100 50 20*50.0 50 100 200&#39;</span><span class="p">,</span>
-            <span class="n">ycellstr</span><span class="o">=</span><span class="s1">&#39;200 100 50 21*50.0 50 100 200&#39;</span><span class="p">,</span>
-            <span class="n">zcellstr</span><span class="o">=</span><span class="s1">&#39;20*25.0 50 100 200&#39;</span><span class="p">,):</span>
+                 <span class="n">xcellstr</span><span class="o">=</span><span class="s1">&#39;200 100 50 20*50.0 50 100 200&#39;</span><span class="p">,</span>
+                 <span class="n">ycellstr</span><span class="o">=</span><span class="s1">&#39;200 100 50 21*50.0 50 100 200&#39;</span><span class="p">,</span>
+                 <span class="n">zcellstr</span><span class="o">=</span><span class="s1">&#39;20*25.0 50 100 200&#39;</span><span class="p">,):</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">)</span>
+                               <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">=</span> <span class="n">origin</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__xcells</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_read_cell_line</span><span class="p">(</span><span class="n">xcellstr</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__ycells</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_read_cell_line</span><span class="p">(</span><span class="n">ycellstr</span><span class="p">)</span>
@@ -495,7 +497,7 @@
             <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nx</span><span class="o">*</span><span class="n">ny</span><span class="o">*</span><span class="n">nz</span><span class="p">)</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Random Data&#39;</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">data_name</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">pdo</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pdo</span></div>
 

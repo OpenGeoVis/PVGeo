@@ -220,8 +220,9 @@
     <span class="s1">&#39;get_combined_input_time_steps&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
 <div class="viewcode-block" id="_calculate_time_range"><a class="viewcode-back" href="../../../content/PVGeo/_helpers/timeseries.html#PVGeo._helpers.timeseries._calculate_time_range">[docs]</a><span class="k">def</span> <span class="nf">_calculate_time_range</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
@@ -335,7 +336,8 @@
     <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">GetNumberOfInputPorts</span><span class="p">()):</span>
         <span class="n">ii</span> <span class="o">=</span> <span class="n">executive</span><span class="o">.</span><span class="n">GetInputInformation</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
         <span class="n">ti</span> <span class="o">=</span> <span class="n">ii</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">executive</span><span class="o">.</span><span class="n">TIME_STEPS</span><span class="p">())</span>
-        <span class="k">if</span> <span class="n">ti</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">ti</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="k">if</span> <span class="n">ti</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ti</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
         <span class="n">tsteps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ti</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">tsteps</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span></div>
 </pre></div>
