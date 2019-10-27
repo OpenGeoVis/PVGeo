@@ -130,7 +130,8 @@ class AddCellConnToPoints(FilterBase):
         for key, val in pdi.point_arrays.items():
             poly.point_arrays[key] = val
         pdo.DeepCopy(poly)
-        print("exectuted in {}".format(datetime.now() - start_time))
+        if log_time:
+            print("exectuted in {}".format(datetime.now() - start_time))
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):
