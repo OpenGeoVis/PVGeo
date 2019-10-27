@@ -6,7 +6,6 @@ __all__ = [
 import numpy as np
 import pyvista as pv
 import vtk
-from scipy.spatial import Delaunay
 
 from .. import interface
 from ..base import AlgorithmBase
@@ -98,6 +97,8 @@ class GlobeSource(AlgorithmBase):
 
     def build_globe(self):
         """Generates the globe as ``vtkPolyData``"""
+        # NOTE: https://gitlab.kitware.com/paraview/paraview/issues/19417
+        from scipy.spatial import Delaunay
         pos, tex = self.create_sphere()
         pts = self.spherical_to_cartesian(pos[:,0], pos[:,1])
         points = interface.points_to_poly_data(pts).GetPoints()
