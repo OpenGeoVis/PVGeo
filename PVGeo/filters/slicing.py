@@ -13,7 +13,7 @@ from vtk.numpy_interface import dataset_adapter as dsa
 
 import pyvista as pv
 
-from .. import _helpers, interface
+from .. import _helpers
 from ..base import FilterBase
 
 
@@ -144,7 +144,7 @@ class ManySlicesAlongPoints(_SliceBase):
     def _get_slice(self, pts, data, planes, output):
         """Internal helper to perfrom the filter
         """
-        numPoints = pts.GetNumberOfPoints()
+        # numPoints = pts.GetNumberOfPoints()
         # Set number of blocks based on user choice in the selction
         output.SetNumberOfBlocks(self.get_number_of_slices())
         blk = 0
@@ -216,7 +216,7 @@ class SlideSliceAlongPoints(ManySlicesAlongPoints):
         """
         if not isinstance(planes, vtk.vtkPlane):
             raise _helpers.PVGeoError('``_get_slice`` can only handle one plane.')
-        numPoints = pts.GetNumberOfPoints()
+        # numPoints = pts.GetNumberOfPoints()
         # Set number of blocks based on user choice in the selction
         self._slice(data, output, planes)
         return output

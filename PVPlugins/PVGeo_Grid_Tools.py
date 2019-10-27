@@ -2,13 +2,14 @@ paraview_plugin_version = '2.0.4'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
-from paraview.util.vtkAlgorithm import *
-
+from paraview.util.vtkAlgorithm import smdomain, smhint, smproperty, smproxy
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.grids import *
-
+from PVGeo.grids import (EsriGridReader, ExtractTopography, LandsatReader,
+                         ReverseImageDataAxii, SurferGridReader,
+                         TableToTimeGrid, TranslateGridOrigin,
+                         WriteCellCenterData, WriteImageDataToSurfer)
 
 #### GLOBAL VARIABLES ####
 MENU_CAT = 'PVGeo: General Grids'
@@ -54,9 +55,9 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
     #### Seters and Geters ####
 
     @smproperty.xml(_helpers.get_drop_down_xml(name='Corner', command='set_corner',
-        labels=['South East Bottom', 'North West Bottom', 'North East Bottom',
-        'South West Top', 'South East Top', 'North West Top', 'North East Top'],
-        values=[1,2,3,4,5,6,7]))
+                                               labels=['South East Bottom', 'North West Bottom', 'North East Bottom',
+                                                       'South West Top', 'South East Top', 'North West Top', 'North East Top'],
+                                               values=[1,2,3,4,5,6,7]))
     def set_corner(self, corner):
         TranslateGridOrigin.set_corner(self, corner)
 
@@ -96,8 +97,8 @@ class PVGeoTableToTimeGrid(TableToTimeGrid):
 
 
     @smproperty.xml(_helpers.get_drop_down_xml(name='Order', command='set_order',
-        labels=['C-style: Row-major order', 'Fortran-style: column-major order'],
-        values=[0, 1]))
+                                               labels=['C-style: Row-major order', 'Fortran-style: column-major order'],
+                                               values=[0, 1]))
     def set_order(self, order):
         o = ['C', 'F']
         TableToTimeGrid.set_order(self, o[order])
@@ -147,9 +148,9 @@ class PVGeoExtractTopography(ExtractTopography):
         ExtractTopography.set_operation(self, op)
 
     @smproperty.xml(_helpers.get_property_xml(name='Invert',
-        command='set_invert',
-        default_values=False,
-        help='A boolean to set whether on whether to invert the extraction.'))
+                                              command='set_invert',
+                                              default_values=False,
+                                              help='A boolean to set whether on whether to invert the extraction.'))
     def set_invert(self, flag):
         ExtractTopography.set_invert(self, flag)
 
@@ -157,9 +158,9 @@ class PVGeoExtractTopography(ExtractTopography):
 
 
 @smproxy.reader(name="PVGeoSurferGridReader",
-       label='PVGeo: %s'%SurferGridReader.__displayname__,
-       extensions=SurferGridReader.extensions,
-       file_description=SurferGridReader.description)
+                label='PVGeo: %s' % SurferGridReader.__displayname__,
+                extensions=SurferGridReader.extensions,
+                file_description=SurferGridReader.description)
 class PVGeoSurferGridReader(SurferGridReader):
     def __init__(self):
         SurferGridReader.__init__(self)
@@ -241,9 +242,9 @@ class PVGeoWriteCellCenterData(WriteCellCenterData):
 
 
 @smproxy.reader(name="PVGeoEsriGridReader",
-       label='PVGeo: %s'%EsriGridReader.__displayname__,
-       extensions=EsriGridReader.extensions,
-       file_description=EsriGridReader.description)
+                label='PVGeo: %s' % EsriGridReader.__displayname__,
+                extensions=EsriGridReader.extensions,
+                file_description=EsriGridReader.description)
 class PVGeoEsriGridReader(EsriGridReader):
     def __init__(self):
         EsriGridReader.__init__(self)
@@ -273,9 +274,9 @@ class PVGeoEsriGridReader(EsriGridReader):
 
 
 @smproxy.reader(name="PVGeoLandsatReader",
-       label='PVGeo: %s'%LandsatReader.__displayname__,
-       extensions=LandsatReader.extensions,
-       file_description=LandsatReader.description)
+                label='PVGeo: %s' % LandsatReader.__displayname__,
+                extensions=LandsatReader.extensions,
+                file_description=LandsatReader.description)
 class PVGeoLandsatReader(LandsatReader):
     def __init__(self):
         LandsatReader.__init__(self)
@@ -292,10 +293,10 @@ class PVGeoLandsatReader(LandsatReader):
 
 
     @smproperty.xml(_helpers.get_property_xml(name='Cast Data Type',
-        command='set_cast_data_type',
-        default_values=True,
-        help='A boolean to set whether to cast the data arrays so invalid points are filled nans.',
-        panel_visibility='advanced'))
+                                              command='set_cast_data_type',
+                                              default_values=True,
+                                              help='A boolean to set whether to cast the data arrays so invalid points are filled nans.',
+                                              panel_visibility='advanced'))
     def set_cast_data_type(self, flag):
         LandsatReader.set_cast_data_type(self, flag)
 

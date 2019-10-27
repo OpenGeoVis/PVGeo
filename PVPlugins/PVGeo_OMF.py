@@ -2,21 +2,21 @@ paraview_plugin_version = '1.1.6'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
-from paraview.util.vtkAlgorithm import *
+from paraview.util.vtkAlgorithm import smproperty, smproxy
 
 # Helpers:
-from PVGeo import _helpers, AlgorithmBase
+from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.gmggroup import *
+from PVGeo.gmggroup import OMFReader
 
 
 ###############################################################################
 
 
 @smproxy.reader(name="PVGeoOMFReader",
-       label="PVGeo: Open Mining Format Project Reader",
-       extensions=OMFReader.extensions,
-       file_description=OMFReader.description)
+                label="PVGeo: Open Mining Format Project Reader",
+                extensions=OMFReader.extensions,
+                file_description=OMFReader.description)
 class PVGeoOMFReader(OMFReader):
     def __init__(self):
         OMFReader.__init__(self)

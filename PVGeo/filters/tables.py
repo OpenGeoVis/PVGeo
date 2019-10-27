@@ -104,7 +104,7 @@ class ReshapeTable(FilterBase):
         # Get number of rows
         rows = pdi.GetColumn(0).GetNumberOfTuples()
 
-        if len(self.__names) is not 0:
+        if len(self.__names) != 0:
             num = len(self.__names)
             if num < self.__ncols:
                 for i in range(num, self.__ncols):

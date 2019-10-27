@@ -1,14 +1,23 @@
 paraview_plugin_version = '2.0.4'
+
+from vtk.numpy_interface import dataset_adapter as dsa
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
-from paraview.util.vtkAlgorithm import *
-from vtk.numpy_interface import dataset_adapter as dsa
-
+from paraview.util.vtkAlgorithm import smdomain, smhint, smproperty, smproxy
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.filters import *
+from PVGeo.filters import (AddCellConnToPoints, AppendCellCenters,
+                           AppendTableToCellData, ArrayMath, ArraysToRGBA,
+                           BuildSurfaceFromPoints, CombineTables, ConvertUnits,
+                           ExtractArray, ExtractCellCenters, ExtractPoints,
+                           IterateOverPoints, LonLatToUTM, ManySlicesAlongAxis,
+                           ManySlicesAlongPoints, NormalizeArray,
+                           PercentThreshold, PointsToTube, ReshapeTable,
+                           RotatePoints, SliceThroughTime,
+                           SlideSliceAlongPoints, SplitTableOnArray,
+                           VoxelizePoints)
 
 #### GLOBAL VARIABLES ####
 MENU_CAT = 'PVGeo: General Filters'
@@ -30,19 +39,19 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
     #### Seters and Geters ####
 
     @smproperty.xml(_helpers.get_drop_down_xml(name='CellType', command='set_cell_type',
-        labels=['Line', 'Poly Line'], values=[3, 4]))
+                                               labels=['Line', 'Poly Line'], values=[3, 4]))
     def set_cell_type(self, cell_type):
         AddCellConnToPoints.set_cell_type(self, cell_type)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Neareast Nbr Approx',
-        command='set_use_nearest_nbr', default_values=False,
-        help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
+                                              command='set_use_nearest_nbr', default_values=False,
+                                              help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
     def set_use_nearest_nbr(self, flag):
         AddCellConnToPoints.set_use_nearest_nbr(self, flag)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Unique Points',
-        command='set_use_unique_points', default_values=False,
-        help='Set a flag on whether to only use unique points'))
+                                              command='set_use_unique_points', default_values=False,
+                                              help='Set a flag on whether to only use unique points'))
     def set_use_unique_points(self, flag):
         AddCellConnToPoints.set_use_unique_points(self, flag)
 
@@ -109,25 +118,25 @@ class PVGeoPointsToTube(PointsToTube):
         PointsToTube.set_number_of_sides(self, num)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Nearest Neighbor',
-        command='set_use_nearest_nbr', default_values=False,
-        help='A boolean to set whether to use a nearest neighbor approxiamtion when building path from input points.'))
+                                              command='set_use_nearest_nbr', default_values=False,
+                                              help='A boolean to set whether to use a nearest neighbor approxiamtion when building path from input points.'))
     def set_use_nearest_nbr(self, flag):
         PointsToTube.set_use_nearest_nbr(self, flag)
 
     @smproperty.xml(_helpers.get_property_xml(name='Capping',
-        command='set_capping', default_values=False,
-        help='A boolean to set whether to cap the ends of the tube.'))
+                                              command='set_capping', default_values=False,
+                                              help='A boolean to set whether to cap the ends of the tube.'))
     def set_capping(self, flag):
         PointsToTube.set_capping(self, flag)
 
     @smproperty.xml(_helpers.get_drop_down_xml(name='CellType', command='set_cell_type',
-        labels=['Line', 'Poly Line'], values=[3, 4]))
+                                               labels=['Line', 'Poly Line'], values=[3, 4]))
     def set_cell_type(self, cell_type):
         PointsToTube.set_cell_type(self, cell_type)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Unique Points',
-        command='set_use_unique_points', default_values=False,
-        help='Set a flag on whether to only use unique points'))
+                                              command='set_use_unique_points', default_values=False,
+                                              help='Set a flag on whether to only use unique points'))
     def set_use_unique_points(self, flag):
         PointsToTube.set_use_unique_points(self, flag)
 
@@ -161,8 +170,8 @@ class PVGeoReshapeTable(ReshapeTable):
         ReshapeTable.set_number_of_rows(self, nrows)
 
     @smproperty.xml(_helpers.get_drop_down_xml(name='Order', command='set_order',
-        labels=['Fortran-style: column-major order', 'C-style: Row-major order'],
-        values=[0, 1]))
+                                               labels=['Fortran-style: column-major order', 'C-style: Row-major order'],
+                                               values=[0, 1]))
     def set_order(self, order):
         o = ['F', 'C']
         ReshapeTable.set_order(self, o[order])
@@ -188,8 +197,8 @@ class PVGeoVoxelizePoints(VoxelizePoints):
     #### Seters and Geters ####
 
     @smproperty.xml(_helpers.get_property_xml(name='Estimate Grid Spacing',
-        command='set_estimate_grid', default_values=True,
-        help='A boolean to set whether to try to estimate the proper dx, dy, and dz spacings for a grid on a regular cartesian coordinate system.', panel_visibility='advanced'))
+                                              command='set_estimate_grid', default_values=True,
+                                              help='A boolean to set whether to try to estimate the proper dx, dy, and dz spacings for a grid on a regular cartesian coordinate system.', panel_visibility='advanced'))
     def set_estimate_grid(self, flag):
         VoxelizePoints.set_estimate_grid(self, flag)
 
@@ -199,8 +208,8 @@ class PVGeoVoxelizePoints(VoxelizePoints):
 
 
     @smproperty.xml(_helpers.get_property_xml(name='Extract Unique',
-        command='set_unique', default_values=True,
-        help='Set a flag on whether to only use unique points'))
+                                              command='set_unique', default_values=True,
+                                              help='Set a flag on whether to only use unique points'))
     def set_unique(self, flag):
         VoxelizePoints.set_unique(self, flag)
 
@@ -262,8 +271,8 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
 
 
     @smproperty.xml(_helpers.get_property_xml(name='Extract Unique',
-        command='set_unique', default_values=True,
-        help='Set a flag on whether to only use unique elements'))
+                                              command='set_unique', default_values=True,
+                                              help='Set a flag on whether to only use unique elements'))
     def set_unique(self, flag):
         VoxelizePoints.set_unique(self, flag)
 
@@ -353,8 +362,8 @@ class PVGeoManySlicesAlongAxis(ManySlicesAlongAxis):
         ManySlicesAlongAxis.set_number_of_slices(self, num)
 
     @smproperty.xml(_helpers.get_drop_down_xml(name='Axis', command='set_axis',
-        labels=['X Axis', 'Y Axis', 'Z Axis'],
-        values=[0, 1, 2]))
+                                               labels=['X Axis', 'Y Axis', 'Z Axis'],
+                                               values=[0, 1, 2]))
     def set_axis(self, axis):
         ManySlicesAlongAxis.set_axis(self, axis)
 
@@ -381,8 +390,8 @@ class PVGeoSliceThroughTime(SliceThroughTime):
         SliceThroughTime.set_time_delta(self, dt)
 
     @smproperty.xml(_helpers.get_drop_down_xml(name='Axis', command='set_axis',
-        labels=['X Axis', 'Y Axis', 'Z Axis'],
-        values=[0, 1, 2]))
+                                               labels=['X Axis', 'Y Axis', 'Z Axis'],
+                                               values=[0, 1, 2]))
     def set_axis(self, axis):
         SliceThroughTime.set_axis(self, axis)
 
@@ -413,8 +422,8 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
 
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Neareast Nbr Approx',
-        command='set_use_nearest_nbr', default_values=False,
-        help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
+                                              command='set_use_nearest_nbr', default_values=False,
+                                              help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
     def set_use_nearest_nbr(self, flag):
         ManySlicesAlongPoints.set_use_nearest_nbr(self, flag)
 
@@ -440,8 +449,8 @@ class PVGeoSlideSliceAlongPoints(SlideSliceAlongPoints):
 
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Neareast Nbr Approx',
-        command='set_use_nearest_nbr', default_values=False,
-        help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
+                                              command='set_use_nearest_nbr', default_values=False,
+                                              help='A boolean to control whether or not to use SciPy nearest neighbor approximation when build cell connectivity.'))
     def set_use_nearest_nbr(self, flag):
         SlideSliceAlongPoints.set_use_nearest_nbr(self, flag)
 
@@ -469,8 +478,8 @@ class PVGeoRotatePoints(RotatePoints):
         RotatePoints.set_origin(self, xo, yo)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Corner',
-        command='set_use_corner', default_values=True,
-        help='Use the corner as the rotation origin.', panel_visibility='advanced'))
+                                              command='set_use_corner', default_values=True,
+                                              help='Use the corner as the rotation origin.', panel_visibility='advanced'))
     def set_use_corner(self, flag):
         RotatePoints.set_use_corner(self, flag)
 
@@ -507,13 +516,13 @@ class PVGeoPercentThreshold(PercentThreshold):
 
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Continuous Cell Range',
-        command='set_use_continuous_cell_range', default_values=False))
+                                              command='set_use_continuous_cell_range', default_values=False))
     def set_use_continuous_cell_range(self, flag):
         PercentThreshold.set_use_continuous_cell_range(self, flag)
 
     @smproperty.xml(_helpers.get_property_xml(name='Invert',
-        command='set_invert', default_values=False,
-        help='Use to invert the threshold filter.'))
+                                              command='set_invert', default_values=False,
+                                              help='Use to invert the threshold filter.'))
     def set_invert(self, flag):
         PercentThreshold.set_invert(self, flag)
 
@@ -661,8 +670,8 @@ class PVGeoArraysToRGBA(ArraysToRGBA):
         return ArraysToRGBA.SetInputArrayToProcess(self, idx, port, connection, field, name)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use Transparency',
-        command='set_use_transparency', default_values=False,
-        help='A boolean to control whether or not to use the Transparency array.'))
+                                              command='set_use_transparency', default_values=False,
+                                              help='A boolean to control whether or not to use the Transparency array.'))
     def set_use_transparency(self, flag):
         ArraysToRGBA.set_use_transparency(self, flag)
 

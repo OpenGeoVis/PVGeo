@@ -68,7 +68,7 @@ class AddCellConnToPoints(FilterBase):
         cell_type = self.__cell_type
 
         if log_time:
-            startTime = datetime.now()
+            start_time = datetime.now()
 
         # Get the Points over the NumPy interface
         pdi = pyvista.wrap(pdi)
@@ -130,6 +130,7 @@ class AddCellConnToPoints(FilterBase):
         for key, val in pdi.point_arrays.items():
             poly.point_arrays[key] = val
         pdo.DeepCopy(poly)
+        print("exectuted in {}".format(datetime.now() - start_time))
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):

@@ -2,10 +2,11 @@ paraview_plugin_version = '2.0.4'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
-from paraview.util.vtkAlgorithm import *
-
+from paraview.util.vtkAlgorithm import smdomain, smhint, smproperty, smproxy
 # Classes to Decorate
-from PVGeo.model_build import *
+from PVGeo.model_build import (CreateEvenRectilinearGrid, CreateTensorMesh,
+                               CreateUniformGrid, GlobeSource,
+                               OutlineContinents)
 
 MENU_CAT = 'PVGeo: Model Building'
 

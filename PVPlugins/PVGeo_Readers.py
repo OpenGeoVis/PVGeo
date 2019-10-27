@@ -2,7 +2,7 @@ paraview_plugin_version = '2.0.4'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
-from paraview.util.vtkAlgorithm import *
+from paraview.util.vtkAlgorithm import smproperty, smproxy
 
 # Helpers:
 from PVGeo import _helpers
@@ -16,9 +16,9 @@ from PVGeo.readers import DelimitedTextReader, XYZTextReader
 
 
 @smproxy.reader(name="PVGeoPackedBinariesReader",
-       label='PVGeo: %s'%PackedBinariesReader.__displayname__,
-       extensions=PackedBinariesReader.extensions,
-       file_description=PackedBinariesReader.description)
+                label='PVGeo: %s' % PackedBinariesReader.__displayname__,
+                extensions=PackedBinariesReader.extensions,
+                file_description=PackedBinariesReader.description)
 class PVGeoPackedBinariesReader(PackedBinariesReader):
     def __init__(self):
         PackedBinariesReader.__init__(self)
@@ -40,14 +40,14 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
         return PackedBinariesReader.get_time_step_values(self)
 
     @smproperty.xml(_helpers.get_drop_down_xml('Endian','set_endian',
-        ['Native', 'Little-Endian', 'Big-Endian'],
-        help='This is the type memory endianness.'))
+                                               ['Native', 'Little-Endian', 'Big-Endian'],
+                                               help='This is the type memory endianness.'))
     def set_endian(self, endian):
         PackedBinariesReader.set_endian(self, endian)
 
     @smproperty.xml(_helpers.get_drop_down_xml('DataType','set_data_type',
-        ['Float64', 'Float32', 'Integer4'],
-        help='This is data type to read.'))
+                                               ['Float64', 'Float32', 'Integer4'],
+                                               help='This is data type to read.'))
     def set_data_type(self, dtype):
         PackedBinariesReader.set_data_type(self, dtype)
 
@@ -62,9 +62,9 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
 
 
 @smproxy.reader(name="PVGeoMadagascarReader",
-       label='PVGeo: %s'%MadagascarReader.__displayname__,
-       extensions=MadagascarReader.extensions,
-       file_description=MadagascarReader.description)
+                label='PVGeo: %s' % MadagascarReader.__displayname__,
+                extensions=MadagascarReader.extensions,
+                file_description=MadagascarReader.description)
 class PVGeoMadagascarReader(MadagascarReader):
     def __init__(self):
         MadagascarReader.__init__(self)
@@ -87,14 +87,14 @@ class PVGeoMadagascarReader(MadagascarReader):
         return MadagascarReader.get_time_step_values(self)
 
     @smproperty.xml(_helpers.get_drop_down_xml('Endian','set_endian',
-        ['Native', 'Little-Endian', 'Big-Endian'],
-        help='This is the type memory endianness.'))
+                                               ['Native', 'Little-Endian', 'Big-Endian'],
+                                               help='This is the type memory endianness.'))
     def set_endian(self, endian):
         MadagascarReader.set_endian(self, endian)
 
     @smproperty.xml(_helpers.get_drop_down_xml('DataType','set_data_type',
-        ['Float64', 'Float32', 'Integer4'],
-        help='This is data type to read.'))
+                                               ['Float64', 'Float32', 'Integer4'],
+                                               help='This is data type to read.'))
     def set_data_type(self, dtype):
         MadagascarReader.set_data_type(self, dtype)
 
@@ -110,9 +110,9 @@ class PVGeoMadagascarReader(MadagascarReader):
 
 
 @smproxy.reader(name="PVGeoDelimitedTextReader",
-       label='PVGeo: %s'%DelimitedTextReader.__displayname__,
-       extensions=DelimitedTextReader.extensions,
-       file_description=DelimitedTextReader.description)
+                label='PVGeo: %s' % DelimitedTextReader.__displayname__,
+                extensions=DelimitedTextReader.extensions,
+                file_description=DelimitedTextReader.description)
 class PVGeoDelimitedTextReader(DelimitedTextReader):
     def __init__(self):
         DelimitedTextReader.__init__(self)
@@ -161,9 +161,9 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 
 
 @smproxy.reader(name="PVGeoXYZTextReader",
-       label='PVGeo: %s'%XYZTextReader.__displayname__,
-       extensions=XYZTextReader.extensions,
-       file_description=XYZTextReader.description)
+                label='PVGeo: %s' % XYZTextReader.__displayname__,
+                extensions=XYZTextReader.extensions,
+                file_description=XYZTextReader.description)
 class PVGeoXYZTextReader(XYZTextReader):
     def __init__(self):
         XYZTextReader.__init__(self)

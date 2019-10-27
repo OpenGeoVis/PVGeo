@@ -174,7 +174,7 @@ def get_drop_down_xml(name, command, labels, help='', values=None):
         for i, lab in enumerate(labels):
             els.append('<Entry value="%d" text="%s"/>' % (values[i],lab))
 
-        formatter = r'%s\n'*len(els)
+        # formatter = r'%s\n'*len(els)
         dom = '''\
         <EnumerationDomain name="enum">'''
         for el in els:

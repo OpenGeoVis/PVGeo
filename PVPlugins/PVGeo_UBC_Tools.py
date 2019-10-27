@@ -2,12 +2,12 @@ paraview_plugin_version = '2.0.4'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
-from paraview.util.vtkAlgorithm import *
+from paraview.util.vtkAlgorithm import smdomain, smhint, smproperty, smproxy
 
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.ubc import *
+from PVGeo.ubc import (TensorMeshAppender, TensorMeshReader, DiscretizeMeshReader, GeologyMapper, MagObsReader, GravGradReader, GravObsReader, TopoReader, WriteImageDataToUBC, WriteRectilinearGridToUBC, OcTreeAppender, OcTreeReader, TopoMeshAppender)
 
 discretize_available = False
 try:
@@ -24,9 +24,9 @@ MENU_CAT = 'PVGeo: UBC Mesh Tools'
 
 
 @smproxy.reader(name="PVGeoTensorMeshReader",
-       label='PVGeo: %s'%TensorMeshReader.__displayname__,
-       extensions=TensorMeshReader.extensions,
-       file_description=TensorMeshReader.description)
+                label='PVGeo: %s' % TensorMeshReader.__displayname__,
+                extensions=TensorMeshReader.extensions,
+                file_description=TensorMeshReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
 class PVGeoTensorMeshReader(TensorMeshReader):
     def __init__(self):
@@ -34,6 +34,7 @@ class PVGeoTensorMeshReader(TensorMeshReader):
 
 
     #### Seters and Geters ####
+
 
     @smproperty.xml('''
         <StringVectorProperty
@@ -78,7 +79,7 @@ class PVGeoTensorMeshReader(TensorMeshReader):
         return TensorMeshReader.get_time_step_values(self)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use file as data name', command='set_use_filename', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
-    panel_visibility="advanced"))
+                                              panel_visibility="advanced"))
     def set_use_filename(self, flag):
         TensorMeshReader.set_use_filename(self, flag)
 
@@ -87,13 +88,14 @@ class PVGeoTensorMeshReader(TensorMeshReader):
         TensorMeshReader.set_data_name(self, name)
 
 @smproxy.filter(name="PVGeoTensorMeshAppender",
-       label=TensorMeshAppender.__displayname__)
+                label=TensorMeshAppender.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
 class PVGeoTensorMeshAppender(TensorMeshAppender):
     """This assumes the input vtkRectilinearGrid has already handled the timesteps"""
+
     def __init__(self):
         TensorMeshAppender.__init__(self)
 
@@ -115,7 +117,7 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
         TensorMeshAppender.add_model_file_name(self, filename)
 
     @smproperty.xml(_helpers.get_property_xml(name='Use file as data name', command='set_use_filename', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
-    panel_visibility="advanced"))
+                                              panel_visibility="advanced"))
     def set_use_filename(self, flag):
         TensorMeshAppender.set_use_filename(self, flag)
 
@@ -131,13 +133,14 @@ class PVGeoTensorMeshAppender(TensorMeshAppender):
 
 
 @smproxy.filter(name="PVGeoTopoMeshAppender",
-       label=TopoMeshAppender.__displayname__)
+                label=TopoMeshAppender.__displayname__)
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkRectilinearGrid"], composite_data_supported=False)
 class PVGeoTopoMeshAppender(TopoMeshAppender):
     """This assumes the input vtkRectilinearGrid has already handled the timesteps"""
+
     def __init__(self):
         TopoMeshAppender.__init__(self)
 
@@ -165,9 +168,9 @@ class PVGeoTopoMeshAppender(TopoMeshAppender):
 
 if discretize_available:
     @smproxy.reader(name="PVGeoUBCOcTreeMeshReader",
-           label='PVGeo: %s'%OcTreeReader.__displayname__,
-           extensions=OcTreeReader.extensions,
-           file_description=OcTreeReader.description)
+                    label='PVGeo: %s' % OcTreeReader.__displayname__,
+                    extensions=OcTreeReader.extensions,
+                    file_description=OcTreeReader.description)
     @smhint.xml('''<RepresentationType view="RenderView" type="Surface With Edges" />''')
     class PVGeoUBCOcTreeMeshReader(OcTreeReader):
         def __init__(self):
@@ -175,6 +178,7 @@ if discretize_available:
 
 
         #### Seters and Geters ####
+
 
         @smproperty.xml('''
             <StringVectorProperty
@@ -219,7 +223,7 @@ if discretize_available:
             return OcTreeReader.get_time_step_values(self)
 
         @smproperty.xml(_helpers.get_property_xml(name='Use file as data name', command='set_use_filename', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
-        panel_visibility="advanced"))
+                                                  panel_visibility="advanced"))
         def set_use_filename(self, flag):
             OcTreeReader.set_use_filename(self, flag)
 
@@ -230,13 +234,14 @@ if discretize_available:
 
 
     @smproxy.filter(name="PVGeoOcTreeAppender",
-           label=OcTreeAppender.__displayname__)
+                    label=OcTreeAppender.__displayname__)
     @smhint.xml('''<ShowInMenu category="%s"/>
         <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
     @smproperty.input(name="Input", port_index=0)
     @smdomain.datatype(dataTypes=["vtkUnstructuredGrid"], composite_data_supported=False)
     class PVGeoOcTreeAppender(OcTreeAppender):
         """This assumes the input vtkUnstructuredGrid has already handled the timesteps"""
+
         def __init__(self):
             OcTreeAppender.__init__(self)
 
@@ -258,7 +263,7 @@ if discretize_available:
             OcTreeAppender.add_model_file_name(self, filename)
 
         @smproperty.xml(_helpers.get_property_xml(name='Use file as data name', command='set_use_filename', default_values=True, help='A boolean to override the DataName and use model file name as data name.',
-        panel_visibility="advanced"))
+                                                  panel_visibility="advanced"))
         def set_use_filename(self, flag):
             OcTreeAppender.set_use_filename(self, flag)
 
@@ -314,9 +319,9 @@ class PVGeoWriteImageDataToUBC(WriteImageDataToUBC):
 
 
 @smproxy.reader(name="PVGeoTopoReader",
-       label='PVGeo: %s'%TopoReader.__displayname__,
-       extensions=TopoReader.extensions,
-       file_description=TopoReader.description)
+                label='PVGeo: %s' % TopoReader.__displayname__,
+                extensions=TopoReader.extensions,
+                file_description=TopoReader.description)
 class PVGeoTopoReader(TopoReader):
     def __init__(self):
         TopoReader.__init__(self)
@@ -349,9 +354,9 @@ class PVGeoTopoReader(TopoReader):
 
 
 @smproxy.reader(name="PVGeoGravObsReader",
-       label='PVGeo: %s'%GravObsReader.__displayname__,
-       extensions=GravObsReader.extensions,
-       file_description=GravObsReader.description)
+                label='PVGeo: %s' % GravObsReader.__displayname__,
+                extensions=GravObsReader.extensions,
+                file_description=GravObsReader.description)
 class PVGeoGravObsReader(GravObsReader):
     def __init__(self):
         GravObsReader.__init__(self)
@@ -383,9 +388,9 @@ class PVGeoGravObsReader(GravObsReader):
 
 
 @smproxy.reader(name="PVGeoGravGradReader",
-       label='PVGeo: %s'%GravGradReader.__displayname__,
-       extensions=GravGradReader.extensions,
-       file_description=GravGradReader.description)
+                label='PVGeo: %s' % GravGradReader.__displayname__,
+                extensions=GravGradReader.extensions,
+                file_description=GravGradReader.description)
 class PVGeoGravGradReader(GravGradReader):
     def __init__(self):
         GravGradReader.__init__(self)
@@ -418,9 +423,9 @@ class PVGeoGravGradReader(GravGradReader):
 
 
 @smproxy.reader(name="PVGeoMagObsReader",
-       label='PVGeo: %s'%MagObsReader.__displayname__,
-       extensions=MagObsReader.extensions,
-       file_description=MagObsReader.description)
+                label='PVGeo: %s' % MagObsReader.__displayname__,
+                extensions=MagObsReader.extensions,
+                file_description=MagObsReader.description)
 class PVGeoMagObsReader(MagObsReader):
     def __init__(self):
         MagObsReader.__init__(self)
@@ -490,9 +495,9 @@ class PVGeoGeologyMapper(GeologyMapper):
 
 if discretize_available:
     @smproxy.reader(name="PVGeoDiscretizeMeshReader",
-           label='PVGeo: %s'%DiscretizeMeshReader.__displayname__,
-           extensions=DiscretizeMeshReader.extensions,
-           file_description=DiscretizeMeshReader.description)
+                    label='PVGeo: %s' % DiscretizeMeshReader.__displayname__,
+                    extensions=DiscretizeMeshReader.extensions,
+                    file_description=DiscretizeMeshReader.description)
     class PVGeoDiscretizeMeshReader(DiscretizeMeshReader):
         def __init__(self):
             DiscretizeMeshReader.__init__(self)

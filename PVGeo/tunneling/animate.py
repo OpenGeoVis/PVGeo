@@ -2,11 +2,8 @@ __all__ = [
     'AnimateTBM',
 ]
 
-import numpy as np
 import vtk
-from vtk.numpy_interface import dataset_adapter as dsa
 
-from .. import _helpers
 from ..base import AlgorithmBase
 
 
@@ -23,7 +20,6 @@ class AnimateTBM(AlgorithmBase):
         self.__dt = 1.0
 
     def RequestData(self, request, inInfo, outInfo):
-        import numpy as np
         from vtk.numpy_interface import dataset_adapter as dsa
         import PVGeo._helpers as inputhelp
         from PVGeo.filters import pointsToTube
@@ -49,7 +45,7 @@ class AnimateTBM(AlgorithmBase):
         # grab coordinates for each part of boring machine at time idx as row
         executive = self.GetExecutive()
         outInfo = executive.GetOutputInformation(0)
-        idx = int(outInfo.Get(executive.UPDATE_TIME_STEP())/dt)
+        idx = int(outInfo.Get(executive.UPDATE_TIME_STEP())/self.__dt)
         pts = []
         for i in range(3):
             x = arrs[i*3][idx]
@@ -62,7 +58,7 @@ class AnimateTBM(AlgorithmBase):
             vtk_pts.InsertNextPoint(pts[i][0],pts[i][1],pts[i][2])
         poly = vtk.vtkPolyData()
         poly.SetPoints(vtk_pts)
-        pointsToTube(poly, radius=Diameter/2, numSides=20, nrNbr=False, pdo=pdo)
+        pointsToTube(poly, radius=self.__diameter/2, numSides=20, nrNbr=False, pdo=pdo)
         return 1
 
 
@@ -73,7 +69,7 @@ class AnimateTBM(AlgorithmBase):
         # Calculate list of timesteps here
         #- Get number of rows in table and use that for num time steps
         nrows = int(self.GetInput().GetColumn(0).GetNumberOfTuples())
-        xtime = np.arange(0,nrows*dt,dt, dtype=float)
+        xtime = np.arange(0, nrows * self.__dt, self.__dt, dtype=float)
         outInfo.Remove(executive.TIME_STEPS())
         for i in range(len(xtime)):
             outInfo.Append(executive.TIME_STEPS(), xtime[i])

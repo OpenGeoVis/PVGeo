@@ -2,20 +2,20 @@ paraview_plugin_version = '2.0.4'
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
-from paraview.util.vtkAlgorithm import *
-
+from paraview.util.vtkAlgorithm import smdomain, smhint, smproperty, smproxy
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.gslib import *
+from PVGeo.gslib import (GSLibPointSetReader, GSLibReader, SGeMSGridReader,
+                         WriteImageDataToSGeMS, WriteTableToGSLib)
 
 ###############################################################################
 
 
 @smproxy.reader(name="PVGeoGSLibReader",
-       label='PVGeo: %s'%GSLibReader.__displayname__,
-       extensions=GSLibReader.extensions,
-       file_description=GSLibReader.description)
+                label='PVGeo: %s' % GSLibReader.__displayname__,
+                extensions=GSLibReader.extensions,
+                file_description=GSLibReader.description)
 class PVGeoGSLibReader(GSLibReader):
     def __init__(self):
         GSLibReader.__init__(self)
@@ -62,9 +62,9 @@ class PVGeoGSLibReader(GSLibReader):
 
 
 @smproxy.reader(name="PVGeoGSLibPointSetReader",
-       label='PVGeo: %s'%GSLibPointSetReader.__displayname__,
-       extensions=GSLibPointSetReader.extensions,
-       file_description=GSLibPointSetReader.description)
+                label='PVGeo: %s' % GSLibPointSetReader.__displayname__,
+                extensions=GSLibPointSetReader.extensions,
+                file_description=GSLibPointSetReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
 class PVGeoGSLibPointSetReader(GSLibPointSetReader):
     def __init__(self):
@@ -111,9 +111,9 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
 
 
 @smproxy.reader(name="PVGeoSGeMSGridReader",
-       label='PVGeo: %s'%SGeMSGridReader.__displayname__,
-       extensions=SGeMSGridReader.extensions,
-       file_description=SGeMSGridReader.description)
+                label='PVGeo: %s' % SGeMSGridReader.__displayname__,
+                extensions=SGeMSGridReader.extensions,
+                file_description=SGeMSGridReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoSGeMSGridReader(SGeMSGridReader):
     def __init__(self):

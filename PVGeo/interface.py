@@ -160,8 +160,6 @@ def points_to_poly_data(points, copy_z=False):
     Return:
         vtkPolyData : points with point-vertex cells
     """
-    __displayname__ = 'Points to PolyData'
-    __category__ = 'filter'
     # This prevents an error that occurs when only one point is passed
     if points.ndim < 2:
         points = points.reshape((1,-1))
