@@ -15,4 +15,4 @@ import PVGeo_All
 __author__ = 'Bane Sullivan'
 __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
-__version__ = '2.0.4'
+__version__ = '2.1.0'

@@ -1,4 +1,4 @@
-paraview_plugin_version = '2.0.4'
+paraview_plugin_version = '2.1.0'
 
 from vtk.numpy_interface import dataset_adapter as dsa
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
