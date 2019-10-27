@@ -53,7 +53,9 @@ class TestDataFrameConversions(TestBase):
 
         # Now test backwards compatability
         dfo = interface.table_to_data_frame(table)
-        self.assertTrue(df.equals(dfo))
+        # self.assertTrue(df.equals(dfo)) # Sorting is different on Py2.7 and 3.5
+        for name in dfo.keys():
+            self.assertTrue(np.allclose(df[name], dfo[name], rtol=RTOL))
         return
 
 
