@@ -8,6 +8,7 @@ __all__ = [
 __displayname__ = 'Math Operations'
 
 import numpy as np
+import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
@@ -212,7 +213,7 @@ class ArrayMath(FilterPreserveTypeBase):
         self.SetInputArrayToProcess(0, 0, 0, field0, array_name_0)
         self.SetInputArrayToProcess(1, 0, 0, field1, array_name_1)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
     def set_multiplier(self, val):
         """This is a static shifter/scale factor across the array after
@@ -459,7 +460,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
     def set_multiplier(self, val):
         """This is a static shifter/scale factor across the array after
@@ -612,7 +613,7 @@ class PercentThreshold(FilterBase):
         arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
 ###############################################################################
 
@@ -782,7 +783,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         self.SetInputArrayToProcess(1, 0, 0, gField, g_array)
         self.SetInputArrayToProcess(2, 0, 0, bField, b_array)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
 
 

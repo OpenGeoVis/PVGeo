@@ -20,6 +20,7 @@ import warnings
 import numpy as np
 import pandas as pd
 import properties
+import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
@@ -418,7 +419,7 @@ class WriteImageDataToSurfer(WriterBase):
         arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
     def Write(self, input_data_object=None, array_name=None):
         """Perfrom the write out."""

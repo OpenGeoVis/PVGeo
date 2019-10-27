@@ -10,6 +10,7 @@ __displayname__ = 'Table Operations'
 
 import numpy as np
 import pandas as pd
+import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
@@ -69,7 +70,7 @@ class CombineTables(FilterBase):
         self.SetInputDataObject(0, table0)
         self.SetInputDataObject(1, table1)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
 
 ###############################################################################
@@ -259,7 +260,7 @@ class ExtractArray(FilterBase):
         arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
 
 
@@ -332,7 +333,7 @@ class SplitTableOnArray(FilterBase):
         arr, field = _helpers.search_for_array(input_data_object, array_name)
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
 ###############################################################################
 
@@ -401,7 +402,7 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         self.SetInputDataObject(0, dataset)
         self.SetInputDataObject(1, table)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
     def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps.

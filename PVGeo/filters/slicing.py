@@ -8,6 +8,7 @@ __all__ = [
 __displayname__ = 'Slicing'
 
 import numpy as np
+import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
@@ -182,7 +183,7 @@ class ManySlicesAlongPoints(_SliceBase):
         self.SetInputDataObject(0, points)
         self.SetInputDataObject(1, data)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
 
 ###############################################################################

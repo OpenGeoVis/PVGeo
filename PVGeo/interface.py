@@ -19,7 +19,6 @@ __all__ = [
     'convert_cell_conn',
     'get_array',
     'get_data_dict',
-    'wrap_pyvista',
 ]
 
 
@@ -55,24 +54,9 @@ def convert_array(arr, name='Data', deep=0, array_type=None, pdf=False):
             return a pandas DataFrame.
 
     """
-    if isinstance(arr, np.ndarray):
-        if arr.dtype is np.dtype('O'):
-            arr = arr.astype('|S')
-        arr = np.ascontiguousarray(arr)
-        try:
-            arr = np.ascontiguousarray(arr)
-            VTK_data = nps.numpy_to_vtk(num_array=arr, deep=deep, array_type=array_type)
-        except ValueError:
-            typ = get_vtk_type(arr.dtype)
-            if typ is 13:
-                VTK_data = convert_string_array(arr)
-        VTK_data.SetName(name)
-        return VTK_data
-    # Otherwise input must be a vtkDataArray
-    if not isinstance(arr, vtk.vtkDataArray):
-        raise _helpers.PVGeoError('Invalid input array.')
-    # Convert from vtkDataArry to NumPy
-    num_data = nps.vtk_to_numpy(arr)
+    num_data = pv.convert_array(arr, name=name, deep=deep, array_type=array_type)
+    if not isinstance(num_data, np.ndarray):
+        return num_data
     if not pdf:
         return num_data
     return pd.DataFrame(data=num_data, columns=[arr.GetName()])
@@ -82,26 +66,21 @@ def convert_array(arr, name='Data', deep=0, array_type=None, pdf=False):
 def data_frame_to_table(df, pdo=None):
     """Converts a pandas DataFrame to a vtkTable"""
     if not isinstance(df, pd.DataFrame):
-        raise PVGeoError('Input is not a pandas DataFrame')
+        raise _helpers.PVGeoError('Input is not a pandas DataFrame')
     if pdo is None:
-        pdo = vtk.vtkTable()
-    for key in df.keys():
-        VTK_data = convert_array(df[key].values, name=key)
-        pdo.AddColumn(VTK_data)
-    return wrap_pyvista(pdo)
+        pdo = pv.Table(df)
+    else:
+        pdo.DeepCopy(pv.Table(df))
+    return pdo
 
 
 def table_to_data_frame(table):
     """Converts a vtkTable to a pandas DataFrame"""
     if not isinstance(table, vtk.vtkTable):
-        raise PVGeoError('Input is not a vtkTable')
-    num = table.GetNumberOfColumns()
-    names = [table.GetColumnName(i) for i in range(num)]
-    data = dsa.WrapDataObject(table).RowData
-    df = pd.DataFrame()
-    for i, n in enumerate(names):
-        df[n] = np.array(data[n])
-    return df
+        raise _helpers.PVGeoError('Input is not a vtkTable')
+    if not isinstance(table, pv.Table):
+        table = pv.Table(table)
+    return table.to_pandas()
 
 
 def place_array_in_table(ndarr, titles, pdo):
@@ -124,7 +103,7 @@ def place_array_in_table(ndarr, titles, pdo):
         if isinstance(ndarr[0], (tuple, np.void)):
             for i, title in enumerate(titles):
                 place_array_in_table(ndarr['f%d' % i], title, pdo)
-            return wrap_pyvista(pdo)
+            return pv.wrap(pdo)
         # Otherwise it is just a 1D array which needs to be 2D
         else:
             ndarr = np.reshape(ndarr, (-1, 1))
@@ -134,7 +113,7 @@ def place_array_in_table(ndarr, titles, pdo):
         VTK_data = convert_array(ndarr[:,i])
         VTK_data.SetName(titles[i])
         pdo.AddColumn(VTK_data)
-    return wrap_pyvista(pdo)
+    return pv.wrap(pdo)
 
 
 
@@ -147,18 +126,18 @@ def get_dtypes(dtype='', endian=None):
             for VTK data types
     """
     # If native `@` was chosen then do not pass an endian
-    if endian is '@':
+    if endian == '@':
         #print('WARNING: Native endianness no longer supported for packed binary reader. Please chose `>` or `<`. This defaults to big `>`.')
         endian = ''
     # No endian specified:
     elif endian is None:
         endian = ''
     # Get numpy and VTK data types and return them both
-    if dtype is 'd':
+    if dtype == 'd':
         vtktype = vtk.VTK_DOUBLE
-    elif dtype is 'f':
+    elif dtype == 'f':
         vtktype = vtk.VTK_FLOAT
-    elif dtype is 'i':
+    elif dtype == 'i':
         vtktype = vtk.VTK_INT
     else:
         raise _helpers.PVGeoError('dtype \'%s\' unknown:' % dtype)
@@ -216,7 +195,7 @@ def points_to_poly_data(points, copy_z=False):
     if copy_z:
         z = convert_array(points[:, 2], name='Elevation')
         pdata.GetPointData().AddArray(z)
-    return wrap_pyvista(pdata)
+    return pv.wrap(pdata)
 
 
 def add_arrays_from_data_frame(pdo, field, df):
@@ -224,7 +203,7 @@ def add_arrays_from_data_frame(pdo, field, df):
     for key in df.keys():
         VTK_data = convert_array(df[key].values, name=key)
         _helpers.add_array(pdo, field, VTK_data)
-    return wrap_pyvista(pdo)
+    return pv.wrap(pdo)
 
 
 
@@ -259,15 +238,3 @@ def get_data_dict(dataset, field='cell'):
     for key in _helpers.get_all_array_names(dataset, field):
         data[key] = np.array(_helpers.get_numpy_array(dataset, field, key))
     return data
-
-
-def wrap_pyvista(dataset):
-    """This will wrap any given VTK dataset via the vtkInterface Python package
-    if it is available and return the wrapped data object. If pyvista is
-    unavailable, then the given object is returned."""
-    try:
-        import pyvista
-        dataset = pyvista.wrap(dataset)
-    except ImportError:
-        pass
-    return dataset

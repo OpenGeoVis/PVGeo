@@ -5,6 +5,7 @@ __all__ = [
 __displayname__ = 'Subsetting'
 
 import numpy as np
+import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
@@ -186,7 +187,7 @@ class ExtractTopography(FilterBase):
         self.SetInputDataObject(0, data)
         self.SetInputDataObject(1, points)
         self.Update()
-        output = interface.wrap_pyvista(self.GetOutput())
+        output = pv.wrap(self.GetOutput())
         if self._remove:
             # NOTE: Assumes the given operation produces zeros and ones only
             #       Also, this does not update the algorithm's output.

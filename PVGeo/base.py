@@ -15,6 +15,7 @@ __displayname__ = 'Base Classes'
 import warnings
 
 import numpy as np
+import pyvista as pv
 # Outside Imports:
 import vtk  # NOTE: This is the first import executed in the package! Keep here!!
 import vtk.util.vtkAlgorithm as valg  # import VTKPythonAlgorithmBase
@@ -62,7 +63,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         """A conveience method to get the output data object of this ``PVGeo``
         algorithm.
         """
-        return interface.wrap_pyvista(self.GetOutputDataObject(port))
+        return pv.wrap(self.GetOutputDataObject(port))
 
     def error_occurred(self):
         """A conveience method for handling errors on the VTK pipeline
@@ -80,7 +81,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     def apply(self):
         """Update the algorithm and get the output data object"""
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
     def update(self):
         """Alias for self.Update()"""
@@ -191,7 +192,7 @@ class ReaderBaseBase(AlgorithmBase):
         """Given a file name (or list of file names), perfrom the read"""
         self.AddFileName(filename)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
 ###############################################################################
 
@@ -212,7 +213,7 @@ class FilterBase(AlgorithmBase):
         """Run this algorithm on the given input dataset"""
         self.SetInputDataObject(input_data_object)
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
 
 
@@ -443,7 +444,7 @@ class TwoFileReaderBase(AlgorithmBase):
         """Perfrom the read with parameters/file names set during init or by
         setters"""
         self.Update()
-        return interface.wrap_pyvista(self.GetOutput())
+        return pv.wrap(self.GetOutput())
 
 
 ###############################################################################
