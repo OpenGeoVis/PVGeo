@@ -1,15 +1,16 @@
-from base import TestBase
+import os
 import shutil
 import tempfile
-import os
-import numpy as np
 
+import numpy as np
+from vtk.numpy_interface import dataset_adapter as dsa
 # VTK imports:
 from vtk.util import numpy_support as nps
-from vtk.numpy_interface import dataset_adapter as dsa
 
+from base import TestBase
 # Functionality to test:
-from PVGeo.readers import *
+from PVGeo.readers import (DelimitedTextReader, MadagascarReader,
+                           PackedBinariesReader, XYZTextReader)
 
 RTOL = 0.000001
 
@@ -17,6 +18,7 @@ class TestDelimitedTextReader(TestBase):
     """
     Test the `DelimitedTextReader`: A widely used base class
     """
+
     def setUp(self):
         TestBase.setUp(self)
         # Create a temporary directory
@@ -149,6 +151,7 @@ class TestXYZTextReader(TestBase):
     """
     Test the `XYZTextReader`
     """
+
     def setUp(self):
         TestBase.setUp(self)
         # Create a temporary directory
@@ -205,6 +208,7 @@ class TestPackedBinariesReader(TestBase):
     """
     Test the `PackedBinariesReader`
     """
+
     def setUp(self):
         TestBase.setUp(self)
         # Create a temporary directory

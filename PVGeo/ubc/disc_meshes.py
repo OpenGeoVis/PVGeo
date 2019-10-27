@@ -7,7 +7,6 @@ __displayname__ = 'Discretize'
 # Import Helpers:
 from .. import _helpers
 from ..base import InterfacedBaseReader
-from .. import interface
 
 with _helpers.HiddenPrints():
     import discretize
@@ -19,6 +18,7 @@ class DiscretizeMeshReader(InterfacedBaseReader):
     extensions = 'json'
     __displayname__ = 'Discretize Mesh Reader'
     description = 'Serialized Discretize Meshes'
+
     def __init__(self, **kwargs):
         InterfacedBaseReader.__init__(self, **kwargs)
 

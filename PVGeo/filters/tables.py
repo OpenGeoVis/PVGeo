@@ -9,13 +9,13 @@ __all__ = [
 __displayname__ = 'Table Operations'
 
 import numpy as np
-import pandas as pd
-import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
+import pyvista as pv
+
 from .. import _helpers, interface
-from ..base import FilterBase,  FilterPreserveTypeBase
+from ..base import FilterBase, FilterPreserveTypeBase
 
 ###############################################################################
 
@@ -29,10 +29,11 @@ class CombineTables(FilterBase):
     """
     __displayname__ = 'Combine Tables'
     __category__ = 'filter'
+
     def __init__(self):
         FilterBase.__init__(self,
-            nInputPorts=2, inputType='vtkTable',
-            nOutputPorts=1, outputType='vtkTable')
+                            nInputPorts=2, inputType='vtkTable',
+                            nOutputPorts=1, outputType='vtkTable')
         # Parameters... none
 
     # CRITICAL for multiple input ports
@@ -84,10 +85,11 @@ class ReshapeTable(FilterBase):
     """
     __displayname__ = 'Reshape Table'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkTable',
-            nOutputPorts=1, outputType='vtkTable')
+                            nInputPorts=1, inputType='vtkTable',
+                            nOutputPorts=1, outputType='vtkTable')
         # Parameters
         self.__nrows = kwargs.get('nrows', 1)
         self.__ncols = kwargs.get('ncols', 1)
@@ -152,6 +154,7 @@ class ReshapeTable(FilterBase):
 
     #### Seters and Geters ####
 
+
     def set_names(self, names):
         """Set names using a semicolon (;) seperated string or a list of strings
 
@@ -210,10 +213,11 @@ class ExtractArray(FilterBase):
     """
     __displayname__ = 'Extract Array'
     __category__ = 'filter'
+
     def __init__(self):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkDataSet',
-            nOutputPorts=1, outputType='vtkTable')
+                            nInputPorts=1, inputType='vtkDataSet',
+                            nOutputPorts=1, outputType='vtkTable')
         self.__input_array = [None, None]
 
 
@@ -274,6 +278,7 @@ class SplitTableOnArray(FilterBase):
     """
     __displayname__ = 'Split Table On Array'
     __category__ = 'filter'
+
     def __init__(self):
         FilterBase.__init__(self, nInputPorts=1, inputType='vtkTable',
                             nOutputPorts=1, outputType='vtkMultiBlockDataSet')
@@ -347,6 +352,7 @@ class AppendTableToCellData(FilterPreserveTypeBase):
     """
     __displayname__ = 'Append Table to Cell Data'
     __category__ = 'filter'
+
     def __init__(self):
         FilterPreserveTypeBase.__init__(self, nInputPorts=2)
         self._preserve_port = 0 # ensure port 0's type is preserved
@@ -408,6 +414,7 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         """Use this in ParaView decorator to register timesteps.
         """
         # if unset, force at least one attempt to set the timesteps
-        if self.__timesteps is None: self._update_time_steps()
+        if self.__timesteps is None:
+            self._update_time_steps()
         # self.__timesteps should already be of type list
         return self.__timesteps if self.__timesteps is not None else None

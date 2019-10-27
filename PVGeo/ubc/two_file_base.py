@@ -7,8 +7,8 @@ __displayname__ = 'Base Classes'
 
 # Outside Imports:
 import os
+
 import numpy as np
-import pandas as pd
 import vtk
 
 from .. import _helpers, base
@@ -23,13 +23,14 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
     __displayname__ = 'UBC Mesh Reader Base'
     __category__ = 'base'
     extensions = 'mesh msh dat txt text'
+
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         base.TwoFileReaderBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType,
-            **kwargs)
+                                        nOutputPorts=nOutputPorts, outputType=outputType,
+                                        **kwargs)
         self.__data_name = 'Data'
         self.__use_filename = True # flag on whether or not to use the model file
-                                 # extension as data name
+        # extension as data name
         # For keeping track of type (2D vs 3D)
         self.__sizeM = None
 
@@ -57,7 +58,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             disc = []
             for i in range(n):
                 ln = fileLines[i+sft].split('!')[0].split()
-                if i is 0:
+                if i == 0:
                     o = ln[0]
                     pts.append(o)
                     ln = [ln[1],ln[2]]
@@ -184,10 +185,11 @@ class ModelAppenderBase(base.AlgorithmBase):
     """
     __displayname__ = 'Model Appender Base'
     __category__ = 'base'
+
     def __init__(self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid', **kwargs):
         base.AlgorithmBase.__init__(self,
-            nInputPorts=1, inputType=inputType,
-            nOutputPorts=1, outputType=outputType)
+                                    nInputPorts=1, inputType=inputType,
+                                    nOutputPorts=1, outputType=outputType)
         self._model_filenames = kwargs.get('model_files', [])
         self.__data_name = kwargs.get('dataname', 'Appended Data')
         self.__use_filename = True
@@ -219,7 +221,8 @@ class ModelAppenderBase(base.AlgorithmBase):
     def Modified(self, read_again=True):
         """Call modified if the files needs to be read again again.
         """
-        if read_again: self.__need_to_read = read_again
+        if read_again:
+            self.__need_to_read = read_again
         base.AlgorithmBase.Modified(self)
 
     def modified(self, read_again=True):
@@ -232,7 +235,8 @@ class ModelAppenderBase(base.AlgorithmBase):
         """
         # Use the inputs' timesteps: this merges the timesteps values
         ts0 = _helpers.get_input_time_steps(self, port=0)
-        if ts0 is None: ts0 = np.array([])
+        if ts0 is None:
+            ts0 = np.array([])
         ts1 = _helpers._calculate_time_range(len(self._model_filenames), self.__dt)
         tsAll = np.unique(np.concatenate((ts0, ts1), 0))
         # Use both inputs' time steps
@@ -240,7 +244,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         return 1
 
     def _read_up_front(self):
-        raise NotImpelementedError()
+        raise NotImplementedError()
 
     def _place_on_mesh(self, output, idx=0):
         raise NotImplementedError()
@@ -289,7 +293,8 @@ class ModelAppenderBase(base.AlgorithmBase):
         """Use this in ParaView decorator to register timesteps.
         """
         # if unset, force at least one attempt to set the timesteps
-        if self.__timesteps is None: self._update_time_steps()
+        if self.__timesteps is None:
+            self._update_time_steps()
         return self.__timesteps if self.__timesteps is not None else None
 
     def clear_models(self):

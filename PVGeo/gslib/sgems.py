@@ -5,7 +5,6 @@ __all__ = [
 
 __displayname__ = 'SGeMS File I/O'
 
-import os
 import re
 
 import numpy as np
@@ -26,6 +25,7 @@ class SGeMSGridReader(GSLibReader):
     __category__ = 'reader'
     extensions = GSLibReader.extensions + 'gslibgrid mtxset'
     description = 'PVGeo: SGeMS Uniform Grid'
+
     def __init__(self, origin=(0.0, 0.0, 0.0), spacing=(1.0, 1.0, 1.0), **kwargs):
         GSLibReader.__init__(self, outputType='vtkImageData', **kwargs)
         self.__extent = None
@@ -34,10 +34,10 @@ class SGeMSGridReader(GSLibReader):
         self.__mask = kwargs.get("mask", -9966699.)
 
     def __parse_extent(self, header):
-        regex = re.compile('\S\s\((\d+)x(\d+)x(\d+)\)')
+        regex = re.compile(r'\S\s\((\d+)x(\d+)x(\d+)\)')
         dims = regex.findall(header)
         if len(dims) < 1:
-            regex = re.compile('(\d+) (\d+) (\d+)')
+            regex = re.compile(r'(\d+) (\d+) (\d+)')
             dims = regex.findall(header)
         if len(dims) < 1:
             raise _helpers.PVGeoError('File not in proper SGeMS Grid fromat.')
@@ -144,6 +144,7 @@ class WriteImageDataToSGeMS(WriterBase):
     """
     __displayname__ = 'Write ``vtkImageData`` To SGeMS Grid Format'
     __category__ = 'writer'
+
     def __init__(self, inputType='vtkImageData'):
         WriterBase.__init__(self, inputType=inputType, ext='SGeMS')
 

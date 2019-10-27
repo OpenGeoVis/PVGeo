@@ -13,10 +13,11 @@ from ..base import AlgorithmBase
 class AnimateTBM(AlgorithmBase):
     """This filter analyzes a vtkTable containing position information about a Tunnel Boring Machine (TBM). This Filter iterates over each row of the table as a timestep and uses the XYZ coordinates of the three different parts of the TBM to generate a tube that represents the TBM.
     """
+
     def __init__(self):
         AlgorithmBase.__init__(self,
-            nInputPorts=1, inputType='vtkTable',
-            nOutputPorts=1, outputType='vtkPolyData')
+                               nInputPorts=1, inputType='vtkTable',
+                               nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.__diameter = 17.45,
         self.__dt = 1.0

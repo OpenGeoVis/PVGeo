@@ -8,9 +8,8 @@ __displayname__ = 'Writers'
 import os
 
 import numpy as np
-import vtk
 
-from .. import _helpers, interface
+from .. import interface
 from ..base import WriterBase
 
 
@@ -20,13 +19,14 @@ class ubcTensorMeshWriterBase(WriterBase):
     """
     __displayname__ = 'UBC Format Writer Base'
     __category__ = 'base'
+
     def __init__(self, inputType='vtkRectilinearGrid'):
         WriterBase.__init__(self, inputType=inputType, ext='msh')
         # These MUST be set by children
         self.xcells = None
         self.ycells = None
         self.zcells = None
-        self.origin= None
+        self.origin = None
 
 
     def write_mesh_3d(self, nx, ny, nz, filename):
@@ -81,6 +81,7 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
     """
     __displayname__ = 'Write ``vtkRectilinearGrid`` to UBC Tensor Mesh'
     __category__ = 'writer'
+
     def __init__(self):
         ubcTensorMeshWriterBase.__init__(self, inputType='vtkRectilinearGrid')
 
@@ -130,6 +131,7 @@ class WriteImageDataToUBC(ubcTensorMeshWriterBase):
     """
     __displayname__ = 'Write ``vtkImageData`` to UBC Tensor Mesh'
     __category__ = 'writer'
+
     def __init__(self):
         ubcTensorMeshWriterBase.__init__(self, inputType='vtkImageData')
 

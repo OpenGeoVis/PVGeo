@@ -8,13 +8,13 @@ __all__ = [
 __displayname__ = 'Slicing'
 
 import numpy as np
-import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
+import pyvista as pv
+
 from .. import _helpers, interface
 from ..base import FilterBase
-
 
 
 class _SliceBase(FilterBase):
@@ -26,12 +26,13 @@ class _SliceBase(FilterBase):
     """
     __displayname__ = 'Base Slicing Filter'
     __category__ = 'filter'
+
     def __init__(self, n_slices=5,
-            nInputPorts=1, inputType='vtkDataSet',
-            nOutputPorts=1, outputType='vtkUnstructuredGrid'):
+                 nInputPorts=1, inputType='vtkDataSet',
+                 nOutputPorts=1, outputType='vtkUnstructuredGrid'):
         FilterBase.__init__(self,
-            nInputPorts=nInputPorts, inputType=inputType,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+                            nInputPorts=nInputPorts, inputType=inputType,
+                            nOutputPorts=nOutputPorts, outputType=outputType)
         # Parameters
         self.__n_slices = n_slices
 
@@ -89,10 +90,11 @@ class ManySlicesAlongPoints(_SliceBase):
     """
     __displayname__ = 'Many Slices Along Points'
     __category__ = 'filter'
+
     def __init__(self, n_slices=5, nearest_nbr=True, outputType='vtkMultiBlockDataSet'):
         _SliceBase.__init__(self, n_slices=n_slices,
-            nInputPorts=2, inputType='vtkDataSet',
-            nOutputPorts=1, outputType=outputType)
+                            nInputPorts=2, inputType='vtkDataSet',
+                            nOutputPorts=1, outputType=outputType)
         self.__useNearestNbr = nearest_nbr
 
     # CRITICAL for multiple input ports
@@ -111,7 +113,7 @@ class ManySlicesAlongPoints(_SliceBase):
             # sklearn's KDTree is faster: use it if available
             from sklearn.neighbors import KDTree as Tree
         except ImportError:
-            from scipy.spatial import cKDTree  as Tree
+            from scipy.spatial import cKDTree as Tree
         if self.get_number_of_slices() == 0:
             return []
         # Get the Points over the NumPy interface
@@ -170,6 +172,7 @@ class ManySlicesAlongPoints(_SliceBase):
 
     #### Getters / Setters ####
 
+
     def set_use_nearest_nbr(self, flag):
         """Set a flag on whether to use SciPy's nearest neighbor approximation
         when generating the slicing path
@@ -201,6 +204,7 @@ class SlideSliceAlongPoints(ManySlicesAlongPoints):
     """
     __displayname__ = 'Slide Slice Along Points'
     __category__ = 'filter'
+
     def __init__(self, n_slices=5, nearest_nbr=True):
         ManySlicesAlongPoints.__init__(self, outputType='vtkPolyData')
         self.__planes = None
@@ -268,10 +272,11 @@ class ManySlicesAlongAxis(_SliceBase):
     """
     __displayname__ = 'Many Slices Along Axis'
     __category__ = 'filter'
+
     def __init__(self, n_slices=5, axis=0, rng=None, pad=0.01, outputType='vtkMultiBlockDataSet'):
         _SliceBase.__init__(self, n_slices=n_slices,
-            nInputPorts=1, inputType='vtkDataSet',
-            nOutputPorts=1, outputType=outputType)
+                            nInputPorts=1, inputType='vtkDataSet',
+                            nOutputPorts=1, outputType=outputType)
         # Parameters
         self.__axis = axis
         self.__rng = rng
@@ -391,9 +396,10 @@ class SliceThroughTime(ManySlicesAlongAxis):
     """
     __displayname__ = 'Slice Through Time'
     __category__ = 'filter'
+
     def __init__(self, n_slices=5, dt=1.0, axis=0, rng=None,):
         ManySlicesAlongAxis.__init__(self, n_slices=n_slices,
-                axis=axis, rng=rng, outputType='vtkPolyData')
+                                     axis=axis, rng=rng, outputType='vtkPolyData')
         # Parameters
         self.__dt = dt
         self.__timesteps = None

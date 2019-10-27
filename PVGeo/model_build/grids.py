@@ -8,9 +8,8 @@ __displayname__ = 'Grids'
 
 import numpy as np
 import vtk
-from vtk.numpy_interface import dataset_adapter as dsa
 
-from .. import _helpers, interface
+from .. import interface
 from ..base import AlgorithmBase
 
 
@@ -26,13 +25,14 @@ class CreateUniformGrid(AlgorithmBase):
     """
     __displayname__ = 'Create Uniform Grid'
     __category__ = 'source'
+
     def __init__(self,
                  extent=(10, 10, 10),
                  spacing=(1.0, 1.0, 1.0),
                  origin=(0.0, 0.0, 0.0)):
         AlgorithmBase.__init__(self,
-            nInputPorts=0,
-            nOutputPorts=1, outputType='vtkImageData')
+                               nInputPorts=0,
+                               nOutputPorts=1, outputType='vtkImageData')
         self.__extent = extent
         self.__spacing = spacing
         self.__origin = origin
@@ -106,14 +106,15 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
     """
     __displayname__ = 'Create Even Rectilinear Grid'
     __category__ = 'source'
+
     def __init__(self,
                  extent=[10, 10, 10],
                  xrng=[-1.0, 1.0],
                  yrng=[-1.0, 1.0],
                  zrng=[-1.0, 1.0]):
         AlgorithmBase.__init__(self,
-            nInputPorts=0,
-            nOutputPorts=1, outputType='vtkRectilinearGrid')
+                               nInputPorts=0,
+                               nOutputPorts=1, outputType='vtkRectilinearGrid')
         self.__extent = extent
         self.__xrange = xrng
         self.__yrange = yrng
@@ -199,12 +200,13 @@ class CreateTensorMesh(AlgorithmBase):
     """
     __displayname__ = 'Create Tensor Mesh'
     __category__ = 'source'
+
     def __init__(self, origin=[-350.0, -400.0, 0.0], data_name='Data',
-            xcellstr='200 100 50 20*50.0 50 100 200',
-            ycellstr='200 100 50 21*50.0 50 100 200',
-            zcellstr='20*25.0 50 100 200',):
+                 xcellstr='200 100 50 20*50.0 50 100 200',
+                 ycellstr='200 100 50 21*50.0 50 100 200',
+                 zcellstr='20*25.0 50 100 200',):
         AlgorithmBase.__init__(self, nInputPorts=0,
-            nOutputPorts=1, outputType='vtkRectilinearGrid')
+                               nOutputPorts=1, outputType='vtkRectilinearGrid')
         self.__origin = origin
         self.__xcells = CreateTensorMesh._read_cell_line(xcellstr)
         self.__ycells = CreateTensorMesh._read_cell_line(ycellstr)
@@ -281,7 +283,7 @@ class CreateTensorMesh(AlgorithmBase):
             data = np.random.rand(nx*ny*nz)
             data = interface.convert_array(data, name='Random Data', deep=True)
         else:
-            data = interface.convert_array(data, name=data_name, deep=True)
+            data = interface.convert_array(data, name=self.__data_name, deep=True)
         pdo.GetCellData().AddArray(data)
         return pdo
 

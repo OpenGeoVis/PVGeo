@@ -17,17 +17,18 @@ __displayname__ = 'Point/Line Sets'
 from datetime import datetime
 
 import numpy as np
-import pandas as pd
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-import pyvista
 
-# NOTE: internal import of pyproj in LonLatToUTM
+import pyvista
 
 from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase
 # improt CreateTensorMesh for its cell string parsing
 from ..model_build import CreateTensorMesh
+
+# NOTE: internal import of pyproj in LonLatToUTM
+
 
 ###############################################################################
 #---- Cell Connectivity ----#
@@ -48,10 +49,11 @@ class AddCellConnToPoints(FilterBase):
     """
     __displayname__ = 'Add Cell Connectivity to Points'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkPolyData',
-            nOutputPorts=1, outputType='vtkPolyData')
+                            nInputPorts=1, inputType='vtkPolyData',
+                            nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.__cell_type = kwargs.get('cell_type', vtk.VTK_POLY_LINE)
         self.__usenbr = kwargs.get('nearest_nbr', False)
@@ -61,8 +63,7 @@ class AddCellConnToPoints(FilterBase):
 
 
     def _connect_cells(self, pdi, pdo, log_time=False):
-        """Internal helper to perfrom the connection
-        """
+        """Internal helper to perfrom the connection"""
         # NOTE: Type map is specified in vtkCellType.h
         cell_type = self.__cell_type
 
@@ -82,7 +83,7 @@ class AddCellConnToPoints(FilterBase):
                 # sklearn's KDTree is faster: use it if available
                 from sklearn.neighbors import KDTree as Tree
             except ImportError:
-                from scipy.spatial import cKDTree  as Tree
+                from scipy.spatial import cKDTree as Tree
             _compute_dist = lambda pt0, pt1: np.linalg.norm(pt0-pt1)
             ind, min_dist = None, np.inf
             tree = Tree(points)
@@ -177,6 +178,7 @@ class PointsToTube(AddCellConnToPoints):
     """
     __displayname__ = 'Points to Tube'
     __category__ = 'filter'
+
     def __init__(self, num_sides=20, radius=10.0, capping=False, **kwargs):
         AddCellConnToPoints.__init__(self, **kwargs)
         # Additional Parameters
@@ -203,6 +205,7 @@ class PointsToTube(AddCellConnToPoints):
 
 
     #### Seters and Geters ####
+
 
     def set_radius(self, radius):
         """Set the radius of the tube
@@ -236,6 +239,7 @@ class LonLatToUTM(FilterPreserveTypeBase):
     """
     __displayname__ = 'Lat Lon To UTM'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self, inputType='vtkDataSet', **kwargs)
         self.__zone = 11,
@@ -254,7 +258,8 @@ class LonLatToUTM(FilterPreserveTypeBase):
         for i, name in enumerate(wgs):
             oldindex = ellps.index(name)
             ellps.insert(0, ellps.pop(oldindex))
-        if idx is not None: return ellps[idx]
+        if idx is not None:
+            return ellps[idx]
         return ellps
 
     def __convert_2d(self, lon, lat, elev):
@@ -308,6 +313,7 @@ class RotationTool(object):
     """
     __displayname__ = 'Rotation Tool'
     __category__ = 'filter'
+
     def __init__(self, decimals=6):
         # Parameters
         self.RESOLUTION = np.pi / 3200.0
@@ -402,8 +408,8 @@ class RotationTool(object):
 
         .. _printipi: https://github.com/Wallacoloo/printipi/blob/master/util/rotation_matrix.py
         """
-        from math import acos, atan2, cos, pi, sin
-        from numpy import array, cross, dot, float64, hypot, zeros
+        from math import acos, cos, sin
+        from numpy import cross, dot
         from numpy.linalg import norm
 
         R = np.zeros((3,3))
@@ -471,7 +477,7 @@ class RotationTool(object):
         # Make the theta range up to 90 degrees to rotate points through
         #- angles = [0.0, 90.0)
         angles = np.arange(0.0, np.pi/2, self.RESOLUTION)
-        nang = len(angles) # Number of rotations
+        # nang = len(angles) # Number of rotations
 
         # if pt1.ndim == pt2.ndim == 3:
         #     # uh-oh
@@ -517,7 +523,7 @@ class RotationTool(object):
             # sklearn's KDTree is faster: use it if available
             from sklearn.neighbors import KDTree as Tree
         except ImportError:
-            from scipy.spatial import cKDTree  as Tree
+            from scipy.spatial import cKDTree as Tree
         # Creat the indexing range for searching the points:
         num = len(pts)
         rng = np.linspace(0, num-1, num=num, dtype=int)
@@ -583,10 +589,11 @@ class RotatePoints(FilterBase):
     """
     __displayname__ = 'Rotate Points'
     __category__ = 'filter'
+
     def __init__(self, angle=45.0, origin=None, use_corner=True):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkPolyData',
-            nOutputPorts=1, outputType='vtkPolyData')
+                            nInputPorts=1, inputType='vtkPolyData',
+                            nOutputPorts=1, outputType='vtkPolyData')
         # Parameters
         self.__angle = angle
         if origin is None:
@@ -647,10 +654,11 @@ class ExtractPoints(FilterBase):
     """
     __displayname__ = 'Extract Points'
     __category__ = 'filter'
+
     def __init__(self):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkDataSet',
-            nOutputPorts=1, outputType='vtkPolyData')
+                            nInputPorts=1, inputType='vtkDataSet',
+                            nOutputPorts=1, outputType='vtkPolyData')
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
@@ -677,9 +685,10 @@ class ExtractPoints(FilterBase):
 class ExtractCellCenters(FilterBase):
     __displayname__ = 'Extract Cell Centers'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         FilterBase.__init__(self, nInputPorts=1, inputType='vtkDataSet',
-                    nOutputPorts=1, outputType='vtkPolyData', **kwargs)
+                            nOutputPorts=1, outputType='vtkPolyData', **kwargs)
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
@@ -706,6 +715,7 @@ class ExtractCellCenters(FilterBase):
 class AppendCellCenters(FilterPreserveTypeBase):
     __displayname__ = 'Append Cell Centers'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self, **kwargs)
 
@@ -737,6 +747,7 @@ class IterateOverPoints(FilterBase):
     """
     __displayname__ = 'Iterate Over Points'
     __category__ = 'filter'
+
     def __init__(self, dt=1.0):
         FilterBase.__init__(self, nInputPorts=1, inputType='vtkPolyData',
                             nOutputPorts=1, outputType='vtkPolyData')
@@ -766,7 +777,7 @@ class IterateOverPoints(FilterBase):
         pdo = self.GetOutputData(outInfo, 0)
         #### Perfrom task ####
         # Get the Points over the NumPy interface
-        wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
+        # wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
         # Now grab point at this timestep
@@ -841,6 +852,7 @@ class ConvertUnits(FilterPreserveTypeBase):
     """
     __displayname__ = 'Convert XYZ Units'
     __category__ = 'filter'
+
     def __init__(self, conversion='meter_to_feet', **kwargs):
         FilterPreserveTypeBase.__init__(self, **kwargs)
         self.__conversion = conversion
@@ -908,6 +920,7 @@ class BuildSurfaceFromPoints(FilterBase):
     """
     __displayname__ = 'Build Surface From Points'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         FilterBase.__init__(self, inputType='vtkPolyData',
                             outputType='vtkUnstructuredGrid', **kwargs)
@@ -969,15 +982,15 @@ class BuildSurfaceFromPoints(FilterBase):
 
         # Create cell indices for that surface
         indexes = np.array(range(0, (nt*ns)))
-        indexes = np.reshape(indexes, (nt, ns) )
+        indexes = np.reshape(indexes, (nt, ns))
 
         # Define the cell connectivity on the surface
-        cellConn = np.zeros(( nt-1, ns-1 , 4), dtype=np.int)
+        cellConn = np.zeros((nt-1, ns-1, 4), dtype=np.int)
         cellConn[:,:,0] = indexes[:-1, :-1]
         cellConn[:,:,1] = indexes[1:, :-1]
         cellConn[:,:,2] = indexes[1:, 1:]
         cellConn[:,:,3] = indexes[:-1, 1:]
-        cellConn = cellConn.reshape((ns-1)*(nt-1) , 4)
+        cellConn = cellConn.reshape((ns-1)*(nt-1), 4)
         cells = vtk.vtkCellArray()
         cells.SetNumberOfCells(cellConn.shape[0])
         cells.SetCells(cellConn.shape[0], interface.convert_cell_conn(cellConn))

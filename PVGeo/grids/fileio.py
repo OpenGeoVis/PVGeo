@@ -12,26 +12,21 @@ __displayname__ = 'File I/O'
 
 # NOTE: Surfer no data value: 1.70141E+38
 
-import re
-import struct
-import sys
 import warnings
+from struct import unpack
 
 import numpy as np
 import pandas as pd
 import properties
-import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
 import espatools
+import pyvista as pv
 
 from .. import _helpers, interface
 from ..base import ReaderBase, ReaderBaseBase, WriterBase
 from ..readers import DelimitedTextReader
-
-
-
 
 ###############################################################################
 
@@ -112,6 +107,7 @@ class SurferGridReader(ReaderBase):
     __category__ = 'reader'
     extensions = 'grd GRD'
     description = 'PVGeo: Surfer Grid'
+
     def __init__(self, outputType='vtkImageData', **kwargs):
         ReaderBase.__init__(self, outputType=outputType, **kwargs)
         self.__grids = None
@@ -124,7 +120,7 @@ class SurferGridReader(ReaderBase):
         with open(filename, 'rb') as f:
             if unpack('4s', f.read(4))[0] != b'DSRB':
                 raise _helpers.PVGeoError(
-                '''Invalid file identifier for Surfer 7 binary .grd
+                    '''Invalid file identifier for Surfer 7 binary .grd
                     file. First 4 characters must be DSRB.'''
                 )
             f.read(8)  #Size & Version
@@ -273,7 +269,7 @@ class SurferGridReader(ReaderBase):
             filenames = self.get_file_names()
         contents = []
         f = open(filenames[0], 'rb')
-        key = struct.unpack('4s', f.read(4))[0]
+        key = unpack('4s', f.read(4))[0]
         f.close()
         if key == b'DSRB':
             reader = self._surfer7bin
@@ -290,7 +286,8 @@ class SurferGridReader(ReaderBase):
                 contents.append(reader(f))
             except (IOError, OSError) as fe:
                 raise _helpers.PVGeoError(str(fe))
-        if idx is not None: return contents[0]
+        if idx is not None:
+            return contents[0]
         return contents
 
 
@@ -304,6 +301,7 @@ class SurferGridReader(ReaderBase):
 
 
     ########################
+
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to get data for current timestep and populate the
@@ -353,6 +351,7 @@ class WriteImageDataToSurfer(WriterBase):
     """Write a 2D ``vtkImageData`` object to the Surfer grid format"""
     __displayname__ = 'Write ``vtkImageData`` to Surfer Format'
     __category__ = 'writer'
+
     def __init__(self):
         WriterBase.__init__(self, inputType='vtkImageData', ext='grd')
         self.__input_array = [None, None]
@@ -446,6 +445,7 @@ class EsriGridReader(DelimitedTextReader):
     __type__ = 'reader'
     description = 'PVGeo: Esri Grid'
     extensions = 'asc dem txt'
+
     def __init__(self, outputType='vtkImageData', **kwargs):
         DelimitedTextReader.__init__(self, outputType=outputType, **kwargs)
         # These are attributes the derived from file contents:
@@ -486,7 +486,7 @@ class EsriGridReader(DelimitedTextReader):
         """This will return the proper data for the given timestep.
         This method handles Surfer's NaN data values and checkes the value range
         """
-        data =  self._data[idx].values.astype(np.float)
+        data = self._data[idx].values.astype(np.float)
         nans = np.argwhere(data == self.NODATA_VALUE)
         # if np.any(nans):
         #     data = np.ma.masked_where(nans, data)
@@ -558,6 +558,7 @@ class LandsatReader(ReaderBaseBase):
     __category__ = 'reader'
     extensions = "xml"
     description = 'PVGeo: Landsat ESPA XML Metadata'
+
     def __init__(self, **kwargs):
         ReaderBaseBase.__init__(self, outputType='vtkImageData', **kwargs)
         self.__reader = espatools.RasterSetReader(yflip=True)
@@ -588,6 +589,7 @@ class LandsatReader(ReaderBaseBase):
 
 
     #### Methods for performing the read ####
+
 
     def _get_file_contents(self, idx=None):
         """Reads XML meta data, no data read."""
@@ -626,6 +628,7 @@ class LandsatReader(ReaderBaseBase):
 
     #### Pipeline Methods ####
 
+
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
         # Get output:
@@ -662,6 +665,7 @@ class LandsatReader(ReaderBaseBase):
 
 
     #### Seters and Geters for the GUI ####
+
 
     def GetDataSelection(self):
         """Used by ParaView GUI"""
@@ -712,6 +716,7 @@ class WriteCellCenterData(WriterBase):
     """
     __displayname__ = 'Write Cell Centers To CSV'
     __category__ = 'writer'
+
     def __init__(self):
         WriterBase.__init__(self, inputType='vtkDataSet')
         self.__delimiter = ','

@@ -4,11 +4,9 @@ __all__ = [
 ]
 
 import numpy as np
-import pandas as pd
 import pyvista as pv
 import vtk
 from scipy.spatial import Delaunay
-from vtk.util import numpy_support as nps
 
 from .. import interface
 from ..base import AlgorithmBase
@@ -20,10 +18,11 @@ class OutlineContinents(AlgorithmBase):
     """
     __displayname__ = 'Outline Continents'
     __category__ = 'source'
+
     def __init__(self, radius=6371.0e6):
         AlgorithmBase.__init__(self,
-            nInputPorts=0,
-            nOutputPorts=1, outputType='vtkPolyData')
+                               nInputPorts=0,
+                               nOutputPorts=1, outputType='vtkPolyData')
         self.__radius = radius
 
     def RequestData(self, request, inInfo, outInfo):
@@ -63,6 +62,7 @@ class GlobeSource(AlgorithmBase):
     """
     __displayname__ = 'Globe Source'
     __category__ = 'source'
+
     def __init__(self, radius=6371.0e6, npar=15, nmer=36, **kwargs):
         AlgorithmBase.__init__(self, nInputPorts=0, nOutputPorts=1, outputType='vtkPolyData')
         self.__radius = radius
@@ -76,7 +76,7 @@ class GlobeSource(AlgorithmBase):
         """
         lon_r = np.radians(meridian)
         lat_r = np.radians(parallel)
-        x =  self.__radius * np.cos(lat_r) * np.cos(lon_r)
+        x = self.__radius * np.cos(lat_r) * np.cos(lon_r)
         y = self.__radius * np.cos(lat_r) * np.sin(lon_r)
         z = self.__radius * np.sin(lat_r)
         return np.vstack((x, y, z)).T
@@ -90,9 +90,9 @@ class GlobeSource(AlgorithmBase):
         pos = np.vstack([lon_g.ravel(), lat_g.ravel()]).T
         # Now create the texture map
         tcgx, tcgy = np.meshgrid(
-                        np.linspace(0.0, 1.0, len(lon)),
-                        np.linspace(0.0, 1.0, len(lat)),
-                        indexing='ij')
+            np.linspace(0.0, 1.0, len(lon)),
+            np.linspace(0.0, 1.0, len(lat)),
+            indexing='ij')
         tex = np.vstack([tcgx.ravel(), tcgy.ravel()]).T
         return pos, tex
 

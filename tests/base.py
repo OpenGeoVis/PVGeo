@@ -1,11 +1,14 @@
 from __future__ import print_function
-import unittest
+
 import time
+import unittest
+
 
 class TestBase(unittest.TestCase):
     """
     Base Class for all test classes to add timing support
     """
+
     def setUp(self):
         self.startTime = time.time()
         return

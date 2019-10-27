@@ -1,18 +1,20 @@
-from base import TestBase
-import numpy as np
+import os
 import shutil
 import tempfile
-import os
 
+import numpy as np
 # VTK imports:
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
 import PVGeo
-from PVGeo import _helpers
+from base import TestBase
 from PVGeo import interface
 # Functionality to test:
-from PVGeo.grids import *
+from PVGeo.grids import (EsriGridReader, ExtractTopography,
+                         ReverseImageDataAxii, SurferGridReader,
+                         TableToTimeGrid, TranslateGridOrigin,
+                         WriteCellCenterData, WriteImageDataToSurfer)
 
 RTOL = 0.000001
 
@@ -23,6 +25,7 @@ class TestTableToTimeGrid(TestBase):
     """
     Test the `TableToTimeGrid` filter
     """
+
     def setUp(self):
         TestBase.setUp(self)
         # Create some input tables
@@ -191,6 +194,7 @@ class TestTranslateGridOrigin(TestBase):
     """
     Test the `TranslateGridOrigin` filter
     """
+
     def setUp(self):
         TestBase.setUp(self)
         # Create some input tables
@@ -267,6 +271,7 @@ class TestSurferGridReader(TestBase):
     """
     Test the `SurferGridReader` and `WriteImageDataToSurfer`
     """
+
     def setUp(self):
         TestBase.setUp(self)
         self.test_dir = tempfile.mkdtemp()
@@ -326,6 +331,7 @@ class TestExtractTopography(TestBase):
     """
     Test the `ExtractTopography` filter
     """
+
     def setUp(self):
         TestBase.setUp(self)
         # create a volumetric data set
@@ -385,21 +391,25 @@ class TestExtractTopography(TestBase):
     def test_underneath(self):
         """`ExtractTopography`: Test extraction on underneath surface"""
         extracted = ExtractTopography(op='underneath').apply(self.grid, self.points)
+        self.assertIsNotNone(extracted)
 
 
     def test_intersection(self):
         """`ExtractTopography`: Test extraction on surface"""
         extracted = ExtractTopography(op='intersection', tolerance=50).apply(self.grid, self.points)
+        self.assertIsNotNone(extracted)
 
     def test_shifted_surface(self):
         """`ExtractTopography`: Test extraction for shifted surface"""
         extracted = ExtractTopography(op='intersection', tolerance=50, offset=-250).apply(self.grid, self.points)
+        self.assertIsNotNone(extracted)
 
 
 class TestCellCenterWriter(TestBase):
     """
     Test the `WriteCellCenterData`
     """
+
     def setUp(self):
         TestBase.setUp(self)
         self.test_dir = tempfile.mkdtemp()
@@ -437,6 +447,7 @@ class TestEsriGridReader(TestBase):
     """
     Test the `EsriGridReader`
     """
+
     def setUp(self):
         TestBase.setUp(self)
         # Create a temporary directory

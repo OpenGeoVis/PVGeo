@@ -14,14 +14,13 @@ __displayname__ = 'Base Classes'
 
 import warnings
 
-import numpy as np
-import pyvista as pv
 # Outside Imports:
 import vtk  # NOTE: This is the first import executed in the package! Keep here!!
 import vtk.util.vtkAlgorithm as valg  # import VTKPythonAlgorithmBase
 
+import pyvista as pv
+
 from . import _helpers
-from . import interface
 
 ###############################################################################
 
@@ -50,11 +49,11 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     __category__ = 'base'
 
     def __init__(self,
-                nInputPorts=1, inputType='vtkDataSet',
-                nOutputPorts=1, outputType='vtkTable', **kwargs):
+                 nInputPorts=1, inputType='vtkDataSet',
+                 nOutputPorts=1, outputType='vtkTable', **kwargs):
         valg.VTKPythonAlgorithmBase.__init__(self,
-            nInputPorts=nInputPorts, inputType=inputType,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+                                             nInputPorts=nInputPorts, inputType=inputType,
+                                             nOutputPorts=nOutputPorts, outputType=outputType)
         # Add error handler to make errors easier to deal with
         self.__error_observer = _helpers.ErrorObserver()
         self.__error_observer.make_observer(self)
@@ -98,10 +97,11 @@ class ReaderBaseBase(AlgorithmBase):
     """
     __displayname__ = 'Reader Base Base'
     __category__ = 'base'
+
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         AlgorithmBase.__init__(self,
-            nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+                               nInputPorts=0,
+                               nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the reader
         self.__filenames = kwargs.get('filenames', [])
@@ -124,7 +124,8 @@ class ReaderBaseBase(AlgorithmBase):
     def Modified(self, read_again=True):
         """Call modified if the files needs to be read again again
         """
-        if read_again: self.__need_to_read = read_again
+        if read_again:
+            self.__need_to_read = read_again
         AlgorithmBase.Modified(self)
 
     def modified(self, read_again=True):
@@ -202,12 +203,13 @@ class FilterBase(AlgorithmBase):
     methods"""
     __displayname__ = 'Filter Base'
     __category__ = 'base'
+
     def __init__(self,
-        nInputPorts=1, inputType='vtkDataSet',
-        nOutputPorts=1, outputType='vtkPolyData', **kwargs):
+                 nInputPorts=1, inputType='vtkDataSet',
+                 nOutputPorts=1, outputType='vtkPolyData', **kwargs):
         AlgorithmBase.__init__(self,
-            nInputPorts=nInputPorts, inputType=inputType,
-            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+                               nInputPorts=nInputPorts, inputType=inputType,
+                               nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
     def apply(self, input_data_object):
         """Run this algorithm on the given input dataset"""
@@ -225,9 +227,10 @@ class ReaderBase(ReaderBaseBase):
     """
     __displayname__ = 'Reader Base: Time Varying'
     __category__ = 'base'
+
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBaseBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+                                nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the VTK/ParaView pipeline
         self.__dt = kwargs.get('dt', 1.0)
@@ -254,6 +257,7 @@ class ReaderBase(ReaderBaseBase):
 
     #### Seters and Geters ####
 
+
     def get_time_step_values(self):
         """Use this in ParaView decorator to register timesteps on the pipeline.
         """
@@ -276,10 +280,11 @@ class FilterPreserveTypeBase(FilterBase):
     """
     __displayname__ = 'Filter Preserve Type Base'
     __category__ = 'base'
+
     def __init__(self, nInputPorts=1, **kwargs):
         FilterBase.__init__(self,
-            nInputPorts=nInputPorts, inputType=kwargs.pop('inputType', 'vtkDataObject'),
-            nOutputPorts=1, **kwargs)
+                            nInputPorts=nInputPorts, inputType=kwargs.pop('inputType', 'vtkDataObject'),
+                            nOutputPorts=1, **kwargs)
         self._preserve_port = 0 # This is the port to preserve data object type
 
     # THIS IS CRUCIAL to preserve data type through filter
@@ -301,10 +306,11 @@ class TwoFileReaderBase(AlgorithmBase):
     """
     __displayname__ = 'Two File Reader Base'
     __category__ = 'base'
+
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         AlgorithmBase.__init__(self,
-            nInputPorts=0,
-            nOutputPorts=nOutputPorts, outputType=outputType)
+                               nInputPorts=0,
+                               nOutputPorts=nOutputPorts, outputType=outputType)
         self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
         self.__mesh_filename = kwargs.get('meshfile', None) # Can only be one!
@@ -350,8 +356,10 @@ class TwoFileReaderBase(AlgorithmBase):
             read_again_mesh (bool): set the status of the reader for mesh files.
             read_again_models (bool): set the status of the reader for model files.
         """
-        if read_again_mesh: self.need_to_readMesh(flag=read_again_mesh)
-        if read_again_models: self.need_to_readModels(flag=read_again_models)
+        if read_again_mesh:
+            self.need_to_readMesh(flag=read_again_mesh)
+        if read_again_models:
+            self.need_to_readModels(flag=read_again_models)
         return AlgorithmBase.Modified(self)
 
     def modified(self, read_again_mesh=True, read_again_models=True):
@@ -452,9 +460,10 @@ class TwoFileReaderBase(AlgorithmBase):
 class WriterBase(AlgorithmBase):
     __displayname__ = 'Writer Base'
     __category__ = 'base'
+
     def __init__(self, nInputPorts=1, inputType='vtkPolyData', **kwargs):
         AlgorithmBase.__init__(self, nInputPorts=nInputPorts, inputType=inputType,
-                                     nOutputPorts=0)
+                               nOutputPorts=0)
         self.__filename = kwargs.get('filename', None)
         self.__fmt = '%.9e'
         # For composite datasets: not always used
@@ -584,12 +593,15 @@ class InterfacedBaseReader(ReaderBase):
     routine for using an external library to handle all I/O and produce the
     VTK data objects."""
     __displayname__ = 'Interfaced Base Reader'
+
     def __init__(self, **kwargs):
         ReaderBase.__init__(self, **kwargs)
         self.__objects = []
 
 
     # THIS IS CRUCIAL to dynamically decided output type
+
+
     def RequestDataObject(self, request, inInfo, outInfo):
         """Do not override. This method lets the us dynamically decide the
         output data type based in the read meshes.

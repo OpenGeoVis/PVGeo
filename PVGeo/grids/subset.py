@@ -5,11 +5,12 @@ __all__ = [
 __displayname__ = 'Subsetting'
 
 import numpy as np
-import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
-from .. import _helpers, interface
+import pyvista as pv
+
+from .. import interface
 from ..base import FilterBase
 
 # NOTE: internal import - from scipy.spatial import cKDTree
@@ -55,11 +56,12 @@ class ExtractTopography(FilterBase):
     """
     __displayname__ = 'Extract Topography'
     __category__ = 'filter'
+
     def __init__(self, op='underneath', tolerance=0.001, offset=0.0,
                  invert=False, remove=False):
         FilterBase.__init__(self,
-            nInputPorts=2, inputType='vtkDataSet',
-            nOutputPorts=1)
+                            nInputPorts=2, inputType='vtkDataSet',
+                            nOutputPorts=1)
         self._tolerance = tolerance
         self._offset = offset
         self._invert = invert
@@ -96,7 +98,7 @@ class ExtractTopography(FilterBase):
             # sklearn's KDTree is faster: use it if available
             from sklearn.neighbors import KDTree as Tree
         except ImportError:
-            from scipy.spatial import cKDTree  as Tree
+            from scipy.spatial import cKDTree as Tree
         tree = Tree(topo_points)
         i = tree.query(data_points)[1].ravel()
         return topo_points[i]
@@ -148,6 +150,7 @@ class ExtractTopography(FilterBase):
 
 
     #### Pipeline Methods ####
+
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""

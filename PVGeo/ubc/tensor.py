@@ -41,9 +41,10 @@ class TensorMeshReader(ubcMeshReaderBase):
     __displayname__ = 'UBC Tensor Mesh Reader'
     __category__ = 'reader'
     description = 'PVGeo: UBC Mesh 2D/3D Two-File Format'
+
     def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid', **kwargs):
         ubcMeshReaderBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+                                   nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
         self.__mesh = vtk.vtkRectilinearGrid()
         self.__models = []
@@ -239,7 +240,7 @@ class TensorMeshReader(ubcMeshReaderBase):
 
         #--- Read in the mesh ---#
         fileLines = np.genfromtxt(FileName, dtype=str,
-            delimiter='\n', comments='!')
+                                  delimiter='\n', comments='!')
 
         # Get mesh dimensions
         dim = np.array(fileLines[0].split('!')[0].split(), dtype=int)
@@ -391,11 +392,12 @@ class TensorMeshAppender(ModelAppenderBase):
     """
     __displayname__ = 'UBC Tensor Mesh Appender'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         ModelAppenderBase.__init__(self,
-            inputType='vtkRectilinearGrid',
-            outputType='vtkRectilinearGrid',
-            **kwargs)
+                                   inputType='vtkRectilinearGrid',
+                                   outputType='vtkRectilinearGrid',
+                                   **kwargs)
 
 
     def _read_up_front(self):
@@ -426,11 +428,12 @@ class TopoMeshAppender(AlgorithmBase):
     """
     __displayname__ = 'Append UBC Discrete Topography'
     __category__ = 'filter'
+
     def __init__(self, inputType='vtkRectilinearGrid',
-                       outputType='vtkRectilinearGrid', **kwargs):
+                 outputType='vtkRectilinearGrid', **kwargs):
         AlgorithmBase.__init__(self,
-            nInputPorts=1, inputType=inputType,
-            nOutputPorts=1, outputType=outputType)
+                               nInputPorts=1, inputType=inputType,
+                               nOutputPorts=1, outputType=outputType)
         self._topoFileName = kwargs.get('filename', None)
         self.__indices = None
         self.__need_to_read = True
@@ -454,7 +457,8 @@ class TopoMeshAppender(AlgorithmBase):
     def Modified(self, read_again=True):
         """Call modified if the files needs to be read again again.
         """
-        if read_again: self.__need_to_read = read_again
+        if read_again:
+            self.__need_to_read = read_again
         AlgorithmBase.Modified(self)
 
     def modified(self, read_again=True):
@@ -471,7 +475,7 @@ class TopoMeshAppender(AlgorithmBase):
         dim = content[0].split()
         self.__ne, self.__nn = int(dim[0]), int(dim[1])
         self.__indices = pd.read_csv(StringIO("\n".join(content[1::])),
-                            names=['i', 'j', 'k'], delim_whitespace=True)
+                                     names=['i', 'j', 'k'], delim_whitespace=True)
         # NOTE: K indices are inverted
         self.need_to_read(flag=False)
         return
@@ -515,6 +519,7 @@ class TopoMeshAppender(AlgorithmBase):
 
 
     #### Setters and Getters ####
+
 
     def clear_topo_file(self):
         """Use to clear data file name.

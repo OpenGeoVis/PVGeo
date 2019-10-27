@@ -8,14 +8,13 @@ __all__ = [
 __displayname__ = 'Math Operations'
 
 import numpy as np
-import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
+import pyvista as pv
+
 from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase
-
-
 
 ###############################################################################
 
@@ -44,6 +43,7 @@ class ArrayMath(FilterPreserveTypeBase):
     """
     __displayname__ = 'Array Math'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -292,6 +292,7 @@ class NormalizeArray(FilterPreserveTypeBase):
     """
     __displayname__ = 'Normalize Array'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self)
         # Parameters:
@@ -530,11 +531,13 @@ class PercentThreshold(FilterBase):
     """
     __displayname__ = 'Percent Threshold'
     __category__ = 'filter'
+
     def __init__(self, percent=50, invert=False, **kwargs):
         FilterBase.__init__(self, inputType='vtkDataSet',
                             outputType='vtkUnstructuredGrid', **kwargs)
         self.__invert = invert
-        if percent < 1.0: percent *= 100
+        if percent < 1.0:
+            percent *= 100
         self.__percent = percent # NOTE: not decimal percent
         self.__filter = vtk.vtkThreshold()
         self.__input_array = [None, None]
@@ -623,6 +626,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
     """
     __displayname__ = 'Arrays To RGBA'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         FilterPreserveTypeBase.__init__(self, **kwargs)
         self.__use_trans = False
@@ -656,10 +660,10 @@ class ArraysToRGBA(FilterPreserveTypeBase):
 
     def _mask_arrays(self, r_arr, g_arr, b_arr, a_arr):
         """Internal helper to mask RGBA arrays"""
-        r_arr = np.ma.masked_where(r_arr==self.__mask, r_arr)
-        g_arr = np.ma.masked_where(g_arr==self.__mask, g_arr)
-        b_arr = np.ma.masked_where(b_arr==self.__mask, b_arr)
-        a_arr = np.ma.masked_where(a_arr==self.__mask, a_arr)
+        r_arr = np.ma.masked_where(r_arr == self.__mask, r_arr)
+        g_arr = np.ma.masked_where(g_arr == self.__mask, g_arr)
+        b_arr = np.ma.masked_where(b_arr == self.__mask, b_arr)
+        a_arr = np.ma.masked_where(a_arr == self.__mask, a_arr)
         return r_arr, g_arr, b_arr, a_arr
 
 
@@ -697,6 +701,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
 
 
     #### Seters and Geters ####
+
 
     def set_use_transparency(self, flag):
         """Set a boolean flag on whether or not to use a transparency component"""

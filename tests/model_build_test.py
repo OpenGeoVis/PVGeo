@@ -1,12 +1,10 @@
-from base import TestBase
-import numpy as np
-
-# VTK imports:
 import vtk
-from vtk.numpy_interface import dataset_adapter as dsa
 
+from base import TestBase
 # Functionality to test:
-from PVGeo.model_build import *
+from PVGeo.model_build import (CreateEvenRectilinearGrid, CreateTensorMesh,
+                               CreateUniformGrid, GlobeSource,
+                               OutlineContinents)
 
 ###############################################################################
 

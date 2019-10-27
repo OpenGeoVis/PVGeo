@@ -27,14 +27,13 @@ __displayname__ = 'Interface'
 
 import numpy as np
 import pandas as pd
-import pyvista as pv
-from pyvista.utilities import convert_string_array, get_vtk_type
 import vtk
-from vtk.numpy_interface import dataset_adapter as dsa
 from vtk.util import numpy_support as nps
 
-from . import _helpers
+import pyvista as pv
+from pyvista.utilities import convert_string_array, get_vtk_type
 
+from . import _helpers
 
 
 def convert_array(arr, name='Data', deep=0, array_type=None, pdf=False):

@@ -10,9 +10,9 @@ __all__ = [
     'get_all_array_names',
 ]
 
-import numpy as np
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
+
 from . import errors as _helpers
 
 

@@ -4,8 +4,8 @@ __all__ = [
     'HiddenPrints',
 ]
 
-import re
 import os
+import re
 import sys
 
 
@@ -19,7 +19,7 @@ class PVGeoError(Exception):
     """
     QUALIFIER_L = '@@@@PVGeoError ---> '
     QUALIFIER_R = ' <--- PVGeoError@@@@'
-    SEARCHER = re.compile(r'@@@@PVGeoError --->.+?<--- PVGeoError@@@@', re.MULTILINE|re.DOTALL)
+    SEARCHER = re.compile(r'@@@@PVGeoError --->.+?<--- PVGeoError@@@@', re.MULTILINE | re.DOTALL)
 
 
     def __init__(self, message):
@@ -50,6 +50,7 @@ class ErrorObserver:
         ERROR: ...
 
     """
+
     def __init__(self):
         self.__error_occurred = False
         self.__get_error_message = None
@@ -108,6 +109,7 @@ class HiddenPrints:
     >>> with HiddenPrints():
     ...     import discretize
     """
+
     def __enter__(self):
         self._original_stdout = sys.stdout
         sys.stdout = open(os.devnull, 'w')

@@ -6,15 +6,12 @@ __all__ = [
 
 __displayname__ = 'Transform'
 
-import warnings
-
 import numpy as np
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
 from .. import _helpers, interface
 from ..base import FilterBase
-
 
 ###############################################################################
 
@@ -25,11 +22,12 @@ class TableToTimeGrid(FilterBase):
     """
     __displayname__ = 'Table To Time Grid'
     __category__ = 'filter'
+
     def __init__(self, extent=(10, 10, 10, 1), order='C',
                  spacing=(1.0, 1.0, 1.0), origin=(0.0, 0.0, 0.0),
                  dims=(0, 1, 2, 3), dt=1.0, points=False, **kwargs):
         FilterBase.__init__(self, nInputPorts=1, nOutputPorts=1,
-                inputType='vtkTable', outputType='vtkImageData', **kwargs)
+                            inputType='vtkTable', outputType='vtkImageData', **kwargs)
         if len(extent) != 4:
             raise _helpers.PVGeoError('`extent` must be of length 4.')
         self.__extent = list(extent)
@@ -99,6 +97,7 @@ class TableToTimeGrid(FilterBase):
 
     #### Algorithm Methods ####
 
+
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
         # Get input/output of Proxy
@@ -141,6 +140,7 @@ class TableToTimeGrid(FilterBase):
 
 
     #### Setters / Getters ####
+
 
     def Modified(self, run_again=True):
         """Call modified if the filter needs to run again"""
@@ -216,10 +216,11 @@ class ReverseImageDataAxii(FilterBase):
     """
     __displayname__ = 'Reverse Image Data Axii'
     __category__ = 'filter'
+
     def __init__(self, axes=(True, True, True)):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkImageData',
-            nOutputPorts=1, outputType='vtkImageData')
+                            nInputPorts=1, inputType='vtkImageData',
+                            nOutputPorts=1, outputType='vtkImageData')
         self.__axes = list(axes[::-1]) # Z Y X (FORTRAN)
 
     def _reverse_grid_axes(self, idi, ido):
@@ -308,10 +309,11 @@ class TranslateGridOrigin(FilterBase):
     """
     __displayname__ = 'Translate Grid Origin'
     __category__ = 'filter'
+
     def __init__(self, corner=1):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkImageData',
-            nOutputPorts=1, outputType='vtkImageData')
+                            nInputPorts=1, inputType='vtkImageData',
+                            nOutputPorts=1, outputType='vtkImageData')
         self.__corner = corner
 
 

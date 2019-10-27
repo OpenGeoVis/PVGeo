@@ -1,17 +1,20 @@
-from base import TestBase
+import os
 import shutil
 import tempfile
-import os
 import warnings
-import numpy as np
 
+import numpy as np
+from vtk.numpy_interface import dataset_adapter as dsa
 # VTK imports:
 from vtk.util import numpy_support as nps
-from vtk.numpy_interface import dataset_adapter as dsa
 
-# Functionality to test:
-from PVGeo.ubc import *
 import PVGeo
+from base import TestBase
+# Functionality to test:
+from PVGeo.ubc import (GravObsReader, OcTreeAppender, OcTreeReader,
+                       TensorMeshAppender, TensorMeshReader, TopoMeshAppender,
+                       TopoReader, WriteImageDataToUBC,
+                       WriteRectilinearGridToUBC)
 
 discretize_available = False
 try:
@@ -48,8 +51,10 @@ class ubcMeshTesterBase(TestBase):
 
 class Test3DTensorMesh(ubcMeshTesterBase):
     """
-    Test the `TensorMeshReader`, `TensorMeshAppender`, `TopoMeshAppender`, and  `WriteRectilinearGridToUBC` for 3D data
+    Test the `TensorMeshReader`, `TensorMeshAppender`, `TopoMeshAppender`,
+    `WriteRectilinearGridToUBC`, and `WriteImageDataToUBC` for 3D data
     """
+
     def _write_mesh(self):
         filename = os.path.join(self.test_dir, 'test.msh')
         with open(filename, 'w') as f:
@@ -78,7 +83,7 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         model = np.random.random((self.n, 3))
         np.savetxt(filename, model, delimiter=' ', comments='! ')
         shp = self.shape
-        model = np.reshape(model, (shp[0], shp[1], shp[2], 3) )
+        model = np.reshape(model, (shp[0], shp[1], shp[2], 3))
         model = np.swapaxes(model,0,1)
         model = np.swapaxes(model,0,2)
         # Now reverse Z axis
@@ -165,12 +170,12 @@ class Test3DTensorMesh(ubcMeshTesterBase):
     def test_topo_appender(self):
         """`TopoMeshAppender` 3D:Test topography appender"""
         indices = np.array([[0,0,1], [0,1,1], [0,2,1], [1,0,1], [1,1,1],
-            [1,2,1], [2,0,1], [2,1,1], [2,2,2], ], dtype=int)
+                            [1,2,1], [2,0,1], [2,1,1], [2,2,2], ], dtype=int)
         filename = os.path.join(self.test_dir, 'disc-topo.txt')
         np.savetxt(filename, X=indices, fmt='%d', comments='', header='3 3')
         # Create input grid
         grid = PVGeo.model_build.CreateTensorMesh(xcellstr='1.0 1.0 1.0',
-                    ycellstr='1.0 1.0 1.0', zcellstr='1.0 1.0 1.0').apply()
+                                                  ycellstr='1.0 1.0 1.0', zcellstr='1.0 1.0 1.0').apply()
         # run the filter
         f = TopoMeshAppender()
         f.SetInputDataObject(grid)
@@ -480,6 +485,7 @@ class TestGravObsReader(TestBase):
     """
     Test the `GravObsReader`
     """
+
     def setUp(self):
         TestBase.setUp(self)
         self.filename = os.path.join(os.path.dirname(__file__), 'data/Craig-Chile/LdM_grav_obs.grv')
@@ -500,6 +506,7 @@ class TestTopoReader(TestBase):
     """
     Test the `TopoReader`
     """
+
     def setUp(self):
         TestBase.setUp(self)
         self.filename = os.path.join(os.path.dirname(__file__), 'data/Craig-Chile/LdM_topo.topo')

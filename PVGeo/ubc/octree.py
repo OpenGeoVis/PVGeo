@@ -6,16 +6,11 @@ __all__ = [
 
 __displayname__ = 'OcTree Mesh'
 
-import os
-
-import numpy as np
 import vtk
 from vtk.util import numpy_support as nps
 
 from .. import _helpers, interface
-from ..base import AlgorithmBase
 from .two_file_base import ModelAppenderBase, ubcMeshReaderBase
-
 
 with _helpers.HiddenPrints():
     import discretize
@@ -30,10 +25,11 @@ class OcTreeReader(ubcMeshReaderBase):
     __displayname__ = 'UBC OcTree Mesh Reader'
     __category__ = 'reader'
     description = 'PVGeo: UBC OcTree Mesh'
+
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
         ubcMeshReaderBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType,
-            **kwargs)
+                                   nOutputPorts=nOutputPorts, outputType=outputType,
+                                   **kwargs)
 
         self.__mesh = None
         self.__models = []
@@ -201,11 +197,12 @@ class OcTreeAppender(ModelAppenderBase):
     """
     __displayname__ = 'UBC OcTree Mesh Appender'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         ModelAppenderBase.__init__(self,
-            inputType='vtkUnstructuredGrid',
-            outputType='vtkUnstructuredGrid',
-            **kwargs)
+                                   inputType='vtkUnstructuredGrid',
+                                   outputType='vtkUnstructuredGrid',
+                                   **kwargs)
 
 
     def _read_up_front(self):

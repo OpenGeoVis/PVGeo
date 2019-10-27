@@ -30,10 +30,11 @@ class VoxelizePoints(FilterBase):
     """
     __displayname__ = 'Voxelize Points'
     __category__ = 'filter'
+
     def __init__(self, **kwargs):
         FilterBase.__init__(self,
-            nInputPorts=1, inputType='vtkPointSet',
-            nOutputPorts=1, outputType='vtkUnstructuredGrid')
+                            nInputPorts=1, inputType='vtkPointSet',
+                            nOutputPorts=1, outputType='vtkUnstructuredGrid')
         self.__dx = kwargs.get('dx', None)
         self.__dy = kwargs.get('dy', None)
         self.__dz = kwargs.get('dz', None)
@@ -88,8 +89,10 @@ class VoxelizePoints(FilterBase):
         xr, yr, zr, dx, dy, angle = r.estimate_and_rotate(x, y, z)
         self.__angle = angle
         uz = np.diff(np.unique(z))
-        if len(uz) > 0: dz = np.average(uz)
-        else: dz = self.__safe
+        if len(uz) > 0:
+            dz = np.average(uz)
+        else:
+            dz = self.__safe
         self.__dx = dx
         self.__dy = dy
         self.__dz = dz
@@ -123,15 +126,15 @@ class VoxelizePoints(FilterBase):
 
         # Generate cell nodes for all points in data set
         #- Bottom
-        c_n1 = np.stack( ((x - dx/2) , (y - dy/2), (z - dz/2) ), axis=1)
-        c_n2 = np.stack(( (x + dx/2) , (y - dy/2), (z - dz/2) ), axis=1)
-        c_n3 = np.stack(( (x - dx/2) , (y + dy/2), (z - dz/2) ), axis=1)
-        c_n4 = np.stack(( (x + dx/2) , (y + dy/2), (z - dz/2) ), axis=1)
+        c_n1 = np.stack(((x - dx/2), (y - dy/2), (z - dz/2)), axis=1)
+        c_n2 = np.stack(((x + dx/2), (y - dy/2), (z - dz/2)), axis=1)
+        c_n3 = np.stack(((x - dx/2), (y + dy/2), (z - dz/2)), axis=1)
+        c_n4 = np.stack(((x + dx/2), (y + dy/2), (z - dz/2)), axis=1)
         #- Top
-        c_n5 = np.stack(( (x - dx/2) , (y - dy/2), (z + dz/2) ), axis=1)
-        c_n6 = np.stack(( (x + dx/2) , (y - dy/2), (z + dz/2) ), axis=1)
-        c_n7 = np.stack(( (x - dx/2) , (y + dy/2), (z + dz/2) ), axis=1)
-        c_n8 = np.stack(( (x + dx/2) , (y + dy/2), (z + dz/2) ), axis=1)
+        c_n5 = np.stack(((x - dx/2), (y - dy/2), (z + dz/2)), axis=1)
+        c_n6 = np.stack(((x + dx/2), (y - dy/2), (z + dz/2)), axis=1)
+        c_n7 = np.stack(((x - dx/2), (y + dy/2), (z + dz/2)), axis=1)
+        c_n8 = np.stack(((x + dx/2), (y + dy/2), (z + dz/2)), axis=1)
 
         #- Concatenate
         all_nodes = np.concatenate((
@@ -206,7 +209,7 @@ class VoxelizePoints(FilterBase):
         pts = wpdi.Points
         x, y, z = pts[:,0], pts[:,1], pts[:,2]
         self.points_to_grid(x, y, z,
-            self.__dx, self.__dy, self.__dz, grid=pdo)
+                            self.__dx, self.__dy, self.__dz, grid=pdo)
         # Now append data to grid
         self._copy_arrays(pdi, pdo)
         return 1
@@ -297,7 +300,8 @@ class VoxelizePoints(FilterBase):
         Args:
             degrees (bool): A flag on to return decimal degrees or radians.
         """
-        if degrees: return np.rad2deg(self.__angle)
+        if degrees:
+            return np.rad2deg(self.__angle)
         return self.__angle
 
 

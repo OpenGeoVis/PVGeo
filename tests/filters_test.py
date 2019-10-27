@@ -1,18 +1,22 @@
-from base import TestBase
-import numpy as np
-import pandas as pd
-
 import os
 
+import numpy as np
+import pandas as pd
 # VTK imports:
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-from PVGeo import _helpers
-from PVGeo import interface
-import PVGeo
 
+import PVGeo
+from base import TestBase
+from PVGeo import interface
 # Functionality to test:
-from PVGeo.filters import *
+from PVGeo.filters import (AddCellConnToPoints, ArrayMath, ArraysToRGBA,
+                           CombineTables, ExtractPoints, LonLatToUTM,
+                           ManySlicesAlongAxis, ManySlicesAlongPoints,
+                           NormalizeArray, PercentThreshold, PointsToTube,
+                           ReshapeTable, RotatePoints, RotationTool,
+                           SliceThroughTime, SlideSliceAlongPoints,
+                           VoxelizePoints)
 
 RTOL = 0.000001
 
@@ -24,6 +28,7 @@ class TestCombineTables(TestBase):
     """
     Test the `CombineTables` filter
     """
+
     def setUp(self):
         TestBase.setUp(self)
         # Create some input tables
@@ -74,6 +79,7 @@ class TestReshapeTable(TestBase):
     """
     Test the `ReshapeTable` filter
     """
+
     def setUp(self):
         TestBase.setUp(self)
         # Create some input tables
@@ -251,6 +257,7 @@ class TestRotatePoints(TestBase):
     """
     Test the `RotatePoints` filter
     """
+
     def setUp(self):
         TestBase.setUp(self)
         self.RTOL = 0.00001 # As higi as rotation precision can get
@@ -375,6 +382,7 @@ class TestExtractPoints(TestBase):
     """
     Test the `ExtractPoints` filter
     """
+
     def test_bad_extraction(self):
         """`ExtractPoints`: catch a bad extraction"""
         img = vtk.vtkImageData()
@@ -581,7 +589,7 @@ class TestAddCellConnToPoints(TestBase):
             h = 0.0
             a = - k / 160.0**2
             x = a*(y-h)**2 + k
-            idxs = np.argwhere(x>0)
+            idxs = np.argwhere(x > 0)
             return x[idxs][:,0], y[idxs][:,0]
 
         y = np.arange(0.0,10.0)
@@ -677,6 +685,7 @@ class TestPointsToTube(TestBase):
     """
     Test the `PointsToTube` filter
     """
+
     def makeComplicatedInput(self, shuffle=True):
         def path1(y):
             # Equation: x = a(y-h)^2 + k
@@ -684,7 +693,7 @@ class TestPointsToTube(TestBase):
             h = 0.0
             a = - k / 160.0**2
             x = a*(y-h)**2 + k
-            idxs = np.argwhere(x>0)
+            idxs = np.argwhere(x > 0)
             return x[idxs][:,0], y[idxs][:,0]
 
         y = np.linspace(0.0, 200.0, num=100)
@@ -757,11 +766,12 @@ class TestManySlicesAlongPoints(TestBase):
         # create a volumetric data set
         self.grid = PVGeo.model_build.CreateTensorMesh().apply()
         # create a spline throught the data set
+
         def path1(y):
             """Equation: x = a(y-h)^2 + k"""
             a = -0.0001
             x = a*y**2 + 1000
-            idxs = np.argwhere(x>0)
+            idxs = np.argwhere(x > 0)
             return x[idxs][:,0], y[idxs][:,0]
 
         x, y = path1(np.arange(-500.0, 1500.0, 25.0))
@@ -802,6 +812,7 @@ class TestManySlicesAlongAxis(TestBase):
     """
     Test the `ManySlicesAlongAxis` and `SliceThroughTime` filters
     """
+
     def setUp(self):
         TestBase.setUp(self)
         # create a volumetric data set

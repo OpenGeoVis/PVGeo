@@ -28,6 +28,7 @@ class TopoReader(DelimitedPointsReaderBase):
     __category__ = 'reader'
     extensions = 'topo txt dat'
     description = 'PVGeo: UBC 3D Topo Files'
+
     def __init__(self, copy_z=True, **kwargs):
         DelimitedPointsReaderBase.__init__(self, copy_z=copy_z, **kwargs)
         self.set_has_titles(False)#kwargs.get('has_titles', False))
@@ -59,6 +60,7 @@ class GravObsReader(DelimitedPointsReaderBase):
     __category__ = 'reader'
     extensions = 'grv txt dat'
     description = 'PVGeo: GIF Gravity Observations'
+
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
         self.set_has_titles(False)
@@ -90,6 +92,7 @@ class GravGradReader(DelimitedPointsReaderBase):
     __category__ = 'reader'
     extensions = 'grv gg txt dat'
     description = 'PVGeo: GIF Gravity Gradiometry Observations'
+
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
         self.set_has_titles(False)
@@ -113,7 +116,7 @@ class GravGradReader(DelimitedPointsReaderBase):
             if num != (len(titles) + len(comps)):
                 raise _helpers.PVGeoError('Data improperly formatted')
             for c in comps:
-                titles.append('Stn_%s' % c )
+                titles.append('Stn_%s' % c)
         return titles, content[2::]
 
 
@@ -129,6 +132,7 @@ class MagObsReader(DelimitedPointsReaderBase):
     __category__ = 'reader'
     extensions = 'mag loc txt dat pre'
     description = 'PVGeo: GIF Magnetic Observations'
+
     def __init__(self, **kwargs):
         DelimitedPointsReaderBase.__init__(self, **kwargs)
         self.set_has_titles(False)
@@ -143,6 +147,8 @@ class MagObsReader(DelimitedPointsReaderBase):
 
 
     # Simply override the extract titles functionality
+
+
     def _extract_header(self, content):
         """Internal helper to parse header details for UBC Magnetic Observations
         files"""
@@ -214,6 +220,7 @@ class GeologyMapper(FilterPreserveTypeBase):
     __displayname__ = 'UBC Geology Mapper'
     __category__ = 'filter'
     description = 'PVGeo: UBC Geology Mapper'
+
     def __init__(self, filename=None, delimiter=',', **kwargs):
         FilterPreserveTypeBase.__init__(self, **kwargs)
         self.__filename = filename

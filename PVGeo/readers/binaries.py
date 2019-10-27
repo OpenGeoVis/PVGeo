@@ -5,14 +5,13 @@ __all__ = [
 
 __displayname__ = 'Binary/Serialized File I/O'
 
-import numpy as np
-import vtk
 import warnings
 
-from .. import _helpers
-from ..base import ReaderBase
-from .. import interface
+import numpy as np
+import vtk
 
+from .. import _helpers, interface
+from ..base import ReaderBase
 
 
 class PackedBinariesReader(ReaderBase):
@@ -29,9 +28,10 @@ class PackedBinariesReader(ReaderBase):
     __category__ = 'reader'
     extensions = 'H@ bin rsf rsf@ HH npz'
     description = 'PVGeo: Packed Binaries Reader'
+
     def __init__(self, **kwargs):
         ReaderBase.__init__(self,
-            nOutputPorts=1, outputType='vtkTable', **kwargs)
+                            nOutputPorts=1, outputType='vtkTable', **kwargs)
         # Other Parameters
         self.__data_name = kwargs.get('dataname', 'Data')
         self.__dtypechar = kwargs.get('dtype', 'f')
@@ -61,7 +61,8 @@ class PackedBinariesReader(ReaderBase):
         contents = []
         for f in filenames:
             contents.append(self._read_raw_file(f))
-        if idx is not None: return contents[0]
+        if idx is not None:
+            return contents[0]
         return contents
 
 
@@ -173,6 +174,7 @@ class MadagascarReader(PackedBinariesReader):
     __category__ = 'reader'
     # extensions are inherrited from PackedBinariesReader
     description = 'PVGeo: Madagascar Single Stream RSF Files'
+
     def __init__(self, **kwargs):
         PackedBinariesReader.__init__(self, **kwargs)
 

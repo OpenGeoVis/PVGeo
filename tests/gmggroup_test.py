@@ -1,12 +1,10 @@
-import unittest
 import os
-
-from PVGeo import _helpers
+import unittest
 
 omf_avail = False
 try:
     # Functionality to test:
-    from PVGeo.gmggroup import *
+    from PVGeo.gmggroup import OMFReader
 except ImportError:
     pass
 else:

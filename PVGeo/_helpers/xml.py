@@ -240,10 +240,9 @@ def _help_arrays_xml(idx, input_name=None, label=None):
 
 
 
-def get_input_array_xml(labels=None, nInputPorts=1, n_arrays=1, input_names='Input'):
-    """Get the XML content for an array selection drop down menu when making a
-    ParaView plugin.
-    """
+def get_input_array_xml(labels=None, nInputPorts=1, n_arrays=1,
+                        input_names='Input'):
+    """Get the XML content for an array selection drop down menu."""
     def get_labels(labels):
         if labels is None and nInputPorts > 1:
             labels = [None]*nInputPorts
@@ -257,7 +256,7 @@ def get_input_array_xml(labels=None, nInputPorts=1, n_arrays=1, input_names='Inp
     labels = get_labels(labels)
 
     def fix_array_labels(labels, n_arrays):
-        if n_arrays is 0:
+        if n_arrays == 0:
             return ''
         if labels is None:
             labels = ['Array %d' % (i+1) for i in range(n_arrays)]

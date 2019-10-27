@@ -2,14 +2,12 @@ __all__ = [
     'OMFReader',
 ]
 
-import vtk
-
 import omf
 import omfvista
+import vtk
 
-from ..base import ReaderBaseBase
 from .. import _helpers
-
+from ..base import ReaderBaseBase
 
 
 class OMFReader(ReaderBaseBase):
@@ -19,9 +17,10 @@ class OMFReader(ReaderBaseBase):
     __category__ = 'reader'
     extensions = 'omf'
     description = 'PVGeo: Open Mining Format Project'
+
     def __init__(self):
         ReaderBaseBase.__init__(self,
-            nOutputPorts=1, outputType='vtkMultiBlockDataSet')
+                                nOutputPorts=1, outputType='vtkMultiBlockDataSet')
         # Properties:
         self._dataselection = vtk.vtkDataArraySelection()
         self._dataselection.AddObserver("ModifiedEvent", _helpers.create_modified_callback(self))
@@ -66,7 +65,7 @@ class OMFReader(ReaderBaseBase):
         data = dict()
         for e in self.__project.elements:
             if self._dataselection.ArrayIsEnabled(e.name):
-                if not e.name in self.__data:
+                if e.name not in self.__data:
                     self.__data[e.name] = omfvista.wrap(e)
                 data[e.name] = self.__data[e.name]
         return data

@@ -31,9 +31,10 @@ class DelimitedTextReader(ReaderBase):
     __category__ = 'reader'
     extensions = 'dat csv txt text ascii xyz tsv ntab'
     description = 'PVGeo: Delimited Text Files'
+
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
         ReaderBase.__init__(self,
-            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+                            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
 
         # Parameters to control the file read:
         #- if these are set/changed, we must reperform the read
@@ -73,7 +74,8 @@ class DelimitedTextReader(ReaderBase):
                 contents.append(np.genfromtxt(f, dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::])
             except (IOError, OSError) as fe:
                 raise _helpers.PVGeoError(str(fe))
-        if idx is not None: return contents[0]
+        if idx is not None:
+            return contents[0]
         return contents
 
     def _extract_header(self, content):
@@ -142,6 +144,7 @@ class DelimitedTextReader(ReaderBase):
 
 
     #### Algorithm Methods ####
+
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to get data for current timestep and populate the
@@ -229,6 +232,7 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
     __category__ = 'base'
     # extensions are inherrited from DelimitedTextReader
     description = 'PVGeo: Delimited Points' # Should be overriden
+
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, outputType='vtkPolyData', **kwargs)
         self.__copy_z = kwargs.get('copy_z', False)
@@ -275,6 +279,7 @@ class XYZTextReader(DelimitedTextReader):
     __category__ = 'reader'
     # extensions are inherrited from DelimitedTextReader
     description = 'PVGeo: XYZ Delimited Text Files where header has comma delimiter.'
+
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, **kwargs)
         self.set_comments(kwargs.get('comments', '#'))

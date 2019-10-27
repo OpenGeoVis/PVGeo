@@ -1,16 +1,13 @@
-from base import TestBase
 import numpy as np
 import pandas as pd
-
 # VTK imports:
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
+from base import TestBase
+from PVGeo import interface
 # Functionality to test:
 from PVGeo._helpers import xml
-from PVGeo import _helpers
-from PVGeo import interface
-
 
 RTOL = 0.000001
 
@@ -21,16 +18,15 @@ class TestXML(TestBase):
 
     def test_simple(self):
         """XML: Make sure no errors arise"""
-        x = xml.get_python_path_property()
-        x = xml.get_reader_time_step_values('txt dat', 'A description')
+        _ = xml.get_python_path_property()
+        _ = xml.get_reader_time_step_values('txt dat', 'A description')
         m = xml.get_vtk_type_map()
         self.assertEqual(m['vtkUnstructuredGrid'], 4)
-        x = xml.get_property_xml('foo', 'SetFoo', 4, panel_visibility='default', help='foo help')
-        x = xml.get_property_xml('foo', 'SetFoo', True, panel_visibility='default', help='foo help')
-        x = xml.get_file_reader_xml('txt dat', reader_description='desc!!', command="AddFileName")
-        x = xml.get_drop_down_xml('foo', 'SetFoo', ['foo1', 'foo2'], help='Help the foo', values=[1, 2])
-        x = xml.get_input_array_xml(labels=['foo'], nInputPorts=1, n_arrays=1, input_names='Input')
-
+        _ = xml.get_property_xml('foo', 'SetFoo', 4, panel_visibility='default', help='foo help')
+        _ = xml.get_property_xml('foo', 'SetFoo', True, panel_visibility='default', help='foo help')
+        _ = xml.get_file_reader_xml('txt dat', reader_description='desc!!', command="AddFileName")
+        _ = xml.get_drop_down_xml('foo', 'SetFoo', ['foo1', 'foo2'], help='Help the foo', values=[1, 2])
+        _ = xml.get_input_array_xml(labels=['foo'], nInputPorts=1, n_arrays=1, input_names='Input')
         return
 
 

@@ -6,8 +6,9 @@ __all__ = [
     'get_combined_input_time_steps',
 ]
 
-import numpy as np
 import collections
+
+import numpy as np
 
 
 def _calculate_time_range(nt, dt=1.0):
@@ -121,6 +122,7 @@ def get_combined_input_time_steps(algorithm, idx=0):
     for port in range(executive.GetNumberOfInputPorts()):
         ii = executive.GetInputInformation(port, idx)
         ti = ii.Get(executive.TIME_STEPS())
-        if ti is None: ti = np.array([])
+        if ti is None:
+            ti = np.array([])
         tsteps.append(ti)
     return np.unique(np.concatenate(tsteps, 0))
