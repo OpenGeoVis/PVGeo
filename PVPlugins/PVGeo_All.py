@@ -15,7 +15,7 @@ from PVGeo_Model_Builder import *
 from PVGeo_Readers import *
 from PVGeo_Tunneling import *
 from PVGeo_UBC_Tools import *
-from PyVista_Exampes import *
+from PyVista_Examples import *
 try:
     import omf
     import omfvista
