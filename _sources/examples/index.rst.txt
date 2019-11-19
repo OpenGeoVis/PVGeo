@@ -14,7 +14,7 @@ Here is a gallery of all the quick examples demonstrating what ``PVGeo`` can do!
 
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 
@@ -31,9 +31,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_add-cell-connectivity-to-points_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_add-cell-connectivity-to-points_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py`
+     :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py`
 
 .. raw:: html
 
@@ -51,9 +51,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_append-cell-centers_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_append-cell-centers_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_append-cell-centers.py`
+     :ref:`sphx_glr_examples_filters-general_append-cell-centers.py`
 
 .. raw:: html
 
@@ -71,9 +71,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_array-math_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_array-math_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_array-math.py`
+     :ref:`sphx_glr_examples_filters-general_array-math.py`
 
 .. raw:: html
 
@@ -91,9 +91,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_combine-tables_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_combine-tables_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_combine-tables.py`
+     :ref:`sphx_glr_examples_filters-general_combine-tables.py`
 
 .. raw:: html
 
@@ -111,9 +111,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_extract-array_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_extract-array_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_extract-array.py`
+     :ref:`sphx_glr_examples_filters-general_extract-array.py`
 
 .. raw:: html
 
@@ -131,9 +131,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_extract-points_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_extract-points_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_extract-points.py`
+     :ref:`sphx_glr_examples_filters-general_extract-points.py`
 
 .. raw:: html
 
@@ -151,9 +151,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_many-slices-along-points_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_many-slices-along-points_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py`
+     :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py`
 
 .. raw:: html
 
@@ -171,9 +171,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_normalize-array_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_normalize-array_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_normalize-array.py`
+     :ref:`sphx_glr_examples_filters-general_normalize-array.py`
 
 .. raw:: html
 
@@ -191,9 +191,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_points-to-tube_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_points-to-tube_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_points-to-tube.py`
+     :ref:`sphx_glr_examples_filters-general_points-to-tube.py`
 
 .. raw:: html
 
@@ -211,9 +211,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_reshape-table_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_reshape-table_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_reshape-table.py`
+     :ref:`sphx_glr_examples_filters-general_reshape-table.py`
 
 .. raw:: html
 
@@ -231,9 +231,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_rotate-points_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_rotate-points_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_rotate-points.py`
+     :ref:`sphx_glr_examples_filters-general_rotate-points.py`
 
 .. raw:: html
 
@@ -251,9 +251,9 @@ General Filters
 
 .. only:: html
 
-    .. figure:: /examples/filters-general/images/thumb/sphx_glr_voxelize-points_thumb.png
+ .. figure:: /examples/filters-general/images/thumb/sphx_glr_voxelize-points_thumb.png
 
-        :ref:`sphx_glr_examples_filters-general_voxelize-points.py`
+     :ref:`sphx_glr_examples_filters-general_voxelize-points.py`
 
 .. raw:: html
 
@@ -266,7 +266,7 @@ General Filters
    /examples/filters-general/voxelize-points
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 
@@ -283,9 +283,9 @@ Grids
 
 .. only:: html
 
-    .. figure:: /examples/grids/images/thumb/sphx_glr_extract-topography_thumb.png
+ .. figure:: /examples/grids/images/thumb/sphx_glr_extract-topography_thumb.png
 
-        :ref:`sphx_glr_examples_grids_extract-topography.py`
+     :ref:`sphx_glr_examples_grids_extract-topography.py`
 
 .. raw:: html
 
@@ -303,9 +303,9 @@ Grids
 
 .. only:: html
 
-    .. figure:: /examples/grids/images/thumb/sphx_glr_read-esri_thumb.png
+ .. figure:: /examples/grids/images/thumb/sphx_glr_read-esri_thumb.png
 
-        :ref:`sphx_glr_examples_grids_read-esri.py`
+     :ref:`sphx_glr_examples_grids_read-esri.py`
 
 .. raw:: html
 
@@ -323,9 +323,9 @@ Grids
 
 .. only:: html
 
-    .. figure:: /examples/grids/images/thumb/sphx_glr_read-surfer_thumb.png
+ .. figure:: /examples/grids/images/thumb/sphx_glr_read-surfer_thumb.png
 
-        :ref:`sphx_glr_examples_grids_read-surfer.py`
+     :ref:`sphx_glr_examples_grids_read-surfer.py`
 
 .. raw:: html
 
@@ -338,7 +338,7 @@ Grids
    /examples/grids/read-surfer
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 
@@ -359,9 +359,9 @@ files to another location for download).
 
 .. only:: html
 
-    .. figure:: /examples/gslib/images/thumb/sphx_glr_read-point-set_thumb.png
+ .. figure:: /examples/gslib/images/thumb/sphx_glr_read-point-set_thumb.png
 
-        :ref:`sphx_glr_examples_gslib_read-point-set.py`
+     :ref:`sphx_glr_examples_gslib_read-point-set.py`
 
 .. raw:: html
 
@@ -379,9 +379,9 @@ files to another location for download).
 
 .. only:: html
 
-    .. figure:: /examples/gslib/images/thumb/sphx_glr_read-sgems-grid_thumb.png
+ .. figure:: /examples/gslib/images/thumb/sphx_glr_read-sgems-grid_thumb.png
 
-        :ref:`sphx_glr_examples_gslib_read-sgems-grid.py`
+     :ref:`sphx_glr_examples_gslib_read-sgems-grid.py`
 
 .. raw:: html
 
@@ -399,9 +399,9 @@ files to another location for download).
 
 .. only:: html
 
-    .. figure:: /examples/gslib/images/thumb/sphx_glr_read-table_thumb.png
+ .. figure:: /examples/gslib/images/thumb/sphx_glr_read-table_thumb.png
 
-        :ref:`sphx_glr_examples_gslib_read-table.py`
+     :ref:`sphx_glr_examples_gslib_read-table.py`
 
 .. raw:: html
 
@@ -414,7 +414,7 @@ files to another location for download).
    /examples/gslib/read-table
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 
@@ -431,9 +431,9 @@ UBC Data Formats
 
 .. only:: html
 
-    .. figure:: /examples/ubc/images/thumb/sphx_glr_read-grv-obs_thumb.png
+ .. figure:: /examples/ubc/images/thumb/sphx_glr_read-grv-obs_thumb.png
 
-        :ref:`sphx_glr_examples_ubc_read-grv-obs.py`
+     :ref:`sphx_glr_examples_ubc_read-grv-obs.py`
 
 .. raw:: html
 
@@ -451,9 +451,9 @@ UBC Data Formats
 
 .. only:: html
 
-    .. figure:: /examples/ubc/images/thumb/sphx_glr_read-tensor-mesh_thumb.png
+ .. figure:: /examples/ubc/images/thumb/sphx_glr_read-tensor-mesh_thumb.png
 
-        :ref:`sphx_glr_examples_ubc_read-tensor-mesh.py`
+     :ref:`sphx_glr_examples_ubc_read-tensor-mesh.py`
 
 .. raw:: html
 
@@ -471,9 +471,9 @@ UBC Data Formats
 
 .. only:: html
 
-    .. figure:: /examples/ubc/images/thumb/sphx_glr_read-topo_thumb.png
+ .. figure:: /examples/ubc/images/thumb/sphx_glr_read-topo_thumb.png
 
-        :ref:`sphx_glr_examples_ubc_read-topo.py`
+     :ref:`sphx_glr_examples_ubc_read-topo.py`
 
 .. raw:: html
 
@@ -486,7 +486,7 @@ UBC Data Formats
    /examples/ubc/read-topo
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 

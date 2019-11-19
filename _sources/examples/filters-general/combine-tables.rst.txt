@@ -31,6 +31,7 @@ Please note that this example only works on version of PyVista>=0.22.0
 
 
 
+
 Create some input tables
 
 
@@ -57,6 +58,7 @@ Create some input tables
 
 
 
+
 .. code-block:: default
 
     print(t0)
@@ -71,9 +73,10 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7f0eae052dc8)
+    Table (0x7f237d9e4e88)
       N Rows:       100
       N Arrays:     2
+
 
 
 
@@ -93,9 +96,10 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7f0eae052f48)
+    Table (0x7f237d9e4fa8)
       N Rows:       100
       N Arrays:     1
+
 
 
 
@@ -118,9 +122,10 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7f0eb5d88d08)
+    Table (0x7f237d9e4f48)
       N Rows:       100
       N Arrays:     3
+
 
 
 
@@ -140,9 +145,10 @@ Create some input tables
 
 
 
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.066 seconds)
+   **Total running time of the script:** ( 0 minutes  0.006 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_combine-tables.py:

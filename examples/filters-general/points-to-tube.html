@@ -263,13 +263,21 @@ then builds a polygonal tube around that line with some specified radius and num
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_points-to-tube_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_points-to-tube_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(288.4271366070708, 331.7230350445708, 254.2230350445708), (44.2041015625, 87.5, 10.0), (0.0, 0.0, 1.0)]
+</pre></div>
+</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the filter: here is vtkPolyData containing the tube</span>
 <span class="n">tube</span> <span class="o">=</span> <span class="n">PointsToTube</span><span class="p">(</span><span class="n">nearestNbr</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 <span class="n">tube</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_points-to-tube_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_points-to-tube_002.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.507 seconds)</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(310.504116595436, 355.2706516584843, 274.2397677001663), (46.26434889525197, 91.03088395830022, 9.999999999982224), (0.0, 0.0, 1.0)]
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.498 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-points-to-tube-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/7352bdf693a517b86ebe54a4c92f0c6d/points-to-tube.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">points-to-tube.py</span></code></a></p>

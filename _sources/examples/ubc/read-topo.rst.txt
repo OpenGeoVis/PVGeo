@@ -26,6 +26,7 @@ Read a UBC topography file
 
 
 
+
 Download sample data files and keep track of names:
 
 
@@ -33,6 +34,7 @@ Download sample data files and keep track of names:
 
     url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/Craig-Chile/LdM_topo.topo'
     topo_file, _ = examples.downloads._retrieve_file(url, 'LdM_topo.topo')
+
 
 
 
@@ -56,13 +58,14 @@ Download sample data files and keep track of names:
 
  .. code-block:: none
 
-    PolyData (0x7f0ea79f14c8)
+    PolyData (0x7f238b1a4f48)
       N Cells:      381924
       N Points:     381924
       X Bounds:     3.550e+05, 3.720e+05
       Y Bounds:     5.999e+06, 6.016e+06
       Z Bounds:     2.050e+03, 3.104e+03
       N Arrays:     1
+
 
 
 
@@ -78,12 +81,21 @@ Download sample data files and keep track of names:
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(390310.76909712993, 6034304.56909713, 29389.81909712996), (363497.94999999995, 6007491.75, 2577.0), (0.0, 0.0, 1.0)]
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.883 seconds)
+   **Total running time of the script:** ( 0 minutes  5.842 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-topo.py:

@@ -26,6 +26,7 @@ THis example demos :class:`PVGeo.filters.RotatePoints`
 
 
 
+
 Get :class:`pyvista.PolyData` sample input to rotate
 
 
@@ -40,6 +41,15 @@ Get :class:`pyvista.PolyData` sample input to rotate
 .. image:: /examples/filters-general/images/sphx_glr_rotate-points_001.png
     :class: sphx-glr-single-img
 
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(19.954813220625095, 19.954813220625095, 19.954813220625095), (4.5, 4.5, 4.5), (0.0, 0.0, 1.0)]
 
 
 
@@ -57,12 +67,21 @@ Use the filter:
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(13.68885816496967, 21.29948831957935, 22.726884974662052), (-4.538026809692383, 3.0726033449172974, 4.5), (0.0, 0.0, 1.0)]
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.739 seconds)
+   **Total running time of the script:** ( 0 minutes  0.717 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_rotate-points.py:

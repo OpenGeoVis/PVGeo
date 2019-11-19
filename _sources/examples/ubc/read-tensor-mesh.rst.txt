@@ -26,6 +26,7 @@ Read a UBC tensor mesh file
 
 
 
+
 Download sample data files and keep track of names:
 
 
@@ -35,6 +36,7 @@ Download sample data files and keep track of names:
     mesh_file, _ = examples.downloads._retrieve_file(url, 'craig_chile.msh')
     url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/Craig-Chile/Lpout.mod'
     model_file, _ = examples.downloads._retrieve_file(url, 'Lpout.mod')
+
 
 
 
@@ -63,7 +65,7 @@ Read the mesh and model
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f0ea79f1fa8)
+    RectilinearGrid (0x7f237d250948)
       N Cells:      190440
       N Points:     200900
       X Bounds:     3.550e+05, 3.722e+05
@@ -71,6 +73,7 @@ Read the mesh and model
       Z Bounds:     -5.250e+03, 3.000e+03
       Dimensions:   70, 70, 41
       N Arrays:     1
+
 
 
 
@@ -90,6 +93,15 @@ Use a `PyVista` ``threshold`` filter to remove ``NaN`` data values
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(392348.1001399256, 6036348.100139925, 27598.10013992562), (363625.0, 6007625.0, -1125.0), (0.0, 0.0, 1.0)]
+
 
 
 Or inspect slices of the model
@@ -107,6 +119,15 @@ Or inspect slices of the model
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(392348.1001399256, 6036348.100139925, 27598.10013992562), (363625.0, 6007625.0, -1125.0), (0.0, 0.0, 1.0)]
+
 
 
 Or threshold a data range
@@ -122,12 +143,21 @@ Or threshold a data range
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(384737.1076481045, 6027487.107648104, 19892.107648104513), (363875.0, 6006625.0, -970.0), (0.0, 0.0, 1.0)]
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.865 seconds)
+   **Total running time of the script:** ( 0 minutes  5.061 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-tensor-mesh.py:

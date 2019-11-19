@@ -34,6 +34,7 @@ This example demos :class:`PVGeo.filters.VoxelizePoints`
 
 
 
+
 Download sample data files and keep track of names:
 
 
@@ -41,6 +42,7 @@ Download sample data files and keep track of names:
 
     url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/fault_points.csv'
     fault_file, _ = examples.downloads._retrieve_file(url, 'fault_points.csv')
+
 
 
 
@@ -80,6 +82,7 @@ object (essentially a point cloud).
 
 
 
+
 .. code-block:: default
 
 
@@ -96,13 +99,14 @@ object (essentially a point cloud).
 
  .. code-block:: none
 
-    PolyData (0x7f0ea79f13a8)
+    PolyData (0x7f237d250168)
       N Cells:      499200
       N Points:     499200
       X Bounds:     3.268e+05, 3.302e+05
       Y Bounds:     4.406e+06, 4.410e+06
       Z Bounds:     1.250e+01, 1.288e+03
       N Arrays:     1
+
 
 
 
@@ -128,6 +132,15 @@ calling the plot function. (Note: change the notebook parameter to
 .. image:: /examples/filters-general/images/sphx_glr_voxelize-points_001.png
     :class: sphx-glr-single-img
 
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(334141.1509516425, 4413705.151451643, 6293.877451642502), (328497.2735, 4408061.274, 650.0), (0.0, 0.0, 1.0)]
 
 
 
@@ -174,13 +187,14 @@ The full pipeline method
     Voxelizing... done.
     Recovered Angle (deg.): 53.550
     Recovered Cell Sizes: (25.00, 25.00, 25.00)
-    UnstructuredGrid (0x7f0ea79f18e8)
+    UnstructuredGrid (0x7f237d250528)
       N Cells:      499200
       N Points:     524064
       X Bounds:     3.268e+05, 3.302e+05
       Y Bounds:     4.406e+06, 4.410e+06
       Z Bounds:     0.000e+00, 1.300e+03
       N Arrays:     3
+
 
 
 
@@ -199,6 +213,15 @@ And now we can plot the voxelized volume
 .. image:: /examples/filters-general/images/sphx_glr_voxelize-points_002.png
     :class: sphx-glr-single-img
 
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(334197.63537062117, 4413761.117303883, 6352.837209322908), (328494.79816129827, 4408058.28009456, 650.0), (0.0, 0.0, 1.0)]
 
 
 
@@ -225,11 +248,12 @@ create 3 orthogonal slices through a data volume.
 
  .. code-block:: none
 
-    MultiBlock (0x7f0ea79f1828)
+    MultiBlock (0x7f237d250888)
       N Blocks:     3
       X Bounds:     326804.336, 330185.260
       Y Bounds:     4406253.954, 4409862.606
       Z Bounds:     0.000, 1300.000
+
 
 
 
@@ -240,6 +264,7 @@ And let's use a ``clip`` filter:
 .. code-block:: default
 
     clip = grid.clip(normal='x').clip(normal='-y').threshold(0.5)
+
 
 
 
@@ -265,12 +290,21 @@ Now display the slices and clipped volume
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(334197.63537062117, 4413761.117303883, 6352.837209322908), (328494.79816129827, 4408058.28009456, 650.0), (0.0, 0.0, 1.0)]
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  18.716 seconds)
+   **Total running time of the script:** ( 0 minutes  19.704 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:

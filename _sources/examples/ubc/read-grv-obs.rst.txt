@@ -26,6 +26,7 @@ Read a UBC gravity observations file
 
 
 
+
 Download sample data files and keep track of names:
 
 
@@ -33,6 +34,7 @@ Download sample data files and keep track of names:
 
     url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/Craig-Chile/LdM_grav_obs.grv'
     grav_file, _ = examples.downloads._retrieve_file(url, 'LdM_grav_obs.grv')
+
 
 
 
@@ -56,13 +58,14 @@ Download sample data files and keep track of names:
 
  .. code-block:: none
 
-    PolyData (0x7f0ea79f1c48)
+    PolyData (0x7f237d250528)
       N Cells:      191
       N Points:     191
       X Bounds:     3.565e+05, 3.702e+05
       Y Bounds:     6.000e+06, 6.015e+06
       Z Bounds:     2.155e+03, 2.865e+03
       N Arrays:     2
+
 
 
 
@@ -78,12 +81,21 @@ Download sample data files and keep track of names:
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(386109.91640657326, 6030150.316406573, 25236.442406573307), (363383.6, 6007424.0, 2510.126), (0.0, 0.0, 1.0)]
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.857 seconds)
+   **Total running time of the script:** ( 0 minutes  0.849 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-grv-obs.py:

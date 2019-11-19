@@ -28,12 +28,14 @@ This example demos :class:`PVGeo.filters.ExtractArray`
 
 
 
+
 Create input data
 
 
 .. code-block:: default
 
     dataset = examples.download_st_helens()
+
 
 
 
@@ -62,9 +64,10 @@ Construct the filter
 
  .. code-block:: none
 
-    Table (0x7f0ea79f10a8)
+    Table (0x7f237d250288)
       N Rows:       152709
       N Arrays:     1
+
 
 
 
@@ -80,12 +83,23 @@ Construct the filter
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    (array([14075., 31732., 38605., 28616., 13749.,  9270.,  7174.,  4687.,
+            3199.,  1602.]), array([ 682. ,  868.1, 1054.2, 1240.3, 1426.4, 1612.5, 1798.6, 1984.7,
+           2170.8, 2356.9, 2543. ], dtype=float32), <a list of 10 Patch objects>)
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.842 seconds)
+   **Total running time of the script:** ( 0 minutes  0.492 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-array.py:

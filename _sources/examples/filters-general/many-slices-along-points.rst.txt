@@ -41,6 +41,7 @@ sphinx_gallery_thumbnail_number = 3
 
 
 
+
 Load a volumetric model to be sliced from pyvista's examples
 
 
@@ -55,6 +56,15 @@ Load a volumetric model to be sliced from pyvista's examples
 .. image:: /examples/filters-general/images/sphx_glr_many-slices-along-points_001.png
     :class: sphx-glr-single-img
 
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(534.8076211353316, 534.8076211353316, 459.80762113533166), (125.0, 125.0, 50.0), (0.0, 0.0, 1.0)]
 
 
 
@@ -88,6 +98,15 @@ we will use to slice the volume.
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(534.8076211353316, 534.8076211353316, 459.80762113533166), (125.0, 125.0, 50.0), (0.0, 0.0, 1.0)]
+
 
 
 Now we can use the **Many Slices Along Points** filter.
@@ -113,11 +132,12 @@ slices to what you prefer!
 
  .. code-block:: none
 
-    MultiBlock (0x7f0ea79f16a8)
+    MultiBlock (0x7f237d250588)
       N Blocks:     6
       X Bounds:     0.000, 250.000
       Y Bounds:     0.000, 250.000
       Z Bounds:     0.000, 100.000
+
 
 
 
@@ -138,12 +158,21 @@ slices to what you prefer!
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(534.8076211353316, 534.8076211353316, 459.80762113533166), (125.0, 125.0, 50.0), (0.0, 0.0, 1.0)]
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.296 seconds)
+   **Total running time of the script:** ( 0 minutes  5.478 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_many-slices-along-points.py:

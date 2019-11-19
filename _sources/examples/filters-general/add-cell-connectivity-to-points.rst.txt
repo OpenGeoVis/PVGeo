@@ -35,6 +35,7 @@ sphinx_gallery_thumbnail_number = 2
 
 
 
+
 First, lets generate some points which we'd like to connect
 
 
@@ -56,6 +57,7 @@ First, lets generate some points which we'd like to connect
 
     # Make a VTK data object for the filter to use
     vtkPoints = points_to_poly_data(coords)
+
 
 
 
@@ -89,6 +91,15 @@ below; this is good.
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(260.7157668726004, 274.0556106226004, 209.0556106226004), (61.66015624999999, 75.0, 10.0), (0.0, 0.0, 1.0)]
+
 
 
 Remember that in the script given above we shuffle the points to demonstrate
@@ -116,12 +127,21 @@ Now it looks good (see image below)!
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(260.7157668726004, 274.0556106226004, 209.0556106226004), (61.66015624999999, 75.0, 10.0), (0.0, 0.0, 1.0)]
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.773 seconds)
+   **Total running time of the script:** ( 0 minutes  0.725 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_add-cell-connectivity-to-points.py:

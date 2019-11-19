@@ -27,6 +27,7 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 
 
+
 .. code-block:: default
 
 
@@ -54,6 +55,7 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 
 
+
 .. code-block:: default
 
     print(table)
@@ -69,9 +71,10 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
  .. code-block:: none
 
-    Table (0x7f0ea79f1648)
+    Table (0x7f237d2507c8)
       N Rows:       2100000
       N Arrays:     1
+
 
 
 
@@ -98,7 +101,7 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 
  .. code-block:: none
 
-    UniformGrid (0x7f0ea79f1ee8)
+    UniformGrid (0x7f237d250528)
       N Cells:      2100000
       N Points:     4205902
       X Bounds:     0.000e+00, 1.200e+03
@@ -107,6 +110,7 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
       Dimensions:   1201, 1751, 2
       Spacing:      1.000e+00, 1.000e+00, 1.000e+00
       N Arrays:     1
+
 
 
 
@@ -122,12 +126,21 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(600.0, 875.0, 4099.714863010925), (600.0, 875.0, 0.5), (0.0, 1.0, 0.0)]
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  29.281 seconds)
+   **Total running time of the script:** ( 0 minutes  29.703 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-table.py:

@@ -28,6 +28,7 @@ This example demos :class:`PVGeo.filters.ExtractPoints`
 
 
 
+
 Have some input data source with valid PointData
 
 
@@ -42,6 +43,15 @@ Have some input data source with valid PointData
 .. image:: /examples/filters-general/images/sphx_glr_extract-points_001.png
     :class: sphx-glr-single-img
 
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(24578060184.082455, 24590884070.56062, 24590884070.56062), (-12823886.478166103, 4.76837158203125e-07, 0.0), (0.0, 0.0, 1.0)]
 
 
 
@@ -59,12 +69,21 @@ Apply the filter:
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    [(24578060184.082455, 24590884070.56062, 24590884070.56062), (-12823886.478166103, 4.76837158203125e-07, 0.0), (0.0, 0.0, 1.0)]
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.903 seconds)
+   **Total running time of the script:** ( 0 minutes  0.885 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-points.py:

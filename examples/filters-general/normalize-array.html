@@ -261,6 +261,10 @@ Feature Scaling and Standard Score.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_normalize-array_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_normalize-array_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(21.886664873203234, 21.886664873203234, 21.886664873203234), (4.5, 4.5, 4.5), (0.0, 0.0, 1.0)]
+</pre></div>
+</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply the filter</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">NormalizeArray</span><span class="p">(</span><span class="n">normalization</span><span class="o">=</span><span class="s1">&#39;feature_scale&#39;</span><span class="p">,</span> <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
@@ -268,7 +272,7 @@ Feature Scaling and Standard Score.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>UniformGrid (0x7f0eae052ca8)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>UniformGrid (0x7f237d9e4fa8)
   N Cells:      729
   N Points:     1000
   X Bounds:     0.000e+00, 9.000e+00
@@ -283,7 +287,11 @@ Feature Scaling and Standard Score.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_normalize-array_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_normalize-array_002.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.905 seconds)</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(21.886664873203234, 21.886664873203234, 21.886664873203234), (4.5, 4.5, 4.5), (0.0, 0.0, 1.0)]
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.939 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-normalize-array-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/a18c6296b7061956a25cdce8ef9ace9f/normalize-array.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">normalize-array.py</span></code></a></p>
