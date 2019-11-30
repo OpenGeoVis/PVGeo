@@ -227,14 +227,14 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">vtk</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
-<span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">AlgorithmBase</span>
-<span class="kn">from</span> <span class="nn">.two_file_base</span> <span class="k">import</span> <span class="n">ModelAppenderBase</span><span class="p">,</span> <span class="n">ubcMeshReaderBase</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">AlgorithmBase</span>
+<span class="kn">from</span> <span class="nn">.two_file_base</span> <span class="kn">import</span> <span class="n">ModelAppenderBase</span><span class="p">,</span> <span class="n">ubcMeshReaderBase</span>
 
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,):</span>
-    <span class="kn">from</span> <span class="nn">StringIO</span> <span class="k">import</span> <span class="n">StringIO</span>
+    <span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">StringIO</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
 
 
@@ -256,7 +256,7 @@
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;reader&#39;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: UBC Mesh 2D/3D Two-File Format&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                    <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -607,7 +607,7 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;UBC Tensor Mesh Appender&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ModelAppenderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                    <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span>
                                    <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span>
@@ -643,7 +643,7 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Append UBC Discrete Topography&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span>
                  <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>

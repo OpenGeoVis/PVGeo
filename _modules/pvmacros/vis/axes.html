@@ -229,7 +229,7 @@
 <span class="sd">        axis (int): The axis to set (X=0, Y=1, or Z=2)</span>
 <span class="sd">        uniform (bool): An optional flag to use the given range on all axii</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">paraview.simple</span> <span class="k">import</span> <span class="n">GetActiveViewOrCreate</span><span class="p">,</span> <span class="n">RenderAllViews</span>
+    <span class="kn">from</span> <span class="nn">paraview.simple</span> <span class="kn">import</span> <span class="n">GetActiveViewOrCreate</span><span class="p">,</span> <span class="n">RenderAllViews</span>
     <span class="c1"># note that third parameter is the step size</span>
     <span class="c1"># get the active view</span>
     <span class="n">rv</span> <span class="o">=</span> <span class="n">GetActiveViewOrCreate</span><span class="p">(</span><span class="s1">&#39;RenderView&#39;</span><span class="p">)</span>
@@ -254,7 +254,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        axis (int or list(int)): The axis to set (X=0, Y=1, or Z=2)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">paraview.simple</span> <span class="k">import</span> <span class="n">GetActiveViewOrCreate</span><span class="p">,</span> <span class="n">RenderAllViews</span>
+    <span class="kn">from</span> <span class="nn">paraview.simple</span> <span class="kn">import</span> <span class="n">GetActiveViewOrCreate</span><span class="p">,</span> <span class="n">RenderAllViews</span>
     <span class="n">rv</span> <span class="o">=</span> <span class="n">GetActiveViewOrCreate</span><span class="p">(</span><span class="s1">&#39;RenderView&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
         <span class="n">axis</span> <span class="o">=</span> <span class="p">[</span><span class="n">axis</span><span class="p">]</span>

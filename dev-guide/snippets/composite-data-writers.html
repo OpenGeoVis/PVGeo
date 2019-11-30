@@ -227,9 +227,9 @@ ParaView’s <a class="reference external" href="https://gitlab.kitware.com/para
 plugins has a composite support option for the <code class="docutils literal notranslate"><span class="pre">smdomain</span></code> input property that is
 incredibly simple to use with filter algorithms yet can be tricky to use for
 writer algorithms.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@smproxy.writer</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="nd">@smproperty.input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TableInput&quot;</span><span class="p">,</span> <span class="n">port_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nd">@smdomain.datatype</span><span class="p">(</span><span class="n">dataTypes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vtkTable&quot;</span><span class="p">],</span> <span class="n">composite_data_supported</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@smproxy</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="nd">@smproperty</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TableInput&quot;</span><span class="p">,</span> <span class="n">port_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nd">@smdomain</span><span class="o">.</span><span class="n">datatype</span><span class="p">(</span><span class="n">dataTypes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vtkTable&quot;</span><span class="p">],</span> <span class="n">composite_data_supported</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">MyWriter</span><span class="p">(</span><span class="n">VTKPythonAlgorithmBase</span><span class="p">):</span>
        <span class="o">...</span>
 </pre></div>
@@ -243,9 +243,9 @@ explicitly.</p>
 within the algorithms <code class="docutils literal notranslate"><span class="pre">FillInputPortInformation</span></code> method.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is partially pseudo-code and is implemented in `WriterBase`</span>
 
-<span class="nd">@smproxy.writer</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="nd">@smproperty.input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Input&quot;</span><span class="p">,</span> <span class="n">port_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nd">@smdomain.datatype</span><span class="p">(</span><span class="n">dataTypes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vtkDataSet&quot;</span><span class="p">],</span> <span class="n">composite_data_supported</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nd">@smproxy</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="nd">@smproperty</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Input&quot;</span><span class="p">,</span> <span class="n">port_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nd">@smdomain</span><span class="o">.</span><span class="n">datatype</span><span class="p">(</span><span class="n">dataTypes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vtkDataSet&quot;</span><span class="p">],</span> <span class="n">composite_data_supported</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">MyWriter</span><span class="p">(</span><span class="n">VTKPythonAlgorithmBase</span><span class="p">):</span>
        <span class="o">...</span>
 
@@ -279,7 +279,7 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
                 <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">IsTypeOf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputType</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">perform_write_out</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_block_filename</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Invalid input block </span><span class="si">%d</span><span class="s1"> of type(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input block </span><span class="si">%d</span><span class="s1"> of type(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
         <span class="c1"># Handle single input dataset</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">perform_write_out</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_name</span><span class="p">())</span>
@@ -297,7 +297,7 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
 <span class="kn">from</span> <span class="nn">vtk.util.vtkAlgorithm</span> <span class="kn">import</span> <span class="n">VTKPythonAlgorithmBase</span>
 
 <span class="kn">import</span> <span class="nn">vtk</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="kn">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
 
 <span class="c1">###############################################################################</span>
@@ -357,9 +357,9 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
 <span class="c1">## Now lets use ``WriterBase`` to make a writer algorithm for image data</span>
 
 
-<span class="nd">@smproxy.writer</span><span class="p">(</span><span class="n">extensions</span><span class="o">=</span><span class="s2">&quot;imgfmt&quot;</span><span class="p">,</span> <span class="n">file_description</span><span class="o">=</span><span class="s2">&quot;Write Custom ImageData&quot;</span><span class="p">,</span> <span class="n">support_reload</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="nd">@smproperty.input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Input&quot;</span><span class="p">,</span> <span class="n">port_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nd">@smdomain.datatype</span><span class="p">(</span><span class="n">dataTypes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vtkImageData&quot;</span><span class="p">],</span> <span class="n">composite_data_supported</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nd">@smproxy</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">extensions</span><span class="o">=</span><span class="s2">&quot;imgfmt&quot;</span><span class="p">,</span> <span class="n">file_description</span><span class="o">=</span><span class="s2">&quot;Write Custom ImageData&quot;</span><span class="p">,</span> <span class="n">support_reload</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nd">@smproperty</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Input&quot;</span><span class="p">,</span> <span class="n">port_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nd">@smdomain</span><span class="o">.</span><span class="n">datatype</span><span class="p">(</span><span class="n">dataTypes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vtkImageData&quot;</span><span class="p">],</span> <span class="n">composite_data_supported</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">WriteCustomImageData</span><span class="p">(</span><span class="n">WriterBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This is an example of how to make your own file writer!</span>
 
@@ -384,8 +384,8 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
         <span class="c1"># Success for pipeline</span>
         <span class="k">return</span> <span class="mi">1</span>
 
-    <span class="nd">@smproperty.stringvector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;FileName&quot;</span><span class="p">,</span> <span class="n">panel_visibility</span><span class="o">=</span><span class="s2">&quot;never&quot;</span><span class="p">)</span>
-    <span class="nd">@smdomain.filelist</span><span class="p">()</span>
+    <span class="nd">@smproperty</span><span class="o">.</span><span class="n">stringvector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;FileName&quot;</span><span class="p">,</span> <span class="n">panel_visibility</span><span class="o">=</span><span class="s2">&quot;never&quot;</span><span class="p">)</span>
+    <span class="nd">@smdomain</span><span class="o">.</span><span class="n">filelist</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">SetFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Specify filename for the file to write.&quot;&quot;&quot;</span>
         <span class="n">WriterBase</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
@@ -396,9 +396,9 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
 <span class="c1">###############################################################################</span>
 <span class="c1">## Now wrap the cell centers writer for use in ParaView!</span>
 
-<span class="nd">@smproxy.writer</span><span class="p">(</span><span class="n">extensions</span><span class="o">=</span><span class="s2">&quot;dat&quot;</span><span class="p">,</span> <span class="n">file_description</span><span class="o">=</span><span class="s2">&quot;Cell Centers and Cell Data&quot;</span><span class="p">,</span> <span class="n">support_reload</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="nd">@smproperty.input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Input&quot;</span><span class="p">,</span> <span class="n">port_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nd">@smdomain.datatype</span><span class="p">(</span><span class="n">dataTypes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vtkDataSet&quot;</span><span class="p">],</span> <span class="n">composite_data_supported</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nd">@smproxy</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">extensions</span><span class="o">=</span><span class="s2">&quot;dat&quot;</span><span class="p">,</span> <span class="n">file_description</span><span class="o">=</span><span class="s2">&quot;Cell Centers and Cell Data&quot;</span><span class="p">,</span> <span class="n">support_reload</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nd">@smproperty</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Input&quot;</span><span class="p">,</span> <span class="n">port_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nd">@smdomain</span><span class="o">.</span><span class="n">datatype</span><span class="p">(</span><span class="n">dataTypes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vtkDataSet&quot;</span><span class="p">],</span> <span class="n">composite_data_supported</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">PVWriteCellCenterData</span><span class="p">(</span><span class="n">WriteCellCenterData</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The ``WriteCellCenterData`` class wrapped for use as a plugin in ParaView.</span>
 <span class="sd">    Be sure that the ``composite_data_supported`` flag is set to ``True``.</span>
@@ -407,18 +407,18 @@ within the algorithms <code class="docutils literal notranslate"><span class="pr
         <span class="n">WriteCellCenterData</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 
-    <span class="nd">@smproperty.stringvector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;FileName&quot;</span><span class="p">,</span> <span class="n">panel_visibility</span><span class="o">=</span><span class="s2">&quot;never&quot;</span><span class="p">)</span>
-    <span class="nd">@smdomain.filelist</span><span class="p">()</span>
+    <span class="nd">@smproperty</span><span class="o">.</span><span class="n">stringvector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;FileName&quot;</span><span class="p">,</span> <span class="n">panel_visibility</span><span class="o">=</span><span class="s2">&quot;never&quot;</span><span class="p">)</span>
+    <span class="nd">@smdomain</span><span class="o">.</span><span class="n">filelist</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">SetFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Specify filename for the file to write.&quot;&quot;&quot;</span>
         <span class="n">WriteCellCenterData</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
-    <span class="nd">@smproperty.stringvector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Format&quot;</span><span class="p">,</span> <span class="n">default_values</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.9e</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nd">@smproperty</span><span class="o">.</span><span class="n">stringvector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Format&quot;</span><span class="p">,</span> <span class="n">default_values</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.9e</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">set_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Use to set the ASCII format for the writer default is ``&#39;%.9e&#39;``&quot;&quot;&quot;</span>
         <span class="n">WriteCellCenterData</span><span class="o">.</span><span class="n">set_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
 
-    <span class="nd">@smproperty.stringvector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Delimiter&quot;</span><span class="p">,</span> <span class="n">default_values</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="nd">@smproperty</span><span class="o">.</span><span class="n">stringvector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Delimiter&quot;</span><span class="p">,</span> <span class="n">default_values</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">set_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deli</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The string delimiter to use&quot;&quot;&quot;</span>
         <span class="n">WriteCellCenterData</span><span class="o">.</span><span class="n">set_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deli</span><span class="p">)</span>

@@ -323,7 +323,7 @@ we built for <cite>discretize &lt;http://discretize.simpeg.xyz/en/latest/&gt;</c
 <span class="c1"># Import the library you wish to leverage</span>
 <span class="kn">import</span> <span class="nn">discretize</span>
 
-<span class="nd">@smproxy.reader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;DiscretizeMeshReader&quot;</span><span class="p">,</span>
+<span class="nd">@smproxy</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;DiscretizeMeshReader&quot;</span><span class="p">,</span>
        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PVGeo: Discretize Mesh Reader&#39;</span><span class="p">,</span>
        <span class="n">extensions</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
        <span class="n">file_description</span><span class="o">=</span><span class="s1">&#39;Serialized Discretize Meshes&#39;</span><span class="p">)</span>
@@ -347,17 +347,17 @@ we built for <cite>discretize &lt;http://discretize.simpeg.xyz/en/latest/&gt;</c
 
     <span class="c1">#### Setters and Getters for the GUI ####</span>
 
-    <span class="nd">@smproperty.xml</span><span class="p">(</span><span class="n">_helpers</span><span class="o">.</span><span class="n">getFileReaderXml</span><span class="p">(</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">readerDescription</span><span class="o">=</span><span class="s1">&#39;Serialized Discretize Meshes&#39;</span><span class="p">))</span>
+    <span class="nd">@smproperty</span><span class="o">.</span><span class="n">xml</span><span class="p">(</span><span class="n">_helpers</span><span class="o">.</span><span class="n">getFileReaderXml</span><span class="p">(</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">readerDescription</span><span class="o">=</span><span class="s1">&#39;Serialized Discretize Meshes&#39;</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">AddFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This enables users to select File-&gt;Open... in ParaView&quot;&quot;&quot;</span>
         <span class="n">InterfacedBaseReader</span><span class="o">.</span><span class="n">AddFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
 
-    <span class="nd">@smproperty.doublevector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TimeDelta&quot;</span><span class="p">,</span> <span class="n">default_values</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">panel_visibility</span><span class="o">=</span><span class="s2">&quot;advanced&quot;</span><span class="p">)</span>
+    <span class="nd">@smproperty</span><span class="o">.</span><span class="n">doublevector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TimeDelta&quot;</span><span class="p">,</span> <span class="n">default_values</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">panel_visibility</span><span class="o">=</span><span class="s2">&quot;advanced&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">set_time_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Allows the user to speed up/slow down the time interval if reading a time series of data&quot;&quot;&quot;</span>
         <span class="n">InterfacedBaseReader</span><span class="o">.</span><span class="n">set_time_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
 
-    <span class="nd">@smproperty.doublevector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TimestepValues&quot;</span><span class="p">,</span> <span class="n">information_only</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">si_class</span><span class="o">=</span><span class="s2">&quot;vtkSITimeStepsProperty&quot;</span><span class="p">)</span>
+    <span class="nd">@smproperty</span><span class="o">.</span><span class="n">doublevector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TimestepValues&quot;</span><span class="p">,</span> <span class="n">information_only</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">si_class</span><span class="o">=</span><span class="s2">&quot;vtkSITimeStepsProperty&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">get_timestep_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This is critical for registering the timesteps (if you want them)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">InterfacedBaseReader</span><span class="o">.</span><span class="n">get_timestep_values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>

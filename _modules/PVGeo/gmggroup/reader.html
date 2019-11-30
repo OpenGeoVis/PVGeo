@@ -220,8 +220,8 @@
 <span class="kn">import</span> <span class="nn">omfvista</span>
 <span class="kn">import</span> <span class="nn">vtk</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span>
-<span class="kn">from</span> <span class="nn">..base</span> <span class="k">import</span> <span class="n">ReaderBaseBase</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">ReaderBaseBase</span>
 
 
 <div class="viewcode-block" id="OMFReader"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader">[docs]</a><span class="k">class</span> <span class="nc">OMFReader</span><span class="p">(</span><span class="n">ReaderBaseBase</span><span class="p">):</span>
@@ -232,7 +232,7 @@
     <span class="n">extensions</span> <span class="o">=</span> <span class="s1">&#39;omf&#39;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: Open Mining Format Project&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                 <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkMultiBlockDataSet&#39;</span><span class="p">)</span>
         <span class="c1"># Properties:</span>

@@ -225,7 +225,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">vtk</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">base</span>
 
 <span class="c1">###############################################################################</span>
 
@@ -238,7 +238,7 @@
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
     <span class="n">extensions</span> <span class="o">=</span> <span class="s1">&#39;mesh msh dat txt text&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">base</span><span class="o">.</span><span class="n">TwoFileReaderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                         <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span>
                                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -400,7 +400,7 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Model Appender Base&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">base</span><span class="o">.</span><span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                     <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span>
                                     <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">)</span>
