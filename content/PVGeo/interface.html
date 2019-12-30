@@ -299,9 +299,9 @@ for VTK cell arrays.</p>
 <h2>convert_string_array<a class="headerlink" href="#convert-string-array" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="PVGeo.interface.convert_string_array">
-<code class="sig-prename descclassname">PVGeo.interface.</code><code class="sig-name descname">convert_string_array</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/utilities/utilities.html#convert_string_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.interface.convert_string_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>A helper to convert a numpy array of strings to a vtkStringArray
-or vice versa. Note that this is terribly inefficient - inefficient support
+<code class="sig-prename descclassname">PVGeo.interface.</code><code class="sig-name descname">convert_string_array</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/utilities/helpers.html#convert_string_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.interface.convert_string_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a numpy array of strings to a vtkStringArray or vice versa.</p>
+<p>Note that this is terribly inefficient - inefficient support
 is better than no support :). If you have ideas on how to make this faster,
 please consider opening a pull request.</p>
 </dd></dl>
@@ -358,9 +358,9 @@ for VTK data types</p>
 <h2>get_vtk_type<a class="headerlink" href="#get-vtk-type" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="PVGeo.interface.get_vtk_type">
-<code class="sig-prename descclassname">PVGeo.interface.</code><code class="sig-name descname">get_vtk_type</code><span class="sig-paren">(</span><em class="sig-param">typ</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/utilities/utilities.html#get_vtk_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.interface.get_vtk_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>This looks up the VTK type for a give python data type. Corrects for
-string type mapping issues.</p>
+<code class="sig-prename descclassname">PVGeo.interface.</code><code class="sig-name descname">get_vtk_type</code><span class="sig-paren">(</span><em class="sig-param">typ</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/utilities/helpers.html#get_vtk_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.interface.get_vtk_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look up the VTK type for a give python data type.</p>
+<p>Corrects for string type mapping issues.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><strong>int</strong></p>

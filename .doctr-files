@@ -141,7 +141,7 @@
 ./_modules/pvmacros/pipeline.html
 ./_modules/pvmacros/vis/axes.html
 ./_modules/pvmacros/vis/objs.html
-./_modules/pyvista/utilities/utilities.html
+./_modules/pyvista/utilities/helpers.html
 ./_sources/about-examples.rst.txt
 ./_sources/content/PVGeo/_helpers/arrays.rst.txt
 ./_sources/content/PVGeo/_helpers/errors.rst.txt

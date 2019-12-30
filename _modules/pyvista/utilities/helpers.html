@@ -9,14 +9,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pyvista.utilities.utilities &mdash; PVGeo  documentation</title>
+  <title>pyvista.utilities.helpers &mdash; PVGeo  documentation</title>
   
 
   
   
   
   
-    <link rel="canonical" href="http://docs.pvgeo.org/_modules/pyvista/utilities/utilities.html"/>
+    <link rel="canonical" href="http://docs.pvgeo.org/_modules/pyvista/utilities/helpers.html"/>
   
 
   
@@ -199,7 +199,7 @@
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
-      <li>pyvista.utilities.utilities</li>
+      <li>pyvista.utilities.helpers</li>
     
     
 
@@ -211,14 +211,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for pyvista.utilities.utilities</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Supporting functions for polydata and grid objects</span>
+  <h1>Source code for pyvista.utilities.helpers</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Supporting functions for polydata and grid objects.&quot;&quot;&quot;</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">ctypes</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scooby</span>
@@ -234,32 +233,36 @@
 
 
 <div class="viewcode-block" id="get_vtk_type"><a class="viewcode-back" href="../../../content/PVGeo/interface.html#PVGeo.interface.get_vtk_type">[docs]</a><span class="k">def</span> <span class="nf">get_vtk_type</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This looks up the VTK type for a give python data type. Corrects for</span>
-<span class="sd">    string type mapping issues.</span>
+    <span class="sd">&quot;&quot;&quot;Look up the VTK type for a give python data type.</span>
+
+<span class="sd">    Corrects for string type mapping issues.</span>
 
 <span class="sd">    Return</span>
 <span class="sd">    ------</span>
-<span class="sd">    int : the integer type id specified in vtkType.h</span>
+<span class="sd">        int : the integer type id specified in vtkType.h</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">typ</span> <span class="o">=</span> <span class="n">nps</span><span class="o">.</span><span class="n">get_vtk_array_type</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
     <span class="c1"># This handles a silly string type bug</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">is</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">13</span>
     <span class="k">return</span> <span class="n">typ</span></div>
 
 
 <span class="k">def</span> <span class="nf">vtk_bit_array_to_char</span><span class="p">(</span><span class="n">vtkarr_bint</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Cast vtk bit array to a char array &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Cast vtk bit array to a char array.&quot;&quot;&quot;</span>
     <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCharArray</span><span class="p">()</span>
     <span class="n">vtkarr</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">vtkarr_bint</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">vtkarr</span>
 
 
 <div class="viewcode-block" id="convert_string_array"><a class="viewcode-back" href="../../../content/PVGeo/interface.html#PVGeo.interface.convert_string_array">[docs]</a><span class="k">def</span> <span class="nf">convert_string_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A helper to convert a numpy array of strings to a vtkStringArray</span>
-<span class="sd">    or vice versa. Note that this is terribly inefficient - inefficient support</span>
+    <span class="sd">&quot;&quot;&quot;Convert a numpy array of strings to a vtkStringArray or vice versa.</span>
+
+<span class="sd">    Note that this is terribly inefficient - inefficient support</span>
 <span class="sd">    is better than no support :). If you have ideas on how to make this faster,</span>
 <span class="sd">    please consider opening a pull request.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">()</span>
@@ -280,7 +283,7 @@
 
 
 <span class="k">def</span> <span class="nf">convert_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A helper to convert a NumPy array to a vtkDataArray or vice versa</span>
+    <span class="sd">&quot;&quot;&quot;Convert a NumPy array to a vtkDataArray or vice versa.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    -----------</span>
@@ -313,7 +316,7 @@
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="c1"># This handles strings</span>
             <span class="n">typ</span> <span class="o">=</span> <span class="n">get_vtk_type</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">typ</span> <span class="ow">is</span> <span class="mi">13</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">13</span><span class="p">:</span>
                 <span class="n">vtk_data</span> <span class="o">=</span> <span class="n">convert_string_array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">vtk_data</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -333,31 +336,56 @@
 
 
 <span class="k">def</span> <span class="nf">is_pyvista_dataset</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return True if the Object is a PyVista wrapped dataset &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Return True if the Object is a PyVista wrapped dataset.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">pyvista</span><span class="o">.</span><span class="n">Common</span><span class="p">,</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">point_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Returns point scalars of a vtk object &quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">point_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return point array of a vtk object.&quot;&quot;&quot;</span>
     <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetAbstractArray</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">field_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Returns field scalars of a vtk object &quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">point_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return point array of a vtk object.</span>
+
+<span class="sd">    DEPRECATED: please use `point_array` instead.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;DEPRECATED: please use `point_array` instead.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">point_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">field_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return field array of a vtk object.&quot;&quot;&quot;</span>
     <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">GetFieldData</span><span class="p">()</span><span class="o">.</span><span class="n">GetAbstractArray</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">cell_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Returns cell scalars of a vtk object &quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">field_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return field array of a vtk object.</span>
+
+<span class="sd">    DEPRECATED: please use `field_array` instead.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;DEPRECATED: please use `field_array` instead.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">field_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">cell_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return cell array of a vtk object.&quot;&quot;&quot;</span>
     <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">GetAbstractArray</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
 
+<span class="k">def</span> <span class="nf">cell_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return cell array of a vtk object.</span>
+
+<span class="sd">    DEPRECATED: please use `cell_array` instead.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;DEPRECATED: please use `cell_array` instead.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cell_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
 <span class="k">def</span> <span class="nf">row_array</span><span class="p">(</span><span class="n">data_object</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Returns cell scalars of a vtk object &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Return row array of a vtk object.&quot;&quot;&quot;</span>
     <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">data_object</span><span class="o">.</span><span class="n">GetRowData</span><span class="p">()</span><span class="o">.</span><span class="n">GetAbstractArray</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">parse_field_choice</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the id of the given field.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">field</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">field</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;cells&#39;</span><span class="p">]:</span>
@@ -378,7 +406,7 @@
 
 
 <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">preference</span><span class="o">=</span><span class="s1">&#39;cell&#39;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Searches point, cell and field data for an array</span>
+    <span class="sd">&quot;&quot;&quot;Search point, cell and field data for an array.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -386,12 +414,12 @@
 <span class="sd">        The name of the array to get the range.</span>
 
 <span class="sd">    preference : str, optional</span>
-<span class="sd">        When scalars is specified, this is the perfered scalar type to</span>
+<span class="sd">        When scalars is specified, this is the perfered array type to</span>
 <span class="sd">        search for in the dataset.  Must be either ``&#39;point&#39;``, ``&#39;cell&#39;``, or</span>
 <span class="sd">        ``&#39;field&#39;``</span>
 
 <span class="sd">    info : bool</span>
-<span class="sd">        Return info about the scalar rather than the array itself.</span>
+<span class="sd">        Return info about the array rather than the array itself.</span>
 
 <span class="sd">    err : bool</span>
 <span class="sd">        Boolean to control whether to throw an error if array is not present.</span>
@@ -400,15 +428,15 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">row_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">arr</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">err</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Data scalar (</span><span class="si">{}</span><span class="s1">) not present in this dataset.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Data array (</span><span class="si">{}</span><span class="s1">) not present in this dataset.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
         <span class="n">field</span> <span class="o">=</span> <span class="n">ROW_DATA_FIELD</span>
         <span class="k">if</span> <span class="n">info</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">arr</span><span class="p">,</span> <span class="n">field</span>
         <span class="k">return</span> <span class="n">arr</span>
 
-    <span class="n">parr</span> <span class="o">=</span> <span class="n">point_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-    <span class="n">carr</span> <span class="o">=</span> <span class="n">cell_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-    <span class="n">farr</span> <span class="o">=</span> <span class="n">field_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">parr</span> <span class="o">=</span> <span class="n">point_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">carr</span> <span class="o">=</span> <span class="n">cell_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">farr</span> <span class="o">=</span> <span class="n">field_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
     <span class="n">preference</span> <span class="o">=</span> <span class="n">parse_field_choice</span><span class="p">(</span><span class="n">preference</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">parr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="n">carr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="n">farr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">preference</span> <span class="o">==</span> <span class="n">CELL_DATA_FIELD</span><span class="p">:</span>
@@ -440,14 +468,14 @@
         <span class="n">arr</span> <span class="o">=</span> <span class="n">farr</span>
         <span class="n">field</span> <span class="o">=</span> <span class="n">FIELD_DATA_FIELD</span>
     <span class="k">elif</span> <span class="n">err</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Data scalar (</span><span class="si">{}</span><span class="s1">) not present in this dataset.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Data array (</span><span class="si">{}</span><span class="s1">) not present in this dataset.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">info</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">arr</span><span class="p">,</span> <span class="n">field</span>
     <span class="k">return</span> <span class="n">arr</span>
 
 
 <span class="k">def</span> <span class="nf">vtk_points</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Convert numpy points to a vtkPoints object &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Convert numpy points to a vtkPoints object.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">points</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;C_CONTIGUOUS&#39;</span><span class="p">]:</span>
         <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
     <span class="n">vtkpts</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
@@ -456,8 +484,8 @@
 
 
 <span class="k">def</span> <span class="nf">line_segments_from_points</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates non-connected line segments from points.</span>
+    <span class="sd">&quot;&quot;&quot;Generate non-connected line segments from points.</span>
+
 <span class="sd">    Assumes points are ordered as line segments and an even number of points</span>
 <span class="sd">    are</span>
 
@@ -501,7 +529,7 @@
 
 
 <span class="k">def</span> <span class="nf">lines_from_points</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Given an array of points, make a connected line set</span>
+    <span class="sd">&quot;&quot;&quot;Make a connected line set given an array of points.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -511,8 +539,8 @@
 
 <span class="sd">        np.array([[0, 0, 0], [1, 0, 0], [1, 1, 0]])</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
 <span class="sd">    lines : pyvista.PolyData</span>
 <span class="sd">        PolyData with lines and cells.</span>
 
@@ -527,9 +555,8 @@
 
 
 <span class="k">def</span> <span class="nf">vector_poly_data</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">vec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Creates a vtkPolyData object composed of vectors &quot;&quot;&quot;</span>
-
-    <span class="c1"># shape, dimention checking</span>
+    <span class="sd">&quot;&quot;&quot;Create a vtkPolyData object composed of vectors.&quot;&quot;&quot;</span>
+    <span class="c1"># shape, dimension checking</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="n">orig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">orig</span><span class="p">)</span>
 
@@ -584,7 +611,7 @@
 
 
 <span class="k">def</span> <span class="nf">trans_from_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Convert a vtk matrix to a numpy.ndarray &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Convert a vtk matrix to a numpy.ndarray.&quot;&quot;&quot;</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
@@ -593,12 +620,12 @@
 
 
 <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">vtkdataset</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This is a convenience method to safely wrap any given VTK data object</span>
-<span class="sd">    to its appropriate PyVista data object. Other formats that are supported</span>
-<span class="sd">    include:</span>
+    <span class="sd">&quot;&quot;&quot;Wrap any given VTK data object to its appropriate PyVista data object.</span>
 
+<span class="sd">    Other formats that are supported include:</span>
 <span class="sd">    * 2D :class:`numpy.ndarray` of XYZ vertices</span>
 <span class="sd">    * 3D :class:`numpy.ndarray` representing a volume. Values will be scalars.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wrappers</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UnstructuredGrid</span><span class="p">,</span>
@@ -624,7 +651,7 @@
         <span class="k">elif</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="n">mesh</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">(</span><span class="n">vtkdataset</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
             <span class="n">mesh</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
-            <span class="n">mesh</span><span class="o">.</span><span class="n">active_scalar_name</span> <span class="o">=</span> <span class="s1">&#39;values&#39;</span>
+            <span class="n">mesh</span><span class="o">.</span><span class="n">active_scalars_name</span> <span class="o">=</span> <span class="s1">&#39;values&#39;</span>
             <span class="k">return</span> <span class="n">mesh</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">vtkdataset</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">vtkdataset</span><span class="p">)</span>
@@ -640,21 +667,22 @@
 
 
 <span class="k">def</span> <span class="nf">image_to_texture</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts ``vtkImageData`` (:class:`pyvista.UniformGrid`) to a ``vtkTexture``</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Convert ``vtkImageData`` (:class:`pyvista.UniformGrid`) to a ``vtkTexture``.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Texture</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">numpy_to_texture</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert a NumPy image array to a vtk.vtkTexture&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Convert a NumPy image array to a vtk.vtkTexture.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Unknown input type (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">image</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Texture</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">is_inside_bounds</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">bounds</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Checks if a point is inside a set of bounds. This is implemented</span>
-<span class="sd">    through recursion so that this is N-dimensional.</span>
+    <span class="sd">&quot;&quot;&quot;Check if a point is inside a set of bounds.</span>
+
+<span class="sd">    This is implemented through recursion so that this is N-dimensional.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="n">point</span> <span class="o">=</span> <span class="p">[</span><span class="n">point</span><span class="p">]</span>
@@ -676,8 +704,7 @@
 
 
 <span class="k">def</span> <span class="nf">fit_plane_to_points</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">return_meta</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fits a plane to a set of points</span>
+    <span class="sd">&quot;&quot;&quot;Fit a plane to a set of points.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -686,6 +713,7 @@
 
 <span class="sd">    return_meta : bool</span>
 <span class="sd">        If true, also returns the center and normal used to generate the plane</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
     <span class="n">center</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -698,11 +726,12 @@
 
 
 <span class="k">def</span> <span class="nf">raise_not_matching</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Raise exception about inconsistencies.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Number of scalars (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span>
                         <span class="s1">&#39;must match number of rows &#39;</span> <span class="o">+</span>
                         <span class="s1">&#39;(</span><span class="si">{}</span><span class="s1">).&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_rows</span><span class="p">)</span> <span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Number of scalars (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Number of scalars (</span><span class="si">{}</span><span class="s1">) &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span>
                     <span class="s1">&#39;must match either the number of points &#39;</span> <span class="o">+</span>
                     <span class="s1">&#39;(</span><span class="si">{}</span><span class="s1">) &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_points</span><span class="p">)</span> <span class="o">+</span>
                     <span class="s1">&#39;or the number of cells &#39;</span> <span class="o">+</span>
@@ -710,7 +739,7 @@
 
 
 <span class="k">def</span> <span class="nf">generate_plane</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">origin</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Returns a vtk.vtkPlane &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Return a vtk.vtkPlane.&quot;&quot;&quot;</span>
     <span class="n">plane</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPlane</span><span class="p">()</span>
     <span class="c1"># NORMAL MUST HAVE MAGNITUDE OF 1</span>
     <span class="n">normal</span> <span class="o">=</span> <span class="n">normal</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
@@ -720,10 +749,14 @@
 
 
 <span class="k">def</span> <span class="nf">generate_report</span><span class="p">(</span><span class="n">additional</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">text_width</span><span class="o">=</span><span class="mi">54</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;DEPRECATED: Please use :class:`pyvista.Report` instead.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Generate a report.</span>
+
+<span class="sd">    DEPRECATED: Please use :class:`pyvista.Report` instead.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;DEPRECATED: Please use `pyvista.Report` instead.&#39;</span><span class="p">)</span>
     <span class="n">core</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pyvista&#39;</span><span class="p">,</span> <span class="s1">&#39;vtk&#39;</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">,</span> <span class="s1">&#39;imageio&#39;</span><span class="p">,</span> <span class="s1">&#39;appdirs&#39;</span><span class="p">,</span> <span class="s1">&#39;scooby&#39;</span><span class="p">]</span>
-    <span class="n">optional</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;PyQt5&#39;</span><span class="p">,</span> <span class="s1">&#39;IPython&#39;</span><span class="p">,</span> <span class="s1">&#39;ipywidgets&#39;</span><span class="p">,</span> <span class="s1">&#39;colorcet&#39;</span><span class="p">,</span>
+    <span class="n">optional</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;PyQt5&#39;</span><span class="p">,</span> <span class="s1">&#39;IPython&#39;</span><span class="p">,</span> <span class="s1">&#39;colorcet&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;cmocean&#39;</span><span class="p">]</span>
     <span class="n">report</span> <span class="o">=</span> <span class="n">scooby</span><span class="o">.</span><span class="n">Report</span><span class="p">(</span><span class="n">core</span><span class="o">=</span><span class="n">core</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="n">optional</span><span class="p">,</span>
                            <span class="n">additional</span><span class="o">=</span><span class="n">additional</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="n">ncol</span><span class="p">,</span>
@@ -732,12 +765,42 @@
 
 
 <span class="k">def</span> <span class="nf">try_callback</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-
+    <span class="sd">&quot;&quot;&quot;Wrap a given callback in a try statement.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Encountered issue in callback: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
     <span class="k">return</span>
+
+
+<span class="k">def</span> <span class="nf">check_depth_peeling</span><span class="p">(</span><span class="n">number_of_peels</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">occlusion_ratio</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check if depth peeling is available.</span>
+
+<span class="sd">    Attempts to use depth peeling to see if it is available for the current</span>
+<span class="sd">    environment. Returns ``True`` if depth peeling is available and has been</span>
+<span class="sd">    successfully leveraged, otherwise ``False``.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Try Depth Peeling with a basic scene</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkSphereSource</span><span class="p">()</span>
+    <span class="n">mapper</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyDataMapper</span><span class="p">()</span>
+    <span class="n">mapper</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    <span class="n">actor</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkActor</span><span class="p">()</span>
+    <span class="n">actor</span><span class="o">.</span><span class="n">SetMapper</span><span class="p">(</span><span class="n">mapper</span><span class="p">)</span>
+    <span class="c1"># requires opacity &lt; 1</span>
+    <span class="n">actor</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span><span class="o">.</span><span class="n">SetOpacity</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">renderer</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkRenderer</span><span class="p">()</span>
+    <span class="n">renderWindow</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkRenderWindow</span><span class="p">()</span>
+    <span class="n">renderWindow</span><span class="o">.</span><span class="n">AddRenderer</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+    <span class="n">renderWindow</span><span class="o">.</span><span class="n">SetOffScreenRendering</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">renderWindow</span><span class="o">.</span><span class="n">SetAlphaBitPlanes</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">renderWindow</span><span class="o">.</span><span class="n">SetMultiSamples</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">renderer</span><span class="o">.</span><span class="n">AddActor</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
+    <span class="n">renderer</span><span class="o">.</span><span class="n">SetUseDepthPeeling</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">renderer</span><span class="o">.</span><span class="n">SetMaximumNumberOfPeels</span><span class="p">(</span><span class="n">number_of_peels</span><span class="p">)</span>
+    <span class="n">renderer</span><span class="o">.</span><span class="n">SetOcclusionRatio</span><span class="p">(</span><span class="n">occlusion_ratio</span><span class="p">)</span>
+    <span class="n">renderWindow</span><span class="o">.</span><span class="n">Render</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">renderer</span><span class="o">.</span><span class="n">GetLastRenderingUsedDepthPeeling</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
 
            </div>
