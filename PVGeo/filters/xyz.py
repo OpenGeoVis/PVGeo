@@ -925,7 +925,7 @@ class BuildSurfaceFromPoints(FilterBase):
 
     def __init__(self, **kwargs):
         FilterBase.__init__(self, inputType='vtkPolyData',
-                            outputType='vtkUnstructuredGrid', **kwargs)
+                            outputType='vtkStructuredGrid', **kwargs)
         self.__zcoords = CreateTensorMesh._read_cell_line('0. 50.')
         zcoords = kwargs.get('zcoords', self.__zcoords)
         if not isinstance(zcoords, (str, list, tuple, np.ndarray)):
@@ -982,25 +982,10 @@ class BuildSurfaceFromPoints(FilterBase):
         tp = zloc[:,None] - tp
         points[:,-1] = tp.ravel()
 
-        # Create cell indices for that surface
-        indexes = np.array(range(0, (nt*ns)))
-        indexes = np.reshape(indexes, (nt, ns))
-
-        # Define the cell connectivity on the surface
-        cellConn = np.zeros((nt-1, ns-1, 4), dtype=np.int)
-        cellConn[:,:,0] = indexes[:-1, :-1]
-        cellConn[:,:,1] = indexes[1:, :-1]
-        cellConn[:,:,2] = indexes[1:, 1:]
-        cellConn[:,:,3] = indexes[:-1, 1:]
-        cellConn = cellConn.reshape((ns-1)*(nt-1), 4)
-        cells = vtk.vtkCellArray()
-        cells.SetNumberOfCells(cellConn.shape[0])
-        cells.SetCells(cellConn.shape[0], interface.convert_cell_conn(cellConn))
-
         # Produce the output
-        output = pyvista.UnstructuredGrid()
+        output = pyvista.StructuredGrid()
         output.points = points
-        output.SetCells(vtk.VTK_QUAD, cells)
+        output.dimensions = [ns, nt, 1]
         return output
 
 

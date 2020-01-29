@@ -2,6 +2,7 @@ import os
 
 import numpy as np
 import pandas as pd
+import pyvista
 # VTK imports:
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
@@ -11,12 +12,12 @@ from base import TestBase
 from PVGeo import interface
 # Functionality to test:
 from PVGeo.filters import (AddCellConnToPoints, ArrayMath, ArraysToRGBA,
-                           CombineTables, ExtractPoints, LonLatToUTM,
-                           ManySlicesAlongAxis, ManySlicesAlongPoints,
-                           NormalizeArray, PercentThreshold, PointsToTube,
-                           ReshapeTable, RotatePoints, RotationTool,
-                           SliceThroughTime, SlideSliceAlongPoints,
-                           VoxelizePoints)
+                           BuildSurfaceFromPoints, CombineTables,
+                           ExtractPoints, LonLatToUTM, ManySlicesAlongAxis,
+                           ManySlicesAlongPoints, NormalizeArray,
+                           PercentThreshold, PointsToTube, ReshapeTable,
+                           RotatePoints, RotationTool, SliceThroughTime,
+                           SlideSliceAlongPoints, VoxelizePoints)
 
 RTOL = 0.000001
 
@@ -881,6 +882,31 @@ class TestArraysToRGBA(TestBase):
         # Make sure there is a new 'Colors' Array
         arr = colored.GetPointData().GetArray('Colors')
         self.assertTrue(isinstance(arr, vtk.vtkUnsignedCharArray))
+        return True
+
+
+
+###############################################################################
+
+
+class TestBuildSurfaceFromPoints(TestBase):
+    """
+    Test the `BuildSurfaceFromPoints` filter
+    """
+
+    def test(self):
+        """`BuildSurfaceFromPoints`: make sure no errors arise"""
+        x = np.arange(100)
+        y = 0.01*x**2
+        points = np.c_[x,y,np.zeros_like(x)]
+        z_range = np.arange(20)
+        mesh = BuildSurfaceFromPoints.create_surface(points, z_range)
+        assert isinstance(mesh, pyvista.StructuredGrid)
+        assert mesh.dimensions == [len(z_range), len(points), 1]
+        poly = pyvista.PolyData(points)
+        mesh = BuildSurfaceFromPoints(zcoords=z_range).apply(poly)
+        assert isinstance(mesh, pyvista.StructuredGrid)
+        assert mesh.dimensions == [len(z_range), len(points), 1]
         return True
 
 
