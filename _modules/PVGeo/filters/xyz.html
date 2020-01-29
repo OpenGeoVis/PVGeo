@@ -28,8 +28,9 @@
         <script type="text/javascript" src="../../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../../_static/doctools.js"></script>
         <script type="text/javascript" src="../../../_static/language_data.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../../_static/clipboard.min.js"></script>
         <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+        <script type="text/javascript">var copybuttonSkipText = '>>> ';</script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -1139,7 +1140,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span>
-                            <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                            <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkStructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__zcoords</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_read_cell_line</span><span class="p">(</span><span class="s1">&#39;0. 50.&#39;</span><span class="p">)</span>
         <span class="n">zcoords</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;zcoords&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__zcoords</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">zcoords</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
@@ -1196,25 +1197,10 @@
         <span class="n">tp</span> <span class="o">=</span> <span class="n">zloc</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="n">tp</span>
         <span class="n">points</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 
-        <span class="c1"># Create cell indices for that surface</span>
-        <span class="n">indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">nt</span><span class="o">*</span><span class="n">ns</span><span class="p">)))</span>
-        <span class="n">indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">indexes</span><span class="p">,</span> <span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">ns</span><span class="p">))</span>
-
-        <span class="c1"># Define the cell connectivity on the surface</span>
-        <span class="n">cellConn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
-        <span class="n">cellConn</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">indexes</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">cellConn</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">cellConn</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span>
-        <span class="n">cellConn</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">indexes</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
-        <span class="n">cellConn</span> <span class="o">=</span> <span class="n">cellConn</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">ns</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
-        <span class="n">cells</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCellArray</span><span class="p">()</span>
-        <span class="n">cells</span><span class="o">.</span><span class="n">SetNumberOfCells</span><span class="p">(</span><span class="n">cellConn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">cells</span><span class="o">.</span><span class="n">SetCells</span><span class="p">(</span><span class="n">cellConn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_cell_conn</span><span class="p">(</span><span class="n">cellConn</span><span class="p">))</span>
-
         <span class="c1"># Produce the output</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UnstructuredGrid</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">StructuredGrid</span><span class="p">()</span>
         <span class="n">output</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points</span>
-        <span class="n">output</span><span class="o">.</span><span class="n">SetCells</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">VTK_QUAD</span><span class="p">,</span> <span class="n">cells</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">ns</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">output</span></div>
 
 

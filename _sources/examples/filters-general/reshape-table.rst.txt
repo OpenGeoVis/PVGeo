@@ -81,7 +81,7 @@ Use the filter to reshape the table
 
  .. code-block:: none
 
-    Table (0x7f4d8521aca8)
+    Table (0x7f0d6b604588)
       N Rows:       600
       N Arrays:     2
 
@@ -112,7 +112,7 @@ Check the output
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.003 seconds)
+   **Total running time of the script:** ( 0 minutes  0.004 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_reshape-table.py:

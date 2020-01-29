@@ -64,7 +64,7 @@ Construct the filter
 
  .. code-block:: none
 
-    Table (0x7f4d851d4228)
+    Table (0x7f0d6b6043a8)
       N Rows:       152709
       N Arrays:     1
 
@@ -99,7 +99,7 @@ Construct the filter
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.691 seconds)
+   **Total running time of the script:** ( 0 minutes  0.583 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-array.py:
