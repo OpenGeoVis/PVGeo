@@ -46,7 +46,7 @@ Use an example mesh from pyvista
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f3ecfe7c3a8)
+    RectilinearGrid (0x7f7d1408f708)
       N Cells:      16146
       N Points:     18144
       X Bounds:     -3.500e+02, 1.350e+03
@@ -77,7 +77,7 @@ Run the PVGeo algorithm
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f3ecfe7c4c8)
+    RectilinearGrid (0x7f7d1408f828)
       N Cells:      16146
       N Points:     18144
       X Bounds:     -3.500e+02, 1.350e+03
@@ -108,14 +108,16 @@ Run the PVGeo algorithm
  .. code-block:: none
 
 
-    [(3381.633746130961, 3356.633746130961, 2456.633746130961), (500.0, 475.0, -425.0), (0.0, 0.0, 1.0)]
+    [(3381.633746130961, 3356.633746130961, 2456.633746130961),
+     (500.0, 475.0, -425.0),
+     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.818 seconds)
+   **Total running time of the script:** ( 0 minutes  0.994 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_append-cell-centers.py:

@@ -62,14 +62,16 @@ Apply a filter to the DEM to have realistic topography
  .. code-block:: none
 
 
-    [(380396.17906938447, 3746898.1790693845, 10488.30242143526), (369910.5, 3736412.5, 2.62335205078125), (0.0, 0.0, 1.0)]
+    [(380396.17906938447, 3746898.1790693845, 10488.30242143526),
+     (369910.5, 3736412.5, 2.62335205078125),
+     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  19.075 seconds)
+   **Total running time of the script:** ( 0 minutes  16.546 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-esri.py:

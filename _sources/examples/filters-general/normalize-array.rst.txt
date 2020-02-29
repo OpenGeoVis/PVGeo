@@ -59,7 +59,9 @@ Create some input data. this can be any `vtkDataObject`
  .. code-block:: none
 
 
-    [(21.886664873203234, 21.886664873203234, 21.886664873203234), (4.5, 4.5, 4.5), (0.0, 0.0, 1.0)]
+    [(21.886664873203234, 21.886664873203234, 21.886664873203234),
+     (4.5, 4.5, 4.5),
+     (0.0, 0.0, 1.0)]
 
 
 
@@ -82,7 +84,7 @@ Create some input data. this can be any `vtkDataObject`
 
  .. code-block:: none
 
-    UniformGrid (0x7f3ecfe7c768)
+    UniformGrid (0x7f7d1408fac8)
       N Cells:      729
       N Points:     1000
       X Bounds:     0.000e+00, 9.000e+00
@@ -114,14 +116,16 @@ Create some input data. this can be any `vtkDataObject`
  .. code-block:: none
 
 
-    [(21.886664873203234, 21.886664873203234, 21.886664873203234), (4.5, 4.5, 4.5), (0.0, 0.0, 1.0)]
+    [(21.886664873203234, 21.886664873203234, 21.886664873203234),
+     (4.5, 4.5, 4.5),
+     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.645 seconds)
+   **Total running time of the script:** ( 0 minutes  2.025 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_normalize-array.py:

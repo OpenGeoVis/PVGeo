@@ -99,7 +99,7 @@ object (essentially a point cloud).
 
  .. code-block:: none
 
-    PolyData (0x7f3ecfe7ce88)
+    PolyData (0x7f7d1400a048)
       N Cells:      499200
       N Points:     499200
       X Bounds:     3.268e+05, 3.302e+05
@@ -140,7 +140,9 @@ calling the plot function. (Note: change the notebook parameter to
  .. code-block:: none
 
 
-    [(334141.1509516425, 4413705.151451643, 6293.877451642502), (328497.2735, 4408061.274, 650.0), (0.0, 0.0, 1.0)]
+    [(334141.1509516425, 4413705.151451643, 6293.877451642502),
+     (328497.2735, 4408061.274, 650.0),
+     (0.0, 0.0, 1.0)]
 
 
 
@@ -187,7 +189,7 @@ The full pipeline method
     Voxelizing... done.
     Recovered Angle (deg.): 53.550
     Recovered Cell Sizes: (25.00, 25.00, 25.00)
-    UnstructuredGrid (0x7f3ecfe7cdc8)
+    UnstructuredGrid (0x7f7d1400a3a8)
       N Cells:      499200
       N Points:     524064
       X Bounds:     3.268e+05, 3.302e+05
@@ -221,7 +223,9 @@ And now we can plot the voxelized volume
  .. code-block:: none
 
 
-    [(334197.63537062117, 4413761.117303883, 6352.837209322908), (328494.79816129827, 4408058.28009456, 650.0), (0.0, 0.0, 1.0)]
+    [(334197.63537062117, 4413761.117303883, 6352.837209322908),
+     (328494.79816129827, 4408058.28009456, 650.0),
+     (0.0, 0.0, 1.0)]
 
 
 
@@ -248,7 +252,7 @@ create 3 orthogonal slices through a data volume.
 
  .. code-block:: none
 
-    MultiBlock (0x7f3ecfe7c3a8)
+    MultiBlock (0x7f7d14128288)
       N Blocks:     3
       X Bounds:     326804.336, 330185.260
       Y Bounds:     4406253.954, 4409862.606
@@ -297,14 +301,16 @@ Now display the slices and clipped volume
  .. code-block:: none
 
 
-    [(334197.63537062117, 4413761.117303883, 6352.837209322908), (328494.79816129827, 4408058.28009456, 650.0), (0.0, 0.0, 1.0)]
+    [(334197.63537062117, 4413761.117303883, 6352.837209322908),
+     (328494.79816129827, 4408058.28009456, 650.0),
+     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  16.603 seconds)
+   **Total running time of the script:** ( 0 minutes  17.190 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:

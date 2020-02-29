@@ -46,7 +46,7 @@ Read GSLib point set file
 
  .. code-block:: none
 
-    PolyData (0x7f3ecfe7c6a8)
+    PolyData (0x7f7d1400abe8)
       N Cells:      100
       N Points:     100
       X Bounds:     3.000e+00, 2.520e+02
@@ -76,14 +76,16 @@ Read GSLib point set file
  .. code-block:: none
 
 
-    [(559.7774386143392, 581.7774386143392, 432.2774386143392), (127.5, 149.5, 0.0), (0.0, 0.0, 1.0)]
+    [(559.7774386143392, 581.7774386143392, 432.2774386143392),
+     (127.5, 149.5, 0.0),
+     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.580 seconds)
+   **Total running time of the script:** ( 0 minutes  0.807 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-point-set.py:

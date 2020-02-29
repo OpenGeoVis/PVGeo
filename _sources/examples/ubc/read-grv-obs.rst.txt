@@ -58,7 +58,7 @@ Download sample data files and keep track of names:
 
  .. code-block:: none
 
-    PolyData (0x7f3ecfe7cb88)
+    PolyData (0x7f7d1408fc48)
       N Cells:      191
       N Points:     191
       X Bounds:     3.565e+05, 3.702e+05
@@ -88,14 +88,16 @@ Download sample data files and keep track of names:
  .. code-block:: none
 
 
-    [(386109.91640657326, 6030150.316406573, 25236.442406573307), (363383.6, 6007424.0, 2510.126), (0.0, 0.0, 1.0)]
+    [(386109.91640657326, 6030150.316406573, 25236.442406573307),
+     (363383.6, 6007424.0, 2510.126),
+     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.638 seconds)
+   **Total running time of the script:** ( 0 minutes  0.904 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-grv-obs.py:

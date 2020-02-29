@@ -64,14 +64,16 @@ Apply a filter to the DEM to have realistic topography
  .. code-block:: none
 
 
-    [(2151970.3202296374, 2051970.3202296377, 1587996.9725733877), (552500.0, 452500.0, -11473.34765625), (0.0, 0.0, 1.0)]
+    [(2151970.3202296374, 2051970.3202296377, 1587996.9725733877),
+     (552500.0, 452500.0, -11473.34765625),
+     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.497 seconds)
+   **Total running time of the script:** ( 0 minutes  1.590 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-surfer.py:

@@ -98,7 +98,9 @@ below; this is good.
  .. code-block:: none
 
 
-    [(260.7157668726004, 274.0556106226004, 209.0556106226004), (61.66015624999999, 75.0, 10.0), (0.0, 0.0, 1.0)]
+    [(260.7157668726004, 274.0556106226004, 209.0556106226004),
+     (61.66015624999999, 75.0, 10.0),
+     (0.0, 0.0, 1.0)]
 
 
 
@@ -134,14 +136,16 @@ Now it looks good (see image below)!
  .. code-block:: none
 
 
-    [(260.7157668726004, 274.0556106226004, 209.0556106226004), (61.66015624999999, 75.0, 10.0), (0.0, 0.0, 1.0)]
+    [(260.7157668726004, 274.0556106226004, 209.0556106226004),
+     (61.66015624999999, 75.0, 10.0),
+     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.620 seconds)
+   **Total running time of the script:** ( 0 minutes  0.982 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_add-cell-connectivity-to-points.py:
