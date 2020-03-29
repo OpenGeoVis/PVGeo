@@ -30,7 +30,6 @@
         <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
-        <script >var copybuttonSkipText = '>>> ';</script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -40,9 +39,11 @@
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
  
@@ -219,6 +220,7 @@
 <span class="kn">import</span> <span class="nn">ctypes</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scooby</span>
@@ -421,9 +423,9 @@
 <span class="sd">        The name of the array to get the range.</span>
 
 <span class="sd">    preference : str, optional</span>
-<span class="sd">        When scalars is specified, this is the perfered array type to</span>
-<span class="sd">        search for in the dataset.  Must be either ``&#39;point&#39;``, ``&#39;cell&#39;``, or</span>
-<span class="sd">        ``&#39;field&#39;``</span>
+<span class="sd">        When scalars is specified, this is the preferred array type to</span>
+<span class="sd">        search for in the dataset.  Must be either ``&#39;point&#39;``,</span>
+<span class="sd">        ``&#39;cell&#39;``, or ``&#39;field&#39;``</span>
 
 <span class="sd">    info : bool</span>
 <span class="sd">        Return info about the array rather than the array itself.</span>
@@ -535,7 +537,7 @@
     <span class="k">return</span> <span class="n">poly</span>
 
 
-<span class="k">def</span> <span class="nf">lines_from_points</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">lines_from_points</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Make a connected line set given an array of points.</span>
 
 <span class="sd">    Parameters</span>
@@ -545,6 +547,9 @@
 <span class="sd">        example, two line segments would be represented as:</span>
 
 <span class="sd">        np.array([[0, 0, 0], [1, 0, 0], [1, 1, 0]])</span>
+
+<span class="sd">    close : bool, optional</span>
+<span class="sd">        If True, close the line segments into a loop</span>
 
 <span class="sd">    Return</span>
 <span class="sd">    ------</span>
@@ -557,6 +562,8 @@
     <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
     <span class="n">cells</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
     <span class="n">cells</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
+        <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">poly</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="n">cells</span>
     <span class="k">return</span> <span class="n">poly</span>
 
@@ -819,6 +826,31 @@
     <span class="n">renderer</span><span class="o">.</span><span class="n">SetOcclusionRatio</span><span class="p">(</span><span class="n">occlusion_ratio</span><span class="p">)</span>
     <span class="n">renderWindow</span><span class="o">.</span><span class="n">Render</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">renderer</span><span class="o">.</span><span class="n">GetLastRenderingUsedDepthPeeling</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">threaded</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Call a function using a thread.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">fn</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">thread</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+
+<span class="k">class</span> <span class="nc">conditional_decorator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Conditional decorator for methods.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">condition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decorator</span> <span class="o">=</span> <span class="n">dec</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="n">condition</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Call the decorated function if condition is matched.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">:</span>
+            <span class="c1"># Return the function unchanged, not decorated.</span>
+            <span class="k">return</span> <span class="n">func</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 </pre></div>
 
            </div>

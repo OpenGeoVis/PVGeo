@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_ubc_read-tensor-mesh.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_ubc_read-tensor-mesh.py:
+        Click :ref:`here <sphx_glr_download_examples_ubc_read-tensor-mesh.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_ubc_read-tensor-mesh.py:
 
 
 Read Tensor Mesh
@@ -65,7 +67,7 @@ Read the mesh and model
 
  .. code-block:: none
 
-    RectilinearGrid (0x7f7d1408fe28)
+    RectilinearGrid (0x7ff3e4ad7ee8)
       N Cells:      190440
       N Points:     200900
       X Bounds:     3.550e+05, 3.722e+05
@@ -163,7 +165,7 @@ Or threshold a data range
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.160 seconds)
+   **Total running time of the script:** ( 0 minutes  4.373 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-tensor-mesh.py:
@@ -176,13 +178,13 @@ Or threshold a data range
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: read-tensor-mesh.py <read-tensor-mesh.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: read-tensor-mesh.ipynb <read-tensor-mesh.ipynb>`
 

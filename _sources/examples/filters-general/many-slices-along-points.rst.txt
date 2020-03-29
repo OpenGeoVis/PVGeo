@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_filters-general_many-slices-along-points.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_filters-general_many-slices-along-points.py:
+        Click :ref:`here <sphx_glr_download_examples_filters-general_many-slices-along-points.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_filters-general_many-slices-along-points.py:
 
 
 Many Slices Along Points
@@ -136,7 +138,7 @@ slices to what you prefer!
 
  .. code-block:: none
 
-    MultiBlock (0x7f7d1408f768)
+    MultiBlock (0x7ff3e4ad7888)
       N Blocks:     6
       X Bounds:     0.000, 250.000
       Y Bounds:     0.000, 250.000
@@ -178,7 +180,7 @@ slices to what you prefer!
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.390 seconds)
+   **Total running time of the script:** ( 0 minutes  4.357 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_many-slices-along-points.py:
@@ -191,13 +193,13 @@ slices to what you prefer!
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: many-slices-along-points.py <many-slices-along-points.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: many-slices-along-points.ipynb <many-slices-along-points.ipynb>`
 

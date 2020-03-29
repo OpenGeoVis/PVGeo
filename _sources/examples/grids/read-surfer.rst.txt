@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_grids_read-surfer.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_grids_read-surfer.py:
+        Click :ref:`here <sphx_glr_download_examples_grids_read-surfer.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_grids_read-surfer.py:
 
 
 Read Surfer Grid File
@@ -73,7 +75,7 @@ Apply a filter to the DEM to have realistic topography
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.590 seconds)
+   **Total running time of the script:** ( 0 minutes  1.561 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-surfer.py:
@@ -86,13 +88,13 @@ Apply a filter to the DEM to have realistic topography
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: read-surfer.py <read-surfer.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: read-surfer.ipynb <read-surfer.ipynb>`
 

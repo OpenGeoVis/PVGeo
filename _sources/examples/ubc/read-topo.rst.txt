@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_ubc_read-topo.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_ubc_read-topo.py:
+        Click :ref:`here <sphx_glr_download_examples_ubc_read-topo.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_ubc_read-topo.py:
 
 
 Read UBC Topography File
@@ -58,7 +60,7 @@ Download sample data files and keep track of names:
 
  .. code-block:: none
 
-    PolyData (0x7f7d1fcdf528)
+    PolyData (0x7ff3e456f048)
       N Cells:      381924
       N Points:     381924
       X Bounds:     3.550e+05, 3.720e+05
@@ -97,7 +99,7 @@ Download sample data files and keep track of names:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.241 seconds)
+   **Total running time of the script:** ( 0 minutes  5.251 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-topo.py:
@@ -110,13 +112,13 @@ Download sample data files and keep track of names:
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: read-topo.py <read-topo.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: read-topo.ipynb <read-topo.ipynb>`
 

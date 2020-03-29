@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_filters-general_voxelize-points.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_filters-general_voxelize-points.py:
+        Click :ref:`here <sphx_glr_download_examples_filters-general_voxelize-points.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_filters-general_voxelize-points.py:
 
 
 Voxelize Points
@@ -99,7 +101,7 @@ object (essentially a point cloud).
 
  .. code-block:: none
 
-    PolyData (0x7f7d1400a048)
+    PolyData (0x7ff3e4ad7828)
       N Cells:      499200
       N Points:     499200
       X Bounds:     3.268e+05, 3.302e+05
@@ -189,7 +191,7 @@ The full pipeline method
     Voxelizing... done.
     Recovered Angle (deg.): 53.550
     Recovered Cell Sizes: (25.00, 25.00, 25.00)
-    UnstructuredGrid (0x7f7d1400a3a8)
+    UnstructuredGrid (0x7ff3e456f348)
       N Cells:      499200
       N Points:     524064
       X Bounds:     3.268e+05, 3.302e+05
@@ -252,7 +254,7 @@ create 3 orthogonal slices through a data volume.
 
  .. code-block:: none
 
-    MultiBlock (0x7f7d14128288)
+    MultiBlock (0x7ff3f2baed68)
       N Blocks:     3
       X Bounds:     326804.336, 330185.260
       Y Bounds:     4406253.954, 4409862.606
@@ -310,7 +312,7 @@ Now display the slices and clipped volume
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  17.190 seconds)
+   **Total running time of the script:** ( 0 minutes  14.570 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:
@@ -323,13 +325,13 @@ Now display the slices and clipped volume
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: voxelize-points.py <voxelize-points.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: voxelize-points.ipynb <voxelize-points.ipynb>`
 

@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_filters-general_normalize-array.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_filters-general_normalize-array.py:
+        Click :ref:`here <sphx_glr_download_examples_filters-general_normalize-array.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_filters-general_normalize-array.py:
 
 
 Normalize Array
@@ -84,7 +86,7 @@ Create some input data. this can be any `vtkDataObject`
 
  .. code-block:: none
 
-    UniformGrid (0x7f7d1408fac8)
+    UniformGrid (0x7ff3e4ad7a68)
       N Cells:      729
       N Points:     1000
       X Bounds:     0.000e+00, 9.000e+00
@@ -125,7 +127,7 @@ Create some input data. this can be any `vtkDataObject`
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.025 seconds)
+   **Total running time of the script:** ( 0 minutes  1.573 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_normalize-array.py:
@@ -138,13 +140,13 @@ Create some input data. this can be any `vtkDataObject`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: normalize-array.py <normalize-array.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: normalize-array.ipynb <normalize-array.ipynb>`
 

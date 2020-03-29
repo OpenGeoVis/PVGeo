@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_gslib_read-sgems-grid.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_gslib_read-sgems-grid.py:
+        Click :ref:`here <sphx_glr_download_examples_gslib_read-sgems-grid.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_gslib_read-sgems-grid.py:
 
 
 Read SGeMS Grid
@@ -46,7 +48,7 @@ Read SGeMS Grid file formats.
 
  .. code-block:: none
 
-    UniformGrid (0x7f7d1400a4c8)
+    UniformGrid (0x7ff3e456f0a8)
       N Cells:      78000
       N Points:     157122
       X Bounds:     0.000e+00, 2.600e+02
@@ -205,7 +207,7 @@ Read SGeMS Grid file formats.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  45.369 seconds)
+   **Total running time of the script:** ( 0 minutes  44.552 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-sgems-grid.py:
@@ -218,13 +220,13 @@ Read SGeMS Grid file formats.
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: read-sgems-grid.py <read-sgems-grid.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: read-sgems-grid.ipynb <read-sgems-grid.ipynb>`
 

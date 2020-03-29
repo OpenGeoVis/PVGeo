@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_gslib_read-point-set.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_gslib_read-point-set.py:
+        Click :ref:`here <sphx_glr_download_examples_gslib_read-point-set.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_gslib_read-point-set.py:
 
 
 Read GSLib Point Set
@@ -46,7 +48,7 @@ Read GSLib point set file
 
  .. code-block:: none
 
-    PolyData (0x7f7d1400abe8)
+    PolyData (0x7ff3e456f408)
       N Cells:      100
       N Points:     100
       X Bounds:     3.000e+00, 2.520e+02
@@ -85,7 +87,7 @@ Read GSLib point set file
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.807 seconds)
+   **Total running time of the script:** ( 0 minutes  0.622 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-point-set.py:
@@ -98,13 +100,13 @@ Read GSLib point set file
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: read-point-set.py <read-point-set.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: read-point-set.ipynb <read-point-set.ipynb>`
 

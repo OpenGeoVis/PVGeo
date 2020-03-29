@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_filters-general_extract-points.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_filters-general_extract-points.py:
+        Click :ref:`here <sphx_glr_download_examples_filters-general_extract-points.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_filters-general_extract-points.py:
 
 
 Extract Points
@@ -87,7 +89,7 @@ Apply the filter:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.162 seconds)
+   **Total running time of the script:** ( 0 minutes  0.689 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-points.py:
@@ -100,13 +102,13 @@ Apply the filter:
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: extract-points.py <extract-points.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: extract-points.ipynb <extract-points.ipynb>`
 

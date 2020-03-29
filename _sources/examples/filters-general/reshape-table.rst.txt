@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_filters-general_reshape-table.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_filters-general_reshape-table.py:
+        Click :ref:`here <sphx_glr_download_examples_filters-general_reshape-table.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_filters-general_reshape-table.py:
 
 
 Reshape Table
@@ -81,7 +83,7 @@ Use the filter to reshape the table
 
  .. code-block:: none
 
-    Table (0x7f7d1408f9a8)
+    Table (0x7ff3e4ad7ac8)
       N Rows:       600
       N Arrays:     2
 
@@ -125,13 +127,13 @@ Check the output
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: reshape-table.py <reshape-table.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: reshape-table.ipynb <reshape-table.ipynb>`
 

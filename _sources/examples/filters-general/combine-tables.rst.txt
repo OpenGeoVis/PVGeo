@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_filters-general_combine-tables.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_filters-general_combine-tables.py:
+        Click :ref:`here <sphx_glr_download_examples_filters-general_combine-tables.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_filters-general_combine-tables.py:
 
 
 Combine Tables
@@ -73,7 +75,7 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7f7d1408fc48)
+    Table (0x7ff3e4ad7be8)
       N Rows:       100
       N Arrays:     2
 
@@ -96,7 +98,7 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7f7d1408f9a8)
+    Table (0x7ff3e4ad7828)
       N Rows:       100
       N Arrays:     1
 
@@ -122,7 +124,7 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7f7d1408f948)
+    Table (0x7ff3e4ad78e8)
       N Rows:       100
       N Arrays:     3
 
@@ -161,13 +163,13 @@ Create some input tables
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: combine-tables.py <combine-tables.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: combine-tables.ipynb <combine-tables.ipynb>`
 
