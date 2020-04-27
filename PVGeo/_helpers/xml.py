@@ -227,15 +227,7 @@ def _help_arrays_xml(idx, input_name=None, label=None):
               function="Input" />
           </RequiredProperties>
         </ArrayListDomain>
-        <FieldDataDomain
-          name="field_list">
-          <RequiredProperties>
-            <Property
-              name="%s"
-              function="Input" />
-          </RequiredProperties>
-        </FieldDataDomain>
-      </StringVectorProperty>''' % (idx, label, idx, input_name, input_name)
+      </StringVectorProperty>''' % (idx, label, idx, input_name)
 
 
 
