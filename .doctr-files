@@ -273,6 +273,8 @@
 ./_static/fonts/fontawesome-webfont.ttf
 ./_static/fonts/fontawesome-webfont.woff
 ./_static/fonts/fontawesome-webfont.woff2
+./_static/gallery-binder.css
+./_static/gallery-dataframe.css
 ./_static/gallery.css
 ./_static/jquery-3.4.1.js
 ./_static/jquery.js

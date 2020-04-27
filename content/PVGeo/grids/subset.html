@@ -243,9 +243,9 @@
 <span id="subsetting"></span><h1>Subsetting<a class="headerlink" href="#module-PVGeo.grids.subset" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="extract-topography">
 <h2>Extract Topography<a class="headerlink" href="#extract-topography" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.grids.subset.ExtractTopography">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.grids.subset.</code><code class="sig-name descname">ExtractTopography</code><span class="sig-paren">(</span><em class="sig-param">op='underneath'</em>, <em class="sig-param">tolerance=0.001</em>, <em class="sig-param">offset=0.0</em>, <em class="sig-param">invert=False</em>, <em class="sig-param">remove=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.grids.subset.</code><code class="sig-name descname">ExtractTopography</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op</span><span class="o">=</span><span class="default_value">'underneath'</span></em>, <em class="sig-param"><span class="n">tolerance</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">invert</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">remove</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>This filter takes two inputs: any mesh dataset and a set of points for
 a topography source. This will add a boolean data array to the cell data of
@@ -279,52 +279,52 @@ variance but need to think about how we would like to do that. Should
 the topography surface be static and the volumetric data have time
 variance?</p>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.FillInputPortInformation">
-<code class="sig-name descname">FillInputPortInformation</code><span class="sig-paren">(</span><em class="sig-param">port</em>, <em class="sig-param">info</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.FillInputPortInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.FillInputPortInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">FillInputPortInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">port</span></em>, <em class="sig-param"><span class="n">info</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.FillInputPortInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.FillInputPortInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>This simply makes sure the user selects the correct inputs</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.RequestDataObject">
-<code class="sig-name descname">RequestDataObject</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.RequestDataObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.RequestDataObject" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestDataObject</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.RequestDataObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.RequestDataObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs the output data object based on the input data object</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography._intersection">
-<em class="property">static </em><code class="sig-name descname">_intersection</code><span class="sig-paren">(</span><em class="sig-param">topo_points</em>, <em class="sig-param">data_points</em>, <em class="sig-param">tolerance</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography._intersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography._intersection" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_intersection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">topo_points</span></em>, <em class="sig-param"><span class="n">data_points</span></em>, <em class="sig-param"><span class="n">tolerance</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography._intersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography._intersection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract cells intersecting the topography surface</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography._query">
-<em class="property">static </em><code class="sig-name descname">_query</code><span class="sig-paren">(</span><em class="sig-param">topo_points</em>, <em class="sig-param">data_points</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography._query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography._query" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_query</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">topo_points</span></em>, <em class="sig-param"><span class="n">data_points</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography._query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography._query" title="Permalink to this definition">¶</a></dt>
 <dd><p>Querrys the data points for their closest point on the topography
 surface</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography._underneath">
-<em class="property">static </em><code class="sig-name descname">_underneath</code><span class="sig-paren">(</span><em class="sig-param">topo_points</em>, <em class="sig-param">data_points</em>, <em class="sig-param">tolerance</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography._underneath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography._underneath" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_underneath</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">topo_points</span></em>, <em class="sig-param"><span class="n">data_points</span></em>, <em class="sig-param"><span class="n">tolerance</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography._underneath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography._underneath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract cells underneath the topography surface</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">points</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">points</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the algorithm on the input data using the topography points</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.get_operation">
-<em class="property">static </em><code class="sig-name descname">get_operation</code><span class="sig-paren">(</span><em class="sig-param">idx</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.get_operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.get_operation" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">get_operation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.get_operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.get_operation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a extraction operation based on an index in the keys</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -336,7 +336,7 @@ surface</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.get_operation_names">
 <em class="property">static </em><code class="sig-name descname">get_operation_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.get_operation_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.get_operation_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a list of the extraction operation keys</p>
@@ -350,34 +350,34 @@ surface</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.get_operations">
 <em class="property">static </em><code class="sig-name descname">get_operations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.get_operations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.get_operations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the extraction operation methods as callable objects in a
 dictionary</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.get_tolerance">
 <code class="sig-name descname">get_tolerance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.get_tolerance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.get_tolerance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the tolerance threshold for the querry</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.set_invert">
-<code class="sig-name descname">set_invert</code><span class="sig-paren">(</span><em class="sig-param">flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.set_invert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.set_invert" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_invert</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.set_invert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.set_invert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the boolean flag on whether to invert the extraction.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.set_offset">
-<code class="sig-name descname">set_offset</code><span class="sig-paren">(</span><em class="sig-param">offset</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.set_offset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.set_offset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_offset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.set_offset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.set_offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets how far off (in Z dir) to slice the data</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.set_operation">
-<code class="sig-name descname">set_operation</code><span class="sig-paren">(</span><em class="sig-param">op</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.set_operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.set_operation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_operation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.set_operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.set_operation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the type of extraction to perform.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -393,9 +393,9 @@ strictly produces an integer array of zeros and ones.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.grids.subset.ExtractTopography.set_tolerance">
-<code class="sig-name descname">set_tolerance</code><span class="sig-paren">(</span><em class="sig-param">tol</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.set_tolerance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.set_tolerance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_tolerance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tol</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography.set_tolerance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography.set_tolerance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the tolerance threshold for the querry</p>
 </dd></dl>
 

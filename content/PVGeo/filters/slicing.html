@@ -248,9 +248,9 @@
 <span id="slicing"></span><h1>Slicing<a class="headerlink" href="#module-PVGeo.filters.slicing" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="many-slices-along-axis">
 <h2>Many Slices Along Axis<a class="headerlink" href="#many-slices-along-axis" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.slicing.</code><code class="sig-name descname">ManySlicesAlongAxis</code><span class="sig-paren">(</span><em class="sig-param">n_slices=5</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">rng=None</em>, <em class="sig-param">pad=0.01</em>, <em class="sig-param">outputType='vtkMultiBlockDataSet'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.slicing.</code><code class="sig-name descname">ManySlicesAlongAxis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_slices</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">rng</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pad</span><span class="o">=</span><span class="default_value">0.01</span></em>, <em class="sig-param"><span class="n">outputType</span><span class="o">=</span><span class="default_value">'vtkMultiBlockDataSet'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.slicing._SliceBase</span></code></p>
 <p>Slices a <code class="docutils literal notranslate"><span class="pre">vtkDataSet</span></code> along a given axis many times.
 This produces a specified number of slices at once each with a normal vector
@@ -261,39 +261,39 @@ the dataset on the chosen axis.</p>
 <dd class="field-odd"><p><strong>pad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Padding as a percentage (0.0, 1.0)</p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis._get_origin">
-<code class="sig-name descname">_get_origin</code><span class="sig-paren">(</span><em class="sig-param">pdi</em>, <em class="sig-param">idx</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis._get_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis._get_origin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_get_origin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdi</span></em>, <em class="sig-param"><span class="n">idx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis._get_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis._get_origin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to get plane origin</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis._set_axial_range">
-<code class="sig-name descname">_set_axial_range</code><span class="sig-paren">(</span><em class="sig-param">pdi</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis._set_axial_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis._set_axial_range" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_set_axial_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdi</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis._set_axial_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis._set_axial_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to set the slicing range along the set axis</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis.get_axis">
 <code class="sig-name descname">get_axis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.get_axis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.get_axis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the set axis to slice upon as int index (0,1,2)</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_bounds">
-<code class="sig-name descname">get_input_bounds</code><span class="sig-paren">(</span><em class="sig-param">pdi</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.get_input_bounds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_bounds" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_input_bounds</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdi</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.get_input_bounds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_bounds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the bounds of the input data set on the set slicing axis.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_center">
-<em class="property">static </em><code class="sig-name descname">get_input_center</code><span class="sig-paren">(</span><em class="sig-param">pdi</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.get_input_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_center" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">get_input_center</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdi</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.get_input_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_center" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the center of the input data set</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -305,21 +305,21 @@ the dataset on the chosen axis.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis.get_normal">
 <code class="sig-name descname">get_normal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.get_normal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.get_normal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the normal of the slicing plane</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis.get_range">
 <code class="sig-name descname">get_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.get_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.get_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the slicing range for the set axis</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis.set_axis">
-<code class="sig-name descname">set_axis</code><span class="sig-paren">(</span><em class="sig-param">axis</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.set_axis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.set_axis" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_axis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">axis</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.set_axis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.set_axis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the axis on which to slice</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -328,9 +328,9 @@ the dataset on the chosen axis.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongAxis.set_padding">
-<code class="sig-name descname">set_padding</code><span class="sig-paren">(</span><em class="sig-param">pad</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.set_padding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.set_padding" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_padding</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pad</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongAxis.set_padding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongAxis.set_padding" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the percent padding for the slices on the edges</p>
 </dd></dl>
 
@@ -339,9 +339,9 @@ the dataset on the chosen axis.</p>
 </div>
 <div class="section" id="many-slices-along-points">
 <h2>Many Slices Along Points<a class="headerlink" href="#many-slices-along-points" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongPoints">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.slicing.</code><code class="sig-name descname">ManySlicesAlongPoints</code><span class="sig-paren">(</span><em class="sig-param">n_slices=5</em>, <em class="sig-param">nearest_nbr=True</em>, <em class="sig-param">outputType='vtkMultiBlockDataSet'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.slicing.</code><code class="sig-name descname">ManySlicesAlongPoints</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_slices</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">nearest_nbr</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">outputType</span><span class="o">=</span><span class="default_value">'vtkMultiBlockDataSet'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.slicing._SliceBase</span></code></p>
 <p>Takes a series of points and a data source to be sliced. The points are
 used to construct a path through the data source and a slice is added at
@@ -355,39 +355,39 @@ constructs many slices through the input dataset as a merged
 <li><p>The SciPy module is required for this filter.</p></li>
 </ul>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongPoints.FillInputPortInformation">
-<code class="sig-name descname">FillInputPortInformation</code><span class="sig-paren">(</span><em class="sig-param">port</em>, <em class="sig-param">info</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints.FillInputPortInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints.FillInputPortInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">FillInputPortInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">port</span></em>, <em class="sig-param"><span class="n">info</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints.FillInputPortInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints.FillInputPortInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>This simply makes sure the user selects the correct inputs</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongPoints.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongPoints._get_planes">
-<code class="sig-name descname">_get_planes</code><span class="sig-paren">(</span><em class="sig-param">pts</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints._get_planes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints._get_planes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_get_planes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pts</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints._get_planes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints._get_planes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to generate planes for the slices</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongPoints._get_slice">
-<code class="sig-name descname">_get_slice</code><span class="sig-paren">(</span><em class="sig-param">pts</em>, <em class="sig-param">data</em>, <em class="sig-param">planes</em>, <em class="sig-param">output</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints._get_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints._get_slice" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_get_slice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pts</span></em>, <em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">planes</span></em>, <em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints._get_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints._get_slice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to perfrom the filter</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongPoints.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">points</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the algorithm along some points for the given input data</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.ManySlicesAlongPoints.set_use_nearest_nbr">
-<code class="sig-name descname">set_use_nearest_nbr</code><span class="sig-paren">(</span><em class="sig-param">flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints.set_use_nearest_nbr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints.set_use_nearest_nbr" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_use_nearest_nbr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#ManySlicesAlongPoints.set_use_nearest_nbr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.ManySlicesAlongPoints.set_use_nearest_nbr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set a flag on whether to use SciPy’s nearest neighbor approximation
 when generating the slicing path</p>
 </dd></dl>
@@ -397,47 +397,47 @@ when generating the slicing path</p>
 </div>
 <div class="section" id="slice-through-time">
 <h2>Slice Through Time<a class="headerlink" href="#slice-through-time" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.filters.slicing.SliceThroughTime">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.slicing.</code><code class="sig-name descname">SliceThroughTime</code><span class="sig-paren">(</span><em class="sig-param">n_slices=5</em>, <em class="sig-param">dt=1.0</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">rng=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.slicing.</code><code class="sig-name descname">SliceThroughTime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_slices</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">dt</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">rng</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#PVGeo.filters.slicing.ManySlicesAlongAxis" title="PVGeo.filters.slicing.ManySlicesAlongAxis"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.slicing.ManySlicesAlongAxis</span></code></a></p>
 <p>Takes a sliceable <code class="docutils literal notranslate"><span class="pre">vtkDataSet</span></code> and progresses a slice of it along a
 given axis. The macro requires that the clip already exist in the pipeline.
 This is especially useful if you have many clips linked together as all will
 move through the seen as a result of this macro.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SliceThroughTime.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SliceThroughTime.RequestInformation">
-<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to set the time information</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SliceThroughTime._update_time_steps">
 <code class="sig-name descname">_update_time_steps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime._update_time_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime._update_time_steps" title="Permalink to this definition">¶</a></dt>
 <dd><p>For internal use only</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SliceThroughTime.get_time_step_values">
 <code class="sig-name descname">get_time_step_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime.get_time_step_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime.get_time_step_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this in ParaView decorator to register timesteps</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SliceThroughTime.set_number_of_slices">
-<code class="sig-name descname">set_number_of_slices</code><span class="sig-paren">(</span><em class="sig-param">num</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime.set_number_of_slices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime.set_number_of_slices" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_number_of_slices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime.set_number_of_slices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime.set_number_of_slices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the number of slices/timesteps to generate</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SliceThroughTime.set_time_delta">
-<code class="sig-name descname">set_time_delta</code><span class="sig-paren">(</span><em class="sig-param">dt</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime.set_time_delta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime.set_time_delta" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_time_delta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SliceThroughTime.set_time_delta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SliceThroughTime.set_time_delta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the time step interval in seconds</p>
 </dd></dl>
 
@@ -446,9 +446,9 @@ move through the seen as a result of this macro.</p>
 </div>
 <div class="section" id="slide-slice-along-points">
 <h2>Slide Slice Along Points<a class="headerlink" href="#slide-slice-along-points" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.filters.slicing.SlideSliceAlongPoints">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.slicing.</code><code class="sig-name descname">SlideSliceAlongPoints</code><span class="sig-paren">(</span><em class="sig-param">n_slices=5</em>, <em class="sig-param">nearest_nbr=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.slicing.</code><code class="sig-name descname">SlideSliceAlongPoints</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_slices</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">nearest_nbr</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#PVGeo.filters.slicing.ManySlicesAlongPoints" title="PVGeo.filters.slicing.ManySlicesAlongPoints"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.slicing.ManySlicesAlongPoints</span></code></a></p>
 <p>Takes a series of points and a data source to be sliced. The points are
 used to construct a path through the data source and a slice is added at
@@ -462,33 +462,33 @@ can translate via a slider bar in ParaView.</p>
 <li><p>The SciPy module is required for this filter.</p></li>
 </ul>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SlideSliceAlongPoints.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SlideSliceAlongPoints.RequestInformation">
-<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to prepare output</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SlideSliceAlongPoints._get_slice">
-<code class="sig-name descname">_get_slice</code><span class="sig-paren">(</span><em class="sig-param">pts</em>, <em class="sig-param">data</em>, <em class="sig-param">planes</em>, <em class="sig-param">output</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints._get_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints._get_slice" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_get_slice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pts</span></em>, <em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">planes</span></em>, <em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints._get_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints._get_slice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to perfrom the filter</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SlideSliceAlongPoints.get_location">
 <code class="sig-name descname">get_location</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints.get_location"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints.get_location" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the current location along the input line for the slice</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.slicing.SlideSliceAlongPoints.set_location">
-<code class="sig-name descname">set_location</code><span class="sig-paren">(</span><em class="sig-param">loc</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints.set_location"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints.set_location" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_location</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loc</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/slicing.html#SlideSliceAlongPoints.set_location"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.slicing.SlideSliceAlongPoints.set_location" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the location along the input line for the slice location as a
 percent (0, 99).</p>
 </dd></dl>

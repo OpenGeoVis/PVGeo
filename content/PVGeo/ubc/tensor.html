@@ -248,19 +248,19 @@
 <span id="tensor-mesh"></span><h1>Tensor Mesh<a class="headerlink" href="#module-PVGeo.ubc.tensor" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="ubc-tensor-mesh-appender">
 <h2>UBC Tensor Mesh Appender<a class="headerlink" href="#ubc-tensor-mesh-appender" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.ubc.tensor.TensorMeshAppender">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.tensor.</code><code class="sig-name descname">TensorMeshAppender</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshAppender"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshAppender" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.tensor.</code><code class="sig-name descname">TensorMeshAppender</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshAppender"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshAppender" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase" title="PVGeo.ubc.two_file_base.ModelAppenderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.ubc.two_file_base.ModelAppenderBase</span></code></a></p>
 <p>This filter reads a timeseries of models and appends it to an input
 <code class="docutils literal notranslate"><span class="pre">vtkRectilinearGrid</span></code></p>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshAppender._place_on_mesh">
-<code class="sig-name descname">_place_on_mesh</code><span class="sig-paren">(</span><em class="sig-param">output</em>, <em class="sig-param">idx=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshAppender._place_on_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshAppender._place_on_mesh" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_place_on_mesh</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output</span></em>, <em class="sig-param"><span class="n">idx</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshAppender._place_on_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshAppender._place_on_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helepr to place a model on the mesh for a given index</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshAppender._read_up_front">
 <code class="sig-name descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshAppender._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshAppender._read_up_front" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helepr to read data at start</p>
@@ -271,9 +271,9 @@
 </div>
 <div class="section" id="ubc-tensor-mesh-reader">
 <h2>UBC Tensor Mesh Reader<a class="headerlink" href="#ubc-tensor-mesh-reader" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.tensor.</code><code class="sig-name descname">TensorMeshReader</code><span class="sig-paren">(</span><em class="sig-param">nOutputPorts=1</em>, <em class="sig-param">outputType='vtkRectilinearGrid'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.tensor.</code><code class="sig-name descname">TensorMeshReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nOutputPorts</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">outputType</span><span class="o">=</span><span class="default_value">'vtkRectilinearGrid'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase" title="PVGeo.ubc.two_file_base.ubcMeshReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.ubc.two_file_base.ubcMeshReaderBase</span></code></a></p>
 <p>UBC Mesh 2D/3D models are defined using a 2-file format. The “mesh” file
 describes how the data is discretized. The “model” file lists the physical
@@ -287,33 +287,33 @@ assumption. If the mesh file is 2D, then then model file must also be in the
 <p>Model File is optional. Reader will still construct
 <code class="docutils literal notranslate"><span class="pre">vtkRectilinearGrid</span></code> safely.</p>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles data request by the pipeline.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader.RequestInformation">
-<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles info request by pipeline about timesteps and grid extents.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader._TensorMeshReader__ubc_mesh_data_2d">
-<code class="sig-name descname">_TensorMeshReader__ubc_mesh_data_2d</code><span class="sig-paren">(</span><em class="sig-param">filename_mesh</em>, <em class="sig-param">filename_models</em>, <em class="sig-param">output</em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader._TensorMeshReader__ubc_mesh_data_2d" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_TensorMeshReader__ubc_mesh_data_2d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename_mesh</span></em>, <em class="sig-param"><span class="n">filename_models</span></em>, <em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader._TensorMeshReader__ubc_mesh_data_2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper method to read a 2D mesh</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader._TensorMeshReader__ubc_mesh_data_3d">
-<code class="sig-name descname">_TensorMeshReader__ubc_mesh_data_3d</code><span class="sig-paren">(</span><em class="sig-param">filename_mesh</em>, <em class="sig-param">filename_models</em>, <em class="sig-param">output</em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader._TensorMeshReader__ubc_mesh_data_3d" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_TensorMeshReader__ubc_mesh_data_3d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename_mesh</span></em>, <em class="sig-param"><span class="n">filename_models</span></em>, <em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader._TensorMeshReader__ubc_mesh_data_3d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper method to read a 3D mesh</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader._TensorMeshReader__ubc_tensor_mesh">
-<code class="sig-name descname">_TensorMeshReader__ubc_tensor_mesh</code><span class="sig-paren">(</span><em class="sig-param">filename_mesh</em>, <em class="sig-param">filename_models</em>, <em class="sig-param">output</em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader._TensorMeshReader__ubc_tensor_mesh" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_TensorMeshReader__ubc_tensor_mesh</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename_mesh</span></em>, <em class="sig-param"><span class="n">filename_models</span></em>, <em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader._TensorMeshReader__ubc_tensor_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper to Read UBC GIF 2D and 3D meshes. UBC Mesh 2D/3D models are
 defined using a 2-file format. The “mesh” file describes how the data is
 descritized. The “model” file lists the physical property values for all
@@ -341,26 +341,26 @@ Cell data is defined by the input model file.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader.clear_mesh">
 <code class="sig-name descname">clear_mesh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.clear_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.clear_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to clean/rebuild the mesh</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader.clear_models">
 <code class="sig-name descname">clear_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.clear_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.clear_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to clean the models and reread</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader.description">
 <code class="sig-name descname">description</code><em class="property"> = 'PVGeo: UBC Mesh 2D/3D Two-File Format'</em><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader.place_model_on_mesh">
-<em class="property">static </em><code class="sig-name descname">place_model_on_mesh</code><span class="sig-paren">(</span><em class="sig-param">mesh</em>, <em class="sig-param">model</em>, <em class="sig-param">data_name='Data'</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.place_model_on_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.place_model_on_mesh" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">place_model_on_mesh</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mesh</span></em>, <em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">data_name</span><span class="o">=</span><span class="default_value">'Data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.place_model_on_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.place_model_on_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Places model data onto a mesh. This is for the UBC Grid data reaers
 to associate model data with the mesh grid.</p>
 <dl class="field-list simple">
@@ -383,9 +383,9 @@ place inside of the mesh’s cells.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader.ubc_mesh_2d">
-<em class="property">static </em><code class="sig-name descname">ubc_mesh_2d</code><span class="sig-paren">(</span><em class="sig-param">FileName</em>, <em class="sig-param">output</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.ubc_mesh_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.ubc_mesh_2d" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">ubc_mesh_2d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">FileName</span></em>, <em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.ubc_mesh_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.ubc_mesh_2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method reads a UBC 2D Mesh file and builds an empty
 <code class="docutils literal notranslate"><span class="pre">vtkRectilinearGrid</span></code> for data to be inserted into. <a class="reference external" href="http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html">Format Specs</a>.</p>
 <dl class="field-list simple">
@@ -408,9 +408,9 @@ No data attributes here, simply an empty mesh. Use the
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader.ubc_mesh_3d">
-<em class="property">static </em><code class="sig-name descname">ubc_mesh_3d</code><span class="sig-paren">(</span><em class="sig-param">FileName</em>, <em class="sig-param">output</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.ubc_mesh_3d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.ubc_mesh_3d" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">ubc_mesh_3d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">FileName</span></em>, <em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.ubc_mesh_3d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.ubc_mesh_3d" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method reads a UBC 3D Mesh file and builds an empty
 <code class="docutils literal notranslate"><span class="pre">vtkRectilinearGrid</span></code> for data to be inserted into.</p>
 <dl class="field-list simple">
@@ -433,9 +433,9 @@ No data attributes here, simply an empty mesh. Use the
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TensorMeshReader.ubc_model_2d">
-<em class="property">static </em><code class="sig-name descname">ubc_model_2d</code><span class="sig-paren">(</span><em class="sig-param">FileName</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.ubc_model_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.ubc_model_2d" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">ubc_model_2d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">FileName</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TensorMeshReader.ubc_model_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TensorMeshReader.ubc_model_2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a 2D model file and returns a 1D NumPy float array. Use the
 <code class="docutils literal notranslate"><span class="pre">place_model_on_mesh()</span></code> method to associate with a grid.</p>
 <div class="admonition note">
@@ -466,51 +466,51 @@ basenames of the files.</p>
 </div>
 <div class="section" id="append-ubc-discrete-topography">
 <h2>Append UBC Discrete Topography<a class="headerlink" href="#append-ubc-discrete-topography" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.ubc.tensor.TopoMeshAppender">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.tensor.</code><code class="sig-name descname">TopoMeshAppender</code><span class="sig-paren">(</span><em class="sig-param">inputType='vtkRectilinearGrid'</em>, <em class="sig-param">outputType='vtkRectilinearGrid'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.tensor.</code><code class="sig-name descname">TopoMeshAppender</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputType</span><span class="o">=</span><span class="default_value">'vtkRectilinearGrid'</span></em>, <em class="sig-param"><span class="n">outputType</span><span class="o">=</span><span class="default_value">'vtkRectilinearGrid'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
 <p>This filter reads a single discrete topography file and appends it as a
 boolean data array.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TopoMeshAppender.Modified">
-<code class="sig-name descname">Modified</code><span class="sig-paren">(</span><em class="sig-param">read_again=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.Modified" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">Modified</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">read_again</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.Modified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call modified if the files needs to be read again again.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TopoMeshAppender.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TopoMeshAppender._place_on_mesh">
-<code class="sig-name descname">_place_on_mesh</code><span class="sig-paren">(</span><em class="sig-param">output</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender._place_on_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender._place_on_mesh" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_place_on_mesh</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender._place_on_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender._place_on_mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helepr to place an active cells model on the mesh</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TopoMeshAppender._read_up_front">
 <code class="sig-name descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender._read_up_front" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helepr to read data at start</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TopoMeshAppender.clear_topo_file">
 <code class="sig-name descname">clear_topo_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.clear_topo_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.clear_topo_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to clear data file name.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TopoMeshAppender.modified">
-<code class="sig-name descname">modified</code><span class="sig-paren">(</span><em class="sig-param">read_again=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.modified" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modified</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">read_again</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.modified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call modified if the files needs to be read again again.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TopoMeshAppender.need_to_read">
-<code class="sig-name descname">need_to_read</code><span class="sig-paren">(</span><em class="sig-param">flag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.need_to_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.need_to_read" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">need_to_read</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.need_to_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.need_to_read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ask self if the reader needs to read the files again</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -526,9 +526,9 @@ status</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.tensor.TopoMeshAppender.set_topo_filename">
-<code class="sig-name descname">set_topo_filename</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.set_topo_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.set_topo_filename" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_topo_filename</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/tensor.html#TopoMeshAppender.set_topo_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.tensor.TopoMeshAppender.set_topo_filename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to set the file names for the reader. Handles single strings only</p>
 </dd></dl>
 

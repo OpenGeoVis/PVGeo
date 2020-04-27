@@ -250,27 +250,27 @@
 <span id="general-tools"></span><h1>General Tools<a class="headerlink" href="#module-PVGeo.ubc.general" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="ubc-geology-mapper">
 <h2>UBC Geology Mapper<a class="headerlink" href="#ubc-geology-mapper" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.ubc.general.GeologyMapper">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.general.</code><code class="sig-name descname">GeologyMapper</code><span class="sig-paren">(</span><em class="sig-param">filename=None</em>, <em class="sig-param">delimiter='</em>, <em class="sig-param">'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.general.</code><code class="sig-name descname">GeologyMapper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">delimiter</span><span class="o">=</span><span class="default_value">','</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterPreserveTypeBase</span></code></a></p>
 <p>A filter to load a GIF geology definity file and map its values to a given
 data array in an input data object.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.GeologyMapper.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.GeologyMapper.SetFileName">
-<code class="sig-name descname">SetFileName</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.SetFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.SetFileName" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SetFileName</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.SetFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.SetFileName" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the file name to read</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.GeologyMapper.SetInputArrayToProcess">
-<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param">idx</em>, <em class="sig-param">port</em>, <em class="sig-param">connection</em>, <em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">port</span></em>, <em class="sig-param"><span class="n">connection</span></em>, <em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to set the input array(s)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -286,33 +286,33 @@ field, and 6 for row)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.GeologyMapper._map_values">
-<em class="property">static </em><code class="sig-name descname">_map_values</code><span class="sig-paren">(</span><em class="sig-param">geol</em>, <em class="sig-param">arr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper._map_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper._map_values" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_map_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">geol</span></em>, <em class="sig-param"><span class="n">arr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper._map_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper._map_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map the values defined by <code class="docutils literal notranslate"><span class="pre">geol</span></code> dataframe to the values in <code class="docutils literal notranslate"><span class="pre">arr</span></code>.
 The first column (name should be <code class="docutils literal notranslate"><span class="pre">Index</span></code>) will be used for the mapping.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.GeologyMapper._read_definitions">
-<em class="property">static </em><code class="sig-name descname">_read_definitions</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">delimiter</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper._read_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper._read_definitions" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_read_definitions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">delimiter</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper._read_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper._read_definitions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reades the geology definition file as a pandas DataFrame</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="PVGeo.ubc.general.GeologyMapper.description">
 <code class="sig-name descname">description</code><em class="property"> = 'PVGeo: UBC Geology Mapper'</em><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.GeologyMapper.set_delimiter">
-<code class="sig-name descname">set_delimiter</code><span class="sig-paren">(</span><em class="sig-param">deli</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.set_delimiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.set_delimiter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_delimiter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">deli</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.set_delimiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.set_delimiter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the delimiter of the ASCII file</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.GeologyMapper.set_file_name">
-<code class="sig-name descname">set_file_name</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.set_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.set_file_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_file_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GeologyMapper.set_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GeologyMapper.set_file_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the file name to read</p>
 </dd></dl>
 
@@ -321,24 +321,24 @@ The first column (name should be <code class="docutils literal notranslate"><spa
 </div>
 <div class="section" id="gif-gravity-gradiometry-observations">
 <h2>GIF Gravity Gradiometry Observations<a class="headerlink" href="#gif-gravity-gradiometry-observations" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.ubc.general.GravGradReader">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.general.</code><code class="sig-name descname">GravGradReader</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravGradReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravGradReader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.general.</code><code class="sig-name descname">GravGradReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravGradReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravGradReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="PVGeo.readers.delimited.DelimitedPointsReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedPointsReaderBase</span></code></a></p>
 <p>Read <a class="reference external" href="https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/ggfile.html">GIF Gravity Gradiometry Observations</a> file.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.GravGradReader._extract_header">
-<code class="sig-name descname">_extract_header</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravGradReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravGradReader._extract_header" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_extract_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">content</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravGradReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravGradReader._extract_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to parse header details for UBC Gravity Gradiometry
 files</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="PVGeo.ubc.general.GravGradReader.description">
 <code class="sig-name descname">description</code><em class="property"> = 'PVGeo: GIF Gravity Gradiometry Observations'</em><a class="headerlink" href="#PVGeo.ubc.general.GravGradReader.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="PVGeo.ubc.general.GravGradReader.extensions">
 <code class="sig-name descname">extensions</code><em class="property"> = 'grv gg txt dat'</em><a class="headerlink" href="#PVGeo.ubc.general.GravGradReader.extensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -348,24 +348,24 @@ files</p>
 </div>
 <div class="section" id="ubc-gravity-observations">
 <h2>UBC Gravity Observations<a class="headerlink" href="#ubc-gravity-observations" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.ubc.general.GravObsReader">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.general.</code><code class="sig-name descname">GravObsReader</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravObsReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravObsReader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.general.</code><code class="sig-name descname">GravObsReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravObsReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravObsReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="PVGeo.readers.delimited.DelimitedPointsReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedPointsReaderBase</span></code></a></p>
 <p>Read <a class="reference external" href="https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/gravfile.html">GIF Gravity Observations</a> file.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.GravObsReader._extract_header">
-<code class="sig-name descname">_extract_header</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravObsReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravObsReader._extract_header" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_extract_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">content</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#GravObsReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.GravObsReader._extract_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to parse header details for UBC Gravity Observation
 files</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="PVGeo.ubc.general.GravObsReader.description">
 <code class="sig-name descname">description</code><em class="property"> = 'PVGeo: GIF Gravity Observations'</em><a class="headerlink" href="#PVGeo.ubc.general.GravObsReader.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="PVGeo.ubc.general.GravObsReader.extensions">
 <code class="sig-name descname">extensions</code><em class="property"> = 'grv txt dat'</em><a class="headerlink" href="#PVGeo.ubc.general.GravObsReader.extensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -375,37 +375,37 @@ files</p>
 </div>
 <div class="section" id="ubc-magnetic-observations">
 <h2>UBC Magnetic Observations<a class="headerlink" href="#ubc-magnetic-observations" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.ubc.general.MagObsReader">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.general.</code><code class="sig-name descname">MagObsReader</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.general.</code><code class="sig-name descname">MagObsReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="PVGeo.readers.delimited.DelimitedPointsReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedPointsReaderBase</span></code></a></p>
 <p>Read <a class="reference external" href="https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/magfile.html">GIF Magnetic Observations</a> file.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.MagObsReader.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to get data for current timestep and populate the
 output data object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.MagObsReader._extract_header">
-<code class="sig-name descname">_extract_header</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader._extract_header" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_extract_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">content</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader._extract_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to parse header details for UBC Magnetic Observations
 files</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.MagObsReader.convert_vector">
-<em class="property">static </em><code class="sig-name descname">convert_vector</code><span class="sig-paren">(</span><em class="sig-param">incl</em>, <em class="sig-param">decl</em>, <em class="sig-param">mag=1</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader.convert_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader.convert_vector" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">convert_vector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">incl</span></em>, <em class="sig-param"><span class="n">decl</span></em>, <em class="sig-param"><span class="n">mag</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#MagObsReader.convert_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader.convert_vector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts inclination, declinations, and magntidue to an XYZ vector</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="PVGeo.ubc.general.MagObsReader.description">
 <code class="sig-name descname">description</code><em class="property"> = 'PVGeo: GIF Magnetic Observations'</em><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="PVGeo.ubc.general.MagObsReader.extensions">
 <code class="sig-name descname">extensions</code><em class="property"> = 'mag loc txt dat pre'</em><a class="headerlink" href="#PVGeo.ubc.general.MagObsReader.extensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -415,24 +415,24 @@ files</p>
 </div>
 <div class="section" id="gif-topo-reader">
 <h2>GIF Topo Reader<a class="headerlink" href="#gif-topo-reader" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.ubc.general.TopoReader">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.general.</code><code class="sig-name descname">TopoReader</code><span class="sig-paren">(</span><em class="sig-param">copy_z=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#TopoReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.TopoReader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.general.</code><code class="sig-name descname">TopoReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">copy_z</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#TopoReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.TopoReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="PVGeo.readers.delimited.DelimitedPointsReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedPointsReaderBase</span></code></a></p>
 <p>A reader to handle .topo files in UBC format to create a topography
 surface.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.ubc.general.TopoReader._extract_header">
-<code class="sig-name descname">_extract_header</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#TopoReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.TopoReader._extract_header" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_extract_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">content</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/general.html#TopoReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.general.TopoReader._extract_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to parse header details for UBC Topo files</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="PVGeo.ubc.general.TopoReader.description">
 <code class="sig-name descname">description</code><em class="property"> = 'PVGeo: UBC 3D Topo Files'</em><a class="headerlink" href="#PVGeo.ubc.general.TopoReader.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="PVGeo.ubc.general.TopoReader.extensions">
 <code class="sig-name descname">extensions</code><em class="property"> = 'topo txt dat'</em><a class="headerlink" href="#PVGeo.ubc.general.TopoReader.extensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>

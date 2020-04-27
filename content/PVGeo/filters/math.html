@@ -248,9 +248,9 @@
 <span id="math-operations"></span><h1>Math Operations<a class="headerlink" href="#module-PVGeo.filters.math" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="array-math">
 <h2>Array Math<a class="headerlink" href="#array-math" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.filters.math.ArrayMath">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.math.</code><code class="sig-name descname">ArrayMath</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.math.</code><code class="sig-name descname">ArrayMath</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterPreserveTypeBase</span></code></a></p>
 <p>This filter allows the user to select two input data arrays on which to
 perfrom math operations. The input arrays are used in their order of
@@ -274,15 +274,15 @@ index, or callable method</p></li>
 <li><p><cite>divide</cite>: Divide input array 1 by input array 2 (arr1/arr2)</p></li>
 <li><p><cite>correlate</cite>: Use <cite>np.correlate(arr1, arr2, mode=’same’)</cite></p></li>
 </ul>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to perfrom operation and generate output</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.SetInputArrayToProcess">
-<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param">idx</em>, <em class="sig-param">port</em>, <em class="sig-param">connection</em>, <em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">port</span></em>, <em class="sig-param"><span class="n">connection</span></em>, <em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to set the input array(s)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -298,77 +298,77 @@ field, and 6 for row)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath._add">
-<em class="property">static </em><code class="sig-name descname">_add</code><span class="sig-paren">(</span><em class="sig-param">arr1</em>, <em class="sig-param">arr2</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._add" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr1</span></em>, <em class="sig-param"><span class="n">arr2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds two input NumPy arrays</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath._correlate">
-<em class="property">static </em><code class="sig-name descname">_correlate</code><span class="sig-paren">(</span><em class="sig-param">arr1</em>, <em class="sig-param">arr2</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._correlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._correlate" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_correlate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr1</span></em>, <em class="sig-param"><span class="n">arr2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._correlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._correlate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use <code class="docutils literal notranslate"><span class="pre">np.correlate()</span></code> on <code class="docutils literal notranslate"><span class="pre">mode='same'</span></code> on two selected arrays
 from one input.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath._divide">
-<em class="property">static </em><code class="sig-name descname">_divide</code><span class="sig-paren">(</span><em class="sig-param">arr1</em>, <em class="sig-param">arr2</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._divide"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._divide" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_divide</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr1</span></em>, <em class="sig-param"><span class="n">arr2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._divide"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._divide" title="Permalink to this definition">¶</a></dt>
 <dd><p>Divides two input NumPy arrays</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath._math_up">
-<code class="sig-name descname">_math_up</code><span class="sig-paren">(</span><em class="sig-param">pdi</em>, <em class="sig-param">pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._math_up"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._math_up" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_math_up</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdi</span></em>, <em class="sig-param"><span class="n">pdo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._math_up"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._math_up" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make sure to pass array names and integer associated fields.
 Use helpers to get these properties.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath._multiply">
-<em class="property">static </em><code class="sig-name descname">_multiply</code><span class="sig-paren">(</span><em class="sig-param">arr1</em>, <em class="sig-param">arr2</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._multiply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._multiply" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_multiply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr1</span></em>, <em class="sig-param"><span class="n">arr2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._multiply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._multiply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutlipies two input NumPy arrays</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath._set_input_array_1">
-<code class="sig-name descname">_set_input_array_1</code><span class="sig-paren">(</span><em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._set_input_array_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._set_input_array_1" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_set_input_array_1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._set_input_array_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._set_input_array_1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set 1st input array by name and field</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath._set_input_array_2">
-<code class="sig-name descname">_set_input_array_2</code><span class="sig-paren">(</span><em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._set_input_array_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._set_input_array_2" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_set_input_array_2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._set_input_array_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._set_input_array_2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set 2nd input array by name and field</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath._subtract">
-<em class="property">static </em><code class="sig-name descname">_subtract</code><span class="sig-paren">(</span><em class="sig-param">arr1</em>, <em class="sig-param">arr2</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._subtract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._subtract" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_subtract</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr1</span></em>, <em class="sig-param"><span class="n">arr2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath._subtract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath._subtract" title="Permalink to this definition">¶</a></dt>
 <dd><p>Subtracts two input NumPy arrays</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">input_data_object</em>, <em class="sig-param">array_name_0</em>, <em class="sig-param">array_name_1</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_data_object</span></em>, <em class="sig-param"><span class="n">array_name_0</span></em>, <em class="sig-param"><span class="n">array_name_1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the algorith on an input data object, specifying array names</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.get_multiplier">
 <code class="sig-name descname">get_multiplier</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.get_multiplier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.get_multiplier" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the set multiplier/scalar</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.get_new_array_name">
 <code class="sig-name descname">get_new_array_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.get_new_array_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.get_new_array_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the name used for the new array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.get_operation">
-<em class="property">static </em><code class="sig-name descname">get_operation</code><span class="sig-paren">(</span><em class="sig-param">idx</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.get_operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.get_operation" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">get_operation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.get_operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.get_operation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a math operation based on an index in the keys</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -380,7 +380,7 @@ Use helpers to get these properties.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.get_operation_names">
 <em class="property">static </em><code class="sig-name descname">get_operation_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.get_operation_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.get_operation_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a list of the math operation keys</p>
@@ -394,29 +394,29 @@ Use helpers to get these properties.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.get_operations">
 <em class="property">static </em><code class="sig-name descname">get_operations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.get_operations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.get_operations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the math operation methods as callable objects in a
 dictionary</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.set_multiplier">
-<code class="sig-name descname">set_multiplier</code><span class="sig-paren">(</span><em class="sig-param">val</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.set_multiplier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.set_multiplier" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_multiplier</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.set_multiplier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.set_multiplier" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a static shifter/scale factor across the array after
 normalization.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.set_new_array_name">
-<code class="sig-name descname">set_new_array_name</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.set_new_array_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.set_new_array_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_new_array_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.set_new_array_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.set_new_array_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Give the new array a meaningful name.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArrayMath.set_operation">
-<code class="sig-name descname">set_operation</code><span class="sig-paren">(</span><em class="sig-param">op</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.set_operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.set_operation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_operation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArrayMath.set_operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArrayMath.set_operation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the math operation to perform</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -438,21 +438,21 @@ as its signature is: <code class="docutils literal notranslate"><span class="pre
 </div>
 <div class="section" id="arrays-to-rgba">
 <h2>Arrays To RGBA<a class="headerlink" href="#arrays-to-rgba" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.filters.math.ArraysToRGBA">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.math.</code><code class="sig-name descname">ArraysToRGBA</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.math.</code><code class="sig-name descname">ArraysToRGBA</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterPreserveTypeBase</span></code></a></p>
 <p>Use arrays from input data object to set an RGBA array. Sets colors and
 transparencies.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute on pipeline</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA.SetInputArrayToProcess">
-<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param">idx</em>, <em class="sig-param">port</em>, <em class="sig-param">connection</em>, <em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">port</span></em>, <em class="sig-param"><span class="n">connection</span></em>, <em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to set the input array(s)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -468,57 +468,57 @@ field, and 6 for row)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA._get_arrays">
-<code class="sig-name descname">_get_arrays</code><span class="sig-paren">(</span><em class="sig-param">wpdi</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._get_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._get_arrays" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_get_arrays</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wpdi</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._get_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._get_arrays" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to fetch RGBA arrays</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA._mask_arrays">
-<code class="sig-name descname">_mask_arrays</code><span class="sig-paren">(</span><em class="sig-param">r_arr</em>, <em class="sig-param">g_arr</em>, <em class="sig-param">b_arr</em>, <em class="sig-param">a_arr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._mask_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._mask_arrays" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_mask_arrays</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">r_arr</span></em>, <em class="sig-param"><span class="n">g_arr</span></em>, <em class="sig-param"><span class="n">b_arr</span></em>, <em class="sig-param"><span class="n">a_arr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._mask_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._mask_arrays" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to mask RGBA arrays</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA._set_input_array_blue">
-<code class="sig-name descname">_set_input_array_blue</code><span class="sig-paren">(</span><em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._set_input_array_blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._set_input_array_blue" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_set_input_array_blue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._set_input_array_blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._set_input_array_blue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set field and name of blue array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA._set_input_array_green">
-<code class="sig-name descname">_set_input_array_green</code><span class="sig-paren">(</span><em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._set_input_array_green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._set_input_array_green" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_set_input_array_green</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._set_input_array_green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._set_input_array_green" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set field and name of green array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA._set_input_array_red">
-<code class="sig-name descname">_set_input_array_red</code><span class="sig-paren">(</span><em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._set_input_array_red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._set_input_array_red" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_set_input_array_red</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._set_input_array_red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._set_input_array_red" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set field and name of red array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA._set_input_array_trans">
-<code class="sig-name descname">_set_input_array_trans</code><span class="sig-paren">(</span><em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._set_input_array_trans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._set_input_array_trans" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_set_input_array_trans</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA._set_input_array_trans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA._set_input_array_trans" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set field and name of transparency array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">input_data_object</em>, <em class="sig-param">r_array</em>, <em class="sig-param">g_array</em>, <em class="sig-param">b_array</em>, <em class="sig-param">a_array=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_data_object</span></em>, <em class="sig-param"><span class="n">r_array</span></em>, <em class="sig-param"><span class="n">g_array</span></em>, <em class="sig-param"><span class="n">b_array</span></em>, <em class="sig-param"><span class="n">a_array</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the algorithm on an input data object, specifying RGBA array names</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA.set_mask_value">
-<code class="sig-name descname">set_mask_value</code><span class="sig-paren">(</span><em class="sig-param">val</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA.set_mask_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA.set_mask_value" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_mask_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA.set_mask_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA.set_mask_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the value to mask in the RGBA arrays</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.ArraysToRGBA.set_use_transparency">
-<code class="sig-name descname">set_use_transparency</code><span class="sig-paren">(</span><em class="sig-param">flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA.set_use_transparency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA.set_use_transparency" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_use_transparency</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#ArraysToRGBA.set_use_transparency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.ArraysToRGBA.set_use_transparency" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set a boolean flag on whether or not to use a transparency component</p>
 </dd></dl>
 
@@ -527,9 +527,9 @@ field, and 6 for row)</p></li>
 </div>
 <div class="section" id="normalize-array">
 <h2>Normalize Array<a class="headerlink" href="#normalize-array" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.filters.math.NormalizeArray">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.math.</code><code class="sig-name descname">NormalizeArray</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.math.</code><code class="sig-name descname">NormalizeArray</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterPreserveTypeBase</span></code></a></p>
 <p>This filter allows the user to select an array from the input data set
 to be normalized. The filter will append another array to that data set for
@@ -556,15 +556,15 @@ integer index, or callable method</p></li>
 <li><p><cite>natural_log</cite>: Log Base 10</p></li>
 <li><p><cite>just_multiply</cite>: Only Multiply by Multiplier</p></li>
 </ul>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.SetInputArrayToProcess">
-<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param">idx</em>, <em class="sig-param">port</em>, <em class="sig-param">connection</em>, <em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">port</span></em>, <em class="sig-param"><span class="n">connection</span></em>, <em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to set the input array(s)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -580,70 +580,70 @@ field, and 6 for row)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray._feature_scale">
-<em class="property">static </em><code class="sig-name descname">_feature_scale</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">rng=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._feature_scale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._feature_scale" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_feature_scale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em>, <em class="sig-param"><span class="n">rng</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._feature_scale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._feature_scale" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns feature scale normalization of input array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray._log10">
-<em class="property">static </em><code class="sig-name descname">_log10</code><span class="sig-paren">(</span><em class="sig-param">arr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._log10"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._log10" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_log10</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._log10"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._log10" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns log base 10 of input array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray._log_nat">
-<em class="property">static </em><code class="sig-name descname">_log_nat</code><span class="sig-paren">(</span><em class="sig-param">arr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._log_nat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._log_nat" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_log_nat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._log_nat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._log_nat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns natural logarithm of input array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray._normalize">
-<code class="sig-name descname">_normalize</code><span class="sig-paren">(</span><em class="sig-param">pdi</em>, <em class="sig-param">pdo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._normalize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdi</span></em>, <em class="sig-param"><span class="n">pdo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._normalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform normalize on a data array for any given VTK data object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray._pass_array">
-<em class="property">static </em><code class="sig-name descname">_pass_array</code><span class="sig-paren">(</span><em class="sig-param">arr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._pass_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._pass_array" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_pass_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._pass_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._pass_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast an input array as a NumPy array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray._standard_score">
-<em class="property">static </em><code class="sig-name descname">_standard_score</code><span class="sig-paren">(</span><em class="sig-param">arr</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._standard_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._standard_score" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">_standard_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray._standard_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray._standard_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns tandard score normalization of input array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">input_data_object</em>, <em class="sig-param">array_name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_data_object</span></em>, <em class="sig-param"><span class="n">array_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the algorithm on an input data object, specifying the array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.get_array_range">
-<em class="property">static </em><code class="sig-name descname">get_array_range</code><span class="sig-paren">(</span><em class="sig-param">pdi</em>, <em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.get_array_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.get_array_range" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">get_array_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdi</span></em>, <em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.get_array_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.get_array_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a tuple of the range for a <code class="docutils literal notranslate"><span class="pre">vtkDataArray</span></code> on a
 <code class="docutils literal notranslate"><span class="pre">vtkDataObject</span></code>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.get_multiplier">
 <code class="sig-name descname">get_multiplier</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.get_multiplier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.get_multiplier" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the set multiplier/scalar</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.get_new_array_name">
 <code class="sig-name descname">get_new_array_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.get_new_array_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.get_new_array_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the name of the new array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.get_normalization">
-<em class="property">static </em><code class="sig-name descname">get_normalization</code><span class="sig-paren">(</span><em class="sig-param">idx</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.get_normalization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.get_normalization" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">get_normalization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.get_normalization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.get_normalization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a normalization based on an index in the keys</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -655,7 +655,7 @@ field, and 6 for row)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.get_normalization_names">
 <em class="property">static </em><code class="sig-name descname">get_normalization_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.get_normalization_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.get_normalization_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a list of the normalization keys</p>
@@ -669,7 +669,7 @@ field, and 6 for row)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.get_normalizations">
 <em class="property">static </em><code class="sig-name descname">get_normalizations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.get_normalizations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.get_normalizations" title="Permalink to this definition">¶</a></dt>
 <dd><p>All Available normalizations</p>
@@ -683,22 +683,22 @@ field, and 6 for row)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.set_multiplier">
-<code class="sig-name descname">set_multiplier</code><span class="sig-paren">(</span><em class="sig-param">val</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.set_multiplier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.set_multiplier" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_multiplier</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.set_multiplier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.set_multiplier" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a static shifter/scale factor across the array after
 normalization.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.set_new_array_name">
-<code class="sig-name descname">set_new_array_name</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.set_new_array_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.set_new_array_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_new_array_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.set_new_array_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.set_new_array_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Give the new array a meaningful name.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.set_normalization">
-<code class="sig-name descname">set_normalization</code><span class="sig-paren">(</span><em class="sig-param">norm</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.set_normalization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.set_normalization" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_normalization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">norm</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.set_normalization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.set_normalization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the normalization operation to perform</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -713,15 +713,15 @@ as its signature is: <code class="docutils literal notranslate"><span class="pre
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.set_shift">
-<code class="sig-name descname">set_shift</code><span class="sig-paren">(</span><em class="sig-param">sft</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.set_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.set_shift" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_shift</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sft</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.set_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.set_shift" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set a static shifter to the input data array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.NormalizeArray.set_take_absolute_value">
-<code class="sig-name descname">set_take_absolute_value</code><span class="sig-paren">(</span><em class="sig-param">flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.set_take_absolute_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.set_take_absolute_value" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_take_absolute_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#NormalizeArray.set_take_absolute_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.NormalizeArray.set_take_absolute_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>This will take the absolute value of the array before normalization.</p>
 </dd></dl>
 
@@ -730,22 +730,22 @@ as its signature is: <code class="docutils literal notranslate"><span class="pre
 </div>
 <div class="section" id="percent-threshold">
 <h2>Percent Threshold<a class="headerlink" href="#percent-threshold" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="PVGeo.filters.math.PercentThreshold">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.math.</code><code class="sig-name descname">PercentThreshold</code><span class="sig-paren">(</span><em class="sig-param">percent=50</em>, <em class="sig-param">invert=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.math.</code><code class="sig-name descname">PercentThreshold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">percent</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">invert</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>Allows user to select a percent of the data range to threshold.
 This will find the data range of the selected input array and remove the
 bottom percent. This can be reversed using the invert property.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.PercentThreshold.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">inInfo</em>, <em class="sig-param">outInfo</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline for execution</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.PercentThreshold.SetInputArrayToProcess">
-<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param">idx</em>, <em class="sig-param">port</em>, <em class="sig-param">connection</em>, <em class="sig-param">field</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">port</span></em>, <em class="sig-param"><span class="n">connection</span></em>, <em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to set the input array(s)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -761,29 +761,29 @@ field, and 6 for row)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.PercentThreshold.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">input_data_object</em>, <em class="sig-param">array_name</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_data_object</span></em>, <em class="sig-param"><span class="n">array_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the algorithm on an input data object, specifying the array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.PercentThreshold.set_invert">
-<code class="sig-name descname">set_invert</code><span class="sig-paren">(</span><em class="sig-param">flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.set_invert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.set_invert" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_invert</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.set_invert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.set_invert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to invert the threshold filter</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.PercentThreshold.set_percent">
-<code class="sig-name descname">set_percent</code><span class="sig-paren">(</span><em class="sig-param">percent</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.set_percent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.set_percent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_percent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">percent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.set_percent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.set_percent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the percent for the threshold in range (0, 100).
 Any values falling beneath the set percent of the total data range
 will be removed.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="PVGeo.filters.math.PercentThreshold.set_use_continuous_cell_range">
-<code class="sig-name descname">set_use_continuous_cell_range</code><span class="sig-paren">(</span><em class="sig-param">flag</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.set_use_continuous_cell_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.set_use_continuous_cell_range" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_use_continuous_cell_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/math.html#PercentThreshold.set_use_continuous_cell_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.math.PercentThreshold.set_use_continuous_cell_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>If this is on (default is off), we will use the continuous
 interval [minimum cell scalar, maxmimum cell scalar] to intersect
 the threshold bound , rather than the set of discrete scalar
