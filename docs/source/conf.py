@@ -126,7 +126,8 @@ extensions = [
     'sphinx.ext.extlinks',
     'sphinxcontrib.napoleon',
     'sphinx_copybutton',
-    'sphinx_gallery.gen_gallery'
+    'sphinx_gallery.gen_gallery',
+    'notfound.extension',
 ]
 
 linkcheck_retries = 3
@@ -281,6 +282,14 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+
+# -- Custom 404 page
+
+notfound_context = {
+        'body': '<h1>Page not found.</h1>\n\nPerhaps try the <a href="https://pvgeo.org/about-examples.html">About Examples page</a>.',
+}
+notfound_no_urls_prefix = True
 
 
 

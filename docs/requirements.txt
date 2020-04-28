@@ -9,3 +9,4 @@ sphinxcontrib-websupport
 doctr
 sphinx-copybutton
 sphinx-gallery
+sphinx-notfound-page>=0.3.0
