@@ -73,7 +73,7 @@ in ParaView for Python based plugins that can leverage ParaView's powerful
 graphical user interface.
 
 To learn more about what PVGeo looks like within ParaView, check out the
-videos on the `About Examples Page <../examples/about-examples>`_ or
+videos on the `About Examples Page <../about-examples>`_ or
 other videos throughout the examples which are all posted to our
 `Vimeo Account <https://vimeo.com/user82050125>`_.
 
@@ -95,7 +95,7 @@ and visualization!
     import pyvista
 
 To learn more about using PVGeo in your Python environment, check out the
-psuedo-code on the `About Examples Page <../examples/about-examples>`_
+psuedo-code on the `About Examples Page <../about-examples>`_
 
 
 Interoperability
@@ -116,7 +116,7 @@ Example
 ~~~~~~~
 
 Create a new reader algorithm and place it in a ``.py`` file like this one
-we built for `discretize <http://discretize.simpeg.xyz/en/latest/>`:
+we built for `discretize <http://discretize.simpeg.xyz/en/latest/>`_:
 
 .. code-block:: python
 
