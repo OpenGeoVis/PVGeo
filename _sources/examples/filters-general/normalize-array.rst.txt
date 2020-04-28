@@ -86,7 +86,7 @@ Create some input data. this can be any `vtkDataObject`
 
  .. code-block:: none
 
-    UniformGrid (0x7f592d3b7f48)
+    UniformGrid (0x7f3d941e3468)
       N Cells:      729
       N Points:     1000
       X Bounds:     0.000e+00, 9.000e+00
@@ -127,7 +127,7 @@ Create some input data. this can be any `vtkDataObject`
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.602 seconds)
+   **Total running time of the script:** ( 0 minutes  1.590 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_normalize-array.py:

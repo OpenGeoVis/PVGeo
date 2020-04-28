@@ -75,7 +75,7 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7f592d3b7b88)
+    Table (0x7f3d941e3648)
       N Rows:       100
       N Arrays:     2
 
@@ -98,7 +98,7 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7f592d3b7d68)
+    Table (0x7f3d941e32e8)
       N Rows:       100
       N Arrays:     1
 
@@ -124,7 +124,7 @@ Create some input tables
 
  .. code-block:: none
 
-    Table (0x7f592d3b7fa8)
+    Table (0x7f3d941e3288)
       N Rows:       100
       N Arrays:     3
 
