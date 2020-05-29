@@ -53,6 +53,7 @@ then builds a polygonal tube around that line with some specified radius and num
 
 
 .. image:: /examples/filters-general/images/sphx_glr_points-to-tube_001.png
+    :alt: points to tube
     :class: sphx-glr-single-img
 
 
@@ -80,6 +81,7 @@ then builds a polygonal tube around that line with some specified radius and num
 
 
 .. image:: /examples/filters-general/images/sphx_glr_points-to-tube_002.png
+    :alt: points to tube
     :class: sphx-glr-single-img
 
 
@@ -99,7 +101,7 @@ then builds a polygonal tube around that line with some specified radius and num
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.371 seconds)
+   **Total running time of the script:** ( 0 minutes  0.359 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_points-to-tube.py:

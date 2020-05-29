@@ -101,7 +101,7 @@ object (essentially a point cloud).
 
  .. code-block:: none
 
-    PolyData (0x7fd5d01bb7c8)
+    PolyData (0x7f6a5d625ee8)
       N Cells:      499200
       N Points:     499200
       X Bounds:     3.268e+05, 3.302e+05
@@ -132,6 +132,7 @@ calling the plot function. (Note: change the notebook parameter to
 
 
 .. image:: /examples/filters-general/images/sphx_glr_voxelize-points_001.png
+    :alt: voxelize points
     :class: sphx-glr-single-img
 
 
@@ -191,7 +192,7 @@ The full pipeline method
     Voxelizing... done.
     Recovered Angle (deg.): 53.550
     Recovered Cell Sizes: (25.00, 25.00, 25.00)
-    UnstructuredGrid (0x7fd5d01bb828)
+    UnstructuredGrid (0x7f6a5d625d68)
       N Cells:      499200
       N Points:     524064
       X Bounds:     3.268e+05, 3.302e+05
@@ -215,6 +216,7 @@ And now we can plot the voxelized volume
 
 
 .. image:: /examples/filters-general/images/sphx_glr_voxelize-points_002.png
+    :alt: voxelize points
     :class: sphx-glr-single-img
 
 
@@ -254,7 +256,7 @@ create 3 orthogonal slices through a data volume.
 
  .. code-block:: none
 
-    MultiBlock (0x7fd5d01bbb28)
+    MultiBlock (0x7f6a5d625a68)
       N Blocks:     3
       X Bounds:     326804.336, 330185.260
       Y Bounds:     4406253.954, 4409862.606
@@ -293,6 +295,7 @@ Now display the slices and clipped volume
 
 
 .. image:: /examples/filters-general/images/sphx_glr_voxelize-points_003.png
+    :alt: voxelize points
     :class: sphx-glr-single-img
 
 
@@ -312,7 +315,7 @@ Now display the slices and clipped volume
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  14.381 seconds)
+   **Total running time of the script:** ( 0 minutes  16.627 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:

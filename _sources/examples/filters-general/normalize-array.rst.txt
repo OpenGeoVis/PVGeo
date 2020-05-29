@@ -51,6 +51,7 @@ Create some input data. this can be any `vtkDataObject`
 
 
 .. image:: /examples/filters-general/images/sphx_glr_normalize-array_001.png
+    :alt: normalize array
     :class: sphx-glr-single-img
 
 
@@ -86,7 +87,7 @@ Create some input data. this can be any `vtkDataObject`
 
  .. code-block:: none
 
-    UniformGrid (0x7fd5d01bb468)
+    UniformGrid (0x7f6a5d625d08)
       N Cells:      729
       N Points:     1000
       X Bounds:     0.000e+00, 9.000e+00
@@ -108,6 +109,7 @@ Create some input data. this can be any `vtkDataObject`
 
 
 .. image:: /examples/filters-general/images/sphx_glr_normalize-array_002.png
+    :alt: normalize array
     :class: sphx-glr-single-img
 
 
@@ -127,7 +129,7 @@ Create some input data. this can be any `vtkDataObject`
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.565 seconds)
+   **Total running time of the script:** ( 0 minutes  1.576 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_normalize-array.py:
