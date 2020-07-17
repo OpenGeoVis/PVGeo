@@ -254,7 +254,7 @@ class LonLatToUTM(FilterPreserveTypeBase):
         """Returns the available ellps
         """
         import pyproj
-        ellps = pyproj.pj_ellps.keys()
+        ellps = list(pyproj.pj_ellps.keys())
         # Now migrate WGSXX to front so that 84 is always default
         wgs = ['WGS60','WGS66','WGS72', 'WGS84']
         for i, name in enumerate(wgs):
