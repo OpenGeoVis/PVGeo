@@ -7,12 +7,13 @@ from paraview.util.vtkAlgorithm import smdomain, smhint, smproperty, smproxy
 # Helpers:
 from PVGeo import _helpers
 # Classes to Decorate
-from PVGeo.ubc import (TensorMeshAppender, TensorMeshReader, DiscretizeMeshReader, GeologyMapper, MagObsReader, GravGradReader, GravObsReader, TopoReader, WriteImageDataToUBC, WriteRectilinearGridToUBC, OcTreeAppender, OcTreeReader, TopoMeshAppender)
+from PVGeo.ubc import (TensorMeshAppender, TensorMeshReader, GeologyMapper, MagObsReader, GravGradReader, GravObsReader, TopoReader, WriteImageDataToUBC, WriteRectilinearGridToUBC, TopoMeshAppender)
 
 discretize_available = False
 try:
     with _helpers.HiddenPrints():
         import discretize
+        from PVGeo.ubc import DiscretizeMeshReader, OcTreeReader, OcTreeAppender
 except ImportError:
     pass
 else:

@@ -43,7 +43,6 @@ class _ExampleLoader(VTKPythonAlgorithmBase):
         return 1
 
 
-
 @smproxy.source(name='PyVistaStHelens', label='Mt. St. Helens')
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
@@ -89,7 +88,6 @@ class PyVistaBloodVessels(_ExampleLoader):
         _ExampleLoader.__init__(self)
 
 
-
 @smproxy.source(name='PyVistaBlow', label='Blow')
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
@@ -99,7 +97,7 @@ class PyVistaBlow(_ExampleLoader):
         _ExampleLoader.__init__(self)
 
 
-@smproxy.source(name='PyVistaBoltNut', label='Bolt & Nut')
+@smproxy.source(name='PyVistaBoltNut', label='Bolt and Nut')
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 class PyVistaBoltNut(_ExampleLoader):
@@ -133,7 +131,6 @@ class PyVistaCadModel(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_cad_model()
         _ExampleLoader.__init__(self)
-
 
 
 @smproxy.source(name='PyVistaCarotid', label='Carotid')
