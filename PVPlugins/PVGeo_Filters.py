@@ -27,7 +27,7 @@ MENU_CAT = 'PVGeo: General Filters'
 
 
 # Add Cell Connectivity To Points
-@smproxy.filter(name='PVGeoAddCellConnToPoints', label=AddCellConnToPoints.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -61,7 +61,7 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
 
 
 # Combine Tables
-@smproxy.filter(name='PVGeoCombineTables', label=CombineTables.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input1", port_index=1)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
@@ -76,7 +76,7 @@ class PVGeoCombineTables(CombineTables):
 
 
 # Split Table on Array
-@smproxy.filter(name='PVGeoSplitTableOnArray', label=SplitTableOnArray.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
@@ -95,7 +95,7 @@ class PVGeoSplitTableOnArray(SplitTableOnArray):
 ###############################################################################
 
 # PointsToTube
-@smproxy.filter(name='PVGeoPointsToTube', label=PointsToTube.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -145,7 +145,7 @@ class PVGeoPointsToTube(PointsToTube):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoReshapeTable', label=ReshapeTable.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
@@ -181,7 +181,7 @@ class PVGeoReshapeTable(ReshapeTable):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoVoxelizePoints', label='Voxelize Points')
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />
     <WarnOnCreate title="Axial Assumptions">
@@ -217,7 +217,7 @@ class PVGeoVoxelizePoints(VoxelizePoints):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoVoxelizePointsFromArrays', label='Voxelize Points From Arrays')
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     RepresentationType view="RenderView" type="Surface" />
     <WarnOnCreate title="Axial Assumptions">
@@ -280,7 +280,7 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
 ###############################################################################
 
 # Normalize Arrays
-@smproxy.filter(name='PVGeoNormalizeArray', label=NormalizeArray.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataObject"], composite_data_supported=False)
@@ -318,7 +318,7 @@ class PVGeoNormalizeArray(NormalizeArray):
 ###############################################################################
 
 # Array Math
-@smproxy.filter(name='PVGeoArrayMath', label=ArrayMath.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataObject"], composite_data_supported=False)
@@ -347,7 +347,7 @@ class PVGeoArrayMath(ArrayMath):
 
 ###############################################################################
 
-@smproxy.filter(name='PVGeoManySlicesAlongAxis', label=ManySlicesAlongAxis.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -371,7 +371,7 @@ class PVGeoManySlicesAlongAxis(ManySlicesAlongAxis):
 
 ###############################################################################
 
-@smproxy.filter(name='PVGeoSliceThroughTime', label=SliceThroughTime.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -404,7 +404,7 @@ class PVGeoSliceThroughTime(SliceThroughTime):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoManySlicesAlongPoints', label=ManySlicesAlongPoints.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Data Set", port_index=1)
@@ -431,7 +431,7 @@ class PVGeoManySlicesAlongPoints(ManySlicesAlongPoints):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoSlideSliceAlongPoints', label=SlideSliceAlongPoints.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Data Set", port_index=1)
@@ -457,7 +457,7 @@ class PVGeoSlideSliceAlongPoints(SlideSliceAlongPoints):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoRotatePoints', label=RotatePoints.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -485,7 +485,7 @@ class PVGeoRotatePoints(RotatePoints):
 
 
 ###############################################################################
-@smproxy.filter(name='PVGeoExtractPoints', label=ExtractPoints.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Points" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -498,7 +498,7 @@ class PVGeoExtractPoints(ExtractPoints):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoPercentThreshold', label=PercentThreshold.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -535,7 +535,7 @@ class PVGeoPercentThreshold(PercentThreshold):
 
 
 # Combine Tables
-@smproxy.filter(name='PVGeoExtractArray', label=ExtractArray.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
@@ -552,7 +552,7 @@ class PVGeoExtractArray(ExtractArray):
 
 
 # Extract Cell Centers
-@smproxy.filter(name='PVGeoExtractCellCenters', label=ExtractCellCenters.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -566,7 +566,7 @@ class PVGeoExtractCellCenters(ExtractCellCenters):
 
 
 # Extract Cell Centers
-@smproxy.filter(name='PVGeoAppendCellCenters', label=AppendCellCenters.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -580,7 +580,7 @@ class PVGeoAppendCellCenters(AppendCellCenters):
 
 
 # IterateOverPoints
-@smproxy.filter(name='PVGeoIterateOverPoints', label=IterateOverPoints.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Points" />
     <Visibility replace_input="0" />''' % MENU_CAT)
@@ -612,7 +612,7 @@ class PVGeoIterateOverPoints(IterateOverPoints):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoConvertUnits', label=ConvertUnits.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=True)
@@ -632,7 +632,7 @@ try:
     # Coordinate system filters depend on pyproj
     # pyproj may not be available on Windows
     import pyproj
-    @smproxy.filter(name='PVGeoLonLatToUTM', label=LonLatToUTM.__displayname__)
+    @smproxy.filter()
     @smhint.xml('''<ShowInMenu category="%s"/>
         <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
     @smproperty.input(name="Input", port_index=0)
@@ -656,7 +656,7 @@ except ImportError:
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoArraysToRGBA', label=ArraysToRGBA.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=False)
@@ -684,7 +684,7 @@ class PVGeoArraysToRGBA(ArraysToRGBA):
 
 
 # Append Table to Cell Data
-@smproxy.filter(name='PVGeoAppendTableToCellData', label=AppendTableToCellData.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Table", port_index=1)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=False)
@@ -702,7 +702,7 @@ class PVGeoAppendTableToCellData(AppendTableToCellData):
 ###############################################################################
 
 # BuildSurfaceFromPoints
-@smproxy.filter(name='PVGeoBuildSurfaceFromPoints', label=BuildSurfaceFromPoints.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)

@@ -12,9 +12,7 @@ from PVGeo.gslib import (GSLibPointSetReader, GSLibReader, SGeMSGridReader,
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoGSLibReader",
-                label='PVGeo: %s' % GSLibReader.__displayname__,
-                extensions=GSLibReader.extensions,
+@smproxy.reader(extensions=GSLibReader.extensions,
                 file_description=GSLibReader.description)
 class PVGeoGSLibReader(GSLibReader):
     def __init__(self):
@@ -61,9 +59,7 @@ class PVGeoGSLibReader(GSLibReader):
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoGSLibPointSetReader",
-                label='PVGeo: %s' % GSLibPointSetReader.__displayname__,
-                extensions=GSLibPointSetReader.extensions,
+@smproxy.reader(extensions=GSLibPointSetReader.extensions,
                 file_description=GSLibPointSetReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
 class PVGeoGSLibPointSetReader(GSLibPointSetReader):
@@ -110,9 +106,7 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoSGeMSGridReader",
-                label='PVGeo: %s' % SGeMSGridReader.__displayname__,
-                extensions=SGeMSGridReader.extensions,
+@smproxy.reader(extensions=SGeMSGridReader.extensions,
                 file_description=SGeMSGridReader.description)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoSGeMSGridReader(SGeMSGridReader):

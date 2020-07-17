@@ -15,9 +15,7 @@ from PVGeo.readers import DelimitedTextReader, XYZTextReader
 
 
 
-@smproxy.reader(name="PVGeoPackedBinariesReader",
-                label='PVGeo: %s' % PackedBinariesReader.__displayname__,
-                extensions=PackedBinariesReader.extensions,
+@smproxy.reader(extensions=PackedBinariesReader.extensions,
                 file_description=PackedBinariesReader.description)
 class PVGeoPackedBinariesReader(PackedBinariesReader):
     def __init__(self):
@@ -61,9 +59,7 @@ class PVGeoPackedBinariesReader(PackedBinariesReader):
 
 
 
-@smproxy.reader(name="PVGeoMadagascarReader",
-                label='PVGeo: %s' % MadagascarReader.__displayname__,
-                extensions=MadagascarReader.extensions,
+@smproxy.reader(extensions=MadagascarReader.extensions,
                 file_description=MadagascarReader.description)
 class PVGeoMadagascarReader(MadagascarReader):
     def __init__(self):
@@ -109,9 +105,7 @@ class PVGeoMadagascarReader(MadagascarReader):
 
 
 
-@smproxy.reader(name="PVGeoDelimitedTextReader",
-                label='PVGeo: %s' % DelimitedTextReader.__displayname__,
-                extensions=DelimitedTextReader.extensions,
+@smproxy.reader(extensions=DelimitedTextReader.extensions,
                 file_description=DelimitedTextReader.description)
 class PVGeoDelimitedTextReader(DelimitedTextReader):
     def __init__(self):
@@ -160,9 +154,7 @@ class PVGeoDelimitedTextReader(DelimitedTextReader):
 
 
 
-@smproxy.reader(name="PVGeoXYZTextReader",
-                label='PVGeo: %s' % XYZTextReader.__displayname__,
-                extensions=XYZTextReader.extensions,
+@smproxy.reader(extensions=XYZTextReader.extensions,
                 file_description=XYZTextReader.description)
 class PVGeoXYZTextReader(XYZTextReader):
     def __init__(self):

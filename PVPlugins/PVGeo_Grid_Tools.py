@@ -18,7 +18,7 @@ MENU_CAT = 'PVGeo: General Grids'
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoReverseImageDataAxii', label=ReverseImageDataAxii.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
@@ -44,7 +44,7 @@ class PVGeoReverseImageDataAxii(ReverseImageDataAxii):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoTranslateGridOrigin', label=TranslateGridOrigin.__displayname__)
+@smproxy.filter()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
@@ -66,7 +66,7 @@ class PVGeoTranslateGridOrigin(TranslateGridOrigin):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoTableToTimeGrid', label=TableToTimeGrid.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
 @smproperty.input(name="Input", port_index=0)
@@ -122,7 +122,7 @@ class PVGeoTableToTimeGrid(TableToTimeGrid):
 ###############################################################################
 
 
-@smproxy.filter(name='PVGeoExtractTopography', label=ExtractTopography.__displayname__)
+@smproxy.filter()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 @smproperty.input(name="Topography", port_index=1)
@@ -157,9 +157,7 @@ class PVGeoExtractTopography(ExtractTopography):
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoSurferGridReader",
-                label='PVGeo: %s' % SurferGridReader.__displayname__,
-                extensions=SurferGridReader.extensions,
+@smproxy.reader(extensions=SurferGridReader.extensions,
                 file_description=SurferGridReader.description)
 class PVGeoSurferGridReader(SurferGridReader):
     def __init__(self):
@@ -241,9 +239,7 @@ class PVGeoWriteCellCenterData(WriteCellCenterData):
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoEsriGridReader",
-                label='PVGeo: %s' % EsriGridReader.__displayname__,
-                extensions=EsriGridReader.extensions,
+@smproxy.reader(extensions=EsriGridReader.extensions,
                 file_description=EsriGridReader.description)
 class PVGeoEsriGridReader(EsriGridReader):
     def __init__(self):
@@ -273,9 +269,7 @@ class PVGeoEsriGridReader(EsriGridReader):
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoLandsatReader",
-                label='PVGeo: %s' % LandsatReader.__displayname__,
-                extensions=LandsatReader.extensions,
+@smproxy.reader(extensions=LandsatReader.extensions,
                 file_description=LandsatReader.description)
 class PVGeoLandsatReader(LandsatReader):
     def __init__(self):

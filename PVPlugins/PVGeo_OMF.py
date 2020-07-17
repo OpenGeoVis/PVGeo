@@ -22,9 +22,7 @@ else:
 
 
 if omf_available:
-    @smproxy.reader(name="PVGeoOMFReader",
-                    label="PVGeo: Open Mining Format Project Reader",
-                    extensions=OMFReader.extensions,
+    @smproxy.reader(extensions=OMFReader.extensions,
                     file_description=OMFReader.description)
     class PVGeoOMFReader(OMFReader):
         def __init__(self):
@@ -51,7 +49,7 @@ if omf_available:
     ###############################################################################
 
 
-    # @smproxy.filter(name="PVGeoOMFExtractor", label="OMF Block Extractor")
+    # @smproxy.filter()
     # @smhint.xml('<ShowInMenu category="%s"/>' % 'PVGeo: OMF')
     # @smproperty.input(name="MultiBlockInput", port_index=0)
     # @smdomain.datatype(dataTypes=["vtkMultiBlockDataSet"], composite_data_supported=True)

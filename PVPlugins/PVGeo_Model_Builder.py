@@ -15,7 +15,7 @@ MENU_CAT = 'PVGeo: Model Building'
 ###############################################################################
 
 
-@smproxy.source(name='PVGeoCreateEvenRectilinearGrid', label='Create Even Rectilinear Grid')
+@smproxy.source()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 class PVGeoCreateEvenRectilinearGrid(CreateEvenRectilinearGrid):
@@ -44,7 +44,7 @@ class PVGeoCreateEvenRectilinearGrid(CreateEvenRectilinearGrid):
 ###############################################################################
 
 
-@smproxy.source(name='PVGeoCreateTensorMesh', label='Create Tensor Mesh')
+@smproxy.source()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 class PVGeoCreateTensorMesh(CreateTensorMesh):
@@ -71,7 +71,7 @@ class PVGeoCreateTensorMesh(CreateTensorMesh):
 ###############################################################################
 
 
-@smproxy.source(name='PVGeoCreateUniformGrid', label='Create Uniform Grid')
+@smproxy.source()
 @smhint.xml('''<ShowInMenu category="%s"/>
     <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
 class PVGeoCreateUniformGrid(CreateUniformGrid):
@@ -98,7 +98,7 @@ class PVGeoCreateUniformGrid(CreateUniformGrid):
 ###############################################################################
 
 
-@smproxy.source(name='PVGeoOutlineContinents', label=OutlineContinents.__displayname__)
+@smproxy.source()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 class PVGeoOutlineContinents(OutlineContinents):
     def __init__(self):
@@ -112,7 +112,7 @@ class PVGeoOutlineContinents(OutlineContinents):
 ###############################################################################
 
 
-@smproxy.source(name='PVGeoGlobeSource', label=GlobeSource.__displayname__)
+@smproxy.source()
 @smhint.xml('<ShowInMenu category="%s"/>' % MENU_CAT)
 class PVGeoGlobeSource(GlobeSource):
     def __init__(self):
