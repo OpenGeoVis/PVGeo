@@ -5,28 +5,28 @@
 
 Computation times
 =================
-**00:22.292** total execution time for **examples_filters-general** files:
+**00:22.888** total execution time for **examples_filters-general** files:
 
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)                                 | 00:13.703 | 0.0 MB |
+| :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)                                 | 00:13.975 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)               | 00:03.156 | 0.0 MB |
+| :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)               | 00:03.233 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)                                 | 00:01.402 | 0.0 MB |
+| :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)                                 | 00:01.430 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)                                           | 00:00.705 | 0.0 MB |
+| :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)                                     | 00:00.765 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)                         | 00:00.672 | 0.0 MB |
+| :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)                                           | 00:00.719 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)                                     | 00:00.645 | 0.0 MB |
+| :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)                         | 00:00.679 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)                                   | 00:00.599 | 0.0 MB |
+| :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)                                   | 00:00.624 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``) | 00:00.583 | 0.0 MB |
+| :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``) | 00:00.597 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)                                     | 00:00.501 | 0.0 MB |
+| :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)                                     | 00:00.524 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)                                   | 00:00.319 | 0.0 MB |
+| :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)                                   | 00:00.335 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+
 | :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``combine-tables.py``)                                   | 00:00.004 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------------------+-----------+--------+

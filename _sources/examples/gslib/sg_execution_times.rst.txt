@@ -5,12 +5,12 @@
 
 Computation times
 =================
-**00:59.102** total execution time for **examples_gslib** files:
+**01:08.618** total execution time for **examples_gslib** files:
 
 +----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_gslib_read-sgems-grid.py` (``read-sgems-grid.py``) | 00:40.629 | 0.0 MB |
+| :ref:`sphx_glr_examples_gslib_read-sgems-grid.py` (``read-sgems-grid.py``) | 00:40.920 | 0.0 MB |
 +----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_gslib_read-table.py` (``read-table.py``)           | 00:17.863 | 0.0 MB |
+| :ref:`sphx_glr_examples_gslib_read-table.py` (``read-table.py``)           | 00:27.042 | 0.0 MB |
 +----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_gslib_read-point-set.py` (``read-point-set.py``)   | 00:00.610 | 0.0 MB |
+| :ref:`sphx_glr_examples_gslib_read-point-set.py` (``read-point-set.py``)   | 00:00.657 | 0.0 MB |
 +----------------------------------------------------------------------------+-----------+--------+

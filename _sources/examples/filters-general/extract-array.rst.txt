@@ -66,7 +66,7 @@ Construct the filter
 
  .. code-block:: none
 
-    Table (0x7f2f89a10fa8)
+    Table (0x7f15dc0fcca8)
       N Rows:       152709
       N Arrays:     1
 
@@ -95,14 +95,14 @@ Construct the filter
 
     (array([14075., 31732., 38605., 28616., 13749.,  9270.,  7174.,  4687.,
             3199.,  1602.]), pyvista_ndarray([ 682. ,  868.1, 1054.2, 1240.3, 1426.4, 1612.5, 1798.6,
-                     1984.7, 2170.8, 2356.9, 2543. ], dtype=float32), <a list of 10 Patch objects>)
+                     1984.7, 2170.8, 2356.9, 2543. ], dtype=float32), <BarContainer object of 10 artists>)
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.645 seconds)
+   **Total running time of the script:** ( 0 minutes  0.765 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-array.py:
