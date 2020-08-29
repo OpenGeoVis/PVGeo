@@ -83,7 +83,7 @@ Use the filter to reshape the table
 
  .. code-block:: none
 
-    Table (0x7f15dc0fc348)
+    Table (0x7f92cc095f48)
       N Rows:       600
       N Arrays:     2
 
