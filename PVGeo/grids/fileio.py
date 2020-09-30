@@ -481,7 +481,6 @@ class EsriGridReader(DelimitedTextReader):
             data.append(df)
         return data
 
-
     def _get_raw_data(self, idx=0):
         """This will return the proper data for the given timestep.
         This method handles Surfer's NaN data values and checkes the value range
@@ -491,9 +490,7 @@ class EsriGridReader(DelimitedTextReader):
         # if np.any(nans):
         #     data = np.ma.masked_where(nans, data)
         data[nans] = np.nan
-        return data.flatten()
-
-
+        return np.flip(np.reshape(data, self.get_shape(), order='F'), 1).flatten(order='F')
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to get data for current timestep and populate the
@@ -511,10 +508,10 @@ class EsriGridReader(DelimitedTextReader):
         # Build the data object
         output.SetOrigin(self.__xo, self.__yo, 0.0)
         output.SetSpacing(self.__cellsize, self.__cellsize, self.__cellsize)
-        output.SetDimensions(self.__nx, self.__ny, 1)
+        output.SetDimensions(*self.get_shape())
 
         # Now add data values as point data
-        data = self._get_raw_data(idx=i).flatten(order='F')
+        data = self._get_raw_data(idx=i)
         vtkarr = interface.convert_array(data, name=self.__data_name)
         output.GetPointData().AddArray(vtkarr)
 
@@ -544,6 +541,9 @@ class EsriGridReader(DelimitedTextReader):
         """Get the name of the data array"""
         return self.__data_name
 
+    def get_shape(self):
+        """Get the shape of the grid."""
+        return (self.__nx, self.__ny, 1)
 
 
 ###############################################################################
