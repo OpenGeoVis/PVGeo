@@ -485,7 +485,7 @@ class EsriGridReader(DelimitedTextReader):
         """This will return the proper data for the given timestep.
         This method handles Surfer's NaN data values and checkes the value range
         """
-        data = self._data[idx].values.astype(np.float)
+        data = self._data[idx].values.astype(np.float).ravel()
         nans = np.argwhere(data == self.NODATA_VALUE)
         # if np.any(nans):
         #     data = np.ma.masked_where(nans, data)
