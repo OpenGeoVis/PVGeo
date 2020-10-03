@@ -87,6 +87,7 @@ import numpy as np
 pyvista.set_error_output_file('errors.txt')
 # Ensure that offscreen rendering is used for docs generation
 pyvista.OFF_SCREEN = True # Not necessary - simply an insurance policy
+pyvista.BUILDING_GALLERY = True # necessary when building the sphinx gallery
 # Preferred plotting style for documentation
 pyvista.set_plot_theme('document')
 
