@@ -228,6 +228,7 @@
 ./_sources/overview/getting-started.rst.txt
 ./_sources/overview/why-pvgeo.rst.txt
 ./_static/basic.css
+./_static/binder_badge_logo.svg
 ./_static/broken_example.png
 ./_static/clipboard.min.js
 ./_static/copy-button.svg
