@@ -77,7 +77,7 @@ Use the filter:
 
  .. code-block:: none
 
-    UniformGrid (0x7f9780ba0a68)
+    UniformGrid (0x7faf4c8c6ac8)
       N Cells:      243
       N Points:     400
       X Bounds:     0.000e+00, 9.000e+00
@@ -131,7 +131,7 @@ Use a custom math operation:
 
  .. code-block:: none
 
-    UniformGrid (0x7f9780ba0c48)
+    UniformGrid (0x7faf4c8c6c48)
       N Cells:      243
       N Points:     400
       X Bounds:     0.000e+00, 9.000e+00
@@ -186,7 +186,7 @@ Use a custom math operation:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.739 seconds)
+   **Total running time of the script:** ( 0 minutes  0.743 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_array-math.py:

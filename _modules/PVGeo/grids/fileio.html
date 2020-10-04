@@ -700,19 +700,16 @@
             <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span></div>
 
-
 <div class="viewcode-block" id="EsriGridReader._get_raw_data"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader._get_raw_data">[docs]</a>    <span class="k">def</span> <span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This will return the proper data for the given timestep.</span>
 <span class="sd">        This method handles Surfer&#39;s NaN data values and checkes the value range</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
         <span class="n">nans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">NODATA_VALUE</span><span class="p">)</span>
         <span class="c1"># if np.any(nans):</span>
         <span class="c1">#     data = np.ma.masked_where(nans, data)</span>
         <span class="n">data</span><span class="p">[</span><span class="n">nans</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span></div>
-
-
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_shape</span><span class="p">(),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="EsriGridReader.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Used by pipeline to get data for current timestep and populate the</span>
@@ -730,10 +727,10 @@
         <span class="c1"># Build the data object</span>
         <span class="n">output</span><span class="o">.</span><span class="n">SetOrigin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__xo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__yo</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">SetSpacing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cellsize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cellsize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cellsize</span><span class="p">)</span>
-        <span class="n">output</span><span class="o">.</span><span class="n">SetDimensions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__nx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ny</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">SetDimensions</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">get_shape</span><span class="p">())</span>
 
         <span class="c1"># Now add data values as point data</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
         <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
 
@@ -761,8 +758,11 @@
 
 <div class="viewcode-block" id="EsriGridReader.get_data_name"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.get_data_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the name of the data array&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span></div>
 
+<div class="viewcode-block" id="EsriGridReader.get_shape"><a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.get_shape">[docs]</a>    <span class="k">def</span> <span class="nf">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the shape of the grid.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__nx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ny</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div></div>
 
 
 <span class="c1">###############################################################################</span>
