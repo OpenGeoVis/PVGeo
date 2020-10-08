@@ -189,6 +189,65 @@
         </ul>
     
 
+    
+
+    <style>
+        div.sidebar-ad {
+            display: block !important;
+        }
+        .sidebar-ad {
+            padding: 0.5em;
+            margin: 1em 0;
+            padding-top: 1em;
+            clear: both;
+            display: none !important;
+            margin-top: 1em;
+            border: 0;
+            /* background-color: #eee; */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #0a0a0a;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .sidebar-ad-block {
+            /* RTD theme doesn't correctly set the sidebar width */
+            width: 300px;
+            padding: 0 1em;
+        }
+        .sidebar-ad-block .sidebar-ad {
+            /* RTD theme doesn't set sidebar text color */
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    </style>
+
+    <div class="sidebar-ad-block">
+        <div class="sidebar-ad">
+            <div class="ad-content">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1379117569915790"
+                     data-ad-slot="3375850680"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <div class="ad-disclaimer">
+                    We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                </div>
+            </div>
+        </div>
+        <img src="https://server.ethicalads.io/proxy/view/1030/c7d0ea2c-7dfe-4593-8dcc-8594e621a563/" style="display: none;">
+    </div>
+
+
+
         </div>
         
       </div>
@@ -301,7 +360,7 @@ input points are rotated, then this angle will reflect a close
 approximation of that rotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>degrees</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – A flag on to return decimal degrees or radians.</p>
+<dd class="field-odd"><p><strong>degrees</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – A flag on to return decimal degrees or radians.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -336,7 +395,7 @@ approximation of that rotation.</p>
 <dd><p>Set the X cells spacing</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
+<dd class="field-odd"><p><strong>dx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
 the X-direction</p>
 </dd>
 </dl>
@@ -348,7 +407,7 @@ the X-direction</p>
 <dd><p>Set the Y cells spacing</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
+<dd class="field-odd"><p><strong>dy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
 the Y-direction</p>
 </dd>
 </dl>
@@ -360,7 +419,7 @@ the Y-direction</p>
 <dd><p>Set the Z cells spacing</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
+<dd class="field-odd"><p><strong>dz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
 the Z-direction</p>
 </dd>
 </dl>
@@ -373,11 +432,11 @@ the Z-direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
+<li><p><strong>dx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
 the X-direction</p></li>
-<li><p><strong>dy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
+<li><p><strong>dy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
 the Y-direction</p></li>
-<li><p><strong>dz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
+<li><p><strong>dz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacing(s) for the cells in
 the Z-direction</p></li>
 </ul>
 </dd>

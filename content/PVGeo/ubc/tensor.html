@@ -192,6 +192,65 @@
         </ul>
     
 
+    
+
+    <style>
+        div.sidebar-ad {
+            display: block !important;
+        }
+        .sidebar-ad {
+            padding: 0.5em;
+            margin: 1em 0;
+            padding-top: 1em;
+            clear: both;
+            display: none !important;
+            margin-top: 1em;
+            border: 0;
+            /* background-color: #eee; */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #0a0a0a;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .sidebar-ad-block {
+            /* RTD theme doesn't correctly set the sidebar width */
+            width: 300px;
+            padding: 0 1em;
+        }
+        .sidebar-ad-block .sidebar-ad {
+            /* RTD theme doesn't set sidebar text color */
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    </style>
+
+    <div class="sidebar-ad-block">
+        <div class="sidebar-ad">
+            <div class="ad-content">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1379117569915790"
+                     data-ad-slot="3375850680"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <div class="ad-disclaimer">
+                    We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                </div>
+            </div>
+        </div>
+        <img src="https://server.ethicalads.io/proxy/view/1030/c7d0ea2c-7dfe-4593-8dcc-8594e621a563/" style="display: none;">
+    </div>
+
+
+
         </div>
         
       </div>
@@ -329,9 +388,9 @@ file. If the mesh file is 2D, then then model file must also be in the
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename_mesh</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The mesh filename as an absolute path for the
+<li><p><strong>filename_mesh</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The mesh filename as an absolute path for the
 input mesh file in UBC 2D/3D Mesh Format</p></li>
-<li><p><strong>filename_models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>)</em>) – The model filename(s) as an
+<li><p><strong>filename_models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>)</em>) – The model filename(s) as an
 absolute path for the input model file in UBC 2D/3D Model Format.</p></li>
 <li><p><strong>output</strong> (<em>vtkRectilinearGrid</em>) – The output data object</p></li>
 </ul>
@@ -376,7 +435,7 @@ to associate model data with the mesh grid.</p>
 mesh to place the model data upon.</p></li>
 <li><p><strong>model</strong> (<em>np.array</em>) – A NumPy float array that holds all of the data to
 place inside of the mesh’s cells.</p></li>
-<li><p><strong>data_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The name of the model data array once placed on the
+<li><p><strong>data_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the model data array once placed on the
 <code class="docutils literal notranslate"><span class="pre">vtkRectilinearGrid</span></code>.</p></li>
 </ul>
 </dd>
@@ -397,7 +456,7 @@ place inside of the mesh’s cells.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The mesh filename as an absolute path for the input
+<li><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The mesh filename as an absolute path for the input
 mesh file in UBC 3D Mesh Format.</p></li>
 <li><p><strong>output</strong> (<em>vtkRectilinearGrid</em>) – The output data object</p></li>
 </ul>
@@ -422,7 +481,7 @@ No data attributes here, simply an empty mesh. Use the
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The mesh filename as an absolute path for the input
+<li><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The mesh filename as an absolute path for the input
 mesh file in UBC 3D Mesh Format.</p></li>
 <li><p><strong>output</strong> (<em>vtkRectilinearGrid</em>) – The output data object</p></li>
 </ul>
@@ -450,7 +509,7 @@ No data attributes here, simply an empty mesh. Use the
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The model filename as an absolute path for the
+<dd class="field-odd"><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The model filename as an absolute path for the
 input model file in UBCMesh Model Format. Also accepts a list of
 string file names.</p>
 </dd>
@@ -520,14 +579,14 @@ boolean data array.</p>
 <dd><p>Ask self if the reader needs to read the files again</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – if the flag is set then this method will set the read
+<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – if the flag is set then this method will set the read
 status</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The status of the reader aspect of the filter.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>

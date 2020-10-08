@@ -193,6 +193,65 @@
         </ul>
     
 
+    
+
+    <style>
+        div.sidebar-ad {
+            display: block !important;
+        }
+        .sidebar-ad {
+            padding: 0.5em;
+            margin: 1em 0;
+            padding-top: 1em;
+            clear: both;
+            display: none !important;
+            margin-top: 1em;
+            border: 0;
+            /* background-color: #eee; */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #0a0a0a;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .sidebar-ad-block {
+            /* RTD theme doesn't correctly set the sidebar width */
+            width: 300px;
+            padding: 0 1em;
+        }
+        .sidebar-ad-block .sidebar-ad {
+            /* RTD theme doesn't set sidebar text color */
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    </style>
+
+    <div class="sidebar-ad-block">
+        <div class="sidebar-ad">
+            <div class="ad-content">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1379117569915790"
+                     data-ad-slot="3375850680"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <div class="ad-disclaimer">
+                    We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                </div>
+            </div>
+        </div>
+        <img src="https://server.ethicalads.io/proxy/view/1030/c7d0ea2c-7dfe-4593-8dcc-8594e621a563/" style="display: none;">
+    </div>
+
+
+
         </div>
         
       </div>
@@ -295,15 +354,15 @@ for an output algorithm to have.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>algorithm</strong> (<em>vtkDataObject</em>) – The data object (Proxy) on the pipeline
 (pass <cite>self</cite> from algorithm subclasses)</p></li>
-<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – the input port</p></li>
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – optional : the connection index on the input port</p></li>
+<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the input port</p></li>
+<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – optional : the connection index on the input port</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the time step values of the input (if there arn’t any, returns <code class="docutils literal notranslate"><span class="pre">None</span></code>)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -323,14 +382,14 @@ reader.</p>
 (pass <cite>self</cite> from algorithm subclasses)</p></li>
 <li><p><strong>outInfo</strong> (<em>vtkInformationVector</em>) – The output information for the
 algorithm</p></li>
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – the index for the output port</p></li>
+<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the index for the output port</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the index of the requested time</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -352,9 +411,9 @@ algorithm</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>algorithm</strong> (<em>vtkDataObject</em>) – The data object (Proxy) on the pipeline
 (pass <cite>self</cite> from algorithm subclasses)</p></li>
-<li><p><strong>nt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – Number of timesteps (Pass a list to use length of
+<li><p><strong>nt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – Number of timesteps (Pass a list to use length of
 that list)</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – The discrete value in seconds for the time step.</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – The discrete value in seconds for the time step.</p></li>
 <li><p><strong>explicit</strong> (<em>boolean</em>) – if true, this will treat the nt argument as the exact
 timestep values to use</p></li>
 </ul>

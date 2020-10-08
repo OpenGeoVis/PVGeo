@@ -199,6 +199,65 @@
         </ul>
     
 
+    
+
+    <style>
+        div.sidebar-ad {
+            display: block !important;
+        }
+        .sidebar-ad {
+            padding: 0.5em;
+            margin: 1em 0;
+            padding-top: 1em;
+            clear: both;
+            display: none !important;
+            margin-top: 1em;
+            border: 0;
+            /* background-color: #eee; */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #0a0a0a;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .sidebar-ad-block {
+            /* RTD theme doesn't correctly set the sidebar width */
+            width: 300px;
+            padding: 0 1em;
+        }
+        .sidebar-ad-block .sidebar-ad {
+            /* RTD theme doesn't set sidebar text color */
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    </style>
+
+    <div class="sidebar-ad-block">
+        <div class="sidebar-ad">
+            <div class="ad-content">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1379117569915790"
+                     data-ad-slot="3375850680"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <div class="ad-disclaimer">
+                    We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                </div>
+            </div>
+        </div>
+        <img src="https://server.ethicalads.io/proxy/view/1030/c7d0ea2c-7dfe-4593-8dcc-8594e621a563/" style="display: none;">
+    </div>
+
+
+
         </div>
         
       </div>
@@ -372,7 +431,7 @@ then the values in z_range will be inferred as absolute.</p>
 <dd><p>Set the spacings for the cells in the Z direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>zcoords</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Z-axis</p>
+<dd class="field-odd"><p><strong>zcoords</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em> or </em><em>np.array</em><em>(</em><em>floats</em><em>)</em>) – the spacings along the Z-axis</p>
 </dd>
 </dl>
 </dd></dl>
@@ -383,7 +442,7 @@ then the values in z_range will be inferred as absolute.</p>
 <dd><p>Set the spacings for the cells in the Z direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>zcoordstr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – the spacings along the Z-axis in the UBC style</p>
+<dd class="field-odd"><p><strong>zcoordstr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the spacings along the Z-axis in the UBC style</p>
 </dd>
 </dl>
 </dd></dl>
@@ -421,7 +480,7 @@ common conversions.</p>
 <dd class="field-odd"><p>dictionary of conversion units</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -641,7 +700,7 @@ origin.</p>
 <dl class="py class">
 <dt id="PVGeo.filters.xyz.RotationTool">
 <em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.xyz.</code><code class="sig-name descname">RotationTool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decimals</span><span class="o">=</span><span class="default_value">6</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/xyz.html#RotationTool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.xyz.RotationTool" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A class that holds a set of methods/tools for performing and estimating
 coordinate rotations.</p>
 <dl class="py method">

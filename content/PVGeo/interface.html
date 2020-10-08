@@ -193,6 +193,65 @@
         </ul>
     
 
+    
+
+    <style>
+        div.sidebar-ad {
+            display: block !important;
+        }
+        .sidebar-ad {
+            padding: 0.5em;
+            margin: 1em 0;
+            padding-top: 1em;
+            clear: both;
+            display: none !important;
+            margin-top: 1em;
+            border: 0;
+            /* background-color: #eee; */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #0a0a0a;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .sidebar-ad-block {
+            /* RTD theme doesn't correctly set the sidebar width */
+            width: 300px;
+            padding: 0 1em;
+        }
+        .sidebar-ad-block .sidebar-ad {
+            /* RTD theme doesn't set sidebar text color */
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    </style>
+
+    <div class="sidebar-ad-block">
+        <div class="sidebar-ad">
+            <div class="ad-content">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1379117569915790"
+                     data-ad-slot="3375850680"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <div class="ad-disclaimer">
+                    We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                </div>
+            </div>
+        </div>
+        <img src="https://server.ethicalads.io/proxy/view/1030/c7d0ea2c-7dfe-4593-8dcc-8594e621a563/" style="display: none;">
+    </div>
+
+
+
         </div>
         
       </div>
@@ -275,9 +334,9 @@ upon.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arr</strong> (<em>ndarray</em><em> or </em><em>vtkDataArry</em>) – A numpy array or vtkDataArry to convert</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – the name of the data array for VTK</p></li>
-<li><p><strong>deep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – if input is numpy array then deep copy values</p></li>
-<li><p><strong>pdf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – if input is vtkDataArry, make a pandas DataFrame of the array</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the name of the data array for VTK</p></li>
+<li><p><strong>deep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – if input is numpy array then deep copy values</p></li>
+<li><p><strong>pdf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – if input is vtkDataArry, make a pandas DataFrame of the array</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -356,7 +415,7 @@ cell/point/field/row data as named NumPy arrays in a dictionary.</p>
 for VTK data types</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a> (numpy.dtype, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>)</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)">tuple</a> (numpy.dtype, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -390,7 +449,7 @@ for VTK data types</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ndarr</strong> (<em>numpy.ndarray</em>) – The 1D/2D array to be converted to a table</p></li>
-<li><p><strong>titles</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><em>tuple</em></a>) – The titles for the arrays in the table. Must
+<li><p><strong>titles</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><em>tuple</em></a>) – The titles for the arrays in the table. Must
 have same number of elements as columns in input ndarray</p></li>
 <li><p><strong>pdo</strong> (<em>vtkTable</em>) – The output data object pointer</p></li>
 </ul>
@@ -418,7 +477,7 @@ coordinates.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>points</strong> (<em>np.ndarray</em><em> or </em><em>pandas.DataFrame</em>) – The points and pointdata</p></li>
-<li><p><strong>copy_z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – A flag on whether to append the z values as a PointData
+<li><p><strong>copy_z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – A flag on whether to append the z values as a PointData
 array</p></li>
 </ul>
 </dd>

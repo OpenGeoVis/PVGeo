@@ -185,6 +185,65 @@
         </ul>
     
 
+    
+
+    <style>
+        div.sidebar-ad {
+            display: block !important;
+        }
+        .sidebar-ad {
+            padding: 0.5em;
+            margin: 1em 0;
+            padding-top: 1em;
+            clear: both;
+            display: none !important;
+            margin-top: 1em;
+            border: 0;
+            /* background-color: #eee; */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #0a0a0a;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .sidebar-ad-block {
+            /* RTD theme doesn't correctly set the sidebar width */
+            width: 300px;
+            padding: 0 1em;
+        }
+        .sidebar-ad-block .sidebar-ad {
+            /* RTD theme doesn't set sidebar text color */
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    </style>
+
+    <div class="sidebar-ad-block">
+        <div class="sidebar-ad">
+            <div class="ad-content">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1379117569915790"
+                     data-ad-slot="3375850680"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <div class="ad-disclaimer">
+                    We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                </div>
+            </div>
+        </div>
+        <img src="https://server.ethicalads.io/proxy/view/1030/c7d0ea2c-7dfe-4593-8dcc-8594e621a563/" style="display: none;">
+    </div>
+
+
+
         </div>
         
       </div>
@@ -277,7 +336,7 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7f0ed3695fa8)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7fb703dc7468)
   N Rows:       100
   N Arrays:     2
 </pre></div>
@@ -286,7 +345,7 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7f0ed3695f48)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7fb703dc7528)
   N Rows:       100
   N Arrays:     1
 </pre></div>
@@ -297,7 +356,7 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7f0ed3695d68)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7fb703dc76a8)
   N Rows:       100
   N Arrays:     3
 </pre></div>
@@ -308,7 +367,7 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
     <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">arrs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">))</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.004 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.005 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-combine-tables-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/d8aedf50f5c866213616a71ca0c34c13/combine-tables.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">combine-tables.py</span></code></a></p>

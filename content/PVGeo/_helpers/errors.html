@@ -191,6 +191,65 @@
         </ul>
     
 
+    
+
+    <style>
+        div.sidebar-ad {
+            display: block !important;
+        }
+        .sidebar-ad {
+            padding: 0.5em;
+            margin: 1em 0;
+            padding-top: 1em;
+            clear: both;
+            display: none !important;
+            margin-top: 1em;
+            border: 0;
+            /* background-color: #eee; */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #0a0a0a;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .sidebar-ad-block {
+            /* RTD theme doesn't correctly set the sidebar width */
+            width: 300px;
+            padding: 0 1em;
+        }
+        .sidebar-ad-block .sidebar-ad {
+            /* RTD theme doesn't set sidebar text color */
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    </style>
+
+    <div class="sidebar-ad-block">
+        <div class="sidebar-ad">
+            <div class="ad-content">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1379117569915790"
+                     data-ad-slot="3375850680"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <div class="ad-disclaimer">
+                    We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                </div>
+            </div>
+        </div>
+        <img src="https://server.ethicalads.io/proxy/view/1030/c7d0ea2c-7dfe-4593-8dcc-8594e621a563/" style="display: none;">
+    </div>
+
+
+
         </div>
         
       </div>
@@ -256,7 +315,7 @@
 <dl class="py class">
 <dt id="PVGeo._helpers.errors.ErrorObserver">
 <em class="property">class </em><code class="sig-prename descclassname">PVGeo._helpers.errors.</code><code class="sig-name descname">ErrorObserver</code><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#ErrorObserver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.errors.ErrorObserver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A class for catching errors when processing on a VTK pipeline. The
 <code class="docutils literal notranslate"><span class="pre">AlgorithmBase</span></code> class handles setting up this observer on initialization.</p>
 <p class="rubric">Example</p>
@@ -284,7 +343,7 @@
 <dd class="field-odd"><p>the last set error message</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -303,7 +362,7 @@
 <dl class="py class">
 <dt id="PVGeo._helpers.errors.HiddenPrints">
 <em class="property">class </em><code class="sig-prename descclassname">PVGeo._helpers.errors.</code><code class="sig-name descname">HiddenPrints</code><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#HiddenPrints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.errors.HiddenPrints" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Use this object to hide print statements when perfroming a task.
 This is used to suppress printed warnings from discretize on import:</p>
 <p>Example:
@@ -317,7 +376,7 @@ This is used to suppress printed warnings from discretize on import:</p>
 <dl class="py class">
 <dt id="PVGeo._helpers.errors.PVGeoError">
 <em class="property">class </em><code class="sig-prename descclassname">PVGeo._helpers.errors.</code><code class="sig-name descname">PVGeoError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#PVGeoError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
 <p>This is a custom error class for handling errors when proccessing on the
 VTK pipeline. It makes the error messages easy to decipher in ParaView and
 cleans the messages when used in Python outside of ParaView. When on the VTK
