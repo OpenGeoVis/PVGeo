@@ -166,10 +166,10 @@
     
 
     <style>
-        div.sidebar-ad {
+        div.extra-content {
             display: block !important;
         }
-        .sidebar-ad {
+        .extra-content {
             padding: 0.5em;
             margin: 1em 0;
             padding-top: 1em;
@@ -186,27 +186,28 @@
             text-align: center;
         }
 
-        .sidebar-ad-block {
+        .sidebar-extra-content {
             /* RTD theme doesn't correctly set the sidebar width */
             width: 300px;
             padding: 0 1em;
         }
-        .sidebar-ad-block .sidebar-ad {
+        .sidebar-extra-content .extra-content {
             /* RTD theme doesn't set sidebar text color */
             color: #b3b3b3;
             font-size: 14px;
             line-height: 20px;
         }
 
-        .ad-content, .adsbygoogle {
+        .internal-content, .adsbygoogle {
             background-color: transparent;
+            text-align: center;
         }
 
     </style>
 
-    <div class="sidebar-ad-block">
-        <div class="sidebar-ad">
-            <div class="ad-content">
+    <div class="sidebar-extra-content">
+        <div class="extra-content">
+            <div class="internal-content">
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <ins class="adsbygoogle"
                      style="display:inline-block;width:250px;height:250px"
@@ -216,12 +217,12 @@
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
-            <div class="ad-disclaimer">
+            <div>
                 We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
             </div>
         </div>
-        <img src="https://server.ethicalads.io/proxy/view/1030/c7d0ea2c-7dfe-4593-8dcc-8594e621a563/" style="display: none;">
     </div>
+
 
 
 
@@ -281,7 +282,7 @@
             
   <div class="section" id="computation-times">
 <span id="sphx-glr-examples-gslib-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Permalink to this headline">¶</a></h1>
-<p><strong>00:59.254</strong> total execution time for <strong>examples_gslib</strong> files:</p>
+<p><strong>00:59.532</strong> total execution time for <strong>examples_gslib</strong> files:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 80%" />
@@ -290,15 +291,15 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="read-sgems-grid.html#sphx-glr-examples-gslib-read-sgems-grid-py"><span class="std std-ref">Read SGeMS Grid</span></a> (<code class="docutils literal notranslate"><span class="pre">read-sgems-grid.py</span></code>)</p></td>
-<td><p>00:40.679</p></td>
+<td><p>00:40.953</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="read-table.html#sphx-glr-examples-gslib-read-table-py"><span class="std std-ref">Read GSLib Table</span></a> (<code class="docutils literal notranslate"><span class="pre">read-table.py</span></code>)</p></td>
-<td><p>00:17.906</p></td>
+<td><p>00:18.021</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="read-point-set.html#sphx-glr-examples-gslib-read-point-set-py"><span class="std std-ref">Read GSLib Point Set</span></a> (<code class="docutils literal notranslate"><span class="pre">read-point-set.py</span></code>)</p></td>
-<td><p>00:00.668</p></td>
+<td><p>00:00.558</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
 </tbody>

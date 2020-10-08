@@ -192,10 +192,10 @@
     
 
     <style>
-        div.sidebar-ad {
+        div.extra-content {
             display: block !important;
         }
-        .sidebar-ad {
+        .extra-content {
             padding: 0.5em;
             margin: 1em 0;
             padding-top: 1em;
@@ -212,27 +212,28 @@
             text-align: center;
         }
 
-        .sidebar-ad-block {
+        .sidebar-extra-content {
             /* RTD theme doesn't correctly set the sidebar width */
             width: 300px;
             padding: 0 1em;
         }
-        .sidebar-ad-block .sidebar-ad {
+        .sidebar-extra-content .extra-content {
             /* RTD theme doesn't set sidebar text color */
             color: #b3b3b3;
             font-size: 14px;
             line-height: 20px;
         }
 
-        .ad-content, .adsbygoogle {
+        .internal-content, .adsbygoogle {
             background-color: transparent;
+            text-align: center;
         }
 
     </style>
 
-    <div class="sidebar-ad-block">
-        <div class="sidebar-ad">
-            <div class="ad-content">
+    <div class="sidebar-extra-content">
+        <div class="extra-content">
+            <div class="internal-content">
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <ins class="adsbygoogle"
                      style="display:inline-block;width:250px;height:250px"
@@ -242,12 +243,12 @@
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
-            <div class="ad-disclaimer">
+            <div>
                 We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
             </div>
         </div>
-        <img src="https://server.ethicalads.io/proxy/view/1030/c7d0ea2c-7dfe-4593-8dcc-8594e621a563/" style="display: none;">
     </div>
+
 
 
 
@@ -353,7 +354,7 @@ object (essentially a point cloud).</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f5b60536ac8)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f2f9424f3a8)
   N Cells:      499200
   N Points:     499200
   X Bounds:     3.268e+05, 3.302e+05
@@ -409,7 +410,7 @@ The full pipeline method</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Voxelizing... done.
 Recovered Angle (deg.): 53.550
 Recovered Cell Sizes: (25.00, 25.00, 25.00)
-UnstructuredGrid (0x7f5b60536b88)
+UnstructuredGrid (0x7f2f9424fb88)
   N Cells:      499200
   N Points:     524064
   X Bounds:     3.268e+05, 3.302e+05
@@ -440,7 +441,7 @@ create 3 orthogonal slices through a data volume.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7f5b60536b28)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7f2f9424fa68)
   N Blocks:     3
   X Bounds:     326804.336, 330185.260
   Y Bounds:     4406253.954, 4409862.606
@@ -466,7 +467,7 @@ create 3 orthogonal slices through a data volume.</p>
  (0.0, 0.0, 1.0)]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  14.684 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  14.323 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-voxelize-points-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/3e880273e4b14e3562631837c4c62dce/voxelize-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">voxelize-points.py</span></code></a></p>

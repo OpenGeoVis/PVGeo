@@ -188,10 +188,10 @@
     
 
     <style>
-        div.sidebar-ad {
+        div.extra-content {
             display: block !important;
         }
-        .sidebar-ad {
+        .extra-content {
             padding: 0.5em;
             margin: 1em 0;
             padding-top: 1em;
@@ -208,27 +208,28 @@
             text-align: center;
         }
 
-        .sidebar-ad-block {
+        .sidebar-extra-content {
             /* RTD theme doesn't correctly set the sidebar width */
             width: 300px;
             padding: 0 1em;
         }
-        .sidebar-ad-block .sidebar-ad {
+        .sidebar-extra-content .extra-content {
             /* RTD theme doesn't set sidebar text color */
             color: #b3b3b3;
             font-size: 14px;
             line-height: 20px;
         }
 
-        .ad-content, .adsbygoogle {
+        .internal-content, .adsbygoogle {
             background-color: transparent;
+            text-align: center;
         }
 
     </style>
 
-    <div class="sidebar-ad-block">
-        <div class="sidebar-ad">
-            <div class="ad-content">
+    <div class="sidebar-extra-content">
+        <div class="extra-content">
+            <div class="internal-content">
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <ins class="adsbygoogle"
                      style="display:inline-block;width:250px;height:250px"
@@ -238,12 +239,12 @@
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
-            <div class="ad-disclaimer">
+            <div>
                 We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
             </div>
         </div>
-        <img src="https://server.ethicalads.io/proxy/view/1030/c7d0ea2c-7dfe-4593-8dcc-8594e621a563/" style="display: none;">
     </div>
+
 
 
 
@@ -346,7 +347,7 @@
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7f5b60536288)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7f2f9424ff48)
   N Rows:       600
   N Arrays:     2
 </pre></div>
