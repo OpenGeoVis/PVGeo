@@ -95,7 +95,7 @@ pyvista.set_plot_theme('document')
 # -- Project information -----------------------------------------------------
 
 project = 'PVGeo'
-copyright = u'2018-2019, Bane Sullivan, http:://banesullivan.com'
+copyright = u'2018-2020, Bane Sullivan, http:://banesullivan.com'
 author = 'Bane Sullivan'
 html_show_copyright = False
 html_show_sphinx = False
