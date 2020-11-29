@@ -286,7 +286,6 @@
 <span></span><span class="sd">&quot;&quot;&quot;Supporting functions for polydata and grid objects.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">collections.abc</span>
-<span class="kn">import</span> <span class="nn">ctypes</span>
 <span class="kn">import</span> <span class="nn">enum</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">signal</span>
@@ -407,7 +406,7 @@
         <span class="k">return</span> <span class="n">vtk_data</span>
     <span class="c1"># Otherwise input must be a vtkDataArray</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkDataArray</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkBitArray</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Invalid input array type (</span><span class="si">{}</span><span class="s1">).&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">arr</span><span class="p">)))</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid input array type (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
     <span class="c1"># Handle booleans</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkBitArray</span><span class="p">):</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">vtk_bit_array_to_char</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
@@ -429,43 +428,16 @@
     <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">point_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return point array of a vtk object.</span>
-
-<span class="sd">    DEPRECATED: please use `point_array` instead.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;DEPRECATED: please use `point_array` instead.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">point_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-
-
 <span class="k">def</span> <span class="nf">field_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return field array of a vtk object.&quot;&quot;&quot;</span>
     <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">GetFieldData</span><span class="p">()</span><span class="o">.</span><span class="n">GetAbstractArray</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">field_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return field array of a vtk object.</span>
-
-<span class="sd">    DEPRECATED: please use `field_array` instead.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;DEPRECATED: please use `field_array` instead.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">field_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-
-
 <span class="k">def</span> <span class="nf">cell_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return cell array of a vtk object.&quot;&quot;&quot;</span>
     <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">GetAbstractArray</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">cell_scalar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return cell array of a vtk object.</span>
-
-<span class="sd">    DEPRECATED: please use `cell_array` instead.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;DEPRECATED: please use `cell_array` instead.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">cell_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">row_array</span><span class="p">(</span><span class="n">data_object</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
@@ -487,11 +459,11 @@
         <span class="k">elif</span> <span class="n">field</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;row&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,]:</span>
             <span class="n">field</span> <span class="o">=</span> <span class="n">FieldAssociation</span><span class="o">.</span><span class="n">ROW</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Data field (</span><span class="si">{}</span><span class="s1">) not supported.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">field</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data field (</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s1">) not supported.&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">FieldAssociation</span><span class="p">):</span>
         <span class="k">pass</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Data field (</span><span class="si">{}</span><span class="s1">) not supported.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">field</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data field (</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s1">) not supported.&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">field</span>
 
 
@@ -518,7 +490,7 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">row_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">arr</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">err</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Data array (</span><span class="si">{}</span><span class="s1">) not present in this dataset.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data array (</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">) not present in this dataset.&#39;</span><span class="p">)</span>
         <span class="n">field</span> <span class="o">=</span> <span class="n">FieldAssociation</span><span class="o">.</span><span class="n">ROW</span>
         <span class="k">if</span> <span class="n">info</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">arr</span><span class="p">,</span> <span class="n">field</span>
@@ -545,7 +517,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">farr</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Data field (</span><span class="si">{}</span><span class="s1">) not supported.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">preference</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data field (</span><span class="si">{</span><span class="n">preference</span><span class="si">}</span><span class="s1">) not supported.&#39;</span><span class="p">)</span>
     <span class="n">arr</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">field</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">parr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -558,7 +530,7 @@
         <span class="n">arr</span> <span class="o">=</span> <span class="n">farr</span>
         <span class="n">field</span> <span class="o">=</span> <span class="n">FieldAssociation</span><span class="o">.</span><span class="n">NONE</span>
     <span class="k">elif</span> <span class="n">err</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Data array (</span><span class="si">{}</span><span class="s1">) not present in this dataset.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data array (</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">) not present in this dataset.&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">info</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">arr</span><span class="p">,</span> <span class="n">field</span>
     <span class="k">return</span> <span class="n">arr</span>
@@ -719,12 +691,80 @@
         <span class="k">return</span> <span class="kc">False</span>
 
 
-<span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">vtkdataset</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Wrap any given VTK data object to its appropriate PyVista data object.</span>
 
 <span class="sd">    Other formats that are supported include:</span>
 <span class="sd">    * 2D :class:`numpy.ndarray` of XYZ vertices</span>
 <span class="sd">    * 3D :class:`numpy.ndarray` representing a volume. Values will be scalars.</span>
+<span class="sd">    * 3d :class:`trimesh.Trimesh` mesh.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dataset : :class:`numpy.ndarray`, :class:`trimesh.Trimesh`, or VTK object</span>
+<span class="sd">        Dataset to wrap.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    wrapped_dataset : pyvista class</span>
+<span class="sd">        The `pyvista` wrapped dataset.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Wrap a numpy array representing a random point cloud</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; import pyvista</span>
+<span class="sd">    &gt;&gt;&gt; points = np.random.random((10, 3))</span>
+<span class="sd">    &gt;&gt;&gt; cloud = pyvista.wrap(points)</span>
+<span class="sd">    &gt;&gt;&gt; cloud  # doctest:+SKIP</span>
+<span class="sd">    PolyData (0x7fc52db83d70)</span>
+<span class="sd">      N Cells:  10</span>
+<span class="sd">      N Points: 10</span>
+<span class="sd">      X Bounds: 1.123e-01, 7.457e-01</span>
+<span class="sd">      Y Bounds: 1.009e-01, 9.877e-01</span>
+<span class="sd">      Z Bounds: 2.346e-03, 9.640e-01</span>
+<span class="sd">      N Arrays: 0</span>
+
+<span class="sd">    Wrap a Trimesh object</span>
+
+<span class="sd">    &gt;&gt;&gt; import trimesh</span>
+<span class="sd">    &gt;&gt;&gt; import pyvista</span>
+<span class="sd">    &gt;&gt;&gt; points = [[0, 0, 0], [0, 0, 1], [0, 1, 0]]</span>
+<span class="sd">    &gt;&gt;&gt; faces = [[0, 1, 2]]</span>
+<span class="sd">    &gt;&gt;&gt; tmesh = trimesh.Trimesh(points, faces=faces, process=False)</span>
+<span class="sd">    &gt;&gt;&gt; mesh = pyvista.wrap(tmesh)</span>
+<span class="sd">    &gt;&gt;&gt; mesh  # doctest:+SKIP</span>
+<span class="sd">    PolyData (0x7fc55ff27ad0)</span>
+<span class="sd">      N Cells:  1</span>
+<span class="sd">      N Points: 3</span>
+<span class="sd">      X Bounds: 0.000e+00, 0.000e+00</span>
+<span class="sd">      Y Bounds: 0.000e+00, 1.000e+00</span>
+<span class="sd">      Z Bounds: 0.000e+00, 1.000e+00</span>
+<span class="sd">      N Arrays: 0</span>
+
+<span class="sd">    Wrap a VTK object</span>
+
+<span class="sd">    &gt;&gt;&gt; import pyvista</span>
+<span class="sd">    &gt;&gt;&gt; import vtk</span>
+<span class="sd">    &gt;&gt;&gt; points = vtk.vtkPoints()</span>
+<span class="sd">    &gt;&gt;&gt; p = [1.0, 2.0, 3.0]</span>
+<span class="sd">    &gt;&gt;&gt; vertices = vtk.vtkCellArray()</span>
+<span class="sd">    &gt;&gt;&gt; pid = points.InsertNextPoint(p)</span>
+<span class="sd">    &gt;&gt;&gt; _ = vertices.InsertNextCell(1)</span>
+<span class="sd">    &gt;&gt;&gt; _ = vertices.InsertCellPoint(pid)</span>
+<span class="sd">    &gt;&gt;&gt; point = vtk.vtkPolyData()</span>
+<span class="sd">    &gt;&gt;&gt; _ = point.SetPoints(points)</span>
+<span class="sd">    &gt;&gt;&gt; _ = point.SetVerts(vertices)</span>
+<span class="sd">    &gt;&gt;&gt; mesh = pyvista.wrap(point)</span>
+<span class="sd">    &gt;&gt;&gt; mesh  # doctest:+SKIP</span>
+<span class="sd">    PolyData (0x7fc55ff27ad0)</span>
+<span class="sd">      N Cells:  1</span>
+<span class="sd">      N Points: 3</span>
+<span class="sd">      X Bounds: 0.000e+00, 0.000e+00</span>
+<span class="sd">      Y Bounds: 0.000e+00, 1.000e+00</span>
+<span class="sd">      Z Bounds: 0.000e+00, 1.000e+00</span>
+<span class="sd">      N Arrays: 0</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wrappers</span> <span class="o">=</span> <span class="p">{</span>
@@ -739,32 +779,39 @@
         <span class="c1"># &#39;vtkParametricSpline&#39;: pyvista.Spline,</span>
     <span class="p">}</span>
     <span class="c1"># Otherwise, we assume a VTK data object was passed</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">vtkdataset</span><span class="p">,</span> <span class="s1">&#39;GetClassName&#39;</span><span class="p">):</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">GetClassName</span><span class="p">()</span>
-    <span class="k">elif</span> <span class="n">vtkdataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="s1">&#39;GetClassName&#39;</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">GetClassName</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">dataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vtkdataset</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">vtkdataset</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">vtkdataset</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="n">mesh</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">(</span><span class="n">vtkdataset</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-            <span class="n">mesh</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vtkdataset</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">mesh</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">mesh</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
             <span class="n">mesh</span><span class="o">.</span><span class="n">active_scalars_name</span> <span class="o">=</span> <span class="s1">&#39;values&#39;</span>
             <span class="k">return</span> <span class="n">mesh</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">vtkdataset</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">vtkdataset</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;NumPy array could not be converted to PyVista.&#39;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">is_meshio_mesh</span><span class="p">(</span><span class="n">vtkdataset</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">from_meshio</span><span class="p">(</span><span class="n">vtkdataset</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">is_meshio_mesh</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">from_meshio</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dataset</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;Trimesh&#39;</span><span class="p">:</span>
+        <span class="c1"># trimesh doesn&#39;t pad faces</span>
+        <span class="n">n_face</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">faces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">faces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_face</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dataset</span><span class="o">.</span><span class="n">faces</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">faces</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">faces</span>
+        <span class="n">faces</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">vertices</span><span class="p">),</span> <span class="n">faces</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Type (</span><span class="si">{}</span><span class="s1">) not able to be wrapped into a PyVista mesh.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">vtkdataset</span><span class="p">)))</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Type (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="si">}</span><span class="s1">) not able to be wrapped into a PyVista mesh.&#39;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">wrapped</span> <span class="o">=</span> <span class="n">wrappers</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">vtkdataset</span><span class="p">)</span>
+        <span class="n">wrapped</span> <span class="o">=</span> <span class="n">wrappers</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">dataset</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;VTK data type (</span><span class="si">{}</span><span class="s1">) is not currently supported by pyvista.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">vtkdataset</span> <span class="c1"># if not supported just passes the VTK data object</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;VTK data type (</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">) is not currently supported by pyvista.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dataset</span>  <span class="c1"># if not supported just passes the VTK data object</span>
     <span class="k">return</span> <span class="n">wrapped</span>
 
 
@@ -775,8 +822,6 @@
 
 <span class="k">def</span> <span class="nf">numpy_to_texture</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert a NumPy image array to a vtk.vtkTexture.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Unknown input type (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">image</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Texture</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
 
@@ -795,7 +840,7 @@
         <span class="n">bounds</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">is_inside_bounds</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Unknown input data type (</span><span class="si">{}</span><span class="s1">).&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">point</span><span class="p">)))</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown input data type (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">point</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
@@ -830,14 +875,10 @@
 <span class="k">def</span> <span class="nf">raise_not_matching</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Raise exception about inconsistencies.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Number of scalars (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span>
-                         <span class="s1">&#39;must match number of rows &#39;</span> <span class="o">+</span>
-                         <span class="s1">&#39;(</span><span class="si">{}</span><span class="s1">).&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_rows</span><span class="p">)</span> <span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Number of scalars (</span><span class="si">{}</span><span class="s1">) &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span>
-                     <span class="s1">&#39;must match either the number of points &#39;</span> <span class="o">+</span>
-                     <span class="s1">&#39;(</span><span class="si">{}</span><span class="s1">) &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_points</span><span class="p">)</span> <span class="o">+</span>
-                     <span class="s1">&#39;or the number of cells &#39;</span> <span class="o">+</span>
-                     <span class="s1">&#39;(</span><span class="si">{}</span><span class="s1">). &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_cells</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">) must match number of rows (</span><span class="si">{</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_rows</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">) &#39;</span> <span class="o">+</span>
+                     <span class="sa">f</span><span class="s1">&#39;must match either the number of points (</span><span class="si">{</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_points</span><span class="si">}</span><span class="s1">) &#39;</span> <span class="o">+</span>
+                     <span class="sa">f</span><span class="s1">&#39;or the number of cells (</span><span class="si">{</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_cells</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">generate_plane</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">origin</span><span class="p">):</span>
@@ -848,22 +889,6 @@
     <span class="n">plane</span><span class="o">.</span><span class="n">SetNormal</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
     <span class="n">plane</span><span class="o">.</span><span class="n">SetOrigin</span><span class="p">(</span><span class="n">origin</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">plane</span>
-
-
-<span class="k">def</span> <span class="nf">generate_report</span><span class="p">(</span><span class="n">additional</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">text_width</span><span class="o">=</span><span class="mi">54</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate a report.</span>
-
-<span class="sd">    DEPRECATED: Please use :class:`pyvista.Report` instead.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;DEPRECATED: Please use `pyvista.Report` instead.&#39;</span><span class="p">)</span>
-    <span class="n">core</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pyvista&#39;</span><span class="p">,</span> <span class="s1">&#39;vtk&#39;</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">,</span> <span class="s1">&#39;imageio&#39;</span><span class="p">,</span> <span class="s1">&#39;appdirs&#39;</span><span class="p">,</span> <span class="s1">&#39;scooby&#39;</span><span class="p">]</span>
-    <span class="n">optional</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;PyQt5&#39;</span><span class="p">,</span> <span class="s1">&#39;IPython&#39;</span><span class="p">,</span> <span class="s1">&#39;colorcet&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;cmocean&#39;</span><span class="p">]</span>
-    <span class="n">report</span> <span class="o">=</span> <span class="n">scooby</span><span class="o">.</span><span class="n">Report</span><span class="p">(</span><span class="n">core</span><span class="o">=</span><span class="n">core</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="n">optional</span><span class="p">,</span>
-                           <span class="n">additional</span><span class="o">=</span><span class="n">additional</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="n">ncol</span><span class="p">,</span>
-                           <span class="n">text_width</span><span class="o">=</span><span class="n">text_width</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">report</span>
 
 
 <span class="k">def</span> <span class="nf">try_callback</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -1014,11 +1039,44 @@
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="n">cls_</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> is an abstract class and may not be instantiated.&#39;</span>
-                            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> is an abstract class and may not be instantiated.&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
     <span class="n">cls_</span><span class="o">.</span><span class="fm">__new__</span> <span class="o">=</span> <span class="fm">__new__</span>
     <span class="k">return</span> <span class="n">cls_</span>
+
+
+<span class="k">def</span> <span class="nf">axis_rotation</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Rotate points angle (in deg) about an axis.&quot;&quot;&quot;</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="c1"># Copy original array to if not inplace</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Convert angle to radians</span>
+    <span class="k">if</span> <span class="n">deg</span><span class="p">:</span>
+        <span class="n">angle</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span>
+
+    <span class="k">if</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">-</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+        <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span>
+    <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="o">-</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+        <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span>
+    <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">-</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+        <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid axis. Must be either &quot;x&quot;, &quot;y&quot;, or &quot;z&quot;&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">points</span>
 </pre></div>
 
            </div>
