@@ -62,7 +62,7 @@ vtkpoints.plot(clim=[0,1], point_size=1)
 # operations can be performed with other PVGeo or VTK filters.
 #
 # Remember that these points are rotated and we do not know the cell sizes...
-# this is okay! The VoxelizePoints filter from PVGeo will handle the recovory of
+# this is okay! The VoxelizePoints filter from PVGeo will handle the recovery of
 # the coordinate rotation and grid our data without running an interpolation
 # scheme. The VoxelizePoints filter assumes that the points are structured on some
 # rotated XY-plane with regular cell spacings and does the rest on its own!
