@@ -21,6 +21,4 @@ git config --global user.name "${GH_NAME}";
 git config --global user.email "${GH_EMAIL}";
 git remote add origin ${REMOTE};
 git push -uf origin master;
-cd ../PVGeo/
-doctr deploy --built-docs ./docs/build/html .;
 set +x

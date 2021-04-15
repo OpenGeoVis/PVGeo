@@ -40,20 +40,31 @@ jobs:
           cd ..;
       - uses: actions/upload-artifact@v2
         with:
-          name: html
-          path: docs/build/html
+          name: docs-build
+          path: docs/build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: notebooks
+          path: docs/source/examples
   deploy:
     name: Publish Documentation
     runs-on: ubuntu-latest
     needs: doc
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
+      - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
-          name: html
-          path: html
+          name: docs-build
+          path: docs/build
+      - uses: actions/download-artifact@v2
+        with:
+          name: notebooks
+          path: docs/source/examples
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
           branch: gh-pages
-          folder: html
+          folder: docs/build/html
+      - name: Push notebooks to demo repo
+        run: sh ./docs/deploy_docs_from_travis.sh
