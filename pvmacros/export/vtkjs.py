@@ -28,11 +28,13 @@ def exportVTKjs(FileName='', compress=False):
     """
     import os
     import sys
+
     path = os.path.dirname(os.path.abspath(__file__))
     # TODO: debug why compression sometimes fails
     sys.argv = ['%s/%s' % (path, '_export-scene-macro.py'), FileName, False]
     execfile('%s/%s' % (path, '_export-scene-macro.py'), globals())
     return
+
 
 exportVTKjs.__displayname__ = 'Export VTKjs'
 exportVTKjs.__category__ = 'macro'
@@ -43,14 +45,17 @@ exportVTKjs.__category__ = 'macro'
 def convertDropboxURL(url):
     return url.replace("https://www.dropbox.com", "https://dl.dropbox.com")
 
+
 def convertGitHubURL(url):
     url = url.replace("https://github.com", "https://rawgit.com")
     url = url.replace("raw/", "")
     return url
 
+
 def generateViewerURL(dataURL):
     viewerURL = "http://viewer.pvgeo.org/"
     return viewerURL + '%s%s' % ("?fileURL=", dataURL)
+
 
 def getVTKjsURL(*args):
     """After using ``exportVTKjs()`` to create a ``.vtkjs`` file from a ParaView
@@ -90,10 +95,13 @@ def getVTKjsURL(*args):
     elif host.lower() == "github":
         convertURL = convertGitHubURL(inURL)
     else:
-        print("--> Warning: Web host not specified or supported. URL is simply appended to standalone scene loader link.")
+        print(
+            "--> Warning: Web host not specified or supported. URL is simply appended to standalone scene loader link."
+        )
         convertURL = inURL
-    #print("--> Your link: %s" % generateViewerURL(convertURL))
+    # print("--> Your link: %s" % generateViewerURL(convertURL))
     return generateViewerURL(convertURL)
+
 
 getVTKjsURL.__displayname__ = 'Get VTKjs URL'
 getVTKjsURL.__category__ = 'macro'

@@ -7,6 +7,7 @@ __all__ = [
 
 import vtk
 
+
 def customAxisTicks(rng, axis=0, uniform=False):
     """Use to set custom axis ticks in the render view
 
@@ -16,6 +17,7 @@ def customAxisTicks(rng, axis=0, uniform=False):
         uniform (bool): An optional flag to use the given range on all axii
     """
     from paraview.simple import GetActiveViewOrCreate, RenderAllViews
+
     # note that third parameter is the step size
     # get the active view
     rv = GetActiveViewOrCreate('RenderView')
@@ -31,8 +33,10 @@ def customAxisTicks(rng, axis=0, uniform=False):
     RenderAllViews()
     return None
 
+
 customAxisTicks.__displayname__ = 'Custom Axis Ticks'
 customAxisTicks.__category__ = 'macro'
+
 
 def resetAxisTicks(axis):
     """Use to reset the axis ticks in the render view for any given axii
@@ -41,6 +45,7 @@ def resetAxisTicks(axis):
         axis (int or list(int)): The axis to set (X=0, Y=1, or Z=2)
     """
     from paraview.simple import GetActiveViewOrCreate, RenderAllViews
+
     rv = GetActiveViewOrCreate('RenderView')
     if not isinstance(axis, (list, tuple)):
         axis = [axis]
@@ -57,15 +62,16 @@ def resetAxisTicks(axis):
         RenderAllViews()
     return None
 
+
 resetAxisTicks.__displayname__ = 'Reset Axis Ticks'
 resetAxisTicks.__category__ = 'macro'
-
 
 
 def scaleAxis(axis, scale):
     """Use to scale an axis visually"""
     import paraview.simple as pvs
-    sc = [1, 1, 1] # Default Scale
+
+    sc = [1, 1, 1]  # Default Scale
     sc[axis] = scale
     for f in pvs.GetSources().values():
         # get active view
@@ -86,7 +92,6 @@ scaleAxis.__displayname__ = 'Scale Axis'
 scaleAxis.__category__ = 'macro'
 
 
-
 def setAxisLabelsFromBounds(name, num=(10, 10, 5)):
     """Sets the axis labels from a given input data source. Use the num argument
     to control the number of labels along each axis. If num is a scalar, then
@@ -104,10 +109,11 @@ def setAxisLabelsFromBounds(name, num=(10, 10, 5)):
     import paraview.simple as pvs
     import paraview.servermanager as sm
     import numpy as np
+
     # Get the input data
     src = pvs.FindSource(name)
     data = sm.Fetch(src)
-    xmin,xmax, ymin,ymax, zmin,zmax = data.GetBounds()
+    xmin, xmax, ymin, ymax, zmin, zmax = data.GetBounds()
     if not isinstance(num, (tuple, list)):
         num = list(num)
     # Cast as ints if needed
