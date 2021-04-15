@@ -8,7 +8,7 @@ __all__ = [
     'get_file_reader_xml',
     'get_drop_down_xml',
     '_help_arrays_xml',
-    'get_input_array_xml'
+    'get_input_array_xml',
 ]
 
 from . import errors as _helpers
@@ -46,15 +46,16 @@ def get_reader_time_step_values(extensions, reader_description):
           <ReaderFactory extensions="%s"
                   file_description="%s" />
       </Hints>
-      ''' % (extensions, reader_description)
-
+      ''' % (
+        extensions,
+        reader_description,
+    )
 
 
 def get_vtk_type_map():
-    """Get the the VTK Type Map as specified in ``vtkType.h``
-    """
+    """Get the the VTK Type Map as specified in ``vtkType.h``"""
     return {
-        '': 8, # same as input
+        '': 8,  # same as input
         'vtkPolyData': 0,
         'vtkStructuredPoints': 1,
         'vtkStructuredGrid': 2,
@@ -75,19 +76,22 @@ def get_vtk_type_map():
         #'vtkTemporalDataSet': 18, # obsolete
         'vtkTable': 19,
         'vtkGraph': 20,
-        'vtkTree': 21
+        'vtkTree': 21,
     }
 
 
-
-def get_property_xml(name, command, default_values, panel_visibility='default', help=''):
+def get_property_xml(
+    name, command, default_values, panel_visibility='default', help=''
+):
     """Get the XML content for a property of a parameter for a python data
     object when making a ParaView plugin.
     """
     # A helper to build XML for any data type/method
     value = default_values
 
-    def _prop_xml(typ, panel_visibility, name, command, default_values, num, help, extra=''):
+    def _prop_xml(
+        typ, panel_visibility, name, command, default_values, num, help, extra=''
+    ):
         return '''
       <%sVectorProperty
         panel_visibility="%s"
@@ -98,8 +102,18 @@ def get_property_xml(name, command, default_values, panel_visibility='default', 
         number_of_elements="%s">
         %s
         <Documentation>%s</Documentation>
-      </%sVectorProperty>''' % (typ, panel_visibility, command, name, command,
-                                default_values, num, extra, help, typ)
+      </%sVectorProperty>''' % (
+            typ,
+            panel_visibility,
+            command,
+            name,
+            command,
+            default_values,
+            num,
+            extra,
+            help,
+            typ,
+        )
 
     if isinstance(value, list):
         num = len(value)
@@ -125,10 +139,13 @@ def get_property_xml(name, command, default_values, panel_visibility='default', 
     elif propertyType is int:
         typ = 'Int'
     else:
-        raise RuntimeError('get_property_xml(): Unknown property type: %r' % propertyType)
+        raise RuntimeError(
+            'get_property_xml(): Unknown property type: %r' % propertyType
+        )
 
-    return _prop_xml(typ, panel_visibility, name, command, default_values, num, help, extra)
-
+    return _prop_xml(
+        typ, panel_visibility, name, command, default_values, num, help, extra
+    )
 
 
 def get_file_reader_xml(extensions, reader_description='', command="AddFileName"):
@@ -160,28 +177,34 @@ def get_file_reader_xml(extensions, reader_description='', command="AddFileName"
       <Hints>
             <ReaderFactory extensions="%s"
                     file_description="%s" />
-      </Hints>''' % (command, extensions, reader_description)
+      </Hints>''' % (
+        command,
+        extensions,
+        reader_description,
+    )
 
 
 def get_drop_down_xml(name, command, labels, help='', values=None):
-    """Get the XML content for a drop down menu when making a ParaView plugin.
-    """
+    """Get the XML content for a drop down menu when making a ParaView plugin."""
 
     def _enum(labels, values=None):
         if values is None:
             values = range(len(labels))
         els = []
         for i, lab in enumerate(labels):
-            els.append('<Entry value="%d" text="%s"/>' % (values[i],lab))
+            els.append('<Entry value="%d" text="%s"/>' % (values[i], lab))
 
         # formatter = r'%s\n'*len(els)
         dom = '''\
         <EnumerationDomain name="enum">'''
         for el in els:
-            dom += ('''
-          %s''' % el)
-        dom += ('''
-        </EnumerationDomain>''')
+            dom += (
+                '''
+          %s'''
+                % el
+            )
+        dom += '''
+        </EnumerationDomain>'''
         return dom, values
 
     domain, values = _enum(labels, values)
@@ -195,20 +218,22 @@ def get_drop_down_xml(name, command, labels, help='', values=None):
         <Documentation>
           %s
         </Documentation>
-      </IntVectorProperty>''' % (name, command, values[0], domain, help)
-
-
-
+      </IntVectorProperty>''' % (
+        name,
+        command,
+        values[0],
+        domain,
+        help,
+    )
 
 
 def _help_arrays_xml(idx, input_name=None, label=None):
-    """Internal helper
-    """
+    """Internal helper"""
     if input_name is None:
         input_name = 'Input'
     if label is None:
         label = 'Array%d' % idx
-    return'''
+    return '''
       <StringVectorProperty
         name="SelectInputScalars%d"
         label="%s"
@@ -227,22 +252,27 @@ def _help_arrays_xml(idx, input_name=None, label=None):
               function="Input" />
           </RequiredProperties>
         </ArrayListDomain>
-      </StringVectorProperty>''' % (idx, label, idx, input_name)
+      </StringVectorProperty>''' % (
+        idx,
+        label,
+        idx,
+        input_name,
+    )
 
 
-
-
-def get_input_array_xml(labels=None, nInputPorts=1, n_arrays=1,
-                        input_names='Input'):
+def get_input_array_xml(labels=None, nInputPorts=1, n_arrays=1, input_names='Input'):
     """Get the XML content for an array selection drop down menu."""
+
     def get_labels(labels):
         if labels is None and nInputPorts > 1:
-            labels = [None]*nInputPorts
+            labels = [None] * nInputPorts
             return labels
         if nInputPorts > 1:
             for l in labels:
                 if not isinstance(l, list):
-                    raise _helpers.PVGeoError('`InputArrayLabels` is improperly structured. Must be a list of lists.')
+                    raise _helpers.PVGeoError(
+                        '`InputArrayLabels` is improperly structured. Must be a list of lists.'
+                    )
         return labels
 
     labels = get_labels(labels)
@@ -251,7 +281,7 @@ def get_input_array_xml(labels=None, nInputPorts=1, n_arrays=1,
         if n_arrays == 0:
             return ''
         if labels is None:
-            labels = ['Array %d' % (i+1) for i in range(n_arrays)]
+            labels = ['Array %d' % (i + 1) for i in range(n_arrays)]
             return labels
         if len(labels) < n_arrays:
             toadd = n_arrays - len(labels)
@@ -262,9 +292,13 @@ def get_input_array_xml(labels=None, nInputPorts=1, n_arrays=1,
     # Recursively call for each input
     if nInputPorts > 1:
         if not isinstance(n_arrays, list):
-            raise _helpers.PVGeoError('When multiple inputs, the `NumberOfInputArrayChoices` must be a list of ints for the number of arrays from each input.')
+            raise _helpers.PVGeoError(
+                'When multiple inputs, the `NumberOfInputArrayChoices` must be a list of ints for the number of arrays from each input.'
+            )
         if len(n_arrays) != nInputPorts:
-            raise _helpers.PVGeoError('You must spectify how many arrays come from each input. `len(NumberOfInputArrayChoices) != nInputPorts`.')
+            raise _helpers.PVGeoError(
+                'You must spectify how many arrays come from each input. `len(NumberOfInputArrayChoices) != nInputPorts`.'
+            )
 
         # Now perfrom recursion
         out = []
@@ -273,7 +307,7 @@ def get_input_array_xml(labels=None, nInputPorts=1, n_arrays=1,
             labs = fix_array_labels(labels[i], n_arrays[i])
             xml = ''
             for j in range(n_arrays[i]):
-                xml += _help_arrays_xml(i+j, input_name=input_names[i], label=labs[j])
+                xml += _help_arrays_xml(i + j, input_name=input_names[i], label=labs[j])
             out.append(xml)
         outstr = "\n".join(inp for inp in out)
         return outstr

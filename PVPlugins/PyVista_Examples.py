@@ -13,11 +13,13 @@ MENU_CAT = 'PyVista: Example Data Sets'
 
 
 class _ExampleLoader(VTKPythonAlgorithmBase):
-
     def __init__(self):
-        VTKPythonAlgorithmBase.__init__(self, nInputPorts=0, nOutputPorts=1,
-                                        outputType=self._example_data.GetClassName())
-
+        VTKPythonAlgorithmBase.__init__(
+            self,
+            nInputPorts=0,
+            nOutputPorts=1,
+            outputType=self._example_data.GetClassName(),
+        )
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to get data for current timestep and populate the
@@ -27,7 +29,6 @@ class _ExampleLoader(VTKPythonAlgorithmBase):
         output = self.GetOutputData(outInfo, 0)
         output.DeepCopy(self._example_data)
         return 1
-
 
     def RequestInformation(self, request, inInfo, outInfo):
         """Used by pipeline to handle output extents"""
@@ -43,10 +44,12 @@ class _ExampleLoader(VTKPythonAlgorithmBase):
         return 1
 
 
-
 @smproxy.source(name='PyVistaStHelens', label='Mt. St. Helens')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaStHelens(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_st_helens()
@@ -54,8 +57,11 @@ class PyVistaStHelens(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaChannels', label='Channels')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaChannels(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.load_channels()
@@ -63,8 +69,11 @@ class PyVistaChannels(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaActionFigure', label='Action Figure')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaActionFigure(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_action_figure()
@@ -72,8 +81,11 @@ class PyVistaActionFigure(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaArmadillo', label='Armadillo')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaArmadillo(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_armadillo()
@@ -81,18 +93,23 @@ class PyVistaArmadillo(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaBloodVessels', label='Blood Vessels')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaBloodVessels(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_blood_vessels()
         _ExampleLoader.__init__(self)
 
 
-
 @smproxy.source(name='PyVistaBlow', label='Blow')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaBlow(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_blow()
@@ -100,8 +117,11 @@ class PyVistaBlow(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaBoltNut', label='Bolt & Nut')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaBoltNut(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_bolt_nut()
@@ -109,8 +129,11 @@ class PyVistaBoltNut(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaBrain', label='Brain')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaBrain(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_brain()
@@ -118,8 +141,11 @@ class PyVistaBrain(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaBunny', label='Bunny')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaBunny(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_bunny()
@@ -127,18 +153,23 @@ class PyVistaBunny(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaCadModel', label='Cad Model')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaCadModel(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_cad_model()
         _ExampleLoader.__init__(self)
 
 
-
 @smproxy.source(name='PyVistaCarotid', label='Carotid')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaCarotid(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_carotid()
@@ -146,8 +177,11 @@ class PyVistaCarotid(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaCow', label='Cow')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaCow(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_cow()
@@ -155,8 +189,11 @@ class PyVistaCow(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaCowHead', label='Cow Head')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaCowHead(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_cow_head()
@@ -164,8 +201,11 @@ class PyVistaCowHead(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaNefertiti', label='Nefertiti')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaNefertiti(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_nefertiti()
@@ -173,8 +213,11 @@ class PyVistaNefertiti(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaLidar', label='Lidar')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaLidar(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_lidar()
@@ -182,8 +225,11 @@ class PyVistaLidar(_ExampleLoader):
 
 
 @smproxy.source(name='PyVistaTopo', label='Global Topography')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface" />'''
+    % MENU_CAT
+)
 class PyVistaTopo(_ExampleLoader):
     def __init__(self):
         self._example_data = examples.download_topo_global()

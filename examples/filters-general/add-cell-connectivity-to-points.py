@@ -22,16 +22,18 @@ from PVGeo.filters import AddCellConnToPoints
 ###############################################################################
 # First, lets generate some points which we'd like to connect
 
+
 def path1(y):
     """Equation: x = a(y-h)^2 + k"""
-    a = - 110.0 / 160.0**2
-    x = a*y**2 + 110.0
-    idxs = np.argwhere(x>0)
-    return x[idxs][:,0], y[idxs][:,0]
+    a = -110.0 / 160.0 ** 2
+    x = a * y ** 2 + 110.0
+    idxs = np.argwhere(x > 0)
+    return x[idxs][:, 0], y[idxs][:, 0]
+
 
 x, y = path1(np.arange(0.0, 200.0, 25.0))
 zo = np.linspace(9.0, 11.0, num=len(y))
-coords = np.vstack((x,y,zo)).T
+coords = np.vstack((x, y, zo)).T
 # Shuffle points to demonstrate value of Nearest Neighbor
 np.random.shuffle(coords)
 

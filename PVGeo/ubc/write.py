@@ -17,6 +17,7 @@ class ubcTensorMeshWriterBase(WriterBase):
     """A base class to assist in writing data bjects to the UBC Tensor Mesh
     format.
     """
+
     __displayname__ = 'UBC Format Writer Base'
     __category__ = 'base'
 
@@ -28,9 +29,9 @@ class ubcTensorMeshWriterBase(WriterBase):
         self.zcells = None
         self.origin = None
 
-
     def write_mesh_3d(self, nx, ny, nz, filename):
         """Write 3D Tensor Mesh to the UBC format"""
+
         def arr2str(arr):
             return ' '.join(map(str, arr))
 
@@ -54,8 +55,8 @@ class ubcTensorMeshWriterBase(WriterBase):
 
         def reshape_model(model):
             # Swap axes because VTK structures the coordinates a bit differently
-            #-  This is absolutely crucial!
-            #-  Do not play with unless you know what you are doing!
+            # -  This is absolutely crucial!
+            # -  Do not play with unless you know what you are doing!
             model = np.reshape(model, (nz, ny, nx))
             model = np.swapaxes(model, 0, 2)
             model = np.swapaxes(model, 0, 1)
@@ -70,7 +71,13 @@ class ubcTensorMeshWriterBase(WriterBase):
             arr = reshape_model(arr)
             path = os.path.dirname(filename)
             filename = '%s/%s.mod' % (path, vtkarr.GetName().replace(' ', '_'))
-            np.savetxt(filename, arr, comments='! ', header='Mesh File: %s' % os.path.basename(filename), fmt=self.get_format())
+            np.savetxt(
+                filename,
+                arr,
+                comments='! ',
+                header='Mesh File: %s' % os.path.basename(filename),
+                fmt=self.get_format(),
+            )
 
         return
 
@@ -79,12 +86,12 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
     """Writes a ``vtkRectilinearGrid`` data object to the UBC Tensor Mesh format.
     This file reader currently only handles 3D data.
     """
+
     __displayname__ = 'Write ``vtkRectilinearGrid`` to UBC Tensor Mesh'
     __category__ = 'writer'
 
     def __init__(self):
         ubcTensorMeshWriterBase.__init__(self, inputType='vtkRectilinearGrid')
-
 
     def perform_write_out(self, input_data_object, filename, object_name):
         """Write out a ``vtkRectilinearGrid`` to the UBC file format"""
@@ -93,7 +100,6 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
 
         # Get grid dimensions
         nx, ny, nz = grd.GetDimensions()
-
 
         # get the points and convert to spacings
         xcoords = interface.convert_array(grd.GetXCoordinates())
@@ -114,7 +120,7 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
         self.zcells = self.zcells[::-1]
 
         # Write mesh
-        self.write_mesh_3d(nx-1, ny-1, nz-1, filename)
+        self.write_mesh_3d(nx - 1, ny - 1, nz - 1, filename)
 
         # Now write out model data
         self.write_models(grd, filename)
@@ -123,18 +129,16 @@ class WriteRectilinearGridToUBC(ubcTensorMeshWriterBase):
         return 1
 
 
-
-
 class WriteImageDataToUBC(ubcTensorMeshWriterBase):
     """Writes a ``vtkImageData`` (uniform grid) data object to the UBC Tensor
     Mesh format. This file reader currently only handles 3D data.
     """
+
     __displayname__ = 'Write ``vtkImageData`` to UBC Tensor Mesh'
     __category__ = 'writer'
 
     def __init__(self):
         ubcTensorMeshWriterBase.__init__(self, inputType='vtkImageData')
-
 
     def perform_write_out(self, input_data_object, filename, object_name):
         """Write out a ``vtkImageData`` to the UBC file format"""
@@ -157,7 +161,7 @@ class WriteImageDataToUBC(ubcTensorMeshWriterBase):
 
         # find origin (top southwest corner)
         ox, oy, oz = grd.GetOrigin()
-        oz += (nz*dz)
+        oz += nz * dz
         self.origin = (ox, oy, oz)
 
         # TODO: decide if 2D or 3D

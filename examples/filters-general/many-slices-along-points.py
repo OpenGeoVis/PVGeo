@@ -34,16 +34,18 @@ model.plot()
 # Create a series of points that move through that model. These are the points
 # we will use to slice the volume.
 
+
 def path(y):
     """Equation: x = a(y-h)^2 + k"""
-    a = 110.0 / 160.0**2
-    x = a*y**2 + 0.0
+    a = 110.0 / 160.0 ** 2
+    x = a * y ** 2 + 0.0
     return x, y
+
 
 x, y = path(np.arange(model.bounds[2], model.bounds[3], 15.0))
 zo = np.linspace(9.0, 11.0, num=len(y))
 # Make a VTK data object for the filter to use
-points = pyvista.PolyData(np.c_[x,y,zo])
+points = pyvista.PolyData(np.c_[x, y, zo])
 
 p = pyvista.Plotter()
 p.add_mesh(model.outline(), color='k')

@@ -6,6 +6,7 @@ this issue:
 """
 import sys
 import os
+
 sys.path.append(os.path.dirname(__file__))
 
 from PVGeo_Filters import *
@@ -16,6 +17,7 @@ from PVGeo_Readers import *
 from PVGeo_Tunneling import *
 from PVGeo_UBC_Tools import *
 from PyVista_Examples import *
+
 try:
     import omf
     import omfvista

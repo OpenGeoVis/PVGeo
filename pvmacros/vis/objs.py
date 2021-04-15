@@ -7,11 +7,12 @@ from paraview.simple import GetActiveCamera, RenderAllViews, WriteImage
 
 
 class camera:
-    """An object to store a single camera location/view. You can make a list/dict of these objects to save interesting views for your project. This object saves just a few parameters about the camera so that it can easily be reconstructed.
-    """
+    """An object to store a single camera location/view. You can make a list/dict of these objects to save interesting views for your project. This object saves just a few parameters about the camera so that it can easily be reconstructed."""
+
     __displayname__ = 'Camera'
     __category__ = 'macro'
-    def __init__(self,cam=None):
+
+    def __init__(self, cam=None):
         """
         @params:
         cam : vtkRenderingOpenGL2Python.vtkOpenGLCamera : optional : The camera you wish to update this object to. Totally optional
@@ -88,7 +89,6 @@ class camera:
         os.chdir(path)
         self.view(cam=cam)
         WriteImage("%s.png" % (basenm))
-
 
     # Static Methods for structures containt cameras
 

@@ -49,7 +49,7 @@ print(vtkpoints)
 # object and pass the thresholding value. We can then plot the result by
 # calling the plot function. (Note: change the notebook parameter to
 # ``False`` for an interactive window)
-vtkpoints.plot(clim=[0,1], point_size=1)
+vtkpoints.plot(clim=[0, 1], point_size=1)
 
 ###############################################################################
 # Points to Voxelized Volume

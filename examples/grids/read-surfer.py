@@ -17,5 +17,5 @@ dem = SurferGridReader().apply(filename)
 
 ###############################################################################
 # Apply a filter to the DEM to have realistic topography
-warped = dem.warp_by_scalar(scale_factor=300.)
+warped = dem.warp_by_scalar(scale_factor=300.0)
 warped.plot(cmap='terrain')

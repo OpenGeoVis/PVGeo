@@ -16,24 +16,23 @@ with _helpers.HiddenPrints():
     import discretize
 
 
-
 class OcTreeReader(ubcMeshReaderBase):
     """This class reads a UBC OcTree Mesh file and builds a
     ``vtkUnstructuredGrid`` of the data in the file. Model File is optional.
     Reader will still construct ``vtkUnstructuredGrid`` safely.
     """
+
     __displayname__ = 'UBC OcTree Mesh Reader'
     __category__ = 'reader'
     description = 'PVGeo: UBC OcTree Mesh'
 
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
-        ubcMeshReaderBase.__init__(self,
-                                   nOutputPorts=nOutputPorts, outputType=outputType,
-                                   **kwargs)
+        ubcMeshReaderBase.__init__(
+            self, nOutputPorts=nOutputPorts, outputType=outputType, **kwargs
+        )
 
         self.__mesh = None
         self.__models = []
-
 
     def ubc_octree_mesh(self, FileName, pdo=None):
         """This method reads a UBC OcTree Mesh file and builds a
@@ -81,20 +80,25 @@ class OcTreeReader(ubcMeshReaderBase):
         """
         if isinstance(model, dict):
             for key in model.keys():
-                mesh = OcTreeReader.place_model_on_octree_mesh(mesh, model[key], data_name=key)
+                mesh = OcTreeReader.place_model_on_octree_mesh(
+                    mesh, model[key], data_name=key
+                )
             return mesh
         # Make sure this model file fits the dimensions of the mesh
         numCells = mesh.GetNumberOfCells()
-        if (numCells < len(model)):
-            raise _helpers.PVGeoError('This model file has more data than the given mesh has cells to hold.')
-        elif (numCells > len(model)):
-            raise _helpers.PVGeoError('This model file does not have enough data to fill the given mesh\'s cells.')
+        if numCells < len(model):
+            raise _helpers.PVGeoError(
+                'This model file has more data than the given mesh has cells to hold.'
+            )
+        elif numCells > len(model):
+            raise _helpers.PVGeoError(
+                'This model file does not have enough data to fill the given mesh\'s cells.'
+            )
 
         # This is absolutely crucial!
         # Do not play with unless you know what you are doing!
         # Also note that this assumes ``discretize`` handles addin this array
-        ind_reorder = nps.vtk_to_numpy(
-            mesh.GetCellData().GetArray('index_cell_corner'))
+        ind_reorder = nps.vtk_to_numpy(mesh.GetCellData().GetArray('index_cell_corner'))
 
         model = model[ind_reorder]
 
@@ -103,8 +107,6 @@ class OcTreeReader(ubcMeshReaderBase):
         # THIS IS CELL DATA! Add the model data to CELL data:
         mesh.GetCellData().AddArray(c)
         return mesh
-
-
 
     def __ubc_octree(self, filename_mesh, filename_models, output):
         """Wrapper to Read UBC GIF OcTree mesh and model file pairs. UBC OcTree
@@ -140,24 +142,21 @@ class OcTreeReader(ubcMeshReaderBase):
             self.need_to_readModels(flag=False)
         return output
 
-
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
-        self.__ubc_octree(
-            self.get_mesh_filename(),
-            self.get_model_filenames(),
-            output)
+        self.__ubc_octree(self.get_mesh_filename(), self.get_model_filenames(), output)
 
         # Place the model data for given timestep onto the mesh
         if len(self.__models) > i:
-            self.place_model_on_octree_mesh(output, self.__models[i], self.get_data_name())
+            self.place_model_on_octree_mesh(
+                output, self.__models[i], self.get_data_name()
+            )
 
         return 1
-
 
     def RequestInformation(self, request, inInfo, outInfo):
         """Pipeline method for handling requests about the grid extents and time
@@ -174,36 +173,34 @@ class OcTreeReader(ubcMeshReaderBase):
         return 1
 
     def clear_mesh(self):
-        """Use to clean/rebuild the mesh.
-        """
+        """Use to clean/rebuild the mesh."""
         self.__mesh = vtk.vtkUnstructuredGrid()
         ubcMeshReaderBase.clear_models(self)
 
     def clear_models(self):
-        """Use to clean the models and reread the data
-        """
+        """Use to clean the models and reread the data"""
         self.__models = []
         ubcMeshReaderBase.clear_models(self)
 
 
-
-
-
 ###############################################################################
+
 
 class OcTreeAppender(ModelAppenderBase):
     """This filter reads a timeseries of models and appends it to an input
     ``vtkUnstructuredGrid``
     """
+
     __displayname__ = 'UBC OcTree Mesh Appender'
     __category__ = 'filter'
 
     def __init__(self, **kwargs):
-        ModelAppenderBase.__init__(self,
-                                   inputType='vtkUnstructuredGrid',
-                                   outputType='vtkUnstructuredGrid',
-                                   **kwargs)
-
+        ModelAppenderBase.__init__(
+            self,
+            inputType='vtkUnstructuredGrid',
+            outputType='vtkUnstructuredGrid',
+            **kwargs
+        )
 
     def _read_up_front(self):
         """Internal helper to read all data at start"""
@@ -217,5 +214,7 @@ class OcTreeAppender(ModelAppenderBase):
 
     def _place_on_mesh(self, output, idx=0):
         """Internal helper to place a model on the mesh for a given index"""
-        OcTreeReader.place_model_on_octree_mesh(output, self._models[idx], self.get_data_name())
+        OcTreeReader.place_model_on_octree_mesh(
+            output, self._models[idx], self.get_data_name()
+        )
         return

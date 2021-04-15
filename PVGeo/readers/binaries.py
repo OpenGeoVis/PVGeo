@@ -24,19 +24,21 @@ class PackedBinariesReader(ReaderBase):
     the filters we can apply to this data down the pipeline and keeps thing
     simple when using filters in this repository.
     """
+
     __displayname__ = 'Packed Binaries Reader'
     __category__ = 'reader'
     extensions = 'H@ bin rsf rsf@ HH npz'
     description = 'PVGeo: Packed Binaries Reader'
 
     def __init__(self, **kwargs):
-        ReaderBase.__init__(self,
-                            nOutputPorts=1, outputType='vtkTable', **kwargs)
+        ReaderBase.__init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs)
         # Other Parameters
         self.__data_name = kwargs.get('dataname', 'Data')
         self.__dtypechar = kwargs.get('dtype', 'f')
         self.__endian = kwargs.get('endian', '')
-        self.__dtype, self.__vtktype = interface.get_dtypes(dtype=self.__dtypechar, endian=self.__endian)
+        self.__dtype, self.__vtktype = interface.get_dtypes(
+            dtype=self.__dtypechar, endian=self.__endian
+        )
         # Data objects to hold the read data for access by the pipeline methods
         self.__data = []
 
@@ -65,31 +67,27 @@ class PackedBinariesReader(ReaderBase):
             return contents[0]
         return contents
 
-
     def _read_up_front(self):
-        """Should not need to be overridden
-        """
+        """Should not need to be overridden"""
         # Perform Read
         self.__data = self._get_file_contents()
         self.need_to_read(flag=False)
         return 1
 
     def _get_raw_data(self, idx=0):
-        """This will return the proper data for the given timestep
-        """
+        """This will return the proper data for the given timestep"""
         return self.__data[idx]
 
     def convert_array(self, arr):
-        """Converts the numpy array to a vtkDataArray
-        """
+        """Converts the numpy array to a vtkDataArray"""
         # Put raw data into vtk array
-        data = interface.convert_array(arr, name=self.__data_name, deep=True, array_type=self.__vtktype)
+        data = interface.convert_array(
+            arr, name=self.__data_name, deep=True, array_type=self.__vtktype
+        )
         return data
 
-
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to request data for current timestep
-        """
+        """Used by pipeline to request data for current timestep"""
         # Get output:
         output = vtk.vtkTable.GetData(outInfo)
         if self.need_to_read():
@@ -102,9 +100,7 @@ class PackedBinariesReader(ReaderBase):
         output.AddColumn(data)
         return 1
 
-
     #### Seters and Geters ####
-
 
     def set_endian(self, endian):
         """Set the endianness of the data file.
@@ -117,7 +113,9 @@ class PackedBinariesReader(ReaderBase):
             endian = pos[endian]
         if endian != self.__endian:
             self.__endian = endian
-            self.__dtype, self.__vtktype = interface.get_dtypes(dtype=self.__dtypechar, endian=self.__endian)
+            self.__dtype, self.__vtktype = interface.get_dtypes(
+                dtype=self.__dtypechar, endian=self.__endian
+            )
             self.Modified()
 
     def get_endian(self):
@@ -125,14 +123,15 @@ class PackedBinariesReader(ReaderBase):
         return self.__endian
 
     def set_data_type(self, dtype):
-        """Set the data type of the binary file: `double='d'`, `float='f'`, `int='i'`
-        """
+        """Set the data type of the binary file: `double='d'`, `float='f'`, `int='i'`"""
         pos = ['d', 'f', 'i']
         if isinstance(dtype, int):
             dtype = pos[dtype]
         if dtype != self.__dtype:
             self.__dtypechar = dtype
-            self.__dtype, self.__vtktype = interface.get_dtypes(dtype=self.__dtypechar, endian=self.__endian)
+            self.__dtype, self.__vtktype = interface.get_dtypes(
+                dtype=self.__dtypechar, endian=self.__endian
+            )
             self.Modified()
 
     def get_data_types(self):
@@ -140,17 +139,14 @@ class PackedBinariesReader(ReaderBase):
         return self.__dtype, self.__vtktype
 
     def set_data_name(self, data_name):
-        """The string name of the data array generated from the inut file.
-        """
+        """The string name of the data array generated from the inut file."""
         if data_name != self.__data_name:
             self.__data_name = data_name
-            self.Modified(read_again=False) # Don't re-read. Just request data again
-
+            self.Modified(read_again=False)  # Don't re-read. Just request data again
 
     def get_data_name(self):
         """Get name used for the data array"""
         return self.__data_name
-
 
 
 class MadagascarReader(PackedBinariesReader):
@@ -170,6 +166,7 @@ class MadagascarReader(PackedBinariesReader):
 
     .. _Details Here: http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF
     """
+
     __displayname__ = 'Madagascar SSRSF Reader'
     __category__ = 'reader'
     # extensions are inherrited from PackedBinariesReader
@@ -181,16 +178,18 @@ class MadagascarReader(PackedBinariesReader):
     def _read_raw_file(self, filename):
         """Reads the raw data from the file for Madagascar SSRSF files"""
         dtype, vtktype = self.get_data_types()
-        CTLSEQ = b'\014\014\004' # The control sequence to seperate header from data
+        CTLSEQ = b'\014\014\004'  # The control sequence to seperate header from data
         rpl = b''
         raw = []
         with open(filename, 'rb') as file:
             raw = file.read()
             idx = raw.find(CTLSEQ)
             if idx == -1:
-                warnings.warn('This is not a single stream RSF format file. Treating entire file as packed binary data.')
+                warnings.warn(
+                    'This is not a single stream RSF format file. Treating entire file as packed binary data.'
+                )
             else:
-                raw = raw[idx:] # deletes the header
-                raw = raw.replace(CTLSEQ, rpl) # removes the control sequence
+                raw = raw[idx:]  # deletes the header
+                raw = raw.replace(CTLSEQ, rpl)  # removes the control sequence
         arr = np.fromstring(raw, dtype=dtype)
         return arr

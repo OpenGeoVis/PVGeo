@@ -16,27 +16,33 @@ For Example:
 
 import sys
 
+
 class stf:
     """
     String Formatting
     """
+
     G = '\033[92m'  # Green
     R = '\033[91m'  # Red
-    B = '\033[1m'   # Bold
-    U = '\033[4m'   # Underline
-    END = '\033[0m' # Normal
+    B = '\033[1m'  # Bold
+    U = '\033[4m'  # Underline
+    END = '\033[0m'  # Normal
+
 
 def convertDropboxURL(url):
     return url.replace("https://www.dropbox.com", "https://dl.dropbox.com")
+
 
 def convertGitHubURL(url):
     url = url.replace("https://github.com", "https://rawgit.com")
     url = url.replace("raw/", "")
     return url
 
+
 def generateViewerURL(dataURL):
     viewerURL = "http://viewer.pvgeo.org/"
     return viewerURL + '%s%s' % ("?fileURL=", dataURL)
+
 
 def main():
     if len(sys.argv) != 3:
@@ -47,16 +53,22 @@ def main():
     host = sys.argv[1]
     inURL = sys.argv[2]
 
-
     if host.lower() == "dropbox":
         convertURL = convertDropboxURL(inURL)
     elif host.lower() == "github":
         convertURL = convertGitHubURL(inURL)
     else:
-        print("%s%s--> Warning: Web host not specified or supported. URL is simply appended to standalone scene loader link.%s" % (stf.R, stf.B, stf.END))
+        print(
+            "%s%s--> Warning: Web host not specified or supported. URL is simply appended to standalone scene loader link.%s"
+            % (stf.R, stf.B, stf.END)
+        )
         convertURL = inURL
-    print("--> Your link: %s%s%s%s" % (stf.U, stf.G, generateViewerURL(convertURL), stf.END))
+    print(
+        "--> Your link: %s%s%s%s"
+        % (stf.U, stf.G, generateViewerURL(convertURL), stf.END)
+    )
     exit(0)
+
 
 if __name__ == '__main__':
     main()

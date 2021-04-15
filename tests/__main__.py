@@ -14,6 +14,7 @@ import sys
 
 if sys.version_info >= (3, 0):
     import faulthandler
+
     faulthandler.enable()
 
 
@@ -30,12 +31,13 @@ def test(close=False):
         from unittest import TextTestRunner
     os.chdir(os.path.dirname(__file__))
     test_file_strings = glob.glob('*_test.py')
-    module_strings = [str[0:len(str)-3] for str in test_file_strings]
-    suites = [unittest.defaultTestLoader.loadTestsFromName(str) for str
-              in module_strings]
+    module_strings = [str[0 : len(str) - 3] for str in test_file_strings]
+    suites = [
+        unittest.defaultTestLoader.loadTestsFromName(str) for str in module_strings
+    ]
     testSuite = unittest.TestSuite(suites)
 
-    #unittest.TextTestRunner(verbosity=2).run(testSuite)
+    # unittest.TextTestRunner(verbosity=2).run(testSuite)
     run = TextTestRunner(verbosity=2).run(testSuite)
     if close:
         exit(len(run.failures) > 0 or len(run.errors) > 0)

@@ -3,6 +3,7 @@ import shutil
 import tempfile
 
 import numpy as np
+
 # VTK imports:
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
@@ -10,16 +11,24 @@ from vtk.numpy_interface import dataset_adapter as dsa
 import PVGeo
 from base import TestBase
 from PVGeo import interface
+
 # Functionality to test:
-from PVGeo.grids import (EsriGridReader, ExtractTopography,
-                         ReverseImageDataAxii, SurferGridReader,
-                         TableToTimeGrid, TranslateGridOrigin,
-                         WriteCellCenterData, WriteImageDataToSurfer)
+from PVGeo.grids import (
+    EsriGridReader,
+    ExtractTopography,
+    ReverseImageDataAxii,
+    SurferGridReader,
+    TableToTimeGrid,
+    TranslateGridOrigin,
+    WriteCellCenterData,
+    WriteImageDataToSurfer,
+)
 
 RTOL = 0.000001
 
 
 ###############################################################################
+
 
 class TestTableToTimeGrid(TestBase):
     """
@@ -68,8 +77,8 @@ class TestTableToTimeGrid(TestBase):
             ido = f.GetOutput()
             checkme = [None] * len(self.arrs)
             for i, arr in enumerate(self.arrs):
-                a = arr.reshape((20, 2, 5, 2))[:,:,:,t]
-                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+                a = arr.reshape((20, 2, 5, 2))[:, :, :, t]
+                checkme[i] = a.flatten(order='F')  # Order F because in XYZ format
             self.check_data_fidelity(ido, checkme, points=False)
         f.set_use_points(True)
         f.Update()
@@ -78,14 +87,14 @@ class TestTableToTimeGrid(TestBase):
             ido = f.GetOutput()
             checkme = [None] * len(self.arrs)
             for i, arr in enumerate(self.arrs):
-                a = arr.reshape((20, 2, 5, 2))[:,:,:,t]
-                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+                a = arr.reshape((20, 2, 5, 2))[:, :, :, t]
+                checkme[i] = a.flatten(order='F')  # Order F because in XYZ format
             self.check_data_fidelity(ido, checkme, points=True)
         return
 
-
     def test_seplib(self):
         """`TableToTimeGrid`: check a SEPLib ordered array"""
+
         def sepit(a):
             a = a.swapaxes(0, 2)
             a = a.swapaxes(0, 1)
@@ -106,9 +115,9 @@ class TestTableToTimeGrid(TestBase):
             self.assertEqual(ido.GetDimensions(), (3, 6, 21))
             checkme = [None] * len(self.arrs)
             for i, arr in enumerate(self.arrs):
-                a = arr.reshape((20, 2, 5, 2), order='F')[:,:,:,t]
+                a = arr.reshape((20, 2, 5, 2), order='F')[:, :, :, t]
                 a = sepit(a)
-                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+                checkme[i] = a.flatten(order='F')  # Order F because in XYZ format
 
             self.check_data_fidelity(ido, checkme, points=False)
         f.set_use_points(True)
@@ -119,17 +128,15 @@ class TestTableToTimeGrid(TestBase):
             self.assertEqual(ido.GetDimensions(), (2, 5, 20))
             checkme = [None] * len(self.arrs)
             for i, arr in enumerate(self.arrs):
-                a = arr.reshape((20, 2, 5, 2), order='F')[:,:,:,t]
+                a = arr.reshape((20, 2, 5, 2), order='F')[:, :, :, t]
                 a = sepit(a)
-                checkme[i] = a.flatten(order='F') # Order F because in XYZ format
+                checkme[i] = a.flatten(order='F')  # Order F because in XYZ format
             self.check_data_fidelity(ido, checkme, points=True)
         return
 
 
-
-
-
 ###############################################################################
+
 
 class TestReverseImageDataAxii(TestBase):
     """
@@ -141,13 +148,15 @@ class TestReverseImageDataAxii(TestBase):
         # Create input vtkImageData:
         nx, ny, nz = 10, 11, 12
         arr = np.random.random((nz, ny, nx))
-        arrCells = np.random.random((nz-1, ny-1, nx-1))
+        arrCells = np.random.random((nz - 1, ny - 1, nx - 1))
         image = vtk.vtkImageData()
         image.SetDimensions(nx, ny, nz)
         image.SetSpacing(2, 2, 2)
         image.SetOrigin(0, 0, 0)
         data = interface.convert_array(arr.flatten(), name='Data', deep=True)
-        cellData = interface.convert_array(arrCells.flatten(), name='CellData', deep=True)
+        cellData = interface.convert_array(
+            arrCells.flatten(), name='CellData', deep=True
+        )
         image.GetPointData().AddArray(data)
         image.GetCellData().AddArray(cellData)
         # Now perfrom the reverse for only X:
@@ -165,7 +174,9 @@ class TestReverseImageDataAxii(TestBase):
         test = wido.PointData['Data']
         testCells = wido.CellData['CellData']
         self.assertTrue(np.allclose(test, np.flip(arr, axis=2).flatten(), rtol=RTOL))
-        self.assertTrue(np.allclose(testCells, np.flip(arrCells, axis=2).flatten(), rtol=RTOL))
+        self.assertTrue(
+            np.allclose(testCells, np.flip(arrCells, axis=2).flatten(), rtol=RTOL)
+        )
         # Now perfrom the reverse for all axii:
         f.set_flip_x(True)
         f.set_flip_y(True)
@@ -189,6 +200,7 @@ class TestReverseImageDataAxii(TestBase):
 
 
 ###############################################################################
+
 
 class TestTranslateGridOrigin(TestBase):
     """
@@ -217,7 +229,7 @@ class TestTranslateGridOrigin(TestBase):
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
-        self.assertEqual(ox, 100-19)
+        self.assertEqual(ox, 100 - 19)
         self.assertEqual(oy, 100)
         self.assertEqual(oz, 100)
         f.set_corner(2)
@@ -225,14 +237,14 @@ class TestTranslateGridOrigin(TestBase):
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
         self.assertEqual(ox, 100)
-        self.assertEqual(oy, 100-1)
+        self.assertEqual(oy, 100 - 1)
         self.assertEqual(oz, 100)
         f.set_corner(3)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
-        self.assertEqual(ox, 100-19)
-        self.assertEqual(oy, 100-1)
+        self.assertEqual(ox, 100 - 19)
+        self.assertEqual(oy, 100 - 1)
         self.assertEqual(oz, 100)
         f.set_corner(4)
         f.Update()
@@ -240,28 +252,28 @@ class TestTranslateGridOrigin(TestBase):
         ox, oy, oz = ido.GetOrigin()
         self.assertEqual(ox, 100)
         self.assertEqual(oy, 100)
-        self.assertEqual(oz, 100-9)
+        self.assertEqual(oz, 100 - 9)
         f.set_corner(5)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
-        self.assertEqual(ox, 100-19)
+        self.assertEqual(ox, 100 - 19)
         self.assertEqual(oy, 100)
-        self.assertEqual(oz, 100-9)
+        self.assertEqual(oz, 100 - 9)
         f.set_corner(6)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
         self.assertEqual(ox, 100)
-        self.assertEqual(oy, 100-1)
-        self.assertEqual(oz, 100-9)
+        self.assertEqual(oy, 100 - 1)
+        self.assertEqual(oz, 100 - 9)
         f.set_corner(7)
         f.Update()
         ido = f.GetOutput()
         ox, oy, oz = ido.GetOrigin()
-        self.assertEqual(ox, 100-19)
-        self.assertEqual(oy, 100-1)
-        self.assertEqual(oz, 100-9)
+        self.assertEqual(ox, 100 - 19)
+        self.assertEqual(oy, 100 - 1)
+        self.assertEqual(oz, 100 - 9)
 
 
 ###############################################################################
@@ -277,12 +289,10 @@ class TestSurferGridReader(TestBase):
         self.test_dir = tempfile.mkdtemp()
         self.filename = os.path.join(os.path.dirname(__file__), 'data/surfer-grid.grd')
 
-
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
         TestBase.tearDown(self)
-
 
     def test(self):
         """`SurferGridReader` and `WriteImageDataToSurfer`: Test reader and writer for Surfer format"""
@@ -323,7 +333,6 @@ class TestSurferGridReader(TestBase):
         return
 
 
-
 ###############################################################################
 
 
@@ -343,7 +352,7 @@ class TestExtractTopography(TestBase):
         x = np.random.uniform(bnds[0], bnds[1], 5000)
         y = np.random.uniform(bnds[2], bnds[3], 5000)
         z = np.random.uniform(-200, -100, 5000)
-        self.points = interface.points_to_poly_data(np.c_[x,y,z])
+        self.points = interface.points_to_poly_data(np.c_[x, y, z])
 
     def test_simple_run(self):
         """`ExtractTopography`: Test extraction on simple data"""
@@ -357,10 +366,9 @@ class TestExtractTopography(TestBase):
         # Convert to XYZ points
         points = np.vstack(map(np.ravel, g)).T
         z = np.reshape(np.full(len(points), 55.0), (len(points), -1))
-        #z = np.reshape(np.random.uniform(low=55.0, high=65.0, size=(len(points),)), (len(points), -1))
+        # z = np.reshape(np.random.uniform(low=55.0, high=65.0, size=(len(points),)), (len(points), -1))
         points = np.concatenate((points, z), axis=1)
         topo = interface.points_to_poly_data(points)
-
 
         # # apply filter
         f = ExtractTopography()
@@ -377,7 +385,7 @@ class TestExtractTopography(TestBase):
         for i in range(grd.GetNumberOfCells()):
             cell = grd.GetCell(i)
             bounds = cell.GetBounds()
-            z = bounds[5]#(bounds[4]+bounds[5])/2.0
+            z = bounds[5]  # (bounds[4]+bounds[5])/2.0
             if z <= 55.0:
                 self.assertTrue(active[i])
             elif z > 55.0:
@@ -387,21 +395,23 @@ class TestExtractTopography(TestBase):
 
         return
 
-
     def test_underneath(self):
         """`ExtractTopography`: Test extraction on underneath surface"""
         extracted = ExtractTopography(op='underneath').apply(self.grid, self.points)
         self.assertIsNotNone(extracted)
 
-
     def test_intersection(self):
         """`ExtractTopography`: Test extraction on surface"""
-        extracted = ExtractTopography(op='intersection', tolerance=50).apply(self.grid, self.points)
+        extracted = ExtractTopography(op='intersection', tolerance=50).apply(
+            self.grid, self.points
+        )
         self.assertIsNotNone(extracted)
 
     def test_shifted_surface(self):
         """`ExtractTopography`: Test extraction for shifted surface"""
-        extracted = ExtractTopography(op='intersection', tolerance=50, offset=-250).apply(self.grid, self.points)
+        extracted = ExtractTopography(
+            op='intersection', tolerance=50, offset=-250
+        ).apply(self.grid, self.points)
         self.assertIsNotNone(extracted)
 
 
@@ -415,12 +425,10 @@ class TestCellCenterWriter(TestBase):
         self.test_dir = tempfile.mkdtemp()
         self.filename = os.path.join(self.test_dir, 'test.txt')
 
-
     def tearDown(self):
         # Remove the test data directory after the test
         shutil.rmtree(self.test_dir)
         TestBase.tearDown(self)
-
 
     def test(self):
         """`SurferGridReader` and `WriteImageDataToSurfer`: Test reader and writer for Surfer format"""
@@ -433,7 +441,6 @@ class TestCellCenterWriter(TestBase):
         comp.SetBlock(0, grid0)
         comp.SetBlock(1, grid1)
 
-
         # test the wirter
         writer = WriteCellCenterData()
         filename = os.path.join(self.filename)
@@ -442,6 +449,7 @@ class TestCellCenterWriter(TestBase):
 
 
 ###############################################################################
+
 
 class TestEsriGridReader(TestBase):
     """
@@ -506,6 +514,7 @@ class TestEsriGridReader(TestBase):
 ###############################################################################
 if __name__ == '__main__':
     import unittest
+
     unittest.main()
 ###############################################################################
 ###############################################################################

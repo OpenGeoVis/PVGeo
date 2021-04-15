@@ -61,7 +61,6 @@ def convert_array(arr, name='Data', deep=0, array_type=None, pdf=False):
     return pd.DataFrame(data=num_data, columns=[arr.GetName()])
 
 
-
 def data_frame_to_table(df, pdo=None):
     """Converts a pandas DataFrame to a vtkTable"""
     if not isinstance(df, pd.DataFrame):
@@ -96,7 +95,9 @@ def place_array_in_table(ndarr, titles, pdo):
     """
     # Put columns into table
     if len(np.shape(ndarr)) > 2:
-        raise _helpers.PVGeoError('Input np.ndarray must be 1D or 2D to be converted to vtkTable.')
+        raise _helpers.PVGeoError(
+            'Input np.ndarray must be 1D or 2D to be converted to vtkTable.'
+        )
     if len(np.shape(ndarr)) == 1:
         # First check if it is an array full of tuples (varying type)
         if isinstance(ndarr[0], (tuple, np.void)):
@@ -109,11 +110,10 @@ def place_array_in_table(ndarr, titles, pdo):
     cols = np.shape(ndarr)[1]
 
     for i in range(cols):
-        VTK_data = convert_array(ndarr[:,i])
+        VTK_data = convert_array(ndarr[:, i])
         VTK_data.SetName(titles[i])
         pdo.AddColumn(VTK_data)
     return pv.wrap(pdo)
-
 
 
 def get_dtypes(dtype='', endian=None):
@@ -126,7 +126,7 @@ def get_dtypes(dtype='', endian=None):
     """
     # If native `@` was chosen then do not pass an endian
     if endian == '@':
-        #print('WARNING: Native endianness no longer supported for packed binary reader. Please chose `>` or `<`. This defaults to big `>`.')
+        # print('WARNING: Native endianness no longer supported for packed binary reader. Please chose `>` or `<`. This defaults to big `>`.')
         endian = ''
     # No endian specified:
     elif endian is None:
@@ -145,7 +145,6 @@ def get_dtypes(dtype='', endian=None):
     return dtype, vtktype
 
 
-
 def points_to_poly_data(points, copy_z=False):
     """Create ``vtkPolyData`` from a numpy array of XYZ points. If the points
     have more than 3 dimensions, then all dimensions after the third will be
@@ -162,7 +161,7 @@ def points_to_poly_data(points, copy_z=False):
     """
     # This prevents an error that occurs when only one point is passed
     if points.ndim < 2:
-        points = points.reshape((1,-1))
+        points = points.reshape((1, -1))
     keys = ['Field %d' % i for i in range(points.shape[1] - 3)]
     # Check if input is anything other than a NumPy array and cast it
     # e.g. you could send a Pandas dataframe
@@ -203,17 +202,18 @@ def add_arrays_from_data_frame(pdo, field, df):
     return pv.wrap(pdo)
 
 
-
 def convert_cell_conn(cell_connectivity):
     """Converts cell connectivity arrays to a cell matrix array that makes sense
     for VTK cell arrays.
     """
     cellsMat = np.concatenate(
-            (
-                np.ones((cell_connectivity.shape[0], 1), dtype=np.int64)*cell_connectivity.shape[1],
-                cell_connectivity
-            ),
-            axis=1).ravel()
+        (
+            np.ones((cell_connectivity.shape[0], 1), dtype=np.int64)
+            * cell_connectivity.shape[1],
+            cell_connectivity,
+        ),
+        axis=1,
+    ).ravel()
     return nps.numpy_to_vtk(cellsMat, deep=True, array_type=vtk.VTK_ID_TYPE)
 
 

@@ -2,17 +2,22 @@ try:
     # Safely test if VTK is avaialable. This is needed for Windows installation
     def tryVTK():
         import vtk
+
         return
-    tryVTK() # Safe import in this manner so docs soes not iterate over VTK
+
+    tryVTK()  # Safe import in this manner so docs soes not iterate over VTK
 except ImportError:
     import sys
     import mock
     import warnings
+
     # Mock the VTK module to run installation
     sys.modules['vtk'] = mock.Mock()
     # This is because VTK is not compatible with Windows Python 2
-    warnings.warn('VTK Python package is unavailable! '\
-        'PVGeo is running in safe mode for installation.')
+    warnings.warn(
+        'VTK Python package is unavailable! '
+        'PVGeo is running in safe mode for installation.'
+    )
 else:
     # Import Base Classes
     from .base import *
@@ -23,7 +28,8 @@ else:
     from . import gslib
     from . import model_build
     from . import readers
-    #TODO: from . import tunneling
+
+    # TODO: from . import tunneling
     from . import ubc
 
     try:

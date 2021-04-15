@@ -18,22 +18,21 @@ from .. import _helpers, base
 
 # UBC Mesh Reader Base
 class ubcMeshReaderBase(base.TwoFileReaderBase):
-    """A base class for the UBC mesh readers
-    """
+    """A base class for the UBC mesh readers"""
+
     __displayname__ = 'UBC Mesh Reader Base'
     __category__ = 'base'
     extensions = 'mesh msh dat txt text'
 
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
-        base.TwoFileReaderBase.__init__(self,
-                                        nOutputPorts=nOutputPorts, outputType=outputType,
-                                        **kwargs)
+        base.TwoFileReaderBase.__init__(
+            self, nOutputPorts=nOutputPorts, outputType=outputType, **kwargs
+        )
         self.__data_name = 'Data'
-        self.__use_filename = True # flag on whether or not to use the model file
+        self.__use_filename = True  # flag on whether or not to use the model file
         # extension as data name
         # For keeping track of type (2D vs 3D)
         self.__sizeM = None
-
 
     def is_3d(self):
         """Returns true if mesh is spatially references in three dimensions"""
@@ -57,22 +56,22 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             pts = []
             disc = []
             for i in range(n):
-                ln = fileLines[i+sft].split('!')[0].split()
+                ln = fileLines[i + sft].split('!')[0].split()
                 if i == 0:
                     o = ln[0]
                     pts.append(o)
-                    ln = [ln[1],ln[2]]
+                    ln = [ln[1], ln[2]]
                 pts.append(ln[0])
                 disc.append(ln[1])
             return pts, disc
 
         # Get the number of lines for each dimension
         nx = int(fileLines[0].split('!')[0])
-        nz = int(fileLines[nx+1].split('!')[0])
+        nz = int(fileLines[nx + 1].split('!')[0])
 
         # Get the origins and tups for both dimensions
         xpts, xdisc = _genTup(1, nx)
-        zpts, zdisc = _genTup(2+nx, nz)
+        zpts, zdisc = _genTup(2 + nx, nz)
 
         return xpts, xdisc, zpts, zdisc
 
@@ -94,10 +93,14 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         try:
             if v[0] >= 1 and v[1] >= 10:
                 # max_rows in numpy versions >= 1.10
-                msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str, comments='!', max_rows=1)
+                msh = np.genfromtxt(
+                    FileName, delimiter='\n', dtype=np.str, comments='!', max_rows=1
+                )
             else:
                 # This reads whole file :(
-                msh = np.genfromtxt(FileName, delimiter='\n', dtype=np.str, comments='!')[0]
+                msh = np.genfromtxt(
+                    FileName, delimiter='\n', dtype=np.str, comments='!'
+                )[0]
         except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         # Fist line is the size of the model
@@ -106,18 +109,17 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         if self.__sizeM.shape[0] == 1:
             # Read in data from file
             xpts, xdisc, zpts, zdisc = ubcMeshReaderBase._ubc_mesh_2d_part(FileName)
-            nx = np.sum(np.array(xdisc,dtype=int))+1
-            nz = np.sum(np.array(zdisc,dtype=int))+1
-            return (0,nx, 0,1, 0,nz)
+            nx = np.sum(np.array(xdisc, dtype=int)) + 1
+            nz = np.sum(np.array(zdisc, dtype=int)) + 1
+            return (0, nx, 0, 1, 0, nz)
         # Check if the mesh is a UBC 3D mesh or OcTree
         elif self.__sizeM.shape[0] >= 3:
             # Get mesh dimensions
             dim = self.__sizeM[0:3]
-            ne,nn,nz = dim[0], dim[1], dim[2]
-            return (0,ne, 0,nn, 0,nz)
+            ne, nn, nz = dim[0], dim[1], dim[2]
+            return (0, ne, 0, nn, 0, nz)
         else:
             raise _helpers.PVGeoError('File format not recognized')
-
 
     @staticmethod
     def ubc_model_3d(FileName):
@@ -174,22 +176,26 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         return self.__data_name
 
 
-
-
 ###############################################################################
 
 
 # UBC Model Appender Base
 class ModelAppenderBase(base.AlgorithmBase):
-    """A base class for create mesh-model appenders on the UBC Mesh formats
-    """
+    """A base class for create mesh-model appenders on the UBC Mesh formats"""
+
     __displayname__ = 'Model Appender Base'
     __category__ = 'base'
 
-    def __init__(self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid', **kwargs):
-        base.AlgorithmBase.__init__(self,
-                                    nInputPorts=1, inputType=inputType,
-                                    nOutputPorts=1, outputType=outputType)
+    def __init__(
+        self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid', **kwargs
+    ):
+        base.AlgorithmBase.__init__(
+            self,
+            nInputPorts=1,
+            inputType=inputType,
+            nOutputPorts=1,
+            outputType=outputType,
+        )
         self._model_filenames = kwargs.get('model_files', [])
         self.__data_name = kwargs.get('dataname', 'Appended Data')
         self.__use_filename = True
@@ -199,8 +205,9 @@ class ModelAppenderBase(base.AlgorithmBase):
         # For the VTK/ParaView pipeline
         self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
-        self.__last_successfull_index = 0 #This is the index to use if the current timestep is unavailable
-
+        self.__last_successfull_index = (
+            0  # This is the index to use if the current timestep is unavailable
+        )
 
     def need_to_read(self, flag=None):
         """Ask self if the reader needs to read the files again
@@ -219,20 +226,17 @@ class ModelAppenderBase(base.AlgorithmBase):
         return self.__need_to_read
 
     def Modified(self, read_again=True):
-        """Call modified if the files needs to be read again again.
-        """
+        """Call modified if the files needs to be read again again."""
         if read_again:
             self.__need_to_read = read_again
         base.AlgorithmBase.Modified(self)
 
     def modified(self, read_again=True):
-        """Call modified if the files needs to be read again again.
-        """
+        """Call modified if the files needs to be read again again."""
         return self.Modified(read_again=read_again)
 
     def _update_time_steps(self):
-        """For internal use only: appropriately sets the timesteps.
-        """
+        """For internal use only: appropriately sets the timesteps."""
         # Use the inputs' timesteps: this merges the timesteps values
         ts0 = _helpers.get_input_time_steps(self, port=0)
         if ts0 is None:
@@ -249,14 +253,12 @@ class ModelAppenderBase(base.AlgorithmBase):
     def _place_on_mesh(self, output, idx=0):
         raise NotImplementedError()
 
-
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to generate output
-        """
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         output = self.GetOutputData(outInfo, 0)
-        output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
+        output.DeepCopy(pdi)  # ShallowCopy if you want changes to propagate upstream
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
         # Perfrom task:
@@ -272,8 +274,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
-        """Used by pipeline to handle time variance and update output extents
-        """
+        """Used by pipeline to handle time variance and update output extents"""
         self._update_time_steps()
         pdi = self.GetInputData(inInfo, 0, 0)
         # Determine if 2D or 3D and read
@@ -290,16 +291,14 @@ class ModelAppenderBase(base.AlgorithmBase):
         return len(self._model_filenames) > 0
 
     def get_time_step_values(self):
-        """Use this in ParaView decorator to register timesteps.
-        """
+        """Use this in ParaView decorator to register timesteps."""
         # if unset, force at least one attempt to set the timesteps
         if self.__timesteps is None:
             self._update_time_steps()
         return self.__timesteps if self.__timesteps is not None else None
 
     def clear_models(self):
-        """Use to clear data file names.
-        """
+        """Use to clear data file names."""
         self._model_filenames = []
         self._models = []
         self.Modified(read_again=True)
@@ -309,7 +308,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         list of strings.
         """
         if filename is None:
-            return # do nothing if None is passed by a constructor on accident
+            return  # do nothing if None is passed by a constructor on accident
         elif isinstance(filename, (list, tuple)):
             for f in filename:
                 self.add_model_file_name(f)

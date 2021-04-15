@@ -5,16 +5,23 @@ import warnings
 
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
+
 # VTK imports:
 from vtk.util import numpy_support as nps
 
 import PVGeo
 from base import TestBase
+
 # Functionality to test:
-from PVGeo.ubc import (GravObsReader,
-                       TensorMeshAppender, TensorMeshReader, TopoMeshAppender,
-                       TopoReader, WriteImageDataToUBC,
-                       WriteRectilinearGridToUBC)
+from PVGeo.ubc import (
+    GravObsReader,
+    TensorMeshAppender,
+    TensorMeshReader,
+    TopoMeshAppender,
+    TopoReader,
+    WriteImageDataToUBC,
+    WriteRectilinearGridToUBC,
+)
 
 discretize_available = False
 try:
@@ -30,11 +37,13 @@ RTOL = 0.000001
 
 ###############################################################################
 
-class ubcMeshTesterBase(TestBase):
 
+class ubcMeshTesterBase(TestBase):
     def _check_shape(self, grid):
         self.assertEqual(grid.GetExtent(), self.extent)
-        self.assertEqual(grid.GetNumberOfCells(), self.extent[1]*self.extent[3]*self.extent[5])
+        self.assertEqual(
+            grid.GetNumberOfCells(), self.extent[1] * self.extent[3] * self.extent[5]
+        )
         return
 
     def _check_data(self, grid, data):
@@ -48,7 +57,9 @@ class ubcMeshTesterBase(TestBase):
         self.assertEqual(corner, self.origin)
         return
 
+
 ###############################################################################
+
 
 class Test3DTensorMesh(ubcMeshTesterBase):
     """
@@ -71,10 +82,10 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         model = np.random.random(self.n)
         np.savetxt(filename, model, delimiter=' ', comments='! ')
         model = np.reshape(model, self.shape)
-        model = np.swapaxes(model,0,1)
-        model = np.swapaxes(model,0,2)
+        model = np.swapaxes(model, 0, 1)
+        model = np.swapaxes(model, 0, 2)
         # Now reverse Z axis
-        model = model[::-1,:,:] # Note it is in Fortran ordering
+        model = model[::-1, :, :]  # Note it is in Fortran ordering
         model = model.flatten()
         return filename, model
 
@@ -85,11 +96,11 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         np.savetxt(filename, model, delimiter=' ', comments='! ')
         shp = self.shape
         model = np.reshape(model, (shp[0], shp[1], shp[2], 3))
-        model = np.swapaxes(model,0,1)
-        model = np.swapaxes(model,0,2)
+        model = np.swapaxes(model, 0, 1)
+        model = np.swapaxes(model, 0, 2)
         # Now reverse Z axis
-        model = model[::-1,:,:,:] # Note it is in Fortran ordering
-        model = np.reshape(model, (shp[0]*shp[1]*shp[2], 3))
+        model = model[::-1, :, :, :]  # Note it is in Fortran ordering
+        model = np.reshape(model, (shp[0] * shp[1] * shp[2], 3))
         return filename, model
 
     def setUp(self):
@@ -101,7 +112,7 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         self.yCells = '200 100 50 21*50.0 50 100 200'
         self.zCells = '20*25.0 50 100 200'
         self.shape = (26, 27, 23)
-        self.n = self.shape[0]*self.shape[1]*self.shape[2]
+        self.n = self.shape[0] * self.shape[1] * self.shape[2]
         self.extent = (0, self.shape[0], 0, self.shape[1], 0, self.shape[2])
         self.data_name = 'foo'
         ##### Now generate output for testing ####
@@ -113,20 +124,20 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         reader = TensorMeshReader()
         reader.set_mesh_filename(self.meshname)
         # Get and test output:
-        reader.Update() # Read only mesh upfront
+        reader.Update()  # Read only mesh upfront
         reader.add_model_file_name(self.modname)
         reader.set_data_name(self.data_name)
-        reader.Update() # Read models upfront
+        reader.Update()  # Read models upfront
         self.GRID = reader.GetOutput()
         #### Now read mesh with multi component data
         # Set up the reader:
         reader = TensorMeshReader()
         reader.set_mesh_filename(self.meshname)
         # Get and test output:
-        reader.Update() # Read only mesh upfront
+        reader.Update()  # Read only mesh upfront
         reader.add_model_file_name(self.modname_multi)
         reader.set_data_name(self.data_name)
-        reader.Update() # Read models upfront
+        reader.Update()  # Read models upfront
         self.GRID_MULTI = reader.GetOutput()
 
     def tearDown(self):
@@ -170,13 +181,26 @@ class Test3DTensorMesh(ubcMeshTesterBase):
 
     def test_topo_appender(self):
         """`TopoMeshAppender` 3D:Test topography appender"""
-        indices = np.array([[0,0,1], [0,1,1], [0,2,1], [1,0,1], [1,1,1],
-                            [1,2,1], [2,0,1], [2,1,1], [2,2,2], ], dtype=int)
+        indices = np.array(
+            [
+                [0, 0, 1],
+                [0, 1, 1],
+                [0, 2, 1],
+                [1, 0, 1],
+                [1, 1, 1],
+                [1, 2, 1],
+                [2, 0, 1],
+                [2, 1, 1],
+                [2, 2, 2],
+            ],
+            dtype=int,
+        )
         filename = os.path.join(self.test_dir, 'disc-topo.txt')
         np.savetxt(filename, X=indices, fmt='%d', comments='', header='3 3')
         # Create input grid
-        grid = PVGeo.model_build.CreateTensorMesh(xcellstr='1.0 1.0 1.0',
-                                                  ycellstr='1.0 1.0 1.0', zcellstr='1.0 1.0 1.0').apply()
+        grid = PVGeo.model_build.CreateTensorMesh(
+            xcellstr='1.0 1.0 1.0', ycellstr='1.0 1.0 1.0', zcellstr='1.0 1.0 1.0'
+        ).apply()
         # run the filter
         f = TopoMeshAppender()
         f.SetInputDataObject(grid)
@@ -185,7 +209,6 @@ class Test3DTensorMesh(ubcMeshTesterBase):
         output = f.GetOutput()
         # TODO: check output
         self.assertIsNotNone(output)
-
 
     def test_writer(self):
         """`WriteRectilinearGridToUBC`: Test data integretiy across I/O"""
@@ -211,12 +234,14 @@ class Test3DTensorMesh(ubcMeshTesterBase):
 
     def test_chile_example(self):
         """`TensorMeshReader`: Test Chile mesh example"""
-        meshfile = os.path.join(os.path.dirname(__file__), 'data/Craig-Chile/craig_chile.msh')
+        meshfile = os.path.join(
+            os.path.dirname(__file__), 'data/Craig-Chile/craig_chile.msh'
+        )
         modfile = os.path.join(os.path.dirname(__file__), 'data/Craig-Chile/Lpout.mod')
         reader = TensorMeshReader()
         reader.set_mesh_filename(meshfile)
         # Get and test output:
-        reader.Update() # Read only mesh upfront
+        reader.Update()  # Read only mesh upfront
         reader.add_model_file_name(modfile)
         reader.set_data_name('Lpout')
         mesh = reader.apply()
@@ -225,6 +250,7 @@ class Test3DTensorMesh(ubcMeshTesterBase):
 
 
 ###############################################################################
+
 
 class Test2DTensorMeshReader(ubcMeshTesterBase):
     """
@@ -239,19 +265,19 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
 
     def _write_model(self, filename='test.mod'):
         filename = os.path.join(self.test_dir, filename)
-        model = np.random.random((self.nz,self.nx))
+        model = np.random.random((self.nz, self.nx))
         with open(filename, 'w') as f:
             f.write('%d %d\n' % (self.nx, self.nz))
             for k in range(self.nz):
                 for i in range(self.nx):
-                    f.write('%.6e ' % model[k,i])
+                    f.write('%.6e ' % model[k, i])
                 f.write('\n')
             f.close()
         model = np.reshape(model.flatten(order='F'), self.shape)
-        model = np.swapaxes(model,0,1)
-        model = np.swapaxes(model,0,2)
+        model = np.swapaxes(model, 0, 1)
+        model = np.swapaxes(model, 0, 2)
         # Now reverse Z axis
-        model = model[::-1,:,:] # Note it is in Fortran ordering
+        model = model[::-1, :, :]  # Note it is in Fortran ordering
         model = model.flatten()
         return filename, model
 
@@ -299,10 +325,10 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
         reader = TensorMeshReader()
         reader.set_mesh_filename(meshname)
         # Get and test output:
-        reader.Update() # Test the read up front for the mesh
+        reader.Update()  # Test the read up front for the mesh
         reader.add_model_file_name(modname)
         reader.set_data_name(self.data_name)
-        reader.Update() # Now read the models upfront
+        reader.Update()  # Now read the models upfront
         self.GRID = reader.GetOutput()
         return
 
@@ -345,6 +371,7 @@ class Test2DTensorMeshReader(ubcMeshTesterBase):
 ###############################################################################
 
 if discretize_available:
+
     class TestOcTreeMeshReader(ubcMeshTesterBase):
         """
         Test the `OcTreeReader`
@@ -393,15 +420,19 @@ if discretize_available:
             with open(filename, 'w') as f:
                 f.write(treeMesh)
 
-
             # write out model file(s)
             self.nt = 5
             self.modelFileNames = ['model%d.mod' % i for i in range(self.nt)]
-            self.modelFileNames = [os.path.join(self.test_dir, self.modelFileNames[i]) for i in range(self.nt)]
+            self.modelFileNames = [
+                os.path.join(self.test_dir, self.modelFileNames[i])
+                for i in range(self.nt)
+            ]
             self.arrs = [None] * self.nt
             for i in range(self.nt):
                 self.arrs[i] = np.random.random(29)
-                np.savetxt(self.modelFileNames[i], self.arrs[i], delimiter=' ', comments='! ')
+                np.savetxt(
+                    self.modelFileNames[i], self.arrs[i], delimiter=' ', comments='! '
+                )
             return
 
         def tearDown(self):
@@ -412,7 +443,8 @@ if discretize_available:
         def reshapeArrs(self, mesh):
             for i in range(self.nt):
                 ind_reorder = nps.vtk_to_numpy(
-                    mesh.GetCellData().GetArray('index_cell_corner'))
+                    mesh.GetCellData().GetArray('index_cell_corner')
+                )
                 self.arrs[i] = self.arrs[i][ind_reorder]
 
         def test_simple_octree(self):
@@ -434,7 +466,7 @@ if discretize_available:
             reader.add_model_file_name(self.modelFileNames)
             reader.set_data_name('foo')
 
-            reader.Update() # Check that normal update works
+            reader.Update()  # Check that normal update works
 
             tree = reader.GetOutputDataObject(0)
             self.assertIsNotNone(tree)
@@ -475,12 +507,16 @@ if discretize_available:
             output = f.GetOutput()
             # remember that 2 arrays is added by the reader
             self.assertEqual(output.GetCellData().GetNumberOfArrays(), 4)
-            self.assertEqual(output.GetCellData().GetArrayName(3), os.path.basename(self.modelFileNames[1])) # use file as name
-            self.assertEqual(len(f.get_time_step_values()), self.nt-1)
+            self.assertEqual(
+                output.GetCellData().GetArrayName(3),
+                os.path.basename(self.modelFileNames[1]),
+            )  # use file as name
+            self.assertEqual(len(f.get_time_step_values()), self.nt - 1)
             return
 
 
 ###############################################################################
+
 
 class TestGravObsReader(TestBase):
     """
@@ -489,7 +525,9 @@ class TestGravObsReader(TestBase):
 
     def setUp(self):
         TestBase.setUp(self)
-        self.filename = os.path.join(os.path.dirname(__file__), 'data/Craig-Chile/LdM_grav_obs.grv')
+        self.filename = os.path.join(
+            os.path.dirname(__file__), 'data/Craig-Chile/LdM_grav_obs.grv'
+        )
 
     def test(self):
         """`GravObsReader`: Test reader for UBC Gravity Observations"""
@@ -503,6 +541,7 @@ class TestGravObsReader(TestBase):
 
 ###############################################################################
 
+
 class TestTopoReader(TestBase):
     """
     Test the `TopoReader`
@@ -510,7 +549,9 @@ class TestTopoReader(TestBase):
 
     def setUp(self):
         TestBase.setUp(self)
-        self.filename = os.path.join(os.path.dirname(__file__), 'data/Craig-Chile/LdM_topo.topo')
+        self.filename = os.path.join(
+            os.path.dirname(__file__), 'data/Craig-Chile/LdM_topo.topo'
+        )
 
     def test(self):
         """`TopoReader`: Test reader for UBC topography"""
@@ -527,6 +568,7 @@ class TestTopoReader(TestBase):
 ###############################################################################
 if __name__ == '__main__':
     import unittest
+
     unittest.main()
 ###############################################################################
 ###############################################################################

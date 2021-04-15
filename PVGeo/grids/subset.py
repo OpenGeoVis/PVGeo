@@ -16,8 +16,8 @@ from ..base import FilterBase
 # NOTE: internal import - from scipy.spatial import cKDTree
 
 
-
 ###############################################################################
+
 
 class ExtractTopography(FilterBase):
     """This filter takes two inputs: any mesh dataset and a set of points for
@@ -54,14 +54,14 @@ class ExtractTopography(FilterBase):
         variance?
 
     """
+
     __displayname__ = 'Extract Topography'
     __category__ = 'filter'
 
-    def __init__(self, op='underneath', tolerance=0.001, offset=0.0,
-                 invert=False, remove=False):
-        FilterBase.__init__(self,
-                            nInputPorts=2, inputType='vtkDataSet',
-                            nOutputPorts=1)
+    def __init__(
+        self, op='underneath', tolerance=0.001, offset=0.0, invert=False, remove=False
+    ):
+        FilterBase.__init__(self, nInputPorts=2, inputType='vtkDataSet', nOutputPorts=1)
         self._tolerance = tolerance
         self._offset = offset
         self._invert = invert
@@ -71,22 +71,19 @@ class ExtractTopography(FilterBase):
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):
-        """This simply makes sure the user selects the correct inputs
-        """
+        """This simply makes sure the user selects the correct inputs"""
         typ = 'vtkDataSet'
         if port == 1:
-            typ = 'vtkPointSet' # Make sure topography is some sort of point set
+            typ = 'vtkPointSet'  # Make sure topography is some sort of point set
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), typ)
         return 1
 
     # THIS IS CRUCIAL to preserve data type through filter
     def RequestDataObject(self, request, inInfo, outInfo):
-        """Constructs the output data object based on the input data object
-        """
+        """Constructs the output data object based on the input data object"""
         self.OutputType = self.GetInputData(inInfo, 0, 0).GetClassName()
         self.FillOutputPortInformation(0, outInfo.GetInformationObject(0))
         return 1
-
 
     #### Extraction Methods ####
 
@@ -107,13 +104,13 @@ class ExtractTopography(FilterBase):
     def _underneath(topo_points, data_points, tolerance):
         """Extract cells underneath the topography surface"""
         comp = ExtractTopography._query(topo_points, data_points)
-        return np.array(data_points[:,2] < (comp[:,2] - tolerance), dtype=int)
+        return np.array(data_points[:, 2] < (comp[:, 2] - tolerance), dtype=int)
 
     @staticmethod
     def _intersection(topo_points, data_points, tolerance):
         """Extract cells intersecting the topography surface"""
         comp = ExtractTopography._query(topo_points, data_points)
-        return np.array(np.abs((data_points[:,2] - comp[:,2])) < tolerance, dtype=int)
+        return np.array(np.abs((data_points[:, 2] - comp[:, 2])) < tolerance, dtype=int)
 
     @staticmethod
     def get_operations():
@@ -148,15 +145,13 @@ class ExtractTopography(FilterBase):
         n = ExtractTopography.get_operation_names()[idx]
         return ExtractTopography.get_operations()[n]
 
-
     #### Pipeline Methods ####
-
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
         # Get input/output of Proxy
-        igrid = self.GetInputData(inInfo, 0, 0) # Port 0: grid
-        topo = self.GetInputData(inInfo, 1, 0) # Port 1: topography
+        igrid = self.GetInputData(inInfo, 0, 0)  # Port 0: grid
+        topo = self.GetInputData(inInfo, 1, 0)  # Port 1: topography
         grid = self.GetOutputData(outInfo, 0)
         grid.DeepCopy(igrid)
 
@@ -165,9 +160,9 @@ class ExtractTopography(FilterBase):
         active = np.zeros((ncells), dtype=int)
         # Now iterate through the cells in the grid and test if they are beneath the topography
         wtopo = dsa.WrapDataObject(topo)
-        topo_points = np.array(wtopo.Points) # mak sure we do not edit the input
+        topo_points = np.array(wtopo.Points)  # mak sure we do not edit the input
         #  shift the topography points for the tree
-        topo_points[:,2] = topo_points[:,2] + self._offset
+        topo_points[:, 2] = topo_points[:, 2] + self._offset
 
         filt = vtk.vtkCellCenters()
         filt.SetInputDataObject(igrid)

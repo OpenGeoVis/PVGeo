@@ -23,8 +23,6 @@ else:
     from io import StringIO
 
 
-
-
 class TensorMeshReader(ubcMeshReaderBase):
     """UBC Mesh 2D/3D models are defined using a 2-file format. The "mesh" file
     describes how the data is discretized. The "model" file lists the physical
@@ -38,17 +36,18 @@ class TensorMeshReader(ubcMeshReaderBase):
         Model File is optional. Reader will still construct
         ``vtkRectilinearGrid`` safely.
     """
+
     __displayname__ = 'UBC Tensor Mesh Reader'
     __category__ = 'reader'
     description = 'PVGeo: UBC Mesh 2D/3D Two-File Format'
 
     def __init__(self, nOutputPorts=1, outputType='vtkRectilinearGrid', **kwargs):
-        ubcMeshReaderBase.__init__(self,
-                                   nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+        ubcMeshReaderBase.__init__(
+            self, nOutputPorts=nOutputPorts, outputType=outputType, **kwargs
+        )
 
         self.__mesh = vtk.vtkRectilinearGrid()
         self.__models = []
-
 
     @staticmethod
     def place_model_on_mesh(mesh, model, data_name='Data'):
@@ -75,29 +74,35 @@ class TensorMeshReader(ubcMeshReaderBase):
         # model.GetNumberOfValues() if model is vtkDataArray
         # Make sure this model file fits the dimensions of the mesh
         ext = mesh.GetExtent()
-        n1,n2,n3 = ext[1],ext[3],ext[5]
-        if (n1*n2*n3 < len(model)):
-            raise _helpers.PVGeoError('Model `%s` has more data than the given mesh has cells to hold.' % data_name)
-        elif (n1*n2*n3 > len(model)):
-            raise _helpers.PVGeoError('Model `%s` does not have enough data to fill the given mesh\'s cells.' % data_name)
+        n1, n2, n3 = ext[1], ext[3], ext[5]
+        if n1 * n2 * n3 < len(model):
+            raise _helpers.PVGeoError(
+                'Model `%s` has more data than the given mesh has cells to hold.'
+                % data_name
+            )
+        elif n1 * n2 * n3 > len(model):
+            raise _helpers.PVGeoError(
+                'Model `%s` does not have enough data to fill the given mesh\'s cells.'
+                % data_name
+            )
 
         # Swap axes because VTK structures the coordinates a bit differently
-        #-  This is absolutely crucial!
-        #-  Do not play with unless you know what you are doing!
+        # -  This is absolutely crucial!
+        # -  Do not play with unless you know what you are doing!
         if model.ndim > 1 and model.ndim < 3:
             ncomp = model.shape[1]
             model = np.reshape(model, (n1, n2, n3, ncomp))
-            model = np.swapaxes(model,0,1)
-            model = np.swapaxes(model,0,2)
+            model = np.swapaxes(model, 0, 1)
+            model = np.swapaxes(model, 0, 2)
             # Now reverse Z axis
-            model = model[::-1,:,:,:] # Note it is in Fortran ordering
-            model = np.reshape(model, (n1*n2*n3, ncomp))
+            model = model[::-1, :, :, :]  # Note it is in Fortran ordering
+            model = np.reshape(model, (n1 * n2 * n3, ncomp))
         else:
-            model = np.reshape(model, (n1,n2,n3))
-            model = np.swapaxes(model,0,1)
-            model = np.swapaxes(model,0,2)
+            model = np.reshape(model, (n1, n2, n3))
+            model = np.swapaxes(model, 0, 1)
+            model = np.swapaxes(model, 0, 2)
             # Now reverse Z axis
-            model = model[::-1,:,:] # Note it is in Fortran ordering
+            model = model[::-1, :, :]  # Note it is in Fortran ordering
             model = model.flatten()
 
         # Convert data to VTK data structure and append to output
@@ -106,9 +111,9 @@ class TensorMeshReader(ubcMeshReaderBase):
         mesh.GetCellData().AddArray(c)
         return mesh
 
-    #------------------------------------------------------------------#
-    #----------------------     UBC MESH 2D    ------------------------#
-    #------------------------------------------------------------------#
+    # ------------------------------------------------------------------#
+    # ----------------------     UBC MESH 2D    ------------------------#
+    # ------------------------------------------------------------------#
 
     @staticmethod
     def ubc_mesh_2d(FileName, output):
@@ -132,31 +137,31 @@ class TensorMeshReader(ubcMeshReaderBase):
         # Read in data from file
         xpts, xdisc, zpts, zdisc = ubcMeshReaderBase._ubc_mesh_2d_part(FileName)
 
-        nx = np.sum(np.array(xdisc,dtype=int))+1
-        nz = np.sum(np.array(zdisc,dtype=int))+1
+        nx = np.sum(np.array(xdisc, dtype=int)) + 1
+        nz = np.sum(np.array(zdisc, dtype=int)) + 1
 
         # Now generate the vtkRectilinear Grid
         def _genCoords(pts, disc, z=False):
             c = [float(pts[0])]
-            for i in range(len(pts)-1):
+            for i in range(len(pts) - 1):
                 start = float(pts[i])
-                stop = float(pts[i+1])
+                stop = float(pts[i + 1])
                 num = int(disc[i])
-                w = (stop-start)/num
+                w = (stop - start) / num
 
-                for j in range(1,num):
-                    c.append(start + (j)*w)
+                for j in range(1, num):
+                    c.append(start + (j) * w)
                 c.append(stop)
-            c = np.array(c,dtype=float)
+            c = np.array(c, dtype=float)
             if z:
                 c = -c[::-1]
-            return interface.convert_array(c,deep=True)
+            return interface.convert_array(c, deep=True)
 
         xcoords = _genCoords(xpts, xdisc)
         zcoords = _genCoords(zpts, zdisc, z=True)
-        ycoords = interface.convert_array(np.zeros(1),deep=True)
+        ycoords = interface.convert_array(np.zeros(1), deep=True)
 
-        output.SetDimensions(nx,2,nz) # note this subtracts 1
+        output.SetDimensions(nx, 2, nz)  # note this subtracts 1
         output.SetXCoordinates(xcoords)
         output.SetYCoordinates(ycoords)
         output.SetZCoordinates(zcoords)
@@ -190,18 +195,20 @@ class TensorMeshReader(ubcMeshReaderBase):
                 out[os.path.basename(f)] = TensorMeshReader.ubc_model_2d(f)
             return out
 
-        dim = np.genfromtxt(FileName, dtype=int, delimiter=None, comments='!', max_rows=1)
+        dim = np.genfromtxt(
+            FileName, dtype=int, delimiter=None, comments='!', max_rows=1
+        )
         names = ['col%d' % i for i in range(dim[0])]
-        df = pd.read_csv(FileName, names=names, delim_whitespace=True, skiprows=1, comment='!')
+        df = pd.read_csv(
+            FileName, names=names, delim_whitespace=True, skiprows=1, comment='!'
+        )
         data = df.values
         if np.shape(data)[0] != dim[1] and np.shape(data)[1] != dim[0]:
             raise _helpers.PVGeoError('Mode file `%s` improperly formatted.' % FileName)
         return data.flatten(order='F')
 
-
     def __ubc_mesh_data_2d(self, filename_mesh, filename_models, output):
-        """Helper method to read a 2D mesh
-        """
+        """Helper method to read a 2D mesh"""
         # Construct/read the mesh
         if self.need_to_readMesh():
             TensorMeshReader.ubc_mesh_2d(filename_mesh, self.__mesh)
@@ -215,10 +222,9 @@ class TensorMeshReader(ubcMeshReaderBase):
             self.need_to_readModels(flag=False)
         return output
 
-
-    #------------------------------------------------------------------#
-    #----------------------     UBC MESH 3D    ------------------------#
-    #------------------------------------------------------------------#
+    # ------------------------------------------------------------------#
+    # ----------------------     UBC MESH 3D    ------------------------#
+    # ------------------------------------------------------------------#
 
     @staticmethod
     def ubc_mesh_3d(FileName, output):
@@ -238,22 +244,18 @@ class TensorMeshReader(ubcMeshReaderBase):
                 ``place_model_on_mesh()`` method to associate with model data.
         """
 
-        #--- Read in the mesh ---#
-        fileLines = np.genfromtxt(FileName, dtype=str,
-                                  delimiter='\n', comments='!')
+        # --- Read in the mesh ---#
+        fileLines = np.genfromtxt(FileName, dtype=str, delimiter='\n', comments='!')
 
         # Get mesh dimensions
         dim = np.array(fileLines[0].split('!')[0].split(), dtype=int)
-        dim = (dim[0]+1, dim[1]+1, dim[2]+1)
+        dim = (dim[0] + 1, dim[1] + 1, dim[2] + 1)
 
         # The origin corner (Southwest-top)
-        #- Remember UBC format specifies down as the positive Z
-        #- Easting, Northing, Altitude
-        oo = np.array(
-            fileLines[1].split('!')[0].split(),
-            dtype=float
-        )
-        ox,oy,oz = oo[0],oo[1],oo[2]
+        # - Remember UBC format specifies down as the positive Z
+        # - Easting, Northing, Altitude
+        oo = np.array(fileLines[1].split('!')[0].split(), dtype=float)
+        ox, oy, oz = oo[0], oo[1], oo[2]
 
         # Read cell sizes for each line in the UBC mesh files
         def _readCellLine(line):
@@ -278,21 +280,20 @@ class TensorMeshReader(ubcMeshReaderBase):
 
         # Now generate the coordinates for from cell width and origin
         cox = ox + np.cumsum(cx)
-        cox = np.insert(cox,0,ox)
+        cox = np.insert(cox, 0, ox)
         coy = oy + np.cumsum(cy)
-        coy = np.insert(coy,0,oy)
+        coy = np.insert(coy, 0, oy)
         coz = oz + np.cumsum(cz)
-        coz = np.insert(coz,0,oz)
+        coz = np.insert(coz, 0, oz)
 
         # Set the dims and coordinates for the output
-        output.SetDimensions(dim[0],dim[1],dim[2])
+        output.SetDimensions(dim[0], dim[1], dim[2])
         # Convert to VTK array for setting coordinates
-        output.SetXCoordinates(interface.convert_array(cox,deep=True))
-        output.SetYCoordinates(interface.convert_array(coy,deep=True))
-        output.SetZCoordinates(interface.convert_array(coz,deep=True))
+        output.SetXCoordinates(interface.convert_array(cox, deep=True))
+        output.SetYCoordinates(interface.convert_array(coy, deep=True))
+        output.SetZCoordinates(interface.convert_array(coz, deep=True))
 
         return output
-
 
     def __ubc_mesh_data_3d(self, filename_mesh, filename_models, output):
         """Helper method to read a 3D mesh"""
@@ -308,7 +309,6 @@ class TensorMeshReader(ubcMeshReaderBase):
                 self.__models.append(TensorMeshReader.ubc_model_3d(f))
             self.need_to_readModels(flag=False)
         return output
-
 
     def __ubc_tensor_mesh(self, filename_mesh, filename_models, output):
         """Wrapper to Read UBC GIF 2D and 3D meshes. UBC Mesh 2D/3D models are
@@ -343,25 +343,23 @@ class TensorMeshReader(ubcMeshReaderBase):
         return output
 
     def RequestData(self, request, inInfo, outInfo):
-        """Handles data request by the pipeline.
-        """
+        """Handles data request by the pipeline."""
         # Get output:
         output = self.GetOutputData(outInfo, 0)
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
         self.__ubc_tensor_mesh(
-            self.get_mesh_filename(),
-            self.get_model_filenames(),
-            output)
+            self.get_mesh_filename(), self.get_model_filenames(), output
+        )
         # Place the model data for given timestep onto the mesh
         if len(self.__models) > i:
-            TensorMeshReader.place_model_on_mesh(output, self.__models[i], self.get_data_name())
+            TensorMeshReader.place_model_on_mesh(
+                output, self.__models[i], self.get_data_name()
+            )
         return 1
 
-
     def RequestInformation(self, request, inInfo, outInfo):
-        """Handles info request by pipeline about timesteps and grid extents.
-        """
+        """Handles info request by pipeline about timesteps and grid extents."""
         # Call parent to handle time stuff
         ubcMeshReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
@@ -373,32 +371,34 @@ class TensorMeshReader(ubcMeshReaderBase):
         return 1
 
     def clear_mesh(self):
-        """Use to clean/rebuild the mesh
-        """
+        """Use to clean/rebuild the mesh"""
         self.__mesh = vtk.vtkRectilinearGrid()
         ubcMeshReaderBase.clear_models(self)
 
     def clear_models(self):
-        """Use to clean the models and reread
-        """
+        """Use to clean the models and reread"""
         self.__models = []
         ubcMeshReaderBase.clear_models(self)
 
+
 ###############################################################################
+
 
 class TensorMeshAppender(ModelAppenderBase):
     """This filter reads a timeseries of models and appends it to an input
     ``vtkRectilinearGrid``
     """
+
     __displayname__ = 'UBC Tensor Mesh Appender'
     __category__ = 'filter'
 
     def __init__(self, **kwargs):
-        ModelAppenderBase.__init__(self,
-                                   inputType='vtkRectilinearGrid',
-                                   outputType='vtkRectilinearGrid',
-                                   **kwargs)
-
+        ModelAppenderBase.__init__(
+            self,
+            inputType='vtkRectilinearGrid',
+            outputType='vtkRectilinearGrid',
+            **kwargs
+        )
 
     def _read_up_front(self):
         """Internal helepr to read data at start"""
@@ -416,24 +416,33 @@ class TensorMeshAppender(ModelAppenderBase):
 
     def _place_on_mesh(self, output, idx=0):
         """Internal helepr to place a model on the mesh for a given index"""
-        TensorMeshReader.place_model_on_mesh(output, self._models[idx], self.get_data_name())
+        TensorMeshReader.place_model_on_mesh(
+            output, self._models[idx], self.get_data_name()
+        )
         return
 
 
 ###############################################################################
 
+
 class TopoMeshAppender(AlgorithmBase):
     """This filter reads a single discrete topography file and appends it as a
     boolean data array.
     """
+
     __displayname__ = 'Append UBC Discrete Topography'
     __category__ = 'filter'
 
-    def __init__(self, inputType='vtkRectilinearGrid',
-                 outputType='vtkRectilinearGrid', **kwargs):
-        AlgorithmBase.__init__(self,
-                               nInputPorts=1, inputType=inputType,
-                               nOutputPorts=1, outputType=outputType)
+    def __init__(
+        self, inputType='vtkRectilinearGrid', outputType='vtkRectilinearGrid', **kwargs
+    ):
+        AlgorithmBase.__init__(
+            self,
+            nInputPorts=1,
+            inputType=inputType,
+            nOutputPorts=1,
+            outputType=outputType,
+        )
         self._topoFileName = kwargs.get('filename', None)
         self.__indices = None
         self.__need_to_read = True
@@ -455,27 +464,28 @@ class TopoMeshAppender(AlgorithmBase):
         return self.__need_to_read
 
     def Modified(self, read_again=True):
-        """Call modified if the files needs to be read again again.
-        """
+        """Call modified if the files needs to be read again again."""
         if read_again:
             self.__need_to_read = read_again
         AlgorithmBase.Modified(self)
 
     def modified(self, read_again=True):
-        """Call modified if the files needs to be read again again.
-        """
+        """Call modified if the files needs to be read again again."""
         return self.Modified(read_again=read_again)
-
 
     def _read_up_front(self):
         """Internal helepr to read data at start"""
         # Read the file
-        content = np.genfromtxt(self._topoFileName, dtype=str, delimiter='\n',
-                                comments='!')
+        content = np.genfromtxt(
+            self._topoFileName, dtype=str, delimiter='\n', comments='!'
+        )
         dim = content[0].split()
         self.__ne, self.__nn = int(dim[0]), int(dim[1])
-        self.__indices = pd.read_csv(StringIO("\n".join(content[1::])),
-                                     names=['i', 'j', 'k'], delim_whitespace=True)
+        self.__indices = pd.read_csv(
+            StringIO("\n".join(content[1::])),
+            names=['i', 'j', 'k'],
+            delim_whitespace=True,
+        )
         # NOTE: K indices are inverted
         self.need_to_read(flag=False)
         return
@@ -484,10 +494,12 @@ class TopoMeshAppender(AlgorithmBase):
         """Internal helepr to place an active cells model on the mesh"""
         # Check mesh extents to math topography
         nx, ny, nz = output.GetDimensions()
-        nx, ny, nz = nx-1, ny-1, nz-1 # because GetDimensions counts the nodes
+        nx, ny, nz = nx - 1, ny - 1, nz - 1  # because GetDimensions counts the nodes
         topz = np.max(self.__indices['k']) + 1
         if nx != self.__nn or ny != self.__ne or topz > nz:
-            raise _helpers.PVGeoError('Dimension mismatch between input grid and topo file.')
+            raise _helpers.PVGeoError(
+                'Dimension mismatch between input grid and topo file.'
+            )
         # # Adjust the k indices to be in caarteian system
         # self.__indices['k'] = nz - self.__indices['k']
         # Fill out the topo and add it as model as it will be in UBC format
@@ -496,20 +508,20 @@ class TopoMeshAppender(AlgorithmBase):
         topo[:] = np.nan
         for row in self.__indices.values:
             i, j, k = row
-            topo[i, j, k+1:] = 0
-            topo[i, j, :k+1] = 1
+            topo[i, j, k + 1 :] = 0
+            topo[i, j, : k + 1] = 1
         # Add as model... ``place_model_on_mesh`` handles the rest
-        TensorMeshReader.place_model_on_mesh(output, topo.flatten(), 'Active Topography')
+        TensorMeshReader.place_model_on_mesh(
+            output, topo.flatten(), 'Active Topography'
+        )
         return
 
-
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to generate output
-        """
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         output = self.GetOutputData(outInfo, 0)
-        output.DeepCopy(pdi) # ShallowCopy if you want changes to propagate upstream
+        output.DeepCopy(pdi)  # ShallowCopy if you want changes to propagate upstream
         # Perfrom task:
         if self.__need_to_read:
             self._read_up_front()
@@ -517,21 +529,17 @@ class TopoMeshAppender(AlgorithmBase):
         self._place_on_mesh(output)
         return 1
 
-
     #### Setters and Getters ####
 
-
     def clear_topo_file(self):
-        """Use to clear data file name.
-        """
+        """Use to clear data file name."""
         self._topoFileName = None
         self.Modified(read_again=True)
 
     def set_topo_filename(self, filename):
-        """Use to set the file names for the reader. Handles single strings only
-        """
+        """Use to set the file names for the reader. Handles single strings only"""
         if filename is None:
-            return # do nothing if None is passed by a constructor on accident
+            return  # do nothing if None is passed by a constructor on accident
         elif isinstance(filename, str) and self._topoFileName != filename:
             self._topoFileName = filename
             self.Modified()

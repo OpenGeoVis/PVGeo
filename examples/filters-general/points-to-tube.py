@@ -15,15 +15,17 @@ from PVGeo.filters import PointsToTube
 
 ###############################################################################
 
+
 def path(y):
     """Equation: x = a(y-h)^2 + k"""
-    a = - 110.0 / 160.0**2
-    x = a*y**2 + 110.0
+    a = -110.0 / 160.0 ** 2
+    x = a * y ** 2 + 110.0
     return x, y
+
 
 x, y = path(np.arange(0.0, 200.0, 25.0))
 zo = np.linspace(9.0, 11.0, num=len(y))
-points = pyvista.PolyData(np.c_[x,y,zo])
+points = pyvista.PolyData(np.c_[x, y, zo])
 
 points.plot(point_size=10)
 

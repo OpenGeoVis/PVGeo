@@ -12,9 +12,8 @@ import numpy as np
 
 
 def _calculate_time_range(nt, dt=1.0):
-    """Discretizes time range accoridng to step size ``dt`` in seconds
-    """
-    return np.arange(0,nt*dt,dt, dtype=float)
+    """Discretizes time range accoridng to step size ``dt`` in seconds"""
+    return np.arange(0, nt * dt, dt, dtype=float)
 
 
 def update_time_steps(algorithm, nt, dt=1.0, explicit=False):
@@ -46,7 +45,7 @@ def update_time_steps(algorithm, nt, dt=1.0, explicit=False):
         return None
     executive = algorithm.GetExecutive()
     oi = executive.GetOutputInformation(0)
-    #oi = outInfo.GetInformationObject(0)
+    # oi = outInfo.GetInformationObject(0)
     oi.Remove(executive.TIME_STEPS())
     oi.Remove(executive.TIME_RANGE())
     for t in timesteps:

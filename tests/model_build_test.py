@@ -1,12 +1,18 @@
 import vtk
 
 from base import TestBase
+
 # Functionality to test:
-from PVGeo.model_build import (CreateEvenRectilinearGrid, CreateTensorMesh,
-                               CreateUniformGrid, GlobeSource,
-                               OutlineContinents)
+from PVGeo.model_build import (
+    CreateEvenRectilinearGrid,
+    CreateTensorMesh,
+    CreateUniformGrid,
+    GlobeSource,
+    OutlineContinents,
+)
 
 ###############################################################################
+
 
 class TestOutlineContinents(TestBase):
     """
@@ -45,6 +51,7 @@ class TestGlobeSource(TestBase):
 
 ###############################################################################
 
+
 class TestCreateUniformGrid(TestBase):
     """
     Test the `CreateUniformGrid` source
@@ -55,19 +62,20 @@ class TestCreateUniformGrid(TestBase):
         g = CreateUniformGrid()
         g.set_extent(20, 10, 35)
         g.set_origin(33.3, 45.5, 6.6)
-        g.set_spacing(5,1,7)
+        g.set_spacing(5, 1, 7)
         g.Update()
         grid = g.GetOutput()
         self.assertIsNotNone(grid)
-        self.assertEqual(grid.GetNumberOfCells(), (19*9*34))
-        self.assertEqual(grid.GetNumberOfPoints(), (20*10*35))
+        self.assertEqual(grid.GetNumberOfCells(), (19 * 9 * 34))
+        self.assertEqual(grid.GetNumberOfPoints(), (20 * 10 * 35))
         bounds = grid.GetBounds()
-        tb = (33.3, 33.3+(19*5), 45.5, 45.5+(9*1), 6.6, 6.6+(34*7))
+        tb = (33.3, 33.3 + (19 * 5), 45.5, 45.5 + (9 * 1), 6.6, 6.6 + (34 * 7))
         self.assertEqual(bounds, tb)
         return
 
 
 ###############################################################################
+
 
 class TestCreateEvenRectilinearGrid(TestBase):
     """
@@ -84,14 +92,15 @@ class TestCreateEvenRectilinearGrid(TestBase):
         g.Update()
         grid = g.GetOutput()
         self.assertIsNotNone(grid)
-        self.assertEqual(grid.GetNumberOfCells(), (20*10*35))
-        self.assertEqual(grid.GetNumberOfPoints(), (21*11*36))
+        self.assertEqual(grid.GetNumberOfCells(), (20 * 10 * 35))
+        self.assertEqual(grid.GetNumberOfPoints(), (21 * 11 * 36))
         bounds = grid.GetBounds()
         tb = (0, 100, -100, 0, 10, 50)
         self.assertEqual(bounds, tb)
 
 
 ###############################################################################
+
 
 class TestCreateTensorMesh(TestBase):
     """
@@ -108,7 +117,7 @@ class TestCreateTensorMesh(TestBase):
         g.Update()
         grid = g.GetOutput()
         self.assertIsNotNone(grid)
-        self.assertEqual(grid.GetNumberOfCells(), (36*31*28))
+        self.assertEqual(grid.GetNumberOfCells(), (36 * 31 * 28))
         bounds = grid.GetBounds()
         tb = (-300.0, 1900, -450, 1500, -965, 10)
         self.assertEqual(bounds, tb)
@@ -122,6 +131,7 @@ class TestCreateTensorMesh(TestBase):
 ###############################################################################
 if __name__ == '__main__':
     import unittest
+
     unittest.main()
 ###############################################################################
 ###############################################################################

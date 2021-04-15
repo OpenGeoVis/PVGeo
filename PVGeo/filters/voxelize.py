@@ -28,13 +28,18 @@ class VoxelizePoints(FilterBase):
     sizes as input arrays. This assumes that the data is at least 2-Dimensional
     on the XY Plane.
     """
+
     __displayname__ = 'Voxelize Points'
     __category__ = 'filter'
 
     def __init__(self, **kwargs):
-        FilterBase.__init__(self,
-                            nInputPorts=1, inputType='vtkPointSet',
-                            nOutputPorts=1, outputType='vtkUnstructuredGrid')
+        FilterBase.__init__(
+            self,
+            nInputPorts=1,
+            inputType='vtkPointSet',
+            nOutputPorts=1,
+            outputType='vtkUnstructuredGrid',
+        )
         self.__dx = kwargs.get('dx', None)
         self.__dy = kwargs.get('dy', None)
         self.__dz = kwargs.get('dz', None)
@@ -44,10 +49,8 @@ class VoxelizePoints(FilterBase):
         self.__tolerance = kwargs.get('tolerance', None)
         self.__angle = kwargs.get('angle', 0.0)
 
-
     def add_field_data(self, grid):
-        """An internal helper to add the recovered information as field data
-        """
+        """An internal helper to add the recovered information as field data"""
         # Add angle
         a = vtk.vtkDoubleArray()
         a.SetName('Recovered Angle (Deg.)')
@@ -62,15 +65,12 @@ class VoxelizePoints(FilterBase):
         grid.GetFieldData().AddArray(s)
         return grid
 
-
     @staticmethod
     def add_cell_data(grid, arr, name):
-        """Add a NumPy array as cell data to the given grid input
-        """
+        """Add a NumPy array as cell data to the given grid input"""
         c = interface.convert_array(arr, name=name)
         grid.GetCellData().AddArray(c)
         return grid
-
 
     def estimate_uniform_spacing(self, x, y, z):
         """This assumes that the input points make up some sort of uniformly
@@ -79,7 +79,9 @@ class VoxelizePoints(FilterBase):
         # TODO: implement ability to rotate around Z axis (think PoroTomo vs UTM)
         # TODO: implement way to estimate rotation
         if not (len(x) == len(y) == len(z)):
-            raise AssertionError('Must have same number of coordinates for all components.')
+            raise AssertionError(
+                'Must have same number of coordinates for all components.'
+            )
         num = len(x)
         if num == 1:
             # Only one point.. use safe
@@ -98,10 +100,8 @@ class VoxelizePoints(FilterBase):
         self.__dz = dz
         return xr, yr, zr
 
-
-    def points_to_grid(self, xo,yo,zo, dx,dy,dz, grid=None):
-        """Convert XYZ points to a ``vtkUnstructuredGrid``.
-        """
+    def points_to_grid(self, xo, yo, zo, dx, dy, dz, grid=None):
+        """Convert XYZ points to a ``vtkUnstructuredGrid``."""
         if not check_numpy(alert='warn'):
             return grid
         if grid is None:
@@ -110,42 +110,42 @@ class VoxelizePoints(FilterBase):
         # TODO: Check dtypes on all arrays. Need to be floats
 
         if self.__estimate_grid:
-            x,y,z = self.estimate_uniform_spacing(xo, yo, zo)
+            x, y, z = self.estimate_uniform_spacing(xo, yo, zo)
         else:
-            x,y,z = xo, yo, zo
+            x, y, z = xo, yo, zo
 
-        dx,dy,dz = self.__dx, self.__dy, self.__dz
+        dx, dy, dz = self.__dx, self.__dy, self.__dz
         if isinstance(dx, np.ndarray) and len(dx) != len(x):
-            raise _helpers.PVGeoError('X-Cell spacings are not properly defined for all points.')
+            raise _helpers.PVGeoError(
+                'X-Cell spacings are not properly defined for all points.'
+            )
         if isinstance(dy, np.ndarray) and len(dy) != len(y):
-            raise _helpers.PVGeoError('Y-Cell spacings are not properly defined for all points.')
+            raise _helpers.PVGeoError(
+                'Y-Cell spacings are not properly defined for all points.'
+            )
         if isinstance(dz, np.ndarray) and len(dz) != len(z):
-            raise _helpers.PVGeoError('Z-Cell spacings are not properly defined for all points.')
+            raise _helpers.PVGeoError(
+                'Z-Cell spacings are not properly defined for all points.'
+            )
 
         n_cells = len(x)
 
         # Generate cell nodes for all points in data set
-        #- Bottom
-        c_n1 = np.stack(((x - dx/2), (y - dy/2), (z - dz/2)), axis=1)
-        c_n2 = np.stack(((x + dx/2), (y - dy/2), (z - dz/2)), axis=1)
-        c_n3 = np.stack(((x - dx/2), (y + dy/2), (z - dz/2)), axis=1)
-        c_n4 = np.stack(((x + dx/2), (y + dy/2), (z - dz/2)), axis=1)
-        #- Top
-        c_n5 = np.stack(((x - dx/2), (y - dy/2), (z + dz/2)), axis=1)
-        c_n6 = np.stack(((x + dx/2), (y - dy/2), (z + dz/2)), axis=1)
-        c_n7 = np.stack(((x - dx/2), (y + dy/2), (z + dz/2)), axis=1)
-        c_n8 = np.stack(((x + dx/2), (y + dy/2), (z + dz/2)), axis=1)
+        # - Bottom
+        c_n1 = np.stack(((x - dx / 2), (y - dy / 2), (z - dz / 2)), axis=1)
+        c_n2 = np.stack(((x + dx / 2), (y - dy / 2), (z - dz / 2)), axis=1)
+        c_n3 = np.stack(((x - dx / 2), (y + dy / 2), (z - dz / 2)), axis=1)
+        c_n4 = np.stack(((x + dx / 2), (y + dy / 2), (z - dz / 2)), axis=1)
+        # - Top
+        c_n5 = np.stack(((x - dx / 2), (y - dy / 2), (z + dz / 2)), axis=1)
+        c_n6 = np.stack(((x + dx / 2), (y - dy / 2), (z + dz / 2)), axis=1)
+        c_n7 = np.stack(((x - dx / 2), (y + dy / 2), (z + dz / 2)), axis=1)
+        c_n8 = np.stack(((x + dx / 2), (y + dy / 2), (z + dz / 2)), axis=1)
 
-        #- Concatenate
-        all_nodes = np.concatenate((
-            c_n1,
-            c_n2,
-            c_n3,
-            c_n4,
-            c_n5,
-            c_n6,
-            c_n7,
-            c_n8), axis=0)
+        # - Concatenate
+        all_nodes = np.concatenate(
+            (c_n1, c_n2, c_n3, c_n4, c_n5, c_n6, c_n7, c_n8), axis=0
+        )
 
         pts = vtk.vtkPoints()
         cells = vtk.vtkCellArray()
@@ -157,15 +157,15 @@ class VoxelizePoints(FilterBase):
             else:
                 TOLERANCE = self.__tolerance
             # Round XY plane by the tolerance
-            txy = np.around(all_nodes[:,0:2]/TOLERANCE)
-            all_nodes[:,0:2] = txy
+            txy = np.around(all_nodes[:, 0:2] / TOLERANCE)
+            all_nodes[:, 0:2] = txy
             unique_nodes, ind_nodes = np.unique(all_nodes, return_inverse=True, axis=0)
-            unique_nodes[:,0:2] *= TOLERANCE
+            unique_nodes[:, 0:2] *= TOLERANCE
             all_nodes = unique_nodes
         else:
             ind_nodes = np.arange(0, len(all_nodes), dtype=int)
 
-        all_nodes[:,0:2] = RotationTool.rotate(all_nodes[:,0:2], -self.__angle)
+        all_nodes[:, 0:2] = RotationTool.rotate(all_nodes[:, 0:2], -self.__angle)
         if self.__estimate_grid:
             self.add_field_data(grid)
         # Add unique nodes as points in output
@@ -176,55 +176,50 @@ class VoxelizePoints(FilterBase):
         arridx = np.add(j, np.repeat(np.arange(0, n_cells, 1, dtype=int), 8))
         ids = ind_nodes[arridx].reshape((n_cells, 8))
 
-        cells_mat = np.concatenate((np.ones((ids.shape[0], 1), dtype=np.int64)*ids.shape[1], ids), axis=1).ravel()
+        cells_mat = np.concatenate(
+            (np.ones((ids.shape[0], 1), dtype=np.int64) * ids.shape[1], ids), axis=1
+        ).ravel()
 
         cells = vtk.vtkCellArray()
         cells.SetNumberOfCells(n_cells)
-        cells.SetCells(n_cells, nps.numpy_to_vtk(cells_mat, deep=True, array_type=vtk.VTK_ID_TYPE))
+        cells.SetCells(
+            n_cells, nps.numpy_to_vtk(cells_mat, deep=True, array_type=vtk.VTK_ID_TYPE)
+        )
 
         # Set the output
         grid.SetPoints(pts)
         grid.SetCells(vtk.VTK_VOXEL, cells)
         return grid
 
-
     @staticmethod
     def _copy_arrays(pdi, pdo):
-        """internal helper to copy arrays from point data to cell data in the voxels.
-        """
+        """internal helper to copy arrays from point data to cell data in the voxels."""
         for i in range(pdi.GetPointData().GetNumberOfArrays()):
             arr = pdi.GetPointData().GetArray(i)
-            _helpers.add_array(pdo, 1, arr) # adds to CELL data
+            _helpers.add_array(pdo, 1, arr)  # adds to CELL data
         return pdo
 
-
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to generate output
-        """
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
         # Perfrom task
         wpdi = dsa.WrapDataObject(pdi)
         pts = wpdi.Points
-        x, y, z = pts[:,0], pts[:,1], pts[:,2]
-        self.points_to_grid(x, y, z,
-                            self.__dx, self.__dy, self.__dz, grid=pdo)
+        x, y, z = pts[:, 0], pts[:, 1], pts[:, 2]
+        self.points_to_grid(x, y, z, self.__dx, self.__dy, self.__dz, grid=pdo)
         # Now append data to grid
         self._copy_arrays(pdi, pdo)
         return 1
 
-
     #### Seters and Geters ####
 
-
     def set_safe_size(self, safe):
-        """A voxel size to use if a spacing cannot be determined for an axis
-        """
+        """A voxel size to use if a spacing cannot be determined for an axis"""
         if self.__safe != safe:
             self.__safe = safe
             self.Modified()
-
 
     def set_delta_x(self, dx):
         """Set the X cells spacing
@@ -236,7 +231,6 @@ class VoxelizePoints(FilterBase):
         self.__dx = dx
         self.Modified()
 
-
     def set_delta_y(self, dy):
         """Set the Y cells spacing
 
@@ -246,7 +240,6 @@ class VoxelizePoints(FilterBase):
         """
         self.__dy = dy
         self.Modified()
-
 
     def set_delta_z(self, dz):
         """Set the Z cells spacing
@@ -258,7 +251,6 @@ class VoxelizePoints(FilterBase):
         self.__dz = dz
         self.set_safe_size(np.min(dz))
         self.Modified()
-
 
     def set_deltas(self, dx, dy, dz):
         """Set the cell spacings for each axial direction
@@ -275,22 +267,17 @@ class VoxelizePoints(FilterBase):
         self.set_delta_y(dy)
         self.set_delta_z(dz)
 
-
     def set_estimate_grid(self, flag):
-        """Set a flag on whether or not to estimate the grid spacing/rotation
-        """
+        """Set a flag on whether or not to estimate the grid spacing/rotation"""
         if self.__estimate_grid != flag:
             self.__estimate_grid = flag
             self.Modified()
 
-
     def set_unique(self, flag):
-        """Set a flag on whether or not to try to elimate non unique elements
-        """
+        """Set a flag on whether or not to try to elimate non unique elements"""
         if self.__unique != flag:
             self.__unique = flag
             self.Modified()
-
 
     def get_angle(self, degrees=True):
         """Returns the recovered angle if set to recover the input grid. If the
@@ -304,11 +291,9 @@ class VoxelizePoints(FilterBase):
             return np.rad2deg(self.__angle)
         return self.__angle
 
-
     def get_recovered_angle(self, degrees=True):
         """DEPRECATED: use `get_angle`"""
         return self.get_angle(degrees=degrees)
-
 
     def set_angle(self, angle):
         """Set the rotation angle manually"""
@@ -316,12 +301,9 @@ class VoxelizePoints(FilterBase):
             self.__angle = angle
             self.Modified()
 
-
     def get_spacing(self):
         """Get the cell spacings"""
         return (self.__dx, self.__dy, self.__dz)
-
-
 
 
 ###############################################################################

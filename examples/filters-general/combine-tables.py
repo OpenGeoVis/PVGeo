@@ -22,11 +22,11 @@ t1 = pv.Table()
 # Populate the tables
 n = 100
 titles = ('Array 0', 'Array 1', 'Array 2')
-arr0 = np.random.random(n) # Table 0
-arr1 = np.random.random(n) # Table 0
+arr0 = np.random.random(n)  # Table 0
+arr1 = np.random.random(n)  # Table 0
 t0[titles[0]] = arr0
 t0[titles[1]] = arr1
-arr2 = np.random.random(n) # Table 1
+arr2 = np.random.random(n)  # Table 1
 t1[titles[2]] = arr2
 arrs = [arr0, arr1, arr2]
 
@@ -47,4 +47,4 @@ print(output)
 # Here I verify the result
 for i in range(len(titles)):
     arr = output[titles[i]]
-    assert(np.allclose(arr, arrs[i], rtol=0.0001))
+    assert np.allclose(arr, arrs[i], rtol=0.0001)

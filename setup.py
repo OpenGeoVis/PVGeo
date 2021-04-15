@@ -18,19 +18,23 @@ with open("README.md", "r") as f:
 
 
 # Manage requirements
-install_requires=[
+install_requires = [
     'numpy>=1.13',
     'scipy>=1.1',
     'pandas>=0.23.4',
     'espatools>=0.0.8',
-    'pyvista>=0.20.1'
+    'pyvista>=0.20.1',
 ]
 
 # add vtk if not windows and (not Python 3.x or not x64)
-if os.name == 'nt' and (int(sys.version[0]) < 3 or '64' not in platform.architecture()[0]):
-    warnings.warn('\nYou will need to install VTK manually.' +
-                  '  Try using Anaconda.  See:\n'
-                  + 'https://anaconda.org/anaconda/vtk')
+if os.name == 'nt' and (
+    int(sys.version[0]) < 3 or '64' not in platform.architecture()[0]
+):
+    warnings.warn(
+        '\nYou will need to install VTK manually.'
+        + '  Try using Anaconda.  See:\n'
+        + 'https://anaconda.org/anaconda/vtk'
+    )
 else:
     install_requires.append(['vtk>=8.1'])
 

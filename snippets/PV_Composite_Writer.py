@@ -13,6 +13,7 @@ import vtk
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 
+
 class WriterBase(VTKPythonAlgorithmBase):
     """This is a writer base class to add convienace methods to the
     ``VTKPythonAlgorithmBase`` for writer algorithms and was originally
@@ -35,16 +36,16 @@ class WriterBase(VTKPythonAlgorithmBase):
     .. _(part 3): https://blog.kitware.com/a-vtk-pipeline-primer-part-3/
     .. _ParaView Python Docs: https://www.paraview.org/ParaView/Doc/Nightly/www/py-doc/paraview.util.vtkAlgorithm.html
     """
+
     def __init__(self, nInputPorts=1, inputType='vtkPolyData', **kwargs):
-        VTKPythonAlgorithmBase.__init__(self, nInputPorts=nInputPorts,
-                                              inputType=inputType,
-                                              nOutputPorts=0)
+        VTKPythonAlgorithmBase.__init__(
+            self, nInputPorts=nInputPorts, inputType=inputType, nOutputPorts=0
+        )
         self.__filename = kwargs.get('filename', None)
         self.__fmt = '%.9e'
         # For composite datasets: not always used
         self.__blockfilenames = None
         self.__composite = False
-
 
     def FillInputPortInformation(self, port, info):
         """Allows us to save composite datasets as well.
@@ -53,16 +54,19 @@ class WriterBase(VTKPythonAlgorithmBase):
         a general use case.
         """
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), self.InputType)
-        info.Append(self.INPUT_REQUIRED_DATA_TYPE(), 'vtkMultiBlockDataSet') # 'vtkCompositeDataSet'
+        info.Append(
+            self.INPUT_REQUIRED_DATA_TYPE(), 'vtkMultiBlockDataSet'
+        )  # 'vtkCompositeDataSet'
         return 1
-
 
     def SetFileName(self, filename):
         """Specify the filename for the output.
         This will be appended if saving composite datasets.
         """
         if not isinstance(filename, str):
-            raise RuntimeError('File name must be string. Only single file is supported.')
+            raise RuntimeError(
+                'File name must be string. Only single file is supported.'
+            )
         if self.__filename != filename:
             self.__filename = filename
             self.Modified()
@@ -84,15 +88,13 @@ class WriterBase(VTKPythonAlgorithmBase):
         raise NotImplementedError('PerformWriteOut must be implemented!')
 
     def apply(self, input_data_object):
-        """A convienace method if using these algorithms in a Python environment.
-        """
+        """A convienace method if using these algorithms in a Python environment."""
         self.SetInputDataObject(input_data_object)
         self.Modified()
         self.Update()
 
     def set_format(self, fmt):
-        """Use to set the ASCII format for the writer default is ``'%.9e'``
-        """
+        """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         if self.__fmt != fmt and isinstance(fmt, str):
             self.__fmt = fmt
             self.Modified()
@@ -113,7 +115,7 @@ class WriterBase(VTKPythonAlgorithmBase):
         """
         number = n
         count = 0
-        while (number > 0):
+        while number > 0:
             number = number // 10
             count = count + 1
         count = '%d' % count
@@ -122,14 +124,14 @@ class WriterBase(VTKPythonAlgorithmBase):
         # Check the file extension:
         ext = self.get_file_name().split('.')[-1]
         basename = self.get_file_name().replace('.%s' % ext, '')
-        self.__blockfilenames = [basename + '%s.%s' % (blocknum[i], ext) for i in range(n)]
+        self.__blockfilenames = [
+            basename + '%s.%s' % (blocknum[i], ext) for i in range(n)
+        ]
         return self.__blockfilenames
 
     def get_block_filename(self, idx):
-        """Get the filename for a specific block if composite dataset.
-        """
+        """Get the filename for a specific block if composite dataset."""
         return self.__blockfilenames[idx]
-
 
     def RequestData(self, request, inInfo, outInfo):
         """Subclasses must implement a ``PerformWriteOut`` method that takes an
@@ -149,12 +151,14 @@ class WriterBase(VTKPythonAlgorithmBase):
                 if data.IsTypeOf(self.InputType):
                     self.PerformWriteOut(data, self.get_block_filename(i), name)
                 else:
-                    warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
+                    warnings.warn(
+                        'Input block %d of type(%s) not saveable by writer.'
+                        % (i, type(data))
+                    )
         # Handle single input dataset
         else:
             self.PerformWriteOut(inp, self.get_file_name(), None)
         return 1
-
 
 
 ###############################################################################
@@ -170,10 +174,10 @@ class WriteCellCenterData(WriterBase):
     .. _PVGeo: http://pvgeo.org
     .. _Bane Sullivan: http://banesullivan.com
     """
+
     def __init__(self):
         WriterBase.__init__(self, inputType='vtkDataSet')
         self.__delimiter = ','
-
 
     def PerformWriteOut(self, input_data_object, filename, object_name):
         # Find cell centers
@@ -187,20 +191,23 @@ class WriteCellCenterData(WriterBase):
         keys = celldata.keys()
         # Save out using numpy
         arr = np.zeros((len(centers), 3 + len(keys)))
-        arr[:,0:3] = centers
+        arr[:, 0:3] = centers
         for i, name in enumerate(keys):
-            arr[:,i+3] = celldata[name]
+            arr[:, i + 3] = celldata[name]
         # Now write out the data
         # Clean data titles to make sure they do not contain the delimiter
         repl = '_' if self.__delimiter != '_' else '-'
         for i, name in enumerate(keys):
             keys[i] = name.replace(self.__delimiter, repl)
         header = ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys)
-        np.savetxt(filename, arr,
-                   header=header,
-                   delimiter=self.__delimiter,
-                   fmt=self.get_format(),
-                   comments='')
+        np.savetxt(
+            filename,
+            arr,
+            header=header,
+            delimiter=self.__delimiter,
+            fmt=self.get_format(),
+            comments='',
+        )
         # Success for pipeline
         return 1
 
@@ -215,7 +222,9 @@ class WriteCellCenterData(WriterBase):
 ## Now lets use ``WriterBase`` to make a writer algorithm for image data
 
 
-@smproxy.writer(extensions="imgfmt", file_description="Write Custom ImageData", support_reload=False)
+@smproxy.writer(
+    extensions="imgfmt", file_description="Write Custom ImageData", support_reload=False
+)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
 class WriteCustomImageData(WriterBase):
@@ -224,10 +233,10 @@ class WriteCustomImageData(WriterBase):
     .. _PVGeo: http://pvgeo.org
     .. _Bane Sullivan: http://banesullivan.com
     """
+
     def __init__(self):
         WriterBase.__init__(self, inputType='vtkImageData')
         self.__delimiter = ','
-
 
     def PerformWriteOut(self, input_data_object, filename, object_name):
         """Perfrom the file write to the given FileName with the given data
@@ -249,21 +258,24 @@ class WriteCustomImageData(WriterBase):
         WriterBase.SetFileName(self, filename)
 
 
-
-
 ###############################################################################
 ## Now wrap the cell centers writer for use in ParaView!
 
-@smproxy.writer(extensions="dat", file_description="Cell Centers and Cell Data", support_reload=False)
+
+@smproxy.writer(
+    extensions="dat",
+    file_description="Cell Centers and Cell Data",
+    support_reload=False,
+)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkDataSet"], composite_data_supported=True)
 class PVWriteCellCenterData(WriteCellCenterData):
     """The ``WriteCellCenterData`` class wrapped for use as a plugin in ParaView.
     Be sure that the ``composite_data_supported`` flag is set to ``True``.
     """
+
     def __init__(self):
         WriteCellCenterData.__init__(self)
-
 
     @smproperty.stringvector(name="FileName", panel_visibility="never")
     @smdomain.filelist()

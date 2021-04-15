@@ -24,6 +24,7 @@ from . import _helpers
 
 ###############################################################################
 
+
 class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     """This is a base class to add convienace methods to the
     ``VTKPythonAlgorithmBase`` for all algorithms implemented in ``PVGeo``.
@@ -45,15 +46,25 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
     .. _(part 3): https://blog.kitware.com/a-vtk-pipeline-primer-part-3/
     .. _ParaView Python Docs: https://www.paraview.org/ParaView/Doc/Nightly/www/py-doc/paraview.util.vtkAlgorithm.html
     """
+
     __displayname__ = 'Algorithm Base'
     __category__ = 'base'
 
-    def __init__(self,
-                 nInputPorts=1, inputType='vtkDataSet',
-                 nOutputPorts=1, outputType='vtkTable', **kwargs):
-        valg.VTKPythonAlgorithmBase.__init__(self,
-                                             nInputPorts=nInputPorts, inputType=inputType,
-                                             nOutputPorts=nOutputPorts, outputType=outputType)
+    def __init__(
+        self,
+        nInputPorts=1,
+        inputType='vtkDataSet',
+        nOutputPorts=1,
+        outputType='vtkTable',
+        **kwargs
+    ):
+        valg.VTKPythonAlgorithmBase.__init__(
+            self,
+            nInputPorts=nInputPorts,
+            inputType=inputType,
+            nOutputPorts=nOutputPorts,
+            outputType=outputType,
+        )
         # Add error handler to make errors easier to deal with
         self.__error_observer = _helpers.ErrorObserver()
         self.__error_observer.make_observer(self)
@@ -73,8 +84,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         return self.__error_observer.error_occurred()
 
     def get_error_message(self):
-        """A conveience method to print the error message.
-        """
+        """A conveience method to print the error message."""
         return self.__error_observer.get_error_message()
 
     def apply(self):
@@ -90,18 +100,23 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         """Alias for self.GetOutput()"""
         return self.GetOutput(port=port)
 
+
 ###############################################################################
 # Base Base Reader
 class ReaderBaseBase(AlgorithmBase):
-    """A base class for inherrited functionality common to all reader algorithms
-    """
+    """A base class for inherrited functionality common to all reader algorithms"""
+
     __displayname__ = 'Reader Base Base'
     __category__ = 'base'
 
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
-        AlgorithmBase.__init__(self,
-                               nInputPorts=0,
-                               nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+        AlgorithmBase.__init__(
+            self,
+            nInputPorts=0,
+            nOutputPorts=nOutputPorts,
+            outputType=outputType,
+            **kwargs
+        )
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the reader
         self.__filenames = kwargs.get('filenames', [])
@@ -122,8 +137,7 @@ class ReaderBaseBase(AlgorithmBase):
         return self.__need_to_read
 
     def Modified(self, read_again=True):
-        """Call modified if the files needs to be read again again
-        """
+        """Call modified if the files needs to be read again again"""
         if read_again:
             self.__need_to_read = read_again
         AlgorithmBase.Modified(self)
@@ -162,7 +176,7 @@ class ReaderBaseBase(AlgorithmBase):
             filename (str): The absolute file name with path to read.
         """
         if filename is None:
-            return # do nothing if None is passed by a constructor on accident
+            return  # do nothing if None is passed by a constructor on accident
         if isinstance(filename, list):
             for f in filename:
                 self.AddFileName(f)
@@ -195,21 +209,33 @@ class ReaderBaseBase(AlgorithmBase):
         self.Update()
         return pv.wrap(self.GetOutput())
 
+
 ###############################################################################
 
 # Base filter to preserve input data type
 class FilterBase(AlgorithmBase):
     """A base class for implementing filters which holds several convienace
     methods"""
+
     __displayname__ = 'Filter Base'
     __category__ = 'base'
 
-    def __init__(self,
-                 nInputPorts=1, inputType='vtkDataSet',
-                 nOutputPorts=1, outputType='vtkPolyData', **kwargs):
-        AlgorithmBase.__init__(self,
-                               nInputPorts=nInputPorts, inputType=inputType,
-                               nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+    def __init__(
+        self,
+        nInputPorts=1,
+        inputType='vtkDataSet',
+        nOutputPorts=1,
+        outputType='vtkPolyData',
+        **kwargs
+    ):
+        AlgorithmBase.__init__(
+            self,
+            nInputPorts=nInputPorts,
+            inputType=inputType,
+            nOutputPorts=nOutputPorts,
+            outputType=outputType,
+            **kwargs
+        )
 
     def apply(self, input_data_object):
         """Run this algorithm on the given input dataset"""
@@ -218,30 +244,31 @@ class FilterBase(AlgorithmBase):
         return pv.wrap(self.GetOutput())
 
 
-
 ###############################################################################
 # Base Reader
 class ReaderBase(ReaderBaseBase):
     """A base class for inherrited functionality common to all reader algorithms
     that need to handle a time series.
     """
+
     __displayname__ = 'Reader Base: Time Varying'
     __category__ = 'base'
 
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
-        ReaderBaseBase.__init__(self,
-                                nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+        ReaderBaseBase.__init__(
+            self, nOutputPorts=nOutputPorts, outputType=outputType, **kwargs
+        )
         # Attributes are namemangled to ensure proper setters/getters are used
         # For the VTK/ParaView pipeline
         self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
 
-
     def _update_time_steps(self):
-        """For internal use only: appropriately sets the timesteps.
-        """
+        """For internal use only: appropriately sets the timesteps."""
         if len(self.get_file_names()) > 1:
-            self.__timesteps = _helpers.update_time_steps(self, self.get_file_names(), self.__dt)
+            self.__timesteps = _helpers.update_time_steps(
+                self, self.get_file_names(), self.__dt
+            )
         return 1
 
     #### Algorithm Methods ####
@@ -254,18 +281,14 @@ class ReaderBase(ReaderBaseBase):
         self._update_time_steps()
         return 1
 
-
     #### Seters and Geters ####
 
-
     def get_time_step_values(self):
-        """Use this in ParaView decorator to register timesteps on the pipeline.
-        """
+        """Use this in ParaView decorator to register timesteps on the pipeline."""
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def set_time_delta(self, dt):
-        """An advanced property to set the time step in seconds.
-        """
+        """An advanced property to set the time step in seconds."""
         if dt != self.__dt:
             self.__dt = dt
             self.Modified()
@@ -278,14 +301,19 @@ class FilterPreserveTypeBase(FilterBase):
     """A Base class for implementing filters that preserve the data type of
     their arbitrary input.
     """
+
     __displayname__ = 'Filter Preserve Type Base'
     __category__ = 'base'
 
     def __init__(self, nInputPorts=1, **kwargs):
-        FilterBase.__init__(self,
-                            nInputPorts=nInputPorts, inputType=kwargs.pop('inputType', 'vtkDataObject'),
-                            nOutputPorts=1, **kwargs)
-        self._preserve_port = 0 # This is the port to preserve data object type
+        FilterBase.__init__(
+            self,
+            nInputPorts=nInputPorts,
+            inputType=kwargs.pop('inputType', 'vtkDataObject'),
+            nOutputPorts=1,
+            **kwargs
+        )
+        self._preserve_port = 0  # This is the port to preserve data object type
 
     # THIS IS CRUCIAL to preserve data type through filter
     def RequestDataObject(self, request, inInfo, outInfo):
@@ -293,9 +321,12 @@ class FilterPreserveTypeBase(FilterBase):
         know that the algorithm will dynamically decide the output data type
         based in the input data type.
         """
-        self.OutputType = self.GetInputData(inInfo, self._preserve_port, 0).GetClassName()
+        self.OutputType = self.GetInputData(
+            inInfo, self._preserve_port, 0
+        ).GetClassName()
         self.FillOutputPortInformation(0, outInfo.GetInformationObject(0))
         return 1
+
 
 ###############################################################################
 
@@ -304,29 +335,32 @@ class TwoFileReaderBase(AlgorithmBase):
     """A base clase for readers that need to handle two input files.
     One meta-data file and a series of data files.
     """
+
     __displayname__ = 'Two File Reader Base'
     __category__ = 'base'
 
     def __init__(self, nOutputPorts=1, outputType='vtkUnstructuredGrid', **kwargs):
-        AlgorithmBase.__init__(self,
-                               nInputPorts=0,
-                               nOutputPorts=nOutputPorts, outputType=outputType)
+        AlgorithmBase.__init__(
+            self, nInputPorts=0, nOutputPorts=nOutputPorts, outputType=outputType
+        )
         self.__dt = kwargs.get('dt', 1.0)
         self.__timesteps = None
-        self.__mesh_filename = kwargs.get('meshfile', None) # Can only be one!
-        modfiles = kwargs.get('model_files', []) # Can be many (single attribute, manytimesteps)
+        self.__mesh_filename = kwargs.get('meshfile', None)  # Can only be one!
+        modfiles = kwargs.get(
+            'model_files', []
+        )  # Can be many (single attribute, manytimesteps)
         if isinstance(modfiles, str):
             modfiles = [modfiles]
         self.__model_filenames = modfiles
         self.__need_to_read_mesh = True
         self.__need_to_read_models = True
 
-
     def __update_time_steps(self):
-        """For internal use only
-        """
+        """For internal use only"""
         if len(self.__model_filenames) > 0:
-            self.__timesteps = _helpers.update_time_steps(self, self.__model_filenames, self.__dt)
+            self.__timesteps = _helpers.update_time_steps(
+                self, self.__model_filenames, self.__dt
+            )
         return 1
 
     def need_to_readMesh(self, flag=None):
@@ -363,57 +397,50 @@ class TwoFileReaderBase(AlgorithmBase):
         return AlgorithmBase.Modified(self)
 
     def modified(self, read_again_mesh=True, read_again_models=True):
-        return self.Modified(read_again_mesh=read_again_mesh, read_again_models=read_again_models)
+        return self.Modified(
+            read_again_mesh=read_again_mesh, read_again_models=read_again_models
+        )
 
     def RequestInformation(self, request, inInfo, outInfo):
         """Used by pipeline to handle setting up time variance"""
         self.__update_time_steps()
         return 1
 
-
     #### Seters and Geters ####
-
 
     @staticmethod
     def has_models(model_files):
-        """A convienance method to see if a list contatins models filenames.
-        """
+        """A convienance method to see if a list contatins models filenames."""
         if isinstance(model_files, list):
             return len(model_files) > 0
         return model_files is not None
 
     def this_has_models(self):
-        """Ask self if the reader has model filenames set.
-        """
+        """Ask self if the reader has model filenames set."""
         return TwoFileReaderBase.has_models(self.__model_filenames)
 
     def get_time_step_values(self):
-        """Use this in ParaView decorator to register timesteps
-        """
+        """Use this in ParaView decorator to register timesteps"""
         return self.__timesteps.tolist() if self.__timesteps is not None else None
 
     def set_time_delta(self, dt):
-        """An advanced property for the time step in seconds.
-        """
+        """An advanced property for the time step in seconds."""
         if dt != self.__dt:
             self.__dt = dt
             self.Modified(read_again_mesh=False, read_again_models=False)
 
     def clear_mesh(self):
-        """Use to clear mesh file name
-        """
+        """Use to clear mesh file name"""
         self.__mesh_filename = None
         self.Modified(read_again_mesh=True, read_again_models=False)
 
     def clear_models(self):
-        """Use to clear data file names
-        """
+        """Use to clear data file names"""
         self.__model_filenames = []
         self.Modified(read_again_mesh=False, read_again_models=True)
 
     def set_mesh_filename(self, filename):
-        """Set the mesh file name.
-        """
+        """Set the mesh file name."""
         if self.__mesh_filename != filename:
             self.__mesh_filename = filename
             self.Modified(read_again_mesh=True, read_again_models=False)
@@ -426,7 +453,7 @@ class TwoFileReaderBase(AlgorithmBase):
             filename (str or list(str)): the file name(s) to use for the model data.
         """
         if filename is None:
-            return # do nothing if None is passed by a constructor on accident
+            return  # do nothing if None is passed by a constructor on accident
         if isinstance(filename, list):
             for f in filename:
                 self.add_model_file_name(f)
@@ -457,19 +484,20 @@ class TwoFileReaderBase(AlgorithmBase):
 
 ###############################################################################
 
+
 class WriterBase(AlgorithmBase):
     __displayname__ = 'Writer Base'
     __category__ = 'base'
 
     def __init__(self, nInputPorts=1, inputType='vtkPolyData', **kwargs):
-        AlgorithmBase.__init__(self, nInputPorts=nInputPorts, inputType=inputType,
-                               nOutputPorts=0)
+        AlgorithmBase.__init__(
+            self, nInputPorts=nInputPorts, inputType=inputType, nOutputPorts=0
+        )
         self.__filename = kwargs.get('filename', None)
         self.__fmt = '%.9e'
         # For composite datasets: not always used
         self.__blockfilenames = None
         self.__composite = False
-
 
     def FillInputPortInformation(self, port, info):
         """Allows us to save composite datasets as well.
@@ -478,15 +506,18 @@ class WriterBase(AlgorithmBase):
             I only care about ``vtkMultiBlockDataSet``
         """
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), self.InputType)
-        info.Append(self.INPUT_REQUIRED_DATA_TYPE(), 'vtkMultiBlockDataSet') # vtkCompositeDataSet
+        info.Append(
+            self.INPUT_REQUIRED_DATA_TYPE(), 'vtkMultiBlockDataSet'
+        )  # vtkCompositeDataSet
         return 1
-
 
     def SetFileName(self, filename):
         """Specify the filename for the output. Writer can only handle a single
         output data object/time step."""
         if not isinstance(filename, str):
-            raise RuntimeError('File name must be string. Only single file is supported.')
+            raise RuntimeError(
+                'File name must be string. Only single file is supported.'
+            )
         if self.__filename != filename:
             self.__filename = filename
             self.Modified()
@@ -544,7 +575,7 @@ class WriterBase(AlgorithmBase):
         """
         number = n
         count = 0
-        while (number > 0):
+        while number > 0:
             number = number // 10
             count = count + 1
         count = '%d' % count
@@ -553,13 +584,14 @@ class WriterBase(AlgorithmBase):
         # Check the file extension:
         ext = self.get_file_name().split('.')[-1]
         basename = self.get_file_name().replace('.%s' % ext, '')
-        self.__blockfilenames = [basename + '%s.%s' % (blocknum[i], ext) for i in range(n)]
+        self.__blockfilenames = [
+            basename + '%s.%s' % (blocknum[i], ext) for i in range(n)
+        ]
         return self.__blockfilenames
 
     def get_block_filename(self, idx):
         """Get filename for component of a multi block dataset"""
         return self.__blockfilenames[idx]
-
 
     def RequestData(self, request, inInfo, outInfo):
         """Subclasses must implement a ``perform_write_out`` method that takes an
@@ -579,28 +611,32 @@ class WriterBase(AlgorithmBase):
                 if data.IsTypeOf(self.InputType):
                     self.perform_write_out(data, self.get_block_filename(i), name)
                 else:
-                    warnings.warn('Input block %d of type(%s) not saveable by writer.' % (i, type(data)))
+                    warnings.warn(
+                        'Input block %d of type(%s) not saveable by writer.'
+                        % (i, type(data))
+                    )
         # Handle single input dataset
         else:
             self.perform_write_out(inp, self.get_file_name(), None)
         return 1
 
+
 ###############################################################################
+
 
 class InterfacedBaseReader(ReaderBase):
     """A general base reader for all interfacing with librarues that already
     have file I/O methods and VTK data object interfaces. This provides a
     routine for using an external library to handle all I/O and produce the
     VTK data objects."""
+
     __displayname__ = 'Interfaced Base Reader'
 
     def __init__(self, **kwargs):
         ReaderBase.__init__(self, **kwargs)
         self.__objects = []
 
-
     # THIS IS CRUCIAL to dynamically decided output type
-
 
     def RequestDataObject(self, request, inInfo, outInfo):
         """Do not override. This method lets the us dynamically decide the
@@ -610,7 +646,6 @@ class InterfacedBaseReader(ReaderBase):
         self._read_up_front()
         self.FillOutputPortInformation(0, outInfo.GetInformationObject(0))
         return 1
-
 
     @staticmethod
     def _read_file(filename):
@@ -656,16 +691,16 @@ class InterfacedBaseReader(ReaderBase):
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
-        """Do not override. Used by pipeline to set extents and time info.
-        """
+        """Do not override. Used by pipeline to set extents and time info."""
         # Call parent to handle time stuff
         ReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
         info = outInfo.GetInformationObject(0)
-        obj = self.__objects[0] # Get first grid to set output extents
+        obj = self.__objects[0]  # Get first grid to set output extents
         # Set WHOLE_EXTENT: This is absolutely necessary
         ext = obj.GetExtent()
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
+
 
 ###############################################################################
