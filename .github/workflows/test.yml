@@ -1,0 +1,48 @@
+name: Testing
+
+on:
+  push:
+    branches: "*"
+    tags: "v*"
+  pull_request:
+    branches: "**"
+
+jobs:
+  test:
+    name: Test PVGeo
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.7, 3.8]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Install PVGeo
+        run: pip install -e .[pyproj,omf,discretize]
+      - name: Run Test Suite
+        run: |
+          pytest -v --cov .
+          codecov --token=8da9d332-1618-450d-8654-09a8ecf3c2dc
+  deploy:
+    name: Ship to PyPI
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Build and Publish to PyPI
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          python setup.py sdist bdist_wheel
+          twine upload --skip-existing dist/*

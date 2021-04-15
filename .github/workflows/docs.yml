@@ -1,0 +1,68 @@
+name: Documentation
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  doc:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    env:
+      DISPLAY: ':99.0'
+      PYVISTA_OFF_SCREEN: 'True'
+      ALLOW_PLOTTING: true
+      SHELLOPTS: 'errexit:pipefail'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Setup Headless Display
+        run: |
+          sudo apt-get install libgl1-mesa-glx
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+          sleep 3
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -r docs/requirements.txt
+          pip install cookiecutter
+      - name: Install PVGeo
+        run: pip install -e .[pyproj,omf,discretize]
+      - name: Build Documentation
+        run: |
+          cd ./docs;
+          make html;
+          set -e;
+          make html;
+          cd ..;
+      - uses: actions/upload-artifact@v2
+        with:
+          name: docs-build
+          path: docs/build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: notebooks
+          path: docs/source/examples
+  deploy:
+    name: Publish Documentation
+    runs-on: ubuntu-latest
+    needs: doc
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: docs-build
+          path: docs/build
+      - uses: actions/download-artifact@v2
+        with:
+          name: notebooks
+          path: docs/source/examples
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages
+          folder: docs/build/html

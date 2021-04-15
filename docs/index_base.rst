@@ -11,10 +11,6 @@ Welcome to PVGeo's code docs!
    :target: https://vimeo.com/user82050125)
    :alt: Vimeo
 
-.. image:: https://img.shields.io/travis/OpenGeoVis/PVGeo-Website/master.svg?label=website&logo=safari&logoColor=white
-   :target: http://pvgeo.org
-   :alt: Website
-
 .. image:: https://img.shields.io/pypi/v/PVGeo.svg?logo=python&logoColor=white
    :target: https://pypi.org/project/PVGeo/
    :alt: PyPI
@@ -27,9 +23,9 @@ Welcome to PVGeo's code docs!
    :target: http://slack.pvgeo.org
    :alt: Slack
 
-.. image:: https://img.shields.io/travis/OpenGeoVis/PVGeo/master.svg?label=build&logo=travis
-   :target: https://travis-ci.org/OpenGeoVis/PVGeo
-   :alt: Build Status
+.. image:: https://github.com/OpenGeoVis/PVGeo/actions/workflows/test.yml/badge.svg
+   :target: https://github.com/OpenGeoVis/PVGeo/actions/workflows/test.yml
+   :alt: Testing Status
 
 .. image:: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master
