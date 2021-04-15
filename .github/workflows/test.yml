@@ -10,7 +10,7 @@ on:
 jobs:
   test:
     name: Test PVGeo
-    runs-on: runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
