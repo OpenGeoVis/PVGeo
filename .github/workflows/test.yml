@@ -27,7 +27,7 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
       - name: Install PVGeo
-        run: pip install -e .
+        run: pip install -e .[pyproj,omf,discretize]
       - name: Run Test Suite
         run: |
           pytest -v --cov .
