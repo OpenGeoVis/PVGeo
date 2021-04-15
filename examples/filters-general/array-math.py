@@ -20,7 +20,7 @@ from PVGeo.filters import ArrayMath
 
 ###############################################################################
 # Create some input data. This can be any `vtkDataObject`
-inp = pyvista.UniformGrid((10,10,4))
+inp = pyvista.UniformGrid((10, 10, 4))
 # Populate the tables
 n = 400
 arr0 = np.random.random(n)
@@ -38,13 +38,14 @@ print(output)
 ###############################################################################
 # Note that the output now has three arrays
 arr = output['foo']
-assert(np.allclose(arr, arr0+arr1))
+assert np.allclose(arr, arr0 + arr1)
 ###############################################################################
 
 ###############################################################################
 # Use a custom math operation:
 def power(arr0, arr1):
-    return arr0**arr1
+    return arr0 ** arr1
+
 
 # Use filter generated above
 f.set_operation(power)
@@ -56,7 +57,7 @@ output = f.get_output()
 print(output)
 ###############################################################################
 arr = output['powered']
-assert(np.allclose(arr, arr0**arr1))
+assert np.allclose(arr, arr0 ** arr1)
 
 ###############################################################################
 output.plot(scalars='powered')

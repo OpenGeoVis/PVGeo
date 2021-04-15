@@ -35,10 +35,12 @@ import os
 # - Y Cells: ``'1000 500 55*250 500 1000'``
 # - Z Cells: ``'30*100.0 5*250.0 500'``
 
-mesh = CreateTensorMesh(origin=[793000, 9192500, 2690],
-                        xcellstr='1000 500 50*250 500 1000',
-                        ycellstr='1000 500 55*250 500 1000',
-                        zcellstr='30*100.0 5*250.0 500').apply()
+mesh = CreateTensorMesh(
+    origin=[793000, 9192500, 2690],
+    xcellstr='1000 500 50*250 500 1000',
+    ycellstr='1000 500 55*250 500 1000',
+    zcellstr='30*100.0 5*250.0 500',
+).apply()
 
 mesh.plot(show_grid=True, color=True, show_edges=True)
 
@@ -85,7 +87,7 @@ p.show()
 ###############################################################################
 # Is that extraction too close to the topography surface? To better extract the
 # topographic surface, you can set a tolerance:
-extracted = ExtractTopography(tolerance=100., remove=True).apply(mesh, topo)
+extracted = ExtractTopography(tolerance=100.0, remove=True).apply(mesh, topo)
 
 p = pyvista.Plotter()
 p.add_mesh(topo, cmap='terrain')
@@ -95,7 +97,7 @@ p.show()
 
 ###############################################################################
 # Note that there are other extraction operations like an ``'intersection'``:
-extracted = ExtractTopography(op='intersection',
-                              remove=True,
-                              tolerance=100.).apply(mesh, topo)
+extracted = ExtractTopography(op='intersection', remove=True, tolerance=100.0).apply(
+    mesh, topo
+)
 extracted.plot(color=True, show_edges=True)
