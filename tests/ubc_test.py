@@ -11,7 +11,7 @@ from vtk.util import numpy_support as nps
 import PVGeo
 from base import TestBase
 # Functionality to test:
-from PVGeo.ubc import (GravObsReader, OcTreeAppender, OcTreeReader,
+from PVGeo.ubc import (GravObsReader,
                        TensorMeshAppender, TensorMeshReader, TopoMeshAppender,
                        TopoReader, WriteImageDataToUBC,
                        WriteRectilinearGridToUBC)
@@ -24,6 +24,7 @@ except ImportError:
     warnings.warn('`discretize` is NOT available. Be sure to install it.')
 else:
     discretize_available = True
+    from PVGeo.ubc import OcTreeAppender, OcTreeReader
 
 RTOL = 0.000001
 
