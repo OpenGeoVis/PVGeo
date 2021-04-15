@@ -24,6 +24,7 @@ class TopoReader(DelimitedPointsReaderBase):
     """A reader to handle .topo files in UBC format to create a topography
     surface.
     """
+
     __displayname__ = 'GIF Topo Reader'
     __category__ = 'reader'
     extensions = 'topo txt dat'
@@ -31,9 +32,9 @@ class TopoReader(DelimitedPointsReaderBase):
 
     def __init__(self, copy_z=True, **kwargs):
         DelimitedPointsReaderBase.__init__(self, copy_z=copy_z, **kwargs)
-        self.set_has_titles(False)#kwargs.get('has_titles', False))
+        self.set_has_titles(False)  # kwargs.get('has_titles', False))
         self.set_split_on_white_space(True)
-        self.__3d = True # TODO: handle 2D topo files as well
+        self.__3d = True  # TODO: handle 2D topo files as well
         self.__npts = None
 
     # Simply override the extract titles functionality
@@ -47,7 +48,6 @@ class TopoReader(DelimitedPointsReaderBase):
         return ['X', 'Y', 'Z'], content[1::]
 
 
-
 ###############################################################################
 
 
@@ -56,6 +56,7 @@ class GravObsReader(DelimitedPointsReaderBase):
 
     .. _GIF Gravity Observations: https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/gravfile.html
     """
+
     __displayname__ = 'UBC Gravity Observations'
     __category__ = 'reader'
     extensions = 'grv txt dat'
@@ -88,6 +89,7 @@ class GravGradReader(DelimitedPointsReaderBase):
 
     .. _GIF Gravity Gradiometry Observations: https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/ggfile.html
     """
+
     __displayname__ = 'GIF Gravity Gradiometry Observations'
     __category__ = 'reader'
     extensions = 'grv gg txt dat'
@@ -128,6 +130,7 @@ class MagObsReader(DelimitedPointsReaderBase):
 
     .. _GIF Magnetic Observations: https://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/magfile.html
     """
+
     __displayname__ = 'UBC Magnetic Observations'
     __category__ = 'reader'
     extensions = 'mag loc txt dat pre'
@@ -145,29 +148,31 @@ class MagObsReader(DelimitedPointsReaderBase):
         self.__adec = None
         self.__dir = None
 
-
     # Simply override the extract titles functionality
-
 
     def _extract_header(self, content):
         """Internal helper to parse header details for UBC Magnetic Observations
         files"""
         # No titles
-        self.__incl, self.__decl, self.__geomag = (float(val) for val in content[0].split(self._get_delimiter()))
-        self.__ainc, self.__adec, self.__dir = (float(val) for val in content[1].split(self._get_delimiter()))
+        self.__incl, self.__decl, self.__geomag = (
+            float(val) for val in content[0].split(self._get_delimiter())
+        )
+        self.__ainc, self.__adec, self.__dir = (
+            float(val) for val in content[1].split(self._get_delimiter())
+        )
         # Get number of points
         self.__npts = int(content[2].strip())
         # Now decide if it is single or multi component
         row = content[3].split(self._get_delimiter())
         num = len(row)
-        if num == 3: # just locations
+        if num == 3:  # just locations
             self.set_copy_z(True)
             return ['X', 'Y', 'Z'], content[3::]
-        elif num == 4: # single component
+        elif num == 4:  # single component
             return ['X', 'Y', 'Z', 'Mag'], content[3::]
-        elif num == 5: # single component
+        elif num == 5:  # single component
             return ['X', 'Y', 'Z', 'Mag', 'Err'], content[3::]
-        elif num == 7: # multi component
+        elif num == 7:  # multi component
             return ['X', 'Y', 'Z', 'ainc_1', 'ainc_2', 'Mag', 'Err'], content[3::]
         else:
             raise _helpers.PVGeoError('Data improperly formatted.')
@@ -208,15 +213,14 @@ class MagObsReader(DelimitedPointsReaderBase):
         return 1
 
 
-
 ###############################################################################
-
 
 
 class GeologyMapper(FilterPreserveTypeBase):
     """A filter to load a GIF geology definity file and map its values to a given
     data array in an input data object.
     """
+
     __displayname__ = 'UBC Geology Mapper'
     __category__ = 'filter'
     description = 'PVGeo: UBC Geology Mapper'
@@ -249,7 +253,7 @@ class GeologyMapper(FilterPreserveTypeBase):
         pdo = self.GetOutputData(outInfo, 0)
         # Get input array
         field, name = self.__input_array[0], self.__input_array[1]
-        #self.__range = NormalizeArray.get_array_range(pdi, field, name)
+        # self.__range = NormalizeArray.get_array_range(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.get_numpy_array(wpdi, field, name)
 
@@ -262,9 +266,7 @@ class GeologyMapper(FilterPreserveTypeBase):
 
         return 1
 
-
     #### Seters and Geters ####
-
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         """Used to set the input array(s)
@@ -284,7 +286,6 @@ class GeologyMapper(FilterPreserveTypeBase):
             self.__input_array[1] = name
             self.Modified()
         return 1
-
 
     def SetFileName(self, filename):
         """Set the file name to read"""

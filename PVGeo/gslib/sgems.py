@@ -21,6 +21,7 @@ class SGeMSGridReader(GSLibReader):
     file in the SGeMS grid format. This format is simply the GSLIB format where
     the header line defines the dimensions of the uniform grid.
     """
+
     __displayname__ = 'SGeMS Grid Reader'
     __category__ = 'reader'
     extensions = GSLibReader.extensions + 'gslibgrid mtxset'
@@ -31,7 +32,7 @@ class SGeMSGridReader(GSLibReader):
         self.__extent = None
         self.__origin = origin
         self.__spacing = spacing
-        self.__mask = kwargs.get("mask", -9966699.)
+        self.__mask = kwargs.get("mask", -9966699.0)
 
     def __parse_extent(self, header):
         regex = re.compile(r'\S\s\((\d+)x(\d+)x(\d+)\)')
@@ -59,9 +60,9 @@ class SGeMSGridReader(GSLibReader):
         # Read first file... extent cannot vary with time
         # TODO: make more efficient to only reader header of file
         fileLines = self._get_file_contents(idx=0)
-        h = fileLines[0+self.get_skip_rows()]
-        n1,n2,n3 = self.__parse_extent(h)
-        return (0,n1, 0,n2, 0,n3)
+        h = fileLines[0 + self.get_skip_rows()]
+        n1, n2, n3 = self.__parse_extent(h)
+        return (0, n1, 0, n2, 0, n3)
 
     def _extract_header(self, content):
         """Internal helper to parse header info for the SGeMS file format"""
@@ -90,7 +91,7 @@ class SGeMSGridReader(GSLibReader):
         n1, n2, n3 = self.__extent
         dx, dy, dz = self.__spacing
         ox, oy, oz = self.__origin
-        output.SetDimensions(n1+1, n2+1, n3+1)
+        output.SetDimensions(n1 + 1, n2 + 1, n3 + 1)
         output.SetSpacing(dx, dy, dz)
         output.SetOrigin(ox, oy, oz)
         # Use table generator and convert because its easy:
@@ -102,13 +103,11 @@ class SGeMSGridReader(GSLibReader):
         # now get arrays from table and add to point data of pdo
         for i in range(table.GetNumberOfColumns()):
             output.GetCellData().AddArray(table.GetColumn(i))
-        del(table)
+        del table
         return 1
 
-
     def RequestInformation(self, request, inInfo, outInfo):
-        """Used by pipeline to set grid extents.
-        """
+        """Used by pipeline to set grid extents."""
         # Call parent to handle time stuff
         GSLibReader.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
@@ -117,7 +116,6 @@ class SGeMSGridReader(GSLibReader):
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
-
 
     def set_spacing(self, dx, dy, dz):
         """Set the spacing for each axial direction"""
@@ -134,20 +132,17 @@ class SGeMSGridReader(GSLibReader):
             self.Modified(read_again=False)
 
 
-
-
-
 class WriteImageDataToSGeMS(WriterBase):
     """Writes a ``vtkImageData`` object to the SGeMS uniform grid format.
     This writer can only handle point data. Note that this will only handle
     CellData as that is convention with SGeMS.
     """
+
     __displayname__ = 'Write ``vtkImageData`` To SGeMS Grid Format'
     __category__ = 'writer'
 
     def __init__(self, inputType='vtkImageData'):
         WriterBase.__init__(self, inputType=inputType, ext='SGeMS')
-
 
     def perform_write_out(self, input_data_object, filename, object_name):
         """Write out the input ``vtkImage`` data to the SGeMS file format"""
@@ -179,6 +174,8 @@ class WriteImageDataToSGeMS(WriterBase):
             f.write('%d\n' % len(titles))
             f.write(datanames)
             f.write('\n')
-            df.to_csv(f, sep=' ', header=None, index=False, float_format=self.get_format())
+            df.to_csv(
+                f, sep=' ', header=None, index=False, float_format=self.get_format()
+            )
 
         return 1

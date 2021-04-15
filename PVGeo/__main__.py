@@ -2,6 +2,7 @@ import os
 import sys
 import platform
 
+
 def GetInstallationPaths(echo=False):
     path = os.path.dirname(os.path.dirname(__file__))
     PYTHONPATH = path
@@ -21,7 +22,7 @@ def GetInstallationPaths(echo=False):
             print('PV_PLUGIN_PATH=%s' % PV_PLUGIN_PATH)
             print('\n')
     ##### LINUX #####
-    elif  'linux' in platform.system().lower():
+    elif 'linux' in platform.system().lower():
         print('We are assuming you are on Linux OS:')
         PV_PLUGIN_PATH = '%s/%s' % (path, 'PVPlugins')
         # TODO: only print if echo and run an installation script
@@ -35,14 +36,18 @@ def GetInstallationPaths(echo=False):
         PV_PLUGIN_PATH = '%s\\%s' % (path, 'PVPlugins')
         print('We are assuming you are on Windows OS:')
         from os.path import expanduser
+
         path = expanduser("~")
 
         launcher = '''@ECHO OFF
 SET PYTHONPATH=%s
 SET PV_PLUGIN_PATH=%s
 CALL "bin\paraview.exe"
-''' % (PYTHONPATH, PV_PLUGIN_PATH)
-        launcher = launcher.replace(r'\n', '\r\n') # Windows Line-Endings
+''' % (
+            PYTHONPATH,
+            PV_PLUGIN_PATH,
+        )
+        launcher = launcher.replace(r'\n', '\r\n')  # Windows Line-Endings
         filename = '%s\\Desktop\\PVGeoLauncher.bat' % path
         if echo:
             print('Contents of `%s`:' % filename)
@@ -51,17 +56,20 @@ CALL "bin\paraview.exe"
         else:
             with open(filename, 'w') as f:
                 f.write(launcher)
-            print('Please follow installation instructions to create a shortcut for the new file: `%s`' % filename)
+            print(
+                'Please follow installation instructions to create a shortcut for the new file: `%s`'
+                % filename
+            )
     else:
-        print('Unknown operating system. Please post an issues for PVGeo: https://github.com/OpenGeoVis/PVGeo/issues/')
+        print(
+            'Unknown operating system. Please post an issues for PVGeo: https://github.com/OpenGeoVis/PVGeo/issues/'
+        )
         PV_PLUGIN_PATH = '%s/%s' % (path, 'PVPlugins')
         print('\n')
         print('PYTHONPATH=%s' % PYTHONPATH)
         print('PV_PLUGIN_PATH=%s' % PV_PLUGIN_PATH)
         print('\n')
     return
-
-
 
 
 if __name__ == '__main__':

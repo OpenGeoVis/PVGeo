@@ -15,6 +15,7 @@ with _helpers.HiddenPrints():
 class DiscretizeMeshReader(InterfacedBaseReader):
     """A general reader for all ``discretize`` mesh objects saved to the
     ``.json`` serialized format"""
+
     extensions = 'json'
     __displayname__ = 'Discretize Mesh Reader'
     description = 'Serialized Discretize Meshes'

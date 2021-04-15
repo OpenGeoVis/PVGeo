@@ -1,8 +1,4 @@
-__all__ = [
-    'DelimitedTextReader',
-    'DelimitedPointsReaderBase',
-    'XYZTextReader'
-]
+__all__ = ['DelimitedTextReader', 'DelimitedPointsReaderBase', 'XYZTextReader']
 
 __displayname__ = 'Delimited File I/O'
 
@@ -20,24 +16,25 @@ else:
     from io import StringIO
 
 
-
 class DelimitedTextReader(ReaderBase):
     """This reader will take in any delimited text file and make a ``vtkTable``
     from it. This is not much different than the default .txt or .csv reader in
     ParaView, however it gives us room to use our own extensions and a little
     more flexibility in the structure of the files we import.
     """
+
     __displayname__ = 'Delimited Text Reader'
     __category__ = 'reader'
     extensions = 'dat csv txt text ascii xyz tsv ntab'
     description = 'PVGeo: Delimited Text Files'
 
     def __init__(self, nOutputPorts=1, outputType='vtkTable', **kwargs):
-        ReaderBase.__init__(self,
-                            nOutputPorts=nOutputPorts, outputType=outputType, **kwargs)
+        ReaderBase.__init__(
+            self, nOutputPorts=nOutputPorts, outputType=outputType, **kwargs
+        )
 
         # Parameters to control the file read:
-        #- if these are set/changed, we must reperform the read
+        # - if these are set/changed, we must reperform the read
         self.__delimiter = kwargs.get('delimiter', ' ')
         self.__use_tab = kwargs.get('use_tab', False)
         self.__skipRows = kwargs.get('skiprows', 0)
@@ -48,8 +45,7 @@ class DelimitedTextReader(ReaderBase):
         self._titles = []
 
     def _get_delimiter(self):
-        """For itenral use only!
-        """
+        """For itenral use only!"""
         if self.__use_tab:
             return None
         return self.__delimiter
@@ -71,7 +67,11 @@ class DelimitedTextReader(ReaderBase):
         contents = []
         for f in filenames:
             try:
-                contents.append(np.genfromtxt(f, dtype=str, delimiter='\n', comments=self.__comments)[self.__skipRows::])
+                contents.append(
+                    np.genfromtxt(
+                        f, dtype=str, delimiter='\n', comments=self.__comments
+                    )[self.__skipRows : :]
+                )
             except (IOError, OSError) as fe:
                 raise _helpers.PVGeoError(str(fe))
         if idx is not None:
@@ -79,10 +79,11 @@ class DelimitedTextReader(ReaderBase):
         return contents
 
     def _extract_header(self, content):
-        """Override this. Removes header from single file's content.
-        """
+        """Override this. Removes header from single file's content."""
         if len(np.shape(content)) > 2:
-            raise _helpers.PVGeoError("`_extract_header()` can only handle a sigle file's content")
+            raise _helpers.PVGeoError(
+                "`_extract_header()` can only handle a sigle file's content"
+            )
         idx = 0
         if self.__has_titles:
             titles = content[idx].split(self._get_delimiter())
@@ -106,9 +107,10 @@ class DelimitedTextReader(ReaderBase):
         # Check that the titles are the same across files:
         ts = np.unique(np.asarray(ts), axis=0)
         if len(ts) > 1:
-            raise _helpers.PVGeoError('Data array titles varied across file timesteps. This data is invalid as a timeseries.')
+            raise _helpers.PVGeoError(
+                'Data array titles varied across file timesteps. This data is invalid as a timeseries.'
+            )
         return ts[0], contents
-
 
     def _file_contents_to_data_frame(self, contents):
         """Should NOT need to be overriden. After ``_extract_headers`` handles
@@ -119,15 +121,22 @@ class DelimitedTextReader(ReaderBase):
         data = []
         for content in contents:
             if self.get_split_on_white_space():
-                df = pd.read_csv(StringIO("\n".join(content)), names=self.get_titles(), delim_whitespace=self.get_split_on_white_space())
+                df = pd.read_csv(
+                    StringIO("\n".join(content)),
+                    names=self.get_titles(),
+                    delim_whitespace=self.get_split_on_white_space(),
+                )
             else:
-                df = pd.read_csv(StringIO("\n".join(content)), names=self.get_titles(), sep=self._get_delimiter())
+                df = pd.read_csv(
+                    StringIO("\n".join(content)),
+                    names=self.get_titles(),
+                    sep=self._get_delimiter(),
+                )
             data.append(df)
         return data
 
     def _read_up_front(self):
-        """Should not need to be overridden.
-        """
+        """Should not need to be overridden."""
         # Perform Read
         contents = self._get_file_contents()
         self._titles, contents = self._extract_headers(contents)
@@ -138,13 +147,10 @@ class DelimitedTextReader(ReaderBase):
     #### Methods for accessing the data read in #####
 
     def _get_raw_data(self, idx=0):
-        """This will return the proper data for the given timestep as a dataframe
-        """
+        """This will return the proper data for the given timestep as a dataframe"""
         return self._data[idx]
 
-
     #### Algorithm Methods ####
-
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to get data for current timestep and populate the
@@ -160,9 +166,7 @@ class DelimitedTextReader(ReaderBase):
         interface.data_frame_to_table(self._get_raw_data(idx=i), output)
         return 1
 
-
     #### Seters and Geters ####
-
 
     def set_delimiter(self, deli):
         """The input file's delimiter. To use a tab delimiter please use
@@ -183,22 +187,18 @@ class DelimitedTextReader(ReaderBase):
             self.__use_tab = flag
             self.Modified()
 
-
     def set_skip_rows(self, skip):
-        """Set the integer number of rows to skip at the top of the file.
-        """
+        """Set the integer number of rows to skip at the top of the file."""
         if skip != self.__skipRows:
             self.__skipRows = skip
             self.Modified()
 
     def get_skip_rows(self):
-        """Get the integer number of rows to skip at the top of the file.
-        """
+        """Get the integer number of rows to skip at the top of the file."""
         return self.__skipRows
 
     def set_comments(self, identifier):
-        """The character identifier for comments within the file.
-        """
+        """The character identifier for comments within the file."""
         if identifier != self.__comments:
             self.__comments = identifier
             self.Modified()
@@ -228,10 +228,11 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
     """A base class for delimited text readers that produce ``vtkPolyData``
     points.
     """
+
     __displayname__ = 'Delimited Points Reader Base'
     __category__ = 'base'
     # extensions are inherrited from DelimitedTextReader
-    description = 'PVGeo: Delimited Points' # Should be overriden
+    description = 'PVGeo: Delimited Points'  # Should be overriden
 
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, outputType='vtkPolyData', **kwargs)
@@ -275,6 +276,7 @@ class XYZTextReader(DelimitedTextReader):
     """A makeshift reader for XYZ files where titles have comma delimiter and
     data has space delimiter.
     """
+
     __displayname__ = 'XYZ Text Reader'
     __category__ = 'reader'
     # extensions are inherrited from DelimitedTextReader
@@ -287,5 +289,5 @@ class XYZTextReader(DelimitedTextReader):
     # Simply override the extract titles functionality
     def _extract_header(self, content):
         """Internal helper to parse header details for XYZ files"""
-        titles = content[0][2::].split(', ') # first two characers of header is '! '
+        titles = content[0][2::].split(', ')  # first two characers of header is '! '
         return titles, content[1::]

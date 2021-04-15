@@ -16,6 +16,7 @@ import os
 import sys
 import shutil
 import faulthandler
+
 faulthandler.enable()
 
 # Add PVGeo to the path
@@ -37,7 +38,7 @@ autodoc_mock_imports = ['paraview']
 # # Automattically generat source pages:
 # os.system('python ./make_files.py')
 
-import PVGeo, pvmacros # for documenting
+import PVGeo, pvmacros  # for documenting
 from gendocs import Generator
 
 append_material = """
@@ -68,26 +69,29 @@ extra = """
 """
 
 # Automatically generate documentaion pages
-Generator().DocumentPackages([PVGeo, pvmacros],
-            index_base='../index_base.rst',
-            showprivate=True,
-            notify=False,
-            intro_pages=['overview/why-pvgeo',
-                         'overview/getting-started',
-                         'overview/featured',
-                         'overview/agu-2018',
-                        ],
-            append_material=append_material,
-            extra=extra,
-            )
+Generator().DocumentPackages(
+    [PVGeo, pvmacros],
+    index_base='../index_base.rst',
+    showprivate=True,
+    notify=False,
+    intro_pages=[
+        'overview/why-pvgeo',
+        'overview/getting-started',
+        'overview/featured',
+        'overview/agu-2018',
+    ],
+    append_material=append_material,
+    extra=extra,
+)
 
 import pyvista
 import numpy as np
+
 # Manage errors
 pyvista.set_error_output_file('errors.txt')
 # Ensure that offscreen rendering is used for docs generation
-pyvista.OFF_SCREEN = True # Not necessary - simply an insurance policy
-pyvista.BUILDING_GALLERY = True # necessary when building the sphinx gallery
+pyvista.OFF_SCREEN = True  # Not necessary - simply an insurance policy
+pyvista.BUILDING_GALLERY = True  # necessary when building the sphinx gallery
 # Preferred plotting style for documentation
 pyvista.set_plot_theme('document')
 
@@ -177,7 +181,6 @@ html_theme_options = {
     'canonical_url': 'http://docs.pvgeo.org/',
     'analytics_id': 'UA-115959679-6',
     'display_version': False,
-
 }
 
 html_context = {
@@ -190,11 +193,26 @@ html_context = {
     'github_version': 'master/docs/',
     'menu_links_name': 'Getting Connected',
     'menu_links': [
-        ('<i class="fa fa-slack fa-fw"></i> Slack Community', 'http://slack.pyvista.org'),
-        ('<i class="fa fa-comment fa-fw"></i> Support', 'https://github.com/pyvista/pyvista-support'),
-        ('<i class="fa fa-github fa-fw"></i> Source Code', 'https://github.com/OpenGeoVis/PVGeo'),
-        ('<i class="fa fa-gavel fa-fw"></i> Contributing', 'https://pvgeo.org/dev-guide/contributing.html'),
-        ('<i class="fa fa-file-text fa-fw"></i> The Paper', 'https://doi.org/10.21105/joss.01451'),
+        (
+            '<i class="fa fa-slack fa-fw"></i> Slack Community',
+            'http://slack.pyvista.org',
+        ),
+        (
+            '<i class="fa fa-comment fa-fw"></i> Support',
+            'https://github.com/pyvista/pyvista-support',
+        ),
+        (
+            '<i class="fa fa-github fa-fw"></i> Source Code',
+            'https://github.com/OpenGeoVis/PVGeo',
+        ),
+        (
+            '<i class="fa fa-gavel fa-fw"></i> Contributing',
+            'https://pvgeo.org/dev-guide/contributing.html',
+        ),
+        (
+            '<i class="fa fa-file-text fa-fw"></i> The Paper',
+            'https://doi.org/10.21105/joss.01451',
+        ),
     ],
 }
 
@@ -227,15 +245,12 @@ latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
-
     # The font size ('10pt', '11pt' or '12pt').
     #
     # 'pointsize': '10pt',
-
     # Additional stuff for the LaTeX preamble.
     #
     # 'preamble': '',
-
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
@@ -245,8 +260,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'PVGeo.tex', 'PVGeo Documentation',
-     'Bane Sullivan', 'manual'),
+    (master_doc, 'PVGeo.tex', 'PVGeo Documentation', 'Bane Sullivan', 'manual'),
 ]
 
 
@@ -254,10 +268,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'pvgeo', 'PVGeo Documentation',
-     [author], 1)
-]
+man_pages = [(master_doc, 'pvgeo', 'PVGeo Documentation', [author], 1)]
 
 
 # -- Options for Texinfo output ----------------------------------------------
@@ -266,9 +277,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'PVGeo', 'PVGeo Documentation',
-     author, 'PVGeo', 'One line description of project.',
-     'Miscellaneous'),
+    (
+        master_doc,
+        'PVGeo',
+        'PVGeo Documentation',
+        author,
+        'PVGeo',
+        'One line description of project.',
+        'Miscellaneous',
+    ),
 ]
 
 
@@ -288,14 +305,14 @@ todo_include_todos = True
 # -- Custom 404 page
 
 notfound_context = {
-        'body': '<h1>Page not found.</h1>\n\nPerhaps try the <a href="https://pvgeo.org/about-examples.html">About Examples page</a>.',
+    'body': '<h1>Page not found.</h1>\n\nPerhaps try the <a href="https://pvgeo.org/about-examples.html">About Examples page</a>.',
 }
 notfound_no_urls_prefix = True
 
 
-
 # -- Sphinx Gallery Options
 from sphinx_gallery.sorting import FileNameSortKey
+
 # thumb_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'PVGeo_icon_horiz.png')
 sphinx_gallery_conf = {
     # path to your examples scripts

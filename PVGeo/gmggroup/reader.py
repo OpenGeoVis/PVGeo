@@ -11,31 +11,30 @@ from ..base import ReaderBaseBase
 
 
 class OMFReader(ReaderBaseBase):
-    """Handles reading an OMF Project
-    """
+    """Handles reading an OMF Project"""
+
     __displayname__ = 'OMF Project Reader'
     __category__ = 'reader'
     extensions = 'omf'
     description = 'PVGeo: Open Mining Format Project'
 
     def __init__(self):
-        ReaderBaseBase.__init__(self,
-                                nOutputPorts=1, outputType='vtkMultiBlockDataSet')
+        ReaderBaseBase.__init__(self, nOutputPorts=1, outputType='vtkMultiBlockDataSet')
         # Properties:
         self._dataselection = vtk.vtkDataArraySelection()
-        self._dataselection.AddObserver("ModifiedEvent", _helpers.create_modified_callback(self))
+        self._dataselection.AddObserver(
+            "ModifiedEvent", _helpers.create_modified_callback(self)
+        )
         self.__names = []
         self.__data = dict()
         self.__project = None
 
     def Modified(self, read_again=False):
-        """Ensure default is overridden to be false so array selector can call.
-        """
+        """Ensure default is overridden to be false so array selector can call."""
         ReaderBaseBase.Modified(self, read_again=read_again)
 
     def modified(self, read_again=False):
-        """Ensure default is overridden to be false so array selector can call.
-        """
+        """Ensure default is overridden to be false so array selector can call."""
         return self.Modified(read_again=read_again)
 
     def get_file_name(self):
@@ -73,10 +72,9 @@ class OMFReader(ReaderBaseBase):
     #### pipeline methods ####
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to get data for current timestep and populate the output data object.
-        """
+        """Used by pipeline to get data for current timestep and populate the output data object."""
         # Get output:
-        #output = self.GetOutputData(outInfo, 0)
+        # output = self.GetOutputData(outInfo, 0)
         output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
         # Perfrom the read
         if self.need_to_read():
@@ -93,9 +91,7 @@ class OMFReader(ReaderBaseBase):
             blk += 1
         return 1
 
-
     #### Getters / Setters ####
-
 
     def GetDataSelection(self):
         """Return the current user selection of data elements"""

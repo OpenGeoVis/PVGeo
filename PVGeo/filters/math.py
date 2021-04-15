@@ -18,7 +18,7 @@ from ..base import FilterBase, FilterPreserveTypeBase
 
 ###############################################################################
 
-#---- ArrayMath ----#
+# ---- ArrayMath ----#
 class ArrayMath(FilterPreserveTypeBase):
     """This filter allows the user to select two input data arrays on which to
     perfrom math operations. The input arrays are used in their order of
@@ -41,6 +41,7 @@ class ArrayMath(FilterPreserveTypeBase):
     - `divide`: Divide input array 1 by input array 2 (arr1/arr2)
     - `correlate`: Use `np.correlate(arr1, arr2, mode='same')`
     """
+
     __displayname__ = 'Array Math'
     __category__ = 'filter'
 
@@ -57,7 +58,6 @@ class ArrayMath(FilterPreserveTypeBase):
             op = self.get_operation(op)
         self.__operation = op
 
-
     @staticmethod
     def _correlate(arr1, arr2):
         """Use ``np.correlate()`` on ``mode='same'`` on two selected arrays
@@ -68,22 +68,22 @@ class ArrayMath(FilterPreserveTypeBase):
     @staticmethod
     def _multiply(arr1, arr2):
         """Mutlipies two input NumPy arrays"""
-        return arr1*arr2
+        return arr1 * arr2
 
     @staticmethod
     def _divide(arr1, arr2):
         """Divides two input NumPy arrays"""
-        return arr1/arr2
+        return arr1 / arr2
 
     @staticmethod
     def _add(arr1, arr2):
         """Adds two input NumPy arrays"""
-        return arr1+arr2
+        return arr1 + arr2
 
     @staticmethod
     def _subtract(arr1, arr2):
         """Subtracts two input NumPy arrays"""
-        return arr1-arr2
+        return arr1 - arr2
 
     @staticmethod
     def get_operations():
@@ -121,7 +121,6 @@ class ArrayMath(FilterPreserveTypeBase):
         n = ArrayMath.get_operation_names()[idx]
         return ArrayMath.get_operations()[n]
 
-
     def _math_up(self, pdi, pdo):
         """Make sure to pass array names and integer associated fields.
         Use helpers to get these properties.
@@ -150,13 +149,10 @@ class ArrayMath(FilterPreserveTypeBase):
         pdo = _helpers.add_array(pdo, field1, c)
         return pdo
 
-
     #### Algorithm Methods ####
 
-
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to perfrom operation and generate output
-        """
+        """Used by pipeline to perfrom operation and generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -164,9 +160,7 @@ class ArrayMath(FilterPreserveTypeBase):
         self._math_up(pdi, pdo)
         return 1
 
-
     #### Seters and Geters ####
-
 
     def _set_input_array_1(self, field, name):
         """Set 1st input array by name and field"""
@@ -202,7 +196,9 @@ class ArrayMath(FilterPreserveTypeBase):
         elif idx == 1:
             self._set_input_array_2(field, name)
         else:
-            raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
+            raise _helpers.PVGeoError(
+                'SetInputArrayToProcess() do not know how to handle idx: %d' % idx
+            )
         return 1
 
     def apply(self, input_data_object, array_name_0, array_name_1):
@@ -224,13 +220,11 @@ class ArrayMath(FilterPreserveTypeBase):
             self.Modified()
 
     def get_multiplier(self):
-        """Return the set multiplier/scalar
-        """
+        """Return the set multiplier/scalar"""
         return self.__multiplier
 
     def set_new_array_name(self, name):
-        """Give the new array a meaningful name.
-        """
+        """Give the new array a meaningful name."""
         if self.__new_name != name:
             self.__new_name = name
             self.Modified()
@@ -259,10 +253,10 @@ class ArrayMath(FilterPreserveTypeBase):
             self.Modified()
 
 
-
 ###############################################################################
 
-#---- Normalizations ----#
+# ---- Normalizations ----#
+
 
 class NormalizeArray(FilterPreserveTypeBase):
     """This filter allows the user to select an array from the input data set
@@ -290,6 +284,7 @@ class NormalizeArray(FilterPreserveTypeBase):
     - `natural_log`: Log Base 10
     - `just_multiply`: Only Multiply by Multiplier
     """
+
     __displayname__ = 'Normalize Array'
     __category__ = 'filter'
 
@@ -307,9 +302,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         self.__normalization = op
         self.__shift = 0.0
 
-
     #### Array normalization methods ####
-
 
     @staticmethod
     def _pass_array(arr):
@@ -391,13 +384,11 @@ class NormalizeArray(FilterPreserveTypeBase):
         arr = np.array(arr)
         return (np.nanmin(arr), np.nanmax(arr))
 
-
     def _normalize(self, pdi, pdo):
-        """Perform normalize on a data array for any given VTK data object.
-        """
+        """Perform normalize on a data array for any given VTK data object."""
         # Get input array
         field, name = self.__input_array[0], self.__input_array[1]
-        #self.__range = NormalizeArray.get_array_range(pdi, field, name)
+        # self.__range = NormalizeArray.get_array_range(pdi, field, name)
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.get_numpy_array(wpdi, field, name)
         arr = np.array(arr, dtype=float)
@@ -422,10 +413,8 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     #### Algorithm Methods ####
 
-
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to generate output
-        """
+        """Used by pipeline to generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -434,7 +423,6 @@ class NormalizeArray(FilterPreserveTypeBase):
         return 1
 
     #### Seters and Geters ####
-
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         """Used to set the input array(s)
@@ -472,14 +460,11 @@ class NormalizeArray(FilterPreserveTypeBase):
             self.Modified()
 
     def get_multiplier(self):
-        """Return the set multiplier/scalar
-        """
+        """Return the set multiplier/scalar"""
         return self.__multiplier
 
-
     def set_new_array_name(self, name):
-        """Give the new array a meaningful name.
-        """
+        """Give the new array a meaningful name."""
         if self.__new_name != name:
             self.__new_name = name
             self.Modified()
@@ -489,8 +474,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         return self.__new_name
 
     def set_take_absolute_value(self, flag):
-        """This will take the absolute value of the array before normalization.
-        """
+        """This will take the absolute value of the array before normalization."""
         if self.__absolute != flag:
             self.__absolute = flag
             self.Modified()
@@ -529,19 +513,20 @@ class PercentThreshold(FilterBase):
     This will find the data range of the selected input array and remove the
     bottom percent. This can be reversed using the invert property.
     """
+
     __displayname__ = 'Percent Threshold'
     __category__ = 'filter'
 
     def __init__(self, percent=50, invert=False, **kwargs):
-        FilterBase.__init__(self, inputType='vtkDataSet',
-                            outputType='vtkUnstructuredGrid', **kwargs)
+        FilterBase.__init__(
+            self, inputType='vtkDataSet', outputType='vtkUnstructuredGrid', **kwargs
+        )
         self.__invert = invert
         if percent < 1.0:
             percent *= 100
-        self.__percent = percent # NOTE: not decimal percent
+        self.__percent = percent  # NOTE: not decimal percent
         self.__filter = vtk.vtkThreshold()
         self.__input_array = [None, None]
-
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline for execution"""
@@ -568,7 +553,6 @@ class PercentThreshold(FilterBase):
 
         pdo.ShallowCopy(filt)
         return 1
-
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         """Used to set the input array(s)
@@ -609,7 +593,6 @@ class PercentThreshold(FilterBase):
             self.__invert = flag
             self.Modified()
 
-
     def apply(self, input_data_object, array_name):
         """Run the algorithm on an input data object, specifying the array"""
         self.SetInputDataObject(input_data_object)
@@ -618,12 +601,15 @@ class PercentThreshold(FilterBase):
         self.Update()
         return pv.wrap(self.GetOutput())
 
+
 ###############################################################################
+
 
 class ArraysToRGBA(FilterPreserveTypeBase):
     """Use arrays from input data object to set an RGBA array. Sets colors and
     transparencies.
     """
+
     __displayname__ = 'Arrays To RGBA'
     __category__ = 'filter'
 
@@ -636,7 +622,6 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         self.__a_array = [None, None]
         self.__field = None
         self.__mask = -9999
-
 
     def _get_arrays(self, wpdi):
         """Internal helper to fetch RGBA arrays"""
@@ -652,11 +637,10 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         # Get Trans
         fielda, name = self.__a_array[0], self.__a_array[1]
         a_arr = _helpers.get_numpy_array(wpdi, fielda, name)
-        if fieldr != fieldg != fieldb: # != fielda
+        if fieldr != fieldg != fieldb:  # != fielda
             raise _helpers.PVGeoError('Data arrays must be of the same field.')
         self.__field = fieldr
         return r_arr, g_arr, b_arr, a_arr
-
 
     def _mask_arrays(self, r_arr, g_arr, b_arr, a_arr):
         """Internal helper to mask RGBA arrays"""
@@ -665,7 +649,6 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         b_arr = np.ma.masked_where(b_arr == self.__mask, b_arr)
         a_arr = np.ma.masked_where(a_arr == self.__mask, a_arr)
         return r_arr, g_arr, b_arr, a_arr
-
 
     def RequestData(self, request, inInfo, outInfo):
         """Execute on pipeline"""
@@ -698,10 +681,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         _helpers.add_array(pdo, self.__field, colors)
         return 1
 
-
-
     #### Seters and Geters ####
-
 
     def set_use_transparency(self, flag):
         """Set a boolean flag on whether or not to use a transparency component"""
@@ -771,7 +751,9 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         elif idx == 3:
             self._set_input_array_trans(field, name)
         else:
-            raise _helpers.PVGeoError('SetInputArrayToProcess() do not know how to handle idx: %d' % idx)
+            raise _helpers.PVGeoError(
+                'SetInputArrayToProcess() do not know how to handle idx: %d' % idx
+            )
         return 1
 
     def apply(self, input_data_object, r_array, g_array, b_array, a_array=None):
@@ -789,7 +771,6 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         self.SetInputArrayToProcess(2, 0, 0, bField, b_array)
         self.Update()
         return pv.wrap(self.GetOutput())
-
 
 
 ###############################################################################

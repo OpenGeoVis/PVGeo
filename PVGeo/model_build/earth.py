@@ -15,13 +15,14 @@ class OutlineContinents(AlgorithmBase):
     """A simple data source to produce a ``vtkEarthSource`` outlining the
     Earth's continents. This works well with our ``GlobeSource``.
     """
+
     __displayname__ = 'Outline Continents'
     __category__ = 'source'
 
     def __init__(self, radius=6371.0e6):
-        AlgorithmBase.__init__(self,
-                               nInputPorts=0,
-                               nOutputPorts=1, outputType='vtkPolyData')
+        AlgorithmBase.__init__(
+            self, nInputPorts=0, nOutputPorts=1, outputType='vtkPolyData'
+        )
         self.__radius = radius
 
     def RequestData(self, request, inInfo, outInfo):
@@ -59,11 +60,14 @@ class GlobeSource(AlgorithmBase):
         npar (int): the number of parallels (latitude)
         nmer (int): the number of meridians (longitude)
     """
+
     __displayname__ = 'Globe Source'
     __category__ = 'source'
 
     def __init__(self, radius=6371.0e6, npar=15, nmer=36, **kwargs):
-        AlgorithmBase.__init__(self, nInputPorts=0, nOutputPorts=1, outputType='vtkPolyData')
+        AlgorithmBase.__init__(
+            self, nInputPorts=0, nOutputPorts=1, outputType='vtkPolyData'
+        )
         self.__radius = radius
         self.__npar = npar
         self.__nmer = nmer
@@ -91,7 +95,8 @@ class GlobeSource(AlgorithmBase):
         tcgx, tcgy = np.meshgrid(
             np.linspace(0.0, 1.0, len(lon)),
             np.linspace(0.0, 1.0, len(lat)),
-            indexing='ij')
+            indexing='ij',
+        )
         tex = np.vstack([tcgx.ravel(), tcgy.ravel()]).T
         return pos, tex
 
@@ -99,15 +104,18 @@ class GlobeSource(AlgorithmBase):
         """Generates the globe as ``vtkPolyData``"""
         # NOTE: https://gitlab.kitware.com/paraview/paraview/issues/19417
         from scipy.spatial import Delaunay
+
         pos, tex = self.create_sphere()
-        pts = self.spherical_to_cartesian(pos[:,0], pos[:,1])
+        pts = self.spherical_to_cartesian(pos[:, 0], pos[:, 1])
         points = interface.points_to_poly_data(pts).GetPoints()
         texcoords = interface.convert_array(tex, name='Texture Coordinates')
         # Now generate triangles
         cell_connectivity = Delaunay(pos).simplices.astype(int)
         cells = vtk.vtkCellArray()
         cells.SetNumberOfCells(cell_connectivity.shape[0])
-        cells.SetCells(cell_connectivity.shape[0], interface.convert_cell_conn(cell_connectivity))
+        cells.SetCells(
+            cell_connectivity.shape[0], interface.convert_cell_conn(cell_connectivity)
+        )
         # Generate output
         output = vtk.vtkPolyData()
         output.SetPoints(points)

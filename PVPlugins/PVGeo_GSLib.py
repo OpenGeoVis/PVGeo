@@ -3,26 +3,39 @@ paraview_plugin_version = '2.1.0'
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import smdomain, smhint, smproperty, smproxy
+
 # Helpers:
 from PVGeo import _helpers
+
 # Classes to Decorate
-from PVGeo.gslib import (GSLibPointSetReader, GSLibReader, SGeMSGridReader,
-                         WriteImageDataToSGeMS, WriteTableToGSLib)
+from PVGeo.gslib import (
+    GSLibPointSetReader,
+    GSLibReader,
+    SGeMSGridReader,
+    WriteImageDataToSGeMS,
+    WriteTableToGSLib,
+)
 
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoGSLibReader",
-                label='PVGeo: %s' % GSLibReader.__displayname__,
-                extensions=GSLibReader.extensions,
-                file_description=GSLibReader.description)
+@smproxy.reader(
+    name="PVGeoGSLibReader",
+    label='PVGeo: %s' % GSLibReader.__displayname__,
+    extensions=GSLibReader.extensions,
+    file_description=GSLibReader.description,
+)
 class PVGeoGSLibReader(GSLibReader):
     def __init__(self):
         GSLibReader.__init__(self)
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.get_file_reader_xml(GSLibReader.extensions, reader_description=GSLibReader.description))
+    @smproperty.xml(
+        _helpers.get_file_reader_xml(
+            GSLibReader.extensions, reader_description=GSLibReader.description
+        )
+    )
     def AddFileName(self, filename):
         GSLibReader.AddFileName(self, filename)
 
@@ -30,7 +43,14 @@ class PVGeoGSLibReader(GSLibReader):
     def set_delimiter(self, deli):
         GSLibReader.set_delimiter(self, deli)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='set_split_on_white_space', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(
+        _helpers.get_property_xml(
+            name='Use Split on Whitespace',
+            command='set_split_on_white_space',
+            default_values=True,
+            help='A boolean to override the Delimiter_Field and use whitespace as delimiter.',
+        )
+    )
     def set_split_on_white_space(self, flag):
         GSLibReader.set_split_on_white_space(self, flag)
 
@@ -42,29 +62,36 @@ class PVGeoGSLibReader(GSLibReader):
     def set_comments(self, identifier):
         GSLibReader.set_comments(self, identifier)
 
-    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    @smproperty.doublevector(
+        name="TimeDelta", default_values=1.0, panel_visibility="advanced"
+    )
     def set_time_delta(self, dt):
         GSLibReader.set_time_delta(self, dt)
 
-    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    @smproperty.doublevector(
+        name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty"
+    )
     def get_time_step_values(self):
         """This is critical for registering the timesteps"""
         return GSLibReader.get_time_step_values(self)
 
-    @smproperty.xml("""<Property name="Print File Header" command="print_file_header" panel_widget="command_button"/>""")
+    @smproperty.xml(
+        """<Property name="Print File Header" command="print_file_header" panel_widget="command_button"/>"""
+    )
     def print_file_header(self):
         print(GSLibReader.get_file_header(self))
         return 1
 
 
-
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoGSLibPointSetReader",
-                label='PVGeo: %s' % GSLibPointSetReader.__displayname__,
-                extensions=GSLibPointSetReader.extensions,
-                file_description=GSLibPointSetReader.description)
+@smproxy.reader(
+    name="PVGeoGSLibPointSetReader",
+    label='PVGeo: %s' % GSLibPointSetReader.__displayname__,
+    extensions=GSLibPointSetReader.extensions,
+    file_description=GSLibPointSetReader.description,
+)
 @smhint.xml('''<RepresentationType view="RenderView" type="Points" />''')
 class PVGeoGSLibPointSetReader(GSLibPointSetReader):
     def __init__(self):
@@ -72,7 +99,12 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
 
     #### Seters and Geters ####
 
-    @smproperty.xml(_helpers.get_file_reader_xml(GSLibPointSetReader.extensions, reader_description=GSLibPointSetReader.description))
+    @smproperty.xml(
+        _helpers.get_file_reader_xml(
+            GSLibPointSetReader.extensions,
+            reader_description=GSLibPointSetReader.description,
+        )
+    )
     def AddFileName(self, filename):
         GSLibPointSetReader.AddFileName(self, filename)
 
@@ -80,7 +112,14 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
     def set_delimiter(self, deli):
         GSLibPointSetReader.set_delimiter(self, deli)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='set_split_on_white_space', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(
+        _helpers.get_property_xml(
+            name='Use Split on Whitespace',
+            command='set_split_on_white_space',
+            default_values=True,
+            help='A boolean to override the Delimiter_Field and use whitespace as delimiter.',
+        )
+    )
     def set_split_on_white_space(self, flag):
         GSLibPointSetReader.set_split_on_white_space(self, flag)
 
@@ -92,16 +131,22 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
     def set_comments(self, identifier):
         GSLibPointSetReader.set_comments(self, identifier)
 
-    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    @smproperty.doublevector(
+        name="TimeDelta", default_values=1.0, panel_visibility="advanced"
+    )
     def set_time_delta(self, dt):
         GSLibPointSetReader.set_time_delta(self, dt)
 
-    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    @smproperty.doublevector(
+        name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty"
+    )
     def get_time_step_values(self):
         """This is critical for registering the timesteps"""
         return GSLibPointSetReader.get_time_step_values(self)
 
-    @smproperty.xml("""<Property name="Print File Header" command="print_file_header" panel_widget="command_button"/>""")
+    @smproperty.xml(
+        """<Property name="Print File Header" command="print_file_header" panel_widget="command_button"/>"""
+    )
     def print_file_header(self):
         print(GSLibPointSetReader.get_file_header(self))
         return 1
@@ -110,18 +155,23 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoSGeMSGridReader",
-                label='PVGeo: %s' % SGeMSGridReader.__displayname__,
-                extensions=SGeMSGridReader.extensions,
-                file_description=SGeMSGridReader.description)
+@smproxy.reader(
+    name="PVGeoSGeMSGridReader",
+    label='PVGeo: %s' % SGeMSGridReader.__displayname__,
+    extensions=SGeMSGridReader.extensions,
+    file_description=SGeMSGridReader.description,
+)
 @smhint.xml('''<RepresentationType view="RenderView" type="Surface" />''')
 class PVGeoSGeMSGridReader(SGeMSGridReader):
     def __init__(self):
         SGeMSGridReader.__init__(self)
 
-
     #### Seters and Geters ####
-    @smproperty.xml(_helpers.get_file_reader_xml(SGeMSGridReader.extensions, reader_description=SGeMSGridReader.description))
+    @smproperty.xml(
+        _helpers.get_file_reader_xml(
+            SGeMSGridReader.extensions, reader_description=SGeMSGridReader.description
+        )
+    )
     def AddFileName(self, filename):
         SGeMSGridReader.AddFileName(self, filename)
 
@@ -129,7 +179,14 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
     def set_delimiter(self, deli):
         SGeMSGridReader.set_delimiter(self, deli)
 
-    @smproperty.xml(_helpers.get_property_xml(name='Use Split on Whitespace', command='set_split_on_white_space', default_values=True, help='A boolean to override the Delimiter_Field and use whitespace as delimiter.'))
+    @smproperty.xml(
+        _helpers.get_property_xml(
+            name='Use Split on Whitespace',
+            command='set_split_on_white_space',
+            default_values=True,
+            help='A boolean to override the Delimiter_Field and use whitespace as delimiter.',
+        )
+    )
     def set_split_on_white_space(self, flag):
         SGeMSGridReader.set_split_on_white_space(self, flag)
 
@@ -141,20 +198,30 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
     def set_comments(self, identifier):
         SGeMSGridReader.set_comments(self, identifier)
 
-    @smproperty.doublevector(name="TimeDelta", default_values=1.0, panel_visibility="advanced")
+    @smproperty.doublevector(
+        name="TimeDelta", default_values=1.0, panel_visibility="advanced"
+    )
     def set_time_delta(self, dt):
         SGeMSGridReader.set_time_delta(self, dt)
 
-    @smproperty.doublevector(name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty")
+    @smproperty.doublevector(
+        name="TimestepValues", information_only="1", si_class="vtkSITimeStepsProperty"
+    )
     def get_time_step_values(self):
         """This is critical for registering the timesteps"""
         return SGeMSGridReader.get_time_step_values(self)
 
-    @smproperty.doublevector(name="Spacing", default_values=[1.0, 1.0, 1.0],)
+    @smproperty.doublevector(
+        name="Spacing",
+        default_values=[1.0, 1.0, 1.0],
+    )
     def set_spacing(self, dx, dy, dz):
         SGeMSGridReader.set_spacing(self, dx, dy, dz)
 
-    @smproperty.doublevector(name="Origin", default_values=[0.0, 0.0, 0.0],)
+    @smproperty.doublevector(
+        name="Origin",
+        default_values=[0.0, 0.0, 0.0],
+    )
     def set_origin(self, ox, oy, oz):
         SGeMSGridReader.set_origin(self, ox, oy, oz)
 
@@ -162,7 +229,9 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
 ###############################################################################
 
 
-@smproxy.writer(extensions="SGeMS", file_description="SGeMS Uniform Grid", support_reload=False)
+@smproxy.writer(
+    extensions="SGeMS", file_description="SGeMS Uniform Grid", support_reload=False
+)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkImageData"], composite_data_supported=True)
 class PVGeoWriteImageDataToSGeMS(WriteImageDataToSGeMS):
@@ -180,9 +249,13 @@ class PVGeoWriteImageDataToSGeMS(WriteImageDataToSGeMS):
         """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteImageDataToSGeMS.set_format(self, fmt)
 
+
 ###############################################################################
 
-@smproxy.writer(extensions="gslib", file_description="GSLib Table", support_reload=False)
+
+@smproxy.writer(
+    extensions="gslib", file_description="GSLib Table", support_reload=False
+)
 @smproperty.input(name="Input", port_index=0)
 @smdomain.datatype(dataTypes=["vtkTable"], composite_data_supported=True)
 class PVGeoWriteTableToGSLib(WriteTableToGSLib):
@@ -203,5 +276,6 @@ class PVGeoWriteTableToGSLib(WriteTableToGSLib):
     def set_format(self, fmt):
         """Use to set the ASCII format for the writer default is ``'%.9e'``"""
         WriteTableToGSLib.set_format(self, fmt)
+
 
 ###############################################################################

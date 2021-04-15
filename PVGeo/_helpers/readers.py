@@ -20,6 +20,7 @@ def clean_data_name(data_name, filename):
 
 def create_modified_callback(anobject):
     import weakref
+
     weakref_obj = weakref.ref(anobject)
     anobject = None
 

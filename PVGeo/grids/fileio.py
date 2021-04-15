@@ -35,6 +35,7 @@ class GridInfo(properties.HasProperties):
     """Internal helper class to store Surfer grid properties and create
     ``vtkImageData`` objects from them.
     """
+
     ny = properties.Integer('number of columns', min=2)
     nx = properties.Integer('number of rows', min=2)
     xll = properties.Float('x-value of lower-left corner')
@@ -48,7 +49,7 @@ class GridInfo(properties.HasProperties):
     def mask(self):
         """Mask the no data value"""
         data = self.data
-        nans = data >= 1.701410009187828e+38
+        nans = data >= 1.701410009187828e38
         if np.any(nans):
             data = np.ma.masked_where(nans, data)
         err_msg = "{} of data ({}) doesn't match that set by file ({})."
@@ -103,6 +104,7 @@ class SurferGridReader(ReaderBase):
         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
         SOFTWARE.
     """
+
     __displayname__ = 'Surfer Grid Reader'
     __category__ = 'reader'
     extensions = 'grd GRD'
@@ -115,28 +117,31 @@ class SurferGridReader(ReaderBase):
 
     @staticmethod
     def _surfer7bin(filename):
-        """See class notes.
-        """
+        """See class notes."""
         with open(filename, 'rb') as f:
             if unpack('4s', f.read(4))[0] != b'DSRB':
                 raise _helpers.PVGeoError(
                     '''Invalid file identifier for Surfer 7 binary .grd
                     file. First 4 characters must be DSRB.'''
                 )
-            f.read(8)  #Size & Version
+            f.read(8)  # Size & Version
 
             section = unpack('4s', f.read(4))[0]
             if section != b'GRID':
                 raise _helpers.PVGeoError(
                     '''Unsupported Surfer 7 file structure. GRID keyword
                     must follow immediately after header but {}
-                    encountered.'''.format(section)
+                    encountered.'''.format(
+                        section
+                    )
                 )
             size = unpack('<i', f.read(4))[0]
             if size != 72:
                 raise _helpers.PVGeoError(
                     '''Surfer 7 GRID section is unrecognized size. Expected
-                    72 but encountered {}'''.format(size)
+                    72 but encountered {}'''.format(
+                        size
+                    )
                 )
             nrow = unpack('<i', f.read(4))[0]
             ncol = unpack('<i', f.read(4))[0]
@@ -156,17 +161,21 @@ class SurferGridReader(ReaderBase):
                 raise _helpers.PVGeoError(
                     '''Unsupported Surfer 7 file structure. DATA keyword
                     must follow immediately after GRID section but {}
-                    encountered.'''.format(section)
+                    encountered.'''.format(
+                        section
+                    )
                 )
             datalen = unpack('<i', f.read(4))[0]
-            if datalen != ncol*nrow*8:
+            if datalen != ncol * nrow * 8:
                 raise _helpers.PVGeoError(
                     '''Surfer 7 DATA size does not match expected size from
                     columns and rows. Expected {} but encountered
-                    {}'''.format(ncol*nrow*8, datalen)
+                    {}'''.format(
+                        ncol * nrow * 8, datalen
+                    )
                 )
-            data = np.zeros(ncol*nrow)
-            for i in range(ncol*nrow):
+            data = np.zeros(ncol * nrow)
+            for i in range(ncol * nrow):
                 data[i] = unpack('<d', f.read(8))[0]
             data = np.where(data >= blankval, np.nan, data)
 
@@ -189,14 +198,13 @@ class SurferGridReader(ReaderBase):
             dy=deltay,
             dmin=zmin,
             dmax=zmax,
-            data=data
+            data=data,
         )
         return grd
 
     @staticmethod
     def _surfer6bin(filename):
-        """See class notes.
-        """
+        """See class notes."""
         with open(filename, 'rb') as f:
             if unpack('4s', f.read(4))[0] != b'DSBB':
                 raise _helpers.PVGeoError(
@@ -214,7 +222,7 @@ class SurferGridReader(ReaderBase):
             data = np.ones(nx * ny)
             for i in range(nx * ny):
                 zdata = unpack('<f', f.read(4))[0]
-                if zdata >= 1.701410009187828e+38:
+                if zdata >= 1.701410009187828e38:
                     data[i] = np.nan
                 else:
                     data[i] = zdata
@@ -224,41 +232,43 @@ class SurferGridReader(ReaderBase):
             ny=ny,
             xll=xlo,
             yll=ylo,
-            dx=(xhi-xlo)/(nx-1),
-            dy=(yhi-ylo)/(ny-1),
+            dx=(xhi - xlo) / (nx - 1),
+            dy=(yhi - ylo) / (ny - 1),
             dmin=dmin,
             dmax=dmax,
-            data=data
+            data=data,
         )
         return grd
 
     @staticmethod
     def _surfer6ascii(filename):
-        """See class notes.
-        """
+        """See class notes."""
         with open(filename, 'r') as f:
             if f.readline().strip() != 'DSAA':
-                raise _helpers.PVGeoError('''Invalid file identifier for Surfer 6 ASCII .grd file. First line must be DSAA''')
+                raise _helpers.PVGeoError(
+                    '''Invalid file identifier for Surfer 6 ASCII .grd file. First line must be DSAA'''
+                )
             [ncol, nrow] = [int(n) for n in f.readline().split()]
             [xmin, xmax] = [float(n) for n in f.readline().split()]
             [ymin, ymax] = [float(n) for n in f.readline().split()]
             [dmin, dmax] = [float(n) for n in f.readline().split()]
             # Read in the rest of the file as a 1D array
-            data = np.fromiter((np.float(s) for line in f for s in line.split()), dtype=float)
+            data = np.fromiter(
+                (np.float(s) for line in f for s in line.split()), dtype=float
+            )
 
         grd = GridInfo(
             nx=ncol,
             ny=nrow,
             xll=xmin,
             yll=ymin,
-            dx=(xmax-xmin)/(ncol-1),
-            dy=(ymax-ymin)/(nrow-1),
+            dx=(xmax - xmin) / (ncol - 1),
+            dy=(ymax - ymin) / (nrow - 1),
             dmin=dmin,
             dmax=dmax,
-            data=data
+            data=data,
         )
         return grd
-
 
     def _read_grids(self, idx=None):
         """This parses the first file to determine grid file type then reads
@@ -278,8 +288,11 @@ class SurferGridReader(ReaderBase):
         elif key == b'DSAA':
             reader = self._surfer6ascii
         else:
-            raise _helpers.PVGeoError('''Invalid file identifier for Surfer .grd file.
-            First 4 characters must be DSRB, DSBB, or DSAA. This file contains: %s''' % key)
+            raise _helpers.PVGeoError(
+                '''Invalid file identifier for Surfer .grd file.
+            First 4 characters must be DSRB, DSBB, or DSAA. This file contains: %s'''
+                % key
+            )
 
         for f in filenames:
             try:
@@ -290,18 +303,14 @@ class SurferGridReader(ReaderBase):
             return contents[0]
         return contents
 
-
     def _read_up_front(self):
-        """Should not need to be overridden.
-        """
+        """Should not need to be overridden."""
         # Perform Read
         self.__grids = self._read_grids()
         self.need_to_read(flag=False)
         return 1
 
-
     ########################
-
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to get data for current timestep and populate the
@@ -319,17 +328,16 @@ class SurferGridReader(ReaderBase):
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
-        """Used by pipeline to set grid extents.
-        """
+        """Used by pipeline to set grid extents."""
         if self.need_to_read():
             self._read_up_front()
         # Call parent to handle time stuff
         ReaderBase.RequestInformation(self, request, inInfo, outInfo)
         # Now set whole output extent
         info = outInfo.GetInformationObject(0)
-        grid = self.__grids[0] # Get first grid to set output extents
+        grid = self.__grids[0]  # Get first grid to set output extents
         # Set WHOLE_EXTENT: This is absolutely necessary
-        ext = (0,grid.nx-1, 0,grid.ny-1, 0,1-1)
+        ext = (0, grid.nx - 1, 0, grid.ny - 1, 0, 1 - 1)
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
@@ -349,13 +357,13 @@ class SurferGridReader(ReaderBase):
 
 class WriteImageDataToSurfer(WriterBase):
     """Write a 2D ``vtkImageData`` object to the Surfer grid format"""
+
     __displayname__ = 'Write ``vtkImageData`` to Surfer Format'
     __category__ = 'writer'
 
     def __init__(self):
         WriterBase.__init__(self, inputType='vtkImageData', ext='grd')
         self.__input_array = [None, None]
-
 
     def perform_write_out(self, input_data_object, filename, object_name):
         """Writes an input ``vtkImageData`` object to a file"""
@@ -365,7 +373,9 @@ class WriteImageDataToSurfer(WriterBase):
         # TODO: handle any orientation
         nx, ny, nz = img.GetDimensions()
         if nx == ny == 1 and nz != 1:
-            raise RuntimeError('Only 2D data on the XY plane is supported at this time.')
+            raise RuntimeError(
+                'Only 2D data on the XY plane is supported at this time.'
+            )
 
         ox, oy, oz = img.GetOrigin()
         dx, dy, dz = img.GetSpacing()
@@ -381,14 +391,20 @@ class WriteImageDataToSurfer(WriterBase):
 
         # arr = arr.reshape((nx, ny), order='F')
 
-        meta = 'DSAA\n%d %d\n%f %f\n%f %f\n%f %f' % (nx, ny, xmin, xmax,
-                                                     ymin, ymax, dmin, dmax)
+        meta = 'DSAA\n%d %d\n%f %f\n%f %f\n%f %f' % (
+            nx,
+            ny,
+            xmin,
+            xmax,
+            ymin,
+            ymax,
+            dmin,
+            dmax,
+        )
         # Now write out the data!
         np.savetxt(filename, arr, header=meta, comments='', fmt=self.get_format())
 
-
         return 1
-
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         """Used to the inpput array / the data value (z-value) to write for the
@@ -430,17 +446,17 @@ class WriteImageDataToSurfer(WriterBase):
         self.Modified()
         self.Update()
 
-
     def write(self, input_data_object=None, array_name=None):
         """Perfrom the write out."""
         return self.Write(input_data_object=input_data_object, array_name=array_name)
+
 
 ###############################################################################
 
 
 class EsriGridReader(DelimitedTextReader):
-    """See details: https://en.wikipedia.org/wiki/Esri_grid
-    """
+    """See details: https://en.wikipedia.org/wiki/Esri_grid"""
+
     __displayname__ = 'Esri Grid Reader'
     __type__ = 'reader'
     description = 'PVGeo: Esri Grid'
@@ -468,15 +484,18 @@ class EsriGridReader(DelimitedTextReader):
             self.__cellsize = float(content[4].split()[1])
             self.NODATA_VALUE = float(content[5].split()[1])
         except ValueError:
-            raise _helpers.PVGeoError('This file is not in proper Esri ASCII Grid format.')
+            raise _helpers.PVGeoError(
+                'This file is not in proper Esri ASCII Grid format.'
+            )
         return [self.__data_name], content[6::]
 
     def _file_contents_to_data_frame(self, contents):
-        """Creates a dataframe with a sinlge array for the file data.
-        """
+        """Creates a dataframe with a sinlge array for the file data."""
         data = []
         for content in contents:
-            arr = np.fromiter((float(s) for line in content for s in line.split()), dtype=float)
+            arr = np.fromiter(
+                (float(s) for line in content for s in line.split()), dtype=float
+            )
             df = pd.DataFrame(data=arr, columns=[self.get_data_name()])
             data.append(df)
         return data
@@ -490,7 +509,9 @@ class EsriGridReader(DelimitedTextReader):
         # if np.any(nans):
         #     data = np.ma.masked_where(nans, data)
         data[nans] = np.nan
-        return np.flip(np.reshape(data, self.get_shape(), order='F'), 1).flatten(order='F')
+        return np.flip(np.reshape(data, self.get_shape(), order='F'), 1).flatten(
+            order='F'
+        )
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to get data for current timestep and populate the
@@ -518,8 +539,7 @@ class EsriGridReader(DelimitedTextReader):
         return 1
 
     def RequestInformation(self, request, inInfo, outInfo):
-        """Used by pipeline to set grid extents.
-        """
+        """Used by pipeline to set grid extents."""
         if self.need_to_read():
             self._read_up_front()
         # Call parent to handle time stuff
@@ -527,7 +547,7 @@ class EsriGridReader(DelimitedTextReader):
         # Now set whole output extent
         info = outInfo.GetInformationObject(0)
         # Set WHOLE_EXTENT: This is absolutely necessary
-        ext = (0,self.__nx-1, 0,self.__ny-1, 0,1-1)
+        ext = (0, self.__nx - 1, 0, self.__ny - 1, 0, 1 - 1)
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
@@ -554,6 +574,7 @@ class LandsatReader(ReaderBaseBase):
     uses the ``espatools`` package to read Landsat rasters (band sets) and
     creates vtkImageData with each band as point data
     """
+
     __displayname__ = 'Landsat XML Reader'
     __category__ = 'reader'
     extensions = "xml"
@@ -567,17 +588,16 @@ class LandsatReader(ReaderBaseBase):
         self.__scheme = 'infrared'
         # Properties:
         self._dataselection = vtk.vtkDataArraySelection()
-        self._dataselection.AddObserver("ModifiedEvent", _helpers.create_modified_callback(self))
-
+        self._dataselection.AddObserver(
+            "ModifiedEvent", _helpers.create_modified_callback(self)
+        )
 
     def Modified(self, read_again=False):
-        """Ensure default is overridden to be false so array selector can call.
-        """
+        """Ensure default is overridden to be false so array selector can call."""
         return ReaderBaseBase.Modified(self, read_again=read_again)
 
     def modified(self, read_again=False):
         return self.Modified(read_again=read_again)
-
 
     def get_file_name(self):
         """Super class has file names as a list but we will only handle a single
@@ -587,9 +607,7 @@ class LandsatReader(ReaderBaseBase):
         """
         return ReaderBaseBase.get_file_names(self, idx=0)
 
-
     #### Methods for performing the read ####
-
 
     def _get_file_contents(self, idx=None):
         """Reads XML meta data, no data read."""
@@ -597,7 +615,7 @@ class LandsatReader(ReaderBaseBase):
         self.__raster = self.__reader.Read(meta_only=True)
         for n in self.__raster.bands.keys():
             self._dataselection.AddArray(n)
-        self.need_to_read(flag=False) # Only meta data has been read
+        self.need_to_read(flag=False)  # Only meta data has been read
         return
 
     def _read_up_front(self):
@@ -611,7 +629,9 @@ class LandsatReader(ReaderBaseBase):
             name = self._dataselection.GetArrayName(i)
             if self._dataselection.ArrayIsEnabled(name):
                 allowed.append(name)
-        self.__raster = self.__reader.Read(meta_only=False, allowed=allowed, cast=self.__cast)
+        self.__raster = self.__reader.Read(
+            meta_only=False, allowed=allowed, cast=self.__cast
+        )
         return self.__raster
 
     def _build_image_data(self, output):
@@ -625,9 +645,7 @@ class LandsatReader(ReaderBaseBase):
         output.SetOrigin(corner.x, corner.y, 0)
         return output
 
-
     #### Pipeline Methods ####
-
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
@@ -641,10 +659,14 @@ class LandsatReader(ReaderBaseBase):
         # Now add the data based on what the user has selected
         for name, band in self.__raster.bands.items():
             data = band.data
-            output.GetPointData().AddArray(interface.convert_array(data.flatten(), name=name))
+            output.GetPointData().AddArray(
+                interface.convert_array(data.flatten(), name=name)
+            )
         if self.__scheme is not None:
-            colors = self.__raster.GetRGB(scheme=self.__scheme).reshape((-1,3))
-            output.GetPointData().SetScalars(interface.convert_array(colors, name=self.__scheme))
+            colors = self.__raster.GetRGB(scheme=self.__scheme).reshape((-1, 3))
+            output.GetPointData().SetScalars(
+                interface.convert_array(colors, name=self.__scheme)
+            )
             output.GetPointData().SetActiveScalars(self.__scheme)
         return 1
 
@@ -657,15 +679,13 @@ class LandsatReader(ReaderBaseBase):
         # Now set whole output extent
         b = self.__raster.bands.get(list(self.__raster.bands.keys())[0])
         nx, ny, nz = b.nsamps, b.nlines, 1
-        ext = (0,nx-1, 0,ny-1, 0,nz-1)
+        ext = (0, nx - 1, 0, ny - 1, 0, nz - 1)
         info = outInfo.GetInformationObject(0)
         # Set WHOLE_EXTENT: This is absolutely necessary
         info.Set(vtk.vtkStreamingDemandDrivenPipeline.WHOLE_EXTENT(), ext, 6)
         return 1
 
-
     #### Seters and Geters for the GUI ####
-
 
     def GetDataSelection(self):
         """Used by ParaView GUI"""
@@ -676,7 +696,6 @@ class LandsatReader(ReaderBaseBase):
                 pass
         return self._dataselection
 
-
     def set_cast_data_type(self, flag):
         """A flag to cast all data arrays as floats/doubles.
         This will fill invalid values with nans instead of a fill value"""
@@ -684,19 +703,20 @@ class LandsatReader(ReaderBaseBase):
             self.__cast = flag
             self.Modified()
 
-
     def set_color_scheme(self, scheme):
         """Get an RGB scheme from the raster set. If no scheme is desired, pass
         any string that is not a defined scheme as the scheme argument."""
         if isinstance(scheme, int):
             scheme = self.get_color_scheme_names()[scheme]
-        if scheme in list(espatools.RasterSet.RGB_SCHEMES.keys()) and self.__scheme != scheme:
+        if (
+            scheme in list(espatools.RasterSet.RGB_SCHEMES.keys())
+            and self.__scheme != scheme
+        ):
             self.__scheme = scheme
             self.Modified()
         elif self.__scheme is not None:
             self.__scheme = None
             self.Modified()
-
 
     @staticmethod
     def get_color_scheme_names():
@@ -714,13 +734,13 @@ class WriteCellCenterData(WriterBase):
     cell centers and its cell data. Use in tandom with ParaView's native CSV
     writer which saves the PointData.
     """
+
     __displayname__ = 'Write Cell Centers To CSV'
     __category__ = 'writer'
 
     def __init__(self):
         WriterBase.__init__(self, inputType='vtkDataSet')
         self.__delimiter = ','
-
 
     def perform_write_out(self, input_data_object, filename, object_name):
         """Writes the cell centers of the input data object to a file"""
@@ -735,20 +755,26 @@ class WriteCellCenterData(WriterBase):
         keys = celldata.keys()
         # Save out using numpy
         arr = np.zeros((len(centers), 3 + len(keys)))
-        arr[:,0:3] = centers
+        arr[:, 0:3] = centers
         for i, name in enumerate(keys):
-            arr[:,i+3] = celldata[name]
+            arr[:, i + 3] = celldata[name]
         # Now write out the data
         # Clean data titles to make sure they do not contain the delimiter
         repl = '_' if self.__delimiter != '_' else '-'
         for i, name in enumerate(keys):
             keys[i] = name.replace(self.__delimiter, repl)
-        header = '! %s\n%s' % (object_name, ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys))
-        np.savetxt(filename, arr,
-                   header=header,
-                   delimiter=self.__delimiter,
-                   fmt=self.get_format(),
-                   comments='')
+        header = '! %s\n%s' % (
+            object_name,
+            ('%s' % self.__delimiter).join(['X', 'Y', 'Z'] + keys),
+        )
+        np.savetxt(
+            filename,
+            arr,
+            header=header,
+            delimiter=self.__delimiter,
+            fmt=self.get_format(),
+            comments='',
+        )
         # Success for pipeline
         return 1
 

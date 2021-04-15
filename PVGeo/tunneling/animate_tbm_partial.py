@@ -26,8 +26,7 @@ Properties = dict(
     dt=1.0,
 )
 
-PropertiesHelp = dict(
-)
+PropertiesHelp = dict()
 
 
 def RequestData():
@@ -35,15 +34,16 @@ def RequestData():
     from vtk.numpy_interface import dataset_adapter as dsa
     import PVGeo._helpers as inputhelp
     from PVGeo.filters import pointsToTube
+
     # Get input/output of Proxy
     pdi = self.GetInput()
     pdo = self.GetOutput()
     # Grab input arrays to process from drop down menus
-    #- Grab all fields for input arrays:
+    # - Grab all fields for input arrays:
     fields = []
     for i in range(4):
         fields.append(inputhelp.get_selected_array_field(self, i))
-    #- Simply grab the names
+    # - Simply grab the names
     names = []
     for i in range(4):
         names.append(inputhelp.get_selected_array_name(self, i))
@@ -59,41 +59,49 @@ def RequestData():
     # grab coordinates for each part of boring machine at time idx as row
     executive = self.GetExecutive()
     outInfo = executive.GetOutputInformation(0)
-    idx = int(outInfo.Get(executive.UPDATE_TIME_STEP())/dt)
+    idx = int(outInfo.Get(executive.UPDATE_TIME_STEP()) / dt)
     index = idcs[idx]
     x = arrs[0][index]
     y = arrs[1][index]
     z = arrs[2][index]
-    center = (x,y,z)
+    center = (x, y, z)
     pts = []
 
     # now compute unit vector.
     def unitVec(s, g):
         # Direction Vector: Vector points from receiver to source
-        vec = (s[0]-g[0], s[1]-g[1], s[2]-g[2])
+        vec = (s[0] - g[0], s[1] - g[1], s[2] - g[2])
         # Total spatial distance:
-        dist = np.sqrt(vec[0]**2 + vec[1]**2 + vec[2]**2)
+        dist = np.sqrt(vec[0] ** 2 + vec[1] ** 2 + vec[2] ** 2)
         # Get unit vector for direction
-        return (vec[0]/dist, vec[1]/dist, vec[2]/dist)
+        return (vec[0] / dist, vec[1] / dist, vec[2] / dist)
 
     if idx == (len(idcs) - 1):
         # use vect between current and last different points
         iii = 1
-        for i in range(1,idx):
-            if arrs[0][idcs[idx-i]] != x or arrs[1][idcs[idx-i]] != y or arrs[2][idcs[idx-i]] != z:
+        for i in range(1, idx):
+            if (
+                arrs[0][idcs[idx - i]] != x
+                or arrs[1][idcs[idx - i]] != y
+                or arrs[2][idcs[idx - i]] != z
+            ):
                 iii = i
                 break
-        index = idcs[idx-iii]
-        vec = unitVec((arrs[0][index],arrs[1][index],arrs[2][index]), center)
+        index = idcs[idx - iii]
+        vec = unitVec((arrs[0][index], arrs[1][index], arrs[2][index]), center)
     else:
         # get vector from current point to next different point.
         iii = 1
-        for i in range(1,len(idcs)-idx):
-            if arrs[0][idcs[idx+i]] != x or arrs[1][idcs[idx+i]] != y or arrs[2][idcs[idx+i]] != z:
+        for i in range(1, len(idcs) - idx):
+            if (
+                arrs[0][idcs[idx + i]] != x
+                or arrs[1][idcs[idx + i]] != y
+                or arrs[2][idcs[idx + i]] != z
+            ):
                 iii = i
                 break
-        index = idcs[idx+iii]
-        vec = unitVec(center, (arrs[0][index],arrs[1][index],arrs[2][index]))
+        index = idcs[idx + iii]
+        vec = unitVec(center, (arrs[0][index], arrs[1][index], arrs[2][index]))
 
     # Generate two more points Length/2 away in pos/neg unit vector direction
     def genPts(vec, c, l):
@@ -104,42 +112,43 @@ def RequestData():
         x2 = c[0] + (vec[0] * l)
         y2 = c[1] + (vec[1] * l)
         z2 = c[2] + (vec[2] * l)
-        return ((x1,y1,z1), (x2,y2,z2))
+        return ((x1, y1, z1), (x2, y2, z2))
 
     # append the points and done. 3 points total
-    add = genPts(vec, center, Length/2)
-    #- append neg first
+    add = genPts(vec, center, Length / 2)
+    # - append neg first
     pts.append(add[0])
-    #- append center
+    # - append center
     pts.append(center)
-    #- append pos last
+    # - append pos last
     pts.append(add[1])
 
     # Generate tube:
     vtk_pts = vtk.vtkPoints()
     for i in range(len(pts)):
-        vtk_pts.InsertNextPoint(pts[i][0],pts[i][1],pts[i][2])
+        vtk_pts.InsertNextPoint(pts[i][0], pts[i][1], pts[i][2])
     poly = vtk.vtkPolyData()
     poly.SetPoints(vtk_pts)
-    pointsToTube(poly, radius=Diameter/2, numSides=20, nrNbr=False, pdo=pdo)
+    pointsToTube(poly, radius=Diameter / 2, numSides=20, nrNbr=False, pdo=pdo)
 
 
 def RequestInformation(self):
     from vtk.numpy_interface import dataset_adapter as dsa
     import PVGeo._helpers as inputhelp
     import numpy as np
+
     executive = self.GetExecutive()
     outInfo = executive.GetOutputInformation(0)
     pdi = self.GetInput()
     # Calculate list of timesteps here
-    #- Get status array
+    # - Get status array
     field = inputhelp.get_selected_array_field(self, 3)
     name = inputhelp.get_selected_array_name(self, 3)
     wpdi = dsa.WrapDataObject(pdi)
     statarr = inputhelp.get_array(wpdi, field, name)
     idcs = np.where(statarr == 2)[0]
-    #- Get number of rows in table and use that for num time steps
-    xtime = np.arange(0,len(idcs)*dt,dt, dtype=float)
+    # - Get number of rows in table and use that for num time steps
+    xtime = np.arange(0, len(idcs) * dt, dt, dtype=float)
     outInfo.Remove(executive.TIME_STEPS())
     for i in range(len(xtime)):
         outInfo.Append(executive.TIME_STEPS(), xtime[i])

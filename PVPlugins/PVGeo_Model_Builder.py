@@ -3,21 +3,30 @@ paraview_plugin_version = '2.1.0'
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import smdomain, smhint, smproperty, smproxy
+
 # Classes to Decorate
-from PVGeo.model_build import (CreateEvenRectilinearGrid, CreateTensorMesh,
-                               CreateUniformGrid, GlobeSource,
-                               OutlineContinents)
+from PVGeo.model_build import (
+    CreateEvenRectilinearGrid,
+    CreateTensorMesh,
+    CreateUniformGrid,
+    GlobeSource,
+    OutlineContinents,
+)
 
 MENU_CAT = 'PVGeo: Model Building'
-
 
 
 ###############################################################################
 
 
-@smproxy.source(name='PVGeoCreateEvenRectilinearGrid', label='Create Even Rectilinear Grid')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
+@smproxy.source(
+    name='PVGeoCreateEvenRectilinearGrid', label='Create Even Rectilinear Grid'
+)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />'''
+    % MENU_CAT
+)
 class PVGeoCreateEvenRectilinearGrid(CreateEvenRectilinearGrid):
     def __init__(self):
         CreateEvenRectilinearGrid.__init__(self)
@@ -45,17 +54,24 @@ class PVGeoCreateEvenRectilinearGrid(CreateEvenRectilinearGrid):
 
 
 @smproxy.source(name='PVGeoCreateTensorMesh', label='Create Tensor Mesh')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />'''
+    % MENU_CAT
+)
 class PVGeoCreateTensorMesh(CreateTensorMesh):
     def __init__(self):
         CreateTensorMesh.__init__(self)
 
-    @smproperty.stringvector(name="X Cells", default_values='200 100 50 20*50.0 50 100 200')
+    @smproperty.stringvector(
+        name="X Cells", default_values='200 100 50 20*50.0 50 100 200'
+    )
     def set_x_cells_str(self, xcellstr):
         CreateTensorMesh.set_x_cells_str(self, xcellstr)
 
-    @smproperty.stringvector(name="Y Cells", default_values='200 100 50 21*50.0 50 100 200')
+    @smproperty.stringvector(
+        name="Y Cells", default_values='200 100 50 21*50.0 50 100 200'
+    )
     def set_y_cells_str(self, ycellstr):
         CreateTensorMesh.set_y_cells_str(self, ycellstr)
 
@@ -72,15 +88,16 @@ class PVGeoCreateTensorMesh(CreateTensorMesh):
 
 
 @smproxy.source(name='PVGeoCreateUniformGrid', label='Create Uniform Grid')
-@smhint.xml('''<ShowInMenu category="%s"/>
-    <RepresentationType view="RenderView" type="Surface With Edges" />''' % MENU_CAT)
+@smhint.xml(
+    '''<ShowInMenu category="%s"/>
+    <RepresentationType view="RenderView" type="Surface With Edges" />'''
+    % MENU_CAT
+)
 class PVGeoCreateUniformGrid(CreateUniformGrid):
     def __init__(self):
         CreateUniformGrid.__init__(self)
 
-
     #### Setters / Getters ####
-
 
     @smproperty.intvector(name="Extent", default_values=[10, 10, 10])
     def set_extent(self, nx, ny, nz):

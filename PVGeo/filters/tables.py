@@ -27,27 +27,29 @@ class CombineTables(FilterBase):
     Currently this cannot handle time varing tables as that gets complicated
     real quick if the tables do not have the same timestep values
     """
+
     __displayname__ = 'Combine Tables'
     __category__ = 'filter'
 
     def __init__(self):
-        FilterBase.__init__(self,
-                            nInputPorts=2, inputType='vtkTable',
-                            nOutputPorts=1, outputType='vtkTable')
+        FilterBase.__init__(
+            self,
+            nInputPorts=2,
+            inputType='vtkTable',
+            nOutputPorts=1,
+            outputType='vtkTable',
+        )
         # Parameters... none
 
     # CRITICAL for multiple input ports
     def FillInputPortInformation(self, port, info):
-        """Used by pipeline. Necessary when dealing with multiple input ports
-        """
+        """Used by pipeline. Necessary when dealing with multiple input ports"""
         # all are tables so no need to check port
         info.Set(self.INPUT_REQUIRED_DATA_TYPE(), "vtkTable")
         return 1
 
-
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to generate output
-        """
+        """Used by pipeline to generate output"""
         # Inputs from different ports:
         pdi0 = self.GetInputData(inInfo, 0, 0)
         pdi1 = self.GetInputData(inInfo, 1, 0)
@@ -75,7 +77,8 @@ class CombineTables(FilterBase):
 
 
 ###############################################################################
-#---- Reshape Table ----#
+# ---- Reshape Table ----#
+
 
 class ReshapeTable(FilterBase):
     """This filter will take a ``vtkTable`` object and reshape it. This filter
@@ -83,13 +86,18 @@ class ReshapeTable(FilterBase):
     ``numpy.reshape`` in a C contiguous manner. Unfortunately, data fields will
     be renamed arbitrarily because VTK data arrays require a name.
     """
+
     __displayname__ = 'Reshape Table'
     __category__ = 'filter'
 
     def __init__(self, **kwargs):
-        FilterBase.__init__(self,
-                            nInputPorts=1, inputType='vtkTable',
-                            nOutputPorts=1, outputType='vtkTable')
+        FilterBase.__init__(
+            self,
+            nInputPorts=1,
+            inputType='vtkTable',
+            nOutputPorts=1,
+            outputType='vtkTable',
+        )
         # Parameters
         self.__nrows = kwargs.get('nrows', 1)
         self.__ncols = kwargs.get('ncols', 1)
@@ -97,8 +105,7 @@ class ReshapeTable(FilterBase):
         self.__order = kwargs.get('order', 'F')
 
     def _reshape(self, pdi, pdo):
-        """Internal helper to perfrom the reshape
-        """
+        """Internal helper to perfrom the reshape"""
         # Get number of columns
         cols = pdi.GetNumberOfColumns()
         # Get number of rows
@@ -110,40 +117,49 @@ class ReshapeTable(FilterBase):
                 for i in range(num, self.__ncols):
                     self.__names.append('Field %d' % i)
             elif num > self.__ncols:
-                raise _helpers.PVGeoError('Too many array names. `ncols` specified as %d and %d names given.' % (self.__ncols, num))
+                raise _helpers.PVGeoError(
+                    'Too many array names. `ncols` specified as %d and %d names given.'
+                    % (self.__ncols, num)
+                )
         else:
             self.__names = ['Field %d' % i for i in range(self.__ncols)]
 
         # Make a 2D numpy array and fill with data from input table
-        data = np.empty((rows,cols))
+        data = np.empty((rows, cols))
         for i in range(cols):
             c = pdi.GetColumn(i)
-            data[:,i] = interface.convert_array(c)
+            data[:, i] = interface.convert_array(c)
 
-        if ((self.__ncols*self.__nrows) != (cols*rows)):
-            raise _helpers.PVGeoError('Total number of elements must remain %d. Check reshape dimensions.' % (cols*rows))
+        if (self.__ncols * self.__nrows) != (cols * rows):
+            raise _helpers.PVGeoError(
+                'Total number of elements must remain %d. Check reshape dimensions.'
+                % (cols * rows)
+            )
 
         # Use numpy.reshape() to reshape data NOTE: only 2D because its a table
         # NOTE: column access of this reshape is not contigous
-        data = np.array(np.reshape(data.flatten(), (self.__nrows,self.__ncols), order=self.__order))
+        data = np.array(
+            np.reshape(data.flatten(), (self.__nrows, self.__ncols), order=self.__order)
+        )
         pdo.SetNumberOfRows(self.__nrows)
 
         # Add new array to output table and assign incremental names (e.g. Field0)
         for i in range(self.__ncols):
             # Make a contigous array from the column we want
-            col = np.array(data[:,i])
+            col = np.array(data[:, i])
             # allow type to be determined by input
             # VTK arrays need a name. Set arbitrarily
-            insert = interface.convert_array(col, name=self.__names[i]) # array_type=vtk.VTK_FLOAT
-            #pdo.AddColumn(insert) # these are not getting added to the output table
+            insert = interface.convert_array(
+                col, name=self.__names[i]
+            )  # array_type=vtk.VTK_FLOAT
+            # pdo.AddColumn(insert) # these are not getting added to the output table
             # ... work around:
-            pdo.GetRowData().AddArray(insert) # NOTE: this is in the FieldData
+            pdo.GetRowData().AddArray(insert)  # NOTE: this is in the FieldData
 
         return pdo
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline
-        """
+        """Used by pipeline"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
@@ -151,9 +167,7 @@ class ReshapeTable(FilterBase):
         self._reshape(pdi, pdo)
         return 1
 
-
     #### Seters and Geters ####
-
 
     def set_names(self, names):
         """Set names using a semicolon (;) seperated string or a list of strings
@@ -181,8 +195,7 @@ class ReshapeTable(FilterBase):
         return self.__names
 
     def set_number_of_columns(self, ncols):
-        """Set the number of columns for the output ``vtkTable``
-        """
+        """Set the number of columns for the output ``vtkTable``"""
         if isinstance(ncols, float):
             ncols = int(ncols)
         if self.__ncols != ncols:
@@ -190,8 +203,7 @@ class ReshapeTable(FilterBase):
             self.Modified()
 
     def set_number_of_rows(self, nrows):
-        """Set the number of rows for the output ``vtkTable``
-        """
+        """Set the number of rows for the output ``vtkTable``"""
         if isinstance(nrows, float):
             nrows = int(nrows)
         if self.__nrows != nrows:
@@ -199,8 +211,7 @@ class ReshapeTable(FilterBase):
             self.Modified()
 
     def set_order(self, order):
-        """Set the reshape order (``'C'`` of ``'F'``)
-        """
+        """Set the reshape order (``'C'`` of ``'F'``)"""
         if self.__order != order:
             self.__order = order
             self.Modified()
@@ -208,26 +219,28 @@ class ReshapeTable(FilterBase):
 
 ###############################################################################
 
+
 class ExtractArray(FilterBase):
-    """Extract an array from a ``vtkDataSet`` and make a ``vtkTable`` of it.
-    """
+    """Extract an array from a ``vtkDataSet`` and make a ``vtkTable`` of it."""
+
     __displayname__ = 'Extract Array'
     __category__ = 'filter'
 
     def __init__(self):
-        FilterBase.__init__(self,
-                            nInputPorts=1, inputType='vtkDataSet',
-                            nOutputPorts=1, outputType='vtkTable')
+        FilterBase.__init__(
+            self,
+            nInputPorts=1,
+            inputType='vtkDataSet',
+            nOutputPorts=1,
+            outputType='vtkTable',
+        )
         self.__input_array = [None, None]
 
-
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to generate output
-        """
+        """Used by pipeline to generate output"""
         # Inputs from different ports:
         pdi = self.GetInputData(inInfo, 0, 0)
         table = self.GetOutputData(outInfo, 0)
-
 
         # Note user has to select a single array to save out
         field, name = self.__input_array[0], self.__input_array[1]
@@ -267,23 +280,26 @@ class ExtractArray(FilterBase):
         return pv.wrap(self.GetOutput())
 
 
-
 ###############################################################################
-
 
 
 class SplitTableOnArray(FilterBase):
     """A filter to seperate table data based on the unique values of a given data
     array into a ``vtkMultiBlockDataSet``.
     """
+
     __displayname__ = 'Split Table On Array'
     __category__ = 'filter'
 
     def __init__(self):
-        FilterBase.__init__(self, nInputPorts=1, inputType='vtkTable',
-                            nOutputPorts=1, outputType='vtkMultiBlockDataSet')
+        FilterBase.__init__(
+            self,
+            nInputPorts=1,
+            inputType='vtkTable',
+            nOutputPorts=1,
+            outputType='vtkMultiBlockDataSet',
+        )
         self.__input_array = [None, None]
-
 
     def RequestData(self, request, inInfo, outInfo):
         """Used by pipeline to generate output"""
@@ -304,11 +320,12 @@ class SplitTableOnArray(FilterBase):
         for val in uniq:
             temp = interface.data_frame_to_table(df[df[name] == val])
             output.SetBlock(blk, temp)
-            output.GetMetaData(blk).Set(vtk.vtkCompositeDataSet.NAME(), '{}{}'.format(name, val))
+            output.GetMetaData(blk).Set(
+                vtk.vtkCompositeDataSet.NAME(), '{}{}'.format(name, val)
+            )
             blk += 1
 
         return 1
-
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         """Used to set the input array(s)
@@ -329,7 +346,6 @@ class SplitTableOnArray(FilterBase):
             self.Modified()
         return 1
 
-
     def apply(self, input_data_object, array_name):
         """Run the algorithm on the input data object, specifying the array name
         to use for the split.
@@ -339,6 +355,7 @@ class SplitTableOnArray(FilterBase):
         self.SetInputArrayToProcess(0, 0, 0, field, array_name)
         self.Update()
         return pv.wrap(self.GetOutput())
+
 
 ###############################################################################
 
@@ -350,40 +367,41 @@ class AppendTableToCellData(FilterPreserveTypeBase):
     will be appended as CellData to the 0th port. The number of rows in the table
     MUST match the number of cells in the input dataset.
     """
+
     __displayname__ = 'Append Table to Cell Data'
     __category__ = 'filter'
 
     def __init__(self):
         FilterPreserveTypeBase.__init__(self, nInputPorts=2)
-        self._preserve_port = 0 # ensure port 0's type is preserved
+        self._preserve_port = 0  # ensure port 0's type is preserved
         self.__timesteps = None
 
-
     def _update_time_steps(self):
-        """For internal use only: appropriately sets the timesteps.
-        """
+        """For internal use only: appropriately sets the timesteps."""
         # Use the inputs' timesteps: this merges the timesteps values
         tsAll = _helpers.get_combined_input_time_steps(self)
         # Use both inputs' time steps
         self.__timesteps = _helpers.update_time_steps(self, tsAll, explicit=True)
         return 1
 
-
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to generate output
-        """
+        """Used by pipeline to generate output"""
         # Inputs from different ports:
-        pdi0 = self.GetInputData(inInfo, 0, 0) # Keep me!
-        table = self.GetInputData(inInfo, 1, 0) # add my data to the input
-        pdo = self.GetOutputData(outInfo, 0) # The output
+        pdi0 = self.GetInputData(inInfo, 0, 0)  # Keep me!
+        table = self.GetInputData(inInfo, 1, 0)  # add my data to the input
+        pdo = self.GetOutputData(outInfo, 0)  # The output
 
         pdo.DeepCopy(pdi0)
 
         # Get number of rows
         nrows = table.GetNumberOfRows()
         ncells = pdo.GetNumberOfCells()
-        if (nrows != ncells):
-            raise _helpers.PVGeoError('Number rows in table ({}) does not match number of cells ({})'.format(nrows, ncells))
+        if nrows != ncells:
+            raise _helpers.PVGeoError(
+                'Number rows in table ({}) does not match number of cells ({})'.format(
+                    nrows, ncells
+                )
+            )
 
         for i in range(table.GetRowData().GetNumberOfArrays()):
             arr = table.GetRowData().GetArray(i)
@@ -411,8 +429,7 @@ class AppendTableToCellData(FilterPreserveTypeBase):
         return pv.wrap(self.GetOutput())
 
     def get_time_step_values(self):
-        """Use this in ParaView decorator to register timesteps.
-        """
+        """Use this in ParaView decorator to register timesteps."""
         # if unset, force at least one attempt to set the timesteps
         if self.__timesteps is None:
             self._update_time_steps()

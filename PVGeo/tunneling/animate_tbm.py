@@ -18,17 +18,21 @@ ExtraXml = '''\
     </DoubleVectorProperty>
 '''
 
-InputArrayLabels = ['Head Easting', 'Head Northing', 'Head Elevation',
-                    'Arti Easting', 'Arti Northing', 'Arti Elevation',
-                    'Tail Easting', 'Tail Northing', 'Tail Elevation']
+InputArrayLabels = [
+    'Head Easting',
+    'Head Northing',
+    'Head Elevation',
+    'Arti Easting',
+    'Arti Northing',
+    'Arti Elevation',
+    'Tail Easting',
+    'Tail Northing',
+    'Tail Elevation',
+]
 
-Properties = dict(
-    Diameter=17.45,
-    dt=1.0
-)
+Properties = dict(Diameter=17.45, dt=1.0)
 
-PropertiesHelp = dict(
-)
+PropertiesHelp = dict()
 
 
 def RequestData():
@@ -36,15 +40,16 @@ def RequestData():
     from vtk.numpy_interface import dataset_adapter as dsa
     import PVGeo._helpers as inputhelp
     from PVGeo.filters import pointsToTube
+
     # Get input/output of Proxy
     pdi = self.GetInput()
     pdo = self.GetOutput()
     # Grab input arrays to process from drop down menus
-    #- Grab all fields for input arrays:
+    # - Grab all fields for input arrays:
     fields = []
     for i in range(3):
         fields.append(inputhelp.get_selected_array_field(self, i))
-    #- Simply grab the names
+    # - Simply grab the names
     names = []
     for i in range(9):
         names.append(inputhelp.get_selected_array_name(self, i))
@@ -58,30 +63,31 @@ def RequestData():
     # grab coordinates for each part of boring machine at time idx as row
     executive = self.GetExecutive()
     outInfo = executive.GetOutputInformation(0)
-    idx = int(outInfo.Get(executive.UPDATE_TIME_STEP())/dt)
+    idx = int(outInfo.Get(executive.UPDATE_TIME_STEP()) / dt)
     pts = []
     for i in range(3):
-        x = arrs[i*3][idx]
-        y = arrs[i*3+1][idx]
-        z = arrs[i*3+2][idx]
-        pts.append((x,y,z))
+        x = arrs[i * 3][idx]
+        y = arrs[i * 3 + 1][idx]
+        z = arrs[i * 3 + 2][idx]
+        pts.append((x, y, z))
     # now exectute a points to tube filter
     vtk_pts = vtk.vtkPoints()
     for i in range(len(pts)):
-        vtk_pts.InsertNextPoint(pts[i][0],pts[i][1],pts[i][2])
+        vtk_pts.InsertNextPoint(pts[i][0], pts[i][1], pts[i][2])
     poly = vtk.vtkPolyData()
     poly.SetPoints(vtk_pts)
-    pointsToTube(poly, radius=Diameter/2, numSides=20, nrNbr=False, pdo=pdo)
+    pointsToTube(poly, radius=Diameter / 2, numSides=20, nrNbr=False, pdo=pdo)
 
 
 def RequestInformation(self):
     import numpy as np
+
     executive = self.GetExecutive()
     outInfo = executive.GetOutputInformation(0)
     # Calculate list of timesteps here
-    #- Get number of rows in table and use that for num time steps
+    # - Get number of rows in table and use that for num time steps
     nrows = int(self.GetInput().GetColumn(0).GetNumberOfTuples())
-    xtime = np.arange(0,nrows*dt,dt, dtype=float)
+    xtime = np.arange(0, nrows * dt, dt, dtype=float)
     outInfo.Remove(executive.TIME_STEPS())
     for i in range(len(xtime)):
         outInfo.Append(executive.TIME_STEPS(), xtime[i])

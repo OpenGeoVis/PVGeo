@@ -17,23 +17,27 @@ class PVGeoError(Exception):
     console. This class makes decipher the error streams a whole lot easier for
     human eyes.
     """
+
     QUALIFIER_L = '@@@@PVGeoError ---> '
     QUALIFIER_R = ' <--- PVGeoError@@@@'
-    SEARCHER = re.compile(r'@@@@PVGeoError --->.+?<--- PVGeoError@@@@', re.MULTILINE | re.DOTALL)
-
+    SEARCHER = re.compile(
+        r'@@@@PVGeoError --->.+?<--- PVGeoError@@@@', re.MULTILINE | re.DOTALL
+    )
 
     def __init__(self, message):
         # Place special characters arround the message for easy extraction
-        self.message = '\n\n\n\n' + self.QUALIFIER_L + message + self.QUALIFIER_R + '\n\n\n\n'
-
+        self.message = (
+            '\n\n\n\n' + self.QUALIFIER_L + message + self.QUALIFIER_R + '\n\n\n\n'
+        )
 
     def __str__(self):
-        return self.message #.replace(self.QUALIFIER, '')
+        return self.message  # .replace(self.QUALIFIER, '')
 
     @staticmethod
     def clean_message(message):
-        return message.replace(PVGeoError.QUALIFIER_L, '').replace(PVGeoError.QUALIFIER_R, '')
-
+        return message.replace(PVGeoError.QUALIFIER_L, '').replace(
+            PVGeoError.QUALIFIER_R, ''
+        )
 
 
 class ErrorObserver:
@@ -74,8 +78,7 @@ class ErrorObserver:
         print(message)
 
     def error_occurred(self):
-        """Ask self if an error has occured
-        """
+        """Ask self if an error has occured"""
         occ = self.__error_occurred
         self.__error_occurred = False
         return occ
@@ -91,8 +94,7 @@ class ErrorObserver:
         return self.__get_error_message
 
     def make_observer(self, algorithm):
-        """Make this an observer of an algorithm
-        """
+        """Make this an observer of an algorithm"""
         if self.__observing:
             raise RuntimeError('This error observer is already observing an algorithm.')
         algorithm.GetExecutive().AddObserver('ErrorEvent', self)

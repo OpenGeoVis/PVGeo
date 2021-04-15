@@ -6,6 +6,7 @@ from paraview.util.vtkAlgorithm import smproperty, smproxy
 
 # Helpers:
 from PVGeo import _helpers
+
 # Classes to Decorate
 from PVGeo.gmggroup import OMFReader
 
@@ -13,10 +14,12 @@ from PVGeo.gmggroup import OMFReader
 ###############################################################################
 
 
-@smproxy.reader(name="PVGeoOMFReader",
-                label="PVGeo: Open Mining Format Project Reader",
-                extensions=OMFReader.extensions,
-                file_description=OMFReader.description)
+@smproxy.reader(
+    name="PVGeoOMFReader",
+    label="PVGeo: Open Mining Format Project Reader",
+    extensions=OMFReader.extensions,
+    file_description=OMFReader.description,
+)
 class PVGeoOMFReader(OMFReader):
     def __init__(self):
         OMFReader.__init__(self)
@@ -24,10 +27,13 @@ class PVGeoOMFReader(OMFReader):
     #### Seters and Geters ####
 
     # TODO: check this to make sure not time varying
-    @smproperty.xml(_helpers.get_file_reader_xml(OMFReader.extensions, reader_description=OMFReader.description))
+    @smproperty.xml(
+        _helpers.get_file_reader_xml(
+            OMFReader.extensions, reader_description=OMFReader.description
+        )
+    )
     def AddFileName(self, filename):
         OMFReader.AddFileName(self, filename)
-
 
     # Array selection API is typical with readers in VTK
     # This is intended to allow ability for users to choose which arrays to
