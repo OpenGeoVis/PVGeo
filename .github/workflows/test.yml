@@ -1,8 +1,11 @@
 name: Testing
+
 on:
   push:
-    branches:
-      - '*'
+    branches: "*"
+    tags: "v*"
+  pull_request:
+    branches: "**"
 
 jobs:
   test:
@@ -21,3 +24,11 @@ jobs:
         run: |
           pytest -v --cov .
           codecov --token=8da9d332-1618-450d-8654-09a8ecf3c2dc
+      - name: Build and Publish to PyPI
+        if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          python setup.py sdist bdist_wheel
+          twine upload --skip-existing dist/*
