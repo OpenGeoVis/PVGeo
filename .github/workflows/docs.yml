@@ -50,7 +50,7 @@ jobs:
     name: Publish Documentation
     runs-on: ubuntu-latest
     needs: doc
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    # if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
