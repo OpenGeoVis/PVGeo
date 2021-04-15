@@ -38,6 +38,19 @@ jobs:
           set -e;
           make html;
           cd ..;
+      - uses: actions/upload-artifact@v2
+        with:
+          name: html
+          path: docs/build/html
+  deploy:
+    name: Publish Documentation
+    runs-on: ubuntu-latest
+    needs: doc
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+      - uses: actions/download-artifact@v2
+        with:
+          name: html
+          path: docs/build/html
        - name: Deploy 🚀
          uses: JamesIves/github-pages-deploy-action@4.1.1
          with:
