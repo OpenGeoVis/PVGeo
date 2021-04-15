@@ -4,15 +4,22 @@ import tempfile
 
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
+
 # VTK imports:
 from vtk.util import numpy_support as nps
 
 from base import TestBase
+
 # Functionality to test:
-from PVGeo.readers import (DelimitedTextReader, MadagascarReader,
-                           PackedBinariesReader, XYZTextReader)
+from PVGeo.readers import (
+    DelimitedTextReader,
+    MadagascarReader,
+    PackedBinariesReader,
+    XYZTextReader,
+)
 
 RTOL = 0.000001
+
 
 class TestDelimitedTextReader(TestBase):
     """
@@ -26,14 +33,15 @@ class TestDelimitedTextReader(TestBase):
         self.commafilename = os.path.join(self.test_dir, 'comma.txt')
         self.tabfilename = os.path.join(self.test_dir, 'tab.txt')
         # Make a temporary delimited text file to test:
-        lines = ['This is a header line to skip',
-                 'int,str,float ! Comment,this line has the data array names',
-                 '5,foo,6.9',
-                 '1,bar,8.5 ! another comment',
-                 '3,oof,7.7'
-                 ]
+        lines = [
+            'This is a header line to skip',
+            'int,str,float ! Comment,this line has the data array names',
+            '5,foo,6.9',
+            '1,bar,8.5 ! another comment',
+            '3,oof,7.7',
+        ]
         # Append newlines
-        lines = [ln+'\n' for ln in lines]
+        lines = [ln + '\n' for ln in lines]
         # Now write contents to files
         f = open(self.commafilename, 'w')
         f.writelines(lines)
@@ -91,9 +99,7 @@ class TestDelimitedTextReader(TestBase):
         self.assertEqual(arr[2], 7.7)
         return
 
-
     # TODO: check timesteps!
-
 
     def test_comma_read(self):
         """`DelimitedTextReader`: comma delimited file"""
@@ -142,10 +148,8 @@ class TestDelimitedTextReader(TestBase):
         return
 
 
-
-
-
 ###############################################################################
+
 
 class TestXYZTextReader(TestBase):
     """
@@ -159,14 +163,12 @@ class TestXYZTextReader(TestBase):
         self.filename = os.path.join(self.test_dir, 'test.xyz')
         # Make a temporary file to test:
         self.nrows = 100
-        self.ncols = 8 # LEAVE ALONE
+        self.ncols = 8  # LEAVE ALONE
         self.header = 'X, dx, Y, dy, Z, dz, approximate distance, cell index'
         self.data = np.random.random((self.nrows, self.ncols))
-        np.savetxt(self.filename, self.data,
-                   header=self.header,
-                   comments='! ',
-                   fmt='%.6e'
-                   )
+        np.savetxt(
+            self.filename, self.data, header=self.header, comments='! ', fmt='%.6e'
+        )
         reader = XYZTextReader()
         reader.AddFileName(self.filename)
         reader.Update()
@@ -192,7 +194,7 @@ class TestXYZTextReader(TestBase):
         titles = self.header.split(', ')
         for i in range(self.ncols):
             arr = nps.vtk_to_numpy(self.TABLE.GetColumnByName(titles[i]))
-            self.assertTrue(np.allclose(self.data[:,i], arr, rtol=RTOL))
+            self.assertTrue(np.allclose(self.data[:, i], arr, rtol=RTOL))
         return
 
     def test_shape(self):
@@ -200,6 +202,7 @@ class TestXYZTextReader(TestBase):
         self.assertEqual(self.TABLE.GetNumberOfRows(), self.nrows)
         self.assertEqual(self.TABLE.GetNumberOfColumns(), self.ncols)
         return
+
 
 ###############################################################################
 
@@ -278,7 +281,7 @@ class TestPackedBinariesReader(TestBase):
         # Set up reader
         reader = PackedBinariesReader()
         reader.AddFileName(filename)
-        reader.set_data_type(2) # 'i' test that sending an int choice works
+        reader.set_data_type(2)  # 'i' test that sending an int choice works
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
@@ -316,7 +319,7 @@ class TestPackedBinariesReader(TestBase):
         reader = PackedBinariesReader()
         reader.AddFileName(filename)
         reader.set_data_type('f')
-        reader.set_endian(1) # '<' test that sending an int choice works
+        reader.set_endian(1)  # '<' test that sending an int choice works
         # Perfrom Read
         reader.Update()
         table = reader.GetOutput()
@@ -324,7 +327,9 @@ class TestPackedBinariesReader(TestBase):
         self._check_data(table, arr)
         return
 
+
 ###############################################################################
+
 
 class TestMadagascarReader(TestBase):
     """
@@ -349,12 +354,12 @@ class TestMadagascarReader(TestBase):
         self.data = np.array(np.random.random(self.n), dtype=dtype)
         filename = os.path.join(self.test_dir, 'test.rsf')
         # Write ascii header
-        lines = ['hello\n']*10
+        lines = ['hello\n'] * 10
         with open(filename, 'w') as f:
             f.writelines(lines)
         # Write data
         with open(filename, 'ab') as f:
-            f.write(b'\014\014\004') # The control sequence
+            f.write(b'\014\014\004')  # The control sequence
             self.data.tofile(f)
         # Set up reader
         reader = MadagascarReader()
@@ -366,7 +371,7 @@ class TestMadagascarReader(TestBase):
         reader.Update()
         table = reader.GetOutput()
         arr = nps.vtk_to_numpy(table.GetColumn(0))
-        self.assertTrue(np.allclose(self.data, arr))#, rtol=0.0001))
+        self.assertTrue(np.allclose(self.data, arr))  # , rtol=0.0001))
         self.assertEqual(table.GetColumnName(0), 'Test Data')
         return
 
@@ -379,6 +384,7 @@ class TestMadagascarReader(TestBase):
 ###############################################################################
 if __name__ == '__main__':
     import unittest
+
     unittest.main()
 ###############################################################################
 ###############################################################################

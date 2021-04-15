@@ -16,14 +16,16 @@ RTOL = 0.000001
 ###############################################################################
 
 if omf_avail:
+
     class TestOMFReader(unittest.TestCase):
         """
         Test the `OMFReader`
         """
 
         def setUp(self):
-            self.filename = os.path.join(os.path.dirname(__file__), 'data/test_file.omf')
-
+            self.filename = os.path.join(
+                os.path.dirname(__file__), 'data/test_file.omf'
+            )
 
         def test_read_project(self):
             """`OMFReader`: read whole project file"""

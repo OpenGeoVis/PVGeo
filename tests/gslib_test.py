@@ -4,18 +4,25 @@ import tempfile
 
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
+
 # VTK imports:
 from vtk.util import numpy_support as nps
 
 import pyvista
 from base import TestBase
+
 # Functionality to test:
-from PVGeo.gslib import (GSLibReader, SGeMSGridReader, WriteImageDataToSGeMS,
-                         WriteTableToGSLib)
+from PVGeo.gslib import (
+    GSLibReader,
+    SGeMSGridReader,
+    WriteImageDataToSGeMS,
+    WriteTableToGSLib,
+)
 
 RTOL = 0.000001
 
 ###############################################################################
+
 
 class TestGSLibReader(TestBase):
     """
@@ -62,7 +69,7 @@ class TestGSLibReader(TestBase):
         """`GSLibReader`: data fidelity"""
         for i, title in enumerate(self.titles):
             arr = nps.vtk_to_numpy(self.TABLE.GetColumn(i))
-            self.assertTrue(np.allclose(self.data[:,i], arr, rtol=RTOL))
+            self.assertTrue(np.allclose(self.data[:, i], arr, rtol=RTOL))
         return
 
     def test_header_catch(self):
@@ -98,16 +105,14 @@ class TestGSLibReader(TestBase):
         truedata = self.TABLE.GetRowData()
         testdata = read.GetRowData()
         self.assertEqual(truedata.GetNumberOfArrays(), testdata.GetNumberOfArrays())
-        #self.assertEqual(truedata.GetNumberOfRows(), testdata.GetNumberOfRows())
-        #self.assertEqual(truedata.GetNumberOfColumns(), testdata.GetNumberOfColumns())
+        # self.assertEqual(truedata.GetNumberOfRows(), testdata.GetNumberOfRows())
+        # self.assertEqual(truedata.GetNumberOfColumns(), testdata.GetNumberOfColumns())
         wtbl = dsa.WrapDataObject(self.TABLE)
         wrd = dsa.WrapDataObject(read)
         for i in range(truedata.GetNumberOfArrays()):
             self.assertIsNotNone(wtbl.RowData[i])
             self.assertIsNotNone(wrd.RowData[i])
             self.assertTrue(np.allclose(wtbl.RowData[i], wrd.RowData[i]))
-
-
 
 
 ###############################################################################
@@ -153,14 +158,19 @@ class TestSGeMSGridReader(TestBase):
     def test_shape(self):
         """`SGeMSGridReader`: check output grid shape"""
         self.assertEqual(self.GRID.GetExtent(), self.extent)
-        self.assertEqual(self.GRID.GetNumberOfCells(), self.extent[1]*self.extent[3]*self.extent[5])
+        self.assertEqual(
+            self.GRID.GetNumberOfCells(),
+            self.extent[1] * self.extent[3] * self.extent[5],
+        )
         return
 
-    def test_data(self,):
+    def test_data(
+        self,
+    ):
         """`SGeMSGridReader`: data fidelity"""
         for i, title in enumerate(self.titles):
             arr = nps.vtk_to_numpy(self.GRID.GetCellData().GetArray(i))
-            self.assertTrue(np.allclose(self.data[:,i], arr, rtol=RTOL))
+            self.assertTrue(np.allclose(self.data[:, i], arr, rtol=RTOL))
         return
 
     def test_bad_file(self):
@@ -177,7 +187,6 @@ class TestSGeMSGridReader(TestBase):
         # Perform the read
         reader.Update()
         self.assertTrue(reader.error_occurred())
-
 
     def test_writer(self):
         """`WriteImageDataToSGeMS`: check data integrity across I/O"""
@@ -206,9 +215,8 @@ class TestSGeMSGridReader(TestBase):
             self.assertIsNotNone(wrd.CellData[i])
             self.assertTrue(np.allclose(wtbl.CellData[i], wrd.CellData[i]))
 
-
     def test_sgems_grid_writer_no_data(self):
-        grid = pyvista.UniformGrid((10, 10, 10), (2,2,2))
+        grid = pyvista.UniformGrid((10, 10, 10), (2, 2, 2))
         writer = WriteImageDataToSGeMS()
         filename = os.path.join(self.test_dir, 'test-writer-no-data.dat')
         writer.SetFileName(filename)
@@ -221,6 +229,7 @@ class TestSGeMSGridReader(TestBase):
 ###############################################################################
 if __name__ == '__main__':
     import unittest
+
     unittest.main()
 ###############################################################################
 ###############################################################################
