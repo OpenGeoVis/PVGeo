@@ -57,14 +57,14 @@ vtkpoints.plot(clim=[0,1], point_size=1)
 #
 # The above figure is pretty cool! But its a point cloud which means out
 # filtering options are pretty limited. Fortunately, we know that the point
-# cloud represents some sort of regularlized gridded volume of data and PVGeo
+# cloud represents some sort of regularized gridded volume of data and PVGeo
 # has a filter to recover that volume. This will allow further volumetric
 # operations can be performed with other PVGeo or VTK filters.
 #
 # Remember that these points are rotated and we do not know the cell sizes...
-# this is okay! The VoxelizePoints filter from PVGeo will handle the recovory of
+# this is okay! The VoxelizePoints filter from PVGeo will handle the recovery of
 # the coordinate rotation and grid our data without running an interpolation
-# scheme. The VoxelizePoints filter assumes that the points are structure on some
+# scheme. The VoxelizePoints filter assumes that the points are structured on some
 # rotated XY-plane with regular cell spacings and does the rest on its own!
 # Check out VoxelizePoints code docs for more details.
 # The full pipeline method

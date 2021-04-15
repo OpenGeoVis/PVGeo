@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Voxelize Points &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/examples/filters-general/voxelize-points.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -288,6 +291,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -310,7 +315,8 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-examples-filters-general-voxelize-points-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-filters-general-voxelize-points-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="voxelize-points">
 <span id="sphx-glr-examples-filters-general-voxelize-points-py"></span><h1>Voxelize Points<a class="headerlink" href="#voxelize-points" title="Permalink to this headline">¶</a></h1>
@@ -354,7 +360,7 @@ object (essentially a point cloud).</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f4fa06b57c8)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PolyData (0x7f9f05dd01c0)
   N Cells:      499200
   N Points:     499200
   X Bounds:     3.268e+05, 3.302e+05
@@ -376,7 +382,7 @@ calling the plot function. (Note: change the notebook parameter to
 </div>
 <img alt="voxelize points" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize-points_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(334141.1509516425, 4413705.151451643, 6293.877451642502),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(334141.1509516418, 4413705.151451642, 6293.877451641769),
  (328497.2735, 4408061.274, 650.0),
  (0.0, 0.0, 1.0)]
 </pre></div>
@@ -385,13 +391,13 @@ calling the plot function. (Note: change the notebook parameter to
 <h2>Points to Voxelized Volume<a class="headerlink" href="#points-to-voxelized-volume" title="Permalink to this headline">¶</a></h2>
 <p>The above figure is pretty cool! But its a point cloud which means out
 filtering options are pretty limited. Fortunately, we know that the point
-cloud represents some sort of regularlized gridded volume of data and PVGeo
+cloud represents some sort of regularized gridded volume of data and PVGeo
 has a filter to recover that volume. This will allow further volumetric
 operations can be performed with other PVGeo or VTK filters.</p>
 <p>Remember that these points are rotated and we do not know the cell sizes…
-this is okay! The VoxelizePoints filter from PVGeo will handle the recovory of
+this is okay! The VoxelizePoints filter from PVGeo will handle the recovery of
 the coordinate rotation and grid our data without running an interpolation
-scheme. The VoxelizePoints filter assumes that the points are structure on some
+scheme. The VoxelizePoints filter assumes that the points are structured on some
 rotated XY-plane with regular cell spacings and does the rest on its own!
 Check out VoxelizePoints code docs for more details.
 The full pipeline method</p>
@@ -410,7 +416,7 @@ The full pipeline method</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Voxelizing... done.
 Recovered Angle (deg.): 53.550
 Recovered Cell Sizes: (25.00, 25.00, 25.00)
-UnstructuredGrid (0x7f4fa06b5048)
+UnstructuredGrid (0x7f9f05d1bf40)
   N Cells:      499200
   N Points:     524064
   X Bounds:     3.268e+05, 3.302e+05
@@ -441,7 +447,7 @@ create 3 orthogonal slices through a data volume.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7f4faaddaac8)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MultiBlock (0x7f9f05d1ba60)
   N Blocks:     3
   X Bounds:     326804.336, 330185.260
   Y Bounds:     4406253.954, 4409862.606
@@ -467,7 +473,7 @@ create 3 orthogonal slices through a data volume.</p>
  (0.0, 0.0, 1.0)]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  12.447 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  12.150 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-voxelize-points-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/3e880273e4b14e3562631837c4c62dce/voxelize-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">voxelize-points.py</span></code></a></p>
@@ -485,16 +491,10 @@ create 3 orthogonal slices through a data volume.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../grids/extract-topography.html" class="btn btn-neutral float-right" title="Extract Topography" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="rotate-points.html" class="btn btn-neutral float-left" title="Rotate Points" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../grids/extract-topography.html" class="btn btn-neutral float-right" title="Extract Topography" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="rotate-points.html" class="btn btn-neutral float-left" title="Rotate Points" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -534,7 +534,6 @@ create 3 orthogonal slices through a data volume.</p>
 
 
 </footer>
-
         </div>
       </div>
 
@@ -560,6 +559,7 @@ create 3 orthogonal slices through a data volume.</p>
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

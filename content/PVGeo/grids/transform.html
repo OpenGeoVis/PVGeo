@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Transform &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/grids/transform.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -288,6 +291,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -316,37 +321,37 @@
 <h2>Reverse Image Data Axii<a class="headerlink" href="#reverse-image-data-axii" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.grids.transform.ReverseImageDataAxii">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.grids.transform.</code><code class="sig-name descname">ReverseImageDataAxii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">axes</span><span class="o">=</span><span class="default_value">(True, True, True)</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.grids.transform.</span></code><code class="sig-name descname"><span class="pre">ReverseImageDataAxii</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(True,</span> <span class="pre">True,</span> <span class="pre">True)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>This filter will flip <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> on any of the three cartesian axii.
 A checkbox is provided for each axis on which you may desire to flip the data.</p>
 <dl class="py method">
 <dt id="PVGeo.grids.transform.ReverseImageDataAxii.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.ReverseImageDataAxii._reverse_grid_axes">
-<code class="sig-name descname">_reverse_grid_axes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idi</span></em>, <em class="sig-param"><span class="n">ido</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii._reverse_grid_axes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii._reverse_grid_axes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_reverse_grid_axes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ido</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii._reverse_grid_axes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii._reverse_grid_axes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to reverse data along specified axii</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.ReverseImageDataAxii.set_flip_x">
-<code class="sig-name descname">set_flip_x</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.set_flip_x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_x" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_flip_x</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.set_flip_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_x" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the filter to flip th input data along the X-axis</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.ReverseImageDataAxii.set_flip_y">
-<code class="sig-name descname">set_flip_y</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.set_flip_y"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_y" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_flip_y</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.set_flip_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_y" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the filter to flip th input data along the Y-axis</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.ReverseImageDataAxii.set_flip_z">
-<code class="sig-name descname">set_flip_z</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.set_flip_z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_z" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_flip_z</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#ReverseImageDataAxii.set_flip_z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_z" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the filter to flip th input data along the Z-axis</p>
 </dd></dl>
 
@@ -357,98 +362,98 @@ A checkbox is provided for each axis on which you may desire to flip the data.</
 <h2>Table To Time Grid<a class="headerlink" href="#table-to-time-grid" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.grids.transform.TableToTimeGrid">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.grids.transform.</code><code class="sig-name descname">TableToTimeGrid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extent</span><span class="o">=</span><span class="default_value">(10, 10, 10, 1)</span></em>, <em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">'C'</span></em>, <em class="sig-param"><span class="n">spacing</span><span class="o">=</span><span class="default_value">(1.0, 1.0, 1.0)</span></em>, <em class="sig-param"><span class="n">origin</span><span class="o">=</span><span class="default_value">(0.0, 0.0, 0.0)</span></em>, <em class="sig-param"><span class="n">dims</span><span class="o">=</span><span class="default_value">(0, 1, 2, 3)</span></em>, <em class="sig-param"><span class="n">dt</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">points</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.grids.transform.</span></code><code class="sig-name descname"><span class="pre">TableToTimeGrid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">10,</span> <span class="pre">10,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">1.0,</span> <span class="pre">1.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>A filter to convert a static (no time variance) table to a time varying
 grid. This effectively reashapes a table full of data arrays as a 4D array
 that is placed onto the CellData of a <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> object.</p>
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.Modified">
-<code class="sig-name descname">Modified</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">run_again</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.Modified" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">Modified</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_again</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.Modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.Modified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call modified if the filter needs to run again</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.RequestInformation">
-<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.RequestInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to set whole output extent.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid._build_image_data">
-<code class="sig-name descname">_build_image_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">img</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._build_image_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._build_image_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_build_image_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._build_image_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._build_image_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to consturct the output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid._set_data">
-<code class="sig-name descname">_set_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._set_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._set_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_set_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._set_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._set_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to restructure the inpt table arrays</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid._update_time_steps">
-<code class="sig-name descname">_update_time_steps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._update_time_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._update_time_steps" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_update_time_steps</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid._update_time_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid._update_time_steps" title="Permalink to this definition">¶</a></dt>
 <dd><p>For internal use only: appropriately sets the timesteps.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.get_time_step_values">
-<code class="sig-name descname">get_time_step_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.get_time_step_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.get_time_step_values" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_time_step_values</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.get_time_step_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.get_time_step_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this in ParaView decorator to register timesteps on the pipeline.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.modified">
-<code class="sig-name descname">modified</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">run_again</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.modified" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">modified</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_again</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.modified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call modified if the filter needs to run again</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.set_dimensions">
-<code class="sig-name descname">set_dimensions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">z</span></em>, <em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_dimensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_dimensions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_dimensions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_dimensions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_dimensions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the dimensions of the output grid</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.set_extent">
-<code class="sig-name descname">set_extent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nx</span></em>, <em class="sig-param"><span class="n">ny</span></em>, <em class="sig-param"><span class="n">nz</span></em>, <em class="sig-param"><span class="n">nt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_extent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_extent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_extent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_extent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the extent of the output grid</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.set_order">
-<code class="sig-name descname">set_order</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">order</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_order" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the reshape order (<cite>‘C’</cite> or <cite>‘F’</cite>)</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.set_origin">
-<code class="sig-name descname">set_origin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x0</span></em>, <em class="sig-param"><span class="n">y0</span></em>, <em class="sig-param"><span class="n">z0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_origin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_origin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_origin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_origin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the origin of the output <cite>vtkImageData</cite></p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.set_spacing">
-<code class="sig-name descname">set_spacing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dx</span></em>, <em class="sig-param"><span class="n">dy</span></em>, <em class="sig-param"><span class="n">dz</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_spacing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_spacing</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_spacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_spacing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the spacing for the points along each axial direction</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.set_time_delta">
-<code class="sig-name descname">set_time_delta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_time_delta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_time_delta" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_time_delta</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_time_delta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_time_delta" title="Permalink to this definition">¶</a></dt>
 <dd><p>An advanced property to set the time step in seconds.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TableToTimeGrid.set_use_points">
-<code class="sig-name descname">set_use_points</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_use_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_use_points" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_use_points</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TableToTimeGrid.set_use_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TableToTimeGrid.set_use_points" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set whether or not to place the data on the nodes/cells of the grid.
 True places data on nodes, false places data at cell centers (CellData).
 In ParaView, switching can be a bit buggy: be sure to turn the visibility
@@ -462,26 +467,26 @@ of this data object OFF on the pipeline when changing between nodes/cells.</p>
 <h2>Translate Grid Origin<a class="headerlink" href="#translate-grid-origin" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.grids.transform.TranslateGridOrigin">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.grids.transform.</code><code class="sig-name descname">TranslateGridOrigin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corner</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.grids.transform.</span></code><code class="sig-name descname"><span class="pre">TranslateGridOrigin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corner</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>This filter will translate the origin of <cite>vtkImageData</cite> to any specified
 Corner of the data set assuming it is currently in the South West Bottom
 Corner (will not work if Corner was moved prior).</p>
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TranslateGridOrigin.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TranslateGridOrigin._translate">
-<code class="sig-name descname">_translate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdi</span></em>, <em class="sig-param"><span class="n">pdo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin._translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin._translate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_translate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin._translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin._translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to translate the inputs origin</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.grids.transform.TranslateGridOrigin.set_corner">
-<code class="sig-name descname">set_corner</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corner</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin.set_corner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin.set_corner" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_corner</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corner</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/transform.html#TranslateGridOrigin.set_corner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.transform.TranslateGridOrigin.set_corner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the corner to use</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -512,16 +517,10 @@ Corner (will not work if Corner was moved prior).</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../gslib/index.html" class="btn btn-neutral float-right" title="GSLib &amp; SGeMS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="subset.html" class="btn btn-neutral float-left" title="Subsetting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../gslib/index.html" class="btn btn-neutral float-right" title="GSLib &amp; SGeMS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="subset.html" class="btn btn-neutral float-left" title="Subsetting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -561,7 +560,6 @@ Corner (will not work if Corner was moved prior).</p>
 
 
 </footer>
-
         </div>
       </div>
 
@@ -587,6 +585,7 @@ Corner (will not work if Corner was moved prior).</p>
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

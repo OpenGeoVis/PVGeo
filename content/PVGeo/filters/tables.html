@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Table Operations &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/filters/tables.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -292,6 +295,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -320,7 +325,7 @@
 <h2>Append Table to Cell Data<a class="headerlink" href="#append-table-to-cell-data" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.filters.tables.AppendTableToCellData">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.tables.</code><code class="sig-name descname">AppendTableToCellData</code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.filters.tables.</span></code><code class="sig-name descname"><span class="pre">AppendTableToCellData</span></code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterPreserveTypeBase</span></code></a></p>
 <p>Takes two inputs, a dataset to preserve and a table of data, where the
 data in the table is appended to the CellData of the input dataset.
@@ -329,25 +334,25 @@ will be appended as CellData to the 0th port. The number of rows in the table
 MUST match the number of cells in the input dataset.</p>
 <dl class="py method">
 <dt id="PVGeo.filters.tables.AppendTableToCellData.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.AppendTableToCellData.RequestInformation">
-<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.RequestInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to handle time variance</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.AppendTableToCellData._update_time_steps">
-<code class="sig-name descname">_update_time_steps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData._update_time_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData._update_time_steps" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_update_time_steps</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData._update_time_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData._update_time_steps" title="Permalink to this definition">¶</a></dt>
 <dd><p>For internal use only: appropriately sets the timesteps.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.AppendTableToCellData.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">table</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the algorithm and get the output data object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -368,7 +373,7 @@ MUST match the number of cells in the input dataset.</p>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.AppendTableToCellData.get_time_step_values">
-<code class="sig-name descname">get_time_step_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.get_time_step_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.get_time_step_values" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_time_step_values</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData.get_time_step_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData.get_time_step_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this in ParaView decorator to register timesteps.</p>
 </dd></dl>
 
@@ -379,26 +384,26 @@ MUST match the number of cells in the input dataset.</p>
 <h2>Combine Tables<a class="headerlink" href="#combine-tables" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.filters.tables.CombineTables">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.tables.</code><code class="sig-name descname">CombineTables</code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.filters.tables.</span></code><code class="sig-name descname"><span class="pre">CombineTables</span></code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>Takes two tables and combines them if they have the same number of rows.
 Currently this cannot handle time varing tables as that gets complicated
 real quick if the tables do not have the same timestep values</p>
 <dl class="py method">
 <dt id="PVGeo.filters.tables.CombineTables.FillInputPortInformation">
-<code class="sig-name descname">FillInputPortInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">port</span></em>, <em class="sig-param"><span class="n">info</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables.FillInputPortInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables.FillInputPortInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">FillInputPortInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables.FillInputPortInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables.FillInputPortInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline. Necessary when dealing with multiple input ports</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.CombineTables.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.CombineTables.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table0</span></em>, <em class="sig-param"><span class="n">table1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the algorithm on the two input tables</p>
 </dd></dl>
 
@@ -409,18 +414,18 @@ real quick if the tables do not have the same timestep values</p>
 <h2>Extract Array<a class="headerlink" href="#extract-array" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.filters.tables.ExtractArray">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.tables.</code><code class="sig-name descname">ExtractArray</code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.filters.tables.</span></code><code class="sig-name descname"><span class="pre">ExtractArray</span></code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>Extract an array from a <code class="docutils literal notranslate"><span class="pre">vtkDataSet</span></code> and make a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> of it.</p>
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ExtractArray.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ExtractArray.SetInputArrayToProcess">
-<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">port</span></em>, <em class="sig-param"><span class="n">connection</span></em>, <em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">SetInputArrayToProcess</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray.SetInputArrayToProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to set the input array(s)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -438,7 +443,7 @@ field, and 6 for row)</p></li>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ExtractArray.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_data_object</span></em>, <em class="sig-param"><span class="n">array_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the algorithm on the input data object, specifying the array name
 to extract.</p>
 </dd></dl>
@@ -450,7 +455,7 @@ to extract.</p>
 <h2>Reshape Table<a class="headerlink" href="#reshape-table" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.filters.tables.ReshapeTable">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.tables.</code><code class="sig-name descname">ReshapeTable</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.filters.tables.</span></code><code class="sig-name descname"><span class="pre">ReshapeTable</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>This filter will take a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> object and reshape it. This filter
 essentially treats <code class="docutils literal notranslate"><span class="pre">vtkTable``s</span> <span class="pre">as</span> <span class="pre">2D</span> <span class="pre">matrices</span> <span class="pre">and</span> <span class="pre">reshapes</span> <span class="pre">them</span> <span class="pre">using</span>
@@ -458,32 +463,32 @@ essentially treats <code class="docutils literal notranslate"><span class="pre">
 be renamed arbitrarily because VTK data arrays require a name.</p>
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ReshapeTable.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ReshapeTable._reshape">
-<code class="sig-name descname">_reshape</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdi</span></em>, <em class="sig-param"><span class="n">pdo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable._reshape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable._reshape" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_reshape</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable._reshape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable._reshape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to perfrom the reshape</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ReshapeTable.add_name">
-<code class="sig-name descname">add_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.add_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.add_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">add_name</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.add_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.add_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to append a name to the list of data array names for the output
 table.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ReshapeTable.get_names">
-<code class="sig-name descname">get_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.get_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.get_names" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_names</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.get_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.get_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of the names given to the new arrays</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ReshapeTable.set_names">
-<code class="sig-name descname">set_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_names" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_names</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set names using a semicolon (;) seperated string or a list of strings</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -495,19 +500,19 @@ using a semicolon (;) to spearate</p>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ReshapeTable.set_number_of_columns">
-<code class="sig-name descname">set_number_of_columns</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ncols</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_number_of_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_number_of_columns" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_number_of_columns</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ncols</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_number_of_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_number_of_columns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the number of columns for the output <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code></p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ReshapeTable.set_number_of_rows">
-<code class="sig-name descname">set_number_of_rows</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nrows</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_number_of_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_number_of_rows" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_number_of_rows</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nrows</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_number_of_rows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_number_of_rows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the number of rows for the output <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code></p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.ReshapeTable.set_order">
-<code class="sig-name descname">set_order</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">order</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_order" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable.set_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable.set_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the reshape order (<code class="docutils literal notranslate"><span class="pre">'C'</span></code> of <code class="docutils literal notranslate"><span class="pre">'F'</span></code>)</p>
 </dd></dl>
 
@@ -518,19 +523,19 @@ using a semicolon (;) to spearate</p>
 <h2>Split Table On Array<a class="headerlink" href="#split-table-on-array" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.filters.tables.SplitTableOnArray">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.filters.tables.</code><code class="sig-name descname">SplitTableOnArray</code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.filters.tables.</span></code><code class="sig-name descname"><span class="pre">SplitTableOnArray</span></code><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
 <p>A filter to seperate table data based on the unique values of a given data
 array into a <code class="docutils literal notranslate"><span class="pre">vtkMultiBlockDataSet</span></code>.</p>
 <dl class="py method">
 <dt id="PVGeo.filters.tables.SplitTableOnArray.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.SplitTableOnArray.SetInputArrayToProcess">
-<code class="sig-name descname">SetInputArrayToProcess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">port</span></em>, <em class="sig-param"><span class="n">connection</span></em>, <em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray.SetInputArrayToProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">SetInputArrayToProcess</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray.SetInputArrayToProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray.SetInputArrayToProcess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to set the input array(s)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -548,7 +553,7 @@ field, and 6 for row)</p></li>
 
 <dl class="py method">
 <dt id="PVGeo.filters.tables.SplitTableOnArray.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_data_object</span></em>, <em class="sig-param"><span class="n">array_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the algorithm on the input data object, specifying the array name
 to use for the split.</p>
 </dd></dl>
@@ -563,16 +568,10 @@ to use for the split.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="voxelize.html" class="btn btn-neutral float-right" title="Voxelize" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="slicing.html" class="btn btn-neutral float-left" title="Slicing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="voxelize.html" class="btn btn-neutral float-right" title="Voxelize" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="slicing.html" class="btn btn-neutral float-left" title="Slicing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -612,7 +611,6 @@ to use for the split.</p>
 
 
 </footer>
-
         </div>
       </div>
 
@@ -638,6 +636,7 @@ to use for the split.</p>
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Discretize &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/ubc/disc_meshes.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -289,6 +292,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -317,30 +322,30 @@
 <h2>Discretize Mesh Reader<a class="headerlink" href="#discretize-mesh-reader" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.ubc.disc_meshes.DiscretizeMeshReader">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.ubc.disc_meshes.</code><code class="sig-name descname">DiscretizeMeshReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.ubc.disc_meshes.</span></code><code class="sig-name descname"><span class="pre">DiscretizeMeshReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.InterfacedBaseReader" title="PVGeo.base.InterfacedBaseReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.InterfacedBaseReader</span></code></a></p>
 <p>A general reader for all <code class="docutils literal notranslate"><span class="pre">discretize</span></code> mesh objects saved to the
 <code class="docutils literal notranslate"><span class="pre">.json</span></code> serialized format</p>
 <dl class="py method">
 <dt id="PVGeo.ubc.disc_meshes.DiscretizeMeshReader._get_vtk_object">
-<em class="property">static </em><code class="sig-name descname">_get_vtk_object</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader._get_vtk_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._get_vtk_object" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">_get_vtk_object</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader._get_vtk_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._get_vtk_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the mesh’s proper VTK data object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.ubc.disc_meshes.DiscretizeMeshReader._read_file">
-<em class="property">static </em><code class="sig-name descname">_read_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader._read_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._read_file" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">_read_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader._read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._read_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a mesh object from the serialized format</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="PVGeo.ubc.disc_meshes.DiscretizeMeshReader.description">
-<code class="sig-name descname">description</code><em class="property"> = 'Serialized Discretize Meshes'</em><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader.description" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">description</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Serialized</span> <span class="pre">Discretize</span> <span class="pre">Meshes'</span></em><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="PVGeo.ubc.disc_meshes.DiscretizeMeshReader.extensions">
-<code class="sig-name descname">extensions</code><em class="property"> = 'json'</em><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader.extensions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">extensions</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'json'</span></em><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader.extensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -353,16 +358,10 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="general.html" class="btn btn-neutral float-right" title="General Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="UBC Mesh Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="general.html" class="btn btn-neutral float-right" title="General Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="UBC Mesh Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -402,7 +401,6 @@
 
 
 </footer>
-
         </div>
       </div>
 
@@ -428,6 +426,7 @@
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

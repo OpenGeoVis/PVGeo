@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>earth &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/model_build/earth.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -286,6 +289,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -314,7 +319,7 @@
 <h2>Globe Source<a class="headerlink" href="#globe-source" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.model_build.earth.GlobeSource">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.model_build.earth.</code><code class="sig-name descname">GlobeSource</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">radius</span><span class="o">=</span><span class="default_value">6371000000.0</span></em>, <em class="sig-param"><span class="n">npar</span><span class="o">=</span><span class="default_value">15</span></em>, <em class="sig-param"><span class="n">nmer</span><span class="o">=</span><span class="default_value">36</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.model_build.earth.</span></code><code class="sig-name descname"><span class="pre">GlobeSource</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6371000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">36</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
 <p>Creates a globe/sphere the size of the Earth with texture coordinates
 already mapped. The globe’s center is assumed to be (0,0,0).</p>
@@ -329,44 +334,44 @@ already mapped. The globe’s center is assumed to be (0,0,0).</p>
 </dl>
 <dl class="py method">
 <dt id="PVGeo.model_build.earth.GlobeSource.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>The pipeline executes this to generate output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.earth.GlobeSource.build_globe">
-<code class="sig-name descname">build_globe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.build_globe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.build_globe" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">build_globe</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.build_globe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.build_globe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates the globe as <code class="docutils literal notranslate"><span class="pre">vtkPolyData</span></code></p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.earth.GlobeSource.create_sphere">
-<code class="sig-name descname">create_sphere</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.create_sphere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.create_sphere" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">create_sphere</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.create_sphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.create_sphere" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates longitude/latitude as 2D points and returns the corresponding
 texture coordinates for those positions.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.earth.GlobeSource.set_n_meridians">
-<code class="sig-name descname">set_n_meridians</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.set_n_meridians"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.set_n_meridians" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_n_meridians</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.set_n_meridians"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.set_n_meridians" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the number of meridians to use</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.earth.GlobeSource.set_n_parallels">
-<code class="sig-name descname">set_n_parallels</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.set_n_parallels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.set_n_parallels" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_n_parallels</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.set_n_parallels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.set_n_parallels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the number of parallels to use</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.earth.GlobeSource.set_radius">
-<code class="sig-name descname">set_radius</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">radius</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.set_radius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.set_radius" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_radius</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.set_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.set_radius" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the radius of the globe. Defualt is 6.371.0e9 meters</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.earth.GlobeSource.spherical_to_cartesian">
-<code class="sig-name descname">spherical_to_cartesian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meridian</span></em>, <em class="sig-param"><span class="n">parallel</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.spherical_to_cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.spherical_to_cartesian" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">spherical_to_cartesian</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meridian</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource.spherical_to_cartesian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource.spherical_to_cartesian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts longitude/latitude to catesian coordinates. Assumes the
 arguments are given in degrees.</p>
 </dd></dl>
@@ -378,19 +383,19 @@ arguments are given in degrees.</p>
 <h2>Outline Continents<a class="headerlink" href="#outline-continents" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.model_build.earth.OutlineContinents">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.model_build.earth.</code><code class="sig-name descname">OutlineContinents</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">radius</span><span class="o">=</span><span class="default_value">6371000000.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#OutlineContinents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.OutlineContinents" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.model_build.earth.</span></code><code class="sig-name descname"><span class="pre">OutlineContinents</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6371000000.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#OutlineContinents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.OutlineContinents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
 <p>A simple data source to produce a <code class="docutils literal notranslate"><span class="pre">vtkEarthSource</span></code> outlining the
 Earth’s continents. This works well with our <code class="docutils literal notranslate"><span class="pre">GlobeSource</span></code>.</p>
 <dl class="py method">
 <dt id="PVGeo.model_build.earth.OutlineContinents.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#OutlineContinents.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.OutlineContinents.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#OutlineContinents.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.OutlineContinents.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate the output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.earth.OutlineContinents.set_radius">
-<code class="sig-name descname">set_radius</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">radius</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#OutlineContinents.set_radius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.earth.OutlineContinents.set_radius" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_radius</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#OutlineContinents.set_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.OutlineContinents.set_radius" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the radius of the globe. Defualt is 6.371.0e9 meters</p>
 </dd></dl>
 
@@ -404,16 +409,10 @@ Earth’s continents. This works well with our <code class="docutils literal not
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="grids.html" class="btn btn-neutral float-right" title="Grids" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="Model Builder" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="grids.html" class="btn btn-neutral float-right" title="Grids" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Model Builder" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -453,7 +452,6 @@ Earth’s continents. This works well with our <code class="docutils literal not
 
 
 </footer>
-
         </div>
       </div>
 
@@ -479,6 +477,7 @@ Earth’s continents. This works well with our <code class="docutils literal not
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

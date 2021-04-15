@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>timeseries &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/_helpers/timeseries.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -292,6 +295,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -320,7 +325,7 @@
 <h2>_calculate_time_range<a class="headerlink" href="#calculate-time-range" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="PVGeo._helpers.timeseries._calculate_time_range">
-<code class="sig-prename descclassname">PVGeo._helpers.timeseries.</code><code class="sig-name descname">_calculate_time_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nt</span></em>, <em class="sig-param"><span class="n">dt</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/timeseries.html#_calculate_time_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.timeseries._calculate_time_range" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">PVGeo._helpers.timeseries.</span></code><code class="sig-name descname"><span class="pre">_calculate_time_range</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/timeseries.html#_calculate_time_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.timeseries._calculate_time_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discretizes time range accoridng to step size <code class="docutils literal notranslate"><span class="pre">dt</span></code> in seconds</p>
 </dd></dl>
 
@@ -329,7 +334,7 @@
 <h2>get_combined_input_time_steps<a class="headerlink" href="#get-combined-input-time-steps" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="PVGeo._helpers.timeseries.get_combined_input_time_steps">
-<code class="sig-prename descclassname">PVGeo._helpers.timeseries.</code><code class="sig-name descname">get_combined_input_time_steps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">algorithm</span></em>, <em class="sig-param"><span class="n">idx</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/timeseries.html#get_combined_input_time_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.timeseries.get_combined_input_time_steps" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">PVGeo._helpers.timeseries.</span></code><code class="sig-name descname"><span class="pre">get_combined_input_time_steps</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/timeseries.html#get_combined_input_time_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.timeseries.get_combined_input_time_steps" title="Permalink to this definition">¶</a></dt>
 <dd><p>This will iterate over all input ports and combine their unique timesteps
 for an output algorithm to have.</p>
 <dl class="field-list simple">
@@ -351,7 +356,7 @@ for an output algorithm to have.</p>
 <h2>get_input_time_steps<a class="headerlink" href="#get-input-time-steps" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="PVGeo._helpers.timeseries.get_input_time_steps">
-<code class="sig-prename descclassname">PVGeo._helpers.timeseries.</code><code class="sig-name descname">get_input_time_steps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">algorithm</span></em>, <em class="sig-param"><span class="n">port</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">idx</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/timeseries.html#get_input_time_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.timeseries.get_input_time_steps" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">PVGeo._helpers.timeseries.</span></code><code class="sig-name descname"><span class="pre">get_input_time_steps</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/timeseries.html#get_input_time_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.timeseries.get_input_time_steps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the timestep values for the algorithm’s input</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -376,7 +381,7 @@ for an output algorithm to have.</p>
 <h2>get_requested_time<a class="headerlink" href="#get-requested-time" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="PVGeo._helpers.timeseries.get_requested_time">
-<code class="sig-prename descclassname">PVGeo._helpers.timeseries.</code><code class="sig-name descname">get_requested_time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">algorithm</span></em>, <em class="sig-param"><span class="n">outInfo</span></em>, <em class="sig-param"><span class="n">idx</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/timeseries.html#get_requested_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.timeseries.get_requested_time" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">PVGeo._helpers.timeseries.</span></code><code class="sig-name descname"><span class="pre">get_requested_time</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/timeseries.html#get_requested_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.timeseries.get_requested_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles setting up the timesteps on on the pipeline for a file series
 reader.</p>
 <dl class="field-list simple">
@@ -408,7 +413,7 @@ algorithm</p></li>
 <h2>update_time_steps<a class="headerlink" href="#update-time-steps" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="PVGeo._helpers.timeseries.update_time_steps">
-<code class="sig-prename descclassname">PVGeo._helpers.timeseries.</code><code class="sig-name descname">update_time_steps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">algorithm</span></em>, <em class="sig-param"><span class="n">nt</span></em>, <em class="sig-param"><span class="n">dt</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">explicit</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/timeseries.html#update_time_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.timeseries.update_time_steps" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">PVGeo._helpers.timeseries.</span></code><code class="sig-name descname"><span class="pre">update_time_steps</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">explicit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/timeseries.html#update_time_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.timeseries.update_time_steps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles setting up the timesteps on on the pipeline for a file series reader.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -439,16 +444,10 @@ timestep values to use</p></li>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="xml.html" class="btn btn-neutral float-right" title="xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="readers.html" class="btn btn-neutral float-left" title="readers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="xml.html" class="btn btn-neutral float-right" title="xml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="readers.html" class="btn btn-neutral float-left" title="readers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -488,7 +487,6 @@ timestep values to use</p></li>
 
 
 </footer>
-
         </div>
       </div>
 
@@ -514,6 +512,7 @@ timestep values to use</p></li>
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

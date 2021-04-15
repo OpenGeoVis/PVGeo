@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>errors &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/_helpers/errors.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -290,6 +293,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -318,7 +323,7 @@
 <h2>ErrorObserver<a class="headerlink" href="#errorobserver" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo._helpers.errors.ErrorObserver">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo._helpers.errors.</code><code class="sig-name descname">ErrorObserver</code><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#ErrorObserver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.errors.ErrorObserver" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo._helpers.errors.</span></code><code class="sig-name descname"><span class="pre">ErrorObserver</span></code><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#ErrorObserver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.errors.ErrorObserver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A class for catching errors when processing on a VTK pipeline. The
 <code class="docutils literal notranslate"><span class="pre">AlgorithmBase</span></code> class handles setting up this observer on initialization.</p>
@@ -334,13 +339,13 @@
 </div>
 <dl class="py method">
 <dt id="PVGeo._helpers.errors.ErrorObserver.error_occurred">
-<code class="sig-name descname">error_occurred</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#ErrorObserver.error_occurred"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.errors.ErrorObserver.error_occurred" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">error_occurred</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#ErrorObserver.error_occurred"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.errors.ErrorObserver.error_occurred" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ask self if an error has occured</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo._helpers.errors.ErrorObserver.get_error_message">
-<code class="sig-name descname">get_error_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">etc</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#ErrorObserver.get_error_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.errors.ErrorObserver.get_error_message" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_error_message</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#ErrorObserver.get_error_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.errors.ErrorObserver.get_error_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the last set error message</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -354,7 +359,7 @@
 
 <dl class="py method">
 <dt id="PVGeo._helpers.errors.ErrorObserver.make_observer">
-<code class="sig-name descname">make_observer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">algorithm</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#ErrorObserver.make_observer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.errors.ErrorObserver.make_observer" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">make_observer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#ErrorObserver.make_observer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.errors.ErrorObserver.make_observer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make this an observer of an algorithm</p>
 </dd></dl>
 
@@ -365,7 +370,7 @@
 <h2>HiddenPrints<a class="headerlink" href="#hiddenprints" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo._helpers.errors.HiddenPrints">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo._helpers.errors.</code><code class="sig-name descname">HiddenPrints</code><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#HiddenPrints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.errors.HiddenPrints" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo._helpers.errors.</span></code><code class="sig-name descname"><span class="pre">HiddenPrints</span></code><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#HiddenPrints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.errors.HiddenPrints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Use this object to hide print statements when perfroming a task.
 This is used to suppress printed warnings from discretize on import:</p>
@@ -379,7 +384,7 @@ This is used to suppress printed warnings from discretize on import:</p>
 <h2>PVGeoError<a class="headerlink" href="#pvgeoerror" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo._helpers.errors.PVGeoError">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo._helpers.errors.</code><code class="sig-name descname">PVGeoError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#PVGeoError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo._helpers.errors.</span></code><code class="sig-name descname"><span class="pre">PVGeoError</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#PVGeoError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
 <p>This is a custom error class for handling errors when proccessing on the
 VTK pipeline. It makes the error messages easy to decipher in ParaView and
@@ -389,22 +394,22 @@ console. This class makes decipher the error streams a whole lot easier for
 human eyes.</p>
 <dl class="py attribute">
 <dt id="PVGeo._helpers.errors.PVGeoError.QUALIFIER_L">
-<code class="sig-name descname">QUALIFIER_L</code><em class="property"> = '&#64;&#64;&#64;&#64;PVGeoError ---&gt; '</em><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError.QUALIFIER_L" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">QUALIFIER_L</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'&#64;&#64;&#64;&#64;PVGeoError</span> <span class="pre">---&gt;</span> <span class="pre">'</span></em><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError.QUALIFIER_L" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="PVGeo._helpers.errors.PVGeoError.QUALIFIER_R">
-<code class="sig-name descname">QUALIFIER_R</code><em class="property"> = ' &lt;--- PVGeoError&#64;&#64;&#64;&#64;'</em><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError.QUALIFIER_R" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">QUALIFIER_R</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'</span> <span class="pre">&lt;---</span> <span class="pre">PVGeoError&#64;&#64;&#64;&#64;'</span></em><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError.QUALIFIER_R" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="PVGeo._helpers.errors.PVGeoError.SEARCHER">
-<code class="sig-name descname">SEARCHER</code><em class="property"> = re.compile('&#64;&#64;&#64;&#64;PVGeoError ---&gt;.+?&lt;--- PVGeoError&#64;&#64;&#64;&#64;', re.MULTILINE|re.DOTALL)</em><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError.SEARCHER" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">SEARCHER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">re.compile('&#64;&#64;&#64;&#64;PVGeoError</span> <span class="pre">---&gt;.+?&lt;---</span> <span class="pre">PVGeoError&#64;&#64;&#64;&#64;',</span> <span class="pre">re.MULTILINE|re.DOTALL)</span></em><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError.SEARCHER" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo._helpers.errors.PVGeoError.clean_message">
-<em class="property">static </em><code class="sig-name descname">clean_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#PVGeoError.clean_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError.clean_message" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">clean_message</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/_helpers/errors.html#PVGeoError.clean_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo._helpers.errors.PVGeoError.clean_message" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -417,16 +422,10 @@ human eyes.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="readers.html" class="btn btn-neutral float-right" title="readers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="arrays.html" class="btn btn-neutral float-left" title="arrays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="readers.html" class="btn btn-neutral float-right" title="readers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="arrays.html" class="btn btn-neutral float-left" title="arrays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -466,7 +465,6 @@ human eyes.</p>
 
 
 </footer>
-
         </div>
       </div>
 
@@ -492,6 +490,7 @@ human eyes.</p>
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

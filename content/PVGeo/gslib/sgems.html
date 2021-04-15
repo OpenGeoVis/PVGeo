@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>SGeMS File I/O &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/gslib/sgems.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -286,6 +289,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -314,38 +319,38 @@
 <h2>SGeMS Grid Reader<a class="headerlink" href="#sgems-grid-reader" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.gslib.sgems.SGeMSGridReader">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.gslib.sgems.</code><code class="sig-name descname">SGeMSGridReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">origin</span><span class="o">=</span><span class="default_value">(0.0, 0.0, 0.0)</span></em>, <em class="sig-param"><span class="n">spacing</span><span class="o">=</span><span class="default_value">(1.0, 1.0, 1.0)</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.gslib.sgems.</span></code><code class="sig-name descname"><span class="pre">SGeMSGridReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">1.0,</span> <span class="pre">1.0)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="gslib.html#PVGeo.gslib.gslib.GSLibReader" title="PVGeo.gslib.gslib.GSLibReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.gslib.gslib.GSLibReader</span></code></a></p>
 <p>Generates <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> from the uniform grid defined in the inout
 file in the SGeMS grid format. This format is simply the GSLIB format where
 the header line defines the dimensions of the uniform grid.</p>
 <dl class="py method">
 <dt id="PVGeo.gslib.sgems.SGeMSGridReader.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to get output data object for given time step.
 Constructs the <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code></p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gslib.sgems.SGeMSGridReader.RequestInformation">
-<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader.RequestInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to set grid extents.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gslib.sgems.SGeMSGridReader.__parse_extent">
-<code class="sig-name descname">__parse_extent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">header</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.__parse_extent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">__parse_extent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.__parse_extent" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gslib.sgems.SGeMSGridReader._extract_header">
-<code class="sig-name descname">_extract_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">content</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader._extract_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader._extract_header" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_extract_header</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader._extract_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader._extract_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal helper to parse header info for the SGeMS file format</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gslib.sgems.SGeMSGridReader._read_extent">
-<code class="sig-name descname">_read_extent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader._read_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader._read_extent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_read_extent</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader._read_extent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader._read_extent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the input file for the SGeMS format to get output extents.
 Computationally inexpensive method to discover whole output extent.</p>
 <dl class="field-list simple">
@@ -363,23 +368,23 @@ extent.</p>
 
 <dl class="py attribute">
 <dt id="PVGeo.gslib.sgems.SGeMSGridReader.description">
-<code class="sig-name descname">description</code><em class="property"> = 'PVGeo: SGeMS Uniform Grid'</em><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.description" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">description</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'PVGeo:</span> <span class="pre">SGeMS</span> <span class="pre">Uniform</span> <span class="pre">Grid'</span></em><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="PVGeo.gslib.sgems.SGeMSGridReader.extensions">
-<code class="sig-name descname">extensions</code><em class="property"> = 'sgems dat geoeas gslib GSLIB txt SGEMS SGeMSgslibgrid mtxset'</em><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.extensions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">extensions</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'sgems</span> <span class="pre">dat</span> <span class="pre">geoeas</span> <span class="pre">gslib</span> <span class="pre">GSLIB</span> <span class="pre">txt</span> <span class="pre">SGEMS</span> <span class="pre">SGeMSgslibgrid</span> <span class="pre">mtxset'</span></em><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.extensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gslib.sgems.SGeMSGridReader.set_origin">
-<code class="sig-name descname">set_origin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ox</span></em>, <em class="sig-param"><span class="n">oy</span></em>, <em class="sig-param"><span class="n">oz</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader.set_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.set_origin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_origin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader.set_origin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.set_origin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the origin corner of the grid</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gslib.sgems.SGeMSGridReader.set_spacing">
-<code class="sig-name descname">set_spacing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dx</span></em>, <em class="sig-param"><span class="n">dy</span></em>, <em class="sig-param"><span class="n">dz</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader.set_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.set_spacing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_spacing</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader.set_spacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader.set_spacing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the spacing for each axial direction</p>
 </dd></dl>
 
@@ -390,14 +395,14 @@ extent.</p>
 <h2>Write <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> To SGeMS Grid Format<a class="headerlink" href="#write-vtkimagedata-to-sgems-grid-format" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.gslib.sgems.WriteImageDataToSGeMS">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.gslib.sgems.</code><code class="sig-name descname">WriteImageDataToSGeMS</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputType</span><span class="o">=</span><span class="default_value">'vtkImageData'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#WriteImageDataToSGeMS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.sgems.WriteImageDataToSGeMS" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.gslib.sgems.</span></code><code class="sig-name descname"><span class="pre">WriteImageDataToSGeMS</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkImageData'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#WriteImageDataToSGeMS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.WriteImageDataToSGeMS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.WriterBase" title="PVGeo.base.WriterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.WriterBase</span></code></a></p>
 <p>Writes a <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> object to the SGeMS uniform grid format.
 This writer can only handle point data. Note that this will only handle
 CellData as that is convention with SGeMS.</p>
 <dl class="py method">
 <dt id="PVGeo.gslib.sgems.WriteImageDataToSGeMS.perform_write_out">
-<code class="sig-name descname">perform_write_out</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_data_object</span></em>, <em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">object_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#WriteImageDataToSGeMS.perform_write_out"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gslib.sgems.WriteImageDataToSGeMS.perform_write_out" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">perform_write_out</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#WriteImageDataToSGeMS.perform_write_out"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.WriteImageDataToSGeMS.perform_write_out" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write out the input <code class="docutils literal notranslate"><span class="pre">vtkImage</span></code> data to the SGeMS file format</p>
 </dd></dl>
 
@@ -411,16 +416,10 @@ CellData as that is convention with SGeMS.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../model_build/index.html" class="btn btn-neutral float-right" title="Model Builder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="gslib.html" class="btn btn-neutral float-left" title="GSLib/GeoEAS File I/O" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../model_build/index.html" class="btn btn-neutral float-right" title="Model Builder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="gslib.html" class="btn btn-neutral float-left" title="GSLib/GeoEAS File I/O" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -460,7 +459,6 @@ CellData as that is convention with SGeMS.</p>
 
 
 </footer>
-
         </div>
       </div>
 
@@ -486,6 +484,7 @@ CellData as that is convention with SGeMS.</p>
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

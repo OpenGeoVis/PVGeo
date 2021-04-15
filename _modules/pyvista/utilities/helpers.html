@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>pyvista.utilities.helpers &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/pyvista/utilities/helpers.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -82,7 +85,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -262,6 +265,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -290,27 +295,25 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">signal</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 <span class="kn">import</span> <span class="nn">threading</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scooby</span>
-<span class="kn">import</span> <span class="nn">vtk</span>
-<span class="kn">import</span> <span class="nn">vtk.util.numpy_support</span> <span class="k">as</span> <span class="nn">nps</span>
 
+<span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">_vtk</span>
 <span class="kn">import</span> <span class="nn">pyvista</span>
 <span class="kn">from</span> <span class="nn">.fileio</span> <span class="kn">import</span> <span class="n">from_meshio</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">transformations</span>
 
 
 <span class="k">class</span> <span class="nc">FieldAssociation</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Represents which type of vtk field a scalar or vector array is associated with.&quot;&quot;&quot;</span>
 
-    <span class="n">POINT</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkDataObject</span><span class="o">.</span><span class="n">FIELD_ASSOCIATION_POINTS</span>
-    <span class="n">CELL</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkDataObject</span><span class="o">.</span><span class="n">FIELD_ASSOCIATION_CELLS</span>
-    <span class="n">NONE</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkDataObject</span><span class="o">.</span><span class="n">FIELD_ASSOCIATION_NONE</span>
-    <span class="n">ROW</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkDataObject</span><span class="o">.</span><span class="n">FIELD_ASSOCIATION_ROWS</span>
+    <span class="n">POINT</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkDataObject</span><span class="o">.</span><span class="n">FIELD_ASSOCIATION_POINTS</span>
+    <span class="n">CELL</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkDataObject</span><span class="o">.</span><span class="n">FIELD_ASSOCIATION_CELLS</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkDataObject</span><span class="o">.</span><span class="n">FIELD_ASSOCIATION_NONE</span>
+    <span class="n">ROW</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkDataObject</span><span class="o">.</span><span class="n">FIELD_ASSOCIATION_ROWS</span>
 
 
 <div class="viewcode-block" id="get_vtk_type"><a class="viewcode-back" href="../../../content/PVGeo/interface.html#PVGeo.interface.get_vtk_type">[docs]</a><span class="k">def</span> <span class="nf">get_vtk_type</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
@@ -318,12 +321,12 @@
 
 <span class="sd">    Corrects for string type mapping issues.</span>
 
-<span class="sd">    Return</span>
-<span class="sd">    ------</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
 <span class="sd">        int : the integer type id specified in vtkType.h</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">typ</span> <span class="o">=</span> <span class="n">nps</span><span class="o">.</span><span class="n">get_vtk_array_type</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
+    <span class="n">typ</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">get_vtk_array_type</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
     <span class="c1"># This handles a silly string type bug</span>
     <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">13</span>
@@ -332,7 +335,7 @@
 
 <span class="k">def</span> <span class="nf">vtk_bit_array_to_char</span><span class="p">(</span><span class="n">vtkarr_bint</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Cast vtk bit array to a char array.&quot;&quot;&quot;</span>
-    <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCharArray</span><span class="p">()</span>
+    <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkCharArray</span><span class="p">()</span>
     <span class="n">vtkarr</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">vtkarr_bint</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">vtkarr</span>
 
@@ -351,7 +354,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-        <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">()</span>
+        <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">()</span>
         <span class="c1">########### OPTIMIZE ###########</span>
         <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
             <span class="n">vtkarr</span><span class="o">.</span><span class="n">InsertNextValue</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
@@ -378,8 +381,8 @@
 <span class="sd">    deep : bool</span>
 <span class="sd">        if input is numpy array then deep copy values</span>
 
-<span class="sd">    Return</span>
-<span class="sd">    ------</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
 <span class="sd">    vtkDataArray, ndarray, or DataFrame:</span>
 <span class="sd">        the converted array (if input is a NumPy ndaray then returns</span>
 <span class="sd">        ``vtkDataArray`` or is input is ``vtkDataArray`` then returns NumPy</span>
@@ -399,27 +402,27 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># This will handle numerical data</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-            <span class="n">vtk_data</span> <span class="o">=</span> <span class="n">nps</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">num_array</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">deep</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="n">array_type</span><span class="p">)</span>
+            <span class="n">vtk_data</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">num_array</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">deep</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="n">array_type</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">vtk_data</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">vtk_data</span>
     <span class="c1"># Otherwise input must be a vtkDataArray</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkDataArray</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkBitArray</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="n">_vtk</span><span class="o">.</span><span class="n">vtkDataArray</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkBitArray</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid input array type (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
     <span class="c1"># Handle booleans</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkBitArray</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkBitArray</span><span class="p">):</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">vtk_bit_array_to_char</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
     <span class="c1"># Handle string arrays</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">convert_string_array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
     <span class="c1"># Convert from vtkDataArry to NumPy</span>
-    <span class="k">return</span> <span class="n">nps</span><span class="o">.</span><span class="n">vtk_to_numpy</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtk_to_numpy</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">is_pyvista_dataset</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return True if the Object is a PyVista wrapped dataset.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">pyvista</span><span class="o">.</span><span class="n">Common</span><span class="p">,</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">pyvista</span><span class="o">.</span><span class="n">DataSet</span><span class="p">,</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">point_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
@@ -456,7 +459,7 @@
             <span class="n">field</span> <span class="o">=</span> <span class="n">FieldAssociation</span><span class="o">.</span><span class="n">POINT</span>
         <span class="k">elif</span> <span class="n">field</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;fields&#39;</span><span class="p">]:</span>
             <span class="n">field</span> <span class="o">=</span> <span class="n">FieldAssociation</span><span class="o">.</span><span class="n">NONE</span>
-        <span class="k">elif</span> <span class="n">field</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;row&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,]:</span>
+        <span class="k">elif</span> <span class="n">field</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;row&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">]:</span>
             <span class="n">field</span> <span class="o">=</span> <span class="n">FieldAssociation</span><span class="o">.</span><span class="n">ROW</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data field (</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s1">) not supported.&#39;</span><span class="p">)</span>
@@ -487,7 +490,7 @@
 <span class="sd">        Boolean to control whether to throw an error if array is not present.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">row_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">arr</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data array (</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">) not present in this dataset.&#39;</span><span class="p">)</span>
@@ -537,11 +540,29 @@
 
 
 <span class="k">def</span> <span class="nf">vtk_points</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert numpy points to a vtkPoints object.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">points</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;C_CONTIGUOUS&#39;</span><span class="p">]:</span>
-        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-    <span class="n">vtkpts</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
-    <span class="n">vtkpts</span><span class="o">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">nps</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">deep</span><span class="p">))</span>
+    <span class="sd">&quot;&quot;&quot;Convert numpy array or array-like to a vtkPoints object.&quot;&quot;&quot;</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+
+    <span class="c1"># verify is numeric</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Points must be a numeric type&#39;</span><span class="p">)</span>
+
+    <span class="c1"># check dimensionality</span>
+    <span class="k">if</span> <span class="n">points</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">points</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Dimension of ``points`` should be 1 or 2, not &#39;</span>
+                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">points</span><span class="o">.</span><span class="n">ndim</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># verify shape</span>
+    <span class="k">if</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Points array must contain three values per point. &#39;</span>
+                         <span class="sa">f</span><span class="s1">&#39;Shape is </span><span class="si">{</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> and should be (X, 3)&#39;</span><span class="p">)</span>
+
+    <span class="c1"># points must be contiguous</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+    <span class="n">vtkpts</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
+    <span class="n">vtkpts</span><span class="o">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">_vtk</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">deep</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">vtkpts</span>
 
 
@@ -604,8 +625,8 @@
 <span class="sd">    close : bool, optional</span>
 <span class="sd">        If True, close the line segments into a loop</span>
 
-<span class="sd">    Return</span>
-<span class="sd">    ------</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
 <span class="sd">    lines : pyvista.PolyData</span>
 <span class="sd">        PolyData with lines and cells.</span>
 
@@ -616,9 +637,58 @@
     <span class="n">cells</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
     <span class="n">cells</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
-        <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">poly</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="n">cells</span>
     <span class="k">return</span> <span class="n">poly</span>
+
+
+<span class="k">def</span> <span class="nf">make_tri_mesh</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">faces</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct a ``pyvista.PolyData`` mesh using points and faces arrays.</span>
+
+<span class="sd">    Construct a mesh from an Nx3 array of points and an Mx3 array of</span>
+<span class="sd">    triangle indices, resulting in a mesh with N vertices and M</span>
+<span class="sd">    triangles.  This function does not require the standard VTK</span>
+<span class="sd">    &quot;padding&quot; column and simplifies mesh creation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    points : np.ndarray</span>
+<span class="sd">        Array of points with shape (N, 3) storing the vertices of the</span>
+<span class="sd">        triangle mesh.</span>
+
+<span class="sd">    faces : np.ndarray</span>
+<span class="sd">        Array of indices with shape (M, 3) containing the triangle</span>
+<span class="sd">        indices.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tri_mesh : pyvista.PolyData</span>
+<span class="sd">        PolyData instance containing the triangle mesh.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    This example discretizes the unit square into a triangle mesh with</span>
+<span class="sd">    nine vertices and eight faces.</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; import pyvista as pv</span>
+<span class="sd">    &gt;&gt;&gt; points = np.array([[0, 0, 0], [0.5, 0, 0], [1, 0, 0], [0, 0.5, 0],</span>
+<span class="sd">    ...                    [0.5, 0.5, 0], [1, 0.5, 0], [0, 1, 0], [0.5, 1, 0],</span>
+<span class="sd">    ...                    [1, 1, 0]])</span>
+<span class="sd">    &gt;&gt;&gt; faces = np.array([[0, 1, 4], [4, 7, 6], [2, 5, 4], [4, 5, 8],</span>
+<span class="sd">    ...                   [0, 4, 3], [3, 4, 6], [1, 2, 4], [4, 8, 7]])</span>
+<span class="sd">    &gt;&gt;&gt; tri_mesh = pyvista.make_tri_mesh(points, faces)</span>
+<span class="sd">    &gt;&gt;&gt; tri_mesh.plot(show_edges=True) # doctest:+SKIP</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Points array should have shape (N, 3).&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">faces</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">faces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Face array should have shape (M, 3).&quot;</span><span class="p">)</span>
+    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">faces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">faces</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">cells</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">cells</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">faces</span>
+    <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">cells</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">vector_poly_data</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">vec</span><span class="p">):</span>
@@ -641,8 +711,8 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;vec array must be 3D&#39;</span><span class="p">)</span>
 
     <span class="c1"># Create vtk points and cells objects</span>
-    <span class="n">vpts</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
-    <span class="n">vpts</span><span class="o">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">nps</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">orig</span><span class="p">),</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">vpts</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
+    <span class="n">vpts</span><span class="o">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">_vtk</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">orig</span><span class="p">),</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 
     <span class="n">npts</span> <span class="o">=</span> <span class="n">orig</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">npts</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">pyvista</span><span class="o">.</span><span class="n">ID_TYPE</span><span class="p">)</span>
@@ -651,13 +721,13 @@
     <span class="n">vcells</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">CellArray</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">npts</span><span class="p">)</span>
 
     <span class="c1"># Create vtkPolyData object</span>
-    <span class="n">pdata</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">()</span>
+    <span class="n">pdata</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">()</span>
     <span class="n">pdata</span><span class="o">.</span><span class="n">SetPoints</span><span class="p">(</span><span class="n">vpts</span><span class="p">)</span>
     <span class="n">pdata</span><span class="o">.</span><span class="n">SetVerts</span><span class="p">(</span><span class="n">vcells</span><span class="p">)</span>
 
     <span class="c1"># Add vectors to polydata</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;vectors&#39;</span>
-    <span class="n">vtkfloat</span> <span class="o">=</span> <span class="n">nps</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">vec</span><span class="p">),</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">vtkfloat</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">vec</span><span class="p">),</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">vtkfloat</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="n">pdata</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">vtkfloat</span><span class="p">)</span>
     <span class="n">pdata</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetActiveVectors</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -665,7 +735,7 @@
     <span class="c1"># Add magnitude of vectors to polydata</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;mag&#39;</span>
     <span class="n">scalars</span> <span class="o">=</span> <span class="p">(</span><span class="n">vec</span> <span class="o">*</span> <span class="n">vec</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
-    <span class="n">vtkfloat</span> <span class="o">=</span> <span class="n">nps</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">scalars</span><span class="p">),</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">vtkfloat</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">scalars</span><span class="p">),</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">vtkfloat</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="n">pdata</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">vtkfloat</span><span class="p">)</span>
     <span class="n">pdata</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetActiveScalars</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -673,13 +743,64 @@
     <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">pdata</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">trans_from_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert a vtk matrix to a numpy.ndarray.&quot;&quot;&quot;</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-            <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">GetElement</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">t</span>
+<span class="k">def</span> <span class="nf">trans_from_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+    <span class="sd">&quot;&quot;&quot;Convert a vtk matrix to a numpy.ndarray.</span>
+
+<span class="sd">    DEPRECATED: Please use ``array_from_vtkmatrix``.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># import needs to happen here to prevent a circular import</span>
+    <span class="kn">from</span> <span class="nn">pyvista.core.errors</span> <span class="kn">import</span> <span class="n">DeprecationError</span>
+    <span class="k">raise</span> <span class="n">DeprecationError</span><span class="p">(</span><span class="s1">&#39;DEPRECATED: Please use ``array_from_vtkmatrix``.&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">array_from_vtkmatrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a vtk matrix to a ``numpy.ndarray``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    matrix : vtk.vtkMatrix3x3 or vtk.vtkMatrix4x4</span>
+<span class="sd">        The vtk matrix to be converted to a ``numpy.ndarray``.</span>
+<span class="sd">        Returned ndarray has shape (3, 3) or (4, 4) as appropriate.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkMatrix3x3</span><span class="p">):</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkMatrix4x4</span><span class="p">):</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Expected vtk.vtkMatrix3x3 or vtk.vtkMatrix4x4 input,&#39;</span>
+                        <span class="sa">f</span><span class="s1">&#39; got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> instead.&#39;</span><span class="p">)</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">GetElement</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">array</span>
+
+
+<span class="k">def</span> <span class="nf">vtkmatrix_from_array</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a ``numpy.ndarray`` or array-like to a vtk matrix.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array : numpy.ndarray or array-like</span>
+<span class="sd">        The array or array-like to be converted to a vtk matrix.</span>
+<span class="sd">        Shape (3, 3) gets converted to a ``vtk.vtkMatrix3x3``, shape (4, 4)</span>
+<span class="sd">        gets converted to a ``vtk.vtkMatrix4x4``. No other shapes are valid.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkMatrix3x3</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkMatrix4x4</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid shape </span><span class="si">{</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">, must be (3, 3) or (4, 4).&#39;</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">matrix</span><span class="o">.</span><span class="n">SetElement</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">matrix</span>
 
 
 <span class="k">def</span> <span class="nf">is_meshio_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">):</span>
@@ -692,12 +813,13 @@
 
 
 <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrap any given VTK data object to its appropriate PyVista data object.</span>
+    <span class="sd">&quot;&quot;&quot;Wrap any given VTK data object to its appropriate pyvista data object.</span>
 
 <span class="sd">    Other formats that are supported include:</span>
 <span class="sd">    * 2D :class:`numpy.ndarray` of XYZ vertices</span>
 <span class="sd">    * 3D :class:`numpy.ndarray` representing a volume. Values will be scalars.</span>
-<span class="sd">    * 3d :class:`trimesh.Trimesh` mesh.</span>
+<span class="sd">    * 3D :class:`trimesh.Trimesh` mesh.</span>
+<span class="sd">    * 3D :class:`meshio` mesh.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -711,7 +833,7 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Wrap a numpy array representing a random point cloud</span>
+<span class="sd">    Wrap a numpy array representing a random point cloud.</span>
 
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; import pyvista</span>
@@ -726,7 +848,7 @@
 <span class="sd">      Z Bounds: 2.346e-03, 9.640e-01</span>
 <span class="sd">      N Arrays: 0</span>
 
-<span class="sd">    Wrap a Trimesh object</span>
+<span class="sd">    Wrap a Trimesh object.</span>
 
 <span class="sd">    &gt;&gt;&gt; import trimesh</span>
 <span class="sd">    &gt;&gt;&gt; import pyvista</span>
@@ -743,7 +865,7 @@
 <span class="sd">      Z Bounds: 0.000e+00, 1.000e+00</span>
 <span class="sd">      N Arrays: 0</span>
 
-<span class="sd">    Wrap a VTK object</span>
+<span class="sd">    Wrap a VTK object.</span>
 
 <span class="sd">    &gt;&gt;&gt; import pyvista</span>
 <span class="sd">    &gt;&gt;&gt; import vtk</span>
@@ -767,23 +889,14 @@
 <span class="sd">      N Arrays: 0</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">wrappers</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UnstructuredGrid</span><span class="p">,</span>
-        <span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">RectilinearGrid</span><span class="p">,</span>
-        <span class="s1">&#39;vtkStructuredGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">StructuredGrid</span><span class="p">,</span>
-        <span class="s1">&#39;vtkPolyData&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">,</span>
-        <span class="s1">&#39;vtkImageData&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">,</span>
-        <span class="s1">&#39;vtkStructuredPoints&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">,</span>
-        <span class="s1">&#39;vtkMultiBlockDataSet&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">,</span>
-        <span class="s1">&#39;vtkTable&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Table</span><span class="p">,</span>
-        <span class="c1"># &#39;vtkParametricSpline&#39;: pyvista.Spline,</span>
-    <span class="p">}</span>
-    <span class="c1"># Otherwise, we assume a VTK data object was passed</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="s1">&#39;GetClassName&#39;</span><span class="p">):</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">GetClassName</span><span class="p">()</span>
-    <span class="k">elif</span> <span class="n">dataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+    <span class="c1"># Return if None</span>
+    <span class="k">if</span> <span class="n">dataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Check if dataset is a numpy array.  We do this first since</span>
+    <span class="c1"># pyvista_ndarray contains a VTK type that we don&#39;t want to</span>
+    <span class="c1"># directly wrap.</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">pyvista_ndarray</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
@@ -794,25 +907,45 @@
             <span class="n">mesh</span><span class="o">.</span><span class="n">active_scalars_name</span> <span class="o">=</span> <span class="s1">&#39;values&#39;</span>
             <span class="k">return</span> <span class="n">mesh</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;NumPy array could not be converted to PyVista.&#39;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">is_meshio_mesh</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;NumPy array could not be wrapped pyvista.&#39;</span><span class="p">)</span>
+
+    <span class="n">wrappers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;vtkExplicitStructuredGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">ExplicitStructuredGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UnstructuredGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">RectilinearGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkStructuredGrid&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">StructuredGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkPolyData&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">,</span>
+        <span class="s1">&#39;vtkImageData&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkStructuredPoints&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">,</span>
+        <span class="s1">&#39;vtkMultiBlockDataSet&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">,</span>
+        <span class="s1">&#39;vtkTable&#39;</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Table</span><span class="p">,</span>
+        <span class="c1"># &#39;vtkParametricSpline&#39;: pyvista.Spline,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Check if a dataset is a VTK type</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="s1">&#39;GetClassName&#39;</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">GetClassName</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">wrappers</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;VTK data type (</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">) is not currently supported by pyvista.&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># wrap meshio</span>
+    <span class="k">if</span> <span class="n">is_meshio_mesh</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">from_meshio</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">dataset</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;Trimesh&#39;</span><span class="p">:</span>
+
+    <span class="c1"># wrap trimesh</span>
+    <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;Trimesh&#39;</span><span class="p">:</span>
         <span class="c1"># trimesh doesn&#39;t pad faces</span>
         <span class="n">n_face</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">faces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">faces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_face</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dataset</span><span class="o">.</span><span class="n">faces</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
         <span class="n">faces</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">faces</span>
         <span class="n">faces</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
         <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">vertices</span><span class="p">),</span> <span class="n">faces</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Type (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="si">}</span><span class="s1">) not able to be wrapped into a PyVista mesh.&#39;</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">wrapped</span> <span class="o">=</span> <span class="n">wrappers</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">dataset</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;VTK data type (</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">) is not currently supported by pyvista.&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">dataset</span>  <span class="c1"># if not supported just passes the VTK data object</span>
-    <span class="k">return</span> <span class="n">wrapped</span>
+
+    <span class="c1"># otherwise, flag tell the user we can&#39;t wrap this object</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unable to wrap (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="si">}</span><span class="s1">) into a pyvista type.&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">image_to_texture</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
@@ -874,16 +1007,16 @@
 
 <span class="k">def</span> <span class="nf">raise_not_matching</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Raise exception about inconsistencies.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">) must match number of rows (</span><span class="si">{</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_rows</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">) &#39;</span> <span class="o">+</span>
-                     <span class="sa">f</span><span class="s1">&#39;must match either the number of points (</span><span class="si">{</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_points</span><span class="si">}</span><span class="s1">) &#39;</span> <span class="o">+</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">) &#39;</span>
+                     <span class="sa">f</span><span class="s1">&#39;must match either the number of points (</span><span class="si">{</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_points</span><span class="si">}</span><span class="s1">) &#39;</span>
                      <span class="sa">f</span><span class="s1">&#39;or the number of cells (</span><span class="si">{</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_cells</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">generate_plane</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">origin</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a vtk.vtkPlane.&quot;&quot;&quot;</span>
-    <span class="n">plane</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPlane</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Return a _vtk.vtkPlane.&quot;&quot;&quot;</span>
+    <span class="n">plane</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkPlane</span><span class="p">()</span>
     <span class="c1"># NORMAL MUST HAVE MAGNITUDE OF 1</span>
     <span class="n">normal</span> <span class="o">=</span> <span class="n">normal</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
     <span class="n">plane</span><span class="o">.</span><span class="n">SetNormal</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
@@ -915,15 +1048,15 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Try Depth Peeling with a basic scene</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkSphereSource</span><span class="p">()</span>
-    <span class="n">mapper</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyDataMapper</span><span class="p">()</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkSphereSource</span><span class="p">()</span>
+    <span class="n">mapper</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkPolyDataMapper</span><span class="p">()</span>
     <span class="n">mapper</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
-    <span class="n">actor</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkActor</span><span class="p">()</span>
+    <span class="n">actor</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkActor</span><span class="p">()</span>
     <span class="n">actor</span><span class="o">.</span><span class="n">SetMapper</span><span class="p">(</span><span class="n">mapper</span><span class="p">)</span>
     <span class="c1"># requires opacity &lt; 1</span>
     <span class="n">actor</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span><span class="o">.</span><span class="n">SetOpacity</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">renderer</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkRenderer</span><span class="p">()</span>
-    <span class="n">renderWindow</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkRenderWindow</span><span class="p">()</span>
+    <span class="n">renderer</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkRenderer</span><span class="p">()</span>
+    <span class="n">renderWindow</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkRenderWindow</span><span class="p">()</span>
     <span class="n">renderWindow</span><span class="o">.</span><span class="n">AddRenderer</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
     <span class="n">renderWindow</span><span class="o">.</span><span class="n">SetOffScreenRendering</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">renderWindow</span><span class="o">.</span><span class="n">SetAlphaBitPlanes</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
@@ -978,7 +1111,7 @@
             <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Please install `tqdm` to monitor algorithms.&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">event_type</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCommand</span><span class="o">.</span><span class="n">ProgressEvent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_type</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkCommand</span><span class="o">.</span><span class="n">ProgressEvent</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_last_progress</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span> <span class="o">=</span> <span class="n">algorithm</span>
@@ -1034,7 +1167,7 @@
     <span class="sd">&quot;&quot;&quot;Decorate a class, overriding __new__.</span>
 
 <span class="sd">    Preventing a class from being instantiated similar to abc.ABCMeta</span>
-<span class="sd">      but does not require an abstract method.</span>
+<span class="sd">    but does not require an abstract method.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1046,44 +1179,63 @@
 
 
 <span class="k">def</span> <span class="nf">axis_rotation</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Rotate points angle (in deg) about an axis.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Rotate points angle (in deg) about an axis.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    points : numpy.ndarray</span>
+<span class="sd">        Array of points with shape ``(N, 3)``</span>
+
+<span class="sd">    angle : float</span>
+<span class="sd">        Rotation angle.</span>
+
+<span class="sd">    inplace : bool, optional</span>
+<span class="sd">        Updates points in-place while returning nothing.</span>
+
+<span class="sd">    deg : bool, optional</span>
+<span class="sd">        If `True`, the angle is interpreted as degrees instead of</span>
+<span class="sd">        radians. Default is `True`.</span>
+
+<span class="sd">    axis : str, optional</span>
+<span class="sd">        Name of axis to rotate about. Valid options are ``&#39;x&#39;``, ``&#39;y&#39;``,</span>
+<span class="sd">        and ``&#39;z&#39;``. Default value is ``&#39;z&#39;``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    points : numpy.ndarray</span>
+<span class="sd">        Rotated points.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Rotate a set of points by 90 degrees about the x-axis in-place.</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; import pyvista</span>
+<span class="sd">    &gt;&gt;&gt; from pyvista import examples</span>
+<span class="sd">    &gt;&gt;&gt; points = examples.load_airplane().points</span>
+<span class="sd">    &gt;&gt;&gt; points_orig = points.copy()</span>
+<span class="sd">    &gt;&gt;&gt; pyvista.axis_rotation(points, 90, axis=&#39;x&#39;, deg=True, inplace=True)</span>
+<span class="sd">    &gt;&gt;&gt; assert np.all(np.isclose(points[:, 0], points_orig[:, 0]))</span>
+<span class="sd">    &gt;&gt;&gt; assert np.all(np.isclose(points[:, 1], -points_orig[:, 2]))</span>
+<span class="sd">    &gt;&gt;&gt; assert np.all(np.isclose(points[:, 2], points_orig[:, 1]))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">axis_to_vec</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    <span class="c1"># Copy original array to if not inplace</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
-        <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">axis</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">axis_to_vec</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid axis. Must be either &quot;x&quot;, &quot;y&quot;, or &quot;z&quot;&#39;</span><span class="p">)</span>
 
-    <span class="c1"># Convert angle to radians</span>
-    <span class="k">if</span> <span class="n">deg</span><span class="p">:</span>
-        <span class="n">angle</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span>
-
-    <span class="k">if</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">-</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-        <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
-        <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span>
-    <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="o">-</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-        <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span>
-    <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">-</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-        <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid axis. Must be either &quot;x&quot;, &quot;y&quot;, or &quot;z&quot;&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">points</span>
+    <span class="n">rot_mat</span> <span class="o">=</span> <span class="n">transformations</span><span class="o">.</span><span class="n">axis_angle_rotation</span><span class="p">(</span><span class="n">axis_to_vec</span><span class="p">[</span><span class="n">axis</span><span class="p">],</span> <span class="n">angle</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="n">deg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">transformations</span><span class="o">.</span><span class="n">apply_transformation_to_points</span><span class="p">(</span><span class="n">rot_mat</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="n">inplace</span><span class="p">)</span>
 </pre></div>
 
            </div>
            
           </div>
           <footer>
-  
 
   <hr/>
 
@@ -1123,7 +1275,6 @@
 
 
 </footer>
-
         </div>
       </div>
 
@@ -1149,6 +1300,7 @@
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

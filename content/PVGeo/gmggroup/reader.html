@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>reader &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/gmggroup/reader.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -284,6 +287,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -312,52 +317,52 @@
 <h2>OMF Project Reader<a class="headerlink" href="#omf-project-reader" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.gmggroup.reader.OMFReader">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.gmggroup.reader.</code><code class="sig-name descname">OMFReader</code><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.gmggroup.reader.</span></code><code class="sig-name descname"><span class="pre">OMFReader</span></code><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBaseBase" title="PVGeo.base.ReaderBaseBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.ReaderBaseBase</span></code></a></p>
 <p>Handles reading an OMF Project</p>
 <dl class="py method">
 <dt id="PVGeo.gmggroup.reader.OMFReader.GetDataSelection">
-<code class="sig-name descname">GetDataSelection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.GetDataSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.GetDataSelection" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">GetDataSelection</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.GetDataSelection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.GetDataSelection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the current user selection of data elements</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gmggroup.reader.OMFReader.Modified">
-<code class="sig-name descname">Modified</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">read_again</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.Modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.Modified" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">Modified</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">read_again</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.Modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.Modified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ensure default is overridden to be false so array selector can call.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gmggroup.reader.OMFReader.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to get data for current timestep and populate the output data object.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gmggroup.reader.OMFReader._get_raw_data">
-<code class="sig-name descname">_get_raw_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader._get_raw_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader._get_raw_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_get_raw_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader._get_raw_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader._get_raw_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts OMF data to VTK data objects.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gmggroup.reader.OMFReader._read_up_front">
-<code class="sig-name descname">_read_up_front</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader._read_up_front"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader._read_up_front" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_read_up_front</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader._read_up_front"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader._read_up_front" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal functiona to read all data at the start</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="PVGeo.gmggroup.reader.OMFReader.description">
-<code class="sig-name descname">description</code><em class="property"> = 'PVGeo: Open Mining Format Project'</em><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.description" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">description</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'PVGeo:</span> <span class="pre">Open</span> <span class="pre">Mining</span> <span class="pre">Format</span> <span class="pre">Project'</span></em><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="PVGeo.gmggroup.reader.OMFReader.extensions">
-<code class="sig-name descname">extensions</code><em class="property"> = 'omf'</em><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.extensions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">extensions</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'omf'</span></em><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.extensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.gmggroup.reader.OMFReader.get_file_name">
-<code class="sig-name descname">get_file_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.get_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.get_file_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_file_name</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.get_file_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.get_file_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Super class has file names as a list but we will only handle a single
 project file. This provides a conveinant way of making sure we only
 access that single file.
@@ -366,7 +371,7 @@ A user could still access the list of file names using <code class="docutils lit
 
 <dl class="py method">
 <dt id="PVGeo.gmggroup.reader.OMFReader.modified">
-<code class="sig-name descname">modified</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">read_again</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.modified" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">modified</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">read_again</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gmggroup/reader.html#OMFReader.modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gmggroup.reader.OMFReader.modified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ensure default is overridden to be false so array selector can call.</p>
 </dd></dl>
 
@@ -380,16 +385,10 @@ A user could still access the list of file names using <code class="docutils lit
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../grids/index.html" class="btn btn-neutral float-right" title="Grid Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="GMG Group Standards" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../grids/index.html" class="btn btn-neutral float-right" title="Grid Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="GMG Group Standards" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -429,7 +428,6 @@ A user could still access the list of file names using <code class="docutils lit
 
 
 </footer>
-
         </div>
       </div>
 
@@ -455,6 +453,7 @@ A user could still access the list of file names using <code class="docutils lit
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

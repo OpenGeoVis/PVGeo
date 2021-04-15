@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>objs &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/content/pvmacros/vis/objs.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -276,6 +279,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -304,32 +309,32 @@
 <h2>Camera<a class="headerlink" href="#camera" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="pvmacros.vis.objs.camera">
-<em class="property">class </em><code class="sig-prename descclassname">pvmacros.vis.objs.</code><code class="sig-name descname">camera</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cam</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pvmacros.vis.objs.</span></code><code class="sig-name descname"><span class="pre">camera</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>An object to store a single camera location/view. You can make a list/dict of these objects to save interesting views for your project. This object saves just a few parameters about the camera so that it can easily be reconstructed.</p>
 <dl class="py method">
 <dt id="pvmacros.vis.objs.camera._getFocalPoint">
-<code class="sig-name descname">_getFocalPoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera._getFocalPoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera._getFocalPoint" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_getFocalPoint</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera._getFocalPoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera._getFocalPoint" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="pvmacros.vis.objs.camera._getOrientation">
-<code class="sig-name descname">_getOrientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera._getOrientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera._getOrientation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_getOrientation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera._getOrientation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera._getOrientation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="pvmacros.vis.objs.camera._getPosition">
-<code class="sig-name descname">_getPosition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera._getPosition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera._getPosition" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_getPosition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera._getPosition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera._getPosition" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="pvmacros.vis.objs.camera._getViewUp">
-<code class="sig-name descname">_getViewUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera._getViewUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera._getViewUp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_getViewUp</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera._getViewUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera._getViewUp" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="pvmacros.vis.objs.camera.loadViews">
-<em class="property">static </em><code class="sig-name descname">loadViews</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'views.camera'</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'/home/travis'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.loadViews"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.loadViews" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">loadViews</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'views.camera'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.loadViews"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.loadViews" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load a file containg a serialized camera objects. Dafault loads from home directory if relative path</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -343,7 +348,7 @@
 
 <dl class="py method">
 <dt id="pvmacros.vis.objs.camera.saveViews">
-<em class="property">static </em><code class="sig-name descname">saveViews</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lib</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'views'</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'/home/travis'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.saveViews"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.saveViews" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">saveViews</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lib</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'views'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.saveViews"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.saveViews" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save a serialized dictionaty/list/whatever of views out to a file. Dafault saves to user’s home directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -358,7 +363,7 @@
 
 <dl class="py method">
 <dt id="pvmacros.vis.objs.camera.screenShot">
-<code class="sig-name descname">screenShot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cam</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'/home/travis'</span></em>, <em class="sig-param"><span class="n">basenm</span><span class="o">=</span><span class="default_value">'view'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.screenShot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.screenShot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">screenShot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basenm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'view'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.screenShot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.screenShot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save a screenshot of a single camera view</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -373,7 +378,7 @@
 
 <dl class="py method">
 <dt id="pvmacros.vis.objs.camera.screenShotViews">
-<em class="property">static </em><code class="sig-name descname">screenShotViews</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">views</span></em>, <em class="sig-param"><span class="n">cam</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'/home/travis'</span></em>, <em class="sig-param"><span class="n">basenm</span><span class="o">=</span><span class="default_value">'view'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.screenShotViews"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.screenShotViews" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">screenShotViews</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basenm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'view'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.screenShotViews"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.screenShotViews" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save screenshots of many views/cameras</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -389,7 +394,7 @@
 
 <dl class="py method">
 <dt id="pvmacros.vis.objs.camera.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cam</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates the camera location to that which is in the currently activated view unless a vtkOpenGLCamera is specified.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -400,7 +405,7 @@
 
 <dl class="py method">
 <dt id="pvmacros.vis.objs.camera.view">
-<code class="sig-name descname">view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cam</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.view" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">view</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pvmacros/vis/objs.html#camera.view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pvmacros.vis.objs.camera.view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this method to update the camera to the saved location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -419,16 +424,10 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../../../dev-guide/contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="axes.html" class="btn btn-neutral float-left" title="axes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../../../dev-guide/contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="axes.html" class="btn btn-neutral float-left" title="axes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -468,7 +467,6 @@
 
 
 </footer>
-
         </div>
       </div>
 
@@ -494,6 +492,7 @@
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 

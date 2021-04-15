@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Grids &mdash; PVGeo  documentation</title>
   
@@ -20,12 +20,16 @@
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
   
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/model_build/grids.html"/>
+  
+
   
 
   
@@ -38,7 +42,6 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
     
@@ -84,7 +87,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> PVGeo
+            <a href="../../../index.html" class="icon icon-home"> PVGeo
           
 
           
@@ -287,6 +290,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -315,43 +320,43 @@
 <h2>Create Even Rectilinear Grid<a class="headerlink" href="#create-even-rectilinear-grid" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.model_build.grids.</code><code class="sig-name descname">CreateEvenRectilinearGrid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extent</span><span class="o">=</span><span class="default_value">[10, 10, 10]</span></em>, <em class="sig-param"><span class="n">xrng</span><span class="o">=</span><span class="default_value">[- 1.0, 1.0]</span></em>, <em class="sig-param"><span class="n">yrng</span><span class="o">=</span><span class="default_value">[- 1.0, 1.0]</span></em>, <em class="sig-param"><span class="n">zrng</span><span class="o">=</span><span class="default_value">[- 1.0, 1.0]</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.model_build.grids.</span></code><code class="sig-name descname"><span class="pre">CreateEvenRectilinearGrid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[10,</span> <span class="pre">10,</span> <span class="pre">10]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xrng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">1.0,</span> <span class="pre">1.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yrng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">1.0,</span> <span class="pre">1.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zrng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">1.0,</span> <span class="pre">1.0]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
 <p>This creates a vtkRectilinearGrid where the discretization along a
 given axis is uniformly distributed.</p>
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate the output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestInformation">
-<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.RequestInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to handle output extents</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_extent">
-<code class="sig-name descname">set_extent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nx</span></em>, <em class="sig-param"><span class="n">ny</span></em>, <em class="sig-param"><span class="n">nz</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_extent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_extent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_extent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_extent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the extent of the output grid.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_x_range">
-<code class="sig-name descname">set_x_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_x_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_x_range" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_x_range</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_x_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_x_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set range (min, max) for the grid in the X-direction.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_y_range">
-<code class="sig-name descname">set_y_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_y_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_y_range" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_y_range</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_y_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_y_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set range (min, max) for the grid in the Y-direction</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_z_range">
-<code class="sig-name descname">set_z_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_z_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_z_range" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_z_range</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateEvenRectilinearGrid.set_z_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_z_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set range (min, max) for the grid in the Z-direction</p>
 </dd></dl>
 
@@ -362,7 +367,7 @@ given axis is uniformly distributed.</p>
 <h2>Create Tensor Mesh<a class="headerlink" href="#create-tensor-mesh" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.model_build.grids.</code><code class="sig-name descname">CreateTensorMesh</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">origin</span><span class="o">=</span><span class="default_value">[- 350.0, - 400.0, 0.0]</span></em>, <em class="sig-param"><span class="n">data_name</span><span class="o">=</span><span class="default_value">'Data'</span></em>, <em class="sig-param"><span class="n">xcellstr</span><span class="o">=</span><span class="default_value">'200 100 50 20*50.0 50 100 200'</span></em>, <em class="sig-param"><span class="n">ycellstr</span><span class="o">=</span><span class="default_value">'200 100 50 21*50.0 50 100 200'</span></em>, <em class="sig-param"><span class="n">zcellstr</span><span class="o">=</span><span class="default_value">'20*25.0 50 100 200'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.model_build.grids.</span></code><code class="sig-name descname"><span class="pre">CreateTensorMesh</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">350.0,</span> <span class="pre">-</span> <span class="pre">400.0,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xcellstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'200</span> <span class="pre">100</span> <span class="pre">50</span> <span class="pre">20*50.0</span> <span class="pre">50</span> <span class="pre">100</span> <span class="pre">200'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycellstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'200</span> <span class="pre">100</span> <span class="pre">50</span> <span class="pre">21*50.0</span> <span class="pre">50</span> <span class="pre">100</span> <span class="pre">200'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zcellstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'20*25.0</span> <span class="pre">50</span> <span class="pre">100</span> <span class="pre">200'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
 <p>This creates a vtkRectilinearGrid where the discretization along a
 given axis is not uniform. Cell spacings along each axis can be set via
@@ -370,50 +375,50 @@ strings with repeating patterns or explicitly using the <code class="docutils li
 methods.</p>
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate output data object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.RequestInformation">
-<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.RequestInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to set output whole extent</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh._add_model_data">
-<code class="sig-name descname">_add_model_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdo</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._add_model_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._add_model_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_add_model_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._add_model_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._add_model_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add an array to the output data object. If data is None, random
 values will be generated.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh._make_model">
-<code class="sig-name descname">_make_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._make_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._make_model" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">_make_model</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._make_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._make_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates the output data object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh._read_cell_line">
-<em class="property">static </em><code class="sig-name descname">_read_cell_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">line</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._read_cell_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._read_cell_line" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">_read_cell_line</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh._read_cell_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh._read_cell_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read cell sizes for each line in the UBC mesh line strings</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.get_extent">
-<code class="sig-name descname">get_extent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.get_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.get_extent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_extent</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.get_extent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.get_extent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the extent of the created mesh</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.set_origin">
-<code class="sig-name descname">set_origin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x0</span></em>, <em class="sig-param"><span class="n">y0</span></em>, <em class="sig-param"><span class="n">z0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_origin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_origin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_origin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_origin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the origin of the output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.set_x_cells">
-<code class="sig-name descname">set_x_cells</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xcells</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_x_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_x_cells" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_x_cells</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xcells</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_x_cells"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_x_cells" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the spacings for the cells in the X direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -424,7 +429,7 @@ values will be generated.</p>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.set_x_cells_str">
-<code class="sig-name descname">set_x_cells_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xcellstr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_x_cells_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_x_cells_str" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_x_cells_str</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xcellstr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_x_cells_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_x_cells_str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the spacings for the cells in the X direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -435,7 +440,7 @@ values will be generated.</p>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.set_y_cells">
-<code class="sig-name descname">set_y_cells</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ycells</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_y_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_y_cells</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ycells</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_y_cells"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the spacings for the cells in the Y direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -446,7 +451,7 @@ values will be generated.</p>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.set_y_cells_str">
-<code class="sig-name descname">set_y_cells_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ycellstr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_y_cells_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells_str" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_y_cells_str</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ycellstr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_y_cells_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells_str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the spacings for the cells in the Y direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -457,7 +462,7 @@ values will be generated.</p>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.set_z_cells">
-<code class="sig-name descname">set_z_cells</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zcells</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_z_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_z_cells" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_z_cells</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zcells</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_z_cells"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_z_cells" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the spacings for the cells in the Z direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -468,7 +473,7 @@ values will be generated.</p>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateTensorMesh.set_z_cells_str">
-<code class="sig-name descname">set_z_cells_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zcellstr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_z_cells_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_z_cells_str" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_z_cells_str</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zcellstr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateTensorMesh.set_z_cells_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateTensorMesh.set_z_cells_str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the spacings for the cells in the Z direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -484,36 +489,36 @@ values will be generated.</p>
 <h2>Create Uniform Grid<a class="headerlink" href="#create-uniform-grid" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PVGeo.model_build.grids.CreateUniformGrid">
-<em class="property">class </em><code class="sig-prename descclassname">PVGeo.model_build.grids.</code><code class="sig-name descname">CreateUniformGrid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extent</span><span class="o">=</span><span class="default_value">(10, 10, 10)</span></em>, <em class="sig-param"><span class="n">spacing</span><span class="o">=</span><span class="default_value">(1.0, 1.0, 1.0)</span></em>, <em class="sig-param"><span class="n">origin</span><span class="o">=</span><span class="default_value">(0.0, 0.0, 0.0)</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PVGeo.model_build.grids.</span></code><code class="sig-name descname"><span class="pre">CreateUniformGrid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">10,</span> <span class="pre">10)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">1.0,</span> <span class="pre">1.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
 <p>Create uniform grid (<code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code>)</p>
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateUniformGrid.RequestData">
-<code class="sig-name descname">RequestData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.RequestData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.RequestData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.RequestData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to generate the output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateUniformGrid.RequestInformation">
-<code class="sig-name descname">RequestInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">inInfo</span></em>, <em class="sig-param"><span class="n">outInfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.RequestInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.RequestInformation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RequestInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.RequestInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.RequestInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used by pipeline to handle output extents</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateUniformGrid.set_extent">
-<code class="sig-name descname">set_extent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nx</span></em>, <em class="sig-param"><span class="n">ny</span></em>, <em class="sig-param"><span class="n">nz</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.set_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.set_extent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_extent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.set_extent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.set_extent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the extent of the output grid.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateUniformGrid.set_origin">
-<code class="sig-name descname">set_origin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x0</span></em>, <em class="sig-param"><span class="n">y0</span></em>, <em class="sig-param"><span class="n">z0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.set_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.set_origin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_origin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.set_origin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.set_origin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the origin of the output grid.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PVGeo.model_build.grids.CreateUniformGrid.set_spacing">
-<code class="sig-name descname">set_spacing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dx</span></em>, <em class="sig-param"><span class="n">dy</span></em>, <em class="sig-param"><span class="n">dz</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.set_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.set_spacing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_spacing</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/grids.html#CreateUniformGrid.set_spacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.grids.CreateUniformGrid.set_spacing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the spacing for the points along each axial direction.</p>
 </dd></dl>
 
@@ -527,16 +532,10 @@ values will be generated.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../readers/index.html" class="btn btn-neutral float-right" title="General Readers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="earth.html" class="btn btn-neutral float-left" title="earth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../readers/index.html" class="btn btn-neutral float-right" title="General Readers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="earth.html" class="btn btn-neutral float-left" title="earth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
@@ -576,7 +575,6 @@ values will be generated.</p>
 
 
 </footer>
-
         </div>
       </div>
 
@@ -602,6 +600,7 @@ values will be generated.</p>
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-115959679-6', 'auto');
+    
     ga('send', 'pageview');
     </script>
 
