@@ -72,7 +72,7 @@ extracted.plot(scalars='Extracted')
 #
 # The resulting grid with cells above the topography extracted will look like the
 # rendering below:
-threshed = extracted.threshold(0.5)
+threshed = extracted.threshold(0.5, scalars='Extracted')
 threshed.plot(color=True, show_edges=True)
 
 ###############################################################################
