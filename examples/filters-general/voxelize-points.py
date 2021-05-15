@@ -25,7 +25,7 @@ fault_file, _ = examples.downloads._retrieve_file(url, 'fault_points.csv')
 ###############################################################################
 # Let's go ahead and load a simple file that has XYZ coordinates and a boolean
 # array for fault presence. This point cloud makes some sort of regular grid,
-# but we have forgotten the deatials of the cell spacings and local coordinate
+# but we have forgotten the details of the cell spacings and local coordinate
 # rotations.
 #
 # We will read in this data with ``pandas`` and send it to the
