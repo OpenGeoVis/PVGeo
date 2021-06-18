@@ -464,13 +464,13 @@ class TopoMeshAppender(AlgorithmBase):
         return self.__need_to_read
 
     def Modified(self, read_again=True):
-        """Call modified if the files needs to be read again again."""
+        """Call modified if the files needs to be read again."""
         if read_again:
             self.__need_to_read = read_again
         AlgorithmBase.Modified(self)
 
     def modified(self, read_again=True):
-        """Call modified if the files needs to be read again again."""
+        """Call modified if the files needs to be read again."""
         return self.Modified(read_again=read_again)
 
     def _read_up_front(self):
