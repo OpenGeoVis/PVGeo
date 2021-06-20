@@ -39,7 +39,7 @@ class OMFReader(ReaderBaseBase):
 
     def get_file_name(self):
         """Super class has file names as a list but we will only handle a single
-        project file. This provides a conveinant way of making sure we only
+        project file. This provides a convenient way of making sure we only
         access that single file.
         A user could still access the list of file names using ``get_file_names()``.
         """
@@ -76,11 +76,11 @@ class OMFReader(ReaderBaseBase):
         # Get output:
         # output = self.GetOutputData(outInfo, 0)
         output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
-        # Perfrom the read
+        # Perform the read
         if self.need_to_read():
             self._read_up_front()
         data = self._get_raw_data()
-        # Set number of blocks based on user choice in the selction
+        # Set number of blocks based on user choice in the selection
         output.SetNumberOfBlocks(self._dataselection.GetNumberOfArraysEnabled())
         blk = 0
         # iterate over data set to produce output based on users selection
