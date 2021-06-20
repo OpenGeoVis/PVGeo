@@ -48,7 +48,7 @@ class ExtractTopography(FilterBase):
 
 
     Note:
-        This currenlty ignores time varying inputs. We can implement time
+        This currently ignores time varying inputs. We can implement time
         variance but need to think about how we would like to do that. Should
         the topography surface be static and the volumetric data have time
         variance?
@@ -89,7 +89,7 @@ class ExtractTopography(FilterBase):
 
     @staticmethod
     def _query(topo_points, data_points):
-        """Querrys the data points for their closest point on the topography
+        """Queries the data points for their closest point on the topography
         surface"""
         try:
             # sklearn's KDTree is faster: use it if available
