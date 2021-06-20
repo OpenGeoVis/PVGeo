@@ -157,7 +157,7 @@ class AddCellConnToPoints(FilterBase):
         self._connect_cells(pdi, pdo)
         return 1
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     def set_cell_type(self, cell_type):
         """Set the cell typ by the integer id as specified in `vtkCellType.h`"""
@@ -201,7 +201,7 @@ class PointsToTube(AddCellConnToPoints):
         self.__capping = capping
 
     def _connect_cells(self, pdi, pdo, log_time=False):
-        """This uses the parent's ``_connect_cells()`` to build a tub around"""
+        """This uses the parent's ``_connect_cells()`` to build a tube around"""
         AddCellConnToPoints._connect_cells(self, pdi, pdo, log_time=log_time)
         tube = vtk.vtkTubeFilter()
         tube.SetInputData(pdo)
@@ -214,7 +214,7 @@ class PointsToTube(AddCellConnToPoints):
         pdo.ShallowCopy(tube.GetOutput())
         return pdo
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     def set_radius(self, radius):
         """Set the radius of the tube"""
@@ -280,7 +280,7 @@ class LonLatToUTM(FilterPreserveTypeBase):
         # Get input/output of Proxy
         pdi = pyvista.wrap(self.GetInputData(inInfo, 0, 0))
         pdo = self.GetOutputData(outInfo, 0)
-        #### Perfrom task ####
+        #### Perform task ####
         if not hasattr(pdi, 'points'):
             raise _helpers.PVGeoError(
                 'Input data object does not have points to convert.'
@@ -306,7 +306,7 @@ class LonLatToUTM(FilterPreserveTypeBase):
         if isinstance(ellps, int):
             ellps = self.get_available_ellps(idx=ellps)
         if not isinstance(ellps, str):
-            raise _helpers.PVGeoError('Ellps must be a string.')
+            raise _helpers.PVGeoError('Ellipse must be a string.')
         if self.__ellps != ellps:
             self.__ellps = ellps
             self.Modified()
@@ -347,7 +347,7 @@ class RotationTool(object):
 
     @staticmethod
     def rotate_around(pts, theta, origin):
-        """Rotate points around an origins given an anlge on the XY plane"""
+        """Rotate points around an origins given an angle on the XY plane"""
         xarr, yarr = pts[:, 0], pts[:, 1]
         ox, oy = origin[0], origin[1]
         qx = ox + np.cos(theta) * (xarr - ox) - np.sin(theta) * (yarr - oy)
@@ -356,7 +356,7 @@ class RotationTool(object):
 
     @staticmethod
     def rotate(pts, theta):
-        """Rotate points around (0,0,0) given an anlge on the XY plane"""
+        """Rotate points around (0,0,0) given an angle on the XY plane"""
         rot = RotationTool._get_rotation_matrix(theta)
         rotated = pts.dot(rot)
         if not isinstance(theta, np.ndarray):
@@ -386,7 +386,7 @@ class RotationTool(object):
 
     @staticmethod
     def sin_between(pts):
-        """Calculate the sin angle between two points"""
+        """Calculate the sine angle between two points"""
         ydiff = abs(pts[0, 1] - pts[1, 1])
         dist = RotationTool.distance_between(pts)
         return np.arcsin(ydiff / dist)
@@ -394,8 +394,8 @@ class RotationTool(object):
     @staticmethod
     def rotation_matrix(vector_orig, vector_fin):
         """Calculate the rotation matrix required to rotate from one vector to another.
-        For the rotation of one vector to another, there are an infinit series of rotation matrices
-        possible.  Due to axially symmetry, the rotation axis can be any vector lying in the symmetry
+        For the rotation of one vector to another, there are an infinite series of rotation matrices
+        possible.  Due to axial symmetry, the rotation axis can be any vector lying in the symmetry
         plane between the two vectors.  Hence the axis-angle convention will be used to construct the
         matrix with the rotation axis defined as the cross product of the two vectors.  The rotation
         angle is the arccosine of the dot product of the two unit vectors.
@@ -615,7 +615,7 @@ class RotatePoints(FilterBase):
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
-        #### Perfrom task ####
+        #### Perform task ####
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdi)  # NumPy wrapped input
         points = np.array(
@@ -679,7 +679,7 @@ class ExtractPoints(FilterBase):
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
-        #### Perfrom task ####
+        #### Perform task ####
         # Get the Points over the NumPy interface
         wpdi = dsa.WrapDataObject(pdi)  # NumPy wrapped input
         if not hasattr(wpdi, 'Points'):
@@ -749,7 +749,7 @@ class AppendCellCenters(FilterPreserveTypeBase):
         filt.SetInputDataObject(pdi)
         filt.Update()
 
-        # I use the dataset adapter/numpy interface because its easy
+        # I use the dataset adapter/numpy interface because it is easy
         centers = dsa.WrapDataObject(filt.GetOutput()).Points
         centers = interface.convert_array(centers)
         centers.SetName('Cell Centers')
@@ -796,7 +796,7 @@ class IterateOverPoints(FilterBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         # Get number of points
         pdo = self.GetOutputData(outInfo, 0)
-        #### Perfrom task ####
+        #### Perform task ####
         # Get the Points over the NumPy interface
         # wpdi = dsa.WrapDataObject(pdi) # NumPy wrapped input
         # Get requested time index
@@ -826,7 +826,7 @@ class IterateOverPoints(FilterBase):
         self._update_time_steps()
         return 1
 
-    #### Public Getters / Setters ####
+    #### Public Setters / Getters ####
 
     def set_decimate(self, percent):
         """Set the percent (1 to 100) to decimate"""
@@ -861,7 +861,7 @@ class IterateOverPoints(FilterBase):
 
 
 class ConvertUnits(FilterPreserveTypeBase):
-    """Convert points in an input data object to from meters to feet or vice versa.
+    """Convert points in an input data object from meters to feet or vice versa.
     This simply uses a ``vtkTransformFilter`` and scales input data object with
     common conversions.
     """
@@ -1004,7 +1004,7 @@ class BuildSurfaceFromPoints(FilterBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         # Get number of points
         pdo = self.GetOutputData(outInfo, 0)
-        #### Perfrom task ####
+        #### Perform task ####
         data = pyvista.wrap(pdi)
         output = BuildSurfaceFromPoints.create_surface(
             data.points, np.array(self.__zcoords)
