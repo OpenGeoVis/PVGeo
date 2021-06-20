@@ -26,7 +26,7 @@ print(table)
 
 
 ###############################################################################
-# From inspecting the header, we realize that this dataset os gridded, so let's
+# From inspecting the header, we realize that this dataset is gridded, so let's
 # use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 # :class:`pyvista.UniformGrid` of that dataset.
 
