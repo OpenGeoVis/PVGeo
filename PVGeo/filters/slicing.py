@@ -140,7 +140,7 @@ class ManySlicesAlongPoints(_SliceBase):
         else:
             ptsi = [i for i in range(numPoints)]
 
-        # Iterate of points in order (skips last point):
+        # Iterate points in order (skips last point):
         planes = []
         for i in range(0, numPoints - 1, numPoints // self.get_number_of_slices()):
             # get normal
@@ -182,7 +182,7 @@ class ManySlicesAlongPoints(_SliceBase):
         self._get_slice(pts, data, planes, output)
         return 1
 
-    #### Getters / Setters ####
+    #### Setters / Getters ####
 
     def set_use_nearest_nbr(self, flag):
         """Set a flag on whether to use SciPy's nearest neighbor approximation
@@ -224,7 +224,7 @@ class SlideSliceAlongPoints(ManySlicesAlongPoints):
         self.__loc = 50  # Percent (halfway)
 
     def _get_slice(self, pts, data, planes, output):
-        """Internal helper to perfrom the filter"""
+        """Internal helper to perform the filter"""
         if not isinstance(planes, vtk.vtkPlane):
             raise _helpers.PVGeoError('``_get_slice`` can only handle one plane.')
         # numPoints = pts.GetNumberOfPoints()
@@ -364,7 +364,7 @@ class ManySlicesAlongAxis(_SliceBase):
 
         return 1
 
-    #### Getters / Setters ####
+    #### Setters / Getters ####
 
     def set_axis(self, axis):
         """Set the axis on which to slice
@@ -448,7 +448,7 @@ class SliceThroughTime(ManySlicesAlongAxis):
         self._update_time_steps()
         return 1
 
-    #### Public Getters / Setters ####
+    #### Public Setters / Getters ####
 
     def set_number_of_slices(self, num):
         """Set the number of slices/timesteps to generate"""
