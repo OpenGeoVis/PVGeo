@@ -6,7 +6,7 @@ __displayname__ = 'Color Maps'
 
 
 def get_parula_map():
-    """A convienance method for getting a matplotlib friendly version of
+    """A convenience method for getting a matplotlib friendly version of
     MATLAB's parula colormap.
     """
     from matplotlib.colors import LinearSegmentedColormap
