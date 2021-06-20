@@ -204,7 +204,7 @@ class VoxelizePoints(FilterBase):
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
-        # Perfrom task
+        # Perform task
         wpdi = dsa.WrapDataObject(pdi)
         pts = wpdi.Points
         x, y, z = pts[:, 0], pts[:, 1], pts[:, 2]
@@ -213,7 +213,7 @@ class VoxelizePoints(FilterBase):
         self._copy_arrays(pdi, pdo)
         return 1
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     def set_safe_size(self, safe):
         """A voxel size to use if a spacing cannot be determined for an axis"""
