@@ -51,7 +51,7 @@ class TensorMeshReader(ubcMeshReaderBase):
 
     @staticmethod
     def place_model_on_mesh(mesh, model, data_name='Data'):
-        """Places model data onto a mesh. This is for the UBC Grid data reaers
+        """Places model data onto a mesh. This is for the UBC Grid data readers
         to associate model data with the mesh grid.
 
         Args:
@@ -500,7 +500,7 @@ class TopoMeshAppender(AlgorithmBase):
             raise _helpers.PVGeoError(
                 'Dimension mismatch between input grid and topo file.'
             )
-        # # Adjust the k indices to be in caarteian system
+        # # Adjust the k indices to be in the cartesian system
         # self.__indices['k'] = nz - self.__indices['k']
         # Fill out the topo and add it as model as it will be in UBC format
         # Create a 3D array of 1s and zeros (1 means beneath topo or active)
