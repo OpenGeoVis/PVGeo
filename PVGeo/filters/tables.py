@@ -24,8 +24,8 @@ from ..base import FilterBase, FilterPreserveTypeBase
 
 class CombineTables(FilterBase):
     """Takes two tables and combines them if they have the same number of rows.
-    Currently this cannot handle time varing tables as that gets complicated
-    real quick if the tables do not have the same timestep values
+    Currently this cannot handle time varying tables as that gets complicated
+    really quickly if the tables do not have the same timestep values
     """
 
     __displayname__ = 'Combine Tables'
@@ -105,7 +105,7 @@ class ReshapeTable(FilterBase):
         self.__order = kwargs.get('order', 'F')
 
     def _reshape(self, pdi, pdo):
-        """Internal helper to perfrom the reshape"""
+        """Internal helper to perform the reshape"""
         # Get number of columns
         cols = pdi.GetNumberOfColumns()
         # Get number of rows
@@ -136,7 +136,7 @@ class ReshapeTable(FilterBase):
                 % (cols * rows)
             )
 
-        # Use numpy.reshape() to reshape data NOTE: only 2D because its a table
+        # Use numpy.reshape() to reshape data NOTE: only 2D because it is a table
         # NOTE: column access of this reshape is not contigous
         data = np.array(
             np.reshape(data.flatten(), (self.__nrows, self.__ncols), order=self.__order)
@@ -163,11 +163,11 @@ class ReshapeTable(FilterBase):
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
-        # Perfrom task
+        # Perform task
         self._reshape(pdi, pdo)
         return 1
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     def set_names(self, names):
         """Set names using a semicolon (;) seperated string or a list of strings
