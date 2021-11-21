@@ -179,7 +179,7 @@ class MagObsReader(DelimitedPointsReaderBase):
 
     @staticmethod
     def convert_vector(incl, decl, mag=1):
-        """Converts inclination, declinations, and magntidue to an XYZ vector"""
+        """Converts inclination, declinations, and magnitude to an XYZ vector"""
         x = mag * np.cos(np.deg2rad(incl)) * np.cos(np.deg2rad(decl))
         y = mag * np.cos(np.deg2rad(incl)) * np.sin(np.deg2rad(decl))
         z = mag * np.sin(np.deg2rad(incl))
@@ -217,7 +217,7 @@ class MagObsReader(DelimitedPointsReaderBase):
 
 
 class GeologyMapper(FilterPreserveTypeBase):
-    """A filter to load a GIF geology definity file and map its values to a given
+    """A filter to load a GIF geology definition file and map its values to a given
     data array in an input data object.
     """
 
