@@ -55,7 +55,7 @@ vtkpoints.plot(clim=[0, 1], point_size=1)
 # Points to Voxelized Volume
 # ++++++++++++++++++++++++++
 #
-# The above figure is pretty cool! But its a point cloud which means out
+# The above figure is pretty cool! But it is a point cloud which means out
 # filtering options are pretty limited. Fortunately, we know that the point
 # cloud represents some sort of regularized gridded volume of data and PVGeo
 # has a filter to recover that volume. This will allow further volumetric
