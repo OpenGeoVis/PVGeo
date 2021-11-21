@@ -1,8 +1,7 @@
 """The ``interface`` module provides functions to convert/cast between common
 VTK and NumPy/Pandas data types. These methods provide a simple to use interface
-for VTK data types so that users can make changes to VTK data strucutres via
-Python data structures that are a bit easier to perform numerical operations
-upon.
+for VTK data types so that users can make changes to VTK data structures via
+Python data structures that are easier to perform numerical operations on.
 """
 
 
@@ -126,7 +125,7 @@ def get_dtypes(dtype='', endian=None):
     """
     # If native `@` was chosen then do not pass an endian
     if endian == '@':
-        # print('WARNING: Native endianness no longer supported for packed binary reader. Please chose `>` or `<`. This defaults to big `>`.')
+        # print('WARNING: Native endianness no longer supported for packed binary reader. Please choose `>` or `<`. This defaults to big `>`.')
         endian = ''
     # No endian specified:
     elif endian is None:
@@ -195,7 +194,7 @@ def points_to_poly_data(points, copy_z=False):
 
 
 def add_arrays_from_data_frame(pdo, field, df):
-    """Add all of the arrays from a given data frame to an output's data"""
+    """Add all of the arrays from a given dataframe to an output's data"""
     for key in df.keys():
         VTK_data = convert_array(df[key].values, name=key)
         _helpers.add_array(pdo, field, VTK_data)
@@ -219,7 +218,7 @@ def convert_cell_conn(cell_connectivity):
 
 def get_array(dataset, name, vtk_object=False):
     """Given an input dataset, this will return the named array as a NumPy array
-    or a vtkDataArray if spceified
+    or a vtkDataArray if specified
     """
     arr, field = _helpers.search_for_array(dataset, name)
     if vtk_object:
