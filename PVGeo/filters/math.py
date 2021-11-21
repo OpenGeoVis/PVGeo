@@ -160,7 +160,7 @@ class ArrayMath(FilterPreserveTypeBase):
         self._math_up(pdi, pdo)
         return 1
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     def _set_input_array_1(self, field, name):
         """Set 1st input array by name and field"""
@@ -202,7 +202,7 @@ class ArrayMath(FilterPreserveTypeBase):
         return 1
 
     def apply(self, input_data_object, array_name_0, array_name_1):
-        """Run the algorith on an input data object, specifying array names"""
+        """Run the algorithm on an input data object, specifying array names"""
         self.SetInputDataObject(input_data_object)
         arr0, field0 = _helpers.search_for_array(input_data_object, array_name_0)
         arr1, field1 = _helpers.search_for_array(input_data_object, array_name_1)
@@ -323,7 +323,7 @@ class NormalizeArray(FilterPreserveTypeBase):
 
     @staticmethod
     def _standard_score(arr):
-        """Returns tandard score normalization of input array"""
+        """Returns standard score normalization of input array"""
         return (arr - np.mean(arr)) / (np.std(arr))
 
     @staticmethod
@@ -422,7 +422,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         self._normalize(pdi, pdo)
         return 1
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     def SetInputArrayToProcess(self, idx, port, connection, field, name):
         """Used to set the input array(s)
@@ -681,7 +681,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         _helpers.add_array(pdo, self.__field, colors)
         return 1
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     def set_use_transparency(self, flag):
         """Set a boolean flag on whether or not to use a transparency component"""
