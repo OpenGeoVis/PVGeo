@@ -48,7 +48,7 @@ class PVGeoTensorMeshReader(TensorMeshReader):
     def __init__(self):
         TensorMeshReader.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     @smproperty.xml(
         '''
@@ -230,7 +230,7 @@ if discretize_available:
         def __init__(self):
             OcTreeReader.__init__(self)
 
-        #### Seters and Geters ####
+        #### Setters and Getters ####
 
         @smproperty.xml(
             '''
@@ -511,7 +511,7 @@ class PVGeoGravGradReader(GravGradReader):
     def __init__(self):
         GravGradReader.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
     @smproperty.xml(
         _helpers.get_file_reader_xml(
             GravGradReader.extensions, reader_description=GravGradReader.description
@@ -559,7 +559,7 @@ class PVGeoMagObsReader(MagObsReader):
     def __init__(self):
         MagObsReader.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
     @smproperty.xml(
         _helpers.get_file_reader_xml(
             MagObsReader.extensions, reader_description=MagObsReader.description
@@ -655,7 +655,7 @@ if discretize_available:
         def __init__(self):
             DiscretizeMeshReader.__init__(self)
 
-        #### Seters and Geters ####
+        #### Setters and Getters ####
 
         @smproperty.xml(
             _helpers.get_file_reader_xml(
