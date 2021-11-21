@@ -14,7 +14,7 @@ from ..base import WriterBase
 
 
 class ubcTensorMeshWriterBase(WriterBase):
-    """A base class to assist in writing data bjects to the UBC Tensor Mesh
+    """A base class to assist in writing data objects to the UBC Tensor Mesh
     format.
     """
 
