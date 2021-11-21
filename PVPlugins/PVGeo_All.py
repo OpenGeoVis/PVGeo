@@ -1,7 +1,7 @@
 """
-This module provides a convienant means of loading all of PVGeo's plugins at once
+This module provides a convenient means of loading all of PVGeo's plugins at once
 through ParaView's plugin manager. This is a hack of a solution and will be
-removed one ParaView fixes the autoloading of ParaView plugins as described in
+removed once ParaView fixes the autoloading of ParaView plugins as described in
 this issue:
 """
 import sys
