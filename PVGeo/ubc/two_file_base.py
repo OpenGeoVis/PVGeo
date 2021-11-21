@@ -35,11 +35,11 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
         self.__sizeM = None
 
     def is_3d(self):
-        """Returns true if mesh is spatially references in three dimensions"""
+        """Returns true if mesh is spatially referenced in three dimensions"""
         return self.__sizeM.shape[0] >= 3
 
     def is_2d(self):
-        """Returns true if mesh is spatially references in only two dimensions"""
+        """Returns true if mesh is spatially referenced in only two dimensions"""
         return self.__sizeM.shape[0] == 1
 
     @staticmethod
