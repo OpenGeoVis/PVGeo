@@ -60,7 +60,7 @@ class PVGeoAddCellConnToPoints(AddCellConnToPoints):
     def __init__(self):
         AddCellConnToPoints.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     @smproperty.xml(
         _helpers.get_drop_down_xml(
@@ -145,7 +145,7 @@ class PVGeoPointsToTube(PointsToTube):
     def __init__(self):
         PointsToTube.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     # NOTE: Not givign the use the choice of cell type for this...
     # It is still accesible to change though...
@@ -214,7 +214,7 @@ class PVGeoReshapeTable(ReshapeTable):
     def __init__(self):
         ReshapeTable.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     @smproperty.stringvector(name="Names", default_values='Field 0')
     def set_names(self, names):
@@ -262,7 +262,7 @@ class PVGeoVoxelizePoints(VoxelizePoints):
     def __init__(self):
         VoxelizePoints.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     @smproperty.xml(
         _helpers.get_property_xml(
@@ -345,7 +345,7 @@ class PVGeoVoxelizePointsFromArrays(VoxelizePoints):
         # call parent and make sure EstimateGrid is set to False
         return VoxelizePoints.RequestData(self, request, inInfo, outInfo)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     # (int idx, int port, int connection, int fieldAssociation, const char *name)
     @smproperty.xml(
@@ -635,7 +635,7 @@ class PVGeoRotatePoints(RotatePoints):
     def __init__(self):
         RotatePoints.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     @smproperty.doublevector(name="Rotation Angle", default_values=45.0)
     @smdomain.doublerange(min=-90.0, max=90.0)
@@ -690,7 +690,7 @@ class PVGeoPercentThreshold(PercentThreshold):
     def __init__(self):
         PercentThreshold.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     @smproperty.doublevector(name="Percent", default_values=50.0)
     @smdomain.doublerange(min=0.0, max=100.0)
@@ -797,7 +797,7 @@ class PVGeoIterateOverPoints(IterateOverPoints):
     def __init__(self):
         IterateOverPoints.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     @smproperty.intvector(name="Decimate", default_values=75)
     @smdomain.intrange(min=1, max=99)
@@ -894,7 +894,7 @@ class PVGeoArraysToRGBA(ArraysToRGBA):
     def __init__(self):
         ArraysToRGBA.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
     @smproperty.xml(
         _helpers.get_input_array_xml(
             nInputPorts=1, n_arrays=4, labels=['Red', 'Green', 'Blue', 'Transparency']
