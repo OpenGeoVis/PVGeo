@@ -63,7 +63,7 @@ class OcTreeReader(ubcMeshReaderBase):
 
     @staticmethod
     def place_model_on_octree_mesh(mesh, model, data_name='Data'):
-        """Places model data onto a mesh. This is for the UBC Grid data reaers
+        """Places model data onto a mesh. This is for the UBC Grid data readers
         to associate model data with the mesh grid.
 
         Args:
