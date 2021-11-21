@@ -26,7 +26,7 @@ from . import _helpers
 
 
 class AlgorithmBase(valg.VTKPythonAlgorithmBase):
-    """This is a base class to add convienace methods to the
+    """This is a base class to add coconvenience methods to the
     ``VTKPythonAlgorithmBase`` for all algorithms implemented in ``PVGeo``.
     We implement our algorithms in this manner to harness all of the backend
     support that the ``VTKPythonAlgorithmBase`` class provides for integrating
@@ -70,21 +70,21 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         self.__error_observer.make_observer(self)
 
     def GetOutput(self, port=0):
-        """A conveience method to get the output data object of this ``PVGeo``
+        """A convenience method to get the output data object of this ``PVGeo``
         algorithm.
         """
         return pv.wrap(self.GetOutputDataObject(port))
 
     def error_occurred(self):
-        """A conveience method for handling errors on the VTK pipeline
+        """A convenience method for handling errors on the VTK pipeline
 
         Return:
-            bool: true if an error has ovvured since last checked
+            bool: true if an error has occurred since last checked
         """
         return self.__error_observer.error_occurred()
 
     def get_error_message(self):
-        """A conveience method to print the error message."""
+        """A convenience method to print the error message."""
         return self.__error_observer.get_error_message()
 
     def apply(self):
@@ -104,7 +104,7 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
 ###############################################################################
 # Base Base Reader
 class ReaderBaseBase(AlgorithmBase):
-    """A base class for inherrited functionality common to all reader algorithms"""
+    """A base class for inherited functionality common to all reader algorithms"""
 
     __displayname__ = 'Reader Base Base'
     __category__ = 'base'
@@ -157,7 +157,7 @@ class ReaderBaseBase(AlgorithmBase):
     def _get_raw_data(self, idx=0):
         raise NotImplementedError()
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     def clear_file_names(self):
         """Use to clear file names of the reader.
@@ -214,7 +214,7 @@ class ReaderBaseBase(AlgorithmBase):
 
 # Base filter to preserve input data type
 class FilterBase(AlgorithmBase):
-    """A base class for implementing filters which holds several convienace
+    """A base class for implementing filters which holds several conveience
     methods"""
 
     __displayname__ = 'Filter Base'
@@ -247,7 +247,7 @@ class FilterBase(AlgorithmBase):
 ###############################################################################
 # Base Reader
 class ReaderBase(ReaderBaseBase):
-    """A base class for inherrited functionality common to all reader algorithms
+    """A base class for inherited functionality common to all reader algorithms
     that need to handle a time series.
     """
 
@@ -274,7 +274,7 @@ class ReaderBase(ReaderBaseBase):
     #### Algorithm Methods ####
 
     def RequestInformation(self, request, inInfo, outInfo):
-        """This is a conveience method that should be overwritten when needed.
+        """This is a convenience method that should be overwritten when needed.
         This will handle setting the timesteps appropriately based on the number
         of file names when the pipeline needs to know the time information.
         """
@@ -406,11 +406,11 @@ class TwoFileReaderBase(AlgorithmBase):
         self.__update_time_steps()
         return 1
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     @staticmethod
     def has_models(model_files):
-        """A convienance method to see if a list contatins models filenames."""
+        """A convenience ethod to see if a list contatins models filenames."""
         if isinstance(model_files, list):
             return len(model_files) > 0
         return model_files is not None
@@ -476,7 +476,7 @@ class TwoFileReaderBase(AlgorithmBase):
         return self.__mesh_filename
 
     def apply(self):
-        """Perfrom the read with parameters/file names set during init or by
+        """Perform the read with parameters/file names set during init or by
         setters"""
         self.Update()
         return pv.wrap(self.GetOutput())
@@ -532,7 +532,7 @@ class WriterBase(AlgorithmBase):
         return self.__filename
 
     def Write(self, input_data_object=None):
-        """Perfrom the write out."""
+        """Perform the write out."""
         if input_data_object:
             self.SetInputDataObject(input_data_object)
         self.Modified()
@@ -625,7 +625,7 @@ class WriterBase(AlgorithmBase):
 
 
 class InterfacedBaseReader(ReaderBase):
-    """A general base reader for all interfacing with librarues that already
+    """A general base reader for all interfacing with libraries that already
     have file I/O methods and VTK data object interfaces. This provides a
     routine for using an external library to handle all I/O and produce the
     VTK data objects."""
@@ -639,7 +639,7 @@ class InterfacedBaseReader(ReaderBase):
     # THIS IS CRUCIAL to dynamically decided output type
 
     def RequestDataObject(self, request, inInfo, outInfo):
-        """Do not override. This method lets the us dynamically decide the
+        """Do not override. This method lets the user dynamically decide the
         output data type based in the read meshes.
         Note: they all have to be the same VTK type.
         """
