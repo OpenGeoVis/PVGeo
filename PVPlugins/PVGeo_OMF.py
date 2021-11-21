@@ -24,7 +24,7 @@ class PVGeoOMFReader(OMFReader):
     def __init__(self):
         OMFReader.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     # TODO: check this to make sure not time varying
     @smproperty.xml(
