@@ -29,7 +29,7 @@ class PVGeoGSLibReader(GSLibReader):
     def __init__(self):
         GSLibReader.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     @smproperty.xml(
         _helpers.get_file_reader_xml(
@@ -97,7 +97,7 @@ class PVGeoGSLibPointSetReader(GSLibPointSetReader):
     def __init__(self):
         GSLibPointSetReader.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     @smproperty.xml(
         _helpers.get_file_reader_xml(
@@ -166,7 +166,7 @@ class PVGeoSGeMSGridReader(SGeMSGridReader):
     def __init__(self):
         SGeMSGridReader.__init__(self)
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
     @smproperty.xml(
         _helpers.get_file_reader_xml(
             SGeMSGridReader.extensions, reader_description=SGeMSGridReader.description
