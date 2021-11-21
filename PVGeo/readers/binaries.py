@@ -21,7 +21,7 @@ class PackedBinariesReader(ReaderBase):
     with native endianness. Use the Table to Uniform Grid or the Reshape Table
     filters to give more meaning to the data. We chose to use a ``vtkTable``
     object as the output of this reader because it gives us more flexibility in
-    the filters we can apply to this data down the pipeline and keeps thing
+    the filters we can apply to this data down the pipeline and keeps things
     simple when using filters in this repository.
     """
 
@@ -43,7 +43,7 @@ class PackedBinariesReader(ReaderBase):
         self.__data = []
 
     def _read_raw_file(self, filename):
-        """Interanl helper to read the raw data from the file"""
+        """Internal helper to read the raw data from the file"""
         dtype = self.__dtype
         if dtype == np.dtype('>f'):
             # Checks if big-endian and fixes read
@@ -55,7 +55,7 @@ class PackedBinariesReader(ReaderBase):
         return np.asarray(arr, dtype=self.__dtype)
 
     def _get_file_contents(self, idx=None):
-        """Interanl helper to get all contents for all files"""
+        """Internal helper to get all contents for all files"""
         if idx is not None:
             filenames = [self.get_file_names(idx=idx)]
         else:
@@ -100,7 +100,7 @@ class PackedBinariesReader(ReaderBase):
         output.AddColumn(data)
         return 1
 
-    #### Seters and Geters ####
+    #### Setters and Getters ####
 
     def set_endian(self, endian):
         """Set the endianness of the data file.
@@ -169,7 +169,7 @@ class MadagascarReader(PackedBinariesReader):
 
     __displayname__ = 'Madagascar SSRSF Reader'
     __category__ = 'reader'
-    # extensions are inherrited from PackedBinariesReader
+    # extensions are inherited from PackedBinariesReader
     description = 'PVGeo: Madagascar Single Stream RSF Files'
 
     def __init__(self, **kwargs):
@@ -178,7 +178,7 @@ class MadagascarReader(PackedBinariesReader):
     def _read_raw_file(self, filename):
         """Reads the raw data from the file for Madagascar SSRSF files"""
         dtype, vtktype = self.get_data_types()
-        CTLSEQ = b'\014\014\004'  # The control sequence to seperate header from data
+        CTLSEQ = b'\014\014\004'  # The control sequence to separate header from data
         rpl = b''
         raw = []
         with open(filename, 'rb') as file:
