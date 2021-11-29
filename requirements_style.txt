@@ -1,0 +1,6 @@
+codespell
+flake8
+flake8-isort
+black
+isort
+pydocstyle
