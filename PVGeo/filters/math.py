@@ -543,9 +543,15 @@ class PercentThreshold(FilterBase):
         val = dmin + (self.__percent / 100.0) * (dmax - dmin)
 
         if self.__invert:
-            self.__filter.ThresholdByLower(val)
+            if hasattr(self.__filter, 'SetLowerThreshold'):
+                self.__filter.SetLowerThreshold(val)
+            else:
+                self.__filter.ThresholdByLower(val)
         else:
-            self.__filter.ThresholdByUpper(val)
+            if hasattr(self.__filter, 'SetUpperThreshold'):
+                self.__filter.SetUpperThreshold(val)
+            else:
+                self.__filter.ThresholdByUpper(val)
 
         self.__filter.Update()
 
