@@ -385,7 +385,7 @@ class TestVoxelizePoints(TestBase):
         x = y = z = np.arange(0, 100, dd, dtype=float)
         g = np.meshgrid(x, y, z)
         # Convert to XYZ points
-        points = np.vstack(map(np.ravel, g)).T
+        points = np.vstack(list(map(np.ravel, g))).T
         rand = np.random.random(len(points))
         vtkpoints = interface.points_to_poly_data(points)
         vtkpoints.GetPointData().AddArray(interface.convert_array(rand, 'Random'))
