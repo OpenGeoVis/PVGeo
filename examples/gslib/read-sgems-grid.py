@@ -26,6 +26,9 @@ warped.plot()
 filename, _ = examples.downloads._download_file('Maules_Creek_3D.SGEMS.zip')
 
 grid = SGeMSGridReader().apply(filename)
+grid
+
+###############################################################################
 grid.plot(categories=True)
 
 

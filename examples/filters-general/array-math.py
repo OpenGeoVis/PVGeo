@@ -33,7 +33,7 @@ inp['Array 1'] = arr1
 f = ArrayMath(operation='add', new_name='foo')
 # Now get the result
 output = f.apply(inp, 'Array 0', 'Array 1')
-print(output)
+output
 
 ###############################################################################
 # Note that the output now has three arrays
@@ -54,7 +54,7 @@ f.update()
 
 # Now get the result
 output = f.get_output()
-print(output)
+output
 ###############################################################################
 arr = output['powered']
 assert np.allclose(arr, arr0 ** arr1)
