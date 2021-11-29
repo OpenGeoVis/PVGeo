@@ -9,7 +9,7 @@ import warnings
 
 import setuptools
 
-__version__ = '2.1.0'
+__version__ = '2.1.1'
 
 with open("README.md", "r") as f:
     long_description = f.read()

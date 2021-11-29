@@ -1,4 +1,4 @@
-paraview_plugin_version = '2.1.0'
+paraview_plugin_version = '2.1.1'
 
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
