@@ -34,7 +34,7 @@ for mod_name in MOCK_MODULES:
 autodoc_mock_imports = ['paraview']
 
 
-# # Automattically generat source pages:
+# # Automattically generate source pages:
 # os.system('python ./make_files.py')
 
 from gendocs import Generator

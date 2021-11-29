@@ -96,7 +96,7 @@ class DelimitedTextReader(ReaderBase):
         return titles, content[idx::]
 
     def _extract_headers(self, contents):
-        """Should NOT be overriden. This is a convienance methods to iteratively
+        """Should NOT be overridden. This is a convienance methods to iteratively
         get all file contents. Your should override ``_extract_header``.
         """
         ts = []
@@ -113,7 +113,7 @@ class DelimitedTextReader(ReaderBase):
         return ts[0], contents
 
     def _file_contents_to_data_frame(self, contents):
-        """Should NOT need to be overriden. After ``_extract_headers`` handles
+        """Should NOT need to be overridden. After ``_extract_headers`` handles
         removing the file header from the file contents, this method will parse
         the remainder of the contents into a pandas DataFrame with column names
         generated from the titles resulting from in ``_extract_headers``.
@@ -173,7 +173,7 @@ class DelimitedTextReader(ReaderBase):
         ``set_split_on_white_space()``
 
         Args:
-            deli (str): a string delimiter/seperator
+            deli (str): a string delimiter/separator
         """
         if deli != self.__delimiter:
             self.__delimiter = deli
@@ -231,8 +231,8 @@ class DelimitedPointsReaderBase(DelimitedTextReader):
 
     __displayname__ = 'Delimited Points Reader Base'
     __category__ = 'base'
-    # extensions are inherrited from DelimitedTextReader
-    description = 'PVGeo: Delimited Points'  # Should be overriden
+    # extensions are inherited from DelimitedTextReader
+    description = 'PVGeo: Delimited Points'  # Should be overridden
 
     def __init__(self, **kwargs):
         DelimitedTextReader.__init__(self, outputType='vtkPolyData', **kwargs)
@@ -279,7 +279,7 @@ class XYZTextReader(DelimitedTextReader):
 
     __displayname__ = 'XYZ Text Reader'
     __category__ = 'reader'
-    # extensions are inherrited from DelimitedTextReader
+    # extensions are inherited from DelimitedTextReader
     description = 'PVGeo: XYZ Delimited Text Files where header has comma delimiter.'
 
     def __init__(self, **kwargs):
@@ -289,5 +289,5 @@ class XYZTextReader(DelimitedTextReader):
     # Simply override the extract titles functionality
     def _extract_header(self, content):
         """Internal helper to parse header details for XYZ files"""
-        titles = content[0][2::].split(', ')  # first two characers of header is '! '
+        titles = content[0][2::].split(', ')  # first two characters of header is '! '
         return titles, content[1::]
