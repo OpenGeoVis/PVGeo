@@ -11,7 +11,7 @@ import PVGeo
 
 ###############################################################################
 # Download sample data files and keep track of names:
-url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/Craig-Chile/LdM_topo.topo'
+url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/LdM_topo.topo'
 topo_file, _ = examples.downloads._retrieve_file(url, 'LdM_topo.topo')
 
 ###############################################################################

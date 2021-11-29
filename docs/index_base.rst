@@ -27,8 +27,8 @@ Welcome to PVGeo's code docs!
    :target: https://github.com/OpenGeoVis/PVGeo/actions/workflows/test.yml
    :alt: Testing Status
 
-.. image:: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/master
+.. image:: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/main/graph/badge.svg
+   :target: https://codecov.io/gh/OpenGeoVis/PVGeo/branch/main
    :alt: Code Coverage
 
 .. image:: https://img.shields.io/github/contributors/OpenGeoVis/PVGeo.svg?logo=github&logoColor=white

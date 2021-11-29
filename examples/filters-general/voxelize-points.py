@@ -19,7 +19,7 @@ import PVGeo
 
 ###############################################################################
 # Download sample data files and keep track of names:
-url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/fault_points.csv'
+url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv'
 fault_file, _ = examples.downloads._retrieve_file(url, 'fault_points.csv')
 
 ###############################################################################

@@ -11,7 +11,7 @@ from PVGeo.grids import SurferGridReader
 ###############################################################################
 # Download a sample Surfer grid file
 fname = 'surfer-grid.grd'
-url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/{}'.format(fname)
+url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/{}'.format(fname)
 filename, _ = examples.downloads._retrieve_file(url, fname)
 dem = SurferGridReader().apply(filename)
 

@@ -12,7 +12,7 @@ def GetInstallationPaths(echo=False):
         # MAC OS INSTALL
         print('We are assuming you are on Mac OS:')
         PV_PLUGIN_PATH = '%s/%s' % (path, 'PVPlugins')
-        script = 'curl -s  https://raw.githubusercontent.com/OpenGeoVis/PVGeo/master/installMac.sh | sh -s'
+        script = 'curl -s  https://raw.githubusercontent.com/OpenGeoVis/PVGeo/main/installMac.sh | sh -s'
         # Install launch agents
         print('Copy paste the following line(s) to execute in your bash terminal:\n')
         print('%s %s' % (script, PYTHONPATH))

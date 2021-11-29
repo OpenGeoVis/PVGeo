@@ -30,7 +30,7 @@ Optional dependencies
 
 PVGeo has a few non-required dependencies that enable more algorithms and
 features when available. All requirements can be found in the
-`requirements.txt <https://github.com/OpenGeoVis/PVGeo/blob/master/requirements.txt>`_
+`requirements.txt <https://github.com/OpenGeoVis/PVGeo/blob/main/requirements.txt>`_
 file in the repo but the needed requirements for PVGeo to work will be installed
 with PVGeo. Some useful dependencies:
 
