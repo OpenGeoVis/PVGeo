@@ -12,7 +12,6 @@ This example demos :class:`PVGeo.filters.ReshapeTable`
 import numpy as np
 import pyvista as pv
 
-import PVGeo
 from PVGeo.filters import ReshapeTable
 
 ###############################################################################

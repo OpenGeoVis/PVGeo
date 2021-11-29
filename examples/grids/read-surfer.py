@@ -4,7 +4,6 @@ Read Surfer Grid File
 
 Read an Surfer ASCII grid file
 """
-import pyvista
 from pyvista import examples
 
 from PVGeo.grids import SurferGridReader

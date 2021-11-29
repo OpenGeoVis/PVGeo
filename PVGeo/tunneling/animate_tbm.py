@@ -36,7 +36,6 @@ PropertiesHelp = dict()
 
 
 def RequestData():
-    import numpy as np
     from vtk.numpy_interface import dataset_adapter as dsa
 
     import PVGeo._helpers as inputhelp

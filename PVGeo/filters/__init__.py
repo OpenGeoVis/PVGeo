@@ -1,3 +1,4 @@
+# flake8: noqa: F401
 from .math import *
 from .slicing import *
 from .tables import *

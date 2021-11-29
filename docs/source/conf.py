@@ -15,7 +15,6 @@ import faulthandler
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-import shutil
 import sys
 
 faulthandler.enable()
@@ -86,7 +85,6 @@ Generator().DocumentPackages(
     extra=extra,
 )
 
-import numpy as np
 import pyvista
 
 # Manage errors

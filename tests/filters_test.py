@@ -778,7 +778,7 @@ class TestPointsToTube(TestBase):
 
 proj = False
 try:
-    import pyproj
+    import pyproj  # noqa
 
     proj = True
 except ImportError:

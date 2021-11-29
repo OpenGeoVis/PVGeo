@@ -4,6 +4,7 @@ through ParaView's plugin manager. This is a hack of a solution and will be
 removed once ParaView fixes the autoloading of ParaView plugins as described in
 this issue:
 """
+# flake8: noqa: F401
 import os
 import sys
 

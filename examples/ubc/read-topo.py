@@ -4,7 +4,6 @@ Read UBC Topography File
 
 Read a UBC topography file
 """
-import pyvista
 from pyvista import examples
 
 # sphinx_gallery_thumbnail_number = 1

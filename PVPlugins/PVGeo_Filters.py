@@ -847,7 +847,7 @@ class PVGeoConvertUnits(ConvertUnits):
 try:
     # Coordinate system filters depend on pyproj
     # pyproj may not be available on Windows
-    import pyproj
+    import pyproj  # noqa
 
     @smproxy.filter(name='PVGeoLonLatToUTM', label=LonLatToUTM.__displayname__)
     @smhint.xml(

@@ -4,7 +4,6 @@ Read Tensor Mesh
 
 Read a UBC tensor mesh file
 """
-import pyvista
 from pyvista import examples
 
 # sphinx_gallery_thumbnail_number = 1

@@ -14,7 +14,7 @@ environment. We will use macros to complete everyday tasks like saving
 screenshots of isometric views of a data scene or tedious tasks like making
 many slices of a single data set along a line.
 """
-
+# flake8: noqa: F401
 from . import export, vis
 from .pipeline import *
 

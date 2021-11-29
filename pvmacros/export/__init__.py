@@ -154,6 +154,7 @@ Once you have that link, use the this script on your URLs in this manner:
     <p><a href="https://vimeo.com/257833915">PVGeo Export Demo</a> from <a href="https://vimeo.com/user82050125">Bane Sullivan</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 """
+# flake8: noqa: F401
 
 from .vtkjs import *
 

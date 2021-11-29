@@ -1,3 +1,4 @@
+# flake8: noqa: F401
 try:
     # Safely test if VTK is available. This is needed for Windows installation
     def tryVTK():

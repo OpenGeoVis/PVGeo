@@ -27,7 +27,7 @@ from PVGeo.ubc import (
 discretize_available = False
 try:
     with _helpers.HiddenPrints():
-        import discretize
+        import discretize  # noqa
 except ImportError:
     pass
 else:

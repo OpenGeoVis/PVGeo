@@ -5,8 +5,6 @@ __all__ = [
     'setAxisLabelsFromBounds',
 ]
 
-import vtk
-
 
 def customAxisTicks(rng, axis=0, uniform=False):
     """Use to set custom axis ticks in the render view

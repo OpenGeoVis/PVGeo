@@ -12,7 +12,6 @@ Please note that this example only works on version of PyVista>=0.22.0
 import numpy as np
 import pyvista as pv
 
-import PVGeo
 from PVGeo.filters import CombineTables
 
 ###############################################################################

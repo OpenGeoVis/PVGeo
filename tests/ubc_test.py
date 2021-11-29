@@ -19,14 +19,13 @@ from PVGeo.ubc import (
     TensorMeshReader,
     TopoMeshAppender,
     TopoReader,
-    WriteImageDataToUBC,
     WriteRectilinearGridToUBC,
 )
 
 discretize_available = False
 try:
     with PVGeo._helpers.HiddenPrints():
-        import discretize
+        import discretize  # noqa
 except ImportError:
     warnings.warn('`discretize` is NOT available. Be sure to install it.')
 else:

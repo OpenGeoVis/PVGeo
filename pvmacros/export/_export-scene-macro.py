@@ -16,14 +16,11 @@ FILENAME_EXTENSION = '.vtkjs'
 ###                   Convenience methods and definitions                   ###
 ### ----------------------------------------------------------------------- ###
 
-import argparse
 import errno
 import gzip
 import hashlib
 import json
-import math
 import os
-import re
 import shutil
 import sys
 import time
@@ -33,10 +30,8 @@ from paraview import simple
 from paraview.vtk import *
 
 try:
-    from vtk.vtkCommonCorePython import vtkUnsignedCharArray
     from vtk.vtkFiltersGeometryPython import vtkCompositeDataGeometryFilter
 except:
-    from vtkCommonCorePython import vtkUnsignedCharArray
     from vtkFiltersGeometryPython import vtkCompositeDataGeometryFilter
 
 USER_HOME = os.path.expanduser('~')
@@ -697,7 +692,7 @@ sceneFileName = os.path.join(
 )
 
 try:
-    import zlib
+    import zlib  # noqa
 
     compression = zipfile.ZIP_DEFLATED
 except:

@@ -2,6 +2,7 @@
 This package is a set of module files for each sub-package in PVGeo. Each file here
 contains the necessary wrappings for PVGeo to be used directly in ParaView.
 """
+# flake8: noqa: F401
 import PVGeo_All
 
 from .PVGeo_Filters import *
