@@ -486,7 +486,7 @@ if discretize_available:
 
         def test_model_appender(self):
             """`OcTreeAppender` 2D: Data array name"""
-            # Creat a tree mesh to append
+            # Create a tree mesh to append
             reader = OcTreeReader()
             reader.set_mesh_filename(self.meshFileName)
             reader.add_model_file_name(self.modelFileNames[0])

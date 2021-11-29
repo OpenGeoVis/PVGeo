@@ -17,7 +17,7 @@ from .gslib import GSLibReader
 
 
 class SGeMSGridReader(GSLibReader):
-    """Generates ``vtkImageData`` from the uniform grid defined in the inout
+    """Generates ``vtkImageData`` from the uniform grid defined in the input
     file in the SGeMS grid format. This format is simply the GSLIB format where
     the header line defines the dimensions of the uniform grid.
     """
@@ -41,7 +41,7 @@ class SGeMSGridReader(GSLibReader):
             regex = re.compile(r'(\d+) (\d+) (\d+)')
             dims = regex.findall(header)
         if len(dims) < 1:
-            raise _helpers.PVGeoError('File not in proper SGeMS Grid fromat.')
+            raise _helpers.PVGeoError('File not in proper SGeMS Grid format.')
         dims = dims[0]
         return int(dims[0]), int(dims[1]), int(dims[2])
 
@@ -74,7 +74,7 @@ class SGeMSGridReader(GSLibReader):
             elif self.__extent != (self.__parse_extent(h)):
                 raise _helpers.PVGeoError('Grid dimensions change in file time series.')
         except ValueError:
-            raise _helpers.PVGeoError('File not in proper SGeMS Grid fromat.')
+            raise _helpers.PVGeoError('File not in proper SGeMS Grid format.')
         return titles, content
 
     def RequestData(self, request, inInfo, outInfo):
@@ -149,7 +149,7 @@ class WriteImageDataToSGeMS(WriterBase):
         # Get the input data object
         grd = input_data_object
 
-        # Get grid dimensions and minus one becuase this defines nodes
+        # Get grid dimensions and minus one because this defines nodes
         nx, ny, nz = grd.GetDimensions()
         nx -= 1
         ny -= 1

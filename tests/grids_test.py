@@ -159,7 +159,7 @@ class TestReverseImageDataAxii(TestBase):
         )
         image.GetPointData().AddArray(data)
         image.GetCellData().AddArray(cellData)
-        # Now perfrom the reverse for only X:
+        # Now perform the reverse for only X:
         f = ReverseImageDataAxii()
         f.SetInputDataObject(image)
         f.set_flip_x(True)
@@ -177,7 +177,7 @@ class TestReverseImageDataAxii(TestBase):
         self.assertTrue(
             np.allclose(testCells, np.flip(arrCells, axis=2).flatten(), rtol=RTOL)
         )
-        # Now perfrom the reverse for all axii:
+        # Now perform the reverse for all axii:
         f.set_flip_x(True)
         f.set_flip_y(True)
         f.set_flip_z(True)
@@ -441,7 +441,7 @@ class TestCellCenterWriter(TestBase):
         comp.SetBlock(0, grid0)
         comp.SetBlock(1, grid1)
 
-        # test the wirter
+        # test the writer
         writer = WriteCellCenterData()
         filename = os.path.join(self.filename)
         writer.SetFileName(filename)

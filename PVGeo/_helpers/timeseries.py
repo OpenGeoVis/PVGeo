@@ -12,7 +12,7 @@ import numpy as np
 
 
 def _calculate_time_range(nt, dt=1.0):
-    """Discretizes time range accoridng to step size ``dt`` in seconds"""
+    """Discretizes time range according to step size ``dt`` in seconds"""
     return np.arange(0, nt * dt, dt, dtype=float)
 
 
@@ -82,7 +82,7 @@ def get_requested_time(algorithm, outInfo, idx=0):
         utime = outInfo.Get(executive.UPDATE_TIME_STEP())
         return np.argmin(np.abs(np.array(timesteps) - utime))
     else:
-        # if we cant match the time, give first
+        # if we can't match the time, give first
         if not len(timesteps) > 0:
             raise AssertionError('Number of timesteps must be greater than 0')
         return 0
@@ -98,7 +98,7 @@ def get_input_time_steps(algorithm, port=0, idx=0):
         idx (int) : optional : the connection index on the input port
 
     Return:
-        list : the time step values of the input (if there arn't any, returns ``None``)
+        list : the time step values of the input (if there aren't any, returns ``None``)
     """
     executive = algorithm.GetExecutive()
     ii = executive.GetInputInformation(port, idx)

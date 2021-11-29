@@ -300,7 +300,7 @@ def get_input_array_xml(labels=None, nInputPorts=1, n_arrays=1, input_names='Inp
                 'You must spectify how many arrays come from each input. `len(NumberOfInputArrayChoices) != nInputPorts`.'
             )
 
-        # Now perfrom recursion
+        # Now perform recursion
         out = []
         for i in range(nInputPorts):
             # Fix labels

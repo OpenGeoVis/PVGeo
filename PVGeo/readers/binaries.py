@@ -139,7 +139,7 @@ class PackedBinariesReader(ReaderBase):
         return self.__dtype, self.__vtktype
 
     def set_data_name(self, data_name):
-        """The string name of the data array generated from the inut file."""
+        """The string name of the data array generated from the input file."""
         if data_name != self.__data_name:
             self.__data_name = data_name
             self.Modified(read_again=False)  # Don't re-read. Just request data again
@@ -153,7 +153,7 @@ class MadagascarReader(PackedBinariesReader):
     """This reads in float or double data that is packed into a Madagascar
     binary file format with a leader header. The reader ignores all of the ascii
     header details by searching for the sequence of three special characters:
-    EOL EOL EOT and it will treat the followng binary packed data as one long
+    EOL EOL EOT and it will treat the following binary packed data as one long
     array and make a ``vtkTable`` with one column of that data. The reader uses
     defaults to import as floats with native endianness. Use the Table to
     Uniform Grid or the Reshape Table filters to give more meaning to the data.

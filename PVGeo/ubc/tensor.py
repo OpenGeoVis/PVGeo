@@ -522,7 +522,7 @@ class TopoMeshAppender(AlgorithmBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         output = self.GetOutputData(outInfo, 0)
         output.DeepCopy(pdi)  # ShallowCopy if you want changes to propagate upstream
-        # Perfrom task:
+        # Perform task:
         if self.__need_to_read:
             self._read_up_front()
         # Place the model data for given timestep onto the mesh

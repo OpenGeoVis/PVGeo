@@ -824,7 +824,7 @@ class TestManySlicesAlongPoints(TestBase):
         TestBase.setUp(self)
         # create a volumetric data set
         self.grid = PVGeo.model_build.CreateTensorMesh().apply()
-        # create a spline throught the data set
+        # create a spline through the data set
 
         def path1(y):
             """Equation: x = a(y-h)^2 + k"""

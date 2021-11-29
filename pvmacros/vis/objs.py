@@ -18,7 +18,7 @@ class camera:
         cam : vtkRenderingOpenGL2Python.vtkOpenGLCamera : optional : The camera you wish to update this object to. Totally optional
         """
         if cam is None:
-            # This allows use to dynamicly select cameras
+            # This allows use to dynamically select cameras
             cam = GetActiveCamera()
         self.orientation = cam.GetOrientation()
         self.position = cam.GetPosition()
@@ -46,7 +46,7 @@ class camera:
             cam (vtkRenderingOpenGL2Python.vtkOpenGLCamera) : The camera you wish to update this object to. Totally optional
         """
         if cam is None:
-            # This allows use to dynamicly select cameras
+            # This allows use to dynamically select cameras
             cam = GetActiveCamera()
         self.orientation = cam.GetOrientation()
         self.position = cam.GetPosition()
@@ -61,7 +61,7 @@ class camera:
             cam (vtkRenderingOpenGL2Python.vtkOpenGLCamera) : The camera you wish to view/update in the current render view
         """
         if cam is None:
-            # This allows use to dynamicly select cameras
+            # This allows use to dynamically select cameras
             cam = GetActiveCamera()
         orientation = self._getOrientation()
         position = self._getPosition()
@@ -84,20 +84,20 @@ class camera:
             basenm (str) : The file basename for the screenshot
         """
         if cam is None:
-            # This allows use to dynamicly select cameras
+            # This allows use to dynamically select cameras
             cam = GetActiveCamera()
         os.chdir(path)
         self.view(cam=cam)
         WriteImage("%s.png" % (basenm))
 
-    # Static Methods for structures containt cameras
+    # Static Methods for structures contain cameras
 
     @staticmethod
     def saveViews(lib, filename='views', path=os.path.expanduser('~')):
-        """Save a serialized dictionaty/list/whatever of views out to a file. Dafault saves to user's home directory
+        """Save a serialized dictionaty/list/whatever of views out to a file. Default saves to user's home directory
 
         Args:
-            lib (dict or list) : some iterable object containg multiple `camera` objects
+            lib (dict or list) : some iterable object containing multiple `camera` objects
             filename (str) : The file basename for the serialized file
             path (str) : The directory you wish to save the views. Defaults to user home directory
         """
@@ -109,10 +109,10 @@ class camera:
 
     @staticmethod
     def loadViews(filename='views.camera', path=os.path.expanduser('~')):
-        """Load a file containg a serialized camera objects. Dafault loads from home directory if relative path
+        """Load a file containing a serialized camera objects. Default loads from home directory if relative path
 
         Args:
-            filename (str) : The file basename for the serialized file (defualt is default for output def)
+            filename (str) : The file basename for the serialized file (default is default for output def)
             path (str): The directory from which you wish to load the views. Defaults to user home directory for relative paths.
         """
         os.chdir(path)
@@ -124,13 +124,13 @@ class camera:
         """Save screenshots of many views/cameras
 
         Args:
-            view d(ict or list) : some iterable object containg multiple `camera` objects
+            view d(ict or list) : some iterable object containing multiple `camera` objects
             cam (vtkRenderingOpenGL2Python.vtkOpenGLCamera) : The camera you wish to view then save a screenshot
             path (str): The directory you wish to save the screenshot. Defaults to user home directory
             basenm (str): The file basename for the screenshot
         """
         if cam is None:
-            # This allows use to dynamicly select cameras
+            # This allows use to dynamically select cameras
             cam = GetActiveCamera()
 
         def _iter(obj):

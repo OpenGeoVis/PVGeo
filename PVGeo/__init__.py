@@ -1,5 +1,5 @@
 try:
-    # Safely test if VTK is avaialable. This is needed for Windows installation
+    # Safely test if VTK is available. This is needed for Windows installation
     def tryVTK():
         import vtk
 

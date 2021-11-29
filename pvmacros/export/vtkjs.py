@@ -1,4 +1,4 @@
-"""The ``export`` module privides a few macros for exporting data scenes within
+"""The ``export`` module provides a few macros for exporting data scenes within
 ParaView's rendering environment to the VTKjs format.
 
 """

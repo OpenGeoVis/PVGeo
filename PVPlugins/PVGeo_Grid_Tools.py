@@ -172,7 +172,7 @@ class PVGeoTableToTimeGrid(TableToTimeGrid):
             command='set_use_points',
             default_values=False,
             panel_visibility='advanced',
-            help='Set whether or not to place the data on the nodes/cells of the grid. In ParaView, switching can be a bit buggy: be sure to turn the visibility of this data object OFF on the pipeline when changing bewteen nodes/cells.',
+            help='Set whether or not to place the data on the nodes/cells of the grid. In ParaView, switching can be a bit buggy: be sure to turn the visibility of this data object OFF on the pipeline when changing between nodes/cells.',
         )
     )
     def set_use_points(self, flag):

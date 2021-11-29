@@ -1,5 +1,5 @@
 """
-A suite of algorithms designed for compatibilty with GMG Group projects such
+A suite of algorithms designed for compatibility with GMG Group projects such
 as the Open Mining Format specification.
 """
 

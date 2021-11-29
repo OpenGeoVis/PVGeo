@@ -245,7 +245,7 @@ class TestPackedBinariesReader(TestBase):
         reader.AddFileName(filename)
         reader.set_data_type('f')
         reader.set_data_name('Test Data')
-        # Perfrom Read
+        # Perform Read
         reader.Update()
         table = reader.GetOutput()
         # Check output
@@ -264,7 +264,7 @@ class TestPackedBinariesReader(TestBase):
         reader = PackedBinariesReader()
         reader.AddFileName(filename)
         reader.set_data_type('d')
-        # Perfrom Read
+        # Perform Read
         reader.Update()
         table = reader.GetOutput()
         # Check output
@@ -282,7 +282,7 @@ class TestPackedBinariesReader(TestBase):
         reader = PackedBinariesReader()
         reader.AddFileName(filename)
         reader.set_data_type(2)  # 'i' test that sending an int choice works
-        # Perfrom Read
+        # Perform Read
         reader.Update()
         table = reader.GetOutput()
         # Check output
@@ -301,7 +301,7 @@ class TestPackedBinariesReader(TestBase):
         reader.AddFileName(filename)
         reader.set_data_type('f')
         reader.set_endian('>')
-        # Perfrom Read
+        # Perform Read
         reader.Update()
         table = reader.GetOutput()
         # Check output
@@ -320,7 +320,7 @@ class TestPackedBinariesReader(TestBase):
         reader.AddFileName(filename)
         reader.set_data_type('f')
         reader.set_endian(1)  # '<' test that sending an int choice works
-        # Perfrom Read
+        # Perform Read
         reader.Update()
         table = reader.GetOutput()
         # Check output
@@ -334,7 +334,7 @@ class TestPackedBinariesReader(TestBase):
 class TestMadagascarReader(TestBase):
     """
     Test the `MadagascarReader`
-    Does not test inherrited functionality
+    Does not test inherited functionality
     """
 
     def tearDown(self):
@@ -367,7 +367,7 @@ class TestMadagascarReader(TestBase):
         reader.set_data_type('f')
         reader.set_data_name('Test Data')
         self.assertEqual(reader.get_data_name(), 'Test Data')
-        # Perfrom Read
+        # Perform Read
         reader.Update()
         table = reader.GetOutput()
         arr = nps.vtk_to_numpy(table.GetColumn(0))

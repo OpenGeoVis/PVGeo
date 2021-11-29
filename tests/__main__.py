@@ -1,6 +1,6 @@
 """This module provideas a convienance method to run all of the tests for PVGeo.
 Each suite within PVGeo has its own ``*_test.py`` file for all unittest
-implemenations to live and each file is executable on its own.
+implementations to live and each file is executable on its own.
 """
 
 __all__ = [

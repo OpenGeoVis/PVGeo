@@ -210,7 +210,7 @@ class ReaderBaseBase(AlgorithmBase):
         return self.__filenames[idx]
 
     def apply(self, filename):
-        """Given a file name (or list of file names), perfrom the read"""
+        """Given a file name (or list of file names), perform the read"""
         self.AddFileName(filename)
         self.Update()
         return pv.wrap(self.GetOutput())

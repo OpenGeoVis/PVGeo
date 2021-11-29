@@ -10,7 +10,7 @@ import sys
 
 
 class PVGeoError(Exception):
-    """This is a custom error class for handling errors when proccessing on the
+    """This is a custom error class for handling errors when processing on the
     VTK pipeline. It makes the error messages easy to decipher in ParaView and
     cleans the messages when used in Python outside of ParaView. When on the VTK
     pipeline, errors aren't really raised but passed over and printed to the
@@ -25,7 +25,7 @@ class PVGeoError(Exception):
     )
 
     def __init__(self, message):
-        # Place special characters arround the message for easy extraction
+        # Place special characters around the message for easy extraction
         self.message = (
             '\n\n\n\n' + self.QUALIFIER_L + message + self.QUALIFIER_R + '\n\n\n\n'
         )
@@ -78,7 +78,7 @@ class ErrorObserver:
         print(message)
 
     def error_occurred(self):
-        """Ask self if an error has occured"""
+        """Ask self if an error has occurred"""
         occ = self.__error_occurred
         self.__error_occurred = False
         return occ
@@ -104,7 +104,7 @@ class ErrorObserver:
 
 
 class HiddenPrints:
-    """Use this object to hide print statements when perfroming a task.
+    """Use this object to hide print statements when performing a task.
     This is used to suppress printed warnings from discretize on import:
 
     Example:

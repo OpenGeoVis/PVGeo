@@ -627,7 +627,7 @@ class PVGeoGeologyMapper(GeologyMapper):
             animateable="1"
             number_of_elements="1">
             <FileListDomain name="filename"/>
-            <Documentation>This is the file contating the mapping definitions.</Documentation>
+            <Documentation>This is the file containing the mapping definitions.</Documentation>
         </StringVectorProperty>'''
     )
     def SetFileName(self, filename):

@@ -17,7 +17,7 @@ class _GSLibReaderMethods(object):
     """A helper class to handle overriding of delimited text reading methods
     for all GSLib readers."""
 
-    # NOTE: order of inherritance matters ALOT!
+    # NOTE: order of inheritance matters A LOT!
     _header = None
     extensions = 'sgems dat geoeas gslib GSLIB txt SGEMS SGeMS'
 
@@ -27,8 +27,8 @@ class _GSLibReaderMethods(object):
             num = int(content[1])  # number of data columns
         except ValueError:
             raise _helpers.PVGeoError('This file is not in proper GSLIB format.')
-        titles = [ln.rstrip('\r\n') for ln in content[2 : 2 + num]]
-        return titles, content[2 + num : :]
+        titles = [ln.rstrip('\r\n') for ln in content[2: 2 + num]]
+        return titles, content[2 + num::]
 
     #### Seters and Geters ####
 

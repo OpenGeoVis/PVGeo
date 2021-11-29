@@ -58,10 +58,10 @@ p.show()
 
 ###############################################################################
 # Remember that in the script given above we shuffle the points to demonstrate
-# that the points make a useable line but we need to reconstruct the order of the
+# that the points make a usable line but we need to reconstruct the order of the
 # points. We do this by using the *Use Nearest Nbr Approx* checkbox; this will
-# ensure that a useable path is generate from the points.
-# Go ahead and use the ``nearest_nbr`` argument for the algorith.
+# ensure that a usable path is generate from the points.
+# Go ahead and use the ``nearest_nbr`` argument for the algorithm.
 # Now it looks good (see image below)!
 
 

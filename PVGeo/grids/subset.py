@@ -155,7 +155,7 @@ class ExtractTopography(FilterBase):
         grid = self.GetOutputData(outInfo, 0)
         grid.DeepCopy(igrid)
 
-        # Perfrom task
+        # Perform task
         ncells = igrid.GetNumberOfCells()
         active = np.zeros((ncells), dtype=int)
         # Now iterate through the cells in the grid and test if they are beneath the topography

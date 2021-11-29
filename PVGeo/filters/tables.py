@@ -137,7 +137,7 @@ class ReshapeTable(FilterBase):
             )
 
         # Use numpy.reshape() to reshape data NOTE: only 2D because it is a table
-        # NOTE: column access of this reshape is not contigous
+        # NOTE: column access of this reshape is not contiguous
         data = np.array(
             np.reshape(data.flatten(), (self.__nrows, self.__ncols), order=self.__order)
         )
@@ -145,7 +145,7 @@ class ReshapeTable(FilterBase):
 
         # Add new array to output table and assign incremental names (e.g. Field0)
         for i in range(self.__ncols):
-            # Make a contigous array from the column we want
+            # Make a contiguous array from the column we want
             col = np.array(data[:, i])
             # allow type to be determined by input
             # VTK arrays need a name. Set arbitrarily
@@ -170,13 +170,13 @@ class ReshapeTable(FilterBase):
     #### Setters and Getters ####
 
     def set_names(self, names):
-        """Set names using a semicolon (;) seperated string or a list of strings
+        """Set names using a semicolon (;) separated string or a list of strings
 
         Args:
             names (string): a string of data array names for the reshaped table
                 using a semicolon (;) to spearate
         """
-        # parse the names (a semicolon seperated list of names)
+        # parse the names (a semicolon separated list of names)
         if isinstance(names, str):
             names = names.split(';')
         if self.__names != names:
@@ -284,7 +284,7 @@ class ExtractArray(FilterBase):
 
 
 class SplitTableOnArray(FilterBase):
-    """A filter to seperate table data based on the unique values of a given data
+    """A filter to separate table data based on the unique values of a given data
     array into a ``vtkMultiBlockDataSet``.
     """
 
@@ -307,7 +307,7 @@ class SplitTableOnArray(FilterBase):
         table = self.GetInputData(inInfo, 0, 0)
         # Get number of points
         output = vtk.vtkMultiBlockDataSet.GetData(outInfo, 0)
-        #### Perfrom task ####
+        #### Perform task ####
         # Get input array
         field, name = self.__input_array[0], self.__input_array[1]
         wtbl = dsa.WrapDataObject(table)
@@ -363,7 +363,7 @@ class SplitTableOnArray(FilterBase):
 class AppendTableToCellData(FilterPreserveTypeBase):
     """Takes two inputs, a dataset to preserve and a table of data, where the
     data in the table is appended to the CellData of the input dataset.
-    The 0th port is the dataset to preserve and the 1st port is a table whos rows
+    The 0th port is the dataset to preserve and the 1st port is a table who's rows
     will be appended as CellData to the 0th port. The number of rows in the table
     MUST match the number of cells in the input dataset.
     """

@@ -55,7 +55,7 @@ p.show()
 ###############################################################################
 # Now we can use the **Many Slices Along Points** filter.
 # Specify the model as the  dataset input and the points as the points input
-# to that filter and apply the algorith.
+# to that filter and apply the algorithm.
 # That's it! The filter should be applied and you can fine tune the number of
 # slices to what you prefer!
 

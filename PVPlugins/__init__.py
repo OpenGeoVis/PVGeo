@@ -1,6 +1,6 @@
 """
 This package is a set of module files for each sub-package in PVGeo. Each file here
-contains the neccessary wrappings for PVGeo to be used directly in ParaView.
+contains the necessary wrappings for PVGeo to be used directly in ParaView.
 """
 from .PVGeo_Filters import *
 from .PVGeo_Grid_Tools import *

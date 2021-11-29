@@ -148,7 +148,7 @@ class PVGeoPointsToTube(PointsToTube):
     #### Setters and Getters ####
 
     # NOTE: Not givign the use the choice of cell type for this...
-    # It is still accesible to change though...
+    # It is still accessible to change though...
 
     @smproperty.doublevector(name="Radius", default_values=10.0)
     def set_radius(self, radius):
@@ -163,7 +163,7 @@ class PVGeoPointsToTube(PointsToTube):
             name='Use Nearest Neighbor',
             command='set_use_nearest_nbr',
             default_values=False,
-            help='A boolean to set whether to use a nearest neighbor approxiamtion when building path from input points.',
+            help='A boolean to set whether to use a nearest neighbor approximation when building path from input points.',
         )
     )
     def set_use_nearest_nbr(self, flag):
@@ -218,8 +218,8 @@ class PVGeoReshapeTable(ReshapeTable):
 
     @smproperty.stringvector(name="Names", default_values='Field 0')
     def set_names(self, names):
-        """Set names using a semicolon (;) seperated list"""
-        # parse the names (a semicolon seperated list of names)
+        """Set names using a semicolon (;) separated list"""
+        # parse the names (a semicolon separated list of names)
         ReshapeTable.set_names(self, names)
 
     @smproperty.intvector(name="Number of Columns", default_values=6)
@@ -453,7 +453,7 @@ class PVGeoArrayMath(ArrayMath):
     def set_multiplier(self, val):
         ArrayMath.set_multiplier(self, val)
 
-    @smproperty.stringvector(name="New Array Name", default_values="Mathed Up")
+    @smproperty.stringvector(name="New Array Name", default_values="New Array")
     def set_new_array_name(self, name):
         ArrayMath.set_new_array_name(self, name)
 

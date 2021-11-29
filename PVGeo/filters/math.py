@@ -21,7 +21,7 @@ from ..base import FilterBase, FilterPreserveTypeBase
 # ---- ArrayMath ----#
 class ArrayMath(FilterPreserveTypeBase):
     """This filter allows the user to select two input data arrays on which to
-    perfrom math operations. The input arrays are used in their order of
+    perform math operations. The input arrays are used in their order of
     selection for the operations.
 
     Args:
@@ -152,11 +152,11 @@ class ArrayMath(FilterPreserveTypeBase):
     #### Algorithm Methods ####
 
     def RequestData(self, request, inInfo, outInfo):
-        """Used by pipeline to perfrom operation and generate output"""
+        """Used by pipeline to perform operation and generate output"""
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
-        # Perfrom task
+        # Perform task
         self._math_up(pdi, pdo)
         return 1
 
@@ -418,7 +418,7 @@ class NormalizeArray(FilterPreserveTypeBase):
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
-        # Perfrom task
+        # Perform task
         self._normalize(pdi, pdo)
         return 1
 
@@ -668,7 +668,7 @@ class ArraysToRGBA(FilterPreserveTypeBase):
         r_arr, g_arr, b_arr, a_arr = self._get_arrays(wpdi)
         r_arr, g_arr, b_arr, a_arr = self._mask_arrays(r_arr, g_arr, b_arr, a_arr)
 
-        # normalize each color array bewteen 0 and 255
+        # normalize each color array between 0 and 255
         r_arr = NormalizeArray._feature_scale(r_arr, [0, 255])
         g_arr = NormalizeArray._feature_scale(g_arr, [0, 255])
         b_arr = NormalizeArray._feature_scale(b_arr, [0, 255])

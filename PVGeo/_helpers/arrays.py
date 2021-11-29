@@ -67,7 +67,7 @@ def get_field_id_by_name(field):
 
 
 def copy_arrays_to_point_data(pdi, pdo, field):
-    """Copys arrays from an input to an ouput's point data.
+    """Copies arrays from an input to an ouput's point data.
 
     Args:
         pdi (vtkDataObject) : The input data object to copy from

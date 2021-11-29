@@ -69,7 +69,7 @@ class AddCellConnToPoints(FilterBase):
         self.__unique = kwargs.get('unique', False)
 
     def _connect_cells(self, pdi, pdo, log_time=False):
-        """Internal helper to perfrom the connection"""
+        """Internal helper to perform the connection"""
         # NOTE: Type map is specified in vtkCellType.h
         cell_type = self.__cell_type
 
@@ -80,7 +80,7 @@ class AddCellConnToPoints(FilterBase):
         pdi = pyvista.wrap(pdi)
         points = np.copy(
             pdi.points
-        )  # New NumPy array of poins so we dont destroy input
+        )  # New NumPy array of points so we dont destroy input
         if self.__unique:
             # Remove repeated points
             indexes = np.unique(points, return_index=True, axis=0)[1]
@@ -153,7 +153,7 @@ class AddCellConnToPoints(FilterBase):
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
-        # Perfrom task
+        # Perform task
         self._connect_cells(pdi, pdo)
         return 1
 
@@ -285,8 +285,8 @@ class LonLatToUTM(FilterPreserveTypeBase):
             raise _helpers.PVGeoError(
                 'Input data object does not have points to convert.'
             )
-        coords = pdi.points.copy()  # New NumPy array of poins so we dont destroy input
-        # Now Conver the points
+        coords = pdi.points.copy()  # New NumPy array of points so we dont destroy input
+        # Now Convert the points
         points = self.__convert_2d(coords[:, 0], coords[:, 1], coords[:, 2])
         output = pdi.copy()
         output.points = points
@@ -527,7 +527,7 @@ class RotationTool(object):
             from sklearn.neighbors import KDTree as Tree
         except ImportError:
             from scipy.spatial import cKDTree as Tree
-        # Creat the indexing range for searching the points:
+        # Create the indexing range for searching the points:
         num = len(pts)
         rng = np.linspace(0, num - 1, num=num, dtype=int)
         N = int(num * sample) + 1
@@ -620,7 +620,7 @@ class RotatePoints(FilterBase):
         wpdi = dsa.WrapDataObject(pdi)  # NumPy wrapped input
         points = np.array(
             wpdi.Points
-        )  # New NumPy array of poins so we dont destroy input
+        )  # New NumPy array of points so we dont destroy input
         origin = self.__origin
         if self.__use_corner:
             idx = np.argmin(points[:, 0])
@@ -686,7 +686,7 @@ class ExtractPoints(FilterBase):
             raise _helpers.PVGeoError('Input data object does not have XYZ points.')
         points = np.array(
             wpdi.Points
-        )  # New NumPy array of poins so we dont destroy input
+        )  # New NumPy array of points so we dont destroy input
         # Now transfer data
         f = vtk.vtkCellDataToPointData()
         f.SetInputData(pdi)
@@ -894,7 +894,7 @@ class ConvertUnits(FilterPreserveTypeBase):
         pdi = self.GetInputData(inInfo, 0, 0)
         # Get number of points
         pdo = self.GetOutputData(outInfo, 0)
-        #### Perfrom task ####
+        #### Perform task ####
         filt = vtk.vtkTransformFilter()
         trans = vtk.vtkTransform()
         trans.Scale(self.get_conversion(), self.get_conversion(), self.get_conversion())

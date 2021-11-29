@@ -42,7 +42,7 @@ class OutlineContinents(AlgorithmBase):
         return 1
 
     def set_radius(self, radius):
-        """Set the radius of the globe. Defualt is 6.371.0e9 meters"""
+        """Set the radius of the globe. Default is 6.371.0e9 meters"""
         if self.__radius != radius:
             self.__radius = radius
             self.Modified()
@@ -131,7 +131,7 @@ class GlobeSource(AlgorithmBase):
         return 1
 
     def set_radius(self, radius):
-        """Set the radius of the globe. Defualt is 6.371.0e9 meters"""
+        """Set the radius of the globe. Default is 6.371.0e9 meters"""
         if self.__radius != radius:
             self.__radius = radius
             self.Modified()

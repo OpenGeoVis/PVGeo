@@ -120,7 +120,7 @@ class CreateEvenRectilinearGrid(AlgorithmBase):
         """Used by pipeline to generate the output"""
         # Get output of Proxy
         pdo = self.GetOutputData(outInfo, 0)
-        # Perfrom task
+        # Perform task
         nx, ny, nz = self.__extent[0] + 1, self.__extent[1] + 1, self.__extent[2] + 1
 
         xcoords = np.linspace(self.__xrange[0], self.__xrange[1], num=nx)

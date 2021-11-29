@@ -241,7 +241,7 @@ class GeologyMapper(FilterPreserveTypeBase):
         """Map the values defined by ``geol`` dataframe to the values in ``arr``.
         The first column (name should be ``Index``) will be used for the mapping.
         """
-        # TODO: check that geol table contains all indexs found in arr
+        # TODO: check that geol table contains all indices found in arr
         # Return the mapped table
         geol.set_index(geol.keys()[0])
         return geol[geol.keys()[1::]].iloc[arr]
@@ -257,7 +257,7 @@ class GeologyMapper(FilterPreserveTypeBase):
         wpdi = dsa.WrapDataObject(pdi)
         arr = _helpers.get_numpy_array(wpdi, field, name)
 
-        #### Perfrom task ####
+        #### Perform task ####
         geol = self._read_definitions(self.__filename, self.__deli)
         data = self._map_values(geol, arr)
 

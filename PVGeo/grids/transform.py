@@ -55,7 +55,7 @@ class TableToTimeGrid(FilterBase):
         self.__origin = list(origin)  # image data origin
         self.__order = order  # unpacking order: 'C' or 'F'
         self.__data = None  # this is where we hold the data so entire filter does
-        # not execute on every time step. Data will be a disctionary of 4D arrays
+        # not execute on every time step. Data will be a dictionary of 4D arrays
         # each 4D array will be in (nx, ny, nz, nt) shape
         self.__needToRun = True
         self.__timesteps = None
@@ -72,19 +72,19 @@ class TableToTimeGrid(FilterBase):
         df = interface.table_to_data_frame(table)
         keys = df.keys().tolist()
         for k in keys:
-            # perfrom the reshape properly. using the user given extent
+            # perform the reshape properly. using the user given extent
             arr = np.reshape(np.array(df[k]), self.__extent, order=self.__order)
             # Now order correctly for the image data spatial reference
             #   this uses the user specified dimension definitions
             for i in range(4):
                 arr = np.moveaxis(arr, sd[i], dims[i])
-            # Now add to disctionary
+            # Now add to dictionary
             self.__data[k] = arr
         self.__needToRun = False
         return
 
     def _build_image_data(self, img):
-        """Internal helper to consturct the output"""
+        """Internal helper to construct the output"""
         if self.__needToUpdateOutput:
             # Clean out the output data object
             img.DeepCopy(vtk.vtkImageData())
@@ -118,7 +118,7 @@ class TableToTimeGrid(FilterBase):
         table = self.GetInputData(inInfo, 0, 0)
         img = self.GetOutputData(outInfo, 0)
         self._build_image_data(img)
-        # Perfrom task
+        # Perform task
         if self.__needToRun:
             self._set_data(table)
         # Get requested time index
@@ -283,7 +283,7 @@ class ReverseImageDataAxii(FilterBase):
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
-        # Perfrom task
+        # Perform task
         self._reverse_grid_axes(pdi, pdo)
         return 1
 
@@ -390,7 +390,7 @@ class TranslateGridOrigin(FilterBase):
         # Get input/output of Proxy
         pdi = self.GetInputData(inInfo, 0, 0)
         pdo = self.GetOutputData(outInfo, 0)
-        # Perfrom task
+        # Perform task
         self._translate(pdi, pdo)
         return 1
 

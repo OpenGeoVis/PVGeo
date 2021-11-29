@@ -58,13 +58,13 @@ class TestDataFrameConversions(TestBase):
         wtbl = dsa.WrapDataObject(table)
         # Now check the vtkTable
         for i, name in enumerate(names):
-            # Check data aray names
+            # Check data array names
             self.assertEqual(table.GetColumnName(i), name)
             # Check data contents
             arr = wtbl.RowData[name]
             self.assertTrue(np.allclose(arr, df[name].values, rtol=RTOL))
 
-        # Now test backwards compatability
+        # Now test backwards compatibility
         dfo = interface.table_to_data_frame(table)
         # self.assertTrue(df.equals(dfo)) # Sorting is different on Py2.7 and 3.5
         for name in dfo.keys():

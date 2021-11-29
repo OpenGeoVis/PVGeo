@@ -470,7 +470,7 @@ else:
         sceneName = generateSceneName()
     else:
         sceneName = args[1]
-    # arg 2 shoud be compression prefernece
+    # arg 2 should be compression prefernece
     doCompressArrays = args[2]
 
 

@@ -437,7 +437,7 @@ class WriteImageDataToSurfer(WriterBase):
         return pv.wrap(self.GetOutput())
 
     def Write(self, input_data_object=None, array_name=None):
-        """Perfrom the write out."""
+        """Perform the write out."""
         if input_data_object:
             self.SetInputDataObject(input_data_object)
             if array_name:
@@ -447,7 +447,7 @@ class WriteImageDataToSurfer(WriterBase):
         self.Update()
 
     def write(self, input_data_object=None, array_name=None):
-        """Perfrom the write out."""
+        """Perform the write out."""
         return self.Write(input_data_object=input_data_object, array_name=array_name)
 
 
@@ -490,7 +490,7 @@ class EsriGridReader(DelimitedTextReader):
         return [self.__data_name], content[6::]
 
     def _file_contents_to_data_frame(self, contents):
-        """Creates a dataframe with a sinlge array for the file data."""
+        """Creates a dataframe with a single array for the file data."""
         data = []
         for content in contents:
             arr = np.fromiter(
@@ -502,7 +502,7 @@ class EsriGridReader(DelimitedTextReader):
 
     def _get_raw_data(self, idx=0):
         """This will return the proper data for the given timestep.
-        This method handles Surfer's NaN data values and checkes the value range
+        This method handles Surfer's NaN data values and checks the value range
         """
         data = self._data[idx].values.astype(float).ravel()
         nans = np.argwhere(data == self.NODATA_VALUE)
@@ -623,7 +623,7 @@ class LandsatReader(ReaderBaseBase):
         return self._get_file_contents()
 
     def _get_raw_data(self, idx=0):
-        """Perfroms the read for the selected bands"""
+        """Performs the read for the selected bands"""
         allowed = []
         for i in range(self._dataselection.GetNumberOfArrays()):
             name = self._dataselection.GetArrayName(i)

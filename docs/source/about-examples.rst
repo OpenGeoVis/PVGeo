@@ -22,7 +22,7 @@ issue on the `issues page`_ so that we can promptly fix it.
 Typical Usage
 -------------
 
-All algorithms deployed in *PVGeo* are useable in the following manners in a
+All algorithms deployed in *PVGeo* are usable in the following manners in a
 Python environment where the algorithm can be called and instantiated with
 keyword arguments for its parameters and then applied on some input data set.
 

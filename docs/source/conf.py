@@ -67,7 +67,7 @@ extra = """
 
 """
 
-# Automatically generate documentaion pages
+# Automatically generate documentation pages
 Generator().DocumentPackages(
     [PVGeo, pvmacros],
     index_base='../index_base.rst',

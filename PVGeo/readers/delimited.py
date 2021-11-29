@@ -70,7 +70,7 @@ class DelimitedTextReader(ReaderBase):
                 contents.append(
                     np.genfromtxt(
                         f, dtype=str, delimiter='\n', comments=self.__comments
-                    )[self.__skipRows : :]
+                    )[self.__skipRows::]
                 )
             except (IOError, OSError) as fe:
                 raise _helpers.PVGeoError(str(fe))
@@ -82,7 +82,7 @@ class DelimitedTextReader(ReaderBase):
         """Override this. Removes header from single file's content."""
         if len(np.shape(content)) > 2:
             raise _helpers.PVGeoError(
-                "`_extract_header()` can only handle a sigle file's content"
+                "`_extract_header()` can only handle a single file's content"
             )
         idx = 0
         if self.__has_titles:

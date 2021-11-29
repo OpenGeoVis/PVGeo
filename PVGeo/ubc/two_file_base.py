@@ -261,7 +261,7 @@ class ModelAppenderBase(base.AlgorithmBase):
         output.DeepCopy(pdi)  # ShallowCopy if you want changes to propagate upstream
         # Get requested time index
         i = _helpers.get_requested_time(self, outInfo)
-        # Perfrom task:
+        # Perform task:
         if self.__need_to_read:
             self._read_up_front()
         # Place the model data for given timestep onto the mesh
