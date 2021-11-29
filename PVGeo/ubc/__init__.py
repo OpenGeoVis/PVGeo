@@ -1,7 +1,7 @@
+from .general import *
 from .tensor import *
 from .two_file_base import *
 from .write import *
-from .general import *
 
 try:
     from .disc_meshes import *

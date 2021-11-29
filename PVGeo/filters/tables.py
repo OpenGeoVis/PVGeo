@@ -9,10 +9,9 @@ __all__ = [
 __displayname__ = 'Table Operations'
 
 import numpy as np
+import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-
-import pyvista as pv
 
 from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase

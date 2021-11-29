@@ -17,8 +17,9 @@ def check_numpy(alert='print'):
     Args:
         alert (str): raise a ``'warn'`` (warning) or an ``'error'`` (PVGeoError) if NumPy is not at a satisfactory version.
     """
-    import numpy as np
     import warnings
+
+    import numpy as np
 
     v = np.array(np.__version__.split('.')[0:2], dtype=int)
     if v[0] >= 1 and v[1] >= 10:

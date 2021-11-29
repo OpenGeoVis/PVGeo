@@ -9,19 +9,19 @@ from PVGeo import _helpers
 
 # Classes to Decorate
 from PVGeo.ubc import (
-    TensorMeshAppender,
-    TensorMeshReader,
     DiscretizeMeshReader,
     GeologyMapper,
-    MagObsReader,
     GravGradReader,
     GravObsReader,
+    MagObsReader,
+    OcTreeAppender,
+    OcTreeReader,
+    TensorMeshAppender,
+    TensorMeshReader,
+    TopoMeshAppender,
     TopoReader,
     WriteImageDataToUBC,
     WriteRectilinearGridToUBC,
-    OcTreeAppender,
-    OcTreeReader,
-    TopoMeshAppender,
 )
 
 discretize_available = False

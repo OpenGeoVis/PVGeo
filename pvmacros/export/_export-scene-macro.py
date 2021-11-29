@@ -16,19 +16,28 @@ FILENAME_EXTENSION = '.vtkjs'
 ###                   Convenience methods and definitions                   ###
 ### ----------------------------------------------------------------------- ###
 
-import sys, os, re, time, errno, json, math, gzip, shutil, argparse, hashlib
-
+import argparse
+import errno
+import gzip
+import hashlib
+import json
+import math
+import os
+import re
+import shutil
+import sys
+import time
 import zipfile
 
 from paraview import simple
 from paraview.vtk import *
 
 try:
-    from vtk.vtkFiltersGeometryPython import vtkCompositeDataGeometryFilter
     from vtk.vtkCommonCorePython import vtkUnsignedCharArray
+    from vtk.vtkFiltersGeometryPython import vtkCompositeDataGeometryFilter
 except:
-    from vtkFiltersGeometryPython import vtkCompositeDataGeometryFilter
     from vtkCommonCorePython import vtkUnsignedCharArray
+    from vtkFiltersGeometryPython import vtkCompositeDataGeometryFilter
 
 USER_HOME = os.path.expanduser('~')
 ROOT_OUTPUT_DIRECTORY = EXPORT_DIRECTORY.replace('${USER_HOME}', USER_HOME)

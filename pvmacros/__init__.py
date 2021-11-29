@@ -15,8 +15,7 @@ screenshots of isometric views of a data scene or tedious tasks like making
 many slices of a single data set along a line.
 """
 
-from . import export
-from . import vis
+from . import export, vis
 from .pipeline import *
 
 __author__ = 'Bane Sullivan'

@@ -6,6 +6,7 @@ Read SGeMS Grid file formats.
 """
 # sphinx_gallery_thumbnail_number = 2
 from pyvista import examples
+
 from PVGeo.gslib import SGeMSGridReader
 
 ###############################################################################

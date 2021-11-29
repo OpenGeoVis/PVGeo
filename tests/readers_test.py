@@ -2,21 +2,15 @@ import os
 import shutil
 import tempfile
 
+from base import TestBase
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 
 # VTK imports:
 from vtk.util import numpy_support as nps
 
-from base import TestBase
-
 # Functionality to test:
-from PVGeo.readers import (
-    DelimitedTextReader,
-    MadagascarReader,
-    PackedBinariesReader,
-    XYZTextReader,
-)
+from PVGeo.readers import DelimitedTextReader, MadagascarReader, PackedBinariesReader, XYZTextReader
 
 RTOL = 0.000001
 

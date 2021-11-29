@@ -2,22 +2,16 @@ import os
 import shutil
 import tempfile
 
+from base import TestBase
 import numpy as np
+import pyvista
 from vtk.numpy_interface import dataset_adapter as dsa
 
 # VTK imports:
 from vtk.util import numpy_support as nps
 
-import pyvista
-from base import TestBase
-
 # Functionality to test:
-from PVGeo.gslib import (
-    GSLibReader,
-    SGeMSGridReader,
-    WriteImageDataToSGeMS,
-    WriteTableToGSLib,
-)
+from PVGeo.gslib import GSLibReader, SGeMSGridReader, WriteImageDataToSGeMS, WriteTableToGSLib
 
 RTOL = 0.000001
 

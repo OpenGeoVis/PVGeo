@@ -8,6 +8,7 @@ This example demonstrates :class:`PVGeo.filters.AppendCellCenters`
 """
 
 from pyvista import examples
+
 from PVGeo.filters import AppendCellCenters
 
 ###############################################################################

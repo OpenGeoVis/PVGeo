@@ -17,11 +17,13 @@ warped slice.
 This example demos :class:`PVGeo.filters.ManySlicesAlongPoints`
 
 """
+import numpy as np
+
 ###############################################################################
 # sphinx_gallery_thumbnail_number = 3
 import pyvista
 from pyvista import examples
-import numpy as np
+
 import PVGeo
 from PVGeo.filters import ManySlicesAlongPoints
 

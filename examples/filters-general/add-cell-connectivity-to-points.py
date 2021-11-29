@@ -16,6 +16,7 @@ spline (either in the order by index or using a nearest neighbor calculation).
 # sphinx_gallery_thumbnail_number = 2
 import numpy as np
 import pyvista
+
 from PVGeo import points_to_poly_data
 from PVGeo.filters import AddCellConnToPoints
 

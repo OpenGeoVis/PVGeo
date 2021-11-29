@@ -6,8 +6,9 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 """
 from pyvista import examples
-from PVGeo.gslib import GSLibReader
+
 from PVGeo.grids import TableToTimeGrid
+from PVGeo.gslib import GSLibReader
 
 ###############################################################################
 

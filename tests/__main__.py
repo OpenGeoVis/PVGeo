@@ -7,10 +7,10 @@ __all__ = [
     'test',
 ]
 
-import unittest
 import glob
 import os
 import sys
+import unittest
 
 if sys.version_info >= (3, 0):
     import faulthandler

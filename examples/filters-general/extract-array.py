@@ -7,9 +7,10 @@ a histogram of that data array.
 
 This example demos :class:`PVGeo.filters.ExtractArray`
 """
-from PVGeo.filters import ExtractArray
-from pyvista import examples
 import matplotlib.pyplot as plt
+from pyvista import examples
+
+from PVGeo.filters import ExtractArray
 
 ###############################################################################
 # Create input data

@@ -12,17 +12,16 @@ __displayname__ = 'File I/O'
 
 # NOTE: Surfer no data value: 1.70141E+38
 
-import warnings
 from struct import unpack
+import warnings
 
+import espatools
 import numpy as np
 import pandas as pd
 import properties
+import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-
-import espatools
-import pyvista as pv
 
 from .. import _helpers, interface
 from ..base import ReaderBase, ReaderBaseBase, WriterBase

@@ -9,11 +9,13 @@ volumetric operations.
 
 This example demos :class:`PVGeo.filters.VoxelizePoints`
 """
+import numpy as np
+import pandas as pd
+
 # sphinx_gallery_thumbnail_number = 2
 import pyvista
 from pyvista import examples
-import numpy as np
-import pandas as pd
+
 import PVGeo
 from PVGeo.filters import VoxelizePoints
 

@@ -8,9 +8,7 @@ from paraview.util.vtkAlgorithm import smproperty, smproxy
 from PVGeo import _helpers
 
 # Classes to Decorate
-from PVGeo.readers import PackedBinariesReader, MadagascarReader
-from PVGeo.readers import DelimitedTextReader, XYZTextReader
-
+from PVGeo.readers import DelimitedTextReader, MadagascarReader, PackedBinariesReader, XYZTextReader
 
 ###############################################################################
 

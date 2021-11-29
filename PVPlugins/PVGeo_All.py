@@ -4,14 +4,14 @@ through ParaView's plugin manager. This is a hack of a solution and will be
 removed once ParaView fixes the autoloading of ParaView plugins as described in
 this issue:
 """
-import sys
 import os
+import sys
 
 sys.path.append(os.path.dirname(__file__))
 
 from PVGeo_Filters import *
-from PVGeo_Grid_Tools import *
 from PVGeo_GSLib import *
+from PVGeo_Grid_Tools import *
 from PVGeo_Model_Builder import *
 from PVGeo_Readers import *
 from PVGeo_Tunneling import *

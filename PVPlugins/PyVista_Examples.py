@@ -3,11 +3,9 @@ paraview_plugin_version = '2.1.0'
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import smhint, smproxy
-
 from pyvista import examples
 import vtk
 from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
-
 
 MENU_CAT = 'PyVista: Example Data Sets'
 

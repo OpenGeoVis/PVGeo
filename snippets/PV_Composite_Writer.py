@@ -3,15 +3,15 @@
 Author: Bane Sullivan <banesulli@gmail.com>
 """
 
+import numpy as np
+
 # This is module to import. It provides VTKPythonAlgorithmBase, the base class
 # for all python-based vtkAlgorithm subclasses in VTK and decorators used to
 # 'register' the algorithm with ParaView along with information about UI.
 from paraview.util.vtkAlgorithm import *
-from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
-
 import vtk
-import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
+from vtk.util.vtkAlgorithm import VTKPythonAlgorithmBase
 
 
 class WriterBase(VTKPythonAlgorithmBase):

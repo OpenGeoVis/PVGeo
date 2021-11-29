@@ -1,3 +1,4 @@
+from base import TestBase
 import numpy as np
 import pandas as pd
 
@@ -5,7 +6,6 @@ import pandas as pd
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
-from base import TestBase
 from PVGeo import interface
 
 # Functionality to test:

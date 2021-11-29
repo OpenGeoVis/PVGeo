@@ -8,10 +8,9 @@ __all__ = [
 __displayname__ = 'Slicing'
 
 import numpy as np
+import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-
-import pyvista as pv
 
 from .. import _helpers
 from ..base import FilterBase

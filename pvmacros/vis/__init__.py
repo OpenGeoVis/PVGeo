@@ -1,6 +1,7 @@
 from __future__ import print_function
-from .objs import *
+
 from .axes import *
+from .objs import *
 
 __displayname__ = 'Visualization'
 

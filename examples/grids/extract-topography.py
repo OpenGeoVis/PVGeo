@@ -19,12 +19,14 @@ processing software that need the entire model discretization with an active
 cells field.
 
 """
+import os
+
 # sphinx_gallery_thumbnail_number = 6
 import pyvista
 from pyvista import examples
-from PVGeo.model_build import CreateTensorMesh
+
 from PVGeo.grids import ExtractTopography
-import os
+from PVGeo.model_build import CreateTensorMesh
 
 ###############################################################################
 # For the grid data set, let's use one of the Model Building sources

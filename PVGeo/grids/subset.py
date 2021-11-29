@@ -5,10 +5,9 @@ __all__ = [
 __displayname__ = 'Subsetting'
 
 import numpy as np
+import pyvista as pv
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-
-import pyvista as pv
 
 from .. import interface
 from ..base import FilterBase

@@ -14,11 +14,11 @@ __displayname__ = 'Base Classes'
 
 import warnings
 
+import pyvista as pv
+
 # Outside Imports:
 import vtk  # NOTE: This is the first import executed in the package! Keep here!!
 import vtk.util.vtkAlgorithm as valg  # import VTKPythonAlgorithmBase
-
-import pyvista as pv
 
 from . import _helpers
 

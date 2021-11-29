@@ -8,8 +8,9 @@ try:
     tryVTK()  # Safe import in this manner so docs soes not iterate over VTK
 except ImportError:
     import sys
-    import mock
     import warnings
+
+    import mock
 
     # Mock the VTK module to run installation
     sys.modules['vtk'] = mock.Mock()
@@ -20,17 +21,10 @@ except ImportError:
     )
 else:
     # Import Base Classes
-    from .base import *
-
-    # Import Suites
-    from . import filters
-    from . import grids
-    from . import gslib
-    from . import model_build
-    from . import readers
-
     # TODO: from . import tunneling
-    from . import ubc
+    # Import Suites
+    from . import filters, grids, gslib, model_build, readers, ubc
+    from .base import *
 
     try:
         __import__('omf')
@@ -45,8 +39,8 @@ else:
     from .interface import *
 # VTK-dependent imports complete
 
-from .cmaps import *
 from . import version
+from .cmaps import *
 
 # Project MetaData
 __author__ = 'Bane Sullivan'

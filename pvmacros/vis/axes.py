@@ -106,9 +106,9 @@ def setAxisLabelsFromBounds(name, num=(10, 10, 5)):
         >>> pvm.vis.setAxisLabelsFromBounds('TableToPoints1', num=(5, 10, 2))
 
     """
-    import paraview.simple as pvs
-    import paraview.servermanager as sm
     import numpy as np
+    import paraview.servermanager as sm
+    import paraview.simple as pvs
 
     # Get the input data
     src = pvs.FindSource(name)

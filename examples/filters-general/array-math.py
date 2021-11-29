@@ -15,6 +15,7 @@ This example demos: :class:`PVGeo.filters.ArrayMath`
 """
 import numpy as np
 import pyvista
+
 import PVGeo
 from PVGeo.filters import ArrayMath
 

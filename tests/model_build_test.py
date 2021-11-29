@@ -1,6 +1,5 @@
-import vtk
-
 from base import TestBase
+import vtk
 
 # Functionality to test:
 from PVGeo.model_build import (

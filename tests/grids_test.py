@@ -2,6 +2,7 @@ import os
 import shutil
 import tempfile
 
+from base import TestBase
 import numpy as np
 
 # VTK imports:
@@ -9,7 +10,6 @@ import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
 
 import PVGeo
-from base import TestBase
 from PVGeo import interface
 
 # Functionality to test:

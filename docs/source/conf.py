@@ -8,14 +8,15 @@
 
 # -- Path setup --------------------------------------------------------------
 
+import faulthandler
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-import sys
 import shutil
-import faulthandler
+import sys
 
 faulthandler.enable()
 
@@ -37,8 +38,10 @@ autodoc_mock_imports = ['paraview']
 # # Automattically generat source pages:
 # os.system('python ./make_files.py')
 
-import PVGeo, pvmacros  # for documenting
 from gendocs import Generator
+
+import PVGeo  # for documenting
+import pvmacros
 
 append_material = """
 
@@ -83,8 +86,8 @@ Generator().DocumentPackages(
     extra=extra,
 )
 
-import pyvista
 import numpy as np
+import pyvista
 
 # Manage errors
 pyvista.set_error_output_file('errors.txt')

@@ -4,10 +4,11 @@ Read Tensor Mesh
 
 Read a UBC tensor mesh file
 """
-# sphinx_gallery_thumbnail_number = 1
-import PVGeo
 import pyvista
 from pyvista import examples
+
+# sphinx_gallery_thumbnail_number = 1
+import PVGeo
 
 ###############################################################################
 # Download sample data files and keep track of names:

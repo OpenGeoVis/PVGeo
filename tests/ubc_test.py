@@ -3,6 +3,7 @@ import shutil
 import tempfile
 import warnings
 
+from base import TestBase
 import numpy as np
 from vtk.numpy_interface import dataset_adapter as dsa
 
@@ -10,7 +11,6 @@ from vtk.numpy_interface import dataset_adapter as dsa
 from vtk.util import numpy_support as nps
 
 import PVGeo
-from base import TestBase
 
 # Functionality to test:
 from PVGeo.ubc import (

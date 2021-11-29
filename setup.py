@@ -2,11 +2,12 @@
 and ParaView.
 """
 
-import setuptools
-import warnings
+import os
 import platform
 import sys
-import os
+import warnings
+
+import setuptools
 
 __version__ = '2.1.0'
 

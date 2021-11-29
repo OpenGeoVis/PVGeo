@@ -17,10 +17,9 @@ __displayname__ = 'Point/Line Sets'
 from datetime import datetime
 
 import numpy as np
+import pyvista
 import vtk
 from vtk.numpy_interface import dataset_adapter as dsa
-
-import pyvista
 
 from .. import _helpers, interface
 from ..base import FilterBase, FilterPreserveTypeBase
@@ -415,6 +414,7 @@ class RotationTool(object):
         .. _printipi: https://github.com/Wallacoloo/printipi/blob/master/util/rotation_matrix.py
         """
         from math import acos, cos, sin
+
         from numpy import cross, dot
         from numpy.linalg import norm
 

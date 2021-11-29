@@ -8,9 +8,11 @@ This example will demonstrate how to to build a tube from a set of points in
 Takes points from a `vtkPolyData` object and constructs a line of those points
 then builds a polygonal tube around that line with some specified radius and number of sides.
 """
+import numpy as np
+
 # sphinx_gallery_thumbnail_number = 2
 import pyvista
-import numpy as np
+
 from PVGeo.filters import PointsToTube
 
 ###############################################################################
