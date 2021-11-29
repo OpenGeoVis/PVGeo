@@ -364,7 +364,7 @@ class TestExtractTopography(TestBase):
         x = y = np.linspace(0, 100, num=50, dtype=float)
         g = np.meshgrid(x, y)
         # Convert to XYZ points
-        points = np.vstack(map(np.ravel, g)).T
+        points = np.vstack(list(map(np.ravel, g))).T
         z = np.reshape(np.full(len(points), 55.0), (len(points), -1))
         # z = np.reshape(np.random.uniform(low=55.0, high=65.0, size=(len(points),)), (len(points), -1))
         points = np.concatenate((points, z), axis=1)

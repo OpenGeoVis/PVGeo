@@ -191,5 +191,5 @@ class MadagascarReader(PackedBinariesReader):
             else:
                 raw = raw[idx:]  # deletes the header
                 raw = raw.replace(CTLSEQ, rpl)  # removes the control sequence
-        arr = np.fromstring(raw, dtype=dtype)
+        arr = np.frombuffer(raw, dtype=dtype)
         return arr
