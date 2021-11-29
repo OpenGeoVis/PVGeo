@@ -73,7 +73,13 @@ class AlgorithmBase(valg.VTKPythonAlgorithmBase):
         """A convenience method to get the output data object of this ``PVGeo``
         algorithm.
         """
-        return pv.wrap(self.GetOutputDataObject(port))
+        output = pv.wrap(self.GetOutputDataObject(port))
+        if hasattr(output, 'active_scalars') and not output.active_scalars is not None and output.n_arrays:
+            if len(output.point_data):
+                output.set_active_scalars(output.point_data.keys()[0])
+            elif len(output.cell_data):
+                output.set_active_scalars(output.cell_data.keys()[0])
+        return output
 
     def error_occurred(self):
         """A convenience method for handling errors on the VTK pipeline
