@@ -141,8 +141,8 @@ class AddCellConnToPoints(FilterBase):
             poly.SetLines(cells)
         else:
             raise _helpers.PVGeoError('Cell type ({}) not supported'.format(cell_type))
-        for key, val in pdi.point_arrays.items():
-            poly.point_arrays[key] = val
+        for key, val in pdi.point_data.items():
+            poly.point_data[key] = val
         pdo.DeepCopy(poly)
         if log_time:
             print("exectuted in {}".format(datetime.now() - start_time))
