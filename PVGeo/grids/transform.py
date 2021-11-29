@@ -53,7 +53,7 @@ class TableToTimeGrid(FilterBase):
         # NOTE: self.__dims[0] is the x axis index, etc., self.__dims[3] is the time axis
         self.__spacing = list(spacing)  # image data spacing
         self.__origin = list(origin)  # image data origin
-        self.__order = list(order)  # unpacking order: 'C' or 'F'
+        self.__order = order  # unpacking order: 'C' or 'F'
         self.__data = None  # this is where we hold the data so entire filter does
         # not execute on every time step. Data will be a disctionary of 4D arrays
         # each 4D array will be in (nx, ny, nz, nt) shape
@@ -65,7 +65,7 @@ class TableToTimeGrid(FilterBase):
         self.__needToUpdateOutput = True
 
     def _set_data(self, table):
-        """Internal helper to restructure the inpt table arrays"""
+        """Internal helper to restructure the input table arrays"""
         self.__data = dict()
         dims = np.array([d for d in self.__dims])
         sd = dims.argsort()
@@ -73,7 +73,7 @@ class TableToTimeGrid(FilterBase):
         keys = df.keys().tolist()
         for k in keys:
             # perfrom the reshape properly. using the user given extent
-            arr = np.reshape(df[k].values, self.__extent, order=self.__order)
+            arr = np.reshape(np.array(df[k]), self.__extent, order=self.__order)
             # Now order correctly for the image data spatial reference
             #   this uses the user specified dimension definitions
             for i in range(4):
