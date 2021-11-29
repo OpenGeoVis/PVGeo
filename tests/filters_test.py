@@ -957,11 +957,11 @@ class TestBuildSurfaceFromPoints(TestBase):
         z_range = np.arange(20)
         mesh = BuildSurfaceFromPoints.create_surface(points, z_range)
         assert isinstance(mesh, pyvista.StructuredGrid)
-        assert mesh.dimensions == [len(z_range), len(points), 1]
+        assert mesh.dimensions == (len(z_range), len(points), 1)
         poly = pyvista.PolyData(points)
         mesh = BuildSurfaceFromPoints(zcoords=z_range).apply(poly)
         assert isinstance(mesh, pyvista.StructuredGrid)
-        assert mesh.dimensions == [len(z_range), len(points), 1]
+        assert mesh.dimensions == (len(z_range), len(points), 1)
         return True
 
 
