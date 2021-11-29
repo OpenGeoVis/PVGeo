@@ -174,7 +174,7 @@ def points_to_poly_data(points, copy_z=False):
         raise RuntimeError('Points must be 3D. Try adding a third dimension of zeros.')
 
     atts = points[:, 3::]
-    points = points[:, 0:3].astype(np.float)
+    points = points[:, 0:3].astype(float)
 
     # Create polydata
     pdata = pv.PolyData(points)

@@ -254,7 +254,7 @@ class SurferGridReader(ReaderBase):
             [dmin, dmax] = [float(n) for n in f.readline().split()]
             # Read in the rest of the file as a 1D array
             data = np.fromiter(
-                (np.float(s) for line in f for s in line.split()), dtype=float
+                (float(s) for line in f for s in line.split()), dtype=float
             )
 
         grd = GridInfo(
@@ -504,7 +504,7 @@ class EsriGridReader(DelimitedTextReader):
         """This will return the proper data for the given timestep.
         This method handles Surfer's NaN data values and checkes the value range
         """
-        data = self._data[idx].values.astype(np.float).ravel()
+        data = self._data[idx].values.astype(float).ravel()
         nans = np.argwhere(data == self.NODATA_VALUE)
         # if np.any(nans):
         #     data = np.ma.masked_where(nans, data)

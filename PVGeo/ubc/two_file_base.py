@@ -94,12 +94,12 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             if v[0] >= 1 and v[1] >= 10:
                 # max_rows in numpy versions >= 1.10
                 msh = np.genfromtxt(
-                    FileName, delimiter='\n', dtype=np.str, comments='!', max_rows=1
+                    FileName, delimiter='\n', dtype=str, comments='!', max_rows=1
                 )
             else:
                 # This reads whole file :(
                 msh = np.genfromtxt(
-                    FileName, delimiter='\n', dtype=np.str, comments='!'
+                    FileName, delimiter='\n', dtype=str, comments='!'
                 )[0]
         except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
@@ -147,7 +147,7 @@ class ubcMeshReaderBase(base.TwoFileReaderBase):
             return out
         # Perform IO
         try:
-            data = np.genfromtxt(FileName, dtype=np.float, comments='!')
+            data = np.genfromtxt(FileName, dtype=float, comments='!')
         except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         return data
