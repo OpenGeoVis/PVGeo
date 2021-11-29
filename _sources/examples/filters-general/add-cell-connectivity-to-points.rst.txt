@@ -34,12 +34,13 @@ spline (either in the order by index or using a nearest neighbor calculation).
 
 sphinx_gallery_thumbnail_number = 2
 
-.. GENERATED FROM PYTHON SOURCE LINES 17-22
+.. GENERATED FROM PYTHON SOURCE LINES 17-23
 
 .. code-block:: default
 
     import numpy as np
     import pyvista
+
     from PVGeo import points_to_poly_data
     from PVGeo.filters import AddCellConnToPoints
 
@@ -50,25 +51,27 @@ sphinx_gallery_thumbnail_number = 2
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-24
+.. GENERATED FROM PYTHON SOURCE LINES 24-25
 
 First, lets generate some points which we'd like to connect
 
-.. GENERATED FROM PYTHON SOURCE LINES 24-41
+.. GENERATED FROM PYTHON SOURCE LINES 25-44
 
 .. code-block:: default
 
 
+
     def path1(y):
         """Equation: x = a(y-h)^2 + k"""
-        a = - 110.0 / 160.0**2
-        x = a*y**2 + 110.0
-        idxs = np.argwhere(x>0)
-        return x[idxs][:,0], y[idxs][:,0]
+        a = -110.0 / 160.0 ** 2
+        x = a * y ** 2 + 110.0
+        idxs = np.argwhere(x > 0)
+        return x[idxs][:, 0], y[idxs][:, 0]
+
 
     x, y = path1(np.arange(0.0, 200.0, 25.0))
     zo = np.linspace(9.0, 11.0, num=len(y))
-    coords = np.vstack((x,y,zo)).T
+    coords = np.vstack((x, y, zo)).T
     # Shuffle points to demonstrate value of Nearest Neighbor
     np.random.shuffle(coords)
 
@@ -82,7 +85,7 @@ First, lets generate some points which we'd like to connect
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-50
+.. GENERATED FROM PYTHON SOURCE LINES 45-53
 
 Apply the Filter
 ++++++++++++++++
@@ -93,7 +96,7 @@ the **Add Cell Connectivity To Points** filter from
 The output data should look really wacky and incorrectly built like the image
 below; this is good.
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-57
+.. GENERATED FROM PYTHON SOURCE LINES 53-60
 
 .. code-block:: default
 
@@ -107,34 +110,25 @@ below; this is good.
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_add-cell-connectivity-to-points_001.png
-    :alt: add cell connectivity to points
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(260.7157668726004, 274.0556106226004, 209.0556106226004),
-     (61.66015624999999, 75.0, 10.0),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/filters-general/images/sphx_glr_add-cell-connectivity-to-points_001.png
+   :alt: add cell connectivity to points
+   :srcset: /examples/filters-general/images/sphx_glr_add-cell-connectivity-to-points_001.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-64
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 61-67
 
 Remember that in the script given above we shuffle the points to demonstrate
-that the points make a useable line but we need to reconstruct the order of the
+that the points make a usable line but we need to reconstruct the order of the
 points. We do this by using the *Use Nearest Nbr Approx* checkbox; this will
-ensure that a useable path is generate from the points.
-Go ahead and use the ``nearest_nbr`` argument for the algorith.
+ensure that a usable path is generate from the points.
+Go ahead and use the ``nearest_nbr`` argument for the algorithm.
 Now it looks good (see image below)!
 
-.. GENERATED FROM PYTHON SOURCE LINES 64-72
+.. GENERATED FROM PYTHON SOURCE LINES 67-75
 
 .. code-block:: default
 
@@ -149,28 +143,19 @@ Now it looks good (see image below)!
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_add-cell-connectivity-to-points_002.png
-    :alt: add cell connectivity to points
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/filters-general/images/sphx_glr_add-cell-connectivity-to-points_002.png
+   :alt: add cell connectivity to points
+   :srcset: /examples/filters-general/images/sphx_glr_add-cell-connectivity-to-points_002.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(260.7157668726004, 274.0556106226004, 209.0556106226004),
-     (61.66015624999999, 75.0, 10.0),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.288 seconds)
+   **Total running time of the script:** ( 0 minutes  2.059 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_add-cell-connectivity-to-points.py:

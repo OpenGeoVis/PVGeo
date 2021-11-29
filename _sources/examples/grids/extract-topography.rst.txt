@@ -37,16 +37,18 @@ to create model discretizations within ParaView for export to external
 processing software that need the entire model discretization with an active
 cells field.
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-29
+.. GENERATED FROM PYTHON SOURCE LINES 22-31
 
 .. code-block:: default
+
+    import os
 
     # sphinx_gallery_thumbnail_number = 6
     import pyvista
     from pyvista import examples
-    from PVGeo.model_build import CreateTensorMesh
+
     from PVGeo.grids import ExtractTopography
-    import os
+    from PVGeo.model_build import CreateTensorMesh
 
 
 
@@ -55,7 +57,7 @@ cells field.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 30-37
+.. GENERATED FROM PYTHON SOURCE LINES 32-39
 
 For the grid data set, let's use one of the Model Building sources
 with the following parameters:
@@ -65,44 +67,37 @@ with the following parameters:
 - Y Cells: ``'1000 500 55*250 500 1000'``
 - Z Cells: ``'30*100.0 5*250.0 500'``
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-45
+.. GENERATED FROM PYTHON SOURCE LINES 39-49
 
 .. code-block:: default
 
 
-    mesh = CreateTensorMesh(origin=[793000, 9192500, 2690],
-                            xcellstr='1000 500 50*250 500 1000',
-                            ycellstr='1000 500 55*250 500 1000',
-                            zcellstr='30*100.0 5*250.0 500').apply()
+    mesh = CreateTensorMesh(
+        origin=[793000, 9192500, 2690],
+        xcellstr='1000 500 50*250 500 1000',
+        ycellstr='1000 500 55*250 500 1000',
+        zcellstr='30*100.0 5*250.0 500',
+    ).apply()
 
     mesh.plot(show_grid=True, color=True, show_edges=True)
 
 
 
 
-.. image:: /examples/grids/images/sphx_glr_extract-topography_001.png
-    :alt: extract topography
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(826749.3788872141, 9226874.378887214, 26314.378887214076),
-     (800750.0, 9200875.0, 315.0),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_001.png
+   :alt: extract topography
+   :srcset: /examples/grids/images/sphx_glr_extract-topography_001.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-47
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 50-51
 
 Now load the topography file from the example data:
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-57
+.. GENERATED FROM PYTHON SOURCE LINES 51-61
 
 .. code-block:: default
 
@@ -119,31 +114,22 @@ Now load the topography file from the example data:
 
 
 
-.. image:: /examples/grids/images/sphx_glr_extract-topography_002.png
-    :alt: extract topography
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(826749.3788872141, 9226874.378887214, 26314.378887214076),
-     (800750.0, 9200875.0, 315.0),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_002.png
+   :alt: extract topography
+   :srcset: /examples/grids/images/sphx_glr_extract-topography_002.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-61
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 62-65
 
 Now that you have the topography and a grid data set,
 let's go ahead and use the **Extract Topography** filter. Be sure to properly
 select the inputs to the algorithm.
 
-.. GENERATED FROM PYTHON SOURCE LINES 61-64
+.. GENERATED FROM PYTHON SOURCE LINES 65-68
 
 .. code-block:: default
 
@@ -153,25 +139,16 @@ select the inputs to the algorithm.
 
 
 
-.. image:: /examples/grids/images/sphx_glr_extract-topography_003.png
-    :alt: extract topography
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(826749.3788872141, 9226874.378887214, 26314.378887214076),
-     (800750.0, 9200875.0, 315.0),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_003.png
+   :alt: extract topography
+   :srcset: /examples/grids/images/sphx_glr_extract-topography_003.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 65-73
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 69-77
 
 op='underneath', tolerance=0.001, offset=0.0, invert=False, remove=False
 This will show the cells that are active underneath the topography surface
@@ -182,39 +159,30 @@ applying a *Threshold* filter to chop out all values below 1.
 The resulting grid with cells above the topography extracted will look like the
 rendering below:
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-76
+.. GENERATED FROM PYTHON SOURCE LINES 77-80
 
 .. code-block:: default
 
-    threshed = extracted.threshold(0.5)
+    threshed = extracted.threshold(0.5, scalars='Extracted')
     threshed.plot(color=True, show_edges=True)
 
 
 
 
-.. image:: /examples/grids/images/sphx_glr_extract-topography_004.png
-    :alt: extract topography
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(826749.3788872141, 9226874.378887214, 26314.378887214076),
-     (800750.0, 9200875.0, 315.0),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_004.png
+   :alt: extract topography
+   :srcset: /examples/grids/images/sphx_glr_extract-topography_004.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 77-78
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 81-82
 
 How well did this remove cells above the topography surface?
 
-.. GENERATED FROM PYTHON SOURCE LINES 78-85
+.. GENERATED FROM PYTHON SOURCE LINES 82-89
 
 .. code-block:: default
 
@@ -228,34 +196,25 @@ How well did this remove cells above the topography surface?
 
 
 
-.. image:: /examples/grids/images/sphx_glr_extract-topography_005.png
-    :alt: extract topography
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(826749.3788872141, 9226874.378887214, 26314.378887214076),
-     (800750.0, 9200875.0, 315.0),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_005.png
+   :alt: extract topography
+   :srcset: /examples/grids/images/sphx_glr_extract-topography_005.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 86-88
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 90-92
 
 Is that extraction too close to the topography surface? To better extract the
 topographic surface, you can set a tolerance:
 
-.. GENERATED FROM PYTHON SOURCE LINES 88-96
+.. GENERATED FROM PYTHON SOURCE LINES 92-100
 
 .. code-block:: default
 
-    extracted = ExtractTopography(tolerance=100., remove=True).apply(mesh, topo)
+    extracted = ExtractTopography(tolerance=100.0, remove=True).apply(mesh, topo)
 
     p = pyvista.Plotter()
     p.add_mesh(topo, cmap='terrain')
@@ -266,61 +225,43 @@ topographic surface, you can set a tolerance:
 
 
 
-.. image:: /examples/grids/images/sphx_glr_extract-topography_006.png
-    :alt: extract topography
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(826749.3084199977, 9226874.308419997, 26314.1533907008),
-     (800750.0, 9200875.0, 314.844970703125),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_006.png
+   :alt: extract topography
+   :srcset: /examples/grids/images/sphx_glr_extract-topography_006.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-98
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 101-102
 
 Note that there are other extraction operations like an ``'intersection'``:
 
-.. GENERATED FROM PYTHON SOURCE LINES 98-102
+.. GENERATED FROM PYTHON SOURCE LINES 102-106
 
 .. code-block:: default
 
-    extracted = ExtractTopography(op='intersection',
-                                  remove=True,
-                                  tolerance=100.).apply(mesh, topo)
+    extracted = ExtractTopography(op='intersection', remove=True, tolerance=100.0).apply(
+        mesh, topo
+    )
     extracted.plot(color=True, show_edges=True)
 
 
 
-.. image:: /examples/grids/images/sphx_glr_extract-topography_007.png
-    :alt: extract topography
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_007.png
+   :alt: extract topography
+   :srcset: /examples/grids/images/sphx_glr_extract-topography_007.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(826266.3526735591, 9226391.352673559, 27406.352673559122),
-     (800750.0, 9200875.0, 1890.0),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  12.800 seconds)
+   **Total running time of the script:** ( 0 minutes  6.734 seconds)
 
 
 .. _sphx_glr_download_examples_grids_extract-topography.py:

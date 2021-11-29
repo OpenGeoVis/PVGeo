@@ -32,14 +32,12 @@ Feature Scaling and Standard Score.
 
 This example demos :class:`PVGeo.filters.NormalizeArray`
 
-.. GENERATED FROM PYTHON SOURCE LINES 17-23
+.. GENERATED FROM PYTHON SOURCE LINES 17-21
 
 .. code-block:: default
 
-    import numpy as np
-    import pyvista
     from pyvista import examples
-    import PVGeo
+
     from PVGeo.filters import NormalizeArray
 
 
@@ -49,11 +47,11 @@ This example demos :class:`PVGeo.filters.NormalizeArray`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 24-25
+.. GENERATED FROM PYTHON SOURCE LINES 22-23
 
 Create some input data. this can be any `vtkDataObject`
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-28
+.. GENERATED FROM PYTHON SOURCE LINES 23-26
 
 .. code-block:: default
 
@@ -63,25 +61,16 @@ Create some input data. this can be any `vtkDataObject`
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_normalize-array_001.png
-    :alt: normalize array
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(21.886664873203234, 21.886664873203234, 21.886664873203234),
-     (4.5, 4.5, 4.5),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/filters-general/images/sphx_glr_normalize-array_001.png
+   :alt: normalize array
+   :srcset: /examples/filters-general/images/sphx_glr_normalize-array_001.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 29-35
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 27-33
 
 .. code-block:: default
 
@@ -89,33 +78,43 @@ Create some input data. this can be any `vtkDataObject`
     # Apply the filter
     f = NormalizeArray(normalization='feature_scale', new_name='foo')
     output = f.apply(mesh, title)
-    print(output)
+    output
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>UniformGrid</th><th>Information</th></tr>
+    <tr><td>N Cells</td><td>729</td></tr>
+    <tr><td>N Points</td><td>1000</td></tr>
+    <tr><td>X Bounds</td><td>0.000e+00, 9.000e+00</td></tr>
+    <tr><td>Y Bounds</td><td>0.000e+00, 9.000e+00</td></tr>
+    <tr><td>Z Bounds</td><td>0.000e+00, 9.000e+00</td></tr>
+    <tr><td>Dimensions</td><td>10, 10, 10</td></tr>
+    <tr><td>Spacing</td><td>1.000e+00, 1.000e+00, 1.000e+00</td></tr>
+    <tr><td>N Arrays</td><td>3</td></tr>
+    </table>
 
-    UniformGrid (0x7f9f05d98220)
-      N Cells:      729
-      N Points:     1000
-      X Bounds:     0.000e+00, 9.000e+00
-      Y Bounds:     0.000e+00, 9.000e+00
-      Z Bounds:     0.000e+00, 9.000e+00
-      Dimensions:   10, 10, 10
-      Spacing:      1.000e+00, 1.000e+00, 1.000e+00
-      N Arrays:     3
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td><b>Spatial Point Data</b></td><td>Points</td><td>float64</td><td>1</td><td>0.000e+00</td><td>7.290e+02</td></tr>
+    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>0.000e+00</td><td>1.000e+00</td></tr>
+    <tr><td>Spatial Cell Data</td><td>Cells</td><td>float64</td><td>1</td><td>0.000e+00</td><td>5.120e+02</td></tr>
+    </table>
 
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 36-37
+.. GENERATED FROM PYTHON SOURCE LINES 34-35
 
 .. code-block:: default
 
@@ -123,28 +122,19 @@ Create some input data. this can be any `vtkDataObject`
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_normalize-array_002.png
-    :alt: normalize array
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/filters-general/images/sphx_glr_normalize-array_002.png
+   :alt: normalize array
+   :srcset: /examples/filters-general/images/sphx_glr_normalize-array_002.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(21.886664873203234, 21.886664873203234, 21.886664873203234),
-     (4.5, 4.5, 4.5),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.657 seconds)
+   **Total running time of the script:** ( 0 minutes  0.763 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_normalize-array.py:

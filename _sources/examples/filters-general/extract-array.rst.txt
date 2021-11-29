@@ -26,13 +26,14 @@ a histogram of that data array.
 
 This example demos :class:`PVGeo.filters.ExtractArray`
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-14
+.. GENERATED FROM PYTHON SOURCE LINES 10-15
 
 .. code-block:: default
 
-    from PVGeo.filters import ExtractArray
-    from pyvista import examples
     import matplotlib.pyplot as plt
+    from pyvista import examples
+
+    from PVGeo.filters import ExtractArray
 
 
 
@@ -41,11 +42,11 @@ This example demos :class:`PVGeo.filters.ExtractArray`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-16
+.. GENERATED FROM PYTHON SOURCE LINES 16-17
 
 Create input data
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-18
+.. GENERATED FROM PYTHON SOURCE LINES 17-19
 
 .. code-block:: default
 
@@ -58,11 +59,11 @@ Create input data
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-20
+.. GENERATED FROM PYTHON SOURCE LINES 20-21
 
 Construct the filter
 
-.. GENERATED FROM PYTHON SOURCE LINES 20-26
+.. GENERATED FROM PYTHON SOURCE LINES 21-27
 
 .. code-block:: default
 
@@ -70,27 +71,35 @@ Construct the filter
     # Define the array to extract
     # Apply the filter on the input
     table = filt.apply(dataset, 'Elevation')
-    print(table)
+    table
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>Table</th><th>Information</th></tr>
+    <tr><td>N Rows</td><td>152709</td></tr>
+    <tr><td>N Arrays</td><td>1</td></tr>
+    </table>
 
-    Table (0x7f9f0cbc3880)
-      N Rows:       152709
-      N Arrays:     1
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td>Elevation</td><td>float32</td><td>1</td><td>6.820e+02</td><td>2.543e+03</td></tr>
+    </table>
 
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 27-28
+.. GENERATED FROM PYTHON SOURCE LINES 28-29
 
 .. code-block:: default
 
@@ -98,9 +107,10 @@ Construct the filter
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_extract-array_001.png
-    :alt: extract array
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/filters-general/images/sphx_glr_extract-array_001.png
+   :alt: extract array
+   :srcset: /examples/filters-general/images/sphx_glr_extract-array_001.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -119,7 +129,7 @@ Construct the filter
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.519 seconds)
+   **Total running time of the script:** ( 0 minutes  0.554 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-array.py:

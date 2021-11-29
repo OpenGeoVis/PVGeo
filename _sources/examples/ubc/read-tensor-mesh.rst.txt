@@ -27,10 +27,10 @@ Read a UBC tensor mesh file
 
 .. code-block:: default
 
+    from pyvista import examples
+
     # sphinx_gallery_thumbnail_number = 1
     import PVGeo
-    import pyvista
-    from pyvista import examples
 
 
 
@@ -47,9 +47,9 @@ Download sample data files and keep track of names:
 
 .. code-block:: default
 
-    url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/Craig-Chile/craig_chile.msh'
+    url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/craig_chile.msh'
     mesh_file, _ = examples.downloads._retrieve_file(url, 'craig_chile.msh')
-    url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/Craig-Chile/Lpout.mod'
+    url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/Lpout.mod'
     model_file, _ = examples.downloads._retrieve_file(url, 'Lpout.mod')
 
 
@@ -71,30 +71,38 @@ Read the mesh and model
     reader.set_mesh_filename(mesh_file)
     reader.add_model_file_name(model_file)
     mesh = reader.apply()
-    print(mesh)
+    mesh
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>RectilinearGrid</th><th>Information</th></tr>
+    <tr><td>N Cells</td><td>190440</td></tr>
+    <tr><td>N Points</td><td>200900</td></tr>
+    <tr><td>X Bounds</td><td>3.550e+05, 3.722e+05</td></tr>
+    <tr><td>Y Bounds</td><td>5.999e+06, 6.016e+06</td></tr>
+    <tr><td>Z Bounds</td><td>-5.250e+03, 3.000e+03</td></tr>
+    <tr><td>Dimensions</td><td>70, 70, 41</td></tr>
+    <tr><td>N Arrays</td><td>1</td></tr>
+    </table>
 
-    RectilinearGrid (0x7f9f0cbce9a0)
-      N Cells:      190440
-      N Points:     200900
-      X Bounds:     3.550e+05, 3.722e+05
-      Y Bounds:     5.999e+06, 6.016e+06
-      Z Bounds:     -5.250e+03, 3.000e+03
-      Dimensions:   70, 70, 41
-      N Arrays:     1
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td><b>Lpout.mod</b></td><td>Cells</td><td>float64</td><td>1</td><td>-6.000e-01</td><td>3.000e-01</td></tr>
+    </table>
 
-
-
-
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
 .. GENERATED FROM PYTHON SOURCE LINES 28-29
 
@@ -110,21 +118,12 @@ Use a `PyVista` ``threshold`` filter to remove ``NaN`` data values
 
 
 
-.. image:: /examples/ubc/images/sphx_glr_read-tensor-mesh_001.png
-    :alt: read tensor mesh
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/ubc/images/sphx_glr_read-tensor-mesh_001.png
+   :alt: read tensor mesh
+   :srcset: /examples/ubc/images/sphx_glr_read-tensor-mesh_001.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(392348.1001399256, 6036348.100139925, 27598.10013992562),
-     (363625.0, 6007625.0, -1125.0),
-     (0.0, 0.0, 1.0)]
 
 
 
@@ -142,21 +141,12 @@ Or inspect slices of the model
 
 
 
-.. image:: /examples/ubc/images/sphx_glr_read-tensor-mesh_002.png
-    :alt: read tensor mesh
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/ubc/images/sphx_glr_read-tensor-mesh_002.png
+   :alt: read tensor mesh
+   :srcset: /examples/ubc/images/sphx_glr_read-tensor-mesh_002.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(392348.1001399256, 6036348.100139925, 27598.10013992562),
-     (363625.0, 6007625.0, -1125.0),
-     (0.0, 0.0, 1.0)]
 
 
 
@@ -172,28 +162,19 @@ Or threshold a data range
 
 
 
-.. image:: /examples/ubc/images/sphx_glr_read-tensor-mesh_003.png
-    :alt: read tensor mesh
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/ubc/images/sphx_glr_read-tensor-mesh_003.png
+   :alt: read tensor mesh
+   :srcset: /examples/ubc/images/sphx_glr_read-tensor-mesh_003.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(384737.1076481045, 6027487.107648104, 19892.107648104513),
-     (363875.0, 6006625.0, -970.0),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.471 seconds)
+   **Total running time of the script:** ( 0 minutes  2.727 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-tensor-mesh.py:

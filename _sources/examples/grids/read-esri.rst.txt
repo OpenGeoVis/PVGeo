@@ -27,9 +27,9 @@ Read an ESRI ASCII grid file
 
 .. code-block:: default
 
-    import pyvista
-    from PVGeo.grids import EsriGridReader
     from pyvista import examples
+
+    from PVGeo.grids import EsriGridReader
 
 
 
@@ -42,25 +42,51 @@ Read an ESRI ASCII grid file
 
 Download a sample ESRI grid file
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-16
+.. GENERATED FROM PYTHON SOURCE LINES 13-17
 
 .. code-block:: default
 
     filename, _ = examples.downloads._download_file('esri_grid.dem.zip')
     dem = EsriGridReader().apply(filename)
+    dem
 
 
 
 
 
 
+.. raw:: html
 
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>UniformGrid</th><th>Information</th></tr>
+    <tr><td>N Cells</td><td>4875263</td></tr>
+    <tr><td>N Points</td><td>4879680</td></tr>
+    <tr><td>X Bounds</td><td>3.666e+05, 3.732e+05</td></tr>
+    <tr><td>Y Bounds</td><td>3.733e+06, 3.740e+06</td></tr>
+    <tr><td>Z Bounds</td><td>0.000e+00, 0.000e+00</td></tr>
+    <tr><td>Dimensions</td><td>2208, 2210, 1</td></tr>
+    <tr><td>Spacing</td><td>3.000e+00, 3.000e+00, 3.000e+00</td></tr>
+    <tr><td>N Arrays</td><td>1</td></tr>
+    </table>
 
-.. GENERATED FROM PYTHON SOURCE LINES 17-18
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td><b>Data</b></td><td>Points</td><td>float64</td><td>1</td><td>-3.936e+02</td><td>3.988e+02</td></tr>
+    </table>
+
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
+
+.. GENERATED FROM PYTHON SOURCE LINES 18-19
 
 Apply a filter to the DEM to have realistic topography
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-20
+.. GENERATED FROM PYTHON SOURCE LINES 19-21
 
 .. code-block:: default
 
@@ -69,28 +95,19 @@ Apply a filter to the DEM to have realistic topography
 
 
 
-.. image:: /examples/grids/images/sphx_glr_read-esri_001.png
-    :alt: read esri
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/grids/images/sphx_glr_read-esri_001.png
+   :alt: read esri
+   :srcset: /examples/grids/images/sphx_glr_read-esri_001.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(380396.17906938447, 3746898.1790693845, 10488.30242143526),
-     (369910.5, 3736412.5, 2.62335205078125),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  9.511 seconds)
+   **Total running time of the script:** ( 0 minutes  8.646 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-esri.py:

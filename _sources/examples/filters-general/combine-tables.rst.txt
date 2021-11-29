@@ -34,7 +34,7 @@ Please note that this example only works on version of PyVista>=0.22.0
 
     import numpy as np
     import pyvista as pv
-    import PVGeo
+
     from PVGeo.filters import CombineTables
 
 
@@ -58,11 +58,11 @@ Create some input tables
     # Populate the tables
     n = 100
     titles = ('Array 0', 'Array 1', 'Array 2')
-    arr0 = np.random.random(n) # Table 0
-    arr1 = np.random.random(n) # Table 0
+    arr0 = np.random.random(n)  # Table 0
+    arr1 = np.random.random(n)  # Table 0
     t0[titles[0]] = arr0
     t0[titles[1]] = arr1
-    arr2 = np.random.random(n) # Table 1
+    arr2 = np.random.random(n)  # Table 1
     t1[titles[2]] = arr2
     arrs = [arr0, arr1, arr2]
 
@@ -77,49 +77,66 @@ Create some input tables
 
 .. code-block:: default
 
-    print(t0)
+    t0
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>Table</th><th>Information</th></tr>
+    <tr><td>N Rows</td><td>100</td></tr>
+    <tr><td>N Arrays</td><td>2</td></tr>
+    </table>
 
-    Table (0x7f9f0cbc3c40)
-      N Rows:       100
-      N Arrays:     2
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td>Array 0</td><td>float64</td><td>1</td><td>1.293e-02</td><td>9.998e-01</td></tr>
+    <tr><td>Array 1</td><td>float64</td><td>1</td><td>1.366e-03</td><td>9.869e-01</td></tr>
+    </table>
 
-
-
-
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
 .. GENERATED FROM PYTHON SOURCE LINES 37-39
 
 .. code-block:: default
 
-    print(t1)
+    t1
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>Table</th><th>Information</th></tr>
+    <tr><td>N Rows</td><td>100</td></tr>
+    <tr><td>N Arrays</td><td>1</td></tr>
+    </table>
 
-    Table (0x7f9f0cbc3ac0)
-      N Rows:       100
-      N Arrays:     1
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td>Array 2</td><td>float64</td><td>1</td><td>2.392e-03</td><td>9.845e-01</td></tr>
+    </table>
 
-
-
-
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
 .. GENERATED FROM PYTHON SOURCE LINES 40-45
 
@@ -128,25 +145,35 @@ Create some input tables
 
     # Now use the `CombineTables` filter:
     output = CombineTables().apply(t0, t1)
-    print(output)
+    output
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>Table</th><th>Information</th></tr>
+    <tr><td>N Rows</td><td>100</td></tr>
+    <tr><td>N Arrays</td><td>3</td></tr>
+    </table>
 
-    Table (0x7f9f51408580)
-      N Rows:       100
-      N Arrays:     3
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td>Array 0</td><td>float64</td><td>1</td><td>1.293e-02</td><td>9.998e-01</td></tr>
+    <tr><td>Array 1</td><td>float64</td><td>1</td><td>1.366e-03</td><td>9.869e-01</td></tr>
+    <tr><td>Array 2</td><td>float64</td><td>1</td><td>2.392e-03</td><td>9.845e-01</td></tr>
+    </table>
 
-
-
-
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
 .. GENERATED FROM PYTHON SOURCE LINES 46-51
 
@@ -156,7 +183,7 @@ Create some input tables
     # Here I verify the result
     for i in range(len(titles)):
         arr = output[titles[i]]
-        assert(np.allclose(arr, arrs[i], rtol=0.0001))
+        assert np.allclose(arr, arrs[i], rtol=0.0001)
 
 
 

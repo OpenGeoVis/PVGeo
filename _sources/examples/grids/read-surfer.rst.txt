@@ -27,9 +27,9 @@ Read an Surfer ASCII grid file
 
 .. code-block:: default
 
-    import pyvista
-    from PVGeo.grids import SurferGridReader
     from pyvista import examples
+
+    from PVGeo.grids import SurferGridReader
 
 
 
@@ -47,7 +47,7 @@ Download a sample Surfer grid file
 .. code-block:: default
 
     fname = 'surfer-grid.grd'
-    url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/{}'.format(fname)
+    url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/{}'.format(fname)
     filename, _ = examples.downloads._retrieve_file(url, fname)
     dem = SurferGridReader().apply(filename)
 
@@ -66,33 +66,24 @@ Apply a filter to the DEM to have realistic topography
 
 .. code-block:: default
 
-    warped = dem.warp_by_scalar(scale_factor=300.)
+    warped = dem.warp_by_scalar(scale_factor=300.0)
     warped.plot(cmap='terrain')
 
 
 
-.. image:: /examples/grids/images/sphx_glr_read-surfer_001.png
-    :alt: read surfer
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/grids/images/sphx_glr_read-surfer_001.png
+   :alt: read surfer
+   :srcset: /examples/grids/images/sphx_glr_read-surfer_001.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(2151970.3202296374, 2051970.3202296377, 1587996.9725733877),
-     (552500.0, 452500.0, -11473.34765625),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.067 seconds)
+   **Total running time of the script:** ( 0 minutes  1.023 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-surfer.py:

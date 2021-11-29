@@ -33,7 +33,7 @@ This example demos :class:`PVGeo.filters.ReshapeTable`
 
     import numpy as np
     import pyvista as pv
-    import PVGeo
+
     from PVGeo.filters import ReshapeTable
 
 
@@ -77,52 +77,58 @@ Create some input table
 
 Use the filter to reshape the table
 
-.. GENERATED FROM PYTHON SOURCE LINES 36-44
+.. GENERATED FROM PYTHON SOURCE LINES 36-41
 
 .. code-block:: default
 
     order = 'F'
     newtitles = ['Title %d' % i for i in range(ncols)]
-    output = ReshapeTable(order=order,
-                          ncols=ncols,
-                          nrows=nrows,
-                          names=newtitles).apply(t0)
-    print(output)
+    output = ReshapeTable(order=order, ncols=ncols, nrows=nrows, names=newtitles).apply(t0)
+    output
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>Table</th><th>Information</th></tr>
+    <tr><td>N Rows</td><td>600</td></tr>
+    <tr><td>N Arrays</td><td>2</td></tr>
+    </table>
 
-    Table (0x7f9f0cbc3b20)
-      N Rows:       600
-      N Arrays:     2
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td>Title 0</td><td>float64</td><td>1</td><td>3.741e-03</td><td>9.981e-01</td></tr>
+    <tr><td>Title 1</td><td>float64</td><td>1</td><td>3.112e-04</td><td>9.995e-01</td></tr>
+    </table>
 
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 45-46
+.. GENERATED FROM PYTHON SOURCE LINES 42-43
 
 Check the output
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-54
+.. GENERATED FROM PYTHON SOURCE LINES 43-51
 
 .. code-block:: default
 
     tarr = np.zeros((nrows, ncols))
     for i in range(ncols):
-        tarr[:,i] = output[i]
+        tarr[:, i] = output[i]
     arrs = np.array(arrs).T
     arrs = arrs.flatten()
     arrs = np.reshape(arrs, (nrows, ncols), order=order)
-    assert(tarr.shape == arrs.shape)
-    assert(np.allclose(tarr, arrs))
+    assert tarr.shape == arrs.shape
+    assert np.allclose(tarr, arrs)
 
 
 

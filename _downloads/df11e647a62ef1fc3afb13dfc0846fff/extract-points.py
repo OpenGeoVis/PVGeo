@@ -9,6 +9,7 @@ This example demos :class:`PVGeo.filters.ExtractPoints`
 """
 # sphinx_gallery_thumbnail_number = 2
 from pyvista import examples
+
 from PVGeo.filters import ExtractPoints
 
 ###############################################################################

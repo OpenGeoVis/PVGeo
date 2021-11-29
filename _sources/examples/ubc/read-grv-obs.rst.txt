@@ -27,10 +27,10 @@ Read a UBC gravity observations file
 
 .. code-block:: default
 
+    from pyvista import examples
+
     # sphinx_gallery_thumbnail_number = 1
     import PVGeo
-    import pyvista
-    from pyvista import examples
 
 
 
@@ -47,7 +47,7 @@ Download sample data files and keep track of names:
 
 .. code-block:: default
 
-    url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/Craig-Chile/LdM_grav_obs.grv'
+    url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/LdM_grav_obs.grv'
     grav_file, _ = examples.downloads._retrieve_file(url, 'LdM_grav_obs.grv')
 
 
@@ -62,29 +62,38 @@ Download sample data files and keep track of names:
 .. code-block:: default
 
     grav = PVGeo.ubc.GravObsReader().apply(grav_file)
-    print(grav)
+    grav
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>PolyData</th><th>Information</th></tr>
+    <tr><td>N Cells</td><td>191</td></tr>
+    <tr><td>N Points</td><td>191</td></tr>
+    <tr><td>X Bounds</td><td>3.565e+05, 3.702e+05</td></tr>
+    <tr><td>Y Bounds</td><td>6.000e+06, 6.015e+06</td></tr>
+    <tr><td>Z Bounds</td><td>2.155e+03, 2.865e+03</td></tr>
+    <tr><td>N Arrays</td><td>2</td></tr>
+    </table>
 
-    PolyData (0x7f9f0cbce580)
-      N Cells:      191
-      N Points:     191
-      X Bounds:     3.565e+05, 3.702e+05
-      Y Bounds:     6.000e+06, 6.015e+06
-      Z Bounds:     2.155e+03, 2.865e+03
-      N Arrays:     2
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td><b>Grav</b></td><td>Points</td><td>float64</td><td>1</td><td>-1.863e+01</td><td>9.917e+00</td></tr>
+    <tr><td>Err</td><td>Points</td><td>float64</td><td>1</td><td>5.000e-02</td><td>5.000e-02</td></tr>
+    </table>
 
-
-
-
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
 .. GENERATED FROM PYTHON SOURCE LINES 22-23
 
@@ -94,28 +103,19 @@ Download sample data files and keep track of names:
 
 
 
-.. image:: /examples/ubc/images/sphx_glr_read-grv-obs_001.png
-    :alt: read grv obs
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/ubc/images/sphx_glr_read-grv-obs_001.png
+   :alt: read grv obs
+   :srcset: /examples/ubc/images/sphx_glr_read-grv-obs_001.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(386109.91640657326, 6030150.316406573, 25236.442406573307),
-     (363383.6, 6007424.0, 2510.126),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.689 seconds)
+   **Total running time of the script:** ( 0 minutes  0.715 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-grv-obs.py:

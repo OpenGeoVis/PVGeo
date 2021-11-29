@@ -1,6 +1,6 @@
 .. _Banes website: http://banesullivan.com
 .. _issues page: https://github.com/OpenGeoVis/PVGeo/issues
-.. _license: https://github.com/OpenGeoVis/PVGeo/blob/master/LICENSE
+.. _license: https://github.com/OpenGeoVis/PVGeo/blob/main/LICENSE
 
 Contributing
 ============

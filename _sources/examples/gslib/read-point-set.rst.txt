@@ -23,12 +23,13 @@ Read GSLib Point Set
 
 Read GSLib point set file
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-11
+.. GENERATED FROM PYTHON SOURCE LINES 7-12
 
 .. code-block:: default
 
     # sphinx_gallery_thumbnail_number = 1
     from pyvista import examples
+
     from PVGeo.gslib import GSLibPointSetReader
 
 
@@ -38,7 +39,7 @@ Read GSLib point set file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 12-19
+.. GENERATED FROM PYTHON SOURCE LINES 13-20
 
 .. code-block:: default
 
@@ -47,31 +48,39 @@ Read GSLib point set file
     filename, _ = examples.downloads._download_file('b_100sampledatawl.sgems')
 
     point_set = GSLibPointSetReader().apply(filename)
-    print(point_set)
+    point_set
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>PolyData</th><th>Information</th></tr>
+    <tr><td>N Cells</td><td>100</td></tr>
+    <tr><td>N Points</td><td>100</td></tr>
+    <tr><td>X Bounds</td><td>3.000e+00, 2.520e+02</td></tr>
+    <tr><td>Y Bounds</td><td>1.000e+00, 2.980e+02</td></tr>
+    <tr><td>Z Bounds</td><td>0.000e+00, 0.000e+00</td></tr>
+    <tr><td>N Arrays</td><td>1</td></tr>
+    </table>
 
-    PolyData (0x7f9f05d1b7c0)
-      N Cells:      100
-      N Points:     100
-      X Bounds:     3.000e+00, 2.520e+02
-      Y Bounds:     1.000e+00, 2.980e+02
-      Z Bounds:     0.000e+00, 0.000e+00
-      N Arrays:     1
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td><b>U-random-samplingtrans</b></td><td>Points</td><td>float64</td><td>1</td><td>0.000e+00</td><td>2.302e+03</td></tr>
+    </table>
 
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 20-21
+.. GENERATED FROM PYTHON SOURCE LINES 21-22
 
 .. code-block:: default
 
@@ -79,28 +88,19 @@ Read GSLib point set file
 
 
 
-.. image:: /examples/gslib/images/sphx_glr_read-point-set_001.png
-    :alt: read point set
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/gslib/images/sphx_glr_read-point-set_001.png
+   :alt: read point set
+   :srcset: /examples/gslib/images/sphx_glr_read-point-set_001.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(559.7774386143392, 581.7774386143392, 432.2774386143392),
-     (127.5, 149.5, 0.0),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.641 seconds)
+   **Total running time of the script:** ( 0 minutes  0.667 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-point-set.py:

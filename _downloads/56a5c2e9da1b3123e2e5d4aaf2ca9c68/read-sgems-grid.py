@@ -6,6 +6,7 @@ Read SGeMS Grid file formats.
 """
 # sphinx_gallery_thumbnail_number = 2
 from pyvista import examples
+
 from PVGeo.gslib import SGeMSGridReader
 
 ###############################################################################
@@ -14,7 +15,7 @@ from PVGeo.gslib import SGeMSGridReader
 filename, _ = examples.downloads._download_file('A_WLreferenceCAT.sgems')
 
 grid = SGeMSGridReader().apply(filename)
-print(grid)
+grid
 
 ###############################################################################
 warped = grid.cell_data_to_point_data().warp_by_scalar(scale_factor=5)
@@ -26,6 +27,9 @@ warped.plot()
 filename, _ = examples.downloads._download_file('Maules_Creek_3D.SGEMS.zip')
 
 grid = SGeMSGridReader().apply(filename)
+grid
+
+###############################################################################
 grid.plot(categories=True)
 
 

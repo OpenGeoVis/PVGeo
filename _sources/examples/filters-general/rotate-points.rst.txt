@@ -25,11 +25,12 @@ This example will demonstrate how to rotate points in a `vtkPolyData` object aro
 
 THis example demos :class:`PVGeo.filters.RotatePoints`
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-13
+.. GENERATED FROM PYTHON SOURCE LINES 10-14
 
 .. code-block:: default
 
     from pyvista import examples
+
     from PVGeo.filters import RotatePoints
 
 
@@ -39,11 +40,11 @@ THis example demos :class:`PVGeo.filters.RotatePoints`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-15
+.. GENERATED FROM PYTHON SOURCE LINES 15-16
 
 Get :class:`pyvista.PolyData` sample input to rotate
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-18
+.. GENERATED FROM PYTHON SOURCE LINES 16-19
 
 .. code-block:: default
 
@@ -53,29 +54,20 @@ Get :class:`pyvista.PolyData` sample input to rotate
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_rotate-points_001.png
-    :alt: rotate points
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(19.954813220625095, 19.954813220625095, 19.954813220625095),
-     (4.5, 4.5, 4.5),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/filters-general/images/sphx_glr_rotate-points_001.png
+   :alt: rotate points
+   :srcset: /examples/filters-general/images/sphx_glr_rotate-points_001.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-20
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 20-21
 
 Use the filter:
 
-.. GENERATED FROM PYTHON SOURCE LINES 20-22
+.. GENERATED FROM PYTHON SOURCE LINES 21-23
 
 .. code-block:: default
 
@@ -84,28 +76,19 @@ Use the filter:
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_rotate-points_002.png
-    :alt: rotate points
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/filters-general/images/sphx_glr_rotate-points_002.png
+   :alt: rotate points
+   :srcset: /examples/filters-general/images/sphx_glr_rotate-points_002.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(13.688858027682276, 21.299487937976537, 22.726884665313836),
-     (-4.5380266376315594, 3.072603272662702, 4.5),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.479 seconds)
+   **Total running time of the script:** ( 0 minutes  0.578 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_rotate-points.py:

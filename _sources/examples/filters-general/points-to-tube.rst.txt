@@ -27,13 +27,15 @@ This example will demonstrate how to to build a tube from a set of points in
 Takes points from a `vtkPolyData` object and constructs a line of those points
 then builds a polygonal tube around that line with some specified radius and number of sides.
 
-.. GENERATED FROM PYTHON SOURCE LINES 11-16
+.. GENERATED FROM PYTHON SOURCE LINES 11-18
 
 .. code-block:: default
 
+    import numpy as np
+
     # sphinx_gallery_thumbnail_number = 2
     import pyvista
-    import numpy as np
+
     from PVGeo.filters import PointsToTube
 
 
@@ -43,45 +45,38 @@ then builds a polygonal tube around that line with some specified radius and num
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 17-30
+.. GENERATED FROM PYTHON SOURCE LINES 19-34
 
 .. code-block:: default
 
 
+
     def path(y):
         """Equation: x = a(y-h)^2 + k"""
-        a = - 110.0 / 160.0**2
-        x = a*y**2 + 110.0
+        a = -110.0 / 160.0 ** 2
+        x = a * y ** 2 + 110.0
         return x, y
+
 
     x, y = path(np.arange(0.0, 200.0, 25.0))
     zo = np.linspace(9.0, 11.0, num=len(y))
-    points = pyvista.PolyData(np.c_[x,y,zo])
+    points = pyvista.PolyData(np.c_[x, y, zo])
 
     points.plot(point_size=10)
 
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_points-to-tube_001.png
-    :alt: points to tube
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(288.4271366070708, 331.7230350445708, 254.2230350445708),
-     (44.2041015625, 87.5, 10.0),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/filters-general/images/sphx_glr_points-to-tube_001.png
+   :alt: points to tube
+   :srcset: /examples/filters-general/images/sphx_glr_points-to-tube_001.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 31-35
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 35-39
 
 .. code-block:: default
 
@@ -92,28 +87,19 @@ then builds a polygonal tube around that line with some specified radius and num
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_points-to-tube_002.png
-    :alt: points to tube
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/filters-general/images/sphx_glr_points-to-tube_002.png
+   :alt: points to tube
+   :srcset: /examples/filters-general/images/sphx_glr_points-to-tube_002.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(310.504116595436, 355.2706516584843, 274.2397677001663),
-     (46.26434889525197, 91.03088395830022, 9.999999999982224),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.512 seconds)
+   **Total running time of the script:** ( 0 minutes  0.627 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_points-to-tube.py:

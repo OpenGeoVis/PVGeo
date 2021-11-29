@@ -27,10 +27,10 @@ Read a UBC topography file
 
 .. code-block:: default
 
+    from pyvista import examples
+
     # sphinx_gallery_thumbnail_number = 1
     import PVGeo
-    import pyvista
-    from pyvista import examples
 
 
 
@@ -47,7 +47,7 @@ Download sample data files and keep track of names:
 
 .. code-block:: default
 
-    url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/Craig-Chile/LdM_topo.topo'
+    url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/LdM_topo.topo'
     topo_file, _ = examples.downloads._retrieve_file(url, 'LdM_topo.topo')
 
 
@@ -62,29 +62,37 @@ Download sample data files and keep track of names:
 .. code-block:: default
 
     topo = PVGeo.ubc.TopoReader().apply(topo_file)
-    print(topo)
+    topo
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>PolyData</th><th>Information</th></tr>
+    <tr><td>N Cells</td><td>381924</td></tr>
+    <tr><td>N Points</td><td>381924</td></tr>
+    <tr><td>X Bounds</td><td>3.550e+05, 3.720e+05</td></tr>
+    <tr><td>Y Bounds</td><td>5.999e+06, 6.016e+06</td></tr>
+    <tr><td>Z Bounds</td><td>2.050e+03, 3.104e+03</td></tr>
+    <tr><td>N Arrays</td><td>1</td></tr>
+    </table>
 
-    PolyData (0x7f9f05dd0100)
-      N Cells:      381924
-      N Points:     381924
-      X Bounds:     3.550e+05, 3.720e+05
-      Y Bounds:     5.999e+06, 6.016e+06
-      Z Bounds:     2.050e+03, 3.104e+03
-      N Arrays:     1
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td><b>Elevation</b></td><td>Points</td><td>float64</td><td>1</td><td>2.050e+03</td><td>3.104e+03</td></tr>
+    </table>
 
-
-
-
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
 .. GENERATED FROM PYTHON SOURCE LINES 22-23
 
@@ -94,28 +102,19 @@ Download sample data files and keep track of names:
 
 
 
-.. image:: /examples/ubc/images/sphx_glr_read-topo_001.png
-    :alt: read topo
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/ubc/images/sphx_glr_read-topo_001.png
+   :alt: read topo
+   :srcset: /examples/ubc/images/sphx_glr_read-topo_001.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(390310.76909712993, 6034304.56909713, 29389.81909712996),
-     (363497.94999999995, 6007491.75, 2577.0),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.542 seconds)
+   **Total running time of the script:** ( 0 minutes  3.080 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-topo.py:

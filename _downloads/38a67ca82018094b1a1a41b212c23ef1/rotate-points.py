@@ -8,6 +8,7 @@ THis example demos :class:`PVGeo.filters.RotatePoints`
 
 """
 from pyvista import examples
+
 from PVGeo.filters import RotatePoints
 
 ###############################################################################

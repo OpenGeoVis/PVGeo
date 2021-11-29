@@ -11,7 +11,7 @@ This example demos :class:`PVGeo.filters.ReshapeTable`
 """
 import numpy as np
 import pyvista as pv
-import PVGeo
+
 from PVGeo.filters import ReshapeTable
 
 ###############################################################################
@@ -35,19 +35,16 @@ t0[titles[2]] = arrs[2]
 # Use the filter to reshape the table
 order = 'F'
 newtitles = ['Title %d' % i for i in range(ncols)]
-output = ReshapeTable(order=order,
-                      ncols=ncols,
-                      nrows=nrows,
-                      names=newtitles).apply(t0)
-print(output)
+output = ReshapeTable(order=order, ncols=ncols, nrows=nrows, names=newtitles).apply(t0)
+output
 
 ###############################################################################
 # Check the output
 tarr = np.zeros((nrows, ncols))
 for i in range(ncols):
-    tarr[:,i] = output[i]
+    tarr[:, i] = output[i]
 arrs = np.array(arrs).T
 arrs = arrs.flatten()
 arrs = np.reshape(arrs, (nrows, ncols), order=order)
-assert(tarr.shape == arrs.shape)
-assert(np.allclose(tarr, arrs))
+assert tarr.shape == arrs.shape
+assert np.allclose(tarr, arrs)

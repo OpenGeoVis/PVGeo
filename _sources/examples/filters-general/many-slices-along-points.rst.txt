@@ -35,17 +35,30 @@ warped slice.
 
 This example demos :class:`PVGeo.filters.ManySlicesAlongPoints`
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-22
+.. GENERATED FROM PYTHON SOURCE LINES 20-22
+
+.. code-block:: default
+
+    import numpy as np
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 23-24
 
 sphinx_gallery_thumbnail_number = 3
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-28
+.. GENERATED FROM PYTHON SOURCE LINES 24-30
 
 .. code-block:: default
 
     import pyvista
     from pyvista import examples
-    import numpy as np
+
     import PVGeo
     from PVGeo.filters import ManySlicesAlongPoints
 
@@ -56,11 +69,11 @@ sphinx_gallery_thumbnail_number = 3
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 29-30
+.. GENERATED FROM PYTHON SOURCE LINES 31-32
 
 Load a volumetric model to be sliced from pyvista's examples
 
-.. GENERATED FROM PYTHON SOURCE LINES 30-33
+.. GENERATED FROM PYTHON SOURCE LINES 32-35
 
 .. code-block:: default
 
@@ -70,44 +83,37 @@ Load a volumetric model to be sliced from pyvista's examples
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_many-slices-along-points_001.png
-    :alt: many slices along points
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(534.8076211353316, 534.8076211353316, 459.80762113533166),
-     (125.0, 125.0, 50.0),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/filters-general/images/sphx_glr_many-slices-along-points_001.png
+   :alt: many slices along points
+   :srcset: /examples/filters-general/images/sphx_glr_many-slices-along-points_001.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-36
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 36-38
 
 Create a series of points that move through that model. These are the points
 we will use to slice the volume.
 
-.. GENERATED FROM PYTHON SOURCE LINES 36-53
+.. GENERATED FROM PYTHON SOURCE LINES 38-57
 
 .. code-block:: default
 
 
+
     def path(y):
         """Equation: x = a(y-h)^2 + k"""
-        a = 110.0 / 160.0**2
-        x = a*y**2 + 0.0
+        a = 110.0 / 160.0 ** 2
+        x = a * y ** 2 + 0.0
         return x, y
+
 
     x, y = path(np.arange(model.bounds[2], model.bounds[3], 15.0))
     zo = np.linspace(9.0, 11.0, num=len(y))
     # Make a VTK data object for the filter to use
-    points = pyvista.PolyData(np.c_[x,y,zo])
+    points = pyvista.PolyData(np.c_[x, y, zo])
 
     p = pyvista.Plotter()
     p.add_mesh(model.outline(), color='k')
@@ -117,61 +123,65 @@ we will use to slice the volume.
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_many-slices-along-points_002.png
-    :alt: many slices along points
-    :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(534.8076211353316, 534.8076211353316, 459.80762113533166),
-     (125.0, 125.0, 50.0),
-     (0.0, 0.0, 1.0)]
+.. image-sg:: /examples/filters-general/images/sphx_glr_many-slices-along-points_002.png
+   :alt: many slices along points
+   :srcset: /examples/filters-general/images/sphx_glr_many-slices-along-points_002.png
+   :class: sphx-glr-single-img
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-59
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 58-63
 
 Now we can use the **Many Slices Along Points** filter.
 Specify the model as the  dataset input and the points as the points input
-to that filter and apply the algorith.
+to that filter and apply the algorithm.
 That's it! The filter should be applied and you can fine tune the number of
 slices to what you prefer!
 
-.. GENERATED FROM PYTHON SOURCE LINES 59-63
+.. GENERATED FROM PYTHON SOURCE LINES 63-67
 
 .. code-block:: default
 
 
     slices = ManySlicesAlongPoints(n_slices=5).apply(points, model)
-    print(slices)
+    slices
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Information</th><th>Blocks</th></tr><tr><td>
+    <table>
+    <tr><th>MultiBlock</th><th>Values</th></tr>
+    <tr><td>N Blocks</td><td>6</td></tr>
+    <tr><td>X Bounds</td><td>0.000, 250.000</td></tr>
+    <tr><td>Y Bounds</td><td>0.000, 250.000</td></tr>
+    <tr><td>Z Bounds</td><td>0.000, 100.000</td></tr>
+    </table>
 
-    MultiBlock (0x7f9f05d1bac0)
-      N Blocks:     6
-      X Bounds:     0.000, 250.000
-      Y Bounds:     0.000, 250.000
-      Z Bounds:     0.000, 100.000
+    </td><td>
+    <table>
+    <tr><th>Index</th><th>Name</th><th>Type</th></tr>
+    <tr><th>0</th><th>Slice00</th><th>PolyData</th></tr>
+    <tr><th>1</th><th>Slice01</th><th>PolyData</th></tr>
+    <tr><th>2</th><th>Slice02</th><th>PolyData</th></tr>
+    <tr><th>3</th><th>Slice03</th><th>PolyData</th></tr>
+    <tr><th>4</th><th>Slice04</th><th>PolyData</th></tr>
+    <tr><th>5</th><th>Slice05</th><th>PolyData</th></tr>
+    </table>
 
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 64-70
+.. GENERATED FROM PYTHON SOURCE LINES 68-74
 
 .. code-block:: default
 
@@ -184,28 +194,19 @@ slices to what you prefer!
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_many-slices-along-points_003.png
-    :alt: many slices along points
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/filters-general/images/sphx_glr_many-slices-along-points_003.png
+   :alt: many slices along points
+   :srcset: /examples/filters-general/images/sphx_glr_many-slices-along-points_003.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(534.8076211353316, 534.8076211353316, 459.80762113533166),
-     (125.0, 125.0, 50.0),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.257 seconds)
+   **Total running time of the script:** ( 0 minutes  3.065 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_many-slices-along-points.py:

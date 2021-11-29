@@ -14,10 +14,8 @@ Feature Scaling and Standard Score.
 This example demos :class:`PVGeo.filters.NormalizeArray`
 
 """
-import numpy as np
-import pyvista
 from pyvista import examples
-import PVGeo
+
 from PVGeo.filters import NormalizeArray
 
 ###############################################################################
@@ -30,7 +28,7 @@ mesh.plot(scalars=title)
 # Apply the filter
 f = NormalizeArray(normalization='feature_scale', new_name='foo')
 output = f.apply(mesh, title)
-print(output)
+output
 
 ###############################################################################
 output.plot(scalars='foo')

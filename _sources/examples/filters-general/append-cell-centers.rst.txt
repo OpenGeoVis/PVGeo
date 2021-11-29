@@ -25,12 +25,13 @@ This example will demonstrate how to append a dataset's cell centers as a length
 
 This example demonstrates :class:`PVGeo.filters.AppendCellCenters`
 
-.. GENERATED FROM PYTHON SOURCE LINES 9-13
+.. GENERATED FROM PYTHON SOURCE LINES 9-14
 
 .. code-block:: default
 
 
     from pyvista import examples
+
     from PVGeo.filters import AppendCellCenters
 
 
@@ -40,75 +41,92 @@ This example demonstrates :class:`PVGeo.filters.AppendCellCenters`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-15
+.. GENERATED FROM PYTHON SOURCE LINES 15-16
 
 Use an example mesh from pyvista
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-18
+.. GENERATED FROM PYTHON SOURCE LINES 16-19
 
 .. code-block:: default
 
     mesh = examples.load_rectilinear()
-    print(mesh)
+    mesh
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>RectilinearGrid</th><th>Information</th></tr>
+    <tr><td>N Cells</td><td>16146</td></tr>
+    <tr><td>N Points</td><td>18144</td></tr>
+    <tr><td>X Bounds</td><td>-3.500e+02, 1.350e+03</td></tr>
+    <tr><td>Y Bounds</td><td>-4.000e+02, 1.350e+03</td></tr>
+    <tr><td>Z Bounds</td><td>-8.500e+02, 0.000e+00</td></tr>
+    <tr><td>Dimensions</td><td>27, 28, 24</td></tr>
+    <tr><td>N Arrays</td><td>1</td></tr>
+    </table>
 
-    RectilinearGrid (0x7f9f0cbc31c0)
-      N Cells:      16146
-      N Points:     18144
-      X Bounds:     -3.500e+02, 1.350e+03
-      Y Bounds:     -4.000e+02, 1.350e+03
-      Z Bounds:     -8.500e+02, 0.000e+00
-      Dimensions:   27, 28, 24
-      N Arrays:     1
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td><b>Random Data</b></td><td>Cells</td><td>float64</td><td>1</td><td>7.096e-05</td><td>1.000e+00</td></tr>
+    </table>
 
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 19-20
+.. GENERATED FROM PYTHON SOURCE LINES 20-21
 
 Run the PVGeo algorithm
 
-.. GENERATED FROM PYTHON SOURCE LINES 20-23
+.. GENERATED FROM PYTHON SOURCE LINES 21-24
 
 .. code-block:: default
 
     centers = AppendCellCenters().apply(mesh)
-    print(centers)
+    centers
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
+.. raw:: html
 
- .. code-block:: none
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>RectilinearGrid</th><th>Information</th></tr>
+    <tr><td>N Cells</td><td>16146</td></tr>
+    <tr><td>N Points</td><td>18144</td></tr>
+    <tr><td>X Bounds</td><td>-3.500e+02, 1.350e+03</td></tr>
+    <tr><td>Y Bounds</td><td>-4.000e+02, 1.350e+03</td></tr>
+    <tr><td>Z Bounds</td><td>-8.500e+02, 0.000e+00</td></tr>
+    <tr><td>Dimensions</td><td>27, 28, 24</td></tr>
+    <tr><td>N Arrays</td><td>2</td></tr>
+    </table>
 
-    RectilinearGrid (0x7f9f16b2fd00)
-      N Cells:      16146
-      N Points:     18144
-      X Bounds:     -3.500e+02, 1.350e+03
-      Y Bounds:     -4.000e+02, 1.350e+03
-      Z Bounds:     -8.500e+02, 0.000e+00
-      Dimensions:   27, 28, 24
-      N Arrays:     2
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td><b>Random Data</b></td><td>Cells</td><td>float64</td><td>1</td><td>7.096e-05</td><td>1.000e+00</td></tr>
+    <tr><td>Cell Centers</td><td>Cells</td><td>float64</td><td>3</td><td>-7.500e+02</td><td>1.250e+03</td></tr>
+    </table>
 
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
 
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 24-25
+.. GENERATED FROM PYTHON SOURCE LINES 25-26
 
 .. code-block:: default
 
@@ -116,28 +134,19 @@ Run the PVGeo algorithm
 
 
 
-.. image:: /examples/filters-general/images/sphx_glr_append-cell-centers_001.png
-    :alt: append cell centers
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/filters-general/images/sphx_glr_append-cell-centers_001.png
+   :alt: append cell centers
+   :srcset: /examples/filters-general/images/sphx_glr_append-cell-centers_001.png
+   :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    [(3381.633746130961, 3356.633746130961, 2456.633746130961),
-     (500.0, 475.0, -425.0),
-     (0.0, 0.0, 1.0)]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.904 seconds)
+   **Total running time of the script:** ( 0 minutes  0.861 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_append-cell-centers.py:

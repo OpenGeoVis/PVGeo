@@ -1,53 +1,32 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Add Cell Connectivity To Points &mdash; PVGeo  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
-
-  
-  
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
     <link rel="canonical" href="http://docs.pvgeo.org/examples/filters-general/add-cell-connectivity-to-points.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Append Cell Centers" href="append-cell-centers.html" />
@@ -76,26 +55,13 @@
 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> PVGeo
-          
-
-          
           </a>
-
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -103,19 +69,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
     
-            
-            
-              
-            
-            
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome to PVGeo’s code docs!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview/why-pvgeo.html">Why PVGeo?</a></li>
@@ -123,7 +78,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../overview/featured.html">Featured</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview/agu-2018.html">AGU 2018</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
@@ -151,12 +106,12 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">API Index:</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Index:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/index.html">About PVGeo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Development Guide</span></p>
+<p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/repo-structure.html">Project Structure</a></li>
@@ -165,8 +120,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/resources.html">External References</a></li>
 </ul>
 
-            
-          
 
     
         <p class="caption">
@@ -246,7 +199,7 @@
                 </script>
             </div>
             <div>
-                We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                We use ads to cover the cost of maintenance for this site and fund beverages for the occasional hackathon (🍺 on us!)
             </div>
         </div>
     </div>
@@ -255,70 +208,35 @@
 
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">PVGeo</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">Quick Examples</a> &raquo;</li>
-        
       <li>Add Cell Connectivity To Points</li>
-    
-    
 
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p>Click <a class="reference internal" href="#sphx-glr-download-examples-filters-general-add-cell-connectivity-to-points-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="add-cell-connectivity-to-points">
-<span id="sphx-glr-examples-filters-general-add-cell-connectivity-to-points-py"></span><h1>Add Cell Connectivity To Points<a class="headerlink" href="#add-cell-connectivity-to-points" title="Permalink to this headline">¶</a></h1>
+<section class="sphx-glr-example-title" id="add-cell-connectivity-to-points">
+<span id="sphx-glr-examples-filters-general-add-cell-connectivity-to-points-py"></span><h1>Add Cell Connectivity To Points<a class="headerlink" href="#add-cell-connectivity-to-points" title="Permalink to this headline"></a></h1>
 <p>Example for <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.AddCellConnToPoints</span></code></p>
 <p>This filter will add <strong>linear</strong> cell connectivity between scattered points.
 You have the option to add <code class="docutils literal notranslate"><span class="pre">VTK_LINE</span></code> or <code class="docutils literal notranslate"><span class="pre">VTK_POLYLINE</span></code> connectivity.
@@ -329,6 +247,7 @@ spline (either in the order by index or using a nearest neighbor calculation).</
 <p>sphinx_gallery_thumbnail_number = 2</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyvista</span>
+
 <span class="kn">from</span> <span class="nn">PVGeo</span> <span class="kn">import</span> <span class="n">points_to_poly_data</span>
 <span class="kn">from</span> <span class="nn">PVGeo.filters</span> <span class="kn">import</span> <span class="n">AddCellConnToPoints</span>
 </pre></div>
@@ -336,14 +255,15 @@ spline (either in the order by index or using a nearest neighbor calculation).</
 <p>First, lets generate some points which we’d like to connect</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">path1</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Equation: x = a(y-h)^2 + k&quot;&quot;&quot;</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">110.0</span> <span class="o">/</span> <span class="mf">160.0</span><span class="o">**</span><span class="mi">2</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">110.0</span>
-    <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="n">idxs</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">idxs</span><span class="p">][:,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">110.0</span> <span class="o">/</span> <span class="mf">160.0</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">110.0</span>
+    <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="n">idxs</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">idxs</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span>
+
 
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">path1</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">))</span>
 <span class="n">zo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">9.0</span><span class="p">,</span> <span class="mf">11.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
-<span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">zo</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zo</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
 <span class="c1"># Shuffle points to demonstrate value of Nearest Neighbor</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
 
@@ -351,8 +271,8 @@ spline (either in the order by index or using a nearest neighbor calculation).</
 <span class="n">vtkPoints</span> <span class="o">=</span> <span class="n">points_to_poly_data</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="apply-the-filter">
-<h2>Apply the Filter<a class="headerlink" href="#apply-the-filter" title="Permalink to this headline">¶</a></h2>
+<section id="apply-the-filter">
+<h2>Apply the Filter<a class="headerlink" href="#apply-the-filter" title="Permalink to this headline"></a></h2>
 <p>Now that you have the points generated, lets go ahead and apply
 the <strong>Add Cell Connectivity To Points</strong> filter from
 <em>Filters-&gt;PVGeo: General Filters-&gt;Add Cell Connectivity To Points</em>.
@@ -365,18 +285,11 @@ below; this is good.</p>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="add cell connectivity to points" class="sphx-glr-single-img" src="../../_images/sphx_glr_add-cell-connectivity-to-points_001.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(260.7157668726004, 274.0556106226004, 209.0556106226004),
- (61.66015624999999, 75.0, 10.0),
- (0.0, 0.0, 1.0)]
-</pre></div>
-</div>
-<p>Remember that in the script given above we shuffle the points to demonstrate
-that the points make a useable line but we need to reconstruct the order of the
+<img src="../../_images/sphx_glr_add-cell-connectivity-to-points_001.png" srcset="../../_images/sphx_glr_add-cell-connectivity-to-points_001.png" alt="add cell connectivity to points" class = "sphx-glr-single-img"/><p>Remember that in the script given above we shuffle the points to demonstrate
+that the points make a usable line but we need to reconstruct the order of the
 points. We do this by using the <em>Use Nearest Nbr Approx</em> checkbox; this will
-ensure that a useable path is generate from the points.
-Go ahead and use the <code class="docutils literal notranslate"><span class="pre">nearest_nbr</span></code> argument for the algorith.
+ensure that a usable path is generate from the points.
+Go ahead and use the <code class="docutils literal notranslate"><span class="pre">nearest_nbr</span></code> argument for the algorithm.
 Now it looks good (see image below)!</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the filter: Here is vtkPolyData containing the connected line:</span>
 <span class="n">line_o</span> <span class="o">=</span> <span class="n">AddCellConnToPoints</span><span class="p">(</span><span class="n">nearest_nbr</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">vtkPoints</span><span class="p">)</span>
@@ -386,14 +299,7 @@ Now it looks good (see image below)!</p>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="add cell connectivity to points" class="sphx-glr-single-img" src="../../_images/sphx_glr_add-cell-connectivity-to-points_002.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(260.7157668726004, 274.0556106226004, 209.0556106226004),
- (61.66015624999999, 75.0, 10.0),
- (0.0, 0.0, 1.0)]
-</pre></div>
-</div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.288 seconds)</p>
+<img src="../../_images/sphx_glr_add-cell-connectivity-to-points_002.png" srcset="../../_images/sphx_glr_add-cell-connectivity-to-points_002.png" alt="add cell connectivity to points" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.059 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-add-cell-connectivity-to-points-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/af91ab2ce8bae9f49e94e6077397ef9f/add-cell-connectivity-to-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">add-cell-connectivity-to-points.py</span></code></a></p>
@@ -403,26 +309,24 @@ Now it looks good (see image below)!</p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="append-cell-centers.html" class="btn btn-neutral float-right" title="Append Cell Centers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Quick Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="append-cell-centers.html" class="btn btn-neutral float-right" title="Append Cell Centers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-
-    </p>
+    <p></p>
   </div>
+
+  
 
  
 
@@ -456,35 +360,24 @@ Now it looks good (see image below)!</p>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115959679-6"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-115959679-6', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-115959679-6', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

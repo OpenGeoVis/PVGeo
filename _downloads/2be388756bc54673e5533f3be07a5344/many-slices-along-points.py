@@ -17,11 +17,13 @@ warped slice.
 This example demos :class:`PVGeo.filters.ManySlicesAlongPoints`
 
 """
+import numpy as np
+
 ###############################################################################
 # sphinx_gallery_thumbnail_number = 3
 import pyvista
 from pyvista import examples
-import numpy as np
+
 import PVGeo
 from PVGeo.filters import ManySlicesAlongPoints
 
@@ -34,16 +36,18 @@ model.plot()
 # Create a series of points that move through that model. These are the points
 # we will use to slice the volume.
 
+
 def path(y):
     """Equation: x = a(y-h)^2 + k"""
-    a = 110.0 / 160.0**2
-    x = a*y**2 + 0.0
+    a = 110.0 / 160.0 ** 2
+    x = a * y ** 2 + 0.0
     return x, y
+
 
 x, y = path(np.arange(model.bounds[2], model.bounds[3], 15.0))
 zo = np.linspace(9.0, 11.0, num=len(y))
 # Make a VTK data object for the filter to use
-points = pyvista.PolyData(np.c_[x,y,zo])
+points = pyvista.PolyData(np.c_[x, y, zo])
 
 p = pyvista.Plotter()
 p.add_mesh(model.outline(), color='k')
@@ -53,12 +57,12 @@ p.show()
 ###############################################################################
 # Now we can use the **Many Slices Along Points** filter.
 # Specify the model as the  dataset input and the points as the points input
-# to that filter and apply the algorith.
+# to that filter and apply the algorithm.
 # That's it! The filter should be applied and you can fine tune the number of
 # slices to what you prefer!
 
 slices = ManySlicesAlongPoints(n_slices=5).apply(points, model)
-print(slices)
+slices
 
 ###############################################################################
 line = PVGeo.filters.AddCellConnToPoints().apply(points)

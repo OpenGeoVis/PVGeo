@@ -9,23 +9,23 @@ volumetric operations.
 
 This example demos :class:`PVGeo.filters.VoxelizePoints`
 """
+import pandas as pd
+
 # sphinx_gallery_thumbnail_number = 2
 import pyvista
 from pyvista import examples
-import numpy as np
-import pandas as pd
+
 import PVGeo
-from PVGeo.filters import VoxelizePoints
 
 ###############################################################################
 # Download sample data files and keep track of names:
-url = 'https://github.com/OpenGeoVis/PVGeo/raw/master/tests/data/fault_points.csv'
+url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv'
 fault_file, _ = examples.downloads._retrieve_file(url, 'fault_points.csv')
 
 ###############################################################################
 # Let's go ahead and load a simple file that has XYZ coordinates and a boolean
 # array for fault presence. This point cloud makes some sort of regular grid,
-# but we have forgotten the deatials of the cell spacings and local coordinate
+# but we have forgotten the details of the cell spacings and local coordinate
 # rotations.
 #
 # We will read in this data with ``pandas`` and send it to the
@@ -37,7 +37,7 @@ print(points[0:2])
 ###############################################################################
 
 vtkpoints = PVGeo.points_to_poly_data(points)
-print(vtkpoints)
+vtkpoints
 
 ###############################################################################
 # Note that we have a :class:`pyvista.PolyData` object now which allows us to do
@@ -49,13 +49,13 @@ print(vtkpoints)
 # object and pass the thresholding value. We can then plot the result by
 # calling the plot function. (Note: change the notebook parameter to
 # ``False`` for an interactive window)
-vtkpoints.plot(clim=[0,1], point_size=1)
+vtkpoints.plot(clim=[0, 1], point_size=1)
 
 ###############################################################################
 # Points to Voxelized Volume
 # ++++++++++++++++++++++++++
 #
-# The above figure is pretty cool! But its a point cloud which means out
+# The above figure is pretty cool! But it is a point cloud which means out
 # filtering options are pretty limited. Fortunately, we know that the point
 # cloud represents some sort of regularized gridded volume of data and PVGeo
 # has a filter to recover that volume. This will allow further volumetric
@@ -76,7 +76,7 @@ print('done.')
 # Output the results
 print('Recovered Angle (deg.): %.3f' % voxelizer.get_angle())
 print('Recovered Cell Sizes: (%.2f, %.2f, %.2f)' % voxelizer.get_spacing())
-print(grid)
+grid
 
 ###############################################################################
 # And now we can plot the voxelized volume
@@ -91,7 +91,7 @@ grid.plot()
 # dataset. Specifically, we are using the ``slice_orthogonal`` filter that will
 # create 3 orthogonal slices through a data volume.
 slices = grid.slice_orthogonal()
-print(slices)
+slices
 
 ###############################################################################
 # And let's use a ``clip`` filter:

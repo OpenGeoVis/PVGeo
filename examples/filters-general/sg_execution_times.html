@@ -1,53 +1,32 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Computation times &mdash; PVGeo  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
-
-  
-  
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
     <link rel="canonical" href="http://docs.pvgeo.org/examples/filters-general/sg_execution_times.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
  
@@ -74,26 +53,13 @@
 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> PVGeo
-          
-
-          
           </a>
-
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -101,19 +67,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
     
-            
-            
-              
-            
-            
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome to PVGeo’s code docs!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview/why-pvgeo.html">Why PVGeo?</a></li>
@@ -121,17 +76,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../overview/featured.html">Featured</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview/agu-2018.html">AGU 2018</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Quick Examples</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API Index:</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Index:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/index.html">About PVGeo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Development Guide</span></p>
+<p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/repo-structure.html">Project Structure</a></li>
@@ -140,8 +95,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/resources.html">External References</a></li>
 </ul>
 
-            
-          
 
     
         <p class="caption">
@@ -221,7 +174,7 @@
                 </script>
             </div>
             <div>
-                We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                We use ads to cover the cost of maintenance for this site and fund beverages for the occasional hackathon (🍺 on us!)
             </div>
         </div>
     </div>
@@ -230,64 +183,30 @@
 
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">PVGeo</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Computation times</li>
-    
-    
 
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="computation-times">
-<span id="sphx-glr-examples-filters-general-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Permalink to this headline">¶</a></h1>
-<p><strong>00:23.103</strong> total execution time for <strong>examples_filters-general</strong> files:</p>
+             
+  <section id="computation-times">
+<span id="sphx-glr-examples-filters-general-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Permalink to this headline"></a></h1>
+<p><strong>00:20.975</strong> total execution time for <strong>examples_filters-general</strong> files:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 86%" />
@@ -296,43 +215,43 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="voxelize-points.html#sphx-glr-examples-filters-general-voxelize-points-py"><span class="std std-ref">Voxelize Points</span></a> (<code class="docutils literal notranslate"><span class="pre">voxelize-points.py</span></code>)</p></td>
-<td><p>00:12.150</p></td>
+<td><p>00:11.056</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="add-cell-connectivity-to-points.html#sphx-glr-examples-filters-general-add-cell-connectivity-to-points-py"><span class="std std-ref">Add Cell Connectivity To Points</span></a> (<code class="docutils literal notranslate"><span class="pre">add-cell-connectivity-to-points.py</span></code>)</p></td>
-<td><p>00:03.288</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="many-slices-along-points.html#sphx-glr-examples-filters-general-many-slices-along-points-py"><span class="std std-ref">Many Slices Along Points</span></a> (<code class="docutils literal notranslate"><span class="pre">many-slices-along-points.py</span></code>)</p></td>
+<td><p>00:03.065</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="many-slices-along-points.html#sphx-glr-examples-filters-general-many-slices-along-points-py"><span class="std std-ref">Many Slices Along Points</span></a> (<code class="docutils literal notranslate"><span class="pre">many-slices-along-points.py</span></code>)</p></td>
-<td><p>00:03.257</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="add-cell-connectivity-to-points.html#sphx-glr-examples-filters-general-add-cell-connectivity-to-points-py"><span class="std std-ref">Add Cell Connectivity To Points</span></a> (<code class="docutils literal notranslate"><span class="pre">add-cell-connectivity-to-points.py</span></code>)</p></td>
+<td><p>00:02.059</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="append-cell-centers.html#sphx-glr-examples-filters-general-append-cell-centers-py"><span class="std std-ref">Append Cell Centers</span></a> (<code class="docutils literal notranslate"><span class="pre">append-cell-centers.py</span></code>)</p></td>
-<td><p>00:00.904</p></td>
+<td><p>00:00.861</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="extract-points.html#sphx-glr-examples-filters-general-extract-points-py"><span class="std std-ref">Extract Points</span></a> (<code class="docutils literal notranslate"><span class="pre">extract-points.py</span></code>)</p></td>
-<td><p>00:00.778</p></td>
+<td><p>00:00.817</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="normalize-array.html#sphx-glr-examples-filters-general-normalize-array-py"><span class="std std-ref">Normalize Array</span></a> (<code class="docutils literal notranslate"><span class="pre">normalize-array.py</span></code>)</p></td>
-<td><p>00:00.657</p></td>
-<td><p>0.0 MB</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="array-math.html#sphx-glr-examples-filters-general-array-math-py"><span class="std std-ref">Array Math</span></a> (<code class="docutils literal notranslate"><span class="pre">array-math.py</span></code>)</p></td>
-<td><p>00:00.551</p></td>
-<td><p>0.0 MB</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="extract-array.html#sphx-glr-examples-filters-general-extract-array-py"><span class="std std-ref">Extract Array to Table</span></a> (<code class="docutils literal notranslate"><span class="pre">extract-array.py</span></code>)</p></td>
-<td><p>00:00.519</p></td>
+<td><p>00:00.763</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="points-to-tube.html#sphx-glr-examples-filters-general-points-to-tube-py"><span class="std std-ref">Points to Tube</span></a> (<code class="docutils literal notranslate"><span class="pre">points-to-tube.py</span></code>)</p></td>
-<td><p>00:00.512</p></td>
+<td><p>00:00.627</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="rotate-points.html#sphx-glr-examples-filters-general-rotate-points-py"><span class="std std-ref">Rotate Points</span></a> (<code class="docutils literal notranslate"><span class="pre">rotate-points.py</span></code>)</p></td>
-<td><p>00:00.479</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="array-math.html#sphx-glr-examples-filters-general-array-math-py"><span class="std std-ref">Array Math</span></a> (<code class="docutils literal notranslate"><span class="pre">array-math.py</span></code>)</p></td>
+<td><p>00:00.586</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rotate-points.html#sphx-glr-examples-filters-general-rotate-points-py"><span class="std std-ref">Rotate Points</span></a> (<code class="docutils literal notranslate"><span class="pre">rotate-points.py</span></code>)</p></td>
+<td><p>00:00.578</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="extract-array.html#sphx-glr-examples-filters-general-extract-array-py"><span class="std std-ref">Extract Array to Table</span></a> (<code class="docutils literal notranslate"><span class="pre">extract-array.py</span></code>)</p></td>
+<td><p>00:00.554</p></td>
 <td><p>0.0 MB</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="combine-tables.html#sphx-glr-examples-filters-general-combine-tables-py"><span class="std std-ref">Combine Tables</span></a> (<code class="docutils literal notranslate"><span class="pre">combine-tables.py</span></code>)</p></td>
@@ -345,21 +264,20 @@
 </tr>
 </tbody>
 </table>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-
-    </p>
+    <p></p>
   </div>
+
+  
 
  
 
@@ -393,35 +311,24 @@
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115959679-6"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-115959679-6', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-115959679-6', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

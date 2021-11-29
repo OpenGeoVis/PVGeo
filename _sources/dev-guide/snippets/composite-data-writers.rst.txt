@@ -167,7 +167,7 @@ Example
 
 
         def PerformWriteOut(self, input_data_object, filename, object_name):
-            """Perfrom the file write to the given FileName with the given data
+            """Perform the file write to the given FileName with the given data
             object. The super class handles all the complicated stuff.
             """
             filename = filename.split('.')

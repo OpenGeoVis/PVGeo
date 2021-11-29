@@ -1,53 +1,32 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Read SGeMS Grid &mdash; PVGeo  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
-
-  
-  
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
     <link rel="canonical" href="http://docs.pvgeo.org/examples/gslib/read-sgems-grid.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Read GSLib Table" href="read-table.html" />
@@ -76,26 +55,13 @@
 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> PVGeo
-          
-
-          
           </a>
-
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -103,19 +69,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
     
-            
-            
-              
-            
-            
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome to PVGeo’s code docs!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview/why-pvgeo.html">Why PVGeo?</a></li>
@@ -123,7 +78,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../overview/featured.html">Featured</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview/agu-2018.html">AGU 2018</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
@@ -139,12 +94,12 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">API Index:</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Index:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/index.html">About PVGeo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Development Guide</span></p>
+<p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/repo-structure.html">Project Structure</a></li>
@@ -153,8 +108,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/resources.html">External References</a></li>
 </ul>
 
-            
-          
 
     
         <p class="caption">
@@ -234,7 +187,7 @@
                 </script>
             </div>
             <div>
-                We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                We use ads to cover the cost of maintenance for this site and fund beverages for the occasional hackathon (🍺 on us!)
             </div>
         </div>
     </div>
@@ -243,73 +196,39 @@
 
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">PVGeo</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">Quick Examples</a> &raquo;</li>
-        
       <li>Read SGeMS Grid</li>
-    
-    
 
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p>Click <a class="reference internal" href="#sphx-glr-download-examples-gslib-read-sgems-grid-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="read-sgems-grid">
-<span id="sphx-glr-examples-gslib-read-sgems-grid-py"></span><h1>Read SGeMS Grid<a class="headerlink" href="#read-sgems-grid" title="Permalink to this headline">¶</a></h1>
+<section class="sphx-glr-example-title" id="read-sgems-grid">
+<span id="sphx-glr-examples-gslib-read-sgems-grid-py"></span><h1>Read SGeMS Grid<a class="headerlink" href="#read-sgems-grid" title="Permalink to this headline"></a></h1>
 <p>Read SGeMS Grid file formats.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
 <span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
+
 <span class="kn">from</span> <span class="nn">PVGeo.gslib</span> <span class="kn">import</span> <span class="n">SGeMSGridReader</span>
 </pre></div>
 </div>
@@ -317,85 +236,87 @@ to download the full example code</p>
 <span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span><span class="s1">&#39;A_WLreferenceCAT.sgems&#39;</span><span class="p">)</span>
 
 <span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="n">grid</span>
 </pre></div>
 </div>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>UniformGrid (0x7f9f1cd1f340)
-  N Cells:      78000
-  N Points:     157122
-  X Bounds:     0.000e+00, 2.600e+02
-  Y Bounds:     0.000e+00, 3.000e+02
-  Z Bounds:     0.000e+00, 1.000e+00
-  Dimensions:   261, 301, 2
-  Spacing:      1.000e+00, 1.000e+00, 1.000e+00
-  N Arrays:     1
-</pre></div>
+<div class="output_subarea output_html rendered_html output_result">
+<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table>
+<tr><th>UniformGrid</th><th>Information</th></tr>
+<tr><td>N Cells</td><td>78000</td></tr>
+<tr><td>N Points</td><td>157122</td></tr>
+<tr><td>X Bounds</td><td>0.000e+00, 2.600e+02</td></tr>
+<tr><td>Y Bounds</td><td>0.000e+00, 3.000e+02</td></tr>
+<tr><td>Z Bounds</td><td>0.000e+00, 1.000e+00</td></tr>
+<tr><td>Dimensions</td><td>261, 301, 2</td></tr>
+<tr><td>Spacing</td><td>1.000e+00, 1.000e+00, 1.000e+00</td></tr>
+<tr><td>N Arrays</td><td>1</td></tr>
+</table>
+
+</td><td>
+<table>
+<tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+<tr><td><b>var</b></td><td>Cells</td><td>int64</td><td>1</td><td>0.000e+00</td><td>2.000e+00</td></tr>
+</table>
+
+</td></tr> </table>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">warped</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">cell_data_to_point_data</span><span class="p">()</span><span class="o">.</span><span class="n">warp_by_scalar</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<br />
+<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">warped</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">cell_data_to_point_data</span><span class="p">()</span><span class="o">.</span><span class="n">warp_by_scalar</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">warped</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="read sgems grid" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-sgems-grid_001.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(572.9532651874126, 592.9532651874126, 448.4532651874127),
- (130.0, 150.0, 5.5),
- (0.0, 0.0, 1.0)]
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/maules_creek_3d.zip&#39;</span>
+<img src="../../_images/sphx_glr_read-sgems-grid_001.png" srcset="../../_images/sphx_glr_read-sgems-grid_001.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/maules_creek_3d.zip&#39;</span>
 <span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span><span class="s1">&#39;Maules_Creek_3D.SGEMS.zip&#39;</span><span class="p">)</span>
 
 <span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">grid</span>
 </pre></div>
 </div>
-<img alt="read sgems grid" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-sgems-grid_002.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(618.9217566667041, 548.9217566667041, 488.9217566667041),
- (170.0, 100.0, 40.0),
- (0.0, 0.0, 1.0)]
+<div class="output_subarea output_html rendered_html output_result">
+<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table>
+<tr><th>UniformGrid</th><th>Information</th></tr>
+<tr><td>N Cells</td><td>5440000</td></tr>
+<tr><td>N Points</td><td>5551821</td></tr>
+<tr><td>X Bounds</td><td>0.000e+00, 3.400e+02</td></tr>
+<tr><td>Y Bounds</td><td>0.000e+00, 2.000e+02</td></tr>
+<tr><td>Z Bounds</td><td>0.000e+00, 8.000e+01</td></tr>
+<tr><td>Dimensions</td><td>341, 201, 81</td></tr>
+<tr><td>Spacing</td><td>1.000e+00, 1.000e+00, 1.000e+00</td></tr>
+<tr><td>N Arrays</td><td>1</td></tr>
+</table>
+
+</td><td>
+<table>
+<tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+<tr><td><b>facies</b></td><td>Cells</td><td>int64</td><td>1</td><td>0.000e+00</td><td>1.000e+00</td></tr>
+</table>
+
+</td></tr> </table>
+</div>
+<br />
+<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti_horizons_continuous.zip&#39;</span>
+<img src="../../_images/sphx_glr_read-sgems-grid_002.png" srcset="../../_images/sphx_glr_read-sgems-grid_002.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti_horizons_continuous.zip&#39;</span>
 <span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span><span class="s1">&#39;TI_horizons_continuous.SGEMS.zip&#39;</span><span class="p">)</span>
 
 <span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">grid</span><span class="o">.</span><span class="n">threshold</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.06</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clim</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">get_data_range</span><span class="p">())</span>
 </pre></div>
 </div>
-<img alt="read sgems grid" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-sgems-grid_003.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(97.27406610312548, 97.27406610312548, 97.27406610312548),
- (20.0, 20.0, 20.0),
- (0.0, 0.0, 1.0)]
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti.zip&#39;</span>
+<img src="../../_images/sphx_glr_read-sgems-grid_003.png" srcset="../../_images/sphx_glr_read-sgems-grid_003.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti.zip&#39;</span>
 <span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span><span class="s1">&#39;ti.sgems.zip&#39;</span><span class="p">)</span>
 
 <span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;photo&#39;</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bone&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="read sgems grid" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-sgems-grid_004.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(175.0, 358.0, 1540.1227443055736),
- (175.0, 358.0, 0.5),
- (0.0, 1.0, 0.0)]
+<img src="../../_images/sphx_glr_read-sgems-grid_004.png" srcset="../../_images/sphx_glr_read-sgems-grid_004.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;seismic&#39;</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;seismic&#39;</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<img alt="read sgems grid" class="sphx-glr-single-img" src="../../_images/sphx_glr_read-sgems-grid_005.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(175.0, 358.0, 1540.1227443055736),
- (175.0, 358.0, 0.5),
- (0.0, 1.0, 0.0)]
-</pre></div>
-</div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  44.270 seconds)</p>
+<img src="../../_images/sphx_glr_read-sgems-grid_005.png" srcset="../../_images/sphx_glr_read-sgems-grid_005.png" alt="read sgems grid" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  38.896 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gslib-read-sgems-grid-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/56a5c2e9da1b3123e2e5d4aaf2ca9c68/read-sgems-grid.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-sgems-grid.py</span></code></a></p>
@@ -405,25 +326,23 @@ to download the full example code</p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="read-table.html" class="btn btn-neutral float-right" title="Read GSLib Table" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="read-point-set.html" class="btn btn-neutral float-left" title="Read GSLib Point Set" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="read-table.html" class="btn btn-neutral float-right" title="Read GSLib Table" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-
-    </p>
+    <p></p>
   </div>
+
+  
 
  
 
@@ -457,35 +376,24 @@ to download the full example code</p>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115959679-6"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-115959679-6', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-115959679-6', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

@@ -1,53 +1,32 @@
 
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Reshape Table &mdash; PVGeo  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
-
-  
-  
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
     <link rel="canonical" href="http://docs.pvgeo.org/examples/filters-general/reshape-table.html"/>
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Rotate Points" href="rotate-points.html" />
@@ -76,26 +55,13 @@
 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> PVGeo
-          
-
-          
           </a>
-
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -103,19 +69,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
     
-            
-            
-              
-            
-            
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome to PVGeo’s code docs!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview/why-pvgeo.html">Why PVGeo?</a></li>
@@ -123,7 +78,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../overview/featured.html">Featured</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview/agu-2018.html">AGU 2018</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
@@ -148,12 +103,12 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">API Index:</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Index:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../content/PVGeo/index.html">About PVGeo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../content/pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Development Guide</span></p>
+<p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/repo-structure.html">Project Structure</a></li>
@@ -162,8 +117,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../dev-guide/resources.html">External References</a></li>
 </ul>
 
-            
-          
 
     
         <p class="caption">
@@ -243,7 +196,7 @@
                 </script>
             </div>
             <div>
-                We use ads to cover the cost of maintenance for this site and sponsor the occasional hackathon (🍺 on us!)
+                We use ads to cover the cost of maintenance for this site and fund beverages for the occasional hackathon (🍺 on us!)
             </div>
         </div>
     </div>
@@ -252,76 +205,41 @@
 
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">PVGeo</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">Quick Examples</a> &raquo;</li>
-        
       <li>Reshape Table</li>
-    
-    
 
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p>Click <a class="reference internal" href="#sphx-glr-download-examples-filters-general-reshape-table-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="reshape-table">
-<span id="sphx-glr-examples-filters-general-reshape-table-py"></span><h1>Reshape Table<a class="headerlink" href="#reshape-table" title="Permalink to this headline">¶</a></h1>
+<section class="sphx-glr-example-title" id="reshape-table">
+<span id="sphx-glr-examples-filters-general-reshape-table-py"></span><h1>Reshape Table<a class="headerlink" href="#reshape-table" title="Permalink to this headline"></a></h1>
 <p>This example will demonstrate how to reshape an input table as though it were a 2D array.</p>
 <p>This filter will take a <cite>vtkTable</cite> object and reshape it. This filter essentially treats <cite>vtkTable`s as 2D matrices and reshapes them using `numpy.reshape</cite> in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.</p>
 <p>This example demos <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.ReshapeTable</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
-<span class="kn">import</span> <span class="nn">PVGeo</span>
+
 <span class="kn">from</span> <span class="nn">PVGeo.filters</span> <span class="kn">import</span> <span class="n">ReshapeTable</span>
 </pre></div>
 </div>
@@ -345,28 +263,37 @@ to download the full example code</p>
 <p>Use the filter to reshape the table</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="s1">&#39;F&#39;</span>
 <span class="n">newtitles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Title </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncols</span><span class="p">)]</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">ReshapeTable</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
-                      <span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span>
-                      <span class="n">nrows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span>
-                      <span class="n">names</span><span class="o">=</span><span class="n">newtitles</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">t0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">ReshapeTable</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">newtitles</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">t0</span><span class="p">)</span>
+<span class="n">output</span>
 </pre></div>
 </div>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Table (0x7f9f0cbc3b20)
-  N Rows:       600
-  N Arrays:     2
-</pre></div>
+<div class="output_subarea output_html rendered_html output_result">
+<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table>
+<tr><th>Table</th><th>Information</th></tr>
+<tr><td>N Rows</td><td>600</td></tr>
+<tr><td>N Arrays</td><td>2</td></tr>
+</table>
+
+</td><td>
+<table>
+<tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+<tr><td>Title 0</td><td>float64</td><td>1</td><td>3.741e-03</td><td>9.981e-01</td></tr>
+<tr><td>Title 1</td><td>float64</td><td>1</td><td>3.112e-04</td><td>9.995e-01</td></tr>
+</table>
+
+</td></tr> </table>
 </div>
-<p>Check the output</p>
+<br />
+<br /><p>Check the output</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncols</span><span class="p">):</span>
-    <span class="n">tarr</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">tarr</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 <span class="n">arrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arrs</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 <span class="n">arrs</span> <span class="o">=</span> <span class="n">arrs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="n">arrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">arrs</span><span class="p">,</span> <span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
-<span class="k">assert</span><span class="p">(</span><span class="n">tarr</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">arrs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tarr</span><span class="p">,</span> <span class="n">arrs</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">tarr</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">arrs</span><span class="o">.</span><span class="n">shape</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tarr</span><span class="p">,</span> <span class="n">arrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.005 seconds)</p>
@@ -379,25 +306,23 @@ to download the full example code</p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="rotate-points.html" class="btn btn-neutral float-right" title="Rotate Points" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="points-to-tube.html" class="btn btn-neutral float-left" title="Points to Tube" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rotate-points.html" class="btn btn-neutral float-right" title="Rotate Points" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-
-    </p>
+    <p></p>
   </div>
+
+  
 
  
 
@@ -431,35 +356,24 @@ to download the full example code</p>
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115959679-6"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-115959679-6', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-115959679-6', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>
