@@ -337,5 +337,5 @@ sphinx_gallery_conf = {
 
 
 def setup(app):
-    app.add_stylesheet("style.css")
-    app.add_stylesheet("copybutton.css")
+    app.add_css_file("style.css")
+    app.add_css_file("copybutton.css")
