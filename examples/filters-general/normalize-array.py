@@ -30,7 +30,7 @@ mesh.plot(scalars=title)
 # Apply the filter
 f = NormalizeArray(normalization='feature_scale', new_name='foo')
 output = f.apply(mesh, title)
-print(output)
+output
 
 ###############################################################################
 output.plot(scalars='foo')

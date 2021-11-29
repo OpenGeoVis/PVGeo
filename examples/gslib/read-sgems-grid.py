@@ -14,7 +14,7 @@ from PVGeo.gslib import SGeMSGridReader
 filename, _ = examples.downloads._download_file('A_WLreferenceCAT.sgems')
 
 grid = SGeMSGridReader().apply(filename)
-print(grid)
+grid
 
 ###############################################################################
 warped = grid.cell_data_to_point_data().warp_by_scalar(scale_factor=5)

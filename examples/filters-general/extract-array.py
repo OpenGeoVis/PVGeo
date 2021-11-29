@@ -21,7 +21,7 @@ filt = ExtractArray()
 # Define the array to extract
 # Apply the filter on the input
 table = filt.apply(dataset, 'Elevation')
-print(table)
+table
 
 ###############################################################################
 plt.hist(table['Elevation'])

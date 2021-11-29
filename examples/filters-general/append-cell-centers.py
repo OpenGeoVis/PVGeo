@@ -13,12 +13,12 @@ from PVGeo.filters import AppendCellCenters
 ###############################################################################
 # Use an example mesh from pyvista
 mesh = examples.load_rectilinear()
-print(mesh)
+mesh
 
 ###############################################################################
 #  Run the PVGeo algorithm
 centers = AppendCellCenters().apply(mesh)
-print(centers)
+centers
 
 ###############################################################################
 centers.plot()

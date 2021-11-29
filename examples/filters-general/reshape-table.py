@@ -36,7 +36,7 @@ t0[titles[2]] = arrs[2]
 order = 'F'
 newtitles = ['Title %d' % i for i in range(ncols)]
 output = ReshapeTable(order=order, ncols=ncols, nrows=nrows, names=newtitles).apply(t0)
-print(output)
+output
 
 ###############################################################################
 # Check the output

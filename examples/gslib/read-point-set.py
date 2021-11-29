@@ -14,7 +14,7 @@ from PVGeo.gslib import GSLibPointSetReader
 filename, _ = examples.downloads._download_file('b_100sampledatawl.sgems')
 
 point_set = GSLibPointSetReader().apply(filename)
-print(point_set)
+point_set
 
 ###############################################################################
 point_set.plot()

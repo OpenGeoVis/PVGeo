@@ -16,7 +16,7 @@ grav_file, _ = examples.downloads._retrieve_file(url, 'LdM_grav_obs.grv')
 
 ###############################################################################
 grav = PVGeo.ubc.GravObsReader().apply(grav_file)
-print(grav)
+grav
 
 ###############################################################################
 grav.plot(render_points_as_spheres=True, point_size=10)

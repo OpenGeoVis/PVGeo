@@ -60,7 +60,7 @@ p.show()
 # slices to what you prefer!
 
 slices = ManySlicesAlongPoints(n_slices=5).apply(points, model)
-print(slices)
+slices
 
 ###############################################################################
 line = PVGeo.filters.AddCellConnToPoints().apply(points)

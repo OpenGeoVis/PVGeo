@@ -16,7 +16,7 @@ topo_file, _ = examples.downloads._retrieve_file(url, 'LdM_topo.topo')
 
 ###############################################################################
 topo = PVGeo.ubc.TopoReader().apply(topo_file)
-print(topo)
+topo
 
 ###############################################################################
 topo.plot(cmap='terrain')

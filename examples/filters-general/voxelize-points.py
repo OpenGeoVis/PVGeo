@@ -37,7 +37,7 @@ print(points[0:2])
 ###############################################################################
 
 vtkpoints = PVGeo.points_to_poly_data(points)
-print(vtkpoints)
+vtkpoints
 
 ###############################################################################
 # Note that we have a :class:`pyvista.PolyData` object now which allows us to do
@@ -76,7 +76,7 @@ print('done.')
 # Output the results
 print('Recovered Angle (deg.): %.3f' % voxelizer.get_angle())
 print('Recovered Cell Sizes: (%.2f, %.2f, %.2f)' % voxelizer.get_spacing())
-print(grid)
+grid
 
 ###############################################################################
 # And now we can plot the voxelized volume
@@ -91,7 +91,7 @@ grid.plot()
 # dataset. Specifically, we are using the ``slice_orthogonal`` filter that will
 # create 3 orthogonal slices through a data volume.
 slices = grid.slice_orthogonal()
-print(slices)
+slices
 
 ###############################################################################
 # And let's use a ``clip`` filter:

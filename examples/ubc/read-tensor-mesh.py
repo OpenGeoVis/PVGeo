@@ -22,7 +22,7 @@ reader = PVGeo.ubc.TensorMeshReader()
 reader.set_mesh_filename(mesh_file)
 reader.add_model_file_name(model_file)
 mesh = reader.apply()
-print(mesh)
+mesh
 
 ###############################################################################
 # Use a `PyVista` ``threshold`` filter to remove ``NaN`` data values
