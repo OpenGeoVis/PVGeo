@@ -207,7 +207,7 @@ def convert_cell_conn(cell_connectivity):
     """
     cellsMat = np.concatenate(
         (
-            np.ones((cell_connectivity.shape[0], 1), dtype=np.int64)
+            np.ones((cell_connectivity.shape[0], 1), dtype=np.int_)
             * cell_connectivity.shape[1],
             cell_connectivity,
         ),

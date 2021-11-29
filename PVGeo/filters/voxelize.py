@@ -177,7 +177,7 @@ class VoxelizePoints(FilterBase):
         ids = ind_nodes[arridx].reshape((n_cells, 8))
 
         cells_mat = np.concatenate(
-            (np.ones((ids.shape[0], 1), dtype=np.int64) * ids.shape[1], ids), axis=1
+            (np.ones((ids.shape[0], 1), dtype=np.int_) * ids.shape[1], ids), axis=1
         ).ravel()
 
         cells = vtk.vtkCellArray()
