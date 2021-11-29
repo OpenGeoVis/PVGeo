@@ -6,7 +6,7 @@ __all__ = [
     'get_combined_input_time_steps',
 ]
 
-import collections
+from collections.abc import Iterable
 
 import numpy as np
 
@@ -31,10 +31,10 @@ def update_time_steps(algorithm, nt, dt=1.0, explicit=False):
     Return:
         numpy.array : Returns the timesteps as an array
     """
-    if explicit and isinstance(nt, collections.Iterable):
+    if explicit and isinstance(nt, Iterable):
         timesteps = nt
     else:
-        if isinstance(nt, collections.Iterable):
+        if isinstance(nt, Iterable):
             nt = len(nt)
         timesteps = _calculate_time_range(nt, dt=1.0)
     if len(timesteps) < 1:
