@@ -52,7 +52,7 @@ class OcTreeReader(ubcMeshReaderBase):
                 ``place_model_on_octree_mesh()`` method to associate with model data.
         """
         try:
-            self.__mesh = discretize.TreeMesh.readUBC(FileName)
+            self.__mesh = discretize.TreeMesh.read_UBC(FileName)
         except (IOError, OSError) as fe:
             raise _helpers.PVGeoError(str(fe))
         if pdo is None:
