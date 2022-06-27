@@ -29,6 +29,7 @@ jobs:
           sleep 3
       - name: Install Dependencies
         run: |
+          pip install Cython
           pip install -r requirements.txt
           pip install -r docs/requirements.txt
           pip install cookiecutter

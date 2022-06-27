@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.7, 3.8]
+        python-version: [3.7, 3.8, 3.9]
         os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
@@ -24,7 +24,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install Dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install Cython
+          pip install -r requirements.txt
       - name: Install PVGeo
         run: pip install -e .[pyproj,omf,discretize]
       - name: Run Test Suite
