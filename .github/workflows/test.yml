@@ -1,11 +1,13 @@
 name: Testing
 
 on:
-  push:
-    branches: "*"
-    tags: "v*"
+  workflow_dispatch:
   pull_request:
-    branches: "**"
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   test:
