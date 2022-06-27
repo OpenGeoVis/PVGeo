@@ -23,6 +23,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
@@ -231,13 +232,13 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.grids.subset">
-<span id="subsetting"></span><h1>Subsetting<a class="headerlink" href="#module-PVGeo.grids.subset" title="Permalink to this headline"></a></h1>
+<span id="subsetting"></span><h1>Subsetting<a class="headerlink" href="#module-PVGeo.grids.subset" title="Permalink to this heading"></a></h1>
 <section id="extract-topography">
-<h2>Extract Topography<a class="headerlink" href="#extract-topography" title="Permalink to this headline"></a></h2>
+<h2>Extract Topography<a class="headerlink" href="#extract-topography" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.grids.subset.ExtractTopography">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.grids.subset.</span></span><span class="sig-name descname"><span class="pre">ExtractTopography</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'underneath'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/subset.html#ExtractTopography"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.subset.ExtractTopography" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterBase</span></code></a></p>
 <p>This filter takes two inputs: any mesh dataset and a set of points for
 a topography source. This will add a boolean data array to the cell data of
 the input grid on whether that cell should be active (under topographic

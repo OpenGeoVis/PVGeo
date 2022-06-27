@@ -23,6 +23,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
@@ -235,14 +236,14 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.grids.fileio">
-<span id="file-i-o"></span><h1>File I/O<a class="headerlink" href="#module-PVGeo.grids.fileio" title="Permalink to this headline"></a></h1>
+<span id="file-i-o"></span><h1>File I/O<a class="headerlink" href="#module-PVGeo.grids.fileio" title="Permalink to this heading"></a></h1>
 <p>This module contains general grid readers and writers for programs like Surfer.</p>
 <section id="esri-grid-reader">
-<h2>Esri Grid Reader<a class="headerlink" href="#esri-grid-reader" title="Permalink to this headline"></a></h2>
+<h2>Esri Grid Reader<a class="headerlink" href="#esri-grid-reader" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.grids.fileio.EsriGridReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.grids.fileio.</span></span><span class="sig-name descname"><span class="pre">EsriGridReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkImageData'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#EsriGridReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.fileio.EsriGridReader" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader" title="PVGeo.readers.delimited.DelimitedTextReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedTextReader</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader" title="PVGeo.readers.delimited.DelimitedTextReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">DelimitedTextReader</span></code></a></p>
 <p>See details: <a class="reference external" href="https://en.wikipedia.org/wiki/Esri_grid">https://en.wikipedia.org/wiki/Esri_grid</a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.grids.fileio.EsriGridReader.RequestData">
@@ -308,11 +309,11 @@ This method handles Surfer’s NaN data values and checks the value range</p>
 
 </section>
 <section id="landsat-xml-reader">
-<h2>Landsat XML Reader<a class="headerlink" href="#landsat-xml-reader" title="Permalink to this headline"></a></h2>
+<h2>Landsat XML Reader<a class="headerlink" href="#landsat-xml-reader" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.grids.fileio.LandsatReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.grids.fileio.</span></span><span class="sig-name descname"><span class="pre">LandsatReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#LandsatReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.fileio.LandsatReader" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBaseBase" title="PVGeo.base.ReaderBaseBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.ReaderBaseBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBaseBase" title="PVGeo.base.ReaderBaseBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReaderBaseBase</span></code></a></p>
 <p>A reader that will handle ESPA XML files for Landsat Imagery. This reader
 uses the <code class="docutils literal notranslate"><span class="pre">espatools</span></code> package to read Landsat rasters (band sets) and
 creates vtkImageData with each band as point data</p>
@@ -412,11 +413,11 @@ any string that is not a defined scheme as the scheme argument.</p>
 
 </section>
 <section id="surfer-grid-reader">
-<h2>Surfer Grid Reader<a class="headerlink" href="#surfer-grid-reader" title="Permalink to this headline"></a></h2>
+<h2>Surfer Grid Reader<a class="headerlink" href="#surfer-grid-reader" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.grids.fileio.SurferGridReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.grids.fileio.</span></span><span class="sig-name descname"><span class="pre">SurferGridReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkImageData'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#SurferGridReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.fileio.SurferGridReader" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBase" title="PVGeo.base.ReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.ReaderBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBase" title="PVGeo.base.ReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReaderBase</span></code></a></p>
 <p>Read 2D ASCII/Binary Surfer grid files. The IO code was adopted from
 <a class="reference external" href="https://github.com/seequent/steno3d-surfer/blob/master/steno3d_surfer/parser.py">Seequent’s steno3d_surfer</a></p>
 <div class="admonition note">
@@ -509,11 +510,11 @@ all files set.</p>
 
 </section>
 <section id="write-cell-centers-to-csv">
-<h2>Write Cell Centers To CSV<a class="headerlink" href="#write-cell-centers-to-csv" title="Permalink to this headline"></a></h2>
+<h2>Write Cell Centers To CSV<a class="headerlink" href="#write-cell-centers-to-csv" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.grids.fileio.WriteCellCenterData">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.grids.fileio.</span></span><span class="sig-name descname"><span class="pre">WriteCellCenterData</span></span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#WriteCellCenterData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.fileio.WriteCellCenterData" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.WriterBase" title="PVGeo.base.WriterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.WriterBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.WriterBase" title="PVGeo.base.WriterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">WriterBase</span></code></a></p>
 <p>This writer will save a file of the XYZ points for an input dataset’s
 cell centers and its cell data. Use in tandom with ParaView’s native CSV
 writer which saves the PointData.</p>
@@ -533,11 +534,11 @@ writer which saves the PointData.</p>
 
 </section>
 <section id="write-vtkimagedata-to-surfer-format">
-<h2>Write <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> to Surfer Format<a class="headerlink" href="#write-vtkimagedata-to-surfer-format" title="Permalink to this headline"></a></h2>
+<h2>Write <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> to Surfer Format<a class="headerlink" href="#write-vtkimagedata-to-surfer-format" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.grids.fileio.WriteImageDataToSurfer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.grids.fileio.</span></span><span class="sig-name descname"><span class="pre">WriteImageDataToSurfer</span></span><a class="reference internal" href="../../../_modules/PVGeo/grids/fileio.html#WriteImageDataToSurfer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.grids.fileio.WriteImageDataToSurfer" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.WriterBase" title="PVGeo.base.WriterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.WriterBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.WriterBase" title="PVGeo.base.WriterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">WriterBase</span></code></a></p>
 <p>Write a 2D <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> object to the Surfer grid format</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.grids.fileio.WriteImageDataToSurfer.SetInputArrayToProcess">

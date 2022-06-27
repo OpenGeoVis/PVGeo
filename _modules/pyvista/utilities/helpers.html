@@ -22,6 +22,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
@@ -207,23 +208,25 @@
   <h1>Source code for pyvista.utilities.helpers</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Supporting functions for polydata and grid objects.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">collections.abc</span>
 <span class="kn">import</span> <span class="nn">enum</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">signal</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 <span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">_vtk</span>
 <span class="kn">import</span> <span class="nn">pyvista</span>
-<span class="kn">from</span> <span class="nn">.fileio</span> <span class="kn">import</span> <span class="n">from_meshio</span>
+<span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">_vtk</span>
+
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">transformations</span>
+<span class="kn">from</span> <span class="nn">.fileio</span> <span class="kn">import</span> <span class="n">from_meshio</span>
 
 
 <span class="k">class</span> <span class="nc">FieldAssociation</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
@@ -361,7 +364,7 @@
     <span class="k">if</span> <span class="n">arr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">):</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;|S&#39;</span><span class="p">)</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bytes_</span><span class="p">):</span>
@@ -370,8 +373,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># This will handle numerical data</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-            <span class="n">vtk_data</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">num_array</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">deep</span><span class="p">,</span>
-                                         <span class="n">array_type</span><span class="o">=</span><span class="n">array_type</span><span class="p">)</span>
+            <span class="n">vtk_data</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">num_array</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">deep</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="n">array_type</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">vtk_data</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">vtk_data</span>
@@ -636,7 +638,7 @@
     <span class="k">return</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">vtk_points</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">vtk_points</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force_float</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert numpy array or array-like to a ``vtkPoints`` object.</span>
 
 <span class="sd">    Parameters</span>
@@ -648,6 +650,12 @@
 <span class="sd">    deep : bool, optional</span>
 <span class="sd">        Perform a deep copy of the array.  Only applicable if</span>
 <span class="sd">        ``points`` is a :class:`numpy.ndarray`.</span>
+
+<span class="sd">    force_float : bool, optional</span>
+<span class="sd">        Casts the datatype to ``float32`` if points datatype is</span>
+<span class="sd">        non-float.  Set this to ``False`` to allow non-float types,</span>
+<span class="sd">        though this may lead to truncation of intermediate floats</span>
+<span class="sd">        when transforming datasets.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -670,17 +678,28 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Points must be a numeric type&#39;</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">force_float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s1">&#39;Points is not a float type. This can cause issues when &#39;</span>
+                <span class="s1">&#39;transforming or applying filters. Casting to &#39;</span>
+                <span class="s1">&#39;``np.float32``. Disable this by passing &#39;</span>
+                <span class="s1">&#39;``force_float=False``.&#39;</span>
+            <span class="p">)</span>
+            <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
     <span class="c1"># check dimensionality</span>
     <span class="k">if</span> <span class="n">points</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">points</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Dimension of ``points`` should be 1 or 2, not &#39;</span>
-                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">points</span><span class="o">.</span><span class="n">ndim</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dimension of ``points`` should be 1 or 2, not </span><span class="si">{</span><span class="n">points</span><span class="o">.</span><span class="n">ndim</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
     <span class="c1"># verify shape</span>
     <span class="k">if</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Points array must contain three values per point. &#39;</span>
-                         <span class="sa">f</span><span class="s1">&#39;Shape is </span><span class="si">{</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> and should be (X, 3)&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;Points array must contain three values per point. &#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;Shape is </span><span class="si">{</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> and should be (X, 3)&#39;</span>
+        <span class="p">)</span>
 
     <span class="c1"># points must be contiguous</span>
     <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">requirements</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">])</span>
@@ -725,9 +744,13 @@
     <span class="c1"># Assuming ordered points, create array defining line order</span>
     <span class="n">n_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
     <span class="n">n_lines</span> <span class="o">=</span> <span class="n">n_points</span> <span class="o">//</span> <span class="mi">2</span>
-    <span class="n">lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_lines</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">),</span>
-                   <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_points</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
-                   <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_points</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">2</span><span class="p">))]</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span>
+        <span class="p">(</span>
+            <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_lines</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_points</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_points</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
     <span class="n">poly</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">()</span>
     <span class="n">poly</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points</span>
     <span class="n">poly</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span>
@@ -763,11 +786,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">poly</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">()</span>
     <span class="n">poly</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points</span>
-    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
-    <span class="n">cells</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
+    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
+    <span class="n">cells</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
     <span class="n">cells</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
-        <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">poly</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="n">cells</span>
     <span class="k">return</span> <span class="n">poly</span>
 
@@ -901,7 +924,7 @@
 
     <span class="c1"># Add magnitude of vectors to polydata</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;mag&#39;</span>
-    <span class="n">scalars</span> <span class="o">=</span> <span class="p">(</span><span class="n">vec</span> <span class="o">*</span> <span class="n">vec</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="n">scalars</span> <span class="o">=</span> <span class="p">(</span><span class="n">vec</span> <span class="o">*</span> <span class="n">vec</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
     <span class="n">vtkfloat</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">scalars</span><span class="p">),</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">vtkfloat</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="n">pdata</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">vtkfloat</span><span class="p">)</span>
@@ -918,6 +941,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># import needs to happen here to prevent a circular import</span>
     <span class="kn">from</span> <span class="nn">pyvista.core.errors</span> <span class="kn">import</span> <span class="n">DeprecationError</span>
+
     <span class="k">raise</span> <span class="n">DeprecationError</span><span class="p">(</span><span class="s1">&#39;DEPRECATED: Please use ``array_from_vtkmatrix``.&#39;</span><span class="p">)</span>
 
 
@@ -941,8 +965,10 @@
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkMatrix4x4</span><span class="p">):</span>
         <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Expected vtk.vtkMatrix3x3 or vtk.vtkMatrix4x4 input,&#39;</span>
-                        <span class="sa">f</span><span class="s1">&#39; got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> instead.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s1">&#39;Expected vtk.vtkMatrix3x3 or vtk.vtkMatrix4x4 input,&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39; got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> instead.&#39;</span>
+        <span class="p">)</span>
     <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
@@ -996,6 +1022,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">meshio</span>
+
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">meshio</span><span class="o">.</span><span class="n">Mesh</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -1092,7 +1119,7 @@
         <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="n">mesh</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">mesh</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
             <span class="n">mesh</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
             <span class="n">mesh</span><span class="o">.</span><span class="n">active_scalars_name</span> <span class="o">=</span> <span class="s1">&#39;values&#39;</span>
             <span class="k">return</span> <span class="n">mesh</span>
@@ -1184,7 +1211,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="n">point</span> <span class="o">=</span> <span class="p">[</span><span class="n">point</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
+        <span class="n">point</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span>
+    <span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Bounds mismatch point dimensionality&#39;</span><span class="p">)</span>
         <span class="n">point</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
@@ -1238,7 +1267,7 @@
 
 <span class="sd">    &gt;&gt;&gt; pl = pyvista.Plotter()</span>
 <span class="sd">    &gt;&gt;&gt; _ = pl.add_mesh(plane, color=&#39;tan&#39;, style=&#39;wireframe&#39;, line_width=4)</span>
-<span class="sd">    &gt;&gt;&gt; _ = pl.add_points(cloud, render_points_as_spheres=True, </span>
+<span class="sd">    &gt;&gt;&gt; _ = pl.add_points(cloud, render_points_as_spheres=True,</span>
 <span class="sd">    ...                   color=&#39;r&#39;, point_size=30)</span>
 <span class="sd">    &gt;&gt;&gt; pl.show()</span>
 
@@ -1270,10 +1299,14 @@
 <span class="sd">        Raises a ValueError if the size of scalars does not the dataset.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">) must match number of rows (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_rows</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">) &#39;</span>
-                     <span class="sa">f</span><span class="s1">&#39;must match either the number of points (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_points</span><span class="si">}</span><span class="s1">) &#39;</span>
-                     <span class="sa">f</span><span class="s1">&#39;or the number of cells (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_cells</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">) must match number of rows (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_rows</span><span class="si">}</span><span class="s1">).&#39;</span>
+        <span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">) &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;must match either the number of points (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_points</span><span class="si">}</span><span class="s1">) &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;or the number of cells (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_cells</span><span class="si">}</span><span class="s1">).&#39;</span>
+    <span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">generate_plane</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">origin</span><span class="p">):</span>
@@ -1318,10 +1351,9 @@
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="n">etype</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">tb</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
         <span class="n">stack</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">extract_tb</span><span class="p">(</span><span class="n">tb</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
-        <span class="n">formatted_exception</span> <span class="o">=</span> \
-            <span class="s1">&#39;Encountered issue in callback (most recent call last):</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-            <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_list</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">+</span>
-                    <span class="n">traceback</span><span class="o">.</span><span class="n">format_exception_only</span><span class="p">(</span><span class="n">etype</span><span class="p">,</span> <span class="n">exc</span><span class="p">))</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">formatted_exception</span> <span class="o">=</span> <span class="s1">&#39;Encountered issue in callback (most recent call last):</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">traceback</span><span class="o">.</span><span class="n">format_list</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">+</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exception_only</span><span class="p">(</span><span class="n">etype</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">formatted_exception</span><span class="p">)</span>
 
 
@@ -1418,7 +1450,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">ProgressMonitor</span><span class="p">():</span>
+<span class="k">class</span> <span class="nc">ProgressMonitor</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;A standard class for monitoring the progress of a VTK algorithm.</span>
 
 <span class="sd">    This must be use in a ``with`` context and it will block keyboard</span>
@@ -1441,7 +1473,7 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize observer.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+            <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>  <span class="c1"># noqa</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Please install `tqdm` to monitor algorithms.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">event_type</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkCommand</span><span class="o">.</span><span class="n">ProgressEvent</span>
@@ -1457,8 +1489,7 @@
     <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Pass signal to custom interrupt handler.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_interrupt_signal_received</span> <span class="o">=</span> <span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;SIGINT received. Delaying KeyboardInterrupt until &#39;</span>
-                      <span class="s1">&#39;VTK algorithm finishes.&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;SIGINT received. Delaying KeyboardInterrupt until VTK algorithm finishes.&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Call progress update callback.</span>
@@ -1480,8 +1511,9 @@
         <span class="c1"># check if in main thread</span>
         <span class="k">if</span> <span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;_MainThread&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_old_handler</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handler</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">leave</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                  <span class="n">bar_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{l_bar}{bar}</span><span class="s1">[</span><span class="si">{elapsed}</span><span class="s1">&lt;</span><span class="si">{remaining}</span><span class="s1">]&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span>
+            <span class="n">total</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">leave</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bar_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{l_bar}{bar}</span><span class="s1">[</span><span class="si">{elapsed}</span><span class="s1">&lt;</span><span class="si">{remaining}</span><span class="s1">]&#39;</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_progress_bar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">AddObserver</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">event_type</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_progress_bar</span>
@@ -1507,17 +1539,18 @@
         <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="n">cls_</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> is an abstract class and may not be instantiated.&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+
     <span class="n">cls_</span><span class="o">.</span><span class="fm">__new__</span> <span class="o">=</span> <span class="fm">__new__</span>
     <span class="k">return</span> <span class="n">cls_</span>
 
 
 <span class="k">def</span> <span class="nf">axis_rotation</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Rotate points angle (in deg) about an axis.</span>
+    <span class="sd">&quot;&quot;&quot;Rotate points by angle about an axis.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    points : numpy.ndarray</span>
-<span class="sd">        Array of points with shape ``(N, 3)``</span>
+<span class="sd">        Array of points with shape ``(N, 3)``.</span>
 
 <span class="sd">    angle : float</span>
 <span class="sd">        Rotation angle.</span>
@@ -1526,8 +1559,8 @@
 <span class="sd">        Updates points in-place while returning nothing.</span>
 
 <span class="sd">    deg : bool, optional</span>
-<span class="sd">        If `True`, the angle is interpreted as degrees instead of</span>
-<span class="sd">        radians. Default is `True`.</span>
+<span class="sd">        If ``True``, the angle is interpreted as degrees instead of</span>
+<span class="sd">        radians. Default is ``True``.</span>
 
 <span class="sd">    axis : str, optional</span>
 <span class="sd">        Name of axis to rotate about. Valid options are ``&#39;x&#39;``, ``&#39;y&#39;``,</span>
@@ -1541,6 +1574,7 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    Rotate a set of points by 90 degrees about the x-axis in-place.</span>
+
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; import pyvista</span>
 <span class="sd">    &gt;&gt;&gt; from pyvista import examples</span>
@@ -1552,11 +1586,7 @@
 <span class="sd">    &gt;&gt;&gt; assert np.all(np.isclose(points[:, 2], points_orig[:, 1]))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="n">axis_to_vec</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-        <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-        <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="p">}</span>
+    <span class="n">axis_to_vec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}</span>
 
     <span class="k">if</span> <span class="n">axis</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">axis_to_vec</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid axis. Must be either &quot;x&quot;, &quot;y&quot;, or &quot;z&quot;&#39;</span><span class="p">)</span>
@@ -1615,9 +1645,11 @@
     <span class="k">for</span> <span class="n">image_path</span> <span class="ow">in</span> <span class="n">image_paths</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
             <span class="n">file_str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_paths</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unable to locate </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-                                    <span class="s1">&#39;Expected to find the following files:</span><span class="se">\n</span><span class="s1">&#39;</span>
-                                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">file_str</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Unable to locate </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;Expected to find the following files:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">file_str</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span>
 
     <span class="n">texture</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Texture</span><span class="p">()</span>
     <span class="n">texture</span><span class="o">.</span><span class="n">SetMipmap</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>

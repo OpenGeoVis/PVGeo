@@ -23,6 +23,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
@@ -226,12 +227,12 @@
            <div itemprop="articleBody">
              
   <section id="export">
-<h1>Export<a class="headerlink" href="#export" title="Permalink to this headline"></a></h1>
+<h1>Export<a class="headerlink" href="#export" title="Permalink to this heading"></a></h1>
 <p>On this page, we demonstrate how to quickly share a 3D rendering of your
 ParaView visualizations with anyone who has access to the internet so that that
 can explore the whole scene in a dynamic manner.</p>
 <section id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"></a></h2>
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading"></a></h2>
 <p>In order to effectively communicate our geoscientific findings, we often need to
 share our 3D visualizations with interested stakeholders. These interested
 parties are likely not going to have ParaView or other visualization software
@@ -245,7 +246,7 @@ formats.</p>
         <iframe src="http://tunnels.pvgeo.org/" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div></section>
 <section id="vtk-js">
-<h2>VTK.js<a class="headerlink" href="#vtk-js" title="Permalink to this headline"></a></h2>
+<h2>VTK.js<a class="headerlink" href="#vtk-js" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="https://kitware.github.io/vtk-js/">vtk.js</a> is a rendering library made for
 scientific visualization on the web. This code base brings high performance
 rendering into anyone’s web browser. This library allows us to export complex
@@ -260,7 +261,7 @@ shareable format for viewing on the web. The <a class="reference external" href=
 can be used but we also deploy an updated (we think more robust) version of
 this export macro in the sub-module <cite>export</cite> of our Python module <cite>pvmacros</cite>.</p>
 <section id="demo-shareable-format">
-<h3>Demo Shareable Format<a class="headerlink" href="#demo-shareable-format" title="Permalink to this headline"></a></h3>
+<h3>Demo Shareable Format<a class="headerlink" href="#demo-shareable-format" title="Permalink to this heading"></a></h3>
 <p>Here are some samples to demonstrate the web viewer which we host on
 <a class="reference external" href="http://viewer.pyvista.org">viewer.pyvista.org</a>. We have included a few of our
 scenes and one of the vtk.js sample scenes for you to demo:</p>
@@ -274,7 +275,7 @@ scenes and one of the vtk.js sample scenes for you to demo:</p>
 </section>
 </section>
 <section id="example-use">
-<h2>Example Use<a class="headerlink" href="#example-use" title="Permalink to this headline"></a></h2>
+<h2>Example Use<a class="headerlink" href="#example-use" title="Permalink to this heading"></a></h2>
 <p>First, make a complex scene in ParaView that you might like to share with someone.
 Now that you have your scene loaded, open the python shell from’View-&gt;Python Shell’
 (or ‘Tools-&gt;Python Shell’ depending on your ParaView version) within ParaView.
@@ -298,11 +299,11 @@ have printed out the location of the saved scene in the Python Shell.</p>
 or read the <a class="reference external" href="https://kitware.github.io/vtk-js/examples/StandaloneSceneLoader.html">vtk.js documentation</a></p>
 </section>
 <section id="how-to-share">
-<h2>How to Share<a class="headerlink" href="#how-to-share" title="Permalink to this headline"></a></h2>
+<h2>How to Share<a class="headerlink" href="#how-to-share" title="Permalink to this heading"></a></h2>
 <p>To share these exported scenes with non-technical stakeholders, we recommend the
 following processes:</p>
 <section id="quick-and-easy">
-<h3>Quick and Easy<a class="headerlink" href="#quick-and-easy" title="Permalink to this headline"></a></h3>
+<h3>Quick and Easy<a class="headerlink" href="#quick-and-easy" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Create your scene and export to the vtk.js format (follow process above)</p></li>
 <li><p>Quality control your visualization by viewing in web browser yourself (follow process above)</p></li>
@@ -316,7 +317,7 @@ Then go to the link below and open that downloaded file.
 </div>
 </section>
 <section id="a-bit-more-robust">
-<h3>A Bit More Robust<a class="headerlink" href="#a-bit-more-robust" title="Permalink to this headline"></a></h3>
+<h3>A Bit More Robust<a class="headerlink" href="#a-bit-more-robust" title="Permalink to this heading"></a></h3>
 <p>Sometimes we might want to give someone a direct link to the web visualization
 so all they have to do is open the link on any device and they can see our
 visualization. Here is a method to share scenes that have a slightly easier
@@ -343,7 +344,7 @@ python get_vtkjs_url.py dropbox <span class="s2">&quot;https://www.dropbox.com/s
 </div>
 <iframe src="https://player.vimeo.com/video/257833915" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 <p><a href="https://vimeo.com/257833915">PVGeo Export Demo</a> from <a href="https://vimeo.com/user82050125">Bane Sullivan</a> on <a href="https://vimeo.com">Vimeo</a>.</p><section id="id3">
-<h4>Export<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h4>
+<h4>Export<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="vtkjs.html">vtkjs</a><ul>

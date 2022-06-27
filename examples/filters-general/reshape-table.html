@@ -23,6 +23,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
@@ -233,7 +234,7 @@
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="reshape-table">
-<span id="sphx-glr-examples-filters-general-reshape-table-py"></span><h1>Reshape Table<a class="headerlink" href="#reshape-table" title="Permalink to this headline"></a></h1>
+<span id="sphx-glr-examples-filters-general-reshape-table-py"></span><h1>Reshape Table<a class="headerlink" href="#reshape-table" title="Permalink to this heading"></a></h1>
 <p>This example will demonstrate how to reshape an input table as though it were a 2D array.</p>
 <p>This filter will take a <cite>vtkTable</cite> object and reshape it. This filter essentially treats <cite>vtkTable`s as 2D matrices and reshapes them using `numpy.reshape</cite> in a C contiguous manner. Unfortunately, data fields will be renamed arbitrarily because VTK data arrays require a name.</p>
 <p>This example demos <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.ReshapeTable</span></code></p>
@@ -278,8 +279,8 @@ to download the full example code</p>
 </td><td>
 <table>
 <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td>Title 0</td><td>float64</td><td>1</td><td>3.741e-03</td><td>9.981e-01</td></tr>
-<tr><td>Title 1</td><td>float64</td><td>1</td><td>3.112e-04</td><td>9.995e-01</td></tr>
+<tr><td>Title 0</td><td>float64</td><td>1</td><td>1.025e-03</td><td>9.997e-01</td></tr>
+<tr><td>Title 1</td><td>float64</td><td>1</td><td>5.030e-04</td><td>9.962e-01</td></tr>
 </table>
 
 </td></tr> </table>
@@ -296,7 +297,7 @@ to download the full example code</p>
 <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tarr</span><span class="p">,</span> <span class="n">arrs</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.005 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.004 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-reshape-table-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/4c7be5225fe65e0abfc2bdd9f7216d1f/reshape-table.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">reshape-table.py</span></code></a></p>

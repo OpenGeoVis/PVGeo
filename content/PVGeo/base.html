@@ -23,6 +23,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
@@ -232,13 +233,13 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.base">
-<span id="base-classes"></span><h1>Base Classes<a class="headerlink" href="#module-PVGeo.base" title="Permalink to this headline"></a></h1>
+<span id="base-classes"></span><h1>Base Classes<a class="headerlink" href="#module-PVGeo.base" title="Permalink to this heading"></a></h1>
 <section id="algorithm-base">
-<h2>Algorithm Base<a class="headerlink" href="#algorithm-base" title="Permalink to this headline"></a></h2>
+<h2>Algorithm Base<a class="headerlink" href="#algorithm-base" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.base.AlgorithmBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.base.</span></span><span class="sig-name descname"><span class="pre">AlgorithmBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nInputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkDataSet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nOutputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkTable'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#AlgorithmBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.AlgorithmBase" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">vtk.util.vtkAlgorithm.VTKPythonAlgorithmBase</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">VTKPythonAlgorithmBase</span></code></p>
 <p>This is a base class to add coconvenience methods to the
 <code class="docutils literal notranslate"><span class="pre">VTKPythonAlgorithmBase</span></code> for all algorithms implemented in <code class="docutils literal notranslate"><span class="pre">PVGeo</span></code>.
 We implement our algorithms in this manner to harness all of the backend
@@ -301,11 +302,11 @@ algorithm.</p>
 
 </section>
 <section id="filter-base">
-<h2>Filter Base<a class="headerlink" href="#filter-base" title="Permalink to this headline"></a></h2>
+<h2>Filter Base<a class="headerlink" href="#filter-base" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.base.FilterBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.base.</span></span><span class="sig-name descname"><span class="pre">FilterBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nInputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkDataSet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nOutputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkPolyData'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#FilterBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.FilterBase" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmBase</span></code></a></p>
 <p>A base class for implementing filters which holds several conveience
 methods</p>
 <dl class="py method">
@@ -318,11 +319,11 @@ methods</p>
 
 </section>
 <section id="filter-preserve-type-base">
-<h2>Filter Preserve Type Base<a class="headerlink" href="#filter-preserve-type-base" title="Permalink to this headline"></a></h2>
+<h2>Filter Preserve Type Base<a class="headerlink" href="#filter-preserve-type-base" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.base.FilterPreserveTypeBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.base.</span></span><span class="sig-name descname"><span class="pre">FilterPreserveTypeBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nInputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#FilterPreserveTypeBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.FilterPreserveTypeBase" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterBase</span></code></a></p>
 <p>A Base class for implementing filters that preserve the data type of
 their arbitrary input.</p>
 <dl class="py method">
@@ -337,11 +338,11 @@ based in the input data type.</p>
 
 </section>
 <section id="interfaced-base-reader">
-<h2>Interfaced Base Reader<a class="headerlink" href="#interfaced-base-reader" title="Permalink to this headline"></a></h2>
+<h2>Interfaced Base Reader<a class="headerlink" href="#interfaced-base-reader" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.base.InterfacedBaseReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.base.</span></span><span class="sig-name descname"><span class="pre">InterfacedBaseReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#InterfacedBaseReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.InterfacedBaseReader" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.ReaderBase" title="PVGeo.base.ReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.ReaderBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.ReaderBase" title="PVGeo.base.ReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReaderBase</span></code></a></p>
 <p>A general base reader for all interfacing with libraries that already
 have file I/O methods and VTK data object interfaces. This provides a
 routine for using an external library to handle all I/O and produce the
@@ -397,11 +398,11 @@ in the given library’s format.</p>
 
 </section>
 <section id="reader-base-time-varying">
-<h2>Reader Base: Time Varying<a class="headerlink" href="#reader-base-time-varying" title="Permalink to this headline"></a></h2>
+<h2>Reader Base: Time Varying<a class="headerlink" href="#reader-base-time-varying" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.base.ReaderBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.base.</span></span><span class="sig-name descname"><span class="pre">ReaderBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nOutputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkTable'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.ReaderBase" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.ReaderBaseBase" title="PVGeo.base.ReaderBaseBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.ReaderBaseBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.ReaderBaseBase" title="PVGeo.base.ReaderBaseBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReaderBaseBase</span></code></a></p>
 <p>A base class for inherited functionality common to all reader algorithms
 that need to handle a time series.</p>
 <dl class="py method">
@@ -434,11 +435,11 @@ of file names when the pipeline needs to know the time information.</p>
 
 </section>
 <section id="reader-base-base">
-<h2>Reader Base Base<a class="headerlink" href="#reader-base-base" title="Permalink to this headline"></a></h2>
+<h2>Reader Base Base<a class="headerlink" href="#reader-base-base" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.base.ReaderBaseBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.base.</span></span><span class="sig-name descname"><span class="pre">ReaderBaseBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nOutputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkTable'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmBase</span></code></a></p>
 <p>A base class for inherited functionality common to all reader algorithms</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.base.ReaderBaseBase.AddFileName">
@@ -535,11 +536,11 @@ timestep’s filename.</p>
 
 </section>
 <section id="two-file-reader-base">
-<h2>Two File Reader Base<a class="headerlink" href="#two-file-reader-base" title="Permalink to this headline"></a></h2>
+<h2>Two File Reader Base<a class="headerlink" href="#two-file-reader-base" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.base.TwoFileReaderBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.base.</span></span><span class="sig-name descname"><span class="pre">TwoFileReaderBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nOutputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkUnstructuredGrid'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmBase</span></code></a></p>
 <p>A base clase for readers that need to handle two input files.
 One meta-data file and a series of data files.</p>
 <dl class="py method">
@@ -673,11 +674,11 @@ timestep’s filename.</p>
 
 </section>
 <section id="writer-base">
-<h2>Writer Base<a class="headerlink" href="#writer-base" title="Permalink to this headline"></a></h2>
+<h2>Writer Base<a class="headerlink" href="#writer-base" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.base.WriterBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.base.</span></span><span class="sig-name descname"><span class="pre">WriterBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nInputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkPolyData'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.WriterBase" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmBase</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.base.WriterBase.FillInputPortInformation">
 <span class="sig-name descname"><span class="pre">FillInputPortInformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#WriterBase.FillInputPortInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.WriterBase.FillInputPortInformation" title="Permalink to this definition"></a></dt>

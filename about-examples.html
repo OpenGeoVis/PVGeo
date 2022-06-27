@@ -23,6 +23,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
@@ -226,7 +227,7 @@
            <div itemprop="articleBody">
              
   <section id="about-examples">
-<span id="about-examples-page"></span><h1>About Examples<a class="headerlink" href="#about-examples" title="Permalink to this headline"></a></h1>
+<span id="about-examples-page"></span><h1>About Examples<a class="headerlink" href="#about-examples" title="Permalink to this heading"></a></h1>
 <p><cite>PVGeo</cite> is deployed in various sub-packages called <em>suites</em>. These <em>suites</em>
 consist of a set of reader, filter, source, or writer algorithms (or any
 combination of those) for a general area of geoscientific processing and
@@ -238,7 +239,7 @@ examples at this time.</p>
 <p>If you think there may be a serious problem with an example, please open an
 issue on the <a class="reference external" href="https://github.com/OpenGeoVis/PVGeo/issues">issues page</a> so that we can promptly fix it.</p>
 <section id="typical-usage">
-<h2>Typical Usage<a class="headerlink" href="#typical-usage" title="Permalink to this headline"></a></h2>
+<h2>Typical Usage<a class="headerlink" href="#typical-usage" title="Permalink to this heading"></a></h2>
 <p>All algorithms deployed in <em>PVGeo</em> are usable in the following manners in a
 Python environment where the algorithm can be called and instantiated with
 keyword arguments for its parameters and then applied on some input data set.</p>
@@ -260,7 +261,7 @@ need to request varying time steps.</p>
 </div>
 </section>
 <section id="reader-algorithms">
-<h2>Reader Algorithms<a class="headerlink" href="#reader-algorithms" title="Permalink to this headline"></a></h2>
+<h2>Reader Algorithms<a class="headerlink" href="#reader-algorithms" title="Permalink to this heading"></a></h2>
 <p>A reader takes data from files and puts them into the proper VTK
 data structures so that we can visualize that data on the VTK or ParaView
 pipeline.
@@ -292,14 +293,14 @@ readers can be used to immediately produce a data object:</p>
 </pre></div>
 </div>
 <section id="paraview-usage">
-<h3>ParaView Usage<a class="headerlink" href="#paraview-usage" title="Permalink to this headline"></a></h3>
+<h3>ParaView Usage<a class="headerlink" href="#paraview-usage" title="Permalink to this heading"></a></h3>
 <p>The <em>PVGeo</em> readers aren’t directly available in the GUI menus of ParaView but
 rather a dialog will appear for you to select the desired file reader when
 selecting <strong>File -&gt; Open…</strong> within ParaView like the screen recording below:</p>
 <iframe src="https://player.vimeo.com/video/281726394?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></section>
 </section>
 <section id="filter-algorithms">
-<h2>Filter Algorithms<a class="headerlink" href="#filter-algorithms" title="Permalink to this headline"></a></h2>
+<h2>Filter Algorithms<a class="headerlink" href="#filter-algorithms" title="Permalink to this heading"></a></h2>
 <p>A filter modifies, transforms, combines, analyses, processes, etc. data in VTK
 data structures on either a VTK or ParaView pipeline. Filters provide a means
 for changing how we visualize data or create a means of generating topology for
@@ -344,14 +345,14 @@ to make repetitive calls on them much like we showed with readers:</p>
 </pre></div>
 </div>
 <section id="id1">
-<h3>ParaView Usage<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<h3>ParaView Usage<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
 <p>Within ParaView, filters are available for selection directly from the GUI menus
 when an input data source is selected on the pipeline. All of the <em>PVGeo</em>
 filters  are available under their own categories in the <strong>Filters</strong> menu.</p>
 <iframe src="https://player.vimeo.com/video/282010041?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></section>
 </section>
 <section id="source-algorithms">
-<h2>Source Algorithms<a class="headerlink" href="#source-algorithms" title="Permalink to this headline"></a></h2>
+<h2>Source Algorithms<a class="headerlink" href="#source-algorithms" title="Permalink to this heading"></a></h2>
 <p>A source takes input parameters from a user and generates a data object for
 visualization or export. In <em>PVGeo</em>, we have implemented the <em>Model Building</em>
 suite with many sources that allow for a user to specify attributes of a data
@@ -365,14 +366,14 @@ immediately produce an output like below:</p>
 </pre></div>
 </div>
 <section id="id2">
-<h3>ParaView Usage<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h3>
+<h3>ParaView Usage<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
 <p>Within ParaView, sources are available for selection directly from the GUI
 menus. All of the <em>PVGeo</em> sources are available under their own categories in
 the <strong>Sources</strong> menu.</p>
 <iframe src="https://player.vimeo.com/video/281726486?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></section>
 </section>
 <section id="writer-algorithms">
-<h2>Writer Algorithms<a class="headerlink" href="#writer-algorithms" title="Permalink to this headline"></a></h2>
+<h2>Writer Algorithms<a class="headerlink" href="#writer-algorithms" title="Permalink to this heading"></a></h2>
 <p><em>PVGeo</em> writers take VTK data structures and write them out to the disk in a
 non-VTK formats that might be a standard for geoscientific data.
 PVGeo readers are often deployed with their complimentary writer equivalents
@@ -390,7 +391,7 @@ immediately write out a data object like below.</p>
 </pre></div>
 </div>
 <section id="id3">
-<h3>ParaView Usage<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
+<h3>ParaView Usage<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
 <p>Demonstrated in the following video, a user can select <em>File -&gt; Save Data</em> in
 ParaView with a selected dataset then choose one of <em>PVGeo</em>’s writers.
 The first <em>1 minute</em> in the video demonstrates the <em>Extract Topography</em> then the

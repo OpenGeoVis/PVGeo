@@ -23,6 +23,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
@@ -231,13 +232,13 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.gslib.sgems">
-<span id="sgems-file-i-o"></span><h1>SGeMS File I/O<a class="headerlink" href="#module-PVGeo.gslib.sgems" title="Permalink to this headline"></a></h1>
+<span id="sgems-file-i-o"></span><h1>SGeMS File I/O<a class="headerlink" href="#module-PVGeo.gslib.sgems" title="Permalink to this heading"></a></h1>
 <section id="sgems-grid-reader">
-<h2>SGeMS Grid Reader<a class="headerlink" href="#sgems-grid-reader" title="Permalink to this headline"></a></h2>
+<h2>SGeMS Grid Reader<a class="headerlink" href="#sgems-grid-reader" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.gslib.sgems.SGeMSGridReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.gslib.sgems.</span></span><span class="sig-name descname"><span class="pre">SGeMSGridReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">1.0,</span> <span class="pre">1.0)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#SGeMSGridReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.SGeMSGridReader" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="gslib.html#PVGeo.gslib.gslib.GSLibReader" title="PVGeo.gslib.gslib.GSLibReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.gslib.gslib.GSLibReader</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gslib.html#PVGeo.gslib.gslib.GSLibReader" title="PVGeo.gslib.gslib.GSLibReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">GSLibReader</span></code></a></p>
 <p>Generates <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> from the uniform grid defined in the input
 file in the SGeMS grid format. This format is simply the GSLIB format where
 the header line defines the dimensions of the uniform grid.</p>
@@ -309,11 +310,11 @@ extent.</p>
 
 </section>
 <section id="write-vtkimagedata-to-sgems-grid-format">
-<h2>Write <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> To SGeMS Grid Format<a class="headerlink" href="#write-vtkimagedata-to-sgems-grid-format" title="Permalink to this headline"></a></h2>
+<h2>Write <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> To SGeMS Grid Format<a class="headerlink" href="#write-vtkimagedata-to-sgems-grid-format" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.gslib.sgems.WriteImageDataToSGeMS">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.gslib.sgems.</span></span><span class="sig-name descname"><span class="pre">WriteImageDataToSGeMS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkImageData'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/sgems.html#WriteImageDataToSGeMS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.sgems.WriteImageDataToSGeMS" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.WriterBase" title="PVGeo.base.WriterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.WriterBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.WriterBase" title="PVGeo.base.WriterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">WriterBase</span></code></a></p>
 <p>Writes a <code class="docutils literal notranslate"><span class="pre">vtkImageData</span></code> object to the SGeMS uniform grid format.
 This writer can only handle point data. Note that this will only handle
 CellData as that is convention with SGeMS.</p>

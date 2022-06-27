@@ -23,6 +23,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
@@ -233,17 +234,17 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.filters.voxelize">
-<span id="voxelize"></span><h1>Voxelize<a class="headerlink" href="#module-PVGeo.filters.voxelize" title="Permalink to this headline"></a></h1>
+<span id="voxelize"></span><h1>Voxelize<a class="headerlink" href="#module-PVGeo.filters.voxelize" title="Permalink to this heading"></a></h1>
 <p>This module provides a complicated algorithm for making voxels out of regularly
 gridded points. Considering that this algorithm is rather complex, we are keeping
 it in its own module until we can simplify it, clean up the code, and make it
 capable of handling non-uniformly gridded points</p>
 <section id="voxelize-points">
-<h2>Voxelize Points<a class="headerlink" href="#voxelize-points" title="Permalink to this headline"></a></h2>
+<h2>Voxelize Points<a class="headerlink" href="#voxelize-points" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.filters.voxelize.VoxelizePoints">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.filters.voxelize.</span></span><span class="sig-name descname"><span class="pre">VoxelizePoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/voxelize.html#VoxelizePoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.voxelize.VoxelizePoints" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterBase</span></code></a></p>
 <p>This makes a <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code> of scattered points given voxel
 sizes as input arrays. This assumes that the data is at least 2-Dimensional
 on the XY Plane.</p>

@@ -67,6 +67,15 @@ Create some input data. This can be any `vtkDataObject`
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    /opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/pyvista/core/grid.py:441: PyvistaDeprecationWarning: Behavior of pyvista.UniformGrid has changed. First argument must be either a ``vtk.vtkImageData`` or path.
+      warnings.warn(
+
 
 
 
@@ -107,9 +116,9 @@ Use the filter:
     </td><td>
     <table>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>5.373e-03</td><td>9.955e-01</td></tr>
-    <tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>4.246e-03</td><td>9.970e-01</td></tr>
-    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>2.802e-02</td><td>1.981e+00</td></tr>
+    <tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>4.622e-03</td><td>9.966e-01</td></tr>
+    <tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>3.494e-03</td><td>9.955e-01</td></tr>
+    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>2.008e-02</td><td>1.924e+00</td></tr>
     </table>
 
     </td></tr> </table>
@@ -178,9 +187,9 @@ Use a custom math operation:
     </td><td>
     <table>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>5.373e-03</td><td>9.955e-01</td></tr>
-    <tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>4.246e-03</td><td>9.970e-01</td></tr>
-    <tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>3.774e-02</td><td>9.998e-01</td></tr>
+    <tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>4.622e-03</td><td>9.966e-01</td></tr>
+    <tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>3.494e-03</td><td>9.955e-01</td></tr>
+    <tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>2.511e-02</td><td>9.994e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -222,7 +231,7 @@ Use a custom math operation:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.586 seconds)
+   **Total running time of the script:** ( 0 minutes  0.507 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_array-math.py:

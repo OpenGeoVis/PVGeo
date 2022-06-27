@@ -23,6 +23,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
@@ -233,7 +234,7 @@
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="array-math">
-<span id="sphx-glr-examples-filters-general-array-math-py"></span><h1>Array Math<a class="headerlink" href="#array-math" title="Permalink to this headline"></a></h1>
+<span id="sphx-glr-examples-filters-general-array-math-py"></span><h1>Array Math<a class="headerlink" href="#array-math" title="Permalink to this heading"></a></h1>
 <p>This example will demonstrate how to perform a mathematical operation
 between two input arrays for any given source.</p>
 <p>This filter allows the user to select two input data arrays on which to perform
@@ -254,6 +255,11 @@ operations.</p>
 <span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">inp</span><span class="p">[</span><span class="s1">&#39;Array 0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr0</span>
 <span class="n">inp</span><span class="p">[</span><span class="s1">&#39;Array 1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr1</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/pyvista/core/grid.py:441: PyvistaDeprecationWarning: Behavior of pyvista.UniformGrid has changed. First argument must be either a ``vtk.vtkImageData`` or path.
+  warnings.warn(
 </pre></div>
 </div>
 <p>Use the filter:</p>
@@ -280,9 +286,9 @@ operations.</p>
 </td><td>
 <table>
 <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>5.373e-03</td><td>9.955e-01</td></tr>
-<tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>4.246e-03</td><td>9.970e-01</td></tr>
-<tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>2.802e-02</td><td>1.981e+00</td></tr>
+<tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>4.622e-03</td><td>9.966e-01</td></tr>
+<tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>3.494e-03</td><td>9.955e-01</td></tr>
+<tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>2.008e-02</td><td>1.924e+00</td></tr>
 </table>
 
 </td></tr> </table>
@@ -325,9 +331,9 @@ operations.</p>
 </td><td>
 <table>
 <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>5.373e-03</td><td>9.955e-01</td></tr>
-<tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>4.246e-03</td><td>9.970e-01</td></tr>
-<tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>3.774e-02</td><td>9.998e-01</td></tr>
+<tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>4.622e-03</td><td>9.966e-01</td></tr>
+<tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>3.494e-03</td><td>9.955e-01</td></tr>
+<tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>2.511e-02</td><td>9.994e-01</td></tr>
 </table>
 
 </td></tr> </table>
@@ -340,7 +346,7 @@ operations.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;powered&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_array-math_001.png" srcset="../../_images/sphx_glr_array-math_001.png" alt="array math" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.586 seconds)</p>
+<img src="../../_images/sphx_glr_array-math_001.png" srcset="../../_images/sphx_glr_array-math_001.png" alt="array math" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.507 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-array-math-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/fa34a9097761bee3ec7989a4e345827c/array-math.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">array-math.py</span></code></a></p>

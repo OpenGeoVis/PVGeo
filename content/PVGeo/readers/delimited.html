@@ -23,6 +23,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
@@ -232,13 +233,13 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.readers.delimited">
-<span id="delimited-file-i-o"></span><h1>Delimited File I/O<a class="headerlink" href="#module-PVGeo.readers.delimited" title="Permalink to this headline"></a></h1>
+<span id="delimited-file-i-o"></span><h1>Delimited File I/O<a class="headerlink" href="#module-PVGeo.readers.delimited" title="Permalink to this heading"></a></h1>
 <section id="delimited-points-reader-base">
-<h2>Delimited Points Reader Base<a class="headerlink" href="#delimited-points-reader-base" title="Permalink to this headline"></a></h2>
+<h2>Delimited Points Reader Base<a class="headerlink" href="#delimited-points-reader-base" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.readers.delimited.DelimitedPointsReaderBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.readers.delimited.</span></span><span class="sig-name descname"><span class="pre">DelimitedPointsReaderBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedPointsReaderBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#PVGeo.readers.delimited.DelimitedTextReader" title="PVGeo.readers.delimited.DelimitedTextReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedTextReader</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.readers.delimited.DelimitedTextReader" title="PVGeo.readers.delimited.DelimitedTextReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">DelimitedTextReader</span></code></a></p>
 <p>A base class for delimited text readers that produce <code class="docutils literal notranslate"><span class="pre">vtkPolyData</span></code>
 points.</p>
 <dl class="py method">
@@ -271,11 +272,11 @@ Point Data</p>
 
 </section>
 <section id="delimited-text-reader">
-<h2>Delimited Text Reader<a class="headerlink" href="#delimited-text-reader" title="Permalink to this headline"></a></h2>
+<h2>Delimited Text Reader<a class="headerlink" href="#delimited-text-reader" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.readers.delimited.DelimitedTextReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.readers.delimited.</span></span><span class="sig-name descname"><span class="pre">DelimitedTextReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nOutputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkTable'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#DelimitedTextReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.delimited.DelimitedTextReader" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBase" title="PVGeo.base.ReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.ReaderBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBase" title="PVGeo.base.ReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReaderBase</span></code></a></p>
 <p>This reader will take in any delimited text file and make a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code>
 from it. This is not much different than the default .txt or .csv reader in
 ParaView, however it gives us room to use our own extensions and a little
@@ -411,11 +412,11 @@ white space as a delimiter.</p>
 
 </section>
 <section id="xyz-text-reader">
-<h2>XYZ Text Reader<a class="headerlink" href="#xyz-text-reader" title="Permalink to this headline"></a></h2>
+<h2>XYZ Text Reader<a class="headerlink" href="#xyz-text-reader" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.readers.delimited.XYZTextReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.readers.delimited.</span></span><span class="sig-name descname"><span class="pre">XYZTextReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/delimited.html#XYZTextReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.delimited.XYZTextReader" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#PVGeo.readers.delimited.DelimitedTextReader" title="PVGeo.readers.delimited.DelimitedTextReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.delimited.DelimitedTextReader</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.readers.delimited.DelimitedTextReader" title="PVGeo.readers.delimited.DelimitedTextReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">DelimitedTextReader</span></code></a></p>
 <p>A makeshift reader for XYZ files where titles have comma delimiter and
 data has space delimiter.</p>
 <dl class="py method">

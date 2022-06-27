@@ -23,6 +23,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
@@ -237,7 +238,7 @@
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="voxelize-points">
-<span id="sphx-glr-examples-filters-general-voxelize-points-py"></span><h1>Voxelize Points<a class="headerlink" href="#voxelize-points" title="Permalink to this headline"></a></h1>
+<span id="sphx-glr-examples-filters-general-voxelize-points-py"></span><h1>Voxelize Points<a class="headerlink" href="#voxelize-points" title="Permalink to this heading"></a></h1>
 <p>This example will demonstrate how to connect a set of points defined on a
 regular grid to create a <cite>vtkUnstructuredGrid</cite> which can be used to perform
 volumetric operations.</p>
@@ -310,7 +311,7 @@ calling the plot function. (Note: change the notebook parameter to
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_voxelize-points_001.png" srcset="../../_images/sphx_glr_voxelize-points_001.png" alt="voxelize points" class = "sphx-glr-single-img"/><section id="points-to-voxelized-volume">
-<h2>Points to Voxelized Volume<a class="headerlink" href="#points-to-voxelized-volume" title="Permalink to this headline"></a></h2>
+<h2>Points to Voxelized Volume<a class="headerlink" href="#points-to-voxelized-volume" title="Permalink to this heading"></a></h2>
 <p>The above figure is pretty cool! But it is a point cloud which means out
 filtering options are pretty limited. Fortunately, we know that the point
 cloud represents some sort of regularized gridded volume of data and PVGeo
@@ -369,7 +370,7 @@ Recovered Cell Sizes: (25.00, 25.00, 25.00)
 </div>
 <img src="../../_images/sphx_glr_voxelize-points_002.png" srcset="../../_images/sphx_glr_voxelize-points_002.png" alt="voxelize points" class = "sphx-glr-single-img"/></section>
 <section id="filter-volumetric-data">
-<h2>Filter Volumetric Data<a class="headerlink" href="#filter-volumetric-data" title="Permalink to this headline"></a></h2>
+<h2>Filter Volumetric Data<a class="headerlink" href="#filter-volumetric-data" title="Permalink to this heading"></a></h2>
 <p>Now lets use one of <cite>PyVista</cite>’s filters to create slices of the thresholded
 dataset. Specifically, we are using the <code class="docutils literal notranslate"><span class="pre">slice_orthogonal</span></code> filter that will
 create 3 orthogonal slices through a data volume.</p>
@@ -410,7 +411,7 @@ create 3 orthogonal slices through a data volume.</p>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_voxelize-points_003.png" srcset="../../_images/sphx_glr_voxelize-points_003.png" alt="voxelize points" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  11.056 seconds)</p>
+<img src="../../_images/sphx_glr_voxelize-points_003.png" srcset="../../_images/sphx_glr_voxelize-points_003.png" alt="voxelize points" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  13.559 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-voxelize-points-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/3e880273e4b14e3562631837c4c62dce/voxelize-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">voxelize-points.py</span></code></a></p>

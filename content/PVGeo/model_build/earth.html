@@ -23,6 +23,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
@@ -231,13 +232,13 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.model_build.earth">
-<span id="earth"></span><h1>earth<a class="headerlink" href="#module-PVGeo.model_build.earth" title="Permalink to this headline"></a></h1>
+<span id="earth"></span><h1>earth<a class="headerlink" href="#module-PVGeo.model_build.earth" title="Permalink to this heading"></a></h1>
 <section id="globe-source">
-<h2>Globe Source<a class="headerlink" href="#globe-source" title="Permalink to this headline"></a></h2>
+<h2>Globe Source<a class="headerlink" href="#globe-source" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.model_build.earth.GlobeSource">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.model_build.earth.</span></span><span class="sig-name descname"><span class="pre">GlobeSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6371000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">36</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#GlobeSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.GlobeSource" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmBase</span></code></a></p>
 <p>Creates a globe/sphere the size of the Earth with texture coordinates
 already mapped. The globe’s center is assumed to be (0,0,0).</p>
 <dl class="field-list simple">
@@ -297,11 +298,11 @@ arguments are given in degrees.</p>
 
 </section>
 <section id="outline-continents">
-<h2>Outline Continents<a class="headerlink" href="#outline-continents" title="Permalink to this headline"></a></h2>
+<h2>Outline Continents<a class="headerlink" href="#outline-continents" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.model_build.earth.OutlineContinents">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.model_build.earth.</span></span><span class="sig-name descname"><span class="pre">OutlineContinents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6371000000.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/model_build/earth.html#OutlineContinents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.model_build.earth.OutlineContinents" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.AlgorithmBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmBase</span></code></a></p>
 <p>A simple data source to produce a <code class="docutils literal notranslate"><span class="pre">vtkEarthSource</span></code> outlining the
 Earth’s continents. This works well with our <code class="docutils literal notranslate"><span class="pre">GlobeSource</span></code>.</p>
 <dl class="py method">

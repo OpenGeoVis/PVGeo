@@ -23,6 +23,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
@@ -231,13 +232,13 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.readers.binaries">
-<span id="binary-serialized-file-i-o"></span><h1>Binary/Serialized File I/O<a class="headerlink" href="#module-PVGeo.readers.binaries" title="Permalink to this headline"></a></h1>
+<span id="binary-serialized-file-i-o"></span><h1>Binary/Serialized File I/O<a class="headerlink" href="#module-PVGeo.readers.binaries" title="Permalink to this heading"></a></h1>
 <section id="madagascar-ssrsf-reader">
-<h2>Madagascar SSRSF Reader<a class="headerlink" href="#madagascar-ssrsf-reader" title="Permalink to this headline"></a></h2>
+<h2>Madagascar SSRSF Reader<a class="headerlink" href="#madagascar-ssrsf-reader" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.MadagascarReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.readers.binaries.</span></span><span class="sig-name descname"><span class="pre">MadagascarReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#MadagascarReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.MadagascarReader" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#PVGeo.readers.binaries.PackedBinariesReader" title="PVGeo.readers.binaries.PackedBinariesReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.readers.binaries.PackedBinariesReader</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#PVGeo.readers.binaries.PackedBinariesReader" title="PVGeo.readers.binaries.PackedBinariesReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PackedBinariesReader</span></code></a></p>
 <p>This reads in float or double data that is packed into a Madagascar
 binary file format with a leader header. The reader ignores all of the ascii
 header details by searching for the sequence of three special characters:
@@ -266,11 +267,11 @@ keeps thing simple when using filters in this repository.
 
 </section>
 <section id="packed-binaries-reader">
-<h2>Packed Binaries Reader<a class="headerlink" href="#packed-binaries-reader" title="Permalink to this headline"></a></h2>
+<h2>Packed Binaries Reader<a class="headerlink" href="#packed-binaries-reader" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.readers.binaries.</span></span><span class="sig-name descname"><span class="pre">PackedBinariesReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBase" title="PVGeo.base.ReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.ReaderBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBase" title="PVGeo.base.ReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReaderBase</span></code></a></p>
 <p>This reads in float or double data that is packed into a binary file
 format. It will treat the data as one long array and make a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code>
 with one column of that data. The reader uses defaults to import as floats

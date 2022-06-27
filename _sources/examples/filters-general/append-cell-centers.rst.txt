@@ -146,7 +146,7 @@ Run the PVGeo algorithm
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.861 seconds)
+   **Total running time of the script:** ( 0 minutes  0.858 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_append-cell-centers.py:

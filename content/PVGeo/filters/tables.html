@@ -23,6 +23,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
@@ -237,13 +238,13 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.filters.tables">
-<span id="table-operations"></span><h1>Table Operations<a class="headerlink" href="#module-PVGeo.filters.tables" title="Permalink to this headline"></a></h1>
+<span id="table-operations"></span><h1>Table Operations<a class="headerlink" href="#module-PVGeo.filters.tables" title="Permalink to this heading"></a></h1>
 <section id="append-table-to-cell-data">
-<h2>Append Table to Cell Data<a class="headerlink" href="#append-table-to-cell-data" title="Permalink to this headline"></a></h2>
+<h2>Append Table to Cell Data<a class="headerlink" href="#append-table-to-cell-data" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.filters.tables.AppendTableToCellData">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.filters.tables.</span></span><span class="sig-name descname"><span class="pre">AppendTableToCellData</span></span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#AppendTableToCellData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.AppendTableToCellData" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterPreserveTypeBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterPreserveTypeBase" title="PVGeo.base.FilterPreserveTypeBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterPreserveTypeBase</span></code></a></p>
 <p>Takes two inputs, a dataset to preserve and a table of data, where the
 data in the table is appended to the CellData of the input dataset.
 The 0th port is the dataset to preserve and the 1st port is a table who’s rows
@@ -298,11 +299,11 @@ MUST match the number of cells in the input dataset.</p>
 
 </section>
 <section id="combine-tables">
-<h2>Combine Tables<a class="headerlink" href="#combine-tables" title="Permalink to this headline"></a></h2>
+<h2>Combine Tables<a class="headerlink" href="#combine-tables" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.filters.tables.CombineTables">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.filters.tables.</span></span><span class="sig-name descname"><span class="pre">CombineTables</span></span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#CombineTables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.CombineTables" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterBase</span></code></a></p>
 <p>Takes two tables and combines them if they have the same number of rows.
 Currently this cannot handle time varying tables as that gets complicated
 really quickly if the tables do not have the same timestep values</p>
@@ -328,11 +329,11 @@ really quickly if the tables do not have the same timestep values</p>
 
 </section>
 <section id="extract-array">
-<h2>Extract Array<a class="headerlink" href="#extract-array" title="Permalink to this headline"></a></h2>
+<h2>Extract Array<a class="headerlink" href="#extract-array" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.filters.tables.ExtractArray">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.filters.tables.</span></span><span class="sig-name descname"><span class="pre">ExtractArray</span></span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ExtractArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ExtractArray" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterBase</span></code></a></p>
 <p>Extract an array from a <code class="docutils literal notranslate"><span class="pre">vtkDataSet</span></code> and make a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> of it.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.filters.tables.ExtractArray.RequestData">
@@ -369,11 +370,11 @@ to extract.</p>
 
 </section>
 <section id="reshape-table">
-<h2>Reshape Table<a class="headerlink" href="#reshape-table" title="Permalink to this headline"></a></h2>
+<h2>Reshape Table<a class="headerlink" href="#reshape-table" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.filters.tables.ReshapeTable">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.filters.tables.</span></span><span class="sig-name descname"><span class="pre">ReshapeTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#ReshapeTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.ReshapeTable" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterBase</span></code></a></p>
 <p>This filter will take a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> object and reshape it. This filter
 essentially treats <code class="docutils literal notranslate"><span class="pre">vtkTable``s</span> <span class="pre">as</span> <span class="pre">2D</span> <span class="pre">matrices</span> <span class="pre">and</span> <span class="pre">reshapes</span> <span class="pre">them</span> <span class="pre">using</span>
 <span class="pre">``numpy.reshape</span></code> in a C contiguous manner. Unfortunately, data fields will
@@ -437,11 +438,11 @@ using a semicolon (;) to spearate</p>
 
 </section>
 <section id="split-table-on-array">
-<h2>Split Table On Array<a class="headerlink" href="#split-table-on-array" title="Permalink to this headline"></a></h2>
+<h2>Split Table On Array<a class="headerlink" href="#split-table-on-array" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.filters.tables.SplitTableOnArray">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.filters.tables.</span></span><span class="sig-name descname"><span class="pre">SplitTableOnArray</span></span><a class="reference internal" href="../../../_modules/PVGeo/filters/tables.html#SplitTableOnArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.filters.tables.SplitTableOnArray" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.base.FilterBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.FilterBase" title="PVGeo.base.FilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterBase</span></code></a></p>
 <p>A filter to separate table data based on the unique values of a given data
 array into a <code class="docutils literal notranslate"><span class="pre">vtkMultiBlockDataSet</span></code>.</p>
 <dl class="py method">
