@@ -1,7 +1,7 @@
 numpy>=1.13
 scipy>=1.1
 colour-runner==0.0.5
-codecov==2.0.15
+codecov==2.0.16
 pandas>=0.23.4
 mock>=2.0.0
 omf>=0.9.3
