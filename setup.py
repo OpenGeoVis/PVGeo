@@ -50,11 +50,12 @@ setuptools.setup(
     url="https://github.com/OpenGeoVis/PVGeo",
     packages=setuptools.find_packages(),
     install_requires=install_requires,
-    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*',
+    python_requires='>=3.6',
     extras_require={
         'pyproj': ['pyproj>=1.9'],
         'omf': ['omf>=0.9.3', 'omfvista>=0.2.0'],
         'discretize': ['discretize>=0.3.8'],
+        'examples': ['pooch'],
     },
     classifiers=(
         "Programming Language :: Python",

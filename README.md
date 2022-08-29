@@ -55,7 +55,7 @@ environment (we highly recommend using anaconda) and install *PVGeo* through pip
 pip install PVGeo
 ```
 
-Now *PVGeo* is ready for use in your standard Python environment (2.7 or >=3.6)
+Now *PVGeo* is ready for use in your standard Python environment (>=3.6)
 with all dependencies installed! Go ahead and test your install:
 
 ```bash
@@ -107,5 +107,5 @@ for more details.
 
 To use the *PVGeo* library as plugins in ParaView, please see the detailed
 explanation [**here**](http://pvgeo.org/overview/getting-started) where you
-must create a second isolated Python 2.7 environment that will host PVGeo for
+must create a second isolated Python environment that will host PVGeo for
 ParaView.
