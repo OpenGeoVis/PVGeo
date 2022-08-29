@@ -97,8 +97,8 @@ Create some input tables
     </td><td>
     <table>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 0</td><td>float64</td><td>1</td><td>1.680e-02</td><td>9.929e-01</td></tr>
-    <tr><td>Array 1</td><td>float64</td><td>1</td><td>7.670e-03</td><td>9.959e-01</td></tr>
+    <tr><td>Array 0</td><td>float64</td><td>1</td><td>5.772e-03</td><td>9.927e-01</td></tr>
+    <tr><td>Array 1</td><td>float64</td><td>1</td><td>1.199e-03</td><td>9.961e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -130,7 +130,7 @@ Create some input tables
     </td><td>
     <table>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 2</td><td>float64</td><td>1</td><td>3.788e-03</td><td>9.987e-01</td></tr>
+    <tr><td>Array 2</td><td>float64</td><td>1</td><td>1.365e-03</td><td>9.982e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -165,9 +165,9 @@ Create some input tables
     </td><td>
     <table>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 0</td><td>float64</td><td>1</td><td>1.680e-02</td><td>9.929e-01</td></tr>
-    <tr><td>Array 1</td><td>float64</td><td>1</td><td>7.670e-03</td><td>9.959e-01</td></tr>
-    <tr><td>Array 2</td><td>float64</td><td>1</td><td>3.788e-03</td><td>9.987e-01</td></tr>
+    <tr><td>Array 0</td><td>float64</td><td>1</td><td>5.772e-03</td><td>9.927e-01</td></tr>
+    <tr><td>Array 1</td><td>float64</td><td>1</td><td>1.199e-03</td><td>9.961e-01</td></tr>
+    <tr><td>Array 2</td><td>float64</td><td>1</td><td>1.365e-03</td><td>9.982e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -194,7 +194,7 @@ Create some input tables
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.005 seconds)
+   **Total running time of the script:** ( 0 minutes  0.006 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_combine-tables.py:

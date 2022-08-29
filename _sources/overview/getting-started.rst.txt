@@ -44,7 +44,7 @@ Using PVGeo in ParaView
 
 If you'd like to use PVGeo directly in ParaView's graphical user interface,
 you must follow the remaining steps in this section very carefully which set up
-an isolated **Python 2.7 environment** that will be shared with your installation of
+an isolated **Python environment** that will be shared with your installation of
 ParaView. Note that after you create this environment, you should leave it alone
 and install PVGeo using the steps in the section above for the Python
 environments you use everyday.
@@ -102,14 +102,15 @@ a new virtual environment and install *PVGeo* through pip.
 
 .. code-block:: bash
 
-    $ conda create -n pvgeoenv python=2.7
+    $ conda create -n pvgeoenv python=3.9
 
 
-If you'd like to link PVGeo to ParaView, you must use a **Python 2.7**
-virtual environment. Once you create this 2.7 environment, you can opt to
-never use it again as it is only necessary for holding PVGeo and its
-dependencies for ParaView to use. If you'd like to use PVGeo outside of
-ParaView, any version of Python will work (except Python 2.x on Windows).
+If you'd like to link PVGeo to ParaView, you must use a Python
+virtual environment where the version of Python matches that of the Python in
+your installed ParaView application. Once you create this virtual environment,
+you can opt to never use it again as it is only necessary for holding PVGeo and
+its dependencies for ParaView to use. If you'd like to use PVGeo outside of
+ParaView, any modern version of Python will work.
 
 
 .. code-block:: bash
