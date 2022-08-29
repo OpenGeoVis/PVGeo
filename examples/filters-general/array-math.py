@@ -25,39 +25,39 @@ inp = pyvista.UniformGrid((10, 10, 4))
 n = 400
 arr0 = np.random.random(n)
 arr1 = np.random.random(n)
-inp['Array 0'] = arr0
-inp['Array 1'] = arr1
+inp["Array 0"] = arr0
+inp["Array 1"] = arr1
 
 ###############################################################################
 # Use the filter:
-f = ArrayMath(operation='add', new_name='foo')
+f = ArrayMath(operation="add", new_name="foo")
 # Now get the result
-output = f.apply(inp, 'Array 0', 'Array 1')
+output = f.apply(inp, "Array 0", "Array 1")
 output
 
 ###############################################################################
 # Note that the output now has three arrays
-arr = output['foo']
+arr = output["foo"]
 assert np.allclose(arr, arr0 + arr1)
 ###############################################################################
 
 ###############################################################################
 # Use a custom math operation:
 def power(arr0, arr1):
-    return arr0 ** arr1
+    return arr0**arr1
 
 
 # Use filter generated above
 f.set_operation(power)
-f.set_new_array_name('powered')
+f.set_new_array_name("powered")
 f.update()
 
 # Now get the result
 output = f.get_output()
 output
 ###############################################################################
-arr = output['powered']
-assert np.allclose(arr, arr0 ** arr1)
+arr = output["powered"]
+assert np.allclose(arr, arr0**arr1)
 
 ###############################################################################
-output.plot(scalars='powered')
+output.plot(scalars="powered")

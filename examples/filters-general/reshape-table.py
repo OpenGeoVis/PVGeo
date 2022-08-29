@@ -22,7 +22,7 @@ arrs = [None, None, None]
 n = 400
 ncols = 2
 nrows = int(n * len(arrs) / ncols)
-titles = ('Array 0', 'Array 1', 'Array 2')
+titles = ("Array 0", "Array 1", "Array 2")
 arrs[0] = np.random.random(n)
 arrs[1] = np.random.random(n)
 arrs[2] = np.random.random(n)
@@ -33,8 +33,8 @@ t0[titles[2]] = arrs[2]
 
 ###############################################################################
 # Use the filter to reshape the table
-order = 'F'
-newtitles = ['Title %d' % i for i in range(ncols)]
+order = "F"
+newtitles = ["Title %d" % i for i in range(ncols)]
 output = ReshapeTable(order=order, ncols=ncols, nrows=nrows, names=newtitles).apply(t0)
 output
 

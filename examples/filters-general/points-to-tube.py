@@ -20,8 +20,8 @@ from PVGeo.filters import PointsToTube
 
 def path(y):
     """Equation: x = a(y-h)^2 + k"""
-    a = -110.0 / 160.0 ** 2
-    x = a * y ** 2 + 110.0
+    a = -110.0 / 160.0**2
+    x = a * y**2 + 110.0
     return x, y
 
 
