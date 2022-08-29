@@ -24,7 +24,6 @@ import os
 
 import pooch
 import pyvista
-from pyvista import examples
 
 from PVGeo.grids import ExtractTopography
 from PVGeo.model_build import CreateTensorMesh

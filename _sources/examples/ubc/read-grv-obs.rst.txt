@@ -23,12 +23,11 @@ Read UBC Gravity Observations
 
 Read a UBC gravity observations file
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-13
+.. GENERATED FROM PYTHON SOURCE LINES 7-12
 
 .. code-block:: default
 
     import pooch
-    from pyvista import examples
 
     # sphinx_gallery_thumbnail_number = 1
     import PVGeo
@@ -40,11 +39,11 @@ Read a UBC gravity observations file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-15
+.. GENERATED FROM PYTHON SOURCE LINES 13-14
 
 Download sample data files and keep track of names:
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-18
+.. GENERATED FROM PYTHON SOURCE LINES 14-17
 
 .. code-block:: default
 
@@ -58,7 +57,7 @@ Download sample data files and keep track of names:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-22
+.. GENERATED FROM PYTHON SOURCE LINES 18-21
 
 .. code-block:: default
 
@@ -96,7 +95,7 @@ Download sample data files and keep track of names:
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-24
+.. GENERATED FROM PYTHON SOURCE LINES 22-23
 
 .. code-block:: default
 
@@ -116,7 +115,7 @@ Download sample data files and keep track of names:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.591 seconds)
+   **Total running time of the script:** ( 0 minutes  0.598 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-grv-obs.py:

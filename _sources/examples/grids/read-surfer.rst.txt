@@ -23,12 +23,11 @@ Read Surfer Grid File
 
 Read an Surfer ASCII grid file
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-12
+.. GENERATED FROM PYTHON SOURCE LINES 7-11
 
 .. code-block:: default
 
     import pooch
-    from pyvista import examples
 
     from PVGeo.grids import SurferGridReader
 
@@ -39,11 +38,11 @@ Read an Surfer ASCII grid file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-14
+.. GENERATED FROM PYTHON SOURCE LINES 12-13
 
 Download a sample Surfer grid file
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-21
+.. GENERATED FROM PYTHON SOURCE LINES 13-20
 
 .. code-block:: default
 
@@ -86,11 +85,11 @@ Download a sample Surfer grid file
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-23
+.. GENERATED FROM PYTHON SOURCE LINES 21-22
 
 Apply a filter to the DEM to have realistic topography
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-25
+.. GENERATED FROM PYTHON SOURCE LINES 22-24
 
 .. code-block:: default
 
@@ -111,7 +110,7 @@ Apply a filter to the DEM to have realistic topography
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.843 seconds)
+   **Total running time of the script:** ( 0 minutes  0.840 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-surfer.py:

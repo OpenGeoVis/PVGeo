@@ -23,14 +23,13 @@ Read GSLib Table
 
 Read any GSLib file as a table :class:`pyvist.Table`
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-16
+.. GENERATED FROM PYTHON SOURCE LINES 8-15
 
 .. code-block:: default
 
     import os
 
     import pooch
-    from pyvista import examples
 
     from PVGeo.grids import TableToTimeGrid
     from PVGeo.gslib import GSLibReader
@@ -42,7 +41,7 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 17-24
+.. GENERATED FROM PYTHON SOURCE LINES 16-23
 
 .. code-block:: default
 
@@ -66,7 +65,7 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-30
+.. GENERATED FROM PYTHON SOURCE LINES 24-29
 
 .. code-block:: default
 
@@ -88,7 +87,7 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 31-33
+.. GENERATED FROM PYTHON SOURCE LINES 30-32
 
 .. code-block:: default
 
@@ -120,13 +119,13 @@ Read any GSLib file as a table :class:`pyvist.Table`
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-37
+.. GENERATED FROM PYTHON SOURCE LINES 33-36
 
 From inspecting the header, we realize that this dataset is gridded, so let's
 use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 :class:`pyvista.UniformGrid` of that dataset.
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-42
+.. GENERATED FROM PYTHON SOURCE LINES 36-41
 
 .. code-block:: default
 
@@ -167,7 +166,7 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-44
+.. GENERATED FROM PYTHON SOURCE LINES 42-43
 
 .. code-block:: default
 
@@ -187,7 +186,7 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  14.384 seconds)
+   **Total running time of the script:** ( 0 minutes  14.146 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-table.py:

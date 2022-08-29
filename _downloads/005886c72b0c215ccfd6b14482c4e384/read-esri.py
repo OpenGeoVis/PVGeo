@@ -7,7 +7,6 @@ Read an ESRI ASCII grid file
 import os
 
 import pooch
-from pyvista import examples
 
 from PVGeo.grids import EsriGridReader
 

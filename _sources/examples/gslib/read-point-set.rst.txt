@@ -23,13 +23,12 @@ Read GSLib Point Set
 
 Read GSLib point set file
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-13
+.. GENERATED FROM PYTHON SOURCE LINES 7-12
 
 .. code-block:: default
 
     # sphinx_gallery_thumbnail_number = 1
     import pooch
-    from pyvista import examples
 
     from PVGeo.gslib import GSLibPointSetReader
 
@@ -40,7 +39,7 @@ Read GSLib point set file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-22
+.. GENERATED FROM PYTHON SOURCE LINES 13-21
 
 .. code-block:: default
 
@@ -82,7 +81,7 @@ Read GSLib point set file
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-24
+.. GENERATED FROM PYTHON SOURCE LINES 22-23
 
 .. code-block:: default
 
@@ -102,7 +101,7 @@ Read GSLib point set file
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.367 seconds)
+   **Total running time of the script:** ( 0 minutes  0.360 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-point-set.py:

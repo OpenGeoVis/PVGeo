@@ -37,7 +37,7 @@ to create model discretizations within ParaView for export to external
 processing software that need the entire model discretization with an active
 cells field.
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-32
+.. GENERATED FROM PYTHON SOURCE LINES 22-31
 
 .. code-block:: default
 
@@ -46,7 +46,6 @@ cells field.
 
     import pooch
     import pyvista
-    from pyvista import examples
 
     from PVGeo.grids import ExtractTopography
     from PVGeo.model_build import CreateTensorMesh
@@ -58,7 +57,7 @@ cells field.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 33-40
+.. GENERATED FROM PYTHON SOURCE LINES 32-39
 
 For the grid data set, let's use one of the Model Building sources
 with the following parameters:
@@ -68,7 +67,7 @@ with the following parameters:
 - Y Cells: ``'1000 500 55*250 500 1000'``
 - Z Cells: ``'30*100.0 5*250.0 500'``
 
-.. GENERATED FROM PYTHON SOURCE LINES 40-50
+.. GENERATED FROM PYTHON SOURCE LINES 39-49
 
 .. code-block:: default
 
@@ -94,11 +93,11 @@ with the following parameters:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 51-52
+.. GENERATED FROM PYTHON SOURCE LINES 50-51
 
 Now load the topography file from the example data:
 
-.. GENERATED FROM PYTHON SOURCE LINES 52-59
+.. GENERATED FROM PYTHON SOURCE LINES 51-58
 
 .. code-block:: default
 
@@ -141,7 +140,7 @@ Now load the topography file from the example data:
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 60-66
+.. GENERATED FROM PYTHON SOURCE LINES 59-65
 
 .. code-block:: default
 
@@ -163,13 +162,13 @@ Now load the topography file from the example data:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-70
+.. GENERATED FROM PYTHON SOURCE LINES 66-69
 
 Now that you have the topography and a grid data set,
 let's go ahead and use the **Extract Topography** filter. Be sure to properly
 select the inputs to the algorithm.
 
-.. GENERATED FROM PYTHON SOURCE LINES 70-73
+.. GENERATED FROM PYTHON SOURCE LINES 69-72
 
 .. code-block:: default
 
@@ -188,7 +187,7 @@ select the inputs to the algorithm.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 74-82
+.. GENERATED FROM PYTHON SOURCE LINES 73-81
 
 op='underneath', tolerance=0.001, offset=0.0, invert=False, remove=False
 This will show the cells that are active underneath the topography surface
@@ -199,7 +198,7 @@ applying a *Threshold* filter to chop out all values below 1.
 The resulting grid with cells above the topography extracted will look like the
 rendering below:
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-85
+.. GENERATED FROM PYTHON SOURCE LINES 81-84
 
 .. code-block:: default
 
@@ -218,11 +217,11 @@ rendering below:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 86-87
+.. GENERATED FROM PYTHON SOURCE LINES 85-86
 
 How well did this remove cells above the topography surface?
 
-.. GENERATED FROM PYTHON SOURCE LINES 87-94
+.. GENERATED FROM PYTHON SOURCE LINES 86-93
 
 .. code-block:: default
 
@@ -245,12 +244,12 @@ How well did this remove cells above the topography surface?
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 95-97
+.. GENERATED FROM PYTHON SOURCE LINES 94-96
 
 Is that extraction too close to the topography surface? To better extract the
 topographic surface, you can set a tolerance:
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-105
+.. GENERATED FROM PYTHON SOURCE LINES 96-104
 
 .. code-block:: default
 
@@ -274,11 +273,11 @@ topographic surface, you can set a tolerance:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 106-107
+.. GENERATED FROM PYTHON SOURCE LINES 105-106
 
 Note that there are other extraction operations like an ``'intersection'``:
 
-.. GENERATED FROM PYTHON SOURCE LINES 107-109
+.. GENERATED FROM PYTHON SOURCE LINES 106-108
 
 .. code-block:: default
 
@@ -299,7 +298,7 @@ Note that there are other extraction operations like an ``'intersection'``:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.971 seconds)
+   **Total running time of the script:** ( 0 minutes  6.883 seconds)
 
 
 .. _sphx_glr_download_examples_grids_extract-topography.py:

@@ -28,7 +28,7 @@ volumetric operations.
 
 This example demos :class:`PVGeo.filters.VoxelizePoints`
 
-.. GENERATED FROM PYTHON SOURCE LINES 12-20
+.. GENERATED FROM PYTHON SOURCE LINES 12-19
 
 .. code-block:: default
 
@@ -36,7 +36,6 @@ This example demos :class:`PVGeo.filters.VoxelizePoints`
     import pandas as pd
     import pooch
     import pyvista
-    from pyvista import examples
 
     import PVGeo
 
@@ -47,11 +46,11 @@ This example demos :class:`PVGeo.filters.VoxelizePoints`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-22
+.. GENERATED FROM PYTHON SOURCE LINES 20-21
 
 Download sample data files and keep track of names:
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-25
+.. GENERATED FROM PYTHON SOURCE LINES 21-24
 
 .. code-block:: default
 
@@ -73,7 +72,7 @@ Download sample data files and keep track of names:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 26-34
+.. GENERATED FROM PYTHON SOURCE LINES 25-33
 
 Let's go ahead and load a simple file that has XYZ coordinates and a boolean
 array for fault presence. This point cloud makes some sort of regular grid,
@@ -84,7 +83,7 @@ We will read in this data with ``pandas`` and send it to the
 :func:`PVGeo.points_to_poly_data` helper to create a :class:`pyvista.PolyData`
 object (essentially a point cloud).
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-37
+.. GENERATED FROM PYTHON SOURCE LINES 33-36
 
 .. code-block:: default
 
@@ -106,7 +105,7 @@ object (essentially a point cloud).
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 38-42
+.. GENERATED FROM PYTHON SOURCE LINES 37-41
 
 .. code-block:: default
 
@@ -144,7 +143,7 @@ object (essentially a point cloud).
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-52
+.. GENERATED FROM PYTHON SOURCE LINES 42-51
 
 Note that we have a :class:`pyvista.PolyData` object now which allows us to do
 all types of immediate plotting of our data. First, lets threshold our points
@@ -156,7 +155,7 @@ object and pass the thresholding value. We can then plot the result by
 calling the plot function. (Note: change the notebook parameter to
 ``False`` for an interactive window)
 
-.. GENERATED FROM PYTHON SOURCE LINES 52-54
+.. GENERATED FROM PYTHON SOURCE LINES 51-53
 
 .. code-block:: default
 
@@ -174,7 +173,7 @@ calling the plot function. (Note: change the notebook parameter to
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 55-71
+.. GENERATED FROM PYTHON SOURCE LINES 54-70
 
 Points to Voxelized Volume
 ++++++++++++++++++++++++++
@@ -193,7 +192,7 @@ rotated XY-plane with regular cell spacings and does the rest on its own!
 Check out VoxelizePoints code docs for more details.
 The full pipeline method
 
-.. GENERATED FROM PYTHON SOURCE LINES 71-81
+.. GENERATED FROM PYTHON SOURCE LINES 70-80
 
 .. code-block:: default
 
@@ -247,11 +246,11 @@ The full pipeline method
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-83
+.. GENERATED FROM PYTHON SOURCE LINES 81-82
 
 And now we can plot the voxelized volume
 
-.. GENERATED FROM PYTHON SOURCE LINES 83-86
+.. GENERATED FROM PYTHON SOURCE LINES 82-85
 
 .. code-block:: default
 
@@ -270,7 +269,7 @@ And now we can plot the voxelized volume
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 87-93
+.. GENERATED FROM PYTHON SOURCE LINES 86-92
 
 Filter Volumetric Data
 ++++++++++++++++++++++
@@ -279,7 +278,7 @@ Now lets use one of `PyVista`'s filters to create slices of the thresholded
 dataset. Specifically, we are using the ``slice_orthogonal`` filter that will
 create 3 orthogonal slices through a data volume.
 
-.. GENERATED FROM PYTHON SOURCE LINES 93-96
+.. GENERATED FROM PYTHON SOURCE LINES 92-95
 
 .. code-block:: default
 
@@ -316,11 +315,11 @@ create 3 orthogonal slices through a data volume.
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-98
+.. GENERATED FROM PYTHON SOURCE LINES 96-97
 
 And let's use a ``clip`` filter:
 
-.. GENERATED FROM PYTHON SOURCE LINES 98-100
+.. GENERATED FROM PYTHON SOURCE LINES 97-99
 
 .. code-block:: default
 
@@ -333,11 +332,11 @@ And let's use a ``clip`` filter:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-102
+.. GENERATED FROM PYTHON SOURCE LINES 100-101
 
 Now display the slices and clipped volume
 
-.. GENERATED FROM PYTHON SOURCE LINES 102-108
+.. GENERATED FROM PYTHON SOURCE LINES 101-107
 
 .. code-block:: default
 
@@ -362,7 +361,7 @@ Now display the slices and clipped volume
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  14.345 seconds)
+   **Total running time of the script:** ( 0 minutes  12.640 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:

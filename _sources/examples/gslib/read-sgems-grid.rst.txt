@@ -23,7 +23,7 @@ Read SGeMS Grid
 
 Read SGeMS Grid file formats.
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-15
+.. GENERATED FROM PYTHON SOURCE LINES 7-14
 
 .. code-block:: default
 
@@ -31,7 +31,6 @@ Read SGeMS Grid file formats.
     import os
 
     import pooch
-    from pyvista import examples
 
     from PVGeo.gslib import SGeMSGridReader
 
@@ -42,7 +41,7 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-24
+.. GENERATED FROM PYTHON SOURCE LINES 15-23
 
 .. code-block:: default
 
@@ -86,7 +85,7 @@ Read SGeMS Grid file formats.
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-28
+.. GENERATED FROM PYTHON SOURCE LINES 24-27
 
 .. code-block:: default
 
@@ -105,7 +104,7 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 29-36
+.. GENERATED FROM PYTHON SOURCE LINES 28-35
 
 .. code-block:: default
 
@@ -129,7 +128,7 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-40
+.. GENERATED FROM PYTHON SOURCE LINES 36-39
 
 .. code-block:: default
 
@@ -168,7 +167,7 @@ Read SGeMS Grid file formats.
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 41-44
+.. GENERATED FROM PYTHON SOURCE LINES 40-43
 
 .. code-block:: default
 
@@ -187,7 +186,7 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-52
+.. GENERATED FROM PYTHON SOURCE LINES 44-51
 
 .. code-block:: default
 
@@ -211,7 +210,7 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-57
+.. GENERATED FROM PYTHON SOURCE LINES 52-56
 
 .. code-block:: default
 
@@ -231,7 +230,7 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-68
+.. GENERATED FROM PYTHON SOURCE LINES 57-67
 
 .. code-block:: default
 
@@ -257,7 +256,7 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 69-70
+.. GENERATED FROM PYTHON SOURCE LINES 68-69
 
 .. code-block:: default
 
@@ -277,7 +276,7 @@ Read SGeMS Grid file formats.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  35.123 seconds)
+   **Total running time of the script:** ( 0 minutes  35.049 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-sgems-grid.py:
