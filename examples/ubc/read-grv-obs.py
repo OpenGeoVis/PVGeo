@@ -5,7 +5,6 @@ Read UBC Gravity Observations
 Read a UBC gravity observations file
 """
 import pooch
-from pyvista import examples
 
 # sphinx_gallery_thumbnail_number = 1
 import PVGeo

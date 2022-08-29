@@ -6,7 +6,6 @@ Read GSLib point set file
 """
 # sphinx_gallery_thumbnail_number = 1
 import pooch
-from pyvista import examples
 
 from PVGeo.gslib import GSLibPointSetReader
 

@@ -8,7 +8,6 @@ Read SGeMS Grid file formats.
 import os
 
 import pooch
-from pyvista import examples
 
 from PVGeo.gslib import SGeMSGridReader
 

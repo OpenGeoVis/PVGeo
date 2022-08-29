@@ -13,7 +13,6 @@ This example demos :class:`PVGeo.filters.VoxelizePoints`
 import pandas as pd
 import pooch
 import pyvista
-from pyvista import examples
 
 import PVGeo
 

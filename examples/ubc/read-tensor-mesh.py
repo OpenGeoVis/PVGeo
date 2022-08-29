@@ -5,7 +5,6 @@ Read Tensor Mesh
 Read a UBC tensor mesh file
 """
 import pooch
-from pyvista import examples
 
 # sphinx_gallery_thumbnail_number = 1
 import PVGeo
