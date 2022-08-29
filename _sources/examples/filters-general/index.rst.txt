@@ -1,22 +1,6 @@
-:orphan:
-
-.. _ref_examples:
-
-Quick Examples
-==============
-
-Here is a gallery of all the quick examples demonstrating what ``PVGeo`` can do!
 
 
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbnails">
-
-
-.. raw:: html
-
-    </div>
+.. _sphx_glr_examples_filters-general:
 
 General Filters
 ---------------
@@ -236,219 +220,20 @@ General Filters
 
     </div>
 
-Grids
------
-
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbnails">
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to add a cell data field to an input data set that defines wh...">
-
-.. only:: html
-
-  .. image:: /examples/grids/images/thumb/sphx_glr_extract-topography_thumb.png
-    :alt: Extract Topography
-
-  :ref:`sphx_glr_examples_grids_extract-topography.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Extract Topography</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Read an ESRI ASCII grid file">
-
-.. only:: html
-
-  .. image:: /examples/grids/images/thumb/sphx_glr_read-esri_thumb.png
-    :alt: Read ESRI Grid File
-
-  :ref:`sphx_glr_examples_grids_read-esri.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Read ESRI Grid File</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Read an Surfer ASCII grid file">
-
-.. only:: html
-
-  .. image:: /examples/grids/images/thumb/sphx_glr_read-surfer_thumb.png
-    :alt: Read Surfer Grid File
-
-  :ref:`sphx_glr_examples_grids_read-surfer.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Read Surfer Grid File</div>
-    </div>
-
-
-.. raw:: html
-
-    </div>
-
-GSLib
------
-
-The examples shown here are downloaded from
-`Multiple-point Geostatistics stochastic modeling with training images <http://www.trainingimages.org/training-images-library.html>`_ website (which recently went down, so we migrated those data
-files to another location for download).
-
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbnails">
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Read GSLib point set file">
-
-.. only:: html
-
-  .. image:: /examples/gslib/images/thumb/sphx_glr_read-point-set_thumb.png
-    :alt: Read GSLib Point Set
-
-  :ref:`sphx_glr_examples_gslib_read-point-set.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Read GSLib Point Set</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Read SGeMS Grid file formats.">
-
-.. only:: html
-
-  .. image:: /examples/gslib/images/thumb/sphx_glr_read-sgems-grid_thumb.png
-    :alt: Read SGeMS Grid
-
-  :ref:`sphx_glr_examples_gslib_read-sgems-grid.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Read SGeMS Grid</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Read any GSLib file as a table pyvist.Table">
-
-.. only:: html
-
-  .. image:: /examples/gslib/images/thumb/sphx_glr_read-table_thumb.png
-    :alt: Read GSLib Table
-
-  :ref:`sphx_glr_examples_gslib_read-table.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Read GSLib Table</div>
-    </div>
-
-
-.. raw:: html
-
-    </div>
-
-UBC Data Formats
-----------------
-
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbnails">
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Read a UBC gravity observations file">
-
-.. only:: html
-
-  .. image:: /examples/ubc/images/thumb/sphx_glr_read-grv-obs_thumb.png
-    :alt: Read UBC Gravity Observations
-
-  :ref:`sphx_glr_examples_ubc_read-grv-obs.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Read UBC Gravity Observations</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Read a UBC tensor mesh file">
-
-.. only:: html
-
-  .. image:: /examples/ubc/images/thumb/sphx_glr_read-tensor-mesh_thumb.png
-    :alt: Read Tensor Mesh
-
-  :ref:`sphx_glr_examples_ubc_read-tensor-mesh.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Read Tensor Mesh</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Read a UBC topography file">
-
-.. only:: html
-
-  .. image:: /examples/ubc/images/thumb/sphx_glr_read-topo_thumb.png
-    :alt: Read UBC Topography File
-
-  :ref:`sphx_glr_examples_ubc_read-topo.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Read UBC Topography File</div>
-    </div>
-
-
-.. raw:: html
-
-    </div>
-
 
 .. toctree::
    :hidden:
-   :includehidden:
 
-   /examples/filters-general/index.rst
-   /examples/grids/index.rst
-   /examples/gslib/index.rst
-   /examples/ubc/index.rst
+   /examples/filters-general/add-cell-connectivity-to-points
+   /examples/filters-general/append-cell-centers
+   /examples/filters-general/array-math
+   /examples/filters-general/combine-tables
+   /examples/filters-general/extract-array
+   /examples/filters-general/extract-points
+   /examples/filters-general/many-slices-along-points
+   /examples/filters-general/normalize-array
+   /examples/filters-general/points-to-tube
+   /examples/filters-general/reshape-table
+   /examples/filters-general/rotate-points
+   /examples/filters-general/voxelize-points
 
-
-
-.. only:: html
-
- .. rst-class:: sphx-glr-signature
-
-    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

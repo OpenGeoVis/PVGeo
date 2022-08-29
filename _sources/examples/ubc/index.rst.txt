@@ -1,0 +1,77 @@
+
+
+.. _sphx_glr_examples_ubc:
+
+UBC Data Formats
+----------------
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read a UBC gravity observations file">
+
+.. only:: html
+
+  .. image:: /examples/ubc/images/thumb/sphx_glr_read-grv-obs_thumb.png
+    :alt: Read UBC Gravity Observations
+
+  :ref:`sphx_glr_examples_ubc_read-grv-obs.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Read UBC Gravity Observations</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read a UBC tensor mesh file">
+
+.. only:: html
+
+  .. image:: /examples/ubc/images/thumb/sphx_glr_read-tensor-mesh_thumb.png
+    :alt: Read Tensor Mesh
+
+  :ref:`sphx_glr_examples_ubc_read-tensor-mesh.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Read Tensor Mesh</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read a UBC topography file">
+
+.. only:: html
+
+  .. image:: /examples/ubc/images/thumb/sphx_glr_read-topo_thumb.png
+    :alt: Read UBC Topography File
+
+  :ref:`sphx_glr_examples_ubc_read-topo.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Read UBC Topography File</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/ubc/read-grv-obs
+   /examples/ubc/read-tensor-mesh
+   /examples/ubc/read-topo
+

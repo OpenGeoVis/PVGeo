@@ -4,6 +4,7 @@ Read Tensor Mesh
 
 Read a UBC tensor mesh file
 """
+import pooch
 from pyvista import examples
 
 # sphinx_gallery_thumbnail_number = 1
@@ -11,10 +12,10 @@ import PVGeo
 
 ###############################################################################
 # Download sample data files and keep track of names:
-url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/craig_chile.msh'
-mesh_file, _ = examples.downloads._retrieve_file(url, 'craig_chile.msh')
-url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/Lpout.mod'
-model_file, _ = examples.downloads._retrieve_file(url, 'Lpout.mod')
+url = "https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/craig_chile.msh"
+mesh_file = pooch.retrieve(url=url, known_hash=None)
+url = "https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/Lpout.mod"
+model_file = pooch.retrieve(url=url, known_hash=None)
 
 ###############################################################################
 # Read the mesh and model

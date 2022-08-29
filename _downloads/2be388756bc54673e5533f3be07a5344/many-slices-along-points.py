@@ -39,8 +39,8 @@ model.plot()
 
 def path(y):
     """Equation: x = a(y-h)^2 + k"""
-    a = 110.0 / 160.0 ** 2
-    x = a * y ** 2 + 0.0
+    a = 110.0 / 160.0**2
+    x = a * y**2 + 0.0
     return x, y
 
 
@@ -50,7 +50,7 @@ zo = np.linspace(9.0, 11.0, num=len(y))
 points = pyvista.PolyData(np.c_[x, y, zo])
 
 p = pyvista.Plotter()
-p.add_mesh(model.outline(), color='k')
+p.add_mesh(model.outline(), color="k")
 p.add_mesh(points, point_size=10.0)
 p.show()
 
@@ -69,5 +69,5 @@ line = PVGeo.filters.AddCellConnToPoints().apply(points)
 p = pyvista.Plotter()
 p.add_mesh(line, line_width=10)
 p.add_mesh(slices, lighting=False)
-p.add_mesh(model.outline(), color='k')
+p.add_mesh(model.outline(), color="k")
 p.show()

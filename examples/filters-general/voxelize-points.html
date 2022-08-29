@@ -30,7 +30,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Extract Topography" href="../grids/extract-topography.html" />
+    <link rel="next" title="Grids" href="../grids/index.html" />
     <link rel="prev" title="Rotate Points" href="rotate-points.html" />
  
 
@@ -83,28 +83,30 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#general-filters">General Filters</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="add-cell-connectivity-to-points.html">Add Cell Connectivity To Points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="append-cell-centers.html">Append Cell Centers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="array-math.html">Array Math</a></li>
-<li class="toctree-l3"><a class="reference internal" href="combine-tables.html">Combine Tables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="extract-array.html">Extract Array to Table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="extract-points.html">Extract Points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="many-slices-along-points.html">Many Slices Along Points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="normalize-array.html">Normalize Array</a></li>
-<li class="toctree-l3"><a class="reference internal" href="points-to-tube.html">Points to Tube</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reshape-table.html">Reshape Table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rotate-points.html">Rotate Points</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Voxelize Points</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#points-to-voxelized-volume">Points to Voxelized Volume</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#filter-volumetric-data">Filter Volumetric Data</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#general-filters">General Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">General Filters</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="add-cell-connectivity-to-points.html">Add Cell Connectivity To Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="append-cell-centers.html">Append Cell Centers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="array-math.html">Array Math</a></li>
+<li class="toctree-l4"><a class="reference internal" href="combine-tables.html">Combine Tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extract-array.html">Extract Array to Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extract-points.html">Extract Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="many-slices-along-points.html">Many Slices Along Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="normalize-array.html">Normalize Array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="points-to-tube.html">Points to Tube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reshape-table.html">Reshape Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rotate-points.html">Rotate Points</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Voxelize Points</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../grids/index.html">Grids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gslib/index.html">GSLib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ubc/index.html">UBC Data Formats</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -224,6 +226,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Quick Examples</a> &raquo;</li>
+          <li><a href="index.html">General Filters</a> &raquo;</li>
       <li>Voxelize Points</li>
 
   </ul>
@@ -243,9 +246,9 @@ to download the full example code</p>
 regular grid to create a <cite>vtkUnstructuredGrid</cite> which can be used to perform
 volumetric operations.</p>
 <p>This example demos <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.VoxelizePoints</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pooch</span>
 <span class="kn">import</span> <span class="nn">pyvista</span>
 <span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
 
@@ -253,8 +256,13 @@ volumetric operations.</p>
 </pre></div>
 </div>
 <p>Download sample data files and keep track of names:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv&#39;</span>
-<span class="n">fault_file</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;fault_points.csv&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv&quot;</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Downloading data from &#39;https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv&#39; to file &#39;/home/runner/.cache/pooch/9d996ff12fa39247ccea6f9867b5a096-fault_points.csv&#39;.
+SHA256 hash of downloaded file: 0eeadcd799121c5d82569abd8b52298f4bcb03b8782f12bcc2c6aea5d6249097
+Use this value as the &#39;known_hash&#39; argument of &#39;pooch.retrieve&#39; to ensure that the file hasn&#39;t changed if it is downloaded again in the future.
 </pre></div>
 </div>
 <p>Let’s go ahead and load a simple file that has XYZ coordinates and a boolean
@@ -264,11 +272,10 @@ rotations.</p>
 <p>We will read in this data with <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and send it to the
 <code class="xref py py-func docutils literal notranslate"><span class="pre">PVGeo.points_to_poly_data()</span></code> helper to create a <code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.PolyData</span></code>
 object (essentially a point cloud).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fault_file</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
 </div>
-<p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>            X            Y       Z  Fault
 0  326819.497  4407450.636  1287.5      0
 1  326834.340  4407470.753  1287.5      0
@@ -324,18 +331,17 @@ scheme. The VoxelizePoints filter assumes that the points are structured on some
 rotated XY-plane with regular cell spacings and does the rest on its own!
 Check out VoxelizePoints code docs for more details.
 The full pipeline method</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voxelizing... &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Voxelizing... &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 <span class="n">voxelizer</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">VoxelizePoints</span><span class="p">()</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">vtkpoints</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;done.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;done.&quot;</span><span class="p">)</span>
 
 <span class="c1"># Output the results</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recovered Angle (deg.): </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">get_angle</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recovered Cell Sizes: (</span><span class="si">%.2f</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">get_spacing</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recovered Angle (deg.): </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">get_angle</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recovered Cell Sizes: (</span><span class="si">%.2f</span><span class="s2">, </span><span class="si">%.2f</span><span class="s2">, </span><span class="si">%.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">voxelizer</span><span class="o">.</span><span class="n">get_spacing</span><span class="p">())</span>
 <span class="n">grid</span>
 </pre></div>
 </div>
-<p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Voxelizing... done.
 Recovered Angle (deg.): 53.550
 Recovered Cell Sizes: (25.00, 25.00, 25.00)
@@ -400,7 +406,7 @@ create 3 orthogonal slices through a data volume.</p>
 </div>
 <br />
 <br /><p>And let’s use a <code class="docutils literal notranslate"><span class="pre">clip</span></code> filter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clip</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">normal</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">normal</span><span class="o">=</span><span class="s1">&#39;-y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clip</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">normal</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">normal</span><span class="o">=</span><span class="s2">&quot;-y&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now display the slices and clipped volume</p>
@@ -411,8 +417,8 @@ create 3 orthogonal slices through a data volume.</p>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_voxelize-points_003.png" srcset="../../_images/sphx_glr_voxelize-points_003.png" alt="voxelize points" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  13.559 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-voxelize-points-py">
+<img src="../../_images/sphx_glr_voxelize-points_003.png" srcset="../../_images/sphx_glr_voxelize-points_003.png" alt="voxelize points" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  14.345 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-voxelize-points-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/3e880273e4b14e3562631837c4c62dce/voxelize-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">voxelize-points.py</span></code></a></p>
 </div>
@@ -429,7 +435,7 @@ create 3 orthogonal slices through a data volume.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="rotate-points.html" class="btn btn-neutral float-left" title="Rotate Points" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../grids/extract-topography.html" class="btn btn-neutral float-right" title="Extract Topography" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../grids/index.html" class="btn btn-neutral float-right" title="Grids" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

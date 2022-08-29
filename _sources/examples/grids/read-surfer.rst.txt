@@ -23,10 +23,11 @@ Read Surfer Grid File
 
 Read an Surfer ASCII grid file
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-11
+.. GENERATED FROM PYTHON SOURCE LINES 7-12
 
 .. code-block:: default
 
+    import pooch
     from pyvista import examples
 
     from PVGeo.grids import SurferGridReader
@@ -38,36 +39,63 @@ Read an Surfer ASCII grid file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 12-13
+.. GENERATED FROM PYTHON SOURCE LINES 13-14
 
 Download a sample Surfer grid file
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-18
+.. GENERATED FROM PYTHON SOURCE LINES 14-21
 
 .. code-block:: default
 
-    fname = 'surfer-grid.grd'
-    url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/{}'.format(fname)
-    filename, _ = examples.downloads._retrieve_file(url, fname)
-    dem = SurferGridReader().apply(filename)
+    fname = "surfer-grid.grd"
+    url = "https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/{}".format(fname)
+    file_path = pooch.retrieve(url=url, known_hash=None)
+
+    dem = SurferGridReader().apply(file_path)
+    dem
 
 
 
 
 
 
+.. raw:: html
 
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>UniformGrid</th><th>Information</th></tr>
+    <tr><td>N Cells</td><td>40001</td></tr>
+    <tr><td>N Points</td><td>40404</td></tr>
+    <tr><td>X Bounds</td><td>0.000e+00, 1.105e+06</td></tr>
+    <tr><td>Y Bounds</td><td>0.000e+00, 9.050e+05</td></tr>
+    <tr><td>Z Bounds</td><td>0.000e+00, 0.000e+00</td></tr>
+    <tr><td>Dimensions</td><td>222, 182, 1</td></tr>
+    <tr><td>Spacing</td><td>5.000e+03, 5.000e+03, 1.000e+00</td></tr>
+    <tr><td>N Arrays</td><td>1</td></tr>
+    </table>
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-20
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td><b>Data</b></td><td>Points</td><td>float64</td><td>1</td><td>-2.519e+02</td><td>1.754e+02</td></tr>
+    </table>
+
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
+
+.. GENERATED FROM PYTHON SOURCE LINES 22-23
 
 Apply a filter to the DEM to have realistic topography
 
-.. GENERATED FROM PYTHON SOURCE LINES 20-22
+.. GENERATED FROM PYTHON SOURCE LINES 23-25
 
 .. code-block:: default
 
     warped = dem.warp_by_scalar(scale_factor=300.0)
-    warped.plot(cmap='terrain')
+    warped.plot(cmap="terrain")
 
 
 
@@ -83,28 +111,23 @@ Apply a filter to the DEM to have realistic topography
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.098 seconds)
+   **Total running time of the script:** ( 0 minutes  0.843 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-surfer.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: read-surfer.py <read-surfer.py>`
 
-     :download:`Download Python source code: read-surfer.py <read-surfer.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: read-surfer.ipynb <read-surfer.ipynb>`
+      :download:`Download Jupyter notebook: read-surfer.ipynb <read-surfer.ipynb>`
 
 
 .. only:: html

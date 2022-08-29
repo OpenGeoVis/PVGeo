@@ -60,8 +60,8 @@ Create some input data. This can be any `vtkDataObject`
     n = 400
     arr0 = np.random.random(n)
     arr1 = np.random.random(n)
-    inp['Array 0'] = arr0
-    inp['Array 1'] = arr1
+    inp["Array 0"] = arr0
+    inp["Array 1"] = arr1
 
 
 
@@ -69,11 +69,9 @@ Create some input data. This can be any `vtkDataObject`
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
-    /opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/pyvista/core/grid.py:441: PyvistaDeprecationWarning: Behavior of pyvista.UniformGrid has changed. First argument must be either a ``vtk.vtkImageData`` or path.
+    /opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/pyvista/core/grid.py:469: PyvistaDeprecationWarning: Behavior of pyvista.UniformGrid has changed. First argument must be either a ``vtk.vtkImageData`` or path.
       warnings.warn(
 
 
@@ -87,9 +85,9 @@ Use the filter:
 
 .. code-block:: default
 
-    f = ArrayMath(operation='add', new_name='foo')
+    f = ArrayMath(operation="add", new_name="foo")
     # Now get the result
-    output = f.apply(inp, 'Array 0', 'Array 1')
+    output = f.apply(inp, "Array 0", "Array 1")
     output
 
 
@@ -116,9 +114,9 @@ Use the filter:
     </td><td>
     <table>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>4.622e-03</td><td>9.966e-01</td></tr>
-    <tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>3.494e-03</td><td>9.955e-01</td></tr>
-    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>2.008e-02</td><td>1.924e+00</td></tr>
+    <tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>2.453e-03</td><td>9.993e-01</td></tr>
+    <tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>5.006e-03</td><td>9.929e-01</td></tr>
+    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>6.807e-02</td><td>1.913e+00</td></tr>
     </table>
 
     </td></tr> </table>
@@ -134,7 +132,7 @@ Note that the output now has three arrays
 
 .. code-block:: default
 
-    arr = output['foo']
+    arr = output["foo"]
     assert np.allclose(arr, arr0 + arr1)
 
 
@@ -152,12 +150,12 @@ Use a custom math operation:
 .. code-block:: default
 
     def power(arr0, arr1):
-        return arr0 ** arr1
+        return arr0**arr1
 
 
     # Use filter generated above
     f.set_operation(power)
-    f.set_new_array_name('powered')
+    f.set_new_array_name("powered")
     f.update()
 
     # Now get the result
@@ -187,9 +185,9 @@ Use a custom math operation:
     </td><td>
     <table>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>4.622e-03</td><td>9.966e-01</td></tr>
-    <tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>3.494e-03</td><td>9.955e-01</td></tr>
-    <tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>2.511e-02</td><td>9.994e-01</td></tr>
+    <tr><td>Array 0</td><td>Points</td><td>float64</td><td>1</td><td>2.453e-03</td><td>9.993e-01</td></tr>
+    <tr><td><b>Array 1</b></td><td>Points</td><td>float64</td><td>1</td><td>5.006e-03</td><td>9.929e-01</td></tr>
+    <tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>4.210e-02</td><td>1.000e+00</td></tr>
     </table>
 
     </td></tr> </table>
@@ -201,8 +199,8 @@ Use a custom math operation:
 
 .. code-block:: default
 
-    arr = output['powered']
-    assert np.allclose(arr, arr0 ** arr1)
+    arr = output["powered"]
+    assert np.allclose(arr, arr0**arr1)
 
 
 
@@ -215,7 +213,7 @@ Use a custom math operation:
 
 .. code-block:: default
 
-    output.plot(scalars='powered')
+    output.plot(scalars="powered")
 
 
 
@@ -231,28 +229,23 @@ Use a custom math operation:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.507 seconds)
+   **Total running time of the script:** ( 0 minutes  0.495 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_array-math.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: array-math.py <array-math.py>`
 
-     :download:`Download Python source code: array-math.py <array-math.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: array-math.ipynb <array-math.ipynb>`
+      :download:`Download Jupyter notebook: array-math.ipynb <array-math.ipynb>`
 
 
 .. only:: html

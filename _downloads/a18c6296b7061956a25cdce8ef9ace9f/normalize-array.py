@@ -21,14 +21,14 @@ from PVGeo.filters import NormalizeArray
 ###############################################################################
 # Create some input data. this can be any `vtkDataObject`
 mesh = examples.load_uniform()
-title = 'Spatial Point Data'
+title = "Spatial Point Data"
 mesh.plot(scalars=title)
 ###############################################################################
 
 # Apply the filter
-f = NormalizeArray(normalization='feature_scale', new_name='foo')
+f = NormalizeArray(normalization="feature_scale", new_name="foo")
 output = f.apply(mesh, title)
 output
 
 ###############################################################################
-output.plot(scalars='foo')
+output.plot(scalars="foo")

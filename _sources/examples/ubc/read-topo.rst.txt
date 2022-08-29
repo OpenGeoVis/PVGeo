@@ -23,13 +23,14 @@ Read UBC Topography File
 
 Read a UBC topography file
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-12
+.. GENERATED FROM PYTHON SOURCE LINES 7-13
 
 .. code-block:: default
 
+    # sphinx_gallery_thumbnail_number = 1
+    import pooch
     from pyvista import examples
 
-    # sphinx_gallery_thumbnail_number = 1
     import PVGeo
 
 
@@ -39,16 +40,16 @@ Read a UBC topography file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-14
+.. GENERATED FROM PYTHON SOURCE LINES 14-15
 
 Download sample data files and keep track of names:
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-17
+.. GENERATED FROM PYTHON SOURCE LINES 15-18
 
 .. code-block:: default
 
-    url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/LdM_topo.topo'
-    topo_file, _ = examples.downloads._retrieve_file(url, 'LdM_topo.topo')
+    url = "https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/LdM_topo.topo"
+    file_path = pooch.retrieve(url=url, known_hash=None)
 
 
 
@@ -57,11 +58,11 @@ Download sample data files and keep track of names:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-21
+.. GENERATED FROM PYTHON SOURCE LINES 19-22
 
 .. code-block:: default
 
-    topo = PVGeo.ubc.TopoReader().apply(topo_file)
+    topo = PVGeo.ubc.TopoReader().apply(file_path)
     topo
 
 
@@ -94,11 +95,11 @@ Download sample data files and keep track of names:
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-23
+.. GENERATED FROM PYTHON SOURCE LINES 23-24
 
 .. code-block:: default
 
-    topo.plot(cmap='terrain')
+    topo.plot(cmap="terrain", notebook=0)
 
 
 
@@ -114,28 +115,23 @@ Download sample data files and keep track of names:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.086 seconds)
+   **Total running time of the script:** ( 0 minutes  3.455 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-topo.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: read-topo.py <read-topo.py>`
 
-     :download:`Download Python source code: read-topo.py <read-topo.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: read-topo.ipynb <read-topo.ipynb>`
+      :download:`Download Jupyter notebook: read-topo.ipynb <read-topo.ipynb>`
 
 
 .. only:: html

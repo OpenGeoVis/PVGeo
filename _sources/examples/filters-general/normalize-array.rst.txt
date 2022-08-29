@@ -56,7 +56,7 @@ Create some input data. this can be any `vtkDataObject`
 .. code-block:: default
 
     mesh = examples.load_uniform()
-    title = 'Spatial Point Data'
+    title = "Spatial Point Data"
     mesh.plot(scalars=title)
 
 
@@ -76,7 +76,7 @@ Create some input data. this can be any `vtkDataObject`
 
 
     # Apply the filter
-    f = NormalizeArray(normalization='feature_scale', new_name='foo')
+    f = NormalizeArray(normalization="feature_scale", new_name="foo")
     output = f.apply(mesh, title)
     output
 
@@ -118,7 +118,7 @@ Create some input data. this can be any `vtkDataObject`
 
 .. code-block:: default
 
-    output.plot(scalars='foo')
+    output.plot(scalars="foo")
 
 
 
@@ -134,28 +134,23 @@ Create some input data. this can be any `vtkDataObject`
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.647 seconds)
+   **Total running time of the script:** ( 0 minutes  0.684 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_normalize-array.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: normalize-array.py <normalize-array.py>`
 
-     :download:`Download Python source code: normalize-array.py <normalize-array.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: normalize-array.ipynb <normalize-array.ipynb>`
+      :download:`Download Jupyter notebook: normalize-array.ipynb <normalize-array.ipynb>`
 
 
 .. only:: html

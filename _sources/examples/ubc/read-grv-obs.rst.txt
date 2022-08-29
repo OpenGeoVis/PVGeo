@@ -23,10 +23,11 @@ Read UBC Gravity Observations
 
 Read a UBC gravity observations file
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-12
+.. GENERATED FROM PYTHON SOURCE LINES 7-13
 
 .. code-block:: default
 
+    import pooch
     from pyvista import examples
 
     # sphinx_gallery_thumbnail_number = 1
@@ -39,16 +40,16 @@ Read a UBC gravity observations file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-14
+.. GENERATED FROM PYTHON SOURCE LINES 14-15
 
 Download sample data files and keep track of names:
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-17
+.. GENERATED FROM PYTHON SOURCE LINES 15-18
 
 .. code-block:: default
 
-    url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/LdM_grav_obs.grv'
-    grav_file, _ = examples.downloads._retrieve_file(url, 'LdM_grav_obs.grv')
+    url = "https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/LdM_grav_obs.grv"
+    file_path = pooch.retrieve(url=url, known_hash=None)
 
 
 
@@ -57,11 +58,11 @@ Download sample data files and keep track of names:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-21
+.. GENERATED FROM PYTHON SOURCE LINES 19-22
 
 .. code-block:: default
 
-    grav = PVGeo.ubc.GravObsReader().apply(grav_file)
+    grav = PVGeo.ubc.GravObsReader().apply(file_path)
     grav
 
 
@@ -95,7 +96,7 @@ Download sample data files and keep track of names:
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-23
+.. GENERATED FROM PYTHON SOURCE LINES 23-24
 
 .. code-block:: default
 
@@ -115,28 +116,23 @@ Download sample data files and keep track of names:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.651 seconds)
+   **Total running time of the script:** ( 0 minutes  0.591 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-grv-obs.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: read-grv-obs.py <read-grv-obs.py>`
 
-     :download:`Download Python source code: read-grv-obs.py <read-grv-obs.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: read-grv-obs.ipynb <read-grv-obs.ipynb>`
+      :download:`Download Jupyter notebook: read-grv-obs.ipynb <read-grv-obs.ipynb>`
 
 
 .. only:: html

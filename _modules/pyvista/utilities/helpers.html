@@ -224,6 +224,7 @@
 
 <span class="kn">import</span> <span class="nn">pyvista</span>
 <span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">_vtk</span>
+<span class="kn">from</span> <span class="nn">pyvista.errors</span> <span class="kn">import</span> <span class="n">AmbiguousDataError</span><span class="p">,</span> <span class="n">MissingDataError</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">transformations</span>
 <span class="kn">from</span> <span class="nn">.fileio</span> <span class="kn">import</span> <span class="n">from_meshio</span>
@@ -324,6 +325,11 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="c1"># VTK default fonts only support ASCII. See https://gitlab.kitware.com/vtk/vtk/-/issues/16904</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">isascii</span><span class="p">():</span>  <span class="c1"># avoids segfault</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;String array contains non-ASCII characters that are not supported by VTK.&#39;</span>
+            <span class="p">)</span>
         <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">()</span>
         <span class="c1">########### OPTIMIZE ###########</span>
         <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
@@ -363,6 +369,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">arr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">):</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;|S&#39;</span><span class="p">)</span>
@@ -407,6 +415,27 @@
     <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">pyvista</span><span class="o">.</span><span class="n">DataSet</span><span class="p">,</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">))</span>
 
 
+<span class="k">def</span> <span class="nf">_assoc_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">association</span><span class="o">=</span><span class="s1">&#39;point&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a point, cell, or field array from a pyvista.DataSet or VTK object.</span>
+
+<span class="sd">    If the array or index doesn&#39;t exist, return nothing. This matches VTK&#39;s</span>
+<span class="sd">    behavior when using ``GetAbstractArray`` with an invalid key or index.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vtk_attr</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Get</span><span class="si">{</span><span class="n">association</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s1">Data&#39;</span>
+    <span class="n">python_attr</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">association</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s1">_data&#39;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">DataSet</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">python_attr</span><span class="p">)</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">abstract_array</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">vtk_attr</span><span class="p">)()</span><span class="o">.</span><span class="n">GetAbstractArray</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">abstract_array</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">pyvista_ndarray</span><span class="p">(</span><span class="n">abstract_array</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
 <span class="k">def</span> <span class="nf">point_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return point array of a pyvista or vtk object.</span>
 
@@ -415,17 +444,16 @@
 <span class="sd">    obj : pyvista.DataSet or vtk.vtkDataSet</span>
 <span class="sd">        PyVista or VTK dataset.</span>
 
-<span class="sd">    name : str</span>
-<span class="sd">        Name of the array.</span>
+<span class="sd">    name : str or int</span>
+<span class="sd">        Name or index of the array.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    numpy.ndarray</span>
-<span class="sd">        Wrapped array.</span>
+<span class="sd">    pyvista.pyvista_ndarray or None</span>
+<span class="sd">        Wrapped array if the index or name is valid. Otherwise, ``None``.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetAbstractArray</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_assoc_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;point&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">field_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
@@ -436,17 +464,16 @@
 <span class="sd">    obj : pyvista.DataSet or vtk.vtkDataSet</span>
 <span class="sd">        PyVista or VTK dataset.</span>
 
-<span class="sd">    name : str</span>
-<span class="sd">        Name of the array.</span>
+<span class="sd">    name : str or int</span>
+<span class="sd">        Name or index of the array.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    numpy.ndarray</span>
-<span class="sd">        Wrapped array.</span>
+<span class="sd">    pyvista.pyvista_ndarray or None</span>
+<span class="sd">        Wrapped array if the index or name is valid. Otherwise, ``None``.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">GetFieldData</span><span class="p">()</span><span class="o">.</span><span class="n">GetAbstractArray</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_assoc_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;field&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">cell_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
@@ -457,17 +484,16 @@
 <span class="sd">    obj : pyvista.DataSet or vtk.vtkDataSet</span>
 <span class="sd">        PyVista or VTK dataset.</span>
 
-<span class="sd">    name : str</span>
-<span class="sd">        Name of the array.</span>
+<span class="sd">    name : str or int</span>
+<span class="sd">        Name or index of the array.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    numpy.ndarray</span>
-<span class="sd">        Wrapped array.</span>
+<span class="sd">    pyvista.pyvista_ndarray or None</span>
+<span class="sd">        Wrapped array if the index or name is valid. Otherwise, ``None``.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">GetAbstractArray</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_assoc_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;cell&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">row_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
@@ -521,7 +547,7 @@
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">FieldAssociation</span><span class="p">):</span>
         <span class="k">pass</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data field (</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s1">) not supported.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data field (</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s1">) not supported.&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">field</span>
 
 
@@ -557,6 +583,14 @@
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data array (</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">) not present in this dataset.&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">arr</span>
 
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">preference</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;`preference` must be a string&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">preference</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">,</span> <span class="s1">&#39;point&#39;</span><span class="p">,</span> <span class="s1">&#39;field&#39;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;`preference` must be either &quot;cell&quot;, &quot;point&quot;, &quot;field&quot; for a &#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span><span class="si">}</span><span class="s1">, not &quot;</span><span class="si">{</span><span class="n">preference</span><span class="si">}</span><span class="s1">&quot;.&#39;</span>
+        <span class="p">)</span>
+
     <span class="n">parr</span> <span class="o">=</span> <span class="n">point_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
     <span class="n">carr</span> <span class="o">=</span> <span class="n">cell_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
     <span class="n">farr</span> <span class="o">=</span> <span class="n">field_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
@@ -566,10 +600,8 @@
             <span class="k">return</span> <span class="n">carr</span>
         <span class="k">elif</span> <span class="n">preference</span> <span class="o">==</span> <span class="n">FieldAssociation</span><span class="o">.</span><span class="n">POINT</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">parr</span>
-        <span class="k">elif</span> <span class="n">preference</span> <span class="o">==</span> <span class="n">FieldAssociation</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># must be field</span>
             <span class="k">return</span> <span class="n">farr</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data field (</span><span class="si">{</span><span class="n">preference</span><span class="si">}</span><span class="s1">) not supported.&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">parr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">parr</span>
@@ -1596,7 +1628,7 @@
 
 
 <span class="k">def</span> <span class="nf">cubemap</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;.jpg&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Construct a cubemap from 6 images.</span>
+    <span class="sd">&quot;&quot;&quot;Construct a cubemap from 6 images from a directory.</span>
 
 <span class="sd">    Each of the 6 images must be in the following format:</span>
 
@@ -1634,14 +1666,69 @@
 <span class="sd">    pyvista.Texture</span>
 <span class="sd">        Texture with cubemap.</span>
 
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Cubemap will appear flipped relative to the XY plane between VTK v9.1 and</span>
+<span class="sd">    VTK v9.2.</span>
+
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
+<span class="sd">    Load a skybox given a directory, prefix, and file extension.</span>
+
 <span class="sd">    &gt;&gt;&gt; import pyvista</span>
 <span class="sd">    &gt;&gt;&gt; skybox = pyvista.cubemap(&#39;my_directory&#39;, &#39;skybox&#39;, &#39;.jpeg&#39;)  # doctest:+SKIP</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sets</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;posx&#39;</span><span class="p">,</span> <span class="s1">&#39;negx&#39;</span><span class="p">,</span> <span class="s1">&#39;posy&#39;</span><span class="p">,</span> <span class="s1">&#39;negy&#39;</span><span class="p">,</span> <span class="s1">&#39;posz&#39;</span><span class="p">,</span> <span class="s1">&#39;negz&#39;</span><span class="p">]</span>
     <span class="n">image_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">suffix</span><span class="si">}{</span><span class="n">ext</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">suffix</span> <span class="ow">in</span> <span class="n">sets</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">_cubemap_from_paths</span><span class="p">(</span><span class="n">image_paths</span><span class="p">)</span>
 
+
+<span class="k">def</span> <span class="nf">cubemap_from_filenames</span><span class="p">(</span><span class="n">image_paths</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct a cubemap from 6 images.</span>
+
+<span class="sd">    Images must be in the following order:</span>
+
+<span class="sd">    - Positive X</span>
+<span class="sd">    - Negative X</span>
+<span class="sd">    - Positive Y</span>
+<span class="sd">    - Negative Y</span>
+<span class="sd">    - Positive Z</span>
+<span class="sd">    - Negative Z</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    image_paths : list</span>
+<span class="sd">        Paths of the individual cubemap images.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pyvista.Texture</span>
+<span class="sd">        Texture with cubemap.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Load a skybox given a list of image paths.</span>
+
+<span class="sd">    &gt;&gt;&gt; image_paths = [</span>
+<span class="sd">    ...     &#39;/home/user/_px.jpg&#39;,</span>
+<span class="sd">    ...     &#39;/home/user/_nx.jpg&#39;,</span>
+<span class="sd">    ...     &#39;/home/user/_py.jpg&#39;,</span>
+<span class="sd">    ...     &#39;/home/user/_ny.jpg&#39;,</span>
+<span class="sd">    ...     &#39;/home/user/_pz.jpg&#39;,</span>
+<span class="sd">    ...     &#39;/home/user/_nz.jpg&#39;,</span>
+<span class="sd">    ... ]</span>
+<span class="sd">    &gt;&gt;&gt; skybox = pyvista.cubemap(image_paths=image_paths)  # doctest:+SKIP</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_paths</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;image_paths must contain 6 paths&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_cubemap_from_paths</span><span class="p">(</span><span class="n">image_paths</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_cubemap_from_paths</span><span class="p">(</span><span class="n">image_paths</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct a cubemap from image paths.&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">image_path</span> <span class="ow">in</span> <span class="n">image_paths</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
             <span class="n">file_str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_paths</span><span class="p">)</span>
@@ -1666,6 +1753,114 @@
         <span class="n">texture</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">flip</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span>
 
     <span class="k">return</span> <span class="n">texture</span>
+
+
+<span class="k">def</span> <span class="nf">set_default_active_vectors</span><span class="p">(</span><span class="n">mesh</span><span class="p">:</span> <span class="s1">&#39;pyvista.DataSet&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Set a default vectors array on mesh, if not already set.</span>
+
+<span class="sd">    If an active vector already exists, no changes are made.</span>
+
+<span class="sd">    If an active vectors does not exist, it checks for possibly cell</span>
+<span class="sd">    or point arrays with shape ``(n, 3)``.  If only one exists, then</span>
+<span class="sd">    it is set as the active vectors.  Otherwise, an error is raised.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mesh : pyvista.DataSet</span>
+<span class="sd">        Dataset to set default active vectors.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    MissingDataError</span>
+<span class="sd">        If no vector-like arrays exist.</span>
+
+<span class="sd">    AmbiguousDataError</span>
+<span class="sd">        If more than one vector-like arrays exist.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mesh</span><span class="o">.</span><span class="n">active_vectors_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">point_data</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">point_data</span>
+    <span class="n">cell_data</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">cell_data</span>
+
+    <span class="n">possible_vectors_point</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">point_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
+    <span class="p">]</span>
+    <span class="n">possible_vectors_cell</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">cell_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
+    <span class="p">]</span>
+
+    <span class="n">possible_vectors</span> <span class="o">=</span> <span class="n">possible_vectors_point</span> <span class="o">+</span> <span class="n">possible_vectors_cell</span>
+    <span class="n">n_possible_vectors</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_vectors</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n_possible_vectors</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_vectors_point</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">preference</span> <span class="o">=</span> <span class="s1">&#39;point&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">preference</span> <span class="o">=</span> <span class="s1">&#39;cell&#39;</span>
+        <span class="n">mesh</span><span class="o">.</span><span class="n">set_active_vectors</span><span class="p">(</span><span class="n">possible_vectors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">preference</span><span class="o">=</span><span class="n">preference</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">n_possible_vectors</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">MissingDataError</span><span class="p">(</span><span class="s2">&quot;No vector-like data available.&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">n_possible_vectors</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AmbiguousDataError</span><span class="p">(</span>
+            <span class="s2">&quot;Multiple vector-like data available</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;cell data: </span><span class="si">{</span><span class="n">possible_vectors_cell</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;point data: </span><span class="si">{</span><span class="n">possible_vectors_point</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;Set one as active using DataSet.set_active_vectors(name, preference=type)&quot;</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">set_default_active_scalars</span><span class="p">(</span><span class="n">mesh</span><span class="p">:</span> <span class="s1">&#39;pyvista.DataSet&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Set a default scalars array on mesh, if not already set.</span>
+
+<span class="sd">    If an active scalars already exists, no changes are made.</span>
+
+<span class="sd">    If an active scalars does not exist, it checks for point or cell</span>
+<span class="sd">    arrays.  If only one exists, then it is set as the active scalars.</span>
+<span class="sd">    Otherwise, an error is raised.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mesh : pyvista.DataSet</span>
+<span class="sd">        Dataset to set default active scalars.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    MissingDataError</span>
+<span class="sd">        If no arrays exist.</span>
+
+<span class="sd">    AmbiguousDataError</span>
+<span class="sd">        If more than one array exists.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mesh</span><span class="o">.</span><span class="n">active_scalars_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">point_data</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">point_data</span>
+    <span class="n">cell_data</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">cell_data</span>
+
+    <span class="n">possible_scalars_point</span> <span class="o">=</span> <span class="n">point_data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="n">possible_scalars_cell</span> <span class="o">=</span> <span class="n">cell_data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="n">possible_scalars</span> <span class="o">=</span> <span class="n">possible_scalars_point</span> <span class="o">+</span> <span class="n">possible_scalars_cell</span>
+    <span class="n">n_possible_scalars</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_scalars</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n_possible_scalars</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_scalars_point</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">preference</span> <span class="o">=</span> <span class="s1">&#39;point&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">preference</span> <span class="o">=</span> <span class="s1">&#39;cell&#39;</span>
+        <span class="n">mesh</span><span class="o">.</span><span class="n">set_active_scalars</span><span class="p">(</span><span class="n">possible_scalars</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">preference</span><span class="o">=</span><span class="n">preference</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">n_possible_scalars</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">MissingDataError</span><span class="p">(</span><span class="s2">&quot;No data available.&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">n_possible_scalars</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AmbiguousDataError</span><span class="p">(</span>
+            <span class="s2">&quot;Multiple data available</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;cell data: </span><span class="si">{</span><span class="n">possible_scalars_cell</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;point data: </span><span class="si">{</span><span class="n">possible_scalars_point</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;Set one as active using DataSet.set_active_scalars(name, preference=type)&quot;</span>
+        <span class="p">)</span>
 </pre></div>
 
            </div>

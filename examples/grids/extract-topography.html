@@ -31,7 +31,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Read ESRI Grid File" href="read-esri.html" />
-    <link rel="prev" title="Voxelize Points" href="../filters-general/voxelize-points.html" />
+    <link rel="prev" title="Grids" href="index.html" />
  
 
 <meta name="description" content="Python package of VTK-based algorithms to analyze geoscientific data and models">
@@ -84,14 +84,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index.html#general-filters">General Filters</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#grids">Grids</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Extract Topography</a></li>
-<li class="toctree-l3"><a class="reference internal" href="read-esri.html">Read ESRI Grid File</a></li>
-<li class="toctree-l3"><a class="reference internal" href="read-surfer.html">Read Surfer Grid File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../filters-general/index.html">General Filters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Grids</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Extract Topography</a></li>
+<li class="toctree-l4"><a class="reference internal" href="read-esri.html">Read ESRI Grid File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="read-surfer.html">Read Surfer Grid File</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gslib/index.html">GSLib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ubc/index.html">UBC Data Formats</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -211,6 +217,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Quick Examples</a> &raquo;</li>
+          <li><a href="index.html">Grids</a> &raquo;</li>
       <li>Extract Topography</li>
 
   </ul>
@@ -237,9 +244,10 @@ range of input data types. We also add this data array as it will enable users
 to create model discretizations within ParaView for export to external
 processing software that need the entire model discretization with an active
 cells field.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 6</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
-<span class="c1"># sphinx_gallery_thumbnail_number = 6</span>
+<span class="kn">import</span> <span class="nn">pooch</span>
 <span class="kn">import</span> <span class="nn">pyvista</span>
 <span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
 
@@ -257,21 +265,48 @@ with the following parameters:</p>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="p">(</span>
     <span class="n">origin</span><span class="o">=</span><span class="p">[</span><span class="mi">793000</span><span class="p">,</span> <span class="mi">9192500</span><span class="p">,</span> <span class="mi">2690</span><span class="p">],</span>
-    <span class="n">xcellstr</span><span class="o">=</span><span class="s1">&#39;1000 500 50*250 500 1000&#39;</span><span class="p">,</span>
-    <span class="n">ycellstr</span><span class="o">=</span><span class="s1">&#39;1000 500 55*250 500 1000&#39;</span><span class="p">,</span>
-    <span class="n">zcellstr</span><span class="o">=</span><span class="s1">&#39;30*100.0 5*250.0 500&#39;</span><span class="p">,</span>
+    <span class="n">xcellstr</span><span class="o">=</span><span class="s2">&quot;1000 500 50*250 500 1000&quot;</span><span class="p">,</span>
+    <span class="n">ycellstr</span><span class="o">=</span><span class="s2">&quot;1000 500 55*250 500 1000&quot;</span><span class="p">,</span>
+    <span class="n">zcellstr</span><span class="o">=</span><span class="s2">&quot;30*100.0 5*250.0 500&quot;</span><span class="p">,</span>
 <span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
 
 <span class="n">mesh</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">show_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_extract-topography_001.png" srcset="../../_images/sphx_glr_extract-topography_001.png" alt="extract topography" class = "sphx-glr-single-img"/><p>Now load the topography file from the example data:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">link</span> <span class="o">=</span> <span class="s1">&#39;https://dl.dropbox.com/s/gw5v3tiq68oge3l/Example-Extract-Topo.zip?dl=0&#39;</span>
-<span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="s1">&#39;Example-Extract-Topo.zip&#39;</span><span class="p">)</span>
-<span class="n">topo</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pyvista</span><span class="o">.</span><span class="n">EXAMPLES_PATH</span><span class="p">,</span> <span class="s1">&#39;topo.vtk&#39;</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://dl.dropbox.com/s/gw5v3tiq68oge3l/Example-Extract-Topo.zip?dl=0&quot;</span>
+<span class="n">file_paths</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">processor</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">Unzip</span><span class="p">())</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_paths</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;topo.vtk&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">p</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">)</span>
+<span class="n">topo</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+<span class="n">topo</span>
+</pre></div>
+</div>
+<div class="output_subarea output_html rendered_html output_result">
+<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table>
+<tr><th>PolyData</th><th>Information</th></tr>
+<tr><td>N Cells</td><td>39764</td></tr>
+<tr><td>N Points</td><td>20164</td></tr>
+<tr><td>X Bounds</td><td>7.937e+05, 8.078e+05</td></tr>
+<tr><td>Y Bounds</td><td>9.194e+06, 9.208e+06</td></tr>
+<tr><td>Z Bounds</td><td>1.182e+03, 2.690e+03</td></tr>
+<tr><td>N Arrays</td><td>3</td></tr>
+</table>
+
+</td><td>
+<table>
+<tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+<tr><td><b>elevation</b></td><td>Points</td><td>float64</td><td>1</td><td>1.182e+03</td><td>2.690e+03</td></tr>
+<tr><td>column integer</td><td>Points</td><td>float32</td><td>1</td><td>1.000e+00</td><td>1.420e+02</td></tr>
+<tr><td>row integer</td><td>Points</td><td>float32</td><td>1</td><td>1.000e+00</td><td>1.420e+02</td></tr>
+</table>
+
+</td></tr> </table>
+</div>
+<br />
+<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;terrain&quot;</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show_grid</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -281,7 +316,7 @@ with the following parameters:</p>
 let’s go ahead and use the <strong>Extract Topography</strong> filter. Be sure to properly
 select the inputs to the algorithm.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extracted</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">topo</span><span class="p">)</span>
-<span class="n">extracted</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;Extracted&#39;</span><span class="p">)</span>
+<span class="n">extracted</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;Extracted&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_extract-topography_003.png" srcset="../../_images/sphx_glr_extract-topography_003.png" alt="extract topography" class = "sphx-glr-single-img"/><p>op=’underneath’, tolerance=0.001, offset=0.0, invert=False, remove=False
@@ -291,13 +326,13 @@ data set to remove parts of the model that are above the topography surface by
 applying a <em>Threshold</em> filter to chop out all values below 1.</p>
 <p>The resulting grid with cells above the topography extracted will look like the
 rendering below:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">threshed</span> <span class="o">=</span> <span class="n">extracted</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;Extracted&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">threshed</span> <span class="o">=</span> <span class="n">extracted</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;Extracted&quot;</span><span class="p">)</span>
 <span class="n">threshed</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_extract-topography_004.png" srcset="../../_images/sphx_glr_extract-topography_004.png" alt="extract topography" class = "sphx-glr-single-img"/><p>How well did this remove cells above the topography surface?</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;terrain&quot;</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">threshed</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show_grid</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -308,21 +343,19 @@ topographic surface, you can set a tolerance:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extracted</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="p">(</span><span class="n">tolerance</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">topo</span><span class="p">)</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;terrain&quot;</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">extracted</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show_grid</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_extract-topography_006.png" srcset="../../_images/sphx_glr_extract-topography_006.png" alt="extract topography" class = "sphx-glr-single-img"/><p>Note that there are other extraction operations like an <code class="docutils literal notranslate"><span class="pre">'intersection'</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extracted</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="p">(</span><span class="n">op</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-    <span class="n">mesh</span><span class="p">,</span> <span class="n">topo</span>
-<span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extracted</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="p">(</span><span class="n">op</span><span class="o">=</span><span class="s2">&quot;intersection&quot;</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">topo</span><span class="p">)</span>
 <span class="n">extracted</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_extract-topography_007.png" srcset="../../_images/sphx_glr_extract-topography_007.png" alt="extract topography" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  7.177 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-grids-extract-topography-py">
+<img src="../../_images/sphx_glr_extract-topography_007.png" srcset="../../_images/sphx_glr_extract-topography_007.png" alt="extract topography" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.971 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-grids-extract-topography-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/1197c872ed98ed4d13457d8de9536e05/extract-topography.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">extract-topography.py</span></code></a></p>
 </div>
@@ -337,7 +370,7 @@ topographic surface, you can set a tolerance:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../filters-general/voxelize-points.html" class="btn btn-neutral float-left" title="Voxelize Points" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Grids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="read-esri.html" class="btn btn-neutral float-right" title="Read ESRI Grid File" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

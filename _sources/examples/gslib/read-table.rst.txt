@@ -23,10 +23,13 @@ Read GSLib Table
 
 Read any GSLib file as a table :class:`pyvist.Table`
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-13
+.. GENERATED FROM PYTHON SOURCE LINES 8-16
 
 .. code-block:: default
 
+    import os
+
+    import pooch
     from pyvista import examples
 
     from PVGeo.grids import TableToTimeGrid
@@ -39,16 +42,36 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-23
+.. GENERATED FROM PYTHON SOURCE LINES 17-24
 
 .. code-block:: default
 
 
     # points_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/sundarbans.zip'
-    filename, _ = examples.downloads._download_file('sundarbans.SGEMS.zip')
+    url = "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/sundarbans.SGEMS.zip"
+    file_paths = pooch.retrieve(url=url, known_hash=None, processor=pooch.Unzip())
+    file_path = [f for f in file_paths if os.path.basename(f) == "sundarbans.SGEMS"][0]
+    file_path
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    '/home/runner/.cache/pooch/86487d9e94190c342742d91d20091f70-sundarbans.SGEMS.zip.unzip/sundarbans.SGEMS'
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 25-30
+
+.. code-block:: default
 
     reader = GSLibReader()
-    table = reader.apply(filename)
+    table = reader.apply(file_path)
     # Print the file header
     print(reader.get_file_header())
 
@@ -58,8 +81,6 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
     1200 1750 1
@@ -67,7 +88,7 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 24-26
+.. GENERATED FROM PYTHON SOURCE LINES 31-33
 
 .. code-block:: default
 
@@ -99,19 +120,19 @@ Read any GSLib file as a table :class:`pyvist.Table`
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 27-30
+.. GENERATED FROM PYTHON SOURCE LINES 34-37
 
 From inspecting the header, we realize that this dataset is gridded, so let's
 use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 :class:`pyvista.UniformGrid` of that dataset.
 
-.. GENERATED FROM PYTHON SOURCE LINES 30-35
+.. GENERATED FROM PYTHON SOURCE LINES 37-42
 
 .. code-block:: default
 
 
     # 1200 x, 1750 y, 1 z, 1 t
-    grid = TableToTimeGrid(extent=(1200, 1750, 1, 1), order='F').apply(table)
+    grid = TableToTimeGrid(extent=(1200, 1750, 1, 1), order="F").apply(table)
     grid
 
 
@@ -146,11 +167,11 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 36-37
+.. GENERATED FROM PYTHON SOURCE LINES 43-44
 
 .. code-block:: default
 
-    grid.plot(cpos='xy')
+    grid.plot(cpos="xy")
 
 
 
@@ -166,28 +187,23 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  14.756 seconds)
+   **Total running time of the script:** ( 0 minutes  14.384 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-table.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: read-table.py <read-table.py>`
 
-     :download:`Download Python source code: read-table.py <read-table.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: read-table.ipynb <read-table.ipynb>`
+      :download:`Download Jupyter notebook: read-table.ipynb <read-table.ipynb>`
 
 
 .. only:: html

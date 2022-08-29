@@ -1,0 +1,81 @@
+
+
+.. _sphx_glr_examples_gslib:
+
+GSLib
+-----
+
+The examples shown here are downloaded from
+`Multiple-point Geostatistics stochastic modeling with training images <http://www.trainingimages.org/training-images-library.html>`_ website (which recently went down, so we migrated those data
+files to another location for download).
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read GSLib point set file">
+
+.. only:: html
+
+  .. image:: /examples/gslib/images/thumb/sphx_glr_read-point-set_thumb.png
+    :alt: Read GSLib Point Set
+
+  :ref:`sphx_glr_examples_gslib_read-point-set.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Read GSLib Point Set</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read SGeMS Grid file formats.">
+
+.. only:: html
+
+  .. image:: /examples/gslib/images/thumb/sphx_glr_read-sgems-grid_thumb.png
+    :alt: Read SGeMS Grid
+
+  :ref:`sphx_glr_examples_gslib_read-sgems-grid.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Read SGeMS Grid</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read any GSLib file as a table pyvist.Table">
+
+.. only:: html
+
+  .. image:: /examples/gslib/images/thumb/sphx_glr_read-table_thumb.png
+    :alt: Read GSLib Table
+
+  :ref:`sphx_glr_examples_gslib_read-table.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Read GSLib Table</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gslib/read-point-set
+   /examples/gslib/read-sgems-grid
+   /examples/gslib/read-table
+

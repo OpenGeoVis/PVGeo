@@ -63,8 +63,8 @@ First, lets generate some points which we'd like to connect
 
     def path1(y):
         """Equation: x = a(y-h)^2 + k"""
-        a = -110.0 / 160.0 ** 2
-        x = a * y ** 2 + 110.0
+        a = -110.0 / 160.0**2
+        x = a * y**2 + 110.0
         idxs = np.argwhere(x > 0)
         return x[idxs][:, 0], y[idxs][:, 0]
 
@@ -155,28 +155,23 @@ Now it looks good (see image below)!
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.420 seconds)
+   **Total running time of the script:** ( 0 minutes  2.764 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_add-cell-connectivity-to-points.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: add-cell-connectivity-to-points.py <add-cell-connectivity-to-points.py>`
 
-     :download:`Download Python source code: add-cell-connectivity-to-points.py <add-cell-connectivity-to-points.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: add-cell-connectivity-to-points.ipynb <add-cell-connectivity-to-points.ipynb>`
+      :download:`Download Jupyter notebook: add-cell-connectivity-to-points.ipynb <add-cell-connectivity-to-points.ipynb>`
 
 
 .. only:: html

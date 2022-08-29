@@ -32,9 +32,9 @@ This example demos :class:`PVGeo.filters.VoxelizePoints`
 
 .. code-block:: default
 
-    import pandas as pd
-
     # sphinx_gallery_thumbnail_number = 2
+    import pandas as pd
+    import pooch
     import pyvista
     from pyvista import examples
 
@@ -55,12 +55,20 @@ Download sample data files and keep track of names:
 
 .. code-block:: default
 
-    url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv'
-    fault_file, _ = examples.downloads._retrieve_file(url, 'fault_points.csv')
+    url = "https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv"
+    file_path = pooch.retrieve(url=url, known_hash=None)
 
 
 
 
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Downloading data from 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv' to file '/home/runner/.cache/pooch/9d996ff12fa39247ccea6f9867b5a096-fault_points.csv'.
+    SHA256 hash of downloaded file: 0eeadcd799121c5d82569abd8b52298f4bcb03b8782f12bcc2c6aea5d6249097
+    Use this value as the 'known_hash' argument of 'pooch.retrieve' to ensure that the file hasn't changed if it is downloaded again in the future.
 
 
 
@@ -80,7 +88,7 @@ object (essentially a point cloud).
 
 .. code-block:: default
 
-    points = pd.read_csv(fault_file)
+    points = pd.read_csv(file_path)
     print(points[0:2])
 
 
@@ -88,8 +96,6 @@ object (essentially a point cloud).
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -191,14 +197,14 @@ The full pipeline method
 
 .. code-block:: default
 
-    print('Voxelizing... ', end='')
+    print("Voxelizing... ", end="")
     voxelizer = PVGeo.filters.VoxelizePoints()
     grid = voxelizer.apply(vtkpoints)
-    print('done.')
+    print("done.")
 
     # Output the results
-    print('Recovered Angle (deg.): %.3f' % voxelizer.get_angle())
-    print('Recovered Cell Sizes: (%.2f, %.2f, %.2f)' % voxelizer.get_spacing())
+    print("Recovered Angle (deg.): %.3f" % voxelizer.get_angle())
+    print("Recovered Cell Sizes: (%.2f, %.2f, %.2f)" % voxelizer.get_spacing())
     grid
 
 
@@ -206,8 +212,6 @@ The full pipeline method
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -320,7 +324,7 @@ And let's use a ``clip`` filter:
 
 .. code-block:: default
 
-    clip = grid.clip(normal='x').clip(normal='-y').threshold(0.5)
+    clip = grid.clip(normal="x").clip(normal="-y").threshold(0.5)
 
 
 
@@ -358,28 +362,23 @@ Now display the slices and clipped volume
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  13.559 seconds)
+   **Total running time of the script:** ( 0 minutes  14.345 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: voxelize-points.py <voxelize-points.py>`
 
-     :download:`Download Python source code: voxelize-points.py <voxelize-points.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: voxelize-points.ipynb <voxelize-points.ipynb>`
+      :download:`Download Jupyter notebook: voxelize-points.ipynb <voxelize-points.ipynb>`
 
 
 .. only:: html

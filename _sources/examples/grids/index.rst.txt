@@ -1,0 +1,77 @@
+
+
+.. _sphx_glr_examples_grids:
+
+Grids
+-----
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to add a cell data field to an input data set that defines wh...">
+
+.. only:: html
+
+  .. image:: /examples/grids/images/thumb/sphx_glr_extract-topography_thumb.png
+    :alt: Extract Topography
+
+  :ref:`sphx_glr_examples_grids_extract-topography.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Extract Topography</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read an ESRI ASCII grid file">
+
+.. only:: html
+
+  .. image:: /examples/grids/images/thumb/sphx_glr_read-esri_thumb.png
+    :alt: Read ESRI Grid File
+
+  :ref:`sphx_glr_examples_grids_read-esri.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Read ESRI Grid File</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read an Surfer ASCII grid file">
+
+.. only:: html
+
+  .. image:: /examples/grids/images/thumb/sphx_glr_read-surfer_thumb.png
+    :alt: Read Surfer Grid File
+
+  :ref:`sphx_glr_examples_grids_read-surfer.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Read Surfer Grid File</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/grids/extract-topography
+   /examples/grids/read-esri
+   /examples/grids/read-surfer
+

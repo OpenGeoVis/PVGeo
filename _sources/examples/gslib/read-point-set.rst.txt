@@ -23,11 +23,12 @@ Read GSLib Point Set
 
 Read GSLib point set file
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-12
+.. GENERATED FROM PYTHON SOURCE LINES 7-13
 
 .. code-block:: default
 
     # sphinx_gallery_thumbnail_number = 1
+    import pooch
     from pyvista import examples
 
     from PVGeo.gslib import GSLibPointSetReader
@@ -39,15 +40,16 @@ Read GSLib point set file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-20
+.. GENERATED FROM PYTHON SOURCE LINES 14-22
 
 .. code-block:: default
 
 
     # points_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/b_100sampledatawl.sgems'
-    filename, _ = examples.downloads._download_file('b_100sampledatawl.sgems')
+    url = "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/b_100sampledatawl.sgems"
+    file_path = pooch.retrieve(url=url, known_hash=None)
 
-    point_set = GSLibPointSetReader().apply(filename)
+    point_set = GSLibPointSetReader().apply(file_path)
     point_set
 
 
@@ -80,7 +82,7 @@ Read GSLib point set file
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-22
+.. GENERATED FROM PYTHON SOURCE LINES 23-24
 
 .. code-block:: default
 
@@ -100,28 +102,23 @@ Read GSLib point set file
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.593 seconds)
+   **Total running time of the script:** ( 0 minutes  0.367 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-point-set.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: read-point-set.py <read-point-set.py>`
 
-     :download:`Download Python source code: read-point-set.py <read-point-set.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: read-point-set.ipynb <read-point-set.ipynb>`
+      :download:`Download Jupyter notebook: read-point-set.ipynb <read-point-set.ipynb>`
 
 
 .. only:: html

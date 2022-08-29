@@ -30,7 +30,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Read GSLib Point Set" href="../gslib/read-point-set.html" />
+    <link rel="next" title="GSLib" href="../gslib/index.html" />
     <link rel="prev" title="Read ESRI Grid File" href="read-esri.html" />
  
 
@@ -84,14 +84,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index.html#general-filters">General Filters</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#grids">Grids</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="extract-topography.html">Extract Topography</a></li>
-<li class="toctree-l3"><a class="reference internal" href="read-esri.html">Read ESRI Grid File</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Read Surfer Grid File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../filters-general/index.html">General Filters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Grids</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="extract-topography.html">Extract Topography</a></li>
+<li class="toctree-l4"><a class="reference internal" href="read-esri.html">Read ESRI Grid File</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Read Surfer Grid File</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gslib/index.html">GSLib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ubc/index.html">UBC Data Formats</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -211,6 +217,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Quick Examples</a> &raquo;</li>
+          <li><a href="index.html">Grids</a> &raquo;</li>
       <li>Read Surfer Grid File</li>
 
   </ul>
@@ -227,25 +234,51 @@ to download the full example code</p>
 <section class="sphx-glr-example-title" id="read-surfer-grid-file">
 <span id="sphx-glr-examples-grids-read-surfer-py"></span><h1>Read Surfer Grid File<a class="headerlink" href="#read-surfer-grid-file" title="Permalink to this heading"></a></h1>
 <p>Read an Surfer ASCII grid file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pooch</span>
+<span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
 
 <span class="kn">from</span> <span class="nn">PVGeo.grids</span> <span class="kn">import</span> <span class="n">SurferGridReader</span>
 </pre></div>
 </div>
 <p>Download a sample Surfer grid file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;surfer-grid.grd&#39;</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_retrieve_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
-<span class="n">dem</span> <span class="o">=</span> <span class="n">SurferGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;surfer-grid.grd&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">dem</span> <span class="o">=</span> <span class="n">SurferGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+<span class="n">dem</span>
 </pre></div>
 </div>
-<p>Apply a filter to the DEM to have realistic topography</p>
+<div class="output_subarea output_html rendered_html output_result">
+<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table>
+<tr><th>UniformGrid</th><th>Information</th></tr>
+<tr><td>N Cells</td><td>40001</td></tr>
+<tr><td>N Points</td><td>40404</td></tr>
+<tr><td>X Bounds</td><td>0.000e+00, 1.105e+06</td></tr>
+<tr><td>Y Bounds</td><td>0.000e+00, 9.050e+05</td></tr>
+<tr><td>Z Bounds</td><td>0.000e+00, 0.000e+00</td></tr>
+<tr><td>Dimensions</td><td>222, 182, 1</td></tr>
+<tr><td>Spacing</td><td>5.000e+03, 5.000e+03, 1.000e+00</td></tr>
+<tr><td>N Arrays</td><td>1</td></tr>
+</table>
+
+</td><td>
+<table>
+<tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+<tr><td><b>Data</b></td><td>Points</td><td>float64</td><td>1</td><td>-2.519e+02</td><td>1.754e+02</td></tr>
+</table>
+
+</td></tr> </table>
+</div>
+<br />
+<br /><p>Apply a filter to the DEM to have realistic topography</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">warped</span> <span class="o">=</span> <span class="n">dem</span><span class="o">.</span><span class="n">warp_by_scalar</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mf">300.0</span><span class="p">)</span>
-<span class="n">warped</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">)</span>
+<span class="n">warped</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;terrain&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_read-surfer_001.png" srcset="../../_images/sphx_glr_read-surfer_001.png" alt="read surfer" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.098 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-grids-read-surfer-py">
+<img src="../../_images/sphx_glr_read-surfer_001.png" srcset="../../_images/sphx_glr_read-surfer_001.png" alt="read surfer" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.843 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-grids-read-surfer-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/34e809189e7fc611d33eed1fd213984a/read-surfer.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-surfer.py</span></code></a></p>
 </div>
@@ -261,7 +294,7 @@ to download the full example code</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="read-esri.html" class="btn btn-neutral float-left" title="Read ESRI Grid File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../gslib/read-point-set.html" class="btn btn-neutral float-right" title="Read GSLib Point Set" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../gslib/index.html" class="btn btn-neutral float-right" title="GSLib" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

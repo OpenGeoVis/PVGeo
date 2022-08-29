@@ -23,11 +23,14 @@ Read SGeMS Grid
 
 Read SGeMS Grid file formats.
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-12
+.. GENERATED FROM PYTHON SOURCE LINES 7-15
 
 .. code-block:: default
 
     # sphinx_gallery_thumbnail_number = 2
+    import os
+
+    import pooch
     from pyvista import examples
 
     from PVGeo.gslib import SGeMSGridReader
@@ -39,15 +42,16 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-20
+.. GENERATED FROM PYTHON SOURCE LINES 16-24
 
 .. code-block:: default
 
 
     # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/a_wlreferencecat.zip'
-    filename, _ = examples.downloads._download_file('A_WLreferenceCAT.sgems')
+    url = "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/A_WLreferenceCAT.sgems"
+    file_path = pooch.retrieve(url=url, known_hash=None)
 
-    grid = SGeMSGridReader().apply(filename)
+    grid = SGeMSGridReader().apply(file_path)
     grid
 
 
@@ -82,7 +86,7 @@ Read SGeMS Grid file formats.
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-24
+.. GENERATED FROM PYTHON SOURCE LINES 25-28
 
 .. code-block:: default
 
@@ -101,15 +105,35 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-32
+.. GENERATED FROM PYTHON SOURCE LINES 29-36
 
 .. code-block:: default
 
 
     # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/maules_creek_3d.zip'
-    filename, _ = examples.downloads._download_file('Maules_Creek_3D.SGEMS.zip')
+    url = "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/Maules_Creek_3D.SGEMS.zip"
+    file_paths = pooch.retrieve(url=url, known_hash=None, processor=pooch.Unzip())
+    file_path = [f for f in file_paths if os.path.basename(f) == "Maules_Creek_3D.SGEMS"][0]
+    file_path
 
-    grid = SGeMSGridReader().apply(filename)
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    '/home/runner/.cache/pooch/db952eed0c325d1a10fc03d53f46f9a9-Maules_Creek_3D.SGEMS.zip.unzip/Maules_Creek_3D.SGEMS'
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 37-40
+
+.. code-block:: default
+
+    grid = SGeMSGridReader().apply(file_path)
     grid
 
 
@@ -144,7 +168,7 @@ Read SGeMS Grid file formats.
     <br />
     <br />
 
-.. GENERATED FROM PYTHON SOURCE LINES 33-36
+.. GENERATED FROM PYTHON SOURCE LINES 41-44
 
 .. code-block:: default
 
@@ -163,15 +187,35 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-45
+.. GENERATED FROM PYTHON SOURCE LINES 45-52
 
 .. code-block:: default
 
 
     # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti_horizons_continuous.zip'
-    filename, _ = examples.downloads._download_file('TI_horizons_continuous.SGEMS.zip')
+    url = "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/TI_horizons_continuous.SGEMS.zip"
+    file_paths = pooch.retrieve(url=url, known_hash=None, processor=pooch.Unzip())
+    file_path = [f for f in file_paths if os.path.basename(f) == "TI_horizons_continuous.SGEMS"][0]
+    file_path
 
-    grid = SGeMSGridReader().apply(filename)
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    '/home/runner/.cache/pooch/cb332143f44792c75fe40091d3efa739-TI_horizons_continuous.SGEMS.zip.unzip/TI_horizons_continuous.SGEMS'
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 53-57
+
+.. code-block:: default
+
+    grid = SGeMSGridReader().apply(file_path)
     grid.threshold([-4, 1.06]).plot(clim=grid.get_data_range())
 
 
@@ -187,16 +231,19 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-53
+.. GENERATED FROM PYTHON SOURCE LINES 58-68
 
 .. code-block:: default
 
 
     # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti.zip'
-    filename, _ = examples.downloads._download_file('ti.sgems.zip')
+    url = "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/ti.sgems.zip"
+    file_paths = pooch.retrieve(url=url, known_hash=None, processor=pooch.Unzip())
+    file_path = [f for f in file_paths if os.path.basename(f) == "ti.sgems"][0]
+    file_path
 
-    grid = SGeMSGridReader().apply(filename)
-    grid.plot(scalars='photo', cpos='xy', cmap='bone')
+    grid = SGeMSGridReader().apply(file_path)
+    grid.plot(scalars="photo", cpos="xy", cmap="bone")
 
 
 
@@ -210,11 +257,11 @@ Read SGeMS Grid file formats.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-55
+.. GENERATED FROM PYTHON SOURCE LINES 69-70
 
 .. code-block:: default
 
-    grid.plot(scalars='seismic', cpos='xy')
+    grid.plot(scalars="seismic", cpos="xy")
 
 
 
@@ -230,28 +277,23 @@ Read SGeMS Grid file formats.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  37.094 seconds)
+   **Total running time of the script:** ( 0 minutes  35.123 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-sgems-grid.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: read-sgems-grid.py <read-sgems-grid.py>`
 
-     :download:`Download Python source code: read-sgems-grid.py <read-sgems-grid.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: read-sgems-grid.ipynb <read-sgems-grid.ipynb>`
+      :download:`Download Jupyter notebook: read-sgems-grid.ipynb <read-sgems-grid.ipynb>`
 
 
 .. only:: html

@@ -88,28 +88,23 @@ Use the filter:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.496 seconds)
+   **Total running time of the script:** ( 0 minutes  0.526 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_rotate-points.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: rotate-points.py <rotate-points.py>`
 
-     :download:`Download Python source code: rotate-points.py <rotate-points.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: rotate-points.ipynb <rotate-points.ipynb>`
+      :download:`Download Jupyter notebook: rotate-points.ipynb <rotate-points.ipynb>`
 
 
 .. only:: html

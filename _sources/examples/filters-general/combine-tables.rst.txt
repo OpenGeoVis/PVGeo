@@ -57,7 +57,7 @@ Create some input tables
 
     # Populate the tables
     n = 100
-    titles = ('Array 0', 'Array 1', 'Array 2')
+    titles = ("Array 0", "Array 1", "Array 2")
     arr0 = np.random.random(n)  # Table 0
     arr1 = np.random.random(n)  # Table 0
     t0[titles[0]] = arr0
@@ -97,8 +97,8 @@ Create some input tables
     </td><td>
     <table>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 0</td><td>float64</td><td>1</td><td>3.187e-03</td><td>9.550e-01</td></tr>
-    <tr><td>Array 1</td><td>float64</td><td>1</td><td>1.520e-03</td><td>9.970e-01</td></tr>
+    <tr><td>Array 0</td><td>float64</td><td>1</td><td>1.303e-02</td><td>9.871e-01</td></tr>
+    <tr><td>Array 1</td><td>float64</td><td>1</td><td>5.669e-02</td><td>9.955e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -130,7 +130,7 @@ Create some input tables
     </td><td>
     <table>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 2</td><td>float64</td><td>1</td><td>2.503e-03</td><td>9.949e-01</td></tr>
+    <tr><td>Array 2</td><td>float64</td><td>1</td><td>7.289e-03</td><td>9.975e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -165,9 +165,9 @@ Create some input tables
     </td><td>
     <table>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 0</td><td>float64</td><td>1</td><td>3.187e-03</td><td>9.550e-01</td></tr>
-    <tr><td>Array 1</td><td>float64</td><td>1</td><td>1.520e-03</td><td>9.970e-01</td></tr>
-    <tr><td>Array 2</td><td>float64</td><td>1</td><td>2.503e-03</td><td>9.949e-01</td></tr>
+    <tr><td>Array 0</td><td>float64</td><td>1</td><td>1.303e-02</td><td>9.871e-01</td></tr>
+    <tr><td>Array 1</td><td>float64</td><td>1</td><td>5.669e-02</td><td>9.955e-01</td></tr>
+    <tr><td>Array 2</td><td>float64</td><td>1</td><td>7.289e-03</td><td>9.975e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -199,23 +199,18 @@ Create some input tables
 
 .. _sphx_glr_download_examples_filters-general_combine-tables.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: combine-tables.py <combine-tables.py>`
 
-     :download:`Download Python source code: combine-tables.py <combine-tables.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: combine-tables.ipynb <combine-tables.ipynb>`
+      :download:`Download Jupyter notebook: combine-tables.ipynb <combine-tables.ipynb>`
 
 
 .. only:: html

@@ -105,8 +105,8 @@ we will use to slice the volume.
 
     def path(y):
         """Equation: x = a(y-h)^2 + k"""
-        a = 110.0 / 160.0 ** 2
-        x = a * y ** 2 + 0.0
+        a = 110.0 / 160.0**2
+        x = a * y**2 + 0.0
         return x, y
 
 
@@ -116,7 +116,7 @@ we will use to slice the volume.
     points = pyvista.PolyData(np.c_[x, y, zo])
 
     p = pyvista.Plotter()
-    p.add_mesh(model.outline(), color='k')
+    p.add_mesh(model.outline(), color="k")
     p.add_mesh(points, point_size=10.0)
     p.show()
 
@@ -189,7 +189,7 @@ slices to what you prefer!
     p = pyvista.Plotter()
     p.add_mesh(line, line_width=10)
     p.add_mesh(slices, lighting=False)
-    p.add_mesh(model.outline(), color='k')
+    p.add_mesh(model.outline(), color="k")
     p.show()
 
 
@@ -206,28 +206,23 @@ slices to what you prefer!
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.031 seconds)
+   **Total running time of the script:** ( 0 minutes  3.036 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_many-slices-along-points.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: many-slices-along-points.py <many-slices-along-points.py>`
 
-     :download:`Download Python source code: many-slices-along-points.py <many-slices-along-points.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: many-slices-along-points.ipynb <many-slices-along-points.ipynb>`
+      :download:`Download Jupyter notebook: many-slices-along-points.ipynb <many-slices-along-points.ipynb>`
 
 
 .. only:: html

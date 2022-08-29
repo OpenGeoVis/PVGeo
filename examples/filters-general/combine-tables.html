@@ -83,24 +83,30 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#general-filters">General Filters</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="add-cell-connectivity-to-points.html">Add Cell Connectivity To Points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="append-cell-centers.html">Append Cell Centers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="array-math.html">Array Math</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Combine Tables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="extract-array.html">Extract Array to Table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="extract-points.html">Extract Points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="many-slices-along-points.html">Many Slices Along Points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="normalize-array.html">Normalize Array</a></li>
-<li class="toctree-l3"><a class="reference internal" href="points-to-tube.html">Points to Tube</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reshape-table.html">Reshape Table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rotate-points.html">Rotate Points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="voxelize-points.html">Voxelize Points</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#general-filters">General Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">General Filters</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="add-cell-connectivity-to-points.html">Add Cell Connectivity To Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="append-cell-centers.html">Append Cell Centers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="array-math.html">Array Math</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Combine Tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extract-array.html">Extract Array to Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extract-points.html">Extract Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="many-slices-along-points.html">Many Slices Along Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="normalize-array.html">Normalize Array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="points-to-tube.html">Points to Tube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reshape-table.html">Reshape Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rotate-points.html">Rotate Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize-points.html">Voxelize Points</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../grids/index.html">Grids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gslib/index.html">GSLib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ubc/index.html">UBC Data Formats</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -220,6 +226,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Quick Examples</a> &raquo;</li>
+          <li><a href="index.html">General Filters</a> &raquo;</li>
       <li>Combine Tables</li>
 
   </ul>
@@ -251,7 +258,7 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 
 <span class="c1"># Populate the tables</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">titles</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Array 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Array 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Array 2&#39;</span><span class="p">)</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Array 0&quot;</span><span class="p">,</span> <span class="s2">&quot;Array 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Array 2&quot;</span><span class="p">)</span>
 <span class="n">arr0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># Table 0</span>
 <span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># Table 0</span>
 <span class="n">t0</span><span class="p">[</span><span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">arr0</span>
@@ -275,8 +282,8 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 </td><td>
 <table>
 <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td>Array 0</td><td>float64</td><td>1</td><td>3.187e-03</td><td>9.550e-01</td></tr>
-<tr><td>Array 1</td><td>float64</td><td>1</td><td>1.520e-03</td><td>9.970e-01</td></tr>
+<tr><td>Array 0</td><td>float64</td><td>1</td><td>1.303e-02</td><td>9.871e-01</td></tr>
+<tr><td>Array 1</td><td>float64</td><td>1</td><td>5.669e-02</td><td>9.955e-01</td></tr>
 </table>
 
 </td></tr> </table>
@@ -296,7 +303,7 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 </td><td>
 <table>
 <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td>Array 2</td><td>float64</td><td>1</td><td>2.503e-03</td><td>9.949e-01</td></tr>
+<tr><td>Array 2</td><td>float64</td><td>1</td><td>7.289e-03</td><td>9.975e-01</td></tr>
 </table>
 
 </td></tr> </table>
@@ -318,9 +325,9 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 </td><td>
 <table>
 <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td>Array 0</td><td>float64</td><td>1</td><td>3.187e-03</td><td>9.550e-01</td></tr>
-<tr><td>Array 1</td><td>float64</td><td>1</td><td>1.520e-03</td><td>9.970e-01</td></tr>
-<tr><td>Array 2</td><td>float64</td><td>1</td><td>2.503e-03</td><td>9.949e-01</td></tr>
+<tr><td>Array 0</td><td>float64</td><td>1</td><td>1.303e-02</td><td>9.871e-01</td></tr>
+<tr><td>Array 1</td><td>float64</td><td>1</td><td>5.669e-02</td><td>9.955e-01</td></tr>
+<tr><td>Array 2</td><td>float64</td><td>1</td><td>7.289e-03</td><td>9.975e-01</td></tr>
 </table>
 
 </td></tr> </table>
@@ -333,7 +340,7 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.005 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-combine-tables-py">
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-combine-tables-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/d8aedf50f5c866213616a71ca0c34c13/combine-tables.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">combine-tables.py</span></code></a></p>
 </div>

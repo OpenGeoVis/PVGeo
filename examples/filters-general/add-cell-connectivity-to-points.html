@@ -31,7 +31,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Append Cell Centers" href="append-cell-centers.html" />
-    <link rel="prev" title="Quick Examples" href="../index.html" />
+    <link rel="prev" title="General Filters" href="index.html" />
  
 
 <meta name="description" content="Python package of VTK-based algorithms to analyze geoscientific data and models">
@@ -83,27 +83,30 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../about-examples.html">About Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#general-filters">General Filters</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Add Cell Connectivity To Points</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#apply-the-filter">Apply the Filter</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="append-cell-centers.html">Append Cell Centers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="array-math.html">Array Math</a></li>
-<li class="toctree-l3"><a class="reference internal" href="combine-tables.html">Combine Tables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="extract-array.html">Extract Array to Table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="extract-points.html">Extract Points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="many-slices-along-points.html">Many Slices Along Points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="normalize-array.html">Normalize Array</a></li>
-<li class="toctree-l3"><a class="reference internal" href="points-to-tube.html">Points to Tube</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reshape-table.html">Reshape Table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rotate-points.html">Rotate Points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="voxelize-points.html">Voxelize Points</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#general-filters">General Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">General Filters</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Add Cell Connectivity To Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="append-cell-centers.html">Append Cell Centers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="array-math.html">Array Math</a></li>
+<li class="toctree-l4"><a class="reference internal" href="combine-tables.html">Combine Tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extract-array.html">Extract Array to Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extract-points.html">Extract Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="many-slices-along-points.html">Many Slices Along Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="normalize-array.html">Normalize Array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="points-to-tube.html">Points to Tube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reshape-table.html">Reshape Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rotate-points.html">Rotate Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize-points.html">Voxelize Points</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../grids/index.html">Grids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gslib/index.html">GSLib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ubc/index.html">UBC Data Formats</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -223,6 +226,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Quick Examples</a> &raquo;</li>
+          <li><a href="index.html">General Filters</a> &raquo;</li>
       <li>Add Cell Connectivity To Points</li>
 
   </ul>
@@ -256,8 +260,8 @@ spline (either in the order by index or using a nearest neighbor calculation).</
 <p>First, lets generate some points which we’d like to connect</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">path1</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Equation: x = a(y-h)^2 + k&quot;&quot;&quot;</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">110.0</span> <span class="o">/</span> <span class="mf">160.0</span> <span class="o">**</span> <span class="mi">2</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">110.0</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">110.0</span> <span class="o">/</span> <span class="mf">160.0</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">110.0</span>
     <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="n">idxs</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">idxs</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span>
 
@@ -300,8 +304,8 @@ Now it looks good (see image below)!</p>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_add-cell-connectivity-to-points_002.png" srcset="../../_images/sphx_glr_add-cell-connectivity-to-points_002.png" alt="add cell connectivity to points" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.420 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-add-cell-connectivity-to-points-py">
+<img src="../../_images/sphx_glr_add-cell-connectivity-to-points_002.png" srcset="../../_images/sphx_glr_add-cell-connectivity-to-points_002.png" alt="add cell connectivity to points" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.764 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-add-cell-connectivity-to-points-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/af91ab2ce8bae9f49e94e6077397ef9f/add-cell-connectivity-to-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">add-cell-connectivity-to-points.py</span></code></a></p>
 </div>
@@ -317,7 +321,7 @@ Now it looks good (see image below)!</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="Quick Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="General Filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="append-cell-centers.html" class="btn btn-neutral float-right" title="Append Cell Centers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

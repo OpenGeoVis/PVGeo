@@ -37,13 +37,14 @@ to create model discretizations within ParaView for export to external
 processing software that need the entire model discretization with an active
 cells field.
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-31
+.. GENERATED FROM PYTHON SOURCE LINES 22-32
 
 .. code-block:: default
 
+    # sphinx_gallery_thumbnail_number = 6
     import os
 
-    # sphinx_gallery_thumbnail_number = 6
+    import pooch
     import pyvista
     from pyvista import examples
 
@@ -57,7 +58,7 @@ cells field.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 32-39
+.. GENERATED FROM PYTHON SOURCE LINES 33-40
 
 For the grid data set, let's use one of the Model Building sources
 with the following parameters:
@@ -67,16 +68,16 @@ with the following parameters:
 - Y Cells: ``'1000 500 55*250 500 1000'``
 - Z Cells: ``'30*100.0 5*250.0 500'``
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-49
+.. GENERATED FROM PYTHON SOURCE LINES 40-50
 
 .. code-block:: default
 
 
     mesh = CreateTensorMesh(
         origin=[793000, 9192500, 2690],
-        xcellstr='1000 500 50*250 500 1000',
-        ycellstr='1000 500 55*250 500 1000',
-        zcellstr='30*100.0 5*250.0 500',
+        xcellstr="1000 500 50*250 500 1000",
+        ycellstr="1000 500 55*250 500 1000",
+        zcellstr="30*100.0 5*250.0 500",
     ).apply()
 
     mesh.plot(show_grid=True, color=True, show_edges=True)
@@ -93,20 +94,59 @@ with the following parameters:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-51
+.. GENERATED FROM PYTHON SOURCE LINES 51-52
 
 Now load the topography file from the example data:
 
-.. GENERATED FROM PYTHON SOURCE LINES 51-61
+.. GENERATED FROM PYTHON SOURCE LINES 52-59
 
 .. code-block:: default
 
-    link = 'https://dl.dropbox.com/s/gw5v3tiq68oge3l/Example-Extract-Topo.zip?dl=0'
-    examples.downloads._retrieve_file(link, 'Example-Extract-Topo.zip')
-    topo = pyvista.read(os.path.join(pyvista.EXAMPLES_PATH, 'topo.vtk'))
+    url = "https://dl.dropbox.com/s/gw5v3tiq68oge3l/Example-Extract-Topo.zip?dl=0"
+    file_paths = pooch.retrieve(url=url, known_hash=None, processor=pooch.Unzip())
+    file_path = [f for f in file_paths if os.path.basename(f) == "topo.vtk"][0]
+
+    topo = pyvista.read(file_path)
+    topo
+
+
+
+
+
+
+.. raw:: html
+
+    <div class="output_subarea output_html rendered_html output_result">
+    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table>
+    <tr><th>PolyData</th><th>Information</th></tr>
+    <tr><td>N Cells</td><td>39764</td></tr>
+    <tr><td>N Points</td><td>20164</td></tr>
+    <tr><td>X Bounds</td><td>7.937e+05, 8.078e+05</td></tr>
+    <tr><td>Y Bounds</td><td>9.194e+06, 9.208e+06</td></tr>
+    <tr><td>Z Bounds</td><td>1.182e+03, 2.690e+03</td></tr>
+    <tr><td>N Arrays</td><td>3</td></tr>
+    </table>
+
+    </td><td>
+    <table>
+    <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+    <tr><td><b>elevation</b></td><td>Points</td><td>float64</td><td>1</td><td>1.182e+03</td><td>2.690e+03</td></tr>
+    <tr><td>column integer</td><td>Points</td><td>float32</td><td>1</td><td>1.000e+00</td><td>1.420e+02</td></tr>
+    <tr><td>row integer</td><td>Points</td><td>float32</td><td>1</td><td>1.000e+00</td><td>1.420e+02</td></tr>
+    </table>
+
+    </td></tr> </table>
+    </div>
+    <br />
+    <br />
+
+.. GENERATED FROM PYTHON SOURCE LINES 60-66
+
+.. code-block:: default
 
     p = pyvista.Plotter()
-    p.add_mesh(topo, cmap='terrain')
+    p.add_mesh(topo, cmap="terrain")
     p.add_mesh(mesh, color=True, show_edges=False, opacity=0.75)
     p.show_grid()
     p.show()
@@ -123,18 +163,18 @@ Now load the topography file from the example data:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 62-65
+.. GENERATED FROM PYTHON SOURCE LINES 67-70
 
 Now that you have the topography and a grid data set,
 let's go ahead and use the **Extract Topography** filter. Be sure to properly
 select the inputs to the algorithm.
 
-.. GENERATED FROM PYTHON SOURCE LINES 65-68
+.. GENERATED FROM PYTHON SOURCE LINES 70-73
 
 .. code-block:: default
 
     extracted = ExtractTopography().apply(mesh, topo)
-    extracted.plot(scalars='Extracted')
+    extracted.plot(scalars="Extracted")
 
 
 
@@ -148,7 +188,7 @@ select the inputs to the algorithm.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 69-77
+.. GENERATED FROM PYTHON SOURCE LINES 74-82
 
 op='underneath', tolerance=0.001, offset=0.0, invert=False, remove=False
 This will show the cells that are active underneath the topography surface
@@ -159,11 +199,11 @@ applying a *Threshold* filter to chop out all values below 1.
 The resulting grid with cells above the topography extracted will look like the
 rendering below:
 
-.. GENERATED FROM PYTHON SOURCE LINES 77-80
+.. GENERATED FROM PYTHON SOURCE LINES 82-85
 
 .. code-block:: default
 
-    threshed = extracted.threshold(0.5, scalars='Extracted')
+    threshed = extracted.threshold(0.5, scalars="Extracted")
     threshed.plot(color=True, show_edges=True)
 
 
@@ -178,17 +218,17 @@ rendering below:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-82
+.. GENERATED FROM PYTHON SOURCE LINES 86-87
 
 How well did this remove cells above the topography surface?
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-89
+.. GENERATED FROM PYTHON SOURCE LINES 87-94
 
 .. code-block:: default
 
 
     p = pyvista.Plotter()
-    p.add_mesh(topo, cmap='terrain')
+    p.add_mesh(topo, cmap="terrain")
     p.add_mesh(threshed, color=True, show_edges=True)
     p.show_grid()
     p.show()
@@ -205,19 +245,19 @@ How well did this remove cells above the topography surface?
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 90-92
+.. GENERATED FROM PYTHON SOURCE LINES 95-97
 
 Is that extraction too close to the topography surface? To better extract the
 topographic surface, you can set a tolerance:
 
-.. GENERATED FROM PYTHON SOURCE LINES 92-100
+.. GENERATED FROM PYTHON SOURCE LINES 97-105
 
 .. code-block:: default
 
     extracted = ExtractTopography(tolerance=100.0, remove=True).apply(mesh, topo)
 
     p = pyvista.Plotter()
-    p.add_mesh(topo, cmap='terrain')
+    p.add_mesh(topo, cmap="terrain")
     p.add_mesh(extracted, color=True, show_edges=True)
     p.show_grid()
     p.show()
@@ -234,17 +274,15 @@ topographic surface, you can set a tolerance:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-102
+.. GENERATED FROM PYTHON SOURCE LINES 106-107
 
 Note that there are other extraction operations like an ``'intersection'``:
 
-.. GENERATED FROM PYTHON SOURCE LINES 102-106
+.. GENERATED FROM PYTHON SOURCE LINES 107-109
 
 .. code-block:: default
 
-    extracted = ExtractTopography(op='intersection', remove=True, tolerance=100.0).apply(
-        mesh, topo
-    )
+    extracted = ExtractTopography(op="intersection", remove=True, tolerance=100.0).apply(mesh, topo)
     extracted.plot(color=True, show_edges=True)
 
 
@@ -261,28 +299,23 @@ Note that there are other extraction operations like an ``'intersection'``:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  7.177 seconds)
+   **Total running time of the script:** ( 0 minutes  6.971 seconds)
 
 
 .. _sphx_glr_download_examples_grids_extract-topography.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: extract-topography.py <extract-topography.py>`
 
-     :download:`Download Python source code: extract-topography.py <extract-topography.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: extract-topography.ipynb <extract-topography.ipynb>`
+      :download:`Download Jupyter notebook: extract-topography.ipynb <extract-topography.ipynb>`
 
 
 .. only:: html

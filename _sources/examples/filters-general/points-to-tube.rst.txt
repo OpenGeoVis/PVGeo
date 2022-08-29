@@ -53,8 +53,8 @@ then builds a polygonal tube around that line with some specified radius and num
 
     def path(y):
         """Equation: x = a(y-h)^2 + k"""
-        a = -110.0 / 160.0 ** 2
-        x = a * y ** 2 + 110.0
+        a = -110.0 / 160.0**2
+        x = a * y**2 + 110.0
         return x, y
 
 
@@ -99,28 +99,23 @@ then builds a polygonal tube around that line with some specified radius and num
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.561 seconds)
+   **Total running time of the script:** ( 0 minutes  0.585 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_points-to-tube.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: points-to-tube.py <points-to-tube.py>`
 
-     :download:`Download Python source code: points-to-tube.py <points-to-tube.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: points-to-tube.ipynb <points-to-tube.ipynb>`
+      :download:`Download Jupyter notebook: points-to-tube.ipynb <points-to-tube.ipynb>`
 
 
 .. only:: html

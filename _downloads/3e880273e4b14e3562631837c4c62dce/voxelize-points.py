@@ -9,9 +9,9 @@ volumetric operations.
 
 This example demos :class:`PVGeo.filters.VoxelizePoints`
 """
-import pandas as pd
-
 # sphinx_gallery_thumbnail_number = 2
+import pandas as pd
+import pooch
 import pyvista
 from pyvista import examples
 
@@ -19,8 +19,8 @@ import PVGeo
 
 ###############################################################################
 # Download sample data files and keep track of names:
-url = 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv'
-fault_file, _ = examples.downloads._retrieve_file(url, 'fault_points.csv')
+url = "https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv"
+file_path = pooch.retrieve(url=url, known_hash=None)
 
 ###############################################################################
 # Let's go ahead and load a simple file that has XYZ coordinates and a boolean
@@ -31,7 +31,7 @@ fault_file, _ = examples.downloads._retrieve_file(url, 'fault_points.csv')
 # We will read in this data with ``pandas`` and send it to the
 # :func:`PVGeo.points_to_poly_data` helper to create a :class:`pyvista.PolyData`
 # object (essentially a point cloud).
-points = pd.read_csv(fault_file)
+points = pd.read_csv(file_path)
 print(points[0:2])
 
 ###############################################################################
@@ -68,14 +68,14 @@ vtkpoints.plot(clim=[0, 1], point_size=1)
 # rotated XY-plane with regular cell spacings and does the rest on its own!
 # Check out VoxelizePoints code docs for more details.
 # The full pipeline method
-print('Voxelizing... ', end='')
+print("Voxelizing... ", end="")
 voxelizer = PVGeo.filters.VoxelizePoints()
 grid = voxelizer.apply(vtkpoints)
-print('done.')
+print("done.")
 
 # Output the results
-print('Recovered Angle (deg.): %.3f' % voxelizer.get_angle())
-print('Recovered Cell Sizes: (%.2f, %.2f, %.2f)' % voxelizer.get_spacing())
+print("Recovered Angle (deg.): %.3f" % voxelizer.get_angle())
+print("Recovered Cell Sizes: (%.2f, %.2f, %.2f)" % voxelizer.get_spacing())
 grid
 
 ###############################################################################
@@ -95,7 +95,7 @@ slices
 
 ###############################################################################
 # And let's use a ``clip`` filter:
-clip = grid.clip(normal='x').clip(normal='-y').threshold(0.5)
+clip = grid.clip(normal="x").clip(normal="-y").threshold(0.5)
 
 ###############################################################################
 # Now display the slices and clipped volume

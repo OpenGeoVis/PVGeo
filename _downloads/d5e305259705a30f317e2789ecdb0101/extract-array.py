@@ -21,8 +21,8 @@ dataset = examples.download_st_helens()
 filt = ExtractArray()
 # Define the array to extract
 # Apply the filter on the input
-table = filt.apply(dataset, 'Elevation')
+table = filt.apply(dataset, "Elevation")
 table
 
 ###############################################################################
-plt.hist(table['Elevation'])
+plt.hist(table["Elevation"])

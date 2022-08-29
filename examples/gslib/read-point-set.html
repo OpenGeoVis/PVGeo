@@ -31,7 +31,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Read SGeMS Grid" href="read-sgems-grid.html" />
-    <link rel="prev" title="Read Surfer Grid File" href="../grids/read-surfer.html" />
+    <link rel="prev" title="GSLib" href="index.html" />
  
 
 <meta name="description" content="Python package of VTK-based algorithms to analyze geoscientific data and models">
@@ -85,13 +85,19 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index.html#general-filters">General Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#grids">Grids</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#gslib">GSLib</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Read GSLib Point Set</a></li>
-<li class="toctree-l3"><a class="reference internal" href="read-sgems-grid.html">Read SGeMS Grid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="read-table.html">Read GSLib Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gslib">GSLib</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../filters-general/index.html">General Filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../grids/index.html">Grids</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">GSLib</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Read GSLib Point Set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="read-sgems-grid.html">Read SGeMS Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="read-table.html">Read GSLib Table</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../index.html#ubc-data-formats">UBC Data Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ubc/index.html">UBC Data Formats</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -211,6 +217,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Quick Examples</a> &raquo;</li>
+          <li><a href="index.html">GSLib</a> &raquo;</li>
       <li>Read GSLib Point Set</li>
 
   </ul>
@@ -228,15 +235,17 @@ to download the full example code</p>
 <span id="sphx-glr-examples-gslib-read-point-set-py"></span><h1>Read GSLib Point Set<a class="headerlink" href="#read-gslib-point-set" title="Permalink to this heading"></a></h1>
 <p>Read GSLib point set file</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 1</span>
+<span class="kn">import</span> <span class="nn">pooch</span>
 <span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
 
 <span class="kn">from</span> <span class="nn">PVGeo.gslib</span> <span class="kn">import</span> <span class="n">GSLibPointSetReader</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># points_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/b_100sampledatawl.sgems&#39;</span>
-<span class="n">filename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">downloads</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span><span class="s1">&#39;b_100sampledatawl.sgems&#39;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/b_100sampledatawl.sgems&quot;</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-<span class="n">point_set</span> <span class="o">=</span> <span class="n">GSLibPointSetReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">point_set</span> <span class="o">=</span> <span class="n">GSLibPointSetReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 <span class="n">point_set</span>
 </pre></div>
 </div>
@@ -264,8 +273,8 @@ to download the full example code</p>
 <br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">point_set</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_read-point-set_001.png" srcset="../../_images/sphx_glr_read-point-set_001.png" alt="read point set" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.593 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gslib-read-point-set-py">
+<img src="../../_images/sphx_glr_read-point-set_001.png" srcset="../../_images/sphx_glr_read-point-set_001.png" alt="read point set" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.367 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gslib-read-point-set-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/72449efec2368b5a0221d3a668dba2df/read-point-set.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-point-set.py</span></code></a></p>
 </div>
@@ -280,7 +289,7 @@ to download the full example code</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../grids/read-surfer.html" class="btn btn-neutral float-left" title="Read Surfer Grid File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="GSLib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="read-sgems-grid.html" class="btn btn-neutral float-right" title="Read SGeMS Grid" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
