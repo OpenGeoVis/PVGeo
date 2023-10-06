@@ -27,7 +27,7 @@ __displayname__ = 'Interface'
 import numpy as np
 import pandas as pd
 import pyvista as pv
-from pyvista.utilities import convert_string_array, get_vtk_type
+from pyvista.core.utilities import convert_string_array, get_vtk_type
 import vtk
 from vtk.util import numpy_support as nps
 

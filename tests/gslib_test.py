@@ -210,7 +210,7 @@ class TestSGeMSGridReader(TestBase):
             self.assertTrue(np.allclose(wtbl.CellData[i], wrd.CellData[i]))
 
     def test_sgems_grid_writer_no_data(self):
-        grid = pyvista.UniformGrid((10, 10, 10), (2, 2, 2))
+        grid = pyvista.ImageData((10, 10, 10), (2, 2, 2))
         writer = WriteImageDataToSGeMS()
         filename = os.path.join(self.test_dir, 'test-writer-no-data.dat')
         writer.SetFileName(filename)
