@@ -120,7 +120,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../ubc/index.html">UBC Mesh Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
@@ -256,10 +255,10 @@ selection for the operations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>multiplier</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – a static shifter/scale factor across the array
+<li><p><strong>multiplier</strong> (<em>float</em>) – a static shifter/scale factor across the array
 after normalization.</p></li>
-<li><p><strong>new_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The new array’s string name</p></li>
-<li><p><strong>operation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, or </em><em>callable</em>) – The operation as a string key, int
+<li><p><strong>new_name</strong> (<em>str</em>) – The new array’s string name</p></li>
+<li><p><strong>operation</strong> (<em>str</em><em>, </em><em>int</em><em>, or </em><em>callable</em>) – The operation as a string key, int
 index, or callable method</p></li>
 </ul>
 </dd>
@@ -285,12 +284,12 @@ index, or callable method</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the index of the array to process</p></li>
-<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – input port (use 0 if unsure)</p></li>
-<li><p><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the connection on the port (use 0 if unsure)</p></li>
-<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the array field (0 for points, 1 for cells, 2 for
+<li><p><strong>idx</strong> (<em>int</em>) – the index of the array to process</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – input port (use 0 if unsure)</p></li>
+<li><p><strong>connection</strong> (<em>int</em>) – the connection on the port (use 0 if unsure)</p></li>
+<li><p><strong>field</strong> (<em>int</em>) – the array field (0 for points, 1 for cells, 2 for
 field, and 6 for row)</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the name of the array</p></li>
+<li><p><strong>name</strong> (<em>int</em>) – the name of the array</p></li>
 </ul>
 </dd>
 </dl>
@@ -387,7 +386,7 @@ Use helpers to get these properties.</p>
 <dd class="field-odd"><p>the keys for getting the math operations</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>)</p>
+<dd class="field-even"><p>list(str)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -419,8 +418,9 @@ normalization.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>op</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, or </em><em>callable</em>) – The operation as a string key, int</p></li>
-<li><p><strong>method</strong> (<em>index</em><em>, or </em><em>callable</em>) – </p></li>
+<li><p><strong>op</strong> (<em>str</em><em>, </em><em>int</em><em>, or </em><em>callable</em>) – The operation as a string key, int</p></li>
+<li><p><strong>index</strong> – </p></li>
+<li><p><strong>method</strong> (<em>or callable</em>) – </p></li>
 </ul>
 </dd>
 </dl>
@@ -455,12 +455,12 @@ transparencies.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the index of the array to process</p></li>
-<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – input port (use 0 if unsure)</p></li>
-<li><p><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the connection on the port (use 0 if unsure)</p></li>
-<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the array field (0 for points, 1 for cells, 2 for
+<li><p><strong>idx</strong> (<em>int</em>) – the index of the array to process</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – input port (use 0 if unsure)</p></li>
+<li><p><strong>connection</strong> (<em>int</em>) – the connection on the port (use 0 if unsure)</p></li>
+<li><p><strong>field</strong> (<em>int</em>) – the array field (0 for points, 1 for cells, 2 for
 field, and 6 for row)</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the name of the array</p></li>
+<li><p><strong>name</strong> (<em>int</em>) – the name of the array</p></li>
 </ul>
 </dd>
 </dl>
@@ -537,11 +537,11 @@ normalizations (more functionality added as requested).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>multiplier</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – a static shifter/scale factor across the array
+<li><p><strong>multiplier</strong> (<em>float</em>) – a static shifter/scale factor across the array
 after normalization.</p></li>
-<li><p><strong>new_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The new array’s string name</p></li>
-<li><p><strong>absolute</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – </p></li>
-<li><p><strong>normalization</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, or </em><em>callable</em>) – The operation as a string key,
+<li><p><strong>new_name</strong> (<em>str</em>) – The new array’s string name</p></li>
+<li><p><strong>absolute</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>normalization</strong> (<em>str</em><em>, </em><em>int</em><em>, or </em><em>callable</em>) – The operation as a string key,
 integer index, or callable method</p></li>
 </ul>
 </dd>
@@ -567,12 +567,12 @@ integer index, or callable method</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the index of the array to process</p></li>
-<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – input port (use 0 if unsure)</p></li>
-<li><p><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the connection on the port (use 0 if unsure)</p></li>
-<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the array field (0 for points, 1 for cells, 2 for
+<li><p><strong>idx</strong> (<em>int</em>) – the index of the array to process</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – input port (use 0 if unsure)</p></li>
+<li><p><strong>connection</strong> (<em>int</em>) – the connection on the port (use 0 if unsure)</p></li>
+<li><p><strong>field</strong> (<em>int</em>) – the array field (0 for points, 1 for cells, 2 for
 field, and 6 for row)</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the name of the array</p></li>
+<li><p><strong>name</strong> (<em>int</em>) – the name of the array</p></li>
 </ul>
 </dd>
 </dl>
@@ -662,7 +662,7 @@ field, and 6 for row)</p></li>
 <dd class="field-odd"><p>the keys for getting the normalizations</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>)</p>
+<dd class="field-even"><p>list(str)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -676,7 +676,7 @@ field, and 6 for row)</p></li>
 <dd class="field-odd"><p>dictionary of callable methods for normalizing an array</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -700,7 +700,7 @@ normalization.</p>
 <dd><p>Set the normalization operation to perform</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>norm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, or </em><em>callable</em>) – The operation as a string key, int
+<dd class="field-odd"><p><strong>norm</strong> (<em>str</em><em>, </em><em>int</em><em>, or </em><em>callable</em>) – The operation as a string key, int
 index, or callable method</p>
 </dd>
 </dl>
@@ -748,12 +748,12 @@ bottom percent. This can be reversed using the invert property.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the index of the array to process</p></li>
-<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – input port (use 0 if unsure)</p></li>
-<li><p><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the connection on the port (use 0 if unsure)</p></li>
-<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the array field (0 for points, 1 for cells, 2 for
+<li><p><strong>idx</strong> (<em>int</em>) – the index of the array to process</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – input port (use 0 if unsure)</p></li>
+<li><p><strong>connection</strong> (<em>int</em>) – the connection on the port (use 0 if unsure)</p></li>
+<li><p><strong>field</strong> (<em>int</em>) – the array field (0 for points, 1 for cells, 2 for
 field, and 6 for row)</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the name of the array</p></li>
+<li><p><strong>name</strong> (<em>int</em>) – the name of the array</p></li>
 </ul>
 </dd>
 </dl>

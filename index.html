@@ -92,7 +92,6 @@
 <p class="caption" role="heading"><span class="caption-text">API Index:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="content/PVGeo/index.html">About PVGeo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
@@ -214,26 +213,21 @@
              
   <section id="welcome-to-pvgeo-s-code-docs">
 <h1>Welcome to PVGeo’s code docs!<a class="headerlink" href="#welcome-to-pvgeo-s-code-docs" title="Permalink to this heading"></a></h1>
-<a class="reference external image-reference" href="https://doi.org/10.21105/joss.01451"><img alt="http://joss.theoj.org/papers/10.21105/joss.01451/status.svg" src="http://joss.theoj.org/papers/10.21105/joss.01451/status.svg" /></a>
+<a class="reference external image-reference" href="https://doi.org/10.21105/joss.01451"><img alt="JOSS Paper" src="http://joss.theoj.org/papers/10.21105/joss.01451/status.svg" /></a>
 <a class="reference external image-reference" href="https://vimeo.com/user82050125)"><img alt="Vimeo" src="https://img.shields.io/badge/demos-grey.svg?logo=vimeo" /></a>
 <a class="reference external image-reference" href="https://pypi.org/project/PVGeo/"><img alt="PyPI" src="https://img.shields.io/pypi/v/PVGeo.svg?logo=python&amp;logoColor=white" /></a>
-<a class="reference external image-reference" href="https://www.codacy.com/app/banesullivan/PVGeo?utm_source=github.com&amp;amp;utm_medium=referral&amp;amp;utm_content=OpenGeoVis/PVGeo&amp;amp;utm_campaign=Badge_Grade"><img alt="Codacy Badge" src="https://api.codacy.com/project/badge/Grade/4b9e8d0ef37a4f70a2d02c0d53ed096f" /></a>
-<a class="reference external image-reference" href="http://slack.pvgeo.org"><img alt="Slack" src="https://img.shields.io/badge/Slack-PVGeo-4B0082.svg?logo=slack" /></a>
+<a class="reference external image-reference" href="http://slack.pyvista.org"><img alt="PyVista Slack" src="https://img.shields.io/badge/Slack-PyVista-4B0082.svg?logo=slack" /></a>
 <a class="reference external image-reference" href="https://github.com/OpenGeoVis/PVGeo/actions/workflows/test.yml"><img alt="Testing Status" src="https://github.com/OpenGeoVis/PVGeo/actions/workflows/test.yml/badge.svg" /></a>
 <a class="reference external image-reference" href="https://codecov.io/gh/OpenGeoVis/PVGeo/branch/main"><img alt="Code Coverage" src="https://codecov.io/gh/OpenGeoVis/PVGeo/branch/main/graph/badge.svg" /></a>
 <a class="reference external image-reference" href="https://GitHub.com/OpenGeoVis/PVGeo/graphs/contributors/"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/OpenGeoVis/PVGeo.svg?logo=github&amp;logoColor=white" /></a>
-<a class="reference external image-reference" href="https://gendocs.readthedocs.io/en/latest/?badge=latest)"><img alt="Documentation Built by gendocs" src="https://img.shields.io/badge/docs%20by-gendocs-blue.svg" /></a>
 <p>The <code class="docutils literal notranslate"><span class="pre">PVGeo</span></code> Python package contains VTK powered tools for data visualization
-in geophysics which are wrapped for direct use within the application
-<a class="reference external" href="https://www.paraview.org">ParaView by Kitware</a> or directly in a Python &gt;=3.6 environment when paired
-with the <a class="reference external" href="http://docs.pyvista.org">PyVista Python package</a>.
+in geophysics which are wrapped for direct use with the <a class="reference external" href="http://docs.pyvista.org">PyVista Python package</a>.
 These tools are tailored to data visualization in the geosciences with a heavy
 focus on structured data sets like 2D or 3D time-varying grids.</p>
 <p>This website hosts the documentation for the <code class="docutils literal notranslate"><span class="pre">PVGeo</span></code> Python package found
 on <a class="reference external" href="https://github.com/OpenGeoVis/PVGeo">GitHub</a> and <a class="reference external" href="https://pypi.org/project/PVGeo/">PyPI</a>.</p>
-<p>For a quick overview of how <code class="docutils literal notranslate"><span class="pre">PVGeo</span></code> can be used in a Python environment or
-directly within ParaView, please checkout the code snippets and videos on the
-<a class="reference internal" href="about-examples.html#about-examples-page"><span class="std std-ref">About Examples</span></a>.</p>
+<p>For a quick overview of how <code class="docutils literal notranslate"><span class="pre">PVGeo</span></code> can be used, please checkout the code snippets
+and videos on the <a class="reference internal" href="about-examples.html#about-examples-page"><span class="std std-ref">About Examples</span></a>.</p>
 <section id="connections">
 <h2>Connections<a class="headerlink" href="#connections" title="Permalink to this heading"></a></h2>
 <p>This package provides many VTK-like algorithms designed for geoscientific data
@@ -298,9 +292,7 @@ pip:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>PVGeo
 </pre></div>
 </div>
-<p>Now <code class="docutils literal notranslate"><span class="pre">PVGeo</span></code> is ready for use in your standard python environment. To use the
-<em>PVGeo</em> library as plugins in <a class="reference external" href="https://paraview.org">ParaView</a>, please see the
-<a class="reference external" href="http://pvgeo.org/overview/getting-started/">detailed explanation here</a>.</p>
+<p>Now <code class="docutils literal notranslate"><span class="pre">PVGeo</span></code> is ready for use in your standard python environment.</p>
 </section>
 <section id="current-statistics">
 <h2>Current Statistics<a class="headerlink" href="#current-statistics" title="Permalink to this heading"></a></h2>
@@ -308,7 +300,6 @@ pip:</p>
 <thead>
 <tr class="row-odd"><th class="head"><p>base</p></th>
 <th class="head"><p>filter</p></th>
-<th class="head"><p>macro</p></th>
 <th class="head"><p>reader</p></th>
 <th class="head"><p>source</p></th>
 <th class="head"><p>writer</p></th>
@@ -317,7 +308,6 @@ pip:</p>
 <tbody>
 <tr class="row-even"><td><p>12</p></td>
 <td><p>33</p></td>
-<td><p>8</p></td>
 <td><p>17</p></td>
 <td><p>5</p></td>
 <td><p>6</p></td>

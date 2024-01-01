@@ -125,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../ubc/index.html">UBC Mesh Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
@@ -259,7 +258,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pdo</strong> (<em>vtkDataObject</em>) – the output data object</p></li>
-<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the field type id or name</p></li>
+<li><p><strong>field</strong> (<em>int</em><em> or </em><em>str</em>) – the field type id or name</p></li>
 <li><p><strong>vtkArray</strong> (<em>vtkDataArray</em>) – the data array to add to the output</p></li>
 </ul>
 </dd>
@@ -284,7 +283,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pdi</strong> (<em>vtkDataObject</em>) – The input data object to copy from</p></li>
 <li><p><strong>pdo</strong> (<em>vtkDataObject</em>) – The output data object to copy over to</p></li>
-<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the field type id or name</p></li>
+<li><p><strong>field</strong> (<em>int</em><em> or </em><em>str</em>) – the field type id or name</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -316,8 +315,8 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>wpdi</strong> (<em>wrapped vtkDataObject</em>) – the input data object wrapped using
 vtk dataset adapter</p></li>
-<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the field type id or name</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the name of the input array for the given index</p></li>
+<li><p><strong>field</strong> (<em>int</em><em> or </em><em>str</em>) – the field type id or name</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – the name of the input array for the given index</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -342,7 +341,7 @@ vtk dataset adapter</p></li>
 <li><p><strong>algorithm</strong> (<em>vtkAlgorithm</em>) – A vtkAlgorithm class instantiation</p></li>
 <li><p><strong>wpdi</strong> (<em>wrapped vtkDataObject</em>) – the input data object wrapped using vtk
 dataset adapter</p></li>
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the input array index</p></li>
+<li><p><strong>idx</strong> (<em>int</em>) – the input array index</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -365,14 +364,14 @@ dataset adapter</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>algorithm</strong> (<em>vtkAlgorithm</em>) – A vtkAlgorithm class instantiation</p></li>
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the input array index</p></li>
+<li><p><strong>idx</strong> (<em>int</em>) – the input array index</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the field type of the input array for the given index</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a></p>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -388,14 +387,14 @@ dataset adapter</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>algorithm</strong> (<em>vtkAlgorithm</em>) – A vtkAlgorithm class instantiation</p></li>
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the input array index</p></li>
+<li><p><strong>idx</strong> (<em>int</em>) – the input array index</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the name of the input array for the given index</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -411,8 +410,8 @@ dataset adapter</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pdi</strong> (<em>vtkDataObject</em>) – the input data object</p></li>
-<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the field type id or name</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the name of the input array for the given index</p></li>
+<li><p><strong>field</strong> (<em>int</em><em> or </em><em>str</em>) – the field type id or name</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – the name of the input array for the given index</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

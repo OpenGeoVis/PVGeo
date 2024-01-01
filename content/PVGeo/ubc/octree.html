@@ -119,7 +119,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
@@ -298,7 +297,7 @@ values for all cells in a mesh. A model file is meaningless without an
 associated mesh file. This only handles OcTree formats</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename_mesh</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The OcTree Mesh filename as an absolute path
+<dd class="field-odd"><p><strong>filename_mesh</strong> (<em>str</em>) – The OcTree Mesh filename as an absolute path
 for the input mesh file in UBC OcTree Mesh Format</p>
 </dd>
 </dl>
@@ -348,7 +347,7 @@ to associate model data with the mesh grid.</p>
 mesh to place the model data upon. Needs to have been read in by ubcOcTree</p></li>
 <li><p><strong>model</strong> (<em>np.ndarray</em>) – A NumPy float array that holds all of the data
 to place inside of the mesh’s cells.</p></li>
-<li><p><strong>data_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The name of the model data array once placed on the
+<li><p><strong>data_name</strong> (<em>str</em>) – The name of the model data array once placed on the
 <code class="docutils literal notranslate"><span class="pre">vtkUnstructuredGrid</span></code>.</p></li>
 </ul>
 </dd>
@@ -370,7 +369,7 @@ the <code class="docutils literal notranslate"><span class="pre">vtkUnstructured
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The mesh filename as an absolute path for the input
+<li><p><strong>FileName</strong> (<em>str</em>) – The mesh filename as an absolute path for the input
 mesh file in UBC OcTree format.</p></li>
 <li><p><strong>pdo</strong> (<em>vtkUnstructuredGrid</em>) – A pointer to the output data object.</p></li>
 </ul>

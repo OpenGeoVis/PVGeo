@@ -87,24 +87,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#optional-dependencies">Optional dependencies</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#using-pvgeo-in-paraview">Using PVGeo in ParaView</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#a-brief-introduction-to-paraview">A Brief Introduction to ParaView</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-paraview">Install ParaView</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-pvgeo">Install <em>PVGeo</em></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#non-windows-users">Non-Windows Users</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#install-pvgeo-to-paraview">Install PVGeo to ParaView</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#linking-pvgeo">Linking <em>PVGeo</em></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#mac-os-users">Mac OS Users</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#windows-users">Windows Users</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#loading-the-plugins">Loading the Plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-outside-modules-in-paraview">Using Outside Modules in ParaView</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#update-pvgeo">Update <em>PVGeo</em></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="featured.html">Featured</a></li>
@@ -118,7 +100,6 @@
 <p class="caption" role="heading"><span class="caption-text">API Index:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../content/PVGeo/index.html">About PVGeo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../content/pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
@@ -242,12 +223,15 @@
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
 <section id="using-pvgeo-in-a-python-environment">
 <h2>Using PVGeo in a Python Environment<a class="headerlink" href="#using-pvgeo-in-a-python-environment" title="Permalink to this heading"></a></h2>
-<p>If you’d like to use PVGeo in Python (&gt;=3.6) without ParaView then simply
-install PVGeo to your active Python environment (please note that we do not
-support the use of PVGeo in a Python 2 environment unless it is directly in
-ParaView’s build).</p>
+<p>If you’d like to use PVGeo in Python (&gt;=3.6), then simply
+install PVGeo to your active Python environment with <code class="docutils literal notranslate"><span class="pre">pip</span></code>
+or <code class="docutils literal notranslate"><span class="pre">conda</span></code></p>
 <p>Install PVGeo via <a class="reference external" href="https://pypi.org/project/PVGeo/">pip</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">PVGeo</span>
+</pre></div>
+</div>
+<p>Or with conda:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">pvgeo</span>
 </pre></div>
 </div>
 <section id="required-dependencies">
@@ -274,194 +258,6 @@ with PVGeo. Some useful dependencies:</p>
 <li><p><a class="reference external" href="https://pypi.org/project/omf/">omf</a> and <a class="reference external" href="https://pypi.org/project/omfvista/">omfvista</a>: Provides support for the Open Mining Format (OMF)</p></li>
 </ul>
 </section>
-</section>
-<section id="using-pvgeo-in-paraview">
-<h2>Using PVGeo in ParaView<a class="headerlink" href="#using-pvgeo-in-paraview" title="Permalink to this heading"></a></h2>
-<p>If you’d like to use PVGeo directly in ParaView’s graphical user interface,
-you must follow the remaining steps in this section very carefully which set up
-an isolated <strong>Python environment</strong> that will be shared with your installation of
-ParaView. Note that after you create this environment, you should leave it alone
-and install PVGeo using the steps in the section above for the Python
-environments you use everyday.</p>
-<section id="a-brief-introduction-to-paraview">
-<h3>A Brief Introduction to ParaView<a class="headerlink" href="#a-brief-introduction-to-paraview" title="Permalink to this heading"></a></h3>
-<p>ParaView is an open-source platform that can visualize 2D, 3D, and 4D
-(time-varying) datasets. ParaView can process multiple very large data sets in
-parallel then later collect the results to yield a responsive graphics
-environment with which a user can interact. The better the processor and
-graphics hardware the machine or machines hosting the software, the faster
-and better ParaView will run. However, it can run quite well on a laptop
-with a standard graphics card such as a MacBook Pro.</p>
-<p>Since ParaView is an open source application, anyone can download the program
-and its source code for modifications. The easiest way to get started with
-ParaView is to <a class="reference external" href="https://www.paraview.org/download/">download the compiled binary installers for your operating system</a>.</p>
-<p>For further help, check out the <a class="reference external" href="https://www.paraview.org/documentation/">documentation</a>
-provided by Kitware. In particular, the two worth looking through for a quick
-tour of ParaView are the <strong>The ParaView Guide</strong> and <strong>The ParaView Tutorial.</strong>
-One is a tutorial of the ParaView software and shows the user how to create
-sources, apply filters, and more. The other is a guide on how to do scripting,
-macros, and more intense use of the application.</p>
-</section>
-<section id="install-paraview">
-<h3>Install ParaView<a class="headerlink" href="#install-paraview" title="Permalink to this heading"></a></h3>
-<p>Open the downloaded installer from
-<a class="reference external" href="https://www.paraview.org/download/">ParaView’s website</a> for ParaView 5.6.x
-(or greater) and follow the prompts with the installer.</p>
-<p>Tour around software:
-Take a look at Section 2.1 of <strong>The ParaView Tutorial</strong> for details of the
-application’s GUI environment. Chapter 2 of the tutorial as a whole does an
-excellent job touring the software and its workflow for those unfamiliar with
-the software and its general capabilities.</p>
-<p>One convenient feature is to save the state of the ParaView environment.
-This saves all the options you selected for all the filters you applied to
-visualize some data. Select <em>File-&gt;Save State…</em> (<em>Note:</em> this saves the
-absolute path of the files loaded into ParaView, so be sure to select
-<em>Search for Files Under Directory…</em> when opening these state files).</p>
-</section>
-<section id="install-pvgeo">
-<h3>Install <em>PVGeo</em><a class="headerlink" href="#install-pvgeo" title="Permalink to this heading"></a></h3>
-<p>We highly recommend using Anaconda to manage your Python virtual environments, and
-we know installation via Anaconda Python distributions will work on Mac, Windows,
-and Linux operating systems. To begin using the <em>PVGeo</em> Python package, create
-a new virtual environment and install <em>PVGeo</em> through pip.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>pvgeoenv<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
-</pre></div>
-</div>
-<p>If you’d like to link PVGeo to ParaView, you must use a Python
-virtual environment where the version of Python matches that of the Python in
-your installed ParaView application. Once you create this virtual environment,
-you can opt to never use it again as it is only necessary for holding PVGeo and
-its dependencies for ParaView to use. If you’d like to use PVGeo outside of
-ParaView, any modern version of Python will work.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>pvgeoenv
-<span class="o">(</span>pvgeoenv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>PVGeo
-</pre></div>
-</div>
-<section id="non-windows-users">
-<h4>Non-Windows Users<a class="headerlink" href="#non-windows-users" title="Permalink to this heading"></a></h4>
-<p>Now you must install VTK to your virtual environment. For Linux and Mac users,
-simply install VTK through <cite>pip</cite>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now install VTK</span>
-<span class="o">(</span>pvgeoenv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>vtk
-</pre></div>
-</div>
-<p>Why not on Windows?
-If you are installing PVGeo for use in ParaView, the VTK Python package is
-available under the ParaView installation and PVGeo will use that library.
-Otherwise, if you’d like to use PVGeo on Windows outside of ParaView, you
-must use a Python &gt;=3.6 version and install VTK through <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
-</section>
-</section>
-<section id="install-pvgeo-to-paraview">
-<h3>Install PVGeo to ParaView<a class="headerlink" href="#install-pvgeo-to-paraview" title="Permalink to this heading"></a></h3>
-<p>Use the latest release of ParaView:
-PVGeo is compatible only with version 5.6.x (and higher) of ParaView.
-You can find the <a class="reference external" href="https://www.paraview.org/download/">ParaView downloads page</a></p>
-<p>To use the <em>PVGeo</em> library as plugins in ParaView, we must link the virtual
-environment that you installed <em>PVGeo</em> to ParaView’s Python environment and
-load a series of plugin files that wrap the <em>PVGeo</em> code base with ParaView’s
-Graphical User Interface.</p>
-</section>
-<section id="linking-pvgeo">
-<h3>Linking <em>PVGeo</em><a class="headerlink" href="#linking-pvgeo" title="Permalink to this heading"></a></h3>
-<p>First, let’s link <em>PVGeo</em>’s virtual environment to ParaView by setting up a
-<code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> and a <code class="docutils literal notranslate"><span class="pre">PV_PLUGIN_PATH</span></code> environmental variables. First, retrieve
-the needed paths from <em>PVGeo</em>. Do this by executing the following from your
-command line:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>pvgeoenv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>PVGeo<span class="w"> </span>install
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Having Trouble?</p>
-<p>Try executing the following command to debug the launcher creation
-(this will help us if you create an issue):</p>
-<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
-<span class="pre">(pvgeoenv)</span> <span class="pre">$</span> <span class="pre">python</span> <span class="pre">-m</span> <span class="pre">PVGeo</span> <span class="pre">install</span> <span class="pre">echo</span>
-<span class="pre">`</span></code></p>
-</div>
-<section id="mac-os-users">
-<h4>Mac OS Users<a class="headerlink" href="#mac-os-users" title="Permalink to this heading"></a></h4>
-<p>The above script will output the paths you need to set in the environmental variables
-moving forward. If you are on a Mac OS X computer, then that script will output
-a shell command for you to execute for the install. If you are on a Mac, run
-that command and skip to [Loading the Plugins](#loading-the-plugins)</p>
-</section>
-<section id="windows-users">
-<h4>Windows Users<a class="headerlink" href="#windows-users" title="Permalink to this heading"></a></h4>
-<p>Setting up environmental variables is a bit involved for Windows. Remember how
-we ran <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">PVGeo</span> <span class="pre">install</span></code>? Well this created a new file on your
-Desktop called <code class="docutils literal notranslate"><span class="pre">PVGeoLauncher.bat</span></code>. We will use this file to safely launch
-ParaView it is own environment with environmental variables appropriately set.</p>
-<ol class="arabic simple">
-<li><p>Go to your Desktop and right-click to select <strong>New-&gt;Shortcut</strong>.</p></li>
-</ol>
-<p>2. <strong>Browse…</strong> to the <code class="docutils literal notranslate"><span class="pre">PVGeoLauncher.bat</span></code> on your Desktop. Not sure where
-this file is? Check the output of the <cite>install</cite> command from above.</p>
-<p>3. Click <strong>Next</strong> and give your shortcut a meaningful name like
-<strong>ParaView+PVGeo</strong> and select <strong>Finish</strong>.</p>
-<ol class="arabic simple" start="4">
-<li><p>Now right-click that newly created shortcut and select <strong>Properties</strong>.</p></li>
-</ol>
-<p>5. For the <strong>Start in</strong> field, we will use the path to your ParaView installation
-(top-level). To discover this, go to where ParaView is installed. Likely in
-<code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span></code> and find the <code class="docutils literal notranslate"><span class="pre">ParaView</span> <span class="pre">5.6-xxxxxx</span></code> folder. Go into that
-folder and then copy the full path by copying the path in the navigation bar at
-the top of the window. Paste this path into the <strong>Start in</strong> field.</p>
-<ol class="arabic simple" start="6">
-<li><p>Click <strong>Apply</strong> then <strong>Okay</strong></p></li>
-<li><p>Now launch ParaView using your new shortcut!</p></li>
-</ol>
-<p>6. Test that the install worked: open the <strong>Python Shell</strong> and import the modules
-delivered in this repo by executing <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">PVGeo</span></code> and <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pvmacros</span></code>.
-Errors should not arise but if they do, seek help via
-<a class="reference external" href="http://slack.pvgeo.org">the Slack community</a>.</p>
-</section>
-</section>
-<section id="loading-the-plugins">
-<h3>Loading the Plugins<a class="headerlink" href="#loading-the-plugins" title="Permalink to this heading"></a></h3>
-<p>Now you must load the plugin files through ParaView’s Plugin Manager. Select
-<em>Tools -&gt; Manage Plugins</em> then select <em>Load New</em> on the bottom right of the
-popup dialog. Navigate to the directory declared in <code class="docutils literal notranslate"><span class="pre">PV_PLUGIN_PATH</span></code> and load
-the plugins files. Note that we have included a file called <code class="docutils literal notranslate"><span class="pre">PVGeo_All.py</span></code>;
-this will load all of PVGeo’s Plugins for convenience. If you wish only to load
-specific suites, then load the desired suites by their individual plugin <code class="docutils literal notranslate"><span class="pre">.py</span></code>
-files. Once the plugins are loaded, expand them in the plugin
-manager and be sure to select <em>Auto Load</em>.</p>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>Not sure where your <code class="docutils literal notranslate"><span class="pre">PV_PLUGIN_PATH</span></code> is located?</p>
-<p>Re-run the install command with an additional argument <code class="docutils literal notranslate"><span class="pre">echo</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>pvgeoenv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>PVGeo<span class="w"> </span>install<span class="w"> </span><span class="nb">echo</span>
-</pre></div>
-</div>
-</div>
-<img alt="../_images/plugin-manager.png" src="../_images/plugin-manager.png" />
-<p>Now test that the install worked by ensuring the various categories for the PVGeo
-filters are in the <strong>Filters</strong> menu such as <strong>PVGeo General Filters</strong>. Errors
-should not arise but if they do, post to the
-<a class="reference external" href="https://github.com/OpenGeoVis/PVGeo/issues">issues page</a> and the errors will be <em>immediately</em> addressed.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If an error arises or you are having trouble, feel free to join the <em>PVGeo</em>
-<a class="reference external" href="http://slack.pvgeo.org">community on Slack</a> and ask for help</p>
-<p>You can also post to the <a class="reference external" href="https://github.com/OpenGeoVis/PVGeo/issues">issues page</a> if you think you are encountering a bug.</p>
-</div>
-</section>
-<section id="using-outside-modules-in-paraview">
-<h3>Using Outside Modules in ParaView<a class="headerlink" href="#using-outside-modules-in-paraview" title="Permalink to this heading"></a></h3>
-<p>If you installed <em>PVGeo</em> according to the instructions above, then any Python
-package installed through <code class="docutils literal notranslate"><span class="pre">pip</span></code>/<code class="docutils literal notranslate"><span class="pre">conda</span></code> in that virtual environment will be accessible in ParaView. For some further reading on using virtual environments
-with ParaView, see
-<a class="reference external" href="https://blog.kitware.com/using-pvpython-and-virtualenv/">this blog post</a></p>
-</section>
-</section>
-<section id="update-pvgeo">
-<h2>Update <em>PVGeo</em><a class="headerlink" href="#update-pvgeo" title="Permalink to this heading"></a></h2>
-<p>Use pip to update PVGeo in your python environment(s):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>pvgeoenv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>PVGeo
-</pre></div>
-</div>
 </section>
 </section>
 

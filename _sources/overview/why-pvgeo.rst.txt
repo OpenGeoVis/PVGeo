@@ -1,12 +1,12 @@
 Why PVGeo?
 ==========
 
-.. _ParaView: https://paraview.org
+.. _PyVista: https://docs.pyvista.org
 
 PVGeo is an open-source Python package for geoscientific visualization and
 analysis harnessing an already powerful software platform: the
-`Visualization Toolkit (VTK) <https://vtk.org>`_ and its front-end application,
-ParaView_.
+`Visualization Toolkit (VTK) <https://vtk.org>`_ and its Python wrappings in
+`PyVista`_.
 The VTK software platform is well-maintained, contains an expansive set of
 native functionality, and provides a robust foundation for scientific
 visualization, yet the development of tools compatible for geoscience data and
@@ -25,9 +25,7 @@ The PVGeo package is available for download on `PyPI <https://pypi.org/project/P
 About the Project
 -----------------
 
-This code base is full of plugins and macros for the open-source,
-multi-platform, data analysis, and visualization application
-ParaView_ by Kitware. These plugins are tailored
+These tools here are tailored
 to the visualization of spatially referenced data in the geosciences, especially
 geophysics. The overarching  goal of this project is to develop set of codes to
 visually integrate post-processed data for more *intuitive* visualization.

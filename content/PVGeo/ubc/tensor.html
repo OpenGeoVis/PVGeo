@@ -120,7 +120,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
@@ -321,9 +320,9 @@ file. If the mesh file is 2D, then then model file must also be in the
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename_mesh</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The mesh filename as an absolute path for the
+<li><p><strong>filename_mesh</strong> (<em>str</em>) – The mesh filename as an absolute path for the
 input mesh file in UBC 2D/3D Mesh Format</p></li>
-<li><p><strong>filename_models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>)</em>) – The model filename(s) as an
+<li><p><strong>filename_models</strong> (<em>str</em><em> or </em><em>list</em><em>(</em><em>str</em><em>)</em>) – The model filename(s) as an
 absolute path for the input model file in UBC 2D/3D Model Format.</p></li>
 <li><p><strong>output</strong> (<em>vtkRectilinearGrid</em>) – The output data object</p></li>
 </ul>
@@ -368,7 +367,7 @@ to associate model data with the mesh grid.</p>
 mesh to place the model data upon.</p></li>
 <li><p><strong>model</strong> (<em>np.array</em>) – A NumPy float array that holds all of the data to
 place inside of the mesh’s cells.</p></li>
-<li><p><strong>data_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The name of the model data array once placed on the
+<li><p><strong>data_name</strong> (<em>str</em>) – The name of the model data array once placed on the
 <code class="docutils literal notranslate"><span class="pre">vtkRectilinearGrid</span></code>.</p></li>
 </ul>
 </dd>
@@ -389,7 +388,7 @@ place inside of the mesh’s cells.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The mesh filename as an absolute path for the input
+<li><p><strong>FileName</strong> (<em>str</em>) – The mesh filename as an absolute path for the input
 mesh file in UBC 3D Mesh Format.</p></li>
 <li><p><strong>output</strong> (<em>vtkRectilinearGrid</em>) – The output data object</p></li>
 </ul>
@@ -414,7 +413,7 @@ No data attributes here, simply an empty mesh. Use the
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The mesh filename as an absolute path for the input
+<li><p><strong>FileName</strong> (<em>str</em>) – The mesh filename as an absolute path for the input
 mesh file in UBC 3D Mesh Format.</p></li>
 <li><p><strong>output</strong> (<em>vtkRectilinearGrid</em>) – The output data object</p></li>
 </ul>
@@ -442,7 +441,7 @@ No data attributes here, simply an empty mesh. Use the
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>FileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The model filename as an absolute path for the
+<dd class="field-odd"><p><strong>FileName</strong> (<em>str</em>) – The model filename as an absolute path for the
 input model file in UBCMesh Model Format. Also accepts a list of
 string file names.</p>
 </dd>
@@ -512,14 +511,14 @@ boolean data array.</p>
 <dd><p>Ask self if the reader needs to read the files again</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – if the flag is set then this method will set the read
+<dd class="field-odd"><p><strong>flag</strong> (<em>bool</em>) – if the flag is set then this method will set the read
 status</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The status of the reader aspect of the filter.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>

@@ -89,22 +89,10 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">About Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#typical-usage">Typical Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#reader-algorithms">Reader Algorithms</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#paraview-usage">ParaView Usage</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#filter-algorithms">Filter Algorithms</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">ParaView Usage</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#source-algorithms">Source Algorithms</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">ParaView Usage</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#writer-algorithms">Writer Algorithms</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">ParaView Usage</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#reader-algorithms">Reader Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filter-algorithms">Filter Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source-algorithms">Source Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writer-algorithms">Writer Algorithms</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Quick Examples</a></li>
@@ -112,7 +100,6 @@
 <p class="caption" role="heading"><span class="caption-text">API Index:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="content/PVGeo/index.html">About PVGeo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
@@ -239,7 +226,7 @@ consist of a set of reader, filter, source, or writer algorithms (or any
 combination of those) for a general area of geoscientific processing and
 visualization.
 The following sections on this page demonstrate general procedures and syntax to
-use each type of algorithm within ParaView or directly in a Python environment.</p>
+use each type of algorithm directly in a Python environment.</p>
 <p>Take a look at the <a class="reference internal" href="examples/index.html#ref-examples"><span class="std std-ref">Quick Examples</span></a> for an outline of all the available
 examples at this time.</p>
 <p>If you think there may be a serious problem with an example, please open an
@@ -269,12 +256,11 @@ need to request varying time steps.</p>
 <section id="reader-algorithms">
 <h2>Reader Algorithms<a class="headerlink" href="#reader-algorithms" title="Permalink to this heading"></a></h2>
 <p>A reader takes data from files and puts them into the proper VTK
-data structures so that we can visualize that data on the VTK or ParaView
-pipeline.
-ParaView and PyVista come with a plethora of native data format readers but
+data structures so that we can visualize that data on the VTK pipeline.
+PyVista comes with a plethora of native data format readers but
 there are still many more formats in the geosciences that have not been
 implemented. By creating formats for common geoscientific formats, we hope to
-make the process of getting data into the ParaView pipeline or into PyVista
+make the process of getting data into the pipeline or into PyVista
 data structures as simple as possible.</p>
 <p>The file readers in <em>PVGeo</em> are available for use in the same manner as all
 algorithms in <em>PVGeo</em>. Readers are typically used in a manner that allows the
@@ -298,17 +284,11 @@ readers can be used to immediately produce a data object:</p>
 <span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s1">&#39;fname.txt&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="paraview-usage">
-<h3>ParaView Usage<a class="headerlink" href="#paraview-usage" title="Permalink to this heading"></a></h3>
-<p>The <em>PVGeo</em> readers aren’t directly available in the GUI menus of ParaView but
-rather a dialog will appear for you to select the desired file reader when
-selecting <strong>File -&gt; Open…</strong> within ParaView like the screen recording below:</p>
-<iframe src="https://player.vimeo.com/video/281726394?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></section>
 </section>
 <section id="filter-algorithms">
 <h2>Filter Algorithms<a class="headerlink" href="#filter-algorithms" title="Permalink to this heading"></a></h2>
 <p>A filter modifies, transforms, combines, analyses, processes, etc. data in VTK
-data structures on either a VTK or ParaView pipeline. Filters provide a means
+data structures on either a VTK pipeline. Filters provide a means
 for changing how we visualize data or create a means of generating topology for
 an input data source to better represent that data in a 3D rendering environment.</p>
 <p>For example, we have developed a filter called Voxelize Points
@@ -350,12 +330,6 @@ to make repetitive calls on them much like we showed with readers:</p>
 <span class="n">filt</span><span class="o">.</span><span class="n">UpdateTimeStep</span><span class="p">(</span><span class="mf">6.0</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="id1">
-<h3>ParaView Usage<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
-<p>Within ParaView, filters are available for selection directly from the GUI menus
-when an input data source is selected on the pipeline. All of the <em>PVGeo</em>
-filters  are available under their own categories in the <strong>Filters</strong> menu.</p>
-<iframe src="https://player.vimeo.com/video/282010041?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></section>
 </section>
 <section id="source-algorithms">
 <h2>Source Algorithms<a class="headerlink" href="#source-algorithms" title="Permalink to this heading"></a></h2>
@@ -371,12 +345,6 @@ immediately produce an output like below:</p>
 <span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
 </pre></div>
 </div>
-<section id="id2">
-<h3>ParaView Usage<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
-<p>Within ParaView, sources are available for selection directly from the GUI
-menus. All of the <em>PVGeo</em> sources are available under their own categories in
-the <strong>Sources</strong> menu.</p>
-<iframe src="https://player.vimeo.com/video/281726486?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></section>
 </section>
 <section id="writer-algorithms">
 <h2>Writer Algorithms<a class="headerlink" href="#writer-algorithms" title="Permalink to this heading"></a></h2>
@@ -396,14 +364,6 @@ immediately write out a data object like below.</p>
 <span class="n">writer</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">inputDataObject</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="id3">
-<h3>ParaView Usage<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
-<p>Demonstrated in the following video, a user can select <em>File -&gt; Save Data</em> in
-ParaView with a selected dataset then choose one of <em>PVGeo</em>’s writers.
-The first <em>1 minute</em> in the video demonstrates the <em>Extract Topography</em> then the
-video shows how to save a <code class="docutils literal notranslate"><span class="pre">vtkRectilinearGrid</span></code> and its attributes to the UBC
-Tensor Mesh/Model formats using a PVGeo writer.</p>
-<iframe src="https://player.vimeo.com/video/284294249?loop=1&autoplay=0" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></section>
 </section>
 </section>
 

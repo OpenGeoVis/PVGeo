@@ -8,7 +8,7 @@ consist of a set of reader, filter, source, or writer algorithms (or any
 combination of those) for a general area of geoscientific processing and
 visualization.
 The following sections on this page demonstrate general procedures and syntax to
-use each type of algorithm within ParaView or directly in a Python environment.
+use each type of algorithm directly in a Python environment.
 
 Take a look at the :ref:`ref_examples` for an outline of all the available
 examples at this time.
@@ -51,12 +51,11 @@ Reader Algorithms
 -----------------
 
 A reader takes data from files and puts them into the proper VTK
-data structures so that we can visualize that data on the VTK or ParaView
-pipeline.
-ParaView and PyVista come with a plethora of native data format readers but
+data structures so that we can visualize that data on the VTK pipeline.
+PyVista comes with a plethora of native data format readers but
 there are still many more formats in the geosciences that have not been
 implemented. By creating formats for common geoscientific formats, we hope to
-make the process of getting data into the ParaView pipeline or into PyVista
+make the process of getting data into the pipeline or into PyVista
 data structures as simple as possible.
 
 
@@ -88,26 +87,11 @@ readers can be used to immediately produce a data object:
     output = PVGeo.suite.Reader(**kwargs).apply('fname.txt')
 
 
-
-
-ParaView Usage
-++++++++++++++
-
-The *PVGeo* readers aren't directly available in the GUI menus of ParaView but
-rather a dialog will appear for you to select the desired file reader when
-selecting **File -> Open...** within ParaView like the screen recording below:
-
-.. raw:: html
-
-    <iframe src="https://player.vimeo.com/video/281726394?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
-
-
 Filter Algorithms
 -----------------
 
 A filter modifies, transforms, combines, analyses, processes, etc. data in VTK
-data structures on either a VTK or ParaView pipeline. Filters provide a means
+data structures on either a VTK pipeline. Filters provide a means
 for changing how we visualize data or create a means of generating topology for
 an input data source to better represent that data in a 3D rendering environment.
 
@@ -161,19 +145,6 @@ to make repetitive calls on them much like we showed with readers:
     filt.UpdateTimeStep(6.0)
 
 
-
-ParaView Usage
-++++++++++++++
-
-Within ParaView, filters are available for selection directly from the GUI menus
-when an input data source is selected on the pipeline. All of the *PVGeo*
-filters  are available under their own categories in the **Filters** menu.
-
-.. raw:: html
-
-    <iframe src="https://player.vimeo.com/video/282010041?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
-
 Source Algorithms
 -----------------
 
@@ -193,18 +164,6 @@ immediately produce an output like below:
     # PSEUDOCODE: Typical use of a PVGeo source:
     output = PVGeo.suite.Source(**kwargs).apply()
 
-
-
-ParaView Usage
-++++++++++++++
-
-Within ParaView, sources are available for selection directly from the GUI
-menus. All of the *PVGeo* sources are available under their own categories in
-the **Sources** menu.
-
-.. raw:: html
-
-    <iframe src="https://player.vimeo.com/video/281726486?loop=1&autoplay=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 Writer Algorithms
 -----------------
@@ -227,19 +186,3 @@ immediately write out a data object like below.
     filename = 'test-writer.grd'
     writer.SetFileName(filename)
     writer.Write(inputDataObject)
-
-
-
-ParaView Usage
-++++++++++++++
-
-Demonstrated in the following video, a user can select *File -> Save Data* in
-ParaView with a selected dataset then choose one of *PVGeo*'s writers.
-The first *1 minute* in the video demonstrates the *Extract Topography* then the
-video shows how to save a ``vtkRectilinearGrid`` and its attributes to the UBC
-Tensor Mesh/Model formats using a PVGeo writer.
-
-
-.. raw:: html
-
-    <iframe src="https://player.vimeo.com/video/284294249?loop=1&autoplay=0" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>

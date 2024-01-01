@@ -121,7 +121,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../ubc/index.html">UBC Mesh Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../pvmacros/index.html">About ParaView Macros</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development Guide</span></p>
 <ul>
@@ -287,15 +286,15 @@ for an output algorithm to have.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>algorithm</strong> (<em>vtkDataObject</em>) – The data object (Proxy) on the pipeline
 (pass <cite>self</cite> from algorithm subclasses)</p></li>
-<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the input port</p></li>
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – optional : the connection index on the input port</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – the input port</p></li>
+<li><p><strong>idx</strong> (<em>int</em>) – optional : the connection index on the input port</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the time step values of the input (if there aren’t any, returns <code class="docutils literal notranslate"><span class="pre">None</span></code>)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a></p>
+<dd class="field-odd"><p>list</p>
 </dd>
 </dl>
 </dd></dl>
@@ -315,14 +314,14 @@ reader.</p>
 (pass <cite>self</cite> from algorithm subclasses)</p></li>
 <li><p><strong>outInfo</strong> (<em>vtkInformationVector</em>) – The output information for the
 algorithm</p></li>
-<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – the index for the output port</p></li>
+<li><p><strong>idx</strong> (<em>int</em>) – the index for the output port</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the index of the requested time</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a></p>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -344,9 +343,9 @@ algorithm</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>algorithm</strong> (<em>vtkDataObject</em>) – The data object (Proxy) on the pipeline
 (pass <cite>self</cite> from algorithm subclasses)</p></li>
-<li><p><strong>nt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – Number of timesteps (Pass a list to use length of
+<li><p><strong>nt</strong> (<em>int</em><em> or </em><em>list</em>) – Number of timesteps (Pass a list to use length of
 that list)</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – The discrete value in seconds for the time step.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – The discrete value in seconds for the time step.</p></li>
 <li><p><strong>explicit</strong> (<em>boolean</em>) – if true, this will treat the nt argument as the exact
 timestep values to use</p></li>
 </ul>

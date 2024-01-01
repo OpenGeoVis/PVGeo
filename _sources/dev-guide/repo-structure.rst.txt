@@ -44,15 +44,13 @@ Outline of Goals
 
     * **Readers:** A reader puts data from files into proper ParaView data structures on the pipeline. These are plugins that read common geoscientific and geophysical spatial data files (GSLIB, UBC Tensor and OcTree meshes, etc.). Also make readers that read common raw data files (packed binary floats, delimited ASCII, etc.)
 
-    * **Filters:** A filter modifies, transforms, combines, analyses, etc. data on the ParaView pipeline. Plugins that perform post-processing analysis of geoscientific data for visualization. For example, filters that build tubes from a series of points that represent a tunnel or filters that take a 1D array, reshape it to 2D or 3D, and make a volumetric model ready for visualization all while adding spatial reference for visual integration.  
+    * **Filters:** A filter modifies, transforms, combines, analyses, etc. data on the ParaView pipeline. Plugins that perform post-processing analysis of geoscientific data for visualization. For example, filters that build tubes from a series of points that represent a tunnel or filters that take a 1D array, reshape it to 2D or 3D, and make a volumetric model ready for visualization all while adding spatial reference for visual integration.
 
     * **Sources:** Plugins that create simple synthetic data sources that could be used for model generation. We are creating a suite of plugins for generating various types of discretized models/meshes which can be exported. Another example could include a sphere or cube with a specified attribute like a spatially varying density or electrical conductivity. Other sources might include using that synthetic sphere or cube to make a volumetric field of some response. These plugins will tailor to the educational needs in applications of this code base.
 
-* Develop and document the ``PVGeo`` and ``pvmacros`` Python modules for use in ParaView's Python Shell. These modules will contain all of the macros, batch processing tasks, and common codes to apply to 3D data scenes.
+* Develop and document the ``PVGeo`` Python modules.
 
     * The ``PVGeo`` module will hold all of the code used in the plugins so that shared features across plugins can be called rather the rewritten and so that we can version control the plugins. This module will be primarily for use in the plugins scripts and not necessary for use in the ParaViewPython shell.
-
-    * The ``pvmacros`` module with be full of macros and other data-independent scripts that can be used directly in the ParaViewPython shell.
 
 * Make tutorials on the use of the tools provided by this repository as well as share how to use ParaView's native features on open source data (for example):
 
