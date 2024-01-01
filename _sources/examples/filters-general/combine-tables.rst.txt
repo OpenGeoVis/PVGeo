@@ -97,8 +97,8 @@ Create some input tables
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 0</td><td>float64</td><td>1</td><td>2.934e-03</td><td>9.844e-01</td></tr>
-    <tr><td>Array 1</td><td>float64</td><td>1</td><td>9.569e-04</td><td>9.997e-01</td></tr>
+    <tr><td>Array 0</td><td>float64</td><td>1</td><td>3.165e-05</td><td>9.990e-01</td></tr>
+    <tr><td>Array 1</td><td>float64</td><td>1</td><td>3.861e-03</td><td>9.682e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -130,7 +130,7 @@ Create some input tables
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 2</td><td>float64</td><td>1</td><td>1.322e-03</td><td>9.968e-01</td></tr>
+    <tr><td>Array 2</td><td>float64</td><td>1</td><td>3.230e-02</td><td>9.864e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -165,9 +165,9 @@ Create some input tables
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Array 0</td><td>float64</td><td>1</td><td>2.934e-03</td><td>9.844e-01</td></tr>
-    <tr><td>Array 1</td><td>float64</td><td>1</td><td>9.569e-04</td><td>9.997e-01</td></tr>
-    <tr><td>Array 2</td><td>float64</td><td>1</td><td>1.322e-03</td><td>9.968e-01</td></tr>
+    <tr><td>Array 0</td><td>float64</td><td>1</td><td>3.165e-05</td><td>9.990e-01</td></tr>
+    <tr><td>Array 1</td><td>float64</td><td>1</td><td>3.861e-03</td><td>9.682e-01</td></tr>
+    <tr><td>Array 2</td><td>float64</td><td>1</td><td>3.230e-02</td><td>9.864e-01</td></tr>
     </table>
 
     </td></tr> </table>

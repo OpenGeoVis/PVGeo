@@ -91,11 +91,30 @@ Read GSLib point set file
 
 
 
-.. image-sg:: /examples/gslib/images/sphx_glr_read-point-set_001.png
-   :alt: read point set
-   :srcset: /examples/gslib/images/sphx_glr_read-point-set_001.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/gslib/images/sphx_glr_read-point-set_001.png
+        :alt: read point set
+        :srcset: /examples/gslib/images/sphx_glr_read-point-set_001.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/gslib/images/sphx_glr_read-point-set_001.vtksz
 
 
 
@@ -105,7 +124,7 @@ Read GSLib point set file
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.410 seconds)
+   **Total running time of the script:** (0 minutes 0.416 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-point-set.py:

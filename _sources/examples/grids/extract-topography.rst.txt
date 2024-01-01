@@ -85,11 +85,30 @@ with the following parameters:
 
 
 
-.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_001.png
-   :alt: extract topography
-   :srcset: /examples/grids/images/sphx_glr_extract-topography_001.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_001.png
+        :alt: extract topography
+        :srcset: /examples/grids/images/sphx_glr_extract-topography_001.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/grids/images/sphx_glr_extract-topography_001.vtksz
 
 
 
@@ -158,11 +177,30 @@ Now load the topography file from the example data:
 
 
 
-.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_002.png
-   :alt: extract topography
-   :srcset: /examples/grids/images/sphx_glr_extract-topography_002.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_002.png
+        :alt: extract topography
+        :srcset: /examples/grids/images/sphx_glr_extract-topography_002.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/grids/images/sphx_glr_extract-topography_002.vtksz
 
 
 
@@ -186,11 +224,30 @@ select the inputs to the algorithm.
 
 
 
-.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_003.png
-   :alt: extract topography
-   :srcset: /examples/grids/images/sphx_glr_extract-topography_003.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_003.png
+        :alt: extract topography
+        :srcset: /examples/grids/images/sphx_glr_extract-topography_003.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/grids/images/sphx_glr_extract-topography_003.vtksz
 
 
 
@@ -219,11 +276,30 @@ rendering below:
 
 
 
-.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_004.png
-   :alt: extract topography
-   :srcset: /examples/grids/images/sphx_glr_extract-topography_004.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_004.png
+        :alt: extract topography
+        :srcset: /examples/grids/images/sphx_glr_extract-topography_004.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/grids/images/sphx_glr_extract-topography_004.vtksz
 
 
 
@@ -249,11 +325,30 @@ How well did this remove cells above the topography surface?
 
 
 
-.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_005.png
-   :alt: extract topography
-   :srcset: /examples/grids/images/sphx_glr_extract-topography_005.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_005.png
+        :alt: extract topography
+        :srcset: /examples/grids/images/sphx_glr_extract-topography_005.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/grids/images/sphx_glr_extract-topography_005.vtksz
 
 
 
@@ -281,11 +376,30 @@ topographic surface, you can set a tolerance:
 
 
 
-.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_006.png
-   :alt: extract topography
-   :srcset: /examples/grids/images/sphx_glr_extract-topography_006.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_006.png
+        :alt: extract topography
+        :srcset: /examples/grids/images/sphx_glr_extract-topography_006.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/grids/images/sphx_glr_extract-topography_006.vtksz
 
 
 
@@ -306,11 +420,30 @@ Note that there are other extraction operations like an ``'intersection'``:
 
 
 
-.. image-sg:: /examples/grids/images/sphx_glr_extract-topography_007.png
-   :alt: extract topography
-   :srcset: /examples/grids/images/sphx_glr_extract-topography_007.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_007.png
+        :alt: extract topography
+        :srcset: /examples/grids/images/sphx_glr_extract-topography_007.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/grids/images/sphx_glr_extract-topography_007.vtksz
 
 
 
@@ -320,7 +453,7 @@ Note that there are other extraction operations like an ``'intersection'``:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 6.246 seconds)
+   **Total running time of the script:** (0 minutes 7.343 seconds)
 
 
 .. _sphx_glr_download_examples_grids_extract-topography.py:

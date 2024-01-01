@@ -104,11 +104,30 @@ Download sample data files and keep track of names:
 
 
 
-.. image-sg:: /examples/ubc/images/sphx_glr_read-topo_001.png
-   :alt: read topo
-   :srcset: /examples/ubc/images/sphx_glr_read-topo_001.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/ubc/images/sphx_glr_read-topo_001.png
+        :alt: read topo
+        :srcset: /examples/ubc/images/sphx_glr_read-topo_001.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/ubc/images/sphx_glr_read-topo_001.vtksz
 
 
 
@@ -118,7 +137,7 @@ Download sample data files and keep track of names:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 3.298 seconds)
+   **Total running time of the script:** (0 minutes 3.397 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-topo.py:

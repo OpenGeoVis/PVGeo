@@ -99,11 +99,30 @@ Apply a filter to the DEM to have realistic topography
 
 
 
-.. image-sg:: /examples/grids/images/sphx_glr_read-surfer_001.png
-   :alt: read surfer
-   :srcset: /examples/grids/images/sphx_glr_read-surfer_001.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/grids/images/sphx_glr_read-surfer_001.png
+        :alt: read surfer
+        :srcset: /examples/grids/images/sphx_glr_read-surfer_001.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/grids/images/sphx_glr_read-surfer_001.vtksz
 
 
 
@@ -113,7 +132,7 @@ Apply a filter to the DEM to have realistic topography
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.038 seconds)
+   **Total running time of the script:** (0 minutes 1.264 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-surfer.py:

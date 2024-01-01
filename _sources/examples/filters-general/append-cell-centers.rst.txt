@@ -135,11 +135,30 @@ Run the PVGeo algorithm
 
 
 
-.. image-sg:: /examples/filters-general/images/sphx_glr_append-cell-centers_001.png
-   :alt: append cell centers
-   :srcset: /examples/filters-general/images/sphx_glr_append-cell-centers_001.png
-   :class: sphx-glr-single-img
 
+
+
+.. tab-set::
+
+
+
+   .. tab-item:: Static Scene
+
+
+
+            
+     .. image-sg:: /examples/filters-general/images/sphx_glr_append-cell-centers_001.png
+        :alt: append cell centers
+        :srcset: /examples/filters-general/images/sphx_glr_append-cell-centers_001.png
+        :class: sphx-glr-single-img
+     
+
+
+   .. tab-item:: Interactive Scene
+
+
+
+       .. offlineviewer:: /home/runner/work/PVGeo/PVGeo/docs/source/examples/filters-general/images/sphx_glr_append-cell-centers_001.vtksz
 
 
 
@@ -149,7 +168,7 @@ Run the PVGeo algorithm
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.953 seconds)
+   **Total running time of the script:** (0 minutes 0.997 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_append-cell-centers.py:
