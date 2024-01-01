@@ -54,10 +54,13 @@ Get :class:`pyvista.PolyData` sample input to rotate
 
 
 
+
 .. image-sg:: /examples/filters-general/images/sphx_glr_rotate-points_001.png
    :alt: rotate points
    :srcset: /examples/filters-general/images/sphx_glr_rotate-points_001.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -76,6 +79,7 @@ Use the filter:
 
 
 
+
 .. image-sg:: /examples/filters-general/images/sphx_glr_rotate-points_002.png
    :alt: rotate points
    :srcset: /examples/filters-general/images/sphx_glr_rotate-points_002.png
@@ -86,9 +90,11 @@ Use the filter:
 
 
 
+
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.376 seconds)
+   **Total running time of the script:** (0 minutes 0.362 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_rotate-points.py:

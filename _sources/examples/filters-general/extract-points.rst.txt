@@ -56,10 +56,13 @@ Have some input data source with valid PointData
 
 
 
+
 .. image-sg:: /examples/filters-general/images/sphx_glr_extract-points_001.png
    :alt: extract points
    :srcset: /examples/filters-general/images/sphx_glr_extract-points_001.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -78,6 +81,7 @@ Apply the filter:
 
 
 
+
 .. image-sg:: /examples/filters-general/images/sphx_glr_extract-points_002.png
    :alt: extract points
    :srcset: /examples/filters-general/images/sphx_glr_extract-points_002.png
@@ -88,9 +92,11 @@ Apply the filter:
 
 
 
+
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.572 seconds)
+   **Total running time of the script:** (0 minutes 0.571 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-points.py:

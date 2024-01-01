@@ -84,10 +84,13 @@ with the following parameters:
 
 
 
+
 .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_001.png
    :alt: extract topography
    :srcset: /examples/grids/images/sphx_glr_extract-topography_001.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -154,10 +157,13 @@ Now load the topography file from the example data:
 
 
 
+
 .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_002.png
    :alt: extract topography
    :srcset: /examples/grids/images/sphx_glr_extract-topography_002.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -179,10 +185,13 @@ select the inputs to the algorithm.
 
 
 
+
 .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_003.png
    :alt: extract topography
    :srcset: /examples/grids/images/sphx_glr_extract-topography_003.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -209,10 +218,13 @@ rendering below:
 
 
 
+
 .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_004.png
    :alt: extract topography
    :srcset: /examples/grids/images/sphx_glr_extract-topography_004.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -236,10 +248,13 @@ How well did this remove cells above the topography surface?
 
 
 
+
 .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_005.png
    :alt: extract topography
    :srcset: /examples/grids/images/sphx_glr_extract-topography_005.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -265,10 +280,13 @@ topographic surface, you can set a tolerance:
 
 
 
+
 .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_006.png
    :alt: extract topography
    :srcset: /examples/grids/images/sphx_glr_extract-topography_006.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -287,6 +305,7 @@ Note that there are other extraction operations like an ``'intersection'``:
 
 
 
+
 .. image-sg:: /examples/grids/images/sphx_glr_extract-topography_007.png
    :alt: extract topography
    :srcset: /examples/grids/images/sphx_glr_extract-topography_007.png
@@ -297,9 +316,11 @@ Note that there are other extraction operations like an ``'intersection'``:
 
 
 
+
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 6.010 seconds)
+   **Total running time of the script:** (0 minutes 5.900 seconds)
 
 
 .. _sphx_glr_download_examples_grids_extract-topography.py:

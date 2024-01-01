@@ -118,10 +118,13 @@ Use a `PyVista` ``threshold`` filter to remove ``NaN`` data values
 
 
 
+
 .. image-sg:: /examples/ubc/images/sphx_glr_read-tensor-mesh_001.png
    :alt: read tensor mesh
    :srcset: /examples/ubc/images/sphx_glr_read-tensor-mesh_001.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -141,10 +144,13 @@ Or inspect slices of the model
 
 
 
+
 .. image-sg:: /examples/ubc/images/sphx_glr_read-tensor-mesh_002.png
    :alt: read tensor mesh
    :srcset: /examples/ubc/images/sphx_glr_read-tensor-mesh_002.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -162,6 +168,7 @@ Or threshold a data range
 
 
 
+
 .. image-sg:: /examples/ubc/images/sphx_glr_read-tensor-mesh_003.png
    :alt: read tensor mesh
    :srcset: /examples/ubc/images/sphx_glr_read-tensor-mesh_003.png
@@ -172,9 +179,11 @@ Or threshold a data range
 
 
 
+
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 2.722 seconds)
+   **Total running time of the script:** (0 minutes 4.270 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-tensor-mesh.py:

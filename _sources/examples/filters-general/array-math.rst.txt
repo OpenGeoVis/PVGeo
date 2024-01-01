@@ -107,9 +107,9 @@ Use the filter:
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>2.420e-03</td><td>9.976e-01</td></tr>
-    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>1.163e-06</td><td>9.992e-01</td></tr>
-    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>1.154e-01</td><td>1.899e+00</td></tr>
+    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>8.039e-03</td><td>9.936e-01</td></tr>
+    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>5.697e-03</td><td>9.941e-01</td></tr>
+    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>5.089e-02</td><td>1.936e+00</td></tr>
     </table>
 
     </td></tr> </table>
@@ -178,9 +178,9 @@ Use a custom math operation:
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>2.420e-03</td><td>9.976e-01</td></tr>
-    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>1.163e-06</td><td>9.992e-01</td></tr>
-    <tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>1.247e-02</td><td>1.000e+00</td></tr>
+    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>8.039e-03</td><td>9.936e-01</td></tr>
+    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>5.697e-03</td><td>9.941e-01</td></tr>
+    <tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>1.578e-02</td><td>9.995e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -210,6 +210,7 @@ Use a custom math operation:
 
 
 
+
 .. image-sg:: /examples/filters-general/images/sphx_glr_array-math_001.png
    :alt: array math
    :srcset: /examples/filters-general/images/sphx_glr_array-math_001.png
@@ -220,9 +221,11 @@ Use a custom math operation:
 
 
 
+
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.400 seconds)
+   **Total running time of the script:** (0 minutes 0.408 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_array-math.py:
