@@ -179,16 +179,11 @@ def points_to_poly_data(points, copy_z=False):
     pdata = pv.PolyData(points)
 
     # Add attributes if given
-    scalSet = False
     for i, key in enumerate(keys):
-        data = convert_array(atts[:, i], name=key)
-        pdata.GetPointData().AddArray(data)
-        if not scalSet:
-            pdata.GetPointData().SetActiveScalars(key)
-            scalSet = True
+        pdata.point_data[key] = convert_array(atts[:, i])
     if copy_z:
         z = convert_array(points[:, 2], name='Elevation')
-        pdata.GetPointData().AddArray(z)
+        pdata.point_data['Elevation'] = z
     return pv.wrap(pdata)
 
 
