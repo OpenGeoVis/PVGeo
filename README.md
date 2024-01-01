@@ -1,15 +1,10 @@
 <a href="http://pvgeo.org"><img src="PVGeo_icon_horiz.png" width="35%" /></a>
 
-Share this project: [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20this%20project%20for%20data%20and%20model%20visualization%20in%20ParaView&url=https://github.com/OpenGeoVis/PVGeo&hashtags=ParaView,PVGeo,visualization,geoscience)
-
-
 The *PVGeo* Python package contains VTK powered tools for data visualization in
-geophysics which are wrapped for direct use within the application
-[ParaView by Kitware](https://www.paraview.org) or in a Python environment with
+geophysics which are wrapped for direct use with
 [**PyVista**](https://github.com/pyvista/pyvista). These tools are tailored to
 data visualization in the geosciences with a heavy focus on structured data sets
 like 2D or 3D time-varying grids.
-
 
 **Learn More:**
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.01451/status.svg)](https://doi.org/10.21105/joss.01451)
@@ -19,20 +14,15 @@ like 2D or 3D time-varying grids.
 **Status:** [![PyPI](https://img.shields.io/pypi/v/PVGeo.svg?logo=python&logoColor=white)](https://pypi.org/project/PVGeo/)
 [![Testing](https://github.com/OpenGeoVis/PVGeo/actions/workflows/test.yml/badge.svg)](https://github.com/OpenGeoVis/PVGeo/actions/workflows/test.yml)
 
-
 **Metrics:**
 [![GitHub contributors](https://img.shields.io/github/contributors/OpenGeoVis/PVGeo.svg?logo=github&logoColor=white)](https://GitHub.com/OpenGeoVis/PVGeo/graphs/contributors/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4b9e8d0ef37a4f70a2d02c0d53ed096f)](https://www.codacy.com/app/banesullivan/PVGeo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenGeoVis/PVGeo&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/OpenGeoVis/PVGeo/branch/main/graph/badge.svg)](https://codecov.io/gh/OpenGeoVis/PVGeo/branch/main)
 
-
 ## Demonstrations of *PVGeo*
 
-For a quick overview of how  *PVGeo* can be used in a Python environment or
-directly within ParaView, checkout the code snippets and videos on the
-[**About Examples Page**](https://pvgeo.org/about-examples.html)
-
-
+For a quick overview of how *PVGeo* can be used, checkout the code snippets and
+videos on the [**About Examples Page**](https://pvgeo.org/about-examples.html)
 
 ## Connections
 
@@ -44,7 +34,6 @@ results of PVGeo algorithms, we are actively involved in the development of
 VTK data objects and 3D visualization in Python.
 To learn more about pairing PVGeo with PyVista, please check out the
 [**example Jupyter notebooks**](https://github.com/OpenGeoVis/PVGeo-Examples).
-
 
 ## Getting Started
 
@@ -62,9 +51,7 @@ with all dependencies installed! Go ahead and test your install:
 python -c "import PVGeo; print(PVGeo.__version__)"
 ```
 
-Note that Windows users must use Python >=3.6 when outside of ParaView.
 Further insight can be found in the [**Getting Started Guide**](http://pvgeo.org/overview/getting-started.html).
-
 
 ## Report Issues and Contribute
 
@@ -89,7 +76,6 @@ this repository were made possible by contributors volunteering their time.
 Head over to the [**Contributors Page**](https://github.com/OpenGeoVis/PVGeo/graphs/contributors)
 to learn more about the developers of *PVGeo*.
 
-
 ### Citing PVGeo
 
 There is a [paper about PVGeo](https://doi.org/10.21105/joss.01451)!
@@ -102,10 +88,7 @@ visibility by citing our work!
 See [CITATION.rst](https://github.com/OpenGeoVis/PVGeo/blob/main/CITATION.rst)
 for more details.
 
-
 ## Linking PVGeo to ParaView
 
-To use the *PVGeo* library as plugins in ParaView, please see the detailed
-explanation [**here**](http://pvgeo.org/overview/getting-started) where you
-must create a second isolated Python environment that will host PVGeo for
-ParaView.
+While PVGeo was previously design to be used as plugins directly in ParaView, we are
+unable to maintain support for ParaView and recommend using PyVista instead.

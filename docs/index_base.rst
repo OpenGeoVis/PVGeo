@@ -5,7 +5,7 @@ Welcome to PVGeo's code docs!
 
 .. image:: http://joss.theoj.org/papers/10.21105/joss.01451/status.svg
    :target: https://doi.org/10.21105/joss.01451
-
+   :alt: JOSS Paper
 
 .. image:: https://img.shields.io/badge/demos-grey.svg?logo=vimeo
    :target: https://vimeo.com/user82050125)
@@ -15,13 +15,9 @@ Welcome to PVGeo's code docs!
    :target: https://pypi.org/project/PVGeo/
    :alt: PyPI
 
-.. image:: https://api.codacy.com/project/badge/Grade/4b9e8d0ef37a4f70a2d02c0d53ed096f
-   :target: https://www.codacy.com/app/banesullivan/PVGeo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenGeoVis/PVGeo&amp;utm_campaign=Badge_Grade
-   :alt: Codacy Badge
-
-.. image:: https://img.shields.io/badge/Slack-PVGeo-4B0082.svg?logo=slack
-   :target: http://slack.pvgeo.org
-   :alt: Slack
+.. image:: https://img.shields.io/badge/Slack-PyVista-4B0082.svg?logo=slack
+   :target: http://slack.pyvista.org
+   :alt: PyVista Slack
 
 .. image:: https://github.com/OpenGeoVis/PVGeo/actions/workflows/test.yml/badge.svg
    :target: https://github.com/OpenGeoVis/PVGeo/actions/workflows/test.yml
@@ -35,27 +31,18 @@ Welcome to PVGeo's code docs!
    :target: https://GitHub.com/OpenGeoVis/PVGeo/graphs/contributors/
    :alt: GitHub Contributors
 
-.. image:: https://img.shields.io/badge/docs%20by-gendocs-blue.svg
-   :target: https://gendocs.readthedocs.io/en/latest/?badge=latest)
-   :alt: Documentation Built by gendocs
-
 
 The ``PVGeo`` Python package contains VTK powered tools for data visualization
-in geophysics which are wrapped for direct use within the application
-`ParaView by Kitware`_ or directly in a Python >=3.6 environment when paired
-with the `PyVista Python package`_.
+in geophysics which are wrapped for direct use with the `PyVista Python package`_.
 These tools are tailored to data visualization in the geosciences with a heavy
 focus on structured data sets like 2D or 3D time-varying grids.
 
 This website hosts the documentation for the ``PVGeo`` Python package found
 on `GitHub`_ and `PyPI`_.
 
-For a quick overview of how ``PVGeo`` can be used in a Python environment or
-directly within ParaView, please checkout the code snippets and videos on the
-:ref:`About Examples Page`.
+For a quick overview of how ``PVGeo`` can be used, please checkout the code snippets
+and videos on the :ref:`About Examples Page`.
 
-
-.. _ParaView by Kitware: https://www.paraview.org
 .. _GitHub: https://github.com/OpenGeoVis/PVGeo\
 .. _PyPI: https://pypi.org/project/PVGeo/
 .. _PyVista Python package: http://docs.pyvista.org
@@ -122,9 +109,4 @@ pip:
     pip install PVGeo
 
 
-Now ``PVGeo`` is ready for use in your standard python environment. To use the
-*PVGeo* library as plugins in `ParaView`_, please see the
-`detailed explanation here`_.
-
-.. _ParaView: https://paraview.org
-.. _detailed explanation here: http://pvgeo.org/overview/getting-started/
+Now ``PVGeo`` is ready for use in your standard python environment.

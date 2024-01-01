@@ -1,5 +1,4 @@
-"""PVGeo: an open-source python package for geoscientific visualization in VTK
-and ParaView.
+"""PVGeo: Geoscientific visualization tools for PyVista.
 """
 
 import os
@@ -44,7 +43,7 @@ setuptools.setup(
     version=__version__,
     author="Bane Sullivan",
     author_email="info@pvgeo.org",
-    description="Geoscientific visualization tools for VTK and ParaView",
+    description="Geoscientific visualization tools for PyVista",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/OpenGeoVis/PVGeo",
