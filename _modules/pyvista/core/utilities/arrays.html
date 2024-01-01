@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,6 @@
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -24,9 +23,9 @@
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../../_static/design-tabs.js?v=36754332"></script>
@@ -695,7 +694,9 @@
     <span class="k">return</span> <span class="n">convert_array</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="get_vtk_type"><a class="viewcode-back" href="../../../../content/PVGeo/interface.html#PVGeo.interface.get_vtk_type">[docs]</a><span class="k">def</span> <span class="nf">get_vtk_type</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
+<div class="viewcode-block" id="get_vtk_type">
+<a class="viewcode-back" href="../../../../content/PVGeo/interface.html#PVGeo.interface.get_vtk_type">[docs]</a>
+<span class="k">def</span> <span class="nf">get_vtk_type</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Look up the VTK type for a given numpy data type.</span>
 
 <span class="sd">    Corrects for string type mapping issues.</span>
@@ -716,6 +717,7 @@
     <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">13</span>
     <span class="k">return</span> <span class="n">typ</span></div>
+
 
 
 <span class="k">def</span> <span class="nf">vtk_bit_array_to_char</span><span class="p">(</span><span class="n">vtkarr_bint</span><span class="p">):</span>
@@ -758,7 +760,9 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">vtk_id_list</span><span class="o">.</span><span class="n">GetId</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vtk_id_list</span><span class="o">.</span><span class="n">GetNumberOfIds</span><span class="p">())])</span>
 
 
-<div class="viewcode-block" id="convert_string_array"><a class="viewcode-back" href="../../../../content/PVGeo/interface.html#PVGeo.interface.convert_string_array">[docs]</a><span class="k">def</span> <span class="nf">convert_string_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="convert_string_array">
+<a class="viewcode-back" href="../../../../content/PVGeo/interface.html#PVGeo.interface.convert_string_array">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_string_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a numpy array of strings to a vtkStringArray or vice versa.</span>
 
 <span class="sd">    Parameters</span>
@@ -798,6 +802,7 @@
     <span class="c1">############### OPTIMIZE ###############</span>
     <span class="n">nvalues</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">GetNumberOfValues</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">arr</span><span class="o">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvalues</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;|U&#39;</span><span class="p">)</span></div>
+
     <span class="c1">########################################</span>
 
 

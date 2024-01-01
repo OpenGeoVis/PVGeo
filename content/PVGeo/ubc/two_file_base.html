@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -10,7 +10,6 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -25,9 +24,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -243,95 +242,95 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.ubc.two_file_base">
-<span id="base-classes"></span><h1>Base Classes<a class="headerlink" href="#module-PVGeo.ubc.two_file_base" title="Permalink to this heading"></a></h1>
+<span id="base-classes"></span><h1>Base Classes<a class="headerlink" href="#module-PVGeo.ubc.two_file_base" title="Link to this heading"></a></h1>
 <section id="model-appender-base">
-<h2>Model Appender Base<a class="headerlink" href="#model-appender-base" title="Permalink to this heading"></a></h2>
+<h2>Model Appender Base<a class="headerlink" href="#model-appender-base" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.ubc.two_file_base.</span></span><span class="sig-name descname"><span class="pre">ModelAppenderBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkRectilinearGrid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkRectilinearGrid'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.ubc.two_file_base.</span></span><span class="sig-name descname"><span class="pre">ModelAppenderBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkRectilinearGrid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkRectilinearGrid'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.AlgorithmBase" title="PVGeo.base.AlgorithmBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmBase</span></code></a></p>
 <p>A base class for create mesh-model appenders on the UBC Mesh formats</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.Modified">
-<span class="sig-name descname"><span class="pre">Modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">read_again</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.Modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.Modified" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">Modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">read_again</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.Modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.Modified" title="Link to this definition"></a></dt>
 <dd><p>Call modified if the files needs to be read again again.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.RequestData">
-<span class="sig-name descname"><span class="pre">RequestData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.RequestData" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">RequestData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.RequestData" title="Link to this definition"></a></dt>
 <dd><p>Used by pipeline to generate output</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.RequestInformation">
-<span class="sig-name descname"><span class="pre">RequestInformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.RequestInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.RequestInformation" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">RequestInformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.RequestInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.RequestInformation" title="Link to this definition"></a></dt>
 <dd><p>Used by pipeline to handle time variance and update output extents</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase._place_on_mesh">
-<span class="sig-name descname"><span class="pre">_place_on_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._place_on_mesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._place_on_mesh" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_place_on_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._place_on_mesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._place_on_mesh" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase._read_up_front">
-<span class="sig-name descname"><span class="pre">_read_up_front</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._read_up_front"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._read_up_front" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_read_up_front</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._read_up_front"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._read_up_front" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase._update_time_steps">
-<span class="sig-name descname"><span class="pre">_update_time_steps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._update_time_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._update_time_steps" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_update_time_steps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase._update_time_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase._update_time_steps" title="Link to this definition"></a></dt>
 <dd><p>For internal use only: appropriately sets the timesteps.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.add_model_file_name">
-<span class="sig-name descname"><span class="pre">add_model_file_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.add_model_file_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.add_model_file_name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_model_file_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.add_model_file_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.add_model_file_name" title="Link to this definition"></a></dt>
 <dd><p>Use to set the file names for the reader. Handles single string or
 list of strings.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.clear_models">
-<span class="sig-name descname"><span class="pre">clear_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.clear_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.clear_models" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">clear_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.clear_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.clear_models" title="Link to this definition"></a></dt>
 <dd><p>Use to clear data file names.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.get_data_name">
-<span class="sig-name descname"><span class="pre">get_data_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_data_name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_data_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_data_name" title="Link to this definition"></a></dt>
 <dd><p>Get the data array name</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.get_model_filenames">
-<span class="sig-name descname"><span class="pre">get_model_filenames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_model_filenames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_model_filenames" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_model_filenames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_model_filenames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_model_filenames" title="Link to this definition"></a></dt>
 <dd><p>Returns the list of file names or given and index returns a specified
 timestep’s filename.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.get_time_step_values">
-<span class="sig-name descname"><span class="pre">get_time_step_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_time_step_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_time_step_values" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_time_step_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.get_time_step_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.get_time_step_values" title="Link to this definition"></a></dt>
 <dd><p>Use this in ParaView decorator to register timesteps.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.has_models">
-<span class="sig-name descname"><span class="pre">has_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.has_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.has_models" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.has_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.has_models" title="Link to this definition"></a></dt>
 <dd><p>Return True if models are associated with this mesh</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.modified">
-<span class="sig-name descname"><span class="pre">modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">read_again</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.modified" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">read_again</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.modified" title="Link to this definition"></a></dt>
 <dd><p>Call modified if the files needs to be read again again.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.need_to_read">
-<span class="sig-name descname"><span class="pre">need_to_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.need_to_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.need_to_read" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">need_to_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.need_to_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.need_to_read" title="Link to this definition"></a></dt>
 <dd><p>Ask self if the reader needs to read the files again</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -349,13 +348,13 @@ status</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.set_data_name">
-<span class="sig-name descname"><span class="pre">set_data_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.set_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.set_data_name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_data_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.set_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.set_data_name" title="Link to this definition"></a></dt>
 <dd><p>Set the data array name</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ModelAppenderBase.set_use_filename">
-<span class="sig-name descname"><span class="pre">set_use_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.set_use_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.set_use_filename" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_use_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ModelAppenderBase.set_use_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ModelAppenderBase.set_use_filename" title="Link to this definition"></a></dt>
 <dd><p>Set a flag on whether or not to use the filename as the data array name</p>
 </dd></dl>
 
@@ -363,15 +362,15 @@ status</p>
 
 </section>
 <section id="ubc-mesh-reader-base">
-<h2>UBC Mesh Reader Base<a class="headerlink" href="#ubc-mesh-reader-base" title="Permalink to this heading"></a></h2>
+<h2>UBC Mesh Reader Base<a class="headerlink" href="#ubc-mesh-reader-base" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ubcMeshReaderBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.ubc.two_file_base.</span></span><span class="sig-name descname"><span class="pre">ubcMeshReaderBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nOutputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkUnstructuredGrid'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.ubc.two_file_base.</span></span><span class="sig-name descname"><span class="pre">ubcMeshReaderBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nOutputPorts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkUnstructuredGrid'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.TwoFileReaderBase" title="PVGeo.base.TwoFileReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TwoFileReaderBase</span></code></a></p>
 <p>A base class for the UBC mesh readers</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ubcMeshReaderBase._read_extent">
-<span class="sig-name descname"><span class="pre">_read_extent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase._read_extent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase._read_extent" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_read_extent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase._read_extent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase._read_extent" title="Link to this definition"></a></dt>
 <dd><p>Reads the mesh file for the UBC 2D/3D Mesh or OcTree format to get
 output extents. Computationally inexpensive method to discover whole
 output extent.</p>
@@ -389,48 +388,48 @@ output should be directly passed to set the whole output extent.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ubcMeshReaderBase._ubc_mesh_2d_part">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_ubc_mesh_2d_part</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">FileName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase._ubc_mesh_2d_part"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase._ubc_mesh_2d_part" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_ubc_mesh_2d_part</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">FileName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase._ubc_mesh_2d_part"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase._ubc_mesh_2d_part" title="Link to this definition"></a></dt>
 <dd><p>Internal helper to read 2D mesh file</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.extensions">
-<span class="sig-name descname"><span class="pre">extensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mesh</span> <span class="pre">msh</span> <span class="pre">dat</span> <span class="pre">txt</span> <span class="pre">text'</span></em><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.extensions" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">extensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mesh</span> <span class="pre">msh</span> <span class="pre">dat</span> <span class="pre">txt</span> <span class="pre">text'</span></em><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.extensions" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.get_data_name">
-<span class="sig-name descname"><span class="pre">get_data_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.get_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.get_data_name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_data_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.get_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.get_data_name" title="Link to this definition"></a></dt>
 <dd><p>Get the data array name</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_2d">
-<span class="sig-name descname"><span class="pre">is_2d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.is_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_2d" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_2d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.is_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_2d" title="Link to this definition"></a></dt>
 <dd><p>Returns true if mesh is spatially referenced in only two dimensions</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_3d">
-<span class="sig-name descname"><span class="pre">is_3d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.is_3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_3d" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_3d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.is_3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_3d" title="Link to this definition"></a></dt>
 <dd><p>Returns true if mesh is spatially referenced in three dimensions</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_data_name">
-<span class="sig-name descname"><span class="pre">set_data_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.set_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_data_name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_data_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.set_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_data_name" title="Link to this definition"></a></dt>
 <dd><p>Set the data array name</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_use_filename">
-<span class="sig-name descname"><span class="pre">set_use_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.set_use_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_use_filename" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_use_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.set_use_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_use_filename" title="Link to this definition"></a></dt>
 <dd><p>Set a flag on whether or not to use the filename as the data array name</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.two_file_base.ubcMeshReaderBase.ubc_model_3d">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ubc_model_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">FileName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.ubc_model_3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.ubc_model_3d" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ubc_model_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">FileName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/two_file_base.html#ubcMeshReaderBase.ubc_model_3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.two_file_base.ubcMeshReaderBase.ubc_model_3d" title="Link to this definition"></a></dt>
 <dd><p>Reads the 3D model file and returns a 1D NumPy float array. Use the
 place_model_on_mesh() method to associate with a grid.</p>
 <dl class="field-list simple">

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,6 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -24,9 +23,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -298,7 +297,9 @@
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="ManySlicesAlongPoints"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints">[docs]</a><span class="k">class</span> <span class="nc">ManySlicesAlongPoints</span><span class="p">(</span><span class="n">_SliceBase</span><span class="p">):</span>
+<div class="viewcode-block" id="ManySlicesAlongPoints">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints">[docs]</a>
+<span class="k">class</span> <span class="nc">ManySlicesAlongPoints</span><span class="p">(</span><span class="n">_SliceBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Takes a series of points and a data source to be sliced. The points are</span>
 <span class="sd">    used to construct a path through the data source and a slice is added at</span>
 <span class="sd">    intervals of that path along the vector of that path at that point. This</span>
@@ -325,7 +326,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__useNearestNbr</span> <span class="o">=</span> <span class="n">nearest_nbr</span>
 
     <span class="c1"># CRITICAL for multiple input ports</span>
-<div class="viewcode-block" id="ManySlicesAlongPoints.FillInputPortInformation"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.FillInputPortInformation">[docs]</a>    <span class="k">def</span> <span class="nf">FillInputPortInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+<div class="viewcode-block" id="ManySlicesAlongPoints.FillInputPortInformation">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.FillInputPortInformation">[docs]</a>
+    <span class="k">def</span> <span class="nf">FillInputPortInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This simply makes sure the user selects the correct inputs&quot;&quot;&quot;</span>
         <span class="n">typ</span> <span class="o">=</span> <span class="s1">&#39;vtkDataSet&#39;</span>
         <span class="k">if</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -333,7 +336,10 @@
         <span class="n">info</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">INPUT_REQUIRED_DATA_TYPE</span><span class="p">(),</span> <span class="n">typ</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongPoints._get_planes"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints._get_planes">[docs]</a>    <span class="k">def</span> <span class="nf">_get_planes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pts</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongPoints._get_planes">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints._get_planes">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_planes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pts</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to generate planes for the slices&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># sklearn&#39;s KDTree is faster: use it if available</span>
@@ -369,7 +375,10 @@
 
         <span class="k">return</span> <span class="n">planes</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongPoints._get_slice"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints._get_slice">[docs]</a>    <span class="k">def</span> <span class="nf">_get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pts</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">planes</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongPoints._get_slice">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints._get_slice">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pts</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">planes</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to perform the filter&quot;&quot;&quot;</span>
         <span class="c1"># numPoints = pts.GetNumberOfPoints()</span>
         <span class="c1"># Set number of blocks based on user choice in the selection</span>
@@ -385,7 +394,10 @@
             <span class="n">blk</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">output</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongPoints.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongPoints.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Port 0: points</span>
@@ -396,9 +408,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_slice</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">planes</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Setters / Getters ####</span>
 
-<div class="viewcode-block" id="ManySlicesAlongPoints.set_use_nearest_nbr"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.set_use_nearest_nbr">[docs]</a>    <span class="k">def</span> <span class="nf">set_use_nearest_nbr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+<div class="viewcode-block" id="ManySlicesAlongPoints.set_use_nearest_nbr">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.set_use_nearest_nbr">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_use_nearest_nbr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a flag on whether to use SciPy&#39;s nearest neighbor approximation</span>
 <span class="sd">        when generating the slicing path</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -406,18 +421,25 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__useNearestNbr</span> <span class="o">=</span> <span class="n">flag</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongPoints.apply"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongPoints.apply">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.apply">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the algorithm along some points for the given input data&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="SlideSliceAlongPoints"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints">[docs]</a><span class="k">class</span> <span class="nc">SlideSliceAlongPoints</span><span class="p">(</span><span class="n">ManySlicesAlongPoints</span><span class="p">):</span>
+<div class="viewcode-block" id="SlideSliceAlongPoints">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints">[docs]</a>
+<span class="k">class</span> <span class="nc">SlideSliceAlongPoints</span><span class="p">(</span><span class="n">ManySlicesAlongPoints</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Takes a series of points and a data source to be sliced. The points are</span>
 <span class="sd">    used to construct a path through the data source and a slice is added at</span>
 <span class="sd">    specified locations along that path along the vector of that path at that</span>
@@ -437,7 +459,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__planes</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__loc</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># Percent (halfway)</span>
 
-<div class="viewcode-block" id="SlideSliceAlongPoints._get_slice"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints._get_slice">[docs]</a>    <span class="k">def</span> <span class="nf">_get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pts</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">planes</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+<div class="viewcode-block" id="SlideSliceAlongPoints._get_slice">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints._get_slice">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pts</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">planes</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to perform the filter&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">planes</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPlane</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;``_get_slice`` can only handle one plane.&#39;</span><span class="p">)</span>
@@ -446,7 +470,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">planes</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span></div>
 
-<div class="viewcode-block" id="SlideSliceAlongPoints.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SlideSliceAlongPoints.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Port 0: points</span>
@@ -460,14 +487,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_slice</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__planes</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">output</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="SlideSliceAlongPoints.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SlideSliceAlongPoints.RequestInformation">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.RequestInformation">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to prepare output&quot;&quot;&quot;</span>
         <span class="n">pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Port 0: points</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_number_of_slices</span><span class="p">(</span><span class="n">pts</span><span class="o">.</span><span class="n">GetNumberOfPoints</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__planes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_planes</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="SlideSliceAlongPoints.set_location"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.set_location">[docs]</a>    <span class="k">def</span> <span class="nf">set_location</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SlideSliceAlongPoints.set_location">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.set_location">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_location</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the location along the input line for the slice location as a</span>
 <span class="sd">        percent (0, 99).&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">loc</span> <span class="o">&gt;</span> <span class="mi">99</span> <span class="ow">or</span> <span class="n">loc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -478,15 +511,22 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__loc</span> <span class="o">=</span> <span class="n">loc</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SlideSliceAlongPoints.get_location"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.get_location">[docs]</a>    <span class="k">def</span> <span class="nf">get_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SlideSliceAlongPoints.get_location">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.get_location">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the current location along the input line for the slice&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__loc</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__loc</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="ManySlicesAlongAxis"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis">[docs]</a><span class="k">class</span> <span class="nc">ManySlicesAlongAxis</span><span class="p">(</span><span class="n">_SliceBase</span><span class="p">):</span>
+<div class="viewcode-block" id="ManySlicesAlongAxis">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis">[docs]</a>
+<span class="k">class</span> <span class="nc">ManySlicesAlongAxis</span><span class="p">(</span><span class="n">_SliceBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Slices a ``vtkDataSet`` along a given axis many times.</span>
 <span class="sd">    This produces a specified number of slices at once each with a normal vector</span>
 <span class="sd">    oriented along the axis of choice and spaced uniformly through the range of</span>
@@ -515,18 +555,26 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__rng</span> <span class="o">=</span> <span class="n">rng</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__pad</span> <span class="o">=</span> <span class="n">pad</span>
 
-<div class="viewcode-block" id="ManySlicesAlongAxis._get_origin"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis._get_origin">[docs]</a>    <span class="k">def</span> <span class="nf">_get_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+<div class="viewcode-block" id="ManySlicesAlongAxis._get_origin">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis._get_origin">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to get plane origin&quot;&quot;&quot;</span>
         <span class="n">og</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_input_center</span><span class="p">(</span><span class="n">pdi</span><span class="p">))</span>
         <span class="n">og</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__axis</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rng</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">og</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongAxis.get_input_bounds"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_bounds">[docs]</a>    <span class="k">def</span> <span class="nf">get_input_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongAxis.get_input_bounds">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_bounds">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_input_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the bounds of the input data set on the set slicing axis.&quot;&quot;&quot;</span>
         <span class="n">bounds</span> <span class="o">=</span> <span class="n">pdi</span><span class="o">.</span><span class="n">GetBounds</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">bounds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__axis</span> <span class="o">*</span> <span class="mi">2</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__axis</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongAxis.get_input_center"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_center">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="ManySlicesAlongAxis.get_input_center">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_center">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_input_center</span><span class="p">(</span><span class="n">pdi</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the center of the input data set</span>
 
@@ -539,13 +587,19 @@
         <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongAxis.get_normal"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_normal">[docs]</a>    <span class="k">def</span> <span class="nf">get_normal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongAxis.get_normal">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_normal">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_normal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the normal of the slicing plane&quot;&quot;&quot;</span>
         <span class="n">norm</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="n">norm</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__axis</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">norm</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongAxis._set_axial_range"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis._set_axial_range">[docs]</a>    <span class="k">def</span> <span class="nf">_set_axial_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongAxis._set_axial_range">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis._set_axial_range">[docs]</a>
+    <span class="k">def</span> <span class="nf">_set_axial_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to set the slicing range along the set axis&quot;&quot;&quot;</span>
         <span class="n">bounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_input_bounds</span><span class="p">(</span><span class="n">pdi</span><span class="p">)</span>
         <span class="n">padding</span> <span class="o">=</span> <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pad</span>  <span class="c1"># get percent padding</span>
@@ -553,7 +607,10 @@
             <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">padding</span><span class="p">,</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">padding</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_number_of_slices</span><span class="p">()</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongAxis.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongAxis.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -578,9 +635,12 @@
 
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Setters / Getters ####</span>
 
-<div class="viewcode-block" id="ManySlicesAlongAxis.set_axis"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.set_axis">[docs]</a>    <span class="k">def</span> <span class="nf">set_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
+<div class="viewcode-block" id="ManySlicesAlongAxis.set_axis">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.set_axis">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the axis on which to slice</span>
 
 <span class="sd">        Args:</span>
@@ -592,25 +652,38 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__axis</span> <span class="o">=</span> <span class="n">axis</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongAxis.get_range"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_range">[docs]</a>    <span class="k">def</span> <span class="nf">get_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongAxis.get_range">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_range">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the slicing range for the set axis&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rng</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongAxis.get_axis"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_axis">[docs]</a>    <span class="k">def</span> <span class="nf">get_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongAxis.get_axis">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_axis">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the set axis to slice upon as int index (0,1,2)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__axis</span></div>
 
-<div class="viewcode-block" id="ManySlicesAlongAxis.set_padding"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.set_padding">[docs]</a>    <span class="k">def</span> <span class="nf">set_padding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pad</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ManySlicesAlongAxis.set_padding">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.set_padding">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_padding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pad</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the percent padding for the slices on the edges&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pad</span> <span class="o">!=</span> <span class="n">pad</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__pad</span> <span class="o">=</span> <span class="n">pad</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="SliceThroughTime"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime">[docs]</a><span class="k">class</span> <span class="nc">SliceThroughTime</span><span class="p">(</span><span class="n">ManySlicesAlongAxis</span><span class="p">):</span>
+<div class="viewcode-block" id="SliceThroughTime">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime">[docs]</a>
+<span class="k">class</span> <span class="nc">SliceThroughTime</span><span class="p">(</span><span class="n">ManySlicesAlongAxis</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Takes a sliceable ``vtkDataSet`` and progresses a slice of it along a</span>
 <span class="sd">    given axis. The macro requires that the clip already exist in the pipeline.</span>
 <span class="sd">    This is especially useful if you have many clips linked together as all will</span>
@@ -634,15 +707,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span> <span class="o">=</span> <span class="n">dt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="SliceThroughTime._update_time_steps"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime._update_time_steps">[docs]</a>    <span class="k">def</span> <span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SliceThroughTime._update_time_steps">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime._update_time_steps">[docs]</a>
+    <span class="k">def</span> <span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;For internal use only&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">update_time_steps</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_number_of_slices</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span>
         <span class="p">)</span></div>
 
+
     <span class="c1">#### Algorithm Methods ####</span>
 
-<div class="viewcode-block" id="SliceThroughTime.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+<div class="viewcode-block" id="SliceThroughTime.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -656,21 +734,30 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">,</span> <span class="n">plane</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="SliceThroughTime.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SliceThroughTime.RequestInformation">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime.RequestInformation">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to set the time information&quot;&quot;&quot;</span>
         <span class="c1"># register time:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_time_steps</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Public Setters / Getters ####</span>
 
-<div class="viewcode-block" id="SliceThroughTime.set_number_of_slices"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime.set_number_of_slices">[docs]</a>    <span class="k">def</span> <span class="nf">set_number_of_slices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+<div class="viewcode-block" id="SliceThroughTime.set_number_of_slices">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime.set_number_of_slices">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_number_of_slices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the number of slices/timesteps to generate&quot;&quot;&quot;</span>
         <span class="n">ManySlicesAlongAxis</span><span class="o">.</span><span class="n">set_number_of_slices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_time_steps</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SliceThroughTime.set_time_delta"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime.set_time_delta">[docs]</a>    <span class="k">def</span> <span class="nf">set_time_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SliceThroughTime.set_time_delta">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime.set_time_delta">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_time_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the time step interval in seconds</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -679,9 +766,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_update_time_steps</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SliceThroughTime.get_time_step_values"><a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime.get_time_step_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SliceThroughTime.get_time_step_values">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/slicing.html#PVGeo.filters.slicing.SliceThroughTime.get_time_step_values">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Use this in ParaView decorator to register timesteps&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span></div>
+</div>
+
 </pre></div>
 
            </div>

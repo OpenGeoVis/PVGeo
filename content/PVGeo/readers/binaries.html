@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -10,7 +10,6 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -25,9 +24,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -239,12 +238,12 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.readers.binaries">
-<span id="binary-serialized-file-i-o"></span><h1>Binary/Serialized File I/O<a class="headerlink" href="#module-PVGeo.readers.binaries" title="Permalink to this heading"></a></h1>
+<span id="binary-serialized-file-i-o"></span><h1>Binary/Serialized File I/O<a class="headerlink" href="#module-PVGeo.readers.binaries" title="Link to this heading"></a></h1>
 <section id="madagascar-ssrsf-reader">
-<h2>Madagascar SSRSF Reader<a class="headerlink" href="#madagascar-ssrsf-reader" title="Permalink to this heading"></a></h2>
+<h2>Madagascar SSRSF Reader<a class="headerlink" href="#madagascar-ssrsf-reader" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.MadagascarReader">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.readers.binaries.</span></span><span class="sig-name descname"><span class="pre">MadagascarReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#MadagascarReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.MadagascarReader" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.readers.binaries.</span></span><span class="sig-name descname"><span class="pre">MadagascarReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#MadagascarReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.MadagascarReader" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#PVGeo.readers.binaries.PackedBinariesReader" title="PVGeo.readers.binaries.PackedBinariesReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">PackedBinariesReader</span></code></a></p>
 <p>This reads in float or double data that is packed into a Madagascar
 binary file format with a leader header. The reader ignores all of the ascii
@@ -261,23 +260,23 @@ keeps thing simple when using filters in this repository.
 <a class="reference external" href="http://www.ahay.org/wiki/RSF_Comprehensive_Description#Single-stream_RSF">Details Here</a>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.MadagascarReader._read_raw_file">
-<span class="sig-name descname"><span class="pre">_read_raw_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#MadagascarReader._read_raw_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.MadagascarReader._read_raw_file" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_read_raw_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#MadagascarReader._read_raw_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.MadagascarReader._read_raw_file" title="Link to this definition"></a></dt>
 <dd><p>Reads the raw data from the file for Madagascar SSRSF files</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.MadagascarReader.description">
-<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PVGeo:</span> <span class="pre">Madagascar</span> <span class="pre">Single</span> <span class="pre">Stream</span> <span class="pre">RSF</span> <span class="pre">Files'</span></em><a class="headerlink" href="#PVGeo.readers.binaries.MadagascarReader.description" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PVGeo:</span> <span class="pre">Madagascar</span> <span class="pre">Single</span> <span class="pre">Stream</span> <span class="pre">RSF</span> <span class="pre">Files'</span></em><a class="headerlink" href="#PVGeo.readers.binaries.MadagascarReader.description" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </section>
 <section id="packed-binaries-reader">
-<h2>Packed Binaries Reader<a class="headerlink" href="#packed-binaries-reader" title="Permalink to this heading"></a></h2>
+<h2>Packed Binaries Reader<a class="headerlink" href="#packed-binaries-reader" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.readers.binaries.</span></span><span class="sig-name descname"><span class="pre">PackedBinariesReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.readers.binaries.</span></span><span class="sig-name descname"><span class="pre">PackedBinariesReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.ReaderBase" title="PVGeo.base.ReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReaderBase</span></code></a></p>
 <p>This reads in float or double data that is packed into a binary file
 format. It will treat the data as one long array and make a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code>
@@ -289,83 +288,83 @@ the filters we can apply to this data down the pipeline and keeps things
 simple when using filters in this repository.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader.RequestData">
-<span class="sig-name descname"><span class="pre">RequestData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.RequestData" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">RequestData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outInfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.RequestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.RequestData" title="Link to this definition"></a></dt>
 <dd><p>Used by pipeline to request data for current timestep</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader._get_file_contents">
-<span class="sig-name descname"><span class="pre">_get_file_contents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._get_file_contents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._get_file_contents" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_get_file_contents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._get_file_contents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._get_file_contents" title="Link to this definition"></a></dt>
 <dd><p>Internal helper to get all contents for all files</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader._get_raw_data">
-<span class="sig-name descname"><span class="pre">_get_raw_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._get_raw_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._get_raw_data" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_get_raw_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._get_raw_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._get_raw_data" title="Link to this definition"></a></dt>
 <dd><p>This will return the proper data for the given timestep</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader._read_raw_file">
-<span class="sig-name descname"><span class="pre">_read_raw_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._read_raw_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._read_raw_file" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_read_raw_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._read_raw_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._read_raw_file" title="Link to this definition"></a></dt>
 <dd><p>Internal helper to read the raw data from the file</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader._read_up_front">
-<span class="sig-name descname"><span class="pre">_read_up_front</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._read_up_front"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._read_up_front" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_read_up_front</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader._read_up_front"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader._read_up_front" title="Link to this definition"></a></dt>
 <dd><p>Should not need to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader.convert_array">
-<span class="sig-name descname"><span class="pre">convert_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.convert_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.convert_array" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">convert_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.convert_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.convert_array" title="Link to this definition"></a></dt>
 <dd><p>Converts the numpy array to a vtkDataArray</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader.description">
-<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PVGeo:</span> <span class="pre">Packed</span> <span class="pre">Binaries</span> <span class="pre">Reader'</span></em><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.description" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PVGeo:</span> <span class="pre">Packed</span> <span class="pre">Binaries</span> <span class="pre">Reader'</span></em><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.description" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader.extensions">
-<span class="sig-name descname"><span class="pre">extensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'H&#64;</span> <span class="pre">bin</span> <span class="pre">rsf</span> <span class="pre">rsf&#64;</span> <span class="pre">HH</span> <span class="pre">npz'</span></em><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.extensions" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">extensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'H&#64;</span> <span class="pre">bin</span> <span class="pre">rsf</span> <span class="pre">rsf&#64;</span> <span class="pre">HH</span> <span class="pre">npz'</span></em><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.extensions" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader.get_data_name">
-<span class="sig-name descname"><span class="pre">get_data_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.get_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.get_data_name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_data_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.get_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.get_data_name" title="Link to this definition"></a></dt>
 <dd><p>Get name used for the data array</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader.get_data_types">
-<span class="sig-name descname"><span class="pre">get_data_types</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.get_data_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.get_data_types" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_data_types</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.get_data_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.get_data_types" title="Link to this definition"></a></dt>
 <dd><p>Get the data type of the binary file</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader.get_endian">
-<span class="sig-name descname"><span class="pre">get_endian</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.get_endian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.get_endian" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_endian</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.get_endian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.get_endian" title="Link to this definition"></a></dt>
 <dd><p>Get the endianness of the data file.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader.set_data_name">
-<span class="sig-name descname"><span class="pre">set_data_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.set_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.set_data_name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_data_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.set_data_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.set_data_name" title="Link to this definition"></a></dt>
 <dd><p>The string name of the data array generated from the input file.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader.set_data_type">
-<span class="sig-name descname"><span class="pre">set_data_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.set_data_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.set_data_type" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_data_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.set_data_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.set_data_type" title="Link to this definition"></a></dt>
 <dd><p>Set the data type of the binary file: <cite>double=’d’</cite>, <cite>float=’f’</cite>, <cite>int=’i’</cite></p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.readers.binaries.PackedBinariesReader.set_endian">
-<span class="sig-name descname"><span class="pre">set_endian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endian</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.set_endian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.set_endian" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_endian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endian</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/readers/binaries.html#PackedBinariesReader.set_endian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.readers.binaries.PackedBinariesReader.set_endian" title="Link to this definition"></a></dt>
 <dd><p>Set the endianness of the data file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

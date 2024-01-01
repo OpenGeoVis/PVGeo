@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -10,7 +10,6 @@
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -25,9 +24,9 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../_static/design-tabs.js?v=36754332"></script>
@@ -280,25 +279,25 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.interface">
-<span id="interface"></span><h1>Interface<a class="headerlink" href="#module-PVGeo.interface" title="Permalink to this heading"></a></h1>
+<span id="interface"></span><h1>Interface<a class="headerlink" href="#module-PVGeo.interface" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">interface</span></code> module provides functions to convert/cast between common
 VTK and NumPy/Pandas data types. These methods provide a simple to use interface
 for VTK data types so that users can make changes to VTK data structures via
 Python data structures that are easier to perform numerical operations on.</p>
 <section id="add-arrays-from-data-frame">
-<h2>add_arrays_from_data_frame<a class="headerlink" href="#add-arrays-from-data-frame" title="Permalink to this heading"></a></h2>
+<h2>add_arrays_from_data_frame<a class="headerlink" href="#add-arrays-from-data-frame" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.add_arrays_from_data_frame">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">add_arrays_from_data_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#add_arrays_from_data_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.add_arrays_from_data_frame" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">add_arrays_from_data_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#add_arrays_from_data_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.add_arrays_from_data_frame" title="Link to this definition"></a></dt>
 <dd><p>Add all of the arrays from a given dataframe to an output’s data</p>
 </dd></dl>
 
 </section>
 <section id="convert-array">
-<h2>convert_array<a class="headerlink" href="#convert-array" title="Permalink to this heading"></a></h2>
+<h2>convert_array<a class="headerlink" href="#convert-array" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.convert_array">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">convert_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#convert_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.convert_array" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">convert_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#convert_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.convert_array" title="Link to this definition"></a></dt>
 <dd><p>A helper to convert a NumPy array to a vtkDataArray or vice versa</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -323,20 +322,20 @@ return a pandas DataFrame.</p>
 
 </section>
 <section id="convert-cell-conn">
-<h2>convert_cell_conn<a class="headerlink" href="#convert-cell-conn" title="Permalink to this heading"></a></h2>
+<h2>convert_cell_conn<a class="headerlink" href="#convert-cell-conn" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.convert_cell_conn">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">convert_cell_conn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell_connectivity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#convert_cell_conn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.convert_cell_conn" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">convert_cell_conn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell_connectivity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#convert_cell_conn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.convert_cell_conn" title="Link to this definition"></a></dt>
 <dd><p>Converts cell connectivity arrays to a cell matrix array that makes sense
 for VTK cell arrays.</p>
 </dd></dl>
 
 </section>
 <section id="convert-string-array">
-<h2>convert_string_array<a class="headerlink" href="#convert-string-array" title="Permalink to this heading"></a></h2>
+<h2>convert_string_array<a class="headerlink" href="#convert-string-array" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.convert_string_array">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">convert_string_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/core/utilities/arrays.html#convert_string_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.convert_string_array" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">convert_string_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/core/utilities/arrays.html#convert_string_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.convert_string_array" title="Link to this definition"></a></dt>
 <dd><p>Convert a numpy array of strings to a vtkStringArray or vice versa.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -359,39 +358,39 @@ to make this faster, please consider opening a pull request.</p>
 
 </section>
 <section id="data-frame-to-table">
-<h2>data_frame_to_table<a class="headerlink" href="#data-frame-to-table" title="Permalink to this heading"></a></h2>
+<h2>data_frame_to_table<a class="headerlink" href="#data-frame-to-table" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.data_frame_to_table">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">data_frame_to_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#data_frame_to_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.data_frame_to_table" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">data_frame_to_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#data_frame_to_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.data_frame_to_table" title="Link to this definition"></a></dt>
 <dd><p>Converts a pandas DataFrame to a vtkTable</p>
 </dd></dl>
 
 </section>
 <section id="get-array">
-<h2>get_array<a class="headerlink" href="#get-array" title="Permalink to this heading"></a></h2>
+<h2>get_array<a class="headerlink" href="#get-array" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.get_array">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtk_object</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#get_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_array" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtk_object</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#get_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_array" title="Link to this definition"></a></dt>
 <dd><p>Given an input dataset, this will return the named array as a NumPy array
 or a vtkDataArray if specified</p>
 </dd></dl>
 
 </section>
 <section id="get-data-dict">
-<h2>get_data_dict<a class="headerlink" href="#get-data-dict" title="Permalink to this heading"></a></h2>
+<h2>get_data_dict<a class="headerlink" href="#get-data-dict" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.get_data_dict">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_data_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cell'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#get_data_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_data_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_data_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cell'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#get_data_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_data_dict" title="Link to this definition"></a></dt>
 <dd><p>Given an input dataset, this will return all the arrays in that object’s
 cell/point/field/row data as named NumPy arrays in a dictionary.</p>
 </dd></dl>
 
 </section>
 <section id="get-dtypes">
-<h2>get_dtypes<a class="headerlink" href="#get-dtypes" title="Permalink to this heading"></a></h2>
+<h2>get_dtypes<a class="headerlink" href="#get-dtypes" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.get_dtypes">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_dtypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#get_dtypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_dtypes" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_dtypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#get_dtypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_dtypes" title="Link to this definition"></a></dt>
 <dd><p>This converts char dtypes and an endian to a numpy and VTK data type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -406,10 +405,10 @@ for VTK data types</p>
 
 </section>
 <section id="get-vtk-type">
-<h2>get_vtk_type<a class="headerlink" href="#get-vtk-type" title="Permalink to this heading"></a></h2>
+<h2>get_vtk_type<a class="headerlink" href="#get-vtk-type" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.get_vtk_type">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_vtk_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/core/utilities/arrays.html#get_vtk_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_vtk_type" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_vtk_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/core/utilities/arrays.html#get_vtk_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_vtk_type" title="Link to this definition"></a></dt>
 <dd><p>Look up the VTK type for a given numpy data type.</p>
 <p>Corrects for string type mapping issues.</p>
 <dl class="field-list simple">
@@ -427,10 +426,10 @@ for VTK data types</p>
 
 </section>
 <section id="place-array-in-table">
-<h2>place_array_in_table<a class="headerlink" href="#place-array-in-table" title="Permalink to this heading"></a></h2>
+<h2>place_array_in_table<a class="headerlink" href="#place-array-in-table" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.place_array_in_table">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">place_array_in_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ndarr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">titles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#place_array_in_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.place_array_in_table" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">place_array_in_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ndarr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">titles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#place_array_in_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.place_array_in_table" title="Link to this definition"></a></dt>
 <dd><p>Takes a 1D/2D numpy array and makes a vtkTable of it</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -452,10 +451,10 @@ have same number of elements as columns in input ndarray</p></li>
 
 </section>
 <section id="points-to-poly-data">
-<h2>points_to_poly_data<a class="headerlink" href="#points-to-poly-data" title="Permalink to this heading"></a></h2>
+<h2>points_to_poly_data<a class="headerlink" href="#points-to-poly-data" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.points_to_poly_data">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">points_to_poly_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#points_to_poly_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.points_to_poly_data" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">points_to_poly_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#points_to_poly_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.points_to_poly_data" title="Link to this definition"></a></dt>
 <dd><p>Create <code class="docutils literal notranslate"><span class="pre">vtkPolyData</span></code> from a numpy array of XYZ points. If the points
 have more than 3 dimensions, then all dimensions after the third will be
 added as attributes. Assume the first three dimensions are the XYZ
@@ -479,10 +478,10 @@ array</p></li>
 
 </section>
 <section id="table-to-data-frame">
-<h2>table_to_data_frame<a class="headerlink" href="#table-to-data-frame" title="Permalink to this heading"></a></h2>
+<h2>table_to_data_frame<a class="headerlink" href="#table-to-data-frame" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.table_to_data_frame">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">table_to_data_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#table_to_data_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.table_to_data_frame" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">table_to_data_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#table_to_data_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.table_to_data_frame" title="Link to this definition"></a></dt>
 <dd><p>Converts a vtkTable to a pandas DataFrame</p>
 </dd></dl>
 

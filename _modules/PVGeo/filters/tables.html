@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,6 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -24,9 +23,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -236,7 +235,9 @@
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="CombineTables"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.CombineTables">[docs]</a><span class="k">class</span> <span class="nc">CombineTables</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+<div class="viewcode-block" id="CombineTables">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.CombineTables">[docs]</a>
+<span class="k">class</span> <span class="nc">CombineTables</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Takes two tables and combines them if they have the same number of rows.</span>
 <span class="sd">    Currently this cannot handle time varying tables as that gets complicated</span>
 <span class="sd">    really quickly if the tables do not have the same timestep values</span>
@@ -256,13 +257,18 @@
         <span class="c1"># Parameters... none</span>
 
     <span class="c1"># CRITICAL for multiple input ports</span>
-<div class="viewcode-block" id="CombineTables.FillInputPortInformation"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.CombineTables.FillInputPortInformation">[docs]</a>    <span class="k">def</span> <span class="nf">FillInputPortInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+<div class="viewcode-block" id="CombineTables.FillInputPortInformation">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.CombineTables.FillInputPortInformation">[docs]</a>
+    <span class="k">def</span> <span class="nf">FillInputPortInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline. Necessary when dealing with multiple input ports&quot;&quot;&quot;</span>
         <span class="c1"># all are tables so no need to check port</span>
         <span class="n">info</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">INPUT_REQUIRED_DATA_TYPE</span><span class="p">(),</span> <span class="s2">&quot;vtkTable&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="CombineTables.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.CombineTables.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CombineTables.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.CombineTables.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Inputs from different ports:</span>
         <span class="n">pdi0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -282,19 +288,26 @@
             <span class="n">pdo</span><span class="o">.</span><span class="n">GetRowData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="CombineTables.apply"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.CombineTables.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table0</span><span class="p">,</span> <span class="n">table1</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CombineTables.apply">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.CombineTables.apply">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table0</span><span class="p">,</span> <span class="n">table1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the algorithm on the two input tables&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">table0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">table1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
 <span class="c1"># ---- Reshape Table ----#</span>
 
 
-<div class="viewcode-block" id="ReshapeTable"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable">[docs]</a><span class="k">class</span> <span class="nc">ReshapeTable</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+<div class="viewcode-block" id="ReshapeTable">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable">[docs]</a>
+<span class="k">class</span> <span class="nc">ReshapeTable</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This filter will take a ``vtkTable`` object and reshape it. This filter</span>
 <span class="sd">    essentially treats ``vtkTable``s as 2D matrices and reshapes them using</span>
 <span class="sd">    ``numpy.reshape`` in a C contiguous manner. Unfortunately, data fields will</span>
@@ -318,7 +331,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__names</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;names&#39;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__order</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;order&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ReshapeTable._reshape"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable._reshape">[docs]</a>    <span class="k">def</span> <span class="nf">_reshape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
+<div class="viewcode-block" id="ReshapeTable._reshape">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable._reshape">[docs]</a>
+    <span class="k">def</span> <span class="nf">_reshape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to perform the reshape&quot;&quot;&quot;</span>
         <span class="c1"># Get number of columns</span>
         <span class="n">cols</span> <span class="o">=</span> <span class="n">pdi</span><span class="o">.</span><span class="n">GetNumberOfColumns</span><span class="p">()</span>
@@ -372,7 +387,10 @@
 
         <span class="k">return</span> <span class="n">pdo</span></div>
 
-<div class="viewcode-block" id="ReshapeTable.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ReshapeTable.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -381,9 +399,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_reshape</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Setters and Getters ####</span>
 
-<div class="viewcode-block" id="ReshapeTable.set_names"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.set_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">):</span>
+<div class="viewcode-block" id="ReshapeTable.set_names">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.set_names">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set names using a semicolon (;) separated string or a list of strings</span>
 
 <span class="sd">        Args:</span>
@@ -397,18 +418,27 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__names</span> <span class="o">=</span> <span class="n">names</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ReshapeTable.add_name"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.add_name">[docs]</a>    <span class="k">def</span> <span class="nf">add_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ReshapeTable.add_name">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.add_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Use to append a name to the list of data array names for the output</span>
 <span class="sd">        table.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ReshapeTable.get_names"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.get_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ReshapeTable.get_names">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.get_names">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of the names given to the new arrays&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__names</span></div>
 
-<div class="viewcode-block" id="ReshapeTable.set_number_of_columns"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.set_number_of_columns">[docs]</a>    <span class="k">def</span> <span class="nf">set_number_of_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ncols</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ReshapeTable.set_number_of_columns">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.set_number_of_columns">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_number_of_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ncols</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the number of columns for the output ``vtkTable``&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ncols</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="n">ncols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ncols</span><span class="p">)</span>
@@ -416,7 +446,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__ncols</span> <span class="o">=</span> <span class="n">ncols</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ReshapeTable.set_number_of_rows"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.set_number_of_rows">[docs]</a>    <span class="k">def</span> <span class="nf">set_number_of_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nrows</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ReshapeTable.set_number_of_rows">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.set_number_of_rows">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_number_of_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nrows</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the number of rows for the output ``vtkTable``&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="n">nrows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
@@ -424,17 +457,24 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__nrows</span> <span class="o">=</span> <span class="n">nrows</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ReshapeTable.set_order"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.set_order">[docs]</a>    <span class="k">def</span> <span class="nf">set_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ReshapeTable.set_order">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ReshapeTable.set_order">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the reshape order (``&#39;C&#39;`` of ``&#39;F&#39;``)&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__order</span> <span class="o">!=</span> <span class="n">order</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__order</span> <span class="o">=</span> <span class="n">order</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="ExtractArray"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ExtractArray">[docs]</a><span class="k">class</span> <span class="nc">ExtractArray</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+<div class="viewcode-block" id="ExtractArray">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ExtractArray">[docs]</a>
+<span class="k">class</span> <span class="nc">ExtractArray</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract an array from a ``vtkDataSet`` and make a ``vtkTable`` of it.&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Extract Array&#39;</span>
@@ -450,7 +490,9 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
 
-<div class="viewcode-block" id="ExtractArray.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ExtractArray.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+<div class="viewcode-block" id="ExtractArray.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ExtractArray.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Inputs from different ports:</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -464,7 +506,10 @@
 
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="ExtractArray.SetInputArrayToProcess"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ExtractArray.SetInputArrayToProcess">[docs]</a>    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ExtractArray.SetInputArrayToProcess">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ExtractArray.SetInputArrayToProcess">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
 
 <span class="sd">        Args:</span>
@@ -483,7 +528,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="ExtractArray.apply"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ExtractArray.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ExtractArray.apply">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.ExtractArray.apply">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the algorithm on the input data object, specifying the array name</span>
 <span class="sd">        to extract.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -491,13 +539,17 @@
         <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="SplitTableOnArray"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.SplitTableOnArray">[docs]</a><span class="k">class</span> <span class="nc">SplitTableOnArray</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+<div class="viewcode-block" id="SplitTableOnArray">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.SplitTableOnArray">[docs]</a>
+<span class="k">class</span> <span class="nc">SplitTableOnArray</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A filter to separate table data based on the unique values of a given data</span>
 <span class="sd">    array into a ``vtkMultiBlockDataSet``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -515,7 +567,9 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
 
-<div class="viewcode-block" id="SplitTableOnArray.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.SplitTableOnArray.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+<div class="viewcode-block" id="SplitTableOnArray.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.SplitTableOnArray.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -541,7 +595,10 @@
 
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="SplitTableOnArray.SetInputArrayToProcess"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.SplitTableOnArray.SetInputArrayToProcess">[docs]</a>    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SplitTableOnArray.SetInputArrayToProcess">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.SplitTableOnArray.SetInputArrayToProcess">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
 
 <span class="sd">        Args:</span>
@@ -560,7 +617,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="SplitTableOnArray.apply"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.SplitTableOnArray.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SplitTableOnArray.apply">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.SplitTableOnArray.apply">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the algorithm on the input data object, specifying the array name</span>
 <span class="sd">        to use for the split.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -568,13 +628,17 @@
         <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputArrayToProcess</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="AppendTableToCellData"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData">[docs]</a><span class="k">class</span> <span class="nc">AppendTableToCellData</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
+<div class="viewcode-block" id="AppendTableToCellData">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData">[docs]</a>
+<span class="k">class</span> <span class="nc">AppendTableToCellData</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Takes two inputs, a dataset to preserve and a table of data, where the</span>
 <span class="sd">    data in the table is appended to the CellData of the input dataset.</span>
 <span class="sd">    The 0th port is the dataset to preserve and the 1st port is a table who&#39;s rows</span>
@@ -590,7 +654,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_port</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># ensure port 0&#39;s type is preserved</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="AppendTableToCellData._update_time_steps"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData._update_time_steps">[docs]</a>    <span class="k">def</span> <span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AppendTableToCellData._update_time_steps">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData._update_time_steps">[docs]</a>
+    <span class="k">def</span> <span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;For internal use only: appropriately sets the timesteps.&quot;&quot;&quot;</span>
         <span class="c1"># Use the inputs&#39; timesteps: this merges the timesteps values</span>
         <span class="n">tsAll</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_combined_input_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -598,7 +664,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsAll</span><span class="p">,</span> <span class="n">explicit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="AppendTableToCellData.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AppendTableToCellData.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Inputs from different ports:</span>
         <span class="n">pdi0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Keep me!</span>
@@ -622,12 +691,18 @@
             <span class="n">pdo</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="AppendTableToCellData.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AppendTableToCellData.RequestInformation">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData.RequestInformation">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to handle time variance&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_time_steps</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="AppendTableToCellData.apply"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AppendTableToCellData.apply">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData.apply">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the algorithm and get the output data object</span>
 
 <span class="sd">        Args:</span>
@@ -642,13 +717,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="AppendTableToCellData.get_time_step_values"><a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData.get_time_step_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AppendTableToCellData.get_time_step_values">
+<a class="viewcode-back" href="../../../content/PVGeo/filters/tables.html#PVGeo.filters.tables.AppendTableToCellData.get_time_step_values">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Use this in ParaView decorator to register timesteps.&quot;&quot;&quot;</span>
         <span class="c1"># if unset, force at least one attempt to set the timesteps</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_update_time_steps</span><span class="p">()</span>
         <span class="c1"># self.__timesteps should already be of type list</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span></div>
+</div>
+
 </pre></div>
 
            </div>

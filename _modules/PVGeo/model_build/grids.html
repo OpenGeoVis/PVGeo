@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,6 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -24,9 +23,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -234,7 +233,9 @@
     <span class="k">return</span> <span class="n">arr</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="CreateUniformGrid"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid">[docs]</a><span class="k">class</span> <span class="nc">CreateUniformGrid</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
+<div class="viewcode-block" id="CreateUniformGrid">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid">[docs]</a>
+<span class="k">class</span> <span class="nc">CreateUniformGrid</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create uniform grid (``vtkImageData``)&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Create Uniform Grid&#39;</span>
@@ -250,7 +251,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__spacing</span> <span class="o">=</span> <span class="n">spacing</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">=</span> <span class="n">origin</span>
 
-<div class="viewcode-block" id="CreateUniformGrid.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+<div class="viewcode-block" id="CreateUniformGrid.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate the output&quot;&quot;&quot;</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -275,7 +278,10 @@
         <span class="n">pdo</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="CreateUniformGrid.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateUniformGrid.RequestInformation">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid.RequestInformation">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to handle output extents&quot;&quot;&quot;</span>
         <span class="c1"># Now set whole output extent</span>
         <span class="n">ext</span> <span class="o">=</span> <span class="p">[</span>
@@ -291,28 +297,41 @@
         <span class="n">info</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkStreamingDemandDrivenPipeline</span><span class="o">.</span><span class="n">WHOLE_EXTENT</span><span class="p">(),</span> <span class="n">ext</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Setters / Getters ####</span>
 
-<div class="viewcode-block" id="CreateUniformGrid.set_extent"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid.set_extent">[docs]</a>    <span class="k">def</span> <span class="nf">set_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">):</span>
+<div class="viewcode-block" id="CreateUniformGrid.set_extent">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid.set_extent">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the extent of the output grid.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span> <span class="o">!=</span> <span class="p">[</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span> <span class="o">=</span> <span class="p">[</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CreateUniformGrid.set_spacing"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid.set_spacing">[docs]</a>    <span class="k">def</span> <span class="nf">set_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateUniformGrid.set_spacing">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid.set_spacing">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacing for the points along each axial direction.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spacing</span> <span class="o">!=</span> <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__spacing</span> <span class="o">=</span> <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CreateUniformGrid.set_origin"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid.set_origin">[docs]</a>    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateUniformGrid.set_origin">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateUniformGrid.set_origin">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the origin of the output grid.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">!=</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+</div>
 
 
-<div class="viewcode-block" id="CreateEvenRectilinearGrid"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid">[docs]</a><span class="k">class</span> <span class="nc">CreateEvenRectilinearGrid</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateEvenRectilinearGrid">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid">[docs]</a>
+<span class="k">class</span> <span class="nc">CreateEvenRectilinearGrid</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This creates a vtkRectilinearGrid where the discretization along a</span>
 <span class="sd">    given axis is uniformly distributed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -331,7 +350,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__yrange</span> <span class="o">=</span> <span class="n">yrng</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__zrange</span> <span class="o">=</span> <span class="n">zrng</span>
 
-<div class="viewcode-block" id="CreateEvenRectilinearGrid.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+<div class="viewcode-block" id="CreateEvenRectilinearGrid.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate the output&quot;&quot;&quot;</span>
         <span class="c1"># Get output of Proxy</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -358,7 +379,10 @@
         <span class="n">pdo</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="CreateEvenRectilinearGrid.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateEvenRectilinearGrid.RequestInformation">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.RequestInformation">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to handle output extents&quot;&quot;&quot;</span>
         <span class="c1"># Now set whole output extent</span>
         <span class="n">ext</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
@@ -367,34 +391,50 @@
         <span class="n">info</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkStreamingDemandDrivenPipeline</span><span class="o">.</span><span class="n">WHOLE_EXTENT</span><span class="p">(),</span> <span class="n">ext</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Setters / Getters ####</span>
 
-<div class="viewcode-block" id="CreateEvenRectilinearGrid.set_extent"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_extent">[docs]</a>    <span class="k">def</span> <span class="nf">set_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">):</span>
+<div class="viewcode-block" id="CreateEvenRectilinearGrid.set_extent">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_extent">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the extent of the output grid.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span> <span class="o">!=</span> <span class="p">[</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span> <span class="o">=</span> <span class="p">[</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CreateEvenRectilinearGrid.set_x_range"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_x_range">[docs]</a>    <span class="k">def</span> <span class="nf">set_x_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateEvenRectilinearGrid.set_x_range">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_x_range">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_x_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set range (min, max) for the grid in the X-direction.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__xrange</span> <span class="o">!=</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__xrange</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CreateEvenRectilinearGrid.set_y_range"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_y_range">[docs]</a>    <span class="k">def</span> <span class="nf">set_y_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateEvenRectilinearGrid.set_y_range">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_y_range">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_y_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set range (min, max) for the grid in the Y-direction&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__yrange</span> <span class="o">!=</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__yrange</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CreateEvenRectilinearGrid.set_z_range"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_z_range">[docs]</a>    <span class="k">def</span> <span class="nf">set_z_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateEvenRectilinearGrid.set_z_range">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateEvenRectilinearGrid.set_z_range">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_z_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set range (min, max) for the grid in the Z-direction&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__zrange</span> <span class="o">!=</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__zrange</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+</div>
 
 
-<div class="viewcode-block" id="CreateTensorMesh"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh">[docs]</a><span class="k">class</span> <span class="nc">CreateTensorMesh</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh">[docs]</a>
+<span class="k">class</span> <span class="nc">CreateTensorMesh</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This creates a vtkRectilinearGrid where the discretization along a</span>
 <span class="sd">    given axis is not uniform. Cell spacings along each axis can be set via</span>
 <span class="sd">    strings with repeating patterns or explicitly using the ``Set*Cells``</span>
@@ -421,7 +461,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__zcells</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_read_cell_line</span><span class="p">(</span><span class="n">zcellstr</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span> <span class="o">=</span> <span class="n">data_name</span>
 
-<div class="viewcode-block" id="CreateTensorMesh._read_cell_line"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh._read_cell_line">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="CreateTensorMesh._read_cell_line">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh._read_cell_line">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_read_cell_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read cell sizes for each line in the UBC mesh line strings&quot;&quot;&quot;</span>
         <span class="c1"># OPTIMIZE: work in progress</span>
@@ -436,12 +478,18 @@
             <span class="n">line_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seg_arr</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">line_list</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh.get_extent"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.get_extent">[docs]</a>    <span class="k">def</span> <span class="nf">get_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh.get_extent">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.get_extent">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the extent of the created mesh&quot;&quot;&quot;</span>
         <span class="n">ne</span><span class="p">,</span> <span class="n">nn</span><span class="p">,</span> <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__xcells</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__ycells</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__zcells</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ne</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nn</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nz</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh._make_model"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh._make_model">[docs]</a>    <span class="k">def</span> <span class="nf">_make_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh._make_model">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh._make_model">[docs]</a>
+    <span class="k">def</span> <span class="nf">_make_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates the output data object&quot;&quot;&quot;</span>
         <span class="n">ox</span><span class="p">,</span> <span class="n">oy</span><span class="p">,</span> <span class="n">oz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
@@ -474,7 +522,10 @@
 
         <span class="k">return</span> <span class="n">pdo</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh._add_model_data"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh._add_model_data">[docs]</a>    <span class="k">def</span> <span class="nf">_add_model_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdo</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh._add_model_data">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh._add_model_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">_add_model_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdo</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add an array to the output data object. If data is None, random</span>
 <span class="sd">        values will be generated.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -489,7 +540,10 @@
         <span class="n">pdo</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pdo</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output data object&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -498,7 +552,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_model_data</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># TODO: add ability to set input data</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh.RequestInformation">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.RequestInformation">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to set output whole extent&quot;&quot;&quot;</span>
         <span class="c1"># Now set whole output extent</span>
         <span class="n">ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_extent</span><span class="p">()</span>
@@ -507,15 +564,21 @@
         <span class="n">info</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkStreamingDemandDrivenPipeline</span><span class="o">.</span><span class="n">WHOLE_EXTENT</span><span class="p">(),</span> <span class="n">ext</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Getters / Setters ####</span>
 
-<div class="viewcode-block" id="CreateTensorMesh.set_origin"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_origin">[docs]</a>    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">):</span>
+<div class="viewcode-block" id="CreateTensorMesh.set_origin">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_origin">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the origin of the output&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">!=</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh.set_x_cells"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_x_cells">[docs]</a>    <span class="k">def</span> <span class="nf">set_x_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xcells</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh.set_x_cells">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_x_cells">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_x_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xcells</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the X direction</span>
 
 <span class="sd">        Args:</span>
@@ -524,7 +587,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__xcells</span> <span class="o">=</span> <span class="n">xcells</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh.set_y_cells"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells">[docs]</a>    <span class="k">def</span> <span class="nf">set_y_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ycells</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh.set_y_cells">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_y_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ycells</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the Y direction</span>
 
 <span class="sd">        Args:</span>
@@ -533,7 +599,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__ycells</span> <span class="o">=</span> <span class="n">ycells</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh.set_z_cells"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_z_cells">[docs]</a>    <span class="k">def</span> <span class="nf">set_z_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zcells</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh.set_z_cells">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_z_cells">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_z_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zcells</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the Z direction</span>
 
 <span class="sd">        Args:</span>
@@ -542,7 +611,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__zcells</span> <span class="o">=</span> <span class="n">zcells</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh.set_x_cells_str"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_x_cells_str">[docs]</a>    <span class="k">def</span> <span class="nf">set_x_cells_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xcellstr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh.set_x_cells_str">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_x_cells_str">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_x_cells_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xcellstr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the X direction</span>
 
 <span class="sd">        Args:</span>
@@ -550,7 +622,10 @@
         <span class="n">xcells</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_read_cell_line</span><span class="p">(</span><span class="n">xcellstr</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_x_cells</span><span class="p">(</span><span class="n">xcells</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh.set_y_cells_str"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells_str">[docs]</a>    <span class="k">def</span> <span class="nf">set_y_cells_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ycellstr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh.set_y_cells_str">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_y_cells_str">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_y_cells_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ycellstr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the Y direction</span>
 
 <span class="sd">        Args:</span>
@@ -558,13 +633,18 @@
         <span class="n">ycells</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_read_cell_line</span><span class="p">(</span><span class="n">ycellstr</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_y_cells</span><span class="p">(</span><span class="n">ycells</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CreateTensorMesh.set_z_cells_str"><a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_z_cells_str">[docs]</a>    <span class="k">def</span> <span class="nf">set_z_cells_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zcellstr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTensorMesh.set_z_cells_str">
+<a class="viewcode-back" href="../../../content/PVGeo/model_build/grids.html#PVGeo.model_build.grids.CreateTensorMesh.set_z_cells_str">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_z_cells_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zcellstr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the Z direction</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            zcellstr (str)  : the spacings along the Z-axis in the UBC style&quot;&quot;&quot;</span>
         <span class="n">zcells</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="o">.</span><span class="n">_read_cell_line</span><span class="p">(</span><span class="n">zcellstr</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_z_cells</span><span class="p">(</span><span class="n">zcells</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_z_cells</span><span class="p">(</span><span class="n">zcells</span><span class="p">)</span></div>
+</div>
+
 </pre></div>
 
            </div>

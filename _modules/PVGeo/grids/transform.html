@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,6 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -24,9 +23,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -231,7 +230,9 @@
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="TableToTimeGrid"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid">[docs]</a><span class="k">class</span> <span class="nc">TableToTimeGrid</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+<div class="viewcode-block" id="TableToTimeGrid">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid">[docs]</a>
+<span class="k">class</span> <span class="nc">TableToTimeGrid</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A filter to convert a static (no time variance) table to a time varying</span>
 <span class="sd">    grid. This effectively reashapes a table full of data arrays as a 4D array</span>
 <span class="sd">    that is placed onto the CellData of a ``vtkImageData`` object.</span>
@@ -279,7 +280,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__usePointData</span> <span class="o">=</span> <span class="n">points</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__needToUpdateOutput</span> <span class="o">=</span> <span class="kc">True</span>
 
-<div class="viewcode-block" id="TableToTimeGrid._set_data"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid._set_data">[docs]</a>    <span class="k">def</span> <span class="nf">_set_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+<div class="viewcode-block" id="TableToTimeGrid._set_data">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid._set_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">_set_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to restructure the input table arrays&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="n">dims</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dims</span><span class="p">])</span>
@@ -298,7 +301,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__needToRun</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid._build_image_data"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid._build_image_data">[docs]</a>    <span class="k">def</span> <span class="nf">_build_image_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid._build_image_data">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid._build_image_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">_build_image_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to construct the output&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__needToUpdateOutput</span><span class="p">:</span>
             <span class="c1"># Clean out the output data object</span>
@@ -318,16 +324,22 @@
         <span class="n">img</span><span class="o">.</span><span class="n">SetOrigin</span><span class="p">(</span><span class="n">ox</span><span class="p">,</span> <span class="n">oy</span><span class="p">,</span> <span class="n">oz</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">img</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid._update_time_steps"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid._update_time_steps">[docs]</a>    <span class="k">def</span> <span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid._update_time_steps">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid._update_time_steps">[docs]</a>
+    <span class="k">def</span> <span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;For internal use only: appropriately sets the timesteps.&quot;&quot;&quot;</span>
         <span class="n">nt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__dims</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
         <span class="k">if</span> <span class="n">nt</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Algorithm Methods ####</span>
 
-<div class="viewcode-block" id="TableToTimeGrid.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+<div class="viewcode-block" id="TableToTimeGrid.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -348,7 +360,10 @@
                 <span class="n">img</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">narr</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid.RequestInformation">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.RequestInformation">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to set whole output extent.&quot;&quot;&quot;</span>
         <span class="c1"># Setup the ImageData</span>
         <span class="n">ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span>
@@ -365,60 +380,90 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_time_steps</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Setters / Getters ####</span>
 
-<div class="viewcode-block" id="TableToTimeGrid.Modified"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.Modified">[docs]</a>    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="TableToTimeGrid.Modified">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.Modified">[docs]</a>
+    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Call modified if the filter needs to run again&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">run_again</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__needToRun</span> <span class="o">=</span> <span class="n">run_again</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__needToUpdateOutput</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid.modified"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.modified">[docs]</a>    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid.modified">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.modified">[docs]</a>
+    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Call modified if the filter needs to run again&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">run_again</span><span class="o">=</span><span class="n">run_again</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid.set_extent"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_extent">[docs]</a>    <span class="k">def</span> <span class="nf">set_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">nt</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid.set_extent">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_extent">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">nt</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the extent of the output grid&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span> <span class="o">!=</span> <span class="p">[</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">nt</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__extent</span> <span class="o">=</span> <span class="p">[</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">nt</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid.set_dimensions"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_dimensions">[docs]</a>    <span class="k">def</span> <span class="nf">set_dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid.set_dimensions">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_dimensions">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the dimensions of the output grid&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dims</span> <span class="o">!=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid.set_spacing"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_spacing">[docs]</a>    <span class="k">def</span> <span class="nf">set_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid.set_spacing">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_spacing">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacing for the points along each axial direction&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spacing</span> <span class="o">!=</span> <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__spacing</span> <span class="o">=</span> <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid.set_origin"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_origin">[docs]</a>    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid.set_origin">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_origin">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the origin of the output `vtkImageData`&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">!=</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid.set_order"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_order">[docs]</a>    <span class="k">def</span> <span class="nf">set_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid.set_order">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_order">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the reshape order (`&#39;C&#39;` or `&#39;F&#39;`)&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__order</span> <span class="o">!=</span> <span class="n">order</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__order</span> <span class="o">=</span> <span class="n">order</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">run_again</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid.get_time_step_values"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.get_time_step_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid.get_time_step_values">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.get_time_step_values">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Use this in ParaView decorator to register timesteps on the pipeline.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid.set_time_delta"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_time_delta">[docs]</a>    <span class="k">def</span> <span class="nf">set_time_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid.set_time_delta">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_time_delta">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_time_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;An advanced property to set the time step in seconds.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">dt</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span> <span class="o">=</span> <span class="n">dt</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="TableToTimeGrid.set_use_points"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_use_points">[docs]</a>    <span class="k">def</span> <span class="nf">set_use_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TableToTimeGrid.set_use_points">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TableToTimeGrid.set_use_points">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_use_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set whether or not to place the data on the nodes/cells of the grid.</span>
 <span class="sd">        True places data on nodes, false places data at cell centers (CellData).</span>
 <span class="sd">        In ParaView, switching can be a bit buggy: be sure to turn the visibility</span>
@@ -426,13 +471,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__usePointData</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__usePointData</span> <span class="o">=</span> <span class="n">flag</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">run_again</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">run_again</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="ReverseImageDataAxii"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii">[docs]</a><span class="k">class</span> <span class="nc">ReverseImageDataAxii</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+<div class="viewcode-block" id="ReverseImageDataAxii">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii">[docs]</a>
+<span class="k">class</span> <span class="nc">ReverseImageDataAxii</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This filter will flip ``vtkImageData`` on any of the three cartesian axii.</span>
 <span class="sd">    A checkbox is provided for each axis on which you may desire to flip the data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -450,7 +499,9 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__axes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">axes</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Z Y X (FORTRAN)</span>
 
-<div class="viewcode-block" id="ReverseImageDataAxii._reverse_grid_axes"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii._reverse_grid_axes">[docs]</a>    <span class="k">def</span> <span class="nf">_reverse_grid_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idi</span><span class="p">,</span> <span class="n">ido</span><span class="p">):</span>
+<div class="viewcode-block" id="ReverseImageDataAxii._reverse_grid_axes">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii._reverse_grid_axes">[docs]</a>
+    <span class="k">def</span> <span class="nf">_reverse_grid_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idi</span><span class="p">,</span> <span class="n">ido</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to reverse data along specified axii&quot;&quot;&quot;</span>
         <span class="c1"># Copy over input to output to be flipped around</span>
         <span class="c1"># Deep copy keeps us from messing with the input data</span>
@@ -493,7 +544,10 @@
 
         <span class="k">return</span> <span class="n">ido</span></div>
 
-<div class="viewcode-block" id="ReverseImageDataAxii.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ReverseImageDataAxii.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output.&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -502,25 +556,36 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_reverse_grid_axes</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Seters and Geters ####</span>
 
-<div class="viewcode-block" id="ReverseImageDataAxii.set_flip_x"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_x">[docs]</a>    <span class="k">def</span> <span class="nf">set_flip_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+<div class="viewcode-block" id="ReverseImageDataAxii.set_flip_x">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_x">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_flip_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the filter to flip th input data along the X-axis&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">flag</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ReverseImageDataAxii.set_flip_y"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_y">[docs]</a>    <span class="k">def</span> <span class="nf">set_flip_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ReverseImageDataAxii.set_flip_y">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_y">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_flip_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the filter to flip th input data along the Y-axis&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">flag</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ReverseImageDataAxii.set_flip_z"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_z">[docs]</a>    <span class="k">def</span> <span class="nf">set_flip_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ReverseImageDataAxii.set_flip_z">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.ReverseImageDataAxii.set_flip_z">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_flip_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the filter to flip th input data along the Z-axis&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">flag</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
@@ -528,7 +593,9 @@
 <span class="c1"># ---- Translate Grid Origin ----#</span>
 
 
-<div class="viewcode-block" id="TranslateGridOrigin"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TranslateGridOrigin">[docs]</a><span class="k">class</span> <span class="nc">TranslateGridOrigin</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+<div class="viewcode-block" id="TranslateGridOrigin">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TranslateGridOrigin">[docs]</a>
+<span class="k">class</span> <span class="nc">TranslateGridOrigin</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This filter will translate the origin of `vtkImageData` to any specified</span>
 <span class="sd">    Corner of the data set assuming it is currently in the South West Bottom</span>
 <span class="sd">    Corner (will not work if Corner was moved prior).</span>
@@ -547,7 +614,9 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__corner</span> <span class="o">=</span> <span class="n">corner</span>
 
-<div class="viewcode-block" id="TranslateGridOrigin._translate"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TranslateGridOrigin._translate">[docs]</a>    <span class="k">def</span> <span class="nf">_translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
+<div class="viewcode-block" id="TranslateGridOrigin._translate">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TranslateGridOrigin._translate">[docs]</a>
+    <span class="k">def</span> <span class="nf">_translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to translate the inputs origin&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">pdo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pdo</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkImageData</span><span class="p">()</span>
@@ -600,7 +669,10 @@
 
         <span class="k">return</span> <span class="n">pdo</span></div>
 
-<div class="viewcode-block" id="TranslateGridOrigin.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TranslateGridOrigin.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TranslateGridOrigin.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TranslateGridOrigin.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output.&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -609,9 +681,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_translate</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Seters and Geters ####</span>
 
-<div class="viewcode-block" id="TranslateGridOrigin.set_corner"><a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TranslateGridOrigin.set_corner">[docs]</a>    <span class="k">def</span> <span class="nf">set_corner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corner</span><span class="p">):</span>
+<div class="viewcode-block" id="TranslateGridOrigin.set_corner">
+<a class="viewcode-back" href="../../../content/PVGeo/grids/transform.html#PVGeo.grids.transform.TranslateGridOrigin.set_corner">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_corner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corner</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the corner to use</span>
 
 <span class="sd">        Args:</span>
@@ -628,7 +703,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__corner</span> <span class="o">!=</span> <span class="n">corner</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__corner</span> <span class="o">=</span> <span class="n">corner</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>

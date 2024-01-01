@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -10,7 +10,6 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -25,9 +24,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -240,34 +239,34 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.gslib.gslib">
-<span id="gslib-geoeas-file-i-o"></span><h1>GSLib/GeoEAS File I/O<a class="headerlink" href="#module-PVGeo.gslib.gslib" title="Permalink to this heading"></a></h1>
+<span id="gslib-geoeas-file-i-o"></span><h1>GSLib/GeoEAS File I/O<a class="headerlink" href="#module-PVGeo.gslib.gslib" title="Link to this heading"></a></h1>
 <section id="gslib-point-set-reader">
-<h2>GSLib Point Set Reader<a class="headerlink" href="#gslib-point-set-reader" title="Permalink to this heading"></a></h2>
+<h2>GSLib Point Set Reader<a class="headerlink" href="#gslib-point-set-reader" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.gslib.gslib.GSLibPointSetReader">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.gslib.gslib.</span></span><span class="sig-name descname"><span class="pre">GSLibPointSetReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#GSLibPointSetReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibPointSetReader" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.gslib.gslib.</span></span><span class="sig-name descname"><span class="pre">GSLibPointSetReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#GSLibPointSetReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibPointSetReader" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_GSLibReaderMethods</span></code>, <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase" title="PVGeo.readers.delimited.DelimitedPointsReaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">DelimitedPointsReaderBase</span></code></a></p>
 <p>Reads a GSLib point set file where the first three columns are the XYZ
 coordinates and the remainder of the data is consistent with the
 <a class="reference internal" href="#PVGeo.gslib.gslib.GSLibReader" title="PVGeo.gslib.gslib.GSLibReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">GSLibReader</span></code></a> specifications.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PVGeo.gslib.gslib.GSLibPointSetReader.description">
-<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PVGeo:</span> <span class="pre">GSLib</span> <span class="pre">Point</span> <span class="pre">Set'</span></em><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibPointSetReader.description" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PVGeo:</span> <span class="pre">GSLib</span> <span class="pre">Point</span> <span class="pre">Set'</span></em><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibPointSetReader.description" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PVGeo.gslib.gslib.GSLibPointSetReader.extensions">
-<span class="sig-name descname"><span class="pre">extensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sgems</span> <span class="pre">dat</span> <span class="pre">geoeas</span> <span class="pre">gslib</span> <span class="pre">GSLIB</span> <span class="pre">txt</span> <span class="pre">SGEMS</span> <span class="pre">SGeMSgslibpts</span> <span class="pre">ptset</span> <span class="pre">gpts'</span></em><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibPointSetReader.extensions" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">extensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sgems</span> <span class="pre">dat</span> <span class="pre">geoeas</span> <span class="pre">gslib</span> <span class="pre">GSLIB</span> <span class="pre">txt</span> <span class="pre">SGEMS</span> <span class="pre">SGeMSgslibpts</span> <span class="pre">ptset</span> <span class="pre">gpts'</span></em><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibPointSetReader.extensions" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </section>
 <section id="gslib-table-reader">
-<h2>GSLib Table Reader<a class="headerlink" href="#gslib-table-reader" title="Permalink to this heading"></a></h2>
+<h2>GSLib Table Reader<a class="headerlink" href="#gslib-table-reader" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.gslib.gslib.GSLibReader">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.gslib.gslib.</span></span><span class="sig-name descname"><span class="pre">GSLibReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkTable'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#GSLibReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibReader" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.gslib.gslib.</span></span><span class="sig-name descname"><span class="pre">GSLibReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkTable'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#GSLibReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibReader" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_GSLibReaderMethods</span></code>, <a class="reference internal" href="../readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader" title="PVGeo.readers.delimited.DelimitedTextReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">DelimitedTextReader</span></code></a></p>
 <p>Reads a GSLIB file format to a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code>. The GSLIB file format has
 headers lines followed by the data as a space delimited ASCI file (this
@@ -280,28 +279,28 @@ characters for the variable name. The data follow with a space between each
 field (column).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PVGeo.gslib.gslib.GSLibReader.description">
-<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PVGeo:</span> <span class="pre">GSLib</span> <span class="pre">Table'</span></em><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibReader.description" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PVGeo:</span> <span class="pre">GSLib</span> <span class="pre">Table'</span></em><a class="headerlink" href="#PVGeo.gslib.gslib.GSLibReader.description" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </section>
 <section id="write-vtktable-to-gslib-format">
-<h2>Write <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> To GSLib Format<a class="headerlink" href="#write-vtktable-to-gslib-format" title="Permalink to this heading"></a></h2>
+<h2>Write <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> To GSLib Format<a class="headerlink" href="#write-vtktable-to-gslib-format" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.gslib.gslib.WriteTableToGSLib">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.gslib.gslib.</span></span><span class="sig-name descname"><span class="pre">WriteTableToGSLib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkTable'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#WriteTableToGSLib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.gslib.WriteTableToGSLib" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.gslib.gslib.</span></span><span class="sig-name descname"><span class="pre">WriteTableToGSLib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vtkTable'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#WriteTableToGSLib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.gslib.WriteTableToGSLib" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.WriterBase" title="PVGeo.base.WriterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">WriterBase</span></code></a></p>
 <p>Write the row data in a <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> to the GSLib Format</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.gslib.gslib.WriteTableToGSLib.perform_write_out">
-<span class="sig-name descname"><span class="pre">perform_write_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#WriteTableToGSLib.perform_write_out"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.gslib.WriteTableToGSLib.perform_write_out" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">perform_write_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#WriteTableToGSLib.perform_write_out"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.gslib.WriteTableToGSLib.perform_write_out" title="Link to this definition"></a></dt>
 <dd><p>Write out the input data object to the GSLib file format</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.gslib.gslib.WriteTableToGSLib.set_header">
-<span class="sig-name descname"><span class="pre">set_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#WriteTableToGSLib.set_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.gslib.WriteTableToGSLib.set_header" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/gslib/gslib.html#WriteTableToGSLib.set_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.gslib.gslib.WriteTableToGSLib.set_header" title="Link to this definition"></a></dt>
 <dd><p>Set the file header string</p>
 </dd></dl>
 

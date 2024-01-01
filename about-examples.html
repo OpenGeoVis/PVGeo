@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -10,7 +10,6 @@
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -25,9 +24,9 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=f281be69"></script>
         <script src="_static/design-tabs.js?v=36754332"></script>
@@ -222,7 +221,7 @@
            <div itemprop="articleBody">
              
   <section id="about-examples">
-<span id="about-examples-page"></span><h1>About Examples<a class="headerlink" href="#about-examples" title="Permalink to this heading"></a></h1>
+<span id="about-examples-page"></span><h1>About Examples<a class="headerlink" href="#about-examples" title="Link to this heading"></a></h1>
 <p><cite>PVGeo</cite> is deployed in various sub-packages called <em>suites</em>. These <em>suites</em>
 consist of a set of reader, filter, source, or writer algorithms (or any
 combination of those) for a general area of geoscientific processing and
@@ -234,7 +233,7 @@ examples at this time.</p>
 <p>If you think there may be a serious problem with an example, please open an
 issue on the <a class="reference external" href="https://github.com/OpenGeoVis/PVGeo/issues">issues page</a> so that we can promptly fix it.</p>
 <section id="typical-usage">
-<h2>Typical Usage<a class="headerlink" href="#typical-usage" title="Permalink to this heading"></a></h2>
+<h2>Typical Usage<a class="headerlink" href="#typical-usage" title="Link to this heading"></a></h2>
 <p>All algorithms deployed in <em>PVGeo</em> are usable in the following manners in a
 Python environment where the algorithm can be called and instantiated with
 keyword arguments for its parameters and then applied on some input data set.</p>
@@ -256,7 +255,7 @@ need to request varying time steps.</p>
 </div>
 </section>
 <section id="reader-algorithms">
-<h2>Reader Algorithms<a class="headerlink" href="#reader-algorithms" title="Permalink to this heading"></a></h2>
+<h2>Reader Algorithms<a class="headerlink" href="#reader-algorithms" title="Link to this heading"></a></h2>
 <p>A reader takes data from files and puts them into the proper VTK
 data structures so that we can visualize that data on the VTK pipeline.
 PyVista comes with a plethora of native data format readers but
@@ -288,7 +287,7 @@ readers can be used to immediately produce a data object:</p>
 </div>
 </section>
 <section id="filter-algorithms">
-<h2>Filter Algorithms<a class="headerlink" href="#filter-algorithms" title="Permalink to this heading"></a></h2>
+<h2>Filter Algorithms<a class="headerlink" href="#filter-algorithms" title="Link to this heading"></a></h2>
 <p>A filter modifies, transforms, combines, analyses, processes, etc. data in VTK
 data structures on either a VTK pipeline. Filters provide a means
 for changing how we visualize data or create a means of generating topology for
@@ -334,7 +333,7 @@ to make repetitive calls on them much like we showed with readers:</p>
 </div>
 </section>
 <section id="source-algorithms">
-<h2>Source Algorithms<a class="headerlink" href="#source-algorithms" title="Permalink to this heading"></a></h2>
+<h2>Source Algorithms<a class="headerlink" href="#source-algorithms" title="Link to this heading"></a></h2>
 <p>A source takes input parameters from a user and generates a data object for
 visualization or export. In <em>PVGeo</em>, we have implemented the <em>Model Building</em>
 suite with many sources that allow for a user to specify attributes of a data
@@ -349,7 +348,7 @@ immediately produce an output like below:</p>
 </div>
 </section>
 <section id="writer-algorithms">
-<h2>Writer Algorithms<a class="headerlink" href="#writer-algorithms" title="Permalink to this heading"></a></h2>
+<h2>Writer Algorithms<a class="headerlink" href="#writer-algorithms" title="Link to this heading"></a></h2>
 <p><em>PVGeo</em> writers take VTK data structures and write them out to the disk in a
 non-VTK formats that might be a standard for geoscientific data.
 PVGeo readers are often deployed with their complimentary writer equivalents

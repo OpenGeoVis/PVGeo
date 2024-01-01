@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -10,7 +10,6 @@
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -25,9 +24,9 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../_static/design-tabs.js?v=36754332"></script>
@@ -248,7 +247,7 @@
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="combine-tables">
-<span id="sphx-glr-examples-filters-general-combine-tables-py"></span><h1>Combine Tables<a class="headerlink" href="#combine-tables" title="Permalink to this heading"></a></h1>
+<span id="sphx-glr-examples-filters-general-combine-tables-py"></span><h1>Combine Tables<a class="headerlink" href="#combine-tables" title="Link to this heading"></a></h1>
 <p>This example will demonstrate how to to merge to <cite>vtkTable</cite> objects with the
 same number of rows into a single <cite>vtkTable</cite>.</p>
 <p>This example demos <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.CombineTables</span></code></p>
@@ -289,8 +288,8 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 </td><td>
 <table style='width: 100%;'>
 <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td>Array 0</td><td>float64</td><td>1</td><td>5.083e-03</td><td>9.835e-01</td></tr>
-<tr><td>Array 1</td><td>float64</td><td>1</td><td>1.510e-02</td><td>9.824e-01</td></tr>
+<tr><td>Array 0</td><td>float64</td><td>1</td><td>2.934e-03</td><td>9.844e-01</td></tr>
+<tr><td>Array 1</td><td>float64</td><td>1</td><td>9.569e-04</td><td>9.997e-01</td></tr>
 </table>
 
 </td></tr> </table>
@@ -310,7 +309,7 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 </td><td>
 <table style='width: 100%;'>
 <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td>Array 2</td><td>float64</td><td>1</td><td>1.498e-03</td><td>9.513e-01</td></tr>
+<tr><td>Array 2</td><td>float64</td><td>1</td><td>1.322e-03</td><td>9.968e-01</td></tr>
 </table>
 
 </td></tr> </table>
@@ -332,9 +331,9 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
 </td><td>
 <table style='width: 100%;'>
 <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td>Array 0</td><td>float64</td><td>1</td><td>5.083e-03</td><td>9.835e-01</td></tr>
-<tr><td>Array 1</td><td>float64</td><td>1</td><td>1.510e-02</td><td>9.824e-01</td></tr>
-<tr><td>Array 2</td><td>float64</td><td>1</td><td>1.498e-03</td><td>9.513e-01</td></tr>
+<tr><td>Array 0</td><td>float64</td><td>1</td><td>2.934e-03</td><td>9.844e-01</td></tr>
+<tr><td>Array 1</td><td>float64</td><td>1</td><td>9.569e-04</td><td>9.997e-01</td></tr>
+<tr><td>Array 2</td><td>float64</td><td>1</td><td>1.322e-03</td><td>9.968e-01</td></tr>
 </table>
 
 </td></tr> </table>
@@ -346,7 +345,7 @@ same number of rows into a single <cite>vtkTable</cite>.</p>
     <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">arrs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.004 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.003 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-combine-tables-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/325685e8cd7db434335b0fd6483b722d/combine-tables.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">combine-tables.ipynb</span></code></a></p>

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,6 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -24,9 +23,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -231,7 +230,9 @@
 <span class="kn">from</span> <span class="nn">.gslib</span> <span class="kn">import</span> <span class="n">GSLibReader</span>
 
 
-<div class="viewcode-block" id="SGeMSGridReader"><a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader">[docs]</a><span class="k">class</span> <span class="nc">SGeMSGridReader</span><span class="p">(</span><span class="n">GSLibReader</span><span class="p">):</span>
+<div class="viewcode-block" id="SGeMSGridReader">
+<a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader">[docs]</a>
+<span class="k">class</span> <span class="nc">SGeMSGridReader</span><span class="p">(</span><span class="n">GSLibReader</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates ``vtkImageData`` from the uniform grid defined in the input</span>
 <span class="sd">    file in the SGeMS grid format. This format is simply the GSLIB format where</span>
 <span class="sd">    the header line defines the dimensions of the uniform grid.</span>
@@ -260,7 +261,9 @@
         <span class="n">dims</span> <span class="o">=</span> <span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
-<div class="viewcode-block" id="SGeMSGridReader._read_extent"><a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader._read_extent">[docs]</a>    <span class="k">def</span> <span class="nf">_read_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SGeMSGridReader._read_extent">
+<a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader._read_extent">[docs]</a>
+    <span class="k">def</span> <span class="nf">_read_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads the input file for the SGeMS format to get output extents.</span>
 <span class="sd">        Computationally inexpensive method to discover whole output extent.</span>
 
@@ -279,7 +282,10 @@
         <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parse_extent</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n3</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SGeMSGridReader._extract_header"><a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader._extract_header">[docs]</a>    <span class="k">def</span> <span class="nf">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SGeMSGridReader._extract_header">
+<a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader._extract_header">[docs]</a>
+    <span class="k">def</span> <span class="nf">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to parse header info for the SGeMS file format&quot;&quot;&quot;</span>
         <span class="n">titles</span><span class="p">,</span> <span class="n">content</span> <span class="o">=</span> <span class="n">GSLibReader</span><span class="o">.</span><span class="n">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
         <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_header</span><span class="p">()</span>
@@ -292,7 +298,10 @@
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;File not in proper SGeMS Grid format.&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">titles</span><span class="p">,</span> <span class="n">content</span></div>
 
-<div class="viewcode-block" id="SGeMSGridReader.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SGeMSGridReader.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to get output data object for given time step.</span>
 <span class="sd">        Constructs the ``vtkImageData``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -321,7 +330,10 @@
         <span class="k">del</span> <span class="n">table</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="SGeMSGridReader.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SGeMSGridReader.RequestInformation">
+<a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader.RequestInformation">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to set grid extents.&quot;&quot;&quot;</span>
         <span class="c1"># Call parent to handle time stuff</span>
         <span class="n">GSLibReader</span><span class="o">.</span><span class="n">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
@@ -332,22 +344,32 @@
         <span class="n">info</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkStreamingDemandDrivenPipeline</span><span class="o">.</span><span class="n">WHOLE_EXTENT</span><span class="p">(),</span> <span class="n">ext</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="SGeMSGridReader.set_spacing"><a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader.set_spacing">[docs]</a>    <span class="k">def</span> <span class="nf">set_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SGeMSGridReader.set_spacing">
+<a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader.set_spacing">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacing for each axial direction&quot;&quot;&quot;</span>
         <span class="n">spac</span> <span class="o">=</span> <span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spacing</span> <span class="o">!=</span> <span class="n">spac</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__spacing</span> <span class="o">=</span> <span class="n">spac</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SGeMSGridReader.set_origin"><a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader.set_origin">[docs]</a>    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ox</span><span class="p">,</span> <span class="n">oy</span><span class="p">,</span> <span class="n">oz</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SGeMSGridReader.set_origin">
+<a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.SGeMSGridReader.set_origin">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ox</span><span class="p">,</span> <span class="n">oy</span><span class="p">,</span> <span class="n">oz</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the origin corner of the grid&quot;&quot;&quot;</span>
         <span class="n">origin</span> <span class="o">=</span> <span class="p">(</span><span class="n">ox</span><span class="p">,</span> <span class="n">oy</span><span class="p">,</span> <span class="n">oz</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">!=</span> <span class="n">origin</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">=</span> <span class="n">origin</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+</div>
 
 
-<div class="viewcode-block" id="WriteImageDataToSGeMS"><a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.WriteImageDataToSGeMS">[docs]</a><span class="k">class</span> <span class="nc">WriteImageDataToSGeMS</span><span class="p">(</span><span class="n">WriterBase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="WriteImageDataToSGeMS">
+<a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.WriteImageDataToSGeMS">[docs]</a>
+<span class="k">class</span> <span class="nc">WriteImageDataToSGeMS</span><span class="p">(</span><span class="n">WriterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes a ``vtkImageData`` object to the SGeMS uniform grid format.</span>
 <span class="sd">    This writer can only handle point data. Note that this will only handle</span>
 <span class="sd">    CellData as that is convention with SGeMS.</span>
@@ -359,7 +381,9 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">):</span>
         <span class="n">WriterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="n">inputType</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;SGeMS&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="WriteImageDataToSGeMS.perform_write_out"><a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.WriteImageDataToSGeMS.perform_write_out">[docs]</a>    <span class="k">def</span> <span class="nf">perform_write_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">object_name</span><span class="p">):</span>
+<div class="viewcode-block" id="WriteImageDataToSGeMS.perform_write_out">
+<a class="viewcode-back" href="../../../content/PVGeo/gslib/sgems.html#PVGeo.gslib.sgems.WriteImageDataToSGeMS.perform_write_out">[docs]</a>
+    <span class="k">def</span> <span class="nf">perform_write_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">object_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Write out the input ``vtkImage`` data to the SGeMS file format&quot;&quot;&quot;</span>
         <span class="c1"># Get the input data object</span>
         <span class="n">grd</span> <span class="o">=</span> <span class="n">input_data_object</span>
@@ -393,7 +417,9 @@
                 <span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_format</span><span class="p">()</span>
             <span class="p">)</span>
 
-        <span class="k">return</span> <span class="mi">1</span></div></div>
+        <span class="k">return</span> <span class="mi">1</span></div>
+</div>
+
 </pre></div>
 
            </div>

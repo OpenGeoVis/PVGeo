@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -10,7 +10,6 @@
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -25,9 +24,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -221,7 +220,7 @@
            <div itemprop="articleBody">
              
   <section id="templates">
-<h1>Templates<a class="headerlink" href="#templates" title="Permalink to this heading"></a></h1>
+<h1>Templates<a class="headerlink" href="#templates" title="Link to this heading"></a></h1>
 <p>Here are a few templates for various types of algorithms to provide a place to
 start developing your own readers, filters, writers, and sources!</p>
 <p>Once you have your new algorithm implemented, head over to <a class="reference external" href="./snippets/composite-data-writers">this example</a> to learn
@@ -229,14 +228,14 @@ more about wrapping your algorithm for direct use in ParaView. Through decoratin
 a new subclass of your algorithm, you can define a user interface that ParaView
 can easily yield to users!</p>
 <section id="readers">
-<h2>Readers<a class="headerlink" href="#readers" title="Permalink to this heading"></a></h2>
+<h2>Readers<a class="headerlink" href="#readers" title="Link to this heading"></a></h2>
 <p>We’ve found that it is difficult to make generic templates for readers as there
 are already so many reader base classes to choose from.
 If you are developing a new reader, talk to one of the active developers on
 [Slack](<a class="reference external" href="http://slack.pvgeo.org">http://slack.pvgeo.org</a>) and we can work with you to ensure you are using an appropriate base class.</p>
 </section>
 <section id="filters">
-<h2>Filters<a class="headerlink" href="#filters" title="Permalink to this heading"></a></h2>
+<h2>Filters<a class="headerlink" href="#filters" title="Link to this heading"></a></h2>
 <p>A filter that will preserve the input data type:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyvista</span>
 <span class="c1"># Import Helpers: TODO Check relativity</span>
@@ -355,7 +354,7 @@ If you are developing a new reader, talk to one of the active developers on
 </div>
 </section>
 <section id="writers">
-<h2>Writers<a class="headerlink" href="#writers" title="Permalink to this heading"></a></h2>
+<h2>Writers<a class="headerlink" href="#writers" title="Link to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Helpers: TODO Check relativity</span>
 <span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">WriterBase</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span>
@@ -396,7 +395,7 @@ If you are developing a new reader, talk to one of the active developers on
 </div>
 </section>
 <section id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this heading"></a></h2>
+<h2>Sources<a class="headerlink" href="#sources" title="Link to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyvista</span>
 <span class="c1"># Import Helpers: TODO: Check relativity</span>
 <span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">AlgorithmBase</span>

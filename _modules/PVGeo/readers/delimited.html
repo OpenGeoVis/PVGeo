@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,6 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -24,9 +23,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -231,7 +230,9 @@
     <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
 
-<div class="viewcode-block" id="DelimitedTextReader"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader">[docs]</a><span class="k">class</span> <span class="nc">DelimitedTextReader</span><span class="p">(</span><span class="n">ReaderBase</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedTextReader">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader">[docs]</a>
+<span class="k">class</span> <span class="nc">DelimitedTextReader</span><span class="p">(</span><span class="n">ReaderBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This reader will take in any delimited text file and make a ``vtkTable``</span>
 <span class="sd">    from it. This is not much different than the default .txt or .csv reader in</span>
 <span class="sd">    ParaView, however it gives us room to use our own extensions and a little</span>
@@ -259,19 +260,27 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_titles</span> <span class="o">=</span> <span class="p">[]</span>
 
-<div class="viewcode-block" id="DelimitedTextReader._get_delimiter"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._get_delimiter">[docs]</a>    <span class="k">def</span> <span class="nf">_get_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedTextReader._get_delimiter">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._get_delimiter">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;For itenral use only!&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_tab</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__delimiter</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader.get_split_on_white_space"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.get_split_on_white_space">[docs]</a>    <span class="k">def</span> <span class="nf">get_split_on_white_space</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader.get_split_on_white_space">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.get_split_on_white_space">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_split_on_white_space</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the status of how the delimiter interprets whitespace&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_tab</span></div>
 
+
     <span class="c1">#### Methods for performing the read ####</span>
 
-<div class="viewcode-block" id="DelimitedTextReader._get_file_contents"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._get_file_contents">[docs]</a>    <span class="k">def</span> <span class="nf">_get_file_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedTextReader._get_file_contents">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._get_file_contents">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_file_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This grabs the lines of the input data file as a string array. This</span>
 <span class="sd">        allows us to load the file contents, parse the header then use numpy or</span>
 <span class="sd">        pandas to parse the data.&quot;&quot;&quot;</span>
@@ -293,7 +302,10 @@
             <span class="k">return</span> <span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">contents</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader._extract_header"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._extract_header">[docs]</a>    <span class="k">def</span> <span class="nf">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader._extract_header">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._extract_header">[docs]</a>
+    <span class="k">def</span> <span class="nf">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Override this. Removes header from single file&#39;s content.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">content</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span>
@@ -310,7 +322,10 @@
                 <span class="n">titles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Field </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">titles</span><span class="p">,</span> <span class="n">content</span><span class="p">[</span><span class="n">idx</span><span class="p">::]</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader._extract_headers"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._extract_headers">[docs]</a>    <span class="k">def</span> <span class="nf">_extract_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader._extract_headers">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._extract_headers">[docs]</a>
+    <span class="k">def</span> <span class="nf">_extract_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Should NOT be overridden. This is a convienance methods to iteratively</span>
 <span class="sd">        get all file contents. Your should override ``_extract_header``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -327,7 +342,10 @@
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">contents</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader._file_contents_to_data_frame"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._file_contents_to_data_frame">[docs]</a>    <span class="k">def</span> <span class="nf">_file_contents_to_data_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader._file_contents_to_data_frame">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._file_contents_to_data_frame">[docs]</a>
+    <span class="k">def</span> <span class="nf">_file_contents_to_data_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Should NOT need to be overridden. After ``_extract_headers`` handles</span>
 <span class="sd">        removing the file header from the file contents, this method will parse</span>
 <span class="sd">        the remainder of the contents into a pandas DataFrame with column names</span>
@@ -350,7 +368,10 @@
             <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader._read_up_front">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._read_up_front">[docs]</a>
+    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Should not need to be overridden.&quot;&quot;&quot;</span>
         <span class="c1"># Perform Read</span>
         <span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_file_contents</span><span class="p">()</span>
@@ -359,15 +380,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Methods for accessing the data read in #####</span>
 
-<div class="viewcode-block" id="DelimitedTextReader._get_raw_data"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._get_raw_data">[docs]</a>    <span class="k">def</span> <span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedTextReader._get_raw_data">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader._get_raw_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This will return the proper data for the given timestep as a dataframe&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
 
+
     <span class="c1">#### Algorithm Methods ####</span>
 
-<div class="viewcode-block" id="DelimitedTextReader.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedTextReader.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to get data for current timestep and populate the</span>
 <span class="sd">        output data object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -381,9 +408,12 @@
         <span class="n">interface</span><span class="o">.</span><span class="n">data_frame_to_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">),</span> <span class="n">output</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
+
     <span class="c1">#### Seters and Geters ####</span>
 
-<div class="viewcode-block" id="DelimitedTextReader.set_delimiter"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.set_delimiter">[docs]</a>    <span class="k">def</span> <span class="nf">set_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deli</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedTextReader.set_delimiter">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.set_delimiter">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deli</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The input file&#39;s delimiter. To use a tab delimiter please use</span>
 <span class="sd">        ``set_split_on_white_space()``</span>
 
@@ -394,7 +424,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__delimiter</span> <span class="o">=</span> <span class="n">deli</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader.set_split_on_white_space"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.set_split_on_white_space">[docs]</a>    <span class="k">def</span> <span class="nf">set_split_on_white_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader.set_split_on_white_space">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.set_split_on_white_space">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_split_on_white_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a boolean flag to override the ``set_delimiter()`` and use any</span>
 <span class="sd">        white space as a delimiter.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -402,23 +435,35 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__use_tab</span> <span class="o">=</span> <span class="n">flag</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader.set_skip_rows"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.set_skip_rows">[docs]</a>    <span class="k">def</span> <span class="nf">set_skip_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">skip</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader.set_skip_rows">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.set_skip_rows">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_skip_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">skip</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the integer number of rows to skip at the top of the file.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">skip</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__skipRows</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__skipRows</span> <span class="o">=</span> <span class="n">skip</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader.get_skip_rows"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.get_skip_rows">[docs]</a>    <span class="k">def</span> <span class="nf">get_skip_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader.get_skip_rows">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.get_skip_rows">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_skip_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the integer number of rows to skip at the top of the file.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__skipRows</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader.set_comments"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.set_comments">[docs]</a>    <span class="k">def</span> <span class="nf">set_comments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader.set_comments">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.set_comments">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_comments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The character identifier for comments within the file.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">identifier</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__comments</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__comments</span> <span class="o">=</span> <span class="n">identifier</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader.set_has_titles"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.set_has_titles">[docs]</a>    <span class="k">def</span> <span class="nf">set_has_titles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader.set_has_titles">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.set_has_titles">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_has_titles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the boolean for if the delimited file has header titles for the</span>
 <span class="sd">        data arrays.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -426,20 +471,30 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__has_titles</span> <span class="o">=</span> <span class="n">flag</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader.has_titles"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.has_titles">[docs]</a>    <span class="k">def</span> <span class="nf">has_titles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedTextReader.has_titles">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.has_titles">[docs]</a>
+    <span class="k">def</span> <span class="nf">has_titles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the boolean for if the delimited file has header titles for the</span>
 <span class="sd">        data arrays.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__has_titles</span></div>
 
-<div class="viewcode-block" id="DelimitedTextReader.get_titles"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.get_titles">[docs]</a>    <span class="k">def</span> <span class="nf">get_titles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_titles</span></div></div>
+
+<div class="viewcode-block" id="DelimitedTextReader.get_titles">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedTextReader.get_titles">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_titles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_titles</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="DelimitedPointsReaderBase"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase">[docs]</a><span class="k">class</span> <span class="nc">DelimitedPointsReaderBase</span><span class="p">(</span><span class="n">DelimitedTextReader</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedPointsReaderBase">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase">[docs]</a>
+<span class="k">class</span> <span class="nc">DelimitedPointsReaderBase</span><span class="p">(</span><span class="n">DelimitedTextReader</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A base class for delimited text readers that produce ``vtkPolyData``</span>
 <span class="sd">    points.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -453,22 +508,30 @@
         <span class="n">DelimitedTextReader</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkPolyData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__copy_z</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;copy_z&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DelimitedPointsReaderBase.set_copy_z"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase.set_copy_z">[docs]</a>    <span class="k">def</span> <span class="nf">set_copy_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedPointsReaderBase.set_copy_z">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase.set_copy_z">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_copy_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set whether or not to copy the Z-component of the points to the</span>
 <span class="sd">        Point Data&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy_z</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__copy_z</span> <span class="o">=</span> <span class="n">flag</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DelimitedPointsReaderBase.get_copy_z"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase.get_copy_z">[docs]</a>    <span class="k">def</span> <span class="nf">get_copy_z</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DelimitedPointsReaderBase.get_copy_z">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase.get_copy_z">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_copy_z</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the status of whether or not to copy the Z-component of the</span>
 <span class="sd">        points to the Point Data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy_z</span></div>
 
+
     <span class="c1">#### Algorithm Methods ####</span>
 
-<div class="viewcode-block" id="DelimitedPointsReaderBase.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+<div class="viewcode-block" id="DelimitedPointsReaderBase.RequestData">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.DelimitedPointsReaderBase.RequestData">[docs]</a>
+    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to get data for current timestep and populate the</span>
 <span class="sd">        output data object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -481,13 +544,17 @@
         <span class="c1"># Generate the PolyData output</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_data</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">DeepCopy</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">points_to_poly_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">copy_z</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_copy_z</span><span class="p">()))</span>
-        <span class="k">return</span> <span class="mi">1</span></div></div>
+        <span class="k">return</span> <span class="mi">1</span></div>
+</div>
+
 
 
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="XYZTextReader"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.XYZTextReader">[docs]</a><span class="k">class</span> <span class="nc">XYZTextReader</span><span class="p">(</span><span class="n">DelimitedTextReader</span><span class="p">):</span>
+<div class="viewcode-block" id="XYZTextReader">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.XYZTextReader">[docs]</a>
+<span class="k">class</span> <span class="nc">XYZTextReader</span><span class="p">(</span><span class="n">DelimitedTextReader</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A makeshift reader for XYZ files where titles have comma delimiter and</span>
 <span class="sd">    data has space delimiter.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -502,10 +569,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">set_comments</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">))</span>
 
     <span class="c1"># Simply override the extract titles functionality</span>
-<div class="viewcode-block" id="XYZTextReader._extract_header"><a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.XYZTextReader._extract_header">[docs]</a>    <span class="k">def</span> <span class="nf">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+<div class="viewcode-block" id="XYZTextReader._extract_header">
+<a class="viewcode-back" href="../../../content/PVGeo/readers/delimited.html#PVGeo.readers.delimited.XYZTextReader._extract_header">[docs]</a>
+    <span class="k">def</span> <span class="nf">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to parse header details for XYZ files&quot;&quot;&quot;</span>
         <span class="n">titles</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">::]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>  <span class="c1"># first two characters of header is &#39;! &#39;</span>
-        <span class="k">return</span> <span class="n">titles</span><span class="p">,</span> <span class="n">content</span><span class="p">[</span><span class="mi">1</span><span class="p">::]</span></div></div>
+        <span class="k">return</span> <span class="n">titles</span><span class="p">,</span> <span class="n">content</span><span class="p">[</span><span class="mi">1</span><span class="p">::]</span></div>
+</div>
+
 </pre></div>
 
            </div>

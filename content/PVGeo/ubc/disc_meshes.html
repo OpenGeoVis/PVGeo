@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -10,7 +10,6 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -25,9 +24,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -242,35 +241,35 @@
            <div itemprop="articleBody">
              
   <section id="module-PVGeo.ubc.disc_meshes">
-<span id="discretize"></span><h1>Discretize<a class="headerlink" href="#module-PVGeo.ubc.disc_meshes" title="Permalink to this heading"></a></h1>
+<span id="discretize"></span><h1>Discretize<a class="headerlink" href="#module-PVGeo.ubc.disc_meshes" title="Link to this heading"></a></h1>
 <section id="discretize-mesh-reader">
-<h2>Discretize Mesh Reader<a class="headerlink" href="#discretize-mesh-reader" title="Permalink to this heading"></a></h2>
+<h2>Discretize Mesh Reader<a class="headerlink" href="#discretize-mesh-reader" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PVGeo.ubc.disc_meshes.DiscretizeMeshReader">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.ubc.disc_meshes.</span></span><span class="sig-name descname"><span class="pre">DiscretizeMeshReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PVGeo.ubc.disc_meshes.</span></span><span class="sig-name descname"><span class="pre">DiscretizeMeshReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base.html#PVGeo.base.InterfacedBaseReader" title="PVGeo.base.InterfacedBaseReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">InterfacedBaseReader</span></code></a></p>
 <p>A general reader for all <code class="docutils literal notranslate"><span class="pre">discretize</span></code> mesh objects saved to the
 <code class="docutils literal notranslate"><span class="pre">.json</span></code> serialized format</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.disc_meshes.DiscretizeMeshReader._get_vtk_object">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_vtk_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader._get_vtk_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._get_vtk_object" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_vtk_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader._get_vtk_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._get_vtk_object" title="Link to this definition"></a></dt>
 <dd><p>Returns the mesh’s proper VTK data object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PVGeo.ubc.disc_meshes.DiscretizeMeshReader._read_file">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader._read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._read_file" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/PVGeo/ubc/disc_meshes.html#DiscretizeMeshReader._read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._read_file" title="Link to this definition"></a></dt>
 <dd><p>Reads a mesh object from the serialized format</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PVGeo.ubc.disc_meshes.DiscretizeMeshReader.description">
-<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Serialized</span> <span class="pre">Discretize</span> <span class="pre">Meshes'</span></em><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader.description" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Serialized</span> <span class="pre">Discretize</span> <span class="pre">Meshes'</span></em><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader.description" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PVGeo.ubc.disc_meshes.DiscretizeMeshReader.extensions">
-<span class="sig-name descname"><span class="pre">extensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'json'</span></em><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader.extensions" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">extensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'json'</span></em><a class="headerlink" href="#PVGeo.ubc.disc_meshes.DiscretizeMeshReader.extensions" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
