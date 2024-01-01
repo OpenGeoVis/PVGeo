@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_grids_read-esri.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_grids_read-esri.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -25,7 +25,7 @@ Read an ESRI ASCII grid file
 
 .. GENERATED FROM PYTHON SOURCE LINES 7-13
 
-.. code-block:: default
+.. code-block:: Python
 
     import os
 
@@ -46,7 +46,7 @@ Download a sample ESRI grid file
 
 .. GENERATED FROM PYTHON SOURCE LINES 15-20
 
-.. code-block:: default
+.. code-block:: Python
 
     url = "https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/esri_grid.dem.zip"
     file_paths = pooch.retrieve(url=url, known_hash=None, processor=pooch.Unzip())
@@ -68,7 +68,7 @@ Download a sample ESRI grid file
 
 .. GENERATED FROM PYTHON SOURCE LINES 21-24
 
-.. code-block:: default
+.. code-block:: Python
 
     dem = EsriGridReader().apply(file_path)
     dem
@@ -81,9 +81,9 @@ Download a sample ESRI grid file
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-    <table>
-    <tr><th>UniformGrid</th><th>Information</th></tr>
+    <table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table style='width: 100%;'>
+    <tr><th>ImageData</th><th>Information</th></tr>
     <tr><td>N Cells</td><td>4875263</td></tr>
     <tr><td>N Points</td><td>4879680</td></tr>
     <tr><td>X Bounds</td><td>3.666e+05, 3.732e+05</td></tr>
@@ -95,7 +95,7 @@ Download a sample ESRI grid file
     </table>
 
     </td><td>
-    <table>
+    <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
     <tr><td><b>Data</b></td><td>Points</td><td>float64</td><td>1</td><td>-3.936e+02</td><td>3.988e+02</td></tr>
     </table>
@@ -111,7 +111,7 @@ Apply a filter to the DEM to have realistic topography
 
 .. GENERATED FROM PYTHON SOURCE LINES 26-28
 
-.. code-block:: default
+.. code-block:: Python
 
     warped = dem.warp_by_scalar()
     warped.plot(cmap="terrain", clim=[-100, 400])
@@ -130,7 +130,7 @@ Apply a filter to the DEM to have realistic topography
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.912 seconds)
+   **Total running time of the script:** (0 minutes 6.438 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-esri.py:
@@ -139,14 +139,13 @@ Apply a filter to the DEM to have realistic topography
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: read-esri.ipynb <read-esri.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: read-esri.py <read-esri.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: read-esri.ipynb <read-esri.ipynb>`
 
 
 .. only:: html

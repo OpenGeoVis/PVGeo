@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_filters-general_extract-points.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_filters-general_extract-points.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -28,7 +28,7 @@ This example demos :class:`PVGeo.filters.ExtractPoints`
 
 .. GENERATED FROM PYTHON SOURCE LINES 10-15
 
-.. code-block:: default
+.. code-block:: Python
 
     # sphinx_gallery_thumbnail_number = 2
     from pyvista import examples
@@ -48,7 +48,7 @@ Have some input data source with valid PointData
 
 .. GENERATED FROM PYTHON SOURCE LINES 17-20
 
-.. code-block:: default
+.. code-block:: Python
 
     data = examples.load_globe()
     data.plot()
@@ -71,7 +71,7 @@ Apply the filter:
 
 .. GENERATED FROM PYTHON SOURCE LINES 22-24
 
-.. code-block:: default
+.. code-block:: Python
 
     polyData = ExtractPoints().apply(data)
     polyData.plot()
@@ -90,7 +90,7 @@ Apply the filter:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.853 seconds)
+   **Total running time of the script:** (0 minutes 0.576 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-points.py:
@@ -99,14 +99,13 @@ Apply the filter:
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: extract-points.ipynb <extract-points.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: extract-points.py <extract-points.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: extract-points.ipynb <extract-points.ipynb>`
 
 
 .. only:: html

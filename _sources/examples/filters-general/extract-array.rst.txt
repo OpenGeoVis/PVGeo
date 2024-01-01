@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_filters-general_extract-array.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_filters-general_extract-array.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -28,7 +28,7 @@ This example demos :class:`PVGeo.filters.ExtractArray`
 
 .. GENERATED FROM PYTHON SOURCE LINES 10-15
 
-.. code-block:: default
+.. code-block:: Python
 
     import matplotlib.pyplot as plt
     from pyvista import examples
@@ -48,7 +48,7 @@ Create input data
 
 .. GENERATED FROM PYTHON SOURCE LINES 17-19
 
-.. code-block:: default
+.. code-block:: Python
 
     dataset = examples.download_st_helens()
 
@@ -65,7 +65,7 @@ Construct the filter
 
 .. GENERATED FROM PYTHON SOURCE LINES 21-27
 
-.. code-block:: default
+.. code-block:: Python
 
     filt = ExtractArray()
     # Define the array to extract
@@ -81,15 +81,15 @@ Construct the filter
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-    <table>
+    <table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table style='width: 100%;'>
     <tr><th>Table</th><th>Information</th></tr>
     <tr><td>N Rows</td><td>152709</td></tr>
     <tr><td>N Arrays</td><td>1</td></tr>
     </table>
 
     </td><td>
-    <table>
+    <table style='width: 100%;'>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
     <tr><td>Elevation</td><td>float32</td><td>1</td><td>6.820e+02</td><td>2.543e+03</td></tr>
     </table>
@@ -101,7 +101,7 @@ Construct the filter
 
 .. GENERATED FROM PYTHON SOURCE LINES 28-29
 
-.. code-block:: default
+.. code-block:: Python
 
     plt.hist(table["Elevation"])
 
@@ -119,15 +119,16 @@ Construct the filter
 
 
     (array([14075., 31732., 38605., 28616., 13749.,  9270.,  7174.,  4687.,
-            3199.,  1602.]), array([ 682. ,  868.1, 1054.2, 1240.3, 1426.4, 1612.5, 1798.6, 1984.7,
-           2170.8, 2356.9, 2543. ], dtype=float32), <BarContainer object of 10 artists>)
+            3199.,  1602.]), array([ 682.        ,  868.09997559, 1054.19995117, 1240.30004883,
+           1426.40002441, 1612.5       , 1798.59997559, 1984.69995117,
+           2170.80004883, 2356.89990234, 2543.        ]), <BarContainer object of 10 artists>)
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.474 seconds)
+   **Total running time of the script:** (0 minutes 0.375 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-array.py:
@@ -136,14 +137,13 @@ Construct the filter
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: extract-array.ipynb <extract-array.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: extract-array.py <extract-array.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: extract-array.ipynb <extract-array.ipynb>`
 
 
 .. only:: html

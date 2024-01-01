@@ -1,32 +1,34 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Read GSLib Table &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/examples/gslib/read-table.html"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -61,11 +63,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -215,10 +221,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Quick Examples</a> &raquo;</li>
-          <li><a href="index.html">GSLib</a> &raquo;</li>
-      <li>Read GSLib Table</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Quick Examples</a></li>
+          <li class="breadcrumb-item"><a href="index.html">GSLib</a></li>
+      <li class="breadcrumb-item active">Read GSLib Table</li>
 
   </ul>
   <hr/>
@@ -228,13 +234,13 @@
              
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-examples-gslib-read-table-py"><span class="std std-ref">here</span></a>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gslib-read-table-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="read-gslib-table">
 <span id="sphx-glr-examples-gslib-read-table-py"></span><h1>Read GSLib Table<a class="headerlink" href="#read-gslib-table" title="Permalink to this heading"></a></h1>
 <p>Read any GSLib file as a table <code class="xref py py-class docutils literal notranslate"><span class="pre">pyvist.Table</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">pooch</span>
 
@@ -242,7 +248,7 @@ to download the full example code</p>
 <span class="kn">from</span> <span class="nn">PVGeo.gslib</span> <span class="kn">import</span> <span class="n">GSLibReader</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># points_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/sundarbans.zip&#39;</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># points_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/sundarbans.zip&#39;</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/sundarbans.SGEMS.zip&quot;</span>
 <span class="n">file_paths</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">processor</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">Unzip</span><span class="p">())</span>
 <span class="n">file_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_paths</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;sundarbans.SGEMS&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -252,7 +258,7 @@ to download the full example code</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;/home/runner/.cache/pooch/86487d9e94190c342742d91d20091f70-sundarbans.SGEMS.zip.unzip/sundarbans.SGEMS&#39;
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reader</span> <span class="o">=</span> <span class="n">GSLibReader</span><span class="p">()</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">reader</span> <span class="o">=</span> <span class="n">GSLibReader</span><span class="p">()</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 <span class="c1"># Print the file header</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">get_file_header</span><span class="p">())</span>
@@ -261,19 +267,19 @@ to download the full example code</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1200 1750 1
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">table</span>
 </pre></div>
 </div>
 <div class="output_subarea output_html rendered_html output_result">
-<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-<table>
+<table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table style='width: 100%;'>
 <tr><th>Table</th><th>Information</th></tr>
 <tr><td>N Rows</td><td>2100000</td></tr>
 <tr><td>N Arrays</td><td>1</td></tr>
 </table>
 
 </td><td>
-<table>
+<table style='width: 100%;'>
 <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
 <tr><td>v</td><td>float64</td><td>1</td><td>2.667e+00</td><td>2.550e+02</td></tr>
 </table>
@@ -283,16 +289,16 @@ to download the full example code</p>
 <br />
 <br /><p>From inspecting the header, we realize that this dataset is gridded, so let’s
 use the <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.grid.TableToTimeGrid</span></code> filter to create a
-<code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.UniformGrid</span></code> of that dataset.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1200 x, 1750 y, 1 z, 1 t</span>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.ImageData</span></code> of that dataset.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1200 x, 1750 y, 1 z, 1 t</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">TableToTimeGrid</span><span class="p">(</span><span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1750</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 <span class="n">grid</span>
 </pre></div>
 </div>
 <div class="output_subarea output_html rendered_html output_result">
-<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-<table>
-<tr><th>UniformGrid</th><th>Information</th></tr>
+<table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table style='width: 100%;'>
+<tr><th>ImageData</th><th>Information</th></tr>
 <tr><td>N Cells</td><td>2100000</td></tr>
 <tr><td>N Points</td><td>4205902</td></tr>
 <tr><td>X Bounds</td><td>0.000e+00, 1.200e+03</td></tr>
@@ -304,7 +310,7 @@ use the <code class="xref py py-class docutils literal notranslate"><span class=
 </table>
 
 </td><td>
-<table>
+<table style='width: 100%;'>
 <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
 <tr><td><b>v</b></td><td>Cells</td><td>float64</td><td>1</td><td>2.667e+00</td><td>2.550e+02</td></tr>
 </table>
@@ -312,16 +318,16 @@ use the <code class="xref py py-class docutils literal notranslate"><span class=
 </td></tr> </table>
 </div>
 <br />
-<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
+<br /><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_read-table_001.png" srcset="../../_images/sphx_glr_read-table_001.png" alt="read table" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  17.990 seconds)</p>
+<img src="../../_images/sphx_glr_read-table_001.png" srcset="../../_images/sphx_glr_read-table_001.png" alt="read table" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 11.207 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gslib-read-table-py">
-<div class="sphx-glr-download sphx-glr-download-python docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/b41528c4b56317f8cdf1ed6575802d4a/read-table.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-table.py</span></code></a></p>
-</div>
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/e07327dfc4a29115f8235509ec4c073c/read-table.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">read-table.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/b41528c4b56317f8cdf1ed6575802d4a/read-table.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-table.py</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

@@ -3,32 +3,68 @@
 
 .. _sphx_glr_examples_filters-general_sg_execution_times:
 
+
 Computation times
 =================
-**00:27.150** total execution time for **examples_filters-general** files:
+**00:17.837** total execution time for 12 files **from examples/filters-general**:
 
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)                                 | 00:16.690 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)               | 00:03.538 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``) | 00:02.234 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)                         | 00:00.905 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)                                   | 00:00.853 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)                                 | 00:00.741 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)                                   | 00:00.609 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)                                           | 00:00.551 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)                                     | 00:00.544 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)                                     | 00:00.474 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``combine-tables.py``)                                   | 00:00.006 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_filters-general_reshape-table.py` (``reshape-table.py``)                                     | 00:00.004 | 0.0 MB |
-+----------------------------------------------------------------------------------------------------------------------+-----------+--------+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)
+     - 00:10.957
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)
+     - 00:02.631
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)
+     - 00:00.991
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``)
+     - 00:00.659
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)
+     - 00:00.576
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)
+     - 00:00.541
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)
+     - 00:00.401
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
+     - 00:00.375
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)
+     - 00:00.356
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)
+     - 00:00.343
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``combine-tables.py``)
+     - 00:00.004
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_reshape-table.py` (``reshape-table.py``)
+     - 00:00.003
+     - 0.0

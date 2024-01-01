@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_gslib_read-sgems-grid.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_gslib_read-sgems-grid.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -25,7 +25,7 @@ Read SGeMS Grid file formats.
 
 .. GENERATED FROM PYTHON SOURCE LINES 7-14
 
-.. code-block:: default
+.. code-block:: Python
 
     # sphinx_gallery_thumbnail_number = 2
     import os
@@ -43,7 +43,7 @@ Read SGeMS Grid file formats.
 
 .. GENERATED FROM PYTHON SOURCE LINES 15-23
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/a_wlreferencecat.zip'
@@ -61,9 +61,9 @@ Read SGeMS Grid file formats.
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-    <table>
-    <tr><th>UniformGrid</th><th>Information</th></tr>
+    <table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table style='width: 100%;'>
+    <tr><th>ImageData</th><th>Information</th></tr>
     <tr><td>N Cells</td><td>78000</td></tr>
     <tr><td>N Points</td><td>157122</td></tr>
     <tr><td>X Bounds</td><td>0.000e+00, 2.600e+02</td></tr>
@@ -75,7 +75,7 @@ Read SGeMS Grid file formats.
     </table>
 
     </td><td>
-    <table>
+    <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
     <tr><td><b>var</b></td><td>Cells</td><td>int64</td><td>1</td><td>0.000e+00</td><td>2.000e+00</td></tr>
     </table>
@@ -87,7 +87,7 @@ Read SGeMS Grid file formats.
 
 .. GENERATED FROM PYTHON SOURCE LINES 24-27
 
-.. code-block:: default
+.. code-block:: Python
 
     warped = grid.cell_data_to_point_data().warp_by_scalar(scale_factor=5)
     warped.plot()
@@ -106,7 +106,7 @@ Read SGeMS Grid file formats.
 
 .. GENERATED FROM PYTHON SOURCE LINES 28-35
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/maules_creek_3d.zip'
@@ -130,7 +130,7 @@ Read SGeMS Grid file formats.
 
 .. GENERATED FROM PYTHON SOURCE LINES 36-39
 
-.. code-block:: default
+.. code-block:: Python
 
     grid = SGeMSGridReader().apply(file_path)
     grid
@@ -143,9 +143,9 @@ Read SGeMS Grid file formats.
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-    <table>
-    <tr><th>UniformGrid</th><th>Information</th></tr>
+    <table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table style='width: 100%;'>
+    <tr><th>ImageData</th><th>Information</th></tr>
     <tr><td>N Cells</td><td>5440000</td></tr>
     <tr><td>N Points</td><td>5551821</td></tr>
     <tr><td>X Bounds</td><td>0.000e+00, 3.400e+02</td></tr>
@@ -157,7 +157,7 @@ Read SGeMS Grid file formats.
     </table>
 
     </td><td>
-    <table>
+    <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
     <tr><td><b>facies</b></td><td>Cells</td><td>int64</td><td>1</td><td>0.000e+00</td><td>1.000e+00</td></tr>
     </table>
@@ -169,7 +169,7 @@ Read SGeMS Grid file formats.
 
 .. GENERATED FROM PYTHON SOURCE LINES 40-43
 
-.. code-block:: default
+.. code-block:: Python
 
     grid.plot(categories=True)
 
@@ -188,7 +188,7 @@ Read SGeMS Grid file formats.
 
 .. GENERATED FROM PYTHON SOURCE LINES 44-51
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti_horizons_continuous.zip'
@@ -212,7 +212,7 @@ Read SGeMS Grid file formats.
 
 .. GENERATED FROM PYTHON SOURCE LINES 52-56
 
-.. code-block:: default
+.. code-block:: Python
 
     grid = SGeMSGridReader().apply(file_path)
     grid.threshold([-4, 1.06]).plot(clim=grid.get_data_range())
@@ -232,7 +232,7 @@ Read SGeMS Grid file formats.
 
 .. GENERATED FROM PYTHON SOURCE LINES 57-67
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # grid_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti.zip'
@@ -258,7 +258,7 @@ Read SGeMS Grid file formats.
 
 .. GENERATED FROM PYTHON SOURCE LINES 68-69
 
-.. code-block:: default
+.. code-block:: Python
 
     grid.plot(scalars="seismic", cpos="xy")
 
@@ -276,7 +276,7 @@ Read SGeMS Grid file formats.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  40.389 seconds)
+   **Total running time of the script:** (0 minutes 28.697 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-sgems-grid.py:
@@ -285,14 +285,13 @@ Read SGeMS Grid file formats.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: read-sgems-grid.ipynb <read-sgems-grid.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: read-sgems-grid.py <read-sgems-grid.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: read-sgems-grid.ipynb <read-sgems-grid.ipynb>`
 
 
 .. only:: html

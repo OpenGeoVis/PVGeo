@@ -1,32 +1,34 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting Started &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/overview/getting-started.html"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -61,11 +63,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -223,8 +229,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Getting Started</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting Started</li>
 
   </ul>
   <hr/>
@@ -318,7 +324,7 @@ absolute path of the files loaded into ParaView, so be sure to select
 we know installation via Anaconda Python distributions will work on Mac, Windows,
 and Linux operating systems. To begin using the <em>PVGeo</em> Python package, create
 a new virtual environment and install <em>PVGeo</em> through pip.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda create -n pvgeoenv <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>pvgeoenv<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
 </pre></div>
 </div>
 <p>If you’d like to link PVGeo to ParaView, you must use a Python
@@ -327,8 +333,8 @@ your installed ParaView application. Once you create this virtual environment,
 you can opt to never use it again as it is only necessary for holding PVGeo and
 its dependencies for ParaView to use. If you’d like to use PVGeo outside of
 ParaView, any modern version of Python will work.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">source</span> activate pvgeoenv
-<span class="o">(</span>pvgeoenv<span class="o">)</span> $ pip install PVGeo
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>pvgeoenv
+<span class="o">(</span>pvgeoenv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>PVGeo
 </pre></div>
 </div>
 <section id="non-windows-users">
@@ -336,7 +342,7 @@ ParaView, any modern version of Python will work.</p>
 <p>Now you must install VTK to your virtual environment. For Linux and Mac users,
 simply install VTK through <cite>pip</cite>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now install VTK</span>
-<span class="o">(</span>pvgeoenv<span class="o">)</span> $ pip install vtk
+<span class="o">(</span>pvgeoenv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>vtk
 </pre></div>
 </div>
 <p>Why not on Windows?
@@ -362,7 +368,7 @@ Graphical User Interface.</p>
 <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> and a <code class="docutils literal notranslate"><span class="pre">PV_PLUGIN_PATH</span></code> environmental variables. First, retrieve
 the needed paths from <em>PVGeo</em>. Do this by executing the following from your
 command line:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>pvgeoenv<span class="o">)</span> $ python -m PVGeo install
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>pvgeoenv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>PVGeo<span class="w"> </span>install
 </pre></div>
 </div>
 <div class="admonition note">
@@ -426,7 +432,7 @@ manager and be sure to select <em>Auto Load</em>.</p>
 <p class="admonition-title">Error</p>
 <p>Not sure where your <code class="docutils literal notranslate"><span class="pre">PV_PLUGIN_PATH</span></code> is located?</p>
 <p>Re-run the install command with an additional argument <code class="docutils literal notranslate"><span class="pre">echo</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>pvgeoenv<span class="o">)</span> $ python -m PVGeo install <span class="nb">echo</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>pvgeoenv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>PVGeo<span class="w"> </span>install<span class="w"> </span><span class="nb">echo</span>
 </pre></div>
 </div>
 </div>
@@ -453,7 +459,7 @@ with ParaView, see
 <section id="update-pvgeo">
 <h2>Update <em>PVGeo</em><a class="headerlink" href="#update-pvgeo" title="Permalink to this heading"></a></h2>
 <p>Use pip to update PVGeo in your python environment(s):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>pvgeoenv<span class="o">)</span> $ pip install --upgrade PVGeo
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>pvgeoenv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>PVGeo
 </pre></div>
 </div>
 </section>

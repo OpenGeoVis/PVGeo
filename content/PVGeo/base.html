@@ -1,32 +1,34 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Base Classes &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/base.html"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -61,11 +63,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -88,14 +94,38 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">About PVGeo</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Base Classes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#algorithm-base">Algorithm Base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#filter-base">Filter Base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#filter-preserve-type-base">Filter Preserve Type Base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#interfaced-base-reader">Interfaced Base Reader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reader-base-time-varying">Reader Base: Time Varying</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reader-base-base">Reader Base Base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#two-file-reader-base">Two File Reader Base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#writer-base">Writer Base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#algorithm-base">Algorithm Base</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.base.AlgorithmBase"><code class="docutils literal notranslate"><span class="pre">AlgorithmBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#filter-base">Filter Base</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.base.FilterBase"><code class="docutils literal notranslate"><span class="pre">FilterBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#filter-preserve-type-base">Filter Preserve Type Base</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.base.FilterPreserveTypeBase"><code class="docutils literal notranslate"><span class="pre">FilterPreserveTypeBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interfaced-base-reader">Interfaced Base Reader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.base.InterfacedBaseReader"><code class="docutils literal notranslate"><span class="pre">InterfacedBaseReader</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reader-base-time-varying">Reader Base: Time Varying</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.base.ReaderBase"><code class="docutils literal notranslate"><span class="pre">ReaderBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reader-base-base">Reader Base Base</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.base.ReaderBaseBase"><code class="docutils literal notranslate"><span class="pre">ReaderBaseBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#two-file-reader-base">Two File Reader Base</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.base.TwoFileReaderBase"><code class="docutils literal notranslate"><span class="pre">TwoFileReaderBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#writer-base">Writer Base</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.base.WriterBase"><code class="docutils literal notranslate"><span class="pre">WriterBase</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cmaps.html">Color Maps</a></li>
@@ -222,9 +252,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">About PVGeo</a> &raquo;</li>
-      <li>Base Classes</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">About PVGeo</a></li>
+      <li class="breadcrumb-item active">Base Classes</li>
 
   </ul>
   <hr/>
@@ -271,11 +301,11 @@ algorithm.</p>
 <span class="sig-name descname"><span class="pre">error_occurred</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#AlgorithmBase.error_occurred"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.AlgorithmBase.error_occurred" title="Permalink to this definition"></a></dt>
 <dd><p>A convenience method for handling errors on the VTK pipeline</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>true if an error has occurred since last checked</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -447,8 +477,8 @@ of file names when the pipeline needs to know the time information.</p>
 <dd><p>Use to set the file names for the reader. Handles singlt string or
 list of strings.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The absolute file name with path to read.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The absolute file name with path to read.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -480,8 +510,8 @@ list of strings.</p>
 <dd><p>Use to set the file names for the reader. Handles singlt string or
 list of strings.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The absolute file name with path to read.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The absolute file name with path to read.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -520,14 +550,14 @@ timestep’s filename.</p>
 <span class="sig-name descname"><span class="pre">need_to_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#ReaderBaseBase.need_to_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.ReaderBaseBase.need_to_read" title="Permalink to this definition"></a></dt>
 <dd><p>Ask self if the reader needs to read the files again.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Set the read status</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Set the read status</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the status of the reader.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -548,10 +578,10 @@ One meta-data file and a series of data files.</p>
 <span class="sig-name descname"><span class="pre">Modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">read_again_mesh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_again_models</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.Modified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.Modified" title="Permalink to this definition"></a></dt>
 <dd><p>Call modified if the files needs to be read again again</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>read_again_mesh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – set the status of the reader for mesh files.</p></li>
-<li><p><strong>read_again_models</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – set the status of the reader for model files.</p></li>
+<li><p><strong>read_again_mesh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – set the status of the reader for mesh files.</p></li>
+<li><p><strong>read_again_models</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – set the status of the reader for model files.</p></li>
 </ul>
 </dd>
 </dl>
@@ -575,8 +605,8 @@ One meta-data file and a series of data files.</p>
 <dd><p>Use to set the file names for the reader. Handles single string or
 list of strings.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>)</em>) – the file name(s) to use for the model data.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>)</em>) – the file name(s) to use for the model data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -635,8 +665,8 @@ timestep’s filename.</p>
 <span class="sig-name descname"><span class="pre">need_to_readMesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.need_to_readMesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.need_to_readMesh" title="Permalink to this definition"></a></dt>
 <dd><p>Ask self if the reader needs to read the mesh file again.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – set the status of the reader for mesh files.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – set the status of the reader for mesh files.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -646,8 +676,8 @@ timestep’s filename.</p>
 <span class="sig-name descname"><span class="pre">need_to_readModels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/base.html#TwoFileReaderBase.need_to_readModels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.base.TwoFileReaderBase.need_to_readModels" title="Permalink to this definition"></a></dt>
 <dd><p>Ask self if the reader needs to read the model files again.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – set the status of the reader for model files.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – set the status of the reader for model files.</p>
 </dd>
 </dl>
 </dd></dl>

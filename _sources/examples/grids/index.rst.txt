@@ -19,7 +19,7 @@ Grids
 .. only:: html
 
   .. image:: /examples/grids/images/thumb/sphx_glr_extract-topography_thumb.png
-    :alt: Extract Topography
+    :alt:
 
   :ref:`sphx_glr_examples_grids_extract-topography.py`
 
@@ -36,7 +36,7 @@ Grids
 .. only:: html
 
   .. image:: /examples/grids/images/thumb/sphx_glr_read-esri_thumb.png
-    :alt: Read ESRI Grid File
+    :alt:
 
   :ref:`sphx_glr_examples_grids_read-esri.py`
 
@@ -53,7 +53,7 @@ Grids
 .. only:: html
 
   .. image:: /examples/grids/images/thumb/sphx_glr_read-surfer_thumb.png
-    :alt: Read Surfer Grid File
+    :alt:
 
   :ref:`sphx_glr_examples_grids_read-surfer.py`
 

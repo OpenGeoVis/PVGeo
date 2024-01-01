@@ -1,31 +1,33 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo.gslib.gslib &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/gslib/gslib.html"/>
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/clipboard.min.js"></script>
-        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -58,11 +60,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -195,9 +201,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>PVGeo.gslib.gslib</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">PVGeo.gslib.gslib</li>
 
   </ul>
   <hr/>
@@ -222,7 +228,7 @@
 
 
 <span class="k">class</span> <span class="nc">_GSLibReaderMethods</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A helper class to handle overriding of delimited text reading methods</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A helper class to handle overriding of delimited text reading methods</span>
 <span class="sd">    for all GSLib readers.&quot;&quot;&quot;</span>
 
     <span class="c1"># NOTE: order of inheritance matters A LOT!</span>
@@ -241,12 +247,12 @@
     <span class="c1">#### Seters and Geters ####</span>
 
     <span class="k">def</span> <span class="nf">get_file_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the file header. If file hasn&#39;t been read, returns ``None``&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the file header. If file hasn&#39;t been read, returns ``None``&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_header</span>
 
 
 <div class="viewcode-block" id="GSLibReader"><a class="viewcode-back" href="../../../content/PVGeo/gslib/gslib.html#PVGeo.gslib.gslib.GSLibReader">[docs]</a><span class="k">class</span> <span class="nc">GSLibReader</span><span class="p">(</span><span class="n">_GSLibReaderMethods</span><span class="p">,</span> <span class="n">DelimitedTextReader</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Reads a GSLIB file format to a ``vtkTable``. The GSLIB file format has</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads a GSLIB file format to a ``vtkTable``. The GSLIB file format has</span>
 <span class="sd">    headers lines followed by the data as a space delimited ASCI file (this</span>
 <span class="sd">    filter is set up to allow you to choose any single character delimiter).</span>
 <span class="sd">    The first header line is the title and will be printed to the console.</span>
@@ -267,7 +273,7 @@
 
 
 <div class="viewcode-block" id="GSLibPointSetReader"><a class="viewcode-back" href="../../../content/PVGeo/gslib/gslib.html#PVGeo.gslib.gslib.GSLibPointSetReader">[docs]</a><span class="k">class</span> <span class="nc">GSLibPointSetReader</span><span class="p">(</span><span class="n">_GSLibReaderMethods</span><span class="p">,</span> <span class="n">DelimitedPointsReaderBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Reads a GSLib point set file where the first three columns are the XYZ</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads a GSLib point set file where the first three columns are the XYZ</span>
 <span class="sd">    coordinates and the remainder of the data is consistent with the</span>
 <span class="sd">    :class:`GSLibReader` specifications.&quot;&quot;&quot;</span>
 
@@ -282,7 +288,7 @@
 
 
 <div class="viewcode-block" id="WriteTableToGSLib"><a class="viewcode-back" href="../../../content/PVGeo/gslib/gslib.html#PVGeo.gslib.gslib.WriteTableToGSLib">[docs]</a><span class="k">class</span> <span class="nc">WriteTableToGSLib</span><span class="p">(</span><span class="n">WriterBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Write the row data in a ``vtkTable`` to the GSLib Format&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write the row data in a ``vtkTable`` to the GSLib Format&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Write ``vtkTable`` To GSLib Format&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;writer&#39;</span>
@@ -292,7 +298,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_header</span> <span class="o">=</span> <span class="s1">&#39;Data saved by PVGeo&#39;</span>
 
 <div class="viewcode-block" id="WriteTableToGSLib.perform_write_out"><a class="viewcode-back" href="../../../content/PVGeo/gslib/gslib.html#PVGeo.gslib.gslib.WriteTableToGSLib.perform_write_out">[docs]</a>    <span class="k">def</span> <span class="nf">perform_write_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">object_name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write out the input data object to the GSLib file format&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write out the input data object to the GSLib file format&quot;&quot;&quot;</span>
         <span class="c1"># Get the input data object</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">input_data_object</span>
 
@@ -317,7 +323,7 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="WriteTableToGSLib.set_header"><a class="viewcode-back" href="../../../content/PVGeo/gslib/gslib.html#PVGeo.gslib.gslib.WriteTableToGSLib.set_header">[docs]</a>    <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the file header string&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the file header string&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_header</span> <span class="o">!=</span> <span class="n">header</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_header</span> <span class="o">=</span> <span class="n">header</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>

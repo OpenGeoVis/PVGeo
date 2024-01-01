@@ -1,32 +1,34 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Read SGeMS Grid &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/examples/gslib/read-sgems-grid.html"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -61,11 +63,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -215,10 +221,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Quick Examples</a> &raquo;</li>
-          <li><a href="index.html">GSLib</a> &raquo;</li>
-      <li>Read SGeMS Grid</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Quick Examples</a></li>
+          <li class="breadcrumb-item"><a href="index.html">GSLib</a></li>
+      <li class="breadcrumb-item active">Read SGeMS Grid</li>
 
   </ul>
   <hr/>
@@ -228,13 +234,13 @@
              
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-examples-gslib-read-sgems-grid-py"><span class="std std-ref">here</span></a>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gslib-read-sgems-grid-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="read-sgems-grid">
 <span id="sphx-glr-examples-gslib-read-sgems-grid-py"></span><h1>Read SGeMS Grid<a class="headerlink" href="#read-sgems-grid" title="Permalink to this heading"></a></h1>
 <p>Read SGeMS Grid file formats.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">pooch</span>
@@ -242,7 +248,7 @@ to download the full example code</p>
 <span class="kn">from</span> <span class="nn">PVGeo.gslib</span> <span class="kn">import</span> <span class="n">SGeMSGridReader</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/a_wlreferencecat.zip&#39;</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/a_wlreferencecat.zip&#39;</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/A_WLreferenceCAT.sgems&quot;</span>
 <span class="n">file_path</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
@@ -251,9 +257,9 @@ to download the full example code</p>
 </pre></div>
 </div>
 <div class="output_subarea output_html rendered_html output_result">
-<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-<table>
-<tr><th>UniformGrid</th><th>Information</th></tr>
+<table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table style='width: 100%;'>
+<tr><th>ImageData</th><th>Information</th></tr>
 <tr><td>N Cells</td><td>78000</td></tr>
 <tr><td>N Points</td><td>157122</td></tr>
 <tr><td>X Bounds</td><td>0.000e+00, 2.600e+02</td></tr>
@@ -265,7 +271,7 @@ to download the full example code</p>
 </table>
 
 </td><td>
-<table>
+<table style='width: 100%;'>
 <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
 <tr><td><b>var</b></td><td>Cells</td><td>int64</td><td>1</td><td>0.000e+00</td><td>2.000e+00</td></tr>
 </table>
@@ -273,11 +279,11 @@ to download the full example code</p>
 </td></tr> </table>
 </div>
 <br />
-<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">warped</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">cell_data_to_point_data</span><span class="p">()</span><span class="o">.</span><span class="n">warp_by_scalar</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<br /><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">warped</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">cell_data_to_point_data</span><span class="p">()</span><span class="o">.</span><span class="n">warp_by_scalar</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">warped</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_read-sgems-grid_001.png" srcset="../../_images/sphx_glr_read-sgems-grid_001.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/maules_creek_3d.zip&#39;</span>
+<img src="../../_images/sphx_glr_read-sgems-grid_001.png" srcset="../../_images/sphx_glr_read-sgems-grid_001.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/maules_creek_3d.zip&#39;</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/Maules_Creek_3D.SGEMS.zip&quot;</span>
 <span class="n">file_paths</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">processor</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">Unzip</span><span class="p">())</span>
 <span class="n">file_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_paths</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Maules_Creek_3D.SGEMS&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -287,14 +293,14 @@ to download the full example code</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;/home/runner/.cache/pooch/db952eed0c325d1a10fc03d53f46f9a9-Maules_Creek_3D.SGEMS.zip.unzip/Maules_Creek_3D.SGEMS&#39;
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 <span class="n">grid</span>
 </pre></div>
 </div>
 <div class="output_subarea output_html rendered_html output_result">
-<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-<table>
-<tr><th>UniformGrid</th><th>Information</th></tr>
+<table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table style='width: 100%;'>
+<tr><th>ImageData</th><th>Information</th></tr>
 <tr><td>N Cells</td><td>5440000</td></tr>
 <tr><td>N Points</td><td>5551821</td></tr>
 <tr><td>X Bounds</td><td>0.000e+00, 3.400e+02</td></tr>
@@ -306,7 +312,7 @@ to download the full example code</p>
 </table>
 
 </td><td>
-<table>
+<table style='width: 100%;'>
 <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
 <tr><td><b>facies</b></td><td>Cells</td><td>int64</td><td>1</td><td>0.000e+00</td><td>1.000e+00</td></tr>
 </table>
@@ -314,10 +320,10 @@ to download the full example code</p>
 </td></tr> </table>
 </div>
 <br />
-<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<br /><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_read-sgems-grid_002.png" srcset="../../_images/sphx_glr_read-sgems-grid_002.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti_horizons_continuous.zip&#39;</span>
+<img src="../../_images/sphx_glr_read-sgems-grid_002.png" srcset="../../_images/sphx_glr_read-sgems-grid_002.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti_horizons_continuous.zip&#39;</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/TI_horizons_continuous.SGEMS.zip&quot;</span>
 <span class="n">file_paths</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">processor</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">Unzip</span><span class="p">())</span>
 <span class="n">file_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_paths</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;TI_horizons_continuous.SGEMS&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -327,11 +333,11 @@ to download the full example code</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;/home/runner/.cache/pooch/cb332143f44792c75fe40091d3efa739-TI_horizons_continuous.SGEMS.zip.unzip/TI_horizons_continuous.SGEMS&#39;
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">SGeMSGridReader</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 <span class="n">grid</span><span class="o">.</span><span class="n">threshold</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.06</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clim</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">get_data_range</span><span class="p">())</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_read-sgems-grid_003.png" srcset="../../_images/sphx_glr_read-sgems-grid_003.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti.zip&#39;</span>
+<img src="../../_images/sphx_glr_read-sgems-grid_003.png" srcset="../../_images/sphx_glr_read-sgems-grid_003.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid_url = &#39;http://www.trainingimages.org/uploads/3/4/7/0/34703305/ti.zip&#39;</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/pyvista/vtk-data/master/Data/ti.sgems.zip&quot;</span>
 <span class="n">file_paths</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">processor</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">Unzip</span><span class="p">())</span>
 <span class="n">file_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_paths</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;ti.sgems&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -341,16 +347,16 @@ to download the full example code</p>
 <span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;photo&quot;</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;bone&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_read-sgems-grid_004.png" srcset="../../_images/sphx_glr_read-sgems-grid_004.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;seismic&quot;</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
+<img src="../../_images/sphx_glr_read-sgems-grid_004.png" srcset="../../_images/sphx_glr_read-sgems-grid_004.png" alt="read sgems grid" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;seismic&quot;</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_read-sgems-grid_005.png" srcset="../../_images/sphx_glr_read-sgems-grid_005.png" alt="read sgems grid" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  40.389 seconds)</p>
+<img src="../../_images/sphx_glr_read-sgems-grid_005.png" srcset="../../_images/sphx_glr_read-sgems-grid_005.png" alt="read sgems grid" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 28.697 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gslib-read-sgems-grid-py">
-<div class="sphx-glr-download sphx-glr-download-python docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/56a5c2e9da1b3123e2e5d4aaf2ca9c68/read-sgems-grid.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-sgems-grid.py</span></code></a></p>
-</div>
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/da5e8fb3f65584f0a94bcf8563a79461/read-sgems-grid.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">read-sgems-grid.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/56a5c2e9da1b3123e2e5d4aaf2ca9c68/read-sgems-grid.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">read-sgems-grid.py</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

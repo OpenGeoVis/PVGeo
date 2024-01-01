@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_filters-general_many-slices-along-points.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_filters-general_many-slices-along-points.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -37,7 +37,7 @@ This example demos :class:`PVGeo.filters.ManySlicesAlongPoints`
 
 .. GENERATED FROM PYTHON SOURCE LINES 20-22
 
-.. code-block:: default
+.. code-block:: Python
 
     import numpy as np
 
@@ -54,7 +54,7 @@ sphinx_gallery_thumbnail_number = 3
 
 .. GENERATED FROM PYTHON SOURCE LINES 24-30
 
-.. code-block:: default
+.. code-block:: Python
 
     import pyvista
     from pyvista import examples
@@ -75,7 +75,7 @@ Load a volumetric model to be sliced from pyvista's examples
 
 .. GENERATED FROM PYTHON SOURCE LINES 32-35
 
-.. code-block:: default
+.. code-block:: Python
 
     model = examples.load_channels()
     model.plot()
@@ -99,7 +99,7 @@ we will use to slice the volume.
 
 .. GENERATED FROM PYTHON SOURCE LINES 38-57
 
-.. code-block:: default
+.. code-block:: Python
 
 
 
@@ -142,7 +142,7 @@ slices to what you prefer!
 
 .. GENERATED FROM PYTHON SOURCE LINES 63-67
 
-.. code-block:: default
+.. code-block:: Python
 
 
     slices = ManySlicesAlongPoints(n_slices=5).apply(points, model)
@@ -156,7 +156,7 @@ slices to what you prefer!
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Information</th><th>Blocks</th></tr><tr><td>
+    <table style='width: 100%;'><tr><th>Information</th><th>Blocks</th></tr><tr><td>
     <table>
     <tr><th>MultiBlock</th><th>Values</th></tr>
     <tr><td>N Blocks</td><td>6</td></tr>
@@ -183,7 +183,7 @@ slices to what you prefer!
 
 .. GENERATED FROM PYTHON SOURCE LINES 68-74
 
-.. code-block:: default
+.. code-block:: Python
 
     line = PVGeo.filters.AddCellConnToPoints().apply(points)
     p = pyvista.Plotter()
@@ -206,7 +206,7 @@ slices to what you prefer!
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.538 seconds)
+   **Total running time of the script:** (0 minutes 2.631 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_many-slices-along-points.py:
@@ -215,14 +215,13 @@ slices to what you prefer!
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: many-slices-along-points.ipynb <many-slices-along-points.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: many-slices-along-points.py <many-slices-along-points.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: many-slices-along-points.ipynb <many-slices-along-points.ipynb>`
 
 
 .. only:: html

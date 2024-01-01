@@ -1,31 +1,33 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo.grids.subset &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/grids/subset.html"/>
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/clipboard.min.js"></script>
-        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -58,11 +60,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -195,9 +201,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>PVGeo.grids.subset</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">PVGeo.grids.subset</li>
 
   </ul>
   <hr/>
@@ -227,7 +233,7 @@
 
 
 <div class="viewcode-block" id="ExtractTopography"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography">[docs]</a><span class="k">class</span> <span class="nc">ExtractTopography</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This filter takes two inputs: any mesh dataset and a set of points for</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This filter takes two inputs: any mesh dataset and a set of points for</span>
 <span class="sd">    a topography source. This will add a boolean data array to the cell data of</span>
 <span class="sd">    the input grid on whether that cell should be active (under topographic</span>
 <span class="sd">    layer). A user can also choose to directly extract the data rather than</span>
@@ -278,7 +284,7 @@
 
     <span class="c1"># CRITICAL for multiple input ports</span>
 <div class="viewcode-block" id="ExtractTopography.FillInputPortInformation"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.FillInputPortInformation">[docs]</a>    <span class="k">def</span> <span class="nf">FillInputPortInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This simply makes sure the user selects the correct inputs&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This simply makes sure the user selects the correct inputs&quot;&quot;&quot;</span>
         <span class="n">typ</span> <span class="o">=</span> <span class="s1">&#39;vtkDataSet&#39;</span>
         <span class="k">if</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">typ</span> <span class="o">=</span> <span class="s1">&#39;vtkPointSet&#39;</span>  <span class="c1"># Make sure topography is some sort of point set</span>
@@ -287,7 +293,7 @@
 
     <span class="c1"># THIS IS CRUCIAL to preserve data type through filter</span>
 <div class="viewcode-block" id="ExtractTopography.RequestDataObject"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.RequestDataObject">[docs]</a>    <span class="k">def</span> <span class="nf">RequestDataObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Constructs the output data object based on the input data object&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructs the output data object based on the input data object&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">OutputType</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">GetClassName</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">FillOutputPortInformation</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">outInfo</span><span class="o">.</span><span class="n">GetInformationObject</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="k">return</span> <span class="mi">1</span></div>
@@ -296,7 +302,7 @@
 
 <div class="viewcode-block" id="ExtractTopography._query"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography._query">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_query</span><span class="p">(</span><span class="n">topo_points</span><span class="p">,</span> <span class="n">data_points</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Queries the data points for their closest point on the topography</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Queries the data points for their closest point on the topography</span>
 <span class="sd">        surface&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># sklearn&#39;s KDTree is faster: use it if available</span>
@@ -309,19 +315,19 @@
 
 <div class="viewcode-block" id="ExtractTopography._underneath"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography._underneath">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_underneath</span><span class="p">(</span><span class="n">topo_points</span><span class="p">,</span> <span class="n">data_points</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Extract cells underneath the topography surface&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract cells underneath the topography surface&quot;&quot;&quot;</span>
         <span class="n">comp</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="n">topo_points</span><span class="p">,</span> <span class="n">data_points</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">comp</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">tolerance</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ExtractTopography._intersection"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography._intersection">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_intersection</span><span class="p">(</span><span class="n">topo_points</span><span class="p">,</span> <span class="n">data_points</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Extract cells intersecting the topography surface&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract cells intersecting the topography surface&quot;&quot;&quot;</span>
         <span class="n">comp</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="n">topo_points</span><span class="p">,</span> <span class="n">data_points</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">data_points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">comp</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]))</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ExtractTopography.get_operations"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.get_operations">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_operations</span><span class="p">():</span>
-        <span class="sd">&quot;&quot;&quot;Returns the extraction operation methods as callable objects in a</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the extraction operation methods as callable objects in a</span>
 <span class="sd">        dictionary</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
@@ -332,7 +338,7 @@
 
 <div class="viewcode-block" id="ExtractTopography.get_operation_names"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.get_operation_names">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_operation_names</span><span class="p">():</span>
-        <span class="sd">&quot;&quot;&quot;Gets a list of the extraction operation keys</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets a list of the extraction operation keys</span>
 
 <span class="sd">        Return:</span>
 <span class="sd">            list(str): the keys for getting the operations</span>
@@ -342,7 +348,7 @@
 
 <div class="viewcode-block" id="ExtractTopography.get_operation"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.get_operation">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_operation</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Gets a extraction operation based on an index in the keys</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets a extraction operation based on an index in the keys</span>
 
 <span class="sd">        Return:</span>
 <span class="sd">            callable: the operation method</span>
@@ -355,7 +361,7 @@
     <span class="c1">#### Pipeline Methods ####</span>
 
 <div class="viewcode-block" id="ExtractTopography.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">igrid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Port 0: grid</span>
         <span class="n">topo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Port 1: topography</span>
@@ -388,7 +394,7 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="ExtractTopography.apply"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run the algorithm on the input data using the topography points&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the algorithm on the input data using the topography points&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
@@ -403,29 +409,29 @@
     <span class="c1">#### Setters/Getters ####</span>
 
 <div class="viewcode-block" id="ExtractTopography.set_tolerance"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.set_tolerance">[docs]</a>    <span class="k">def</span> <span class="nf">set_tolerance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the tolerance threshold for the querry&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the tolerance threshold for the querry&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tolerance</span> <span class="o">!=</span> <span class="n">tol</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_tolerance</span> <span class="o">=</span> <span class="n">tol</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ExtractTopography.get_tolerance"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.get_tolerance">[docs]</a>    <span class="k">def</span> <span class="nf">get_tolerance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the tolerance threshold for the querry&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the tolerance threshold for the querry&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tolerance</span></div>
 
 <div class="viewcode-block" id="ExtractTopography.set_offset"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.set_offset">[docs]</a>    <span class="k">def</span> <span class="nf">set_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Sets how far off (in Z dir) to slice the data&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets how far off (in Z dir) to slice the data&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">!=</span> <span class="n">offset</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="n">offset</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ExtractTopography.set_invert"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.set_invert">[docs]</a>    <span class="k">def</span> <span class="nf">set_invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Sets the boolean flag on whether to invert the extraction.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the boolean flag on whether to invert the extraction.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_invert</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_invert</span> <span class="o">=</span> <span class="n">flag</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ExtractTopography.set_operation"><a class="viewcode-back" href="../../../content/PVGeo/grids/subset.html#PVGeo.grids.subset.ExtractTopography.set_operation">[docs]</a>    <span class="k">def</span> <span class="nf">set_operation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the type of extraction to perform.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the type of extraction to perform.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            op (str, int, or callable): The operation as a string key, int</span>

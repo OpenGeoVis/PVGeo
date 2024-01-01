@@ -23,7 +23,7 @@ files to another location for download).
 .. only:: html
 
   .. image:: /examples/gslib/images/thumb/sphx_glr_read-point-set_thumb.png
-    :alt: Read GSLib Point Set
+    :alt:
 
   :ref:`sphx_glr_examples_gslib_read-point-set.py`
 
@@ -40,7 +40,7 @@ files to another location for download).
 .. only:: html
 
   .. image:: /examples/gslib/images/thumb/sphx_glr_read-sgems-grid_thumb.png
-    :alt: Read SGeMS Grid
+    :alt:
 
   :ref:`sphx_glr_examples_gslib_read-sgems-grid.py`
 
@@ -57,7 +57,7 @@ files to another location for download).
 .. only:: html
 
   .. image:: /examples/gslib/images/thumb/sphx_glr_read-table_thumb.png
-    :alt: Read GSLib Table
+    :alt:
 
   :ref:`sphx_glr_examples_gslib_read-table.py`
 

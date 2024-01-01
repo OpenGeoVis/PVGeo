@@ -1,32 +1,34 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>General Filters &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/filters/index.html"/>
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/clipboard.min.js"></script>
-        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -61,11 +63,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -219,9 +225,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">About PVGeo</a> &raquo;</li>
-      <li>General Filters</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">About PVGeo</a></li>
+      <li class="breadcrumb-item active">General Filters</li>
 
   </ul>
   <hr/>
@@ -234,43 +240,337 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="math.html">Math Operations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="math.html#array-math">Array Math</a></li>
-<li class="toctree-l2"><a class="reference internal" href="math.html#arrays-to-rgba">Arrays To RGBA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="math.html#normalize-array">Normalize Array</a></li>
-<li class="toctree-l2"><a class="reference internal" href="math.html#percent-threshold">Percent Threshold</a></li>
+<li class="toctree-l2"><a class="reference internal" href="math.html#array-math">Array Math</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath"><code class="docutils literal notranslate"><span class="pre">ArrayMath</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.RequestData"><code class="docutils literal notranslate"><span class="pre">ArrayMath.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.SetInputArrayToProcess"><code class="docutils literal notranslate"><span class="pre">ArrayMath.SetInputArrayToProcess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath._add"><code class="docutils literal notranslate"><span class="pre">ArrayMath._add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath._correlate"><code class="docutils literal notranslate"><span class="pre">ArrayMath._correlate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath._divide"><code class="docutils literal notranslate"><span class="pre">ArrayMath._divide()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath._math_up"><code class="docutils literal notranslate"><span class="pre">ArrayMath._math_up()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath._multiply"><code class="docutils literal notranslate"><span class="pre">ArrayMath._multiply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath._set_input_array_1"><code class="docutils literal notranslate"><span class="pre">ArrayMath._set_input_array_1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath._set_input_array_2"><code class="docutils literal notranslate"><span class="pre">ArrayMath._set_input_array_2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath._subtract"><code class="docutils literal notranslate"><span class="pre">ArrayMath._subtract()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.apply"><code class="docutils literal notranslate"><span class="pre">ArrayMath.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.get_multiplier"><code class="docutils literal notranslate"><span class="pre">ArrayMath.get_multiplier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.get_new_array_name"><code class="docutils literal notranslate"><span class="pre">ArrayMath.get_new_array_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.get_operation"><code class="docutils literal notranslate"><span class="pre">ArrayMath.get_operation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.get_operation_names"><code class="docutils literal notranslate"><span class="pre">ArrayMath.get_operation_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.get_operations"><code class="docutils literal notranslate"><span class="pre">ArrayMath.get_operations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.set_multiplier"><code class="docutils literal notranslate"><span class="pre">ArrayMath.set_multiplier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.set_new_array_name"><code class="docutils literal notranslate"><span class="pre">ArrayMath.set_new_array_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArrayMath.set_operation"><code class="docutils literal notranslate"><span class="pre">ArrayMath.set_operation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="math.html#arrays-to-rgba">Arrays To RGBA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA.RequestData"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA.SetInputArrayToProcess"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA.SetInputArrayToProcess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA._get_arrays"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA._get_arrays()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA._mask_arrays"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA._mask_arrays()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_blue"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA._set_input_array_blue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_green"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA._set_input_array_green()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_red"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA._set_input_array_red()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_trans"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA._set_input_array_trans()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA.apply"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA.set_mask_value"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA.set_mask_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.ArraysToRGBA.set_use_transparency"><code class="docutils literal notranslate"><span class="pre">ArraysToRGBA.set_use_transparency()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="math.html#normalize-array">Normalize Array</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray"><code class="docutils literal notranslate"><span class="pre">NormalizeArray</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.RequestData"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.SetInputArrayToProcess"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.SetInputArrayToProcess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray._feature_scale"><code class="docutils literal notranslate"><span class="pre">NormalizeArray._feature_scale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray._log10"><code class="docutils literal notranslate"><span class="pre">NormalizeArray._log10()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray._log_nat"><code class="docutils literal notranslate"><span class="pre">NormalizeArray._log_nat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray._normalize"><code class="docutils literal notranslate"><span class="pre">NormalizeArray._normalize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray._pass_array"><code class="docutils literal notranslate"><span class="pre">NormalizeArray._pass_array()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray._standard_score"><code class="docutils literal notranslate"><span class="pre">NormalizeArray._standard_score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.apply"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.get_array_range"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.get_array_range()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.get_multiplier"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.get_multiplier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.get_new_array_name"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.get_new_array_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.get_normalization"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.get_normalization()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.get_normalization_names"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.get_normalization_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.get_normalizations"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.get_normalizations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.set_multiplier"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.set_multiplier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.set_new_array_name"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.set_new_array_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.set_normalization"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.set_normalization()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.set_shift"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.set_shift()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.NormalizeArray.set_take_absolute_value"><code class="docutils literal notranslate"><span class="pre">NormalizeArray.set_take_absolute_value()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="math.html#percent-threshold">Percent Threshold</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="math.html#PVGeo.filters.math.PercentThreshold"><code class="docutils literal notranslate"><span class="pre">PercentThreshold</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.PercentThreshold.RequestData"><code class="docutils literal notranslate"><span class="pre">PercentThreshold.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.PercentThreshold.SetInputArrayToProcess"><code class="docutils literal notranslate"><span class="pre">PercentThreshold.SetInputArrayToProcess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.PercentThreshold.apply"><code class="docutils literal notranslate"><span class="pre">PercentThreshold.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.PercentThreshold.set_invert"><code class="docutils literal notranslate"><span class="pre">PercentThreshold.set_invert()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.PercentThreshold.set_percent"><code class="docutils literal notranslate"><span class="pre">PercentThreshold.set_percent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="math.html#PVGeo.filters.math.PercentThreshold.set_use_continuous_cell_range"><code class="docutils literal notranslate"><span class="pre">PercentThreshold.set_use_continuous_cell_range()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="slicing.html">Slicing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="slicing.html#many-slices-along-axis">Many Slices Along Axis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slicing.html#many-slices-along-points">Many Slices Along Points</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slicing.html#slice-through-time">Slice Through Time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slicing.html#slide-slice-along-points">Slide Slice Along Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#many-slices-along-axis">Many Slices Along Axis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.RequestData"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis._get_origin"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis._get_origin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis._set_axial_range"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis._set_axial_range()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_axis"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis.get_axis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_bounds"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis.get_input_bounds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_input_center"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis.get_input_center()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_normal"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis.get_normal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.get_range"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis.get_range()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.set_axis"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis.set_axis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongAxis.set_padding"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongAxis.set_padding()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#many-slices-along-points">Many Slices Along Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongPoints</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.FillInputPortInformation"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongPoints.FillInputPortInformation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.RequestData"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongPoints.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints._get_planes"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongPoints._get_planes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints._get_slice"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongPoints._get_slice()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.apply"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongPoints.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.ManySlicesAlongPoints.set_use_nearest_nbr"><code class="docutils literal notranslate"><span class="pre">ManySlicesAlongPoints.set_use_nearest_nbr()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#slice-through-time">Slice Through Time</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SliceThroughTime"><code class="docutils literal notranslate"><span class="pre">SliceThroughTime</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SliceThroughTime.RequestData"><code class="docutils literal notranslate"><span class="pre">SliceThroughTime.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SliceThroughTime.RequestInformation"><code class="docutils literal notranslate"><span class="pre">SliceThroughTime.RequestInformation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SliceThroughTime._update_time_steps"><code class="docutils literal notranslate"><span class="pre">SliceThroughTime._update_time_steps()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SliceThroughTime.get_time_step_values"><code class="docutils literal notranslate"><span class="pre">SliceThroughTime.get_time_step_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SliceThroughTime.set_number_of_slices"><code class="docutils literal notranslate"><span class="pre">SliceThroughTime.set_number_of_slices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SliceThroughTime.set_time_delta"><code class="docutils literal notranslate"><span class="pre">SliceThroughTime.set_time_delta()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#slide-slice-along-points">Slide Slice Along Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints"><code class="docutils literal notranslate"><span class="pre">SlideSliceAlongPoints</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.RequestData"><code class="docutils literal notranslate"><span class="pre">SlideSliceAlongPoints.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.RequestInformation"><code class="docutils literal notranslate"><span class="pre">SlideSliceAlongPoints.RequestInformation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints._get_slice"><code class="docutils literal notranslate"><span class="pre">SlideSliceAlongPoints._get_slice()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.get_location"><code class="docutils literal notranslate"><span class="pre">SlideSliceAlongPoints.get_location()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slicing.html#PVGeo.filters.slicing.SlideSliceAlongPoints.set_location"><code class="docutils literal notranslate"><span class="pre">SlideSliceAlongPoints.set_location()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tables.html">Table Operations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tables.html#append-table-to-cell-data">Append Table to Cell Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tables.html#combine-tables">Combine Tables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tables.html#extract-array">Extract Array</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tables.html#reshape-table">Reshape Table</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tables.html#split-table-on-array">Split Table On Array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html#append-table-to-cell-data">Append Table to Cell Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tables.html#PVGeo.filters.tables.AppendTableToCellData"><code class="docutils literal notranslate"><span class="pre">AppendTableToCellData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.AppendTableToCellData.RequestData"><code class="docutils literal notranslate"><span class="pre">AppendTableToCellData.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.AppendTableToCellData.RequestInformation"><code class="docutils literal notranslate"><span class="pre">AppendTableToCellData.RequestInformation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.AppendTableToCellData._update_time_steps"><code class="docutils literal notranslate"><span class="pre">AppendTableToCellData._update_time_steps()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.AppendTableToCellData.apply"><code class="docutils literal notranslate"><span class="pre">AppendTableToCellData.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.AppendTableToCellData.get_time_step_values"><code class="docutils literal notranslate"><span class="pre">AppendTableToCellData.get_time_step_values()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html#combine-tables">Combine Tables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tables.html#PVGeo.filters.tables.CombineTables"><code class="docutils literal notranslate"><span class="pre">CombineTables</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.CombineTables.FillInputPortInformation"><code class="docutils literal notranslate"><span class="pre">CombineTables.FillInputPortInformation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.CombineTables.RequestData"><code class="docutils literal notranslate"><span class="pre">CombineTables.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.CombineTables.apply"><code class="docutils literal notranslate"><span class="pre">CombineTables.apply()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html#extract-array">Extract Array</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ExtractArray"><code class="docutils literal notranslate"><span class="pre">ExtractArray</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ExtractArray.RequestData"><code class="docutils literal notranslate"><span class="pre">ExtractArray.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ExtractArray.SetInputArrayToProcess"><code class="docutils literal notranslate"><span class="pre">ExtractArray.SetInputArrayToProcess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ExtractArray.apply"><code class="docutils literal notranslate"><span class="pre">ExtractArray.apply()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html#reshape-table">Reshape Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ReshapeTable"><code class="docutils literal notranslate"><span class="pre">ReshapeTable</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ReshapeTable.RequestData"><code class="docutils literal notranslate"><span class="pre">ReshapeTable.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ReshapeTable._reshape"><code class="docutils literal notranslate"><span class="pre">ReshapeTable._reshape()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ReshapeTable.add_name"><code class="docutils literal notranslate"><span class="pre">ReshapeTable.add_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ReshapeTable.get_names"><code class="docutils literal notranslate"><span class="pre">ReshapeTable.get_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ReshapeTable.set_names"><code class="docutils literal notranslate"><span class="pre">ReshapeTable.set_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ReshapeTable.set_number_of_columns"><code class="docutils literal notranslate"><span class="pre">ReshapeTable.set_number_of_columns()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ReshapeTable.set_number_of_rows"><code class="docutils literal notranslate"><span class="pre">ReshapeTable.set_number_of_rows()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.ReshapeTable.set_order"><code class="docutils literal notranslate"><span class="pre">ReshapeTable.set_order()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html#split-table-on-array">Split Table On Array</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tables.html#PVGeo.filters.tables.SplitTableOnArray"><code class="docutils literal notranslate"><span class="pre">SplitTableOnArray</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.SplitTableOnArray.RequestData"><code class="docutils literal notranslate"><span class="pre">SplitTableOnArray.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.SplitTableOnArray.SetInputArrayToProcess"><code class="docutils literal notranslate"><span class="pre">SplitTableOnArray.SetInputArrayToProcess()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#PVGeo.filters.tables.SplitTableOnArray.apply"><code class="docutils literal notranslate"><span class="pre">SplitTableOnArray.apply()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="voxelize.html">Voxelize</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="voxelize.html#voxelize-points">Voxelize Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="voxelize.html#voxelize-points">Voxelize Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.RequestData"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints._copy_arrays"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints._copy_arrays()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.add_cell_data"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.add_cell_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.add_field_data"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.add_field_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.estimate_uniform_spacing"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.estimate_uniform_spacing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.get_angle"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.get_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.get_recovered_angle"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.get_recovered_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.get_spacing"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.get_spacing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.points_to_grid"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.points_to_grid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_angle"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.set_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_delta_x"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.set_delta_x()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_delta_y"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.set_delta_y()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_delta_z"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.set_delta_z()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_deltas"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.set_deltas()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_estimate_grid"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.set_estimate_grid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_safe_size"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.set_safe_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_unique"><code class="docutils literal notranslate"><span class="pre">VoxelizePoints.set_unique()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="xyz.html">Point/Line Sets</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#add-cell-connectivity-to-points">Add Cell Connectivity to Points</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#append-cell-centers">Append Cell Centers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#build-surface-from-points">Build Surface From Points</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#convert-xyz-units">Convert XYZ Units</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#extract-cell-centers">Extract Cell Centers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#extract-points">Extract Points</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#iterate-over-points">Iterate Over Points</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#lat-lon-to-utm">Lat Lon To UTM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#points-to-tube">Points to Tube</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#rotate-points">Rotate Points</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xyz.html#rotation-tool">Rotation Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#add-cell-connectivity-to-points">Add Cell Connectivity to Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.AddCellConnToPoints"><code class="docutils literal notranslate"><span class="pre">AddCellConnToPoints</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.AddCellConnToPoints.RequestData"><code class="docutils literal notranslate"><span class="pre">AddCellConnToPoints.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.AddCellConnToPoints._connect_cells"><code class="docutils literal notranslate"><span class="pre">AddCellConnToPoints._connect_cells()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.AddCellConnToPoints.set_cell_type"><code class="docutils literal notranslate"><span class="pre">AddCellConnToPoints.set_cell_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.AddCellConnToPoints.set_use_nearest_nbr"><code class="docutils literal notranslate"><span class="pre">AddCellConnToPoints.set_use_nearest_nbr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.AddCellConnToPoints.set_use_unique_points"><code class="docutils literal notranslate"><span class="pre">AddCellConnToPoints.set_use_unique_points()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#append-cell-centers">Append Cell Centers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.AppendCellCenters"><code class="docutils literal notranslate"><span class="pre">AppendCellCenters</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.AppendCellCenters.RequestData"><code class="docutils literal notranslate"><span class="pre">AppendCellCenters.RequestData()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#build-surface-from-points">Build Surface From Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints"><code class="docutils literal notranslate"><span class="pre">BuildSurfaceFromPoints</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.RequestData"><code class="docutils literal notranslate"><span class="pre">BuildSurfaceFromPoints.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.create_surface"><code class="docutils literal notranslate"><span class="pre">BuildSurfaceFromPoints.create_surface()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.set_z_coords"><code class="docutils literal notranslate"><span class="pre">BuildSurfaceFromPoints.set_z_coords()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.set_z_coords_str"><code class="docutils literal notranslate"><span class="pre">BuildSurfaceFromPoints.set_z_coords_str()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#convert-xyz-units">Convert XYZ Units</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.ConvertUnits"><code class="docutils literal notranslate"><span class="pre">ConvertUnits</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.ConvertUnits.RequestData"><code class="docutils literal notranslate"><span class="pre">ConvertUnits.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.ConvertUnits.get_conversion"><code class="docutils literal notranslate"><span class="pre">ConvertUnits.get_conversion()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.ConvertUnits.lookup_conversions"><code class="docutils literal notranslate"><span class="pre">ConvertUnits.lookup_conversions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.ConvertUnits.set_conversion"><code class="docutils literal notranslate"><span class="pre">ConvertUnits.set_conversion()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#extract-cell-centers">Extract Cell Centers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.ExtractCellCenters"><code class="docutils literal notranslate"><span class="pre">ExtractCellCenters</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.ExtractCellCenters.RequestData"><code class="docutils literal notranslate"><span class="pre">ExtractCellCenters.RequestData()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#extract-points">Extract Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.ExtractPoints"><code class="docutils literal notranslate"><span class="pre">ExtractPoints</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.ExtractPoints.RequestData"><code class="docutils literal notranslate"><span class="pre">ExtractPoints.RequestData()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#iterate-over-points">Iterate Over Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.IterateOverPoints"><code class="docutils literal notranslate"><span class="pre">IterateOverPoints</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.IterateOverPoints.RequestData"><code class="docutils literal notranslate"><span class="pre">IterateOverPoints.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.IterateOverPoints.RequestInformation"><code class="docutils literal notranslate"><span class="pre">IterateOverPoints.RequestInformation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.IterateOverPoints._update_time_steps"><code class="docutils literal notranslate"><span class="pre">IterateOverPoints._update_time_steps()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.IterateOverPoints.get_normal"><code class="docutils literal notranslate"><span class="pre">IterateOverPoints.get_normal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.IterateOverPoints.get_point"><code class="docutils literal notranslate"><span class="pre">IterateOverPoints.get_point()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.IterateOverPoints.get_time_step_values"><code class="docutils literal notranslate"><span class="pre">IterateOverPoints.get_time_step_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.IterateOverPoints.set_decimate"><code class="docutils literal notranslate"><span class="pre">IterateOverPoints.set_decimate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.IterateOverPoints.set_time_delta"><code class="docutils literal notranslate"><span class="pre">IterateOverPoints.set_time_delta()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#lat-lon-to-utm">Lat Lon To UTM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.LonLatToUTM"><code class="docutils literal notranslate"><span class="pre">LonLatToUTM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.LonLatToUTM.RequestData"><code class="docutils literal notranslate"><span class="pre">LonLatToUTM.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.LonLatToUTM.__convert_2d"><code class="docutils literal notranslate"><span class="pre">LonLatToUTM.__convert_2d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.LonLatToUTM.get_available_ellps"><code class="docutils literal notranslate"><span class="pre">LonLatToUTM.get_available_ellps()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.LonLatToUTM.set_ellps"><code class="docutils literal notranslate"><span class="pre">LonLatToUTM.set_ellps()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.LonLatToUTM.set_zone"><code class="docutils literal notranslate"><span class="pre">LonLatToUTM.set_zone()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#points-to-tube">Points to Tube</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.PointsToTube"><code class="docutils literal notranslate"><span class="pre">PointsToTube</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.PointsToTube._connect_cells"><code class="docutils literal notranslate"><span class="pre">PointsToTube._connect_cells()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.PointsToTube.set_capping"><code class="docutils literal notranslate"><span class="pre">PointsToTube.set_capping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.PointsToTube.set_number_of_sides"><code class="docutils literal notranslate"><span class="pre">PointsToTube.set_number_of_sides()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.PointsToTube.set_radius"><code class="docutils literal notranslate"><span class="pre">PointsToTube.set_radius()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#rotate-points">Rotate Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotatePoints"><code class="docutils literal notranslate"><span class="pre">RotatePoints</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotatePoints.RequestData"><code class="docutils literal notranslate"><span class="pre">RotatePoints.RequestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotatePoints.set_origin"><code class="docutils literal notranslate"><span class="pre">RotatePoints.set_origin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotatePoints.set_rotation_degrees"><code class="docutils literal notranslate"><span class="pre">RotatePoints.set_rotation_degrees()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotatePoints.set_use_corner"><code class="docutils literal notranslate"><span class="pre">RotatePoints.set_use_corner()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xyz.html#rotation-tool">Rotation Tool</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool"><code class="docutils literal notranslate"><span class="pre">RotationTool</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool._converge_angle"><code class="docutils literal notranslate"><span class="pre">RotationTool._converge_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool._estimate_angle_and_spacing"><code class="docutils literal notranslate"><span class="pre">RotationTool._estimate_angle_and_spacing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool._get_rotation_matrix"><code class="docutils literal notranslate"><span class="pre">RotationTool._get_rotation_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool.cos_between"><code class="docutils literal notranslate"><span class="pre">RotationTool.cos_between()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool.distance_between"><code class="docutils literal notranslate"><span class="pre">RotationTool.distance_between()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool.estimate_and_rotate"><code class="docutils literal notranslate"><span class="pre">RotationTool.estimate_and_rotate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool.rotate"><code class="docutils literal notranslate"><span class="pre">RotationTool.rotate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool.rotate_around"><code class="docutils literal notranslate"><span class="pre">RotationTool.rotate_around()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool.rotation_matrix"><code class="docutils literal notranslate"><span class="pre">RotationTool.rotation_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="xyz.html#PVGeo.filters.xyz.RotationTool.sin_between"><code class="docutils literal notranslate"><span class="pre">RotationTool.sin_between()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

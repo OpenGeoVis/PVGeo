@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_filters-general_voxelize-points.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_filters-general_voxelize-points.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -30,7 +30,7 @@ This example demos :class:`PVGeo.filters.VoxelizePoints`
 
 .. GENERATED FROM PYTHON SOURCE LINES 12-19
 
-.. code-block:: default
+.. code-block:: Python
 
     # sphinx_gallery_thumbnail_number = 2
     import pandas as pd
@@ -52,7 +52,7 @@ Download sample data files and keep track of names:
 
 .. GENERATED FROM PYTHON SOURCE LINES 21-24
 
-.. code-block:: default
+.. code-block:: Python
 
     url = "https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv"
     file_path = pooch.retrieve(url=url, known_hash=None)
@@ -60,14 +60,6 @@ Download sample data files and keep track of names:
 
 
 
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    Downloading data from 'https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/fault_points.csv' to file '/home/runner/.cache/pooch/9d996ff12fa39247ccea6f9867b5a096-fault_points.csv'.
-    SHA256 hash of downloaded file: 0eeadcd799121c5d82569abd8b52298f4bcb03b8782f12bcc2c6aea5d6249097
-    Use this value as the 'known_hash' argument of 'pooch.retrieve' to ensure that the file hasn't changed if it is downloaded again in the future.
 
 
 
@@ -85,7 +77,7 @@ object (essentially a point cloud).
 
 .. GENERATED FROM PYTHON SOURCE LINES 33-36
 
-.. code-block:: default
+.. code-block:: Python
 
     points = pd.read_csv(file_path)
     print(points[0:2])
@@ -107,7 +99,7 @@ object (essentially a point cloud).
 
 .. GENERATED FROM PYTHON SOURCE LINES 37-41
 
-.. code-block:: default
+.. code-block:: Python
 
 
     vtkpoints = PVGeo.points_to_poly_data(points)
@@ -121,11 +113,12 @@ object (essentially a point cloud).
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-    <table>
+    <table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table style='width: 100%;'>
     <tr><th>PolyData</th><th>Information</th></tr>
     <tr><td>N Cells</td><td>499200</td></tr>
     <tr><td>N Points</td><td>499200</td></tr>
+    <tr><td>N Strips</td><td>0</td></tr>
     <tr><td>X Bounds</td><td>3.268e+05, 3.302e+05</td></tr>
     <tr><td>Y Bounds</td><td>4.406e+06, 4.410e+06</td></tr>
     <tr><td>Z Bounds</td><td>1.250e+01, 1.288e+03</td></tr>
@@ -133,7 +126,7 @@ object (essentially a point cloud).
     </table>
 
     </td><td>
-    <table>
+    <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
     <tr><td><b>Fault</b></td><td>Points</td><td>float64</td><td>1</td><td>0.000e+00</td><td>1.000e+00</td></tr>
     </table>
@@ -157,7 +150,7 @@ calling the plot function. (Note: change the notebook parameter to
 
 .. GENERATED FROM PYTHON SOURCE LINES 51-53
 
-.. code-block:: default
+.. code-block:: Python
 
     vtkpoints.plot(clim=[0, 1], point_size=1)
 
@@ -194,7 +187,7 @@ The full pipeline method
 
 .. GENERATED FROM PYTHON SOURCE LINES 70-80
 
-.. code-block:: default
+.. code-block:: Python
 
     print("Voxelizing... ", end="")
     voxelizer = PVGeo.filters.VoxelizePoints()
@@ -222,8 +215,8 @@ The full pipeline method
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-    <table>
+    <table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table style='width: 100%;'>
     <tr><th>UnstructuredGrid</th><th>Information</th></tr>
     <tr><td>N Cells</td><td>499200</td></tr>
     <tr><td>N Points</td><td>524064</td></tr>
@@ -234,7 +227,7 @@ The full pipeline method
     </table>
 
     </td><td>
-    <table>
+    <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
     <tr><td><b>Fault</b></td><td>Cells</td><td>float64</td><td>1</td><td>0.000e+00</td><td>1.000e+00</td></tr>
     <tr><td>Recovered Angle (Deg.)</td><td>Fields</td><td>float64</td><td>1</td><td>5.355e+01</td><td>5.355e+01</td></tr>
@@ -252,7 +245,7 @@ And now we can plot the voxelized volume
 
 .. GENERATED FROM PYTHON SOURCE LINES 82-85
 
-.. code-block:: default
+.. code-block:: Python
 
     grid.plot()
 
@@ -280,7 +273,7 @@ create 3 orthogonal slices through a data volume.
 
 .. GENERATED FROM PYTHON SOURCE LINES 92-95
 
-.. code-block:: default
+.. code-block:: Python
 
     slices = grid.slice_orthogonal()
     slices
@@ -293,7 +286,7 @@ create 3 orthogonal slices through a data volume.
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Information</th><th>Blocks</th></tr><tr><td>
+    <table style='width: 100%;'><tr><th>Information</th><th>Blocks</th></tr><tr><td>
     <table>
     <tr><th>MultiBlock</th><th>Values</th></tr>
     <tr><td>N Blocks</td><td>3</td></tr>
@@ -321,7 +314,7 @@ And let's use a ``clip`` filter:
 
 .. GENERATED FROM PYTHON SOURCE LINES 97-99
 
-.. code-block:: default
+.. code-block:: Python
 
     clip = grid.clip(normal="x").clip(normal="-y").threshold(0.5)
 
@@ -338,7 +331,7 @@ Now display the slices and clipped volume
 
 .. GENERATED FROM PYTHON SOURCE LINES 101-107
 
-.. code-block:: default
+.. code-block:: Python
 
 
     p = pyvista.Plotter()
@@ -361,7 +354,7 @@ Now display the slices and clipped volume
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  16.690 seconds)
+   **Total running time of the script:** (0 minutes 10.957 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:
@@ -370,14 +363,13 @@ Now display the slices and clipped volume
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: voxelize-points.ipynb <voxelize-points.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: voxelize-points.py <voxelize-points.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: voxelize-points.ipynb <voxelize-points.ipynb>`
 
 
 .. only:: html

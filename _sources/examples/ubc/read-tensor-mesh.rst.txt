@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_ubc_read-tensor-mesh.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_ubc_read-tensor-mesh.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -25,7 +25,7 @@ Read a UBC tensor mesh file
 
 .. GENERATED FROM PYTHON SOURCE LINES 7-12
 
-.. code-block:: default
+.. code-block:: Python
 
     import pooch
 
@@ -45,7 +45,7 @@ Download sample data files and keep track of names:
 
 .. GENERATED FROM PYTHON SOURCE LINES 14-19
 
-.. code-block:: default
+.. code-block:: Python
 
     url = "https://github.com/OpenGeoVis/PVGeo/raw/main/tests/data/Craig-Chile/craig_chile.msh"
     mesh_file = pooch.retrieve(url=url, known_hash=None)
@@ -65,7 +65,7 @@ Read the mesh and model
 
 .. GENERATED FROM PYTHON SOURCE LINES 21-27
 
-.. code-block:: default
+.. code-block:: Python
 
     reader = PVGeo.ubc.TensorMeshReader()
     reader.set_mesh_filename(mesh_file)
@@ -81,8 +81,8 @@ Read the mesh and model
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-    <table>
+    <table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table style='width: 100%;'>
     <tr><th>RectilinearGrid</th><th>Information</th></tr>
     <tr><td>N Cells</td><td>190440</td></tr>
     <tr><td>N Points</td><td>200900</td></tr>
@@ -94,7 +94,7 @@ Read the mesh and model
     </table>
 
     </td><td>
-    <table>
+    <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
     <tr><td><b>93c3bf0f879573c07f76c0a0cbc55705-Lpout.mod</b></td><td>Cells</td><td>float64</td><td>1</td><td>-6.000e-01</td><td>3.000e-01</td></tr>
     </table>
@@ -110,7 +110,7 @@ Use a `PyVista` ``threshold`` filter to remove ``NaN`` data values
 
 .. GENERATED FROM PYTHON SOURCE LINES 29-32
 
-.. code-block:: default
+.. code-block:: Python
 
     mesh.threshold().plot()
 
@@ -133,7 +133,7 @@ Or inspect slices of the model
 
 .. GENERATED FROM PYTHON SOURCE LINES 34-37
 
-.. code-block:: default
+.. code-block:: Python
 
     mesh.slice_orthogonal().plot()
 
@@ -156,7 +156,7 @@ Or threshold a data range
 
 .. GENERATED FROM PYTHON SOURCE LINES 39-40
 
-.. code-block:: default
+.. code-block:: Python
 
     mesh.threshold([-0.6, -0.3]).plot(clim=[-0.6, 0.3])
 
@@ -174,7 +174,7 @@ Or threshold a data range
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.291 seconds)
+   **Total running time of the script:** (0 minutes 3.293 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-tensor-mesh.py:
@@ -183,14 +183,13 @@ Or threshold a data range
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: read-tensor-mesh.ipynb <read-tensor-mesh.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: read-tensor-mesh.py <read-tensor-mesh.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: read-tensor-mesh.ipynb <read-tensor-mesh.ipynb>`
 
 
 .. only:: html

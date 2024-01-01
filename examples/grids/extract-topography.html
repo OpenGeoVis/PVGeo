@@ -1,32 +1,34 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Extract Topography &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/examples/grids/extract-topography.html"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -61,11 +63,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -215,10 +221,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Quick Examples</a> &raquo;</li>
-          <li><a href="index.html">Grids</a> &raquo;</li>
-      <li>Extract Topography</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Quick Examples</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Grids</a></li>
+      <li class="breadcrumb-item active">Extract Topography</li>
 
   </ul>
   <hr/>
@@ -228,7 +234,7 @@
              
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-examples-grids-extract-topography-py"><span class="std std-ref">here</span></a>
+<p><a class="reference internal" href="#sphx-glr-download-examples-grids-extract-topography-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="extract-topography">
@@ -244,7 +250,7 @@ range of input data types. We also add this data array as it will enable users
 to create model discretizations within ParaView for export to external
 processing software that need the entire model discretization with an active
 cells field.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 6</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 6</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">pooch</span>
@@ -262,7 +268,7 @@ with the following parameters:</p>
 <li><p>Y Cells: <code class="docutils literal notranslate"><span class="pre">'1000</span> <span class="pre">500</span> <span class="pre">55*250</span> <span class="pre">500</span> <span class="pre">1000'</span></code></p></li>
 <li><p>Z Cells: <code class="docutils literal notranslate"><span class="pre">'30*100.0</span> <span class="pre">5*250.0</span> <span class="pre">500'</span></code></p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="p">(</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">CreateTensorMesh</span><span class="p">(</span>
     <span class="n">origin</span><span class="o">=</span><span class="p">[</span><span class="mi">793000</span><span class="p">,</span> <span class="mi">9192500</span><span class="p">,</span> <span class="mi">2690</span><span class="p">],</span>
     <span class="n">xcellstr</span><span class="o">=</span><span class="s2">&quot;1000 500 50*250 500 1000&quot;</span><span class="p">,</span>
     <span class="n">ycellstr</span><span class="o">=</span><span class="s2">&quot;1000 500 55*250 500 1000&quot;</span><span class="p">,</span>
@@ -273,7 +279,7 @@ with the following parameters:</p>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_extract-topography_001.png" srcset="../../_images/sphx_glr_extract-topography_001.png" alt="extract topography" class = "sphx-glr-single-img"/><p>Now load the topography file from the example data:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://dl.dropbox.com/s/gw5v3tiq68oge3l/Example-Extract-Topo.zip?dl=0&quot;</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://dl.dropbox.com/s/gw5v3tiq68oge3l/Example-Extract-Topo.zip?dl=0&quot;</span>
 <span class="n">file_paths</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">processor</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">Unzip</span><span class="p">())</span>
 <span class="n">file_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_paths</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;topo.vtk&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
@@ -282,11 +288,12 @@ with the following parameters:</p>
 </pre></div>
 </div>
 <div class="output_subarea output_html rendered_html output_result">
-<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-<table>
+<table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table style='width: 100%;'>
 <tr><th>PolyData</th><th>Information</th></tr>
 <tr><td>N Cells</td><td>39764</td></tr>
 <tr><td>N Points</td><td>20164</td></tr>
+<tr><td>N Strips</td><td>0</td></tr>
 <tr><td>X Bounds</td><td>7.937e+05, 8.078e+05</td></tr>
 <tr><td>Y Bounds</td><td>9.194e+06, 9.208e+06</td></tr>
 <tr><td>Z Bounds</td><td>1.182e+03, 2.690e+03</td></tr>
@@ -294,7 +301,7 @@ with the following parameters:</p>
 </table>
 
 </td><td>
-<table>
+<table style='width: 100%;'>
 <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
 <tr><td><b>elevation</b></td><td>Points</td><td>float64</td><td>1</td><td>1.182e+03</td><td>2.690e+03</td></tr>
 <tr><td>column integer</td><td>Points</td><td>float32</td><td>1</td><td>1.000e+00</td><td>1.420e+02</td></tr>
@@ -304,7 +311,7 @@ with the following parameters:</p>
 </td></tr> </table>
 </div>
 <br />
-<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
+<br /><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;terrain&quot;</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show_grid</span><span class="p">()</span>
@@ -314,7 +321,7 @@ with the following parameters:</p>
 <img src="../../_images/sphx_glr_extract-topography_002.png" srcset="../../_images/sphx_glr_extract-topography_002.png" alt="extract topography" class = "sphx-glr-single-img"/><p>Now that you have the topography and a grid data set,
 let’s go ahead and use the <strong>Extract Topography</strong> filter. Be sure to properly
 select the inputs to the algorithm.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extracted</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">topo</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">extracted</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">topo</span><span class="p">)</span>
 <span class="n">extracted</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;Extracted&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -325,12 +332,12 @@ data set to remove parts of the model that are above the topography surface by
 applying a <em>Threshold</em> filter to chop out all values below 1.</p>
 <p>The resulting grid with cells above the topography extracted will look like the
 rendering below:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">threshed</span> <span class="o">=</span> <span class="n">extracted</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;Extracted&quot;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">threshed</span> <span class="o">=</span> <span class="n">extracted</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;Extracted&quot;</span><span class="p">)</span>
 <span class="n">threshed</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_extract-topography_004.png" srcset="../../_images/sphx_glr_extract-topography_004.png" alt="extract topography" class = "sphx-glr-single-img"/><p>How well did this remove cells above the topography surface?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;terrain&quot;</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">threshed</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show_grid</span><span class="p">()</span>
@@ -339,7 +346,7 @@ rendering below:</p>
 </div>
 <img src="../../_images/sphx_glr_extract-topography_005.png" srcset="../../_images/sphx_glr_extract-topography_005.png" alt="extract topography" class = "sphx-glr-single-img"/><p>Is that extraction too close to the topography surface? To better extract the
 topographic surface, you can set a tolerance:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extracted</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="p">(</span><span class="n">tolerance</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">topo</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">extracted</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="p">(</span><span class="n">tolerance</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">topo</span><span class="p">)</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;terrain&quot;</span><span class="p">)</span>
@@ -349,17 +356,17 @@ topographic surface, you can set a tolerance:</p>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_extract-topography_006.png" srcset="../../_images/sphx_glr_extract-topography_006.png" alt="extract topography" class = "sphx-glr-single-img"/><p>Note that there are other extraction operations like an <code class="docutils literal notranslate"><span class="pre">'intersection'</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extracted</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="p">(</span><span class="n">op</span><span class="o">=</span><span class="s2">&quot;intersection&quot;</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">topo</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">extracted</span> <span class="o">=</span> <span class="n">ExtractTopography</span><span class="p">(</span><span class="n">op</span><span class="o">=</span><span class="s2">&quot;intersection&quot;</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">topo</span><span class="p">)</span>
 <span class="n">extracted</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_extract-topography_007.png" srcset="../../_images/sphx_glr_extract-topography_007.png" alt="extract topography" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  8.127 seconds)</p>
+<img src="../../_images/sphx_glr_extract-topography_007.png" srcset="../../_images/sphx_glr_extract-topography_007.png" alt="extract topography" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 6.194 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-grids-extract-topography-py">
-<div class="sphx-glr-download sphx-glr-download-python docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/1197c872ed98ed4d13457d8de9536e05/extract-topography.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">extract-topography.py</span></code></a></p>
-</div>
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/0363d808a2578ffde4eb0d4b0a755d3d/extract-topography.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">extract-topography.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/1197c872ed98ed4d13457d8de9536e05/extract-topography.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">extract-topography.py</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

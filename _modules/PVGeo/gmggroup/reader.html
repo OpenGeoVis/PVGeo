@@ -1,31 +1,33 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo.gmggroup.reader &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/gmggroup/reader.html"/>
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/clipboard.min.js"></script>
-        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -58,11 +60,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -195,9 +201,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>PVGeo.gmggroup.reader</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">PVGeo.gmggroup.reader</li>
 
   </ul>
   <hr/>
@@ -219,7 +225,7 @@
 
 
 <div class="viewcode-block" id="OMFReader"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader">[docs]</a><span class="k">class</span> <span class="nc">OMFReader</span><span class="p">(</span><span class="n">ReaderBaseBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handles reading an OMF Project&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles reading an OMF Project&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;OMF Project Reader&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;reader&#39;</span>
@@ -238,15 +244,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__project</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="OMFReader.Modified"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader.Modified">[docs]</a>    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Ensure default is overridden to be false so array selector can call.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ensure default is overridden to be false so array selector can call.&quot;&quot;&quot;</span>
         <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="n">read_again</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="OMFReader.modified"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader.modified">[docs]</a>    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Ensure default is overridden to be false so array selector can call.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ensure default is overridden to be false so array selector can call.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="n">read_again</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="OMFReader.get_file_name"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader.get_file_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Super class has file names as a list but we will only handle a single</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Super class has file names as a list but we will only handle a single</span>
 <span class="sd">        project file. This provides a convenient way of making sure we only</span>
 <span class="sd">        access that single file.</span>
 <span class="sd">        A user could still access the list of file names using ``get_file_names()``.</span>
@@ -256,7 +262,7 @@
     <span class="c1">#### Methods for performing the read ####</span>
 
 <div class="viewcode-block" id="OMFReader._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Internal functiona to read all data at the start&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal functiona to read all data at the start&quot;&quot;&quot;</span>
         <span class="c1"># Read all elements</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">omf</span><span class="o">.</span><span class="n">OMFReader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_file_name</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__project</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">get_project</span><span class="p">()</span>
@@ -267,7 +273,7 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="OMFReader._get_raw_data"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader._get_raw_data">[docs]</a>    <span class="k">def</span> <span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Converts OMF data to VTK data objects.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts OMF data to VTK data objects.&quot;&quot;&quot;</span>
         <span class="c1"># Now iterate over the elements and add converted data to the data dict:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__project</span><span class="o">.</span><span class="n">elements</span><span class="p">:</span>
@@ -280,7 +286,7 @@
     <span class="c1">#### pipeline methods ####</span>
 
 <div class="viewcode-block" id="OMFReader.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to get data for current timestep and populate the output data object.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to get data for current timestep and populate the output data object.&quot;&quot;&quot;</span>
         <span class="c1"># Get output:</span>
         <span class="c1"># output = self.GetOutputData(outInfo, 0)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkMultiBlockDataSet</span><span class="o">.</span><span class="n">GetData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -302,7 +308,7 @@
     <span class="c1">#### Getters / Setters ####</span>
 
 <div class="viewcode-block" id="OMFReader.GetDataSelection"><a class="viewcode-back" href="../../../content/PVGeo/gmggroup/reader.html#PVGeo.gmggroup.reader.OMFReader.GetDataSelection">[docs]</a>    <span class="k">def</span> <span class="nf">GetDataSelection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the current user selection of data elements&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the current user selection of data elements&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataselection</span></div></div>

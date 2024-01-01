@@ -19,7 +19,7 @@ UBC Data Formats
 .. only:: html
 
   .. image:: /examples/ubc/images/thumb/sphx_glr_read-grv-obs_thumb.png
-    :alt: Read UBC Gravity Observations
+    :alt:
 
   :ref:`sphx_glr_examples_ubc_read-grv-obs.py`
 
@@ -36,7 +36,7 @@ UBC Data Formats
 .. only:: html
 
   .. image:: /examples/ubc/images/thumb/sphx_glr_read-tensor-mesh_thumb.png
-    :alt: Read Tensor Mesh
+    :alt:
 
   :ref:`sphx_glr_examples_ubc_read-tensor-mesh.py`
 
@@ -53,7 +53,7 @@ UBC Data Formats
 .. only:: html
 
   .. image:: /examples/ubc/images/thumb/sphx_glr_read-topo_thumb.png
-    :alt: Read UBC Topography File
+    :alt:
 
   :ref:`sphx_glr_examples_ubc_read-topo.py`
 

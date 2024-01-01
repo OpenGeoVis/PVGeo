@@ -1,31 +1,33 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo.ubc.tensor &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/ubc/tensor.html"/>
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/clipboard.min.js"></script>
-        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -58,11 +60,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -195,9 +201,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>PVGeo.ubc.tensor</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">PVGeo.ubc.tensor</li>
 
   </ul>
   <hr/>
@@ -232,7 +238,7 @@
 
 
 <div class="viewcode-block" id="TensorMeshReader"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader">[docs]</a><span class="k">class</span> <span class="nc">TensorMeshReader</span><span class="p">(</span><span class="n">ubcMeshReaderBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;UBC Mesh 2D/3D models are defined using a 2-file format. The &quot;mesh&quot; file</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;UBC Mesh 2D/3D models are defined using a 2-file format. The &quot;mesh&quot; file</span>
 <span class="sd">    describes how the data is discretized. The &quot;model&quot; file lists the physical</span>
 <span class="sd">    property values for all cells in a mesh. A model file is meaningless without</span>
 <span class="sd">    an associated mesh file. The reader will automatically detect if the mesh is</span>
@@ -259,7 +265,7 @@
 
 <div class="viewcode-block" id="TensorMeshReader.place_model_on_mesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.place_model_on_mesh">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">place_model_on_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Places model data onto a mesh. This is for the UBC Grid data readers</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Places model data onto a mesh. This is for the UBC Grid data readers</span>
 <span class="sd">        to associate model data with the mesh grid.</span>
 
 <span class="sd">        Args:</span>
@@ -325,7 +331,7 @@
 
 <div class="viewcode-block" id="TensorMeshReader.ubc_mesh_2d"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.ubc_mesh_2d">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">ubc_mesh_2d</span><span class="p">(</span><span class="n">FileName</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method reads a UBC 2D Mesh file and builds an empty</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This method reads a UBC 2D Mesh file and builds an empty</span>
 <span class="sd">        ``vtkRectilinearGrid`` for data to be inserted into. `Format Specs`_.</span>
 
 <span class="sd">        .. _Format Specs: http://giftoolscookbook.readthedocs.io/en/latest/content/fileFormats/mesh2Dfile.html</span>
@@ -378,7 +384,7 @@
 
 <div class="viewcode-block" id="TensorMeshReader.ubc_model_2d"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.ubc_model_2d">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">ubc_model_2d</span><span class="p">(</span><span class="n">FileName</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reads a 2D model file and returns a 1D NumPy float array. Use the</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads a 2D model file and returns a 1D NumPy float array. Use the</span>
 <span class="sd">        ``place_model_on_mesh()`` method to associate with a grid.</span>
 
 <span class="sd">        Note:</span>
@@ -416,7 +422,7 @@
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__ubc_mesh_data_2d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename_mesh</span><span class="p">,</span> <span class="n">filename_models</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper method to read a 2D mesh&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper method to read a 2D mesh&quot;&quot;&quot;</span>
         <span class="c1"># Construct/read the mesh</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">():</span>
             <span class="n">TensorMeshReader</span><span class="o">.</span><span class="n">ubc_mesh_2d</span><span class="p">(</span><span class="n">filename_mesh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="p">)</span>
@@ -436,7 +442,7 @@
 
 <div class="viewcode-block" id="TensorMeshReader.ubc_mesh_3d"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.ubc_mesh_3d">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">ubc_mesh_3d</span><span class="p">(</span><span class="n">FileName</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method reads a UBC 3D Mesh file and builds an empty</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This method reads a UBC 3D Mesh file and builds an empty</span>
 <span class="sd">        ``vtkRectilinearGrid`` for data to be inserted into.</span>
 
 <span class="sd">        Args:</span>
@@ -504,7 +510,7 @@
         <span class="k">return</span> <span class="n">output</span></div>
 
     <span class="k">def</span> <span class="nf">__ubc_mesh_data_3d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename_mesh</span><span class="p">,</span> <span class="n">filename_models</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper method to read a 3D mesh&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper method to read a 3D mesh&quot;&quot;&quot;</span>
         <span class="c1"># Construct/read the mesh</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_readMesh</span><span class="p">():</span>
             <span class="n">TensorMeshReader</span><span class="o">.</span><span class="n">ubc_mesh_3d</span><span class="p">(</span><span class="n">filename_mesh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span><span class="p">)</span>
@@ -519,7 +525,7 @@
         <span class="k">return</span> <span class="n">output</span>
 
     <span class="k">def</span> <span class="nf">__ubc_tensor_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename_mesh</span><span class="p">,</span> <span class="n">filename_models</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Wrapper to Read UBC GIF 2D and 3D meshes. UBC Mesh 2D/3D models are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrapper to Read UBC GIF 2D and 3D meshes. UBC Mesh 2D/3D models are</span>
 <span class="sd">        defined using a 2-file format. The &quot;mesh&quot; file describes how the data is</span>
 <span class="sd">        descritized. The &quot;model&quot; file lists the physical property values for all</span>
 <span class="sd">        cells in a mesh. A model file is meaningless without an associated mesh</span>
@@ -551,7 +557,7 @@
         <span class="k">return</span> <span class="n">output</span>
 
 <div class="viewcode-block" id="TensorMeshReader.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Handles data request by the pipeline.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handles data request by the pipeline.&quot;&quot;&quot;</span>
         <span class="c1"># Get output:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Get requested time index</span>
@@ -567,7 +573,7 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="TensorMeshReader.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Handles info request by pipeline about timesteps and grid extents.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handles info request by pipeline about timesteps and grid extents.&quot;&quot;&quot;</span>
         <span class="c1"># Call parent to handle time stuff</span>
         <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
         <span class="c1"># Now set whole output extent</span>
@@ -579,12 +585,12 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="TensorMeshReader.clear_mesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.clear_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">clear_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Use to clean/rebuild the mesh&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use to clean/rebuild the mesh&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__mesh</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkRectilinearGrid</span><span class="p">()</span>
         <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TensorMeshReader.clear_models"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshReader.clear_models">[docs]</a>    <span class="k">def</span> <span class="nf">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Use to clean the models and reread&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use to clean the models and reread&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__models</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
 
@@ -593,7 +599,7 @@
 
 
 <div class="viewcode-block" id="TensorMeshAppender"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshAppender">[docs]</a><span class="k">class</span> <span class="nc">TensorMeshAppender</span><span class="p">(</span><span class="n">ModelAppenderBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This filter reads a timeseries of models and appends it to an input</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This filter reads a timeseries of models and appends it to an input</span>
 <span class="sd">    ``vtkRectilinearGrid``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -609,7 +615,7 @@
         <span class="p">)</span>
 
 <div class="viewcode-block" id="TensorMeshAppender._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshAppender._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Internal helepr to read data at start&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helepr to read data at start&quot;&quot;&quot;</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">ubcMeshReaderBase</span><span class="o">.</span><span class="n">ubc_model_3d</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_3D</span><span class="p">:</span>
             <span class="c1"># Note how in UBC format, 2D grids are specified on an XZ plane (no Y component)</span>
@@ -623,7 +629,7 @@
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="TensorMeshAppender._place_on_mesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TensorMeshAppender._place_on_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">_place_on_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Internal helepr to place a model on the mesh for a given index&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helepr to place a model on the mesh for a given index&quot;&quot;&quot;</span>
         <span class="n">TensorMeshReader</span><span class="o">.</span><span class="n">place_model_on_mesh</span><span class="p">(</span>
             <span class="n">output</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data_name</span><span class="p">()</span>
         <span class="p">)</span>
@@ -634,7 +640,7 @@
 
 
 <div class="viewcode-block" id="TopoMeshAppender"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender">[docs]</a><span class="k">class</span> <span class="nc">TopoMeshAppender</span><span class="p">(</span><span class="n">AlgorithmBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This filter reads a single discrete topography file and appends it as a</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This filter reads a single discrete topography file and appends it as a</span>
 <span class="sd">    boolean data array.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -657,7 +663,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__ne</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__nn</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="TopoMeshAppender.need_to_read"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.need_to_read">[docs]</a>    <span class="k">def</span> <span class="nf">need_to_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Ask self if the reader needs to read the files again</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ask self if the reader needs to read the files again</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            flag (bool): if the flag is set then this method will set the read</span>
@@ -672,17 +678,17 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span></div>
 
 <div class="viewcode-block" id="TopoMeshAppender.Modified"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.Modified">[docs]</a>    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Call modified if the files needs to be read again.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call modified if the files needs to be read again.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">read_again</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="n">read_again</span>
         <span class="n">AlgorithmBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TopoMeshAppender.modified"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.modified">[docs]</a>    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Call modified if the files needs to be read again.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call modified if the files needs to be read again.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="n">read_again</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TopoMeshAppender._read_up_front"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender._read_up_front">[docs]</a>    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Internal helepr to read data at start&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helepr to read data at start&quot;&quot;&quot;</span>
         <span class="c1"># Read the file</span>
         <span class="n">content</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_topoFileName</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;!&#39;</span>
@@ -699,7 +705,7 @@
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="TopoMeshAppender._place_on_mesh"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender._place_on_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">_place_on_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Internal helepr to place an active cells model on the mesh&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helepr to place an active cells model on the mesh&quot;&quot;&quot;</span>
         <span class="c1"># Check mesh extents to math topography</span>
         <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">GetDimensions</span><span class="p">()</span>
         <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span> <span class="o">=</span> <span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nz</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># because GetDimensions counts the nodes</span>
@@ -725,7 +731,7 @@
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="TopoMeshAppender.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -740,12 +746,12 @@
     <span class="c1">#### Setters and Getters ####</span>
 
 <div class="viewcode-block" id="TopoMeshAppender.clear_topo_file"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.clear_topo_file">[docs]</a>    <span class="k">def</span> <span class="nf">clear_topo_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Use to clear data file name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use to clear data file name.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_topoFileName</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TopoMeshAppender.set_topo_filename"><a class="viewcode-back" href="../../../content/PVGeo/ubc/tensor.html#PVGeo.ubc.tensor.TopoMeshAppender.set_topo_filename">[docs]</a>    <span class="k">def</span> <span class="nf">set_topo_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Use to set the file names for the reader. Handles single strings only&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use to set the file names for the reader. Handles single strings only&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>  <span class="c1"># do nothing if None is passed by a constructor on accident</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_topoFileName</span> <span class="o">!=</span> <span class="n">filename</span><span class="p">:</span>

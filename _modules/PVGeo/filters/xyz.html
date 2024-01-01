@@ -1,31 +1,33 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo.filters.xyz &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/filters/xyz.html"/>
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/clipboard.min.js"></script>
-        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -58,11 +60,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -195,9 +201,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>PVGeo.filters.xyz</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">PVGeo.filters.xyz</li>
 
   </ul>
   <hr/>
@@ -243,7 +249,7 @@
 
 
 <div class="viewcode-block" id="AddCellConnToPoints"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.AddCellConnToPoints">[docs]</a><span class="k">class</span> <span class="nc">AddCellConnToPoints</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This filter will add linear cell connectivity between scattered points.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This filter will add linear cell connectivity between scattered points.</span>
 <span class="sd">    You have the option to add ``VTK_Line`` or ``VTK_PolyLine`` connectivity.</span>
 <span class="sd">    ``VTK_Line`` connectivity makes a straight line between the points in order</span>
 <span class="sd">    (either in the order by index or using a nearest neighbor calculation).</span>
@@ -276,7 +282,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__unique</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;unique&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AddCellConnToPoints._connect_cells"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.AddCellConnToPoints._connect_cells">[docs]</a>    <span class="k">def</span> <span class="nf">_connect_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">,</span> <span class="n">log_time</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Internal helper to perform the connection&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to perform the connection&quot;&quot;&quot;</span>
         <span class="c1"># NOTE: Type map is specified in vtkCellType.h</span>
         <span class="n">cell_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cell_type</span>
 
@@ -356,7 +362,7 @@
         <span class="k">return</span> <span class="n">pdo</span></div>
 
 <div class="viewcode-block" id="AddCellConnToPoints.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.AddCellConnToPoints.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output data object&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output data object&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -367,13 +373,13 @@
     <span class="c1">#### Setters and Getters ####</span>
 
 <div class="viewcode-block" id="AddCellConnToPoints.set_cell_type"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.AddCellConnToPoints.set_cell_type">[docs]</a>    <span class="k">def</span> <span class="nf">set_cell_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_type</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the cell typ by the integer id as specified in `vtkCellType.h`&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the cell typ by the integer id as specified in `vtkCellType.h`&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">cell_type</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cell_type</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__cell_type</span> <span class="o">=</span> <span class="n">cell_type</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="AddCellConnToPoints.set_use_nearest_nbr"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.AddCellConnToPoints.set_use_nearest_nbr">[docs]</a>    <span class="k">def</span> <span class="nf">set_use_nearest_nbr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set a flag on whether to a KDTree nearest neighbor</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a flag on whether to a KDTree nearest neighbor</span>
 <span class="sd">        algorithm to sort the points to before adding linear connectivity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">flag</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__usenbr</span><span class="p">:</span>
@@ -381,7 +387,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="AddCellConnToPoints.set_use_unique_points"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.AddCellConnToPoints.set_use_unique_points">[docs]</a>    <span class="k">def</span> <span class="nf">set_use_unique_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set a flag on whether to only use unique points&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a flag on whether to only use unique points&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">flag</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unique</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__unique</span> <span class="o">=</span> <span class="n">flag</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
@@ -391,7 +397,7 @@
 
 
 <div class="viewcode-block" id="PointsToTube"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.PointsToTube">[docs]</a><span class="k">class</span> <span class="nc">PointsToTube</span><span class="p">(</span><span class="n">AddCellConnToPoints</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Takes points from a vtkPolyData object and constructs a line of those</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Takes points from a vtkPolyData object and constructs a line of those</span>
 <span class="sd">    points then builds a polygonal tube around that line with some specified</span>
 <span class="sd">    radius and number of sides.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -408,7 +414,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__capping</span> <span class="o">=</span> <span class="n">capping</span>
 
 <div class="viewcode-block" id="PointsToTube._connect_cells"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.PointsToTube._connect_cells">[docs]</a>    <span class="k">def</span> <span class="nf">_connect_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">,</span> <span class="n">log_time</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This uses the parent&#39;s ``_connect_cells()`` to build a tube around&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This uses the parent&#39;s ``_connect_cells()`` to build a tube around&quot;&quot;&quot;</span>
         <span class="n">AddCellConnToPoints</span><span class="o">.</span><span class="n">_connect_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">,</span> <span class="n">log_time</span><span class="o">=</span><span class="n">log_time</span><span class="p">)</span>
         <span class="n">tube</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTubeFilter</span><span class="p">()</span>
         <span class="n">tube</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">pdo</span><span class="p">)</span>
@@ -424,19 +430,19 @@
     <span class="c1">#### Setters and Getters ####</span>
 
 <div class="viewcode-block" id="PointsToTube.set_radius"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.PointsToTube.set_radius">[docs]</a>    <span class="k">def</span> <span class="nf">set_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the radius of the tube&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the radius of the tube&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__radius</span> <span class="o">!=</span> <span class="n">radius</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__radius</span> <span class="o">=</span> <span class="n">radius</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="PointsToTube.set_number_of_sides"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.PointsToTube.set_number_of_sides">[docs]</a>    <span class="k">def</span> <span class="nf">set_number_of_sides</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the number of sides (resolution) for the tube&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the number of sides (resolution) for the tube&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__numSides</span> <span class="o">!=</span> <span class="n">num</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__numSides</span> <span class="o">=</span> <span class="n">num</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="PointsToTube.set_capping"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.PointsToTube.set_capping">[docs]</a>    <span class="k">def</span> <span class="nf">set_capping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set a boolean flag on whether or not to cap the ends of the tube&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a boolean flag on whether or not to cap the ends of the tube&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capping</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__capping</span> <span class="o">=</span> <span class="n">flag</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div></div>
@@ -447,7 +453,7 @@
 
 
 <div class="viewcode-block" id="LonLatToUTM"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.LonLatToUTM">[docs]</a><span class="k">class</span> <span class="nc">LonLatToUTM</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts Points from Lon Lat to UTM&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts Points from Lon Lat to UTM&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Lat Lon To UTM&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
@@ -461,7 +467,7 @@
 
 <div class="viewcode-block" id="LonLatToUTM.get_available_ellps"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.LonLatToUTM.get_available_ellps">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_available_ellps</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the available ellps&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the available ellps&quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">pyproj</span>
 
         <span class="n">ellps</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">pj_ellps</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
@@ -475,7 +481,7 @@
         <span class="k">return</span> <span class="n">ellps</span></div>
 
     <span class="k">def</span> <span class="nf">__convert_2d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">elev</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Converts 2D Lon Lat coords to 2D XY UTM points&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts 2D Lon Lat coords to 2D XY UTM points&quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">pyproj</span>
 
         <span class="n">p</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="s1">&#39;utm&#39;</span><span class="p">,</span> <span class="n">zone</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__zone</span><span class="p">,</span> <span class="n">ellps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__ellps</span><span class="p">)</span>
@@ -483,7 +489,7 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">utm_x</span><span class="p">,</span> <span class="n">utm_y</span><span class="p">,</span> <span class="n">elev</span><span class="p">]</span>
 
 <div class="viewcode-block" id="LonLatToUTM.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.LonLatToUTM.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -501,7 +507,7 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="LonLatToUTM.set_zone"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.LonLatToUTM.set_zone">[docs]</a>    <span class="k">def</span> <span class="nf">set_zone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zone</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the UTM zone number&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the UTM zone number&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">zone</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">zone</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Zone (</span><span class="si">%d</span><span class="s1">) is invalid.&#39;</span> <span class="o">%</span> <span class="n">zone</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__zone</span> <span class="o">!=</span> <span class="n">zone</span><span class="p">:</span>
@@ -509,7 +515,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="LonLatToUTM.set_ellps"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.LonLatToUTM.set_ellps">[docs]</a>    <span class="k">def</span> <span class="nf">set_ellps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ellps</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the ellipsoid type&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the ellipsoid type&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ellps</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">ellps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_available_ellps</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">ellps</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ellps</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -523,7 +529,7 @@
 
 
 <div class="viewcode-block" id="RotationTool"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool">[docs]</a><span class="k">class</span> <span class="nc">RotationTool</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A class that holds a set of methods/tools for performing and estimating</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class that holds a set of methods/tools for performing and estimating</span>
 <span class="sd">    coordinate rotations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -537,7 +543,7 @@
 
 <div class="viewcode-block" id="RotationTool._get_rotation_matrix"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool._get_rotation_matrix">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_get_rotation_matrix</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Internal helper to generate a rotation matrix given a rotation angle&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to generate a rotation matrix given a rotation angle&quot;&quot;&quot;</span>
         <span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
         <span class="n">xy</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
         <span class="n">yx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
@@ -554,7 +560,7 @@
 
 <div class="viewcode-block" id="RotationTool.rotate_around"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool.rotate_around">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">rotate_around</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">origin</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rotate points around an origins given an angle on the XY plane&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rotate points around an origins given an angle on the XY plane&quot;&quot;&quot;</span>
         <span class="n">xarr</span><span class="p">,</span> <span class="n">yarr</span> <span class="o">=</span> <span class="n">pts</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">pts</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">ox</span><span class="p">,</span> <span class="n">oy</span> <span class="o">=</span> <span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">qx</span> <span class="o">=</span> <span class="n">ox</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">xarr</span> <span class="o">-</span> <span class="n">ox</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">yarr</span> <span class="o">-</span> <span class="n">oy</span><span class="p">)</span>
@@ -563,7 +569,7 @@
 
 <div class="viewcode-block" id="RotationTool.rotate"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool.rotate">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rotate points around (0,0,0) given an angle on the XY plane&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rotate points around (0,0,0) given an angle on the XY plane&quot;&quot;&quot;</span>
         <span class="n">rot</span> <span class="o">=</span> <span class="n">RotationTool</span><span class="o">.</span><span class="n">_get_rotation_matrix</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
         <span class="n">rotated</span> <span class="o">=</span> <span class="n">pts</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">rot</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -572,7 +578,7 @@
 
 <div class="viewcode-block" id="RotationTool.distance_between"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool.distance_between">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">distance_between</span><span class="p">(</span><span class="n">pts</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Gets the distance between two points&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the distance between two points&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">pts</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">pts</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">pts</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pts</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
@@ -581,7 +587,7 @@
 
 <div class="viewcode-block" id="RotationTool.cos_between"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool.cos_between">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">cos_between</span><span class="p">(</span><span class="n">pts</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Gets the cosine between two points&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the cosine between two points&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">pts</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
             <span class="n">xdiff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">pts</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
             <span class="n">dist</span> <span class="o">=</span> <span class="n">RotationTool</span><span class="o">.</span><span class="n">distance_between</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
@@ -593,14 +599,14 @@
 
 <div class="viewcode-block" id="RotationTool.sin_between"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool.sin_between">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">sin_between</span><span class="p">(</span><span class="n">pts</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculate the sine angle between two points&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the sine angle between two points&quot;&quot;&quot;</span>
         <span class="n">ydiff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pts</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="n">RotationTool</span><span class="o">.</span><span class="n">distance_between</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">ydiff</span> <span class="o">/</span> <span class="n">dist</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RotationTool.rotation_matrix"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool.rotation_matrix">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">rotation_matrix</span><span class="p">(</span><span class="n">vector_orig</span><span class="p">,</span> <span class="n">vector_fin</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculate the rotation matrix required to rotate from one vector to another.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the rotation matrix required to rotate from one vector to another.</span>
 <span class="sd">        For the rotation of one vector to another, there are an infinite series of rotation matrices</span>
 <span class="sd">        possible.  Due to axial symmetry, the rotation axis can be any vector lying in the symmetry</span>
 <span class="sd">        plane between the two vectors.  Hence the axis-angle convention will be used to construct the</span>
@@ -684,7 +690,7 @@
     <span class="c1">#         raise _helpers.PVGeoError(&#39;No angle found&#39;)</span>
 
 <div class="viewcode-block" id="RotationTool._converge_angle"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool._converge_angle">[docs]</a>    <span class="k">def</span> <span class="nf">_converge_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pt1</span><span class="p">,</span> <span class="n">pt2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Internal use only: pts should only be a two neighboring points.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal use only: pts should only be a two neighboring points.&quot;&quot;&quot;</span>
         <span class="c1"># Make the theta range up to 90 degrees to rotate points through</span>
         <span class="c1"># - angles = [0.0, 90.0)</span>
         <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">RESOLUTION</span><span class="p">)</span>
@@ -729,7 +735,7 @@
         <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;No angle found. Precision too low/high.&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RotationTool._estimate_angle_and_spacing"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool._estimate_angle_and_spacing">[docs]</a>    <span class="k">def</span> <span class="nf">_estimate_angle_and_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pts</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;internal use only&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;internal use only&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># sklearn&#39;s KDTree is faster: use it if available</span>
             <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KDTree</span> <span class="k">as</span> <span class="n">Tree</span>
@@ -778,7 +784,7 @@
         <span class="k">return</span> <span class="n">angle</span><span class="p">,</span> <span class="n">dx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="RotationTool.estimate_and_rotate"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotationTool.estimate_and_rotate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate_and_rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;A method to estimate the rotation of a set of points and correct</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to estimate the rotation of a set of points and correct</span>
 <span class="sd">        that rotation on the XY plane</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)):</span>
@@ -796,7 +802,7 @@
 
 
 <div class="viewcode-block" id="RotatePoints"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotatePoints">[docs]</a><span class="k">class</span> <span class="nc">RotatePoints</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Rotates XYZ coordinates in `vtkPolyData` around an origin at a given</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rotates XYZ coordinates in `vtkPolyData` around an origin at a given</span>
 <span class="sd">    angle on the XY plane.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -819,7 +825,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__use_corner</span> <span class="o">=</span> <span class="n">use_corner</span>
 
 <div class="viewcode-block" id="RotatePoints.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotatePoints.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output.&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -843,20 +849,20 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="RotatePoints.set_rotation_degrees"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotatePoints.set_rotation_degrees">[docs]</a>    <span class="k">def</span> <span class="nf">set_rotation_degrees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Sets the rotational angle in degrees.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the rotational angle in degrees.&quot;&quot;&quot;</span>
         <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__angle</span> <span class="o">!=</span> <span class="n">theta</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__angle</span> <span class="o">=</span> <span class="n">theta</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="RotatePoints.set_origin"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotatePoints.set_origin">[docs]</a>    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xo</span><span class="p">,</span> <span class="n">yo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Sets the origin to perform the rotate around.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the origin to perform the rotate around.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">!=</span> <span class="p">[</span><span class="n">xo</span><span class="p">,</span> <span class="n">yo</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__origin</span> <span class="o">=</span> <span class="p">[</span><span class="n">xo</span><span class="p">,</span> <span class="n">yo</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="RotatePoints.set_use_corner"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.RotatePoints.set_use_corner">[docs]</a>    <span class="k">def</span> <span class="nf">set_use_corner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;A flag to use a corner of the input data set as the rotational</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A flag to use a corner of the input data set as the rotational</span>
 <span class="sd">        origin.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_corner</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
@@ -868,7 +874,7 @@
 
 
 <div class="viewcode-block" id="ExtractPoints"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ExtractPoints">[docs]</a><span class="k">class</span> <span class="nc">ExtractPoints</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extracts XYZ coordinates and point/cell data from an input ``vtkDataSet``&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extracts XYZ coordinates and point/cell data from an input ``vtkDataSet``&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Extract Points&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
@@ -883,7 +889,7 @@
         <span class="p">)</span>
 
 <div class="viewcode-block" id="ExtractPoints.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ExtractPoints.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -920,7 +926,7 @@
         <span class="p">)</span>
 
 <div class="viewcode-block" id="ExtractCellCenters.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ExtractCellCenters.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Find cell centers</span>
@@ -949,7 +955,7 @@
         <span class="n">FilterPreserveTypeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AppendCellCenters.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.AppendCellCenters.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">pdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetOutputData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Find cell centers</span>
@@ -970,7 +976,7 @@
 
 
 <div class="viewcode-block" id="IterateOverPoints"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints">[docs]</a><span class="k">class</span> <span class="nc">IterateOverPoints</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Iterate over points in a time varying manner.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Iterate over points in a time varying manner.&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Iterate Over Points&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
@@ -995,11 +1001,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__normal</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
 
 <div class="viewcode-block" id="IterateOverPoints._update_time_steps"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints._update_time_steps">[docs]</a>    <span class="k">def</span> <span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;For internal use only&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;For internal use only&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IterateOverPoints.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Get number of points</span>
@@ -1024,7 +1030,7 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="IterateOverPoints.RequestInformation"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints.RequestInformation">[docs]</a>    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to set the time information&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to set the time information&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Get number of points</span>
@@ -1037,7 +1043,7 @@
     <span class="c1">#### Public Setters / Getters ####</span>
 
 <div class="viewcode-block" id="IterateOverPoints.set_decimate"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints.set_decimate">[docs]</a>    <span class="k">def</span> <span class="nf">set_decimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">percent</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the percent (1 to 100) to decimate&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the percent (1 to 100) to decimate&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">percent</span> <span class="o">&gt;</span> <span class="mi">100</span> <span class="ow">or</span> <span class="n">percent</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__decimate</span> <span class="o">=</span> <span class="n">percent</span>
@@ -1047,7 +1053,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="IterateOverPoints.set_time_delta"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints.set_time_delta">[docs]</a>    <span class="k">def</span> <span class="nf">set_time_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the time step interval in seconds</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dt</span> <span class="o">!=</span> <span class="n">dt</span><span class="p">:</span>
@@ -1056,20 +1062,20 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="IterateOverPoints.get_time_step_values"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints.get_time_step_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Use this in ParaView decorator to register timesteps&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use this in ParaView decorator to register timesteps&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="IterateOverPoints.get_point"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints.get_point">[docs]</a>    <span class="k">def</span> <span class="nf">get_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the current point&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current point&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__point</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IterateOverPoints.get_normal"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.IterateOverPoints.get_normal">[docs]</a>    <span class="k">def</span> <span class="nf">get_normal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the current normal vector&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current normal vector&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__normal</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="ConvertUnits"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ConvertUnits">[docs]</a><span class="k">class</span> <span class="nc">ConvertUnits</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert points in an input data object from meters to feet or vice versa.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert points in an input data object from meters to feet or vice versa.</span>
 <span class="sd">    This simply uses a ``vtkTransformFilter`` and scales input data object with</span>
 <span class="sd">    common conversions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1083,7 +1089,7 @@
 
 <div class="viewcode-block" id="ConvertUnits.lookup_conversions"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ConvertUnits.lookup_conversions">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">lookup_conversions</span><span class="p">(</span><span class="n">get_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;All Available conversions</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;All Available conversions</span>
 
 <span class="sd">        Return:</span>
 <span class="sd">            dict: dictionary of conversion units</span>
@@ -1097,7 +1103,7 @@
         <span class="k">return</span> <span class="n">convs</span></div>
 
 <div class="viewcode-block" id="ConvertUnits.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ConvertUnits.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Get number of points</span>
@@ -1114,7 +1120,7 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="ConvertUnits.set_conversion"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ConvertUnits.set_conversion">[docs]</a>    <span class="k">def</span> <span class="nf">set_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the conversion via a lookup table&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the conversion via a lookup table&quot;&quot;&quot;</span>
         <span class="n">convs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_conversions</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">convs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
@@ -1127,13 +1133,13 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="ConvertUnits.get_conversion"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.ConvertUnits.get_conversion">[docs]</a>    <span class="k">def</span> <span class="nf">get_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the conversion value&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the conversion value&quot;&quot;&quot;</span>
         <span class="n">convs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_conversions</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">convs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__conversion</span><span class="p">]</span></div></div>
 
 
 <div class="viewcode-block" id="BuildSurfaceFromPoints"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints">[docs]</a><span class="k">class</span> <span class="nc">BuildSurfaceFromPoints</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;From the sorted x, y, and z station locations in the input PolyData,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;From the sorted x, y, and z station locations in the input PolyData,</span>
 <span class="sd">    create a surface to project down from the line of those points. Use the</span>
 <span class="sd">    Z cells to control the size of the mesh surface</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1156,7 +1162,7 @@
 
 <div class="viewcode-block" id="BuildSurfaceFromPoints.create_surface"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.create_surface">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">create_surface</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">z_range</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;From the sorted x, y, and z station locations, create a surface</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;From the sorted x, y, and z station locations, create a surface</span>
 <span class="sd">        to display a seismic recording/migration on in space. The result is</span>
 <span class="sd">        defined in the X,Y,Z-z_range 3D space.</span>
 
@@ -1207,7 +1213,7 @@
         <span class="k">return</span> <span class="n">output</span></div>
 
 <div class="viewcode-block" id="BuildSurfaceFromPoints.RequestData"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.RequestData">[docs]</a>    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Execute on pipeline&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute on pipeline&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Get number of points</span>
@@ -1221,7 +1227,7 @@
         <span class="k">return</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="BuildSurfaceFromPoints.set_z_coords"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.set_z_coords">[docs]</a>    <span class="k">def</span> <span class="nf">set_z_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zcoords</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the Z direction</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the Z direction</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            zcoords (list or np.array(floats)): the spacings along the Z-axis&quot;&quot;&quot;</span>
@@ -1232,7 +1238,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="BuildSurfaceFromPoints.set_z_coords_str"><a class="viewcode-back" href="../../../content/PVGeo/filters/xyz.html#PVGeo.filters.xyz.BuildSurfaceFromPoints.set_z_coords_str">[docs]</a>    <span class="k">def</span> <span class="nf">set_z_coords_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zcoordstr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the Z direction</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the spacings for the cells in the Z direction</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            zcoordstr (str)  : the spacings along the Z-axis in the UBC style&quot;&quot;&quot;</span>

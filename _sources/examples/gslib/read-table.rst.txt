@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_gslib_read-table.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_gslib_read-table.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -25,7 +25,7 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 .. GENERATED FROM PYTHON SOURCE LINES 8-15
 
-.. code-block:: default
+.. code-block:: Python
 
     import os
 
@@ -43,7 +43,7 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 .. GENERATED FROM PYTHON SOURCE LINES 16-23
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # points_url = 'http://www.trainingimages.org/uploads/3/4/7/0/34703305/sundarbans.zip'
@@ -67,7 +67,7 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 .. GENERATED FROM PYTHON SOURCE LINES 24-29
 
-.. code-block:: default
+.. code-block:: Python
 
     reader = GSLibReader()
     table = reader.apply(file_path)
@@ -89,7 +89,7 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 .. GENERATED FROM PYTHON SOURCE LINES 30-32
 
-.. code-block:: default
+.. code-block:: Python
 
     table
 
@@ -101,15 +101,15 @@ Read any GSLib file as a table :class:`pyvist.Table`
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-    <table>
+    <table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table style='width: 100%;'>
     <tr><th>Table</th><th>Information</th></tr>
     <tr><td>N Rows</td><td>2100000</td></tr>
     <tr><td>N Arrays</td><td>1</td></tr>
     </table>
 
     </td><td>
-    <table>
+    <table style='width: 100%;'>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
     <tr><td>v</td><td>float64</td><td>1</td><td>2.667e+00</td><td>2.550e+02</td></tr>
     </table>
@@ -123,11 +123,11 @@ Read any GSLib file as a table :class:`pyvist.Table`
 
 From inspecting the header, we realize that this dataset is gridded, so let's
 use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
-:class:`pyvista.UniformGrid` of that dataset.
+:class:`pyvista.ImageData` of that dataset.
 
 .. GENERATED FROM PYTHON SOURCE LINES 36-41
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # 1200 x, 1750 y, 1 z, 1 t
@@ -142,9 +142,9 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-    <table>
-    <tr><th>UniformGrid</th><th>Information</th></tr>
+    <table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table style='width: 100%;'>
+    <tr><th>ImageData</th><th>Information</th></tr>
     <tr><td>N Cells</td><td>2100000</td></tr>
     <tr><td>N Points</td><td>4205902</td></tr>
     <tr><td>X Bounds</td><td>0.000e+00, 1.200e+03</td></tr>
@@ -156,7 +156,7 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
     </table>
 
     </td><td>
-    <table>
+    <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
     <tr><td><b>v</b></td><td>Cells</td><td>float64</td><td>1</td><td>2.667e+00</td><td>2.550e+02</td></tr>
     </table>
@@ -168,7 +168,7 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 
 .. GENERATED FROM PYTHON SOURCE LINES 42-43
 
-.. code-block:: default
+.. code-block:: Python
 
     grid.plot(cpos="xy")
 
@@ -186,7 +186,7 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  17.990 seconds)
+   **Total running time of the script:** (0 minutes 11.207 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-table.py:
@@ -195,14 +195,13 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: read-table.ipynb <read-table.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: read-table.py <read-table.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: read-table.ipynb <read-table.ipynb>`
 
 
 .. only:: html

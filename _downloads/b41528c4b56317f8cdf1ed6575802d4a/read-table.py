@@ -32,7 +32,7 @@ table
 ###############################################################################
 # From inspecting the header, we realize that this dataset is gridded, so let's
 # use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
-# :class:`pyvista.UniformGrid` of that dataset.
+# :class:`pyvista.ImageData` of that dataset.
 
 # 1200 x, 1750 y, 1 z, 1 t
 grid = TableToTimeGrid(extent=(1200, 1750, 1, 1), order="F").apply(table)

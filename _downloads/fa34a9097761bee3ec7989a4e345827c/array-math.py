@@ -20,7 +20,7 @@ from PVGeo.filters import ArrayMath
 
 ###############################################################################
 # Create some input data. This can be any `vtkDataObject`
-inp = pyvista.UniformGrid((10, 10, 4))
+inp = pyvista.ImageData((10, 10, 4))
 # Populate the tables
 n = 400
 arr0 = np.random.random(n)

@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_filters-general_points-to-tube.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_filters-general_points-to-tube.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -29,7 +29,7 @@ then builds a polygonal tube around that line with some specified radius and num
 
 .. GENERATED FROM PYTHON SOURCE LINES 11-18
 
-.. code-block:: default
+.. code-block:: Python
 
     import numpy as np
 
@@ -47,7 +47,7 @@ then builds a polygonal tube around that line with some specified radius and num
 
 .. GENERATED FROM PYTHON SOURCE LINES 19-34
 
-.. code-block:: default
+.. code-block:: Python
 
 
 
@@ -78,7 +78,7 @@ then builds a polygonal tube around that line with some specified radius and num
 
 .. GENERATED FROM PYTHON SOURCE LINES 35-39
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Use the filter: here is vtkPolyData containing the tube
@@ -99,7 +99,7 @@ then builds a polygonal tube around that line with some specified radius and num
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.609 seconds)
+   **Total running time of the script:** (0 minutes 0.343 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_points-to-tube.py:
@@ -108,14 +108,13 @@ then builds a polygonal tube around that line with some specified radius and num
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: points-to-tube.ipynb <points-to-tube.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: points-to-tube.py <points-to-tube.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: points-to-tube.ipynb <points-to-tube.ipynb>`
 
 
 .. only:: html

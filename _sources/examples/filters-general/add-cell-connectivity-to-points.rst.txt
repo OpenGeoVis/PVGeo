@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_filters-general_add-cell-connectivity-to-points.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_filters-general_add-cell-connectivity-to-points.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -36,7 +36,7 @@ sphinx_gallery_thumbnail_number = 2
 
 .. GENERATED FROM PYTHON SOURCE LINES 17-23
 
-.. code-block:: default
+.. code-block:: Python
 
     import numpy as np
     import pyvista
@@ -57,7 +57,7 @@ First, lets generate some points which we'd like to connect
 
 .. GENERATED FROM PYTHON SOURCE LINES 25-44
 
-.. code-block:: default
+.. code-block:: Python
 
 
 
@@ -98,7 +98,7 @@ below; this is good.
 
 .. GENERATED FROM PYTHON SOURCE LINES 53-60
 
-.. code-block:: default
+.. code-block:: Python
 
     line = AddCellConnToPoints().apply(vtkPoints)
 
@@ -130,7 +130,7 @@ Now it looks good (see image below)!
 
 .. GENERATED FROM PYTHON SOURCE LINES 67-75
 
-.. code-block:: default
+.. code-block:: Python
 
 
 
@@ -155,7 +155,7 @@ Now it looks good (see image below)!
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.234 seconds)
+   **Total running time of the script:** (0 minutes 0.659 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_add-cell-connectivity-to-points.py:
@@ -164,14 +164,13 @@ Now it looks good (see image below)!
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: add-cell-connectivity-to-points.ipynb <add-cell-connectivity-to-points.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: add-cell-connectivity-to-points.py <add-cell-connectivity-to-points.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: add-cell-connectivity-to-points.ipynb <add-cell-connectivity-to-points.ipynb>`
 
 
 .. only:: html

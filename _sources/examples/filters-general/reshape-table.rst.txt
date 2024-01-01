@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_filters-general_reshape-table.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_filters-general_reshape-table.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -29,7 +29,7 @@ This example demos :class:`PVGeo.filters.ReshapeTable`
 
 .. GENERATED FROM PYTHON SOURCE LINES 12-17
 
-.. code-block:: default
+.. code-block:: Python
 
     import numpy as np
     import pyvista as pv
@@ -49,7 +49,7 @@ Create some input table
 
 .. GENERATED FROM PYTHON SOURCE LINES 19-34
 
-.. code-block:: default
+.. code-block:: Python
 
     t0 = pv.Table()
     # Populate the tables
@@ -79,7 +79,7 @@ Use the filter to reshape the table
 
 .. GENERATED FROM PYTHON SOURCE LINES 36-41
 
-.. code-block:: default
+.. code-block:: Python
 
     order = "F"
     newtitles = ["Title %d" % i for i in range(ncols)]
@@ -94,18 +94,18 @@ Use the filter to reshape the table
 .. raw:: html
 
     <div class="output_subarea output_html rendered_html output_result">
-    <table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
-    <table>
+    <table style='width: 100%;'><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+    <table style='width: 100%;'>
     <tr><th>Table</th><th>Information</th></tr>
     <tr><td>N Rows</td><td>600</td></tr>
     <tr><td>N Arrays</td><td>2</td></tr>
     </table>
 
     </td><td>
-    <table>
+    <table style='width: 100%;'>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Title 0</td><td>float64</td><td>1</td><td>1.148e-03</td><td>9.968e-01</td></tr>
-    <tr><td>Title 1</td><td>float64</td><td>1</td><td>9.570e-04</td><td>9.990e-01</td></tr>
+    <tr><td>Title 0</td><td>float64</td><td>1</td><td>1.836e-03</td><td>9.999e-01</td></tr>
+    <tr><td>Title 1</td><td>float64</td><td>1</td><td>1.822e-03</td><td>9.991e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -119,7 +119,7 @@ Check the output
 
 .. GENERATED FROM PYTHON SOURCE LINES 43-51
 
-.. code-block:: default
+.. code-block:: Python
 
     tarr = np.zeros((nrows, ncols))
     for i in range(ncols):
@@ -139,7 +139,7 @@ Check the output
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.004 seconds)
+   **Total running time of the script:** (0 minutes 0.003 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_reshape-table.py:
@@ -148,14 +148,13 @@ Check the output
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: reshape-table.ipynb <reshape-table.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: reshape-table.py <reshape-table.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: reshape-table.ipynb <reshape-table.ipynb>`
 
 
 .. only:: html

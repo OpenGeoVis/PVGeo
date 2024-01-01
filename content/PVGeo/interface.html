@@ -1,32 +1,34 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Interface &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=34a7ea53" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
     <link rel="canonical" href="http://docs.pvgeo.org/content/PVGeo/interface.html"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -61,11 +63,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> PVGeo
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PVGeo
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -90,18 +96,54 @@
 <li class="toctree-l2"><a class="reference internal" href="base.html">Base Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cmaps.html">Color Maps</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#add-arrays-from-data-frame">add_arrays_from_data_frame</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#convert-array">convert_array</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#convert-cell-conn">convert_cell_conn</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#convert-string-array">convert_string_array</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data-frame-to-table">data_frame_to_table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get-array">get_array</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get-data-dict">get_data_dict</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get-dtypes">get_dtypes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get-vtk-type">get_vtk_type</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#place-array-in-table">place_array_in_table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#points-to-poly-data">points_to_poly_data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#table-to-data-frame">table_to_data_frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-arrays-from-data-frame">add_arrays_from_data_frame</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.add_arrays_from_data_frame"><code class="docutils literal notranslate"><span class="pre">add_arrays_from_data_frame()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-array">convert_array</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.convert_array"><code class="docutils literal notranslate"><span class="pre">convert_array()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-cell-conn">convert_cell_conn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.convert_cell_conn"><code class="docutils literal notranslate"><span class="pre">convert_cell_conn()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-string-array">convert_string_array</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.convert_string_array"><code class="docutils literal notranslate"><span class="pre">convert_string_array()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-frame-to-table">data_frame_to_table</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.data_frame_to_table"><code class="docutils literal notranslate"><span class="pre">data_frame_to_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#get-array">get_array</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.get_array"><code class="docutils literal notranslate"><span class="pre">get_array()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#get-data-dict">get_data_dict</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.get_data_dict"><code class="docutils literal notranslate"><span class="pre">get_data_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#get-dtypes">get_dtypes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.get_dtypes"><code class="docutils literal notranslate"><span class="pre">get_dtypes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#get-vtk-type">get_vtk_type</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.get_vtk_type"><code class="docutils literal notranslate"><span class="pre">get_vtk_type()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#place-array-in-table">place_array_in_table</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.place_array_in_table"><code class="docutils literal notranslate"><span class="pre">place_array_in_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#points-to-poly-data">points_to_poly_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.points_to_poly_data"><code class="docutils literal notranslate"><span class="pre">points_to_poly_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#table-to-data-frame">table_to_data_frame</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PVGeo.interface.table_to_data_frame"><code class="docutils literal notranslate"><span class="pre">table_to_data_frame()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="version.html">Version Verifier</a></li>
@@ -226,9 +268,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">About PVGeo</a> &raquo;</li>
-      <li>Interface</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">About PVGeo</a></li>
+      <li class="breadcrumb-item active">Interface</li>
 
   </ul>
   <hr/>
@@ -258,21 +300,21 @@ Python data structures that are easier to perform numerical operations on.</p>
 <span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">convert_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#convert_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.convert_array" title="Permalink to this definition"></a></dt>
 <dd><p>A helper to convert a NumPy array to a vtkDataArray or vice versa</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arr</strong> (<em>ndarray</em><em> or </em><em>vtkDataArry</em>) – A numpy array or vtkDataArry to convert</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the name of the data array for VTK</p></li>
-<li><p><strong>deep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – if input is numpy array then deep copy values</p></li>
-<li><p><strong>pdf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – if input is vtkDataArry, make a pandas DataFrame of the array</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – the name of the data array for VTK</p></li>
+<li><p><strong>deep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – if input is numpy array then deep copy values</p></li>
+<li><p><strong>pdf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – if input is vtkDataArry, make a pandas DataFrame of the array</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the converted array (if input is a NumPy ndaray then returns
 <code class="docutils literal notranslate"><span class="pre">vtkDataArray</span></code> or is input is <code class="docutils literal notranslate"><span class="pre">vtkDataArray</span></code> then returns NumPy
 <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>). If pdf==True and the input is <code class="docutils literal notranslate"><span class="pre">vtkDataArry</span></code>,
 return a pandas DataFrame.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>vtkDataArray, ndarray, or DataFrame</p>
 </dd>
 </dl>
@@ -293,19 +335,19 @@ for VTK cell arrays.</p>
 <h2>convert_string_array<a class="headerlink" href="#convert-string-array" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.convert_string_array">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">convert_string_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/utilities/helpers.html#convert_string_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.convert_string_array" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">convert_string_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/core/utilities/arrays.html#convert_string_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.convert_string_array" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a numpy array of strings to a vtkStringArray or vice versa.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arr</strong> (<em>numpy.ndarray</em>) – Numpy string array to convert.</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Name to set the vtkStringArray to.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Name to set the vtkStringArray to.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>VTK string array.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>vtkStringArray</p>
 </dd>
 </dl>
@@ -351,12 +393,12 @@ cell/point/field/row data as named NumPy arrays in a dictionary.</p>
 <span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_dtypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#get_dtypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_dtypes" title="Permalink to this definition"></a></dt>
 <dd><p>This converts char dtypes and an endian to a numpy and VTK data type.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the numpy data type and the integer type id specified in vtkType.h
 for VTK data types</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)">tuple</a> (numpy.dtype, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a>)</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a> (numpy.dtype, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -366,18 +408,18 @@ for VTK data types</p>
 <h2>get_vtk_type<a class="headerlink" href="#get-vtk-type" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="PVGeo.interface.get_vtk_type">
-<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_vtk_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/utilities/helpers.html#get_vtk_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_vtk_type" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">get_vtk_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyvista/core/utilities/arrays.html#get_vtk_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.get_vtk_type" title="Permalink to this definition"></a></dt>
 <dd><p>Look up the VTK type for a given numpy data type.</p>
 <p>Corrects for string type mapping issues.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>typ</strong> (<em>numpy.dtype</em>) – Numpy data type.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Integer type id specified in <code class="docutils literal notranslate"><span class="pre">vtkType.h</span></code></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Integer type id specified in <code class="docutils literal notranslate"><span class="pre">vtkType.h</span></code>.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -390,18 +432,18 @@ for VTK data types</p>
 <span class="sig-prename descclassname"><span class="pre">PVGeo.interface.</span></span><span class="sig-name descname"><span class="pre">place_array_in_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ndarr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">titles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/PVGeo/interface.html#place_array_in_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PVGeo.interface.place_array_in_table" title="Permalink to this definition"></a></dt>
 <dd><p>Takes a 1D/2D numpy array and makes a vtkTable of it</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ndarr</strong> (<em>numpy.ndarray</em>) – The 1D/2D array to be converted to a table</p></li>
-<li><p><strong>titles</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a>) – The titles for the arrays in the table. Must
+<li><p><strong>titles</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a>) – The titles for the arrays in the table. Must
 have same number of elements as columns in input ndarray</p></li>
 <li><p><strong>pdo</strong> (<em>vtkTable</em>) – The output data object pointer</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>returns the same input pdo table</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>vtkTable</p>
 </dd>
 </dl>
@@ -418,17 +460,17 @@ have more than 3 dimensions, then all dimensions after the third will be
 added as attributes. Assume the first three dimensions are the XYZ
 coordinates.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>points</strong> (<em>np.ndarray</em><em> or </em><em>pandas.DataFrame</em>) – The points and pointdata</p></li>
-<li><p><strong>copy_z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – A flag on whether to append the z values as a PointData
+<li><p><strong>copy_z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – A flag on whether to append the z values as a PointData
 array</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>points with point-vertex cells</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>vtkPolyData</p>
 </dd>
 </dl>
