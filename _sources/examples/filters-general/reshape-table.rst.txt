@@ -104,8 +104,8 @@ Use the filter to reshape the table
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Title 0</td><td>float64</td><td>1</td><td>3.395e-04</td><td>9.970e-01</td></tr>
-    <tr><td>Title 1</td><td>float64</td><td>1</td><td>1.784e-03</td><td>9.972e-01</td></tr>
+    <tr><td>Title 0</td><td>float64</td><td>1</td><td>1.939e-03</td><td>9.999e-01</td></tr>
+    <tr><td>Title 1</td><td>float64</td><td>1</td><td>7.200e-04</td><td>9.985e-01</td></tr>
     </table>
 
     </td></tr> </table>

@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:40.816** total execution time for 3 files **from examples/gslib**:
+**00:39.555** total execution time for 3 files **from examples/gslib**:
 
 .. container::
 
@@ -33,11 +33,11 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_gslib_read-sgems-grid.py` (``read-sgems-grid.py``)
-     - 00:29.000
+     - 00:28.195
      - 0.0
    * - :ref:`sphx_glr_examples_gslib_read-table.py` (``read-table.py``)
-     - 00:11.424
+     - 00:11.105
      - 0.0
    * - :ref:`sphx_glr_examples_gslib_read-point-set.py` (``read-point-set.py``)
-     - 00:00.392
+     - 00:00.254
      - 0.0
