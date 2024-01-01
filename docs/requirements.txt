@@ -6,5 +6,9 @@ sphinx-autobuild
 sphinx-rtd-theme
 sphinxcontrib-websupport
 sphinx-copybutton
+sphinx-design
 sphinx-gallery
 sphinx-notfound-page>=0.3.0
+trame
+trame-vtk
+trame-vuetify

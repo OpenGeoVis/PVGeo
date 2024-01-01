@@ -83,6 +83,7 @@ Generator().DocumentPackages(
 )
 
 import pyvista
+from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 
 # Manage errors
 pyvista.set_error_output_file('errors.txt')
@@ -128,8 +129,11 @@ extensions = [
     'sphinx.ext.extlinks',
     'sphinx.ext.napoleon',
     'sphinx_copybutton',
+    'sphinx_design',
     'sphinx_gallery.gen_gallery',
     'notfound.extension',
+    'pyvista.ext.plot_directive',
+    'pyvista.ext.viewer_directive',
 ]
 
 linkcheck_retries = 3
@@ -324,7 +328,7 @@ sphinx_gallery_conf = {
     "backreferences_dir": None,
     # Modules for which function level galleries are created.  In
     "doc_module": "PVGeo",
-    "image_scrapers": (pyvista.Scraper(), 'matplotlib'),
+    "image_scrapers": (DynamicScraper(), 'matplotlib'),
     "thumbnail_size": (350, 350),
     # 'default_thumb_file': thumb_path,
 }
