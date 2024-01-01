@@ -47,8 +47,8 @@ jobs:
           python-version: 3.8
       - name: Build and Publish to PyPI
         env:
-          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
           pip install wheel twine
           python setup.py sdist bdist_wheel
