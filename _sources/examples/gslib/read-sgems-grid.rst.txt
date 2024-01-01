@@ -95,13 +95,10 @@ Read SGeMS Grid file formats.
 
 
 
-
 .. image-sg:: /examples/gslib/images/sphx_glr_read-sgems-grid_001.png
    :alt: read sgems grid
    :srcset: /examples/gslib/images/sphx_glr_read-sgems-grid_001.png
    :class: sphx-glr-single-img
-
-
 
 
 
@@ -180,13 +177,10 @@ Read SGeMS Grid file formats.
 
 
 
-
 .. image-sg:: /examples/gslib/images/sphx_glr_read-sgems-grid_002.png
    :alt: read sgems grid
    :srcset: /examples/gslib/images/sphx_glr_read-sgems-grid_002.png
    :class: sphx-glr-single-img
-
-
 
 
 
@@ -227,13 +221,10 @@ Read SGeMS Grid file formats.
 
 
 
-
 .. image-sg:: /examples/gslib/images/sphx_glr_read-sgems-grid_003.png
    :alt: read sgems grid
    :srcset: /examples/gslib/images/sphx_glr_read-sgems-grid_003.png
    :class: sphx-glr-single-img
-
-
 
 
 
@@ -256,13 +247,10 @@ Read SGeMS Grid file formats.
 
 
 
-
 .. image-sg:: /examples/gslib/images/sphx_glr_read-sgems-grid_004.png
    :alt: read sgems grid
    :srcset: /examples/gslib/images/sphx_glr_read-sgems-grid_004.png
    :class: sphx-glr-single-img
-
-
 
 
 
@@ -276,7 +264,6 @@ Read SGeMS Grid file formats.
 
 
 
-
 .. image-sg:: /examples/gslib/images/sphx_glr_read-sgems-grid_005.png
    :alt: read sgems grid
    :srcset: /examples/gslib/images/sphx_glr_read-sgems-grid_005.png
@@ -287,11 +274,9 @@ Read SGeMS Grid file formats.
 
 
 
-
-
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 29.230 seconds)
+   **Total running time of the script:** (0 minutes 28.703 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-sgems-grid.py:

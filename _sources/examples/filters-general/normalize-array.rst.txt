@@ -61,13 +61,10 @@ Create some input data. this can be any `vtkDataObject`
 
 
 
-
 .. image-sg:: /examples/filters-general/images/sphx_glr_normalize-array_001.png
    :alt: normalize array
    :srcset: /examples/filters-general/images/sphx_glr_normalize-array_001.png
    :class: sphx-glr-single-img
-
-
 
 
 
@@ -125,7 +122,6 @@ Create some input data. this can be any `vtkDataObject`
 
 
 
-
 .. image-sg:: /examples/filters-general/images/sphx_glr_normalize-array_002.png
    :alt: normalize array
    :srcset: /examples/filters-general/images/sphx_glr_normalize-array_002.png
@@ -136,11 +132,9 @@ Create some input data. this can be any `vtkDataObject`
 
 
 
-
-
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.539 seconds)
+   **Total running time of the script:** (0 minutes 0.533 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_normalize-array.py:

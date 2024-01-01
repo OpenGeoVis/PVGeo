@@ -110,13 +110,10 @@ below; this is good.
 
 
 
-
 .. image-sg:: /examples/filters-general/images/sphx_glr_add-cell-connectivity-to-points_001.png
    :alt: add cell connectivity to points
    :srcset: /examples/filters-general/images/sphx_glr_add-cell-connectivity-to-points_001.png
    :class: sphx-glr-single-img
-
-
 
 
 
@@ -146,7 +143,6 @@ Now it looks good (see image below)!
 
 
 
-
 .. image-sg:: /examples/filters-general/images/sphx_glr_add-cell-connectivity-to-points_002.png
    :alt: add cell connectivity to points
    :srcset: /examples/filters-general/images/sphx_glr_add-cell-connectivity-to-points_002.png
@@ -157,11 +153,9 @@ Now it looks good (see image below)!
 
 
 
-
-
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.693 seconds)
+   **Total running time of the script:** (0 minutes 2.236 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_add-cell-connectivity-to-points.py:

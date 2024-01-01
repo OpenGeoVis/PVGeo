@@ -98,7 +98,6 @@ Apply a filter to the DEM to have realistic topography
 
 
 
-
 .. image-sg:: /examples/grids/images/sphx_glr_read-surfer_001.png
    :alt: read surfer
    :srcset: /examples/grids/images/sphx_glr_read-surfer_001.png
@@ -109,11 +108,9 @@ Apply a filter to the DEM to have realistic topography
 
 
 
-
-
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.499 seconds)
+   **Total running time of the script:** (0 minutes 0.840 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-surfer.py:

@@ -174,7 +174,6 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 
 
 
-
 .. image-sg:: /examples/gslib/images/sphx_glr_read-table_001.png
    :alt: read table
    :srcset: /examples/gslib/images/sphx_glr_read-table_001.png
@@ -185,11 +184,9 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 
 
 
-
-
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 11.667 seconds)
+   **Total running time of the script:** (0 minutes 11.225 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-table.py:

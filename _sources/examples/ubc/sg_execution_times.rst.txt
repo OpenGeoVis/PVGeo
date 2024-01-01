@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:08.577** total execution time for 3 files **from examples/ubc**:
+**00:05.880** total execution time for 3 files **from examples/ubc**:
 
 .. container::
 
@@ -33,11 +33,11 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_ubc_read-tensor-mesh.py` (``read-tensor-mesh.py``)
-     - 00:04.270
+     - 00:02.777
      - 0.0
    * - :ref:`sphx_glr_examples_ubc_read-topo.py` (``read-topo.py``)
-     - 00:03.583
+     - 00:02.549
      - 0.0
    * - :ref:`sphx_glr_examples_ubc_read-grv-obs.py` (``read-grv-obs.py``)
-     - 00:00.724
+     - 00:00.554
      - 0.0
