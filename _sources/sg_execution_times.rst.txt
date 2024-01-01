@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**01:11.555** total execution time for 21 files **from all galleries**:
+**01:16.275** total execution time for 21 files **from all galleries**:
 
 .. container::
 
@@ -33,61 +33,61 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_gslib_read-sgems-grid.py` (``../../examples/gslib/read-sgems-grid.py``)
-     - 00:27.517
+     - 00:28.683
      - 0.0
    * - :ref:`sphx_glr_examples_gslib_read-table.py` (``../../examples/gslib/read-table.py``)
-     - 00:10.704
+     - 00:11.103
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``../../examples/filters-general/voxelize-points.py``)
-     - 00:09.234
+     - 00:10.440
      - 0.0
    * - :ref:`sphx_glr_examples_grids_read-esri.py` (``../../examples/grids/read-esri.py``)
-     - 00:06.083
+     - 00:06.344
      - 0.0
    * - :ref:`sphx_glr_examples_grids_extract-topography.py` (``../../examples/grids/extract-topography.py``)
-     - 00:05.706
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``../../examples/filters-general/many-slices-along-points.py``)
-     - 00:02.515
+     - 00:06.010
      - 0.0
    * - :ref:`sphx_glr_examples_ubc_read-tensor-mesh.py` (``../../examples/ubc/read-tensor-mesh.py``)
-     - 00:02.463
+     - 00:02.722
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``../../examples/filters-general/many-slices-along-points.py``)
+     - 00:02.613
      - 0.0
    * - :ref:`sphx_glr_examples_ubc_read-topo.py` (``../../examples/ubc/read-topo.py``)
-     - 00:02.165
+     - 00:02.493
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``../../examples/filters-general/append-cell-centers.py``)
-     - 00:00.889
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``../../examples/filters-general/add-cell-connectivity-to-points.py``)
-     - 00:00.603
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_extract-points.py` (``../../examples/filters-general/extract-points.py``)
-     - 00:00.558
+     - 00:00.936
      - 0.0
    * - :ref:`sphx_glr_examples_grids_read-surfer.py` (``../../examples/grids/read-surfer.py``)
-     - 00:00.542
+     - 00:00.779
      - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``../../examples/filters-general/normalize-array.py``)
-     - 00:00.514
+   * - :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``../../examples/filters-general/add-cell-connectivity-to-points.py``)
+     - 00:00.640
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_extract-points.py` (``../../examples/filters-general/extract-points.py``)
+     - 00:00.572
      - 0.0
    * - :ref:`sphx_glr_examples_ubc_read-grv-obs.py` (``../../examples/ubc/read-grv-obs.py``)
-     - 00:00.444
+     - 00:00.565
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``../../examples/filters-general/normalize-array.py``)
+     - 00:00.541
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_array-math.py` (``../../examples/filters-general/array-math.py``)
-     - 00:00.398
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``../../examples/filters-general/rotate-points.py``)
-     - 00:00.353
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``../../examples/filters-general/points-to-tube.py``)
-     - 00:00.347
+     - 00:00.400
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_extract-array.py` (``../../examples/filters-general/extract-array.py``)
-     - 00:00.296
+     - 00:00.388
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``../../examples/filters-general/rotate-points.py``)
+     - 00:00.376
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``../../examples/filters-general/points-to-tube.py``)
+     - 00:00.343
      - 0.0
    * - :ref:`sphx_glr_examples_gslib_read-point-set.py` (``../../examples/gslib/read-point-set.py``)
-     - 00:00.220
+     - 00:00.318
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``../../examples/filters-general/combine-tables.py``)
      - 00:00.004

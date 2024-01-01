@@ -299,7 +299,7 @@ Note that there are other extraction operations like an ``'intersection'``:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 5.706 seconds)
+   **Total running time of the script:** (0 minutes 6.010 seconds)
 
 
 .. _sphx_glr_download_examples_grids_extract-topography.py:
