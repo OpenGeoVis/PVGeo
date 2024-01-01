@@ -103,6 +103,7 @@ Download sample data files and keep track of names:
 
 
 
+
 .. image-sg:: /examples/ubc/images/sphx_glr_read-topo_001.png
    :alt: read topo
    :srcset: /examples/ubc/images/sphx_glr_read-topo_001.png
@@ -113,9 +114,11 @@ Download sample data files and keep track of names:
 
 
 
+
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 2.549 seconds)
+   **Total running time of the script:** (0 minutes 2.397 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-topo.py:

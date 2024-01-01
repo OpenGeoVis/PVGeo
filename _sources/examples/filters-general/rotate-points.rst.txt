@@ -54,10 +54,13 @@ Get :class:`pyvista.PolyData` sample input to rotate
 
 
 
+
 .. image-sg:: /examples/filters-general/images/sphx_glr_rotate-points_001.png
    :alt: rotate points
    :srcset: /examples/filters-general/images/sphx_glr_rotate-points_001.png
    :class: sphx-glr-single-img
+
+
 
 
 
@@ -76,10 +79,13 @@ Use the filter:
 
 
 
+
 .. image-sg:: /examples/filters-general/images/sphx_glr_rotate-points_002.png
    :alt: rotate points
    :srcset: /examples/filters-general/images/sphx_glr_rotate-points_002.png
    :class: sphx-glr-single-img
+
+
 
 
 

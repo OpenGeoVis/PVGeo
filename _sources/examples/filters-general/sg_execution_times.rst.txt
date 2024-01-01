@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:18.233** total execution time for 12 files **from examples/filters-general**:
+**00:18.092** total execution time for 12 files **from examples/filters-general**:
 
 .. container::
 
@@ -33,37 +33,37 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)
-     - 00:09.864
+     - 00:09.607
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)
-     - 00:02.575
+     - 00:02.592
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``)
-     - 00:02.236
+     - 00:02.332
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)
-     - 00:00.956
+     - 00:00.995
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)
-     - 00:00.566
+     - 00:00.572
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)
-     - 00:00.533
+     - 00:00.531
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)
-     - 00:00.433
+     - 00:00.402
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)
      - 00:00.374
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)
-     - 00:00.350
+     - 00:00.358
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
-     - 00:00.338
+     - 00:00.322
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``combine-tables.py``)
-     - 00:00.004
+     - 00:00.005
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_reshape-table.py` (``reshape-table.py``)
      - 00:00.003

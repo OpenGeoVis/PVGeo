@@ -118,6 +118,7 @@ Apply a filter to the DEM to have realistic topography
 
 
 
+
 .. image-sg:: /examples/grids/images/sphx_glr_read-esri_001.png
    :alt: read esri
    :srcset: /examples/grids/images/sphx_glr_read-esri_001.png
@@ -128,9 +129,11 @@ Apply a filter to the DEM to have realistic topography
 
 
 
+
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 6.326 seconds)
+   **Total running time of the script:** (0 minutes 6.222 seconds)
 
 
 .. _sphx_glr_download_examples_grids_read-esri.py:
