@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:20.722** total execution time for 12 files **from examples/filters-general**:
+**00:16.951** total execution time for 12 files **from examples/filters-general**:
 
 .. container::
 
@@ -33,34 +33,34 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)
-     - 00:11.604
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``)
-     - 00:02.585
+     - 00:09.901
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)
-     - 00:02.571
+     - 00:02.599
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)
-     - 00:00.995
+     - 00:00.953
      - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
-     - 00:00.757
+   * - :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``)
+     - 00:00.812
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)
-     - 00:00.573
+     - 00:00.561
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)
-     - 00:00.524
+     - 00:00.521
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
+     - 00:00.496
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)
      - 00:00.399
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)
-     - 00:00.358
+     - 00:00.359
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)
-     - 00:00.349
+     - 00:00.343
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``combine-tables.py``)
      - 00:00.004

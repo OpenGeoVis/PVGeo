@@ -107,9 +107,9 @@ Use the filter:
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>1.508e-03</td><td>9.982e-01</td></tr>
-    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>8.818e-03</td><td>9.990e-01</td></tr>
-    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>8.314e-02</td><td>1.983e+00</td></tr>
+    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>4.914e-03</td><td>9.982e-01</td></tr>
+    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>9.637e-04</td><td>9.983e-01</td></tr>
+    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>1.586e-02</td><td>1.933e+00</td></tr>
     </table>
 
     </td></tr> </table>
@@ -178,9 +178,9 @@ Use a custom math operation:
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>1.508e-03</td><td>9.982e-01</td></tr>
-    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>8.818e-03</td><td>9.990e-01</td></tr>
-    <tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>1.611e-03</td><td>9.999e-01</td></tr>
+    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>4.914e-03</td><td>9.982e-01</td></tr>
+    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>9.637e-04</td><td>9.983e-01</td></tr>
+    <tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>8.707e-03</td><td>9.997e-01</td></tr>
     </table>
 
     </td></tr> </table>
