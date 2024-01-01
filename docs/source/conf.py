@@ -25,13 +25,11 @@ print(path)
 sys.path.insert(0, path)
 
 
-# Mock the paraview module to build pvmacros docs
 import mock
 
-MOCK_MODULES = ['paraview', 'paraview.simple', 'discretize', 'pyproj']
+MOCK_MODULES = ['discretize', 'pyproj']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
-autodoc_mock_imports = ['paraview']
 
 
 # # Automattically generate source pages:
@@ -40,7 +38,6 @@ autodoc_mock_imports = ['paraview']
 from gendocs import Generator
 
 import PVGeo  # for documenting
-import pvmacros
 
 append_material = """
 
@@ -71,7 +68,7 @@ extra = """
 
 # Automatically generate documentation pages
 Generator().DocumentPackages(
-    [PVGeo, pvmacros],
+    [PVGeo,],
     index_base='../index_base.rst',
     showprivate=True,
     notify=False,
@@ -129,7 +126,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx.ext.extlinks',
-    'sphinxcontrib.napoleon',
+    'sphinx.ext.napoleon',
     'sphinx_copybutton',
     'sphinx_gallery.gen_gallery',
     'notfound.extension',
@@ -155,7 +152,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+# language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -291,10 +288,6 @@ texinfo_documents = [
 
 # -- Extension configuration -------------------------------------------------
 
-# -- Options for intersphinx extension ---------------------------------------
-
-# Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
 
 # -- Options for todo extension ----------------------------------------------
 

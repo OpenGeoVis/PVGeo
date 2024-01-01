@@ -809,7 +809,6 @@ if proj:
             wpdi = dsa.WrapDataObject(converted)
             points = np.array(wpdi.Points)
             self.assertTrue(np.allclose(points, data[['x_utm', 'y_utm', 'altitude']]))
-            return True
 
 
 ###############################################################################
@@ -910,7 +909,6 @@ class TestPercentThreshold(TestBase):
         data = PVGeo.model_build.CreateTensorMesh().apply()
         thresh = PercentThreshold(percent=75).apply(data, 'Random Data')
         self.assertTrue(isinstance(thresh, vtk.vtkUnstructuredGrid))
-        return True
 
 
 ###############################################################################
@@ -938,7 +936,6 @@ class TestArraysToRGBA(TestBase):
         # Make sure there is a new 'Colors' Array
         arr = colored.GetPointData().GetArray('Colors')
         self.assertTrue(isinstance(arr, vtk.vtkUnsignedCharArray))
-        return True
 
 
 ###############################################################################
@@ -962,7 +959,6 @@ class TestBuildSurfaceFromPoints(TestBase):
         mesh = BuildSurfaceFromPoints(zcoords=z_range).apply(poly)
         assert isinstance(mesh, pyvista.StructuredGrid)
         assert mesh.dimensions == (len(z_range), len(points), 1)
-        return True
 
 
 ###############################################################################
