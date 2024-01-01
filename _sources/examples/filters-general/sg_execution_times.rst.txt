@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:18.615** total execution time for 12 files **from examples/filters-general**:
+**00:17.746** total execution time for 12 files **from examples/filters-general**:
 
 .. container::
 
@@ -33,34 +33,34 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)
-     - 00:11.431
+     - 00:09.548
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)
-     - 00:02.585
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)
-     - 00:00.948
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
-     - 00:00.776
+     - 00:02.566
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``)
-     - 00:00.656
+     - 00:01.849
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)
+     - 00:00.960
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
+     - 00:00.596
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)
-     - 00:00.575
+     - 00:00.571
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)
-     - 00:00.527
+     - 00:00.539
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)
-     - 00:00.403
+     - 00:00.405
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)
-     - 00:00.363
+     - 00:00.356
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)
-     - 00:00.343
+     - 00:00.349
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``combine-tables.py``)
      - 00:00.004
