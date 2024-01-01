@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:16.867** total execution time for 12 files **from examples/filters-general**:
+**00:19.777** total execution time for 12 files **from examples/filters-general**:
 
 .. container::
 
@@ -33,34 +33,34 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)
-     - 00:09.835
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)
-     - 00:02.577
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)
-     - 00:00.963
+     - 00:09.942
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``)
-     - 00:00.676
+     - 00:02.940
      - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)
-     - 00:00.590
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)
-     - 00:00.569
+   * - :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)
+     - 00:02.565
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
-     - 00:00.548
+     - 00:01.052
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)
+     - 00:00.991
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)
+     - 00:00.577
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)
+     - 00:00.538
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)
-     - 00:00.401
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)
-     - 00:00.357
+     - 00:00.406
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)
-     - 00:00.344
+     - 00:00.382
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)
+     - 00:00.377
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``combine-tables.py``)
      - 00:00.004
