@@ -16,7 +16,6 @@ like 2D or 3D time-varying grids.
 
 **Metrics:**
 [![GitHub contributors](https://img.shields.io/github/contributors/OpenGeoVis/PVGeo.svg?logo=github&logoColor=white)](https://GitHub.com/OpenGeoVis/PVGeo/graphs/contributors/)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4b9e8d0ef37a4f70a2d02c0d53ed096f)](https://www.codacy.com/app/banesullivan/PVGeo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenGeoVis/PVGeo&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/OpenGeoVis/PVGeo/branch/main/graph/badge.svg)](https://codecov.io/gh/OpenGeoVis/PVGeo/branch/main)
 
 ## Demonstrations of *PVGeo*
