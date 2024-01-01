@@ -260,17 +260,13 @@ operations.</p>
 </pre></div>
 </div>
 <p>Create some input data. This can be any <cite>vtkDataObject</cite></p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">ImageData</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">ImageData</span><span class="p">(</span><span class="n">dimensions</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="c1"># Populate the tables</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">400</span>
 <span class="n">arr0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">inp</span><span class="p">[</span><span class="s2">&quot;Array 0&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr0</span>
 <span class="n">inp</span><span class="p">[</span><span class="s2">&quot;Array 1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr1</span>
-</pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pyvista/core/grid.py:538: PyVistaDeprecationWarning: Behavior of pyvista.ImageData has changed. First argument must be either a ``vtk.vtkImageData`` or path.
-  warnings.warn(
 </pre></div>
 </div>
 <p>Use the filter:</p>
@@ -297,9 +293,9 @@ operations.</p>
 </td><td>
 <table style='width: 100%;'>
 <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>1.020e-02</td><td>9.985e-01</td></tr>
-<tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>3.503e-03</td><td>9.982e-01</td></tr>
-<tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>6.165e-02</td><td>1.877e+00</td></tr>
+<tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>4.700e-03</td><td>9.989e-01</td></tr>
+<tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>2.786e-03</td><td>9.948e-01</td></tr>
+<tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>9.686e-02</td><td>1.953e+00</td></tr>
 </table>
 
 </td></tr> </table>
@@ -342,9 +338,9 @@ operations.</p>
 </td><td>
 <table style='width: 100%;'>
 <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-<tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>1.020e-02</td><td>9.985e-01</td></tr>
-<tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>3.503e-03</td><td>9.982e-01</td></tr>
-<tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>1.151e-02</td><td>9.999e-01</td></tr>
+<tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>4.700e-03</td><td>9.989e-01</td></tr>
+<tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>2.786e-03</td><td>9.948e-01</td></tr>
+<tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>1.191e-02</td><td>1.000e+00</td></tr>
 </table>
 
 </td></tr> </table>
@@ -357,7 +353,7 @@ operations.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;powered&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_array-math_001.png" srcset="../../_images/sphx_glr_array-math_001.png" alt="array math" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.406 seconds)</p>
+<img src="../../_images/sphx_glr_array-math_001.png" srcset="../../_images/sphx_glr_array-math_001.png" alt="array math" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.403 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-array-math-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/bcfe38a64719cee9e960640d4eccdcc2/array-math.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">array-math.ipynb</span></code></a></p>

@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:17.912** total execution time for 12 files **from examples/filters-general**:
+**00:18.615** total execution time for 12 files **from examples/filters-general**:
 
 .. container::
 
@@ -33,34 +33,34 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_filters-general_voxelize-points.py` (``voxelize-points.py``)
-     - 00:09.781
+     - 00:11.431
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_many-slices-along-points.py` (``many-slices-along-points.py``)
-     - 00:02.621
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``)
-     - 00:02.038
+     - 00:02.585
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_append-cell-centers.py` (``append-cell-centers.py``)
-     - 00:00.972
+     - 00:00.948
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
+     - 00:00.776
+     - 0.0
+   * - :ref:`sphx_glr_examples_filters-general_add-cell-connectivity-to-points.py` (``add-cell-connectivity-to-points.py``)
+     - 00:00.656
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_extract-points.py` (``extract-points.py``)
-     - 00:00.580
+     - 00:00.575
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_normalize-array.py` (``normalize-array.py``)
-     - 00:00.531
+     - 00:00.527
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_array-math.py` (``array-math.py``)
-     - 00:00.406
+     - 00:00.403
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_rotate-points.py` (``rotate-points.py``)
      - 00:00.363
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_points-to-tube.py` (``points-to-tube.py``)
      - 00:00.343
-     - 0.0
-   * - :ref:`sphx_glr_examples_filters-general_extract-array.py` (``extract-array.py``)
-     - 00:00.270
      - 0.0
    * - :ref:`sphx_glr_examples_filters-general_combine-tables.py` (``combine-tables.py``)
      - 00:00.004
