@@ -4,7 +4,7 @@ Getting Started
 Using PVGeo in a Python Environment
 -----------------------------------
 
-If you'd like to use PVGeo in Python (>=3.6), then simply
+If you'd like to use PVGeo in Python (>=3.8), then simply
 install PVGeo to your active Python environment with ``pip``
 or ``conda``
 
