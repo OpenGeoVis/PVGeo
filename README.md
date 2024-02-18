@@ -43,7 +43,7 @@ environment (we highly recommend using anaconda) and install *PVGeo* through pip
 pip install PVGeo
 ```
 
-Now *PVGeo* is ready for use in your standard Python environment (>=3.6)
+Now *PVGeo* is ready for use in your standard Python environment (>=3.8)
 with all dependencies installed! Go ahead and test your install:
 
 ```bash
