@@ -124,7 +124,7 @@ class DelimitedTextReader(ReaderBase):
                 df = pd.read_csv(
                     StringIO("\n".join(content)),
                     names=self.get_titles(),
-                    delim_whitespace=self.get_split_on_white_space(),
+                    sep=r'\s+',
                 )
             else:
                 df = pd.read_csv(

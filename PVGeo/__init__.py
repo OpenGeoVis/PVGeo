@@ -40,7 +40,6 @@ else:
     from .interface import *
 # VTK-dependent imports complete
 
-from . import version
 from .cmaps import *
 
 # Project MetaData
@@ -49,7 +48,3 @@ __license__ = 'BSD-3-Clause'
 __copyright__ = '2018, Bane Sullivan'
 __version__ = '3.0.1'
 __displayname__ = 'PVGeo'
-
-
-# Now check that NumPy is at a satisfactory version
-version.check_numpy()
