@@ -1,4 +1,4 @@
-vtk>=8.1.1
+vtk>=8.1.1,<9.4
 pyvista>=0.20.1
 numpy>=1.13
 scipy>=1.1

@@ -36,7 +36,7 @@ if os.name == 'nt' and (
         + 'https://anaconda.org/anaconda/vtk'
     )
 else:
-    install_requires.append(['vtk>=8.1'])
+    install_requires.append(['vtk>=8.1,<9.4'])
 
 setuptools.setup(
     name="PVGeo",
@@ -49,7 +49,7 @@ setuptools.setup(
     url="https://github.com/OpenGeoVis/PVGeo",
     packages=setuptools.find_packages(),
     install_requires=install_requires,
-    python_requires='>=3.8',
+    python_requires='>=3.9',
     extras_require={
         'pyproj': ['pyproj>=1.9'],
         'omf': ['omf>=0.9.3', 'omfvista>=0.2.0'],
