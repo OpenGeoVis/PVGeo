@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_gslib_read-table.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -208,7 +208,7 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 33.913 seconds)
+   **Total running time of the script:** (0 minutes 36.210 seconds)
 
 
 .. _sphx_glr_download_examples_gslib_read-table.py:
@@ -224,6 +224,10 @@ use the :class:`PVGeo.grid.TableToTimeGrid` filter to create a
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: read-table.py <read-table.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: read-table.zip <read-table.zip>`
 
 
 .. only:: html

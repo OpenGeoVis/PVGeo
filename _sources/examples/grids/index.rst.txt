@@ -11,10 +11,11 @@ Grids
 
     <div class="sphx-glr-thumbnails">
 
+.. thumbnail-parent-div-open
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to add a cell data field to an input data set that defines wh...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to add a cell data field to an input data set that defines whether that cell should be active. The activity of the cell is determined by whether it is beneath and input topography surface.">
 
 .. only:: html
 
@@ -62,6 +63,8 @@ Grids
       <div class="sphx-glr-thumbnail-title">Read Surfer Grid File</div>
     </div>
 
+
+.. thumbnail-parent-div-close
 
 .. raw:: html
 

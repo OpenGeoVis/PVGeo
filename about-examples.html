@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -6,30 +8,26 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Examples &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
 
   
     <link rel="canonical" href="http://docs.pvgeo.org/about-examples.html"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="_static/copybutton.js?v=f281be69"></script>
-        <script src="_static/design-tabs.js?v=36754332"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -237,14 +235,14 @@ issue on the <a class="reference external" href="https://github.com/OpenGeoVis/P
 <p>All algorithms deployed in <em>PVGeo</em> are usable in the following manners in a
 Python environment where the algorithm can be called and instantiated with
 keyword arguments for its parameters and then applied on some input data set.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PVGeo</span>
 <span class="c1"># PSEUDOCODE: Typical use of a PVGeo algorithm:</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Algorithm</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Or we can instantiate the algorithm for repetitive calls if, for example, we
 need to request varying time steps.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PVGeo</span>
 <span class="c1"># PSEUDOCODE: Typical use of a PVGeo algorithm:</span>
 <span class="n">alg</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Algorithm</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="c1"># Grab the output data object</span>
@@ -266,7 +264,7 @@ data structures as simple as possible.</p>
 <p>The file readers in <em>PVGeo</em> are available for use in the same manner as all
 algorithms in <em>PVGeo</em>. Readers are typically used in a manner that allows the
 reader algorithm to be repetitively called to request various time steps:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PVGeo</span>
 <span class="c1"># PSEUDOCODE: Typical use of a PVGeo reader:</span>
 <span class="n">reader</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="n">reader</span><span class="o">.</span><span class="n">AddFileName</span><span class="p">([</span><span class="s1">&#39;file</span><span class="si">%.2d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)])</span>
@@ -280,7 +278,7 @@ reader algorithm to be repetitively called to request various time steps:</p>
 </div>
 <p>It is worth noting that if you have only one file (one time step) to read, then
 readers can be used to immediately produce a data object:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PVGeo</span>
 <span class="c1"># PSEUDOCODE: Typical use of a PVGeo reader:</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s1">&#39;fname.txt&#39;</span><span class="p">)</span>
 </pre></div>
@@ -306,19 +304,19 @@ while still having complex visualizations from that data.</p>
 dataset is provided to immediately produce an output. The parameters/options of
 the filter are set via the <cite>**kwargs</cite> upon construction and the input(s) is/are
 given to the <cite>apply()</cite> call:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PVGeo</span>
 <span class="c1"># PSEUDOCODE: Typical use of a PVGeo filter:</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">inputDataObject</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PVGeo</span>
 <span class="c1"># PSEUDOCODE: Typical use of a PVGeo filter with multiple inputs:</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">input0</span><span class="p">,</span> <span class="n">input1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>It is also worth noting that filter algorithms can be used as their own entities
 to make repetitive calls on them much like we showed with readers:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PVGeo</span>
 <span class="c1"># PSEUDOCODE: Typical use of a PVGeo filter:</span>
 <span class="n">filt</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">inputDataObject</span><span class="p">)</span>
@@ -341,7 +339,7 @@ set such as a model discretization and have a data source appear in the
 rendering environment alongside their other data for that scene.</p>
 <p>Sources can be used like any algorithm in <em>PVGeo</em> and are typically called to
 immediately produce an output like below:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PVGeo</span>
 <span class="c1"># PSEUDOCODE: Typical use of a PVGeo source:</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
 </pre></div>
@@ -357,7 +355,7 @@ filters, then output to the same format in memory for use in an external
 processing library.</p>
 <p>Writers can be used like any algorithm in <em>PVGeo</em> and are typically called to
 immediately write out a data object like below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PVGeo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PVGeo</span>
 <span class="c1"># PSEUDOCODE: Typical use of a PVGeo writer:</span>
 <span class="n">writer</span> <span class="o">=</span> <span class="n">PVGeo</span><span class="o">.</span><span class="n">suite</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;test-writer.grd&#39;</span>

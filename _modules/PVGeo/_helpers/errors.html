@@ -1,34 +1,32 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo._helpers.errors &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/_helpers/errors.html"/>
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -218,14 +216,14 @@
     <span class="s1">&#39;HiddenPrints&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
 
 <div class="viewcode-block" id="PVGeoError">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/errors.html#PVGeo._helpers.errors.PVGeoError">[docs]</a>
-<span class="k">class</span> <span class="nc">PVGeoError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PVGeoError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This is a custom error class for handling errors when processing on the</span>
 <span class="sd">    VTK pipeline. It makes the error messages easy to decipher in ParaView and</span>
 <span class="sd">    cleans the messages when used in Python outside of ParaView. When on the VTK</span>
@@ -240,19 +238,19 @@
         <span class="sa">r</span><span class="s1">&#39;@@@@PVGeoError ---&gt;.+?&lt;--- PVGeoError@@@@&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span>
     <span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="c1"># Place special characters around the message for easy extraction</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
             <span class="s1">&#39;</span><span class="se">\n\n\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">QUALIFIER_L</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">QUALIFIER_R</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n\n\n</span><span class="s1">&#39;</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span>  <span class="c1"># .replace(self.QUALIFIER, &#39;&#39;)</span>
 
 <div class="viewcode-block" id="PVGeoError.clean_message">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/errors.html#PVGeo._helpers.errors.PVGeoError.clean_message">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">clean_message</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clean_message</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">PVGeoError</span><span class="o">.</span><span class="n">QUALIFIER_L</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
             <span class="n">PVGeoError</span><span class="o">.</span><span class="n">QUALIFIER_R</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
         <span class="p">)</span></div>
@@ -262,7 +260,7 @@
 
 <div class="viewcode-block" id="ErrorObserver">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/errors.html#PVGeo._helpers.errors.ErrorObserver">[docs]</a>
-<span class="k">class</span> <span class="nc">ErrorObserver</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ErrorObserver</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for catching errors when processing on a VTK pipeline. The</span>
 <span class="sd">    ``AlgorithmBase`` class handles setting up this observer on initialization.</span>
 
@@ -277,7 +275,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__error_occurred</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__get_error_message</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__get_error_messageEtc</span> <span class="o">=</span> <span class="kc">None</span>
@@ -285,7 +283,7 @@
         <span class="c1"># Object to observe:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__observing</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__error_occurred</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="c1"># Serch the message for a PVGeoError qualifier to extract</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="n">PVGeoError</span><span class="o">.</span><span class="n">SEARCHER</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
@@ -301,7 +299,7 @@
 
 <div class="viewcode-block" id="ErrorObserver.error_occurred">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/errors.html#PVGeo._helpers.errors.ErrorObserver.error_occurred">[docs]</a>
-    <span class="k">def</span> <span class="nf">error_occurred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">error_occurred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Ask self if an error has occurred&quot;&quot;&quot;</span>
         <span class="n">occ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__error_occurred</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__error_occurred</span> <span class="o">=</span> <span class="kc">False</span>
@@ -310,7 +308,7 @@
 
 <div class="viewcode-block" id="ErrorObserver.get_error_message">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/errors.html#PVGeo._helpers.errors.ErrorObserver.get_error_message">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_error_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">etc</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_error_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">etc</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the last set error message</span>
 
 <span class="sd">        Return:</span>
@@ -323,7 +321,7 @@
 
 <div class="viewcode-block" id="ErrorObserver.make_observer">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/errors.html#PVGeo._helpers.errors.ErrorObserver.make_observer">[docs]</a>
-    <span class="k">def</span> <span class="nf">make_observer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_observer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make this an observer of an algorithm&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__observing</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;This error observer is already observing an algorithm.&#39;</span><span class="p">)</span>
@@ -337,7 +335,7 @@
 
 <div class="viewcode-block" id="HiddenPrints">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/errors.html#PVGeo._helpers.errors.HiddenPrints">[docs]</a>
-<span class="k">class</span> <span class="nc">HiddenPrints</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">HiddenPrints</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Use this object to hide print statements when performing a task.</span>
 <span class="sd">    This is used to suppress printed warnings from discretize on import:</span>
 
@@ -346,11 +344,11 @@
 <span class="sd">    ...     import discretize</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_original_stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_original_stdout</span></div>
 

@@ -1,34 +1,32 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo._helpers.arrays &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/_helpers/arrays.html"/>
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -224,15 +222,15 @@
     <span class="s1">&#39;get_all_array_names&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="kn">import</span> <span class="nn">vtk</span>
-<span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="kn">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">vtk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vtk.numpy_interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">errors</span> <span class="k">as</span> <span class="n">_helpers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">errors</span> <span class="k">as</span> <span class="n">_helpers</span>
 
 
 <div class="viewcode-block" id="get_selected_array_name">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/arrays.html#PVGeo._helpers.arrays.get_selected_array_name">[docs]</a>
-<span class="k">def</span> <span class="nf">get_selected_array_name</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_selected_array_name</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets the name of the input array for a given index on a VTK algorithm</span>
 
 <span class="sd">    Args:</span>
@@ -249,7 +247,7 @@
 
 <div class="viewcode-block" id="get_selected_array_field">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/arrays.html#PVGeo._helpers.arrays.get_selected_array_field">[docs]</a>
-<span class="k">def</span> <span class="nf">get_selected_array_field</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_selected_array_field</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets the field of the input array for a given index on a VTK algorithm</span>
 
 <span class="sd">    Args:</span>
@@ -264,7 +262,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">get_field_id_by_name</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_field_id_by_name</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the field ID by name.&quot;&quot;&quot;</span>
     <span class="n">fields</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
         <span class="n">point</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -288,7 +286,7 @@
 
 <div class="viewcode-block" id="copy_arrays_to_point_data">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/arrays.html#PVGeo._helpers.arrays.copy_arrays_to_point_data">[docs]</a>
-<span class="k">def</span> <span class="nf">copy_arrays_to_point_data</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">copy_arrays_to_point_data</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Copies arrays from an input to an ouput&#39;s point data.</span>
 
 <span class="sd">    Args:</span>
@@ -335,7 +333,7 @@
 
 <div class="viewcode-block" id="get_numpy_array">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/arrays.html#PVGeo._helpers.arrays.get_numpy_array">[docs]</a>
-<span class="k">def</span> <span class="nf">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_numpy_array</span><span class="p">(</span><span class="n">wpdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Grabs an array from vtkDataObject given its name and field association.</span>
 
 <span class="sd">    Args:</span>
@@ -375,7 +373,7 @@
 
 <div class="viewcode-block" id="get_vtk_array">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/arrays.html#PVGeo._helpers.arrays.get_vtk_array">[docs]</a>
-<span class="k">def</span> <span class="nf">get_vtk_array</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_vtk_array</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Grabs an array from vtkDataObject given its name and field association.</span>
 
 <span class="sd">    Args:</span>
@@ -412,7 +410,7 @@
 
 <div class="viewcode-block" id="get_selected_array">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/arrays.html#PVGeo._helpers.arrays.get_selected_array">[docs]</a>
-<span class="k">def</span> <span class="nf">get_selected_array</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">wpdi</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_selected_array</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">wpdi</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets selectected array at index idx wrapped for NumPy</span>
 
 <span class="sd">    Args:</span>
@@ -432,7 +430,7 @@
 
 <div class="viewcode-block" id="add_array">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/arrays.html#PVGeo._helpers.arrays.add_array">[docs]</a>
-<span class="k">def</span> <span class="nf">add_array</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">vtkArray</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_array</span><span class="p">(</span><span class="n">pdo</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">vtkArray</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds an array to a vtkDataObject given its field association.</span>
 
 <span class="sd">    Args:</span>
@@ -467,7 +465,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_get_data</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_data</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets data field from input vtkDataObject&quot;&quot;&quot;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -498,7 +496,7 @@
     <span class="k">return</span> <span class="n">data</span>
 
 
-<span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_array</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets an array from a vtkDataObject given its field association and name.</span>
 
 <span class="sd">    Notes:</span>
@@ -523,8 +521,8 @@
 
 <div class="viewcode-block" id="search_for_array">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/arrays.html#PVGeo._helpers.arrays.search_for_array">[docs]</a>
-<span class="k">def</span> <span class="nf">search_for_array</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">_search_field</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">search_for_array</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_search_field</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">_get_data</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">GetNumberOfArrays</span><span class="p">()):</span>
             <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">GetArrayName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
@@ -548,7 +546,7 @@
 
 <div class="viewcode-block" id="get_all_array_names">
 <a class="viewcode-back" href="../../../content/PVGeo/_helpers/arrays.html#PVGeo._helpers.arrays.get_all_array_names">[docs]</a>
-<span class="k">def</span> <span class="nf">get_all_array_names</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_all_array_names</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">field</span> <span class="o">=</span> <span class="n">get_field_id_by_name</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">numpy_interface</span><span class="o">.</span><span class="n">dataset_adapter</span><span class="o">.</span><span class="n">DataObject</span><span class="p">):</span>

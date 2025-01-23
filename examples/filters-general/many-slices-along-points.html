@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -6,30 +8,26 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Many Slices Along Points &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
     <link rel="canonical" href="http://docs.pvgeo.org/examples/filters-general/many-slices-along-points.html"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -244,7 +242,7 @@
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p><a class="reference internal" href="#sphx-glr-download-examples-filters-general-many-slices-along-points-py"><span class="std std-ref">Go to the end</span></a>
-to download the full example code</p>
+to download the full example code.</p>
 </div>
 <section class="sphx-glr-example-title" id="many-slices-along-points">
 <span id="sphx-glr-examples-filters-general-many-slices-along-points-py"></span><h1>Many Slices Along Points<a class="headerlink" href="#many-slices-along-points" title="Link to this heading"></a></h1>
@@ -259,15 +257,15 @@ intervals. In this example, we also demonstrate a filter that comes native in
 ParaView to slice that entire model along the travel path to have a single
 warped slice.</p>
 <p>This example demos <code class="xref py py-class docutils literal notranslate"><span class="pre">PVGeo.filters.ManySlicesAlongPoints</span></code></p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
 <p>sphinx_gallery_thumbnail_number = 3</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyvista</span>
-<span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">examples</span>
 
-<span class="kn">import</span> <span class="nn">PVGeo</span>
-<span class="kn">from</span> <span class="nn">PVGeo.filters</span> <span class="kn">import</span> <span class="n">ManySlicesAlongPoints</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">PVGeo</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PVGeo.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">ManySlicesAlongPoints</span>
 </pre></div>
 </div>
 <p>Load a volumetric model to be sliced from pyvista’s examples</p>
@@ -277,11 +275,11 @@ warped slice.</p>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-0">
+<label class="sd-tab-label" for="sd-tab-item-0">
 Static Scene</label><div class="sd-tab-content docutils">
 <img src="../../_images/sphx_glr_many-slices-along-points_001.png" srcset="../../_images/sphx_glr_many-slices-along-points_001.png" alt="many slices along points" class = "sphx-glr-single-img"/></div>
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-1">
+<label class="sd-tab-label" for="sd-tab-item-1">
 Interactive Scene</label><div class="sd-tab-content docutils">
 
     <iframe src='../../_static/static_viewer.html?fileURL=../_images/examples/filters-general/images/sphx_glr_many-slices-along-points_001.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
@@ -289,7 +287,7 @@ Interactive Scene</label><div class="sd-tab-content docutils">
 </div>
 <p>Create a series of points that move through that model. These are the points
 we will use to slice the volume.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">path</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">path</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Equation: x = a(y-h)^2 + k&quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="mf">110.0</span> <span class="o">/</span> <span class="mf">160.0</span><span class="o">**</span><span class="mi">2</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.0</span>
@@ -309,11 +307,11 @@ we will use to slice the volume.</p>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-2">
+<label class="sd-tab-label" for="sd-tab-item-2">
 Static Scene</label><div class="sd-tab-content docutils">
 <img src="../../_images/sphx_glr_many-slices-along-points_002.png" srcset="../../_images/sphx_glr_many-slices-along-points_002.png" alt="many slices along points" class = "sphx-glr-single-img"/></div>
 <input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-3">
+<label class="sd-tab-label" for="sd-tab-item-3">
 Interactive Scene</label><div class="sd-tab-content docutils">
 
     <iframe src='../../_static/static_viewer.html?fileURL=../_images/examples/filters-general/images/sphx_glr_many-slices-along-points_002.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
@@ -362,23 +360,26 @@ slices to what you prefer!</p>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-4">
+<label class="sd-tab-label" for="sd-tab-item-4">
 Static Scene</label><div class="sd-tab-content docutils">
 <img src="../../_images/sphx_glr_many-slices-along-points_003.png" srcset="../../_images/sphx_glr_many-slices-along-points_003.png" alt="many slices along points" class = "sphx-glr-single-img"/></div>
 <input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-5">
+<label class="sd-tab-label" for="sd-tab-item-5">
 Interactive Scene</label><div class="sd-tab-content docutils">
 
     <iframe src='../../_static/static_viewer.html?fileURL=../_images/examples/filters-general/images/sphx_glr_many-slices-along-points_003.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
 </div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 4.017 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 5.227 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-filters-general-many-slices-along-points-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/c670879f5c9389f4f694e81564da1ab7/many-slices-along-points.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">many-slices-along-points.ipynb</span></code></a></p>
 </div>
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/2be388756bc54673e5533f3be07a5344/many-slices-along-points.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">many-slices-along-points.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/1ea7cffc57d86e3fa359a9b935e033de/many-slices-along-points.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">many-slices-along-points.zip</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

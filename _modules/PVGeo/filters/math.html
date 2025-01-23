@@ -1,34 +1,32 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo.filters.math &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/filters/math.html"/>
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -221,20 +219,20 @@
 
 <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Math Operations&#39;</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
-<span class="kn">import</span> <span class="nn">vtk</span>
-<span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="kn">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">vtk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vtk.numpy_interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
-<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">FilterBase</span><span class="p">,</span> <span class="n">FilterPreserveTypeBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterBase</span><span class="p">,</span> <span class="n">FilterPreserveTypeBase</span>
 
 <span class="c1">###############################################################################</span>
 
 <span class="c1"># ---- ArrayMath ----#</span>
 <div class="viewcode-block" id="ArrayMath">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath">[docs]</a>
-<span class="k">class</span> <span class="nc">ArrayMath</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ArrayMath</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This filter allows the user to select two input data arrays on which to</span>
 <span class="sd">    perform math operations. The input arrays are used in their order of</span>
 <span class="sd">    selection for the operations.</span>
@@ -260,7 +258,7 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Array Math&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">FilterPreserveTypeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="c1"># Parameters:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;multiplier&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
@@ -276,7 +274,7 @@
 <div class="viewcode-block" id="ArrayMath._correlate">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._correlate">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_correlate</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_correlate</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Use ``np.correlate()`` on ``mode=&#39;same&#39;`` on two selected arrays</span>
 <span class="sd">        from one input.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -286,7 +284,7 @@
 <div class="viewcode-block" id="ArrayMath._multiply">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._multiply">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_multiply</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_multiply</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Mutlipies two input NumPy arrays&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">arr1</span> <span class="o">*</span> <span class="n">arr2</span></div>
 
@@ -294,7 +292,7 @@
 <div class="viewcode-block" id="ArrayMath._divide">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._divide">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_divide</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_divide</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Divides two input NumPy arrays&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">arr1</span> <span class="o">/</span> <span class="n">arr2</span></div>
 
@@ -302,7 +300,7 @@
 <div class="viewcode-block" id="ArrayMath._add">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._add">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_add</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_add</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds two input NumPy arrays&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">arr1</span> <span class="o">+</span> <span class="n">arr2</span></div>
 
@@ -310,7 +308,7 @@
 <div class="viewcode-block" id="ArrayMath._subtract">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._subtract">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_subtract</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_subtract</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Subtracts two input NumPy arrays&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">arr1</span> <span class="o">-</span> <span class="n">arr2</span></div>
 
@@ -318,7 +316,7 @@
 <div class="viewcode-block" id="ArrayMath.get_operations">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.get_operations">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_operations</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_operations</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the math operation methods as callable objects in a</span>
 <span class="sd">        dictionary</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -335,7 +333,7 @@
 <div class="viewcode-block" id="ArrayMath.get_operation_names">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.get_operation_names">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_operation_names</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_operation_names</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets a list of the math operation keys</span>
 
 <span class="sd">        Return:</span>
@@ -348,7 +346,7 @@
 <div class="viewcode-block" id="ArrayMath.get_operation">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.get_operation">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_operation</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_operation</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets a math operation based on an index in the keys</span>
 
 <span class="sd">        Return:</span>
@@ -362,7 +360,7 @@
 
 <div class="viewcode-block" id="ArrayMath._math_up">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._math_up">[docs]</a>
-    <span class="k">def</span> <span class="nf">_math_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_math_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make sure to pass array names and integer associated fields.</span>
 <span class="sd">        Use helpers to get these properties.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -395,7 +393,7 @@
 
 <div class="viewcode-block" id="ArrayMath.RequestData">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.RequestData">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to perform operation and generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -409,7 +407,7 @@
 
 <div class="viewcode-block" id="ArrayMath._set_input_array_1">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._set_input_array_1">[docs]</a>
-    <span class="k">def</span> <span class="nf">_set_input_array_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_input_array_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set 1st input array by name and field&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
@@ -421,7 +419,7 @@
 
 <div class="viewcode-block" id="ArrayMath._set_input_array_2">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath._set_input_array_2">[docs]</a>
-    <span class="k">def</span> <span class="nf">_set_input_array_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_input_array_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set 2nd input array by name and field&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__input_array_2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
@@ -433,7 +431,7 @@
 
 <div class="viewcode-block" id="ArrayMath.SetInputArrayToProcess">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.SetInputArrayToProcess">[docs]</a>
-    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
 
 <span class="sd">        Args:</span>
@@ -457,7 +455,7 @@
 
 <div class="viewcode-block" id="ArrayMath.apply">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name_0</span><span class="p">,</span> <span class="n">array_name_1</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name_0</span><span class="p">,</span> <span class="n">array_name_1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the algorithm on an input data object, specifying array names&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
         <span class="n">arr0</span><span class="p">,</span> <span class="n">field0</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name_0</span><span class="p">)</span>
@@ -470,7 +468,7 @@
 
 <div class="viewcode-block" id="ArrayMath.set_multiplier">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.set_multiplier">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This is a static shifter/scale factor across the array after</span>
 <span class="sd">        normalization.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -481,14 +479,14 @@
 
 <div class="viewcode-block" id="ArrayMath.get_multiplier">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.get_multiplier">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the set multiplier/scalar&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span></div>
 
 
 <div class="viewcode-block" id="ArrayMath.set_new_array_name">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.set_new_array_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Give the new array a meaningful name.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span> <span class="o">=</span> <span class="n">name</span>
@@ -497,14 +495,14 @@
 
 <div class="viewcode-block" id="ArrayMath.get_new_array_name">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.get_new_array_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the name used for the new array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span></div>
 
 
 <div class="viewcode-block" id="ArrayMath.set_operation">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArrayMath.set_operation">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_operation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_operation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the math operation to perform</span>
 
 <span class="sd">        Args:</span>
@@ -533,7 +531,7 @@
 
 <div class="viewcode-block" id="NormalizeArray">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray">[docs]</a>
-<span class="k">class</span> <span class="nc">NormalizeArray</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NormalizeArray</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This filter allows the user to select an array from the input data set</span>
 <span class="sd">    to be normalized. The filter will append another array to that data set for</span>
 <span class="sd">    the output. The user can specify how they want to rename the array, can</span>
@@ -563,7 +561,7 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Normalize Array&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">FilterPreserveTypeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="c1"># Parameters:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;multiplier&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
@@ -582,7 +580,7 @@
 <div class="viewcode-block" id="NormalizeArray._pass_array">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._pass_array">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_pass_array</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pass_array</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Cast an input array as a NumPy array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span></div>
 
@@ -590,7 +588,7 @@
 <div class="viewcode-block" id="NormalizeArray._feature_scale">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._feature_scale">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_feature_scale</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_feature_scale</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns feature scale normalization of input array&quot;&quot;&quot;</span>
         <span class="c1"># TODO: implement ability to use custom range</span>
         <span class="k">if</span> <span class="n">rng</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -605,7 +603,7 @@
 <div class="viewcode-block" id="NormalizeArray._standard_score">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._standard_score">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_standard_score</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_standard_score</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns standard score normalization of input array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">arr</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span></div>
 
@@ -613,7 +611,7 @@
 <div class="viewcode-block" id="NormalizeArray._log10">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._log10">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_log10</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_log10</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns log base 10 of input array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span></div>
 
@@ -621,7 +619,7 @@
 <div class="viewcode-block" id="NormalizeArray._log_nat">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._log_nat">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_log_nat</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_log_nat</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns natural logarithm of input array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span></div>
 
@@ -629,7 +627,7 @@
 <div class="viewcode-block" id="NormalizeArray.get_normalizations">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_normalizations">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_normalizations</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_normalizations</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;All Available normalizations</span>
 
 <span class="sd">        Return:</span>
@@ -648,7 +646,7 @@
 <div class="viewcode-block" id="NormalizeArray.get_normalization_names">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_normalization_names">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_normalization_names</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_normalization_names</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets a list of the normalization keys</span>
 
 <span class="sd">        Return:</span>
@@ -661,7 +659,7 @@
 <div class="viewcode-block" id="NormalizeArray.get_normalization">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_normalization">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_normalization</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_normalization</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets a normalization based on an index in the keys</span>
 
 <span class="sd">        Return:</span>
@@ -676,7 +674,7 @@
 <div class="viewcode-block" id="NormalizeArray.get_array_range">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_array_range">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_array_range</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_array_range</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a tuple of the range for a ``vtkDataArray`` on a</span>
 <span class="sd">        ``vtkDataObject``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -688,7 +686,7 @@
 
 <div class="viewcode-block" id="NormalizeArray._normalize">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray._normalize">[docs]</a>
-    <span class="k">def</span> <span class="nf">_normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform normalize on a data array for any given VTK data object.&quot;&quot;&quot;</span>
         <span class="c1"># Get input array</span>
         <span class="n">field</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -720,7 +718,7 @@
 
 <div class="viewcode-block" id="NormalizeArray.RequestData">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.RequestData">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -734,7 +732,7 @@
 
 <div class="viewcode-block" id="NormalizeArray.SetInputArrayToProcess">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.SetInputArrayToProcess">[docs]</a>
-    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
 
 <span class="sd">        Args:</span>
@@ -756,7 +754,7 @@
 
 <div class="viewcode-block" id="NormalizeArray.apply">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the algorithm on an input data object, specifying the array&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
         <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
@@ -767,7 +765,7 @@
 
 <div class="viewcode-block" id="NormalizeArray.set_multiplier">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_multiplier">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This is a static shifter/scale factor across the array after</span>
 <span class="sd">        normalization.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -778,14 +776,14 @@
 
 <div class="viewcode-block" id="NormalizeArray.get_multiplier">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_multiplier">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the set multiplier/scalar&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__multiplier</span></div>
 
 
 <div class="viewcode-block" id="NormalizeArray.set_new_array_name">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_new_array_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Give the new array a meaningful name.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span> <span class="o">=</span> <span class="n">name</span>
@@ -794,14 +792,14 @@
 
 <div class="viewcode-block" id="NormalizeArray.get_new_array_name">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.get_new_array_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_new_array_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the name of the new array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__new_name</span></div>
 
 
 <div class="viewcode-block" id="NormalizeArray.set_take_absolute_value">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_take_absolute_value">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_take_absolute_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_take_absolute_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This will take the absolute value of the array before normalization.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__absolute</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__absolute</span> <span class="o">=</span> <span class="n">flag</span>
@@ -810,7 +808,7 @@
 
 <div class="viewcode-block" id="NormalizeArray.set_normalization">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_normalization">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_normalization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">norm</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_normalization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">norm</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the normalization operation to perform</span>
 
 <span class="sd">        Args:</span>
@@ -832,7 +830,7 @@
 
 <div class="viewcode-block" id="NormalizeArray.set_shift">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.NormalizeArray.set_shift">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sft</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sft</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a static shifter to the input data array&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__shift</span> <span class="o">!=</span> <span class="n">sft</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__shift</span> <span class="o">=</span> <span class="n">sft</span>
@@ -846,7 +844,7 @@
 
 <div class="viewcode-block" id="PercentThreshold">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold">[docs]</a>
-<span class="k">class</span> <span class="nc">PercentThreshold</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PercentThreshold</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Allows user to select a percent of the data range to threshold.</span>
 <span class="sd">    This will find the data range of the selected input array and remove the</span>
 <span class="sd">    bottom percent. This can be reversed using the invert property.</span>
@@ -855,7 +853,7 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Percent Threshold&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span>
@@ -868,7 +866,7 @@
 
 <div class="viewcode-block" id="PercentThreshold.RequestData">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.RequestData">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline for execution&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -903,7 +901,7 @@
 
 <div class="viewcode-block" id="PercentThreshold.SetInputArrayToProcess">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.SetInputArrayToProcess">[docs]</a>
-    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
 
 <span class="sd">        Args:</span>
@@ -924,7 +922,7 @@
 
 <div class="viewcode-block" id="PercentThreshold.set_percent">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.set_percent">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_percent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">percent</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_percent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">percent</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the percent for the threshold in range (0, 100).</span>
 <span class="sd">        Any values falling beneath the set percent of the total data range</span>
 <span class="sd">        will be removed.&quot;&quot;&quot;</span>
@@ -935,7 +933,7 @@
 
 <div class="viewcode-block" id="PercentThreshold.set_use_continuous_cell_range">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.set_use_continuous_cell_range">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_use_continuous_cell_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_use_continuous_cell_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;If this is on (default is off), we will use the continuous</span>
 <span class="sd">        interval [minimum cell scalar, maxmimum cell scalar] to intersect</span>
 <span class="sd">        the threshold bound , rather than the set of discrete scalar</span>
@@ -945,7 +943,7 @@
 
 <div class="viewcode-block" id="PercentThreshold.set_invert">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.set_invert">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Use to invert the threshold filter&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__invert</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__invert</span> <span class="o">=</span> <span class="n">flag</span>
@@ -954,7 +952,7 @@
 
 <div class="viewcode-block" id="PercentThreshold.apply">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.PercentThreshold.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the algorithm on an input data object, specifying the array&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
         <span class="n">arr</span><span class="p">,</span> <span class="n">field</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">)</span>
@@ -970,7 +968,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA">[docs]</a>
-<span class="k">class</span> <span class="nc">ArraysToRGBA</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ArraysToRGBA</span><span class="p">(</span><span class="n">FilterPreserveTypeBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Use arrays from input data object to set an RGBA array. Sets colors and</span>
 <span class="sd">    transparencies.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -978,7 +976,7 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Arrays To RGBA&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">FilterPreserveTypeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__use_trans</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
@@ -990,7 +988,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA._get_arrays">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._get_arrays">[docs]</a>
-    <span class="k">def</span> <span class="nf">_get_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wpdi</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wpdi</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to fetch RGBA arrays&quot;&quot;&quot;</span>
         <span class="c1"># Get Red</span>
         <span class="n">fieldr</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -1012,7 +1010,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA._mask_arrays">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._mask_arrays">[docs]</a>
-    <span class="k">def</span> <span class="nf">_mask_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">,</span> <span class="n">a_arr</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_mask_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_arr</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">,</span> <span class="n">b_arr</span><span class="p">,</span> <span class="n">a_arr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to mask RGBA arrays&quot;&quot;&quot;</span>
         <span class="n">r_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">r_arr</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mask</span><span class="p">,</span> <span class="n">r_arr</span><span class="p">)</span>
         <span class="n">g_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">g_arr</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mask</span><span class="p">,</span> <span class="n">g_arr</span><span class="p">)</span>
@@ -1023,7 +1021,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA.RequestData">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA.RequestData">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute on pipeline&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -1059,7 +1057,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA.set_use_transparency">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA.set_use_transparency">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_use_transparency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_use_transparency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a boolean flag on whether or not to use a transparency component&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_trans</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__use_trans</span> <span class="o">=</span> <span class="n">flag</span>
@@ -1068,7 +1066,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA.set_mask_value">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA.set_mask_value">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_mask_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_mask_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the value to mask in the RGBA arrays&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mask</span> <span class="o">!=</span> <span class="n">val</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__mask</span> <span class="o">=</span> <span class="n">val</span>
@@ -1077,7 +1075,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA._set_input_array_red">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_red">[docs]</a>
-    <span class="k">def</span> <span class="nf">_set_input_array_red</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_input_array_red</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set field and name of red array&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__r_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
@@ -1089,7 +1087,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA._set_input_array_green">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_green">[docs]</a>
-    <span class="k">def</span> <span class="nf">_set_input_array_green</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_input_array_green</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set field and name of green array&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__g_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__g_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
@@ -1101,7 +1099,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA._set_input_array_blue">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_blue">[docs]</a>
-    <span class="k">def</span> <span class="nf">_set_input_array_blue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_input_array_blue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set field and name of blue array&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__b_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__b_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
@@ -1113,7 +1111,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA._set_input_array_trans">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA._set_input_array_trans">[docs]</a>
-    <span class="k">def</span> <span class="nf">_set_input_array_trans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_input_array_trans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set field and name of transparency array&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__a_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__a_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
@@ -1125,7 +1123,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA.SetInputArrayToProcess">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA.SetInputArrayToProcess">[docs]</a>
-    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used to set the input array(s)</span>
 
 <span class="sd">        Args:</span>
@@ -1153,7 +1151,7 @@
 
 <div class="viewcode-block" id="ArraysToRGBA.apply">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/math.html#PVGeo.filters.math.ArraysToRGBA.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">r_array</span><span class="p">,</span> <span class="n">g_array</span><span class="p">,</span> <span class="n">b_array</span><span class="p">,</span> <span class="n">a_array</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">r_array</span><span class="p">,</span> <span class="n">g_array</span><span class="p">,</span> <span class="n">b_array</span><span class="p">,</span> <span class="n">a_array</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the algorithm on an input data object, specifying RGBA array names&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
         <span class="n">r_arr</span><span class="p">,</span> <span class="n">rField</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">search_for_array</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">r_array</span><span class="p">)</span>

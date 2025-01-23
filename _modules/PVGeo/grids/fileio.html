@@ -1,34 +1,32 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo.grids.fileio &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/grids/fileio.html"/>
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -226,25 +224,25 @@
 
 <span class="c1"># NOTE: Surfer no data value: 1.70141E+38</span>
 
-<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">unpack</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struct</span><span class="w"> </span><span class="kn">import</span> <span class="n">unpack</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
-<span class="kn">import</span> <span class="nn">espatools</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">properties</span>
-<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
-<span class="kn">import</span> <span class="nn">vtk</span>
-<span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="kn">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">espatools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">properties</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">vtk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vtk.numpy_interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
-<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">ReaderBase</span><span class="p">,</span> <span class="n">ReaderBaseBase</span><span class="p">,</span> <span class="n">WriterBase</span>
-<span class="kn">from</span> <span class="nn">..readers</span> <span class="kn">import</span> <span class="n">DelimitedTextReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReaderBase</span><span class="p">,</span> <span class="n">ReaderBaseBase</span><span class="p">,</span> <span class="n">WriterBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..readers</span><span class="w"> </span><span class="kn">import</span> <span class="n">DelimitedTextReader</span>
 
 <span class="c1">###############################################################################</span>
 
 
-<span class="k">class</span> <span class="nc">GridInfo</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">HasProperties</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GridInfo</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">HasProperties</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Internal helper class to store Surfer grid properties and create</span>
 <span class="sd">    ``vtkImageData`` objects from them.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -259,7 +257,7 @@
     <span class="n">dmax</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="s1">&#39;maximum data value&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="s1">&#39;grid of data values&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,))</span>
 
-    <span class="k">def</span> <span class="nf">mask</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mask</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Mask the no data value&quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="n">nans</span> <span class="o">=</span> <span class="n">data</span> <span class="o">&gt;=</span> <span class="mf">1.701410009187828e38</span>
@@ -273,7 +271,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
         <span class="k">return</span>
 
-    <span class="k">def</span> <span class="nf">to_vtk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">dz</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_vtk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">dz</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to a ``vtkImageData`` object&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
@@ -290,7 +288,7 @@
 
 <div class="viewcode-block" id="SurferGridReader">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader">[docs]</a>
-<span class="k">class</span> <span class="nc">SurferGridReader</span><span class="p">(</span><span class="n">ReaderBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SurferGridReader</span><span class="p">(</span><span class="n">ReaderBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Read 2D ASCII/Binary Surfer grid files. The IO code was adopted from</span>
 <span class="sd">    `Seequent&#39;s steno3d_surfer`_</span>
 
@@ -325,7 +323,7 @@
     <span class="n">extensions</span> <span class="o">=</span> <span class="s1">&#39;grd GRD&#39;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: Surfer Grid&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ReaderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__grids</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data_name&#39;</span><span class="p">,</span> <span class="s1">&#39;Data&#39;</span><span class="p">)</span>
@@ -333,7 +331,7 @@
 <div class="viewcode-block" id="SurferGridReader._surfer7bin">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader._surfer7bin">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_surfer7bin</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_surfer7bin</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;See class notes.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;4s&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="sa">b</span><span class="s1">&#39;DSRB&#39;</span><span class="p">:</span>
@@ -423,7 +421,7 @@
 <div class="viewcode-block" id="SurferGridReader._surfer6bin">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader._surfer6bin">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_surfer6bin</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_surfer6bin</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;See class notes.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;4s&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="sa">b</span><span class="s1">&#39;DSBB&#39;</span><span class="p">:</span>
@@ -464,7 +462,7 @@
 <div class="viewcode-block" id="SurferGridReader._surfer6ascii">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader._surfer6ascii">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_surfer6ascii</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_surfer6ascii</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;See class notes.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;DSAA&#39;</span><span class="p">:</span>
@@ -496,7 +494,7 @@
 
 <div class="viewcode-block" id="SurferGridReader._read_grids">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader._read_grids">[docs]</a>
-    <span class="k">def</span> <span class="nf">_read_grids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_grids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This parses the first file to determine grid file type then reads</span>
 <span class="sd">        all files set.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -532,7 +530,7 @@
 
 <div class="viewcode-block" id="SurferGridReader._read_up_front">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader._read_up_front">[docs]</a>
-    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Should not need to be overridden.&quot;&quot;&quot;</span>
         <span class="c1"># Perform Read</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__grids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_grids</span><span class="p">()</span>
@@ -544,7 +542,7 @@
 
 <div class="viewcode-block" id="SurferGridReader.RequestData">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader.RequestData">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to get data for current timestep and populate the</span>
 <span class="sd">        output data object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -562,7 +560,7 @@
 
 <div class="viewcode-block" id="SurferGridReader.RequestInformation">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader.RequestInformation">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to set grid extents.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
@@ -579,7 +577,7 @@
 
 <div class="viewcode-block" id="SurferGridReader.set_data_name">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader.set_data_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the name of the data array&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span> <span class="o">!=</span> <span class="n">data_name</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span> <span class="o">=</span> <span class="n">data_name</span>
@@ -588,7 +586,7 @@
 
 <div class="viewcode-block" id="SurferGridReader.get_data_name">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.SurferGridReader.get_data_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the name of the data array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span></div>
 </div>
@@ -600,19 +598,19 @@
 
 <div class="viewcode-block" id="WriteImageDataToSurfer">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteImageDataToSurfer">[docs]</a>
-<span class="k">class</span> <span class="nc">WriteImageDataToSurfer</span><span class="p">(</span><span class="n">WriterBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WriteImageDataToSurfer</span><span class="p">(</span><span class="n">WriterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Write a 2D ``vtkImageData`` object to the Surfer grid format&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Write ``vtkImageData`` to Surfer Format&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;writer&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">WriterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;grd&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__input_array</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
 
 <div class="viewcode-block" id="WriteImageDataToSurfer.perform_write_out">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteImageDataToSurfer.perform_write_out">[docs]</a>
-    <span class="k">def</span> <span class="nf">perform_write_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">object_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">perform_write_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">object_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes an input ``vtkImageData`` object to a file&quot;&quot;&quot;</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">input_data_object</span>
 
@@ -656,7 +654,7 @@
 
 <div class="viewcode-block" id="WriteImageDataToSurfer.SetInputArrayToProcess">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteImageDataToSurfer.SetInputArrayToProcess">[docs]</a>
-    <span class="k">def</span> <span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SetInputArrayToProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used to the inpput array / the data value (z-value) to write for the</span>
 <span class="sd">        Surfer format.</span>
 
@@ -679,7 +677,7 @@
 
 <div class="viewcode-block" id="WriteImageDataToSurfer.apply">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteImageDataToSurfer.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the algorithm on an input data object, specifying one data array</span>
 <span class="sd">        to save out.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -692,7 +690,7 @@
 
 <div class="viewcode-block" id="WriteImageDataToSurfer.Write">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteImageDataToSurfer.Write">[docs]</a>
-    <span class="k">def</span> <span class="nf">Write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform the write out.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">input_data_object</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">SetInputDataObject</span><span class="p">(</span><span class="n">input_data_object</span><span class="p">)</span>
@@ -705,7 +703,7 @@
 
 <div class="viewcode-block" id="WriteImageDataToSurfer.write">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteImageDataToSurfer.write">[docs]</a>
-    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform the write out.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">input_data_object</span><span class="o">=</span><span class="n">input_data_object</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="n">array_name</span><span class="p">)</span></div>
 </div>
@@ -717,7 +715,7 @@
 
 <div class="viewcode-block" id="EsriGridReader">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader">[docs]</a>
-<span class="k">class</span> <span class="nc">EsriGridReader</span><span class="p">(</span><span class="n">DelimitedTextReader</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EsriGridReader</span><span class="p">(</span><span class="n">DelimitedTextReader</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;See details: https://en.wikipedia.org/wiki/Esri_grid&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Esri Grid Reader&#39;</span>
@@ -725,7 +723,7 @@
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: Esri Grid&#39;</span>
     <span class="n">extensions</span> <span class="o">=</span> <span class="s1">&#39;asc dem txt&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">DelimitedTextReader</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c1"># These are attributes the derived from file contents:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_delimiter</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
@@ -739,7 +737,7 @@
 
 <div class="viewcode-block" id="EsriGridReader._extract_header">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader._extract_header">[docs]</a>
-    <span class="k">def</span> <span class="nf">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to parse header information in ESRI Grid files&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__nx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
@@ -757,7 +755,7 @@
 
 <div class="viewcode-block" id="EsriGridReader._file_contents_to_data_frame">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader._file_contents_to_data_frame">[docs]</a>
-    <span class="k">def</span> <span class="nf">_file_contents_to_data_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_file_contents_to_data_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a dataframe with a single array for the file data.&quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">:</span>
@@ -771,7 +769,7 @@
 
 <div class="viewcode-block" id="EsriGridReader._get_raw_data">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader._get_raw_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This will return the proper data for the given timestep.</span>
 <span class="sd">        This method handles Surfer&#39;s NaN data values and checks the value range</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -787,7 +785,7 @@
 
 <div class="viewcode-block" id="EsriGridReader.RequestData">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.RequestData">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to get data for current timestep and populate the</span>
 <span class="sd">        output data object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -815,7 +813,7 @@
 
 <div class="viewcode-block" id="EsriGridReader.RequestInformation">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.RequestInformation">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to set grid extents.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_read_up_front</span><span class="p">()</span>
@@ -831,7 +829,7 @@
 
 <div class="viewcode-block" id="EsriGridReader.set_data_name">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.set_data_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the name of the data array&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span> <span class="o">!=</span> <span class="n">data_name</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span> <span class="o">=</span> <span class="n">data_name</span>
@@ -840,14 +838,14 @@
 
 <div class="viewcode-block" id="EsriGridReader.get_data_name">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.get_data_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the name of the data array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_name</span></div>
 
 
 <div class="viewcode-block" id="EsriGridReader.get_shape">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.EsriGridReader.get_shape">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the shape of the grid.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__nx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ny</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
 </div>
@@ -859,7 +857,7 @@
 
 <div class="viewcode-block" id="LandsatReader">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader">[docs]</a>
-<span class="k">class</span> <span class="nc">LandsatReader</span><span class="p">(</span><span class="n">ReaderBaseBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LandsatReader</span><span class="p">(</span><span class="n">ReaderBaseBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A reader that will handle ESPA XML files for Landsat Imagery. This reader</span>
 <span class="sd">    uses the ``espatools`` package to read Landsat rasters (band sets) and</span>
 <span class="sd">    creates vtkImageData with each band as point data</span>
@@ -870,7 +868,7 @@
     <span class="n">extensions</span> <span class="o">=</span> <span class="s2">&quot;xml&quot;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;PVGeo: Landsat ESPA XML Metadata&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkImageData&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__reader</span> <span class="o">=</span> <span class="n">espatools</span><span class="o">.</span><span class="n">RasterSetReader</span><span class="p">(</span><span class="n">yflip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span> <span class="o">=</span> <span class="kc">None</span>
@@ -884,20 +882,20 @@
 
 <div class="viewcode-block" id="LandsatReader.Modified">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.Modified">[docs]</a>
-    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Ensure default is overridden to be false so array selector can call.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="n">read_again</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="LandsatReader.modified">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.modified">[docs]</a>
-    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="n">read_again</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="LandsatReader.get_file_name">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.get_file_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Super class has file names as a list but we will only handle a single</span>
 <span class="sd">        project file. This provides a conveinant way of making sure we only</span>
 <span class="sd">        access that single file.</span>
@@ -910,7 +908,7 @@
 
 <div class="viewcode-block" id="LandsatReader._get_file_contents">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._get_file_contents">[docs]</a>
-    <span class="k">def</span> <span class="nf">_get_file_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_file_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads XML meta data, no data read.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__reader</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_file_name</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__reader</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">meta_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -922,14 +920,14 @@
 
 <div class="viewcode-block" id="LandsatReader._read_up_front">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._read_up_front">[docs]</a>
-    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to read all data at start&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_file_contents</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="LandsatReader._get_raw_data">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._get_raw_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_raw_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Performs the read for the selected bands&quot;&quot;&quot;</span>
         <span class="n">allowed</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dataselection</span><span class="o">.</span><span class="n">GetNumberOfArrays</span><span class="p">()):</span>
@@ -944,7 +942,7 @@
 
 <div class="viewcode-block" id="LandsatReader._build_image_data">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader._build_image_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">_build_image_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_image_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Properly builds the output ``vtkImageData`` object&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__raster</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="s1">&#39;Raster invalid.&#39;</span><span class="p">)</span>
@@ -960,7 +958,7 @@
 
 <div class="viewcode-block" id="LandsatReader.RequestData">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.RequestData">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get output:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkImageData</span><span class="o">.</span><span class="n">GetData</span><span class="p">(</span><span class="n">outInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -986,7 +984,7 @@
 
 <div class="viewcode-block" id="LandsatReader.RequestInformation">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.RequestInformation">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to set grid extents.&quot;&quot;&quot;</span>
         <span class="c1"># Call parent to handle time stuff</span>
         <span class="n">ReaderBaseBase</span><span class="o">.</span><span class="n">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">)</span>
@@ -1006,7 +1004,7 @@
 
 <div class="viewcode-block" id="LandsatReader.GetDataSelection">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.GetDataSelection">[docs]</a>
-    <span class="k">def</span> <span class="nf">GetDataSelection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GetDataSelection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by ParaView GUI&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_to_read</span><span class="p">():</span>
             <span class="k">try</span><span class="p">:</span>
@@ -1018,7 +1016,7 @@
 
 <div class="viewcode-block" id="LandsatReader.set_cast_data_type">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.set_cast_data_type">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_cast_data_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_cast_data_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;A flag to cast all data arrays as floats/doubles.</span>
 <span class="sd">        This will fill invalid values with nans instead of a fill value&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cast</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
@@ -1028,7 +1026,7 @@
 
 <div class="viewcode-block" id="LandsatReader.set_color_scheme">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.set_color_scheme">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_color_scheme</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scheme</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_color_scheme</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scheme</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get an RGB scheme from the raster set. If no scheme is desired, pass</span>
 <span class="sd">        any string that is not a defined scheme as the scheme argument.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scheme</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -1047,7 +1045,7 @@
 <div class="viewcode-block" id="LandsatReader.get_color_scheme_names">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.LandsatReader.get_color_scheme_names">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_color_scheme_names</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_color_scheme_names</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a list of the available color schemes&quot;&quot;&quot;</span>
         <span class="n">schemes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">espatools</span><span class="o">.</span><span class="n">RasterSet</span><span class="o">.</span><span class="n">RGB_SCHEMES</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="n">schemes</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;No Selection&#39;</span><span class="p">)</span>
@@ -1061,7 +1059,7 @@
 
 <div class="viewcode-block" id="WriteCellCenterData">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteCellCenterData">[docs]</a>
-<span class="k">class</span> <span class="nc">WriteCellCenterData</span><span class="p">(</span><span class="n">WriterBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WriteCellCenterData</span><span class="p">(</span><span class="n">WriterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This writer will save a file of the XYZ points for an input dataset&#39;s</span>
 <span class="sd">    cell centers and its cell data. Use in tandom with ParaView&#39;s native CSV</span>
 <span class="sd">    writer which saves the PointData.</span>
@@ -1070,13 +1068,13 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Write Cell Centers To CSV&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;writer&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">WriterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkDataSet&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__delimiter</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span>
 
 <div class="viewcode-block" id="WriteCellCenterData.perform_write_out">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteCellCenterData.perform_write_out">[docs]</a>
-    <span class="k">def</span> <span class="nf">perform_write_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">object_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">perform_write_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data_object</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">object_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes the cell centers of the input data object to a file&quot;&quot;&quot;</span>
         <span class="c1"># Find cell centers</span>
         <span class="n">filt</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCellCenters</span><span class="p">()</span>
@@ -1115,7 +1113,7 @@
 
 <div class="viewcode-block" id="WriteCellCenterData.set_delimiter">
 <a class="viewcode-back" href="../../../content/PVGeo/grids/fileio.html#PVGeo.grids.fileio.WriteCellCenterData.set_delimiter">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deli</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deli</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The string delimiter to use&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__delimiter</span> <span class="o">!=</span> <span class="n">deli</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__delimiter</span> <span class="o">=</span> <span class="n">deli</span>

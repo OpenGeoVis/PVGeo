@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_filters-general_extract-array.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -120,7 +120,7 @@ Construct the filter
 
     (array([14075., 31732., 38605., 28616., 13749.,  9270.,  7174.,  4687.,
             3199.,  1602.]), array([ 682.        ,  868.09997559, 1054.19995117, 1240.30004883,
-           1426.40002441, 1612.5       , 1798.59997559, 1984.69995117,
+           1426.40002441, 1612.5       , 1798.60009766, 1984.70007324,
            2170.80004883, 2356.89990234, 2543.        ]), <BarContainer object of 10 artists>)
 
 
@@ -128,7 +128,7 @@ Construct the filter
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.255 seconds)
+   **Total running time of the script:** (0 minutes 0.574 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_extract-array.py:
@@ -144,6 +144,10 @@ Construct the filter
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: extract-array.py <extract-array.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: extract-array.zip <extract-array.zip>`
 
 
 .. only:: html

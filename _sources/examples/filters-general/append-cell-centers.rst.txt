@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_filters-general_append-cell-centers.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -168,7 +168,7 @@ Run the PVGeo algorithm
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.011 seconds)
+   **Total running time of the script:** (0 minutes 1.062 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_append-cell-centers.py:
@@ -184,6 +184,10 @@ Run the PVGeo algorithm
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: append-cell-centers.py <append-cell-centers.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: append-cell-centers.zip <append-cell-centers.zip>`
 
 
 .. only:: html

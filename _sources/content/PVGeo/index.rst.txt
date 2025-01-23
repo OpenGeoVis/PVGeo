@@ -15,7 +15,6 @@ About PVGeo
    base.rst
    cmaps.rst
    interface.rst
-   version.rst
    _helpers/index.rst
    filters/index.rst
    gmggroup/index.rst

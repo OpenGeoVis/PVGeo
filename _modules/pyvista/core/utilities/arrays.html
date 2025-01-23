@@ -1,34 +1,32 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>pyvista.core.utilities.arrays &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=649a27d8" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/pyvista/core/utilities/arrays.html"/>
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -213,20 +211,32 @@
              
   <h1>Source code for pyvista.core.utilities.arrays</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Internal array utilities.&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">collections.abc</span>
-<span class="kn">import</span> <span class="nn">enum</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">pyvista</span>
-<span class="kn">from</span> <span class="nn">pyvista.core</span> <span class="kn">import</span> <span class="n">_vtk_core</span> <span class="k">as</span> <span class="n">_vtk</span>
-<span class="kn">from</span> <span class="nn">pyvista.core._typing_core</span> <span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">NumpyFltArray</span><span class="p">,</span> <span class="n">TransformLike</span><span class="p">,</span> <span class="n">Vector</span>
-<span class="kn">from</span> <span class="nn">pyvista.core.errors</span> <span class="kn">import</span> <span class="n">AmbiguousDataError</span><span class="p">,</span> <span class="n">MissingDataError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserDict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyvista.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">_vtk_core</span> <span class="k">as</span> <span class="n">_vtk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyvista.core.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">AmbiguousDataError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyvista.core.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">MissingDataError</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pyvista.core._typing_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">MatrixLike</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pyvista.core._typing_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NumpyArray</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pyvista.core._typing_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransformLike</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pyvista.core._typing_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">VectorLike</span>
 
 
-<span class="k">class</span> <span class="nc">FieldAssociation</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FieldAssociation</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents which type of vtk field a scalar or vector array is associated with.&quot;&quot;&quot;</span>
 
     <span class="n">POINT</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkDataObject</span><span class="o">.</span><span class="n">FIELD_ASSOCIATION_POINTS</span>
@@ -235,7 +245,7 @@
     <span class="n">ROW</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkDataObject</span><span class="o">.</span><span class="n">FIELD_ASSOCIATION_ROWS</span>
 
 
-<span class="k">def</span> <span class="nf">parse_field_choice</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_field_choice</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a field association object for a given field type string.</span>
 
 <span class="sd">    Parameters</span>
@@ -269,14 +279,15 @@
     <span class="k">return</span> <span class="n">field</span>
 
 
-<span class="k">def</span> <span class="nf">_coerce_pointslike_arg</span><span class="p">(</span>
-    <span class="n">points</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Matrix</span><span class="p">,</span> <span class="n">Vector</span><span class="p">],</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_coerce_pointslike_arg</span><span class="p">(</span>
+    <span class="n">points</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="n">VectorLike</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NumpyArray</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check and coerce arg to (n, 3) np.ndarray.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    points : Matrix, Vector</span>
+<span class="sd">    points : MatrixLike[float] | VectorLike[float]</span>
 <span class="sd">        Argument to coerce into (n, 3) :class:`numpy.ndarray`.</span>
 
 <span class="sd">    copy : bool, default: False</span>
@@ -291,7 +302,7 @@
 <span class="sd">        Whether the input was a single point in an array-like with shape ``(3,)``.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">):</span>
         <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -316,7 +327,7 @@
     <span class="k">return</span> <span class="n">points</span><span class="p">,</span> <span class="n">singular</span>
 
 
-<span class="k">def</span> <span class="nf">copy_vtk_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">copy_vtk_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a deep or shallow copy of a VTK array.</span>
 
 <span class="sd">    Parameters</span>
@@ -359,7 +370,7 @@
     <span class="k">return</span> <span class="n">new_array</span>
 
 
-<span class="k">def</span> <span class="nf">has_duplicates</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">has_duplicates</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return if an array has any duplicates.</span>
 
 <span class="sd">    Parameters</span>
@@ -376,7 +387,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">raise_has_duplicates</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">raise_has_duplicates</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Raise a ValueError if an array is not unique.</span>
 
 <span class="sd">    Parameters</span>
@@ -393,7 +404,7 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Array contains duplicate values.&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">convert_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a NumPy array to a vtkDataArray or vice versa.</span>
 
 <span class="sd">    Parameters</span>
@@ -405,7 +416,7 @@
 <span class="sd">    deep : bool, default: False</span>
 <span class="sd">        If input is numpy array then deep copy values.</span>
 <span class="sd">    array_type : int, optional</span>
-<span class="sd">        VTK array type ID as specified in specified in ``vtkType.h``.</span>
+<span class="sd">        VTK array type ID as specified in ``vtkType.h``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -416,15 +427,18 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">arr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">):</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;|S&#39;</span><span class="p">)</span>
-        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bytes_</span><span class="p">):</span>
             <span class="c1"># This handles strings</span>
+            <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Do not call ascontiguousarray for scalar strings since this will reshape to 1D</span>
+                <span class="c1"># and scalars are already contiguous anyway</span>
+                <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
             <span class="n">vtk_data</span> <span class="o">=</span> <span class="n">convert_string_array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># This will handle numerical data</span>
@@ -446,7 +460,7 @@
     <span class="k">return</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtk_to_numpy</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">preference</span><span class="o">=</span><span class="s1">&#39;cell&#39;</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;pyvista.ndarray&#39;</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">preference</span><span class="o">=</span><span class="s1">&#39;cell&#39;</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Search point, cell and field data for an array.</span>
 
 <span class="sd">    Parameters</span>
@@ -483,7 +497,7 @@
     <span class="k">if</span> <span class="n">preference</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">,</span> <span class="s1">&#39;point&#39;</span><span class="p">,</span> <span class="s1">&#39;field&#39;</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s1">&#39;`preference` must be either &quot;cell&quot;, &quot;point&quot;, &quot;field&quot; for a &#39;</span>
-            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span><span class="si">}</span><span class="s1">, not &quot;</span><span class="si">{</span><span class="n">preference</span><span class="si">}</span><span class="s1">&quot;.&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span><span class="si">}</span><span class="s1">, not &quot;</span><span class="si">{</span><span class="n">preference</span><span class="si">}</span><span class="s1">&quot;.&#39;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="n">parr</span> <span class="o">=</span> <span class="n">point_array</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
@@ -509,7 +523,7 @@
     <span class="k">return</span> <span class="kc">None</span>
 
 
-<span class="k">def</span> <span class="nf">get_array_association</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">preference</span><span class="o">=</span><span class="s1">&#39;cell&#39;</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FieldAssociation</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_array_association</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">preference</span><span class="o">=</span><span class="s1">&#39;cell&#39;</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FieldAssociation</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the array association.</span>
 
 <span class="sd">    Parameters</span>
@@ -565,7 +579,7 @@
     <span class="k">return</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">raise_not_matching</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">raise_not_matching</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Raise exception about inconsistencies.</span>
 
 <span class="sd">    Parameters</span>
@@ -583,16 +597,16 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkTable</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">) must match number of rows (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_rows</span><span class="si">}</span><span class="s1">).&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">) must match number of rows (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_rows</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
         <span class="sa">f</span><span class="s1">&#39;Number of scalars (</span><span class="si">{</span><span class="n">scalars</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">) &#39;</span>
         <span class="sa">f</span><span class="s1">&#39;must match either the number of points (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_points</span><span class="si">}</span><span class="s1">) &#39;</span>
-        <span class="sa">f</span><span class="s1">&#39;or the number of cells (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_cells</span><span class="si">}</span><span class="s1">).&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;or the number of cells (</span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_cells</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">,</span>
     <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_assoc_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">association</span><span class="o">=</span><span class="s1">&#39;point&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_assoc_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">association</span><span class="o">=</span><span class="s1">&#39;point&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a point, cell, or field array from a pyvista.DataSet or VTK object.</span>
 
 <span class="sd">    If the array or index doesn&#39;t exist, return nothing. This matches VTK&#39;s</span>
@@ -613,7 +627,7 @@
     <span class="k">return</span> <span class="kc">None</span>
 
 
-<span class="k">def</span> <span class="nf">point_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">point_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return point array of a pyvista or vtk object.</span>
 
 <span class="sd">    Parameters</span>
@@ -633,7 +647,7 @@
     <span class="k">return</span> <span class="n">_assoc_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;point&#39;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">field_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">field_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return field data of a pyvista or vtk object.</span>
 
 <span class="sd">    Parameters</span>
@@ -653,7 +667,7 @@
     <span class="k">return</span> <span class="n">_assoc_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;field&#39;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">cell_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cell_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return cell array of a pyvista or vtk object.</span>
 
 <span class="sd">    Parameters</span>
@@ -673,7 +687,7 @@
     <span class="k">return</span> <span class="n">_assoc_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;cell&#39;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">row_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">row_array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return row array of a vtk object.</span>
 
 <span class="sd">    Parameters</span>
@@ -696,7 +710,7 @@
 
 <div class="viewcode-block" id="get_vtk_type">
 <a class="viewcode-back" href="../../../../content/PVGeo/interface.html#PVGeo.interface.get_vtk_type">[docs]</a>
-<span class="k">def</span> <span class="nf">get_vtk_type</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_vtk_type</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Look up the VTK type for a given numpy data type.</span>
 
 <span class="sd">    Corrects for string type mapping issues.</span>
@@ -720,7 +734,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">vtk_bit_array_to_char</span><span class="p">(</span><span class="n">vtkarr_bint</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">vtk_bit_array_to_char</span><span class="p">(</span><span class="n">vtkarr_bint</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Cast vtk bit array to a char array.</span>
 
 <span class="sd">    Parameters</span>
@@ -743,7 +757,7 @@
     <span class="k">return</span> <span class="n">vtkarr</span>
 
 
-<span class="k">def</span> <span class="nf">vtk_id_list_to_array</span><span class="p">(</span><span class="n">vtk_id_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">vtk_id_list_to_array</span><span class="p">(</span><span class="n">vtk_id_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a vtkIdList to a NumPy array.</span>
 
 <span class="sd">    Parameters</span>
@@ -760,14 +774,25 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">vtk_id_list</span><span class="o">.</span><span class="n">GetId</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vtk_id_list</span><span class="o">.</span><span class="n">GetNumberOfIds</span><span class="p">())])</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_set_string_scalar_object_name</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">:</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set object name for scalar string arrays.&quot;&quot;&quot;</span>
+    <span class="c1"># This is used as a flag so that scalar arrays can be reshaped later.</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">vtkarr</span><span class="o">.</span><span class="n">SetObjectName</span><span class="p">(</span><span class="s1">&#39;scalar&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">vtkarr</span><span class="o">.</span><span class="n">GetObjectName</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;scalar&#39;</span>
+
+
 <div class="viewcode-block" id="convert_string_array">
 <a class="viewcode-back" href="../../../../content/PVGeo/interface.html#PVGeo.interface.convert_string_array">[docs]</a>
-<span class="k">def</span> <span class="nf">convert_string_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_string_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a numpy array of strings to a vtkStringArray or vice versa.</span>
+
+<span class="sd">    If a scalar string is provided, it is converted to a vtkCharArray</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    arr : numpy.ndarray</span>
+<span class="sd">    arr : numpy.ndarray | str</span>
 <span class="sd">        Numpy string array to convert.</span>
 
 <span class="sd">    name : str, optional</span>
@@ -784,13 +809,22 @@
 <span class="sd">    to make this faster, please consider opening a pull request.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">arr</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="c1"># VTK default fonts only support ASCII. See https://gitlab.kitware.com/vtk/vtk/-/issues/16904</span>
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">isascii</span><span class="p">():</span>  <span class="c1"># avoids segfault</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span><span class="o">.</span><span class="n">isascii</span><span class="p">()</span>
+        <span class="p">):</span>  <span class="c1"># avoids segfault</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s1">&#39;String array contains non-ASCII characters that are not supported by VTK.&#39;</span>
+                <span class="s1">&#39;String array contains non-ASCII characters that are not supported by VTK.&#39;</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="n">vtkarr</span> <span class="o">=</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,))</span>
+            <span class="c1"># distinguish scalar inputs from array inputs by</span>
+            <span class="c1"># setting the object name</span>
+            <span class="n">_set_string_scalar_object_name</span><span class="p">(</span><span class="n">vtkarr</span><span class="p">)</span>
+
         <span class="c1">########### OPTIMIZE ###########</span>
         <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
             <span class="n">vtkarr</span><span class="o">.</span><span class="n">InsertNextValue</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
@@ -801,12 +835,18 @@
     <span class="c1"># Otherwise it is a vtk array and needs to be converted back to numpy</span>
     <span class="c1">############### OPTIMIZE ###############</span>
     <span class="n">nvalues</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">GetNumberOfValues</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">arr</span><span class="o">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvalues</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;|U&#39;</span><span class="p">)</span></div>
+    <span class="n">arr_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">arr</span><span class="o">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvalues</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;|U&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">GetObjectName</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;scalar&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">arr_out</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">arr_out</span></div>
 
     <span class="c1">########################################</span>
 
 
-<span class="k">def</span> <span class="nf">array_from_vtkmatrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumpyFltArray</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">array_from_vtkmatrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumpyArray</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a vtk matrix to an array.</span>
 
 <span class="sd">    Parameters</span>
@@ -828,7 +868,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
             <span class="s1">&#39;Expected vtk.vtkMatrix3x3 or vtk.vtkMatrix4x4 input,&#39;</span>
-            <span class="sa">f</span><span class="s1">&#39; got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> instead.&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39; got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> instead.&#39;</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])):</span>
@@ -836,7 +876,7 @@
     <span class="k">return</span> <span class="n">array</span>
 
 
-<span class="k">def</span> <span class="nf">vtkmatrix_from_array</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">vtkmatrix_from_array</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a ``numpy.ndarray`` or array-like to a vtk matrix.</span>
 
 <span class="sd">    Parameters</span>
@@ -865,7 +905,7 @@
     <span class="k">return</span> <span class="n">matrix</span>
 
 
-<span class="k">def</span> <span class="nf">set_default_active_vectors</span><span class="p">(</span><span class="n">mesh</span><span class="p">:</span> <span class="s1">&#39;pyvista.DataSet&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_default_active_vectors</span><span class="p">(</span><span class="n">mesh</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">DataSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set a default vectors array on mesh, if not already set.</span>
 
 <span class="sd">    If an active vector already exists, no changes are made.</span>
@@ -905,10 +945,7 @@
     <span class="n">n_possible_vectors</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_vectors</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">n_possible_vectors</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_vectors_point</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">preference</span> <span class="o">=</span> <span class="s1">&#39;point&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">preference</span> <span class="o">=</span> <span class="s1">&#39;cell&#39;</span>
+        <span class="n">preference</span> <span class="o">=</span> <span class="s1">&#39;point&#39;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_vectors_point</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;cell&#39;</span>
         <span class="n">mesh</span><span class="o">.</span><span class="n">set_active_vectors</span><span class="p">(</span><span class="n">possible_vectors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">preference</span><span class="o">=</span><span class="n">preference</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">n_possible_vectors</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">MissingDataError</span><span class="p">(</span><span class="s2">&quot;No vector-like data available.&quot;</span><span class="p">)</span>
@@ -917,11 +954,11 @@
             <span class="s2">&quot;Multiple vector-like data available</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;cell data: </span><span class="si">{</span><span class="n">possible_vectors_cell</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;point data: </span><span class="si">{</span><span class="n">possible_vectors_point</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="s2">&quot;Set one as active using DataSet.set_active_vectors(name, preference=type)&quot;</span>
+            <span class="s2">&quot;Set one as active using DataSet.set_active_vectors(name, preference=type)&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">set_default_active_scalars</span><span class="p">(</span><span class="n">mesh</span><span class="p">:</span> <span class="s1">&#39;pyvista.DataSet&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_default_active_scalars</span><span class="p">(</span><span class="n">mesh</span><span class="p">:</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">DataSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set a default scalars array on mesh, if not already set.</span>
 
 <span class="sd">    If an active scalars already exists, no changes are made.</span>
@@ -957,10 +994,7 @@
     <span class="n">n_possible_scalars</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_scalars</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">n_possible_scalars</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_scalars_point</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">preference</span> <span class="o">=</span> <span class="s1">&#39;point&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">preference</span> <span class="o">=</span> <span class="s1">&#39;cell&#39;</span>
+        <span class="n">preference</span> <span class="o">=</span> <span class="s1">&#39;point&#39;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_scalars_point</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;cell&#39;</span>
         <span class="n">mesh</span><span class="o">.</span><span class="n">set_active_scalars</span><span class="p">(</span><span class="n">possible_scalars</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">preference</span><span class="o">=</span><span class="n">preference</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">n_possible_scalars</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">MissingDataError</span><span class="p">(</span><span class="s2">&quot;No data available.&quot;</span><span class="p">)</span>
@@ -969,11 +1003,11 @@
             <span class="s2">&quot;Multiple data available</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;cell data: </span><span class="si">{</span><span class="n">possible_scalars_cell</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;point data: </span><span class="si">{</span><span class="n">possible_scalars_point</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="s2">&quot;Set one as active using DataSet.set_active_scalars(name, preference=type)&quot;</span>
+            <span class="s2">&quot;Set one as active using DataSet.set_active_scalars(name, preference=type)&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_coerce_transformlike_arg</span><span class="p">(</span><span class="n">transform_like</span><span class="p">:</span> <span class="n">TransformLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumpyFltArray</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_coerce_transformlike_arg</span><span class="p">(</span><span class="n">transform_like</span><span class="p">:</span> <span class="n">TransformLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumpyArray</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check and coerce transform-like arg to a 4x4 numpy array.</span>
 
 <span class="sd">    Parameters</span>
@@ -988,7 +1022,7 @@
 <span class="sd">        4x4 transformation matrix.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">transform_array</span><span class="p">:</span> <span class="n">NumpyFltArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">transform_array</span><span class="p">:</span> <span class="n">NumpyArray</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform_like</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkMatrix4x4</span><span class="p">):</span>
         <span class="n">transform_array</span> <span class="o">=</span> <span class="n">array_from_vtkmatrix</span><span class="p">(</span><span class="n">transform_like</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform_like</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkMatrix3x3</span><span class="p">):</span>
@@ -1009,98 +1043,115 @@
             <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">vtk.vtkMatrix3x3</span><span class="se">\n</span><span class="s1">&#39;</span>
             <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">vtk.vtkTransform</span><span class="se">\n</span><span class="s1">&#39;</span>
             <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">4x4 np.ndarray</span><span class="se">\n</span><span class="s1">&#39;</span>
-            <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">3x3 np.ndarray</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">3x3 np.ndarray</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">transform_array</span>
 
 
-<span class="k">def</span> <span class="nf">cast_to_list_array</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cast an array to a nested list.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    arr : array_like</span>
-<span class="sd">        Array to cast.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    list</span>
-<span class="sd">        List or nested list array.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">cast_to_ndarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">_JSONValueType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span>
+    <span class="nb">dict</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+    <span class="nb">list</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+    <span class="nb">tuple</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+    <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">int</span><span class="p">,</span>
+    <span class="nb">float</span><span class="p">,</span>
+    <span class="nb">bool</span><span class="p">,</span>
+    <span class="kc">None</span><span class="p">,</span>
+<span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">cast_to_tuple_array</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cast an array to a nested tuple.</span>
+<span class="c1"># TODO: add generic type annotations &#39;UserDict[str, _JSONValueType]&#39;</span>
+<span class="c1">#  once support for Python 3.8 is dropped</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_SerializedDictArray</span><span class="p">(</span><span class="n">UserDict</span><span class="p">,</span> <span class="n">_vtk</span><span class="o">.</span><span class="n">vtkStringArray</span><span class="p">):</span>  <span class="c1"># type: ignore[type-arg]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dict-like object with a JSON-serialized string array representation.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    arr : array_like</span>
-<span class="sd">        Array to cast.</span>
+<span class="sd">    This class behaves just like a regular dict, except its contents</span>
+<span class="sd">    are represented internally as a JSON-formatted vtkStringArray.</span>
+<span class="sd">    The string array is updated dynamically any time the dict is</span>
+<span class="sd">    modified, such that modifying the dict will also implicitly modify</span>
+<span class="sd">    its JSON string representation.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    tuple</span>
-<span class="sd">        Tuple or nested tuple array.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">arr</span> <span class="o">=</span> <span class="n">cast_to_ndarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">_to_tuple</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">_to_tuple</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span>
-
-    <span class="k">return</span> <span class="n">_to_tuple</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">cast_to_ndarray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">as_any</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cast array to a NumPy ndarray.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    arr : array_like</span>
-<span class="sd">        Array to cast.</span>
-
-<span class="sd">    as_any : bool, default: True</span>
-<span class="sd">        Allow subclasses of ``np.ndarray`` to pass through without</span>
-<span class="sd">        making a copy.</span>
-
-<span class="sd">    dtype : dtype_like</span>
-<span class="sd">        The data-type of the returned array.</span>
-
-<span class="sd">    copy : bool, default: False</span>
-<span class="sd">        If ``True``, a copy of the array is returned. A copy is always</span>
-<span class="sd">        returned if the array:</span>
-
-<span class="sd">            * is a nested sequence</span>
-<span class="sd">            * is a subclass of ``np.ndarray`` and ``as_any`` is ``False``.</span>
-
-<span class="sd">    Raises</span>
-<span class="sd">    ------</span>
-<span class="sd">    ValueError</span>
-<span class="sd">        If input cannot be cast as a NumPy ndarray.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    np.ndarray</span>
-<span class="sd">        NumPy ndarray.</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This class is intended for use as a dict with a small number of keys and</span>
+<span class="sd">    relatively small values, e.g. for storing metadata. It should not be</span>
+<span class="sd">    used to store frequently accessed array data with hundreds of entries.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">as_any</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">copy</span> <span class="ow">and</span> <span class="n">dtype</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">arr</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">as_any</span><span class="p">:</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
-                <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;object&#39;</span><span class="p">:</span>
-            <span class="c1"># NumPy will normally raise ValueError automatically for</span>
-            <span class="c1"># object arrays, but on some systems it will not, so raise</span>
-            <span class="c1"># error manually</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span>
-    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">VisibleDeprecationWarning</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input cannot be cast as </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
-    <span class="k">return</span> <span class="n">out</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_string</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the vtkStringArray string.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetNumberOfValues</span><span class="p">())])</span>
+
+    <span class="nd">@_string</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">str_</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the vtkStringArray to a specified string.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetNumberOfValues</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Clear string</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">str_</span><span class="p">:</span>  <span class="c1"># Populate string</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">InsertNextValue</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Format dict data as JSON and update the vtkStringArray.&quot;&quot;&quot;</span>
+        <span class="n">data_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data_str</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_string</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_string</span> <span class="o">=</span> <span class="n">data_str</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return JSON-formatted dict representation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_string</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Init from JSON string</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dict_</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">dict_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">dict_</span><span class="p">)</span>
+
+        <span class="c1"># Init UserDict</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dict_</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_string</span><span class="p">()</span>
+
+        <span class="c1"># Flag self as a scalar string</span>
+        <span class="c1"># This is only needed so that the Field DatasetAttributes repr</span>
+        <span class="c1"># shows this array as `str`</span>
+        <span class="n">_set_string_scalar_object_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="c1"># Override any/all `UserDict` or `MutableMapping` methods which mutate</span>
+    <span class="c1"># the dictionary. This ensures the serialized string is also updated</span>
+    <span class="c1"># and synced with the dict</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setitem__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_string</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_string</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_string</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s1">&#39;_string&#39;</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_string</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">popitem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">popitem</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_string</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">item</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">__key</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">__key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_string</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">item</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_string</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">setdefault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_string</span><span class="p">()</span>
 </pre></div>
 
            </div>

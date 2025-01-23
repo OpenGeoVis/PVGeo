@@ -1,34 +1,32 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo.ubc.disc_meshes &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/ubc/disc_meshes.html"/>
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -219,16 +217,16 @@
 <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Discretize&#39;</span>
 
 <span class="c1"># Import Helpers:</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span>
-<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">InterfacedBaseReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">_helpers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">InterfacedBaseReader</span>
 
 <span class="k">with</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">HiddenPrints</span><span class="p">():</span>
-    <span class="kn">import</span> <span class="nn">discretize</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">discretize</span>
 
 
 <div class="viewcode-block" id="DiscretizeMeshReader">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/disc_meshes.html#PVGeo.ubc.disc_meshes.DiscretizeMeshReader">[docs]</a>
-<span class="k">class</span> <span class="nc">DiscretizeMeshReader</span><span class="p">(</span><span class="n">InterfacedBaseReader</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DiscretizeMeshReader</span><span class="p">(</span><span class="n">InterfacedBaseReader</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A general reader for all ``discretize`` mesh objects saved to the</span>
 <span class="sd">    ``.json`` serialized format&quot;&quot;&quot;</span>
 
@@ -236,13 +234,13 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Discretize Mesh Reader&#39;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Serialized Discretize Meshes&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">InterfacedBaseReader</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="DiscretizeMeshReader._read_file">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/disc_meshes.html#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._read_file">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads a mesh object from the serialized format&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">discretize</span><span class="o">.</span><span class="n">MeshIO</span><span class="o">.</span><span class="n">load_mesh</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
 
@@ -250,7 +248,7 @@
 <div class="viewcode-block" id="DiscretizeMeshReader._get_vtk_object">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/disc_meshes.html#PVGeo.ubc.disc_meshes.DiscretizeMeshReader._get_vtk_object">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_get_vtk_object</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_vtk_object</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the mesh&#39;s proper VTK data object&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">to_vtk</span><span class="p">()</span></div>
 </div>

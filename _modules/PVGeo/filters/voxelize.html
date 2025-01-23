@@ -1,34 +1,32 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo.filters.voxelize &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/filters/voxelize.html"/>
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -224,22 +222,21 @@
 
 <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Voxelize&#39;</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">vtk</span>
-<span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="kn">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
-<span class="kn">from</span> <span class="nn">vtk.util</span> <span class="kn">import</span> <span class="n">numpy_support</span> <span class="k">as</span> <span class="n">nps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">vtk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vtk.numpy_interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vtk.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">numpy_support</span> <span class="k">as</span> <span class="n">nps</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
-<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">FilterBase</span>
-<span class="kn">from</span> <span class="nn">..version</span> <span class="kn">import</span> <span class="n">check_numpy</span>
-<span class="kn">from</span> <span class="nn">.xyz</span> <span class="kn">import</span> <span class="n">RotationTool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">interface</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.xyz</span><span class="w"> </span><span class="kn">import</span> <span class="n">RotationTool</span>
 
 <span class="c1">###############################################################################</span>
 
 
 <div class="viewcode-block" id="VoxelizePoints">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints">[docs]</a>
-<span class="k">class</span> <span class="nc">VoxelizePoints</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">VoxelizePoints</span><span class="p">(</span><span class="n">FilterBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This makes a ``vtkUnstructuredGrid`` of scattered points given voxel</span>
 <span class="sd">    sizes as input arrays. This assumes that the data is at least 2-Dimensional</span>
 <span class="sd">    on the XY Plane.</span>
@@ -248,7 +245,7 @@
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Voxelize Points&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;filter&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">FilterBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">nInputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -267,7 +264,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.add_field_data">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.add_field_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_field_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_field_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;An internal helper to add the recovered information as field data&quot;&quot;&quot;</span>
         <span class="c1"># Add angle</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkDoubleArray</span><span class="p">()</span>
@@ -287,7 +284,7 @@
 <div class="viewcode-block" id="VoxelizePoints.add_cell_data">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.add_cell_data">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">add_cell_data</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_cell_data</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a NumPy array as cell data to the given grid input&quot;&quot;&quot;</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">convert_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
         <span class="n">grid</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
@@ -296,7 +293,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.estimate_uniform_spacing">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.estimate_uniform_spacing">[docs]</a>
-    <span class="k">def</span> <span class="nf">estimate_uniform_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">estimate_uniform_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;This assumes that the input points make up some sort of uniformly</span>
 <span class="sd">        spaced grid on at least an XY plane.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -327,10 +324,8 @@
 
 <div class="viewcode-block" id="VoxelizePoints.points_to_grid">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.points_to_grid">[docs]</a>
-    <span class="k">def</span> <span class="nf">points_to_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xo</span><span class="p">,</span> <span class="n">yo</span><span class="p">,</span> <span class="n">zo</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">points_to_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xo</span><span class="p">,</span> <span class="n">yo</span><span class="p">,</span> <span class="n">zo</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert XYZ points to a ``vtkUnstructuredGrid``.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">check_numpy</span><span class="p">(</span><span class="n">alert</span><span class="o">=</span><span class="s1">&#39;warn&#39;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">grid</span>
         <span class="k">if</span> <span class="n">grid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">grid</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkUnstructuredGrid</span><span class="p">()</span>
 
@@ -422,7 +417,7 @@
 <div class="viewcode-block" id="VoxelizePoints._copy_arrays">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints._copy_arrays">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_copy_arrays</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_copy_arrays</span><span class="p">(</span><span class="n">pdi</span><span class="p">,</span> <span class="n">pdo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;internal helper to copy arrays from point data to cell data in the voxels.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pdi</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetNumberOfArrays</span><span class="p">()):</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">pdi</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetArray</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
@@ -432,7 +427,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.RequestData">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.RequestData">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -451,7 +446,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.set_safe_size">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_safe_size">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_safe_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">safe</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_safe_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">safe</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;A voxel size to use if a spacing cannot be determined for an axis&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__safe</span> <span class="o">!=</span> <span class="n">safe</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__safe</span> <span class="o">=</span> <span class="n">safe</span>
@@ -460,7 +455,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.set_delta_x">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_delta_x">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_delta_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_delta_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the X cells spacing</span>
 
 <span class="sd">        Args:</span>
@@ -473,7 +468,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.set_delta_y">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_delta_y">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_delta_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_delta_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the Y cells spacing</span>
 
 <span class="sd">        Args:</span>
@@ -486,7 +481,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.set_delta_z">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_delta_z">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_delta_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dz</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_delta_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dz</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the Z cells spacing</span>
 
 <span class="sd">        Args:</span>
@@ -500,7 +495,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.set_deltas">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_deltas">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_deltas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_deltas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the cell spacings for each axial direction</span>
 
 <span class="sd">        Args:</span>
@@ -518,7 +513,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.set_estimate_grid">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_estimate_grid">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_estimate_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_estimate_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a flag on whether or not to estimate the grid spacing/rotation&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__estimate_grid</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__estimate_grid</span> <span class="o">=</span> <span class="n">flag</span>
@@ -527,7 +522,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.set_unique">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_unique">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_unique</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_unique</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a flag on whether or not to try to elimate non unique elements&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unique</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__unique</span> <span class="o">=</span> <span class="n">flag</span>
@@ -536,7 +531,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.get_angle">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.get_angle">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the recovered angle if set to recover the input grid. If the</span>
 <span class="sd">        input points are rotated, then this angle will reflect a close</span>
 <span class="sd">        approximation of that rotation.</span>
@@ -551,14 +546,14 @@
 
 <div class="viewcode-block" id="VoxelizePoints.get_recovered_angle">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.get_recovered_angle">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_recovered_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_recovered_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;DEPRECATED: use `get_angle`&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_angle</span><span class="p">(</span><span class="n">degrees</span><span class="o">=</span><span class="n">degrees</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="VoxelizePoints.set_angle">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.set_angle">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the rotation angle manually&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__angle</span> <span class="o">!=</span> <span class="n">angle</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__angle</span> <span class="o">=</span> <span class="n">angle</span>
@@ -567,7 +562,7 @@
 
 <div class="viewcode-block" id="VoxelizePoints.get_spacing">
 <a class="viewcode-back" href="../../../content/PVGeo/filters/voxelize.html#PVGeo.filters.voxelize.VoxelizePoints.get_spacing">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the cell spacings&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dz</span><span class="p">)</span></div>
 </div>

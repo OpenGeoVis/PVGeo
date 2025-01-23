@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_filters-general_reshape-table.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -104,8 +104,8 @@ Use the filter to reshape the table
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td>Title 0</td><td>float64</td><td>1</td><td>4.294e-03</td><td>9.976e-01</td></tr>
-    <tr><td>Title 1</td><td>float64</td><td>1</td><td>3.614e-04</td><td>9.991e-01</td></tr>
+    <tr><td>Title 0</td><td>float64</td><td>1</td><td>1.925e-03</td><td>9.991e-01</td></tr>
+    <tr><td>Title 1</td><td>float64</td><td>1</td><td>1.275e-03</td><td>1.000e+00</td></tr>
     </table>
 
     </td></tr> </table>
@@ -155,6 +155,10 @@ Check the output
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: reshape-table.py <reshape-table.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: reshape-table.zip <reshape-table.zip>`
 
 
 .. only:: html

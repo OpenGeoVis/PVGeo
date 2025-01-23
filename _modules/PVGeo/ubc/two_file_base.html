@@ -1,34 +1,32 @@
 
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PVGeo.ubc.two_file_base &mdash; PVGeo  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=34a7ea53" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
     <link rel="canonical" href="http://docs.pvgeo.org/_modules/PVGeo/ubc/two_file_base.html"/>
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -220,12 +218,12 @@
 <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Base Classes&#39;</span>
 
 <span class="c1"># Outside Imports:</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">vtk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">vtk</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">base</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">_helpers</span><span class="p">,</span> <span class="n">base</span>
 
 <span class="c1">###############################################################################</span>
 
@@ -233,14 +231,14 @@
 <span class="c1"># UBC Mesh Reader Base</span>
 <div class="viewcode-block" id="ubcMeshReaderBase">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase">[docs]</a>
-<span class="k">class</span> <span class="nc">ubcMeshReaderBase</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">TwoFileReaderBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ubcMeshReaderBase</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">TwoFileReaderBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A base class for the UBC mesh readers&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;UBC Mesh Reader Base&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
     <span class="n">extensions</span> <span class="o">=</span> <span class="s1">&#39;mesh msh dat txt text&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkUnstructuredGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">base</span><span class="o">.</span><span class="n">TwoFileReaderBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">nOutputPorts</span><span class="o">=</span><span class="n">nOutputPorts</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="n">outputType</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span>
@@ -252,14 +250,14 @@
 
 <div class="viewcode-block" id="ubcMeshReaderBase.is_3d">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_3d">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_3d</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_3d</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns true if mesh is spatially referenced in three dimensions&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sizeM</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">3</span></div>
 
 
 <div class="viewcode-block" id="ubcMeshReaderBase.is_2d">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase.is_2d">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_2d</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_2d</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns true if mesh is spatially referenced in only two dimensions&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sizeM</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span></div>
 
@@ -267,7 +265,7 @@
 <div class="viewcode-block" id="ubcMeshReaderBase._ubc_mesh_2d_part">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase._ubc_mesh_2d_part">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_ubc_mesh_2d_part</span><span class="p">(</span><span class="n">FileName</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ubc_mesh_2d_part</span><span class="p">(</span><span class="n">FileName</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal helper to read 2D mesh file&quot;&quot;&quot;</span>
         <span class="c1"># This is a helper method to read file contents of mesh</span>
         <span class="k">try</span><span class="p">:</span>
@@ -275,7 +273,7 @@
         <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">fe</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">PVGeoError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fe</span><span class="p">))</span>
 
-        <span class="k">def</span> <span class="nf">_genTup</span><span class="p">(</span><span class="n">sft</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_genTup</span><span class="p">(</span><span class="n">sft</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
             <span class="c1"># This reads in the data for a dimension</span>
             <span class="n">pts</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">disc</span> <span class="o">=</span> <span class="p">[]</span>
@@ -302,7 +300,7 @@
 
 <div class="viewcode-block" id="ubcMeshReaderBase._read_extent">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase._read_extent">[docs]</a>
-    <span class="k">def</span> <span class="nf">_read_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads the mesh file for the UBC 2D/3D Mesh or OcTree format to get</span>
 <span class="sd">        output extents. Computationally inexpensive method to discover whole</span>
 <span class="sd">        output extent.</span>
@@ -352,7 +350,7 @@
 <div class="viewcode-block" id="ubcMeshReaderBase.ubc_model_3d">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase.ubc_model_3d">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">ubc_model_3d</span><span class="p">(</span><span class="n">FileName</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ubc_model_3d</span><span class="p">(</span><span class="n">FileName</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads the 3D model file and returns a 1D NumPy float array. Use the</span>
 <span class="sd">        place_model_on_mesh() method to associate with a grid.</span>
 
@@ -385,7 +383,7 @@
 
 <div class="viewcode-block" id="ubcMeshReaderBase.set_use_filename">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_use_filename">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_use_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_use_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a flag on whether or not to use the filename as the data array name&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_filename</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__use_filename</span> <span class="o">=</span> <span class="n">flag</span>
@@ -394,7 +392,7 @@
 
 <div class="viewcode-block" id="ubcMeshReaderBase.set_data_name">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase.set_data_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the data array name&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__use_filename</span> <span class="o">=</span> <span class="kc">True</span>
@@ -407,7 +405,7 @@
 
 <div class="viewcode-block" id="ubcMeshReaderBase.get_data_name">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ubcMeshReaderBase.get_data_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the data array name&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_filename</span><span class="p">:</span>
             <span class="n">mname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_model_filenames</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -423,13 +421,13 @@
 <span class="c1"># UBC Model Appender Base</span>
 <div class="viewcode-block" id="ModelAppenderBase">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase">[docs]</a>
-<span class="k">class</span> <span class="nc">ModelAppenderBase</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">AlgorithmBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModelAppenderBase</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">AlgorithmBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A base class for create mesh-model appenders on the UBC Mesh formats&quot;&quot;&quot;</span>
 
     <span class="n">__displayname__</span> <span class="o">=</span> <span class="s1">&#39;Model Appender Base&#39;</span>
     <span class="n">__category__</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">inputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="n">outputType</span><span class="o">=</span><span class="s1">&#39;vtkRectilinearGrid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">):</span>
         <span class="n">base</span><span class="o">.</span><span class="n">AlgorithmBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
@@ -454,7 +452,7 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.need_to_read">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.need_to_read">[docs]</a>
-    <span class="k">def</span> <span class="nf">need_to_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">need_to_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Ask self if the reader needs to read the files again</span>
 
 <span class="sd">        Args:</span>
@@ -473,7 +471,7 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.Modified">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.Modified">[docs]</a>
-    <span class="k">def</span> <span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Call modified if the files needs to be read again again.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">read_again</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__need_to_read</span> <span class="o">=</span> <span class="n">read_again</span>
@@ -482,14 +480,14 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.modified">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.modified">[docs]</a>
-    <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_again</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Call modified if the files needs to be read again again.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Modified</span><span class="p">(</span><span class="n">read_again</span><span class="o">=</span><span class="n">read_again</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ModelAppenderBase._update_time_steps">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase._update_time_steps">[docs]</a>
-    <span class="k">def</span> <span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;For internal use only: appropriately sets the timesteps.&quot;&quot;&quot;</span>
         <span class="c1"># Use the inputs&#39; timesteps: this merges the timesteps values</span>
         <span class="n">ts0</span> <span class="o">=</span> <span class="n">_helpers</span><span class="o">.</span><span class="n">get_input_time_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -504,19 +502,19 @@
 
 <div class="viewcode-block" id="ModelAppenderBase._read_up_front">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase._read_up_front">[docs]</a>
-    <span class="k">def</span> <span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_up_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="ModelAppenderBase._place_on_mesh">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase._place_on_mesh">[docs]</a>
-    <span class="k">def</span> <span class="nf">_place_on_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_place_on_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="ModelAppenderBase.RequestData">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.RequestData">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to generate output&quot;&quot;&quot;</span>
         <span class="c1"># Get input/output of Proxy</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -539,7 +537,7 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.RequestInformation">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.RequestInformation">[docs]</a>
-    <span class="k">def</span> <span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RequestInformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">inInfo</span><span class="p">,</span> <span class="n">outInfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used by pipeline to handle time variance and update output extents&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_time_steps</span><span class="p">()</span>
         <span class="n">pdi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetInputData</span><span class="p">(</span><span class="n">inInfo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -555,14 +553,14 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.has_models">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.has_models">[docs]</a>
-    <span class="k">def</span> <span class="nf">has_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">has_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if models are associated with this mesh&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_filenames</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
 
 <div class="viewcode-block" id="ModelAppenderBase.get_time_step_values">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.get_time_step_values">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_time_step_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Use this in ParaView decorator to register timesteps.&quot;&quot;&quot;</span>
         <span class="c1"># if unset, force at least one attempt to set the timesteps</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timesteps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -572,7 +570,7 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.clear_models">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.clear_models">[docs]</a>
-    <span class="k">def</span> <span class="nf">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Use to clear data file names.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_filenames</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_models</span> <span class="o">=</span> <span class="p">[]</span>
@@ -581,7 +579,7 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.add_model_file_name">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.add_model_file_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_model_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_model_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Use to set the file names for the reader. Handles single string or</span>
 <span class="sd">        list of strings.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -599,7 +597,7 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.get_model_filenames">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.get_model_filenames">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_model_filenames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_model_filenames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the list of file names or given and index returns a specified</span>
 <span class="sd">        timestep&#39;s filename.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -610,7 +608,7 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.set_use_filename">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.set_use_filename">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_use_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_use_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a flag on whether or not to use the filename as the data array name&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_filename</span> <span class="o">!=</span> <span class="n">flag</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__use_filename</span> <span class="o">=</span> <span class="n">flag</span>
@@ -619,7 +617,7 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.set_data_name">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.set_data_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the data array name&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__use_filename</span> <span class="o">=</span> <span class="kc">True</span>
@@ -632,7 +630,7 @@
 
 <div class="viewcode-block" id="ModelAppenderBase.get_data_name">
 <a class="viewcode-back" href="../../../content/PVGeo/ubc/two_file_base.html#PVGeo.ubc.two_file_base.ModelAppenderBase.get_data_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_data_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the data array name&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_filename</span><span class="p">:</span>
             <span class="n">mname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_model_filenames</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>

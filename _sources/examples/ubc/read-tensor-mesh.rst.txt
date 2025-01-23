@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_ubc_read-tensor-mesh.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -240,7 +240,7 @@ Or threshold a data range
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 2.611 seconds)
+   **Total running time of the script:** (0 minutes 3.964 seconds)
 
 
 .. _sphx_glr_download_examples_ubc_read-tensor-mesh.py:
@@ -256,6 +256,10 @@ Or threshold a data range
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: read-tensor-mesh.py <read-tensor-mesh.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: read-tensor-mesh.zip <read-tensor-mesh.zip>`
 
 
 .. only:: html

@@ -11,6 +11,7 @@ General Filters
 
     <div class="sphx-glr-thumbnails">
 
+.. thumbnail-parent-div-open
 
 .. raw:: html
 
@@ -48,7 +49,7 @@ General Filters
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to perform a mathematical operation between two input arrays ...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to perform a mathematical operation between two input arrays for any given source.">
 
 .. only:: html
 
@@ -65,7 +66,7 @@ General Filters
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to to merge to vtkTable objects with the same number of rows ...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to to merge to vtkTable objects with the same number of rows into a single vtkTable.">
 
 .. only:: html
 
@@ -99,7 +100,7 @@ General Filters
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to extract the points and PointData of any input data set tha...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to extract the points and PointData of any input data set that has valid PointData into a vtkPolyData object.">
 
 .. only:: html
 
@@ -116,7 +117,7 @@ General Filters
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to slice a 3D data source along some arbitrary line or sequen...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to slice a 3D data source along some arbitrary line or sequence of points specified in another data source to have many slices of the 3D data perpendicular to that travel path.">
 
 .. only:: html
 
@@ -133,7 +134,7 @@ General Filters
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to perform a normalization or any custom mathematical operati...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to perform a normalization or any custom mathematical operation on a single data array for an input data set.">
 
 .. only:: html
 
@@ -184,7 +185,7 @@ General Filters
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to rotate points in a vtkPolyData object around some origin o...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to rotate points in a vtkPolyData object around some origin on the XY plane.">
 
 .. only:: html
 
@@ -201,7 +202,7 @@ General Filters
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to connect a set of points defined on a regular grid to creat...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example will demonstrate how to connect a set of points defined on a regular grid to create a vtkUnstructuredGrid which can be used to perform volumetric operations.">
 
 .. only:: html
 
@@ -215,6 +216,8 @@ General Filters
       <div class="sphx-glr-thumbnail-title">Voxelize Points</div>
     </div>
 
+
+.. thumbnail-parent-div-close
 
 .. raw:: html
 
