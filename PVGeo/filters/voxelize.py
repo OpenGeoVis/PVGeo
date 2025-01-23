@@ -17,7 +17,6 @@ from vtk.util import numpy_support as nps
 
 from .. import _helpers, interface
 from ..base import FilterBase
-from ..version import check_numpy
 from .xyz import RotationTool
 
 ###############################################################################
@@ -102,8 +101,6 @@ class VoxelizePoints(FilterBase):
 
     def points_to_grid(self, xo, yo, zo, dx, dy, dz, grid=None):
         """Convert XYZ points to a ``vtkUnstructuredGrid``."""
-        if not check_numpy(alert='warn'):
-            return grid
         if grid is None:
             grid = vtk.vtkUnstructuredGrid()
 

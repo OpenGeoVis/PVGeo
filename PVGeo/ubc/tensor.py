@@ -200,7 +200,7 @@ class TensorMeshReader(ubcMeshReaderBase):
         )
         names = ['col%d' % i for i in range(dim[0])]
         df = pd.read_csv(
-            FileName, names=names, delim_whitespace=True, skiprows=1, comment='!'
+            FileName, names=names, sep=r'\s+', skiprows=1, comment='!'
         )
         data = df.values
         if np.shape(data)[0] != dim[1] and np.shape(data)[1] != dim[0]:
@@ -484,7 +484,7 @@ class TopoMeshAppender(AlgorithmBase):
         self.__indices = pd.read_csv(
             StringIO("\n".join(content[1::])),
             names=['i', 'j', 'k'],
-            delim_whitespace=True,
+            sep=r'\s+',
         )
         # NOTE: K indices are inverted
         self.need_to_read(flag=False)
