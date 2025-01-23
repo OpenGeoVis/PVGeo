@@ -107,9 +107,9 @@ Use the filter:
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>8.965e-04</td><td>9.971e-01</td></tr>
-    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>3.890e-03</td><td>9.935e-01</td></tr>
-    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>7.559e-03</td><td>1.928e+00</td></tr>
+    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>1.132e-03</td><td>9.966e-01</td></tr>
+    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>5.172e-04</td><td>9.975e-01</td></tr>
+    <tr><td>foo</td><td>Points</td><td>float64</td><td>1</td><td>9.855e-02</td><td>1.991e+00</td></tr>
     </table>
 
     </td></tr> </table>
@@ -178,9 +178,9 @@ Use a custom math operation:
     </td><td>
     <table style='width: 100%;'>
     <tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
-    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>8.965e-04</td><td>9.971e-01</td></tr>
-    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>3.890e-03</td><td>9.935e-01</td></tr>
-    <tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>1.497e-02</td><td>9.998e-01</td></tr>
+    <tr><td><b>Array 0</b></td><td>Points</td><td>float64</td><td>1</td><td>1.132e-03</td><td>9.966e-01</td></tr>
+    <tr><td>Array 1</td><td>Points</td><td>float64</td><td>1</td><td>5.172e-04</td><td>9.975e-01</td></tr>
+    <tr><td>powered</td><td>Points</td><td>float64</td><td>1</td><td>3.928e-03</td><td>9.998e-01</td></tr>
     </table>
 
     </td></tr> </table>
@@ -244,7 +244,7 @@ Use a custom math operation:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.395 seconds)
+   **Total running time of the script:** (0 minutes 0.393 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_array-math.py:
