@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:50.418** total execution time for 3 files **from examples/grids**:
+**00:45.311** total execution time for 3 files **from examples/grids**:
 
 .. container::
 
@@ -33,11 +33,11 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_grids_read-esri.py` (``read-esri.py``)
-     - 00:41.489
+     - 00:37.269
      - 0.0
    * - :ref:`sphx_glr_examples_grids_extract-topography.py` (``extract-topography.py``)
-     - 00:07.416
+     - 00:06.921
      - 0.0
    * - :ref:`sphx_glr_examples_grids_read-surfer.py` (``read-surfer.py``)
-     - 00:01.513
+     - 00:01.122
      - 0.0
