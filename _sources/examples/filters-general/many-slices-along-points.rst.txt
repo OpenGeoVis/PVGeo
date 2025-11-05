@@ -203,10 +203,10 @@ slices to what you prefer!
     <table style='width: 100%;'><tr><th>Information</th><th>Blocks</th></tr><tr><td>
     <table>
     <tr><th>MultiBlock</th><th>Values</th></tr>
-    <tr><td>N Blocks</td><td>6</td></tr>
-    <tr><td>X Bounds</td><td>0.000, 250.000</td></tr>
-    <tr><td>Y Bounds</td><td>0.000, 250.000</td></tr>
-    <tr><td>Z Bounds</td><td>0.000, 100.000</td></tr>
+    <tr><td>N Blocks:</td><td>6</td></tr>
+    <tr><td>X Bounds:</td><td>0.000e+00, 2.500e+02</td></tr>
+    <tr><td>Y Bounds:</td><td>0.000e+00, 2.500e+02</td></tr>
+    <tr><td>Z Bounds:</td><td>0.000e+00, 1.000e+02</td></tr>
     </table>
 
     </td><td>
@@ -272,7 +272,7 @@ slices to what you prefer!
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 5.262 seconds)
+   **Total running time of the script:** (0 minutes 5.169 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_many-slices-along-points.py:

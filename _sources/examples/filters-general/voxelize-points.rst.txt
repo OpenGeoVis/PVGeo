@@ -333,10 +333,10 @@ create 3 orthogonal slices through a data volume.
     <table style='width: 100%;'><tr><th>Information</th><th>Blocks</th></tr><tr><td>
     <table>
     <tr><th>MultiBlock</th><th>Values</th></tr>
-    <tr><td>N Blocks</td><td>3</td></tr>
-    <tr><td>X Bounds</td><td>326804.336, 330185.260</td></tr>
-    <tr><td>Y Bounds</td><td>4406253.954, 4409862.606</td></tr>
-    <tr><td>Z Bounds</td><td>0.000, 1300.000</td></tr>
+    <tr><td>N Blocks:</td><td>3</td></tr>
+    <tr><td>X Bounds:</td><td>3.268e+05, 3.302e+05</td></tr>
+    <tr><td>Y Bounds:</td><td>4.406e+06, 4.410e+06</td></tr>
+    <tr><td>Z Bounds:</td><td>0.000e+00, 1.300e+03</td></tr>
     </table>
 
     </td><td>
@@ -420,7 +420,7 @@ Now display the slices and clipped volume
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 15.963 seconds)
+   **Total running time of the script:** (0 minutes 15.635 seconds)
 
 
 .. _sphx_glr_download_examples_filters-general_voxelize-points.py:
