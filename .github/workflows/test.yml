@@ -50,6 +50,6 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
-          pip install wheel twine
+          pip install wheel twine setuptools
           python setup.py sdist bdist_wheel
           twine upload --skip-existing dist/*
